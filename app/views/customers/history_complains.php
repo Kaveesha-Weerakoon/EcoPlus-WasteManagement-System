@@ -9,27 +9,28 @@
                     <h1>Eco Plus</h1>
                 </div>
                 <div class="main-left-middle"><a href="./CustomerDashboard.html">
+                    <a href="<?php echo URLROOT?>/customers">
                         <div class="main-left-middle-content ">
                             <div class="main-left-middle-content-line2"></div>
                             <img src="<?php echo IMGROOT?>/Customer_DashBoard_Icon.png" alt="">
                             <h2>Dashboard</h2>
                         </div>
                     </a>
-                    <a href="../Request/Request_Ongoing.html">
+                    <a href="<?php echo URLROOT?>/customers/request_main">
                         <div class="main-left-middle-content">
                             <div class="main-left-middle-content-line2"></div>
                             <img src="<?php echo IMGROOT?>/Customer_Request.png" alt="">
                             <h2>Requests</h2>
                         </div>
                     </a>
-                    <a href="../History.html">
+                    
                         <div class="main-left-middle-content current">
                             <div class="main-left-middle-content-line"></div>
                             <img src="<?php echo IMGROOT?>/Customer_tracking _Icon.png" alt="">
                             <h2>History</h2>
                         </div>
-                    </a>
-                    <a href="../EditProfile.html">
+                   
+                    <a href="<?php echo URLROOT?>/customers/editprofile">
                         <div class="main-left-middle-content">
                             <div class="main-left-middle-content-line2"></div>
                             <img src="<?php echo IMGROOT?>/Customer_Edit_Pro_Icon.png" alt="">

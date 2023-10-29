@@ -21,10 +21,24 @@
     public function viewprofile(){
       $data = [
         'title' => 'TraversyMVC',
-        'pop'=>'True'
+        'pop'=>'True',
+        'name'=>'',
+        'userid'=>'',
+        'email'=>'',
+        'contactno'=>'',
+        'address'=>'',
+        'city'=>''
       ];
-   
+      $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+      $data['name']=$_SESSION['user_name'];
+      $data['userid']=$_SESSION['user_id'];
+      $data['email']=$_SESSION['user_email'];
+      $data['contactno']=$user->mobile_number;
+      $data['address']=$user->address;
+      $data['city']=$user->city;
       $this->view('customers/index', $data);
+     
     }
 
     public function request_main(){

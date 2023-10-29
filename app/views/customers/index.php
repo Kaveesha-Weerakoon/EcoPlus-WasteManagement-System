@@ -168,28 +168,28 @@
 
                         <div class="profile-down-content">
                             <p>Name</p>
-                            <input type="text" value="Ananda Perera">
+                            <input type="text" value="<?php echo $data['name']?>">
                         </div>
                         <div class="profile-down-content">
                             <p>User ID</p>
-                            <input type="text" value="C234567">
+                            <input type="text" value="C<?php echo $data['userid']?>">
                         </div>
 
                         <div class="profile-down-content">
                             <p>Email</p>
-                            <input type="text" value="AnandaPerera@gmail.com">
+                            <input type="text" value="<?php echo $data['email']?>">
                         </div>
                         <div class="profile-down-content">
                             <p>Contact No</p>
-                            <input type="text" value="0771231232">
+                            <input type="text" value="<?php echo $data['contactno']?>">
                         </div>
                         <div class="profile-down-content">
                             <p>Address</p>
-                            <input type="text" value="172, colombo, sri Lanka">
+                            <input type="text" value="<?php echo $data['address']?>">
                         </div>
                         <div class="profile-down-content">
                             <p>City</p>
-                            <input type="text" value="Homagama">
+                            <input type="text" value="<?php echo $data['city']?>">
                         </div>
 
 

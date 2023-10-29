@@ -1756,6 +1756,206 @@ a {
     }
 }
 
+.Customer-editprofile {
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: inter;
+
+    }
+
+    .main {
+
+        overflow: hidden;
+    }
+
+    .main-right {
+        display: grid;
+        grid-template-rows: 10% 90%;
+        height: 100%;
+    }
+
+    .main-right-top {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-left: 82%;
+    }
+
+    .main-right-top img {
+        width: 50px;
+        height: 50px;
+        margin-left: 10px;
+    }
+
+    .main-right-top p {
+        font-family: inter;
+        font-size: 17px;
+    }
+
+    .main-right-bottom {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+
+    .main-right-bottom-content {
+        width: 60%;
+        height: 90%;
+    }
+
+    .main-right-bottom-content {
+        display: grid;
+        grid-template-rows: 10% 90%;
+    }
+
+    .main-right-bottom-content-top {}
+
+    .main-right-bottom-content-top h1 {
+        font-size: 30px;
+        margin-bottom: 6px;
+        color: #2B2B2B;
+    }
+
+    .Edit-Profile-line {
+        width: 65px;
+        height: 5px;
+        background: #1B6652;
+    }
+
+    .main-right-bottom-content-bottom {
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    .main-right-bottom-content-bottom-left {
+        display: flex;
+        flex-direction: column;
+        padding-top: 35px;
+    }
+
+    .edit-profile-content {
+        margin-bottom: 19px;
+    }
+
+    .edit-profile-content h3 {
+        font-size: 19px;
+        margin-bottom: 7px;
+        color: #393939;
+        font-weight: 500;
+    }
+
+    .edit-profile-content input {
+        height: 32px;
+        width: 85%;
+        border-radius: 5px;
+        border: 1px solid #858585;
+        font-size: 17px;
+        padding-left: 5px;
+    }
+
+
+    .main-right-bottom-content-bottom-left button {
+        width: 46%;
+        height: 40px;
+        background: #1B6652;
+        font-size: 20px;
+        color: white;
+        border: none;
+        font-weight: 550;
+        margin-top: 30px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .main-right-bottom-content-bottom-right {
+        display: flex;
+        flex-direction: column;
+        padding-top: 35px;
+        padding-left: 55px;
+    }
+
+    .main-right-bottom-content-bottom-right button {
+        width: 60%;
+        height: 45px;
+        background: #1B6652;
+        font-size: 20px;
+        color: white;
+        border: none;
+        font-weight: 550;
+        /* margin-top: 114px; */
+        margin-top: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .main-right-bottom-content {
+        overflow: scroll;
+    }
+
+    @media screen and (max-width: 1416px) {
+        .main-right-bottom {
+            width: 100%;
+        }
+
+        .main-right-bottom-content {
+            width: 90%;
+        }
+
+        .main-right-top {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-left: 70%;
+        }
+    }
+
+
+    @media screen and (max-width: 968px) {
+
+        .main-left {
+            overflow: hidden;
+        }
+
+        .main-right-bottom-content {
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-right-bottom-content-bottom {
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-right-bottom-content-bottom-right {
+            padding-left: 0;
+        }
+
+        .main-right-bottom-content-bottom-left button {
+            width: 200px;
+            font-size: 18px;
+        }
+
+        .main-right-bottom-content-bottom-right button {
+            width: 200px;
+            font-size: 18xpx;
+        }
+
+        .main-right-top {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-left: 5%;
+        }
+    }
+}
+
+
 .Customer-history-top {
     .main-right {
         display: grid;
@@ -2221,6 +2421,201 @@ a {
         width: 25px;
         height: 25px;
         cursor: pointer;
+    }
+}
+
+.Customer-Transfer {
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: Inter;
+    }
+
+    .main {
+        width: 100%;
+        height: 727px;
+        display: grid;
+        grid-template-rows: 12% 88%;
+    }
+
+    .main-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-family: Inter;
+    }
+
+    .main-top img {
+        width: 35px;
+        height: 35px;
+        margin-left: 30px;
+    }
+
+    .main-top-component {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+    }
+
+    .back-button {
+        cursor: pointer;
+    }
+
+    .main-top-component img {
+        width: 50px;
+        height: 50px;
+        margin-left: 10px;
+    }
+
+    .main-top-component p {
+        font-family: inter;
+        font-size: 17px;
+    }
+
+    .main-bottom {
+        display: grid;
+        grid-template-columns: 40% 60%;
+    }
+
+    .main-bottom-left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-bottom-right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-bottom-left-component {
+        width: 80%;
+        height: 95%;
+        background: #DFFFD3;
+        border-radius: 20px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #2B2B2B;
+        margin-left: 70px;
+        margin-bottom: 10px;
+    }
+
+    .main-bottom-left-component img {
+        height: 180px;
+        width: 180px;
+        margin-top: 30px;
+    }
+
+    .main-bottom-left-component h2 {
+        font-size: 28px;
+        color: #2B2B2B;
+        margin-bottom: 15px;
+    }
+
+    .line {
+        width: 71.01px;
+        height: 5.46px;
+        background: #1B6652;
+        margin-bottom: 35px;
+    }
+
+    .main-bottom-left-component-component {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: left;
+        width: 80%;
+        margin-bottom: 15px;
+
+    }
+
+    .main-bottom-left-component p {
+        font-size: 17px;
+        font-family: inter;
+        margin-bottom: 15px;
+        width: 300px;
+        margin-right: 12%;
+    }
+
+    .main-bottom-left-component input {
+        height: 40px;
+        width: 90%;
+        background: #F4F4F4;
+        border: 1px solid #1B6652;
+        border-radius: 5px;
+    }
+
+    .main-bottom-left-component button {
+        width: 190.59px;
+        height: 58.27px;
+        background: #1B6652;
+        font-size: 22px;
+        color: white;
+        font-weight: 550;
+        border: none;
+        border-radius: 10px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 1138px) {
+        .main-bottom-right {
+            display: none;
+        }
+
+        .main-bottom-left {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70%;
+        }
+
+        .main-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0;
+        }
+
+        .main-bottom-left-component h2 {
+            font-size: 17px;
+            height: 100%;
+        }
+
+        .main-bottom-left-component {
+            width: 100%;
+            height: 100%;
+            margin-bottom: 0;
+        }
+
+        .main-bottom-left-component button {
+            width: 190.59px;
+            height: 50px;
+            background: #1B6652;
+            font-size: 22px;
+            color: white;
+            font-weight: 550;
+            border: none;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .main-bottom-left-component p {
+            font-size: 17px;
+            font-family: inter;
+            margin-bottom: 15px;
+            width: auto;
+            margin-right: 0;
+        }
     }
 }
 

@@ -8,7 +8,8 @@
                     <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
                     <h1>Eco Plus</h1>
                 </div>
-                <div class="main-left-middle"><a href="./CustomerDashboard.html">
+                <div class="main-left-middle">
+               
                     <a href="<?php echo URLROOT?>/customers">
                         <div class="main-left-middle-content ">
                             <div class="main-left-middle-content-line2"></div>
@@ -61,7 +62,7 @@
                         <h1>History</h1>
                     </div>
                     <div class="main-right-top-three">
-                        <a href="History.html">
+                        <a href="<?php echo URLROOT?>/customers/history">
                             <div class="main-right-top-three-content">
                                 <p>Credits History</p>
                                 <div class="line1"></div>

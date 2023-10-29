@@ -7,7 +7,7 @@
         </a>
 
         <div class="main-top-component">
-          <p>Ananda Perera</p>
+          <p><?php echo $_SESSION['user_name']?></p>
           <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="" />
         </div>
       </div>
@@ -59,7 +59,7 @@
     <?php if($data['completed']=='True') : ?>
     <div class="complain-success">
           <div class="complain-success-box">
-                  <h1>Complain Successfull</h1>
+                  <h1>Complaint Successful</h1>
                   <a href="<?php echo URLROOT?>/customers/complains"><button>Okay</button></a>
           </div>
     </div>

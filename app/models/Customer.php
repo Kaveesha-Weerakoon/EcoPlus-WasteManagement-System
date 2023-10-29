@@ -37,13 +37,13 @@
   }
 
 
-   public function get_customer($id){
+    public function get_customer($id){
     $this->db->query('SELECT * FROM customers WHERE user_id = :id');
     $this->db->bind(':id', $id);
     $results = $this->db->single();
     // print_r($results);
     return $results;
-   }
+     }
 
 }
     

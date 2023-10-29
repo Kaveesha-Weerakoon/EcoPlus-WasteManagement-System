@@ -66,12 +66,13 @@
                             <img src="<?php echo IMGROOT?>/customer.png" alt="">
                         </div>
 
-
                         <div class="main-right-left-two-component B" id="center_manager">
-                            <h3>Center Managers</h3>
-                            <img src="<?php echo IMGROOT?>/center_manager.png" alt="">
+                            <a href="<?php echo URLROOT?>/admin/center_managers">
+                               <h3>Center Managers</h3>
+                               <img src="<?php echo IMGROOT?>/center_manager.png" alt="">
+                            </a>
                         </div>
-
+                      
 
                         <div class="main-right-left-two-component C">
                             <h3>Credit Discounts Agent</h3>

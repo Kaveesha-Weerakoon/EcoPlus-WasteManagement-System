@@ -49,6 +49,22 @@
       $this->view('customers/request_main', $data);
     }
 
+    public function request_completed(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+     
+      $this->view('customers/request_completed', $data);
+    }
+
+    public function request_cancelled(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+     
+      $this->view('customers/request_cancelled', $data);
+    }
+
     public function history(){
       $data = [
         'title' => 'TraversyMVC',

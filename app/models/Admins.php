@@ -50,7 +50,12 @@
     }
 
     public function get_center_managers(){
-      $this->db->query('SELECT * FROM center_managers');
+      $this->db->query('SELECT *,
+              center_managers.id as cmID,
+              users.id as userId
+              FROM center_managers
+              INNER JOIN users
+              ON center_managers.user_id = users.id');
       $results = $this->db->resultSet();
       return $results;
     }

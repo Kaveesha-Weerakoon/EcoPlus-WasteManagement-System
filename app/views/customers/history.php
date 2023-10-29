@@ -40,7 +40,7 @@
                 </div>
                 <div class="main-left-bottom">
 
-                    <a href="../../../Login.html">
+                    <a href="<?php echo URLROOT?>/customers/logout">
                         <div class="main-left-bottom-content">
                             <img src="<?php echo IMGROOT?>/Logout.png" alt="">
                             <p>Log out</p>

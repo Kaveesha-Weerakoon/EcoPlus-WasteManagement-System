@@ -28,5 +28,22 @@
       }
     }
 
+    public function get_complains($id) {
+      $this->db->query('SELECT * FROM customer_complains WHERE customer_id = :id ORDER BY customer_complains.date DESC');
+      $this->db->bind(':id', $id);
+      $results = $this->db->resultSet();
+      
+      return $results;
+  }
+
+
+   public function get_customer($id){
+    $this->db->query('SELECT * FROM customers WHERE user_id = :id');
+    $this->db->bind(':id', $id);
+    $results = $this->db->getOne();
+    
+    return $results;
+   }
+
 }
     

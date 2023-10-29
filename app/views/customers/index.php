@@ -126,10 +126,13 @@
                             <p>Tranfer Credit</p>
                         </a>
 
+                        <a href="<?php echo URLROOT?>/customers/viewprofile" class="main-right-right-two-component">
                         <div id="Profile" class="main-right-right-two-component">
                             <img src="<?php echo IMGROOT?>/Profile.png" alt="">
                             <p>Profile</p>
-                        </div>
+                        </div> 
+                        </a>
+
                         <a href="<?php echo URLROOT?>/customers/complains" class="main-right-right-two-component">
                             <img src="<?php echo IMGROOT?>/Complaints.png" alt="">
                             <p>Complaints</p>
@@ -148,17 +151,19 @@
                 </div>
             </div>
             <script src="CustomerDashboard.js"></script>
-
+            <?php if($data['pop']=='True') : ?>
             <div class="Pop" id="Popup">
                 <div id="Profile_Pop" class="Profile">
                     <div class="profile-top">
                         <div class="profile-top-left"></div>
-                        <img src="../../src/Close.png" id="Profile_close">
+                        <a href="<?php echo URLROOT?>/customers" >
+                                <img src="<?php echo IMGROOT?>/Close.png" id="Profile_close">
+                        </a>
                     </div>
                     <div class="profile-down">
                         <div class="profile-down-top-content">
-                            <img src="../../src/Profile2.png" alt="">
-                            <h1 style="font-size: 29px;">Ananda Perera</h1>
+                            <img src="<?php echo IMGROOT?>/Profile2.png" alt="">
+                            <h1 style="font-size: 29px;"><?php echo $_SESSION['user_name']?></h1>
                         </div>
 
                         <div class="profile-down-content">
@@ -191,6 +196,7 @@
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
 </div>
 </div>
 

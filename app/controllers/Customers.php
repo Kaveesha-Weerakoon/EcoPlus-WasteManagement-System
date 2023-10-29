@@ -12,8 +12,18 @@
     public function index(){
       $data = [
         'title' => 'TraversyMVC',
+        'pop'=>''
       ];
      
+      $this->view('customers/index', $data);
+    }
+    
+    public function viewprofile(){
+      $data = [
+        'title' => 'TraversyMVC',
+        'pop'=>'True'
+      ];
+   
       $this->view('customers/index', $data);
     }
 
@@ -34,8 +44,11 @@
     }
 
     public function history_complains(){
+      $id=$_SESSION['user_id']; 
+      $complains = $this->customerModel->get_complains($id);
+
       $data = [
-        'title' => 'TraversyMVC',
+        'complains' => $complains
       ];
      
       $this->view('customers/history_complains', $data);

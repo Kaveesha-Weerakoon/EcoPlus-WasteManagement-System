@@ -22,7 +22,7 @@
                             <h2>Reports</h2>
                         </div>
                     </a>
-                    <a href="./Complains/Complains_customer.html">
+                    <a href="<?php echo URLROOT?>/admin/complain_customers">
                         <div class="main-left-middle-content Collector">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/Complains.png" alt="">

@@ -54,7 +54,7 @@
                         <img src="<?php echo IMGROOT?>/Search.png" alt="">
                         <input type="text" placeholder="Search">
                         <div class="main-right-top-one-content">
-                            <p>Ananda Perera</p>
+                            <p><?php echo $_SESSION['user_name']?></p>
                             <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="">
                         </div>
                     </div>

@@ -66,7 +66,7 @@
 
                         </div>
                         <div class="main-right-left-two-component B" style="background-image: url('<?php echo IMGROOT?>/Group.png');">
-                            <a href="Credits_Per_Waste_Quantity.html">
+                            <a href="<?php echo URLROOT?>/customers/credit_per_waste">
                                 <div class="main-right-left-two-component-component">
                                     <p>Credits per waste quantity</p>
                                     <img src="<?php echo IMGROOT?>/Tree.png" alt="">
@@ -168,28 +168,28 @@
 
                         <div class="profile-down-content">
                             <p>Name</p>
-                            <input type="text" value="<?php echo $data['name']?>">
+                            <input type="text" value="<?php echo $data['name']?>" readonly>
                         </div>
                         <div class="profile-down-content">
                             <p>User ID</p>
-                            <input type="text" value="C<?php echo $data['userid']?>">
+                            <input type="text" value="C<?php echo $data['userid']?>" readonly>
                         </div>
 
                         <div class="profile-down-content">
                             <p>Email</p>
-                            <input type="text" value="<?php echo $data['email']?>">
+                            <input type="text" value="<?php echo $data['email']?>" readonly>
                         </div>
                         <div class="profile-down-content">
                             <p>Contact No</p>
-                            <input type="text" value="<?php echo $data['contactno']?>">
+                            <input type="text" value="<?php echo $data['contactno']?>" readonly>
                         </div>
                         <div class="profile-down-content">
                             <p>Address</p>
-                            <input type="text" value="<?php echo $data['address']?>">
+                            <input type="text" value="<?php echo $data['address']?>" readonly>
                         </div>
                         <div class="profile-down-content">
                             <p>City</p>
-                            <input type="text" value="<?php echo $data['city']?>">
+                            <input type="text" value="<?php echo $data['city']?>" readonly>
                         </div>
 
 

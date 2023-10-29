@@ -39,7 +39,7 @@
                 </div>
                 <div class="main-left-bottom">
 
-                <a href="<?php echo URLROOT?>/customers/logout">
+                <a href="<?php echo URLROOT?>/customers">
                         <div class="main-left-bottom-content">
                             <img src="<?php echo IMGROOT?>/Logout.png" alt="">
                             <p>Log out</p>
@@ -49,7 +49,7 @@
             </div>
             <div class="main-right">
                 <div class="main-right-top">
-                    <p>Ananda Perera</p>
+                    <p><?php echo $_SESSION['user_name']?></p>
                     <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="">
                 </div>
                 <div class="main-right-bottom">

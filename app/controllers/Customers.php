@@ -169,6 +169,13 @@
       $this->view('customers/transfer', $data);
     }
 
+    public function credit_per_waste(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+      $this->view('customers/credits_per_waste', $data);
+    }
+
     public function logout(){
       unset($_SESSION['user_id']);
       unset($_SESSION['user_email']);

@@ -8,10 +8,10 @@
 
     public function complains($data){
       $id= $_SESSION['user_id'];
-      $this->db->query('INSERT INTO customer_complains (customer_id,name,contact_no, region,subject,complaint) VALUES (:customer_id,:name,:contact_no,:region,:subject,:complaint )');
+      $this->db->query('INSERT INTO customer_complains (customer_id,name,contact_no, region,subject,complaint) VALUES (:customer_id,:name,:contact_no,:region,:subject,:complaint)');
       // Bind values
 
-      $this->db->bind(':name', $id);
+      $this->db->bind(':customer_id', $id);
       $this->db->bind(':name', $data['name']);
       $this->db->bind(':contact_no', $data['contact_no']);
       $this->db->bind(':subject', $data['subject']);

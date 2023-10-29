@@ -33,6 +33,15 @@
       $this->view('customers/history', $data);
     }
 
+    public function history_complains(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+     
+      $this->view('customers/history_complains', $data);
+    }
+
+
     public function editprofile(){
       $data = [
         'title' => 'TraversyMVC',
@@ -56,8 +65,14 @@
           'contact_no_err' => '',
           'region_err' => '',
           'subject_err' => '' ,
-          'complain_err' => ''     
+          'complain_err' => '' ,
+          'completed'=>''    
         ];
+        
+        if($data['completed']=='True'){
+          $data['completed']=='';
+          $this->view('customers/complains', $data);
+        }
 
         if(empty($data['name'])){
           $data['name_err'] = 'Pleae enter name';
@@ -82,16 +97,16 @@
 
         if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
           if($this->customerModel->complains($data)){
-            redirect('users/login');
+            $data['completed']="True";
+            $this->view('customers/complains', $data);
+           
           } else {
             die('Something went wrong');
           }
         }
-        else{
-              $this->view('customers/complains', $data);
-             
+        else{     
+              $this->view('customers/complains', $data);         
         }
-        die();
       }
       else
       $data =[

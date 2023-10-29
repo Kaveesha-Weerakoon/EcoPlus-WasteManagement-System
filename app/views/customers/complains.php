@@ -56,6 +56,14 @@
         </div>
       </div>
     </div>
+    <?php if($data['completed']=='True') : ?>
+    <div class="complain-success">
+          <div class="complain-success-box">
+                  <h1>Complain Successfull</h1>
+                  <a href="<?php echo URLROOT?>/customers/complains"><button>Okay</button></a>
+          </div>
+    </div>
+    <?php endif; ?>
 </div>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

@@ -31,12 +31,12 @@
 
     public function center_managers(){
 
-      $center_managers = $this->customerModel->get_center_managers();
+      $center_managers = $this->adminModel->get_center_managers();
       $data = [
-        'center_managers ' => $center_managers 
+        'center_managers' => $center_managers 
       ];
      
-      $this->view('admin/history_complains', $data);
+      $this->view('admin/center_managers', $data);
     }
 
     public function center_managers_add(){

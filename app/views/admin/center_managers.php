@@ -49,39 +49,18 @@
                     </div>
                     <div class="main-right-bottom-down">
                         <table class="table">
-                            <tr class="table-row">
-                                <td>Samantha</t<?php echo IMGROOT?>d>
-                                <td>1212121212</td>
-                                <td>Colombo</td>
-                                <td>Yes</td>
-                                <td>Kottawa</td>
-                                <td><img src="/View.png" alt=""></td>
-                                <td><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                                <td class="delete"> <img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
-
-                            </tr>
-                            <tr class="table-row">
-                                <td>Samantha</td>
-                                <td>1212121212</td>
-                                <td>Colombo</td>
-                                <td>No</td>
-                                <td>None</td>
-                                <td><img src="<?php echo IMGROOT?>/View.png" alt=""></td>
-                                <td><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                                <td class="delete"> <img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
-
-                            </tr>
-                            <tr class="table-row">
-                                <td>Samantha</td>
-                                <td>1212121212</td>
-                                <td>1212121212</td>
-                                <td>Yes</td>
-                                <td>Nugegoda</td>
-                                <td><img src="<?php echo IMGROOT?>/View.png" alt=""></td>
-                                <td><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                                <td class="delete"> <img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
-
-                            </tr>
+                             <?php foreach($data['center_managers'] as $post) : ?>
+                                       <tr class="table-row">
+                                           <td>CM <?php echo $post->user_id?></td>
+                                           <td>Name</td>
+                                           <td>Name</td>
+                                           <td> <?php echo $post->assinged?></td>
+                                           <td> <?php echo $post->assined_center_id?></td>
+                                           <td></td>
+                                    </tr>
+                             <?php endforeach; ?>
+                           
+                
 
                     </div>
                 </div>

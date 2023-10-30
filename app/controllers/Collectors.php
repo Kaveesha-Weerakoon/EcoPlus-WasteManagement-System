@@ -21,5 +21,24 @@
       session_destroy();
       redirect('users/login');
     }
+
+    public function collector_assistants(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+     
+      $this->view('collectors/collector_assistants', $data);
+    }
+
+    public function collector_assistants_add(){
+      $data = [
+        'name' => '',
+        'nic' => '',
+        'dob'=>''.
+        'address' =>''
+      ];
+     
+      $this->view('collectors/collector_assistants_add', $data);
+    }
    
   }

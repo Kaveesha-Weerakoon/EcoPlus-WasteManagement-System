@@ -7,7 +7,7 @@
                     <div class="slogan">Join with Us</div>
                     <img src="<?php echo IMGROOT ?>/Logo_No_Background.png" class="logo" alt="">
                 </div>
-                <form action="<?php echo URLROOT;?>/admin/register" method="post">
+                <form action="<?php echo URLROOT;?>/users/register" method="post">
                 
                 <div class="fields">
                   <input type="text" name="name" placeholder="Enter Your Name" value="<?php echo $data['name']; ?>">

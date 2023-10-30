@@ -37,15 +37,15 @@
                         </div>
                     </a>
 
-                </div>
+                </div> <a href="<?php echo URLROOT?>/admin/logout">
                 <div class="main-left-bottom">
-                    <a href="<?php echo URLROOT?>/admin/logout">
+                   
                     <div class="main-left-bottom-content">
                         <img src="<?php echo IMGROOT?>/logout.png" alt="">
                         <p>Log out</p>
                     </div>
-                    </a>
-                </div>
+                   
+                </div> </a>
             </div>
             <div class="main-right">
                 <div class="main-right-left">

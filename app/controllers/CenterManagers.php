@@ -21,5 +21,13 @@
       session_destroy();
       redirect('users/login');
     }
+
+    public function collectors(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+     
+      $this->view('collectors/collector_main', $data);
+    }
    
   }

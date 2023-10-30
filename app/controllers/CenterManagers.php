@@ -29,5 +29,21 @@
      
       $this->view('collectors/collector_main', $data);
     }
+
+    public function center_workers(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+     
+      $this->view('center_managers/center_workers', $data);
+    }
+
+    public function center_workers_add(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+     
+      $this->view('center_managers/center_workers_add', $data);
+    }
    
   }

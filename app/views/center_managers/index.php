@@ -65,7 +65,7 @@
                                 <img src="<?php echo IMGROOT?>/Collector.png" alt="">
                             </div>
                         </a>
-                        <a href="./Center_Workers/Center_Workers.html" class="main-right-left-two-a">
+                        <a href="<?php echo URLROOT?>/centermanagers/center_workers" class="main-right-left-two-a">
                             <div class="main-right-left-two-component" style="background-image: url('<?php echo IMGROOT?>/Dashboard2.png');">
                                 <h1>Center Workers</h1>
                                 <img src="<?php echo IMGROOT?>/Center_Workers.png" alt="">

@@ -110,7 +110,7 @@
                 </div>
                 <div class="main-right-bottom-content-content">
                     <h2>DOB</h2>
-                    <input type="date" name="dob">
+                    <input type="text" value="<?php echo $data['dob']?>">
                     <div class="error-div">
                             <?php echo $data['dob_err']?>
                     </div>

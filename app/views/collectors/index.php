@@ -24,7 +24,7 @@
                             <h2>Requests</h2>
                         </div>
                     </a>
-                    <a href="./Collector_Collector Assistans/Collector_CollectorAssistants.html">
+                    <a href="<?php echo URLROOT?>/collectors/collector_assistants">
                         <div class="main-left-middle-content Collector">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/CollectorAssis.png" alt="">

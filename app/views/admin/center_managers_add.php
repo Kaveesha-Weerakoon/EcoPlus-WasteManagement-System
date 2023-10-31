@@ -1,0 +1,102 @@
+<?php require APPROOT . '/views/inc/header.php'; ?>
+<div class="Admin-Center-Manager">
+<div class="main">
+            <div class="main-top">
+                <a href="<?php echo URLROOT?>/admin">
+                    <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
+                </a>
+                <div class="main-top-component">
+                    <p>Admin</p>
+                    <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="">
+                </div>
+            </div>
+            <div class="main-bottom">
+                <div class="main-bottom-top">
+                    <div class="main-right-top-two">
+                        <h1>Center Managers</h1>
+                    </div>
+                    <div class="main-right-top-three">
+                    <a href="<?php echo URLROOT?>/admin/center_managers">
+                            <div class="main-right-top-three-content">
+                                <p>View</p>
+                                <div class="line1"></div>
+                            </div>
+                        </a>
+                        <a href="./add.html">
+                            <div class="main-right-top-three-content">
+                                <p><b style="color: #1B6652;">Add</b></p>
+                                <div class="line"></div>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="main-bottom-down">
+                    <hr width="100%">
+                    <h1>Add Center Managers</h1>
+                    
+                     <form class="main-right-bottom-content" action="<?php echo URLROOT;?>/admin/center_managers_add" method="post">
+                        <div class="main-right-bottom-content-top">
+                         
+                            <div class="main-right-bottom-content-content">
+                                <h2>Name</h2>
+                                <input type="text" name="name" value="<?php echo $data['name']; ?>">
+                                <div class="err"><?php echo $data['name_err']?></div>
+                            </div>
+
+                            <div class="main-right-bottom-content-content">
+                                <h2>NIC</h2>
+                                <input type="text" name="nic" value="<?php echo $data['nic']; ?>">
+                                <div class="err"><?php echo $data['nic_err']?></div>
+                            </div>
+                            <div class="main-right-bottom-content-content"  >
+                                <h2>Address</h2>
+                                <input type="text" name="address"  value="<?php echo $data['address']; ?>">
+                                <div class="err"><?php echo $data['address_err']?></div>
+                            </div>
+                            <div class="main-right-bottom-content-content">
+                                <h2>Contact No</h2>
+                                <input type="text" name="contact_no"  value="<?php echo $data['contact_no']; ?>">
+                                <div class="err"><?php echo $data['contact_no_err']?></div>
+                            </div>
+                            <div class="main-right-bottom-content-content">
+                                <h2>DOB</h2>
+                                <input type="date" name="dob" value="<?php echo $data['dob']; ?>">
+                                <div class="err"><?php echo $data['dob_err']?></div>
+                            </div>
+                            <div class="main-right-bottom-content-content">
+                                <h2>Email</h2>
+                                <input type="text" name="email" value="<?php echo $data['email']; ?>">
+                                <div class="err"><?php echo $data['email_err']?></div>
+                            </div>
+                            <div class="main-right-bottom-content-content">
+                                <h2>Password</h2>
+                                <input type="password" name="password" value="<?php echo $data['password']; ?>">
+                                <div class="err"><?php echo $data['password_err']?></div>
+                            </div>
+                            <div class="main-right-bottom-content-content">
+                                <h2>Re enter Password</h2>
+                                <input type="password" name="confirm_password" value="<?php echo $data['confirm_password']; ?>">
+                                <div class="err"><?php echo $data['confirm_password_err']?></div>
+                            </div>
+                        </div>
+                        <div class="main-right-bottom-content-down">
+                            <div class="main-right-bottom-content-content a">
+                                <button>ADD</button>
+                            </div>
+                        </div>
+                     </form>
+                    
+                </div>
+            </div> 
+            <?php if($data['completed']=='True') : ?>
+               <div class="complain-success">
+                   <div class="complain-success-box">
+                     <h1>Center Manager Added Successful</h1>
+                      <a href="<?php echo URLROOT?>/admin/center_managers_add"><button>Okay</button></a>
+                    </div>
+               </div>
+            <?php endif; ?>
+        </div>
+
+<?php require APPROOT . '/views/inc/footer.php'; ?>

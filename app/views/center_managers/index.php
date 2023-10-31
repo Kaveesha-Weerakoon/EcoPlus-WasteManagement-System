@@ -1,13 +1,13 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-    <div class="Center_manager-sidebar">
-        <div class="Center_manager-main">
-            <div class="main">
-                <div class="main-left">
-                    <div class="main-left-top">
-                        <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
-                        <h1>Eco Plus</h1>
-                    </div>
-                    <div class="main-left-middle">
+ <div class="Center_manager-sidebar">
+    <div class="Center_manager-main">
+        <div class="main">
+            <div class="main-left">
+                <div class="main-left-top">
+                    <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
+                    <h1>Eco Plus</h1>
+                </div>
+                <div class="main-left-middle">
                     <a href="./CenterManager_DashBoard.html">
                         <div class="main-left-middle-content current">
                             <div class="main-left-middle-content-line"></div>
@@ -36,63 +36,57 @@
                             <h2>Edit Profile</h2>
                         </div>
                     </a>
-
-                    </div>
-                    <div class="main-left-bottom">
-                        <a href="<?php echo URLROOT?>/centermanagers/logout">
-                        <div class="main-left-bottom-content">
-                        <img src="<?php echo IMGROOT?>/logout.png" alt="">
-                        <p>Log out</p>
-                    </div>
-                   </a>
                 </div>
+                <div class="main-left-bottom">
+                     <a href="<?php echo URLROOT?>/centermanagers/logout" class="logout-ancor">
+                        <div class="main-left-bottom-content">                      
+                            <img src="<?php echo IMGROOT?>/logout.png" alt="">
+                            <p>Log out</p> 
+                        </div>                  
+                      </a>
                 </div>
-                <div class="main-right">
-
-                     <div class="main-right-left">
+            </div>
+            <div class="main-right">
+                <div class="main-right-left">
                     <div class="main-right-left-one">
                         <div class="main-right-left-one-text">
                             <div class="change">Welcome back</div> Eco plus
                         </div>
                         <div class="main-right-left-one-right">
                             <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                            <input type="text" placeholder="Search Any thing">
+                            <input type="text" placeholder="Search Anything">
                             <img src="<?php echo IMGROOT?>/notifications.png" alt="">
                         </div>
                     </div>
                     <div class="main-right-left-two">
-                        <a href="./Collectors/Collectors.html" class="main-right-left-two-a">
+                        <a href="<?php echo URLROOT?>/collectors.collector_main" class="main-right-left-two-a">
                             <div class="main-right-left-two-component" style="background-image: url('<?php echo IMGROOT?>/Dashboard1.png');">
                                 <h1>Collectors</h1>
                                 <img src="<?php echo IMGROOT?>/Collector.png" alt="">
                             </div>
                         </a>
-                        <a href="./Center_Workers/Center_Workers.html" class="main-right-left-two-a">
+                        <a href="<?php echo URLROOT?>/centermanagers/center_workers" class="main-right-left-two-a">
                             <div class="main-right-left-two-component" style="background-image: url('<?php echo IMGROOT?>/Dashboard2.png');">
                                 <h1>Center Workers</h1>
                                 <img src="<?php echo IMGROOT?>/Center_Workers.png" alt="">
                             </div>
                         </a>
-
-                    </div>
+                    </div> 
                     <div class="main-right-left-three">
                         <div class="main-right-left-three-content">
                             <div class="main-right-left-three-content-left">
                                 <img src="<?php echo IMGROOT?>/Center_Img.png" alt="">
                                 <h1>Kottawa</h1>
-                                <h4>Center ID : CEN 23</h3>
+                                <h4>Center ID: CEN 23</h3>
                             </div>
                             <div class="main-right-left-three-content-right">
                                 <button>Incoming Requests</button>
-
                             </div>
                         </div>
-                    </div>
-
-                    </div>
-                     <div class="main-right-right">
-                        <div class="main-right-right-top">
-
+                    </div> 
+                </div>
+                <div class="main-right-right">
+                    <div class="main-right-right-top">
                         <img src="<?php echo IMGROOT?>/CustomerDashboard_image.png" alt="">
                         <h2>Ananda</h2>
                         <p>Center Manager ID: CM 2132</p>
@@ -101,10 +95,10 @@
                     <div class="main-right-right-bottom">
                         <img src="<?php echo IMGROOT?>/Dashboard-Man.jpg" alt="">
                     </div>
-
                 </div>
             </div>
         </div>
-      </div>
     </div>
+ </div>
+
 <?php require APPROOT . '/views/inc/footer.php'; ?>

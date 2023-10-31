@@ -22,7 +22,7 @@
                             <h2>Reports</h2>
                         </div>
                     </a>
-                    <a href="./Complains/Complains_customer.html">
+                    <a href="<?php echo URLROOT?>/admin/complain_customers">
                         <div class="main-left-middle-content Collector">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/Complains.png" alt="">
@@ -37,15 +37,15 @@
                         </div>
                     </a>
 
-                </div>
+                </div> <a href="<?php echo URLROOT?>/admin/logout">
                 <div class="main-left-bottom">
-                    <a href="<?php echo URLROOT?>/admin/logout">
+                   
                     <div class="main-left-bottom-content">
                         <img src="<?php echo IMGROOT?>/logout.png" alt="">
                         <p>Log out</p>
                     </div>
-                    </a>
-                </div>
+                   
+                </div> </a>
             </div>
             <div class="main-right">
                 <div class="main-right-left">
@@ -66,12 +66,13 @@
                             <img src="<?php echo IMGROOT?>/customer.png" alt="">
                         </div>
 
-
                         <div class="main-right-left-two-component B" id="center_manager">
-                            <h3>Center Managers</h3>
-                            <img src="<?php echo IMGROOT?>/center_manager.png" alt="">
+                            <a href="<?php echo URLROOT?>/admin/center_managers">
+                               <h3>Center Managers</h3>
+                               <img src="<?php echo IMGROOT?>/center_manager.png" alt="">
+                            </a>
                         </div>
-
+                      
 
                         <div class="main-right-left-two-component C">
                             <h3>Credit Discounts Agent</h3>

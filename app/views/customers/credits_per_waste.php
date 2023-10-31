@@ -1,13 +1,13 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
- <div class="Customer-Transfer">
-    <div class="main">
+<div class="Customer-credits-per-waste">
+<div class="main">
             <div class="main-top">
                 <a href="<?php echo URLROOT?>/customers">
                     <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
                 </a>
 
                 <div class="main-top-component">
-                   <p><?php echo $_SESSION['user_name']?></p>
+                    <p><?php echo $_SESSION['user_name']?></p>
                     <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="">
                 </div>
             </div>
@@ -28,9 +28,11 @@
                         <button>Transfer</button>
                     </form>
                 </div>
-                <div class="main-bottom-right"><img src="../../src/Transfer_Credit.png" alt=""></div>
+                <div class="main-bottom-right"><img src="<?php echo IMGROOT?>/Transfer_Credit.png" alt=""></div>
             </div>
-     </div>
- </div>
+        </div>
+
+</div>
+
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

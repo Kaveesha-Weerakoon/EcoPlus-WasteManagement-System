@@ -12,9 +12,33 @@
     public function index(){
       $data = [
         'title' => 'TraversyMVC',
+        'pop'=>''
       ];
      
       $this->view('customers/index', $data);
+    }
+    
+    public function viewprofile(){
+      $data = [
+        'title' => 'TraversyMVC',
+        'pop'=>'True',
+        'name'=>'',
+        'userid'=>'',
+        'email'=>'',
+        'contactno'=>'',
+        'address'=>'',
+        'city'=>''
+      ];
+      $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+      $data['name']=$_SESSION['user_name'];
+      $data['userid']=$_SESSION['user_id'];
+      $data['email']=$_SESSION['user_email'];
+      $data['contactno']=$user->mobile_number;
+      $data['address']=$user->address;
+      $data['city']=$user->city;
+      $this->view('customers/index', $data);
+     
     }
 
     public function request_main(){
@@ -25,6 +49,22 @@
       $this->view('customers/request_main', $data);
     }
 
+    public function request_completed(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+     
+      $this->view('customers/request_completed', $data);
+    }
+
+    public function request_cancelled(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+     
+      $this->view('customers/request_cancelled', $data);
+    }
+
     public function history(){
       $data = [
         'title' => 'TraversyMVC',
@@ -32,6 +72,18 @@
      
       $this->view('customers/history', $data);
     }
+
+    public function history_complains(){
+      $id=$_SESSION['user_id']; 
+      $complains = $this->customerModel->get_complains($id);
+
+      $data = [
+        'complains' => $complains
+      ];
+     
+      $this->view('customers/history_complains', $data);
+    }
+
 
     public function editprofile(){
       $data = [
@@ -56,8 +108,14 @@
           'contact_no_err' => '',
           'region_err' => '',
           'subject_err' => '' ,
-          'complain_err' => ''     
+          'complain_err' => '' ,
+          'completed'=>''    
         ];
+        
+        if($data['completed']=='True'){
+          $data['completed']=='';
+          $this->view('customers/complains', $data);
+        }
 
         if(empty($data['name'])){
           $data['name_err'] = 'Pleae enter name';
@@ -82,16 +140,16 @@
 
         if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
           if($this->customerModel->complains($data)){
-            redirect('users/login');
+            $data['completed']="True";
+            $this->view('customers/complains', $data);
+           
           } else {
             die('Something went wrong');
           }
         }
-        else{
-              $this->view('customers/complains', $data);
-             
+        else{     
+              $this->view('customers/complains', $data);         
         }
-        die();
       }
       else
       $data =[
@@ -125,6 +183,13 @@
       ];
      
       $this->view('customers/transfer', $data);
+    }
+
+    public function credit_per_waste(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+      $this->view('customers/credits_per_waste', $data);
     }
 
     public function logout(){

@@ -70,7 +70,7 @@
   
           // Validate Confirm Password
           if(empty($data['confirm_password'])){
-            $data['confirm_password_err'] = 'Pleae confirm password';
+            $data['confirm_password_err'] = 'Please confirm password';
           } else {
             if($data['password'] != $data['confirm_password']){
               $data['confirm_password_err'] = 'Passwords do not match';
@@ -83,6 +83,7 @@
   
             // Register User
             if($this->userModel->register($data)){
+            
               redirect('users/login');
             } else {
               die('Something went wrong');

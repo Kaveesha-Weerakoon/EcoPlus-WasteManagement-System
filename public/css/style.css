@@ -7,7 +7,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
 
-body {}
+body {
+    background: none;
+}
 
 a {
     text-decoration: none;
@@ -3860,7 +3862,7 @@ a {
         background: #8CF889;
         display: flex;
         flex-direction: column;
-        background: black;
+
     }
 
     .main-left-top {
@@ -6150,7 +6152,6 @@ a {
         justify-content: center;
         margin-right: 30px;
         cursor: pointer !important;
-        height: 15px;
     }
 
     .main-right-top-three-content p {
@@ -6257,12 +6258,6 @@ a {
         align-items: center;
         justify-content: center;
         height: 100%;
-    }
-
-    .error-div {
-        font-size: 17px;
-        background-color: black;
-        color: red !important;
     }
 }
 
@@ -6630,7 +6625,7 @@ a {
     }
 
     .pop-eco_credits {
-        display: none;
+        display: flex;
         position: fixed;
         top: 0;
         left: 0;
@@ -6640,6 +6635,7 @@ a {
         z-index: 1;
         align-items: center;
         justify-content: center;
+
     }
 
     .Eco_Credits-main {
@@ -6693,26 +6689,35 @@ a {
         margin-top: 23px;
     }
 
+    .Eco_Credits-main {}
+
     .Eco_Credits-main-top {
         display: flex;
         align-items: center;
         padding-top: 12px;
         width: 100%;
-
-
+        /* Adjust the width as needed */
     }
 
+    .pop-anchor {
+        background-color: #13C93E;
+    }
+
+
+
     .Eco_Credits-main-top h1 {
-        margin-right: 16%;
-        margin-left: 32%;
-        width: 100%;
+        margin-right: 15%;
+        margin-left: 30%;
+        width: 300%;
+        font-size: 30px;
+
     }
 
     .View-content-img {
         height: 25px;
         width: 25px;
         cursor: pointer;
-        margin-right: 1%;
+        margin-left: 40%;
     }
 
     .Eco_Credits-main button {
@@ -7498,6 +7503,19 @@ a {
             height: 100%;
         }
     }
+
+    .line {
+        width: 93px;
+        height: 3px;
+        background-color: #1B6652;
+    }
+
+    .line1 {
+        width: 93px;
+        height: 3px;
+        background-color: none;
+    }
+
 }
 
 .Admin-Center-Manager {

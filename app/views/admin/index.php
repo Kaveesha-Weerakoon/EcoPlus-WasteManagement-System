@@ -96,7 +96,7 @@
                             <img src="<?php echo IMGROOT?>/Logo2.png" alt="">
                             <h6>Manage Eco Credit Details</h6>
                             <div class="component">
-                                <button class="button" id="Open-eco_credits">Eco credits</button>
+                                <a href="<?php echo URLROOT?>/admin/pop_eco_credit"><button class="button" id="Open-eco_credits">Eco credits</button></a>
                                 <button id="Open-rupee">Rupee Value </button>
                             </div>
                         </div>
@@ -114,49 +114,53 @@
                     </div>
                 </div>
             </div>
+            <?php if($data['pop_eco_credits']=='True') : ?>
             <div class="pop-eco_credits" id="pop-eco_credits">
-                <div class="Eco_Credits-main">
-                    <div class="Eco_Credits-main-top">
+                <form class="Eco_Credits-main" method="post" action="<?php echo URLROOT;?>/admin/pop_eco_credit">
+                    <div class="Eco_Credits-main-top">      
                         <h1> Eco Credits Per Kilogram</h1>
+                        <a href="<?php echo URLROOT?>/admin"> 
                         <img class="View-content-img" src="<?php echo IMGROOT?>/cancel.png" id="close-eco_credits">
+                        </a>
                     </div>
-                    <div class="View-content-content">
+                    <div class="View-content-content" >
                         <div class="View-content-content-content">
                             <img src="<?php echo IMGROOT?>/Polythene.png" alt="">
                             <h6>Polythene</h6>
-                            <input type="text" value="12">
+                            <input type="text" name="polythene" value="<?php echo $data['polythene_credit']; ?>">
                         </div>
                         <div class="View-content-content-content">
                             <img src="<?php echo IMGROOT?>/Plastic.png" alt="">
                             <h6>Plastic</h6>
-                            <input type="text" value="12">
+                            <input type="text" name="plastic" value="<?php echo $data['plastic_credit']; ?>">
                         </div>
                         <div class="View-content-content-content">
                             <img src="<?php echo IMGROOT?>/Glass.png" alt="">
                             <h6>Glass</h6>
-                            <input type="text" value="12">
+                            <input type="text" name="glass" value="<?php echo $data['glass_credit']; ?>">
                         </div>
                         <div class="View-content-content-content">
                             <img src="<?php echo IMGROOT?>/paper.png" alt="">
                             <h6>Paper Waste</h6>
-                            <input type="text" value="12">
+                            <input type="text" name="paper" value="<?php echo $data['paper_credit']; ?>">
                         </div>
                         <div class="View-content-content-content">
                             <img src="<?php echo IMGROOT?>/Electronic_Waste.png" alt="">
                             <h6>Electronic Waste</h6>
-                            <input type="text" value="12">
+                            <input type="text" name="electronic" value="<?php echo $data['electronic_credit']; ?>">
                         </div>
                         <div class="View-content-content-content">
                             <img src="<?php echo IMGROOT?>/Metal.png" alt="">
                             <h6>Metals</h6>
-                            <input type="text" value="12">
+                            <input type="text" name="metal" value="<?php echo $data['metal_credit']; ?>">
                         </div>
 
                     </div>
 
-                    <button>Update</button>
-                </div>
+                    <button type="submit">Update</button>
+                </form>
             </div>
+            <?php endif; ?>
             <div class="pop-rupee_value" id="pop-rupee_value">
                 <div class="rupee-main">
                     <div class="rupee-main-top">

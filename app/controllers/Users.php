@@ -226,6 +226,7 @@
       $_SESSION['center_manager_id'] = $user->id;
       $_SESSION['center_manager_email'] = $user->email;
       $_SESSION['center_manager_name'] = $user->name;
+      $_SESSION['center_id'] = "1";
       redirect('centermanagers');
     }
 

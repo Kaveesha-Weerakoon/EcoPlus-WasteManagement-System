@@ -1,6 +1,8 @@
 <?php
   class CenterManagers extends Controller {
     public function __construct(){
+
+      $this->centerworkerModel=$this->model('Center_Worker');
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
       }
@@ -31,9 +33,13 @@
     }
 
     public function center_workers(){
+
+
+      $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
       $data = [
-        'title' => 'TraversyMVC',
+        'center_workers' => $center_workers
       ];
+     
      
       $this->view('center_managers/center_workers', $data);
     }
@@ -49,7 +55,7 @@
                'contact_no'=>trim($_POST['contact_no']),
                'address' =>trim($_POST['address']),
                'completed'=>'',
-  
+               
                'name_err' => '',
                'nic_err' => '',
                'dob_err'=>'',
@@ -81,8 +87,8 @@
         }
 
         if(empty($data['address_err']) && empty($data['contact_no_err']) && empty($data['dob_err']) && empty($data['nic_err']) && empty($data['name_err']) ){
-          if($this->collector_assistantModel->add_collector_assistants($data)){
-            $data['completed']='True';        
+          if($this->centerworkerModel->add_center_workers($data)){
+            $data['completed']='True';       
             $this->view('center_managers/center_workers_add',$data);
           } else {
             die('Something went wrong');
@@ -105,7 +111,8 @@
           'nic_err' => '',
           'dob_err'=>'',
           'contact_no_err'=>'',
-          'address_err' =>''
+          'address_err' =>'',
+          'completed' =>''
         ];
         
         $this->view('center_managers/center_workers_add', $data);

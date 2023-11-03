@@ -68,7 +68,7 @@
                 </div>
                 <div class="main-right-bottom-content-content">
                     <h2>DOB</h2>
-                    <input name="dob" type="text" value="<?php echo $data['dob']?>">
+                    <input name="dob" type="date" value="<?php echo $data['dob']?>">
                     <div class="error-div" style="color:red">
                             <?php echo $data['dob_err']?>
                     </div>

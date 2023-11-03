@@ -4,6 +4,8 @@
 
       $this->adminModel=$this->model('Admins');
       $this->userModel=$this->model('User');
+      $this->creditModel=$this->model('Credit_amount');
+      $this->customerModel=$this->model('Customer');
 
       if(!isLoggedIn('admin_id')){
         redirect('users/login');
@@ -58,30 +60,43 @@
       }
 
       if(empty($data['metal_credit'])){
-        $data['metal_credit_err'] = 'Please enter contact no';  
+        $data['metal_credit_err'] = 'Please enter contact no'; 
       }
 
       if(empty($data['glass_credit_err'])){
-        $data['glass_credit_err'] = 'Please enter contact no';
+        $data['glass_credit_err'] = 'Please enter contact no';  
       }
 
-      if(empty($data['metal_credit_err']) &&  empty($data['plastic_credit_err']) &&  empty($data['polythene_credit_err']) &&  empty($data['glass_credit_err'])  &&  empty($data['paper_credit_err'])  &&  empty($data['electronic_credit_err']) ){
-        die(sdsd);
+      if(!empty($data['metal_credit']) &&  !empty($data['plastic_credit']) &&  !empty($data['polythene_credit']) &&  !empty($data['glass_credit'])  &&  !empty($data['paper_credit'])  &&  !empty($data['electronic_credit']) ){
+        if($this->creditModel->update($data)){
+          /*$data['completed']='True';  */      
+          $this->view('admin/index',$data);
+        } else {
+          die('Something went wrong');
+        }
+
+      }
+      else{
+        $this->view('admin/index', $data);
       }
     
       $this->view('admin/index', $data);
 
       }
       else{
+
+        $credit= $this->creditModel->get();
         $data = [
-          'pop_eco_credits' => 'True',
-          'plastic_credit' =>'',
-          'polythene_credit'=>'',
-          'paper_credit'=>'',
-          'glass_credit'=>'',
-          'electronic_credit'=>'',
-          'metal_credit'=>'',
+           'pop_eco_credits'=>'True',
+           'credit' => $credit,
+           'plastic_credit' =>$credit->plastic,
+           'polythene_credit'=>$credit->polythene,
+           'paper_credit'=>$credit->paper,
+           'glass_credit'=>$credit->glass,
+           'electronic_credit'=>$credit->electronic,
+           'metal_credit'=>$credit->metal
         ];
+       
         $this->view('admin/index', $data);
 
       }
@@ -97,6 +112,21 @@
       
       $this->view('admin/complain_customers', $data);
     }
+
+
+    public function complain_delete($id){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){     
+
+        if($this->customerModel->deletecomplain($id)){
+          redirect('./');
+        } else {
+          die('Something went wrong');
+        }
+      } else {
+        redirect('$url');
+      }
+    }
+    
 
     public function center_managers(){
 
@@ -236,6 +266,16 @@
       unset($_SESSION['admin_name']);
       session_destroy();
       redirect('users/login');
+    }
+
+    public function customers(){
+      
+      $customers = $this->customerModel->get_all();
+      $data = [
+        'customers' =>$customers
+      ];
+     
+      $this->view('admin/customer_main', $data);
     }
    
   }

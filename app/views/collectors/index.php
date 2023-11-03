@@ -1,9 +1,9 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
-<div class="Collector-sidebar">
-  <div class="Collector-main">
-     <div class="main">
-            <div class="main-left">
+<div class="Collector-sidebar" style="background-color:white">
+  <div class="Collector-main" style="background-color:white">
+     <div class="main" style="background-color:white">
+            <div class="main-left" style="background: #8CF889;">
                 <div class="main-left-top">
                     <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
                     <h1>Eco Plus</h1>
@@ -17,7 +17,7 @@
                             <h2>Dashboard</h2>
                         </div>
                     </a>
-                    <a href="./Collector_Requests/Collector_Requests.html">
+                    <a href="">
                         <div class="main-left-middle-content ">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/Request.png" alt="">
@@ -31,7 +31,7 @@
                             <h2>Collector Assistants</h2>
                         </div>
                     </a>
-                    <a href="./Collector_Edit_Profile/Collector_EditProfile.html">
+                    <a href="">
                         <div class="main-left-middle-content ">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">
@@ -39,9 +39,7 @@
                         </div>
                     </a>
 
-                </div>
-
-                
+                </div>             
                 <div class="main-left-bottom">
                   <a href="<?php echo URLROOT?>/collectors/logout">
                     <div class="main-left-bottom-content">
@@ -67,7 +65,7 @@
                         <img src="<?php echo IMGROOT?>/Collector_Dashboard.png" alt="">
                         <div class="main-right-left-two-component">
                             <h1>Welcome to Collector Portal</h1>
-                            <a href="./Collector_Requests/Collector_Requests.html"><button>Assigned
+                            <a href=""><button>Assigned
                                     Requests</button></a>
                         </div>
 
@@ -78,32 +76,32 @@
                             <div class="main-right-left-three-component">
                                 <img src="<?php echo IMGROOT?>/Polythene.png" alt="">
                                 <h2>Polythene</h2>
-                                <h3>5 Credits</h3>
+                                <h3><?php echo $data['eco_credit_per']->polythene ?></h3>
                             </div>
                             <div class="main-right-left-three-component">
                                 <img src="<?php echo IMGROOT?>/Plastic.png" alt="">
                                 <h2>Plastic</h2>
-                                <h3>5 Credits</h3>
+                                <h3><?php echo $data['eco_credit_per']->plastic?></h3>
                             </div>
                             <div class="main-right-left-three-component">
                                 <img src="<?php echo IMGROOT?>/Glass.png" alt="">
                                 <h2>Glass</h2>
-                                <h3>5 Credits</h3>
+                                <h3><?php echo $data['eco_credit_per']->glass?></h3>
                             </div>
                             <div class="main-right-left-three-component">
                                 <img src="<?php echo IMGROOT?>/paper.png" alt="">
                                 <h2>Paper Waste</h2>
-                                <h3>5 Credits</h3>
+                                <h3><?php echo $data['eco_credit_per']->paper ?></h3>
                             </div>
                             <div class="main-right-left-three-component">
                                 <img src="<?php echo IMGROOT?>/Electronic_Waste.png" alt="">
                                 <h2>Electronic Waste</h2>
-                                <h3>5 Credits</h3>
+                                <h3><?php echo $data['eco_credit_per']->electronic ?></h3>
                             </div>
                             <div class="main-right-left-three-component">
                                 <img src="<?php echo IMGROOT?>/Metal.png" alt="">
                                 <h2>Metals</h2>
-                                <h3>5 Credits</h3>
+                                <h3><?php echo $data['eco_credit_per']->metal ?></h3>
                             </div>
                         </div>
                     </div>
@@ -112,11 +110,11 @@
                     <div class="main-right-right-top">
 
                         <img src="<?php echo IMGROOT?>/CustomerDashboard_image.png" alt="">
-                        <h2>Ananda</h2>
-                        <p>Collector ID: CM 2132</p>
+                        <h2><?php echo $_SESSION['collector_name']?></h2>
+                        <p>Collector ID: <?php echo $_SESSION['collector_id']?></p>
 
                         <button id="Profile">Profile</button>
-                        <a href="./Complaints/Complaints.html"><button>Complaints</button></a>
+                        <a href=""><button>Complaints</button></a>
                     </div>
                     <div class="main-right-right-bottom">
                         <img src="<?php echo IMGROOT?>/Collector_Dashboard3.jpg" alt="">

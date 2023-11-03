@@ -4,6 +4,7 @@
 
       $this->collectorModel=$this->model('Collector');
       $this->collector_assistantModel=$this->model('Collector_Assistant');
+      $this->creditModel=$this->model('Credit_amount');
 
       if(!isLoggedIn('collector_id')){
         redirect('users/login');
@@ -11,8 +12,11 @@
     }
     
     public function index(){
+
+      $credit= $this->creditModel->get();
       $data = [
         'title' => 'TraversyMVC',
+        'eco_credit_per'=>$credit
       ];
      
       $this->view('collectors/index', $data);

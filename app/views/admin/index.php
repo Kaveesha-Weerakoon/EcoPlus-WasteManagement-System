@@ -62,8 +62,11 @@
                     <div class="main-right-left-two">
 
                         <div class="main-right-left-two-component A" id="customers">
+                            <a href="<?php echo URLROOT?>/admin/customers">
                             <h3>Customers</h3>
                             <img src="<?php echo IMGROOT?>/customer.png" alt="">
+                            </a>
+
                         </div>
 
                         <div class="main-right-left-two-component B" id="center_manager">

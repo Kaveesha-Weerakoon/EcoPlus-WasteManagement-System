@@ -26,5 +26,16 @@
         $results = $this->db->resultSet();
         return $results;
       }
-  
+    
+      public function register_collector($data){
+        $this->db->query('INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, "collector")');
+        // Bind values
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':password', $data['password']);
+        $result = $this->db->execute();
+       
+        return true;
+       
+      }
 }

@@ -49,7 +49,7 @@
                     <table class="table">
                     <?php foreach($data['center_workers'] as $post) : ?>
                                        <tr class="table-row">
-                                           <td>CM <?php echo $post->name?></td>
+                                           <td> <?php echo $post->name?></td>
                                            <td><?php echo $post->nic?></td>
                                            <td><?php echo $post->address?></td>
                                            <td> <?php echo $post->contact_no?></td>

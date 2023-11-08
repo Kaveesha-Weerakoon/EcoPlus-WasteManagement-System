@@ -34,32 +34,57 @@
   
            // Validate Email
            if(empty($data['email'])){
-            $data['email_err'] = 'Pleae enter email';
-          } else {
-            // Check email
-            if($this->userModel->findUserByEmail($data['email'])){
-              $data['email_err'] = 'Email is already taken';
+            $data['email_err'] = 'Please enter an email';
+        } else {
+            // Check email format
+            if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+                $data['email_err'] = 'Invalid email format';
+            } else {
+                // Check email length
+                if(strlen($data['email']) > 255) { // You can adjust the maximum length as needed
+                    $data['email_err'] = 'Email is too long';
+                } else {
+                    // Check email availability
+                    if($this->userModel->findUserByEmail($data['email'])){
+                        $data['email_err'] = 'Email is already taken';
+                    }
+                }
             }
-          }
+        }
+        
+        
   
           // Validate Name
-          if(empty($data['name'])){
-            $data['name_err'] = 'Pleae enter name';
-          }
+          if (empty($data['name'])) {
+            $data['name_err'] = 'Please enter a name';
+        } elseif (strlen($data['name']) > 255) {
+            $data['name_err'] = 'Name is too long';
+        }
+        
   
           // Validate Contact no
-          if(empty($data['contact_no'])){
-            $data['contact_no_err'] = 'Pleae enter contact no';
-          }
+          if (empty($data['contact_no'])) {
+            $data['contact_no_err'] = 'Please enter a contact number';
+        } elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+            $data['contact_no_err'] = 'Please enter a valid contact number';
+        }
+        
+        
   
           // Validate Adress
-          if(empty($data['address'])){
-            $data['address_err'] = 'Pleae enter adress';
+          if (empty($data['address'])) {
+            $data['address_err'] = 'Please enter an address';
+          } elseif (strlen($data['address']) > 500) {
+            $data['address_err'] = 'Address is too long ';
           }
+        
   
-          if(empty($data['city'])){
-            $data['city_err'] = 'Pleae enter city';
-          }
+          if (empty($data['city'])) {
+            $data['city_err'] = 'Please enter a city';
+          } elseif (strlen($data['city']) > 500) {
+             $data['city_err'] = 'City name is too long';
+        }
+        
   
           // Validate Password
           if(empty($data['password'])){
@@ -151,21 +176,28 @@
   
           // Validate Email
           if(empty($data['email'])){
-            $data['email_err'] = 'Pleae enter email';
+            $data['email_err'] = 'Please enter email';
+          }
+          else {
+            if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+              $data['email_err'] = 'Invalid email format';
+           }
+           else{
+            if($this->userModel->findUserByEmail($data['email'])){
+              // User found
+            } else {
+              // User not found
+              $data['email_err'] = 'User not found';
+            }
+          }
           }
          
           // Validate Password
           if(empty($data['password'])){
-            $data['password_err'] = 'Please enter password';
+            $data['password_err'] = 'Please enter the password';
           }
 
-          if($this->userModel->findUserByEmail($data['email'])){
-            // User found
-          } else {
-            // User not found
-            $data['email_err'] = 'No user found';
-          }
-  
+         
           // Make sure errors are empty
           if(empty($data['email_err']) && empty($data['password_err'])){
             // Validated
@@ -226,6 +258,7 @@
       $_SESSION['center_manager_id'] = $user->id;
       $_SESSION['center_manager_email'] = $user->email;
       $_SESSION['center_manager_name'] = $user->name;
+      $_SESSION['center_id'] = "1";
       redirect('centermanagers');
     }
 

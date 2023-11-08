@@ -2,7 +2,7 @@
 
 
 <div class="Center_manager-addcenterworkers">
-<div class="main">
+  <div class="main">
     <div class="main-top">
         <a href="<?php echo URLROOT?>/centermanagers">
             <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
@@ -41,35 +41,35 @@
                 <div class="main-right-bottom-content-content">
                     <h2>Name</h2>
                     <input name="name" type="text" value="<?php echo $data['name'];?>">
-                    <div class="error-div">
+                    <div class="error-div" style="color:red">
                             <?php echo $data['name_err']?>
                     </div>
                 </div>
                 <div class="main-right-bottom-content-content">
                     <h2>NIC</h2>
                     <input name="nic" type="text" value=<?php echo $data['nic'];?>>
-                    <div class="error-div">
+                    <div class="error-div" style="color:red">
                             <?php echo $data['nic_err']?>
                     </div>
                 </div>
                 <div class="main-right-bottom-content-content">
                     <h2>Address</h2>
                     <input name="address" type="text" value="<?php echo $data['address']?>">
-                    <div class="error-div">
+                    <div class="error-div" style="color:red">
                             <?php echo $data['address_err']?>
                     </div>
                 </div>
                 <div class="main-right-bottom-content-content">
                     <h2>Contact No</h2>
                     <input name="contact_no" type="text" value="<?php echo $data['contact_no']?>">
-                    <div class="error-div">
+                    <div class="error-div" style="color:red">
                             <?php echo $data['contact_no_err']?>
                     </div>
                 </div>
                 <div class="main-right-bottom-content-content">
                     <h2>DOB</h2>
-                    <input name="dob" type="text" value="<?php echo $data['dob']?>">
-                    <div class="error-div">
+                    <input name="dob" type="date" value="<?php echo $data['dob']?>">
+                    <div class="error-div" style="color:red">
                             <?php echo $data['dob_err']?>
                     </div>
                 </div>
@@ -78,9 +78,17 @@
                 </div>
             </form>
         </div>
+        <?php if($data['completed']=='True') : ?>
+               <div class="complain-success">
+                   <div class="complain-success-box">
+                     <h1>Center Worker Added Successful</h1>
+                      <a href="<?php echo URLROOT?>/centermanagers/center_workers_add"><button>Okay</button></a>
+                    </div>
+               </div>
+            <?php endif; ?>
     </div>
-</div>
+  </div>
+</div> 
 
-</div>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

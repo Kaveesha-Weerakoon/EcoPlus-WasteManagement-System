@@ -28,7 +28,7 @@
                         <button>Transfer</button>
                     </form>
                 </div>
-                <div class="main-bottom-right"><img src="../../src/Transfer_Credit.png" alt=""></div>
+                <div class="main-bottom-right"><img src="<?php echo IMGROOT?>/Transfer_Credit.png" alt=""></div>
             </div>
      </div>
  </div>

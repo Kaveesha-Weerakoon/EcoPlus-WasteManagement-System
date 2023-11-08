@@ -3,7 +3,7 @@
 <div class="Collector-sidebar">
     <div class="Collector_assistants-add">
     <div class="main">
-    <div class="main-left">
+    <div class="main-left" style="background:  #8CF889">
         <div class="main-left-top">
             <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
             <h1>Eco Plus</h1>
@@ -16,7 +16,7 @@
                     <h2>Dashboard</h2>
                 </div>
             </a>
-            <a href="../Collector_Requests/Collector_Requests.html">
+            <a href="">
                 <div class="main-left-middle-content">
                     <div class="main-left-middle-content-line1"></div>
                     <img src="<?php echo IMGROOT?>/Request.png" alt="">
@@ -30,7 +30,7 @@
                     <h2>Collector Assistants</h2>
                 </div>
             </a>
-            <a href="../Collector_Edit_Profile/Collector_EditProfile.html">
+            <a href="">
                 <div class="main-left-middle-content">
                     <div class="main-left-middle-content-line1"></div>
                     <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">
@@ -110,7 +110,7 @@
                 </div>
                 <div class="main-right-bottom-content-content">
                     <h2>DOB</h2>
-                    <input type="text" value="<?php echo $data['dob']?>">
+                    <input type="date" value="<?php echo $data['dob']?>" name="dob">
                     <div class="error-div">
                             <?php echo $data['dob_err']?>
                     </div>
@@ -124,7 +124,7 @@
     <?php if($data['completed']=='True') : ?>
                <div class="complain-success">
                    <div class="complain-success-box">
-                     <h1>Center Manager Added Successful</h1>
+                     <h1>Collector Assistant Added Successful</h1>
                       <a href="<?php echo URLROOT?>/collectors/collector_assistants_add"><button>Okay</button></a>
                     </div>
                </div>

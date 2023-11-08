@@ -47,15 +47,17 @@
                 </div>
                 <div class="main-right-bottom-down">
                     <table class="table">
-                        <tr class="table-row">
-                            <td>Samantha</td>
-                            <td>1212121212</td>
-                            <td>Colombo</td>
-                            <td>077-4567890</td>
-                            <td>299.87.23</td>
-                            <td><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                            <td class="delete"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
-                        </tr>
+                    <?php foreach($data['center_workers'] as $post) : ?>
+                                       <tr class="table-row">
+                                           <td> <?php echo $post->name?></td>
+                                           <td><?php echo $post->nic?></td>
+                                           <td><?php echo $post->address?></td>
+                                           <td> <?php echo $post->contact_no?></td>
+                                           <td> <?php echo $post->dob?></td>
+                                           <td class="cancel-open"><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
+                                           <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
+                                    </tr>
+                     <?php endforeach; ?>
                        
                     </table>
                 </div>

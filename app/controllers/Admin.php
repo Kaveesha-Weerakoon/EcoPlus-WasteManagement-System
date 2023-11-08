@@ -6,6 +6,7 @@
       $this->userModel=$this->model('User');
       $this->creditModel=$this->model('Credit_amount');
       $this->customerModel=$this->model('Customer');
+      $this->center_managerModel=$this->model('Center_Manager');
 
       if(!isLoggedIn('admin_id')){
         redirect('users/login');
@@ -130,7 +131,7 @@
 
     public function center_managers(){
 
-      $center_managers = $this->adminModel->get_center_managers();
+      $center_managers = $this->center_managerModel->get_center_managers();
       $data = [
         'center_managers' => $center_managers 
       ];
@@ -169,35 +170,51 @@
         }*/
 
         if(empty($data['email'])){
-          $data['email_err'] = 'Pleae enter email';
+          $data['email_err'] = 'Please enter an email';
         } else {
-          // Check email
-          if($this->userModel->findUserByEmail($data['email'])){
-            $data['email_err'] = 'Email is already taken';
-          }
+          if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+            $data['email_err'] = 'Invalid email format';
+          } 
+          else{
+            if($this->userModel->findUserByEmail($data['email'])){
+              $data['email_err'] = 'Email is already taken';
+            }
+          }   
         }
 
         // Validate Name
         if(empty($data['name'])){
-          $data['name_err'] = 'Pleae enter name';
+          $data['name_err'] = 'Please enter name';
+        }
+        elseif (strlen($data['name']) > 255) {
+          $data['name_err'] = 'name is too long ';
         }
 
         if(empty($data['nic'])){
-          $data['nic_err'] = 'Pleae enter NIC';
+          $data['nic_err'] = 'Please enter NIC';
         }
+        elseif (strlen($data['nic']) !== 12) {
+          $data['nic_err'] = 'Please enter a valid nic number';
+      }
 
         if(empty($data['dob'])){
-          $data['dob_err'] = 'Pleae enter dob';
+          $data['dob_err'] = 'Please enter dob';
         }
 
         // Validate Contact no
-        if(empty($data['contact_no'])){
-          $data['contact_no_err'] = 'Pleae enter contact no';
-        }
+        if (empty($data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter a contact number';
+      } elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter a valid contact number';
+      }
+      
 
         // Validate Adress
         if(empty($data['address'])){
-          $data['address_err'] = 'Pleae enter adress';
+          $data['address_err'] = 'Please enter an address';
+        }
+        elseif (strlen($data['address']) > 255) {
+          $data['address_err'] = 'address is too long ';
         }
             // Validate Password
             if(empty($data['password'])){
@@ -219,7 +236,7 @@
               // Validated
                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
              
-              if($this->adminModel->register_center_manager($data)){
+              if($this->center_managerModel->register_center_manager($data)){
                 $data['completed']='True';        
                 $this->view('admin/center_managers_add',$data);
               } else {

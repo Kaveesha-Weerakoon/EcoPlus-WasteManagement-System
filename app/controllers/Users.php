@@ -65,9 +65,10 @@
           // Validate Contact no
           if (empty($data['contact_no'])) {
             $data['contact_no_err'] = 'Please enter a contact number';
-        } elseif (strlen($data['contact_no']) !== 10) {
+        } elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
             $data['contact_no_err'] = 'Please enter a valid contact number';
         }
+        
         
   
           // Validate Adress

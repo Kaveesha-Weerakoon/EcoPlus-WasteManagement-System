@@ -93,29 +93,32 @@
             die('Something went wrong');
           }
         }
+        else{
+          $this->view('centermanagers/collectors_add', $data);
+
+        }
 
 
 
-        $this->view('center_managers/collectors_add', $data);
 
       }
       else{
-
+        $data = [
+          'name' =>'',
+          'nic' => '',
+          'dob'=>'',
+          'contact_no'=>'',
+          'address' =>'',
+          'email'=>'',
+          'vehicle_no'=>'',
+          'vehicle_type'=>'',
+          'completed'=>'',
+          'password'=>'',
+          'confirm_password'=>''
+        ];
+          $this->view('center_managers/collectors_add', $data);
       }
-      $data = [
-        'name' =>'',
-        'nic' => '',
-        'dob'=>'',
-        'contact_no'=>'',
-        'address' =>'',
-        'email'=>'',
-        'vehicle_no'=>'',
-        'vehicle_type'=>'',
-        'completed'=>'',
-        'password'=>'',
-        'confirm_password'=>''
-      ];
-        $this->view('center_managers/collectors_add', $data);
+     
      
     }
 

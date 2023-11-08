@@ -12,15 +12,20 @@
                     <div class="slogan"> Sign into your account</div>
                     <div class="line"></div>
                     <div class="field">
-                        <input type="email" name="email" placeholder="Email" id="" class="<?php echo (!empty($data['email_err'])) ? 'alert_empty' : ''; ?>" value="<?php echo $data['email']; ?>">
-                       
+                        <input type="text" name="email" placeholder="Email" id="" class="<?php echo (!empty($data['email_err'])) ? 'alert_empty' : ''; ?>" value="<?php echo $data['email']; ?>">          
                     </div> 
-                    
+                    <div class="field-two">
+                        <p><?php echo $data['email_err']?></p>
+                    </div>
+                                   
                     <div class="field">
                         <input type="password" name="password" placeholder="Password" id="" class="<?php echo (!empty($data['password_err'])) ? 'alert_empty' : ''; ?>" value="<?php echo $data['password']; ?>">
+                    </div> 
+                    <div class="field-two">
+                        <p><?php echo $data['password_err']?></p>
                     </div>
-                  
-                    <div class="forgot"><a href="./Forgot_Password.html">Forgot your password?</a></div>
+                                
+                    <div class="forgot"><a href="">Forgot your password?</a></div>
                     <button class="login-button">Login</button>
                     <p>Don't have an account? <a href="<?php echo URLROOT?>/users/register"><b>Register</b></a></a></p>
                 </div>

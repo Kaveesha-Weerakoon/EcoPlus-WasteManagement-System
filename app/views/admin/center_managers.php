@@ -61,9 +61,9 @@
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
                                     </tr>
                              <?php endforeach; ?>
-                           
+                           </table>
                 
-
+ 
                     </div>
                 </div>
             </div>

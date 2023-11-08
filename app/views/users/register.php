@@ -13,7 +13,7 @@
                   <input type="text" name="name" placeholder="Enter Your Name" value="<?php echo $data['name']; ?>">
                   <span class="error_span"><?php echo $data['name_err']?></span>
                  
-                  <input type="email" name="email" placeholder="Enter Your Email" value="<?php echo $data['email']; ?>">
+                  <input type="text" name="email" placeholder="Enter Your Email" value="<?php echo $data['email']; ?>">
                   <span class="error_span"><?php echo $data['email_err']?></span>
 
                   <input type="text" name="contact_no" placeholder="Enter Your Contact Number" value="<?php echo $data['contact_no']; ?>">

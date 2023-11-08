@@ -3,6 +3,7 @@
     public function __construct(){
 
       $this->customerModel=$this->model('Customer');
+      $this->creditModel=$this->model('Credit_amount');
 
       if(!isLoggedIn('user_id')){
         redirect('users/login');
@@ -178,16 +179,17 @@
     }
 
     public function transfer(){
-      $data = [
-        'title' => 'TraversyMVC',
-      ];
+      $data = [];
+     
      
       $this->view('customers/transfer', $data);
     }
 
     public function credit_per_waste(){
+       $credit= $this->creditModel->get();
       $data = [
         'title' => 'TraversyMVC',
+        'eco_credit_per'=>$credit
       ];
       $this->view('customers/credits_per_waste', $data);
     }

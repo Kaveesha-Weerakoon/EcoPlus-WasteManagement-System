@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="main-right-left-two">
-                        <a href="<?php echo URLROOT?>/collectors.collector_main" class="main-right-left-two-a">
+                        <a href="<?php echo URLROOT?>/centermanagers/collectors" class="main-right-left-two-a">
                             <div class="main-right-left-two-component" style="background-image: url('<?php echo IMGROOT?>/Dashboard1.png');">
                                 <h1>Collectors</h1>
                                 <img src="<?php echo IMGROOT?>/Collector.png" alt="">
@@ -88,8 +88,8 @@
                 <div class="main-right-right">
                     <div class="main-right-right-top">
                         <img src="<?php echo IMGROOT?>/CustomerDashboard_image.png" alt="">
-                        <h2>Ananda</h2>
-                        <p>Center Manager ID: CM 2132</p>
+                        <h2><?php echo $_SESSION['center_manager_name']?></h2>
+                        <p>Center Manager ID: CM <?php echo $_SESSION['center_manager_id']?></p>
                         <button>Profile</button>
                     </div>
                     <div class="main-right-right-bottom">

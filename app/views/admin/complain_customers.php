@@ -8,21 +8,21 @@
                     <h1>Eco Plus</h1>
                 </div>
                 <div class="main-left-middle">
-                    <a href="../Admin_Dashboard.html">
+                    <a href="<?php echo URLROOT?>/admin">
                         <div class="main-left-middle-content ">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/Home.png" alt="">
                             <h2>Dashboard</h2>
                         </div>
                     </a>
-                    <a href="./Collector_Requests/Collector_Requests.html">
+                    <a href="">
                         <div class="main-left-middle-content">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/Reports.png" alt="">
                             <h2>Reports</h2>
                         </div>
                     </a>
-                    <a href="./Collector_Collector Assistans/Collector_CollectorAssistants.html">
+                    <a href="">
                         <div class="main-left-middle-content current">
                             <div class="main-left-middle-content-line"></div>
                             <img src="<?php echo IMGROOT?>/Complains.png" alt="">
@@ -104,9 +104,9 @@
                                            <td><?php echo $post->contact_no?></td>
                                            <td><?php echo $post->name?></td>
                                            <td><?php echo $post->subject?></td>
-                                           <td><?php echo $post->complaint?></td>
-                                           <td class="x"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
-                                    </tr>
+                                           <td><?php echo $post->complaint?></td>                                   
+                                            <td>delete</td>
+                                        </tr>
                                   <?php endforeach; ?>
                         </table>
 

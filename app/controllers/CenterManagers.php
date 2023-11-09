@@ -202,7 +202,7 @@
           'dob_err'=>'',
           'contact_no_err'=>'',
           'address_err' =>'',
-          'completed' =>''
+          'completed_err' =>''
         ];
         
         $this->view('center_managers/center_workers_add', $data);
@@ -211,5 +211,25 @@
       
     }
 
+    public function center_workers_delete($workerId){
+
+      $center_worker = $this->centerworkerModel->getCenterWorkerById($workerId);
+      if(empty($center_worker)){
+        die('Center worker not found');
+      }
+      else{
+        if($this->centerworkerModel->delete_center_workers($workerId)){
+          redirect('centermanagers/center_workers');
+        }
+        else{
+          die('Something went wrong');
+        }
+
+      }
+
+    }
+
    
   }
+
+?>

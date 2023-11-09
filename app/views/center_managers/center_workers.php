@@ -7,7 +7,7 @@
                 <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
             </a>
             <div class="main-top-component">
-                <p>Ananda Perera</p>
+                <p><?php echo $_SESSION['center_manager_name']?></p>
                 <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="">
             </div>
         </div>
@@ -47,15 +47,15 @@
                 </div>
                 <div class="main-right-bottom-down">
                     <table class="table">
-                    <?php foreach($data['center_workers'] as $post) : ?>
+                    <?php foreach($data['center_workers'] as $center_worker) : ?>
                                        <tr class="table-row">
-                                           <td> <?php echo $post->name?></td>
-                                           <td><?php echo $post->nic?></td>
-                                           <td><?php echo $post->address?></td>
-                                           <td> <?php echo $post->contact_no?></td>
-                                           <td> <?php echo $post->dob?></td>
+                                           <td> <?php echo $center_worker->name?></td>
+                                           <td><?php echo $center_worker->nic?></td>
+                                           <td><?php echo $center_worker->address?></td>
+                                           <td> <?php echo $center_worker->contact_no?></td>
+                                           <td> <?php echo $center_worker->dob?></td>
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                                           <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
+                                           <td class="cancel-open"><a href="<?php echo URLROOT?>/CenterManagers/center_workers_delete/<?php echo $center_worker->id ?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
                                     </tr>
                      <?php endforeach; ?>
                        

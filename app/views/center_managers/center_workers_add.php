@@ -9,7 +9,7 @@
         </a>
 
         <div class="main-top-component">
-            <p>Ananda Perera</p>
+            <p><?php echo $_SESSION['center_manager_name']?></p>
             <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="">
         </div>
     </div>

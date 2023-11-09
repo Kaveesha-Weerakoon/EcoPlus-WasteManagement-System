@@ -1,5 +1,5 @@
 <?php
-  class Customer_Complains {
+  class Customer_Complain {
 
     private $db;
 
@@ -18,7 +18,7 @@
         $this->db->bind(':subject', $data['subject']);
         $this->db->bind(':complaint', $data['complain']);
         $this->db->bind(':region', $data['region']);
-  
+     
         $result = $this->db->execute();
         
         if ($result) {
@@ -33,23 +33,19 @@
         $this->db->query('SELECT * FROM customer_complains WHERE customer_id = :id ORDER BY customer_complains.date DESC');
         $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
-        
+      
         return $results;
     }
   
+    public function get_customer_complains(){
 
-    public function deletecomplain($id){
-        $this->db->query('DELETE FROM customers WHERE id = :id');
-       // Bind values
-        $this->db->bind(':id', $id);
+      $this->db->query('SELECT * FROM customer_complains  ORDER BY customer_complains.date DESC');
+      $results = $this->db->resultSet();
+      return $results;
+  }
+
+
  
-       // Execute
-        if($this->db->execute()){
-          return true;
-       } else {
-         return false;
-       }
-      }
 
 
   }

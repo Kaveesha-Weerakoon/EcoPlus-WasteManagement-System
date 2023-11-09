@@ -7,6 +7,7 @@
       $this->creditModel=$this->model('Credit_amount');
       $this->customerModel=$this->model('Customer');
       $this->center_managerModel=$this->model('Center_Manager');
+      $this->customer_complain_Model=$this->model('Customer_Complain');
 
       if(!isLoggedIn('admin_id')){
         redirect('users/login');
@@ -106,7 +107,7 @@
 
     public function complain_customers(){
     
-      $complains = $this->adminModel->get_customer_complains();
+      $complains = $this->customer_complain_Model->get_customer_complains();
       $data = [
         'complains' => $complains
       ];

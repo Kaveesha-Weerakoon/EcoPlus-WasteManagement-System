@@ -1,0 +1,72 @@
+.Admin_Center_Manager_Add {
+    .main-bottom-down {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+    }
+
+    .main-right-bottom-content {
+        width: 50%;
+        height: 90%;
+        display: grid;
+        grid-template-rows: 90% 10%;
+
+    }
+
+    .main-right-bottom-content-top {
+        display: grid;
+        grid-template-columns: 50% 50%;
+
+    }
+
+    .main-right-bottom hr {
+        width: "100%";
+        margin-bottom: 15px;
+    }
+
+    .main-bottom-down h1 {
+        width: "100%";
+        margin-bottom: 25px;
+        margin-top: 15px;
+        font-size: 31px;
+    }
+
+    .main-right-bottom-content-content {
+        width: 90%;
+
+    }
+
+    .main-right-bottom-content-content h2 {
+        font-size: 17px;
+        margin-bottom: 10px;
+        font-weight: 500;
+    }
+
+    .main-right-bottom-content-content input {
+        width: 100%;
+        height: 34px;
+        border: 2px solid #858585;
+        border-radius: 5px;
+    }
+
+    .main-right-bottom-content-content button {
+        background: #1B6652;
+        width: 40%;
+        height: 40px;
+        border-radius: 5px;
+        font-size: 12px;
+        color: white;
+        font-size: 20px;
+        font-weight: 510;
+        cursor: pointer;
+        border: none;
+    }
+
+    .a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+}

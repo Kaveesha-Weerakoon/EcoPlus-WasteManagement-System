@@ -163,7 +163,8 @@
         'contact_no_err' => '',
         'region_err' => '',
         'subject_err' => '' ,
-        'complain_err' => ''     
+        'complain_err' => ''  ,
+        'completed'=>''      
       ];{
         $this->view('customers/complains', $data);
       }

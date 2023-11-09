@@ -1,0 +1,150 @@
+.Register-main {
+    .main {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 45% 55%;
+        height: 731px;
+        font-family: 'Inter', sans-serif;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        /* border: 1px solid red; */
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+        padding: 0;
+        margin: 0;
+    }
+
+    .main-left {
+        background-color: #ecf0f1;
+    }
+
+    .main-right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .image {
+        width: 600px;
+        height: 600px;
+    }
+
+    .logo {
+        width: 170px;
+        height: 170px;
+    }
+
+    .top {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 135px;
+        margin-bottom: 12px;
+        margin-top: 4px;
+    }
+
+    .slogan {
+        font-size: 48px;
+        font-weight: bold;
+        color: #3E8860;
+        margin-right: 20px;
+    }
+
+    .fields {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input {
+        margin-bottom: 1px;
+        height: 35px;
+        width: 400px;
+        font-size: 17px;
+        padding-left: 6px;
+        border: 1.5px solid #2c3e50;
+        border-radius: 7px;
+    }
+
+    .error_span {
+        color: red;
+        width: 395px;
+        height: 18px;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .buttton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 85px;
+    }
+
+    button {
+        width: 250px;
+        height: 55px;
+        border-radius: 15px;
+        font-size: 24px;
+        color: white;
+        font-weight: 600;
+        background: #1B6652;
+        cursor: pointer;
+        border: none;
+    }
+
+    .have {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    @media screen and (max-width: 1362px) {
+        .slogan {
+            font-size: 27px;
+        }
+
+        .logo {
+            width: 130px;
+            height: 130px;
+        }
+
+        .main-right {
+            display: none
+        }
+
+        .top {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-right: 225px;
+        }
+
+        .main {
+            grid-template-columns: 100%;
+
+        }
+    }
+
+    @media screen and (max-width:676px) {
+        .slogan {
+            font-size: 22px;
+        }
+
+        .top {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-right: 150px;
+        }
+    }
+}

@@ -1,0 +1,491 @@
+.Admin_Dashboard {
+    a {
+        width: 100%;
+    }
+
+    .main-right {
+        display: grid;
+        height: 100%;
+        grid-template-columns: 65% 35%;
+    }
+
+    .main-right-left {
+        background: #FAFBFC;
+        margin: 5px;
+        display: grid;
+        border-radius: 8px;
+        grid-template-rows: 19% 40% 41%;
+        border: 5px;
+
+    }
+
+    .main-right-left-one {
+        display: flex;
+        flex-direction: row;
+        padding-top: 40px;
+
+    }
+
+    .main-right-left-one-text {
+        width: 29%;
+        font-size: 25px;
+        font-weight: 600;
+        margin-left: 30px;
+        margin-right: 40px;
+    }
+
+    .change {
+        font-weight: 510;
+        color: #47924B;
+        font-size: 23px;
+    }
+
+    .main-right-left-one-right {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        width: 90%;
+        margin-top: 20px;
+        margin-right: 2%;
+    }
+
+    .main-right-left-one-right img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .main-right-left-one-right input {
+        width: 100%;
+        height: 30px;
+        font-size: 12px;
+        margin-left: 15px;
+        border: 1px solid #b2bec3;
+        padding-left: 10px;
+        border-radius: 5px;
+        margin-right: 20px
+    }
+
+    .main-right-left-two {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .main-right-left-two-component {
+        cursor: pointer;
+        width: 23% !important;
+        text-align: center;
+        height: 80% !important;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background: radial-gradient(82.23% 108.11% at 101.39% 101.07%, #13C93E 0%, #DFFFA4 100%)
+    }
+
+    .main-right-left-two-component:hover {
+        background: radial-gradient(82.23% 108.11% at 101.39% 101.07%, #13C93E 20%, #DFFFA4 100%)
+    }
+
+    .main-right-left-two-component img {
+        width: 90px !important;
+        ;
+    }
+
+    .main-right-left-two-component h3 {
+        font-size: 18px !important;
+        margin-bottom: 30px;
+        height: 30px !important;
+
+    }
+
+    .main-right-left-three {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .main-right-left-three-component {
+        background-color: #DFFFD3;
+        width: 45%;
+        height: 286px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .main-right-left-three-component img {
+        width: 30%;
+        height: 125px !important;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    .main-right-left-three-component h6 {
+        font-size: 22px;
+        margin-bottom: 12px;
+    }
+
+    button {
+        width: 35%;
+        background: linear-gradient(0deg, #8CF889, #8CF889),
+            linear-gradient(0deg, #989898, #989898);
+        height: 38px;
+        border: none;
+        border-radius: 10px;
+        color: #196637;
+        font-size: 20px;
+        margin: 7px;
+        cursor: pointer;
+    }
+
+    .button1 {
+        width: 95%;
+        background: linear-gradient(0deg, #8CF889, #8CF889),
+            linear-gradient(0deg, #989898, #989898);
+        height: 38px;
+        border: none;
+        border-radius: 10px;
+        color: #196637;
+        font-size: 20px;
+        margin: 7px;
+        cursor: pointer;
+    }
+
+    .component {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-right-right {
+        display: grid;
+        grid-template-rows: 45% 55%;
+    }
+
+    .main-right-right-top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .main-right-right-top img {
+        width: 25%;
+    }
+
+    .main-right-right-top h2 {
+        margin-top: 15px;
+    }
+
+    .main-right-right-top p {
+        margin-top: 10px;
+        font-size: 22px;
+    }
+
+    .main-right-right-bottom {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        margin: 10px;
+        border-radius: 15px;
+    }
+
+    .main-right-right-bottom img {
+        width: 60%;
+        height: 350px;
+        border-radius: 10px;
+    }
+
+    .pop-eco_credits {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .Eco_Credits-main {
+        width: 60%;
+        background-color: white;
+        height: 66%;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .View-content-content-content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin: 43px;
+        width: 70px;
+        height: 240px;
+        text-align: center;
+    }
+
+    .View-content-content-content img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .View-content-content-content h6 {
+        font-size: 20px;
+        margin-top: 30px;
+        height: 50px;
+        margin-bottom: 40px;
+    }
+
+    .View-content-content-content input {
+        font-size: 20px;
+        font-weight: 600;
+        width: 100%;
+
+        text-align: center;
+    }
+
+    .View-content-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        height: 325px;
+
+        margin-top: 23px;
+    }
+
+    .Eco_Credits-main {}
+
+    .Eco_Credits-main-top {
+        display: flex;
+        align-items: center;
+        padding-top: 12px;
+        width: 100%;
+        /* Adjust the width as needed */
+    }
+
+    .pop-anchor {
+        background-color: #13C93E;
+    }
+
+
+
+    .Eco_Credits-main-top h1 {
+        margin-right: 15%;
+        margin-left: 30%;
+        width: 300%;
+        font-size: 30px;
+
+    }
+
+    .View-content-img {
+        height: 25px;
+        width: 25px;
+        cursor: pointer;
+        margin-left: 40%;
+    }
+
+    .Eco_Credits-main button {
+        background: #1B6652;
+        width: 35%;
+        height: 40px !important;
+        border-radius: 5px;
+        font-size: 25px !important;
+        color: white;
+        font-size: 20px;
+        font-weight: 510;
+        cursor: pointer;
+        border: none;
+
+
+    }
+
+    .pop-rupee_value {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .rupee-main {
+        width: 55%;
+        background-color: white;
+        height: 50%;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .rupee-main-top {
+        display: flex;
+        align-items: center;
+        padding-top: 12px;
+        width: 100%;
+    }
+
+    .rupee-main-top h1 {
+        margin-right: 16%;
+        margin-left: 28%;
+        width: 100%;
+    }
+
+    .rupee-main-down {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .rupee-main-down h4 {
+        font-size: 25px;
+        margin-right: 20px;
+    }
+
+    .rupee-main-down input {
+        font-size: 23px;
+    }
+
+    .rupee-main button {
+        background: #1B6652;
+        width: 35%;
+        height: 80px;
+        border-radius: 5px;
+        font-size: 25px !important;
+        color: white;
+        font-size: 20px;
+        font-weight: 510;
+        cursor: pointer;
+        border: none;
+        margin-bottom: 40px;
+    }
+
+
+    @media screen and (max-width: 1238px) {
+        .main-right-left-two-component h3 {
+            font-size: 15px;
+
+        }
+
+        .main-right-left-three-component img {
+            width: 25%;
+            height: 100px;
+        }
+
+        .main-right-left-three-component h6 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        button {
+            font-size: 14px;
+        }
+
+    }
+
+    @media screen and (max-width: 1056px) {
+
+        .main-right {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: scroll;
+        }
+
+        .main-right-left {
+            width: 100%;
+            height: 100%;
+        }
+
+        .main-right-right {
+            width: 100%;
+            height: 100%;
+        }
+
+        .main-right-left-one {
+            width: 100%;
+            height: 100%;
+            margin-bottom: 20px;
+        }
+
+        .main-right-left-two {
+            width: 100%;
+            height: 100%;
+            margin-bottom: 70px;
+        }
+
+        .main-right-left-three {
+            width: 100%;
+            height: 100%;
+            margin-bottom: 70px;
+        }
+
+        .main-right-right-bottom img {
+            display: none;
+        }
+
+        .main-right-right-top p {
+            display: none;
+        }
+
+        .main-right-right-top img {
+
+            width: 20%;
+            margin-top: 20px;
+        }
+    }
+
+    @media screen and (max-width: 638px) {
+        .main-right-left-three-component h6 {
+            font-size: 15px;
+        }
+
+        button {
+            font-size: 12px;
+        }
+
+        .main-right-left-two-component h3 {
+            font-size: 14px;
+
+        }
+    }
+
+    @media screen and (max-width: 560px) {
+        .main-right-right-top img {
+            height: 50%;
+            width: 15%;
+            margin-top: 20px;
+        }
+
+        .main-right-left-three-component img {
+            width: 25%;
+            height: 70px;
+        }
+
+        .main-right-left-three-component h6 {
+            font-size: 13px;
+        }
+
+        .main-right-right-top img {
+            display: none;
+        }
+    }
+}

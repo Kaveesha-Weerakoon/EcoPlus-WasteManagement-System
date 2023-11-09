@@ -92,15 +92,15 @@
                     </div>
                     <div class="main-right-bottom-down">
                         <table class="table">
-                        <?php foreach($data['collector_assistants'] as $post) : ?>
+                        <?php foreach($data['collector_assistants'] as $collector_assistant) : ?>
                                        <tr class="table-row">
-                                           <td>CM <?php echo $post->name?></td>
-                                           <td><?php echo $post->nic?></td>
-                                           <td><?php echo $post->address?></td>
-                                           <td> <?php echo $post->contact_no?></td>
-                                           <td> <?php echo $post->dob?></td>
+                                           <td><?php echo $collector_assistant->name?></td>
+                                           <td><?php echo $collector_assistant->nic?></td>
+                                           <td><?php echo $collector_assistant->address?></td>
+                                           <td> <?php echo $collector_assistant->contact_no?></td>
+                                           <td> <?php echo $collector_assistant->dob?></td>
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                                           <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
+                                           <td class="cancel-open"><a href="<?php echo URLROOT?>/Collectors/collector_assistants_delete/<?php echo $collector_assistant->id ?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
                                     </tr>
                              <?php endforeach; ?>
 

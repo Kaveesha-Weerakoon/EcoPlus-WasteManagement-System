@@ -28,5 +28,28 @@
         
         return $results;
       }
+
+      public function getCollectorAssisById($assisId){
+        $this->db->query('SELECT * FROM collector_assistants WHERE id = :assisId');
+        $this->db->bind(':assisId', $assisId);
+
+        $row = $this->db->single();
+
+        return $row;
+
+      }
+
+      public function delete_collector_assistants($assisId){
+        $this->db->query('DELETE FROM collector_assistants WHERE id = :assisId');
+        $this->db->bind(':assisId', $assisId);
+
+        if($this->db->execute()){
+          return true;
+        }
+        else{
+          return false;
+        }
+
+      }
   
 }

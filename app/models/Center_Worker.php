@@ -29,5 +29,28 @@
         
         return $results;
       }
+
+      public function getCenterWorkerById($workerId){
+        $this->db->query('SELECT * FROM center_workers WHERE id = :workerId');
+        $this->db->bind(':workerId', $workerId);
+
+        $row = $this->db->single();
+
+        return $row;
+
+      }
+
+      public function delete_center_workers($workerId){
+        $this->db->query('DELETE FROM center_workers WHERE id = :workerId');
+        $this->db->bind(':workerId', $workerId);
+
+        if($this->db->execute()){
+          return true;
+        }
+        else{
+          return false;
+        }
+
+      }
   
 }

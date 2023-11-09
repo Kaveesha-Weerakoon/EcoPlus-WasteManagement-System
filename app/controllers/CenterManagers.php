@@ -27,9 +27,11 @@
     }
 
     public function collectors(){
+      $collectors = $this->collectorModel->get_collectors($_SESSION['center_id']);
       $data = [
-        'title' => 'TraversyMVC',
+        'collectors' => $collectors
       ];
+     
      
       $this->view('center_managers/collectors', $data);
     }

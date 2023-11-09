@@ -56,32 +56,21 @@
                     </div>
                     <div class="main-right-bottom-down">
                         <table class="table">
+                        <?php foreach($data['collectors'] as $collector) : ?> 
                             <tr class="table-row">
-                                <td>Samantha</td>
-                                <td>Samantha</td>
-                                <td>1212121212</td>
-                                <td>Samantha@gmail.com</td>
-                                <td>Colombo</td>
-                                <td>077-4567890</td>
-                                <td>299.87.23</td>
+                                <td><?php echo $collector->user_id?></td>
+                                <td><?php echo $collector->name?></td>
+                                <td><?php echo $collector->nic?></td>
+                                <td><?php echo $collector->email?></td>
+                                <td><?php echo $collector->address?></td>
+                                <td><?php echo $collector->contact_no?></td>
+                                <td><?php echo $collector->dob?></td>
                                 <td><img src="<?php echo IMGROOT ?>/View.png" alt=""></td>
                                 <td><img src="<?php echo IMGROOT ?>/update.png" alt=""></td>
                                 <td class="delete"> <img src="<?php echo IMGROOT ?>/delete.png" alt=""></td>
 
                             </tr>
-                            <tr class="table-row">
-                                <td>Samantha</td>
-                                <td>Samantha</td>
-                                <td>1212121212</td>
-                                <td>Samantha@gmail.com</td>
-                                <td>Colombo</td>
-                                <td>077-4567890</td>
-                                <td>299.87.23</td>
-                                <td><img src="<?php echo IMGROOT ?>/View.png" alt=""></td>
-                                <td><img src="<?php echo IMGROOT ?>/update.png" alt=""></td>
-                                <td class="delete"> <img src="<?php echo IMGROOT ?>/delete.png" alt=""></td>
-
-                            </tr>
+                        <?php endforeach; ?>
 
                     </div>
                 </div>

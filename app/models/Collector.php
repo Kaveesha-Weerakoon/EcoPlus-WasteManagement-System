@@ -46,6 +46,19 @@
        
       }
 
+
+      public function get_collectors(){
+        $this->db->query('SELECT *,
+              collectors.id as cID,
+              users.id as userId
+              FROM collectors
+              INNER JOIN users
+              ON collectors.user_id = users.id');
+        $results = $this->db->resultSet();
+        return $results;
+
+      }
+
       public function getCollectorByNIC($NIC){
         $this->db->query('SELECT * FROM collectors WHERE nic = :nic');
         $this->db->bind(':nic', $NIC);

@@ -2,9 +2,9 @@
   class Customers extends Controller {
     public function __construct(){
 
-      $this->customerModel=$this->model('Customer');
+      $this->customer_complain_Model=$this->model('Customer_Complain');
       $this->creditModel=$this->model('Credit_amount');
-
+      $this->customerModel=$this->model('Customer');
       if(!isLoggedIn('user_id')){
         redirect('users/login');
       }
@@ -76,7 +76,7 @@
 
     public function history_complains(){
       $id=$_SESSION['user_id']; 
-      $complains = $this->customerModel->get_complains($id);
+      $complains = $this->customer_complain_Model->get_complains($id);
 
       $data = [
         'complains' => $complains
@@ -140,7 +140,7 @@
         }
 
         if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
-          if($this->customerModel->complains($data)){
+          if($this->customer_complain_Model->complains($data)){
             $data['completed']="True";
             $this->view('customers/complains', $data);
            
@@ -163,7 +163,8 @@
         'contact_no_err' => '',
         'region_err' => '',
         'subject_err' => '' ,
-        'complain_err' => ''     
+        'complain_err' => ''  ,
+        'completed'=>''      
       ];{
         $this->view('customers/complains', $data);
       }

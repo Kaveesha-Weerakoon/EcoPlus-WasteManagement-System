@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Customer-Request-collect">
+<div class="Customer_Request_collect">
 <div class="main">
       <div class="main-top">
         <a href="CustomerDashboard.html">

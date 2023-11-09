@@ -1,5 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Admin-Center-Manager">
+<div class="Admin_Center_Manager">
+<div class="Admin_Center_Manager_Add">
 <div class="main">
             <div class="main-top">
                 <a href="<?php echo URLROOT?>/admin">
@@ -99,4 +100,5 @@
             <?php endif; ?>
         </div>
 
+</div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

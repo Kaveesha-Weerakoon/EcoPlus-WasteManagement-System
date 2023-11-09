@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
- <div class="Admin-sidebar">
-    <div class="Admin-Customer_Complains">
+ <div class="Admin_Main">
+    <div class="Admin_Customer_Complains">
         <div class="main">
              <div class="main-left">
                 <div class="main-left-top">

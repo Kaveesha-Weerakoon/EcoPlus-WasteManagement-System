@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Customer-main-main">
-    <div class="Customer-Request-Main">
-        <div class="Customer-Request-Cancelled">
+<div class="Customer_Main">
+    <div class="Customer_Request_Main">
+        <div class="Customer_Request_Cancelled">
         <div class="main">
             <div class="main-left">
                 <div class="main-left-top">

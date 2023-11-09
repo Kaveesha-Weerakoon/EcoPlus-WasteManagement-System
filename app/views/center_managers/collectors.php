@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Center-manager-collector">
+<div class="CenterManager_Collector">
 <div class="main">
             <div class="main-top">
                 <a href="<?php echo URLROOT?>/centermanagers">

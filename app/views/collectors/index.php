@@ -1,8 +1,8 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
-<div class="Collector-sidebar" style="background-color:white">
-  <div class="Collector-main" style="background-color:white">
-     <div class="main" style="background-color:white">
+<div class="Collector_Main" >
+  <div class="Collector_Dashboard" >
+     <div class="main" >
             <div class="main-left" style="background: #8CF889;">
                 <div class="main-left-top">
                     <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">

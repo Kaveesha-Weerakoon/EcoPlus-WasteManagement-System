@@ -1,0 +1,155 @@
+.Login-main {
+
+    .main {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        height: 731px;
+        font-family: 'Inter', sans-serif;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-left {
+        background-color: #8CF889;
+        font-size: 55px;
+        font-weight: 700;
+        width: 500px;
+        height: 100%;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+    }
+
+    .login-component {
+        width: 650px;
+        height: 650px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .login-image {
+        width: 660.94px;
+        height: 593.96px;
+        top: 223.84px;
+        display: block;
+        margin-top: 80px;
+        margin-left: -350px;
+    }
+
+    .image {
+        background-image: url('src/Logo.png');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 170px;
+        height: 140px;
+        margin-bottom: 20px;
+    }
+
+    .login {
+        font-size: 35px;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+
+    .slogan {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .line {
+        width: 100px;
+        height: 5px;
+        margin-bottom: 50px;
+        background: #1B6652;
+    }
+
+    .field {
+        margin-bottom: 5px;
+    }
+
+    .field-two {
+        width: 350px;
+        height: 15px;
+        font-size: 14px;
+        color: red;
+        margin-bottom: 15px;
+        align-items: flex-start;
+    }
+
+    .alert_empty {
+        border: 2px solid red;
+    }
+
+    input {
+        height: 35px;
+        width: 350px;
+        border: 2px solid black;
+        border-radius: 5px;
+        font-size: 16px;
+        padding-left: 6px;
+    }
+
+    .forgot {
+        margin-bottom: 40px;
+        text-decoration: none;
+        margin-right: 180px;
+        margin-top: -5px;
+        font-size: 16px;
+        color: black;
+    }
+
+    .login-button {
+        width: 160px;
+        height: 41px;
+        border-radius: 7px;
+        font-size: 22px;
+        margin-bottom: 28px;
+        color: white;
+        font-weight: 600;
+        background: #1B6652;
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 1284px) {
+        .login-image {
+            display: none;
+        }
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    @media screen and (max-width: 648px) {
+        .login-image {
+            display: none;
+        }
+
+        .main-right {
+
+            width: 100%;
+
+        }
+
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+}

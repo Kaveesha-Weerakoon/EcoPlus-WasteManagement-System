@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Customer-main-main">
-    <div class="Customer-history-top">
-     <div class="Customer-main-history"> 
+<div class="Customer_Main">
+    <div class="Customer_History_Top">
+     <div class="Customer_Main_History"> 
            <div class="main">
             <div class="main-left">
                 <div class="main-left-top">
@@ -221,5 +221,5 @@
             </div>
         </div>
      </div>
-  </div> 
+     </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

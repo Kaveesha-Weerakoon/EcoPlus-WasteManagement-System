@@ -4,7 +4,7 @@
 
       $this->customer_complain_Model=$this->model('Customer_Complain');
       $this->creditModel=$this->model('Credit_amount');
-
+      $this->customerModel=$this->model('Customer');
       if(!isLoggedIn('user_id')){
         redirect('users/login');
       }
@@ -163,7 +163,8 @@
         'contact_no_err' => '',
         'region_err' => '',
         'subject_err' => '' ,
-        'complain_err' => ''     
+        'complain_err' => ''  ,
+        'completed'=>''      
       ];{
         $this->view('customers/complains', $data);
       }

@@ -67,4 +67,34 @@
         return true;
        
       }
+
+      public function getCollectorByNIC($NIC){
+        $this->db->query('SELECT * FROM collectors WHERE nic = :nic');
+        $this->db->bind(':nic', $NIC);
+
+        $row = $this->db->single();
+
+        return $row;
+
+      }
+
+      public function getCollectorByVehicleNo($vehicleNo){
+        $this->db->query('SELECT * FROM collectors WHERE vehicle_no = :vehicleNo');
+        $this->db->bind(':vehicleNo', $vehicleNo);
+
+        $row = $this->db->single();
+
+        return $row;
+
+      }
+
+      // public function getCollectorByEmail($email){
+      //   $this->db->query('SELECT * FROM collectors WHERE email = :email');
+      //   $this->db->bind(':email', $email);
+
+      //   $row = $this->db->single();
+
+      //   return $row;
+
+      // }
 }

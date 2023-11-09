@@ -218,7 +218,7 @@
         }
             // Validate Password
             if(empty($data['password'])){
-              $data['password_err'] = 'Pleae enter password';
+              $data['password_err'] = 'Please enter password';
             } elseif(strlen($data['password']) < 6){
               $data['password_err'] = 'Password must be at least 6 characters';
             }

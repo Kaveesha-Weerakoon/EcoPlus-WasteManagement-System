@@ -26,7 +26,7 @@
        
       }
 
-      public function get(){
+    public function get(){
         $this->db->query('SELECT * FROM credits_per_waste WHERE id = :id');
         $this->db->bind(':id', 1);
   

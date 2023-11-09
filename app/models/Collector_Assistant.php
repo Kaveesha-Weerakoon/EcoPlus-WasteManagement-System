@@ -21,7 +21,7 @@
        
       }
 
-      public function get_collector_assistants($data){
+    public function get_collector_assistants($data){
         $this->db->query('SELECT * FROM collector_assistants WHERE collector_id=:id');
         $this->db->bind(':id', $data);
         $results = $this->db->resultSet();

@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
- <div class="Customer-Transfer">
+ <div class="Customer_Transfercredit">
     <div class="main">
             <div class="main-top">
                 <a href="<?php echo URLROOT?>/customers">

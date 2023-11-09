@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
- <div class="Center_manager-sidebar">
-    <div class="Center_manager-main">
+ <div class="CenterManager_Main">
+    <div class="CenterManager_Dashboard">
         <div class="main">
             <div class="main-left">
                 <div class="main-left-top">

@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Admin-sidebar">
-    <div class="Admin-main">
+<div class="Admin_Main">
+    <div class="Admin_Dashboard ">
         <div class="main">
             <div class="main-left">
                 <div class="main-left-top">
@@ -63,8 +63,8 @@
 
                         <div class="main-right-left-two-component A" id="customers">
                             <a href="<?php echo URLROOT?>/admin/customers">
-                            <h3>Customers</h3>
-                            <img src="<?php echo IMGROOT?>/customer.png" alt="">
+                               <h3>Customers</h3>
+                               <img src="<?php echo IMGROOT?>/customer.png" alt="">
                             </a>
 
                         </div>
@@ -99,8 +99,8 @@
                             <img src="<?php echo IMGROOT?>/Logo2.png" alt="">
                             <h6>Manage Eco Credit Details</h6>
                             <div class="component">
-                                <a href="<?php echo URLROOT?>/admin/pop_eco_credit"><button class="button" id="Open-eco_credits">Eco credits</button></a>
-                                <button id="Open-rupee">Rupee Value </button>
+                                <a href="<?php echo URLROOT?>/admin/pop_eco_credit"><button class="button1" id="Open-eco_credits">Eco credits</button></a>
+                                <a href="<?php echo URLROOT?>/admin/pop_eco_credit"><button class="button1" id="Open-eco_credits">Rupee Value</button></a>
                             </div>
                         </div>
                     </div>

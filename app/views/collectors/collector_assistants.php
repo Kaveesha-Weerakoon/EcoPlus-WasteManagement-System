@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Collector-sidebar">
+<div class="Collector_Main">
    <div class="Collector_assistants-main">
       <div class="main">
             <div class="main-left" style="background: #8CF889">

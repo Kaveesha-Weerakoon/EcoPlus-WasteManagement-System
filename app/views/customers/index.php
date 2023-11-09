@@ -1,6 +1,9 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Customer-main">
-<div class="main">
+<div class="Customer_Main">
+
+  <div class="Customer_Dashboard">
+    
+     <div class="main">
             <div class="main-left">
                 <div class="main-left-top">
                     <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
@@ -197,7 +200,10 @@
                 </div>
             </div>
             <?php endif; ?>
-</div>
+    </div>
+
+  </div>
+    
 </div>
 
 

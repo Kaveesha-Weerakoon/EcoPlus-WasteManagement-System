@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Customer-complains">
+<div class="Customer_Complains">
     <div class="main">
       <div class="main-top">
         <a href="<?php echo URLROOT?>/customers">

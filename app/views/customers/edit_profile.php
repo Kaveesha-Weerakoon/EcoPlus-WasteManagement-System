@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Customer-main-main">
-    <div class="Customer-editprofile">
+<div class="Customer_Main">
+    <div class="Customer_Editprofile">
     <div class="main">
             <div class="main-left">
                 <div class="main-left-top">

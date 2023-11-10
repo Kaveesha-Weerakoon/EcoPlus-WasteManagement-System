@@ -295,5 +295,19 @@
      
       $this->view('admin/customer_main', $data);
     }
+
+    public function center(){
+      $data = [
+        'customers' =>$customers
+      ];
+       $this->view('admin/center_view', $data);
+    }
+
+    public function center_add(){
+      $data = [
+        'customers' =>$customers
+      ];
+       $this->view('admin/center_add', $data);
+    }
    
   }

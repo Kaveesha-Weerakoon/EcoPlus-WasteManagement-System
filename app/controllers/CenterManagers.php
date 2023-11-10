@@ -27,9 +27,11 @@
     }
 
     public function collectors(){
+      $collectors = $this->collectorModel->get_collectors($_SESSION['center_id']);
       $data = [
-        'title' => 'TraversyMVC',
+        'collectors' => $collectors
       ];
+     
      
       $this->view('center_managers/collectors', $data);
     }
@@ -50,23 +52,92 @@
           'completed'=>'',
           'password'=>trim($_POST['password']),
           'confirm_password'=>trim($_POST['confirm_password']),
+
+          'name_err' =>'',
+          'nic_err' =>'',
+          'dob_err' =>'',
+          'contactNo_err' =>'',
+          'address_err' =>'',
+          'email_err'=>'', 
+          'vehicleNo_err' =>'',
+          'vehicleType_err' =>'',
           'password_err'=>'',
-          'confirm_password_err'=>'',
-          'email_err'=>''       
+          'confirm_password_err'=>''
+                
         ];
 
-
-        if(empty($data['email'])){
-          $data['email_err'] = 'Pleae enter email';
-        } else {
-          // Check email
-          if($this->userModel->findUserByEmail($data['email'])){
-            $data['email'] = 'Email is already taken';
-          
-          }
+        //validate name
+        if(empty($data['name'])){
+          $data['name_err'] = 'Please enter name';
+        }elseif (strlen($data['name']) > 255) {
+          $data['name_err'] = 'Name is too long';
         }
 
+        //validate NIC
+        if(empty($data['nic'])){
+          $data['nic_err'] = 'Please enter NIC';
+        }elseif(!(is_numeric($data['nic']) && (strlen($data['nic']) == 12)) && !preg_match('/^[0-9]{9}[vV]$/', $data['nic'])){
+          $data['nic_err'] = 'Please enter a valid NIC';
+        }elseif($this->collectorModel->getCollectorByNIC($data['nic'])){
+          $data['nic_err'] = 'NIC already exists';
+        }
 
+        //validate DOB
+        if(empty($data['dob'])){
+          $data['dob_err'] = 'Please enter dob';
+        }
+
+        //validate contact number
+        if(empty($data['contact_no'])){
+          $data['contactNo_err'] = 'Please enter contact no';
+        }elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+          $data['contactNo_err'] = 'Please enter a valid contact number';
+        }
+
+        //validate address
+        if(empty($data['address'])){
+          $data['address_err'] = 'Please enter address';
+        }elseif (strlen($data['address']) > 500) {
+          $data['address_err'] = 'Address is too long ';
+        }
+
+        //validate vehicle number
+        if(empty($data['vehicle_no'])){
+          $data['vehicleNo_err'] = 'Please enter vehicle plate number';
+        }elseif(!preg_match('/^[A-Z]{2,3}-[0-9]{4}$/', $data['vehicle_no'])){
+          $data['vehicleNo_err'] = 'Please enter a valid vehicle plate number';
+        }elseif($this->collectorModel->getCollectorByVehicleNo($data['vehicle_no'])){
+          $data['vehicleNo_err'] = 'Vehicle have already registered';
+        }
+
+        //validate vehicle type
+        if(empty($data['vehicle_type'])){
+          $data['vehicleType_err'] = 'Please enter vehicle type';
+        }elseif(strlen($data['address']) > 50){
+          $data['vehicleType_err'] = 'Vehicle type is too long';
+        }
+
+        // Validate Email
+        if(empty($data['email'])){
+          $data['email_err'] = 'Please enter an email';
+        } else {
+            // Check email format
+            if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+                $data['email_err'] = 'Invalid email format';
+            } else {
+                // Check email length
+                if(strlen($data['email']) > 255) { // You can adjust the maximum length as needed
+                    $data['email_err'] = 'Email is too long';
+                } else {
+                    // Check email availability
+                    if($this->userModel->findUserByEmail($data['email'])){
+                        $data['email_err'] = 'Email is already taken';
+                    }
+                }
+            }
+        }
+
+        //validate password
         if(empty($data['password'])){
           $data['password_err'] = 'Please enter password';
         } elseif(strlen($data['password']) < 6){
@@ -82,19 +153,19 @@
           }
         }
 
-        if(!empty($data['email']) && !empty($data['password']) && !empty($data['confirm_password']) && empty($data['email_err'])&& empty($data['confirm_password_err'])){
-             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        if(empty($data['name_err']) && empty($data['nic_err']) && empty($data['dob_err']) && empty($data['contactNo_err'])&& empty($data['address_err']) && empty($data['email_err']) && empty($data['vehicleNo_err']) && empty($data['vehicleType_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             
-              if($this->collectorModel->register_collector($data)){
-               $data['completed']='True';  
-              
-               $this->view('center_managers/collectors',$data);
-          } else {
-            die('Something went wrong');
-          }
+            if($this->collectorModel->register_collector($data)){
+              $data['completed']='True';  
+            
+              $this->view('center_managers/collectors_add',$data);
+            } else {
+              die('Something went wrong');
+            }
         }
         else{
-          $this->view('centermanagers/collectors_add', $data);
+          $this->view('center_managers/collectors_add', $data);
 
         }
 
@@ -114,12 +185,41 @@
           'vehicle_type'=>'',
           'completed'=>'',
           'password'=>'',
-          'confirm_password'=>''
+          'confirm_password'=>'',
+
+          'name_err' =>'',
+          'nic_err' =>'',
+          'dob_err' =>'',
+          'contactNo_err' =>'',
+          'address_err' =>'',
+          'email_err'=>'', 
+          'vehicleNo_err' =>'',
+          'vehicleType_err' =>'',
+          'password_err'=>'',
+          'confirm_password_err'=>''
         ];
-          $this->view('center_managers/collectors_add', $data);
+          
+        $this->view('center_managers/collectors_add', $data);
       }
      
      
+    }
+
+    public function collector_delete($collectorId){
+      $collector = $this->collectorModel->getCollectorById($collectorId);
+      if(empty($collector)){
+        die('Collector not found');
+      }
+      else{
+        if($this->collectorModel->delete_collectors($collectorId)){
+          redirect('centermanagers/collectors');
+        }
+        else{
+          die('Something went wrong');
+        }
+
+      }
+
     }
 
     public function center_workers(){
@@ -154,14 +254,23 @@
                
         ];
 
+        //validate name
         if(empty($data['name'])){
           $data['name_err'] = 'Please enter name';
+        }elseif (strlen($data['name']) > 255) {
+          $data['name_err'] = 'Name is too long';
         }
 
+        //validate NIC
         if(empty($data['nic'])){
           $data['nic_err'] = 'Please enter NIC';
+        }elseif(!(is_numeric($data['nic']) && (strlen($data['nic']) == 12)) && !preg_match('/^[0-9]{9}[vV]$/', $data['nic'])){
+          $data['nic_err'] = 'Please enter a valid NIC';
+        }elseif($this->centerworkerModel->getCenterWorkerByNIC($data['nic'])){
+          $data['nic_err'] = 'NIC already exists';
         }
 
+        //validate DOB
         if(empty($data['dob'])){
           $data['dob_err'] = 'Please enter dob';
         }
@@ -169,11 +278,15 @@
         // Validate Contact no
         if(empty($data['contact_no'])){
           $data['contact_no_err'] = 'Please enter contact no';
+        }elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter a valid contact number';
         }
 
-        // Validate Adress
+        // Validate Address
         if(empty($data['address'])){
           $data['address_err'] = 'Please enter address';
+        }elseif (strlen($data['address']) > 500) {
+          $data['address_err'] = 'Address is too long ';
         }
 
         if(empty($data['address_err']) && empty($data['contact_no_err']) && empty($data['dob_err']) && empty($data['nic_err']) && empty($data['name_err']) ){

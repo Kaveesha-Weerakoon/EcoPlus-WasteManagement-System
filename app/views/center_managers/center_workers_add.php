@@ -81,7 +81,7 @@
         <?php if($data['completed']=='True') : ?>
                <div class="complain-success">
                    <div class="complain-success-box">
-                     <h1>Center Worker Added Successful</h1>
+                     <h1>Center Worker Added Successfully</h1>
                       <a href="<?php echo URLROOT?>/centermanagers/center_workers_add"><button>Okay</button></a>
                     </div>
                </div>

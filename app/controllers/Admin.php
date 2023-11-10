@@ -298,14 +298,14 @@
 
     public function center(){
       $data = [
-        'customers' =>$customers
+        'customers' =>'$customers'
       ];
        $this->view('admin/center_view', $data);
     }
 
     public function center_add(){
       $data = [
-        'customers' =>$customers
+        'customers' =>'$customers'
       ];
        $this->view('admin/center_add', $data);
     }

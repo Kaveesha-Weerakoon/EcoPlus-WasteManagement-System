@@ -9,7 +9,7 @@
 
                 <div class="main-top-component">
                     <p>Admin</p>
-                    <img src="../src/Requests Profile.png" alt="">
+                    <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="">
                 </div>
             </div>
             <div class="main-bottom">
@@ -24,7 +24,7 @@
                                 <div class="line"></div>
                             </div>
                         </a>
-                        <a href="<?php echo URLROOT?>/admin">
+                        <a href="<?php echo URLROOT?>/admin/center_add">
                             <div class="main-right-top-three-content">
                                 <p>Add</p>
                                 <div class="line1"></div>

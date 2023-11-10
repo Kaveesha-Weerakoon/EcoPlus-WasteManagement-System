@@ -305,7 +305,7 @@
 
     public function center_add(){
       $data = [
-        'customers' =>$customers
+        'customers' =>'$customers'
       ];
        $this->view('admin/center_add', $data);
     }

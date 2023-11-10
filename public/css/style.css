@@ -76,6 +76,10 @@
 
 @import url('Component/Admin/Admin_Customer.css');
 
+@import url('Component/Admin/Admin_Center_View.css');
+@import url('Component/Admin/Admin_Center_Top.css');
+@import url('Component/Admin/Admin_Center_Add.css');
+
 a {
     text-decoration: none;
     padding: 0;

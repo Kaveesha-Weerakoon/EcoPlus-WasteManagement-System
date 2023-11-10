@@ -170,6 +170,7 @@
           $this->view('customers/complains', $data);
         }*/
 
+        //validate email
         if(empty($data['email'])){
           $data['email_err'] = 'Please enter an email';
         } else {
@@ -191,13 +192,16 @@
           $data['name_err'] = 'name is too long ';
         }
 
+        //validate NIC
         if(empty($data['nic'])){
           $data['nic_err'] = 'Please enter NIC';
+        }elseif(!(is_numeric($data['nic']) && (strlen($data['nic']) == 12)) && !preg_match('/^[0-9]{9}[vV]$/', $data['nic'])){
+          $data['nic_err'] = 'Please enter a valid NIC';
+        }elseif($this->center_managerModel->getCenterManagerByNIC($data['nic'])){
+          $data['nic_err'] = 'NIC already exists';
         }
-        elseif (strlen($data['nic']) !== 12) {
-          $data['nic_err'] = 'Please enter a valid nic number';
-      }
 
+        //validate DOB
         if(empty($data['dob'])){
           $data['dob_err'] = 'Please enter dob';
         }
@@ -205,9 +209,9 @@
         // Validate Contact no
         if (empty($data['contact_no'])) {
           $data['contact_no_err'] = 'Please enter a contact number';
-      } elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
-          $data['contact_no_err'] = 'Please enter a valid contact number';
-      }
+        } elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+            $data['contact_no_err'] = 'Please enter a valid contact number';
+        }
       
 
         // Validate Adress
@@ -217,37 +221,38 @@
         elseif (strlen($data['address']) > 255) {
           $data['address_err'] = 'address is too long ';
         }
-            // Validate Password
-            if(empty($data['password'])){
-              $data['password_err'] = 'Please enter password';
-            } elseif(strlen($data['password']) < 6){
-              $data['password_err'] = 'Password must be at least 6 characters';
-            }
-    
-            // Validate Confirm Password
-            if(empty($data['confirm_password'])){
-              $data['confirm_password_err'] = 'Please confirm password';
-            } else {
-              if($data['password'] != $data['confirm_password']){
-                $data['confirm_password_err'] = 'Passwords do not match';
-              }
-            }
 
-            if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err'])){
-              // Validated
-               $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-             
-              if($this->center_managerModel->register_center_manager($data)){
-                $data['completed']='True';        
-                $this->view('admin/center_managers_add',$data);
-              } else {
-                die('Something went wrong');
-              }
-            }
-            else{
-              $this->view('admin/center_managers_add', $data);
-            }
-            
+        // Validate Password
+        if(empty($data['password'])){
+          $data['password_err'] = 'Please enter password';
+        } elseif(strlen($data['password']) < 6){
+          $data['password_err'] = 'Password must be at least 6 characters';
+        }
+
+        // Validate Confirm Password
+        if(empty($data['confirm_password'])){
+          $data['confirm_password_err'] = 'Please confirm password';
+        } else {
+          if($data['password'] != $data['confirm_password']){
+            $data['confirm_password_err'] = 'Passwords do not match';
+          }
+        }
+
+        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err'])){
+          // Validated
+          $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+          
+          if($this->center_managerModel->register_center_manager($data)){
+            $data['completed']='True';        
+            $this->view('admin/center_managers_add',$data);
+          } else {
+            die('Something went wrong');
+          }
+        }
+        else{
+          $this->view('admin/center_managers_add', $data);
+        }
+        
 
       }
       else{
@@ -275,7 +280,11 @@
         $this->view('admin/center_managers_add', $data);
       }
     
-      }
+    }
+
+    public function center_managers_delete(){
+      
+    }
 
  
       public function logout(){

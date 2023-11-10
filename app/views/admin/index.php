@@ -89,12 +89,15 @@
                         </div>
 
                     </div>
-                    <div class="main-right-left-three">
+                    <div class="main-right-left-three">             
                         <div class="main-right-left-three-component">
                             <img src="<?php echo IMGROOT?>/Centers.png" alt="">
                             <h6>View Centers</h6>
-                            <button id="center">Centers</button>
+                           
+                            <button id="center"> <a href="<?php echo URLROOT?>/admin/center">Centers </a></button>
+                           
                         </div>
+                        
                         <div class="main-right-left-three-component">
                             <img src="<?php echo IMGROOT?>/Logo2.png" alt="">
                             <h6>Manage Eco Credit Details</h6>

@@ -43,6 +43,7 @@
         align-items: center;
         justify-content: center;
         margin-right: 20px;
+
     }
 
     .back-button {
@@ -56,8 +57,9 @@
     }
 
     .main-top-component p {
-        font-size: 18px;
+        font-size: 22px;
         font-family: inter;
+        letter-spacing: 0.1px;
     }
 
     .main-bottom {

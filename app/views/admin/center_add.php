@@ -41,9 +41,36 @@
                             </div>
                             
                       </div>
-                      <div class="main-bottom-down-down">
+                      <form  class="main-bottom-down-down" type="post">
+                           
+                                      
+                                      <div class="main-bottom-down-down-content">
+                                              <p>Region</p>
+                                              <input type="text">
+                                      </div>
+                                      
 
-                      </div>
+                                      <div class="main-bottom-down-down-content">
+                                              <p>District</p>
+                                              <input type="text">
+                                      </div>
+
+                                      <div class="main-bottom-down-down-content">
+                                              <p>Address</p>
+                                              <input type="text">
+                                      </div>
+                                      <div class="main-bottom-down-down-content">
+                                              <p>Center Manager</p>
+                                              <input type="text">
+                                      </div>
+                                      <button class="Create_Center_Button" type="submit">
+                                          Create Center
+                                      </button>
+
+                           
+                          
+                      </form>
+                    
                 </div>
                 </div>
             </div>

@@ -117,7 +117,21 @@
       
     }
 
+    public function collector_assistants_delete($assisId){
+      $collector_assistant = $this->collector_assistantModel->getCollectorAssisById($assisId);
+      if(empty($collector_assistant)){
+        die('Center worker not found');
+      }
+      else{
+        if($this->collector_assistantModel->delete_collector_assistants($assisId)){
+          redirect('collectors/collector_assistants');
+        }
+        else{
+          die('Something went wrong');
+        }
 
+      }
+    }
     
   
    

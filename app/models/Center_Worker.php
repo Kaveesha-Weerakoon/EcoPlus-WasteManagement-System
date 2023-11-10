@@ -30,6 +30,16 @@
         return $results;
       }
 
+      public function getCenterWorkerByNIC($NIC){
+        $this->db->query('SELECT * FROM center_workers WHERE nic = :nic');
+        $this->db->bind(':nic', $NIC);
+
+        $row = $this->db->single();
+
+        return $row;
+
+      }
+
       public function getCenterWorkerById($workerId){
         $this->db->query('SELECT * FROM center_workers WHERE id = :workerId');
         $this->db->bind(':workerId', $workerId);

@@ -29,6 +29,16 @@
         return $results;
       }
 
+      public function getCollectorAssisByNIC($NIC){
+        $this->db->query('SELECT * FROM collector_assistants WHERE nic = :nic');
+        $this->db->bind(':nic', $NIC);
+
+        $row = $this->db->single();
+
+        return $row;
+
+      }
+
       public function getCollectorAssisById($assisId){
         $this->db->query('SELECT * FROM collector_assistants WHERE id = :assisId');
         $this->db->bind(':assisId', $assisId);

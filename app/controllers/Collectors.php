@@ -61,14 +61,23 @@
                
         ];
 
+        //validate name
         if(empty($data['name'])){
           $data['name_err'] = 'Please enter name';
+        } elseif (strlen($data['name']) > 255) {
+          $data['name_err'] = 'Name is too long';
         }
 
+        //validate NIC
         if(empty($data['nic'])){
           $data['nic_err'] = 'Please enter NIC';
+        }elseif(!(is_numeric($data['nic']) && (strlen($data['nic']) == 12)) && !preg_match('/^[0-9]{9}[vV]$/', $data['nic'])){
+          $data['nic_err'] = 'Please enter a valid NIC';
+        }elseif($this->collector_assistantModel->getCollectorAssisByNIC($data['nic'])){
+          $data['nic_err'] = 'NIC already exists';
         }
 
+        //validate DOB
         if(empty($data['dob'])){
           $data['dob_err'] = 'Please enter dob';
         }
@@ -76,11 +85,15 @@
         // Validate Contact no
         if(empty($data['contact_no'])){
           $data['contact_no_err'] = 'Please enter contact no';
+        }elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter a valid contact number';
         }
 
-        // Validate Adress
+        // Validate Address
         if(empty($data['address'])){
           $data['address_err'] = 'Please enter adress';
+        } elseif (strlen($data['address']) > 500) {
+          $data['address_err'] = 'Address is too long ';
         }
 
         if(empty($data['address_err']) && empty($data['contact_no_err']) && empty($data['dob_err']) && empty($data['nic_err']) && empty($data['name_err']) ){

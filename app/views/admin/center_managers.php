@@ -50,13 +50,13 @@
                     </div>
                     <div class="main-right-bottom-down">
                         <table class="table">
-                             <?php foreach($data['center_managers'] as $post) : ?>
+                             <?php foreach($data['center_managers'] as $center_manager) : ?>
                                        <tr class="table-row">
-                                           <td>CM <?php echo $post->user_id?></td>
-                                           <td><?php echo $post->name?></td>
-                                           <td><?php echo $post->email?></td>
-                                           <td> <?php echo $post->assinged?></td>
-                                           <td> <?php echo $post->assined_center_id?></td>
+                                           <td>CM <?php echo $center_manager->user_id?></td>
+                                           <td><?php echo $center_manager->name?></td>
+                                           <td><?php echo $center_manager->email?></td>
+                                           <td> <?php echo $center_manager->assinged?></td>
+                                           <td> <?php echo $center_manager->assined_center_id?></td>
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/view.png" alt=""></td>
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>

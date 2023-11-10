@@ -219,7 +219,7 @@
         }
             // Validate Password
             if(empty($data['password'])){
-              $data['password_err'] = 'Pleae enter password';
+              $data['password_err'] = 'Please enter password';
             } elseif(strlen($data['password']) < 6){
               $data['password_err'] = 'Password must be at least 6 characters';
             }
@@ -294,6 +294,20 @@
       ];
      
       $this->view('admin/customer_main', $data);
+    }
+
+    public function center(){
+      $data = [
+        'customers' =>$customers
+      ];
+       $this->view('admin/center_view', $data);
+    }
+
+    public function center_add(){
+      $data = [
+        'customers' =>$customers
+      ];
+       $this->view('admin/center_add', $data);
     }
    
   }

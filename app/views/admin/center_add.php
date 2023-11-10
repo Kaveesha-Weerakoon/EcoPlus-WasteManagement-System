@@ -20,7 +20,7 @@
                     <div class="main-right-top-three">
                         <a href="<?php echo URLROOT?>/Admin/Center">
                             <div class="main-right-top-three-content">
-                                <p><b>View</b></p>
+                                <p>View</p>
                                 <div class="line1"></div>
                             </div>
                         </a>

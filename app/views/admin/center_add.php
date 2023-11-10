@@ -18,24 +18,33 @@
                         <h1>Centers</h1>
                     </div>
                     <div class="main-right-top-three">
-                        <a href="Collectors.html">
+                        <a href="<?php echo URLROOT?>/Admin/Center">
                             <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">View</b></p>
-                                <div class="line"></div>
+                                <p><b>View</b></p>
+                                <div class="line1"></div>
                             </div>
                         </a>
                         <a href="<?php echo URLROOT?>/admin/center_add">
                             <div class="main-right-top-three-content">
-                                <p>Add</p>
-                                <div class="line1"></div>
+                                <p><b style="color: #1B6652;">Add</b></p>
+                                <div class="line"></div>
                             </div>
                         </a>
 
                     </div>
                 </div>
                 <div class="main-bottom-down">
-                 
-                    </div>
+                      <div class="main-bottom-down-top">
+                            <div class="main-bottom-down-top-content">
+                                <img src="<?php echo IMGROOT?>/Admin_Center.png" alt="">
+                                <p>Add Centers</p>
+                            </div>
+                            
+                      </div>
+                      <div class="main-bottom-down-down">
+
+                      </div>
+                </div>
                 </div>
             </div>
         </div>

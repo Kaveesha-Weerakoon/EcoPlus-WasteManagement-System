@@ -1,5 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Mukta:wght@500&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital,wght@0,400;0,500;1,400&family=Rubik:wght@500&family=Shrikhand&display=swap');
+
 .Admin_Center_Add {
     .main-bottom-down {
-        background-color: black;
+        background-color: white;
+        display: grid;
+        grid-template-rows: 12% 88%;
     }
+
+    .main-bottom-down-top {
+        border-top: 1px solid #2c3e50;
+        border-bottom: 1px solid #2c3e50;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f1f2f6;
+    }
+
+    .main-bottom-down-top-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        margin-left: 32px;
+    }
+
+    .main-bottom-down-top-content img {
+        height: 45px;
+        width: 45px;
+        margin-right: 30px;
+    }
+
+    .main-bottom-down-top-content p {
+        font-size: 22px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: bold;
+    }
+
+    .main-bottom-down-down {
+        border: 1px solid black;
+        margin: 25px 90px;
+        border-radius: 15px;
+    }
+
 }

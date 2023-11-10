@@ -67,7 +67,7 @@
                                 <td><?php echo $collector->dob?></td>
                                 <td><img src="<?php echo IMGROOT ?>/View.png" alt=""></td>
                                 <td><img src="<?php echo IMGROOT ?>/update.png" alt=""></td>
-                                <td class="delete"> <img src="<?php echo IMGROOT ?>/delete.png" alt=""></td>
+                                <td class="delete"><a href="<?php echo URLROOT?>/CenterManagers/collector_delete/<?php echo $collector->user_id ?>"> <img src="<?php echo IMGROOT ?>/delete.png" alt=""></a></td>
 
                             </tr>
                         <?php endforeach; ?>

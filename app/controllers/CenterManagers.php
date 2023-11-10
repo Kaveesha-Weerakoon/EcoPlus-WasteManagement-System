@@ -205,6 +205,23 @@
      
     }
 
+    public function collector_delete($collectorId){
+      $collector = $this->collectorModel->getCollectorById($collectorId);
+      if(empty($collector)){
+        die('Collector not found');
+      }
+      else{
+        if($this->collectorModel->delete_collectors($collectorId)){
+          redirect('centermanagers/collectors');
+        }
+        else{
+          die('Something went wrong');
+        }
+
+      }
+
+    }
+
     public function center_workers(){
 
 

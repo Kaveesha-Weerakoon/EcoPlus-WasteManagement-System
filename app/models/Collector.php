@@ -59,6 +59,31 @@
 
       }
 
+      public function delete_collectors($collectorId){
+        $this->db->query('DELETE FROM users WHERE id = :collectorId');
+        $this->db->bind(':collectorId', $collectorId);
+
+        if($this->db->execute()){
+          return true;
+        }
+        else{
+          return false;
+        }
+
+      }
+
+      
+
+      public function getCollectorById($collectorId){
+        $this->db->query('SELECT * FROM collectors WHERE user_id = :collectorId');
+        $this->db->bind(':collectorId', $collectorId);
+
+        $row = $this->db->single();
+
+        return $row;
+
+      }
+
       public function getCollectorByNIC($NIC){
         $this->db->query('SELECT * FROM collectors WHERE nic = :nic');
         $this->db->bind(':nic', $NIC);

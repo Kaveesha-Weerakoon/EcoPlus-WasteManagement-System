@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Admin_Center_Manager">
-<div class="Admin_Center_Manager_Add">
-<div class="main">
+  <div class="Admin_Center_Manager_Add">
+     <div class="main">
             <div class="main-top">
                 <a href="<?php echo URLROOT?>/admin">
                     <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
@@ -89,16 +89,18 @@
                      </form>
                     
                 </div>
-            </div> 
-            <?php if($data['completed']=='True') : ?>
-               <div class="complain-success">
-                   <div class="complain-success-box">
-                     <h1>Center Manager Added Successful</h1>
-                      <a href="<?php echo URLROOT?>/admin/center_managers_add"><button>Okay</button></a>
-                    </div>
-               </div>
-            <?php endif; ?>
-        </div>
+            </div>            
+    </div>
+    <?php if($data['registered']=='True') : ?>
+    <div class="center_manager_success">
+      <div class="popup" id="popup">
+          <img src="<?php echo IMGROOT?>/check.png" alt="">
+          <h2>Success!!</h2>
+          <p>Center Manager has been registered successfully</p>
+          <a href="<?php echo URLROOT?>/admin/center_managers_add"><button type="button" >OK</button></a>
 
+      </div>
+    </div>
+    <?php endif; ?>
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

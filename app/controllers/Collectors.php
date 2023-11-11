@@ -35,7 +35,8 @@
 
       $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
       $data = [
-        'collector_assistants' => $collector_assistants
+        'collector_assistants' => $collector_assistants,
+        'confirm_delete' =>''
       ];
      
       $this->view('collectors/collector_assistants', $data);
@@ -57,7 +58,8 @@
                'nic_err' => '',
                'dob_err'=>'',
                'contact_no_err'=>'',
-               'address_err' =>''
+               'address_err' =>'',
+      
                
         ];
 
@@ -130,6 +132,17 @@
 
       
     }
+
+    public function collector_assistants_delete_confirm($assisId){
+      $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
+      $data = [
+        'collector_assistants' => $collector_assistants,
+        'confirm_delete' =>'True',
+        'collector_assistant_id'=>$assisId
+      ];
+     
+      $this->view('collectors/collector_assistants', $data);
+    } 
 
     public function collector_assistants_delete($assisId){
       $collector_assistant = $this->collector_assistantModel->getCollectorAssisById($assisId);

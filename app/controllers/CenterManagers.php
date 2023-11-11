@@ -246,7 +246,9 @@
       $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
       $data = [
         'center_workers' => $center_workers,
-        'confirm_delete' => ''
+        'confirm_delete' => '',
+        'center_worker_id'=>'',
+        
       ];
      
      
@@ -328,7 +330,7 @@
           'dob'=>'',
           'contact_no'=>'',
           'address' =>'',
-          'completed'=>'',
+          'registered'=>'',
           'name_err' => '',
           'nic_err' => '',
           'dob_err'=>'',
@@ -351,8 +353,7 @@
         'center_worker_id'=>$workerId
 
       ];
-     
-     
+
       $this->view('center_managers/center_workers', $data);
     } 
 

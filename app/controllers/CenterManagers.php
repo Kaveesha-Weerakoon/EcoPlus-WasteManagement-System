@@ -240,6 +240,7 @@
       $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
       $data = [
         'center_workers' => $center_workers,
+        'click_update' =>'',
         'confirm_delete' => ''
       ];
      
@@ -335,6 +336,23 @@
       }
 
       
+    }
+
+    public function center_workers_update_click($workerId){
+      $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
+      $data = [
+        'center_workers' => $center_workers,
+        'click_update' =>'True',
+        'center_worker_id'=>$workerId
+
+      ];
+       
+      $this->view('center_managers/center_workers', $data);
+
+    }
+
+    public function center_workers_update(){
+
     }
 
     public function center_workers_delete_confirm($workerId){

@@ -218,17 +218,6 @@
 
     }
 
-    .btn {
-        padding: 10px 60px;
-        background: white;
-        border: 0;
-        outline: none;
-        cursor: pointer;
-        font-size: 22px;
-        font-weight: 500;
-        border-radius: 30px;
-    }
-
     .popup {
         width: 400px;
         background: white;

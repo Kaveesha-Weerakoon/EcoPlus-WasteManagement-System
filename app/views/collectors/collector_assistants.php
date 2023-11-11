@@ -116,7 +116,7 @@
                  <p>This action will permanently delete this collector assistant</p>
                  <div class="btns">
                      <a href="<?php echo URLROOT?>/Collectors/collector_assistants_delete/<?php echo $data['collector_assistant_id'] ?>"><button type="button" class="deletebtn" >Delete</button></a>
-                     <a href="<?php echo URLROOT?>/Collectors/collector_assistants?>"><button type="button" class="cancelbtn" onClick="closePopup()">Cancel</button></a>
+                     <a href="<?php echo URLROOT?>/Collectors/collector_assistants?>"><button type="button" class="cancelbtn" >Cancel</button></a>
                   </div>
                </div>
        </div>

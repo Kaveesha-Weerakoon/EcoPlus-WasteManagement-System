@@ -78,14 +78,17 @@
                 </div>
             </form>
         </div>
-        <?php if($data['completed']=='True') : ?>
-               <div class="complain-success">
-                   <div class="complain-success-box">
-                     <h1>Center Worker Added Successfully</h1>
-                      <a href="<?php echo URLROOT?>/centermanagers/center_workers_add"><button>Okay</button></a>
-                    </div>
-               </div>
-            <?php endif; ?>
+        <?php if($data['registered']=='True') : ?>
+            <div class="center_worker_success">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/check.png" alt="">
+                    <h2>Success!!</h2>
+                    <p>Center Worker has been registered successfully</p>
+                    <a href="<?php echo URLROOT?>/centermanagers/center_workers"><button type="button" >OK</button></a>
+
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
   </div>
 </div> 

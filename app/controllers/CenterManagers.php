@@ -35,7 +35,8 @@
     public function collectors(){
       $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
       $data = [
-        'collectors' => $collectors
+        'collectors' => $collectors,
+        'confirm_delete' =>''
       ];
      
      
@@ -55,7 +56,7 @@
           'email'=>trim($_POST['email']),
           'vehicle_no'=>trim($_POST['vehicle_no']),
           'vehicle_type'=>trim($_POST['vehicle_type']),
-          'completed'=>'',
+          'registered'=>'',
           'password'=>trim($_POST['password']),
           'confirm_password'=>trim($_POST['confirm_password']),
 
@@ -163,7 +164,7 @@
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             
             if($this->collectorModel->register_collector($data)){
-              $data['completed']='True';  
+              $data['registered']='True';  
             
               $this->view('center_managers/collectors_add',$data);
             } else {
@@ -174,9 +175,6 @@
           $this->view('center_managers/collectors_add', $data);
 
         }
-
-
-
 
       }
       else{
@@ -189,7 +187,7 @@
           'email'=>'',
           'vehicle_no'=>'',
           'vehicle_type'=>'',
-          'completed'=>'',
+          'registered'=>'',
           'password'=>'',
           'confirm_password'=>'',
 
@@ -209,6 +207,20 @@
       }
      
      
+    }
+
+    public function collector_delete_confirm($collectorId){
+        $collectors = $this->collectorModel->get_collectors($_SESSION['center_id']);
+        $data = [
+          'collectors' => $collectors,
+          'confirm_delete' => 'True',
+          'collector_id' => $collectorId
+
+        ];
+      
+      
+        $this->view('center_managers/collectors', $data);
+        
     }
 
     public function collector_delete($collectorId){
@@ -233,7 +245,8 @@
 
       $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
       $data = [
-        'center_workers' => $center_workers
+        'center_workers' => $center_workers,
+        'confirm_delete' => ''
       ];
      
      
@@ -250,7 +263,7 @@
                'dob'=>trim($_POST['dob']),
                'contact_no'=>trim($_POST['contact_no']),
                'address' =>trim($_POST['address']),
-               'completed'=>'',
+               'registered'=>'',
                
                'name_err' => '',
                'nic_err' => '',
@@ -297,7 +310,7 @@
 
         if(empty($data['address_err']) && empty($data['contact_no_err']) && empty($data['dob_err']) && empty($data['nic_err']) && empty($data['name_err']) ){
           if($this->centerworkerModel->add_center_workers($data)){
-            $data['completed']='True';       
+            $data['registered']='True';       
             $this->view('center_managers/center_workers_add',$data);
           } else {
             die('Something went wrong');
@@ -321,7 +334,7 @@
           'dob_err'=>'',
           'contact_no_err'=>'',
           'address_err' =>'',
-          'completed_err' =>''
+          
         ];
         
         $this->view('center_managers/center_workers_add', $data);
@@ -329,6 +342,20 @@
 
       
     }
+
+    public function center_workers_delete_confirm($workerId){
+      $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
+      $data = [
+        'center_workers' => $center_workers,
+        'confirm_delete' =>'True',
+        'center_worker_id'=>$workerId
+
+      ];
+     
+     
+      $this->view('center_managers/center_workers', $data);
+    } 
+
 
     public function center_workers_delete($workerId){
 

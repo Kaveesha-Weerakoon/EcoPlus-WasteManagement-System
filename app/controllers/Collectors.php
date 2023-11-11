@@ -51,7 +51,7 @@
                'dob'=>trim($_POST['dob']),
                'contact_no'=>trim($_POST['contact_no']),
                'address' =>trim($_POST['address']),
-               'completed'=>'',
+               'registered'=>'',
   
                'name_err' => '',
                'nic_err' => '',
@@ -99,7 +99,7 @@
 
         if(empty($data['address_err']) && empty($data['contact_no_err']) && empty($data['dob_err']) && empty($data['nic_err']) && empty($data['name_err']) ){
           if($this->collector_assistantModel->add_collector_assistants($data)){
-            $data['completed']='True';        
+            $data['registered']='True';        
             $this->view('collectors/collector_assistants_add',$data);
           } else {
             die('Something went wrong');
@@ -118,7 +118,7 @@
           'dob'=>'',
           'contact_no'=>'',
           'address' =>'',
-          'completed'=>'',
+          'registered'=>'',
           'name_err' => '',
           'nic_err' => '',
           'dob_err'=>'',

@@ -67,7 +67,7 @@
                                 <td><?php echo $collector->dob?></td>
                                 <td><img src="<?php echo IMGROOT ?>/View.png" alt=""></td>
                                 <td><img src="<?php echo IMGROOT ?>/update.png" alt=""></td>
-                                <td class="delete"><a href="<?php echo URLROOT?>/CenterManagers/collector_delete/<?php echo $collector->user_id ?>"> <img src="<?php echo IMGROOT ?>/delete.png" alt=""></a></td>
+                                <td class="delete"><a href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>"> <img src="<?php echo IMGROOT ?>/delete.png" alt=""></a></td>
 
                             </tr>
                         <?php endforeach; ?>
@@ -76,7 +76,19 @@
                 </div>
             </div>
         </div>
-
+    <?php if($data['confirm_delete']== 'True') : ?>
+        <div class="delete_confirm">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/trash.png" alt="">
+                    <h2>Delete this collector?</h2>
+                    <p>This action will permanently delete this collector</p>
+                    <div class="btns">
+                        <a href="<?php echo URLROOT?>/centermanagers/collector_delete/<?php echo $data['collector_id'] ?>"><button type="button" class="deletebtn" >Delete</button></a>
+                        <a href="<?php echo URLROOT?>/centermanagers/collectors ?>"><button type="button" class="cancelbtn">Cancel</button></a>
+                    </div>
+                </div>
+        </div>
+    <?php endif; ?>
 
 </div>
 

@@ -304,8 +304,10 @@
     }
 
     public function center_add(){
+
+      $na_center_managers = $this->center_managerModel->get_not_assisgned_center_managers();
       $data = [
-        'customers' =>'$customers'
+        'customers' => $na_center_managers
       ];
        $this->view('admin/center_add', $data);
     }

@@ -54,5 +54,15 @@
       return $results;
     }
 
+    public function getCenterManagerByNIC($NIC){
+      $this->db->query('SELECT * FROM center_managers WHERE nic = :nic');
+      $this->db->bind(':nic', $NIC);
+
+      $row = $this->db->single();
+
+      return $row;
+
+    }
+
 
   }

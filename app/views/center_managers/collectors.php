@@ -17,7 +17,7 @@
                         <h1>Collectors</h1>
                     </div>
                     <div class="main-right-top-three">
-                        <a href="<?php?>">
+                        <a href="">
                             <div class="main-right-top-three-content">
                                 <p><b style="color: #1B6652;">View</b></p>
                                 <div class="line"></div>

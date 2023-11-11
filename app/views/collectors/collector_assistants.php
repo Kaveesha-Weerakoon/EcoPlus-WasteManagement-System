@@ -112,11 +112,11 @@
       <div class="delete_confirm">
               <div class="popup" id="popup">
                  <img src="<?php echo IMGROOT?>/trash.png" alt="">
-                 <h2>Delete this assistant?</h2>
-                 <p>This action will permanently delete this record</p>
+                 <h2>Delete this collector assistant?</h2>
+                 <p>This action will permanently delete this collector assistant</p>
                  <div class="btns">
                      <a href="<?php echo URLROOT?>/Collectors/collector_assistants_delete/<?php echo $data['collector_assistant_id'] ?>"><button type="button" class="deletebtn" >Delete</button></a>
-                     <a href="<?php echo URLROOT?>/Collectors/collector_assistants?>"><button type="button" class="cancelbtn" onClick="closePopup()">Cancel</button></a>
+                     <a href="<?php echo URLROOT?>/Collectors/collector_assistants?>"><button type="button" class="cancelbtn" >Cancel</button></a>
                   </div>
                </div>
        </div>

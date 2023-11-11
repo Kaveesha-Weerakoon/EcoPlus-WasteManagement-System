@@ -222,6 +222,7 @@
           $data['address_err'] = 'address is too long ';
         }
 
+
         // Validate Password
         if(empty($data['password'])){
           $data['password_err'] = 'Please enter password';
@@ -252,7 +253,7 @@
         else{
           $this->view('admin/center_managers_add', $data);
         }
-        
+
 
       }
       else{

@@ -100,25 +100,28 @@
                                            <td> <?php echo $collector_assistant->contact_no?></td>
                                            <td> <?php echo $collector_assistant->dob?></td>
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                                           <td class="cancel-open"><a href="<?php echo URLROOT?>/Collectors/collector_assistants_delete/<?php echo $collector_assistant->id ?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
+                                           <td class="cancel-open"><a href="<?php echo URLROOT?>/Collectors/collector_assistants_delete_confirm/<?php echo $collector_assistant->id ?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
                                     </tr>
                              <?php endforeach; ?>
 
                     </div>
                 </div>
-            </div>
-            <!-- <div class="cancel-confirm" id="cancel-confirm">
-                <div class="cancel-confirm-content">
-                    <h1>Delete Collector Assistant?</h1>
-                    <div class="confim-cancell-content-box">
-                        <button id="cancel-pop" style="background-color: tomato;">OK</button>
-                        <button id="okay">CANCEL </button>
-                    </div>
-                </div>
-            </div> -->
-            <!-- <script src="./Collector_CollectorAssistants.js"></script> -->
-        </div>
-   </div>               
+            </div>     
+      </div>
+      <?php if($data['confirm_delete']=='True') : ?>
+      <div class="delete_confirm">
+              <div class="popup" id="popup">
+                 <img src="<?php echo IMGROOT?>/trash.png" alt="">
+                 <h2>Delete this assistant?</h2>
+                 <p>This action will permanently delete this record</p>
+                 <div class="btns">
+                     <a href="<?php echo URLROOT?>/Collectors/collector_assistants_delete/<?php echo $data['collector_assistant_id'] ?>"><button type="button" class="deletebtn" >Delete</button></a>
+                     <a href="<?php echo URLROOT?>/Collectors/collector_assistants?>"><button type="button" class="cancelbtn" onClick="closePopup()">Cancel</button></a>
+                  </div>
+               </div>
+       </div>
+       <?php endif; ?>
+    </div>               
 </div>
 
 

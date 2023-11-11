@@ -81,12 +81,12 @@
     }
 
     .main-right-left-two-component h1 {
-        font-family: Josefin Sans;
+        font-family: Inter;
         font-size: 42px;
-        font-weight: 700;
+        font-weight: 501;
         width: 79%;
         line-height: 47px;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.04em;
         text-align: left;
         margin-left: 15px;
     }

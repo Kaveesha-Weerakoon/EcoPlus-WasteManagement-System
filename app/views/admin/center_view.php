@@ -50,39 +50,19 @@
                     </div>
                     <div class="main-right-bottom-down">
                         <table class="table">
-                            <tr class="table-row">
-                                <td>CE 1212</td>
-                                <td>Nugegoda</td>
-                                <td>Colombo</td>
-                                <td>CM 1212</td>
-                                <td>Samantha</td>
-                                <td><img src="<?php echo IMGROOT?>/View.png" alt=""></td>
-                                <td><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                                <td class="delete"> <img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
-
-                            </tr>
-                            <tr class="table-row">
-                                <td>CE 1212</td>
-                                <td>Nugegoda</td>
-                                <td>Colombo</td>
-                                <td>CM 1212</td>
-                                <td>Samantha</td>
-                                <td><img src="<?php echo IMGROOT?>/View.png" alt=""></td>
-                                <td><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                                <td class="delete"> <img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
-
-                            </tr>
-                            <tr class="table-row">
-                                <td>CE 1212</td>
-                                <td>Nugegoda</td>
-                                <td>Colombo</td>
-                                <td>CM 1212</td>
-                                <td>Samantha</td>
-                                <td><img src="<?php echo IMGROOT?>/View.png" alt=""></td>
-                                <td><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                                <td class="delete"> <img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
-
-                            </tr>
+                        <?php foreach($data['centers'] as $centers) : ?>
+                             <tr class="table-row">
+                                 <td>C<?php echo $centers->id?></td>
+                                 <td><?php echo $centers->region?></td>
+                                 <td><?php echo $centers->address?></td>
+                                 <td><?php echo $centers->center_manager_id?></td>
+                                 <td><?php echo $centers->center_manager_name?></td>
+                                 <td><img src="<?php echo IMGROOT?>/View.png" alt=""></td>
+                                 <td><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
+                                 <td class="delete"> <img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
+                             </tr>   
+                            <?php endforeach; ?>  
+                                       
                     </div>
                 </div>
             </div>

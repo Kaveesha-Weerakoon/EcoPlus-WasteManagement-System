@@ -72,4 +72,18 @@
         return false;
       }
     }
+
+    public function findUserById($id){
+      $this->db->query('SELECT * FROM users WHERE id = :user_id');
+      $this->db->bind(':user_id', $id);
+      
+      $row = $this->db->single();
+      
+      // Check row
+      if ($this->db->rowCount() > 0) {
+          return $row; // Returning user data if found
+      } else {
+          return null; // Return null or false if user is not found
+      }
+    }
   }

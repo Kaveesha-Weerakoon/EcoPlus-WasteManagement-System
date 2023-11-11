@@ -47,7 +47,7 @@
       }
 
 
-      public function get_collectors(){
+    public function get_collectors(){
         $this->db->query('SELECT *,
               collectors.id as cID,
               users.id as userId
@@ -57,9 +57,24 @@
         $results = $this->db->resultSet();
         return $results;
 
-      }
+    }
 
-      public function delete_collectors($collectorId){
+    public function get_collectors_bycenterid($center_id){
+           $this->db->query('SELECT *,
+                             collectors.id as cID,
+                             users.id as userId
+                             FROM collectors
+                             INNER JOIN users
+                             ON collectors.user_id = users.id
+                             WHERE collectors.center_id = :center_id');
+            $this->db->bind(':center_id', $center_id);
+
+            $results = $this->db->resultSet();
+            return $results;
+    }
+
+
+    public function delete_collectors($collectorId){
         $this->db->query('DELETE FROM users WHERE id = :collectorId');
         $this->db->bind(':collectorId', $collectorId);
 
@@ -74,7 +89,7 @@
 
       
 
-      public function getCollectorById($collectorId){
+    public function getCollectorById($collectorId){
         $this->db->query('SELECT * FROM collectors WHERE user_id = :collectorId');
         $this->db->bind(':collectorId', $collectorId);
 
@@ -84,7 +99,7 @@
 
       }
 
-      public function getCollectorByNIC($NIC){
+    public function getCollectorByNIC($NIC){
         $this->db->query('SELECT * FROM collectors WHERE nic = :nic');
         $this->db->bind(':nic', $NIC);
 
@@ -94,7 +109,7 @@
 
       }
 
-      public function getCollectorByVehicleNo($vehicleNo){
+    public function getCollectorByVehicleNo($vehicleNo){
         $this->db->query('SELECT * FROM collectors WHERE vehicle_no = :vehicleNo');
         $this->db->bind(':vehicleNo', $vehicleNo);
 

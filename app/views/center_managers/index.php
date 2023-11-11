@@ -76,8 +76,8 @@
                         <div class="main-right-left-three-content">
                             <div class="main-right-left-three-content-left">
                                 <img src="<?php echo IMGROOT?>/Center_Img.png" alt="">
-                                <h1>Kottawa</h1>
-                                <h4>Center ID: CEN 23</h3>
+                                <h1><?php echo $data['center_name']?></h1>
+                                <h4>Center ID: CEN <?php echo $data['center_id']?></h3>
                             </div>
                             <div class="main-right-left-three-content-right">
                                 <button>Incoming Requests</button>

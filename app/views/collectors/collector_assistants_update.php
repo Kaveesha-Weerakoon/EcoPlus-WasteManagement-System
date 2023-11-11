@@ -79,7 +79,7 @@
             <hr width="100%">
             <h1>UPDATE Collector Assistants</h1>
             
-            <form class="main-right-bottom-content" action="<?php echo URLROOT;?>/collectors/collector_assistants_update/<?php echo $$data['assistant_id'] ?>" method="post">
+            <form class="main-right-bottom-content" action="<?php echo URLROOT;?>/collectors/collector_assistants_update/<?php echo $data['assistant_id'] ?>" method="post">
                 <div class="main-right-bottom-content-content">
                     <h2>Name</h2>
                     <input type="text" name="name" value="<?php echo $data['name'];?>">

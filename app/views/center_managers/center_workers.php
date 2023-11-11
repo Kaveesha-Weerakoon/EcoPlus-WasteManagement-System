@@ -55,13 +55,26 @@
                                            <td> <?php echo $center_worker->contact_no?></td>
                                            <td> <?php echo $center_worker->dob?></td>
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                                           <td class="cancel-open"><a href="<?php echo URLROOT?>/CenterManagers/center_workers_delete/<?php echo $center_worker->id ?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
+                                           <td class="cancel-open"><a href="<?php echo URLROOT?>/centermanagers/center_workers_delete_confirm/<?php echo $center_worker->id ?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
                                     </tr>
                      <?php endforeach; ?>
                        
                     </table>
                 </div>
             </div>
+            <?php if($data['confirm_delete']=='True') : ?>
+                <div class="delete_confirm">
+                        <div class="popup" id="popup">
+                            <img src="<?php echo IMGROOT?>/trash.png" alt="">
+                            <h2>Delete this center worker?</h2>
+                            <p>This action will permanently delete this center worker</p>
+                            <div class="btns">
+                                <a href="<?php echo URLROOT?>/centermanagers/center_workers_delete/<?php echo $data['center_worker_id'] ?>"><button type="button" class="deletebtn" >Delete</button></a>
+                                <a href="<?php echo URLROOT?>/centermanagers/center_workers ?>"><button type="button" class="cancelbtn">Cancel</button></a>
+                            </div>
+                        </div>
+                </div>
+       <?php endif; ?>
         </div>
     </div>
 </div>

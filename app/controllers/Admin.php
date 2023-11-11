@@ -162,7 +162,7 @@
           'password_err' => '' ,
           'complain_err' => '' ,
           'confirm_password_err'=>'' ,
-          'completed'=>''   
+          'registered'=>''   
         ];
 
         /*if($data['completed']=='True'){
@@ -243,7 +243,7 @@
           $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
           
           if($this->center_managerModel->register_center_manager($data)){
-            $data['completed']='True';        
+            $data['registered']='True';        
             $this->view('admin/center_managers_add',$data);
           } else {
             die('Something went wrong');
@@ -275,15 +275,11 @@
           'password_err' => '' ,
           'complain_err' => '' ,
           'confirm_password_err'=>'',
-          'completed'=>''  
+          'registered'=>''  
         ];
         $this->view('admin/center_managers_add', $data);
       }
     
-    }
-
-    public function center_managers_delete(){
-      
     }
 
  

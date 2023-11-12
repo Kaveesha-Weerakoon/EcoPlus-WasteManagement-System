@@ -27,6 +27,8 @@
       unset($_SESSION['collector_id']);
       unset($_SESSION['collector_email']);
       unset($_SESSION['collector_name']);
+      unset($_SESSION['center_id']);
+      unset($_SESSION['center']);
       session_destroy();
       redirect('users/login');
     }
@@ -168,7 +170,7 @@
         $data =[
           'name' => trim($_POST['name']),
           'contact_no' => trim($_POST['contact_no']),
-          'region' => trim($_POST['region']),
+          'region' => '',
           'subject' => trim($_POST['subject']),
           'complain' => trim($_POST['complain']),
           'name_err' => '',
@@ -176,7 +178,8 @@
           'region_err' => '',
           'subject_err' => '' ,
           'complain_err' => '' ,
-          'completed'=>  '' 
+          'completed'=>  '',
+          'center_id'=>''
         ];
         
         /*if($data['completed']=='True'){
@@ -185,27 +188,28 @@
         }*/
 
         if(empty($data['name'])){
-          $data['name_err'] = 'Pleae enter name';
+          $data['name_err'] = 'Please enter the name';
         }
        
         // Validate Password
-        if(empty($data['contact_no'])){
-          $data['contact_no_err'] = 'Please enter contact no';
-        }
-
-        if(empty($data['region'])){
-          $data['region_err'] = 'Pleae enter region';
-        } 
-        
+        if (empty($data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter the contact no';
+      } elseif (!preg_match('/^\d{10}$/', $data['contact_no'])) {
+          $data['contact_no_err'] = 'Invalid contact no';
+      }
+          
         if(empty($data['subject'])){
-          $data['subject_err'] = 'Pleae enter subject';
+          $data['subject_err'] = 'Please enter subject';
         }
         
         if(empty($data['complain'])){
-          $data['complain_err'] = 'Pleae enter complain';
+          $data['complain_err'] = 'Please enter complain';
         }
 
         if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
+          
+          $data['center_id']=$_SESSION['center_id'];
+          $data['region']=$_SESSION['center'];
           if($this->collector_complain_Model->complains($data)){
             $data['completed']="True";
             $this->view('collectors/complains', $data);

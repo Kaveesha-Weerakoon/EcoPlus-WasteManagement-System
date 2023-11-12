@@ -3,6 +3,8 @@
     public function __construct(){
            $this->userModel=$this->model('User');
            $this->center_managerModel=$this->model('Center_Manager');
+           $this->collectorModel=$this->model('Collector');
+
           }
 
     public function register(){
@@ -208,7 +210,9 @@
                 $this->createUserSession($loggedInUser); 
               }
               else if($loggedInUser->role=="collector"){
-                
+                $collector = $this->collectorModel->getCollectorById($loggedInUser->id);
+                $_SESSION['center_id'] = $collector->center_id;
+                $_SESSION['center'] = $collector->center_name;
                 $this->createCollectorSession($loggedInUser);
               }
               else if($loggedInUser->role=="centermanager"){

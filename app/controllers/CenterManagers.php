@@ -4,6 +4,7 @@
       $this->userModel=$this->model('User');
       $this->collectorModel=$this->model('Collector');
       $this->center_model=$this->model('Center');
+      $this->collector_complain_Model=$this->model('Collector_Complain');
 
       $this->centerworkerModel=$this->model('Center_Worker');
       if(!isLoggedIn('center_manager_id')){
@@ -43,6 +44,16 @@
       $this->view('center_managers/collectors', $data);
     }
 
+    public function collectors_complains(){
+      $collector_complains=$this->collector_complain_Model->get_complains_byCenterID($_SESSION['center_id']);
+      $data = [
+        'collectors_complains' => $collector_complains,
+      ];
+     
+     
+      $this->view('center_managers/collectors_complains', $data);
+    }
+
     public function collectors_add(){
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -59,6 +70,7 @@
           'registered'=>'',
           'password'=>trim($_POST['password']),
           'confirm_password'=>trim($_POST['confirm_password']),
+          'center_name'=>'',
 
           'name_err' =>'',
           'nic_err' =>'',
@@ -162,7 +174,8 @@
 
         if(empty($data['name_err']) && empty($data['nic_err']) && empty($data['dob_err']) && empty($data['contactNo_err'])&& empty($data['address_err']) && empty($data['email_err']) && empty($data['vehicleNo_err']) && empty($data['vehicleType_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-            
+            $center=$this->center_model->getCenterById($_SESSION['center_id']);
+            $data['center_name']=$center->region;
             if($this->collectorModel->register_collector($data)){
               $data['registered']='True';  
             
@@ -210,7 +223,7 @@
     }
 
     public function collector_delete_confirm($collectorId){
-        $collectors = $this->collectorModel->get_collectors($_SESSION['center_id']);
+         $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
         $data = [
           'collectors' => $collectors,
           'confirm_delete' => 'True',

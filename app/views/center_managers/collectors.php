@@ -29,7 +29,7 @@
                                 <div class="line1"></div>
                             </div>
                         </a>
-                        <a href="">
+                        <a  href="<?php echo URLROOT?>/centermanagers/collectors_complains">
                             <div class="main-right-top-three-content">
                                 <p>Complains</p>
                                 <div class="line1"></div>

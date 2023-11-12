@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
- <div class="Admin_Main">
-    <div class="Admin_Customer_Complains">
-        <div class="main">
+<div class="Admin_Main">
+    <div class="Admin_Collectors_Complains">
+    <div class="main">
              <div class="main-left">
                 <div class="main-left-top">
                     <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
@@ -61,16 +61,16 @@
                         <h1>Complains</h1>
                     </div>
                     <div class="main-right-top-three">
-                        <a href="">
+                        <a href="<?php echo URLROOT?>/Admin/complain_customers">
                             <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">Customers</b></p>
-                                <div class="line"></div>
+                                <p>Customers</p>
+                                <div class="line1"></div>
                             </div>
                         </a>
-                        <a href="<?php echo URLROOT?>/Admin/complain_collectors">
+                        <a href="">
                             <div class="main-right-top-three-content">
-                                <p>Collectors</p>
-                                <div class="line1"></div>
+                                <p><b style="color: #1B6652;">Collectors</b></p>
+                                <div class="line"></div>
                             </div>
                         </a>
                         <a href="">
@@ -86,10 +86,11 @@
                         <table class="table">
                             <tr class="table-header">
                                 <th>Complain ID</th>
-                                <th>Customer ID</th>
+                                <th>Collector ID</th>
+                                <th>Center</th>
                                 <th>Date</th>
-                                <th>Contact NO</th>
-                                <th>Customer Name</th>
+                                <th>Contact No</th>
+                                <th>Collector Name</th>
                                 <th>Subject</th>
                                 <th>Complain</th>
                                 <th>Action</th>
@@ -97,16 +98,17 @@
                         </table>
                     </div>
                     <div class="main-right-bottom-down">
-                        <table class="table">
-                        <?php foreach($data['complains'] as $post) : ?>
+                    <table class="table">
+                                   <?php foreach($data['complains'] as $post) : ?>
                                        <tr class="table-row">
-                                           <td>Com <?php echo $post->id?></td>
-                                           <td>C<?php echo $post->customer_id?></td>
+                                           <td>CoC<?php echo $post->id?></td>
+                                           <td>Co<?php echo $post->collector_id?></td>
+                                           <td>Cen<?php echo $post->center_id?></td>
                                            <td><?php echo $post->date?></td>
                                            <td><?php echo $post->contact_no?></td>
                                            <td><?php echo $post->name?></td>
                                            <td><?php echo $post->subject?></td>
-                                           <td><?php echo $post->complaint?></td>                                   
+                                           <td class="cancel-open"><img src="<?php echo IMGROOT?>/view.png" alt=""></td>             
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
                                         </tr>
                                   <?php endforeach; ?>
@@ -116,10 +118,6 @@
                 </div>
              </div>
         </div>
-
-    </div> 
- </div>
-    
-
-
+    </div>
+</div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

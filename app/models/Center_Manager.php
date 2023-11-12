@@ -85,4 +85,17 @@
       $results = $this->db->resultSet();
       return $results;
     }
+
+    public function delete_centermanager($centermanagerId){
+      $this->db->query('DELETE FROM users WHERE id = :centermanagerId');
+      $this->db->bind(':centermanagerId', $centermanagerId);
+
+      if($this->db->execute()){
+        return true;
+      }
+      else{
+        return false;
+      }
+
+    }
   }

@@ -61,7 +61,7 @@
 
     .main-bottom {
         display: grid;
-        grid-template-rows: 17% 83%;
+        grid-template-rows: 18% 82%;
 
     }
 
@@ -73,6 +73,7 @@
         display: flex;
         align-items: center;
         padding-left: 33px;
+        padding-top: 6px;
     }
 
     .main-right-top-two h1 {

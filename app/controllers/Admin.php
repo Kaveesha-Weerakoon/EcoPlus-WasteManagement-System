@@ -127,7 +127,6 @@
       $this->view('admin/complain_customers', $data);
     }
 
-
     public function complain_delete($id){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){     
 
@@ -141,14 +140,55 @@
       }
     }
     
-
     public function center_managers(){
 
       $center_managers = $this->center_managerModel->get_center_managers();
       $data = [
-        'center_managers' => $center_managers 
+        'center_managers' => $center_managers,
+        'confirm_delete' =>'',
+        'assigned'=>'',
+        'success'=>''
       ];
      
+      $this->view('admin/center_managers', $data);
+    }
+
+    public function center_managers_delete_confirm($id){
+      $center_managers = $this->center_managerModel->get_center_managers();
+      $centermanger = $this->center_managerModel->getCenterManagerByID($id);
+      if($centermanger){
+        $data = [
+          'center_managers' => $center_managers,
+          'confirm_delete' =>'True',
+          'assigned'=> $centermanger->assinged,
+          'center_manager_id'=>$id,
+          'success'=>''
+        ];
+      }
+      else{
+        $data = [
+          'center_managers' => $center_managers,
+          'confirm_delete' =>'True',
+          'assigned'=> '',
+          'center_manager_id'=>$id,
+          'success'=>''
+        ];
+      }
+    
+     
+      $this->view('admin/center_managers', $data);
+    }
+
+    public function center_managers_delete($id) {
+      $this->center_managerModel->delete_centermanager($id);
+      $center_managers = $this->center_managerModel->get_center_managers();
+      $data = [
+        'center_managers' => $center_managers,
+        'confirm_delete' =>'',
+        'assigned'=>'',
+        'success'=>'True'
+      ];
+    
       $this->view('admin/center_managers', $data);
     }
 
@@ -295,7 +335,6 @@
     
     }
 
-   
     public function customers(){
       
       $customers = $this->customerModel->get_all();
@@ -352,7 +391,7 @@
         }
 
         if( $data['center_manager']=='default'){
-          die('No cm');
+          $this->view('admin/center_add', $data);
         }
         
         if(empty($data['region_err']) &&  empty($data['address_err']) && empty($data['district_err'] ) && empty($data['center_manager_err'] )){

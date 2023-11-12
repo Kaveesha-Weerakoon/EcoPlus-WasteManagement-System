@@ -98,7 +98,7 @@
     }
 
     .main-bottom-down-down-content-field {
-        height: 58px;
+        height: 56px;
     }
 
     .main-bottom-down-down-content-field p {
@@ -120,13 +120,13 @@
 
     .Create_Center_Button {
         width: 50%;
-        height: 60px;
+        height: 65px;
         background: #1B6652;
-        font-size: 18px;
+        font-size: 20px;
         color: white;
         border: none;
         font-weight: 600;
-        margin-top: 15px;
+        margin-top: 5px;
         border-radius: 5px;
         cursor: pointer;
         transition: background 0.3s ease;

@@ -26,7 +26,7 @@
             $this->db->bind(':nic', $data['nic']);
             $this->db->bind(':dob', $data['dob']);
             $this->db->bind(':center_id', $_SESSION['center_id']);
-            $this->db->bind(':center_name', "kottawa");
+            $this->db->bind(':center_name', $data['center_name']);
             $this->db->bind(':vehicle_no', $data['vehicle_no']);
             $this->db->bind(':vehicle_type', $data['vehicle_type']);
             $result = $this->db->execute();

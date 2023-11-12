@@ -27,12 +27,12 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .main-top img {
-        width: 35px;
-        height: 35px;
+        width: 32px;
+        height: 32px;
         margin-left: 30px;
     }
 
@@ -49,9 +49,9 @@
     }
 
     .main-top-component img {
-        width: 50px;
-        height: 50px;
-        margin-left: 10px;
+        width: 40px;
+        height: 40px;
+        margin-left: 15px;
     }
 
     .main-top-component p {
@@ -61,7 +61,7 @@
 
     .main-bottom {
         display: grid;
-        grid-template-rows: 16% 84%;
+        grid-template-rows: 17% 83%;
 
     }
 
@@ -69,7 +69,7 @@
 
 
     .main-right-top-two {
-        height: 50px;
+        height: 60px;
         display: flex;
         align-items: center;
         padding-left: 33px;

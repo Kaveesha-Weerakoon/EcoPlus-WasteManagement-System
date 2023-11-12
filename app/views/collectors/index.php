@@ -114,7 +114,7 @@
                         <p>Collector ID: <?php echo $_SESSION['collector_id']?></p>
 
                         <button id="Profile">Profile</button>
-                        <a href=""><button>Complaints</button></a>
+                        <a href="<?php echo URLROOT?>/collectors/complains"><button>Complaints</button></a>
                     </div>
                     <div class="main-right-right-bottom">
                         <img src="<?php echo IMGROOT?>/Collector_Dashboard3.jpg" alt="">

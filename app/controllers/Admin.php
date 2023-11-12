@@ -9,11 +9,22 @@
       $this->center_managerModel=$this->model('Center_Manager');
       $this->customer_complain_Model=$this->model('Customer_Complain');
       $this->center_model=$this->model('Center');
+      $this->collector_model=$this->model('Collector');
+      $this->collector_complain_Model=$this->model('Collector_Complain');
 
       if(!isLoggedIn('admin_id')){
         redirect('users/login');
       }
     }
+
+    public function logout(){
+      unset($_SESSION['admin_id']);
+      unset($_SESSION['admin_email']);
+      unset($_SESSION['admin_name']);
+       session_destroy();
+      redirect('users/login');
+ }
+
     
     public function index(){
       $data = [
@@ -284,14 +295,7 @@
     
     }
 
-    public function logout(){
-         unset($_SESSION['admin_id']);
-         unset($_SESSION['admin_email']);
-         unset($_SESSION['admin_name']);
-          session_destroy();
-         redirect('users/login');
-    }
-
+   
     public function customers(){
       
       $customers = $this->customerModel->get_all();
@@ -382,6 +386,25 @@
          $this->view('admin/center_add', $data);
       }
       
+    }
+
+    public function collectors(){
+      $collectors =$this->collector_model->get_collectors();
+      $data = [
+        'collectors' =>$collectors
+      ];
+     
+      $this->view('admin/collectors', $data);
+    }
+
+    public function complain_collectors(){
+
+      $collector_complains= $this->collector_complain_Model->get_complains();
+
+      $data = [
+        'complains' => $collector_complains
+      ];
+      $this->view('admin/complain_collectors', $data);
     }
    
   }

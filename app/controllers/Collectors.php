@@ -5,6 +5,7 @@
       $this->collectorModel=$this->model('Collector');
       $this->collector_assistantModel=$this->model('Collector_Assistant');
       $this->creditModel=$this->model('Credit_amount');
+      $this->collector_complain_Model=$this->model('Collector_Complain');
 
       if(!isLoggedIn('collector_id')){
         redirect('users/login');
@@ -175,7 +176,7 @@
           'region_err' => '',
           'subject_err' => '' ,
           'complain_err' => '' ,
-          //'completed'=>''    
+          'completed'=>  '' 
         ];
         
         /*if($data['completed']=='True'){

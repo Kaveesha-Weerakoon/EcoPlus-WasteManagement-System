@@ -8,6 +8,7 @@
       $this->customerModel=$this->model('Customer');
       $this->center_managerModel=$this->model('Center_Manager');
       $this->customer_complain_Model=$this->model('Customer_Complain');
+      $this->center_model=$this->model('Center');
 
       if(!isLoggedIn('admin_id')){
         redirect('users/login');
@@ -283,13 +284,12 @@
     
     }
 
- 
-      public function logout(){
-      unset($_SESSION['admin_id']);
-      unset($_SESSION['admin_email']);
-      unset($_SESSION['admin_name']);
-      session_destroy();
-      redirect('users/login');
+    public function logout(){
+         unset($_SESSION['admin_id']);
+         unset($_SESSION['admin_email']);
+         unset($_SESSION['admin_name']);
+          session_destroy();
+         redirect('users/login');
     }
 
     public function customers(){
@@ -303,17 +303,85 @@
     }
 
     public function center(){
+
+      $centers = $this->center_model->getallCenters();
       $data = [
-        'customers' =>'$customers'
+        'centers' =>$centers
       ];
        $this->view('admin/center_view', $data);
     }
 
     public function center_add(){
-      $data = [
-        'customers' =>'$customers'
-      ];
-       $this->view('admin/center_add', $data);
+      
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
+        $data =[
+            'center_managers' => $na_center_managers,
+            'address' => trim($_POST['address']),
+            'district' =>trim($_POST['district']),
+            'region' =>trim($_POST['region']),
+            'center_manager'=>trim($_POST['centerManager']),
+            'address_err' => '',
+            'district_err' =>'',
+            'region_err' =>'',
+            'center_manager_err'=>'',
+            'center_manager_data'=>'',
+            'center_manager_name'=>''
+        ];
+
+        if(empty($data['address'])){
+          $data['address_err']='Please enter a address';
+        }
+
+        if(empty($data['district'])){
+          $data['district_err']='Please enter a district';
+        }
+
+        if(empty($data['region'])){
+          $data['region_err']='Please enter a region';
+        }
+        else{
+          if($this->center_model->findCenterbyRegion($data['region'])){
+            $data['region_err'] = 'Region already exists';
+        }
+        }
+
+        if( $data['center_manager']=='default'){
+          die('No cm');
+        }
+        
+        if(empty($data['region_err']) &&  empty($data['address_err']) && empty($data['district_err'] ) && empty($data['center_manager_err'] )){
+            
+            $data['center_manager_data']=$this->center_managerModel->getCenterManagerByID($data['center_manager']);
+            $data['center_manager_name']=$this->userModel->findUserById($data['center_manager']);
+
+            if($this->center_model->addcenter($data)){
+              redirect('users/login');
+            } else {
+              die('Something went wrong');
+            }
+        }
+        else{
+          $this->view('admin/center_add', $data);
+        }
+      }
+      else{
+        $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
+        $data = [
+          'center_managers' => $na_center_managers,
+          'address' => '',
+          'district' =>'',
+          'center_manager'=>'',
+          'region' =>'',
+          'address_err' => '',
+          'district_err' =>'',
+          'region_err' =>'',
+          'center_manager_err'=>''
+        ];
+         $this->view('admin/center_add', $data);
+      }
+      
     }
    
   }

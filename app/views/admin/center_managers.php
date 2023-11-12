@@ -56,7 +56,7 @@
                                            <td><?php echo $center_manager->name?></td>
                                            <td><?php echo $center_manager->email?></td>
                                            <td> <?php echo $center_manager->assinged?></td>
-                                           <td> <?php echo $center_manager->assined_center_id?></td>
+                                           <td> <?php echo $center_manager->assigned_center_id?></td>
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/view.png" alt=""></td>
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>

@@ -22,7 +22,7 @@
        
       }
 
-      public function get_center_workers($data){
+    public function get_center_workers($data){
         $this->db->query('SELECT * FROM center_workers WHERE center_id=:id');
         $this->db->bind(':id', $data);
         $results = $this->db->resultSet();
@@ -30,7 +30,7 @@
         return $results;
       }
 
-      public function getCenterWorkerByNIC($NIC){
+    public function getCenterWorkerByNIC($NIC){
         $this->db->query('SELECT * FROM center_workers WHERE nic = :nic');
         $this->db->bind(':nic', $NIC);
 
@@ -40,7 +40,7 @@
 
       }
 
-      public function getCenterWorkerById($workerId){
+    public function getCenterWorkerById($workerId){
         $this->db->query('SELECT * FROM center_workers WHERE id = :workerId');
         $this->db->bind(':workerId', $workerId);
 
@@ -50,7 +50,7 @@
 
       }
 
-      public function delete_center_workers($workerId){
+    public function delete_center_workers($workerId){
         $this->db->query('DELETE FROM center_workers WHERE id = :workerId');
         $this->db->bind(':workerId', $workerId);
 

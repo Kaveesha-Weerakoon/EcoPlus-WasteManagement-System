@@ -3,6 +3,7 @@
     public function __construct(){
       $this->userModel=$this->model('User');
       $this->collectorModel=$this->model('Collector');
+      $this->center_model=$this->model('Center');
 
       $this->centerworkerModel=$this->model('Center_Worker');
       if(!isLoggedIn('center_manager_id')){
@@ -11,8 +12,12 @@
     }
     
     public function index(){
+
+      $center=$this->center_model->getCenterById($_SESSION['center_id']);
+
       $data = [
-        'title' => 'TraversyMVC',
+        'center_id' => $center->id,
+        'center_name' => $center->region
       ];
      
       $this->view('center_managers/index', $data);
@@ -22,12 +27,13 @@
       unset($_SESSION['center_manager_id']);
       unset($_SESSION['center_manager_email']);
       unset($_SESSION['center_manager_name']);
+      unset($_SESSION['center_id']);
       session_destroy();
       redirect('users/login');
     }
 
     public function collectors(){
-      $collectors = $this->collectorModel->get_collectors($_SESSION['center_id']);
+      $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
       $data = [
         'collectors' => $collectors,
         'confirm_delete' =>''
@@ -240,8 +246,10 @@
       $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
       $data = [
         'center_workers' => $center_workers,
+        'center_worker_id'=>'',
         'click_update' =>'',
         'confirm_delete' => ''
+
       ];
      
      
@@ -323,7 +331,7 @@
           'dob'=>'',
           'contact_no'=>'',
           'address' =>'',
-          'completed'=>'',
+          'registered'=>'',
           'name_err' => '',
           'nic_err' => '',
           'dob_err'=>'',
@@ -363,8 +371,7 @@
         'center_worker_id'=>$workerId
 
       ];
-     
-     
+
       $this->view('center_managers/center_workers', $data);
     } 
 

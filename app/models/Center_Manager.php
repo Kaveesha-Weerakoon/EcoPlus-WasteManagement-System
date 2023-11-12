@@ -64,5 +64,25 @@
 
     }
 
+    public function getCenterManagerByID($data){
 
+      $this->db->query('SELECT * FROM center_managers WHERE user_id = :assisId');
+      $this->db->bind(':assisId', $data);
+
+      $row = $this->db->single();
+
+      return $row;
+    }
+
+    public function get_Non_Assigned_CenterManger(){
+      $this->db->query('SELECT *,
+              center_managers.id as cmID,
+              users.id as userId
+              FROM center_managers
+              INNER JOIN users
+              ON center_managers.user_id = users.id
+              WHERE center_managers.assinged = "No"');
+      $results = $this->db->resultSet();
+      return $results;
+    }
   }

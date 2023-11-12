@@ -1,5 +1,4 @@
 .Admin_Center_Top {
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
 
     * {
         margin: 0px;
@@ -53,16 +52,13 @@
     .main-top-component img {
         width: 40px;
         height: 40px;
-
         margin-left: 15px;
     }
 
     .main-top-component p {
-
         font-size: 18px;
         font-family: inter;
         letter-spacing: 0.1px;
-
     }
 
     .main-bottom {

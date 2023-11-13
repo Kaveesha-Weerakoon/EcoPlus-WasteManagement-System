@@ -99,7 +99,7 @@
                                            <td><?php echo $collector_assistant->address?></td>
                                            <td> <?php echo $collector_assistant->contact_no?></td>
                                            <td> <?php echo $collector_assistant->dob?></td>
-                                           <td class="cancel-open"><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
+                                           <td class="cancel-open"><a href="<?php echo URLROOT?>/Collectors/collector_assistants_update/<?php echo $collector_assistant->id ?>"><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/Collectors/collector_assistants_delete_confirm/<?php echo $collector_assistant->id ?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
                                     </tr>
                              <?php endforeach; ?>

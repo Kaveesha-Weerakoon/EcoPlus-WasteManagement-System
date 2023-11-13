@@ -1,0 +1,187 @@
+.Admin_Center_Main {
+    .main {
+        display: grid;
+        grid-template-rows: 20% 80%;
+        height: 730px;
+        width: 100%;
+    }
+
+    .main-top {
+        display: grid;
+        grid-template-rows: 40% 60%;
+    }
+
+    .main-top-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-top-top-component {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+    }
+
+    .main-top-top-component p {
+        font-size: 18px;
+        font-family: inter;
+        letter-spacing: 0.1px;
+    }
+
+    .main-top-top img {
+        width: 32px;
+        height: 32px;
+        margin-left: 30px;
+    }
+
+    .main-top-top-component img {
+        width: 40px;
+        height: 40px;
+        margin-left: 15px;
+    }
+
+    .main-top-bottom {
+        box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .main-bottom-left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .main-bottom-left img {
+        height: 56px;
+        width: 56px;
+        margin-left: 27px;
+        margin-right: 15px;
+    }
+
+    .main-bottom-left-component {
+        margin-top: 10px;
+    }
+
+    .main-bottom-left p {
+        margin-right: 10px;
+    }
+
+    .main-bottom-left h4 {
+        font-size: 28px;
+    }
+
+    .main-bottom-right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .main-bottom-right img {
+        height: 56px;
+        width: 56px;
+        margin-left: 27px;
+        margin-right: 15px;
+    }
+
+    .main-bottom-right-component {
+        margin-top: 10px;
+    }
+
+    .main-bottom-right_button {
+        width: 120px;
+        height: 35px;
+        background-color: #e74c3c;
+        border-radius: 10px;
+        border: none;
+        font-size: 20px;
+        color: white;
+        margin-right: 15px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-left: 29px;
+        margin-top: 14px;
+    }
+
+    .main-bottom-right_button :hover {
+        background-color: #FF5E5D;
+    }
+
+    .main-bottom-right p {
+        margin-right: 10px;
+    }
+
+    .main-bottom-right h4 {
+        font-size: 28px;
+    }
+
+    .change_center_manager_pop {
+        background-color: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+    }
+
+    .change_center_manager {
+        width: 300px;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 17px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        height: auto;
+    }
+
+    .change_center_manager label,
+    .change_center_manager select,
+    .change_center_manager button {
+        display: block;
+        margin-bottom: 15px;
+        font-family: 'Inter' !important;
+
+    }
+
+    .change_center_manager select,
+    .change_center_manager button {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .change_center_manager button {
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+        border: none;
+    }
+
+    .change_center_manager button.cancel {
+        background-color: #ccc;
+        text-align: center;
+        height: 35px;
+    }
+
+    .change_center_manager button.cancel {
+        background-color: #ff7675;
+
+    }
+
+    .change_center_manager button.cancel:hover {
+        background-color: #ff7675;
+    }
+
+
+}

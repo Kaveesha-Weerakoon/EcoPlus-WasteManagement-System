@@ -445,5 +445,66 @@
       ];
       $this->view('admin/complain_collectors', $data);
     }
+
+    public function center_main($center_id){
+      $center=$this->center_model->getCenterById($center_id);
+      $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
+
+      $data = [
+        'center' =>$center,
+        'not_assigned_cm'=>$na_center_managers,
+        'change_cm'=>''
+      ];
+      $this->view('admin/center_main', $data);
+    }
+
+    public function center_main_change_cm($center_id){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+       
+        $center=$this->center_model->getCenterById($center_id);
+        $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
+  
+        $data = [
+          'center' =>$center,
+          'not_assigned_cm'=>$na_center_managers,
+          'change_cm'=>'True',
+          'center_manager'=>trim($_POST['centerManager']),
+        ];
+        if($data['center_manager']=='default'){
+          $this->view('admin/center_main', $data);
+        }
+        else{
+
+          $assining_manger = $this->center_managerModel->getCenterManagerByID($data['center_manager']);
+          $old_manager = $this->center_managerModel->getCenterManagerByID($center->center_manager_id);
+          $assigning_manager_name=$this->userModel->findUserById($data['center_manager']);
+
+          $this->center_model->changeCentermanager($center->id,$assining_manger,$assigning_manager_name );
+          $result=$this->center_managerModel->change_center_managers($assining_manger,$old_manager,$center_id );
+          if( $result){
+            $center=$this->center_model->getCenterById($center_id);
+          }   
+          $data = [
+            'center' =>$center,
+            'not_assigned_cm'=>$na_center_managers,
+            'change_cm'=>'',
+            'center_manager'=>trim($_POST['centerManager']),
+          ];
+          $this->center_main($center_id);
+        }
+        
+      }else{
+        $center=$this->center_model->getCenterById($center_id);
+        $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
+  
+        $data = [
+          'center' =>$center,
+          'not_assigned_cm'=>$na_center_managers,
+          'change_cm'=>'True'
+        ];
+        $this->view('admin/center_main', $data);
+      }
+     
+    }
    
   }

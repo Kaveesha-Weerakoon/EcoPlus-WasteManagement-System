@@ -1,10 +1,12 @@
 <?php
   class Center_Manager{
     private $db;
+    private $re;
 
     public function __construct(){
 
       $this->db = new Database;
+      $this->re = new Database;
     }
 
     public function register_center_manager($data){
@@ -98,4 +100,26 @@
       }
 
     }
+    
+
+    public function change_center_managers($new_manager, $old_manager, $center_id) {
+      $updateManagerQuery = 'UPDATE center_managers SET assinged = "True", assigned_center_id = :assigned_center_id WHERE user_id = :centerManagerId';
+  
+      $this->db->query($updateManagerQuery);
+      $this->db->bind(':centerManagerId', $new_manager->user_id);
+      $this->db->bind(':assigned_center_id', $center_id);
+      
+      $result=$this->db->execute();
+      if($result){
+        $updateManagerQuery2 = 'UPDATE center_managers SET assinged = "No", assigned_center_id = :assigned_center_id2 WHERE user_id = :centerManagerId2';
+     
+        $val = 0;
+        $this->re->query($updateManagerQuery2);
+        $this->re->bind(':assigned_center_id2', $val);
+        $this->re->bind(':centerManagerId2', $old_manager->user_id);
+         $this->re->execute();
+      }
   }
+  
+  
+}

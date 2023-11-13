@@ -163,7 +163,7 @@
       }
     }
 
- public function complains(){
+   public function complains(){
     
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -243,7 +243,7 @@
      
     }
     
-    public function collector_assistants_update($assisId){
+  public function collector_assistants_update($assisId){
   
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -254,7 +254,7 @@
                'dob'=>trim($_POST['dob']),
                'contact_no'=>trim($_POST['contact_no']),
                'address' =>trim($_POST['address']),
-               'completed'=>''
+               'completed'=>'',
                'name_err' => '',
                'nic_err' => '',
                'dob_err'=>'',

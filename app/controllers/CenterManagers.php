@@ -261,7 +261,8 @@
         'center_workers' => $center_workers,
         'center_worker_id'=>'',
         'click_update' =>'',
-        'confirm_delete' => ''
+        'confirm_delete' => '',
+        'delete_success' =>''
 
       ];
      
@@ -359,20 +360,140 @@
       
     }
 
-    public function center_workers_update_click($workerId){
-      $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
-      $data = [
-        'center_workers' => $center_workers,
-        'click_update' =>'True',
-        'center_worker_id'=>$workerId
+    // public function center_workers_update_click($workerId){
+    //   $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
+    //   $center_wroker = $this->centerworkerModel->getCenterWorkerById($workerId);
 
-      ];
-       
-      $this->view('center_managers/center_workers', $data);
+    //   $data = [
+    //     'center_workers' => $center_workers,
+    //     'click_update' =>'True',
+    //     'center_worker_id'=>$workerId,
 
-    }
+    //     'name' => $center_wroker->name,
+    //     'nic' => $center_wroker->nic,
+    //     'dob'=> $center_wroker->dob,
+    //     'contact_no'=> $center_wroker->contact_no,
+    //     'address' => $center_wroker->address,
+    //     'registered'=>'',
 
-    public function center_workers_update(){
+    //     'name_err' => '',
+    //     'nic_err' => '',
+    //     'dob_err'=>'',
+    //     'contact_no_err'=>'',
+    //     'address_err' =>''
+
+    //   ];
+      
+      
+    //   $this->view('center_managers/center_workers', $data);
+
+    // }
+
+    public function center_workers_update($workerId){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
+            $data = [
+                'center_workers' => $center_workers,
+                'id'=> $workerId,
+                'name' =>trim($_POST['name']),
+                'nic' => trim($_POST['nic']),
+                'dob'=>trim($_POST['dob']),
+                'contact_no'=>trim($_POST['contact_no']),
+                'address' =>trim($_POST['address']),
+                'click_update' =>'True',
+                'update_success'=>'',
+                
+                'name_err' => '',
+                'nic_err' => '',
+                'dob_err'=>'',
+                'contact_no_err'=>'',
+                'address_err' =>''
+                
+            ];
+
+        //validate name
+        if(empty($data['name'])){
+          $data['name_err'] = 'Please enter name';
+        }elseif (strlen($data['name']) > 255) {
+          $data['name_err'] = 'Name is too long';
+        }
+
+        //validate NIC
+        if(empty($data['nic'])){
+          $data['nic_err'] = 'Please enter NIC';
+        }elseif(!(is_numeric($data['nic']) && (strlen($data['nic']) == 12)) && !preg_match('/^[0-9]{9}[vV]$/', $data['nic'])){
+          $data['nic_err'] = 'Please enter a valid NIC';
+        }elseif($this->centerworkerModel->getCenterWorkersByNIC_except($data['nic'] , $workerId)){
+          $data['nic_err'] = 'Already exists a center worker under this NIC';
+        }
+
+        //validate DOB
+        if(empty($data['dob'])){
+          $data['dob_err'] = 'Please enter dob';
+        }
+
+        // Validate Contact no
+        if(empty($data['contact_no'])){
+          $data['contact_no_err'] = 'Please enter contact no';
+        }elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter a valid contact number';
+        }
+
+        // Validate Address
+        if(empty($data['address'])){
+          $data['address_err'] = 'Please enter address';
+        }elseif (strlen($data['address']) > 500) {
+          $data['address_err'] = 'Address is too long ';
+        }
+
+        
+        if(empty($data['address_err']) && empty($data['contact_no_err']) && empty($data['dob_err']) && empty($data['nic_err']) && empty($data['name_err']) ){
+          if($this->centerworkerModel->update_center_workers($data)){
+            //die('sucess');
+            $data['update_success']='True';       
+            $this->view('center_managers/center_workers',$data);
+          } else {
+            die('Something went wrong');
+          }
+        }
+        else{
+          $this->view('center_managers/center_workers', $data);
+        }
+
+        //$this->view('center_managers/center_workers', $data);
+      
+      }
+      else{
+
+        $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
+        $center_worker = $this->centerworkerModel->getCenterWorkerById($workerId);
+        $data = [
+
+          'center_workers' => $center_workers,
+          'id'=> $workerId,
+          'name' => $center_worker->name,
+          'nic' => $center_worker->nic,
+          'dob'=> $center_worker->dob,
+          'contact_no'=> $center_worker->contact_no,
+          'address' => $center_worker->address,
+          'click_update' =>'True',
+          'update_success'=>'',
+
+          'name_err' => '',
+          'nic_err' => '',
+          'dob_err'=>'',
+          'contact_no_err'=>'',
+          'address_err' =>''
+          
+        ];
+        
+        $this->view('center_managers/center_workers', $data);
+
+        
+      }
+
+     
 
     }
 
@@ -381,6 +502,7 @@
       $data = [
         'center_workers' => $center_workers,
         'confirm_delete' =>'True',
+        'delete_success' =>'',
         'center_worker_id'=>$workerId
 
       ];
@@ -391,13 +513,19 @@
 
     public function center_workers_delete($workerId){
 
+      $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
+      $data = [
+        'center_workers' => $center_workers
+
+      ];
       $center_worker = $this->centerworkerModel->getCenterWorkerById($workerId);
       if(empty($center_worker)){
         die('Center worker not found');
       }
       else{
         if($this->centerworkerModel->delete_center_workers($workerId)){
-          redirect('centermanagers/center_workers');
+          $data['delete_success'] = 'True';
+          $this->view('center_managers/center_workers', $data);
         }
         else{
           die('Something went wrong');

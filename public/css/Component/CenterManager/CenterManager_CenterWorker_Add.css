@@ -201,6 +201,7 @@
         height: 100%;
     }
 
+    /*Success popup*/
     .center_worker_success{
         position: fixed;
         top: 0;

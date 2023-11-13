@@ -81,4 +81,16 @@
       }
     }
 
+    public function changeCentermanager($centerid,$center_manager,$assigning_manager_name){
+
+      $sql = 'UPDATE center SET center_manager_id = :newManagerId, center_manager_name = :newManagerName WHERE id = :centerId';
+
+      $this->db->query($sql);
+      $this->db->bind(':newManagerId',$center_manager->user_id);
+      $this->db->bind(':newManagerName', $assigning_manager_name->name);
+      $this->db->bind(':centerId', $centerid);
+ 
+      $result= $this->db->execute();    
+    }
+
 }

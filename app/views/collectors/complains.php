@@ -30,12 +30,6 @@
             </div>
 
             <div class="main-bottom-left-component-input">
-              <p>Region :</p>
-              <input type="text" name="region" value="<?php echo $data['region']; ?>"/>
-              <p class="error"><?php echo $data['region_err']; ?></p>
-            </div>
-
-            <div class="main-bottom-left-component-input">
               <p>Subject :</p>
               <input type="text" name="subject" value="<?php echo $data['subject']; ?>"/>
               <p class="error"><?php echo $data['subject_err']; ?></p>
@@ -56,13 +50,17 @@
       </div>
     </div>
     <?php if($data['completed']=='True') : ?>
-    <div class="complain-success">
-          <div class="complain-success-box">
-                  <h1>Complaint Successful</h1>
-                  <a href="<?php echo URLROOT?>/customers/complains"><button>Okay</button></a>
-          </div>
-    </div>
+            <div class="collector_assistant_success">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/check.png" alt="">
+                    <h2>Success!!</h2>
+                    <p>Complain has reported</p>
+                    <a href="<?php echo URLROOT?>/collectors/complains"><button type="button" >OK</button></a>
+
+                </div>
+            </div>
     <?php endif; ?>
+    
 </div>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

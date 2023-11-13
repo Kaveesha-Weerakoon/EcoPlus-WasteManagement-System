@@ -37,7 +37,8 @@
                         </div>
                     </a>
 
-                </div> <a href="<?php echo URLROOT?>/admin/logout">
+                </div> 
+                <a href="<?php echo URLROOT?>/admin/logout">
                 <div class="main-left-bottom">
                    
                     <div class="main-left-bottom-content">
@@ -45,7 +46,8 @@
                         <p>Log out</p>
                     </div>
                    
-                </div> </a>
+                </div>
+                </a>
             </div>
             <div class="main-right">
                 <div class="main-right-left">
@@ -84,8 +86,10 @@
 
 
                         <div class="main-right-left-two-component D">
-                            <h3>Collectors</h3>
-                            <img src="<?php echo IMGROOT?>/collectors.png" alt="">
+                           <a href="<?php echo URLROOT?>/admin/collectors">
+                              <h3>Collectors</h3>
+                              <img src="<?php echo IMGROOT?>/collectors.png" alt="">
+                            </a>
                         </div>
 
                     </div>

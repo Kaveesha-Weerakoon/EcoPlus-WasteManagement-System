@@ -6,6 +6,7 @@
       $this->collectorModel=$this->model('Collector');
       $this->collector_assistantModel=$this->model('Collector_Assistant');
       $this->creditModel=$this->model('Credit_amount');
+      $this->collector_complain_Model=$this->model('Collector_Complain');
 
       if(!isLoggedIn('collector_id')){
         redirect('users/login');
@@ -27,6 +28,8 @@
       unset($_SESSION['collector_id']);
       unset($_SESSION['collector_email']);
       unset($_SESSION['collector_name']);
+      unset($_SESSION['center_id']);
+      unset($_SESSION['center']);
       session_destroy();
       redirect('users/login');
     }
@@ -52,7 +55,7 @@
                'dob'=>trim($_POST['dob']),
                'contact_no'=>trim($_POST['contact_no']),
                'address' =>trim($_POST['address']),
-               'completed'=>'',
+               'registered'=>'',
   
                'name_err' => '',
                'nic_err' => '',
@@ -100,7 +103,7 @@
 
         if(empty($data['address_err']) && empty($data['contact_no_err']) && empty($data['dob_err']) && empty($data['nic_err']) && empty($data['name_err']) ){
           if($this->collector_assistantModel->add_collector_assistants($data)){
-            $data['completed']='True';        
+            $data['registered']='True';        
             $this->view('collectors/collector_assistants_add',$data);
           } else {
             die('Something went wrong');
@@ -119,7 +122,7 @@
           'dob'=>'',
           'contact_no'=>'',
           'address' =>'',
-          'completed'=>'',
+          'registered'=>'',
           'name_err' => '',
           'nic_err' => '',
           'dob_err'=>'',
@@ -160,7 +163,7 @@
       }
     }
 
-    public function complains(){
+ public function complains(){
     
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -168,7 +171,7 @@
         $data =[
           'name' => trim($_POST['name']),
           'contact_no' => trim($_POST['contact_no']),
-          'region' => trim($_POST['region']),
+          'region' => '',
           'subject' => trim($_POST['subject']),
           'complain' => trim($_POST['complain']),
           'name_err' => '',
@@ -176,7 +179,8 @@
           'region_err' => '',
           'subject_err' => '' ,
           'complain_err' => '' ,
-          //'completed'=>''    
+          'completed'=>  '',
+          'center_id'=>''
         ];
         
         /*if($data['completed']=='True'){
@@ -185,30 +189,32 @@
         }*/
 
         if(empty($data['name'])){
-          $data['name_err'] = 'Pleae enter name';
+          $data['name_err'] = 'Please enter the name';
         }
        
         // Validate Password
-        if(empty($data['contact_no'])){
-          $data['contact_no_err'] = 'Please enter contact no';
-        }
-
-        if(empty($data['region'])){
-          $data['region_err'] = 'Pleae enter region';
-        } 
-        
+        if (empty($data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter the contact no';
+      } elseif (!preg_match('/^\d{10}$/', $data['contact_no'])) {
+          $data['contact_no_err'] = 'Invalid contact no';
+      }
+          
         if(empty($data['subject'])){
-          $data['subject_err'] = 'Pleae enter subject';
+          $data['subject_err'] = 'Please enter subject';
         }
         
         if(empty($data['complain'])){
-          $data['complain_err'] = 'Pleae enter complain';
+          $data['complain_err'] = 'Please enter complain';
         }
 
         if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
+          
+          $data['center_id']=$_SESSION['center_id'];
+          $data['region']=$_SESSION['center'];
           if($this->collector_complain_Model->complains($data)){
             $data['completed']="True";
             $this->view('collectors/complains', $data);
+           
            
           } else {
             die('Something went wrong');
@@ -237,7 +243,6 @@
      
     }
     
-
     public function collector_assistants_update($assisId){
   
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -249,15 +254,12 @@
                'dob'=>trim($_POST['dob']),
                'contact_no'=>trim($_POST['contact_no']),
                'address' =>trim($_POST['address']),
-               'completed'=>'',
-  
+               'completed'=>''
                'name_err' => '',
                'nic_err' => '',
                'dob_err'=>'',
                'contact_no_err'=>'',
-               'address_err' =>'',
-      
-               
+               'address_err' =>'',            
         ];
   
         //validate name
@@ -303,12 +305,9 @@
             die('Something went wrong');
           }
         }
-        else{
-          $this->view('collectors/collector_assistants_update', $data);
-  
-        }
-      
       }
+
+ 
       else{
         $ass = $this -> collector_assistantModel -> getCollectorAssisById($assisId);
 
@@ -332,6 +331,7 @@
       }
   
       
+
     }
   
    

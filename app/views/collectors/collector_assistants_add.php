@@ -121,14 +121,17 @@
             </div>
         </div>
     </div>
-    <?php if($data['completed']=='True') : ?>
-               <div class="complain-success">
-                   <div class="complain-success-box">
-                     <h1>Collector Assistant Added Successful</h1>
-                      <a href="<?php echo URLROOT?>/collectors/collector_assistants_add"><button>Okay</button></a>
-                    </div>
-               </div>
-            <?php endif; ?>
+    <?php if($data['registered']=='True') : ?>
+            <div class="collector_assistant_success">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/check.png" alt="">
+                    <h2>Success!!</h2>
+                    <p>Collector assistant has been registered successfully</p>
+                    <a href="<?php echo URLROOT?>/collectors/collector_assistants"><button type="button" >OK</button></a>
+
+                </div>
+            </div>
+    <?php endif; ?>
 </div>
 </div>
 </div>

@@ -2,7 +2,10 @@
   class Users extends Controller {
     public function __construct(){
            $this->userModel=$this->model('User');
-    }
+           $this->center_managerModel=$this->model('Center_Manager');
+           $this->collectorModel=$this->model('Collector');
+
+          }
 
     public function register(){
       // Check for POST
@@ -207,10 +210,22 @@
                 $this->createUserSession($loggedInUser); 
               }
               else if($loggedInUser->role=="collector"){
+                $collector = $this->collectorModel->getCollectorById($loggedInUser->id);
+                $_SESSION['center_id'] = $collector->center_id;
+                $_SESSION['center'] = $collector->center_name;
                 $this->createCollectorSession($loggedInUser);
               }
               else if($loggedInUser->role=="centermanager"){
-                $this->createCenterManagerSession($loggedInUser);
+                $center_manager = $this->center_managerModel->getCenterManagerByID($loggedInUser->id);
+                if($center_manager->assinged=='No'){
+                  $data['email_err'] = 'You are not assigned';
+                  $this->view('users/login', $data);
+                }
+                else{
+                  $_SESSION['center_id'] = $center_manager->assigned_center_id;
+                  $this->createCenterManagerSession($loggedInUser);
+                }
+                
               }
               else if($loggedInUser->role=="admin"){
                 $this->createAdminSession($loggedInUser);
@@ -258,7 +273,7 @@
       $_SESSION['center_manager_id'] = $user->id;
       $_SESSION['center_manager_email'] = $user->email;
       $_SESSION['center_manager_name'] = $user->name;
-      $_SESSION['center_id'] = "1";
+    
       redirect('centermanagers');
     }
 

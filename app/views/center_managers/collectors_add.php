@@ -30,7 +30,7 @@
                                 <div class="line"></div>
                             </div>
                         </a>
-                        <a href="">
+                        <a href="<?php echo URLROOT?>/centermanagers/collectors_complains">
                             <div class="main-right-top-three-content">
                                 <p>Complaints</p>
                                 <div class="line1"></div>
@@ -135,14 +135,17 @@
 
             </div>
         </div>
-        <!-- <?php if($data['completed']=='True') : ?>
-            <div class="complain-success">
-                <div class="complain-success-box">
-                    <h1>Collector Added Successfully</h1>
-                    <a href="<?php echo URLROOT?>/centermanagers/collectors_add"><button>Okay</button></a>
+        <?php if($data['registered']=='True') : ?>
+            <div class="collector_success">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/check.png" alt="">
+                    <h2>Success!!</h2>
+                    <p>Collector has been registered successfully</p>
+                    <a href="<?php echo URLROOT?>/centermanagers/collectors"><button type="button" >OK</button></a>
+
                 </div>
             </div>
-        <?php endif; ?> -->
+        <?php endif; ?>
 
 </div>
 

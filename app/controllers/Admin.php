@@ -8,11 +8,23 @@
       $this->customerModel=$this->model('Customer');
       $this->center_managerModel=$this->model('Center_Manager');
       $this->customer_complain_Model=$this->model('Customer_Complain');
+      $this->center_model=$this->model('Center');
+      $this->collector_model=$this->model('Collector');
+      $this->collector_complain_Model=$this->model('Collector_Complain');
 
       if(!isLoggedIn('admin_id')){
         redirect('users/login');
       }
     }
+
+    public function logout(){
+      unset($_SESSION['admin_id']);
+      unset($_SESSION['admin_email']);
+      unset($_SESSION['admin_name']);
+       session_destroy();
+      redirect('users/login');
+ }
+
     
     public function index(){
       $data = [
@@ -115,7 +127,6 @@
       $this->view('admin/complain_customers', $data);
     }
 
-
     public function complain_delete($id){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){     
 
@@ -129,14 +140,55 @@
       }
     }
     
-
     public function center_managers(){
 
       $center_managers = $this->center_managerModel->get_center_managers();
       $data = [
-        'center_managers' => $center_managers 
+        'center_managers' => $center_managers,
+        'confirm_delete' =>'',
+        'assigned'=>'',
+        'success'=>''
       ];
      
+      $this->view('admin/center_managers', $data);
+    }
+
+    public function center_managers_delete_confirm($id){
+      $center_managers = $this->center_managerModel->get_center_managers();
+      $centermanger = $this->center_managerModel->getCenterManagerByID($id);
+      if($centermanger){
+        $data = [
+          'center_managers' => $center_managers,
+          'confirm_delete' =>'True',
+          'assigned'=> $centermanger->assinged,
+          'center_manager_id'=>$id,
+          'success'=>''
+        ];
+      }
+      else{
+        $data = [
+          'center_managers' => $center_managers,
+          'confirm_delete' =>'True',
+          'assigned'=> '',
+          'center_manager_id'=>$id,
+          'success'=>''
+        ];
+      }
+    
+     
+      $this->view('admin/center_managers', $data);
+    }
+
+    public function center_managers_delete($id) {
+      $this->center_managerModel->delete_centermanager($id);
+      $center_managers = $this->center_managerModel->get_center_managers();
+      $data = [
+        'center_managers' => $center_managers,
+        'confirm_delete' =>'',
+        'assigned'=>'',
+        'success'=>'True'
+      ];
+    
       $this->view('admin/center_managers', $data);
     }
 
@@ -283,15 +335,6 @@
     
     }
 
- 
-      public function logout(){
-      unset($_SESSION['admin_id']);
-      unset($_SESSION['admin_email']);
-      unset($_SESSION['admin_name']);
-      session_destroy();
-      redirect('users/login');
-    }
-
     public function customers(){
       
       $customers = $this->customerModel->get_all();
@@ -303,17 +346,104 @@
     }
 
     public function center(){
+
+      $centers = $this->center_model->getallCenters();
       $data = [
-        'customers' =>'$customers'
+        'centers' =>$centers
       ];
        $this->view('admin/center_view', $data);
     }
 
     public function center_add(){
+      
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
+        $data =[
+            'center_managers' => $na_center_managers,
+            'address' => trim($_POST['address']),
+            'district' =>trim($_POST['district']),
+            'region' =>trim($_POST['region']),
+            'center_manager'=>trim($_POST['centerManager']),
+            'address_err' => '',
+            'district_err' =>'',
+            'region_err' =>'',
+            'center_manager_err'=>'',
+            'center_manager_data'=>'',
+            'center_manager_name'=>''
+        ];
+
+        if(empty($data['address'])){
+          $data['address_err']='Please enter a address';
+        }
+
+        if(empty($data['district'])){
+          $data['district_err']='Please enter a district';
+        }
+
+        if(empty($data['region'])){
+          $data['region_err']='Please enter a region';
+        }
+        else{
+          if($this->center_model->findCenterbyRegion($data['region'])){
+            $data['region_err'] = 'Region already exists';
+        }
+        }
+
+        if( $data['center_manager']=='default'){
+          $this->view('admin/center_add', $data);
+        }
+        
+        if(empty($data['region_err']) &&  empty($data['address_err']) && empty($data['district_err'] ) && empty($data['center_manager_err'] )){
+            
+            $data['center_manager_data']=$this->center_managerModel->getCenterManagerByID($data['center_manager']);
+            $data['center_manager_name']=$this->userModel->findUserById($data['center_manager']);
+
+            if($this->center_model->addcenter($data)){
+              redirect('users/login');
+            } else {
+              die('Something went wrong');
+            }
+        }
+        else{
+          $this->view('admin/center_add', $data);
+        }
+      }
+      else{
+        $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
+        $data = [
+          'center_managers' => $na_center_managers,
+          'address' => '',
+          'district' =>'',
+          'center_manager'=>'',
+          'region' =>'',
+          'address_err' => '',
+          'district_err' =>'',
+          'region_err' =>'',
+          'center_manager_err'=>''
+        ];
+         $this->view('admin/center_add', $data);
+      }
+      
+    }
+
+    public function collectors(){
+      $collectors =$this->collector_model->get_collectors();
       $data = [
-        'customers' =>'$customers'
+        'collectors' =>$collectors
       ];
-       $this->view('admin/center_add', $data);
+     
+      $this->view('admin/collectors', $data);
+    }
+
+    public function complain_collectors(){
+
+      $collector_complains= $this->collector_complain_Model->get_complains();
+
+      $data = [
+        'complains' => $collector_complains
+      ];
+      $this->view('admin/complain_collectors', $data);
     }
    
   }

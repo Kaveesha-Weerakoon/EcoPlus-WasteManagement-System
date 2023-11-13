@@ -8,7 +8,6 @@
     }
 
     .main-bottom-down-top {
-
         display: flex;
         align-items: center;
         justify-content: center;
@@ -22,7 +21,6 @@
         flex-direction: row;
         margin-left: 32px;
         width: 80%;
-
     }
 
     .main-bottom-down-top-content img {
@@ -66,13 +64,23 @@
 
     .main-bottom-down-down-content {
         display: grid;
-        grid-template-columns: 30% 70%;
-        margin-bottom: 20px;
+        grid-template-columns: 34% 66%;
+        margin-bottom: 25px;
         width: 100%;
-
     }
 
     .main-bottom-down-down-content input {
+        height: 40px;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        padding: 10px;
+        box-sizing: border-box;
+        margin-bottom: 3px;
+    }
+
+    .main-bottom-down-down-content select {
         height: 40px;
         width: 100%;
         border-radius: 5px;
@@ -84,29 +92,48 @@
 
     .main-bottom-down-down-content p {
         font-size: 18px;
-        margin-bottom: 7px;
+        margin-bottom: 5px;
+        color: #555;
+        font-weight: 600;
+    }
+
+    .main-bottom-down-down-content-field {
+        height: 56px;
+    }
+
+    .main-bottom-down-down-content-field p {
+        font-size: 16px;
+        color: #e74c3c;
+        font-weight: 400;
+    }
+
+    .error-class {
+        border: 1px solid #e74c3c !important;
+    }
+
+    .main-bottom-down-down-content label {
+        font-size: 18px;
+        margin-bottom: 1px;
         color: #555;
         font-weight: 600;
     }
 
     .Create_Center_Button {
         width: 50%;
-        height: 45px;
+        height: 65px;
         background: #1B6652;
-        font-size: 18px;
+        font-size: 20px;
         color: white;
         border: none;
         font-weight: 600;
-        margin-top: 30px;
+        margin-top: 5px;
         border-radius: 5px;
         cursor: pointer;
         transition: background 0.3s ease;
-
     }
 
     .Create_Center_Button:hover {
         background: #155843;
-        /* Darker color on hover */
     }
 
 }

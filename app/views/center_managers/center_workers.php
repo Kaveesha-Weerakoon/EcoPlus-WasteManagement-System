@@ -54,16 +54,71 @@
                                            <td><?php echo $center_worker->address?></td>
                                            <td> <?php echo $center_worker->contact_no?></td>
                                            <td> <?php echo $center_worker->dob?></td>
-                                           <td class="cancel-open"><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                                           <td class="cancel-open"><a href="<?php echo URLROOT?>/CenterManagers/center_workers_delete/<?php echo $center_worker->id ?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
+                                           <td class="cancel-open"><a href="<?php echo URLROOT?>/centermanagers/center_workers_update_click/<?php echo $center_worker->id ?>"><img src="<?php echo IMGROOT?>/update.png" alt=""></a></td>
+                                           <td class="cancel-open"><a href="<?php echo URLROOT?>/centermanagers/center_workers_delete_confirm/<?php echo $center_worker->id ?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
                                     </tr>
                      <?php endforeach; ?>
                        
                     </table>
                 </div>
             </div>
+            <?php if($data['click_update']=='True') : ?>
+                <div class="update_click">
+                    <div class="popup-form" id="popup">
+                        <a href="<?php echo URLROOT?>/centermanagers/center_workers"><img src="<?php echo IMGROOT?>/close_popup.png"  class="update-popup-img" alt=""></a>
+                        <h2>Update Details</h2>
+                        <center><div class="line"></div></center>
+                        <form class="updatePopupform" action="">
+                            <div class="updateData A">
+                                <label>Name</label><br>
+                                <input type="text" placeholder="Enter name"><br>
+                            </div>
+                            <div class="updateData">
+                                <label>NIC</label><br>
+                                <input type="text" placeholder="Enter NIC"><br>
+                            </div>
+                            <div class="updateData">
+                                <label>Address</label><br>
+                                <input type="text" placeholder="Enter Address"><br>
+                            </div>
+                            <div class="updateData">
+                                <label>Contact No</label><br>
+                                <input type="text" placeholder="Enter Contact No"><br>
+
+                            </div>
+                            <div class="updateData B">
+                                <label>DOB</label><br>
+                                <input type="date" placeholder="Enter DOB"><br>
+                            </div>
+                            
+                        </form>
+                        <div class="btns1">
+                            <a href="<?php echo URLROOT?>/centermanagers/center_workers_update"><button type="button" class="updatebtn" >Update</button></a>
+                            <a href="<?php echo URLROOT?>/centermanagers/center_workers"><button type="button" class="cancelbtn1" >Cancel</button></a>
+                        </div>
+                        
+
+                    </div>
+                </div>
+
+            <?php endif; ?> 
+
+            <?php if($data['confirm_delete']=='True') : ?>
+                <div class="delete_confirm">
+                        <div class="popup" id="popup">
+                            <img src="<?php echo IMGROOT?>/trash.png" alt="">
+                            <h2>Delete this center worker?</h2>
+                            <p>This action will permanently delete this center worker</p>
+                            <div class="btns">
+                                <a href="<?php echo URLROOT?>/centermanagers/center_workers_delete/<?php echo $data['center_worker_id'] ?>"><button type="button" class="deletebtn" >Delete</button></a>
+                                <a href="<?php echo URLROOT?>/centermanagers/center_workers ?>"><button type="button" class="cancelbtn">Cancel</button></a>
+                            </div>
+                        </div>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
+
 </div>
 
 

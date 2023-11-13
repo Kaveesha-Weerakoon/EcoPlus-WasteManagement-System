@@ -41,28 +41,46 @@
                             </div>
                             
                       </div>
-                      <form  class="main-bottom-down-down" type="post">
-                           
-                                      
+                      <form  class="main-bottom-down-down" action="<?php echo URLROOT;?>/admin/center_add" method="post">                           
                                       <div class="main-bottom-down-down-content">
                                               <p>Region</p>
-                                              <input type="text">
-                                      </div>
-                                      
-
+                                              <div class="main-bottom-down-down-content-field">
+                                                  <input class="<?php echo isset($data['region_err']) && !empty($data['region_err']) ? 'error-class' : ''; ?>" type="text" name="region" value="<?php echo $data['region']?>">
+                                                  <p><?php echo $data['region_err']?></p>
+                                              </div>
+                                      </div>                                     
                                       <div class="main-bottom-down-down-content">
                                               <p>District</p>
-                                              <input type="text">
+                                              <div class="main-bottom-down-down-content-field">
+                                                  <input class="<?php echo isset($data['district_err']) && !empty($data['district_err']) ? 'error-class' : ''; ?>" type="text" name="district" value="<?php echo $data['district']?>">
+                                                  <p><?php echo $data['district_err']?></p>
+                                              </div>
                                       </div>
-
                                       <div class="main-bottom-down-down-content">
                                               <p>Address</p>
-                                              <input type="text">
+                                              <div class="main-bottom-down-down-content-field">
+                                                  <input class="<?php echo isset($data['address_err']) && !empty($data['address_err']) ? 'error-class' : ''; ?>" type="text" name="address" value="<?php echo $data['address']?>">
+                                                  <p><?php echo $data['address_err']?></p>
+                                              </div>
+                                           
                                       </div>
                                       <div class="main-bottom-down-down-content">
-                                              <p>Center Manager</p>
-                                              <input type="text">
-                                      </div>
+                                           <label for="centerManager">Center Manager</label>
+                                           <select name="centerManager" id="centerManager">
+                                           <?php
+                                                     $centerManagers = $data['center_managers'];
+                                                   if (!empty($centerManagers)) {
+                                                       foreach ($centerManagers as $manager) {
+                                                        echo "<option value=\"$manager->id\">CM $manager->id</option>";
+                                                    }
+                                                } else {
+                                                       echo "<option value=\"default\">No Center Managers Available</option>";
+                                                    }
+                                                    ?>
+                                           </select>
+                                           <p><?php echo $data['center_manager_err']?></p>
+                                       </div>
+
                                       <button class="Create_Center_Button" type="submit">
                                           Create Center
                                       </button>

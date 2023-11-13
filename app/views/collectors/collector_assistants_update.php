@@ -79,7 +79,7 @@
             <hr width="100%">
             <h1>UPDATE Collector Assistants</h1>
             
-            <form class="main-right-bottom-content" action="<?php echo URLROOT;?>/collectors/collector_assistants_update/<?php echo $$data['assistant_id'] ?>" method="post">
+            <form class="main-right-bottom-content" action="<?php echo URLROOT;?>/collectors/collector_assistants_update/<?php echo $data['assistant_id'] ?>" method="post">
                 <div class="main-right-bottom-content-content">
                     <h2>Name</h2>
                     <input type="text" name="name" value="<?php echo $data['name'];?>">
@@ -125,7 +125,7 @@
                <div class="complain-success">
                    <div class="complain-success-box">
                      <h1>Collector Assistant Updated Successful</h1>
-                      <a href="<?php echo URLROOT?>/collectors/collector_assistants_update"><button>Okay</button></a>
+                      <a href="<?php echo URLROOT?>/collectors/collector_assistants"><button>Okay</button></a>
                     </div>
                </div>
             <?php endif; ?>

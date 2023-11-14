@@ -25,12 +25,13 @@
         if ($row) {
             $user_id = $row->id; // Assuming 'user_id' is the correct column name
     
-            $this->db->query('INSERT INTO center_managers (user_id, contact_no, address, nic,dob) VALUES (:user_id, :mobile_number, :address, :nic,:dob)');
+            $this->db->query('INSERT INTO center_managers (user_id, contact_no, address, nic,dob,image) VALUES (:user_id, :mobile_number, :address, :nic,:dob,:image)');
             $this->db->bind(':user_id', $user_id);
             $this->db->bind(':mobile_number', $data['contact_no']);
             $this->db->bind(':address', $data['address']);
             $this->db->bind(':nic', $data['nic']);
             $this->db->bind(':dob', $data['dob']);
+            $this->db->bind(':image', $data['profile_image_name']);
             $result = $this->db->execute();
     
             // Return true or false based on the final insert

@@ -29,6 +29,7 @@
       unset($_SESSION['center_manager_email']);
       unset($_SESSION['center_manager_name']);
       unset($_SESSION['center_id']);
+      unset($_SESSION['cm_profile']);
       session_destroy();
       redirect('users/login');
     }

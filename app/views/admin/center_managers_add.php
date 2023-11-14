@@ -36,7 +36,7 @@
                     <hr width="100%">
                     <h1>Add Center Managers</h1>
                     
-                     <form class="main-right-bottom-content" action="<?php echo URLROOT;?>/admin/center_managers_add" method="post">
+                     <form class="main-right-bottom-content" action="<?php echo URLROOT;?>/admin/center_managers_add" method="post" enctype="multipart/form-data">
                         <div class="main-right-bottom-content-top">
                          
                             <div class="main-right-bottom-content-content">
@@ -44,6 +44,27 @@
                                 <input type="text" name="name" value="<?php echo $data['name']; ?>">
                                 <div class="err"><?php echo $data['name_err']?></div>
                             </div>
+                            <div class="form-drag-area">
+                                <div class="icon">
+                                    <img src="<?php echo IMGROOT;?>/img_upload/placeholder.png" alt="PLACEHOLDER" width="90px" heigh="90px" id="profile_image_placeholder">
+                                </div>
+                                <div class="right-content">
+                                    <div class="description">
+                                        Drap & Drop to Upload File
+                                    </div>
+                                    <div class="form-upload">
+                                        <input type="file" name="profile_image" id="profile_image">
+                                        Browse File
+                                    </div>
+                                    <div class="form-validation">
+                                        <div class="profile-image-validation">
+                                            <img src="<?php echo IMGROOT?>/checked.png" alt="green_tik" width="20px" height="20px">
+                                            Select a Profile picture
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <div class="main-right-bottom-content-content">
                                 <h2>NIC</h2>
@@ -89,8 +110,11 @@
                      </form>
                     
                 </div>
-            </div>            
+            </div>    
+            <script src="<?php echo JSROOT?>/Admin_Center_Manager.js"> </script>        
     </div>
+
+
     <?php if($data['registered']=='True') : ?>
     <div class="center_manager_success">
       <div class="popup" id="popup">
@@ -102,5 +126,6 @@
       </div>
     </div>
     <?php endif; ?>
-</div>
+   
+</div> 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

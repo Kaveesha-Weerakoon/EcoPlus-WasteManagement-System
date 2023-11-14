@@ -76,8 +76,8 @@
                     </div>
                 </div>
                 <div class="main-right-bottom">
-                    <div class="main-right-bottom-top " style="background: white;">
-                        <table class="table" style="background: white;">
+                    <div class="main-right-bottom-top "">
+                        <table class="table" >
                             <tr class="table-header" >
                                 <th>Name</th>
                                 <th>NIC</th>

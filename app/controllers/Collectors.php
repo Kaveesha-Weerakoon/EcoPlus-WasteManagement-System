@@ -259,7 +259,7 @@
                'nic_err' => '',
                'dob_err'=>'',
                'contact_no_err'=>'',
-               'address_err' =>'',            
+               'address_err' =>''            
         ];
   
         //validate name

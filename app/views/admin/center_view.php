@@ -42,7 +42,7 @@
                                 <th>Address</th>
                                 <th>Center Manger ID</th>
                                 <th>Center Manager Name</th>
-                                <th>View Details</th>
+                                <th>View Center</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
@@ -59,15 +59,29 @@
                                  <td><?php echo $centers->center_manager_name?></td>
                                  <td><a href="<?php echo URLROOT?>/admin/center_main/<?php echo $centers->id?>"><img src="<?php echo IMGROOT?>/View.png" alt=""></a></td>
                                  <td><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                                 <td class="delete"> <img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
+                                 <td class="delete"> <a href="<?php echo URLROOT?>/admin/center_delete/<?php echo $centers->id?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
                              </tr>   
                             <?php endforeach; ?>  
                                        
                     </div>
                 </div>
             </div>
-        </div>
+
+     </div>
+     <?php if($data['delete_center']=='True') : ?>
+     <div class="center_delete">
+     <div class="popup" id="popup">
+                 <img src="<?php echo IMGROOT?>/trash.png" alt="">
+                 <h2>Delete this Center?</h2>
+                 <p>This action will permanently delete this Center</p>
+                 <div class="btns">
+                     <a href="<?php echo URLROOT?>/admin/center_delete_confirm/<?php echo $data['center_id']?>"><button type="button" class="deletebtn" >Delete</button></a>
+                     <a href="<?php echo URLROOT?>/admin/center"><button type="button" class="cancelbtn" >Cancel</button></a>
+                  </div>
+               </div>
+     </div>
     </div>
+    <?php endif; ?>
 </div>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

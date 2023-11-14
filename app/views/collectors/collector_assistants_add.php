@@ -50,8 +50,7 @@
     <div class="main-right">
         <div class="main-right-top">
             <div class="main-right-top-one">
-                <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                <input type="text" placeholder="Search">
+               
                 <div class="main-right-top-one-content">
                     <p><?php echo $_SESSION['collector_name']?></p>
                     <img src="<?php echo IMGROOT?>/Profile2.png" alt="">

@@ -93,4 +93,16 @@
       $result= $this->db->execute();    
     }
 
+    public function delete_center($center_id){
+      $this->db->query('DELETE FROM center WHERE id = :id ');
+      $this->db->bind(':id', $center_id);
+      $this->db->execute();
+
+      if ($this->db->rowCount() > 0) {
+        return true; 
+      } else {
+        return false; 
+      }
+    }
+
 }

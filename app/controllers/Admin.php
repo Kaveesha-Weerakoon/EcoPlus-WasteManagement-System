@@ -335,6 +335,7 @@
     
     }
 
+
     public function customers(){
       
       $customers = $this->customerModel->get_all();

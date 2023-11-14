@@ -254,12 +254,12 @@
                'dob'=>trim($_POST['dob']),
                'contact_no'=>trim($_POST['contact_no']),
                'address' =>trim($_POST['address']),
-               'completed'=>''
+               'completed'=>'',
                'name_err' => '',
                'nic_err' => '',
                'dob_err'=>'',
                'contact_no_err'=>'',
-               'address_err' =>'',            
+               'address_err' =>''            
         ];
   
         //validate name

@@ -2,7 +2,7 @@
 <div class="Collector_Main">
    <div class="Collector_assistants-main">
       <div class="main">
-            <div class="main-left" style="background: #8CF889">
+            <div class="main-left" >
                 <div class="main-left-top">
                     <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
                     <h1>Eco Plus</h1>
@@ -47,7 +47,7 @@
                    </a>
                 </div>
             </div>
-            <div class="main-right" style="background: white;">
+            <div class="main-right" >
                 <div class="main-right-top">
                     <div class="main-right-top-one">
                       

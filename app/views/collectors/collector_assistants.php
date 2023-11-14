@@ -50,8 +50,7 @@
             <div class="main-right" style="background: white;">
                 <div class="main-right-top">
                     <div class="main-right-top-one">
-                        <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                        <input type="text" placeholder="Search">
+                      
                         <div class="main-right-top-one-content">
                            <p><?php echo $_SESSION['collector_name']?></p>
                            <img src="<?php echo IMGROOT?>/Profile2.png" alt="">
@@ -79,7 +78,7 @@
                 <div class="main-right-bottom">
                     <div class="main-right-bottom-top " style="background: white;">
                         <table class="table" style="background: white;">
-                            <tr class="table-header" style="background-color: #B9FFB7">
+                            <tr class="table-header" >
                                 <th>Name</th>
                                 <th>NIC</th>
                                 <th>Address</th>

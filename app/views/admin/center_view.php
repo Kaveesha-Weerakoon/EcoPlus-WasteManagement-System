@@ -42,7 +42,7 @@
                                 <th>Address</th>
                                 <th>Center Manger ID</th>
                                 <th>Center Manager Name</th>
-                                <th>View Details</th>
+                                <th>View Center</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>

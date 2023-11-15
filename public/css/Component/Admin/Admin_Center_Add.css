@@ -3,15 +3,16 @@
 .Admin_Center_Add {
     .main-bottom-down {
         background-color: white;
-        display: grid;
-        grid-template-rows: 12% 88%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
     }
 
     .main-bottom-down-top {
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #f1f2f6;
     }
 
     .main-bottom-down-top-content {
@@ -23,30 +24,34 @@
         width: 80%;
     }
 
-    .main-bottom-down-top-content img {
+    .main-bottom-down-top img {
         height: 45px;
         width: 45px;
         margin-right: 30px;
     }
 
-    .main-bottom-down-top-content p {
+    .main-bottom-down-top p {
         font-size: 22px;
         font-family: 'Open Sans', sans-serif;
         font-weight: bold;
     }
 
-    .main-bottom-down-down {
+    .main-bottom-down-downn {
+        width: 600px;
+        display: grid;
+        grid-template-rows: 20% 80%;
         border: 1px solid #ddd;
-        margin: 30px auto;
+        height: 90%;
+
+    }
+
+    .main-bottom-down-down {
         border-radius: 8px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: #f9f9f9;
-        width: 40%;
+
     }
 
     .main-bottom-down-down h1 {
@@ -66,7 +71,7 @@
         display: grid;
         grid-template-columns: 34% 66%;
         margin-bottom: 25px;
-        width: 100%;
+        width: 85%;
     }
 
     .main-bottom-down-down-content input {
@@ -113,20 +118,20 @@
 
     .main-bottom-down-down-content label {
         font-size: 18px;
-        margin-bottom: 1px;
+        margin-bottom: 5px;
         color: #555;
         font-weight: 600;
+
     }
 
     .Create_Center_Button {
-        width: 50%;
-        height: 65px;
+        width: 45%;
+        height: 45px;
         background: #1B6652;
         font-size: 20px;
         color: white;
         border: none;
         font-weight: 600;
-        margin-top: 5px;
         border-radius: 5px;
         cursor: pointer;
         transition: background 0.3s ease;
@@ -160,6 +165,11 @@
         font-size: 22px;
         font-weight: 500;
         border-radius: 30px;
+    }
+
+    option {
+        font-size: 16px;
+        font-family: Arial, sans-serif;
     }
 
     .popup {

@@ -193,8 +193,11 @@
     }
 
     .main-right-right-top img {
-        width: 22%;
-
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        margin-top: 10px;
     }
 
     .main-right-right-top button {

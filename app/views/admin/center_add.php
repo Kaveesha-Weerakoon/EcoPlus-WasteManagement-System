@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Admin_Center_Top">
     <div class="Admin_Center_Add">
-    <div class="main">
+        <div class="main">
             <div class="main-top">
                 <a href="<?php echo URLROOT?>/admin">
                     <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
@@ -33,15 +33,14 @@
 
                     </div>
                 </div>
-                <div class="main-bottom-down">
-                      <div class="main-bottom-down-top">
-                            <div class="main-bottom-down-top-content">
+                <div class="main-bottom-down">  
+                         <form  class="main-bottom-down-downn" action="<?php echo URLROOT;?>/admin/center_add" method="post">                           
+                                  
+                             <div class="main-bottom-down-top">
                                 <img src="<?php echo IMGROOT?>/Admin_Center.png" alt="">
-                                <p>Add Centers</p>
-                            </div>
-                            
-                      </div>
-                      <form  class="main-bottom-down-down" action="<?php echo URLROOT;?>/admin/center_add" method="post">                           
+                                <p>Add a Center</p>
+                             </div>
+                            <div class="main-bottom-down-down">
                                       <div class="main-bottom-down-down-content">
                                               <p>Region</p>
                                               <div class="main-bottom-down-down-content-field">
@@ -84,15 +83,24 @@
                                       <button class="Create_Center_Button" type="submit">
                                           Create Center
                                       </button>
-
-                           
-                          
-                      </form>
+                            </div>                           
+                          </form>
                     
-                </div>
-                </div>
-            </div>
+                   
+             </div>
+            </div> 
+            <?php if($data['center_add_success']=='True') : ?> 
+            <div class="center_add_success">
+                <div class="popup" id="popup">
+                   <img src="<?php echo IMGROOT?>/check.png" alt="">
+                   <h2>Success!!</h2>
+                    <p>Center has been created successfully  </p>
+                    <a href="<?php echo URLROOT?>/admin/center"><button type="button" >OK</button></a>
+                 </div>
+             </div>
+             <?php endif; ?>
         </div>
+      
     </div>
 </div>
 

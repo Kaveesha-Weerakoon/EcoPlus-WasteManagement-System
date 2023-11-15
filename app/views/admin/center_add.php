@@ -33,15 +33,14 @@
 
                     </div>
                 </div>
-                <div class="main-bottom-down">
-                      <div class="main-bottom-down-top">
-                            <div class="main-bottom-down-top-content">
+                <div class="main-bottom-down">  
+                         <form  class="main-bottom-down-downn" action="<?php echo URLROOT;?>/admin/center_add" method="post">                           
+                                  
+                             <div class="main-bottom-down-top">
                                 <img src="<?php echo IMGROOT?>/Admin_Center.png" alt="">
-                                <p>Add Centers</p>
-                            </div>
-                            
-                      </div>
-                      <form  class="main-bottom-down-down" action="<?php echo URLROOT;?>/admin/center_add" method="post">                           
+                                <p>Add a Center</p>
+                             </div>
+                            <div class="main-bottom-down-down">
                                       <div class="main-bottom-down-down-content">
                                               <p>Region</p>
                                               <div class="main-bottom-down-down-content-field">
@@ -84,12 +83,10 @@
                                       <button class="Create_Center_Button" type="submit">
                                           Create Center
                                       </button>
-
-                           
-                          
-                      </form>
+                            </div>                           
+                          </form>
                     
-                </div>
+                   
              </div>
             </div> 
             <?php if($data['center_add_success']=='True') : ?> 

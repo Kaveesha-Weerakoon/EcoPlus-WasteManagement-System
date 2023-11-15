@@ -270,7 +270,7 @@
         $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
             $data = [
                'collector_assistants' => $collector_assistants,
-               'assistant_id' => $assisId,
+               'id' => $assisId,
                'name' =>trim($_POST['name']),
                'nic' => trim($_POST['nic']),
                'dob'=>trim($_POST['dob']),
@@ -343,7 +343,7 @@
 
         $data = [
           'collector_assistants' => $collector_assistants,
-          'assistant_id' => $assisId,
+          'id' => $assisId,
           'name' => $ass->name,
           'nic' => $ass->nic,
           'dob'=> $ass->dob,

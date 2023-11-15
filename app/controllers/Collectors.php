@@ -280,7 +280,7 @@
                'update_success'=>'',
                'confirm_delete'=>'',
                'delete_success'=>'',
-
+               'completed'=>'',
                'name_err' => '',
                'nic_err' => '',
                'dob_err'=>'',

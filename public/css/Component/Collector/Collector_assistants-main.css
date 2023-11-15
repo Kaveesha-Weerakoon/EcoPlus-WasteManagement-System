@@ -22,10 +22,6 @@
 
     }
 
-    .A {
-        background-color: #FFCA3A !important;
-    }
-
     .main-right-top-one {
         display: flex;
         flex-direction: row;
@@ -218,13 +214,11 @@
         height: 500px;
         overflow: scroll;
         padding-left: 1%;
-
     }
 
     .main-right-bottom-top {
         padding-left: 1%;
         width: 99%;
-
     }
 
     .logout_anchor {
@@ -287,7 +281,6 @@
         height: 25px;
         cursor: pointer;
     }
-
 
     @media screen and (max-width:862px) {
         .cancel-confirm-content h1 {
@@ -449,129 +442,6 @@
 
     }
 
-
-    .main-right a {
-        text-decoration: none;
-        margin-right: 5%
-    }
-
-    .main-right {
-        display: grid;
-        width: 100%;
-        height: 100%;
-        grid-template-rows: 26% 74%;
-    }
-
-    .main-right-top {
-        display: flex;
-        flex-direction: column;
-
-    }
-
-
-
-    .main-right-top-one {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        height: 50px;
-        margin-top: 20px;
-
-    }
-
-    .main-right-top-one img {
-        margin-left: 30px;
-        margin-right: 14px;
-        width: 22px;
-        height: 22px;
-    }
-
-    .main-right-top-one input {
-        width: 375px;
-        height: 24px;
-        border-radius: 3px;
-        border: 1px solid #7f8c8d;
-        padding-left: 10px;
-    }
-
-    .main-right-top-one-content {
-        width: 300px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding-left: 19%;
-        margin-left: 37%;
-    }
-
-    .main-right-top-one-content p {
-        margin-right: 15px;
-        font-family: inter;
-        font-size: 17px;
-        margin-left: 20px;
-    }
-
-    .main-right-top-one-content img {
-        width: 40px;
-        height: 40px;
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .main-right-top-two {
-        height: 50px;
-        display: flex;
-        align-items: center;
-        padding-left: 33px;
-        margin-top: 20px;
-    }
-
-    .main-right-top-two button {
-        width: 206px;
-        height: 43px;
-        background: #8CF889;
-        font-size: 20px;
-        font-weight: 700;
-        line-height: 24px;
-        letter-spacing: 0em;
-        text-align: center;
-        border-radius: 5px;
-        border: none;
-        margin-right: 5%;
-        cursor: pointer;
-    }
-
-    .main-right-top-two h1 {
-        font-size: 22px;
-    }
-
-    .main-right-top-three {
-        display: flex;
-        flex-direction: row;
-        padding-left: 38px;
-        padding-top: 7px;
-    }
-
-    .main-right-top-three-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-right: 30px;
-        cursor: pointer;
-        width: 100px;
-    }
-
-    .main-right-top-three-content p {
-        font-size: 17px;
-        padding-bottom: 5px;
-    }
-
-    .line {
-        width: 93px;
-        height: 3px;
-        background-color: #106234;
-    }
-
     .delete_confirm {
         position: fixed;
         top: 0;
@@ -586,7 +456,6 @@
         width: 100%;
         height: 100%;
     }
-
 
     .popup {
         width: 400px;
@@ -629,7 +498,7 @@
     }
 
 
-    .update_click{
+    .update_click {
         position: fixed;
         top: 0;
         left: 0;
@@ -643,8 +512,8 @@
 
     }
 
-    .popup-form{
-        width:50%;
+    .popup-form {
+        width: 50%;
         background: white;
         border-radius: 6px;
         top: 0;
@@ -653,39 +522,40 @@
         padding: 0 30px 30px;
         color: #333;
         transition: transform 0.4s, top 0.4s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
     }
 
-    .popup-form h2{
+    .popup-form h2 {
         font-size: 23px;
         font-weight: 600;
         margin: 10px 0 10px;
         margin-top: 25px;
     }
-    
-    .update-popup-img{
+
+    .update-popup-img {
         width: 20px;
         height: 20px;
         position: absolute;
-        top: 10px; 
+        top: 10px;
         right: 10px;
-    
+
     }
-    
-    .btns1{
+
+    .btns1 {
         margin-top: 5px;
         margin-bottom: 25px;
         display: flex;
-        align-items: center;
-        justify-content: center;
         flex-direction: row;
-        
-        
+        justify-content: space-around;
+        padding-left: 80px;
+        padding-right: 55px;
+        height: 30px;
     }
-    
-    .updatebtn{
-        width: 42%; 
-        margin-left: 5px;
-        padding: 10px 0;
+
+    .updatebtn {
+        width: 310px;
+        height: 40px;
         background: rgb(44, 196, 42);
         color: white;
         border: 0;
@@ -694,13 +564,11 @@
         border-radius: 4px;
         cursor: pointer;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-    
     }
 
-    .cancelbtn1{
-        width: 319px;
-        margin-left: 10px;
-        padding: 10px 0;
+    .cancelbtn1 {
+        width: 310px;
+        height: 40px;
         background: #bab3b3;
         color: white;
         border: 0;
@@ -709,7 +577,6 @@
         border-radius: 4px;
         cursor: pointer;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-    
     }
 
     .updateData {
@@ -720,70 +587,68 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-       
     }
-    
-    .A{
+
+    .A {
         margin-top: 17px;
     }
-    
-    .B{
+
+    .B {
         margin-bottom: 17px;
     }
-    
-    .line{
+
+    .line {
         width: 93px;
         height: 3px;
         background-color: #1B6652;
-        
     }
-    
-    .updateData input{
-        width: 80%;   
+
+    .updateData input {
+        width: 80%;
         padding: 6px 12px;
         font-size: 16px;
         font-weight: 400;
-        line-height: 1.5;  
+        line-height: 1.5;
         background-color: #fff;
         border: 1px solid #ced4da;
         border-radius: 4px;
-        
-    
+
+
     }
-    
-    .updateData label{
-    
-         margin-bottom: 7px; 
+
+    .updateData label {
+
+        margin-bottom: 7px;
     }
-    
-    .updatePopupform{
+
+    .updatePop {
         display: flex;
         flex-direction: column;
         width: 100%;
         border-radius: 4px;
-        height: 100%;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
     }
-    
-    @media screen and(max-width: 946px){
-    
+
+    @media screen and(max-width: 946px) {
+
         .updateData {
-            margin-left:10px;
-    
+            margin-left: 10px;
+
         }
 
-        .cancelbtn1{
+        .cancelbtn1 {
             width: 100px;
         }
 
-        .updatebtn{
+        .updatebtn {
             width: 100px;
         }
-    
+
     }
 
     /*Update success*/
-    .collector_ass_update_success{
+    .collector_ass_update_success {
         position: fixed;
         top: 0;
         left: 0;
@@ -962,6 +827,6 @@
             width: 140%;
         }
 
-        }
+    }
 
 }

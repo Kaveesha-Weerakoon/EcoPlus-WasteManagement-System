@@ -66,7 +66,7 @@
                                 <td><?php echo $collector->contact_no?></td>
                                 <td><?php echo $collector->dob?></td>
                                 <td><img src="<?php echo IMGROOT ?>/View.png" alt=""></td>
-                                <td><img src="<?php echo IMGROOT ?>/update.png" alt=""></td>
+                                <td><a href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/update.png" alt=""></a></td>
                                 <td class="delete"><a href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>"> <img src="<?php echo IMGROOT ?>/delete.png" alt=""></a></td>
 
                             </tr>
@@ -76,53 +76,74 @@
                 </div>
             </div>
         </div>
-        <?php if(True) : ?>
+        <?php if($data['click_update']=='True') : ?>
                 <div class="update_click">
                     <div class="popup-form" id="popup">
                     <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png"  class="update-popup-img" alt=""></a>
                         <h2>Update Details</h2>
                         <center><div class="update-topic-line"></div></center>
-                        <form class="updatePopupform" action="">
+                        <form class="updatePopupform" action="<?php echo URLROOT;?>/centermanagers/collectors_update/<?php echo $data['id'];?>" method="post">
                             <div class="updatePopupform-div">
                                 <div class="personal-details">Personal Details</div>
                                 <div class="top-personal-details"> 
                                     <div class="updateData">
                                         <label>Name</label><br>
-                                        <input type="text" placeholder="Enter name"><br>
+                                        <input type="text" name="name" placeholder="Enter name" value="<?php echo $data['name']; ?>"><br>
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['name_err']?>
+                                        </div>
                                     </div>
                                     <div class="updateData">
                                         <label>NIC</label><br>
-                                        <input type="text" placeholder="Enter NIC"><br>
+                                        <input type="text" name="nic" placeholder="Enter NIC" value="<?php echo $data['nic']; ?>"><br>
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['nic_err']?>
+                                        </div>
                                     </div>
                                     <div class="updateData">
                                         <label>Address</label><br>
-                                        <input type="text" placeholder="Enter Address"><br>
+                                        <input type="text" name="address" placeholder="Enter Address" value="<?php echo $data['address']; ?>"><br>
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['address_err']?>
+                                        </div>
                                     </div>
                                     <div class="updateData">
                                         <label>Contact No</label><br>
-                                        <input type="text" placeholder="Enter Contact No"><br>
+                                        <input type="text" name="contact_no" placeholder="Enter Contact No" value="<?php echo $data['contact_no']; ?>"><br>
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['contact_no_err']?>
+                                        </div>
                                     </div>
                                     <div class="updateData">
                                         <label>DOB</label><br>
-                                        <input type="date" placeholder="Enter DOB"><br>
+                                        <input type="date" name="dob" placeholder="Enter DOB" value="<?php echo $data['dob']; ?>"><br>
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['dob_err']?>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="vehicle-details">Vehicle Details</div>
                                 <div class="bottom-vehicle-details">
                                     <div class="updateData">
                                         <label>Vehicle Plate No</label><br>
-                                        <input type="password" placeholder="Enter Vehicle Plate No"><br>
+                                        <input type="text" name="vehicle_no" placeholder="Enter Vehicle Plate No" value="<?php echo $data['vehicle_no']; ?>"><br>
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['vehicle_no_err']?>
+                                        </div>
                                     </div>
                                     <div class="updateData">
                                         <label>Vehicle Type</label><br>
-                                        <input type="password" placeholder="Enter Vehicle Type"><br>
+                                        <input type="text" name="vehicle_type" placeholder="Enter Vehicle Type" value="<?php echo $data['vehicle_type']; ?>"><br>
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['vehicle_type_err']?>
+                                        </div>
                                     </div>
 
                                 </div>
                                 
                                 <div class="btns1">
-                                    <button type="button" class="updatebtn" >Update</button>
-                                    <button type="button" class="cancelbtn1" >Cancel</button>
+                                    <button type="submit" class="updatebtn" >Update</button>
+                                    <button type="button" class="cancelbtn1" ><a href="<?php echo URLROOT?>/centermanagers/collectors">Cancel</a></button>
                                 </div>
 
                             </div>

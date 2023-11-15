@@ -73,6 +73,69 @@
             return $results;
     }
 
+    public function update_collectors($data){ 
+      $this->db->query('UPDATE users SET name = :name WHERE id= :collectorId');
+      $this->db->bind(':collectorId', $data['id']);
+      $this->db->bind(':name', $data['name']);
+      
+      $result1 = $this->db->execute();
+      if($result1){
+        $this->db->query('UPDATE collectors SET nic = :nic, address = :address, contact_no = :contact_no, dob = :dob, vehicle_no= :vehicleNo, vehicle_type= :vehicleType WHERE user_id = :collectorId');
+        $this->db->bind(':collectorId', $data['id']);
+        $this->db->bind(':nic', $data['nic']);
+        $this->db->bind(':address', $data['address']);
+        $this->db->bind(':contactNo', $data['contact_no']);
+        $this->db->bind(':dob', $data['dob']);
+        $this->db->bind(':vehicleNo', $data['vehicle_no']);
+        $this->db->bind(':vehicleType', $data['vehicle_type']);
+
+        $result2 = $this->db->execute();
+        if($result2){
+          return true;
+        }
+        else{
+          return false;
+        }
+
+      }else{
+        return false;
+      }
+   
+
+    }
+
+    public function getCollectorByNIC_except($NIC, $collectorId){ 
+      $this->db->query('SELECT * FROM collectors WHERE nic = :nic AND user_id <> :id');
+      $this->db->bind(':nic', $NIC);
+      $this->db->bind(':id', $collectorId);
+
+      $rows = $this->db->resultSet();
+
+      //check whether there are collectors with the entered NIC
+      if($this->db->rowCount() > 0){
+        return true;
+      } 
+      else {
+        return false;
+      }
+
+
+
+    }
+
+    public function getCollector_ByID_view($collectorId){
+      $this->db->query('SELECT *
+                        FROM collectors
+                        INNER JOIN users
+                        ON collectors.user_id = users.id
+                        WHERE collectors.user_id = :collector_Id'); 
+      $this->db->bind(':collector_Id', $collectorId);
+      
+      $row = $this->db->single();
+      return $row;
+
+    }
+
 
     public function delete_collectors($collectorId){
         $this->db->query('DELETE FROM users WHERE id = :collectorId');

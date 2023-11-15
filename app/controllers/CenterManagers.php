@@ -1,5 +1,6 @@
 <?php
   class CenterManagers extends Controller {
+
     public function __construct(){
       $this->userModel=$this->model('User');
       $this->collectorModel=$this->model('Collector');
@@ -38,7 +39,9 @@
       $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
       $data = [
         'collectors' => $collectors,
-        'confirm_delete' =>''
+        'click_update' =>'',
+        'confirm_delete' =>'',
+        
       ];
      
      
@@ -223,6 +226,140 @@
      
     }
 
+    public function collectors_update($collectorId){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+            $data = [
+                'collectors' => $collectors,
+                'id'=> $collectorId,
+                'name' =>trim($_POST['name']),
+                'nic' => trim($_POST['nic']),
+                'dob'=>trim($_POST['dob']),
+                'contact_no'=>trim($_POST['contact_no']),
+                'address' =>trim($_POST['address']),
+                'vehicle_no'=>trim($_POST['vehicle_no']),
+                'vehicle_type'=>trim($_POST['vehicle_type']),
+                'click_update' =>'True',
+                'update_success'=>'',
+                'confirm_delete'=> '',
+                
+                'name_err' => '',
+                'nic_err' => '',
+                'dob_err'=>'',
+                'contact_no_err'=>'',
+                'address_err' =>'',
+                'vehicle_no_err'=> '',
+                'vehicle_type_err'=> ''
+                
+            ];
+
+        //validate name
+        if(empty($data['name'])){
+          $data['name_err'] = 'Please enter name';
+        }elseif (strlen($data['name']) > 255) {
+          $data['name_err'] = 'Name is too long';
+        }
+
+        //validate NIC
+        if(empty($data['nic'])){
+          $data['nic_err'] = 'Please enter NIC';
+        }elseif(!(is_numeric($data['nic']) && (strlen($data['nic']) == 12)) && !preg_match('/^[0-9]{9}[vV]$/', $data['nic'])){
+          $data['nic_err'] = 'Please enter a valid NIC';
+        }elseif($this->collectorModel->getCollectorByNIC_except($data['nic'] , $collectorId)){
+          $data['nic_err'] = 'Already exists a collector under this NIC';
+        }
+
+        //validate DOB
+        if(empty($data['dob'])){
+          $data['dob_err'] = 'Please enter dob';
+        }
+
+        // Validate Contact no
+        if(empty($data['contact_no'])){
+          $data['contact_no_err'] = 'Please enter contact no';
+        }elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter a valid contact number';
+        }
+
+        // Validate Address
+        if(empty($data['address'])){
+          $data['address_err'] = 'Please enter address';
+        }elseif (strlen($data['address']) > 500) {
+          $data['address_err'] = 'Address is too long ';
+        }
+
+        //Validate Vehicle plate No
+        if(empty($data['vehicle_no'])){
+          $data['vehicle_no_err'] = 'Please enter vehicle plate number';
+        }elseif(!preg_match('/^[A-Z]{2,3}-[0-9]{4}$/', $data['vehicle_no'])){
+          $data['vehicle_no_err'] = 'Please enter a valid vehicle plate number';
+        }elseif($this->collectorModel->getCollectorByVehicleNo($data['vehicle_no'])){
+          $data['vehicle_no_err'] = 'Vehicle have already registered';
+        }
+
+        //validate vehicle type
+        if(empty($data['vehicle_type'])){
+          $data['vehicle_type_err'] = 'Please enter vehicle type';
+        }elseif(strlen($data['address']) > 50){
+          $data['vehicle_type_err'] = 'Vehicle type is too long';
+        }
+
+
+        if(empty($data['address_err']) && empty($data['contact_no_err']) && empty($data['dob_err']) && empty($data['nic_err']) && empty($data['name_err']) && empty($data['vehicle_no_err']) && empty($data['vehicle_type_err'])){
+          if($this->collectorModel->update_collectors($data)){
+            $data['update_success']='True';       
+            $this->view('center_managers/collectors',$data);
+          } else {
+            die('Something went wrong');
+          }
+        }
+        else{
+          $this->view('center_managers/collectors', $data);
+        }
+
+        //$this->view('center_managers/collectors', $data);
+      
+      }
+      else{
+
+        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        $collector = $this->collectorModel->getCollector_ByID_view($collectorId);
+        $data = [
+
+          'collectors' => $collectors,
+          'id'=> $collectorId,
+          'name' => $collector->name,
+          'nic' => $collector->nic,
+          'dob'=> $collector->dob,
+          'contact_no'=> $collector->contact_no,
+          'address' => $collector->address,
+          'vehicle_no'=> $collector->vehicle_no,
+          'vehicle_type'=> $collector->vehicle_type,
+          'click_update' =>'True',
+          'update_success'=>'',
+          'confirm_delete'=> '',
+
+          'name_err' => '',
+          'nic_err' => '',
+          'dob_err'=>'',
+          'contact_no_err'=>'',
+          'address_err' =>'',
+          'vehicle_no_err'=>'',
+          'vehicle_type_err'=>''
+          
+        ];
+        
+        $this->view('center_managers/collectors', $data);
+
+        
+      }
+
+     
+
+    }
+
+
     public function collector_delete_confirm($collectorId){
          $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
         $data = [
@@ -404,6 +541,7 @@
                 'address' =>trim($_POST['address']),
                 'click_update' =>'True',
                 'update_success'=>'',
+                'confirm_delete'=> '',
                 
                 'name_err' => '',
                 'nic_err' => '',
@@ -480,6 +618,7 @@
           'address' => $center_worker->address,
           'click_update' =>'True',
           'update_success'=>'',
+          'confirm_delete'=> '',
 
           'name_err' => '',
           'nic_err' => '',

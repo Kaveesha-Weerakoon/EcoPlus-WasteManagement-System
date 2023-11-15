@@ -183,7 +183,7 @@
                 <div class="popup1" id="popup1">
                     <img src="<?php echo IMGROOT?>/check.png" alt="">
                     <h2>Success!!</h2>
-                    <p>Center Worker details has been updated successfully</p>
+                    <p>Collector Assistant details has been updated successfully</p>
                     <a href="<?php echo URLROOT?>/collectors/collector_assistants"><button type="button" >OK</button></a>
 
                 </div>

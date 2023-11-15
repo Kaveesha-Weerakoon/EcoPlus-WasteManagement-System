@@ -121,6 +121,86 @@
                </div>
        </div>
        <?php endif; ?>
+
+  
+       <?php if($data['confirm_update']=='True') : ?>
+                <div class="update_click">
+                    <div class="popup-form" id="popup">
+                        <a href="<?php echo URLROOT?>/Collectors/collector_assistants/"><img src="<?php echo IMGROOT?>/close_popup.png"  class="update-popup-img" alt=""></a>
+                        <h2>Update Details</h2>
+                        <center><div class="line"></div></center>
+                        <form class="updatePopupform" method="post" action="<?php echo URLROOT;?>/Collectors/collector_assistants_update/<?php echo $data['assistant_id'];?>" >
+                            <div class="updateData A">
+                                <label>Name</label><br>
+                                <input type="text" name="name" placeholder="Enter name" value="<?php echo $data['name']; ?>"><br>
+                                <div class="error-div" style="color:red">
+                                    <?php echo $data['name_err']?>
+                                </div>
+                            </div>
+                            <div class="updateData">
+                                <label>NIC</label><br>
+                                <input type="text" name="nic" placeholder="Enter NIC" value="<?php echo $data['nic']; ?>"><br>
+                                <div class="error-div" style="color:red">
+                                    <?php echo $data['nic_err']?>
+                                </div>
+                            </div>
+                            <div class="updateData">
+                                <label>Address</label><br>
+                                <input type="text" name="address" placeholder="Enter Address" value="<?php echo $data['address']; ?>"><br>
+                                <div class="error-div" style="color:red">
+                                    <?php echo $data['address_err']?>
+                                </div>
+                            </div>
+                            <div class="updateData">
+                                <label>Contact No</label><br>
+                                <input type="text" name="contact_no" placeholder="Enter Contact No" value="<?php echo $data['contact_no']; ?>"><br>
+                                <div class="error-div" style="color:red">
+                                    <?php echo $data['contact_no_err']?>
+                                </div>
+                            </div>
+                            <div class="updateData B">
+                                <label>DOB</label><br>
+                                <input type="date" name="dob" placeholder="Enter DOB" value="<?php echo $data['dob']; ?>"><br>
+                                <div class="error-div" style="color:red">
+                                    <?php echo $data['dob_err']?>
+                                </div>
+                            </div>
+
+                            <div class="btns1">
+                            <button type="submit" class="updatebtn" >Update</button>
+                            <a href="<?php echo URLROOT?>/collectors/collector_assistants"><button type="button" class="cancelbtn1" >Cancel</button></a>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                </div>
+
+            <?php endif; ?> 
+
+            <?php if($data['update_success']=='True') : ?>
+            <div class="collector_ass_update_success">
+                <div class="popup1" id="popup1">
+                    <img src="<?php echo IMGROOT?>/check.png" alt="">
+                    <h2>Success!!</h2>
+                    <p>Center Worker details has been updated successfully</p>
+                    <a href="<?php echo URLROOT?>/collectors/collector_assistants"><button type="button" >OK</button></a>
+
+                </div>
+            </div>
+            <?php endif; ?>
+
+            <?php if($data['delete_success']=='True') : ?>
+            <div class="collector_ass_update_success">
+                <div class="popup1" id="popup1">
+                    <img src="<?php echo IMGROOT?>/check.png" alt="">
+                    <h2>Success!!</h2>
+                    <p>Center Worker has been deleted successfully</p>
+                    <a href="<?php echo URLROOT?>/collectors/collector_assistants"><button type="button" >OK</button></a>
+
+                </div>
+            </div>
+            <?php endif; ?>
     </div>               
 </div>
 

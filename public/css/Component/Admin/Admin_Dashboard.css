@@ -1,6 +1,7 @@
 .Admin_Dashboard {
     a {
-        width: 100%;
+        width: auto;
+        text-decoration: none;
     }
 
     .main-right {
@@ -114,6 +115,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;
+        justify-content: center;
     }
 
     .main-right-left-three-component img {
@@ -128,8 +130,22 @@
         margin-bottom: 12px;
     }
 
+    .center_btn_container {
+        width: 100%;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .center_btn {
+        width: 190px !important;
+        align-self: center;
+        margin: 0 !important;
+    }
+
     button {
-        width: 35%;
+        width: 100%;
         background: linear-gradient(0deg, #8CF889, #8CF889),
             linear-gradient(0deg, #989898, #989898);
         height: 38px;
@@ -142,7 +158,7 @@
     }
 
     .button1 {
-        width: 95%;
+        width: auto;
         background: linear-gradient(0deg, #8CF889, #8CF889),
             linear-gradient(0deg, #989898, #989898);
         height: 38px;
@@ -150,15 +166,16 @@
         border-radius: 10px;
         color: #196637;
         font-size: 20px;
-        margin: 7px;
         cursor: pointer;
+        padding: 0 25px;
     }
 
     .component {
         display: flex;
         width: 100%;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
+        background-color: black !;
     }
 
     .main-right-right {

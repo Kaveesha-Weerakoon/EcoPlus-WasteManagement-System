@@ -86,4 +86,10 @@
           return null; // Return null or false if user is not found
       }
     }
+
+    public function deleteuser($id){
+      $this->db->query('DELETE FROM users WHERE id = :id');
+      $this->db->bind(':id', $id);
+      $result = $this->db->execute();
+    }
   }

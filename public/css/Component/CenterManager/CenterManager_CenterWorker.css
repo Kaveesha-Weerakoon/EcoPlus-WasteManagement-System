@@ -196,12 +196,12 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .main-top img {
-        width: 35px;
-        height: 35px;
+        width: 32px;
+        height: 32px;
         margin-left: 30px;
     }
 
@@ -210,7 +210,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        margin-right: 20px;
+        margin-right: 40px;
     }
 
     .back-button {
@@ -218,14 +218,15 @@
     }
 
     .main-top-component img {
-        width: 50px;
-        height: 50px;
-        margin-left: 10px;
+        width: 40px;
+        height: 40px;
+        margin-left: 15px;
     }
 
     .main-top-component p {
         font-size: 18px;
         font-family: inter;
+        letter-spacing: 0.1px;
     }
 
     .main-bottom {
@@ -238,14 +239,15 @@
 
 
     .main-right-top-two {
-        height: 50px;
+        height: 55px;
         display: flex;
         align-items: center;
         padding-left: 33px;
+
     }
 
     .main-right-top-two h1 {
-        font-size: 28px;
+        font-size: 27px;
     }
 
     .main-right-top-three {
@@ -304,8 +306,8 @@
         }
     }
 
-    /*Delete popup*/
-    .delete_confirm{
+    /*Delete confirm popup*/
+    .delete_confirm {
         position: fixed;
         top: 0;
         left: 0;
@@ -391,7 +393,7 @@
     }
 
     /*Update popup*/
-    .update_click{
+    .update_click {
         position: fixed;
         top: 0;
         left: 0;
@@ -405,8 +407,8 @@
 
     }
 
-    .popup-form{
-        width:50%;
+    .popup-form {
+        width: 50%;
         background: white;
         border-radius: 6px;
         top: 0;
@@ -417,32 +419,36 @@
         transition: transform 0.4s, top 0.4s;
     }
 
-    .popup-form h2{
+    .popup-form h2 {
         font-size: 23px;
         font-weight: 600;
         margin: 10px 0 10px;
         margin-top: 25px;
     }
-    
-    .update-popup-img{
+
+    .update-popup-img {
         width: 20px;
         height: 20px;
         position: absolute;
-        top: 10px; 
+        top: 10px;
         right: 10px;
-    
+
     }
-    
-    .btns1{
+
+    .btns1 {
+        margin-top: 5px;
+        margin-bottom: 25px;
         display: flex;
+        align-items: center;
+        justify-content: center;
         flex-direction: row;
-        
+
+
     }
-    
-    .updatebtn{
-        width: 375px;
-        margin-top: 30px;
-        margin-right: 20px;
+
+    .updatebtn {
+        width: 42%;
+        margin-left: 5px;
         padding: 10px 0;
         background: rgb(44, 196, 42);
         color: white;
@@ -452,12 +458,12 @@
         border-radius: 4px;
         cursor: pointer;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-    
+
     }
 
-    .cancelbtn1{
-        width: 375px;
-        margin-top: 30px;
+    .cancelbtn1 {
+        width: 319px;
+        margin-left: 10px;
         padding: 10px 0;
         background: #bab3b3;
         color: white;
@@ -467,56 +473,54 @@
         border-radius: 4px;
         cursor: pointer;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-    
+
     }
 
     .updateData {
         width: 100%;
         margin-bottom: 15px;
-        margin-left: 70px;
+        margin-left: 65px;
         border-radius: 4px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-       
+
     }
-    
-    .A{
+
+    .A {
         margin-top: 17px;
     }
-    
-    .B{
+
+    .B {
         margin-bottom: 17px;
     }
-    
-    .line{
+
+    .line {
+        width: 93px;
+        height: 3px;
         background-color: #1B6652;
-        width: 50px;
-        height: 5px;
-        margin-top: 10px;
-        margin-bottom: 15px;
-        
+
     }
-    
-    .updateData input{
-        width: 80%;   
+
+    .updateData input {
+        width: 80%;
         padding: 6px 12px;
         font-size: 16px;
         font-weight: 400;
-        line-height: 1.5;  
+        line-height: 1.5;
         background-color: #fff;
         border: 1px solid #ced4da;
         border-radius: 4px;
-        
-    
+
+
     }
-    
-    .updateData label{
-    
-         margin-bottom: 7px; 
+
+    .updateData label {
+
+        margin-bottom: 7px;
     }
-    
-    .updatePopupform{
+
+    .updatePopupform {
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -524,22 +528,84 @@
         height: 100%;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-    
-    @media screen and(max-width: 946px){
-    
+
+    @media screen and(max-width: 946px) {
+
         .updateData {
-            margin-left:10px;
-    
+            margin-left: 10px;
+
         }
 
-        .cancelbtn1{
+        .cancelbtn1 {
             width: 100px;
         }
 
-        .updatebtn{
+        .updatebtn {
             width: 100px;
         }
-    
+
     }
+
+    /*Update success*/
+    .center_worker_update_success {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+
+
+    }
+
+    .popup1 {
+        width: 400px;
+        background: white;
+        font-family: 'poppins', sans-serif;
+        border-radius: 6px;
+        text-align: center;
+        padding: 0 30px 30px;
+        color: #333;
+        transition: transform 0.4s, top 0.4s;
+    }
+
+    .open-popup1 {
+        visibility: visible;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup1 img {
+        width: 100px;
+        margin-top: 35px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .popup1 h2 {
+        font-size: 38px;
+        font-weight: 500;
+        margin: 10px 0 10px;
+    }
+
+    .popup1 button {
+        width: 100%;
+        margin-top: 30px;
+        padding: 10px 0;
+        background: #6fd649;
+        color: white;
+        border: 0;
+        outline: none;
+        font-size: 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+
+    }
+
 
 }

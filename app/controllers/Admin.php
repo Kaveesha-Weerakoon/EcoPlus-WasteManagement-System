@@ -347,6 +347,7 @@
     
     }
 
+
     public function customers(){
       
       $customers = $this->customerModel->get_all();
@@ -361,7 +362,8 @@
 
       $centers = $this->center_model->getallCenters();
       $data = [
-        'centers' =>$centers
+        'centers' =>$centers,
+        'delete_center'=>''
       ];
        $this->view('admin/center_view', $data);
     }
@@ -382,7 +384,8 @@
             'region_err' =>'',
             'center_manager_err'=>'',
             'center_manager_data'=>'',
-            'center_manager_name'=>''
+            'center_manager_name'=>'',
+            'center_add_success'=>''
         ];
 
         if(empty($data['address'])){
@@ -412,7 +415,8 @@
             $data['center_manager_name']=$this->userModel->findUserById($data['center_manager']);
 
             if($this->center_model->addcenter($data)){
-              redirect('users/login');
+              $data['center_add_success']='True';
+              $this->view('admin/center_add', $data);
             } else {
               die('Something went wrong');
             }
@@ -432,11 +436,43 @@
           'address_err' => '',
           'district_err' =>'',
           'region_err' =>'',
-          'center_manager_err'=>''
+          'center_manager_err'=>'',
+          'center_add_success'=>''
         ];
          $this->view('admin/center_add', $data);
       }
       
+    }
+
+    public function center_delete($center_id){
+      $centers = $this->center_model->getallCenters();
+      $data = [
+        'centers' =>$centers,
+        'delete_center'=>'True',
+        'center_id'=>$center_id,
+        
+      ];
+       $this->view('admin/center_view', $data);
+    }
+
+    public function center_delete_confirm($center_id){
+      $center = $this->center_model->getCenterById($center_id);
+      $centers = $this->center_model->getallCenters();
+
+      $collectors = $this->collector_model->get_collectors_bycenterid($center_id);
+    
+      foreach ($collectors as $collector) {
+            $this->userModel->deleteuser($collector->user_id);
+      }
+
+      $this->center_managerModel->Remove_Assign($center->center_manager_id);
+      $this->center_model->delete_center($center_id);
+
+      $data = [ 
+        'centers' =>$centers,
+        'delete_center'=>''
+      ];
+       $this->center();
     }
 
     public function collectors(){

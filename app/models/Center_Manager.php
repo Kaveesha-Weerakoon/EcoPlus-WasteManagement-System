@@ -121,6 +121,16 @@
          $this->re->execute();
       }
   }
+
+    public function Remove_Assign($center_manager_id){
+      $updateManagerQuery = 'UPDATE center_managers SET assinged = "No", assigned_center_id = :assigned_center_id WHERE user_id = :centerManagerId';
+      $val = 0;
+      $this->db->query($updateManagerQuery);
+      $this->db->bind(':centerManagerId',$center_manager_id);
+      $this->db->bind(':assigned_center_id', $val);
+      
+      $result=$this->db->execute();
+    }
   
   
 }

@@ -39,7 +39,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        margin-right: 20px;
+        margin-right: 40px;
     }
 
     .back-button {
@@ -69,6 +69,7 @@
         align-items: center;
         padding-left: 33px;
         padding-top: 5px;
+
     }
 
     .main-right-top-two h1 {
@@ -89,7 +90,6 @@
         justify-content: center;
         margin-right: 30px;
         cursor: pointer;
-
     }
 
     .main-right-top-three-content p {

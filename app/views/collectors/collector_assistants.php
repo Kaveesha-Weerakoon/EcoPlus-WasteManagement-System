@@ -68,7 +68,7 @@
                        </a>
                         <a href="<?php echo URLROOT?>/collectors/collector_assistants_add">
                             <div class="main-right-top-three-content">
-                                <p>Add</p>
+                                <p>Register</p>
                                 <div class="line1"></div>
                             </div>
                         </a>

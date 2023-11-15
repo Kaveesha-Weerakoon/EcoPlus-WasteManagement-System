@@ -119,15 +119,6 @@
 
       }
 
-      // public function getCollectorByEmail($email){
-      //   $this->db->query('SELECT * FROM collectors WHERE email = :email');
-      //   $this->db->bind(':email', $email);
-
-      //   $row = $this->db->single();
-
-      //   return $row;
-
-      // }
-    
+   
 
 }

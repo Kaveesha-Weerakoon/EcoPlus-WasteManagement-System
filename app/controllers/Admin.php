@@ -446,8 +446,16 @@
     public function center_delete_confirm($center_id){
       $center = $this->center_model->getCenterById($center_id);
       $centers = $this->center_model->getallCenters();
+
+      $collectors = $this->collector_model->get_collectors_bycenterid($center_id);
+    
+      foreach ($collectors as $collector) {
+            $this->userModel->deleteuser($collector->user_id);
+      }
+
       $this->center_managerModel->Remove_Assign($center->center_manager_id);
       $this->center_model->delete_center($center_id);
+
       $data = [ 
         'centers' =>$centers,
         'delete_center'=>''

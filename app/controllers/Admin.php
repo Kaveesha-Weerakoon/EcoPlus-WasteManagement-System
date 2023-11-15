@@ -198,7 +198,9 @@
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $data =[
           'name' => trim($_POST['name']),
-          'contact_no' => trim($_POST['contact_no']),
+          'profile' => $_FILES['profile_image'],
+           'contact_no' => trim($_POST['contact_no']),
+          'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
           'nic' => trim($_POST['nic']),
           'address' => trim($_POST['address']),
           'dob' => trim($_POST['dob']),
@@ -213,9 +215,17 @@
           'email_err' => '' ,
           'password_err' => '' ,
           'complain_err' => '' ,
+          'profile_err'=>'',
           'confirm_password_err'=>'' ,
           'registered'=>''   
         ];
+
+        if(uploadImage($data['profile']['tmp_name'],$data['profile_image_name'],'/img/img_upload/center_manager/')){
+          
+        }
+        else{
+          $data['profile_err']='Profile Upload error';
+        }
 
         /*if($data['completed']=='True'){
           $data['completed']=='';
@@ -291,7 +301,7 @@
           }
         }
 
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err'])){
+        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err']) && empty($data['profile_err'])){
           // Validated
           $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
           
@@ -312,6 +322,7 @@
         
         $data = [
           'name' =>'',
+          'profile'=>'',
           'contact_no' => '',
           'nic' => '',
           'address' => '',
@@ -325,6 +336,7 @@
           'address_err' => '' ,
           'dob_err' => '' ,
           'email_err' => '' ,
+          'profile_err'=>'',
           'password_err' => '' ,
           'complain_err' => '' ,
           'confirm_password_err'=>'',

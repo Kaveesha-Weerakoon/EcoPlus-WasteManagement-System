@@ -223,6 +223,7 @@
                 }
                 else{
                   $_SESSION['center_id'] = $center_manager->assigned_center_id;
+                  $_SESSION['cm_profile'] = $center_manager->image;
                   $this->createCenterManagerSession($loggedInUser);
                 }
                 

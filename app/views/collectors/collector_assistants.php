@@ -129,6 +129,7 @@
                         <h2>Update Details</h2>
                         <center><div class="line"></div></center>
                         <form class="updatePop" method="post" action="<?php echo URLROOT;?>/Collectors/collector_assistants_update/<?php echo $data['id'];?>" >
+                        <div class= form>
                             <div class="updateData A">
                                 <label>Name</label><br>
                                 <input type="text" name="name" placeholder="Enter name" value="<?php echo $data['name']; ?>"><br>
@@ -169,6 +170,8 @@
                                <a href=""><button type="submit" class="updatebtn" >Update</button></a>
                                <a href="<?php echo URLROOT?>/collectors/collector_assistants"><button type="button" class="cancelbtn1" >Cancel</button></a>
                             </div>
+
+                        <div>
                             
                         </form>
                         

@@ -72,12 +72,13 @@
                         </div>
 
                         <div class="main-right-left-two-component B" id="center_manager">
-                            <a href="<?php echo URLROOT?>/admin/center_managers">
-                               <h3>Center Managers</h3>
-                               <img src="<?php echo IMGROOT?>/center_manager.png" alt="">
-                            </a>
+                               <a href="<?php echo URLROOT?>/admin/center_managers">
+
+                                   <h3>Center Managers</h3>
+                                   <img src="<?php echo IMGROOT?>/center_manager.png" alt="">
+                               </a>
                         </div>
-                      
+                        
 
                         <div class="main-right-left-two-component C">
                             <h3>Credit Discounts Agent</h3>
@@ -96,10 +97,10 @@
                     <div class="main-right-left-three">             
                         <div class="main-right-left-three-component">
                             <img src="<?php echo IMGROOT?>/Centers.png" alt="">
-                            <h6>View Centers</h6>
-                           
-                            <button id="center"> <a href="<?php echo URLROOT?>/admin/center">Centers </a></button>
-                           
+                            <h6>Centers</h6>
+                            <div class="center_btn_container">
+                                <a href="<?php echo URLROOT?>/admin/center"><button id="center" class="center_btn">View</button></a>
+                            </div>           
                         </div>
                         
                         <div class="main-right-left-three-component">

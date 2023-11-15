@@ -39,6 +39,23 @@
 
       }
 
+      public function getCollectorAssisByNIC_except($NIC, $assisId){
+        $this->db->query('SELECT * FROM collector_assistants WHERE nic = :nic AND id <> :id');
+        $this->db->bind(':nic', $NIC);
+        $this->db->bind(':id', $assisId);
+  
+        $rows = $this->db->resultSet();
+  
+        //check whether there are center workers with the entered NIC
+        if($this->db->rowCount() > 0){
+          return true;
+        } 
+        else {
+          return false;
+        }
+      }
+  
+
       public function getCollectorAssisById($assisId){
         $this->db->query('SELECT * FROM collector_assistants WHERE id = :assisId');
         $this->db->bind(':assisId', $assisId);

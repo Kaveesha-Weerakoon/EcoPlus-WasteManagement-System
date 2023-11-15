@@ -39,7 +39,12 @@
       $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
       $data = [
         'collector_assistants' => $collector_assistants,
-        'confirm_delete' =>''
+        'assistant_id'=>'',
+        'confirm_delete' =>'',
+        'delete_success'=>'',
+        'confirm_update' => '',
+        'update_success'=>''
+        
       ];
      
       $this->view('collectors/collector_assistants', $data);
@@ -61,7 +66,7 @@
                'nic_err' => '',
                'dob_err'=>'',
                'contact_no_err'=>'',
-               'address_err' =>'',
+               'address_err' =>''
       
                
         ];
@@ -71,6 +76,7 @@
           $data['name_err'] = 'Please enter name';
         } elseif (strlen($data['name']) > 255) {
           $data['name_err'] = 'Name is too long';
+
         }
 
         //validate NIC
@@ -141,20 +147,33 @@
       $data = [
         'collector_assistants' => $collector_assistants,
         'confirm_delete' =>'True',
-        'collector_assistant_id'=>$assisId
+        'collector_assistant_id'=>$assisId,
+        'delete_success'=>'',
+        'confirm_update' =>'',
+        'update_success'=> ''
       ];
      
       $this->view('collectors/collector_assistants', $data);
     } 
 
     public function collector_assistants_delete($assisId){
+      $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
+      $data = [
+        'collector_assistants' => $collector_assistants,
+        'delete_success'=>'',
+        'confirm_delete' =>'',
+        'confirm_update' =>'',
+        'update_success'=> ''
+
+      ];
       $collector_assistant = $this->collector_assistantModel->getCollectorAssisById($assisId);
       if(empty($collector_assistant)){
         die('Center worker not found');
       }
       else{
         if($this->collector_assistantModel->delete_collector_assistants($assisId)){
-          redirect('collectors/collector_assistants');
+          $data['delete_success']='True';
+          $this->view('collectors/collector_assistants',$data);
         }
         else{
           die('Something went wrong');
@@ -163,7 +182,7 @@
       }
     }
 
- public function complains(){
+   public function complains(){
     
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -242,19 +261,26 @@
       }
      
     }
+
     
-    public function collector_assistants_update($assisId){
+  public function collector_assistants_update($assisId){
   
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
             $data = [
+               'collector_assistants' => $collector_assistants,
                'assistant_id' => $assisId,
                'name' =>trim($_POST['name']),
                'nic' => trim($_POST['nic']),
                'dob'=>trim($_POST['dob']),
                'contact_no'=>trim($_POST['contact_no']),
                'address' =>trim($_POST['address']),
-               'completed'=>'',
+               'confirm_update' =>'True',
+               'update_success'=>'',
+               'confirm_delete'=>'',
+               'delete_success'=>'',
+
                'name_err' => '',
                'nic_err' => '',
                'dob_err'=>'',
@@ -274,8 +300,8 @@
           $data['nic_err'] = 'Please enter NIC';
         }elseif(!(is_numeric($data['nic']) && (strlen($data['nic']) == 12)) && !preg_match('/^[0-9]{9}[vV]$/', $data['nic'])){
           $data['nic_err'] = 'Please enter a valid NIC';
-        }elseif($this->collector_assistantModel->getCollectorAssisByNIC($data['nic'])){
-          $data['nic_err'] = 'NIC already exists';
+        }elseif($this->collector_assistantModel->getCollectorAssisByNIC_except($data['nic'] , $assisId)){
+          $data['nic_err'] = 'Already exists a center worker under this NIC';
         }
   
         //validate DOB
@@ -299,26 +325,34 @@
   
         if(empty($data['address_err']) && empty($data['contact_no_err']) && empty($data['dob_err']) && empty($data['nic_err']) && empty($data['name_err']) ){
           if($this->collector_assistantModel->update_collector_assistants($data)){
-            $data['completed']='True';        
-            $this->view('collectors/collector_assistants_update',$data);
+            $data['update_success']='True';        
+            $this->view('collectors/collector_assistants',$data);
           } else {
             die('Something went wrong');
           }
+        }
+        else{
+          $this->view('collectors/collector_assistants',$data);
         }
       }
 
  
       else{
         $ass = $this -> collector_assistantModel -> getCollectorAssisById($assisId);
+        $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
 
         $data = [
+          'collector_assistants' => $collector_assistants,
           'assistant_id' => $assisId,
           'name' => $ass->name,
           'nic' => $ass->nic,
           'dob'=> $ass->dob,
           'contact_no'=> $ass->contact_no,
           'address' => $ass->address,
-          'completed'=> '',
+          'confirm_update' =>'True',
+          'update_success'=> '',
+          'confirm_delete'=>'',
+          'delete_success'=>'',
 
           'name_err' => '',
           'nic_err' =>'',
@@ -327,7 +361,7 @@
           'address_err' => ''
         ];
         
-        $this->view('collectors/collector_assistants_update', $data);
+        $this->view('collectors/collector_assistants', $data);
       }
   
       

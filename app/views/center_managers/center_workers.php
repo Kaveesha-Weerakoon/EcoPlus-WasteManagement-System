@@ -25,7 +25,7 @@
                     </a>
                     <a href="<?php echo URLROOT?>/centermanagers/center_workers_add">
                         <div class="main-right-top-three-content">
-                            <p>Add</p>
+                            <p>Register</p>
                             <div class="line1"></div>
                         </div>
                     </a>
@@ -67,7 +67,7 @@
                     <div class="popup-form" id="popup">
                         <a href="<?php echo URLROOT?>/centermanagers/center_workers"><img src="<?php echo IMGROOT?>/close_popup.png"  class="update-popup-img" alt=""></a>
                         <h2>Update Details</h2>
-                        <center><div class="line"></div></center>
+                        <center><div class="update-topic-line"></div></center>
                         <form class="updatePopupform" method="post" action="<?php echo URLROOT;?>/centermanagers/center_workers_update/<?php echo $data['id'];?>" >
                             <div class="updateData A">
                                 <label>Name</label><br>

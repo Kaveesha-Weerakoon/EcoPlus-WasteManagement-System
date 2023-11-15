@@ -76,6 +76,65 @@
                 </div>
             </div>
         </div>
+        <?php if(True) : ?>
+                <div class="update_click">
+                    <div class="popup-form" id="popup">
+                    <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png"  class="update-popup-img" alt=""></a>
+                        <h2>Update Details</h2>
+                        <center><div class="update-topic-line"></div></center>
+                        <form class="updatePopupform" action="">
+                            <div class="updatePopupform-div">
+                                <div class="personal-details">Personal Details</div>
+                                <div class="top-personal-details"> 
+                                    <div class="updateData">
+                                        <label>Name</label><br>
+                                        <input type="text" placeholder="Enter name"><br>
+                                    </div>
+                                    <div class="updateData">
+                                        <label>NIC</label><br>
+                                        <input type="text" placeholder="Enter NIC"><br>
+                                    </div>
+                                    <div class="updateData">
+                                        <label>Address</label><br>
+                                        <input type="text" placeholder="Enter Address"><br>
+                                    </div>
+                                    <div class="updateData">
+                                        <label>Contact No</label><br>
+                                        <input type="text" placeholder="Enter Contact No"><br>
+                                    </div>
+                                    <div class="updateData">
+                                        <label>DOB</label><br>
+                                        <input type="date" placeholder="Enter DOB"><br>
+                                    </div>
+                                </div>
+                                <div class="vehicle-details">Vehicle Details</div>
+                                <div class="bottom-vehicle-details">
+                                    <div class="updateData">
+                                        <label>Vehicle Plate No</label><br>
+                                        <input type="password" placeholder="Enter Vehicle Plate No"><br>
+                                    </div>
+                                    <div class="updateData">
+                                        <label>Vehicle Type</label><br>
+                                        <input type="password" placeholder="Enter Vehicle Type"><br>
+                                    </div>
+
+                                </div>
+                                
+                                <div class="btns1">
+                                    <button type="button" class="updatebtn" >Update</button>
+                                    <button type="button" class="cancelbtn1" >Cancel</button>
+                                </div>
+
+                            </div>
+                            
+                            
+                        </form>
+                    </div>
+                </div>
+
+            <?php endif; ?> 
+    
+        
     <?php if($data['confirm_delete']== 'True') : ?>
         <div class="delete_confirm">
                 <div class="popup" id="popup">
@@ -89,7 +148,6 @@
                 </div>
         </div>
     <?php endif; ?>
-
 </div>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

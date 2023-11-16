@@ -68,7 +68,7 @@
                        </a>
                         <a href="<?php echo URLROOT?>/collectors/collector_assistants_add">
                             <div class="main-right-top-three-content">
-                                <p>Add</p>
+                                <p>Register</p>
                                 <div class="line1"></div>
                             </div>
                         </a>
@@ -128,7 +128,8 @@
                         <a href="<?php echo URLROOT?>/Collectors/collector_assistants/"><img src="<?php echo IMGROOT?>/close_popup.png"  class="update-popup-img" alt=""></a>
                         <h2>Update Details</h2>
                         <center><div class="line"></div></center>
-                        <form class="updatePopupform" method="post" action="<?php echo URLROOT;?>/Collectors/collector_assistants_update/<?php echo $data['assistant_id'];?>" >
+                        <form class="updatePop" method="post" action="<?php echo URLROOT;?>/Collectors/collector_assistants_update/<?php echo $data['id'];?>" >
+                        <div class= form>
                             <div class="updateData A">
                                 <label>Name</label><br>
                                 <input type="text" name="name" placeholder="Enter name" value="<?php echo $data['name']; ?>"><br>
@@ -166,9 +167,11 @@
                             </div>
 
                             <div class="btns1">
-                            <button type="submit" class="updatebtn" >Update</button>
-                            <a href="<?php echo URLROOT?>/collectors/collector_assistants"><button type="button" class="cancelbtn1" >Cancel</button></a>
+                               <a href=""><button type="submit" class="updatebtn" >Update</button></a>
+                               <a href="<?php echo URLROOT?>/collectors/collector_assistants"><button type="button" class="cancelbtn1" >Cancel</button></a>
                             </div>
+
+                        <div>
                             
                         </form>
                         

@@ -40,8 +40,10 @@
       $data = [
         'collectors' => $collectors,
         'click_update' =>'',
+        'update_success'=>'',
         'confirm_delete' =>'',
-        
+        'delete_success' =>''
+   
       ];
      
      
@@ -243,6 +245,7 @@
                 'click_update' =>'True',
                 'update_success'=>'',
                 'confirm_delete'=> '',
+                'delete_success'=> '',
                 
                 'name_err' => '',
                 'nic_err' => '',
@@ -294,8 +297,8 @@
           $data['vehicle_no_err'] = 'Please enter vehicle plate number';
         }elseif(!preg_match('/^[A-Z]{2,3}-[0-9]{4}$/', $data['vehicle_no'])){
           $data['vehicle_no_err'] = 'Please enter a valid vehicle plate number';
-        }elseif($this->collectorModel->getCollectorByVehicleNo($data['vehicle_no'])){
-          $data['vehicle_no_err'] = 'Vehicle have already registered';
+        }elseif($this->collectorModel->getVehicleNo_except($data['vehicle_no'] , $collectorId)){
+          $data['vehicle_no_err'] = 'Already exists a vehicle under this vehicle No';
         }
 
         //validate vehicle type
@@ -339,6 +342,7 @@
           'click_update' =>'True',
           'update_success'=>'',
           'confirm_delete'=> '',
+          'delete_success'=> '',
 
           'name_err' => '',
           'nic_err' => '',
@@ -365,6 +369,9 @@
         $data = [
           'collectors' => $collectors,
           'confirm_delete' => 'True',
+          'delete_success' =>'',
+          'click_update' =>'',
+          'update_success'=>'',
           'collector_id' => $collectorId
 
         ];
@@ -375,13 +382,24 @@
     }
 
     public function collector_delete($collectorId){
+
+      $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+      $data = [
+        'collectors' => $collectors,
+        'click_update' =>'',
+        'update_success'=>'',
+        'confirm_delete'=> ''
+
+      ];
+
       $collector = $this->collectorModel->getCollectorById($collectorId);
       if(empty($collector)){
         die('Collector not found');
       }
       else{
         if($this->collectorModel->delete_collectors($collectorId)){
-          redirect('centermanagers/collectors');
+          $data['delete_success'] = 'True';
+          $this->view('center_managers/collectors', $data);
         }
         else{
           die('Something went wrong');
@@ -399,6 +417,7 @@
         'center_workers' => $center_workers,
         'center_worker_id'=>'',
         'click_update' =>'',
+        'update_success'=>'',
         'confirm_delete' => '',
         'delete_success' =>''
 
@@ -643,6 +662,8 @@
         'center_workers' => $center_workers,
         'confirm_delete' =>'True',
         'delete_success' =>'',
+        'click_update' =>'',
+        'update_success'=>'',
         'center_worker_id'=>$workerId
 
       ];

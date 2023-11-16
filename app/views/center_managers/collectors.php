@@ -169,6 +169,29 @@
                 </div>
         </div>
     <?php endif; ?>
+
+    <?php if($data['update_success']=='True') : ?>
+        <div class="success_popup_box">
+            <div class="popup1" id="popup1">
+                <img src="<?php echo IMGROOT?>/check.png" alt="">
+                <h2>Success!!</h2>
+                <p>Collector details has updated successfully</p>
+                <a href="<?php echo URLROOT?>/centermanagers/collectors"><button type="button" >OK</button></a>
+
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if($data['delete_success']=='True') : ?>
+        <div class="success_popup_box">
+            <div class="popup1" id="popup1">
+                <img src="<?php echo IMGROOT?>/check.png" alt="">
+                <h2>Success!!</h2>
+                <p>Collector has deleted successfully</p>
+                <a href="<?php echo URLROOT?>/centermanagers/collectors"><button type="button" >OK</button></a>
+            </div>
+        </div>
+    <?php endif; ?>
 </div>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

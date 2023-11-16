@@ -136,7 +136,7 @@
                 <div class="popup1" id="popup1">
                     <img src="<?php echo IMGROOT?>/check.png" alt="">
                     <h2>Success!!</h2>
-                    <p>Center Worker details has been updated successfully</p>
+                    <p>Center Worker details has updated successfully</p>
                     <a href="<?php echo URLROOT?>/centermanagers/center_workers"><button type="button" >OK</button></a>
 
                 </div>
@@ -148,7 +148,7 @@
                 <div class="popup1" id="popup1">
                     <img src="<?php echo IMGROOT?>/check.png" alt="">
                     <h2>Success!!</h2>
-                    <p>Center Worker has been deleted successfully</p>
+                    <p>Center Worker has deleted successfully</p>
                     <a href="<?php echo URLROOT?>/centermanagers/center_workers"><button type="button" >OK</button></a>
 
                 </div>

@@ -215,24 +215,23 @@
           'email_err' => '' ,
           'password_err' => '' ,
           'complain_err' => '' ,
-          'profile_err'=>'',
+          'profile_err'=>'Input a profile picture',
           'confirm_password_err'=>'' ,
           'registered'=>''   
         ];
 
-        if(uploadImage($data['profile']['tmp_name'],$data['profile_image_name'],'/img/img_upload/center_manager/')){
-          
-        }
-        else{
-          $data['profile_err']='Profile Upload error';
-        }
-
-        /*if($data['completed']=='True'){
-          $data['completed']=='';
-          $this->view('customers/complains', $data);
-        }*/
-
-        //validate email
+        if ($_FILES['profile_image']['error'] == 4) {
+          $data['profile_err'] = 'Input a profile image';
+      }
+      else{
+        if (uploadImage($data['profile']['tmp_name'], $data['profile_image_name'], '/img/img_upload/center_manager/')) {
+          $data['profile_err'] = 'Profile Uploaded Success';
+     } else {
+         $data['profile_err'] = 'Input a valid type';
+     }
+      }
+     
+       //validate email
         if(empty($data['email'])){
           $data['email_err'] = 'Please enter an email';
         } else {
@@ -346,7 +345,6 @@
       }
     
     }
-
 
     public function customers(){
       

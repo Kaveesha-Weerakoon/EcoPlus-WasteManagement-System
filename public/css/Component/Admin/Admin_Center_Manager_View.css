@@ -2,25 +2,26 @@
 
 
     .main-right-bottom-down {
-        width: 99%;
-        height: 100%;
-        overflow: scroll;
-        padding-left: 1%;
-
+        width: 98%;
+        overflow: scroll !important;
+        padding-left: 2%;
+        padding-right: 2%;
+        margin-bottom: 40px;
     }
 
     .main-right-bottom-top {
-        width: 99%;
-        padding-left: 1%;
-
+        width: 98%;
+        padding-left: 2%;
+        padding-right: 2%;
     }
 
     .table {
-        padding-left: 1%;
+        padding-left: 2%;
         width: 99%;
         border-collapse: collapse;
         text-align: center;
-        padding-left: 1%;
+        padding-right: 2%;
+        height: 100%;
     }
 
     .table-header {
@@ -30,7 +31,7 @@
         text-align: center;
         height: 55px;
         display: grid;
-        grid-template-columns: 15% 12% 12% 12% 17% 12% 10% 10%;
+        grid-template-columns: 12% 9% 12% 14% 10% 15% 12% 8% 8%;
     }
 
     .table-header th {
@@ -44,17 +45,15 @@
         font-size: 1px;
         font-family: Montserrat;
         text-align: center;
-        height: 52px;
+        height: 100px;
         display: grid;
-        grid-template-columns: 15% 12% 12% 12% 17% 12% 10% 10%;
+        grid-template-columns: 12% 9% 12% 14% 10% 15% 12% 8% 8%;
         border-bottom: 2px solid #CACACA;
-
-
     }
 
     .table td {
-        height: 50px;
-        font-size: 16px;
+        height: 100px;
+        font-size: 17px;
         vertical-align: middle;
         text-align: center;
         display: flex;
@@ -67,10 +66,18 @@
         margin: 6px;
     }
 
-    .table-row img {
+    .cancel-open img {
         width: 25px;
         height: 25px;
         cursor: pointer;
+    }
+
+    .cm-profile-img img {
+        width: 67px;
+        height: 67px;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        /* Adjust values as needed */
     }
 
     @media screen and (max-width: 1118px) {

@@ -87,7 +87,7 @@
                 </div>
                 <div class="main-right-right">
                     <div class="main-right-right-top">
-                        <img src="<?php echo IMGROOT?>/CustomerDashboard_image.png" alt="">
+                        <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>" alt="">
                         <h2><?php echo $_SESSION['center_manager_name']?></h2>
                         <p>Center Manager ID: CM <?php echo $_SESSION['center_manager_id']?></p>
                         <button>Profile</button>

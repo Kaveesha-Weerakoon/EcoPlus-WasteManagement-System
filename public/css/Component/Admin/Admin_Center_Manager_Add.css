@@ -2,17 +2,16 @@
     .main-bottom-down {
         display: flex;
         align-items: center;
-        flex-direction: column;
-
+        justify-content: center;
     }
 
+
+
     .main-right-bottom-content {
-        width: 50%;
-        height: 90%;
-        display: grid;
-        grid-template-rows: 90% 10%;
-        overflow: scroll;
-        height: 1000px !important;
+        width: 60%;
+        height: 450px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
     }
 
     .main-right-bottom-content-top {

@@ -33,11 +33,11 @@
                     </div>
                 </div>
                 <div class="main-bottom-down">
-                    <hr width="100%">
+                    <!-- <hr width="100%">
                     <h1>Add Center Managers</h1>
                     
                      <form class="main-right-bottom-content" action="<?php echo URLROOT;?>/admin/center_managers_add" method="post" enctype="multipart/form-data">
-                        <!-- <div class="main-right-bottom-content-top">
+                        <div class="main-right-bottom-content-top">
                          
                             <div class="main-right-bottom-content-content">
                                 <h2>Name</h2>
@@ -106,29 +106,12 @@
                             <div class="main-right-bottom-content-content a">
                                 <button>ADD</button>
                             </div>
-                        </div> -->
-                     </form>
+                        </div>
+                     </form> -->
                     
+                  <div class="main-right-bottom-content">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                  </div>
 
                 </div>
             </div>    

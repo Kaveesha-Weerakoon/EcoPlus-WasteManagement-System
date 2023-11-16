@@ -42,12 +42,10 @@
                         <table class="table">
                             <tr class="table-header">
                                 <th>Collector ID</th>
+                                <th>Profile Pic</th>
                                 <th>Name</th>
-                                <th>NIC</th>
                                 <th>Email</th>
-                                <th>Address</th>
-                                <th>Contact No</th>
-                                <th>DOB</th>
+                                <th>Personal Details</th>
                                 <th>Vehicle Details</th>
                                 <th>Update</th>
                                 <th>Delete</th>
@@ -59,13 +57,11 @@
                         <?php foreach($data['collectors'] as $collector) : ?> 
                             <tr class="table-row">
                                 <td><?php echo $collector->user_id?></td>
+                                <td>Profile pic</td>
                                 <td><?php echo $collector->name?></td>
-                                <td><?php echo $collector->nic?></td>
                                 <td><?php echo $collector->email?></td>
-                                <td><?php echo $collector->address?></td>
-                                <td><?php echo $collector->contact_no?></td>
-                                <td><?php echo $collector->dob?></td>
-                                <td><img src="<?php echo IMGROOT ?>/View.png" alt=""></td>
+                                <td><img src="<?php echo IMGROOT ?>/resume.png" alt=""></td>
+                                <td><img src="<?php echo IMGROOT ?>/car.png" alt=""></td>
                                 <td><a href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/update.png" alt=""></a></td>
                                 <td class="delete"><a href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>"> <img src="<?php echo IMGROOT ?>/delete.png" alt=""></a></td>
 

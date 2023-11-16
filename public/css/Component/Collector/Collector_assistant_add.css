@@ -257,9 +257,7 @@
         padding-bottom: 5px;
     }
 
-    .details {
-        margin-bottom: 121px;
-    }
+
 
     .main-right-bottom-content-content input {
         height: 45px;
@@ -271,13 +269,13 @@
         font-size: 16px;
         border-bottom-width: 2px;
         transition: all 0.3s ease;
+        margin-top: 3px;
     }
 
     .main-right-bottom-content-content {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         width: calc(100% / 2 - 20px);
-        margin-top: 15px;
-
+        margin-top: 12px;
     }
 
     .main-bottom-down {
@@ -331,7 +329,7 @@
 
     .form-button {
         height: 45px;
-        margin-top: 15px;
+        margin-top: 35px;
     }
 
     .form-button button {

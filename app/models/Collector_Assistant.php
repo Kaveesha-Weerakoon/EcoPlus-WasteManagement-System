@@ -81,9 +81,9 @@
 
 
       public function update_collector_assistants($data){
-        $this->db->query('UPDATE collector_assistants SET collector_id = :id, name = :name, nic = :nic, address = :address, contact_no = :contact_no, dob = :dob WHERE collector_id= :id ');
+        $this->db->query('UPDATE collector_assistants SET  name = :name, nic = :nic, address = :address, contact_no = :contact_no, dob = :dob WHERE id = :assisId ');
         // Bind values
-        $this->db->bind(':id', $_SESSION['collector_id']);
+        $this->db->bind(':assisId', $data['id']);
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':nic', $data['nic']);
         $this->db->bind(':address', $data['address']);

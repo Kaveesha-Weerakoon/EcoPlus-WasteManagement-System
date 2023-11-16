@@ -422,7 +422,7 @@
     .popup-form h2 {
         font-size: 23px;
         font-weight: 600;
-        margin: 10px 0 10px;
+        margin: 10px 0 5px;
         margin-top: 25px;
     }
 
@@ -495,10 +495,11 @@
         margin-bottom: 17px;
     }
 
-    .line {
+    .update-topic-line {
         width: 93px;
-        height: 3px;
+        height: 4px;
         background-color: #1B6652;
+        margin-bottom: 15px;
 
     }
 

@@ -7,7 +7,7 @@
 
     .main-bottom-down-content {
         width: 60%;
-        height: 502px;
+        height: 510px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         border-radius: 5px;
         padding: 10px 30px;
@@ -143,6 +143,7 @@
     .form-fields .err {
         height: 10px;
         font-size: 15px;
+
         font-weight: 500;
         margin-bottom: 5px;
         color: #e74c3c;
@@ -157,7 +158,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: 5px;
+        margin-top: 190px;
     }
 
     .main-bottom-down-content-bottom-button button {

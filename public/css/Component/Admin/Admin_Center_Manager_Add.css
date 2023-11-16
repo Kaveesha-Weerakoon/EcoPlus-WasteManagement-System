@@ -248,4 +248,27 @@
         cursor: pointer;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
     }
+
+    @media screen and (max-width: 1068px) {
+        .main-bottom-down-content-bottom {
+            overflow: scroll;
+        }
+
+        .main-bottom-down-content-bottom-one {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    @media screen and (max-width: 866px) {
+        .main-bottom-down-content-bottom-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-bottom-down-content-bottom-content-three {
+            display: flex;
+            flex-direction: column;
+        }
+    }
 }

@@ -11,13 +11,13 @@
         height: 90%;
         display: grid;
         grid-template-rows: 90% 10%;
-
+        overflow: scroll;
+        height: 1000px !important;
     }
 
     .main-right-bottom-content-top {
         display: grid;
         grid-template-columns: 50% 50%;
-
     }
 
     .main-right-bottom hr {
@@ -34,7 +34,6 @@
 
     .main-right-bottom-content-content {
         width: 90%;
-
     }
 
     .main-right-bottom-content-content h2 {
@@ -70,8 +69,23 @@
         height: 100%;
     }
 
-    .center_manager_success {
+    .form-drag-area {
+        height: 160px;
+        background-color: #eeeded;
+        border-radius: 5px;
+        align-items: center;
+        justify-content: center;
+        display: grid;
 
+    }
+
+    .form-drag-area.active {
+        border: 2px dashed #8888;
+        background-color: #d8d8d8;
+    }
+
+
+    .center_manager_success {
         position: fixed;
         top: 0;
         left: 0;
@@ -139,6 +153,5 @@
         border-radius: 4px;
         cursor: pointer;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-
     }
 }

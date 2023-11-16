@@ -38,10 +38,11 @@
                         <table class="table">
                             <tr class="table-header">
                                 <th>Center Manager ID</th>
+                                <th>Profile</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Assigned</th>
-                                <th>Assigned Center</th>
+                                <th>Assigned Center ID</th>
                                 <th>Personal Details</th>
                                 <th>Update</th>
                                 <th>Delete</th>
@@ -53,6 +54,7 @@
                              <?php foreach($data['center_managers'] as $center_manager) : ?>
                                        <tr class="table-row">
                                            <td>CM <?php echo $center_manager->user_id?></td>
+                                           <td class="cm-profile-img"><img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $center_manager->image?>" alt=""></td>
                                            <td><?php echo $center_manager->name?></td>
                                            <td><?php echo $center_manager->email?></td>
                                            <td> <?php echo $center_manager->assinged?></td>

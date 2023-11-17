@@ -409,6 +409,10 @@
 
     }
 
+    public function personal_details_view($collectorId){
+
+    }
+
     public function center_workers(){
 
 

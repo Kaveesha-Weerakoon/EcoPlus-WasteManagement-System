@@ -60,7 +60,7 @@
                                 <td>Profile pic</td>
                                 <td><?php echo $collector->name?></td>
                                 <td><?php echo $collector->email?></td>
-                                <td><img src="<?php echo IMGROOT ?>/resume.png" alt=""></td>
+                                <td><a href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/resume.png" alt=""></a></td>
                                 <td><img src="<?php echo IMGROOT ?>/car.png" alt=""></td>
                                 <td><a href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/update.png" alt=""></a></td>
                                 <td class="delete"><a href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>"> <img src="<?php echo IMGROOT ?>/delete.png" alt=""></a></td>
@@ -149,7 +149,7 @@
                     </div>
                 </div>
 
-            <?php endif; ?> 
+        <?php endif; ?> 
     
         
     <?php if($data['confirm_delete']== 'True') : ?>
@@ -188,6 +188,69 @@
             </div>
         </div>
     <?php endif; ?>
+
+    <?php if('False') : ?>
+        <div class="personal-details-popup-box">
+            <div class="personal-details-popup-form" id="popup">
+                <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"></a>
+                <center><div class="personal-details-topic">Personal Details</div></center>
+                
+                <div class="personal-details-popup" >
+                    <div class="personal-details-left">
+                        <img src="<?php echo IMGROOT?>/profile-pic.jpeg" class="profile-pic" alt="">
+                        <p>Collector ID: <span>C1234</span></p>
+                    </div>
+                    <div class="personal-details-right"> 
+                        <div class="personal-details-right-labels">
+                            <span>Name</span><br>
+                            <span>Email</span><br>
+                            <span>NIC</span><br>
+                            <span>Address</span><br>
+                            <span>Contact No</span><br>
+                            <span>DOB</span><br>
+                        </div>
+                        <div class="personal-details-right-values">
+                            <span>Jung hae in</span><br>
+                            <span>haein@gmail.com</span><br>
+                            <span>123456789V</span><br>
+                            <span>Seoul</span><br>
+                            <span>0771234567</span><br>
+                            <span>2001-03-26</span><br>
+
+                        </div>   
+                    </div>   
+                </div>
+            </div>
+
+        </div>
+        
+    <?php endif; ?>
+
+    <?php if('True') : ?>
+        <div class="vehicle-details-popup-box">
+            <div class="vehicle-details-popup-form" id="popup">
+                <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close"></a>
+                <center><div class="vehicle-details-topic">Vehicle Details</div></center>
+                
+                <div class="vehicle-details-popup" >
+                    <div class="vehicle-details-labels">
+                        <span>Collector ID</span><br>
+                        <span>Name</span><br>
+                        <span>Vehicle Plate No</span><br>
+                        <span>Vehicle Type</span><br>
+                    </div>
+                    <div class="vehicle-details-values">
+                        <span>C1234</span><br>
+                        <span>Jung hae in</span><br>
+                        <span>HQ-1234</span><br>
+                        <span>Van</span><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <?php endif; ?>
+
 </div>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

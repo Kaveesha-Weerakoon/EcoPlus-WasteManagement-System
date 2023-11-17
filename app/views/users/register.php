@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="form-upload">
                                     <input type="file" name="profile_image" id="profile_image" placeholder="select a profile image">
-
+                                    <div class="err"><?php echo $data['profile_err']?></div>
                                     </div>
                                     <div class="form-validation">
                                         <div class="profile-image-validation">

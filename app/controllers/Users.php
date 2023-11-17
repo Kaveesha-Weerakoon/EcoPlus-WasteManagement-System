@@ -41,7 +41,7 @@
           ];
 
           if ($_FILES['profile_image']['error'] == 4) {
-            $data['profile_err'] = 'Upload a image';
+          
         } else {
             if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/customer/')) {
               $data['profile_err'] = '';
@@ -71,8 +71,6 @@
             }
         }
         
-        
-  
           // Validate Name
           if (empty($data['name'])) {
             $data['name_err'] = 'Please enter a name';
@@ -80,16 +78,13 @@
             $data['name_err'] = 'Name is too long';
         }
         
-  
           // Validate Contact no
           if (empty($data['contact_no'])) {
             $data['contact_no_err'] = 'Please enter a contact number';
         } elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
             $data['contact_no_err'] = 'Please enter a valid contact number';
         }
-        
-        
-  
+         
           // Validate Adress
           if (empty($data['address'])) {
             $data['address_err'] = 'Please enter an address';
@@ -97,14 +92,12 @@
             $data['address_err'] = 'Address is too long ';
           }
         
-  
           if (empty($data['city'])) {
             $data['city_err'] = 'Please enter a city';
           } elseif (strlen($data['city']) > 500) {
              $data['city_err'] = 'City name is too long';
         }
         
-  
           // Validate Password
           if(empty($data['password'])){
             $data['password_err'] = 'Pleae enter password';
@@ -154,7 +147,9 @@
             'address_err' => '',
             'city_err'=>'',
             'password_err' => '',
-            'confirm_password_err' => ''
+            'confirm_password_err' => '',  
+            'profile_err'=>'',
+            'profile_upload_error'=>''
           ];
   
           // Load view
@@ -224,7 +219,14 @@
             if($loggedInUser){
               if($loggedInUser->role=="customer"){
                 $customer=$this->customerModel->get_customer($loggedInUser->id);
-                $_SESSION['customer_profile'] = $customer->image;
+                if($customer->image==$loggedInUser->email.'_'){
+                  $_SESSION['customer_profile'] = "Profile.png";
+                }
+                else{
+                  $_SESSION['customer_profile'] = $customer->image;
+                }
+               
+
                 echo $customer->image;
                 $this->createUserSession($loggedInUser); 
               }

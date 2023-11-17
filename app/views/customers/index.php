@@ -160,7 +160,7 @@
                     <div class="profile-top">
                         <div class="profile-top-left"></div>
                         <a href="<?php echo URLROOT?>/customers" >
-                                <img src="<?php echo IMGROOT?>/Close.png" id="Profile_close">
+                                <img src="<?php echo IMGROOT?>/close_popup.png" id="Profile_close">
                         </a>
                     </div>
                     <div class="profile-down">

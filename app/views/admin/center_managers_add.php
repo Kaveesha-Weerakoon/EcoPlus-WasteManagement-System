@@ -36,7 +36,7 @@
                      <form class="main-bottom-down-content" action="<?php echo URLROOT;?>/admin/center_managers_add" method="post" enctype="multipart/form-data">
                        <div class="main-bottom-down-content-top">
                             <div class="main-bottom-down-content-top-content">
-                                  <h3>Registration form</h3>
+                                  <h3>Registration Form</h3>
                                   <div class="registration-line"></div>
                             </div>
                        </div>
@@ -57,9 +57,9 @@
                                                <div class="form-validation">
                                                  <div class="profile-image-validation">
                                                    <img src="<?php echo IMGROOT?>/checked.png" alt="green_tik" width="20px" height="20px">
-                                                   <?php 
+                                                   <p style="color: #e74c3c;"><?php 
                                                           echo $data['profile_err'];                                                                                          
-                                                    ?>
+                                                    ?></p>
                                                   </div>
                                                </div>
                                           </div>

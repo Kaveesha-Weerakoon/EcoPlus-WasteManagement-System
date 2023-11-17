@@ -25,13 +25,13 @@
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/collectors_add">
                             <div class="main-right-top-three-content">
-                                <p>Add</p>
+                                <p>Register</p>
                                 <div class="line1"></div>
                             </div>
                         </a>
                         <a  href="<?php echo URLROOT?>/centermanagers/collectors_complains">
                             <div class="main-right-top-three-content">
-                                <p>Complains</p>
+                                <p>Complaints</p>
                                 <div class="line1"></div>
                             </div>
                         </a>
@@ -57,7 +57,7 @@
                         <?php foreach($data['collectors'] as $collector) : ?> 
                             <tr class="table-row">
                                 <td><?php echo $collector->user_id?></td>
-                                <td>Profile pic</td>
+                                <td class="collector_image"><img src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>" alt=""></td>
                                 <td><?php echo $collector->name?></td>
                                 <td><?php echo $collector->email?></td>
                                 <td><a href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/resume.png" alt=""></a></td>
@@ -189,7 +189,7 @@
         </div>
     <?php endif; ?>
 
-    <?php if('False') : ?>
+    <?php if(false) : ?>
         <div class="personal-details-popup-box">
             <div class="personal-details-popup-form" id="popup">
                 <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"></a>
@@ -226,7 +226,7 @@
         
     <?php endif; ?>
 
-    <?php if('True') : ?>
+    <?php if(false) : ?>
         <div class="vehicle-details-popup-box">
             <div class="vehicle-details-popup-form" id="popup">
                 <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close"></a>

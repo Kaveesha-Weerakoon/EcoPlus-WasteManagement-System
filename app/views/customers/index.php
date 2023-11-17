@@ -118,7 +118,7 @@
                 </div>
                 <div class="main-right-right">
                     <div class="main-right-right-one">
-                        <img src="<?php echo IMGROOT?>/CustomerDashboard_image.png" alt="">
+                        <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>" alt="">
                         <h2><?php echo $_SESSION['user_name']?></h2>
                         <p>User ID: C <?php echo $_SESSION['user_id']?></p>
                     </div>
@@ -165,7 +165,7 @@
                     </div>
                     <div class="profile-down">
                         <div class="profile-down-top-content">
-                            <img src="<?php echo IMGROOT?>/Profile2.png" alt="">
+                        <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>" alt="">
                             <h1 style="font-size: 29px;"><?php echo $_SESSION['user_name']?></h1>
                         </div>
 

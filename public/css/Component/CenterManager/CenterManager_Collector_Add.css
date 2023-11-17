@@ -132,93 +132,163 @@
         }
     }
 
+
     .main-bottom-down {
         display: flex;
-        flex-direction: column;
+        justify-content: center;
     }
 
-    .main-bottom-main {
+    .main-bottom-down-content {
+        width: 75%;
+        height: 870px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+
+    }
+
+    .main-bottom-down-content-one {
+        margin-bottom: 12px;
+        padding-left: 60px;
+    }
+
+    .main-bottom-down-content-one h2 {
+        margin-bottom: 6px;
+    }
+
+    .line3 {
+        background-color: #1B6652;
+        width: 50px;
+        height: 4px;
+    }
+
+
+    .main-bottom-down-content-two {
         display: grid;
         grid-template-columns: 50% 50%;
+        margin-bottom: 15px;
     }
 
-    .main-bottom-down h1 {
-        font-size: 25px;
-        margin-bottom: 25px;
-        margin-top: 15px;
-    }
-
-    .main-bottom-down-h1 {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 65px;
-    }
-
-    .main-bottom-down-h1 h1 {
-        font-size: 32px
-    }
-
-    .main-bottom-down-left {
+    .main-bottom-down-content-two-left {
         display: flex;
         justify-content: center;
-        flex-direction: column;
-        align-items: center;
+        padding-left: 35px;
     }
 
-    .main-bottom-down-right {
+    .main-bottom-down-content-two-right {
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        flex-direction: column;
         align-items: center;
     }
 
-    .main-right-bottom-content {
-        width: 50%;
-        height: 90%;
+
+    .form-drag-area {
         display: flex;
         align-items: center;
-        flex-direction: column;
-    }
-
-    .main-right-bottom-content-content {
-        width: 90%;
-        height: 70px;
-        margin-bottom: 18px;
-    }
-
-    .main-right-bottom-content-content h2 {
-        font-size: 17px;
-        margin-bottom: 10px;
-        font-weight: 500;
-    }
-
-    .main-right-bottom-content-content input {
+        padding: 15px;
         width: 100%;
-        height: 35px;
-        border: 2px solid #858585;
-        border-radius: 5px;
     }
 
-    .main-bottom-down-button {
+    .form-drag-area.active {
+        border: 2px dashed #8888;
+        background-color: #d8d8d8;
+    }
+
+    .icon {
+        margin-right: 20px;
+    }
+
+    .icon img {
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+    }
+
+    .main-bottom-down-content-bottom-one-left .right-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .right-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .right-content .description {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .right-content .form-upload {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .profile-image-validation img {
+        display: none;
+    }
+
+    .main-bottom-down-content-bottom-one-right {
+        display: flex;
+        align-items: center;
+    }
+
+    .main-bottom-down-content-two-right label {
+        font-weight: 500;
+        margin-bottom: 5px;
+        font-size: 17px;
+        margin-bottom: 7px;
+    }
+
+    .main-bottom-down-content-two-right input {
+        height: 38px;
+        width: 78%;
+        outline: none;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding-left: 15px;
+        font-size: 16px;
+        border-bottom-width: 2px;
+        transition: all 0.3s ease;
+        margin-bottom: 5px;
+    }
+
+    .main-bottom-down-content-two-right input:focus {
+        border-color: #4dccaa;
+    }
+
+    .err {
+        height: 10px;
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 5px;
+        color: #e74c3c;
+    }
+
+    .main-bottom-down-content-button {
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-top: 10px;
     }
 
-    .main-bottom-down button {
-        background: #1B6652;
-        text-align: center;
-        width: 22%;
-        height: 45px;
-        border-radius: 5px;
-        font-size: 22px !important;
+    .main-bottom-down-content-button button {
+        height: 41px;
+        width: 90%;
+        outline: none;
         color: white;
-        font-size: 20px;
-        font-weight: 510;
+        font-size: 19px;
+        font-weight: 500;
+        border-radius: 5px;
         cursor: pointer;
         border: none;
-        margin: 10px;
+        letter-spacing: 1px;
+        background: #1B6652;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
     .collector_success {

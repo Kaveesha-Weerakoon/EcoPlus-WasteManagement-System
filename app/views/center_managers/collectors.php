@@ -57,7 +57,7 @@
                         <?php foreach($data['collectors'] as $collector) : ?> 
                             <tr class="table-row">
                                 <td><?php echo $collector->user_id?></td>
-                                <td>Profile pic</td>
+                                <td class="collector_image"><img src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>" alt=""></td>
                                 <td><?php echo $collector->name?></td>
                                 <td><?php echo $collector->email?></td>
                                 <td><a href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/resume.png" alt=""></a></td>

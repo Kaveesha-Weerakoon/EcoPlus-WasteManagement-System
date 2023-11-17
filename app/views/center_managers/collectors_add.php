@@ -26,7 +26,7 @@
                         </a>
                         <a href="">
                             <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">Add</b></p>
+                                <p><b style="color: #1B6652;">Register</b></p>
                                 <div class="line"></div>
                             </div>
                         </a>

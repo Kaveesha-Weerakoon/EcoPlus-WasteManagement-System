@@ -25,13 +25,13 @@
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/collectors_add">
                             <div class="main-right-top-three-content">
-                                <p>Add</p>
+                                <p>Register</p>
                                 <div class="line1"></div>
                             </div>
                         </a>
                         <a  href="<?php echo URLROOT?>/centermanagers/collectors_complains">
                             <div class="main-right-top-three-content">
-                                <p>Complains</p>
+                                <p>Complaints</p>
                                 <div class="line1"></div>
                             </div>
                         </a>
@@ -189,7 +189,7 @@
         </div>
     <?php endif; ?>
 
-    <?php if('False') : ?>
+    <?php if(false) : ?>
         <div class="personal-details-popup-box">
             <div class="personal-details-popup-form" id="popup">
                 <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"></a>
@@ -226,7 +226,7 @@
         
     <?php endif; ?>
 
-    <?php if('True') : ?>
+    <?php if(false) : ?>
         <div class="vehicle-details-popup-box">
             <div class="vehicle-details-popup-form" id="popup">
                 <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close"></a>

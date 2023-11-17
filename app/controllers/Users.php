@@ -4,7 +4,7 @@
            $this->userModel=$this->model('User');
            $this->center_managerModel=$this->model('Center_Manager');
            $this->collectorModel=$this->model('Collector');
-
+           $this->customerModel=$this->model('Customer');
           }
 
     public function register(){
@@ -26,14 +26,30 @@
             'city'=>trim($_POST['city']),
             'password' => trim($_POST['password']),
             'confirm_password' => trim($_POST['confirm_password']),
+            'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
             'name_err' => '',
             'email_err' => '',
             'contact_no_err' => '',
             'address_err' => '',
             'city_err'=>'',
             'password_err' => '',
-            'confirm_password_err' => ''
+            'confirm_password_err' => '',
+            'profile_err'=>'',
+            'profile_upload_error'=>''   
+
+
           ];
+
+          if ($_FILES['profile_image']['error'] == 4) {
+          
+        } else {
+            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/customer/')) {
+              $data['profile_err'] = '';
+  
+            } else {
+                $data['profile_err'] = 'Error uploading the profile image';
+            }
+        }
   
            // Validate Email
            if(empty($data['email'])){
@@ -55,8 +71,6 @@
             }
         }
         
-        
-  
           // Validate Name
           if (empty($data['name'])) {
             $data['name_err'] = 'Please enter a name';
@@ -64,16 +78,13 @@
             $data['name_err'] = 'Name is too long';
         }
         
-  
           // Validate Contact no
           if (empty($data['contact_no'])) {
             $data['contact_no_err'] = 'Please enter a contact number';
         } elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
             $data['contact_no_err'] = 'Please enter a valid contact number';
         }
-        
-        
-  
+         
           // Validate Adress
           if (empty($data['address'])) {
             $data['address_err'] = 'Please enter an address';
@@ -81,14 +92,12 @@
             $data['address_err'] = 'Address is too long ';
           }
         
-  
           if (empty($data['city'])) {
             $data['city_err'] = 'Please enter a city';
           } elseif (strlen($data['city']) > 500) {
              $data['city_err'] = 'City name is too long';
         }
         
-  
           // Validate Password
           if(empty($data['password'])){
             $data['password_err'] = 'Pleae enter password';
@@ -105,13 +114,13 @@
             }
           }
   
-          if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['city_err']) && empty($data['address_err'])){
+          if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['city_err']) && empty($data['address_err'])&& empty($data['profile_err'])){
             // Validated
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-  
+            
             // Register User
             if($this->userModel->register($data)){
-            
+             
               redirect('users/login');
             } else {
               die('Something went wrong');
@@ -138,7 +147,9 @@
             'address_err' => '',
             'city_err'=>'',
             'password_err' => '',
-            'confirm_password_err' => ''
+            'confirm_password_err' => '',  
+            'profile_err'=>'',
+            'profile_upload_error'=>''
           ];
   
           // Load view
@@ -207,6 +218,16 @@
             $loggedInUser = $this->userModel->login($data['email'], $data['password']);
             if($loggedInUser){
               if($loggedInUser->role=="customer"){
+                $customer=$this->customerModel->get_customer($loggedInUser->id);
+                if($customer->image==$loggedInUser->email.'_'){
+                  $_SESSION['customer_profile'] = "Profile.png";
+                }
+                else{
+                  $_SESSION['customer_profile'] = $customer->image;
+                }
+               
+
+                echo $customer->image;
                 $this->createUserSession($loggedInUser); 
               }
               else if($loggedInUser->role=="collector"){
@@ -289,6 +310,7 @@
       unset($_SESSION['user_id']);
       unset($_SESSION['user_email']);
       unset($_SESSION['user_name']);
+       unset($_SESSION['customer_profile']);
       session_destroy();
       redirect('users/login');
     }

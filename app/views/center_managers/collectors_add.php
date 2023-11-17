@@ -135,6 +135,9 @@
 
             </div>
         </div>
+
+
+        
         <?php if($data['registered']=='True') : ?>
             <div class="collector_success">
                 <div class="popup" id="popup">

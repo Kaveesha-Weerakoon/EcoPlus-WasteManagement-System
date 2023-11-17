@@ -41,7 +41,7 @@
     }
 
     public function getCenterWorkersByNIC_except($NIC, $workerId){
-      $this->db->query('SELECT * FROM center_workers WHERE nic = :nic AND id <> :id');
+      $this->db->query('SELECT * FROM center_workers WHERE nic = :nic AND id <> :id'); 
       $this->db->bind(':nic', $NIC);
       $this->db->bind(':id', $workerId);
 

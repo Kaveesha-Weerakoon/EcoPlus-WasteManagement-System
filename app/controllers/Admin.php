@@ -180,8 +180,10 @@
     }
 
     public function center_managers_delete($id) {
+      $cm_id = $this->center_managerModel->getCenterManagerByID($id);
       $this->center_managerModel->delete_centermanager($id);
       $center_managers = $this->center_managerModel->get_center_managers();
+      deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\center_manager\\" . $cm_id->image);
       $data = [
         'center_managers' => $center_managers,
         'confirm_delete' =>'',
@@ -215,24 +217,24 @@
           'email_err' => '' ,
           'password_err' => '' ,
           'complain_err' => '' ,
-          'profile_err'=>'',
+          'profile_err'=>'error',
           'confirm_password_err'=>'' ,
-          'registered'=>''   
+          'registered'=>'',
+           'profile_upload_error'=>''   
         ];
 
-        if(uploadImage($data['profile']['tmp_name'],$data['profile_image_name'],'/img/img_upload/center_manager/')){
-          
-        }
-        else{
-          $data['profile_err']='Profile Upload error';
-        }
+        if ($_FILES['profile_image']['error'] == 4) {
+          $data['profile_err'] = 'Upload a image';
+      } else {
+          if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/center_manager/')) {
+            $data['profile_err'] = '';
 
-        /*if($data['completed']=='True'){
-          $data['completed']=='';
-          $this->view('customers/complains', $data);
-        }*/
-
-        //validate email
+          } else {
+              $data['profile_err'] = 'Error uploading the profile image';
+          }
+      }
+     
+       //validate email
         if(empty($data['email'])){
           $data['email_err'] = 'Please enter an email';
         } else {
@@ -304,7 +306,6 @@
         if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err']) && empty($data['profile_err'])){
           // Validated
           $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-          
           if($this->center_managerModel->register_center_manager($data)){
             $data['registered']='True';        
             $this->view('admin/center_managers_add',$data);
@@ -313,6 +314,7 @@
           }
         }
         else{
+         
           $this->view('admin/center_managers_add', $data);
         }
 
@@ -340,13 +342,14 @@
           'password_err' => '' ,
           'complain_err' => '' ,
           'confirm_password_err'=>'',
-          'registered'=>''  
+          'registered'=>'' ,         
+          'profile_upload_error'=>''   
+
         ];
         $this->view('admin/center_managers_add', $data);
       }
     
     }
-
 
     public function customers(){
       

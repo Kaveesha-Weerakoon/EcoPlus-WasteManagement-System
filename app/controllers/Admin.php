@@ -56,29 +56,29 @@
       ];
 
       if(empty($data['plastic_credit'])){
-        $data['plastic_credit_err'] = 'Please enter name';  
+        $data['plastic_credit_err'] = 'Please enter a value';  
        
       }
 
       if(empty($data['polythene_credit'])){
-        $data['polythene_credit_err'] = 'Please enter NIC'; 
+        $data['polythene_credit_err'] = 'Please enter a value'; 
       }
 
       if(empty($data['paper_credit'])){
-        $data['paper_credit_err'] = 'Please enter dob'; 
+        $data['paper_credit_err'] = 'Please enter a value'; 
       }
 
       // Validate Contact no
       if(empty($data['electronic_credit'])){
-        $data['electronic_credit_err'] = 'Please enter contact no';   
+        $data['electronic_credit_err'] = 'Please enter a value';   
       }
 
       if(empty($data['metal_credit'])){
-        $data['metal_credit_err'] = 'Please enter contact no'; 
+        $data['metal_credit_err'] = 'Please enter a value'; 
       }
 
       if(empty($data['glass_credit_err'])){
-        $data['glass_credit_err'] = 'Please enter contact no';  
+        $data['glass_credit_err'] = 'Please enter a value';  
       }
 
       if(!empty($data['metal_credit']) &&  !empty($data['plastic_credit']) &&  !empty($data['polythene_credit']) &&  !empty($data['glass_credit'])  &&  !empty($data['paper_credit'])  &&  !empty($data['electronic_credit']) ){
@@ -349,6 +349,113 @@
         $this->view('admin/center_managers_add', $data);
       }
     
+    }
+
+    public function center_managers_update($managerId){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $center_managers = $this->center_managerModel->get_center_managers();
+            $data = [
+                'center_managers' => $center_managers,
+                'id'=> $managerId,
+                'name' =>trim($_POST['name']),
+                'nic' => trim($_POST['nic']),
+                'dob'=>trim($_POST['dob']),
+                'contact_no'=>trim($_POST['contact_no']),
+                'address' =>trim($_POST['address']),
+                'click_update' =>'True',
+                'update_success'=>'',
+                'confirm_delete'=> '',          
+                'name_err' => '',
+                'nic_err' => '',
+                'dob_err'=>'',
+                'contact_no_err'=>'',
+                'address_err' =>''          
+            ];
+
+        //validate name
+        if(empty($data['name'])){
+          $data['name_err'] = 'Please enter name';
+        }elseif (strlen($data['name']) > 255) {
+          $data['name_err'] = 'Name is too long';
+        }
+
+        //validate NIC
+        if(empty($data['nic'])){
+          $data['nic_err'] = 'Please enter NIC';
+        }elseif(!(is_numeric($data['nic']) && (strlen($data['nic']) == 12)) && !preg_match('/^[0-9]{9}[vV]$/', $data['nic'])){
+          $data['nic_err'] = 'Please enter a valid NIC';
+        }elseif($this->center_managerModel->getCenterManagerByNIC_except($data['nic'] , $managerId)){
+          $data['nic_err'] = 'Already exists a center manager under this NIC';
+        }
+
+        //validate DOB
+        if(empty($data['dob'])){
+          $data['dob_err'] = 'Please enter dob';
+        }
+
+        // Validate Contact no
+        if(empty($data['contact_no'])){
+          $data['contact_no_err'] = 'Please enter contact no';
+        }elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter a valid contact number';
+        }
+
+        // Validate Address
+        if(empty($data['address'])){
+          $data['address_err'] = 'Please enter address';
+        }elseif (strlen($data['address']) > 500) {
+          $data['address_err'] = 'Address is too long ';
+        }
+
+        
+        if(empty($data['address_err']) && empty($data['contact_no_err']) && empty($data['dob_err']) && empty($data['nic_err']) && empty($data['name_err']) ){
+          if($this->center_managerModel->update_center_managers($data)){
+            $data['update_success']='True';       
+            $this->view('admin/center_managers',$data);
+          } else {
+            die('Something went wrong');
+          }
+        }
+        else{
+          $this->view('admin/center_managers', $data);
+        }
+
+        //$this->view('admin/center_managers', $data);
+      
+      }
+      else{
+
+        $center_managers = $this->center_managerModel->get_center_managers();
+        $center_manager = $this->center_managerModel->getCenterManager_ByID_view($managerId);
+        $data = [
+
+          'center_managers' => $center_managers,
+          'id'=> $managerId,
+          'name' => $center_manager->name,
+          'nic' => $center_manager->nic,
+          'dob'=> $center_manager->dob,
+          'contact_no'=> $center_manager->contact_no,
+          'address' => $center_manager->address,
+          'click_update' =>'True',
+          'update_success'=>'',
+          'confirm_delete'=> '',
+
+          'name_err' => '',
+          'nic_err' => '',
+          'dob_err'=>'',
+          'contact_no_err'=>'',
+          'address_err' =>''
+          
+        ];
+        
+        $this->view('admin/center_managers', $data);
+
+        
+      }
+
+     
+
     }
 
     public function customers(){

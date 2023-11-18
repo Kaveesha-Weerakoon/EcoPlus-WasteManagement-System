@@ -25,13 +25,13 @@
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/collectors_add">
                             <div class="main-right-top-three-content">
-                                <p>Add</p>
+                                <p>Register</p>
                                 <div class="line1"></div>
                             </div>
                         </a>
                         <a  href="<?php echo URLROOT?>/centermanagers/collectors_complains">
                             <div class="main-right-top-three-content">
-                                <p>Complains</p>
+                                <p>Complaints</p>
                                 <div class="line1"></div>
                             </div>
                         </a>
@@ -57,11 +57,11 @@
                         <?php foreach($data['collectors'] as $collector) : ?> 
                             <tr class="table-row">
                                 <td><?php echo $collector->user_id?></td>
-                                <td>Profile pic</td>
+                                <td class="collector_image"><img src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>" alt=""></td>
                                 <td><?php echo $collector->name?></td>
                                 <td><?php echo $collector->email?></td>
-                                <td><img src="<?php echo IMGROOT ?>/resume.png" alt=""></td>
-                                <td><img src="<?php echo IMGROOT ?>/car.png" alt=""></td>
+                                <td><a href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/resume.png" alt=""></a></td>
+                                <td><a href="<?php echo URLROOT?>/centermanagers/vehicle_details_view/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/car.png" alt=""></a></td>
                                 <td><a href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/update.png" alt=""></a></td>
                                 <td class="delete"><a href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>"> <img src="<?php echo IMGROOT ?>/delete.png" alt=""></a></td>
 
@@ -149,7 +149,7 @@
                     </div>
                 </div>
 
-            <?php endif; ?> 
+        <?php endif; ?> 
     
         
     <?php if($data['confirm_delete']== 'True') : ?>
@@ -188,6 +188,77 @@
             </div>
         </div>
     <?php endif; ?>
+
+<<<<<<< HEAD
+    <?php if($data['personal_details_click']=='True') : ?>
+=======
+    <?php if(false) : ?>
+>>>>>>> e4c7d38fbba5352ba3a610d6befce55723209a1f
+        <div class="personal-details-popup-box">
+            <div class="personal-details-popup-form" id="popup">
+                <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"></a>
+                <center><div class="personal-details-topic">Personal Details</div></center>
+                
+                <div class="personal-details-popup" >
+                    <div class="personal-details-left">
+                        <img src="<?php echo IMGROOT?>/profile-pic.jpeg" class="profile-pic" alt="">
+                        <p>Collector ID: <span>C<?php echo $data['id']?></span></p>
+                    </div>
+                    <div class="personal-details-right"> 
+                        <div class="personal-details-right-labels">
+                            <span>Name</span><br>
+                            <span>Email</span><br>
+                            <span>NIC</span><br>
+                            <span>Address</span><br>
+                            <span>Contact No</span><br>
+                            <span>DOB</span><br>
+                        </div>
+                        <div class="personal-details-right-values">
+                            <span><?php echo $data['name']?></span><br>
+                            <span><?php echo $data['email']?></span><br>
+                            <span><?php echo $data['nic']?></span><br>
+                            <span><?php echo $data['address']?></span><br>
+                            <span><?php echo $data['contact_no']?></span><br>
+                            <span><?php echo $data['dob']?></span><br>
+
+                        </div>   
+                    </div>   
+                </div>
+            </div>
+
+        </div>
+        
+    <?php endif; ?>
+
+<<<<<<< HEAD
+    <?php if($data['vehicle_details_click']=='True') : ?>
+=======
+    <?php if(false) : ?>
+>>>>>>> e4c7d38fbba5352ba3a610d6befce55723209a1f
+        <div class="vehicle-details-popup-box">
+            <div class="vehicle-details-popup-form" id="popup">
+                <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close"></a>
+                <center><div class="vehicle-details-topic">Vehicle Details</div></center>
+                
+                <div class="vehicle-details-popup" >
+                    <div class="vehicle-details-labels">
+                        <span>Collector ID</span><br>
+                        <span>Name</span><br>
+                        <span>Vehicle Plate No</span><br>
+                        <span>Vehicle Type</span><br>
+                    </div>
+                    <div class="vehicle-details-values">
+                        <span>C<?php echo $data['id']?></span><br>
+                        <span><?php echo $data['name']?></span><br>
+                        <span><?php echo $data['vehicle_no']?></span><br>
+                        <span><?php echo $data['vehicle_type']?></span><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <?php endif; ?>
+
 </div>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

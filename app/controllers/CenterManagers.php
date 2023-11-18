@@ -42,7 +42,9 @@
         'click_update' =>'',
         'update_success'=>'',
         'confirm_delete' =>'',
-        'delete_success' =>''
+        'delete_success' =>'',
+        'personal_details_click'=> '',
+        'vehicle_details_click'=> ''
    
       ];
      
@@ -69,6 +71,7 @@
           'nic' => trim($_POST['nic']),
           'dob'=>trim($_POST['dob']),
           'contact_no'=>trim($_POST['contact_no']),
+          'profile_name'=>trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
           'address' =>trim($_POST['address']),
           'email'=>trim($_POST['email']),
           'vehicle_no'=>trim($_POST['vehicle_no']),
@@ -87,9 +90,12 @@
           'vehicleNo_err' =>'',
           'vehicleType_err' =>'',
           'password_err'=>'',
-          'confirm_password_err'=>''
+          'confirm_password_err'=>'',
+          'profile_err'=>''
                 
         ];
+
+
 
         //validate name
         if(empty($data['name'])){
@@ -179,6 +185,21 @@
         }
 
         if(empty($data['name_err']) && empty($data['nic_err']) && empty($data['dob_err']) && empty($data['contactNo_err'])&& empty($data['address_err']) && empty($data['email_err']) && empty($data['vehicleNo_err']) && empty($data['vehicleType_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
+          if ($_FILES['profile_image']['error'] == 4) {
+            $data['profile_err'] = 'Upload a image';
+        } else {
+            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_name'], '/img/img_upload/collector/')) {
+              $data['profile_err'] = '';
+  
+            } else {
+              
+                $data['profile_err'] = 'Error uploading the profile image';
+            }
+        }
+        }
+
+
+        if(empty($data['name_err']) && empty($data['nic_err']) && empty($data['dob_err']) && empty($data['contactNo_err'])&& empty($data['address_err']) && empty($data['email_err']) && empty($data['vehicleNo_err']) && empty($data['vehicleType_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['profile_err'])){
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             $center=$this->center_model->getCenterById($_SESSION['center_id']);
             $data['center_name']=$center->region;
@@ -219,7 +240,8 @@
           'vehicleNo_err' =>'',
           'vehicleType_err' =>'',
           'password_err'=>'',
-          'confirm_password_err'=>''
+          'confirm_password_err'=>'',
+          'profile_err'=>''
         ];
           
         $this->view('center_managers/collectors_add', $data);
@@ -246,6 +268,8 @@
                 'update_success'=>'',
                 'confirm_delete'=> '',
                 'delete_success'=> '',
+                'personal_details_click'=> '',
+                'vehicle_details_click'=> '',
                 
                 'name_err' => '',
                 'nic_err' => '',
@@ -343,6 +367,8 @@
           'update_success'=>'',
           'confirm_delete'=> '',
           'delete_success'=> '',
+          'personal_details_click'=> '',
+          'vehicle_details_click'=> '',
 
           'name_err' => '',
           'nic_err' => '',
@@ -365,13 +391,15 @@
 
 
     public function collector_delete_confirm($collectorId){
-         $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
         $data = [
           'collectors' => $collectors,
           'confirm_delete' => 'True',
           'delete_success' =>'',
           'click_update' =>'',
           'update_success'=>'',
+          'personal_details_click'=> '',
+          'vehicle_details_click'=> '',
           'collector_id' => $collectorId
 
         ];
@@ -388,7 +416,9 @@
         'collectors' => $collectors,
         'click_update' =>'',
         'update_success'=>'',
-        'confirm_delete'=> ''
+        'confirm_delete'=> '',
+        'personal_details_click'=> '',
+        'vehicle_details_click'=> ''
 
       ];
 
@@ -398,6 +428,7 @@
       }
       else{
         if($this->collectorModel->delete_collectors($collectorId)){
+          deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\collector\\".$collector->image);
           $data['delete_success'] = 'True';
           $this->view('center_managers/collectors', $data);
         }
@@ -407,6 +438,57 @@
 
       }
 
+    }
+
+    public function personal_details_view($collectorId){
+        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        $collector = $this->collectorModel->getCollector_ByID_view($collectorId);
+        $data = [
+          'collectors' => $collectors,
+          'id'=> $collectorId,
+          'name' => $collector->name,
+          'email'=> $collector->email,
+          'nic' => $collector->nic,
+          'dob'=> $collector->dob,
+          'contact_no'=> $collector->contact_no,
+          'address' => $collector->address,
+          'personal_details_click'=> 'True',
+          'vehicle_details_click'=> '',
+          'confirm_delete' => '',
+          'delete_success' =>'',
+          'click_update' =>'',
+          'update_success'=>'',
+          
+
+        ];
+      
+      
+        $this->view('center_managers/collectors', $data);
+
+    }
+
+    public function vehicle_details_view($collectorId){
+      $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        $collector = $this->collectorModel->getCollector_ByID_view($collectorId);
+        $data = [
+          'collectors' => $collectors,
+          'id'=> $collectorId,
+          'name' => $collector->name,
+          'vehicle_no'=> $collector->vehicle_no,
+          'vehicle_type'=> $collector->vehicle_type,
+          'vehicle_details_click'=> 'True',
+          'personal_details_click'=> '',
+          'confirm_delete' => '',
+          'delete_success' =>'',
+          'click_update' =>'',
+          'update_success'=>'',
+          
+
+        ];
+      
+      
+        $this->view('center_managers/collectors', $data);
+  
     }
 
     public function center_workers(){

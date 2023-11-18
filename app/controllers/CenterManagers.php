@@ -332,7 +332,6 @@
           $data['vehicle_type_err'] = 'Vehicle type is too long';
         }
 
-
         if(empty($data['address_err']) && empty($data['contact_no_err']) && empty($data['dob_err']) && empty($data['nic_err']) && empty($data['name_err']) && empty($data['vehicle_no_err']) && empty($data['vehicle_type_err'])){
           if($this->collectorModel->update_collectors($data)){
             $data['update_success']='True';       
@@ -344,9 +343,7 @@
         else{
           $this->view('center_managers/collectors', $data);
         }
-
         //$this->view('center_managers/collectors', $data);
-      
       }
       else{
 
@@ -381,14 +378,8 @@
         ];
         
         $this->view('center_managers/collectors', $data);
-
-        
       }
-
-     
-
     }
-
 
     public function collector_delete_confirm($collectorId){
         $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
@@ -401,12 +392,8 @@
           'personal_details_click'=> '',
           'vehicle_details_click'=> '',
           'collector_id' => $collectorId
-
-        ];
-      
-      
-        $this->view('center_managers/collectors', $data);
-        
+        ];     
+        $this->view('center_managers/collectors', $data);       
     }
 
     public function collector_delete($collectorId){
@@ -419,7 +406,6 @@
         'confirm_delete'=> '',
         'personal_details_click'=> '',
         'vehicle_details_click'=> ''
-
       ];
 
       $collector = $this->collectorModel->getCollectorById($collectorId);
@@ -452,6 +438,7 @@
           'dob'=> $collector->dob,
           'contact_no'=> $collector->contact_no,
           'address' => $collector->address,
+          'image'=>$collector->image,
           'personal_details_click'=> 'True',
           'vehicle_details_click'=> '',
           'confirm_delete' => '',
@@ -493,7 +480,6 @@
 
     public function center_workers(){
 
-
       $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
       $data = [
         'center_workers' => $center_workers,
@@ -502,11 +488,9 @@
         'update_success'=>'',
         'confirm_delete' => '',
         'delete_success' =>''
-
       ];
-     
-     
-      $this->view('center_managers/center_workers', $data);
+       
+    $this->view('center_managers/center_workers', $data);
     }
 
     public function center_workers_add(){
@@ -642,14 +626,12 @@
                 'address' =>trim($_POST['address']),
                 'click_update' =>'True',
                 'update_success'=>'',
-                'confirm_delete'=> '',
-                
+                'confirm_delete'=> '',          
                 'name_err' => '',
                 'nic_err' => '',
                 'dob_err'=>'',
                 'contact_no_err'=>'',
-                'address_err' =>''
-                
+                'address_err' =>''          
             ];
 
         //validate name

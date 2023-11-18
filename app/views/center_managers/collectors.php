@@ -61,7 +61,7 @@
                                 <td><?php echo $collector->name?></td>
                                 <td><?php echo $collector->email?></td>
                                 <td><a href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/resume.png" alt=""></a></td>
-                                <td><img src="<?php echo IMGROOT ?>/car.png" alt=""></td>
+                                <td><a href="<?php echo URLROOT?>/centermanagers/vehicle_details_view/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/car.png" alt=""></a></td>
                                 <td><a href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/update.png" alt=""></a></td>
                                 <td class="delete"><a href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>"> <img src="<?php echo IMGROOT ?>/delete.png" alt=""></a></td>
 
@@ -72,7 +72,9 @@
                 </div>
             </div>
         </div>
-        <?php if($data['click_update']=='True') : ?>
+
+
+    <?php if($data['click_update']=='True') : ?>
                 <div class="update_click">
                     <div class="popup-form" id="popup">
                     <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png"  class="update-popup-img" alt=""></a>
@@ -149,7 +151,7 @@
                     </div>
                 </div>
 
-        <?php endif; ?> 
+    <?php endif; ?> 
     
         
     <?php if($data['confirm_delete']== 'True') : ?>
@@ -189,7 +191,7 @@
         </div>
     <?php endif; ?>
 
-    <?php if(false) : ?>
+    <?php if($data['personal_details_click']=='True') : ?>
         <div class="personal-details-popup-box">
             <div class="personal-details-popup-form" id="popup">
                 <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"></a>
@@ -197,8 +199,8 @@
                 
                 <div class="personal-details-popup" >
                     <div class="personal-details-left">
-                        <img src="<?php echo IMGROOT?>/profile-pic.jpeg" class="profile-pic" alt="">
-                        <p>Collector ID: <span>C1234</span></p>
+                        <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $data['image']?>" class="profile-pic" alt="">
+                        <p>Collector ID: <span>C<?php echo $data['id']?></span></p>
                     </div>
                     <div class="personal-details-right"> 
                         <div class="personal-details-right-labels">
@@ -210,12 +212,12 @@
                             <span>DOB</span><br>
                         </div>
                         <div class="personal-details-right-values">
-                            <span>Jung hae in</span><br>
-                            <span>haein@gmail.com</span><br>
-                            <span>123456789V</span><br>
-                            <span>Seoul</span><br>
-                            <span>0771234567</span><br>
-                            <span>2001-03-26</span><br>
+                            <span><?php echo $data['name']?></span><br>
+                            <span><?php echo $data['email']?></span><br>
+                            <span><?php echo $data['nic']?></span><br>
+                            <span><?php echo $data['address']?></span><br>
+                            <span><?php echo $data['contact_no']?></span><br>
+                            <span><?php echo $data['dob']?></span><br>
 
                         </div>   
                     </div>   
@@ -226,7 +228,7 @@
         
     <?php endif; ?>
 
-    <?php if(false) : ?>
+    <?php if($data['vehicle_details_click']=='True') : ?>
         <div class="vehicle-details-popup-box">
             <div class="vehicle-details-popup-form" id="popup">
                 <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close"></a>
@@ -240,10 +242,10 @@
                         <span>Vehicle Type</span><br>
                     </div>
                     <div class="vehicle-details-values">
-                        <span>C1234</span><br>
-                        <span>Jung hae in</span><br>
-                        <span>HQ-1234</span><br>
-                        <span>Van</span><br>
+                        <span>C<?php echo $data['id']?></span><br>
+                        <span><?php echo $data['name']?></span><br>
+                        <span><?php echo $data['vehicle_no']?></span><br>
+                        <span><?php echo $data['vehicle_type']?></span><br>
                     </div>
                 </div>
             </div>

@@ -72,7 +72,9 @@
                 </div>
             </div>
         </div>
-        <?php if($data['click_update']=='True') : ?>
+
+
+    <?php if($data['click_update']=='True') : ?>
                 <div class="update_click">
                     <div class="popup-form" id="popup">
                     <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png"  class="update-popup-img" alt=""></a>
@@ -149,7 +151,7 @@
                     </div>
                 </div>
 
-        <?php endif; ?> 
+    <?php endif; ?> 
     
         
     <?php if($data['confirm_delete']== 'True') : ?>
@@ -189,11 +191,7 @@
         </div>
     <?php endif; ?>
 
-<<<<<<< HEAD
     <?php if($data['personal_details_click']=='True') : ?>
-=======
-    <?php if(false) : ?>
->>>>>>> e4c7d38fbba5352ba3a610d6befce55723209a1f
         <div class="personal-details-popup-box">
             <div class="personal-details-popup-form" id="popup">
                 <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"></a>
@@ -201,7 +199,7 @@
                 
                 <div class="personal-details-popup" >
                     <div class="personal-details-left">
-                        <img src="<?php echo IMGROOT?>/profile-pic.jpeg" class="profile-pic" alt="">
+                        <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $data['image']?>" class="profile-pic" alt="">
                         <p>Collector ID: <span>C<?php echo $data['id']?></span></p>
                     </div>
                     <div class="personal-details-right"> 
@@ -230,11 +228,7 @@
         
     <?php endif; ?>
 
-<<<<<<< HEAD
     <?php if($data['vehicle_details_click']=='True') : ?>
-=======
-    <?php if(false) : ?>
->>>>>>> e4c7d38fbba5352ba3a610d6befce55723209a1f
         <div class="vehicle-details-popup-box">
             <div class="vehicle-details-popup-form" id="popup">
                 <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close"></a>

@@ -189,11 +189,7 @@
         </div>
     <?php endif; ?>
 
-<<<<<<< HEAD
     <?php if($data['personal_details_click']=='True') : ?>
-=======
-    <?php if(false) : ?>
->>>>>>> e4c7d38fbba5352ba3a610d6befce55723209a1f
         <div class="personal-details-popup-box">
             <div class="personal-details-popup-form" id="popup">
                 <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"></a>
@@ -230,11 +226,7 @@
         
     <?php endif; ?>
 
-<<<<<<< HEAD
     <?php if($data['vehicle_details_click']=='True') : ?>
-=======
-    <?php if(false) : ?>
->>>>>>> e4c7d38fbba5352ba3a610d6befce55723209a1f
         <div class="vehicle-details-popup-box">
             <div class="vehicle-details-popup-form" id="popup">
                 <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close"></a>

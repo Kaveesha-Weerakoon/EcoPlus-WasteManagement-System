@@ -42,7 +42,9 @@
         'click_update' =>'',
         'update_success'=>'',
         'confirm_delete' =>'',
-        'delete_success' =>''
+        'delete_success' =>'',
+        'personal_details_click'=> '',
+        'vehicle_details_click'=> ''
    
       ];
      
@@ -266,6 +268,8 @@
                 'update_success'=>'',
                 'confirm_delete'=> '',
                 'delete_success'=> '',
+                'personal_details_click'=> '',
+                'vehicle_details_click'=> '',
                 
                 'name_err' => '',
                 'nic_err' => '',
@@ -363,6 +367,8 @@
           'update_success'=>'',
           'confirm_delete'=> '',
           'delete_success'=> '',
+          'personal_details_click'=> '',
+          'vehicle_details_click'=> '',
 
           'name_err' => '',
           'nic_err' => '',
@@ -385,13 +391,15 @@
 
 
     public function collector_delete_confirm($collectorId){
-         $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
         $data = [
           'collectors' => $collectors,
           'confirm_delete' => 'True',
           'delete_success' =>'',
           'click_update' =>'',
           'update_success'=>'',
+          'personal_details_click'=> '',
+          'vehicle_details_click'=> '',
           'collector_id' => $collectorId
 
         ];
@@ -408,7 +416,9 @@
         'collectors' => $collectors,
         'click_update' =>'',
         'update_success'=>'',
-        'confirm_delete'=> ''
+        'confirm_delete'=> '',
+        'personal_details_click'=> '',
+        'vehicle_details_click'=> ''
 
       ];
 
@@ -431,7 +441,54 @@
     }
 
     public function personal_details_view($collectorId){
+        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        $collector = $this->collectorModel->getCollector_ByID_view($collectorId);
+        $data = [
+          'collectors' => $collectors,
+          'id'=> $collectorId,
+          'name' => $collector->name,
+          'email'=> $collector->email,
+          'nic' => $collector->nic,
+          'dob'=> $collector->dob,
+          'contact_no'=> $collector->contact_no,
+          'address' => $collector->address,
+          'personal_details_click'=> 'True',
+          'vehicle_details_click'=> '',
+          'confirm_delete' => '',
+          'delete_success' =>'',
+          'click_update' =>'',
+          'update_success'=>'',
+          
 
+        ];
+      
+      
+        $this->view('center_managers/collectors', $data);
+
+    }
+
+    public function vehicle_details_view($collectorId){
+      $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        $collector = $this->collectorModel->getCollector_ByID_view($collectorId);
+        $data = [
+          'collectors' => $collectors,
+          'id'=> $collectorId,
+          'name' => $collector->name,
+          'vehicle_no'=> $collector->vehicle_no,
+          'vehicle_type'=> $collector->vehicle_type,
+          'vehicle_details_click'=> 'True',
+          'personal_details_click'=> '',
+          'confirm_delete' => '',
+          'delete_success' =>'',
+          'click_update' =>'',
+          'update_success'=>'',
+          
+
+        ];
+      
+      
+        $this->view('center_managers/collectors', $data);
+  
     }
 
     public function center_workers(){

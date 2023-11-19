@@ -59,7 +59,7 @@
                                            <td><?php echo $center_manager->email?></td>
                                            <td> <?php echo $center_manager->assinged?></td>
                                            <td> <?php echo $center_manager->assigned_center_id?></td>
-                                           <td class="cancel-open"><img src="<?php echo IMGROOT?>/view.png" alt=""></td>
+                                           <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/cm_personal_details_view/<?php echo $center_manager->user_id ?>"><img src="<?php echo IMGROOT?>/personal_details_icon.png" alt=""></a></td>
                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_update/<?php echo $center_manager->user_id ?>"><img src="<?php echo IMGROOT?>/update.png" alt=""></a></td>
                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_delete_confirm/<?php echo $center_manager->user_id?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
                                    </tr>
@@ -173,6 +173,43 @@
 
                 </div>
             </div>
+            <?php endif; ?>
+
+            <?php if($data['personal_details_click']=='True') : ?>
+                <div class="personal-details-popup-box">
+                    <div class="personal-details-popup-form" id="popup">
+                        <a href="<?php echo URLROOT?>/admin/center_managers"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"></a>
+                        <center><div class="personal-details-topic">Personal Details</div></center>
+                        
+                        <div class="personal-details-popup" >
+                            <div class="personal-details-left">
+                                <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $data['image']?>" class="profile-pic" alt="">
+                                <p>Center Manager ID: <span>C<?php echo $data['id']?></span></p>
+                            </div>
+                            <div class="personal-details-right"> 
+                                <div class="personal-details-right-labels">
+                                    <span>Name</span><br>
+                                    <span>Email</span><br>
+                                    <span>NIC</span><br>
+                                    <span>Address</span><br>
+                                    <span>Contact No</span><br>
+                                    <span>DOB</span><br>
+                                </div>
+                                <div class="personal-details-right-values">
+                                    <span><?php echo $data['name']?></span><br>
+                                    <span><?php echo $data['email']?></span><br>
+                                    <span><?php echo $data['nic']?></span><br>
+                                    <span><?php echo $data['address']?></span><br>
+                                    <span><?php echo $data['contact_no']?></span><br>
+                                    <span><?php echo $data['dob']?></span><br>
+
+                                </div>   
+                            </div>   
+                        </div>
+                    </div>
+
+                </div>
+        
             <?php endif; ?>
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

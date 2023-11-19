@@ -455,8 +455,34 @@
       }
 
      
-
     }
+
+    public function cm_personal_details_view($managerId){
+      $center_managers = $this->center_managerModel->get_center_managers();
+      $center_manager = $this->center_managerModel->getCenterManager_ByID_view($managerId);
+      $data = [
+        'center_managers' => $center_managers,
+        'id'=> $managerId,
+        'name' => $center_manager->name,
+        'email'=> $center_manager->email,
+        'nic' => $center_manager->nic,
+        'dob'=> $center_manager->dob,
+        'contact_no'=> $center_manager->contact_no,
+        'address' => $center_manager->address,
+        'image'=>$center_manager->image,
+        'personal_details_click'=> 'True',
+        'confirm_delete' => '',
+        'success' =>'',
+        'click_update' =>'',
+        'update_success'=>'',
+        
+
+      ];
+    
+    
+      $this->view('admin/center_managers', $data);
+
+  }
 
     public function customers(){
       
@@ -592,6 +618,29 @@
       ];
      
       $this->view('admin/collectors', $data);
+    }
+
+    public function vehicle_details_view($collectorId){
+        $collectors =$this->collector_model->get_collectors();
+        $collector = $this->collector_model->getCollector_ByID_view($collectorId);
+        $data = [
+          'collectors' => $collectors,
+          'id'=> $collectorId,
+          'name' => $collector->name,
+          'vehicle_no'=> $collector->vehicle_no,
+          'vehicle_type'=> $collector->vehicle_type,
+          'vehicle_details_click'=> 'True',
+          // 'confirm_delete' => '',
+          // 'delete_success' =>'',
+          // 'click_update' =>'',
+          // 'update_success'=>'',
+          
+
+        ];
+      
+      
+        $this->view('admin/collectors', $data);
+  
     }
 
     public function complain_collectors(){

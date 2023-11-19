@@ -34,16 +34,16 @@
                 </div>
                 <div class="main-right-bottom-down">
                 <table class="table">
-                             <?php foreach($data['collectors'] as $post) : ?>
+                             <?php foreach($data['collectors'] as $collector) : ?>
                                        <tr class="table-row">
-                                           <td>C <?php echo $post->user_id?></td>
-                                           <td><?php echo $post->center_name?></td>
-                                           <td><?php echo $post->name?></td>
-                                           <td> <?php echo $post->nic?></td>
-                                           <td> <?php echo $post->email?></td>
-                                           <td> <?php echo $post->contact_no?></td>
-                                           <td> <?php echo $post->address?></td>
-                                           <td><img class="location" src="<?php echo IMGROOT?>/View.png" alt=""></td>
+                                           <td>C <?php echo $collector->user_id?></td>
+                                           <td><?php echo $collector->center_name?></td>
+                                           <td><?php echo $collector->name?></td>
+                                           <td> <?php echo $collector->nic?></td>
+                                           <td> <?php echo $collector->email?></td>
+                                           <td> <?php echo $collector->contact_no?></td>
+                                           <td> <?php echo $collector->address?></td>
+                                           <td><img class="location" src="<?php echo IMGROOT?>/car.png" alt=""></td>
                                            <td><img class="location" src="<?php echo IMGROOT?>/delete.png" alt=""></td>
                              <?php endforeach; ?>
                      </table>

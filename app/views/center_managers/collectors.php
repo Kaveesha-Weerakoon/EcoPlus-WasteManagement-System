@@ -60,7 +60,7 @@
                                 <td class="collector_image"><img src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>" alt=""></td>
                                 <td><?php echo $collector->name?></td>
                                 <td><?php echo $collector->email?></td>
-                                <td><a href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/resume.png" alt=""></a></td>
+                                <td><a href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/personal_details_icon.png" alt=""></a></td>
                                 <td><a href="<?php echo URLROOT?>/centermanagers/vehicle_details_view/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/car.png" alt=""></a></td>
                                 <td><a href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/update.png" alt=""></a></td>
                                 <td class="delete"><a href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>"> <img src="<?php echo IMGROOT ?>/delete.png" alt=""></a></td>

@@ -43,17 +43,40 @@
                                            <td> <?php echo $collector->email?></td>
                                            <td> <?php echo $collector->contact_no?></td>
                                            <td> <?php echo $collector->address?></td>
-                                           <td><img class="location" src="<?php echo IMGROOT?>/car.png" alt=""></td>
+                                           <td><a href="<?php echo URLROOT?>/admin/vehicle_details_view/<?php echo $collector->user_id ?>"><img class="location" src="<?php echo IMGROOT?>/car.png" alt=""></a></td>
                                            <td><img class="location" src="<?php echo IMGROOT?>/delete.png" alt=""></td>
                              <?php endforeach; ?>
-                     </table>
+                </table>
                    
                   
                 </div>
             </div>
         </div>
     </div>
-
+    <?php if($data['vehicle_details_click']=='True') : ?>
+        <div class="vehicle-details-popup-box">
+            <div class="vehicle-details-popup-form" id="popup">
+                <a href="<?php echo URLROOT?>/admin/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close"></a>
+                <center><div class="vehicle-details-topic">Vehicle Details</div></center>
+                
+                <div class="vehicle-details-popup" >
+                    <div class="vehicle-details-labels">
+                        <span>Collector ID</span><br>
+                        <span>Name</span><br>
+                        <span>Vehicle Plate No</span><br>
+                        <span>Vehicle Type</span><br>
+                    </div>
+                    <div class="vehicle-details-values">
+                        <span>C<?php echo $data['id']?></span><br>
+                        <span><?php echo $data['name']?></span><br>
+                        <span><?php echo $data['vehicle_no']?></span><br>
+                        <span><?php echo $data['vehicle_type']?></span><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <?php endif; ?>
 
 
 </div>

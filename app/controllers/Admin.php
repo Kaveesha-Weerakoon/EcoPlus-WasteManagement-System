@@ -620,6 +620,29 @@
       $this->view('admin/collectors', $data);
     }
 
+    public function vehicle_details_view($collectorId){
+        $collectors =$this->collector_model->get_collectors();
+        $collector = $this->collector_model->getCollector_ByID_view($collectorId);
+        $data = [
+          'collectors' => $collectors,
+          'id'=> $collectorId,
+          'name' => $collector->name,
+          'vehicle_no'=> $collector->vehicle_no,
+          'vehicle_type'=> $collector->vehicle_type,
+          'vehicle_details_click'=> 'True',
+          // 'confirm_delete' => '',
+          // 'delete_success' =>'',
+          // 'click_update' =>'',
+          // 'update_success'=>'',
+          
+
+        ];
+      
+      
+        $this->view('admin/collectors', $data);
+  
+    }
+
     public function complain_collectors(){
 
       $collector_complains= $this->collector_complain_Model->get_complains();

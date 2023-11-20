@@ -69,12 +69,29 @@
 
     public function getCenterManagerByID($data){
 
-      $this->db->query('SELECT * FROM center_managers WHERE user_id = :assisId');
-      $this->db->bind(':assisId', $data);
+      $this->db->query('SELECT * FROM center_managers WHERE user_id = :managerId');
+      $this->db->bind(':managerId', $data);
 
       $row = $this->db->single();
 
       return $row;
+    }
+
+    public function getCenterManagerByNIC_except($NIC, $managerId){
+      $this->db->query('SELECT * FROM center_managers WHERE nic = :nic AND user_id <> :id'); 
+      $this->db->bind(':nic', $NIC);
+      $this->db->bind(':id', $managerId);
+
+      $rows = $this->db->resultSet();
+
+      //check whether there are center managers with the entered NIC
+      if($this->db->rowCount() > 0){
+        return true;
+      } 
+      else {
+        return false;
+      }
+
     }
 
     public function get_Non_Assigned_CenterManger(){
@@ -132,5 +149,46 @@
       $result=$this->db->execute();
     }
   
+    public function update_center_managers($data){
+      $this->db->query('UPDATE users SET name = :name WHERE id= :managerId');
+      $this->db->bind(':managerId', $data['id']);
+      $this->db->bind(':name', $data['name']);
+      
+      $result1 = $this->db->execute();
+      if($result1){
+        $this->db->query('UPDATE center_managers SET nic = :nic, address = :address, contact_no = :contact_no, dob = :dob WHERE user_id = :collectorId');
+        $this->db->bind(':collectorId', $data['id']);
+        $this->db->bind(':nic', $data['nic']);
+        $this->db->bind(':address', $data['address']);
+        $this->db->bind(':contact_no', $data['contact_no']);
+        $this->db->bind(':dob', $data['dob']);
+
+        $result2 = $this->db->execute();
+        if($result2){
+          return $result2;
+        }
+        else{
+          return false;
+        }
+
+      }else{
+        return false;
+      }
+
+
+    }
+
+    public function getCenterManager_ByID_view($managerId){
+      $this->db->query('SELECT *
+                        FROM center_managers
+                        INNER JOIN users
+                        ON center_managers.user_id = users.id
+                        WHERE center_managers.user_id = :manager_Id'); 
+      $this->db->bind(':manager_Id', $managerId);
+      
+      $row = $this->db->single();
+      return $row;
+
+    }
   
 }

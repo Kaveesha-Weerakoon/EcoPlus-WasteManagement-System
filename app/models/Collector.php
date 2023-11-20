@@ -19,7 +19,7 @@
           $row = $this->db->single();
           if ($row) {
             $user_id = $row->id;
-            $this->db->query('INSERT INTO collectors (user_id, contact_no, address, nic,dob,center_id,center_name,vehicle_no,vehicle_type) VALUES (:user_id, :contact_no, :address, :nic,:dob,:center_id,:center_name,:vehicle_no,:vehicle_type)');
+            $this->db->query('INSERT INTO collectors (user_id, contact_no, address, nic,dob,center_id,center_name,vehicle_no,vehicle_type,image) VALUES (:user_id, :contact_no, :address, :nic,:dob,:center_id,:center_name,:vehicle_no,:vehicle_type,:image)');
             $this->db->bind(':user_id', $user_id);
             $this->db->bind(':contact_no', $data['contact_no']);
             $this->db->bind(':address', $data['address']);
@@ -29,6 +29,7 @@
             $this->db->bind(':center_name', $data['center_name']);
             $this->db->bind(':vehicle_no', $data['vehicle_no']);
             $this->db->bind(':vehicle_type', $data['vehicle_type']);
+            $this->db->bind(':image', $data['profile_name']);
             $result = $this->db->execute();
 
           }

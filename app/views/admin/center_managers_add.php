@@ -25,7 +25,7 @@
                         </a>
                         <a href="./add.html">
                             <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">Add</b></p>
+                                <p><b style="color: #1B6652;">Register</b></p>
                                 <div class="line"></div>
                             </div>
                         </a>
@@ -122,7 +122,7 @@
                                   </div>  
                                   <div class="main-bottom-down-content-bottom-one-right">
                                         <div class="form-fields">
-                                             <h2>Re enter Password</h2>
+                                             <h2>Re-enter Password</h2>
                                              <input type="password" name="confirm_password" value="<?php echo $data['confirm_password']; ?>">
                                              <div class="err"><?php echo $data['confirm_password_err']?></div>
                                          </div>

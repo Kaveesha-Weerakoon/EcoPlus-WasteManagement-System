@@ -9,7 +9,7 @@
 
         <div class="main-top-component">
           <p><?php echo $_SESSION['user_name']?></p>
-          <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="" />
+          <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>" alt="">
         </div>
       </div>
       <div class="main-bottom">
@@ -21,27 +21,32 @@
             </div>
 
             <div class="main-bottom-component-left-component">
+              <h2>Name</h2>
               <input value="<?php echo $data['name']; ?>" type="text" name="name"  placeholder="Name">
               <div class="err"><?php echo $data['name_err']; ?></div>
             </div>
 
             <div class="main-bottom-component-left-component">
+              <h2>Contact Number</h2>
               <input value="<?php echo $data['contact_no']; ?>" name="contact_no" type="text" placeholder="Contact Number">
               <div class="err"><?php echo $data['contact_no_err']; ?></div>
             </div>
 
             <div class="main-bottom-component-left-component">
+              <h2>District</h2>
               <input type="text" value="<?php echo $data['region']; ?>" name="region" placeholder="District">
               <div class="err"><?php echo $data['region_err']; ?></div>
             </div>
 
             <div class="main-bottom-component-left-component">
-              <input value="<?php echo $data['subject']; ?>" name="subject" type="text" placeholder="Subject">
+               <h2>Subject</h2>
+               <input value="<?php echo $data['subject']; ?>" name="subject" type="text" placeholder="Subject">
               <div  class="err"><?php echo $data['subject_err']; ?></div>
             </div>
 
             <div class="main-bottom-component-left-component">
-              <input value="<?php echo $data['complain']; ?>" name="complain" type="text" placeholder="Complain" class="complain">
+              <h2>Complain</h2>
+              <input value="<?php echo $data['complain']; ?>" name="complain" type="text" placeholder="Complain" >
               <div class="err"><?php echo $data['complain_err']; ?></div>
             </div>
             <div class="main-bottom-component-left-button">

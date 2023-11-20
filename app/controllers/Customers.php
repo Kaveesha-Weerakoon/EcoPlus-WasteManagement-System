@@ -128,11 +128,11 @@
         }
 
         if(empty($data['region'])){
-          $data['region_err'] = 'Pleae enter region';
+          $data['region_err'] = 'Please enter region';
         } 
         
         if(empty($data['subject'])){
-          $data['subject_err'] = 'Pleae enter subject';
+          $data['subject_err'] = 'Please enter subject';
         }
         
         if(empty($data['complain'])){

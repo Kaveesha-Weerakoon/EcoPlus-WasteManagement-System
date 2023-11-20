@@ -217,7 +217,7 @@
           'email_err' => '' ,
           'password_err' => '' ,
           'complain_err' => '' ,
-          'profile_err'=>'error',
+          'profile_err'=>'',
           'confirm_password_err'=>'' ,
           'registered'=>'',
            'profile_upload_error'=>''   
@@ -292,6 +292,10 @@
           if($data['password'] != $data['confirm_password']){
             $data['confirm_password_err'] = 'Passwords do not match';
           }
+        } 
+        if ($_FILES['profile_image']['error'] == 4) {
+          $data['profile_err'] = 'Upload a image';
+     
         }
 
         if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err'])){

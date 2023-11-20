@@ -30,19 +30,34 @@
               $this->db->bind(':address', $data['address']);
               $this->db->bind(':city', $data['city']);
       
-              $result = $this->db->execute();
-      
-              // Return true or false based on the final insert
-              return $result;
-          } else {
-              // Handle the case where the user was not found in the database
+              $result_customer_insert = $this->db->execute();
+
+            if ($result_customer_insert) {
+                $this->db->query('INSERT INTO customer_credits (user_id, credit_amount) VALUES (:user_id, 100)');
+                $this->db->bind(':user_id', $user_id);
+
+                $result_credit_insert = $this->db->execute();
+
+                // Return true or false based on the final insert into customer_credits
+                return $result_credit_insert;
+            }else {
+            // Handle failure in inserting into the 'customers' table
               return false;
-          }
+            }
+
+          } else {
+            // Handle the case where the user was not found in the database
+            return false;
+        }
+
       } else {
-          // Handle the case where the user was not inserted into the 'users' table
-          return false;
-      }
+        // Handle the case where the user was not inserted into the 'users' table
+        return false;
     }
+
+  }
+                          
+
 
     public function login($email, $password){
       $this->db->query('SELECT * FROM users WHERE email = :email');

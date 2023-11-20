@@ -171,6 +171,10 @@
      
     }
 
+    
+    
+
+  
     public function request_collect(){
       $data = [
         'title' => 'TraversyMVC',
@@ -179,12 +183,7 @@
       $this->view('customers/request_collect', $data);
     }
 
-    public function transfer(){
-      $data = [];
-     
-     
-      $this->view('customers/transfer', $data);
-    }
+
 
     public function credit_per_waste(){
        $credit= $this->creditModel->get();
@@ -202,5 +201,72 @@
       session_destroy();
       redirect('users/login');
     }
+
+
    
-  }
+  
+
+
+  public function transfer() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+            'customer_id' => trim($_POST['customer_id']),
+            'credit_amount' => trim($_POST['credit_amount']),
+
+            'customer_id_err' => '',
+            'credit_amount_err' => '',
+            'completed' => ''
+        ];
+
+        if (empty($data['customer_id'])) {
+          $data['customer_id_err'] = 'Please enter customer id';
+      } else {
+          // Extract numeric part from the user input
+          $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
+          // Convert extracted numeric part to an integer
+          $customer_id = (int)$numeric_part;
+      
+          // Check if the user input matches the required format
+          if (!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
+              $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
+          } elseif (!$this->customerModel->get_customer($customer_id)) {
+              $data['customer_id_err'] = 'Customer ID does not exist';
+          }
+      }
+      
+
+
+
+
+
+
+
+      
+        if (empty($data['credit_amount'])) {
+            $data['credit_amount_err'] = 'Please enter credit amount';
+        } elseif (!filter_var($data['credit_amount'], FILTER_VALIDATE_FLOAT)) {
+            $data['credit_amount_err'] = 'Credit amount should be a valid number';
+        }
+
+        if (empty($data['customer_id_err']) && empty($data['credit_amount_err'])) {
+            /*...*/
+        } else {
+            $this->view('customers/transfer', $data);
+        }
+    } else {
+        $data = [
+            'customer_id' => '',
+            'credit_amount' => '',
+            'customer_id_err' => '',
+            'credit_amount_err' => '',
+            'completed' => ''
+        ];
+
+        $this->view('customers/transfer', $data);
+    }
+ }
+
+}
+  ?>

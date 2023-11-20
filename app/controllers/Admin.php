@@ -223,16 +223,7 @@
            'profile_upload_error'=>''   
         ];
 
-        if ($_FILES['profile_image']['error'] == 4) {
-          $data['profile_err'] = 'Upload a image';
-      } else {
-          if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/center_manager/')) {
-            $data['profile_err'] = '';
-
-          } else {
-              $data['profile_err'] = 'Error uploading the profile image';
-          }
-      }
+    
      
        //validate email
         if(empty($data['email'])){
@@ -301,6 +292,19 @@
           if($data['password'] != $data['confirm_password']){
             $data['confirm_password_err'] = 'Passwords do not match';
           }
+        }
+
+        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err'])){
+          if ($_FILES['profile_image']['error'] == 4) {
+            $data['profile_err'] = 'Upload a image';
+        } else {
+            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/center_manager/')) {
+              $data['profile_err'] = '';
+  
+            } else {
+                $data['profile_err'] = 'Error uploading the profile image';
+            }
+        }
         }
 
         if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err']) && empty($data['profile_err'])){

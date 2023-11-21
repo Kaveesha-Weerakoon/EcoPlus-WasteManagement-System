@@ -22,6 +22,7 @@
                         <tr class="table-header">
                             <th>Customer ID</th>
                             <th>Name</th>
+                            <th>Pro Pic</th>
                             <th>Email</th>
                             <th>Contact No</th>
                             <th>Address</th>
@@ -39,13 +40,14 @@
                                        <tr class="table-row">
                                            <td>C <?php echo $post->user_id?></td>
                                            <td><?php echo $post->name?></td>
+                                           <td><img class="propic" src="<?php echo IMGROOT ?>/img_upload/customer/<?php echo ($post->image == '') ? 'Profile.png' : $post->image; ?>" alt=""></td>
                                            <td><?php echo $post->email?></td>
                                            <td> <?php echo $post->mobile_number?></td>
                                            <td> <?php echo $post->address?></td>
                                            <td> <?php echo $post->city?></td>
                                            <td> 0</td>
                                            <td><img class="location" src="<?php echo IMGROOT?>/View.png" alt=""></td>
-                                           <td><img class="location" src="<?php echo IMGROOT?>/delete.png" alt=""></td>
+                                           <td><a href="<?php echo URLROOT?>/Admin/customerdelete_confirm/<?php echo $post->user_id?>"><img class="location" src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
                              <?php endforeach; ?>
                      </table>
                   
@@ -53,6 +55,23 @@
             </div>
         </div>
     </div>
+    <?php if($data['delete_confirm']=='True') : ?>
+       <div class="delete_confirm">
+              <div class="popup" id="popup">
+                 <img src="<?php echo IMGROOT?>/trash.png" alt="">
+                 <?php
+                       echo "<h2>Delete this Collector?</h2>";
+                       echo "<p>This action will permanently delete this center manager</p>";          
+                 ?>
+                 <div class="btns">
+                    
+                    <a href="<?php echo URLROOT?>/Admin/customerdelete/<?php echo $data['id']?>"><button type="button" class="deletebtn">Delete</button></a>
+                                       
+                    <a href="<?php echo URLROOT?>/Admin/customers"><button type="button" class="cancelbtn" >Cancel</button></a>
+                  </div>
+               </div>
+       </div>
+       <?php endif; ?>
 </div>
 
 

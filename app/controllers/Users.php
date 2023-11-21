@@ -41,7 +41,8 @@
           ];
 
           if ($_FILES['profile_image']['error'] == 4) {
-          
+            $data['profile_image_name'] ='';
+
         } else {
             if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/customer/')) {
               $data['profile_err'] = '';
@@ -234,6 +235,7 @@
                 $collector = $this->collectorModel->getCollectorById($loggedInUser->id);
                 $_SESSION['center_id'] = $collector->center_id;
                 $_SESSION['center'] = $collector->center_name;
+                $_SESSION['collector_profile'] = $collector->image;
                 $this->createCollectorSession($loggedInUser);
               }
               else if($loggedInUser->role=="centermanager"){

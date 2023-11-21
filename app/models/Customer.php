@@ -27,16 +27,64 @@
 
      public function deletecomplain($id){
        $this->db->query('DELETE FROM customers WHERE id = :id');
-      // Bind values
        $this->db->bind(':id', $id);
 
-      // Execute
        if($this->db->execute()){
          return true;
       } else {
         return false;
       }
      }
+
+     public function editprofile($data){
+
+            $this->db->query('UPDATE users SET name = :value WHERE id = :id');
+            $this->db->bind(':value', $data['name']);
+            $this->db->bind(':id', $_SESSION['user_id']);
+            $_SESSION['user_name']=$data['name'];
+            if ($this->db->execute()) {
+              $this->db->query('UPDATE customers SET address = :address, mobile_number = :contact_number, city = :city WHERE user_id = :customer_id');
+              $this->db->bind(':address',  $data['address']);
+              $this->db->bind(':contact_number',  $data['contactno']);
+              $this->db->bind(':city',  $data['city']);
+              $this->db->bind(':customer_id',  $_SESSION['user_id']);
+             
+              if ($this->db->execute()) {
+                  return true; 
+              } else {
+                  return false; 
+              }          
+         }else {
+             return false; 
+         }
+     }
+
+     public function editprofile_withimg($data){
+
+      $this->db->query('UPDATE users SET name = :value WHERE id = :id');
+      $this->db->bind(':value', $data['name']);
+      $this->db->bind(':id', $_SESSION['user_id']);
+
+      $_SESSION['user_name']=$data['name'];
+      $_SESSION['collector_profile'] =$data['profile_image_name'];
+
+      if ($this->db->execute()) {
+        $this->db->query('UPDATE customers SET address = :address, mobile_number = :contact_number, city = :city, image = :image WHERE user_id = :customer_id');
+        $this->db->bind(':address', $data['address']);
+        $this->db->bind(':contact_number', $data['contactno']);
+        $this->db->bind(':city', $data['city']);
+        $this->db->bind(':customer_id', $_SESSION['user_id']);
+        $this->db->bind(':image', $data['profile_image_name']);
+        
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }          
+       }else {
+         return false; 
+      }
+       }
 
 }
     

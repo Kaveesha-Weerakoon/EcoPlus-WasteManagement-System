@@ -29,7 +29,7 @@
                             <h2>Center Waste Management</h2>
                         </div>
                     </a>
-                    <a href="./CenterManager_Edit_Profile/CenterManager_Edit_Profile.html">
+                    <a href="<?php echo URLROOT?>/centermanagers/editprofile">
                         <div class="main-left-middle-content">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">

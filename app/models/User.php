@@ -20,9 +20,8 @@
           $this->db->bind(':email', $data['email']);
           $row = $this->db->single();
       
-          // Check if the user was successfully inserted and retrieved
           if ($row) {
-              $user_id = $row->id; // Assuming 'user_id' is the correct column name
+              $user_id = $row->id; 
       
               $this->db->query('INSERT INTO customers (user_id, mobile_number, address, city,image) VALUES (:user_id, :mobile_number, :address, :city,:image)');
               $this->db->bind(':user_id', $user_id);
@@ -38,29 +37,52 @@
 
                 $result_credit_insert = $this->db->execute();
 
-                // Return true or false based on the final insert into customer_credits
                 return $result_credit_insert;
             }else {
-            // Handle failure in inserting into the 'customers' table
               
               $result = $this->db->execute();
       
-              // Return true or false based on the final insert
               return $result;
           } 
 
           } else {
-            // Handle the case where the user was not found in the database
             return false;
         }
 
       } else {
-        // Handle the case where the user was not inserted into the 'users' table
         return false;
     }
 
   }
-                          
+
+  public function pw_check($id, $password){
+    $this->db->query('SELECT * FROM users WHERE id = :id');
+    $this->db->bind(':id', $id);
+
+    $row = $this->db->single();
+
+    $hashed_password = $row->password;
+    if(password_verify($password, $hashed_password)){
+      return $row;die();
+    } else {
+      return false;
+    }
+  }
+
+  public function change_pw($id, $newPassword) {
+
+    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+    $this->db->query('UPDATE users SET password = :password WHERE id = :id');
+    $this->db->bind(':password', $hashedPassword);
+    $this->db->bind(':id', $id);
+
+    if ($this->db->execute()) {
+        return true; 
+    } else {
+        return false; 
+    }
+}                
 
 
     public function login($email, $password){

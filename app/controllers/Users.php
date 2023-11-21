@@ -234,6 +234,7 @@
                 $collector = $this->collectorModel->getCollectorById($loggedInUser->id);
                 $_SESSION['center_id'] = $collector->center_id;
                 $_SESSION['center'] = $collector->center_name;
+                $_SESSION['collector_profile'] = $collector->image;
                 $this->createCollectorSession($loggedInUser);
               }
               else if($loggedInUser->role=="centermanager"){

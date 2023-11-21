@@ -729,7 +729,7 @@
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $id=$_SESSION['center_manager_id']; 
-        $user=$this->collectorModel->getCollectorById($id);
+        $user=$this->centermanagerModel->getCenterManagerByID($id);
 
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         
@@ -782,8 +782,8 @@
                 $data['change_pw_success']='True';
                 $data['profile_err'] = '';
            } else {
-             $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/collector/' . $user->image;    
-            if (updateImage($old_image_path, $_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/collector/')) {
+             $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/center_manager/' . $user->image;    
+            if (updateImage($old_image_path, $_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/center_manager/')) {
               $this->centermanagerModel->editprofile_withimg($data);
               $data['success_message']="Profile Details Updated Successfully";
               $data['change_pw_success']='True';
@@ -861,7 +861,7 @@
 
       $id=$_SESSION['center_manager_id']; 
       $user=$this->centermanagerModel->getCenterManagerByID($id);
-      $data['name']=$_SESSION['collector_name'];
+      $data['name']=$_SESSION['center_manager_name'];
       $data['contactno']=$user->contact_no;
       $data['address']=$user->address;
    

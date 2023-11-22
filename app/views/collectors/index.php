@@ -31,7 +31,7 @@
                             <h2>Collector Assistants</h2>
                         </div>
                     </a>
-                    <a href="">
+                    <a href="<?php echo URLROOT?>/collectors/editprofile">
                         <div class="main-left-middle-content ">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">

@@ -1,6 +1,13 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Customer_Request_collect">
-<div class="main">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+      <script  
+            src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
+            async defer>
+       </script>
+
+    <div class="main">
       <div class="main-top">
         <a href="CustomerDashboard.html">
           <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="" />
@@ -12,68 +19,99 @@
         </div>
       </div>
 
-      <div class="main-bottom">
-        <div class="main-bottom-content-bottom-component-img">
-          <img src="<?php echo IMGROOT?>/Home_Middle-Image.png" alt="" />
-        </div>
-        <div class="main-bottom-wrap">
-          <div class="main-bottom-content">
-            <h1>Request Garbage Collection Service</h1>
-            <div class="line-container">
-              <div class="line"></div>
-            </div>
+      <form  class="main-bottom" action="<?php echo URLROOT;?>/customers/request_collect" method="post">
+     
+        <div class="main-bottom-component" >
+             <div class="main-bottom-component-left">
+                  <img src="<?php echo IMGROOT?>/RequestCollect.jpg" alt="">
+             </div>
+             <div class="main-bottom-component-right" >
+                    <div class="main-bottom-component-right-component-topic">
+                           <h2>Request a Collect</h2>
+                           <div class="line"></div>
+                    </div>
+                    <div class="main-bottom-component-right-component-main">
+                       <div class="main-bottom-component-right-component">
+                           <h2>Name</h2>
+                           <input value="<?php echo $data['name']?>" name="name" type="text" placeholder="Name">
+                           <div  class="err"><?php echo $data['name_err']?></div>
+                       </div>
+                       <div class="main-bottom-component-right-component">
+                           <h2>Contact Number</h2>
+                           <input value="<?php echo $data['contact_no']?>"name="contact_no" type="text" placeholder="Contact Number">
+                           <div  class="err"><?php echo $data['contact_no_err']?></div>
+                       </div>
+                    </div> 
+                    <div class="main-bottom-component-right-component-main">
 
-            <div class="main-bottom-content-top">
-              <label>
-                <input type="radio" name="language" value="java" />
-                Collection Service
-              </label>
-              <label>
-                <input type="radio" name="language" value="java" />
-                Cleanup Event
-              </label>
-            </div>
-            <div class="main-bottom-content-bottom">
-              <div class="main-bottom-content-bottom-component">
-                <p>Name</p>
-                <input type="text" />
+                          <div class="main-bottom-component-right-component">
+                             <h2>Date</h2>
+                             <input value="<?php echo $data['date']?>" name="date" type="date" >
+                             <div  class="err"><?php echo $data['date_err']?></div>
+                          </div>
+                          <div class="main-bottom-component-right-component">
+                             <h2>Time</h2>
+                             <input value="<?php echo $data['time']?>" name="time" type="Time" placeholder="Name">
+                             <div  class="err"><?php echo $data['time_err']?></div>
+                          </div>
+                    </div>
+                    <div class="main-bottom-component-right-component">
+                        <h2>Your Region</h2>
+                        <select name="center" id="centerDropdown">
+                         <?php
+                              $centerManagers = $data['centers'];
+                              if (!empty($centerManagers)) {
+                                foreach ($centerManagers as $center) {
+                                echo "<option value=\"$center->region\">$center->region</option>";
+                              }
+                              } else {
+                                 echo "<option value=\"default\">No Centers Available</option>";
+                                }
+                          ?>
+                        </select>
+                    </div>
+                    <div class="main-bottom-component-right-component">
+                        <h2>Pick Up Instructions</h2>
+                        <input value="<?php echo $data['instructions']?>" name="instructions" type="Text" placeholder="Pick Up Instructions">
+                        <div  class="err"><?php echo $data['instructions_err']?></div>
+                    </div>
+                    <div class="main-bottom-component-right-component Z">
+                        <h2>Location</h2>
+                     
+                        <div class="main-bottom-maps">
+                               <h4>Maps</h4>
+                               <img src="<?php echo IMGROOT?>/location2.png" alt="">
+                         
+                        </div>
+                    
+                    </div>
+                    <div class="main-bottom-component-right-component-button">
+                        <Button type="submit">Request Now</Button>
+                    </div>
+                  
               </div>
-              <div class="main-bottom-content-bottom-component">
-                <p>Date</p>
-                <input type="date" />
-              </div>
-              <div class="main-bottom-content-bottom-component">
-                <p>Region</p>
-                <input type="text" id="searchInput" placeholder="Search...">
-                <ul id="searchResults"></ul>
+         </div>
+         <div class="map_pop" id="mapPopup">
+        <div id="map"></div>
+            <div class="buttons-container" id="submitForm" >
+                <button type="submit" formaction="<?php echo URLROOT; ?>/customers/location_fetched" method="post" id="markLocationBtn" onclick="getLocation()">Mark Location</button>
+                <button type="button" id="cancelBtn">Cancel</button>
+                <input type="hidden" id="latitudeInput" name="latitude">
+                <input type="hidden" id="longitudeInput" name="longitude">
+             </div>
 
-              </div>
-              <div class="main-bottom-content-bottom-component">
-                <p>Contact Number</p>
-                <input type="text" />
-              </div>
-
-              <div class="main-bottom-content-bottom-component">
-                <p>Time</p>
-                <input type="time" />
-              </div>
-              <div class="main-bottom-content-bottom-component">
-                <p>Pick up Location</p>
-                <input type="text" />
-              </div>
-              <div class="main-bottom-content-bottom-component B">
-                <p>Description</p>
-                <input class="a" type="text" />
-              </div>
-              <div class="main-bottom-content-bottom-component">
-                <button>Request</button>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
+         </div> 
+      </form >
+      <script>
+           $( document).ready(function() {
+                 $('#centerDropdown').select2();
+           });
+      </script>
     </div>
+
+
+    <script src="<?php echo JSROOT?>/Request_Collect.js"> </script>   
+    
 </div>
 
 

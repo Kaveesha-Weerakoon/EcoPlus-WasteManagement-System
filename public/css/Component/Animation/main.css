@@ -1,0 +1,16 @@
+@keyframes bounceAndMove {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(0) translateY(-10px);
+        animation-timing-function: ease-in-out;
+    }
+
+}

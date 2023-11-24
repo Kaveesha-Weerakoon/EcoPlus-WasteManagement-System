@@ -102,11 +102,14 @@
         font-size: 16px;
         padding-left: 6px;
         border: 2px solid #2d3436;
+        outline: none;
+
         /* Set border color to transparent */
     }
 
     input:focus {
-        border: 1px solid #4dccaa;
+        border: 2px solid #4dccaa;
+        outline: none;
 
     }
 

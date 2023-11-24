@@ -1,4 +1,5 @@
 <?php
+
   class Customers extends Controller {
     public function __construct(){
 
@@ -6,6 +7,8 @@
       $this->creditModel=$this->model('Credit_amount');
       $this->customerModel=$this->model('Customer'); 
       $this->userModel=$this->model('User');
+      $this->center_model=$this->model('Center');
+
       if(!isLoggedIn('user_id')){
         redirect('users/login');
       }
@@ -379,18 +382,100 @@
      
     }
 
-    public function request_collect(){
-      $data = [
-        'title' => 'TraversyMVC',
+
+
+
+    private function getCommonData() {
+      $centers = $this->center_model->getallCenters();
+      return [
+          'centers' => $centers,
+          'map_pop' => '',
+          'name' => '',
+          'contact_no' => '',
+          'date' => '',
+          'time' => '',
+          'region' => '',
+          'instructions' => '',
+          'name_err' => '',
+          'contact_no_err' => '',
+          'date_err' => '',
+          'time_err' => '',
+          'region_err' => '',
+          'instructions_err' => '',
+          'lattitude'=>'',
+          'longitude'=>''
       ];
-     
+    }
+
+    public function request_collect(){
+      
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+       
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $centers = $this->center_model->getallCenters();
+        $data = $this->getCommonData();
+        $data['name'] = trim($_POST['name']);
+        $data['contact_no'] = trim($_POST['contact_no']);
+        $data['date'] = trim($_POST['date']);
+        $data['time'] = trim($_POST['time']);
+        $data['instructions'] = trim($_POST['instructions']);
+        
+       if (empty($data['name'])) {
+          $data['name_err'] = 'Name is required';
+       }
+
+       if (empty($data['contact_no'])) {
+           $data['contact_no_err'] = 'Contact No is required';
+        }
+        if (empty($data['date'])) {
+           $data['date_err'] = 'Date is required';
+        }
+
+       if (empty($data['time'])) {
+         $data['time_err'] = 'Time is required';
+        }
+
+        if (empty($data['instructions'])) {
+          $data['instructions_err'] = 'Instructions is required';
+         }
+         
       $this->view('customers/request_collect', $data);
+      
+    }
+     else {
+      $data = $this->getCommonData();
+      $this->view('customers/request_collect', $data);
+      }
+    }
+
+  
+    public function location_fetched() {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $centers = $this->center_model->getallCenters();
+      $data = [
+        'centers'=>$centers,
+        'map_pop'=>'',
+        'name'=>trim($_POST['name']),
+        'contact_no'=>trim($_POST['contact_no']),
+        'date'=>trim($_POST['date']),
+        'time'=>trim($_POST['time']),
+        'region'=>'',
+        'instructions'=>trim($_POST['instructions']),
+        'name_err'=>'',
+        'contact_no_err'=>'',
+        'date_err'=>'',
+        'time_err'=>'',
+        'region_err'=>'',
+        'instructions_err'=>'',
+        'lattitude'=>$_POST['latitude'],
+        'longitude'=>$_POST['longitude']
+      ];
+       $this->view('customers/request_collect', $data);
     }
 
     public function credit_per_waste(){
        $credit= $this->creditModel->get();
       $data = [
-        'title' => 'TraversyMVC',
         'eco_credit_per'=>$credit
       ];
       $this->view('customers/credits_per_waste', $data);
@@ -455,6 +540,5 @@
         $this->view('customers/transfer', $data);
     }
  }
-
 }
   ?>

@@ -59,7 +59,7 @@
          }
      }
 
-     public function editprofile_withimg($data){
+    public function editprofile_withimg($data){
 
       $this->db->query('UPDATE users SET name = :value WHERE id = :id');
       $this->db->bind(':value', $data['name']);
@@ -85,6 +85,17 @@
          return false; 
       }
        }
+    
+    
+    public function deletecustomer($id){
+      $this->db->query('DELETE FROM users WHERE id = :id');
+      $this->db->bind(':id', $id);
 
+      if($this->db->execute()){
+        return true;
+     } else {
+       return false;
+     }
+    }
 }
     

@@ -26,7 +26,6 @@
         justify-content: space-between;
         align-items: center;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-
     }
 
     .main-top img {
@@ -118,9 +117,9 @@
         font-size: 1px;
         font-family: Montserrat;
         text-align: center;
-        height: 52px;
+        height: 75px;
         display: grid;
-        grid-template-columns: 10% 8% 13% 12% 12% 12% 15% 10% 8%;
+        grid-template-columns: 15% 15% 10% 24% 12% 12% 12%;
         border-bottom: 2px solid #CACACA;
     }
 
@@ -131,7 +130,7 @@
         text-align: center;
         height: 55px;
         display: grid;
-        grid-template-columns: 10% 8% 13% 12% 12% 12% 15% 10% 8%;
+        grid-template-columns: 15% 15% 10% 24% 12% 12% 12%;
     }
 
     .table {
@@ -149,8 +148,8 @@
     }
 
     .table td {
-        height: 50px;
-        font-size: 16px;
+        height: 75px;
+        font-size: 18px;
         vertical-align: middle;
         text-align: center;
         display: flex;
@@ -162,6 +161,97 @@
         width: 25px;
         height: 25px;
         cursor: pointer;
+    }
+
+    .profilepic {
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 50%;
+    }
+
+    .delete_confirm {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+
+    }
+
+    .delete_confirm .popup {
+        width: 400px;
+        background: white;
+        border-radius: 6px;
+        top: 0;
+        text-align: center;
+        padding: 0 30px 30px;
+        color: #333;
+        transition: transform 0.4s, top 0.4s;
+    }
+
+    .delete_confirm .popup a {
+        width: auto;
+    }
+
+    .delete_confirm .open-popup {
+        visibility: visible;
+        top: 50%;
+    }
+
+    .delete_confirm .popup img {
+        width: 100px;
+        margin-top: 35px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .delete_confirm .popup h2 {
+        font-size: 23px;
+        font-weight: 600;
+        margin: 10px 0 10px;
+    }
+
+    .delete_confirm .btns {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .delete_confirm .deletebtn {
+        width: 150px;
+        margin-top: 30px;
+        margin-right: 20px;
+        padding: 10px 0;
+        background: rgb(220, 39, 39);
+        color: white;
+        border: 0;
+        outline: none;
+        font-size: 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .delete_confirm .cancelbtn {
+        width: 150px;
+        margin-top: 30px;
+        padding: 10px 0;
+        background: #bab3b3;
+        color: white;
+        border: 0;
+        outline: none;
+        font-size: 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
     @media screen and (max-width: 1178px) {
@@ -301,126 +391,126 @@
 
     }
 
-        /*Vehicle details popup*/
-        .vehicle-details-popup-box {
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-    
-        }
-    
-        .vehicle-details-popup-form {
-            width: 30%;
-            background: white;
-            border-radius: 6px;
-            position: relative;
-            top: 0;
-            text-align: center;
-            padding: 0 30px 30px;
-            color: #333;
-            transition: transform 0.4s, top 0.4s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-    
-        .vehicle-details-popup-form-close {
-            width: 25px;
-            height: 25px;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 20px;
-            height: 20px;
-        }
-    
-        .vehicle-details-popup {
-            display: grid;
-            grid-template-columns: 40% 60%;
-            width: 100%;
-            border-radius: 4px;
-            height: 100%;
-            padding-top: 10px;
-            margin-top: 17px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-    
+    /*Vehicle details popup*/
+    .vehicle-details-popup-box {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+
+    }
+
+    .vehicle-details-popup-form {
+        width: 30%;
+        background: white;
+        border-radius: 6px;
+        position: relative;
+        top: 0;
+        text-align: center;
+        padding: 0 30px 30px;
+        color: #333;
+        transition: transform 0.4s, top 0.4s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .vehicle-details-popup-form-close {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .vehicle-details-popup {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        width: 100%;
+        border-radius: 4px;
+        height: 100%;
+        padding-top: 10px;
+        margin-top: 17px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .vehicle-details-labels {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 40px;
+        padding-bottom: 50px;
+        padding-left: 60px;
+    }
+
+    .vehicle-details-labels span {
+        margin-bottom: 15px;
+        font-size: 15px;
+        color: #7c7c7d;
+
+    }
+
+
+    .vehicle-details-values {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 40px;
+        padding-bottom: 50px;
+        padding-left: 60px;
+
+    }
+
+    .vehicle-details-values span {
+        margin-bottom: 15px;
+        font-size: 15px;
+        color: #767e95;
+        font-weight: 550;
+
+    }
+
+
+    .vehicle-details-topic {
+        font-size: 18px;
+        font-weight: 500;
+        position: relative;
+        margin-inline-end: auto;
+        margin-top: 15px;
+
+    }
+
+    .vehicle-details-topic::before {
+        content: '';
+        position: absolute;
+        margin-top: 23px;
+        margin-left: 45px;
+        margin-bottom: 15px;
+        height: 3px;
+        width: 45px;
+        background: #1B6652;
+
+    }
+
+
+    @media screen and(max-width: 1307px) {
+
         .vehicle-details-labels {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding-top: 40px;
-            padding-bottom: 50px;
-            padding-left: 60px;
+            padding-left: 40px;
         }
-    
-        .vehicle-details-labels span {
-            margin-bottom: 15px;
-            font-size: 15px;
-            color: #7c7c7d;
-    
-        }
-    
-    
+
         .vehicle-details-values {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding-top: 40px;
-            padding-bottom: 50px;
-            padding-left: 60px;
-    
+            padding-left: 40px;
         }
-    
-        .vehicle-details-values span {
-            margin-bottom: 15px;
-            font-size: 15px;
-            color: #767e95;
-            font-weight: 550;
-    
-        }
-    
-    
-        .vehicle-details-topic {
-            font-size: 18px;
-            font-weight: 500;
-            position: relative;
-            margin-inline-end: auto;
-            margin-top: 15px;
-    
-        }
-    
-        .vehicle-details-topic::before {
-            content: '';
-            position: absolute;
-            margin-top: 23px;
-            margin-left: 45px;
-            margin-bottom: 15px;
-            height: 3px;
-            width: 45px;
-            background: #1B6652;
-    
-        }
-    
-    
-        @media screen and(max-width: 1307px) {
-    
-            .vehicle-details-labels {
-                padding-left: 40px;
-            }
-    
-            .vehicle-details-values {
-                padding-left: 40px;
-            }
-        }
+    }
 }

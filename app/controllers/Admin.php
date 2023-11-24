@@ -116,7 +116,6 @@
       }
     }
 
-
     public function complain_customers(){
     
       $complains = $this->customer_complain_Model->get_customer_complains();
@@ -496,12 +495,36 @@
       
       $customers = $this->customerModel->get_all();
       $data = [
-        'customers' =>$customers
+        'customers' =>$customers,
+        'delete_confirm'=>''
       ];
      
       $this->view('admin/customer_main', $data);
     }
 
+    public function customerdelete_confirm($id){
+      $customers = $this->customerModel->get_all();
+      $data = [
+        'customers' =>$customers,
+        'delete_confirm'=>'True',
+        'id'=>$id
+      ];
+     
+      $this->view('admin/customer_main', $data);
+    }
+
+    public function customerdelete($id){   
+      $this->customerModel->deletecustomer($id);
+      $customers = $this->customerModel->get_all();
+      $data = [
+        'customers' =>$customers,
+        'delete_confirm'=>'',
+
+      ];
+     
+      $this->view('admin/customer_main', $data);
+    }
+    
     public function center(){
 
       $centers = $this->center_model->getallCenters();
@@ -622,12 +645,34 @@
     public function collectors(){
       $collectors =$this->collector_model->get_collectors();
       $data = [
-        'collectors' =>$collectors
+        'collectors' =>$collectors,
+        'delete_confirm'=>'',
       ];
      
       $this->view('admin/collectors', $data);
     }
 
+    public function collectorsdelete_confirm($id){
+      $collectors =$this->collector_model->get_collectors();
+         $data=[
+          'collectors' =>$collectors,
+           'delete_confirm'=>'True',
+           'id'=>$id
+         ];
+         $this->view('admin/collectors', $data);
+    }
+
+    public function collectordelete($id){   
+      $this->collector_model->delete_collectors($id);
+      $collectors =$this->collector_model->get_collectors();
+      $data = [
+        'collectors' =>$collectors,
+        'delete_confirm'=>'',
+
+      ];
+     
+      $this->view('admin/collectors', $data);
+    }
     public function vehicle_details_view($collectorId){
         $collectors =$this->collector_model->get_collectors();
         $collector = $this->collector_model->getCollector_ByID_view($collectorId);
@@ -721,5 +766,6 @@
       }
      
     }
-   
+
+  
   }

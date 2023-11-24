@@ -26,8 +26,8 @@
                     <a href="<?php echo URLROOT?>/collectors/collector_assistants">
                         <div class="main-left-middle-content Collector">
                             <div class="main-left-middle-content-line1"></div>
-                            <img src="<?php echo IMGROOT?>/CollectorAssis.png" alt="">
-                            <h2>Collector Assistants</h2>
+                            <img src="<?php echo IMGROOT?>/Center.png" alt="">
+                            <h2>Center Waste Management</h2>
                         </div>
                     </a>
                     <a href="<?php echo URLROOT?>/centermanagers/editprofile">

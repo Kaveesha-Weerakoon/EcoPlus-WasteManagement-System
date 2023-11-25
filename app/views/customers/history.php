@@ -3,7 +3,7 @@
     <div class="Customer_History_Top">
      <div class="Customer_Main_History"> 
            <div class="main">
-            <div class="main-left">
+              <div class="main-left">
                 <div class="main-left-top">
                     <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
                     <h1>Eco Plus</h1>
@@ -47,8 +47,8 @@
                         </div>
                     </a>
                 </div>
-            </div>
-            <div class="main-right">
+              </div>
+              <div class="main-right">
                 <div class="main-right-top">
                     <div class="main-right-top-one">
                         <img src="<?php echo IMGROOT?>/Search.png" alt="">
@@ -218,7 +218,7 @@
                     </div>
                 </div>
 
-            </div>
+              </div>
         </div>
      </div>
      </div>

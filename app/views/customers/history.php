@@ -51,8 +51,11 @@
               <div class="main-right">
                 <div class="main-right-top">
                     <div class="main-right-top-one">
-                        <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                        <input type="text" placeholder="Search">
+                        <div class="main-right-top-one-search">
+                           <img src="<?php echo IMGROOT?>/Search.png" alt="">
+                           <input type="text" placeholder="Search">
+                        </div>
+                        
                         <div class="main-right-top-one-content">
                             <p><?php echo $_SESSION['user_name']?></p>
                             <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>" alt="">
@@ -61,8 +64,7 @@
                     <div class="main-right-top-two">
                         <h1>History</h1>
                     </div>
-                    <div class="main-right-top-three">
-                        
+                    <div class="main-right-top-three">                  
                             <div class="main-right-top-three-content">
                                 <p><b style="color: #1B6652;">Discounts History</b></p>
                                 <div class="line"></div>

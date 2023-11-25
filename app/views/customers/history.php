@@ -3,7 +3,7 @@
     <div class="Customer_History_Top">
      <div class="Customer_Main_History"> 
            <div class="main">
-            <div class="main-left">
+              <div class="main-left">
                 <div class="main-left-top">
                     <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
                     <h1>Eco Plus</h1>
@@ -47,8 +47,8 @@
                         </div>
                     </a>
                 </div>
-            </div>
-            <div class="main-right">
+              </div>
+              <div class="main-right">
                 <div class="main-right-top">
                     <div class="main-right-top-one">
                         <img src="<?php echo IMGROOT?>/Search.png" alt="">
@@ -64,7 +64,7 @@
                     <div class="main-right-top-three">
                         
                             <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">Credits History</b></p>
+                                <p><b style="color: #1B6652;">Discounts History</b></p>
                                 <div class="line"></div>
                             </div>
                         
@@ -74,7 +74,12 @@
                                 <div class="line1"></div>
                             </div>
                         </a>
-
+                        <a href="<?php echo URLROOT?>/customers/transfer_history">
+                            <div class="main-right-top-three-content">
+                                <p>Transfer History</p>
+                                <div class="line1"></div>
+                            </div>
+                        </a>
                     </div>
                 </div>
 
@@ -82,143 +87,14 @@
                     <div class="main-right-bottom-container">
                         <div class="main-right-bottom-container-top">
                             <div class="circle"></div>
-                            <h4>Discount Details</h4>
+                            <h4>Discount History</h4>
                         </div>
-                        <div class="main-right-bottom-container-container">
-                            <div class="main-right-bottom-top">
-                                <table class="table">
-                                    <tr class="table-header">
-                                        <th>Discount Agent ID</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
-                                        <th>Credit Discounts Agent</th>
-                                        <th>Branch</th>
-                                        <th>Amount of Eco Credits</th>
-                                        <th>Discount gained</th>
-
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="main-right-bottom-down">
-                                <table class="table">
-                                    <tr class="table-row">
-                                        <td>D20462</td>
-                                        <td>13/05/2022</td>
-                                        <td>12.00 PM</td>
-                                        <td>Keels</td>
-                                        <td>Kelaniya</td>
-                                        <td>50</td>
-                                        <td>23.45</td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td>D20462</td>
-                                        <td>13/05/2022</td>
-                                        <td>12.00 PM</td>
-                                        <td>Keels</td>
-                                        <td>Kelaniya</td>
-                                        <td>50</td>
-                                        <td>23.45</td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td>D20462</td>
-                                        <td>13/05/2022</td>
-                                        <td>12.00 PM</td>
-                                        <td>Keels</td>
-                                        <td>Kelaniya</td>
-                                        <td>50</td>
-                                        <td>23.45</td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td>D20462</td>
-                                        <td>13/05/2022</td>
-                                        <td>12.00 PM</td>
-                                        <td>Keels</td>
-                                        <td>Kelaniya</td>
-                                        <td>50</td>
-                                        <td>23.45</td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td>D20462</td>
-                                        <td>13/05/2022</td>
-                                        <td>12.00 PM</td>
-                                        <td>Keels</td>
-                                        <td>Kelaniya</td>
-                                        <td>50</td>
-                                        <td>23.45</td>
-
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td>D20462</td>
-                                        <td>13/05/2022</td>
-                                        <td>12.00 PM</td>
-                                        <td>Keels</td>
-                                        <td>Kelaniya</td>
-                                        <td>50</td>
-                                        <td>23.45</td>
-
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
+                        
                     </div>
-                    <div class="main-right-bottom-container">
-                        <div class="main-right-bottom-container-top">
-                            <div class="circle"></div>
-                            <h4>Transfer Details <h4>
-                        </div>
-                        <div class="main-right-bottom-container-container">
-                            <div class="main-right-bottom-top">
-                                <table class="table">
-                                    <tr class="table-header table2">
-                                        <th>Transferred account ID</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
-                                        <th>Amount of Eco credits</th>
-
-
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="main-right-bottom-down">
-                                <table class="table">
-                                    <tr class="table2row">
-                                        <td>C 23232</td>
-                                        <td>13/05/2022</td>
-                                        <td>12.00 PM</td>
-                                        <td>23.45</td>
-                                    </tr>
-                                    <tr class="table2row">
-                                        <td>C 23232</td>
-                                        <td>13/05/2022</td>
-                                        <td>12.00 PM</td>
-                                        <td>23.45</td>
-                                    </tr>
-                                    <tr class="table2row">
-                                        <td>C 23232</td>
-                                        <td>13/05/2022</td>
-                                        <td>12.00 PM</td>
-                                        <td>23.45</td>
-                                    </tr>
-                                    <tr class="table2row">
-                                        <td>C 23232</td>
-                                        <td>13/05/2022</td>
-                                        <td>12.00 PM</td>
-                                        <td>23.45</td>
-                                    </tr>
-                                    <tr class="table2row">
-                                        <td>C 23232</td>
-                                        <td>13/05/2022</td>
-                                        <td>12.00 PM</td>
-                                        <td>23.45</td>
-                                    </tr>
-
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
 
-            </div>
+              </div>
         </div>
      </div>
      </div>

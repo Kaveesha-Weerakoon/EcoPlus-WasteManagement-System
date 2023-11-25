@@ -204,7 +204,106 @@
       $this->view('customers/edit_profile', $data);
      }
     }
-
+    public function change_password(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); $data=[
+          'name'=>'',
+          'userid'=>'',
+          'email'=>'',
+          'contactno'=>'',
+          'address'=>'',
+          'city'=>'',
+          'current'=>trim($_POST['current']),
+          'new_pw'=>trim($_POST['new_pw']),
+          're_enter_pw'=>trim($_POST['re_enter_pw']),
+          'current_err'=>'',
+          'new_pw_err'=>'',
+          're_enter_pw_err'=>'',
+          'change_pw_success'=>'',
+          'name_err'=>'',
+          'address_err'=>'',
+          'contactno_err' =>'',
+          'city_err'=>'' ,
+          'profile_err'=>'',
+          'success_message'=>''
+        ];
+  
+  
+        $id=$_SESSION['user_id']; 
+        $user=$this->customerModel->get_customer($id);
+        $data['name']=$_SESSION['user_name'];
+        $data['contactno']=$user->mobile_number;
+        $data['address']=$user->address;
+     
+  
+        if (empty($data['current'])) {
+          $data['current_err'] = 'Please Enter Current Password';
+      }
+      
+      if (empty($data['new_pw'])) {
+          $data['new_pw_err'] = 'Please Enter New Password';
+      } elseif (strlen($data['new_pw']) < 6) {
+          $data['new_pw_err'] = 'New Password must be at least 6 characters';
+      }
+      
+      if (empty($data['re_enter_pw'])) {
+          $data['re_enter_pw_err'] = 'Please Confirm New Password';
+      } elseif (strlen($data['re_enter_pw']) < 6) {
+          $data['re_enter_pw_err'] = 'Confirmed Password must be at least 6 characters';
+      }
+  
+      if(empty($data['new_pw_err']) && empty($data['current_err']) && empty($data['re_enter_pw_err'])) {
+           
+              if($this->userModel->pw_check($_SESSION['user_id'],$data['current'])){
+                if($data['new_pw']!=$data['re_enter_pw']){
+                  $data['new_pw_err'] = 'Passwords Does not match';
+                }
+                else{
+                  if($this->userModel->change_pw($_SESSION['user_id'],$data['re_enter_pw'])){
+                    $data['success_message']="Password Changed Successfully";
+                    $data['change_pw_success']='True';
+                    $this->view('customers/edit_profile', $data);
+                  }
+                }
+              }
+              else{
+                $data['current_err'] = 'Invalid Password';
+              }
+                   
+        }
+  
+        $this->view('customers/edit_profile', $data);
+        }
+        else{
+          $data = [
+            'name'=>'',
+            'userid'=>'',
+            'email'=>'',
+            'contactno'=>'',
+            'address'=>'',
+            'city'=>'',
+            'current'=>'',
+            'new_pw'=>'',
+            're_enter_pw'=>'',
+            'current_err'=>'',
+            'new_pw_err'=>'',
+            're_enter_pw_err'=>'',
+            'change_pw_success'=>'',
+            'name_err'=>'',
+            'address_err'=>'',
+            'contactno_err' =>'',
+            'city_err'=>'',
+            'profile_err'=>'',
+            'success_message'=>''
+  
+  
+          ];
+          $this->view('customers/editprofile', $data);
+  
+        }
+  
+    }
    
     public function complains(){
     

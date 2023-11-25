@@ -8,6 +8,8 @@
       $this->customerModel=$this->model('Customer'); 
       $this->userModel=$this->model('User');
       $this->center_model=$this->model('Center');
+      $this->customerModel=$this->model('Customer');
+      $this->Customer_Credit_Model=$this->model('Customer_Credit');
 
       if(!isLoggedIn('user_id')){
         redirect('users/login');
@@ -88,6 +90,7 @@
      
       $this->view('customers/history_complains', $data);
     }
+
 
     public function editprofile(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -201,10 +204,9 @@
       $this->view('customers/edit_profile', $data);
      }
     }
-
     public function change_password(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        
+      
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); $data=[
           'name'=>'',
           'userid'=>'',
@@ -226,17 +228,15 @@
           'profile_err'=>'',
           'success_message'=>''
         ];
-
-
+  
+  
         $id=$_SESSION['user_id']; 
         $user=$this->customerModel->get_customer($id);
         $data['name']=$_SESSION['user_name'];
-        $data['userid']=$_SESSION['user_id'];
-        $data['email']=$_SESSION['user_email'];
         $data['contactno']=$user->mobile_number;
         $data['address']=$user->address;
-        $data['city']=$user->city;
-
+     
+  
         if (empty($data['current'])) {
           $data['current_err'] = 'Please Enter Current Password';
       }
@@ -254,7 +254,7 @@
       }
   
       if(empty($data['new_pw_err']) && empty($data['current_err']) && empty($data['re_enter_pw_err'])) {
-           {
+           
               if($this->userModel->pw_check($_SESSION['user_id'],$data['current'])){
                 if($data['new_pw']!=$data['re_enter_pw']){
                   $data['new_pw_err'] = 'Passwords Does not match';
@@ -270,9 +270,9 @@
               else{
                 $data['current_err'] = 'Invalid Password';
               }
-            }           
+                   
         }
-
+  
         $this->view('customers/edit_profile', $data);
         }
         else{
@@ -296,13 +296,13 @@
             'city_err'=>'',
             'profile_err'=>'',
             'success_message'=>''
-
-
+  
+  
           ];
           $this->view('customers/editprofile', $data);
-
+  
         }
-
+  
     }
    
     public function complains(){
@@ -404,9 +404,7 @@
           'location_err'=>'',
           'location_success'=>'',
           'confirm_collect_pop'=>'',
-          'success'=>''
-
-      ];
+          'success'=>'' ];  
     }
 
     public function request_collect(){
@@ -533,8 +531,13 @@
       redirect('users/login');
     }
 
-    public function transfer() {
-      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+   
+  
+
+
+  public function transfer() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $data = [
@@ -546,34 +549,88 @@
             'completed' => ''
         ];
 
-        if (empty($data['customer_id'])) {
+
+         // Extract numeric part from the user input
+         $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
+         // Convert extracted numeric part to an integer
+         $customer_id = (int)$numeric_part;
+
+        /* if (empty($data['customer_id'])) {
           $data['customer_id_err'] = 'Please enter customer id';
       } else {
-          // Extract numeric part from the user input
-          $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
-          // Convert extracted numeric part to an integer
-          $customer_id = (int)$numeric_part;
-      
-          // Check if the user input matches the required format
-          if (!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
-              $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
-          } elseif (!$this->customerModel->get_customer($customer_id)) {
-              $data['customer_id_err'] = 'Customer ID does not exist';
-        }
-      } 
-        if (empty($data['credit_amount'])) {
-            $data['credit_amount_err'] = 'Please enter credit amount';
-        } elseif (!filter_var($data['credit_amount'], FILTER_VALIDATE_FLOAT)) {
-            $data['credit_amount_err'] = 'Credit amount should be a valid number';
-        }
+          if ($customer_id === $_SESSION['user_id']) {
+              $data['customer_id_err'] = 'You cannot transfer credits to yourself';
+          } else {
+              // Check if the user input matches the required format
+              if (!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
+                  $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
+              } elseif (!$this->customerModel->get_customer($customer_id)) {
+                  $data['customer_id_err'] = 'Customer ID does not exist';
+              }
+          }
+      }*/
 
+        if (empty($data['customer_id'])) {
+            $data['customer_id_err'] = 'Please enter customer id';
+        } else {
+              if(!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
+                  $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
+              } elseif($customer_id === $_SESSION['user_id']) {
+                  $data['customer_id_err'] = 'You cannot transfer credits to yourself';
+              } else {
+            // Check if the user input matches the required format
+                  if (!$this->customerModel->get_customer($customer_id)) {
+                        $data['customer_id_err'] = 'Customer ID does not exist';
+                  }
+              }
+        }
+    
+      
+
+
+        if (empty($data['credit_amount']) || $data['credit_amount'] <= 0) {
+          $data['credit_amount_err'] = 'Please enter a credit amount greater than 0';
+      } elseif (!filter_var($data['credit_amount'], FILTER_VALIDATE_FLOAT)) {
+          $data['credit_amount_err'] = 'Credit amount should be a valid number';
+      } else {
+          $user_balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
+          if ($data['credit_amount'] > $user_balance) {
+              $data['credit_amount_err'] = 'Transfer amount cannot exceed your available credit balance';
+          }
+      }
+
+
+      
         if (empty($data['customer_id_err']) && empty($data['credit_amount_err'])) {
-            /*...*/
+          $sender_id = $_SESSION['user_id'];
+          $receiver_id = $customer_id;
+          $transfer_amount = $data['credit_amount'];
+
+          $sender_balance = $this->Customer_Credit_Model->get_customer_credit_balance($sender_id);
+          $receiver_balance = $this->Customer_Credit_Model->get_customer_credit_balance($receiver_id);
+      
+          if ($transfer_amount <= $sender_balance) {
+             
+              $new_sender_balance = $sender_balance - $transfer_amount;
+              $new_receiver_balance = $receiver_balance + $transfer_amount;
+              $sender_update = $this->Customer_Credit_Model->update_credit_balance($sender_id, $new_sender_balance);
+              $receiver_update = $this->Customer_Credit_Model->update_credit_balance($receiver_id, $new_receiver_balance);
+      
+              if ($sender_update && $receiver_update) {
+                  $data['completed'] = 'True';
+                  $this->view('customers/transfer', $data);
+              } else {
+                die('Something went wrong');
+              }
+          } else {
+              $data['credit_amount_err'] = 'Transfer amount exceeds available credit balance';
+          }
         } else {
             $this->view('customers/transfer', $data);
         }
-      } else {
-        $data = [
+
+        }else {
+          $data = [
             'customer_id' => '',
             'credit_amount' => '',
             'customer_id_err' => '',

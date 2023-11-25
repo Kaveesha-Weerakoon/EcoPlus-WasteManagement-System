@@ -2,11 +2,12 @@ var map;
 var marker;
 
 function initMap() {
+
     var defaultLatLng = { lat: 8.00, lng: 81.00 };
 
     map = new google.maps.Map(document.getElementById('map'), {
         center: defaultLatLng,
-        zoom: 7.5
+        zoom: 7.6
     });
 
     marker = new google.maps.Marker({
@@ -26,8 +27,8 @@ function getLocation() {
     var currentLatLng = { lat: marker.getPosition().lat(), lng: marker.getPosition().lng() };
     console.log('Selected Location:', currentLatLng);
 
-    document.getElementById('latitudeInput').value = 1;//currentLatLng.lat
-    document.getElementById('longitudeInput').value = 1;//currentLatLng.lng
+    document.getElementById('latitudeInput').value = currentLatLng.lat;
+    document.getElementById('longitudeInput').value = currentLatLng.lng;//
 
 
 }
@@ -45,8 +46,12 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
     var cancelBtn = document.getElementById('cancelBtn');
     var mapPopup = document.getElementById('mapPopup');
-
+    var map = document.getElementById('markLocationBtn');
     cancelBtn.addEventListener('click', function () {
+        // Set display property of mapPopup to 'none'
+        mapPopup.style.display = 'none';
+    });
+    map.addEventListener('click', function () {
         // Set display property of mapPopup to 'none'
         mapPopup.style.display = 'none';
     });

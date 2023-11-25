@@ -221,7 +221,6 @@
             'completed' => ''
         ];
 
-
          // Extract numeric part from the user input
          $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
          // Convert extracted numeric part to an integer
@@ -262,24 +261,29 @@
 
         if (empty($data['credit_amount']) || $data['credit_amount'] <= 0) {
           $data['credit_amount_err'] = 'Please enter a credit amount greater than 0';
-      } elseif (!filter_var($data['credit_amount'], FILTER_VALIDATE_FLOAT)) {
-          $data['credit_amount_err'] = 'Credit amount should be a valid number';
-      } else {
+      }  elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['credit_amount'])) {
+        $data['credit_amount_err'] = 'Credit amount should have up to two decimal places';
+      }  elseif (!filter_var($data['credit_amount'], FILTER_VALIDATE_FLOAT)) {
+        $data['credit_amount_err'] = 'Credit amount should be a valid number';
+      }else {
           $user_balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
           if ($data['credit_amount'] > $user_balance) {
               $data['credit_amount_err'] = 'Transfer amount cannot exceed your available credit balance';
           }
       }
 
-
       
         if (empty($data['customer_id_err']) && empty($data['credit_amount_err'])) {
           $sender_id = $_SESSION['user_id'];
           $receiver_id = $customer_id;
           $transfer_amount = $data['credit_amount'];
+          $date = date('Y-m-d'); // Current date
+          $time = date('H:i:s'); // Current time
 
           $sender_balance = $this->Customer_Credit_Model->get_customer_credit_balance($sender_id);
           $receiver_balance = $this->Customer_Credit_Model->get_customer_credit_balance($receiver_id);
+          $sender = $this->customerModel->get_customer($sender_id);
+          $receiver = $this->customerModel->get_customer($receiver_id);
       
           if ($transfer_amount <= $sender_balance) {
              
@@ -287,8 +291,12 @@
               $new_receiver_balance = $receiver_balance + $transfer_amount;
               $sender_update = $this->Customer_Credit_Model->update_credit_balance($sender_id, $new_sender_balance);
               $receiver_update = $this->Customer_Credit_Model->update_credit_balance($receiver_id, $new_receiver_balance);
+              $sender_image =$sender->image;
+              $receiver_image =$receiver->image;
+
+              $result = $this->Customer_Credit_Model->record_credit_transfer($sender_id,$sender_image, $receiver_id, $receiver_image, $date, $time, $transfer_amount);
       
-              if ($sender_update && $receiver_update) {
+              if ($sender_update && $receiver_update && $result) {
                   $data['completed'] = 'True';
                   $this->view('customers/transfer', $data);
               } else {

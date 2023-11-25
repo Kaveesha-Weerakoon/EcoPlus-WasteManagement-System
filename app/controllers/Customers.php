@@ -97,6 +97,14 @@
       $this->view('customers/history_complains', $data);
     }
 
+    public function transfer_history(){
+      $data = [
+        'complains' =>''
+      ];
+     
+      $this->view('customers/transfer_history', $data);
+    }
+
 
     public function editprofile(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){

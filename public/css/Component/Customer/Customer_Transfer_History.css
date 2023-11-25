@@ -1,17 +1,4 @@
-.Customer_Main_History {
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
-
-    * {
-        margin: 0;
-        padding: 0;
-        font-family: inter;
-    }
-
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
-
+.Customer_Transfer_History {
     .main-right-top {
         height: 100%;
     }
@@ -19,14 +6,13 @@
     .main-right-bottom {
         display: grid;
         height: 100%;
-
     }
 
     .main-right-bottom-container {
         display: grid;
         grid-template-rows: 10% 90%;
         width: 100%;
-        height: 500px;
+        height: 550px;
     }
 
     .main-right-bottom-container-top {
@@ -48,7 +34,6 @@
     .main-right-bottom-container-container {
         width: 100%;
         height: 100%;
-        overflow: hidden;
 
     }
 
@@ -60,7 +45,7 @@
 
     .main-right-bottom-down {
         width: 99%;
-        height: 100%;
+        height: 450px;
         overflow: scroll;
         padding-left: 1%;
     }
@@ -81,40 +66,15 @@
         height: 55px;
         display: grid;
         margin-bottom: 0px;
-        grid-template-columns: 17% 12% 12% 17% 13% 14% 15%;
-
-
+        grid-template-columns: 15% 20% 15% 20% 15% 15%;
     }
 
-    .table2 {
-        background-color: #B9FFB7;
-        font-size: 17px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 55px;
-        display: grid;
-        margin-bottom: 0px;
-        grid-template-columns: 17% 12% 12% 59%;
-    }
-
-    .table2row {
-        grid-template-columns: 17% 12% 12% 59%;
-        margin-bottom: 2px;
-        font-size: 1px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 52px;
-        display: grid;
-        border-bottom: 2px solid #CACACA;
-
-    }
 
     .table-header th {
         display: flex;
         align-items: center;
         justify-content: center;
         margin-bottom: 0px;
-
     }
 
     .table-row {
@@ -122,16 +82,14 @@
         font-size: 1px;
         font-family: Montserrat;
         text-align: center;
-        height: 52px;
+        height: 70px;
         display: grid;
-        grid-template-columns: 17% 12% 12% 17% 13% 14% 15%;
+        grid-template-columns: 15% 20% 15% 20% 15% 15%;
         border-bottom: 2px solid #CACACA;
-
-
     }
 
     .table td {
-        height: 50px;
+        height: 70px;
         font-size: 17px;
         vertical-align: middle;
         text-align: center;
@@ -140,9 +98,20 @@
         justify-content: center;
     }
 
-    .table-row img {
-        width: 25px;
-        height: 25px;
-        cursor: pointer;
+    .table td p {
+        width: 100px;
+    }
+
+
+    .status {
+        margin-right: 5px;
+        width: 37px;
+        height: 32px;
+    }
+
+    .td-pro_pic {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
     }
 }

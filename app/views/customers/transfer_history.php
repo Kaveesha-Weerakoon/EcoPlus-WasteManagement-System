@@ -111,7 +111,7 @@
                                  
                                 <?php foreach ($data['transaction_history'] as $transaction): ?>
                                     <tr class="table-row">
-                                        <td><?php echo $_SESSION['user_id']; ?></td>
+                                        <td>T <?php echo $transaction->id ?></td>
                                         <td><?php echo $transaction->date . ' ' . $transaction->time; ?></td>
                                         <td>
                                             <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
@@ -123,17 +123,17 @@
                                             <?php endif; ?>
                                         </td>
                                         <td><?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
-                                                <?php echo $transaction->receiver_id; ?>
+                                               C <?php echo $transaction->receiver_id; ?>
                                             <?php else: ?>
-                                                <?php echo $transaction->sender_id; ?>
+                                               C <?php echo $transaction->sender_id; ?>
                                             <?php endif; ?>
 
                                         </td>
                                         <td>
                                             <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
-                                                <img class="td-pro_pic" src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $transaction->receiver_image; ?>" alt="">
+                                                <img class="td-pro_pic" src="<?php echo empty($transaction->receiver_image) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->receiver_image; ?>" alt="">
                                             <?php else: ?>
-                                                <img class="td-pro_pic" src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $transaction->sender_image; ?>" alt="">
+                                                <img class="td-pro_pic" src="<?php echo empty($transaction->sender_image) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->sender_image; ?>" alt="">
                                             <?php endif; ?>
                                         </td>
                                         <td><?php echo $transaction->transfer_amount; ?></td>

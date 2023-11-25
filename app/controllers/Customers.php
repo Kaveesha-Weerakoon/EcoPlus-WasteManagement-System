@@ -253,7 +253,7 @@
         $data['name']=$_SESSION['user_name'];
         $data['contactno']=$user->mobile_number;
         $data['address']=$user->address;
-     
+        $data['city']=$user->city;
   
         if (empty($data['current'])) {
           $data['current_err'] = 'Please Enter Current Password';

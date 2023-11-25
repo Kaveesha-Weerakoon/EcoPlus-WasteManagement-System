@@ -49,9 +49,11 @@
             </div>
             <div class="main-right">
                 <div class="main-right-top">
-                    <p><?php echo $_SESSION['user_name']?></p>
-                    <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>" alt="">
-                </div>
+                    <div class="main-right-top-component">
+                       <p><?php echo $_SESSION['user_name']?></p>
+                       <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>" alt="">  
+                    </div>
+                                  </div>
                 <div class="main-right-bottom">
                     <div class="main-right-bottom-content" >
 

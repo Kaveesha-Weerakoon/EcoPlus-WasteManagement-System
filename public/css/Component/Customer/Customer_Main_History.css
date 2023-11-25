@@ -26,7 +26,7 @@
         display: grid;
         grid-template-rows: 10% 90%;
         width: 100%;
-        height: 500px;
+        height: 550px;
     }
 
     .main-right-bottom-container-top {
@@ -74,7 +74,7 @@
     }
 
     .table-header {
-        background-color: #B9FFB7;
+        background-color: #A1FFAF;
         font-size: 17px;
         font-family: Montserrat;
         text-align: center;

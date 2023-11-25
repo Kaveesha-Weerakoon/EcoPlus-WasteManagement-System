@@ -15,7 +15,7 @@
 
         <div class="main-top-component">
           <p><?php echo $_SESSION['user_name']?></p>
-          <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="" />
+          <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>" alt="">
         </div>
       </div>
 

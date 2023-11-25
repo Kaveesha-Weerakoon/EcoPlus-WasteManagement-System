@@ -15,14 +15,14 @@
                             <h2>Dashboard</h2>
                         </div>
                     </a>
-                    <a href="./CenterManager_Requests/CenterManager_Requests.html">
+                    <a href="">
                         <div class="main-left-middle-content">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/Request.png" alt="">
                             <h2>Requests</h2>
                         </div>
                     </a>
-                    <a href="./Center_Management/Center Management.html">
+                    <a href="">
                         <div class="main-left-middle-content Collector">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/Center.png" alt="">

@@ -109,22 +109,36 @@
                             <div class="main-right-bottom-down">
                                 <table class="table">
                                  
-                                       <tr class="table-row">
-                                           <td>121213</td>
-                                           <td>2021.09.01 12.03 PM</td>
-                                           <td><img class="status" src="<?php echo IMGROOT?>/recieved.png"  alt=""> <p>Recieved</p> </td>
-                                           <td>C 12412</td>
-                                           <td><img class="td-pro_pic" src="<?php echo IMGROOT?>/profile-pic.jpeg" alt=""></td>
-                                           <td>55.12</td>
-                                        </tr>
-                                        <tr class="table-row">
-                                           <td>121213</td>
-                                           <td>2021.09.01 12.03 PM</td>
-                                           <td><img class="status" src="<?php echo IMGROOT?>/send.png"  alt=""> <p>Sent</p> </td>
-                                           <td>C 12412</td>
-                                           <td><img class="td-pro_pic" src="<?php echo IMGROOT?>/profile-pic.jpeg" alt=""></td>
-                                           <td>55.12</td>
-                                        </tr>
+                                <?php foreach ($data['transaction_history'] as $transaction): ?>
+                                    <tr class="table-row">
+                                        <td>T <?php echo $transaction->id ?></td>
+                                        <td><?php echo $transaction->date . ' ' . $transaction->time; ?></td>
+                                        <td>
+                                            <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
+                                                <img class="status" src="<?php echo IMGROOT; ?>/send.png" alt="">
+                                                <p>Sent</p>
+                                            <?php else: ?>
+                                                <img class="status" src="<?php echo IMGROOT; ?>/recieved.png" alt="">
+                                                <p>Received</p>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
+                                               C <?php echo $transaction->receiver_id; ?>
+                                            <?php else: ?>
+                                               C <?php echo $transaction->sender_id; ?>
+                                            <?php endif; ?>
+
+                                        </td>
+                                        <td>
+                                            <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
+                                                <img class="td-pro_pic" src="<?php echo empty($transaction->receiver_image) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->receiver_image; ?>" alt="">
+                                            <?php else: ?>
+                                                <img class="td-pro_pic" src="<?php echo empty($transaction->sender_image) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->sender_image; ?>" alt="">
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?php echo $transaction->transfer_amount; ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
                                 </table>
                             </div>
                         </div>

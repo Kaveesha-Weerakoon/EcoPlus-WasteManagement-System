@@ -143,7 +143,7 @@
                     </div>
                     <div class="main-right-right-three">
                         <h1>Eco Credit Balance</h1>
-                        <div class="main-right-right-three-compnent">632.897</div>
+                        <div class="main-right-right-three-compnent"><?php echo $data['credit_balance']?></div>
                         <p>Redeem your Eco credits on supermarket bills</p>
                     </div>
                     <div class="main-right-right-four">

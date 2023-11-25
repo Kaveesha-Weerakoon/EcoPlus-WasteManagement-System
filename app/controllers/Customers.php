@@ -549,118 +549,110 @@
     }
 
     public function transfer() {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-        $data = [
-            'customer_id' => trim($_POST['customer_id']),
-            'credit_amount' => trim($_POST['credit_amount']),
-
-            'customer_id_err' => '',
-            'credit_amount_err' => '',
-            'completed' => ''
-        ];
-
-         // Extract numeric part from the user input
-         $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
-         // Convert extracted numeric part to an integer
-         $customer_id = (int)$numeric_part;
-
-        /* if (empty($data['customer_id'])) {
-          $data['customer_id_err'] = 'Please enter customer id';
-      } else {
-          if ($customer_id === $_SESSION['user_id']) {
-              $data['customer_id_err'] = 'You cannot transfer credits to yourself';
-          } else {
-              // Check if the user input matches the required format
-              if (!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
-                  $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
-              } elseif (!$this->customerModel->get_customer($customer_id)) {
-                  $data['customer_id_err'] = 'Customer ID does not exist';
-              }
-          }
-      }*/
-
-        if (empty($data['customer_id'])) {
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+          $data = [
+              'customer_id' => trim($_POST['customer_id']),
+              'credit_amount' => trim($_POST['credit_amount']),
+  
+              'customer_id_err' => '',
+              'credit_amount_err' => '',
+              'completed' => ''
+          ];
+  
+  
+           // Extract numeric part from the user input
+           $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
+           // Convert extracted numeric part to an integer
+           $customer_id = (int)$numeric_part;
+  
+          /* if (empty($data['customer_id'])) {
             $data['customer_id_err'] = 'Please enter customer id';
         } else {
-              if(!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
-                  $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
-              } elseif($customer_id === $_SESSION['user_id']) {
-                  $data['customer_id_err'] = 'You cannot transfer credits to yourself';
-              } else {
-            // Check if the user input matches the required format
-                  if (!$this->customerModel->get_customer($customer_id)) {
-                        $data['customer_id_err'] = 'Customer ID does not exist';
-                  }
-              }
-        }
-    
-      
-
-
-        if (empty($data['credit_amount']) || $data['credit_amount'] <= 0) {
-          $data['credit_amount_err'] = 'Please enter a credit amount greater than 0';
-      }  elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['credit_amount'])) {
-        $data['credit_amount_err'] = 'Credit amount should have up to two decimal places';
-      }  elseif (!filter_var($data['credit_amount'], FILTER_VALIDATE_FLOAT)) {
-        $data['credit_amount_err'] = 'Credit amount should be a valid number';
-      }else {
-          $user_balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
-          if ($data['credit_amount'] > $user_balance) {
-              $data['credit_amount_err'] = 'Transfer amount cannot exceed your available credit balance';
-          }
-      }
-
-      
-        if (empty($data['customer_id_err']) && empty($data['credit_amount_err'])) {
-          $sender_id = $_SESSION['user_id'];
-          $receiver_id = $customer_id;
-          $transfer_amount = $data['credit_amount'];
-          $date = date('Y-m-d'); // Current date
-          $time = date('H:i:s'); // Current time
-
-          $sender_balance = $this->Customer_Credit_Model->get_customer_credit_balance($sender_id);
-          $receiver_balance = $this->Customer_Credit_Model->get_customer_credit_balance($receiver_id);
-          $sender = $this->customerModel->get_customer($sender_id);
-          $receiver = $this->customerModel->get_customer($receiver_id);
-      
-          if ($transfer_amount <= $sender_balance) {
-             
-              $new_sender_balance = $sender_balance - $transfer_amount;
-              $new_receiver_balance = $receiver_balance + $transfer_amount;
-              $sender_update = $this->Customer_Credit_Model->update_credit_balance($sender_id, $new_sender_balance);
-              $receiver_update = $this->Customer_Credit_Model->update_credit_balance($receiver_id, $new_receiver_balance);
-              $sender_image =$sender->image;
-              $receiver_image =$receiver->image;
-
-              $result = $this->Customer_Credit_Model->record_credit_transfer($sender_id,$sender_image, $receiver_id, $receiver_image, $date, $time, $transfer_amount);
-      
-              if ($sender_update && $receiver_update && $result) {
-                  $data['completed'] = 'True';
-                  $this->view('customers/transfer', $data);
-              } else {
-                die('Something went wrong');
-              }
+            if ($customer_id === $_SESSION['user_id']) {
+                $data['customer_id_err'] = 'You cannot transfer credits to yourself';
+            } else {
+                // Check if the user input matches the required format
+                if (!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
+                    $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
+                } elseif (!$this->customerModel->get_customer($customer_id)) {
+                    $data['customer_id_err'] = 'Customer ID does not exist';
+                }
+            }
+        }*/
+  
+          if (empty($data['customer_id'])) {
+              $data['customer_id_err'] = 'Please enter customer id';
           } else {
-              $data['credit_amount_err'] = 'Transfer amount exceeds available credit balance';
+                if(!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
+                    $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
+                } elseif($customer_id === $_SESSION['user_id']) {
+                    $data['customer_id_err'] = 'You cannot transfer credits to yourself';
+                } else {
+              // Check if the user input matches the required format
+                    if (!$this->customerModel->get_customer($customer_id)) {
+                          $data['customer_id_err'] = 'Customer ID does not exist';
+                    }
+                }
           }
+      
+        
+  
+  
+          if (empty($data['credit_amount']) || $data['credit_amount'] <= 0) {
+            $data['credit_amount_err'] = 'Please enter a credit amount greater than 0';
+        } elseif (!filter_var($data['credit_amount'], FILTER_VALIDATE_FLOAT)) {
+            $data['credit_amount_err'] = 'Credit amount should be a valid number';
         } else {
-            $this->view('customers/transfer', $data);
+            $user_balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
+            if ($data['credit_amount'] > $user_balance) {
+                $data['credit_amount_err'] = 'Transfer amount cannot exceed your available credit balance';
+            }
         }
-
-        }else {
-          $data = [
-            'customer_id' => '',
-            'credit_amount' => '',
-            'customer_id_err' => '',
-            'credit_amount_err' => '',
-            'completed' => ''
-        ];
-
-        $this->view('customers/transfer', $data);
-    }
-     }
+  
+  
+        
+          if (empty($data['customer_id_err']) && empty($data['credit_amount_err'])) {
+            $sender_id = $_SESSION['user_id'];
+            $receiver_id = $customer_id;
+            $transfer_amount = $data['credit_amount'];
+  
+            $sender_balance = $this->Customer_Credit_Model->get_customer_credit_balance($sender_id);
+            $receiver_balance = $this->Customer_Credit_Model->get_customer_credit_balance($receiver_id);
+        
+            if ($transfer_amount <= $sender_balance) {
+               
+                $new_sender_balance = $sender_balance - $transfer_amount;
+                $new_receiver_balance = $receiver_balance + $transfer_amount;
+                $sender_update = $this->Customer_Credit_Model->update_credit_balance($sender_id, $new_sender_balance);
+                $receiver_update = $this->Customer_Credit_Model->update_credit_balance($receiver_id, $new_receiver_balance);
+        
+                if ($sender_update && $receiver_update) {
+                    $data['completed'] = 'True';
+                    $this->view('customers/transfer', $data);
+                } else {
+                  die('Something went wrong');
+                }
+            } else {
+                $data['credit_amount_err'] = 'Transfer amount exceeds available credit balance';
+            }
+          } else {
+              $this->view('customers/transfer', $data);
+          }
+  
+          }else {
+            $data = [
+              'customer_id' => '',
+              'credit_amount' => '',
+              'customer_id_err' => '',
+              'credit_amount_err' => '',
+              'completed' => ''
+          ];
+  
+          $this->view('customers/transfer', $data);
+      }
+       }
 
 }
   ?>

@@ -25,6 +25,7 @@
       $this->view('customers/index', $data);
     }
     
+    
     public function viewprofile(){
       $data = [
         'title' => 'TraversyMVC',
@@ -48,6 +49,7 @@
      
     }
 
+
     public function request_main(){
       $data = [
         'title' => 'TraversyMVC',
@@ -55,6 +57,7 @@
      
       $this->view('customers/request_main', $data);
     }
+
 
     public function request_completed(){
       $data = [
@@ -64,6 +67,7 @@
       $this->view('customers/request_completed', $data);
     }
 
+
     public function request_cancelled(){
       $data = [
         'title' => 'TraversyMVC',
@@ -72,6 +76,7 @@
       $this->view('customers/request_cancelled', $data);
     }
 
+
     public function history(){
       $data = [
         'title' => 'TraversyMVC',
@@ -79,6 +84,7 @@
      
       $this->view('customers/history', $data);
     }
+
 
     public function history_complains(){
       $id=$_SESSION['user_id']; 
@@ -204,6 +210,7 @@
       $this->view('customers/edit_profile', $data);
      }
     }
+
     public function change_password(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
       
@@ -514,7 +521,6 @@
       }
     }
 
-
     public function credit_per_waste(){
        $credit= $this->creditModel->get();
       $data = [
@@ -531,12 +537,7 @@
       redirect('users/login');
     }
 
-
-   
-  
-
-
-  public function transfer() {
+    public function transfer() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -640,6 +641,7 @@
 
         $this->view('customers/transfer', $data);
     }
- }
+     }
+
 }
   ?>

@@ -61,8 +61,7 @@
                     <div class="main-right-top-two">
                         <h1>History</h1>
                     </div>
-                    <div class="main-right-top-three">
-                        
+                    <div class="main-right-top-three">                  
                             <div class="main-right-top-three-content">
                                 <p><b style="color: #1B6652;">Discounts History</b></p>
                                 <div class="line"></div>

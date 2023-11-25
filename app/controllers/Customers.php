@@ -199,7 +199,7 @@
           'location_err'=>'',
           'location_success'=>'',
           'confirm_collect_pop'=>'',
-          'success'=>''    
+          'success'=>'' ];  
     }
 
     public function request_collect(){

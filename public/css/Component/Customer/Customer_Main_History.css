@@ -1,7 +1,6 @@
 .Customer_Main_History {
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
 
-
     * {
         margin: 0;
         padding: 0;
@@ -13,17 +12,13 @@
         color: inherit;
     }
 
-
-
     .main-right-top {
         height: 100%;
-
     }
 
     .main-right-bottom {
         display: grid;
         height: 100%;
-        grid-template-rows: 50% 50%;
 
     }
 
@@ -31,8 +26,7 @@
         display: grid;
         grid-template-rows: 10% 90%;
         width: 100%;
-        height: 240px;
-
+        height: 500px;
     }
 
     .main-right-bottom-container-top {

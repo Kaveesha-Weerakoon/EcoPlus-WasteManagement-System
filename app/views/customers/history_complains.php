@@ -66,19 +66,25 @@
                         <h1>History</h1>
                     </div>
                     <div class="main-right-top-three">
-                        <a href="<?php echo URLROOT?>/customers/history">
-                            <div class="main-right-top-three-content">
-                                <p>Credits History</p>
-                                <div class="line1"></div>
+                       <a href="<?php echo URLROOT?>/customers/history">
+                        <div class="main-right-top-three-content">
+                            <p>Discounts History</p>
+                            <div class="line1"></div>
+                        </div>
+                        </a>
+                        <a href="">
+                          <div class="main-right-top-three-content">
+                            <p><b style="color: #1B6652;">Complaints History</b></p>
+                            <div class="line"></div>
+                        </div>
+                        
+                        <a href="<?php echo URLROOT?>/customers/transfer_history">
+                           <div class="main-right-top-three-content">
+                              <p>Transfer History</p>
+                              <div class="line1"></div>
                             </div>
                         </a>
-                        <a href="Complaints_History.html">
-                            <div class="main-right-top-three-content">
-                                <b style="color: #1B6652;">Complaints History</b> </p>
-                                <div class="line"></div>
-                            </div>
-                        </a>
-                    </div>
+                     </div>
                 </div>
 
                 <div class="main-right-bottom">

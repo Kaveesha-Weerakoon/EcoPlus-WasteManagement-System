@@ -21,12 +21,14 @@
                     <table class="table">
                         <tr class="table-header">
                             <th>Collector_Id</th>
+                            <th>Pro Pic</th>
                             <th>Center</th>
                             <th>Name</th>
-                            <th>NIC</th>
+                            <!-- <th>NIC</th>
                             <th>Email</th>
                             <th>Contact No</th>
-                            <th>Address</th>                      
+                            <th>Address</th>  -->
+                            <th>Personal Details</th>
                             <th>Vehicle Details</th>
                             <th>Delete</th>
                         </tr>
@@ -37,14 +39,16 @@
                              <?php foreach($data['collectors'] as $collector) : ?>
                                        <tr class="table-row">
                                            <td>C <?php echo $collector->user_id?></td>
+                                           <td><img class="profilepic" src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $collector->image?>" alt=""></td>
                                            <td><?php echo $collector->center_name?></td>
                                            <td><?php echo $collector->name?></td>
-                                           <td> <?php echo $collector->nic?></td>
+                                           <!-- <td> <?php echo $collector->nic?></td>
                                            <td> <?php echo $collector->email?></td>
                                            <td> <?php echo $collector->contact_no?></td>
-                                           <td> <?php echo $collector->address?></td>
+                                           <td> <?php echo $collector->address?></td> -->
+                                           <td><img class="location" src="<?php echo IMGROOT?>/view.png" alt=""></td>
                                            <td><a href="<?php echo URLROOT?>/admin/vehicle_details_view/<?php echo $collector->user_id ?>"><img class="location" src="<?php echo IMGROOT?>/car.png" alt=""></a></td>
-                                           <td><img class="location" src="<?php echo IMGROOT?>/delete.png" alt=""></td>
+                                           <td><a href="<?php echo URLROOT?>/admin/collectorsdelete_confirm/<?php echo $collector->user_id ?>"><img class="location" src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
                              <?php endforeach; ?>
                 </table>
                    
@@ -77,7 +81,23 @@
         </div>
     
     <?php endif; ?>
-
+    <?php if($data['delete_confirm']=='True') : ?>
+       <div class="delete_confirm">
+              <div class="popup" id="popup">
+                 <img src="<?php echo IMGROOT?>/trash.png" alt="">
+                 <?php
+                       echo "<h2>Delete this Customer?</h2>";
+                       echo "<p>This action will permanently delete this center manager</p>";          
+                 ?>
+                 <div class="btns">
+                    
+                    <a href="<?php echo URLROOT?>/Admin/collectordelete/<?php echo $data['id']?>"><button type="button" class="deletebtn">Delete</button></a>
+                                       
+                    <a href="<?php echo URLROOT?>/Admin/collectors"><button type="button" class="cancelbtn" >Cancel</button></a>
+                  </div>
+               </div>
+       </div>
+       <?php endif; ?>
 
 </div>
 

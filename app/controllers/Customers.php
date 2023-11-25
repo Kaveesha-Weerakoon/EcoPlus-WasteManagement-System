@@ -17,9 +17,11 @@
     }
     
     public function index(){
+      $balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
       $data = [
         'title' => 'TraversyMVC',
-        'pop'=>''
+        'pop'=>'',
+        'credit_balance'=>$balance 
       ];
      
       $this->view('customers/index', $data);

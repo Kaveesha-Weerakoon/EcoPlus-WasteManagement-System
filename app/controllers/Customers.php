@@ -93,12 +93,118 @@
 
 
     public function editprofile(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $id=$_SESSION['user_id']; 
+        $user=$this->customerModel->get_customer($id);
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
       $data = [
-        'title' => 'TraversyMVC',
+        'name'=>trim($_POST['name']),
+        'userid'=>'',
+        'profile_image_name' => $_SESSION['user_email'].'_'.$_FILES['profile_image']['name'],
+        'contactno'=>trim($_POST['contactno']),
+        'address'=>trim($_POST['address']),
+        'city'=>trim($_POST['city']),
+        'current'=>'',
+        'new_pw'=>'',
+        're_enter_pw'=>'',
+        'current_err'=>'',
+        'new_pw_err'=>'',
+        're_enter_pw_err'=>'',
+        'change_pw_success'=>'',
+        'name_err'=>'',
+        'address_err'=>'',
+        'contactno_err' =>'',
+        'city_err'=>'',
+        'profile_err'=>'',
+        'success_message'=>''
       ];
+
+      if (empty($data['name'])) {
+        $data['name_err'] = 'Please Enter a Name';
+      } elseif (strlen($data['name']) > 200) {
+        $data['name_err'] = 'Name should be at most 200 characters';
+      }
+
+      if (empty($data['contactno'])) {
+        $data['contactno_err'] = 'Please Enter a Contact No';
+      } elseif (!preg_match('/^\d{10}$/', $data['contactno'])) {
+        $data['contactno_err'] = 'Contact No should be 10 digits ';
+      }
+
+      if (empty($data['city'])) {
+       $data['city_err'] = 'Please Enter a City';
+      } elseif (strlen($data['city']) > 200) {
+        $data['city_err'] = 'City should be at most 200 characters';
+       }
+
+     if (empty($data['address'])) {
+        $data['address_err'] = 'Please Enter an Address';
+     } elseif (strlen($data['address']) > 200) {
+        $data['address_err'] = 'Address should be at most 200 characters';
+      }
+
+      if(empty($data['name_err']) && empty($data['contactno_err']) && empty($data['city_err']) && empty($data['address_err'])){
+       
+        if ($_FILES['profile_image']['error'] == 4) {
+           $data['profile_image_name']='';
+           $this->customerModel->editprofile($data);
+           $data['success_message']="Profile Details Updated Successfully";
+           $data['change_pw_success']='True';
+
+          
+        } else {
+          $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/' . $user->image;
+
+          if (updateImage($old_image_path, $_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/customer/')) {
+            $this->customerModel->editprofile_withimg($data); 
+            $data['success_message']="Profile Details Updated Successfully";
+            $data['change_pw_success']='True';
+            $data['profile_err'] = '';
+          } else {
+              $data['profile_err'] = 'Error uploading the profile image';
+          }
+          
+        }
+      } 
+    
+      $this->view('customers/edit_profile', $data);
+     }
+     else{
+      $data = [
+        'name'=>'',
+        'userid'=>'',
+        'email'=>'',
+        'contactno'=>'',
+        'address'=>'',
+        'city'=>'',
+        'current'=>'',
+        'new_pw'=>'',
+        're_enter_pw'=>'',
+        'current_err'=>'',
+        'new_pw_err'=>'',
+        're_enter_pw_err'=>'',
+        'change_pw_success'=>'',
+        'name_err'=>'',
+        'address_err'=>'',
+        'contactno_err' =>'',
+        'city_err'=>'',
+        'profile_err'=>'',
+        'success_message'=>''
+
+      ];
+      $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+      $data['name']=$_SESSION['user_name'];
+      $data['userid']=$_SESSION['user_id'];
+      $data['email']=$_SESSION['user_email'];
+      $data['contactno']=$user->mobile_number;
+      $data['address']=$user->address;
+      $data['city']=$user->city;
      
       $this->view('customers/edit_profile', $data);
+     }
     }
+
    
     public function complains(){
     

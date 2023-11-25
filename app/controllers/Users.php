@@ -220,7 +220,7 @@
             if($loggedInUser){
               if($loggedInUser->role=="customer"){
                 $customer=$this->customerModel->get_customer($loggedInUser->id);
-                if($customer->image==$loggedInUser->email.'_'){
+                if($customer->image==''){
                   $_SESSION['customer_profile'] = "Profile.png";
                 }
                 else{

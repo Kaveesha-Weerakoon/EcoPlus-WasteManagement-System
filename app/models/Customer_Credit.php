@@ -42,6 +42,14 @@
 
         return $this->db->execute();
     }
+
+    // Add a method in the Customer_Credit model to retrieve transaction history
+    public function get_transaction_history($user_id) {
+        $this->db->query('SELECT * FROM credits_transfer WHERE sender_id = :user_id OR receiver_id = :user_id');
+        $this->db->bind(':user_id', $user_id);
+        return $this->db->resultSet();
+    }
+
 }
 
 

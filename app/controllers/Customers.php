@@ -98,8 +98,9 @@
     }
 
     public function transfer_history(){
+      $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']); 
       $data = [
-        'complains' =>''
+        'transaction_history' =>$transaction_history
       ];
      
       $this->view('customers/transfer_history', $data);

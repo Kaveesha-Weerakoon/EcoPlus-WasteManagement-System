@@ -1,4 +1,5 @@
 <?php
+
   class Customers extends Controller {
     public function __construct(){
 
@@ -6,6 +7,8 @@
       $this->creditModel=$this->model('Credit_amount');
       $this->customerModel=$this->model('Customer'); 
       $this->userModel=$this->model('User');
+      $this->center_model=$this->model('Center');
+
       if(!isLoggedIn('user_id')){
         redirect('users/login');
       }
@@ -379,18 +382,144 @@
      
     }
 
-    public function request_collect(){
-      $data = [
-        'title' => 'TraversyMVC',
+    private function getCommonData() {
+      $centers = $this->center_model->getallCenters();
+      return [
+          'centers' => $centers,
+          'map_pop' => '',
+          'name' => '',
+          'contact_no' => '',
+          'date' => '',
+          'time' => '',
+          'region' => '',
+          'instructions' => '',
+          'name_err' => '',
+          'contact_no_err' => '',
+          'date_err' => '',
+          'time_err' => '',
+          'region_err' => '',
+          'instructions_err' => '',
+          'lattitude'=>'',
+          'longitude'=>'',
+          'location_err'=>'',
+          'location_success'=>'',
+          'confirm_collect_pop'=>'',
+          'success'=>''
+
       ];
-     
-      $this->view('customers/request_collect', $data);
     }
+
+    public function request_collect(){
+      
+     if($_SERVER['REQUEST_METHOD'] == 'POST'){
+       
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $centers = $this->center_model->getallCenters();
+        $data = $this->getCommonData();
+        $data['name'] = trim($_POST['name']);
+        $data['contact_no'] = trim($_POST['contact_no']);
+        $data['date'] = trim($_POST['date']);
+        $data['time'] = trim($_POST['time']);
+        $data['instructions'] = trim($_POST['instructions']);
+        $data['lattitude'] =trim($_POST['latitude']);
+        $data['longitude'] =trim($_POST['longitude']);
+        $data['region'] =trim($_POST['center']);
+       
+        if (empty($data['name'])) {
+           $data['name_err'] = 'Name is required';
+        }elseif (strlen($data['name']) > 30) {
+          $data['name_err'] = 'Name cannot exceed 30 characters';
+        }
+      
+
+        if (empty($data['contact_no'])) {
+           $data['contact_no_err'] = 'Contact No is required';
+        } elseif (!preg_match('/^\d{10}$/', $data['contact_no'])) {
+          $data['contact_no_err'] = 'Invalid Contact No';
+        }
+
+
+        if (empty($data['date'])) {
+          $data['date_err'] = 'Date is required';
+        } else {
+          $selectedTimestamp = strtotime($data['date']);
+          $currentTimestamp = strtotime('tomorrow');
+          if ($selectedTimestamp < $currentTimestamp) {
+            $data['date_err'] = 'Select a date from tomorrow onwards';
+          }
+        }
+    
+
+        if (empty($data['time'])) {
+          $data['time_err'] = 'Time is required';
+        } else {
+           $selectedTimestamp = strtotime($data['time']);
+           $eightAMTimestamp = strtotime('8:00 AM');
+           $fivePMTimestamp = strtotime('5:00 PM');
+    
+           if ($selectedTimestamp < $eightAMTimestamp || $selectedTimestamp > $fivePMTimestamp) {
+            $data['time_err'] = 'Select a time between 8 am and 5 pm';
+          }
+        }
+    
+
+        if (empty($data['instructions'])) {
+          $data['instructions_err'] = 'Instructions is required';
+          } elseif (strlen($data['instructions']) > 100) {
+           $data['instructions_err'] = 'Instructions cannot exceed 100 characters';
+        }
+    
+
+        if (empty($data['lattitude']) || empty($data['longitude'])) {
+          $data['location_err'] = 'Location Error';
+          }
+         else{ 
+            $data['location_success'] = 'Success';        
+        }
+
+        if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['date_err']) && empty($data['time_err']) && empty($data['instructions_err'])&& empty($data['location_err']) ){
+         
+            $data['confirm_collect_pop']="True";        
+            $this->view('customers/request_collect', $data);
+          
+
+        }
+        else{
+          $this->view('customers/request_collect', $data);
+        }        
+      }
+     else {
+         $data = $this->getCommonData();
+         $this->view('customers/request_collect', $data);
+      }
+    }
+
+    public function request_confirm(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+       
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $data = $this->getCommonData();
+      $data['name'] = trim($_POST['name']);
+      $data['contact_no'] = trim($_POST['contact_no']);
+      $data['date'] = trim($_POST['date']);
+      $data['time'] = trim($_POST['time']);
+      $data['instructions'] = trim($_POST['instructions']);
+      $data['lattitude'] =trim($_POST['latitude']);
+      $data['longitude'] =trim($_POST['longitude']);
+      $data['region'] =trim($_POST['center']);
+      $data['success']='True';
+      $this->view('customers/request_collect', $data);
+      }
+      else{
+        $data=$this->getCommonData();
+        $this->view('customers/request_collect', $data);
+      }
+    }
+
 
     public function credit_per_waste(){
        $credit= $this->creditModel->get();
       $data = [
-        'title' => 'TraversyMVC',
         'eco_credit_per'=>$credit
       ];
       $this->view('customers/credits_per_waste', $data);
@@ -455,6 +584,5 @@
         $this->view('customers/transfer', $data);
     }
  }
-
 }
   ?>

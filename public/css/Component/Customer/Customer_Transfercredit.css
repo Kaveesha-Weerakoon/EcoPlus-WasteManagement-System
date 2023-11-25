@@ -1,200 +1,207 @@
 .Customer_Transfercredit {
-        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap");
-    
-        * {
-            margin: 0;
-            padding: 0;
-            font-family: Inter;
-        }
-    
-        .main {
-            width: 100%;
-            height: 731px;
-            display: grid;
-            grid-template-rows: 10% 90%;
-        }
-    
-        .main-top {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            font-family: Inter;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    
-        }
-    
-        .main-top img {
-            width: 32px;
-            height: 32px;
-            margin-left: 30px;
-        }
-    
-        .main-top-component {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            margin-right: 20px;
-        }
-    
-        .main-top-component img {
-            width: 40px;
-            height: 40px;
-            margin-left: 15px;
-        }
-    
-        .main-top-component p {
-            font-size: 18px;
-            font-family: inter;
-            letter-spacing: 0.1px;
-        }
-    
-        .back_button {
-            cursor: pointer;
-        }
-    
-        .main-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    
-        .main-bottom-component {
-            width: 65%;
-            height: 75%;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            padding: 25px;
-            display: grid;
-            grid-template-columns: 50% 50%;
-        }
-    
-    
-        .main-bottom-component-right {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    
-        .main-bottom-component-right img {
-            width: 75%;
-            height: 75%;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-    
-        }
-    
-        .main-bottom-component-left {
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Center vertically */
-            align-items: center; /* Center horizontally */
-            margin: auto; /* This may help in centering it within its parent container */
-        }
-        
-    
-        .main-bottom-component-left-topic {
-            margin-bottom: 35px;
-        }
-    
-        .line {
-            height: 4px;
-            width: 60px;
-            background: #1B6652;
-            margin-top: 3px;
-        }
-    
-        .main-bottom-component-left-topic h2 {
-            
-            font-size: 28px;
-            font-weight: 500;
-        }
-    
-        .main-bottom-component-left-component {
-            width: 400px;
-            display: flex;
-            flex-direction: column;
-        }
-    
-        .main-bottom-component-left-component {
-            width: 100%; /* Adjust width as needed */
-            display: flex;
-            flex-direction: column;
-            text-align: left; /* Align text within the container to the left */
-            margin-bottom: 10px;
-        }
-        .main-bottom-component-left-component p {
-            font-weight: 500;
-            margin-bottom: 5px;
-            font-size: 17px;
-            margin-bottom: 7px;
-        }
-    
-        .main-bottom-component-left-component h4 {
-            font-weight: 500;
-            margin-bottom: 5px;
-            font-size: 17px;
-            margin-bottom: 7px;
-        }
-    
-        .main-bottom-component-left-component input {
-            height: 35px;
-            width: 100%;
-            outline: none;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            padding-left: 15px;
-            font-size: 16px;
-            border-bottom-width: 2px;
-            transition: all 0.3s ease;
-            margin-bottom: 6px;
-        }
-    
-        .main-bottom-component-left-component input:focus {
-            border-color: #4dccaa;
-        }
-    
-        .complain {
-            height: 66px !important;
-        }
-    
-        .err {
-            height: 10px;
-            font-size: 15px;
-            font-weight: 500;
-            margin-bottom: 5px;
-            color: #e74c3c;
-        }
-    
-        .main-bottom-component-left-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 5px;
-        }
-    
-        .main-bottom-component-left button {
-            height: 40px;
-            width:245px;
-            outline: none;
-            color: white;
-            font-size: 18px;
-            font-weight: 500;
-            border-radius: 5px;
-            cursor: pointer;
-            border: none;
-            letter-spacing: 1px;
-            background: #1B6652;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-            margin-right: 9%;
-            margin-top: 10px;
-            margin-left: 15%;
-        }
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap");
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: Inter;
+    }
+
+    .main {
+        width: 100%;
+        height: 731px;
+        display: grid;
+        grid-template-rows: 10% 90%;
+    }
+
+    .main-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-family: Inter;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+    }
+
+    .main-top img {
+        width: 32px;
+        height: 32px;
+        margin-left: 30px;
+    }
+
+    .main-top-component {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+    }
+
+    .main-top-component img {
+        width: 55px;
+        height: 55px;
+        margin-left: 15px;
+        border-radius: 50%;
+    }
+
+    .main-top-component p {
+        font-size: 18px;
+        font-family: inter;
+        letter-spacing: 0.1px;
+    }
+
+    .back_button {
+        cursor: pointer;
+    }
+
+    .main-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-bottom-component {
+        width: 65%;
+        height: 75%;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 25px;
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+
+    .main-bottom-component-right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-bottom-component-right img {
+        width: 75%;
+        height: 75%;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+
+    }
+
+    .main-bottom-component-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* Center vertically */
+        align-items: center;
+        /* Center horizontally */
+        margin: auto;
+        /* This may help in centering it within its parent container */
+    }
+
+
+    .main-bottom-component-left-topic {
+        margin-bottom: 35px;
+    }
+
+    .line {
+        height: 4px;
+        width: 60px;
+        background: #1B6652;
+        margin-top: 3px;
+    }
+
+    .main-bottom-component-left-topic h2 {
+
+        font-size: 28px;
+        font-weight: 500;
+    }
+
+    .main-bottom-component-left-component {
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-bottom-component-left-component {
+        width: 100%;
+        /* Adjust width as needed */
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        /* Align text within the container to the left */
+        margin-bottom: 10px;
+    }
+
+    .main-bottom-component-left-component p {
+        font-weight: 500;
+        margin-bottom: 5px;
+        font-size: 17px;
+        margin-bottom: 7px;
+    }
+
+    .main-bottom-component-left-component h4 {
+        font-weight: 500;
+        margin-bottom: 5px;
+        font-size: 17px;
+        margin-bottom: 7px;
+    }
+
+    .main-bottom-component-left-component input {
+        height: 35px;
+        width: 100%;
+        outline: none;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding-left: 15px;
+        font-size: 16px;
+        border-bottom-width: 2px;
+        transition: all 0.3s ease;
+        margin-bottom: 6px;
+    }
+
+    .main-bottom-component-left-component input:focus {
+        border-color: #4dccaa;
+    }
+
+    .complain {
+        height: 66px !important;
+    }
+
+    .err {
+        height: 10px;
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 5px;
+        color: #e74c3c;
+    }
+
+    .main-bottom-component-left-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5px;
+    }
+
+    .main-bottom-component-left button {
+        height: 40px;
+        width: 245px;
+        outline: none;
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+        border-radius: 5px;
+        cursor: pointer;
+        border: none;
+        letter-spacing: 1px;
+        background: #1B6652;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        margin-right: 9%;
+        margin-top: 10px;
+        margin-left: 15%;
+    }
 
 
 
-        
+
     /*Success popup*/
     .credit_transfer_success {
         position: fixed;
@@ -255,6 +262,6 @@
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
     }
 
-        
-    
-    }
+
+
+}

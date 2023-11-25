@@ -10,7 +10,6 @@
         text-decoration: none;
         font-family: inter;
         color: inherit;
-
     }
 
     .main {
@@ -19,7 +18,6 @@
         display: grid;
         grid-template-rows: 8% 92%;
         overflow: hidden;
-
     }
 
     .main-top {
@@ -42,7 +40,6 @@
         align-items: center;
         justify-content: center;
         margin-right: 20px;
-
     }
 
     .back-button {

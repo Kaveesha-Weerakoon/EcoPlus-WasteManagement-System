@@ -63,13 +63,13 @@
         FROM request_main
         LEFT JOIN request_cancelled ON request_main.req_id = request_cancelled.req_id
         WHERE request_main.customer_id = :customer_id AND request_main.type = :type
-    ');
+     ');
 
-    $this->db->bind(':customer_id', $customer_id);
-    $this->db->bind(':type', 'cancelled');
-    $results = $this->db->resultSet();
+      $this->db->bind(':customer_id', $customer_id);
+      $this->db->bind(':type', 'cancelled');
+      $results = $this->db->resultSet();
 
-    return $results;
+       return $results;
 
     }
 

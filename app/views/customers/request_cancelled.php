@@ -96,7 +96,6 @@
                                 <th>Collector</th>
                                 <th>Cancelled By</th>
                                 <th>Reason</th>
-
                             </tr>
                         </table>
                     </div>

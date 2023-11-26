@@ -84,7 +84,7 @@
         'cancelled_by'=>'Me'];
 
       $this->Request_Model->cancel_request($data);
-      $this->view('customers/request_cancelled', $data);
+      $this->request_cancelled();
     }
 
     public function request_completed(){
@@ -99,7 +99,7 @@
     public function request_cancelled(){
       $cancelled_request=$this->Request_Model->get_cancelled_request($_SESSION['user_id']);
       $data = [
-        'cancelled_request' => $cancelled_request,
+        'cancelled_request' => $cancelled_request
       ];
     
       $this->view('customers/request_cancelled', $data);

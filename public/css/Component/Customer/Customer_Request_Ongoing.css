@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
 
-
 * {
     margin: 0;
     padding: 0;
@@ -36,7 +35,7 @@
     text-align: center;
     height: 55px;
     display: grid;
-    grid-template-columns: 12% 12% 10% 12% 12% 20% 12% 10%;
+    grid-template-columns: 10% 12% 12% 10% 13% 10% 12% 11% 10%;
 }
 
 .table-header th {
@@ -49,17 +48,15 @@
     font-size: 1px;
     font-family: Montserrat;
     text-align: center;
-    height: 52px;
+    height: 58px;
     display: grid;
-    grid-template-columns: 12% 12% 10% 12% 12% 20% 12% 10%;
+    grid-template-columns: 10% 12% 12% 10% 13% 10% 12% 11% 10%;
     border-bottom: 2px solid #CACACA;
-    ;
-
 }
 
 .table td {
-    height: 50px;
-    font-size: 17px;
+    height: 58px;
+    font-size: 15.5px;
     vertical-align: middle;
     text-align: center;
     display: flex;
@@ -67,10 +64,39 @@
     justify-content: center;
 }
 
-.table-row img {
-    width: 25px;
-    height: 25px;
+.table-row .cancel-open img {
+    width: 27px;
+    height: 27px;
     cursor: pointer;
+}
+
+.processing {
+    width: 35px;
+    height: 35px;
+    animation: rotateAnimation 10s infinite linear;
+    margin-right: 10px;
+    font-weight: 5001;
+}
+
+.assinged {
+    width: 38px;
+    height: 38px;
+    animation: moveRightToLeft2 1.5s ease-in-out infinite alternate;
+    margin-right: 12px;
+}
+
+.bold1 {
+    font-weight: bold;
+    background-color: #f6e58d;
+    padding: 6px;
+    border-radius: 10px;
+}
+
+.bold2 {
+    font-weight: bold;
+    background-color: #f8a5c2;
+    padding: 6px;
+    border-radius: 10px;
 }
 
 .confirm-cancel {
@@ -121,6 +147,140 @@
     margin: 10px;
     background-color: #74b9ff;
     cursor: pointer;
+}
+
+.location_pop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.location_pop_content {
+    width: 70%;
+    height: 78%;
+    padding: 10px;
+    background-color: #f1f2f6;
+    border-radius: 10px;
+    padding: 20px;
+    padding-bottom: 40px;
+}
+
+.location_pop_map {
+    width: 100;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.location_close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6px;
+}
+
+.location_close button {
+    background-color: #ff4757;
+    height: 28px;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 85px;
+}
+
+/*Delete confirm popup*/
+.delete_confirm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+}
+
+.popup {
+    width: 400px;
+    background: white;
+    border-radius: 6px;
+    top: 0;
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    transition: transform 0.4s, top 0.4s;
+}
+
+.popup a {
+    width: auto;
+}
+
+.open-popup {
+    visibility: visible;
+    top: 50%;
+}
+
+.popup img {
+    width: 100px;
+    margin-top: 35px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup h2 {
+    font-size: 23px;
+    font-weight: 600;
+    margin: 10px 0 10px;
+}
+
+.btns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.deletebtn {
+    width: 150px;
+    margin-top: 30px;
+    margin-right: 20px;
+    padding: 10px 0;
+    background: rgb(220, 39, 39);
+    color: white;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.cancelbtn {
+    width: 150px;
+    margin-top: 30px;
+    padding: 10px 0;
+    background: #bab3b3;
+    color: white;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 @media screen and (max-width: 1250px) {
@@ -222,12 +382,8 @@
 }
 
 @media screen and (max-width: 692px) {
-
-
     .table td {
-
         font-size: 9px;
-
     }
 
     .table-header {

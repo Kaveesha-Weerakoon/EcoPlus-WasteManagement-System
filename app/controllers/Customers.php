@@ -10,6 +10,7 @@
       $this->center_model=$this->model('Center');
       $this->customerModel=$this->model('Customer');
       $this->Customer_Credit_Model=$this->model('Customer_Credit');
+      $this->Request_Model=$this->model('Request');
 
       if(!isLoggedIn('user_id')){
         redirect('users/login');
@@ -53,13 +54,33 @@
 
 
     public function request_main(){
+
+      $current_request=$this->Request_Model->get_request_current($_SESSION['user_id']);
+
       $data = [
-        'title' => 'TraversyMVC',
+        'request' => $current_request,
+        'cancel'=>''
       ];
      
       $this->view('customers/request_main', $data);
     }
 
+    public function cancel_request_confirm($req_id){
+
+      $current_request=$this->Request_Model->get_request_current($_SESSION['user_id']);
+
+      $data = [
+        'request' => $current_request,
+        'cancel'=>'True',
+        'request_id'=>$req_id
+      ];
+     
+      $this->view('customers/request_main', $data);
+    }
+
+    public function cancel_request($req_id){
+       die($req_id);
+    }
 
     public function request_completed(){
       $data = [
@@ -74,7 +95,7 @@
       $data = [
         'title' => 'TraversyMVC',
       ];
-     
+    
       $this->view('customers/request_cancelled', $data);
     }
 
@@ -422,7 +443,8 @@
           'location_err'=>'',
           'location_success'=>'',
           'confirm_collect_pop'=>'',
-          'success'=>'' ];  
+          'success'=>'' ,
+          'customer_id'=>''];
     }
 
     public function request_collect(){
@@ -524,6 +546,10 @@
       $data['longitude'] =trim($_POST['longitude']);
       $data['region'] =trim($_POST['center']);
       $data['success']='True';
+      $data['customer_id']=$_SESSION['user_id'];
+
+      $this->Request_Model->request_insert($data);
+
       $this->view('customers/request_collect', $data);
       }
       else{

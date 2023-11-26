@@ -30,5 +30,48 @@
         return $results;
     }
 
+    public function get_request_by_id($req_id){
+
+      $this->db->query('SELECT * FROM request_main  WHERE id = :workerId');
+      $this->db->bind(':workerId', $req_id);
+      $row = $this->db->single();
+      return $row;
+    }
+
+    public function cancel_request($data) {
+      $this->db->query('INSERT INTO request_cancelled (req_id, cancelled_by, reason) VALUES (:req_id, :cancelled_by, :reason)');
+      $this->db->bind(':req_id', $data['request_id']);
+      $this->db->bind(':cancelled_by', $data['cancelled_by']);
+      $this->db->bind(':reason', $data['reason']);
+      $insertResult = $this->db->execute();
+  
+      if ($insertResult) {
+          $this->db->query('UPDATE request_main SET type = :type WHERE req_id = :req_id');
+          $this->db->bind(':type', 'cancelled');
+          $this->db->bind(':req_id', $data['request_id']);
+          $updateResult = $this->db->execute();
+  
+          return $updateResult;
+      } else {
+          return false;
+      }
+    }
+
+    public function get_cancelled_request($customer_id){
+      $this->db->query('
+        SELECT request_main.*, request_cancelled.*
+        FROM request_main
+        LEFT JOIN request_cancelled ON request_main.req_id = request_cancelled.req_id
+        WHERE request_main.customer_id = :customer_id AND request_main.type = :type
+    ');
+
+    $this->db->bind(':customer_id', $customer_id);
+    $this->db->bind(':type', 'cancelled');
+    $results = $this->db->resultSet();
+
+    return $results;
+
+    }
+
    
 }

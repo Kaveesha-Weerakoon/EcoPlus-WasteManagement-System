@@ -91,7 +91,9 @@
                                 <th>Req ID</th>
                                 <th>Date</th>
                                 <th>Time</th>
-                                <th>Type</th>
+                                <th>Center</th>
+                                <th>Location</th> 
+                                <th>Collector</th>
                                 <th>Cancelled By</th>
                                 <th>Reason</th>
 
@@ -101,16 +103,17 @@
 
                     <div class="main-right-bottom-down">
                         <table class="table">
-                            <tr class="table-row">
-                                <td>R1231</td>
-                                <td>13/05/2022</td>
-                                <td>12:00 P.M</td>
-                                <td>Collection</td>
-                                <td>Eco plus</td>
-                                <td>Customer Was not Home</td>
-
-                            </tr>
-
+                           <?php foreach($data['cancelled_request'] as $request) : ?>
+                               <tr class="table-row">
+                                 <td>R<?php echo $request->req_id?></td>
+                                 <td><?php echo $request->date?></td>
+                                 <td><?php echo $request->time?></td>
+                                 <td><?php echo $request->region?></td>
+                                 <td><img src="<?php echo IMGROOT?>/location.png" alt=""></td>
+                                 <td><img src="<?php echo IMGROOT?>/view.png" alt=""></td>
+                                 <td><?php echo $request->cancelled_by?></td>
+                                 <td><?php echo ($request->reason ? $request->reason : 'None'); ?></td>                             </tr>
+                            <?php endforeach; ?>
                         </table>
 
                     </div>

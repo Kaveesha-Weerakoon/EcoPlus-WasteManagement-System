@@ -27,8 +27,7 @@
      
       $this->view('customers/index', $data);
     }
-    
-    
+      
     public function viewprofile(){
       $data = [
         'title' => 'TraversyMVC',
@@ -51,7 +50,6 @@
       $this->view('customers/index', $data);
      
     }
-
 
     public function request_main(){
 
@@ -79,7 +77,14 @@
     }
 
     public function cancel_request($req_id){
-       die($req_id);
+
+      $data=[
+        'request_id'=>$req_id,
+        'reason' =>'',
+        'cancelled_by'=>'Me'];
+
+      $this->Request_Model->cancel_request($data);
+      $this->view('customers/request_cancelled', $data);
     }
 
     public function request_completed(){
@@ -92,8 +97,9 @@
 
 
     public function request_cancelled(){
+      $cancelled_request=$this->Request_Model->get_cancelled_request($_SESSION['user_id']);
       $data = [
-        'title' => 'TraversyMVC',
+        'cancelled_request' => $cancelled_request,
       ];
     
       $this->view('customers/request_cancelled', $data);

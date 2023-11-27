@@ -73,5 +73,14 @@
 
     }
 
+    public function get_incoming_request($region){
+      $this->db->query('SELECT * FROM request_main WHERE region = :region AND type IN ("incoming")');
+      $this->db->bind(':region', $region);
+        
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
+
    
 }

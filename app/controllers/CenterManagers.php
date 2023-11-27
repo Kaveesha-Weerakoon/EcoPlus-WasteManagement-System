@@ -7,7 +7,9 @@
       $this->center_model=$this->model('Center');
       $this->collector_complain_Model=$this->model('Collector_Complain');
       $this->centermanagerModel=$this->model('Center_Manager');
-      $this->centerworkerModel=$this->model('Center_Worker');
+      $this->centerworkerModel=$this->model('Center_Worker');      
+      $this->Request_Model=$this->model('Request');
+
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
       }
@@ -446,9 +448,7 @@
 
         ];
       
-      
         $this->view('center_managers/collectors', $data);
-
     }
 
     public function vehicle_details_view($collectorId){
@@ -935,7 +935,15 @@
   } 
 
   public function request_incomming(){
-    $data=[];
+
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
+    $jsonData = json_encode($incoming_requests);
+    $data = [
+      'incoming_requests' => $incoming_requests,
+      'jsonData' => $jsonData,
+    ];
+
     $this->view('center_managers/request_incomming', $data);
 
   }

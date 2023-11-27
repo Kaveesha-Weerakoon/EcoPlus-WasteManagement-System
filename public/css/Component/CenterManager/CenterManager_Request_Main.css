@@ -68,9 +68,10 @@
     }
 
     .main-right-top-one-content img {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
         margin-left: 15px;
+        border-radius: 50%;
     }
 
     .main-right-top-two {

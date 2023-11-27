@@ -34,3 +34,23 @@
         animation-timing-function: ease-in-out;
     }
 }
+
+@keyframes rotateAnimation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes moveRightToLeft2 {
+    0% {
+        transform: translateX(20%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}

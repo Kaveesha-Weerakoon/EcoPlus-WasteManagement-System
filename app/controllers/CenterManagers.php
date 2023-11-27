@@ -934,6 +934,12 @@
 
   } 
 
+  public function request_incomming(){
+    $data=[];
+    $this->view('center_managers/request_incomming', $data);
+
+  }
+
    
   }
 

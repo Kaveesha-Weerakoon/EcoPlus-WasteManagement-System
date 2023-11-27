@@ -1,4 +1,4 @@
-.Customer-Request-Cancelled {
+.Customer_Request_Cancelled {
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
 
 
@@ -34,34 +34,29 @@
     }
 
     .table-header {
-        background-color: #A1FFAF;
+
         font-size: 17px;
         font-family: Montserrat;
         text-align: center;
         height: 55px;
         display: grid;
-        grid-template-columns: 15% 15% 10% 15% 15% 30%;
-
+        grid-template-columns: 10% 11% 9% 11% 14% 11% 14% 20%;
     }
 
     .table-header th {
         display: flex;
-
         align-items: center;
         justify-content: center;
     }
 
     .table-row {
-
         font-size: 1px;
         font-family: Montserrat;
         text-align: center;
         height: 52px;
         display: grid;
-        grid-template-columns: 15% 15% 10% 15% 15% 30%;
+        grid-template-columns: 10% 11% 9% 11% 14% 11% 14% 20%;
         border-bottom: 2px solid #CACACA;
-        ;
-
     }
 
     .table td {

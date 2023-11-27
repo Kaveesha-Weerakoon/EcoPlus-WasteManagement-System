@@ -16,6 +16,7 @@
 
 /* Customer Reqeust Right hand side top of the ui css */
 @import url('Component/Customer/Customer_Request_Main.css');
+@import url('Component/Customer/Customer_Request_Cancelled.css');
 
 @import url('Component/Customer/Customer_Request_Ongoing.css');
 @import url('Component/Customer/Customer_Editprofile.css');

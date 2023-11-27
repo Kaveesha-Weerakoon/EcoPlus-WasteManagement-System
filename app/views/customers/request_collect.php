@@ -140,7 +140,7 @@
                   <img src="<?php echo IMGROOT?>/check.png" alt="">
                   <h2>Success!!</h2>
                   <p>Request received! Our team is on it.</p>
-                  <a href="<?php echo URLROOT?>/customers/request_collect"><button type="button" >OK</button></a>
+                  <a href="<?php echo URLROOT?>/customers/request_main"><button type="button" >OK</button></a>
               </div>
             </div>
           <?php endif; ?>

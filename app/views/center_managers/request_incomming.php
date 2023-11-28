@@ -86,7 +86,7 @@
                                 <div class="line1"></div>
                             </div>
                         </a>
-                        <a href="./CenterManager_Canclled.html">
+                        <a href="<?php echo URLROOT?>/centermanagers/request_cancelled">
                             <div class="main-right-top-three-content">
                                 <p>Cancelled</p>
                                 <div class="line1"></div>

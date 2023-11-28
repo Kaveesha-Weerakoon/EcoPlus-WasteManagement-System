@@ -996,6 +996,16 @@
     }
   }
 
+  public function request_cancelled(){
+       $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+       $cancelled_request = $this->Request_Model->get_cancelled_request_bycenter($center->region);
+       $data=[
+         'cancelled_request'=>$cancelled_request
+       ];
+       $this->view('center_managers/request_cancelled', $data);
+
+  }
+
 
    
   }

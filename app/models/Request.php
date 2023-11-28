@@ -82,5 +82,19 @@
         return $results;
     }
 
+    public function get_cancelled_request_bycenter($center){
+      $this->db->query('
+          SELECT request_main.*, request_cancelled.*
+          FROM request_main
+          LEFT JOIN request_cancelled ON request_main.req_id = request_cancelled.req_id
+          WHERE request_main.region = :region AND request_main.type = :type
+      ');
+
+      $this->db->bind(':region', $center);
+      $this->db->bind(':type', 'cancelled');
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
    
 }

@@ -114,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-
+                <?php if(!empty($data['incoming_requests'])) : ?>
                 <div class="main-right-bottom" id="main-right-bottom">
                     <div class="main-right-bottom-top">
                         <table class="table">
@@ -157,6 +157,15 @@
 
                     </div>
                 </div>
+                <?php else: ?>
+                     <div class="main-right-bottom-three">
+                            <div class="main-right-bottom-three-content">
+                                   <img src="<?php echo IMGROOT?>/Center_Manager_Request_Incomming_Empty.jpg" alt="">
+                                   <h1>You Have No Incomming Requests</h1>
+                                  
+                            </div>
+                     </div>
+                 <?php endif; ?>
             </div>
             
          
@@ -197,6 +206,8 @@
             </div>
 
         </div>
+
+
 <script>
 
     function validateCancelForm(){
@@ -221,7 +232,7 @@
         var inputElement = document.querySelector('input[name="id"]');
         var assign_reqid = document.getElementById('assign_reqid');
         inputElement.style.display = 'none';
-        inputElement.value = $id;
+
         assign_reqid.innerHTML = $id;
         document.getElementById("View").style.display="flex"
     }
@@ -243,13 +254,15 @@
             });
 
             marker.addListener('click', function () {
-                handleMarkerClick(marker);
+                handleMarkerClick(marker,coordinate);
             });
         });
      }
 
-     function handleMarkerClick(marker) {
+     function handleMarkerClick(marker,coordinate) {
         const adddetails = document.getElementById("View");
+        var assign_reqid = document.getElementById('assign_reqid');
+        assign_reqid.innerHTML = coordinate.req_id;
         adddetails.style.display = "flex";
     }
 
@@ -343,7 +356,6 @@
         });
     });
     }
-
     
     document.addEventListener("DOMContentLoaded", function () {
        
@@ -360,17 +372,26 @@
       
        
         maps.addEventListener("click", function () {
-            main_right_bottom.style.display = "none";
+            if (main_right_bottom !== null) {
+                main_right_bottom.style.display = "none";
+            }
+            if (main_right_bottom_two !== null) {
+                main_right_bottom_two.style.display = "flex";
+            }
             maps.style.backgroundColor = "#ecf0f1";
             table.style.backgroundColor = "";
-            main_right_bottom_two.style.display = "flex";
         }); 
 
         table.addEventListener("click", function () {
+            if (main_right_bottom !== null) {
+                main_right_bottom.style.display = "flex";
+            }
+            if (main_right_bottom_two !== null) {
+                main_right_bottom_two.style.display = "none"; 
+            }
             table.style.backgroundColor = "#ecf0f1";
             maps.style.backgroundColor = "";
-            main_right_bottom_two.style.display = "none";
-            main_right_bottom.style.display = "flex";
+            
         });
 
     
@@ -391,7 +412,7 @@
 </script> 
 
     </div>
-</div>
+  </div>
 </div>
 
 

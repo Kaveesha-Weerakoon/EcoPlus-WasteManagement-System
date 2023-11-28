@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="main-right-top-one-content">
-                            <p>Ananda Perera</p>
+                            <p><?php echo $_SESSION['center_manager_name']?></p>
                             <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>" alt="">
                         </div>
                     </div>
@@ -96,20 +96,25 @@
                     <div class="main-right-top-four">
                         <div class="main-right-top-four-left">
                             <p>Date</p>
-                            <input type="date">
+                            <input type="date" id="selected-date">
+                            <button onclick="loadLocations()">Load Locations</button>
+                            
                         </div>
                         <div class="main-right-top-four-right">
-                            <div class="main-right-top-four-component" style="background-color: #ecf0f1;" id="maps">
+
+                            <div class="main-right-top-four-component" style="background-color: #ecf0f1" id="maps">
                                 <img src="<?php echo IMGROOT?>/map.png" alt="">
                                 <p>Maps</p>
-                            </div>
+                            </div>      
+
                             <div class="main-right-top-four-component" id="tables">
-                                <img src="<?php echo IMGROOT?>/cells.png" alt="">
+                            <img src="<?php echo IMGROOT?>/cells.png" alt="">
                                 <p>Tables</p>
-                            </div>
+                               </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="main-right-bottom" id="main-right-bottom">
                     <div class="main-right-bottom-top">
                         <table class="table">
@@ -121,8 +126,8 @@
                                 <th>C ID</th>
                                 <th>Contact No</th>
                                 <th>Instructions</th>
-                                <th>Location</th>
-                                <th>Action</th>
+                                <th>Assign</th>
+                                <th>Cancel</th>
                             </tr>
                         </table>
                     </div>
@@ -137,9 +142,8 @@
                                 <td><?php  echo $request->customer_id?></td>
                                 <td><?php  echo $request->contact_no?></td>
                                 <td><?php  echo $request->instructions?></td>
-                                <td><img class="location" src="<?php echo IMGROOT?>/location.png" alt=""></td>
+                                <td><img class="add" src="<?php echo IMGROOT?>/assign.png" alt=""></td>
                                 <td>
-                                    <img class="add" src="<?php echo IMGROOT?>/add.png" alt="">
                                     <img class="cancel" src="<?php echo IMGROOT?>/cancel.png" alt="">
                                 </td>
                             </tr>
@@ -155,14 +159,10 @@
                 </div>
 
 
+
             </div>
-            <div class="Location" id="Location">
-                <div class="Location-content" id="Location-content">
-                    <img class="View-content-img" src="../../../src/cancel.png" id="cancel-location">
-                    <h2>Location</h2>
-                    <img class="google_map" src="<?php echo IMGROOT?>/Google_Map.webp" alt="">
-                </div>
-            </div>
+            
+         
             <div class="cancel-confirm" id="cancel-confirm">
                 <div class="cancel-confirm-content">
                     <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-detail">
@@ -192,7 +192,6 @@
                 </div>
             </div>
 
-            <script src="./CenterManagerRequest2.js"></script>
         </div>
 
 
@@ -202,18 +201,13 @@
 <script>
   
 
-    function initMap($var) {
+    function initMap() {
        var map = new google.maps.Map(document.getElementById('map-loaction'), {
          center: { lat: 7.8731, lng: 80.7718 },
          zoom: 7.2
        });
-
+       ;
        var incomingRequests = <?php echo $data['jsonData']; ?>;
-
-       var map2 = new google.maps.Map(document.getElementById('Location-content'), {
-        center: { lat:1, lng: 2},
-        zoom: 12
-       });
 
        incomingRequests.forEach(function (coordinate) {
             var marker = new google.maps.Marker({
@@ -232,44 +226,82 @@
         const adddetails = document.getElementById("View");
         adddetails.style.display = "flex";
     }
+     
+    function loadLocations() {
+    var selectedDate = document.getElementById('selected-date').value;
+      if (selectedDate.trim() !== "") {
+            updateMapForDate(selectedDate);
+      
+            var rows = document.querySelectorAll('.table-row');
+            rows.forEach(function(row) {
+                   console.log('d');
+                   var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+                   if (date .includes(selectedDate) ) {
+                        row.style.display = '';  
+                   } else {
+                     row.style.display = 'none'; 
+                    }
+                  });         
+      }
+}
 
+    function updateMapForDate(selectedDate) {
+        var map = new google.maps.Map(document.getElementById('map-loaction'), {
+         center: { lat: 7.8731, lng: 80.7718 },
+         zoom: 7.2
+       });
+     
+      var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
+      var filteredRequests = incomingRequestsForDate.filter(function (coordinate) {
+        return coordinate.date === selectedDate;
+    });
+
+    filteredRequests.forEach(function (coordinate) {
+        var marker = new google.maps.Marker({
+            position: { lat: parseFloat(coordinate.lat), lng: parseFloat(coordinate.longi) },
+            map: map,
+            title: 'Marker'
+        });
+
+        marker.addListener('click', function () {
+            handleMarkerClick(marker);
+        });
+    });
+    }
+
+    
     document.addEventListener("DOMContentLoaded", function () {
        
         const closeButton = document.getElementById("cancel-pop");
         const popup = document.getElementById("cancel-confirm");
         const popupadd = document.getElementById("Add-Details");
         const closeDetails = document.getElementById("cancel-detail");
-        const closeLocation = document.getElementById("cancel-location");
         const adddetails = document.getElementById("View");
-        const location = document.getElementById("Location");
-        const main_right_bottom_two = document.getElementById("main-right-bottom-two");
-        const main_right_bottom = document.getElementById("main-right-bottom");
-
         const maps = document.getElementById("maps");
         const table = document.getElementById("tables");
+        const main_right_bottom= document.getElementById("main-right-bottom");
+        const main_right_bottom_two = document.getElementById("main-right-bottom-two");
+      
+        closeDetails.addEventListener("click", function () {
+ 
+              popup.style.display = "none";
+        });
 
         maps.addEventListener("click", function () {
+            main_right_bottom.style.display = "none";
             maps.style.backgroundColor = "#ecf0f1";
             table.style.backgroundColor = "";
             main_right_bottom_two.style.display = "flex";
-            main_right_bottom.style.display = "none"
-        });
-  
+        }); 
+
         table.addEventListener("click", function () {
-            maps.style.backgroundColor = "";
             table.style.backgroundColor = "#ecf0f1";
+            maps.style.backgroundColor = "";
             main_right_bottom_two.style.display = "none";
-            main_right_bottom.style.display = "flex"
+            main_right_bottom.style.display = "flex";
         });
 
-        closeDetails.addEventListener("click", function () {
- 
-            popup.style.display = "none";
-        });
-
-        closeLocation.addEventListener("click", function () {
-            location.style.display = "none";
-        });
+       
 
         closeButton.addEventListener("click", function () {
             popup.style.display = "none";
@@ -293,12 +325,7 @@
          });
         });
  
-        showLocationButtons.forEach(button => {
-          button.addEventListener("click", function () {
-
-            location.style.display = "flex";
-        });
-      });
+     
     });
 
  

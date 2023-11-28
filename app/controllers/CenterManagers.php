@@ -942,11 +942,15 @@
     $data = [
       'incoming_requests' => $incoming_requests,
       'jsonData' => $jsonData,
+      'pop_location'=>'',
+      'map'=>''
+
     ];
 
     $this->view('center_managers/request_incomming', $data);
 
   }
+
 
    
   }

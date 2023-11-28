@@ -12,7 +12,7 @@
         $this->db->bind(':region', $data['region']);
         $this->db->bind(':customer_id', $data['customer_id']);
         $this->db->bind(':name', $data['name']);
-        $this->db->bind(':contact_no', $data['region']);
+        $this->db->bind(':contact_no', $data['contact_no']);
         $this->db->bind(':date', $data['date']);
         $this->db->bind(':time', $data['time']);
         $this->db->bind(':instructions', $data['instructions']);
@@ -71,6 +71,29 @@
 
        return $results;
 
+    }
+
+    public function get_incoming_request($region){
+      $this->db->query('SELECT * FROM request_main WHERE region = :region AND type IN ("incoming")');
+      $this->db->bind(':region', $region);
+        
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
+
+    public function get_cancelled_request_bycenter($center){
+      $this->db->query('
+          SELECT request_main.*, request_cancelled.*
+          FROM request_main
+          LEFT JOIN request_cancelled ON request_main.req_id = request_cancelled.req_id
+          WHERE request_main.region = :region AND request_main.type = :type
+      ');
+
+      $this->db->bind(':region', $center);
+      $this->db->bind(':type', 'cancelled');
+      $results = $this->db->resultSet();
+      return $results;
     }
 
    

@@ -1,0 +1,39 @@
+.CenterManager_Request_Cancelled {
+
+
+    .main-right-bottom {
+        flex-direction: column;
+        height: 550px;
+        display: flex;
+    }
+
+    .map-locations {
+        width: 85%;
+        height: 90%;
+        border-radius: 10px;
+    }
+
+    .table-row {
+        font-size: 1px;
+        font-family: Montserrat;
+        text-align: center;
+        height: 52px;
+        display: grid;
+        grid-template-columns: 11% 10% 9% 11% 14% 12% 12% 21%;
+        border-bottom: 2px solid #CACACA;
+    }
+
+    .table-header {
+        background-color: #B9FFB7;
+        font-size: 17px;
+        font-family: Montserrat;
+        text-align: center;
+        height: 55px;
+        display: grid;
+        grid-template-columns: 11% 10% 9% 11% 14% 12% 12% 21%;
+    }
+
+    td img {
+        margin: 7px;
+    }
+}

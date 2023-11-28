@@ -16,6 +16,35 @@
         display: none;
     }
 
+    .main-right-bottom-three {
+        display: flex;
+        justify-content: center;
+        height: 550px;
+    }
+
+    .main-right-bottom-three-content {
+
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+
+    .main-right-bottom-three-content img {
+        width: 450px;
+        height: 450px;
+    }
+
+    .main-right-bottom-three-content h1 {
+        font-size: 25px;
+        font-weight: 500;
+        margin-top: 20px;
+    }
+
+
+
     .map-locations {
         width: 85%;
         height: 90%;
@@ -30,6 +59,16 @@
         display: grid;
         grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
         border-bottom: 2px solid #CACACA;
+    }
+
+    .table td {
+        height: 50px;
+        font-size: 17px;
+        vertical-align: middle;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .table-header {

@@ -67,6 +67,12 @@
 @import url('Component/CenterManager/CenterManager_CenterWorker.css');
 @import url('Component/CenterManager/CenterManager_CenterWorker_Add.css');
 
+
+@import url('Component/CenterManager/CenterManager_Request_Main.css');
+@import url('Component/CenterManager/CenterManager_Request_Incomming.css');
+@import url('Component/CenterManager/CenterManager_Request_Cancelled.css');
+@import url('Component/CenterManager/CenterManager_Request_Assinged.css');
+
 @import url('Component/CenterManager/CenterManager_EditProfile.css');
 
 /* Admin CSS */

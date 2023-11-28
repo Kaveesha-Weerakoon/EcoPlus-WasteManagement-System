@@ -7,7 +7,9 @@
       $this->center_model=$this->model('Center');
       $this->collector_complain_Model=$this->model('Collector_Complain');
       $this->centermanagerModel=$this->model('Center_Manager');
-      $this->centerworkerModel=$this->model('Center_Worker');
+      $this->centerworkerModel=$this->model('Center_Worker');      
+      $this->Request_Model=$this->model('Request');
+
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
       }
@@ -446,9 +448,7 @@
 
         ];
       
-      
         $this->view('center_managers/collectors', $data);
-
     }
 
     public function vehicle_details_view($collectorId){
@@ -724,7 +724,7 @@
 
     }
 
-    public function editprofile(){
+   public function editprofile(){
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -934,7 +934,179 @@
 
   } 
 
+  public function request_incomming(){
+    $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
+    $jsonData = json_encode($incoming_requests);
+    $data = [
+      'incoming_requests' => $incoming_requests,
+      'jsonData' => $jsonData,
+      'pop_location'=>'',
+      'map'=>'',
+      'collectors'=>$collectors
+    ];
+    $this->view('center_managers/request_incomming', $data);
+
+  }
+
+  public function request_cancell(){
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
+    $jsonData = json_encode($incoming_requests);
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+        'incoming_requests' => $incoming_requests,
+        'jsonData' => $jsonData,
+        'pop_location'=>'',
+        'map'=>'',
+        'request_id'=>trim($_POST['id']),
+        'reason'=>trim($_POST['reason']),
+        'cancelled_by'=>"Center",
+        'assinged'=>'No'
+
+      ];
+
+      if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
+         $this->view('center_managers/request_incomming', $data);
+
+      } else {
+        $this->Request_Model->cancel_request($data);
+        $this->request_incomming();
+    }
+    
+    }
+    else{
+      $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+      $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
+      $jsonData = json_encode($incoming_requests);
+      $data = [
+        'incoming_requests' => $incoming_requests,
+        'jsonData' => $jsonData,
+        'pop_location'=>'',
+        'map'=>'',
+
+      ];
+      $this->view('center_managers/request_incomming', $data);
+    }
+  }
+
+  public function request_cancelled(){
+       $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+       $cancelled_request = $this->Request_Model->get_cancelled_request_bycenter($center->region);
+       $data=[
+         'cancelled_request'=>$cancelled_request
+       ];
+       $this->view('center_managers/request_cancelled', $data);
+
+  }
+
+  public function assing(){
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
+    $jsonData = json_encode($incoming_requests);
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+     
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+        'incoming_requests' => $incoming_requests,
+        'jsonData' => $jsonData,
+        'pop_location'=>'',
+        'map'=>'',
+        'request_id'=>trim($_POST['assign_req_id']),
+        'collector_id'=>trim($_POST['collectors']),
+
+      ];
+      if (empty($data['request_id']) || empty($data['collector_id']) ) {
+          $this->request_incomming();
+      } 
+      else {
+        if($data['collector_id']=='default'){
+           $this->request_incomming();
+        }
+        else{
+          $this->Request_Model->assing_collector($data);
+          $this->request_incomming();
+        }
+    } 
+    }
+    else{
+      $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+      $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
+      $jsonData = json_encode($incoming_requests);
+      $data = [
+        'incoming_requests' => $incoming_requests,
+        'jsonData' => $jsonData,
+        'pop_location'=>'',
+        'map'=>'',
+
+      ];
+      $this->view('center_managers/request_incomming', $data);
+    }
+  }
+
+  public function request_assigned(){
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $assined_requests=$this->Request_Model->get_assigned_request_by_center($center->region);
+    $jsonData = json_encode($assined_requests);
    
+    $data=[
+      'assined_requests'=>$assined_requests,
+      'jsonData'=>$jsonData 
+    ];
+    
+    $this->view('center_managers/request_assinged', $data);
+
+  }
+  
+  public function assinged_request_cancell(){
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $assined_requests=$this->Request_Model->get_assigned_request_by_center($center->region);
+    $jsonData = json_encode($assined_requests);
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+        'incoming_requests' => $assined_requests,
+        'jsonData' => $jsonData,
+        'pop_location'=>'',
+        'map'=>'',
+        'request_id'=>trim($_POST['id']),
+        'reason'=>trim($_POST['reason']),
+        'cancelled_by'=>"Center",
+        'assinged'=>'Yes'
+
+      ];
+
+      if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
+        $this->request_assigned();
+
+      } else {
+        $this->Request_Model->cancel_request($data);
+        $this->request_assigned();
+    }
+    
+    }
+    else{
+
+      $data = [
+        'incoming_requests' => $assined_requests,
+        'jsonData' => $jsonData,
+        'pop_location'=>'',
+        'map'=>'',
+
+      ];
+      $this->view('center_managers/request_assigned', $data);
+    }
+   }
+
+
+
   }
 
 ?>

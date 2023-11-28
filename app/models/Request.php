@@ -12,7 +12,7 @@
         $this->db->bind(':region', $data['region']);
         $this->db->bind(':customer_id', $data['customer_id']);
         $this->db->bind(':name', $data['name']);
-        $this->db->bind(':contact_no', $data['region']);
+        $this->db->bind(':contact_no', $data['contact_no']);
         $this->db->bind(':date', $data['date']);
         $this->db->bind(':time', $data['time']);
         $this->db->bind(':instructions', $data['instructions']);
@@ -39,10 +39,11 @@
     }
 
     public function cancel_request($data) {
-      $this->db->query('INSERT INTO request_cancelled (req_id, cancelled_by, reason) VALUES (:req_id, :cancelled_by, :reason)');
+      $this->db->query('INSERT INTO request_cancelled (req_id, cancelled_by, reason,assinged) VALUES (:req_id, :cancelled_by, :reason,:assinged)');
       $this->db->bind(':req_id', $data['request_id']);
       $this->db->bind(':cancelled_by', $data['cancelled_by']);
       $this->db->bind(':reason', $data['reason']);
+      $this->db->bind(':assinged', $data['assinged']);
       $insertResult = $this->db->execute();
   
       if ($insertResult) {
@@ -71,6 +72,62 @@
 
        return $results;
 
+    }
+
+    public function get_incoming_request($region){
+      $this->db->query('SELECT * FROM request_main WHERE region = :region AND type IN ("incoming")');
+      $this->db->bind(':region', $region);
+        
+        $results = $this->db->resultSet();
+        
+        return $results;
+    }
+
+    public function get_cancelled_request_bycenter($center){
+      $this->db->query('
+          SELECT request_main.*, request_cancelled.*
+          FROM request_main
+          LEFT JOIN request_cancelled ON request_main.req_id = request_cancelled.req_id
+          WHERE request_main.region = :region AND request_main.type = :type
+      ');
+
+      $this->db->bind(':region', $center);
+      $this->db->bind(':type', 'cancelled');
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function assing_collector($data) {
+      $this->db->query('INSERT INTO request_assigned (req_id, collector_id) VALUES (:req_id, :collector_id)');
+      $this->db->bind(':req_id', $data['request_id']);
+      $this->db->bind(':collector_id', $data['collector_id']);
+      $insertResult = $this->db->execute();
+  
+      if ($insertResult) {
+          $this->db->query('UPDATE request_main SET type = :type WHERE req_id = :req_id');
+          $this->db->bind(':type', 'assigned'); // Corrected the typo from 'assinged' to 'assigned'
+          $this->db->bind(':req_id', $data['request_id']);
+          $updateResult = $this->db->execute();
+  
+          return $updateResult;
+      } else {
+          return false;
+      }
+  }
+
+    public function get_assigned_request_by_center($region){
+      $this->db->query('
+    SELECT request_main.*, request_assigned.collector_id, collectors.*
+    FROM request_main
+    LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
+    LEFT JOIN collectors ON request_assigned.collector_id = collectors.user_id
+    WHERE request_main.region= :region AND request_main.type = :type
+');
+
+      $this->db->bind(':region', $region);
+      $this->db->bind(':type', 'assigned');
+      $results = $this->db->resultSet();
+      return $results;
     }
 
    

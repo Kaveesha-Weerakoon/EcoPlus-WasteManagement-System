@@ -88,7 +88,7 @@
                         </a>
                      </div>
                 </div>
-
+                <?php if(!empty($data['complains'])) : ?>
                 <div class="main-right-bottom">
                     <div class="main-right-bottom-container">
                         <div class="main-right-bottom-container-top">
@@ -121,6 +121,16 @@
                         </div>
                     </div>
                 </div>
+                <?php else: ?>
+                     <div class="main-right-bottom-two">
+                            <div class="main-right-bottom-two-content">
+                                   <img src="<?php echo IMGROOT?>/9264822.jpg" alt="">
+                                   <h1>You Have No Ongoing Requests</h1>
+                                   <a href="<?php echo URLROOT?>/customers/request_collect"><button>Request a Collect Now</button></a>
+                                  
+                            </div>
+                     </div>
+                 <?php endif; ?>
 
             </div>
             <script>

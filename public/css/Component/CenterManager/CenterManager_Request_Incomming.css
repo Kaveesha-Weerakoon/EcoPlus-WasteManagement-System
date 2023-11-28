@@ -129,7 +129,7 @@
     }
 
     .cancel-confirm-content button {
-        width: 45%;
+        width: 200px;
         height: 35px;
         font-size: 18px;
         border-radius: 5px;
@@ -209,6 +209,13 @@
         width: 100px;
         height: 100px;
         margin-top: 15px;
+    }
+
+    .view_assing_middle {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
     }
 
     .View-content-content {

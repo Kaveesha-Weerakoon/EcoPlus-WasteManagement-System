@@ -56,7 +56,7 @@
                     <div class="main-right-top-one">
                         <div class="main-right-top-one-search">
                             <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                            <input type="text" placeholder="Search">
+                            <input id="searchInput" type="text" placeholder="Search">
                         </div>
 
                         <div class="main-right-top-one-content">
@@ -97,7 +97,7 @@
                         <div class="main-right-top-four-left">
                             <p>Date</p>
                             <input type="date" id="selected-date">
-                            <button onclick="loadLocations()">Load Locations</button>
+                            <button onclick="loadLocations()">Filter</button>
                             
                         </div>
                         <div class="main-right-top-four-right">
@@ -142,9 +142,9 @@
                                 <td><?php  echo $request->customer_id?></td>
                                 <td><?php  echo $request->contact_no?></td>
                                 <td><?php  echo $request->instructions?></td>
-                                <td><img class="add" src="<?php echo IMGROOT?>/assign.png" alt=""></td>
+                                <td><img onclick="assign(<?php echo $request->req_id ?>)" class="add" src="<?php echo IMGROOT?>/assign.png" alt=""></td>
                                 <td>
-                                    <img class="cancel" src="<?php echo IMGROOT?>/cancel.png" alt="">
+                                    <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel" src="<?php echo IMGROOT?>/cancel.png" alt="">
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -157,35 +157,39 @@
 
                     </div>
                 </div>
-
-
-
             </div>
             
          
             <div class="cancel-confirm" id="cancel-confirm">
-                <div class="cancel-confirm-content">
-                    <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-detail">
-                    <h1>Cancel the Request?</h1>
-                    <img class="cancel-confirm-content-warning" src="<?php echo IMGROOT?>/warning.png" alt=""> 
-                    <input type="text" placeholder="Input the Reason">
-                  
-                    <button id="cancel-pop" style="background-color: tomato;">OK</button>
-                    
-                </div>
+              <form class="cancel-confirm-content" id="cancel-form" method="post" action="<?php echo URLROOT?>/centermanagers/request_cancell">
+                   <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop">
+                   <h1>Cancel the Request?</h1>
+                   <img class="cancel-confirm-content-warning" src="<?php echo IMGROOT?>/warning.png" alt=""> 
+                   <input name="reason" type="text" placeholder="Input the Reason">
+                   <input name="id" type="text" >
+                   <button onclick="validateCancelForm()" id="cancel-pop" style="background-color: tomato;">OK</button>
+              </form>
+
             </div>
             <div class="View" id="View">
                 <div class="View-content">
-                    <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-detail">
+                    <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-assing">
                     <h2>Assign a Collector</h2>
 
                     <img class="view_assing" src="<?php echo IMGROOT?>/selection.png" alt="">
-                    <h3>Req ID <b>R 1231</b></h3>
+                    <div class="view_assing_middle"><h3 >Req ID <b>R <div id="assign_reqid" style="display: inline;"></div></b></h3></div>
 
-                    <select id="dropdown" name="fruit">
-                        <option value="saman">Saman</option>
-                        <option value="kumara">Kumara</option>
-                        <option value="janaka">Janaka</option>
+                    <select id="dropdown" name="collectors">
+                    <?php
+                         $collectors = $data['collectors'];
+                          if (!empty($collectors)) {
+                             foreach ($collectors as $collector) {
+                                 echo "<option value=\"$collector->id\">C $collector->id $collector->name</option>";
+                            }
+                          } else {
+                               echo "<option value=\"default\">No Collectors Available</option>";
+                            }
+                         ?>
 
                     </select>
                     <Button>Assign</Button>
@@ -193,13 +197,35 @@
             </div>
 
         </div>
-
-
-
-
-
 <script>
-  
+
+    function validateCancelForm(){
+        var reasonInput = document.getElementsByName("reason")[0].value;
+
+        if (reasonInput.trim() === "" || reasonInput.split(/\s+/).length > 200) {
+         alert("Please enter a reason");
+        } else {
+        document.getElementById("cancel-form").submit();
+      }
+    }
+
+
+    function cancel($id) {
+        var inputElement = document.querySelector('input[name="id"]');
+        inputElement.style.display = 'none';
+        inputElement.value = $id;
+        document.getElementById("cancel-confirm").style.display="flex"
+    }
+
+    function assign($id){
+        var inputElement = document.querySelector('input[name="id"]');
+        var assign_reqid = document.getElementById('assign_reqid');
+        inputElement.style.display = 'none';
+        inputElement.value = $id;
+        assign_reqid.innerHTML = $id;
+        document.getElementById("View").style.display="flex"
+    }
+
 
     function initMap() {
        var map = new google.maps.Map(document.getElementById('map-loaction'), {
@@ -226,9 +252,31 @@
         const adddetails = document.getElementById("View");
         adddetails.style.display = "flex";
     }
-     
+
+    function searchTable() {
+                   var input = document.getElementById('searchInput').value.toLowerCase();
+                   var rows = document.querySelectorAll('.table-row');
+
+                   rows.forEach(function(row) {
+                   var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+                   var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+                   var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+                   var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+                   var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+                   var conctact_no = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
+                   var instructions= row.querySelector('td:nth-child(7)').innerText.toLowerCase();
+
+                   if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(input) ||  cid.includes(input) ||  conctact_no.includes(input) ||  instructions.includes(input)) {
+                        row.style.display = '';  
+                   } else {
+                     row.style.display = 'none';  // Hide the row
+                    }
+                  });
+            
+    } 
+
     function loadLocations() {
-    var selectedDate = document.getElementById('selected-date').value;
+     var selectedDate = document.getElementById('selected-date').value;
       if (selectedDate.trim() !== "") {
             updateMapForDate(selectedDate);
       
@@ -243,7 +291,34 @@
                     }
                   });         
       }
-}
+      else{
+          var rows = document.querySelectorAll('.table-row');
+            rows.forEach(function(row) {
+        
+                     row.style.display = ''; 
+                 
+                  }); 
+
+        var map = new google.maps.Map(document.getElementById('map-loaction'), {
+         center: { lat: 7.8731, lng: 80.7718 },
+         zoom: 7.2
+       });
+     
+      var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
+  
+      incomingRequestsForDate.forEach(function (coordinate) {
+        var marker = new google.maps.Marker({
+            position: { lat: parseFloat(coordinate.lat), lng: parseFloat(coordinate.longi) },
+            map: map,
+            title: 'Marker'
+        });
+
+        marker.addListener('click', function () {
+            handleMarkerClick(marker);
+        });
+      });
+      }
+    }
 
     function updateMapForDate(selectedDate) {
         var map = new google.maps.Map(document.getElementById('map-loaction'), {
@@ -274,19 +349,16 @@
        
         const closeButton = document.getElementById("cancel-pop");
         const popup = document.getElementById("cancel-confirm");
-        const popupadd = document.getElementById("Add-Details");
-        const closeDetails = document.getElementById("cancel-detail");
-        const adddetails = document.getElementById("View");
+       
+        const closeassign = document.getElementById("cancel-assing");
+        const assign = document.getElementById("View");
+
         const maps = document.getElementById("maps");
         const table = document.getElementById("tables");
         const main_right_bottom= document.getElementById("main-right-bottom");
         const main_right_bottom_two = document.getElementById("main-right-bottom-two");
       
-        closeDetails.addEventListener("click", function () {
- 
-              popup.style.display = "none";
-        });
-
+       
         maps.addEventListener("click", function () {
             main_right_bottom.style.display = "none";
             maps.style.backgroundColor = "#ecf0f1";
@@ -301,34 +373,20 @@
             main_right_bottom.style.display = "flex";
         });
 
-       
-
+    
         closeButton.addEventListener("click", function () {
             popup.style.display = "none";
         });
 
-        const showDivButtons = document.querySelectorAll(".cancel");
-        const showAddButtons = document.querySelectorAll(".add");
-        const showLocationButtons = document.querySelectorAll(".location");
-
-        showDivButtons.forEach(button => {
-            button.addEventListener("click", function () {
-
-            popup.style.display = "flex";
+        closeassign.addEventListener("click", function () {
+            assign.style.display = "none";
         });
-       });
-      
-        showAddButtons.forEach(button => {
-          button.addEventListener("click", function () {
-
-            adddetails.style.display = "flex";
-         });
-        });
- 
+    
      
     });
 
- 
+    document.getElementById('searchInput').addEventListener('input', searchTable);
+
 
 </script> 
 

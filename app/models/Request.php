@@ -12,7 +12,7 @@
         $this->db->bind(':region', $data['region']);
         $this->db->bind(':customer_id', $data['customer_id']);
         $this->db->bind(':name', $data['name']);
-        $this->db->bind(':contact_no', $data['region']);
+        $this->db->bind(':contact_no', $data['contact_no']);
         $this->db->bind(':date', $data['date']);
         $this->db->bind(':time', $data['time']);
         $this->db->bind(':instructions', $data['instructions']);

@@ -158,6 +158,24 @@
         font-size: 15px;
     }
 
+    .main-right-top-four-left button {
+        margin-right: 5px;
+        font-weight: bold;
+        background-color: #f6e58d;
+        height: 26px;
+        border-radius: 10px;
+        border: none;
+        width: 100px;
+        cursor: pointer;
+        font-size: 15px;
+        transition: 1s;
+        letter-spacing: 0.05rem;
+    }
+
+    .main-right-top-four-left button:hover {
+        background-color: #f0932b;
+    }
+
     .main-right-top-four-right {
         display: flex;
 

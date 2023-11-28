@@ -935,7 +935,7 @@
   } 
 
   public function request_incomming(){
-
+    $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
     $jsonData = json_encode($incoming_requests);
@@ -943,12 +943,57 @@
       'incoming_requests' => $incoming_requests,
       'jsonData' => $jsonData,
       'pop_location'=>'',
-      'map'=>''
-
+      'map'=>'',
+      'collectors'=>$collectors
     ];
-
     $this->view('center_managers/request_incomming', $data);
 
+  }
+
+  public function request_cancell(){
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
+    $jsonData = json_encode($incoming_requests);
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+        'incoming_requests' => $incoming_requests,
+        'jsonData' => $jsonData,
+        'pop_location'=>'',
+        'map'=>'',
+        'request_id'=>trim($_POST['id']),
+        'reason'=>trim($_POST['reason']),
+        'cancelled_by'=>"Center",
+
+      ];
+
+      if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
+         $this->view('center_managers/request_incomming', $data);
+
+      } else {
+        $this->Request_Model->cancel_request($data);
+        $this->request_incomming();
+    }
+    
+      
+      
+
+    }
+    else{
+      $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+      $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
+      $jsonData = json_encode($incoming_requests);
+      $data = [
+        'incoming_requests' => $incoming_requests,
+        'jsonData' => $jsonData,
+        'pop_location'=>'',
+        'map'=>'',
+
+      ];
+      $this->view('center_managers/request_incomming', $data);
+    }
   }
 
 

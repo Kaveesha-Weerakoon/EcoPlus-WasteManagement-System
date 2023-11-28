@@ -1,0 +1,195 @@
+.CenterManager_Request_Assinged {
+    .main-right-bottom-two {
+        width: 99%;
+        height: 550px;
+        padding-left: 1%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+    }
+
+    .main-right-bottom-three {
+        display: flex;
+        justify-content: center;
+        height: 550px;
+    }
+
+    .main-right-bottom-three-content {
+
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+
+    .main-right-bottom-three-content img {
+        width: 450px;
+        height: 450px;
+    }
+
+    .main-right-bottom-three-content h1 {
+        font-size: 25px;
+        font-weight: 500;
+        margin-top: 20px;
+    }
+
+    .main-right-bottom {
+        flex-direction: column;
+        height: 550px;
+        display: none;
+    }
+
+    .table-row {
+        font-size: 1px;
+        font-family: Montserrat;
+        text-align: center;
+        height: 65px;
+        display: grid;
+        grid-template-columns: 11% 10% 9% 13% 14% 12% 17% 13%;
+        border-bottom: 2px solid #CACACA;
+    }
+
+    .table td {
+        height: 65px;
+        font-size: 15.5px;
+        vertical-align: middle;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .table-header {
+        background-color: #B9FFB7;
+        font-size: 17px;
+        font-family: Montserrat;
+        text-align: center;
+        height: 55px;
+        display: grid;
+        grid-template-columns: 11% 10% 9% 13% 14% 12% 17% 13%;
+    }
+
+    .collector_img {
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 50%;
+    }
+
+    .Location {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .Location-content {
+        background-color: white;
+        width: 65%;
+        height: 75%;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        color: #2B2B2B;
+    }
+
+    .map-locations {
+        width: 85%;
+        height: 90%;
+        border-radius: 10px;
+    }
+
+    .cancel-confirm {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cancel-confirm-content {
+        width: 500px;
+        background: white;
+        font-family: 'poppins', sans-serif;
+        border-radius: 6px;
+        text-align: center;
+        padding: 0 30px 30px;
+        color: #333;
+        transition: transform 0.4s, top 0.4s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cancel-confirm-content input {
+        width: 70%;
+        height: 40px;
+        margin-bottom: 10px;
+        margin: 12px;
+        text-align: center;
+        font-size: 20px;
+        border-radius: 5px;
+        border: 1px solid black;
+    }
+
+    .cancel-confirm-content h1 {
+
+        font-size: 32px;
+        font-weight: 500;
+    }
+
+    .confim-cancel-content-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .cancel-confirm-content button {
+        width: 200px;
+        height: 35px;
+        font-size: 18px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        margin-top: 10px;
+        background-color: #74b9ff;
+        cursor: pointer;
+    }
+
+    .cancel-confirm-content-warning {
+        width: 100px;
+        height: 100px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .cancel-confirm-top-close {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 3px;
+        width: 105%;
+    }
+
+    .cancel-confirm-top-close img {
+        cursor: pointer;
+    }
+}

@@ -68,19 +68,19 @@
                         <h1>Requests</h1>
                     </div>
                     <div class="main-right-top-three">
-                        <a href="./CenterManager_Requests.html">
+                        <a href="">
                             <div class="main-right-top-three-content">
                                 <p><b style="color: #1B6652;">Incoming</b></p>
                                 <div class="line"></div>
                             </div>
                         </a>
-                        <a href="./CenterManager_Assigned.html">
+                        <a href="<?php echo URLROOT?>/centermanagers/request_assigned">
                             <div class="main-right-top-three-content">
                                 <p>Assigned</p>
                                 <div class="line1"></div>
                             </div>
                         </a>
-                        <a href="./CenterManager_Requests_Completed.html">
+                        <a href="">
                             <div class="main-right-top-three-content">
                                 <p>Completed</p>
                                 <div class="line1"></div>
@@ -181,12 +181,13 @@
 
             </div>
             <div class="View" id="View">
-                <div class="View-content">
+                <form class="View-content" method="post" action="<?php echo URLROOT?>/centermanagers/assing">
                     <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-assing">
                     <h2>Assign a Collector</h2>
 
                     <img class="view_assing" src="<?php echo IMGROOT?>/selection.png" alt="">
                     <div class="view_assing_middle"><h3 >Req ID <b>R <div id="assign_reqid" style="display: inline;"></div></b></h3></div>
+                    <input name="assign_req_id" type="text" id="assign_req_id" style="display: none;">
 
                     <select id="dropdown" name="collectors">
                     <?php
@@ -201,8 +202,8 @@
                          ?>
 
                     </select>
-                    <Button>Assign</Button>
-                </div>
+                    <Button type="submit" onclick="assing_complete()">Assign</Button>
+                </form>
             </div>
 
         </div>
@@ -219,7 +220,29 @@
         document.getElementById("cancel-form").submit();
       }
     }
+    
+    function assing_complete(){
+        var dropdown = document.getElementById('dropdown');
+        var assignForm = document.getElementById('assignForm');
 
+        if (dropdown.value === 'default') {
+            alert('Please select a collector before assigning.');
+        } else {
+            assignForm.submit(); 
+        }
+    }
+
+    function assign($id){
+        var inputElement = document.querySelector('input[name="id"]');
+        var assign_reqid = document.getElementById('assign_req_id');
+
+        assign_reqid.value = $id;
+
+        inputElement.style.display = 'none';
+
+        assign_reqid.innerHTML = $id;
+        document.getElementById("View").style.display="flex"
+    }
 
     function cancel($id) {
         var inputElement = document.querySelector('input[name="id"]');
@@ -227,17 +250,7 @@
         inputElement.value = $id;
         document.getElementById("cancel-confirm").style.display="flex"
     }
-
-    function assign($id){
-        var inputElement = document.querySelector('input[name="id"]');
-        var assign_reqid = document.getElementById('assign_reqid');
-        inputElement.style.display = 'none';
-
-        assign_reqid.innerHTML = $id;
-        document.getElementById("View").style.display="flex"
-    }
-
-
+    
     function initMap() {
        var map = new google.maps.Map(document.getElementById('map-loaction'), {
          center: { lat: 7.8731, lng: 80.7718 },

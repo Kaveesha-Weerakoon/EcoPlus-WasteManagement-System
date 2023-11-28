@@ -73,7 +73,7 @@
                                  <div class="line1"></div>
                               </div>
                            </a>
-                          <a href="">
+                          <a href="<?php echo URLROOT?>/centermanagers/request_assigned">
                             <div class="main-right-top-three-content">
                                 <p>Assigned</p>
                                 <div class="line1"></div>
@@ -93,13 +93,13 @@
                            </a>
                         </div>
                         <div class="main-right-top-four">
-                        <div class="main-right-top-four-left">
+                          <div class="main-right-top-four-left">
                             <p>Date</p>
                             <input type="date" id="selected-date">
                             <button onclick="loadLocations()">Filter</button>
                             
-                        </div>
-                        <div class="main-right-top-four-right" >
+                          </div>
+                          <div class="main-right-top-four-right" >
 
                             <div class="main-right-top-four-component" style="" id="maps">
                                 <img src="<?php echo IMGROOT?>/map.png" alt="">
@@ -110,7 +110,7 @@
                                 <img src="<?php echo IMGROOT?>/cells.png" alt="">
                                 <p>Tables</p>
                                </div>
-                        </div>
+                          </div>
                         </div>
                    </div>
 
@@ -131,7 +131,7 @@
                       </div>
                       <div class="main-right-bottom-down">
                         <table class="table">
-                          <!-- <?php foreach($data['cancelled_request'] as $request) : ?> -->
+                          <?php foreach($data['cancelled_request'] as $request) : ?> 
                            <tr class="table-row" id="table-row">
                                 <td>R<?php echo $request->req_id?></td>
                                 <td><?php  echo $request->date?></td>
@@ -150,26 +150,24 @@
 
                                
                             </tr>
-                            <!-- <?php endforeach; ?> -->
+                            <?php endforeach; ?> 
 
                         </table>
                       </div>
                    </div>
-                   <div class="location_pop">
-                 <div class="location_pop_content">
-                    <div class="location_pop_map">
-                     
-                     </div>
-                     <div class="location_close">
-                        <button onclick="closemap()">Close</button>
-                     </div>
-                 </div>
-                
-              </div>
-
+                   
 
                </div>
-
+               <div class="location_pop">
+                 <div class="location_pop_content">
+                          <div class="location_pop_map">
+                     
+                           </div>
+                           <div class="location_close">
+                               <button onclick="closemap()">Close</button>
+                           </div>
+                  </div>
+                </div>
            </div>
         </div>
     </div>

@@ -125,8 +125,7 @@
                      <div class="main-right-bottom-two">
                             <div class="main-right-bottom-two-content">
                                    <img src="<?php echo IMGROOT?>/9264822.jpg" alt="">
-                                   <h1>You Have No Ongoing Requests</h1>
-                                   <a href="<?php echo URLROOT?>/customers/request_collect"><button>Request a Collect Now</button></a>
+                                   <h1>No active complaints</h1>
                                   
                             </div>
                      </div>

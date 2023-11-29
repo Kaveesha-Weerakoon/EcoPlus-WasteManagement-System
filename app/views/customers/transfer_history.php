@@ -86,7 +86,7 @@
                         </a>
                     </div>
                 </div>
-
+                <?php if(!empty($data['transaction_history'])) : ?>
                 <div class="main-right-bottom">
                     <div class="main-right-bottom-container">
                         <div class="main-right-bottom-container-top">
@@ -145,6 +145,16 @@
                     </div>
                    
                 </div>
+                <?php else: ?>
+                     <div class="main-right-bottom-two">
+                            <div class="main-right-bottom-two-content">
+                                   <img src="<?php echo IMGROOT?>/customer_trasfer_empty.jpg" alt="">
+                                   <h1>Your credit transfer is currently unavailable</h1>
+                                   <a href="<?php echo URLROOT?>/customers/transfer"><button>Transfer Credits</button></a>
+                                  
+                            </div>
+                     </div>
+                 <?php endif; ?>
 
               </div>
         </div>

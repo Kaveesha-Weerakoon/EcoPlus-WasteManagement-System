@@ -654,6 +654,7 @@
   
             $sender_balance = $this->Customer_Credit_Model->get_customer_credit_balance($sender_id);
             $receiver_balance = $this->Customer_Credit_Model->get_customer_credit_balance($receiver_id);
+
         
             if ($transfer_amount <= $sender_balance) {
                
@@ -661,8 +662,15 @@
                 $new_receiver_balance = $receiver_balance + $transfer_amount;
                 $sender_update = $this->Customer_Credit_Model->update_credit_balance($sender_id, $new_sender_balance);
                 $receiver_update = $this->Customer_Credit_Model->update_credit_balance($receiver_id, $new_receiver_balance);
+                $receiver =$this->customerModel->get_customer($receiver_id);
+                $receiver_image= $receiver->image;
+                $sender=$this->customerModel->get_customer($sender_id);
+                $sender_image= $sender->image;
+                $date = date('Y-m-d'); // Current date
+                $time = date('H:i:s'); // Current time
+                $result = $this->Customer_Credit_Model->record_credit_transfer($sender_id,$sender_image, $receiver_id, $receiver_image, $date, $time, $transfer_amount);
         
-                if ($sender_update && $receiver_update) {
+                if ($sender_update && $receiver_update && $result) {
                     $data['completed'] = 'True';
                     $this->view('customers/transfer', $data);
                 } else {

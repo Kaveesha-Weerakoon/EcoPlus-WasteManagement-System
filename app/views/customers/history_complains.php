@@ -88,7 +88,7 @@
                         </a>
                      </div>
                 </div>
-
+                <?php if(!empty($data['complains'])) : ?>
                 <div class="main-right-bottom">
                     <div class="main-right-bottom-container">
                         <div class="main-right-bottom-container-top">
@@ -121,6 +121,15 @@
                         </div>
                     </div>
                 </div>
+                <?php else: ?>
+                     <div class="main-right-bottom-two">
+                            <div class="main-right-bottom-two-content">
+                                   <img src="<?php echo IMGROOT?>/9264822.jpg" alt="">
+                                   <h1>No active complaints</h1>
+                                  
+                            </div>
+                     </div>
+                 <?php endif; ?>
 
             </div>
             <script>

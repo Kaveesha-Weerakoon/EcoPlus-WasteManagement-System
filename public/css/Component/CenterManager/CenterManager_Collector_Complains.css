@@ -95,6 +95,64 @@
         padding-bottom: 5px;
     }
 
+        /*Empty table UI*/
+        .main-right-bottom-two {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        
+        }
+        
+        .main-right-bottom-two-content {
+            width: 55%;
+            height: 92%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+        
+        
+        .main-right-bottom-two-content img {
+            width: 470px;
+            height: 470px;
+            
+        }
+        
+        .main-right-bottom-two-content h1 {
+            font-size: 23px;
+            color: #333;
+            font-weight: 550;
+        }
+        
+        .main-right-bottom-two-content p{
+            font-size: 18px;
+            margin-top: 7px;
+            color: #7c7c7d;
+        }
+        
+        .main-right-bottom-two-content button {
+            height: 42px;
+            width: 200px;
+            outline: none;
+            color: white;
+            font-size: 19px;
+            font-weight: 500;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            letter-spacing: 1px;
+            background: #1B6652;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+        
+        
+        .main-right-bottom-two-content button:hover {
+            background: rgb(28, 79, 64);
+        }
+
 
     .line {
         width: 93px;

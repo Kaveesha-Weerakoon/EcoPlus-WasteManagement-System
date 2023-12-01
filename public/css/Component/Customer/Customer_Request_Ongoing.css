@@ -48,14 +48,14 @@
     font-size: 1px;
     font-family: Montserrat;
     text-align: center;
-    height: 58px;
+    height: 65px;
     display: grid;
     grid-template-columns: 10% 12% 12% 10% 13% 10% 12% 11% 10%;
     border-bottom: 2px solid #CACACA;
 }
 
 .table td {
-    height: 58px;
+    height: 65px;
     font-size: 15.5px;
     vertical-align: middle;
     text-align: center;
@@ -144,6 +144,11 @@
     border-radius: 10px;
 }
 
+.collector_img {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50%;
+}
 
 .location_pop {
     display: none;

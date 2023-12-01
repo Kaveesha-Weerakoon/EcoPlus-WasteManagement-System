@@ -181,12 +181,12 @@
                    <button onclick="validateCancelForm()" id="cancel-pop" style="background-color: tomato;">OK</button>
               </form>
 
-            </div>
+        </div>
    </div>
 </div>
 </div>
 <script>
-   function cancel($id) {
+    function cancel($id) {
         var inputElement = document.querySelector('input[name="id"]');
         inputElement.style.display = 'none';
         inputElement.value = $id;
@@ -222,7 +222,7 @@
       }
     }
 
-   function initMap() {
+    function initMap() {
        var map = new google.maps.Map(document.getElementById('map-loaction'), {
           center: { lat: 7.8731, lng: 80.7718 },
          zoom: 7.2
@@ -239,9 +239,9 @@
                 handleMarkerClick(marker,coordinate);
             });
         });
-     }
+    }
 
-     document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
        
        const closeButton = document.getElementById("cancel-pop");
        const popup = document.getElementById("cancel-confirm");
@@ -286,8 +286,9 @@
       //    closeassign.addEventListener("click", function () {
        //        assign.style.display = "none";
       //    });
-     });
-   document.getElementById('searchInput').addEventListener('input', searchTable);
+    });
+    
+    document.getElementById('searchInput').addEventListener('input', searchTable);
 
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

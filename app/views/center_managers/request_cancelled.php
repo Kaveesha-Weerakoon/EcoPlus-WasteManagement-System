@@ -140,7 +140,12 @@
                                 <td><?php  if ($request->cancelled_by === 'Me') {
                                   echo 'Customer';
                                 } else {
-                                  echo $request->cancelled_by;
+                                  if (empty($request->collector_id)){
+                                    echo $request->cancelled_by;
+                                  }
+                                  else{
+                                    echo 'Collector '.$request->collector_id;
+                                  }
                                 }?>
                                 </td>
                                 <td><img onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)" class="add" src="<?php echo IMGROOT?>/location.png" alt=""></td>

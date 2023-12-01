@@ -966,7 +966,8 @@
         'request_id'=>trim($_POST['id']),
         'reason'=>trim($_POST['reason']),
         'cancelled_by'=>"Center",
-        'assinged'=>'No'
+        'assinged'=>'No',
+        'collector_id'=>''
 
       ];
 
@@ -1079,8 +1080,8 @@
         'request_id'=>trim($_POST['id']),
         'reason'=>trim($_POST['reason']),
         'cancelled_by'=>"Center",
-        'assinged'=>'Yes'
-
+        'assinged'=>'Yes',
+        'collector_id'=> $assined_requests->collector_id
       ];
 
       if (empty($data['reason']) || str_word_count($data['reason']) > 200) {

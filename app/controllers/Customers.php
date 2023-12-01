@@ -82,7 +82,8 @@
         'request_id'=>$req_id,
         'reason' =>'',
         'cancelled_by'=>'Me',
-        'assinged'=>'No'
+        'assinged'=>'No',
+        'collector_id'=>''
       ];
 
       $this->Request_Model->cancel_request($data);

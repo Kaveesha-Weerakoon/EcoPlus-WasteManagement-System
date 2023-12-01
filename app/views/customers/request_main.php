@@ -109,21 +109,32 @@
                         <table class="table" id="dataTable">
                            <?php foreach($data['request'] as $request) : ?>
                               <tr class="table-row">
-                                 <td><?php echo $request->req_id ?></td>
+                                 <td><?php echo $request->request_id?></td>
                                  <td>
-                                    <?php 
-                                        echo $request->type = ($request->type === 'incoming') ? 
+                                 <?php
+                                        $typeContent = ($request->type === 'incoming') ? 
                                         '<img class="processing" src="' . IMGROOT . '/process.png" alt="1">'.'<p class="bold1">Pending</p>'  : 
-                                        '<img class="assinged" src="' . IMGROOT . '/GarbageTruck.png" alt="1">'.'<p class="bold2">Assigned</p>';          
-                                    ?>
-                                 
+                                        '<img class="assinged" src="' . IMGROOT . '/GarbageTruck.png" alt="1">'.'<p class="bold2">Assigned</p>';
+                                        echo $typeContent
+                                 ?>
+                                 </td>
                                  <td><?php echo $request->date?></td>
                                  <td><?php echo $request->time?></td>
                                  <td><?php echo $request->region?></td>
                                  <td class="cancel-open"><img src="<?php echo IMGROOT?>/location.png" alt="" onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></td>
-                                 <td class="cancel-open"><img src="<?php echo IMGROOT?>/collectors.png" alt=""></td>
+                                 <td>
+                                    <?php
+                                        $typeContent = ($request->type === 'assigned') ? 
+                                        '<img class="collector_img" src="' . IMGROOT . '/img_upload/collector/' .$request->image . '" alt="1">':
+
+                                        '<img class="collector_img" src="' . IMGROOT . '/collector.png" alt="1">';
+                                        echo $typeContent
+                                    ?>
+                                 </td>
+
+                                </td>
                                  <td class="cancel-open"><img src="<?php echo IMGROOT?>/view.png" alt=""></td>
-                                 <td class="cancel-open"><a href="<?php echo URLROOT?>/customers/cancel_request_confirm/<?php echo $request->req_id?>"><img src="<?php echo IMGROOT?>/cancel.png" alt=""></a></td>
+                                 <td class="cancel-open"><a href="<?php echo URLROOT?>/customers/cancel_request_confirm/<?php echo $request->request_id?>"><img src="<?php echo IMGROOT?>/cancel.png" alt=""></a></td>
                                </tr>
                             <?php endforeach; ?>
 

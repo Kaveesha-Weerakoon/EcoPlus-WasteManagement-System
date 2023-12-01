@@ -173,20 +173,22 @@
     public function get_cancelled_request_by_collector($collector_id){
       $this->db->query('
       SELECT
-          request_main.*,
-          request_assigned.*
-      FROM
-         request_main
-      JOIN
-           request_assigned ON request_main.req_id = request_assigned.req_id
-      WHERE
-           request_assigned.collector_id = :collector_id
-           AND request_main.type = "assigned";
-      ');
+      request_main.*,
+      request_cancelled.*
+  FROM
+      request_main
+  JOIN
+      request_assigned ON request_main.req_id = request_assigned.req_id
+  LEFT JOIN
+      request_cancelled ON request_main.req_id = request_cancelled.req_id
+  WHERE
+      request_assigned.collector_id = :collector_id
+      AND request_main.type = "cancelled";
+    ');
 
-   $this->db->bind(':collector_id', $collector_id);
+     $this->db->bind(':collector_id', $collector_id);
 
-   $results = $this->db->resultSet();
+     $results = $this->db->resultSet();
 
    return $results;
 

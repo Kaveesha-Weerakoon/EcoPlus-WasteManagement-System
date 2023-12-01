@@ -111,6 +111,7 @@
                         <table class="table">
                             <tr class="table-header">
                                 <th>Req ID</th>
+                                <th>Date</th>
                                 <th>Request Details</th>
                                 <th>Location</th>
                                 <th>Cancelled By</th>
@@ -124,11 +125,12 @@
                             <?php foreach($data['cancelled_requests'] as $request) : ?>
                            <tr class="table-row">
                                 <td>R<?php echo $request->req_id?></td>
+                                <td><?php echo $request->date?></td>
                                 <td><img src="<?php echo IMGROOT?>/view.png" alt=""></td>
                                 <td><img src="<?php echo IMGROOT?>/location.png" alt=""></td>
                                 <td><?php  echo $request->cancelled_by?></td>
                                 <td><?php  echo $request->reason?> </td>
-                               
+                             
                             </tr>
                             <?php endforeach; ?>
                           </table>

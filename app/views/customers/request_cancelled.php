@@ -54,7 +54,7 @@
                     <div class="main-right-top-one">
                        <div class="main-right-top-one-input">
                            <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                           <input type="text" placeholder="Search">
+                           <input type="text" placeholder="Search" id="searchInput">
                         </div>
                         <div class="main-right-top-one-content">
                             <p><?php echo $_SESSION['user_name']?></p>
@@ -136,6 +136,28 @@
     </div>  
 </div>
 <script>
+
+    function searchTable() {
+                   var input = document.getElementById('searchInput').value.toLowerCase();
+                   var rows = document.querySelectorAll('.table-row');
+
+                   rows.forEach(function(row) {
+                   var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+                   var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+                   var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+                   var center = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+                   var cancelled_By = row.querySelector('td:nth-child(7)').innerText.toLowerCase();
+                   var reason = row.querySelector('td:nth-child(8)').innerText.toLowerCase();
+
+                   if (center.includes(input) || id.includes(input) || status.includes(input) || date.includes(input) ||  time.includes(input)|| cancelled_By.includes(input)|| reason.includes(input)) {
+                        row.style.display = '';  
+                   } else {
+                     row.style.display = 'none';  // Hide the row
+                    }
+                  });
+            
+    }
+
     function initMap(latitude, longitude) {
       var mapCenter = { lat: 7.4, lng: 81.00000000 };
 
@@ -159,5 +181,7 @@
         document.querySelector('.location_pop').style.display = 'none';
 
     }
+    document.getElementById('searchInput').addEventListener('input', searchTable);
+
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

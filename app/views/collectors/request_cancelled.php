@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Collector_Main" >
     <div class="Collector_Request_Top">
-
+       <div class="Collector_Request_Cancelled">
     
     <div class="main" >
             <div class="main-left" >
@@ -94,12 +94,12 @@
                         </div>
                         <div class="main-right-top-four-right">
 
-                            <div class="main-right-top-four-component" style="background-color: #ecf0f1" id="maps">
+                            <div class="main-right-top-four-component"  id="maps">
                                 <img src="<?php echo IMGROOT?>/map.png" alt="">
                                 <p>Maps</p>
                             </div>      
 
-                            <div class="main-right-top-four-component" id="tables">
+                            <div class="main-right-top-four-component" id="tables" style="background-color: #ecf0f1">
                             <img src="<?php echo IMGROOT?>/cells.png" alt="">
                                 <p>Tables</p>
                                </div>
@@ -107,9 +107,36 @@
                         </div>
                 </div>
                 <div class="main-right-bottom">
+                <div class="main-right-bottom-top">
+                        <table class="table">
+                            <tr class="table-header">
+                                <th>Req ID</th>
+                                <th>Request Details</th>
+                                <th>Location</th>
+                                <th>Cancelled By</th>
+                                <th>Reason</th>
+                            </tr>
+                        </table>
+                      </div>
+                      <div class="main-right-bottom-down">
 
+                          <table class="table">
+                            <?php foreach($data['cancelled_requests'] as $request) : ?>
+                           <tr class="table-row">
+                                <td>R<?php echo $request->req_id?></td>
+                                <td><img src="<?php echo IMGROOT?>/view.png" alt=""></td>
+                                <td><img src="<?php echo IMGROOT?>/location.png" alt=""></td>
+                                <td><?php  echo $request->cancelled_by?></td>
+                                <td><?php  echo $request->reason?> </td>
+                               
+                            </tr>
+                            <?php endforeach; ?>
+                          </table>
+
+                        </div>
                 </div>
             </div>
+    </div>
     </div>
 </div>
 </div>

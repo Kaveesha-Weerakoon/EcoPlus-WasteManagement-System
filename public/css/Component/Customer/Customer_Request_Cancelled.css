@@ -75,6 +75,53 @@
         cursor: pointer;
     }
 
+    .location_pop {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .location_pop_content {
+        width: 70%;
+        height: 78%;
+        padding: 10px;
+        background-color: #f1f2f6;
+        border-radius: 10px;
+        padding: 20px;
+        padding-bottom: 40px;
+    }
+
+    .location_pop_map {
+        width: 100;
+        height: 100%;
+        border-radius: 10px;
+    }
+
+    .location_close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 6px;
+    }
+
+    .location_close button {
+        background-color: #ff4757;
+        height: 28px;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+        font-size: 16px;
+        border-radius: 5px;
+        width: 85px;
+    }
 
     @media screen and (max-width: 1250px) {
         .main-left-middle-content h2 {

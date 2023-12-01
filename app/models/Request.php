@@ -28,13 +28,16 @@
               rm.*,
               ar.*,
               c.user_id AS collector_user_id,
-              c.*
+              c.*,
+              u.name as name
           FROM
               request_main rm
           LEFT JOIN
               request_assigned ar ON rm.req_id = ar.req_id
           LEFT JOIN
               collectors c ON ar.collector_id = c.user_id
+          LEFT JOIN 
+              users u ON c.user_id=u.id
           WHERE
               rm.customer_id = :customer_id
               AND rm.type IN ("incoming", "assigned")
@@ -165,6 +168,28 @@
       $results = $this->db->resultSet();
 
       return $results;
+    }
+
+    public function get_cancelled_request_by_collector($collector_id){
+      $this->db->query('
+      SELECT
+          request_main.*,
+          request_assigned.*
+      FROM
+         request_main
+      JOIN
+           request_assigned ON request_main.req_id = request_assigned.req_id
+      WHERE
+           request_assigned.collector_id = :collector_id
+           AND request_main.type = "assigned";
+      ');
+
+   $this->db->bind(':collector_id', $collector_id);
+
+   $results = $this->db->resultSet();
+
+   return $results;
+
     }
 
 }

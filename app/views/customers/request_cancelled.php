@@ -1,5 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Customer_Main">
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initMap" async defer></script>
+
     <div class="Customer_Request_Main">
         <div class="Customer_Request_Cancelled">
         <div class="main">
@@ -108,7 +110,7 @@
                                  <td><?php echo $request->date?></td>
                                  <td><?php echo $request->time?></td>
                                  <td><?php echo $request->region?></td>
-                                 <td><img src="<?php echo IMGROOT?>/location.png" alt=""></td>
+                                 <td><img src="<?php echo IMGROOT?>/location.png" onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></td>
                                  <td><img src="<?php echo IMGROOT?>/view.png" alt=""></td>
                                  <td><?php echo $request->cancelled_by?></td>
                                  <td><?php echo ($request->reason ? $request->reason : 'None'); ?></td>                             </tr>
@@ -119,7 +121,43 @@
                 </div>
 
             </div>
+            <div class="location_pop">
+                 <div class="location_pop_content">
+                    <div class="location_pop_map">
+                     
+                     </div>
+                     <div class="location_close">
+                        <button onclick="closemap()">Close</button>
+                     </div>
+                 </div>
+                
+              </div>
         </div>
     </div>  
 </div>
+<script>
+    function initMap(latitude, longitude) {
+      var mapCenter = { lat: 7.4, lng: 81.00000000 };
+
+      var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
+         center: mapCenter,
+         zoom: 7.4
+      });
+
+      var marker = new google.maps.Marker({
+        position: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+        map: map,
+        title: 'Marked Location'
+      });
+    }
+
+    function viewLocation($lattitude,$longitude){
+        initMap($lattitude,$longitude);
+        document.querySelector('.location_pop').style.display = 'flex';
+    }   
+    function closemap(){
+        document.querySelector('.location_pop').style.display = 'none';
+
+    }
+</script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

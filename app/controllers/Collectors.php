@@ -593,9 +593,8 @@
 
       } else {
         $this->Request_Model->cancel_request($data);
-        $this->view('collectors/request_assinged', $data);
+        $this->request_cancelled();
       }
-      $this->view('collectors/request_assinged', $data);
 
     }
     else{
@@ -620,8 +619,11 @@
    }
 
    public function request_cancelled(){
+
+    $cancelled_requests=$this->Request_Model->get_cancelled_request_by_collector($_SESSION['collector_id']);
     $data = [
-      'title' => 'TraversyMVC',
+
+      'cancelled_requests' => $cancelled_requests,
     ];
    
     $this->view('collectors/request_cancelled', $data);

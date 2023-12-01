@@ -151,8 +151,7 @@
                    <div class="main-right-bottom-two" id="main-right-bottom-two">
                              <div class="map-locations" id="map-loaction">
 
-                             </div>
-                  
+                             </div>  
                    </div>
                 </div>
                 <?php else: ?> 
@@ -166,14 +165,16 @@
             </div>
             <div class="cancel-confirm" id="cancel-confirm">
               <form class="cancel-confirm-content" id="cancel-form" method="post" action="<?php echo URLROOT?>/collectors/request_assinged">
-                   <div class="cancel-confirm-top-close">
-                      <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop">
-                   </div>
-                   <h1>Cancel the Request?</h1>
-                   <img id="cancel-confirm-content-warning" class="cancel-confirm-content-warning" src="<?php echo IMGROOT?>/warning.png" alt=""> 
+                   <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
+                            <h2>Cancel the Request?</h2>
+                    <p>This action will cancel the request </p>
                    <input name="reason" type="text" placeholder="Input the Reason">
                    <input name="id" type="text" >
-                   <button onclick="validateCancelForm()" id="cancel-pop" style="background-color: tomato;">OK</button>
+                   <div class="btns" id="btns">
+                                <button onclick="validateCancelForm()"  class="deletebtn" >OK</button>
+                                <button id="cancel-pop" type="button" class="cancelbtn">Cancel</button></a>
+                   </div>
+
               </form>
             </div>
     </div>
@@ -206,16 +207,14 @@
         inputElement.style.display = 'none';
         inputElement.value = $id;
         document.getElementById("cancel-confirm").style.display="flex";
+        setTimeout(function() {
+            document.getElementById("btns").style.display="flex";
+            document.querySelector("#cancel-confirm img").style.display="flex";
+            document.querySelector("#cancel-confirm h2").style.display="flex";
+            document.querySelector("#cancel-confirm input").style.display="flex";
+            document.querySelector("#cancel-confirm p").style.display="flex";
 
-        setTimeout(function () {
-            document.getElementById("cancel-confirm").querySelector("h1").style.display="flex";
-            document.getElementById("cancel-confirm").querySelector("input").style.display="flex";
-            document.getElementById("cancel-confirm").querySelector("button").style.display="flex";
-            document.getElementById("cancel-confirm").querySelector("img").style.display="flex";
-            document.getElementById("cancel-confirm-content-warning").style.display="flex";
-
-
-        },300);
+        }, 350);
 
     }
 
@@ -334,6 +333,7 @@
         const closeButton = document.getElementById("cancel-pop");
         const cancel_popup = document.getElementById("cancel-confirm");
         const cancel_form = document.getElementById("cancel-form");
+        const btns = document.getElementById("btns");
 
         maps.addEventListener("click", function () {
             if (main_right_bottom !== null) {
@@ -361,14 +361,12 @@
         closeButton.addEventListener("click", function () {
             cancel_form.style.width="0px";
             cancel_form.style.height="0px";
-           
-            document.getElementById("cancel-confirm").querySelector("h1").style.display="none";
-            document.getElementById("cancel-confirm").querySelector("input").style.display="none";
-            document.getElementById("cancel-confirm").querySelector("button").style.display="none";
-            document.getElementById("cancel-confirm").querySelector("img").style.display="none";
-            document.getElementById("cancel-confirm").querySelector("img").style.display="none";
-            document.getElementsByClassName("cancel-confirm-content-warning")[0].style.display = "none";
             cancel_popup.style.display = "none";
+            btns.style.display = "none";
+            document.querySelector("#cancel-confirm img").style.display= "none";
+            document.querySelector("#cancel-confirm h2").style.display= "none";
+            document.querySelector("#cancel-confirm input").style.display= "none";
+            document.querySelector("#cancel-confirm p").style.display= "none";
         });
     
     });

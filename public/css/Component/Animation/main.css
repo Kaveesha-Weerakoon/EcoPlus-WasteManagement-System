@@ -57,7 +57,7 @@
 
 @keyframes slideDown {
     to {
-        width: 500px;
-        height: 50%;
+        width: 450px;
+        height: 40%;
     }
 }

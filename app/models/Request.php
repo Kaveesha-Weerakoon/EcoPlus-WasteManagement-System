@@ -21,14 +21,35 @@
         $result = $this->db->execute();
     }
 
-    public function get_request_current($user_id){
-        $this->db->query('SELECT * FROM request_main WHERE customer_id = :customer_id AND type IN ("incoming", "assigned")') ;
-        $this->db->bind(':customer_id', $user_id);
-        
-        $results = $this->db->resultSet();
-        
-        return $results;
-    }
+    public function get_request_current($user_id) {
+      $query = '
+          SELECT
+              rm.req_id As request_id,
+              rm.*,
+              ar.*,
+              c.user_id AS collector_user_id,
+              c.*,
+              u.name as name
+          FROM
+              request_main rm
+          LEFT JOIN
+              request_assigned ar ON rm.req_id = ar.req_id
+          LEFT JOIN
+              collectors c ON ar.collector_id = c.user_id
+          LEFT JOIN 
+              users u ON c.user_id=u.id
+          WHERE
+              rm.customer_id = :customer_id
+              AND rm.type IN ("incoming", "assigned")
+      ';
+  
+      $this->db->query($query);
+      $this->db->bind(':customer_id', $user_id);
+      $results = $this->db->resultSet();
+  
+      return $results;
+  }
+  
 
     public function get_request_by_id($req_id){
 
@@ -39,17 +60,20 @@
     }
 
     public function cancel_request($data) {
-      $this->db->query('INSERT INTO request_cancelled (req_id, cancelled_by, reason,assinged) VALUES (:req_id, :cancelled_by, :reason,:assinged)');
+      $this->db->query('INSERT INTO request_cancelled (req_id, cancelled_by, reason,assinged,collector_id) VALUES (:req_id, :cancelled_by, :reason,:assinged,:collector_id)');
       $this->db->bind(':req_id', $data['request_id']);
       $this->db->bind(':cancelled_by', $data['cancelled_by']);
       $this->db->bind(':reason', $data['reason']);
       $this->db->bind(':assinged', $data['assinged']);
+      $this->db->bind(':collector_id', $data['collector_id']);
+
       $insertResult = $this->db->execute();
   
       if ($insertResult) {
           $this->db->query('UPDATE request_main SET type = :type WHERE req_id = :req_id');
           $this->db->bind(':type', 'cancelled');
           $this->db->bind(':req_id', $data['request_id']);
+          
           $updateResult = $this->db->execute();
   
           return $updateResult;
@@ -113,16 +137,16 @@
       } else {
           return false;
       }
-  }
+    }
 
     public function get_assigned_request_by_center($region){
       $this->db->query('
-    SELECT request_main.*, request_assigned.collector_id, collectors.*
-    FROM request_main
-    LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
-    LEFT JOIN collectors ON request_assigned.collector_id = collectors.user_id
-    WHERE request_main.region= :region AND request_main.type = :type
-');
+            SELECT request_main.*, request_assigned.collector_id, collectors.*
+            FROM request_main
+            LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
+            LEFT JOIN collectors ON request_assigned.collector_id = collectors.user_id
+            WHERE request_main.region= :region AND request_main.type = :type
+     ');
 
       $this->db->bind(':region', $region);
       $this->db->bind(':type', 'assigned');
@@ -130,5 +154,44 @@
       return $results;
     }
 
-   
+    public function get_assigned_request_by_collector($collector_id){
+      $this->db->query('
+         SELECT request_main.*
+         FROM request_main
+         JOIN request_assigned ON request_main.req_id = request_assigned.req_id
+         WHERE request_assigned.collector_id = :collector_id
+         AND request_main.type = "assigned"
+      ');
+
+      $this->db->bind(':collector_id', $collector_id);
+
+      $results = $this->db->resultSet();
+
+      return $results;
+    }
+
+    public function get_cancelled_request_by_collector($collector_id){
+      $this->db->query('
+      SELECT
+      request_main.*,
+      request_cancelled.*
+  FROM
+      request_main
+  JOIN
+      request_assigned ON request_main.req_id = request_assigned.req_id
+  LEFT JOIN
+      request_cancelled ON request_main.req_id = request_cancelled.req_id
+  WHERE
+      request_assigned.collector_id = :collector_id
+      AND request_main.type = "cancelled";
+    ');
+
+     $this->db->bind(':collector_id', $collector_id);
+
+     $results = $this->db->resultSet();
+
+   return $results;
+
+    }
+
 }

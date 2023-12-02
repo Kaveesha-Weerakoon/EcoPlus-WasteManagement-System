@@ -17,7 +17,7 @@
                             <h2>Dashboard</h2>
                         </div>
                     </a>
-                    <a href="">
+                    <a href="<?php echo URLROOT?>/collectors/request_assinged">
                         <div class="main-left-middle-content ">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/Request.png" alt="">
@@ -65,7 +65,7 @@
                         <img src="<?php echo IMGROOT?>/Collector_Dashboard.png" alt="">
                         <div class="main-right-left-two-component">
                             <h1>Welcome to Collector Portal</h1>
-                            <a href=""><button>Assigned
+                            <a href="<?php echo URLROOT?>/collectors/request_assinged"><button>Assigned
                                     Requests</button></a>
                         </div>
 

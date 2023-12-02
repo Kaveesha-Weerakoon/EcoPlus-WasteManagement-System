@@ -49,6 +49,9 @@
 
 @import url('Component/Collector/Collector_Complains.css');
 
+@import url('Component/Collector/Collector_Request_Top.css');
+@import url('Component/Collector/Collector_Reuqest_Assigned.css');
+@import url('Component/Collector/Collector_Request_Cancelled.css');
 
 @import url('Component/Collector/Collector_Editprofile.css');
 /* Center Manager CSS */
@@ -119,6 +122,8 @@ a {
     font-family: inter;
     margin: 0;
     padding: 0;
+}
 
-
+.body {
+    height: 100vh;
 }

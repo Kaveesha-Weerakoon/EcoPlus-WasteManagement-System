@@ -54,3 +54,10 @@
         transform: translateX(0);
     }
 }
+
+@keyframes slideDown {
+    to {
+        width: 450px;
+        height: 40%;
+    }
+}

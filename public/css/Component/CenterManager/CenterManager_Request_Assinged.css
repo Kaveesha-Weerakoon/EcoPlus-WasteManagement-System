@@ -73,11 +73,7 @@
         grid-template-columns: 11% 10% 9% 13% 14% 12% 17% 13%;
     }
 
-    .collector_img {
-        width: 60px !important;
-        height: 60px !important;
-        border-radius: 50%;
-    }
+
 
     .Location {
         display: flex;
@@ -149,7 +145,6 @@
     }
 
     .cancel-confirm-content h1 {
-
         font-size: 32px;
         font-weight: 500;
     }

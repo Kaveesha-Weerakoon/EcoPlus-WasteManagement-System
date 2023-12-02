@@ -215,7 +215,7 @@
         var reasonInput = document.getElementsByName("reason")[0].value;
 
         if (reasonInput.trim() === "" || reasonInput.split(/\s+/).length > 200) {
-         alert("Please enter a reason");
+           alert("Please enter a reason");
         } else {
         document.getElementById("cancel-form").submit();
       }
@@ -355,9 +355,9 @@
       var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
       var filteredRequests = incomingRequestsForDate.filter(function (coordinate) {
         return coordinate.date === selectedDate;
-    });
-
-    filteredRequests.forEach(function (coordinate) {
+      });
+  
+      filteredRequests.forEach(function (coordinate) {
         var marker = new google.maps.Marker({
             position: { lat: parseFloat(coordinate.lat), lng: parseFloat(coordinate.longi) },
             map: map,
@@ -367,7 +367,7 @@
         marker.addListener('click', function () {
             handleMarkerClick(marker);
         });
-    });
+      });
     }
     
     document.addEventListener("DOMContentLoaded", function () {

@@ -8,6 +8,7 @@
       $this->creditModel=$this->model('Credit_amount');
       $this->collector_complain_Model=$this->model('Collector_Complain');
       $this->userModel=$this->model('User');
+      $this->Request_Model=$this->model('Request');
 
       if(!isLoggedIn('collector_id')){
         redirect('users/login');
@@ -15,7 +16,6 @@
     }
     
     public function index(){
-
       $credit= $this->creditModel->get();
       $data = [
         'title' => 'TraversyMVC',
@@ -262,7 +262,6 @@
      
     }
 
-    
     public function collector_assistants_update($assisId){
   
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -365,8 +364,6 @@
       }
     }
 
-  
-  
     public function editprofile(){
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -574,7 +571,65 @@
 
       }
 
-  }
+   }
+
+   public function request_assinged(){
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
+      $jsonData = json_encode($assinged_Requests);
+       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+       $data = [
+        'assigned_requests' => $assinged_Requests,
+        'jsonData' => $jsonData,
+        'request_id'=>trim($_POST['id']),
+        'reason'=>trim($_POST['reason']),
+        'cancelled_by'=>'Collector',
+        'assinged'=>'Yes',
+        'collector_id'=>($_SESSION['collector_id'])
+      ];
+      if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
+        $this->view('collectors/request_assinged', $data);
+
+      } else {
+        $this->Request_Model->cancel_request($data);
+        $this->request_cancelled();
+      }
+
+    }
+    else{
+      $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
+      $jsonData = json_encode($assinged_Requests);
+      $data = [
+        'assigned_requests' => $assinged_Requests,
+        'jsonData' => $jsonData,
+      ];
+     
+      $this->view('collectors/request_assinged', $data);
+    }
+    
+   }
+
+   public function request_completed(){
+    $data = [
+      'title' => 'TraversyMVC',
+    ];
+   
+    $this->view('collectors/request_completed', $data);
+   }
+
+   public function request_cancelled(){
+
+    $cancelled_requests=$this->Request_Model->get_cancelled_request_by_collector($_SESSION['collector_id']);
+    $data = [
+
+      'cancelled_requests' => $cancelled_requests,
+    ];
+   
+    $this->view('collectors/request_cancelled', $data);
+   }
+
+  
   }
 
 

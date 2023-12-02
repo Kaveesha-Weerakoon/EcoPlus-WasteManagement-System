@@ -109,21 +109,33 @@
                         <table class="table" id="dataTable">
                            <?php foreach($data['request'] as $request) : ?>
                               <tr class="table-row">
-                                 <td><?php echo $request->req_id ?></td>
+                                 <td><?php echo $request->request_id?></td>
                                  <td>
-                                    <?php 
-                                        echo $request->type = ($request->type === 'incoming') ? 
+                                 <?php
+                                        $typeContent = ($request->type === 'incoming') ? 
                                         '<img class="processing" src="' . IMGROOT . '/process.png" alt="1">'.'<p class="bold1">Pending</p>'  : 
-                                        '<img class="assinged" src="' . IMGROOT . '/GarbageTruck.png" alt="1">'.'<p class="bold2">Assigned</p>';          
-                                    ?>
-                                 
+                                        '<img class="assinged" src="' . IMGROOT . '/GarbageTruck.png" alt="1">'.'<p class="bold2">Assigned</p>';
+                                        echo $typeContent
+                                 ?>
+                                 </td>
                                  <td><?php echo $request->date?></td>
                                  <td><?php echo $request->time?></td>
                                  <td><?php echo $request->region?></td>
                                  <td class="cancel-open"><img src="<?php echo IMGROOT?>/location.png" alt="" onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></td>
-                                 <td class="cancel-open"><img src="<?php echo IMGROOT?>/collectors.png" alt=""></td>
-                                 <td class="cancel-open"><img src="<?php echo IMGROOT?>/view.png" alt=""></td>
-                                 <td class="cancel-open"><a href="<?php echo URLROOT?>/customers/cancel_request_confirm/<?php echo $request->req_id?>"><img src="<?php echo IMGROOT?>/cancel.png" alt=""></a></td>
+                                 <td>
+                                    <?php
+                                        $typeContent = ($request->type === 'assigned') ? 
+                                        '<img class="collector_img" src="' . IMGROOT . '/img_upload/collector/' .$request->image . '" alt="1">':
+
+                                        '<img class="collector_img" src="' . IMGROOT . '/collector.png" alt="1">';
+                                        echo $typeContent
+                                    ?>
+                                 </td>
+
+                                </td>
+                                <td class="cancel-open">
+                                <img src="<?php echo IMGROOT ?>/view.png" <?php if ($request->type === 'assigned') { ?>onclick="view_collector('<?php echo $request->image; ?>', '<?php echo $request->user_id; ?>', '<?php echo $request->name; ?>', '<?php echo $request->contact_no; ?>', '<?php echo $request->vehicle_no; ?>', '<?php echo $request->vehicle_type; ?>')"<?php } ?> alt="">
+                                 <td class="cancel-open"><a href="<?php echo URLROOT?>/customers/cancel_request_confirm/<?php echo $request->request_id?>"><img src="<?php echo IMGROOT?>/cancel.png" alt=""></a></td>
                                </tr>
                             <?php endforeach; ?>
 
@@ -171,11 +183,49 @@
                  </div>
                 
               </div>
-             
+              <div class="personal-details-popup-box" id="personal-details-popup-box">
+                   <div class="personal-details-popup-form" id="popup">
+                        <img  src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close" id="personal-details-popup-form-close">
+                        <center><div class="personal-details-topic">Collector Details</div></center>
+                
+                    <div class="personal-details-popup" >
+                                  <div class="personal-details-left">
+                                     <img id="collector_profile_img" src="<?php echo IMGROOT?>/img_upload/collector/?>" class="profile-pic" alt="">
+                                     <p>Collector ID: <span id="collector_id">C<?php?></span></p>
+                                  </div>
+                        <div class="personal-details-right"> 
+                                    <div class="personal-details-right-labels">
+                                        <span >Name</span><br>
+                                        <span>Contact No</span><br>
+                                        <span>Vehicle No</span><br>
+                                        <span>Vehicle Type</span><br>
+     
+                                    </div>
+                                   <div class="personal-details-right-values">
+                                        <span id="collector_name"></span><br>
+                                        <span id="collector_conno"></span><br>
+                                        <span id="collector_vehicle_no"></span><br>
+                                        <span id="collector_vehicle_type"></span><br>
+                                    </div>   
+                         </div>   
+                    </div>
+              </div>
+
+        </div>
          </div>
     </div>
 </div>
 <script>
+
+    function view_collector(image,col_id,name,contact_no,type,vehno){
+        document.getElementById('personal-details-popup-box').style.display = 'flex';
+        document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + image;
+        document.getElementById('collector_id').innerText= col_id;
+        document.getElementById('collector_name').innerText=name;
+        document.getElementById('collector_conno').innerText= contact_no;
+        document.getElementById('collector_vehicle_no').innerText= vehno;
+        document.getElementById('collector_vehicle_type').innerText=type;
+    }
     
     function initMap(latitude, longitude) {
       var mapCenter = { lat: 7.4, lng: 81.00000000 };
@@ -202,9 +252,6 @@
 
     }
 
-    function cancel_request(){
-
-    }
       
     function searchTable() {
                    var input = document.getElementById('searchInput').value.toLowerCase();
@@ -224,9 +271,17 @@
                     }
                   });
             
-        }
+    }
 
-        document.getElementById('searchInput').addEventListener('input', searchTable);
+    document.getElementById('searchInput').addEventListener('input', searchTable);
+    document.addEventListener("DOMContentLoaded", function () {
+        const close_collector = document.getElementById("personal-details-popup-form-close");
+        const collector_view = document.getElementById("personal-details-popup-box");
 
+        close_collector.addEventListener("click", function () {
+            collector_view.style.display="none"
+        });
+    
+    });
  </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

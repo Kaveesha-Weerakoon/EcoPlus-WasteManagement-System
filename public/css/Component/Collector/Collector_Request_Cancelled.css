@@ -1,0 +1,46 @@
+.Collector_Request_Cancelled {
+    .table-row {
+        font-size: 1px;
+        font-family: Montserrat;
+        text-align: left;
+        height: 52px;
+        display: grid;
+        border-bottom: 2px solid #CACACA;
+        grid-template-columns: 11% 10% 15% 15% 19% 40%;
+
+    }
+
+
+
+    .table td {
+        height: 50px;
+        font-size: 15.5px;
+
+
+    }
+
+    .table-header {
+        background-color: #B9FFB7;
+        font-size: 17px;
+        font-family: Montserrat;
+        height: 55px;
+
+        grid-template-columns: 11% 10% 15% 15% 19% 40%;
+    }
+
+    .table th {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    td img {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+    }
+
+
+
+}

@@ -1,6 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Customer_Request_collect">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script  
             src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
@@ -21,7 +20,7 @@
 
       <form id="myForm" class="main-bottom" action="<?php echo URLROOT;?>/customers/request_collect" method="post">
      
-        <div class="main-bottom-component" >
+            <div class="main-bottom-component" >
              <div class="main-bottom-component-left">
                   <img src="<?php echo IMGROOT?>/RequestCollect.jpg" alt="">
              </div>
@@ -104,9 +103,9 @@
                     </div>
                   
               </div>
-        </div>
+           </div>
          
-         <div class="map_pop" id="mapPopup">
+          <div class="map_pop" id="mapPopup">
           <div id="map"></div>
              <div class="buttons-container" id="submitForm" >
                 <button type="submit" formaction="<?php echo URLROOT; ?>/customers/request_collect" method="post" id="markLocationBtn" onclick="getLocation()">Mark Location</button>
@@ -114,9 +113,8 @@
                 <input type="hidden" id="latitudeInput" value=" <?php echo $data['lattitude']?>" name="latitude">
                 <input type="hidden" id="longitudeInput" value=" <?php echo $data['longitude']?>" name="longitude">
               </div>
-         </div> 
-
-         <?php if($data['confirm_collect_pop']=='True') : ?>
+          </div>    
+          <?php if($data['confirm_collect_pop']=='True') : ?>
             <div class="confirm_collect_pop">
                 <div class="popup" id="popup">
                    <img src="<?php echo IMGROOT?>/Collector_Dashboard3.jpg" alt="">
@@ -132,9 +130,8 @@
                     </div>
                  </div>
             </div>
-         <?php endif; ?>
-
-         <?php if($data['success']=='True') : ?>
+          <?php endif; ?>
+          <?php if($data['success']=='True') : ?>
             <div class="request_success">
               <div class="popup" id="popup">
                   <img src="<?php echo IMGROOT?>/check.png" alt="">
@@ -144,8 +141,6 @@
               </div>
             </div>
           <?php endif; ?>
-
-      
       </form >
     
          <script>

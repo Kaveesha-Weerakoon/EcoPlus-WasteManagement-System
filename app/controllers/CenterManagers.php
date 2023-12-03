@@ -699,7 +699,6 @@
       $this->view('center_managers/center_workers', $data);
     } 
 
-
     public function center_workers_delete($workerId){
 
       $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
@@ -1031,7 +1030,7 @@
         }
         else{
           $this->Request_Model->assing_collector($data);
-          $this->request_incomming();
+          $this->request_assigned();
         }
     } 
     }
@@ -1046,7 +1045,7 @@
         'map'=>'',
 
       ];
-      $this->view('center_managers/request_incomming', $data);
+      $this->view('center_managers/request_assinged', $data);
     }
   }
 
@@ -1081,15 +1080,15 @@
         'reason'=>trim($_POST['reason']),
         'cancelled_by'=>"Center",
         'assinged'=>'Yes',
-        'collector_id'=> $assined_requests->collector_id
+        'collector_id'=> trim($_POST['collector_id'])
       ];
 
       if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
-        $this->request_assigned();
+        $this->view('center_managers/request_assigned', $data);
 
       } else {
         $this->Request_Model->cancel_request($data);
-        $this->request_assigned();
+        $this->request_cancelled();
     }
     
     }

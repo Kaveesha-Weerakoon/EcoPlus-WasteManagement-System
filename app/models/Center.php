@@ -27,12 +27,13 @@
     }
 
     public function addCenter($data){
-        $this->db->query('INSERT INTO center (region, address, district, center_manager_id, center_manager_name) VALUES (:region, :address, :district, :center_manager_id, :center_manager_name)');
+        $this->db->query('INSERT INTO center (region,district,center_manager_id,center_manager_name,lat,longi) VALUES (:region,:district, :center_manager_id, :center_manager_name,:lat,:longi)');
        
         $centerManagers = $data['center_manager_data'];
         $this->db->bind(':region', $data['region']);
-        $this->db->bind(':address', $data['address']);
         $this->db->bind(':district', $data['district']);
+        $this->db->bind(':lat', $data['lattitude']);
+        $this->db->bind(':longi', $data['longitude']);
         $this->db->bind(':center_manager_id', $centerManagers->user_id);
         $this->db->bind(':center_manager_name', $data['center_manager_name']->name);   
         $result = $this->db->execute();

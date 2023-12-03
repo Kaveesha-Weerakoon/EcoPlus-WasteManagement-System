@@ -123,14 +123,14 @@
 
             </div>
             <div class="location_pop">
-                 <div class="location_pop_content">
+                <div class="location_pop_content">
                     <div class="location_pop_map">
                      
                      </div>
                      <div class="location_close">
                         <button onclick="closemap()">Close</button>
-                     </div>
-                 </div>
+                </div>
+            </div>
                 
             </div>
             <div class="personal-details-popup-box" id="personal-details-popup-box">
@@ -216,7 +216,6 @@
 
     function closemap(){
         document.querySelector('.location_pop').style.display = 'none';
-
     }
 
     document.getElementById('searchInput').addEventListener('input', searchTable);

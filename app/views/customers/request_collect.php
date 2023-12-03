@@ -194,7 +194,6 @@
             var mapPopup = document.getElementById('mapPopup');
 
             mainBottomMaps.addEventListener('click', function () {
-            // Toggle the display property of mapPopup
             mapPopup.style.display = (mapPopup.style.display === 'flex') ? 'none' : 'flex';
           });
         });

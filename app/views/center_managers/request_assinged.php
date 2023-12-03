@@ -111,9 +111,9 @@
                         </div>
                     </div>
                 </div>
-                <?php if(!empty($data['assined_requests'])) : ?>
+                 <?php if(!empty($data['assined_requests'])) : ?>
 
-                <div class="main-right-bottom" id="main-right-bottom">
+                      <div class="main-right-bottom" id="main-right-bottom">
                     <div class="main-right-bottom-top">
                         <table class="table">
                             <tr class="table-header">
@@ -143,23 +143,22 @@
                                      <img onclick="" class="collector_img" src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->image?>" alt="">
                                   </td>
                                   <td>
-                                     <img onclick="" class="cancel" src="<?php echo IMGROOT?>/info.png" alt="">
-                                  </td> 
+                                  <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)" class="cancel" src="<?php echo IMGROOT ?>/info.png" alt="">                                  </td> 
                                   <td>
-                                    <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel" src="<?php echo IMGROOT?>/cancel.png" alt="">
+                                    <img onclick="cancel(<?php echo $request->req_id ?>,<?php echo  $request->collector_id ?>)" class="cancel" src="<?php echo IMGROOT?>/cancel.png" alt="">
                                   </td>
                             </tr>
                             <?php endforeach; ?> 
                         </table>
                     </div>
                    </div>
-                <div class="main-right-bottom-two" id="main-right-bottom-two">
+                       <div class="main-right-bottom-two" id="main-right-bottom-two">
                       <div class="map-locations" id="map-loaction">
 
                        </div>
                     </div>
-                </div>
-                <?php else: ?>
+                    </div>
+                 <?php else: ?>
                      <div class="main-right-bottom-three">
                             <div class="main-right-bottom-three-content">
                                    <img src="<?php echo IMGROOT?>/Center_Manager_Request_Assign_Empty.jpg" alt="">
@@ -177,19 +176,80 @@
                    <h1>Cancel the Request?</h1>
                    <img class="cancel-confirm-content-warning" src="<?php echo IMGROOT?>/warning.png" alt=""> 
                    <input name="reason" type="text" placeholder="Input the Reason">
-                   <input name="id" type="text" >
+                   <input name="id" type="text" > 
+                   <input name="collector_id" id="collector_id" type="text" >
                    <button onclick="validateCancelForm()" id="cancel-pop" style="background-color: tomato;">OK</button>
               </form>
 
+        </div>
+        <div class="personal-details-popup-box" id="personal-details-popup-box">
+                   <div class="personal-details-popup-form" id="popup">
+                        <img  src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close" id="personal-details-popup-form-close">
+                        <center><div class="personal-details-topic">Request ID R<div id="req_id"></div></div></center>
+                
+                    <div class="personal-details-popup" >
+                                  <div class="personal-details-left">
+                                     <img id="collector_profile_img" src="<?php echo IMGROOT?>/img_upload/collector/?>" class="profile-pic" alt="">
+                                     <p>Collector ID: <span id="collector_id">C<?php?></span></p>
+                                  </div>
+                        <div class="personal-details-right"> 
+                                    <div class="personal-details-right-labels">
+                                        <span >Name</span><br>
+                                        <span>Contact No</span><br>
+                                        <span>Vehicle No</span><br>
+                                        <span>Vehicle Type</span><br>
+     
+                                    </div>
+                                   <div class="personal-details-right-values">
+                                        <span id="collector_name"></span><br>
+                                        <span id="collector_conno"></span><br>
+                                        <span id="collector_vehicle_no"></span><br>
+                                        <span id="collector_vehicle_type"></span><br>
+                                    </div>   
+                         </div>   
+                    </div>
+                   </div>
+        </div>
+        <div class="request-details-pop" id="request-details-popup-box">
+             <div class="request-details-pop-form">                        
+                   <img  src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close" id="request-details-pop-form-close">
+                    <div class="request-details-pop-form-top">
+                        <div class="request-details-topic">Request ID R <div id="req_id3"></div></div>
+                    </div>
+                          
+                <div class="request-details-pop-form-content"> 
+                                    <div class="personal-details-right-labels">
+                                        <span>Customer Id</span><br>
+                                        <span>Name</span><br>
+                                        <span>Date</span><br>
+                                        <span>Time</span><br>
+                                        <span>Contact No</span><br>
+                                        <span>Instructions</span><br>
+                                    </div>
+                                   <div class="personal-details-right-values">
+                                        <span id="req_id2">23</span><br>
+                                        <span id="req_name">23</span><br>
+                                        <span id="req_date"></span><br>
+                                        <span id="req_time"></span><br>
+                                        <span id="req_contactno"></span><br>                                        
+                                        <span id="instructions"></span><br>
+                                    </div>   
+                  </div> 
+             </div>
         </div>
    </div>
 </div>
 </div>
 <script>
-    function cancel($id) {
+    function cancel(id,collector_id) {
         var inputElement = document.querySelector('input[name="id"]');
         inputElement.style.display = 'none';
-        inputElement.value = $id;
+        var collector_id = document.getElementById('collector_id');
+        collector_id.style.display = 'none';
+
+        inputElement.value = id;
+        collector_id.value = collector_id;
+
         document.getElementById("cancel-confirm").style.display="flex"
     }
     function searchTable() {
@@ -222,6 +282,31 @@
       }
     }
 
+    function view_collector(image,col_id,name,contact_no,type,vehno,request_id){
+        document.getElementById('personal-details-popup-box').style.display = 'flex';
+        document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + image;
+        document.getElementById('collector_id').innerText= col_id;
+        document.getElementById('collector_name').innerText=name;
+        document.getElementById('collector_conno').innerText= contact_no;
+        document.getElementById('collector_vehicle_no').innerText= vehno;
+        document.getElementById('collector_vehicle_type').innerText=type;
+        document.getElementById('req_id').innerText=request_id;
+    }
+
+    function view_request_details(request){
+        
+        document.getElementById('request-details-popup-box').style.display = "flex";
+        document.getElementById('req_id3').innerText=request.req_id;
+        document.getElementById('req_id2').innerText=request.customer_id;
+        document.getElementById('req_name').innerText=request.customer_name;
+        document.getElementById('req_date').innerText= request.date;
+        document.getElementById('req_time').innerText= request.time;
+        document.getElementById('req_contactno').innerText= request.customer_contactno;
+        document.getElementById('instructions').innerText=request.instructions;
+        
+    }
+    
+
     function initMap() {
        var map = new google.maps.Map(document.getElementById('map-loaction'), {
           center: { lat: 7.8731, lng: 80.7718 },
@@ -233,19 +318,85 @@
             var marker = new google.maps.Marker({
                 position: { lat: parseFloat(coordinate.lat), lng: parseFloat(coordinate.longi) },
                 map: map,
-                title: 'Marker'
             });
-            marker.addListener('click', function () {
-                handleMarkerClick(marker,coordinate);
+            marker.addListener('click', function () { 
+                view_collector(coordinate.image,coordinate.collector_id,coordinate.name,coordinate.contact_no,coordinate.vehicle_no,coordinate.vehicle_type,coordinate.req_id);
             });
         });
     }
 
+    function loadLocations() {
+     var selectedDate = document.getElementById('selected-date').value;
+      if (selectedDate.trim() !== "") {
+            updateMapForDate(selectedDate);
+      
+            var rows = document.querySelectorAll('.table-row');
+            rows.forEach(function(row) {
+                   console.log('d');
+                   var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+                   if (date .includes(selectedDate) ) {
+                        row.style.display = '';  
+                   } else {
+                     row.style.display = 'none'; 
+                    }
+                  });         
+      }
+      else{
+          var rows = document.querySelectorAll('.table-row');
+            rows.forEach(function(row) {
+        
+                     row.style.display = ''; 
+                 
+                  }); 
+
+        var map = new google.maps.Map(document.getElementById('map-loaction'), {
+         center: { lat: 7.8731, lng: 80.7718 },
+         zoom: 7.2
+       });
+     
+      var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
+  
+      incomingRequestsForDate.forEach(function (coordinate) {
+        var marker = new google.maps.Marker({
+            position: { lat: parseFloat(coordinate.lat), lng: parseFloat(coordinate.longi) },
+            map: map,
+            title: 'Marker'
+        });
+
+        marker.addListener('click', function () {
+            handleMarkerClick(marker);
+        });
+      });
+      }
+    }
+    function updateMapForDate(selectedDate) {
+        var map = new google.maps.Map(document.getElementById('map-loaction'), {
+         center: { lat: 7.8731, lng: 80.7718 },
+         zoom: 7.2
+       });
+     
+      var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
+      var filteredRequests = incomingRequestsForDate.filter(function (coordinate) {
+        return coordinate.date === selectedDate;
+      });
+  
+      filteredRequests.forEach(function (coordinate) {
+        var marker = new google.maps.Marker({
+            position: { lat: parseFloat(coordinate.lat), lng: parseFloat(coordinate.longi) },
+            map: map,
+            title: 'Marker'
+        });
+
+        marker.addListener('click', function () {
+            handleMarkerClick(marker);
+        });
+      });
+    }
     document.addEventListener("DOMContentLoaded", function () {
        
        const closeButton = document.getElementById("cancel-pop");
        const popup = document.getElementById("cancel-confirm");
-      
+       const close_collector_pop = document.getElementById("personal-details-popup-form-close");
        const closeassign = document.getElementById("cancel-assing");
        const assign = document.getElementById("View");
 
@@ -253,7 +404,7 @@
        const table = document.getElementById("tables");
        const main_right_bottom= document.getElementById("main-right-bottom");
        const main_right_bottom_two = document.getElementById("main-right-bottom-two");
-     
+       const close_request_details= document.getElementById("request-details-pop-form-close");
       
        maps.addEventListener("click", function () {
            if (main_right_bottom !== null) {
@@ -278,14 +429,17 @@
            
        });
 
-   
-        closeButton.addEventListener("click", function () {
+       close_collector_pop .addEventListener("click", function () {
+          document.getElementById('personal-details-popup-box').style.display = "none";
+        });
+
+       closeButton.addEventListener("click", function () {
             popup.style.display = "none";
         });
 
-      //    closeassign.addEventListener("click", function () {
-       //        assign.style.display = "none";
-      //    });
+        close_request_details.addEventListener("click", function () {
+            document.getElementById('request-details-popup-box').style.display = "none";
+         });
     });
     
     document.getElementById('searchInput').addEventListener('input', searchTable);

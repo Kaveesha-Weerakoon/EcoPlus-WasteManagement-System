@@ -2,7 +2,8 @@
 <div class="Collector_Main" >
     <div class="Collector_Request_Top">
        <div class="Collector_Request_Cancelled">
-    
+       <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initMap" async defer></script>
+
     <div class="main" >
             <div class="main-left" >
                 <div class="main-left-top">
@@ -112,6 +113,7 @@
                             <tr class="table-header">
                                 <th>Req ID</th>
                                 <th>Date</th>
+                                <th>Time</th>
                                 <th>Request Details</th>
                                 <th>Location</th>
                                 <th>Cancelled By</th>
@@ -126,8 +128,9 @@
                            <tr class="table-row">
                                 <td>R<?php echo $request->req_id?></td>
                                 <td><?php echo $request->date?></td>
-                                <td><img src="<?php echo IMGROOT?>/view.png" alt=""></td>
-                                <td><img src="<?php echo IMGROOT?>/location.png" alt=""></td>
+                                <td><?php echo $request->time?></td>
+                                <td ><img  onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)" src="<?php echo IMGROOT?>/view.png" alt=""></td>
+                                <td><img onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)" src="<?php echo IMGROOT?>/location.png" alt=""></td>
                                 <td><?php  echo $request->cancelled_by?></td>
                                 <td><?php  echo $request->reason?> </td>
                              
@@ -138,8 +141,89 @@
                         </div>
                 </div>
             </div>
+            <div class="location_pop"  id="location_pop">
+                 <div class="location_pop_content">
+                          <div class="location_pop_map">
+                     
+                           </div>
+                           <div class="location_close">
+                               <button onclick="closemap()">Close</button>
+                           </div>
+                  </div>
+            </div>
+            <div class="request-details-pop" id="request-details-popup-box">
+                  <div class="request-details-pop-form">                        
+                     <img  src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close" id="request-details-pop-form-close">
+                      <div class="request-details-pop-form-top">
+                        <div class="request-details-topic">Request ID R <div id="req_id3"></div></div>
+                      </div>
+                          
+                      <div class="request-details-pop-form-content"> 
+                                    <div class="personal-details-right-labels">
+                                        <span>Customer Id</span><br>
+                                        <span>Name</span><br>
+                                        <span>Date</span><br>
+                                        <span>Time</span><br>
+                                        <span>Contact No</span><br>
+                                        <span>Instructions</span><br>
+                                    </div>
+                                   <div class="personal-details-right-values">
+                                        <span id="req_id2"></span><br>
+                                        <span id="req_name"></span><br>
+                                        <span id="req_date"></span><br>
+                                        <span id="req_time"></span><br>
+                                        <span id="req_contactno"></span><br>                                        
+                                        <span id="instructions"></span><br>
+                                    </div>   
+                     </div> 
+                  </div>
+            </div>
     </div>
     </div>
 </div>
 </div>
+<script>
+    function view_request_details(request){
+        
+        document.getElementById('request-details-popup-box').style.display = "flex";
+        document.getElementById('req_id3').innerText=request.req_id;
+        document.getElementById('req_id2').innerText=request.customer_id;
+        document.getElementById('req_name').innerText=request.name;
+        document.getElementById('req_date').innerText= request.date;
+        document.getElementById('req_time').innerText= request.time;
+        document.getElementById('req_contactno').innerText= request.contact_no;
+        document.getElementById('instructions').innerText=request.instructions;
+        
+    }
+      function viewLocation($lattitude,$longitude){
+        initMap($lattitude,$longitude);
+        console.log('as');
+        document.querySelector('.location_pop').style.display = 'flex';
+    }
+     function initMap(latitude= 7.4, longitude=81.00000000) {
+        var mapCenter = { lat:latitude, lng:longitude};
+
+      var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
+         center: mapCenter,
+         zoom: 7.4
+      });
+
+      var marker = new google.maps.Marker({
+        position: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+        map: map,
+        title: 'Marked Location'
+      });
+    }
+    function closemap(){
+        document.querySelector('.location_pop').style.display = 'none';
+
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+      const close_request_details= document.getElementById("request-details-pop-form-close");
+
+      close_request_details.addEventListener("click", function () {
+            document.getElementById('request-details-popup-box').style.display = "none";
+         });
+    });
+</script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

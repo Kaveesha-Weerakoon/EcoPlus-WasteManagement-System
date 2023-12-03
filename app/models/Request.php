@@ -50,7 +50,6 @@
       return $results;
   }
   
-
     public function get_request_by_id($req_id){
 
       $this->db->query('SELECT * FROM request_main  WHERE id = :workerId');
@@ -82,19 +81,37 @@
       }
     }
 
-    public function get_cancelled_request($customer_id){
-      $this->db->query('
-        SELECT request_main.*, request_cancelled.*
-        FROM request_main
-        LEFT JOIN request_cancelled ON request_main.req_id = request_cancelled.req_id
-        WHERE request_main.customer_id = :customer_id AND request_main.type = :type
-     ');
+    public function get_cancelled_request($customer_id){    
+      $query = '
+      SELECT
+        rm.req_id AS request_id,
+        rm.*,
+        rc.*,
+        ra.*,
+        c.user_id AS collector_user_id,
+        c.*,
+        u.name AS collector_name
+      FROM
+        request_main rm
+      LEFT JOIN
+        request_cancelled rc ON rm.req_id = rc.req_id
+      LEFT JOIN
+        request_assigned ra ON rc.req_id = ra.req_id
+      LEFT JOIN
+        collectors c ON ra.collector_id = c.user_id
+      LEFT JOIN
+        users u ON c.user_id = u.id
+       WHERE
+        rm.customer_id = :customer_id
+        AND rm.type = :type
+      ';
 
-      $this->db->bind(':customer_id', $customer_id);
-      $this->db->bind(':type', 'cancelled');
-      $results = $this->db->resultSet();
+       $this->db->query($query);
+       $this->db->bind(':customer_id', $customer_id);
+     $this->db->bind(':type', 'cancelled'); // Assuming 'cancelled' is a string value
+       $results = $this->db->resultSet();
 
-       return $results;
+      return $results;
 
     }
 
@@ -141,7 +158,12 @@
 
     public function get_assigned_request_by_center($region){
       $this->db->query('
-            SELECT request_main.*, request_assigned.collector_id, collectors.*
+            SELECT 
+               request_main.*, 
+               request_main.name AS customer_name,
+               request_main.contact_no AS customer_contactno,
+               request_assigned.collector_id, 
+               collectors.*
             FROM request_main
             LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
             LEFT JOIN collectors ON request_assigned.collector_id = collectors.user_id
@@ -175,23 +197,33 @@
       SELECT
       request_main.*,
       request_cancelled.*
-  FROM
+      FROM
       request_main
-  JOIN
+      JOIN
       request_assigned ON request_main.req_id = request_assigned.req_id
-  LEFT JOIN
+      LEFT JOIN
       request_cancelled ON request_main.req_id = request_cancelled.req_id
-  WHERE
+      WHERE
       request_assigned.collector_id = :collector_id
       AND request_main.type = "cancelled";
-    ');
+      ');
 
      $this->db->bind(':collector_id', $collector_id);
 
      $results = $this->db->resultSet();
 
-   return $results;
+     return $results;
 
+    }
+
+    public function get_assigned_request($req_id){
+      
+      $this->db->query('SELECT * FROM request_assigned WHERE req_id =:req_id');
+      $this->db->bind(':req_id', $req_id);
+
+      $row = $this->db->single();
+
+      return $row;
     }
 
 }

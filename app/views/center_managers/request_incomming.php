@@ -181,7 +181,7 @@
 
             </div>
             <div class="View" id="View">
-                <form class="View-content" method="post" action="<?php echo URLROOT?>/centermanagers/assing">
+                <form class="View-content" id="assignForm" method="post" action="<?php echo URLROOT?>/centermanagers/assing">
                     <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-assing">
                     <h2>Assign a Collector</h2>
 
@@ -224,7 +224,6 @@
     function assing_complete(){
         var dropdown = document.getElementById('dropdown');
         var assignForm = document.getElementById('assignForm');
-
         if (dropdown.value === 'default') {
             alert('Please select a collector before assigning.');
         } else {
@@ -256,7 +255,7 @@
          center: { lat: 7.8731, lng: 80.7718 },
          zoom: 7.2
        });
-       ;
+       
        var incomingRequests = <?php echo $data['jsonData']; ?>;
 
        incomingRequests.forEach(function (coordinate) {
@@ -275,8 +274,8 @@
      function handleMarkerClick(marker,coordinate) {
         const adddetails = document.getElementById("View");
         var assign_reqid = document.getElementById('assign_reqid');
-        assign_reqid.innerHTML = coordinate.req_id;
-        adddetails.style.display = "flex";
+        /*assign_reqid.innerHTML = coordinate.req_id;*/
+        assign(coordinate.req_id)
     }
 
     function searchTable() {

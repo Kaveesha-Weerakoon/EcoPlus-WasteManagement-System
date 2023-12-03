@@ -85,6 +85,12 @@
         'assinged'=>'No',
         'collector_id'=>''
       ];
+      if($this->Request_Model->get_assigned_request($req_id)){
+        $data['assinged']='Yes';
+      }
+      else{
+        $data['assinged']='No';
+      }
 
       $this->Request_Model->cancel_request($data);
       $this->request_cancelled();
@@ -98,16 +104,13 @@
       $this->view('customers/request_completed', $data);
     }
 
-
     public function request_cancelled(){
       $cancelled_request=$this->Request_Model->get_cancelled_request($_SESSION['user_id']);
       $data = [
         'cancelled_request' => $cancelled_request
       ];
-    
       $this->view('customers/request_cancelled', $data);
     }
-
 
     public function history(){
       $data = [
@@ -116,7 +119,6 @@
      
       $this->view('customers/history', $data);
     }
-
 
     public function history_complains(){
       $id=$_SESSION['user_id']; 
@@ -137,7 +139,6 @@
      
       $this->view('customers/transfer_history', $data);
     }
-
 
     public function editprofile(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -524,12 +525,9 @@
             $data['location_success'] = 'Success';        
         }
 
-        if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['date_err']) && empty($data['time_err']) && empty($data['instructions_err'])&& empty($data['location_err']) ){
-         
+        if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['date_err']) && empty($data['time_err']) && empty($data['instructions_err'])&& empty($data['location_err']) ){     
             $data['confirm_collect_pop']="True";        
-            $this->view('customers/request_collect', $data);
-          
-
+            $this->view('customers/request_collect', $data);   
         }
         else{
           $this->view('customers/request_collect', $data);

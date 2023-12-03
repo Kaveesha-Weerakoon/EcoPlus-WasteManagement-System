@@ -89,6 +89,7 @@
         flex-direction: column;
     }
 
+    /*Location Pop*/
     .location_pop_content {
         width: 70%;
         height: 78%;
@@ -122,6 +123,8 @@
         border-radius: 5px;
         width: 85px;
     }
+
+    /* ------ */
 
     /*View Collector Pop*/
     .personal-details-popup-box {

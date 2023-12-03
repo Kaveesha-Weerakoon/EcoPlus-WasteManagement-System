@@ -622,7 +622,6 @@
 
     $cancelled_requests=$this->Request_Model->get_cancelled_request_by_collector($_SESSION['collector_id']);
     $data = [
-
       'cancelled_requests' => $cancelled_requests,
     ];
    

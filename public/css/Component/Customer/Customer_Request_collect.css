@@ -372,7 +372,9 @@
         margin-top: 35px;
         border-radius: 50%;
         animation: Move_Left_to_Right 3s ease infinite;
+        box-shadow: none !important;
     }
+
 
     .popup h2 {
         font-size: 23px;

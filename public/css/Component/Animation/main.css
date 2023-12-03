@@ -20,19 +20,19 @@
     0% {
         transform: translateX(-10px);
         animation-timing-function: ease-in-out;
-
-    }
-
-    100% {
-        transform: translateX(-10px);
-        animation-timing-function: ease-in-out;
-
     }
 
     50% {
         transform: translateX(10px);
         animation-timing-function: ease-in-out;
     }
+
+    100% {
+        transform: translateX(-10px);
+        animation-timing-function: ease-in-out;
+    }
+
+
 }
 
 @keyframes rotateAnimation {

@@ -111,7 +111,8 @@
                                  <td><?php echo $request->time?></td>
                                  <td><?php echo $request->region?></td>
                                  <td><img src="<?php echo IMGROOT?>/location.png" onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></td>
-                                 <td><img src="<?php echo IMGROOT?>/view.png" alt=""></td>
+                                 <td><img src="<?php echo IMGROOT ?>/view.png" <?php if ($request->assinged === 'Yes') { ?>onclick="view_collector('<?php echo $request->image; ?>', '<?php echo $request->user_id; ?>', '<?php echo $request->name; ?>', '<?php echo $request->contact_no; ?>', '<?php echo $request->vehicle_no; ?>', '<?php echo $request->vehicle_type; ?>')"<?php } ?> alt=""></td>
+
                                  <td><?php echo $request->cancelled_by?></td>
                                  <td><?php echo ($request->reason ? $request->reason : 'None'); ?></td>                             </tr>
                             <?php endforeach; ?>
@@ -131,12 +132,47 @@
                      </div>
                  </div>
                 
-              </div>
-        </div>
+            </div>
+            <div class="personal-details-popup-box" id="personal-details-popup-box">
+                   <div class="personal-details-popup-form" id="popup">
+                        <img  src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close" id="personal-details-popup-form-close">
+                        <center><div class="personal-details-topic">Collector Details</div></center>
+                
+                    <div class="personal-details-popup" >
+                                  <div class="personal-details-left">
+                                     <img id="collector_profile_img" src="<?php echo IMGROOT?>/img_upload/collector/?>" class="profile-pic" alt="">
+                                     <p>Collector ID: <span id="collector_id">C<?php?></span></p>
+                                  </div>
+                        <div class="personal-details-right"> 
+                                    <div class="personal-details-right-labels">
+                                        <span >Name</span><br>
+                                        <span>Contact No</span><br>
+                                        <span>Vehicle No</span><br>
+                                        <span>Vehicle Type</span><br>
+     
+                                    </div>
+                                   <div class="personal-details-right-values">
+                                        <span id="collector_name"></span><br>
+                                        <span id="collector_conno"></span><br>
+                                        <span id="collector_vehicle_no"></span><br>
+                                        <span id="collector_vehicle_type"></span><br>
+                                    </div>   
+                         </div>   
+                    </div>
+                   </div>
+            </div>
     </div>  
 </div>
 <script>
-
+    function view_collector(image,col_id,name,contact_no,type,vehno){  
+        document.getElementById('personal-details-popup-box').style.display = 'flex';
+        document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + image;
+        document.getElementById('collector_id').innerText= col_id;
+        document.getElementById('collector_name').innerText=name;
+        document.getElementById('collector_conno').innerText= contact_no;
+        document.getElementById('collector_vehicle_no').innerText= vehno;
+        document.getElementById('collector_vehicle_type').innerText=type;
+    }
     function searchTable() {
                    var input = document.getElementById('searchInput').value.toLowerCase();
                    var rows = document.querySelectorAll('.table-row');
@@ -159,11 +195,11 @@
     }
 
     function initMap(latitude, longitude) {
-      var mapCenter = { lat: 7.4, lng: 81.00000000 };
+      var mapCenter = { lat: latitude, lng: longitude };
 
       var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
          center: mapCenter,
-         zoom: 7.4
+         zoom: 8
       });
 
       var marker = new google.maps.Marker({
@@ -177,11 +213,21 @@
         initMap($lattitude,$longitude);
         document.querySelector('.location_pop').style.display = 'flex';
     }   
+
     function closemap(){
         document.querySelector('.location_pop').style.display = 'none';
 
     }
-    document.getElementById('searchInput').addEventListener('input', searchTable);
 
+    document.getElementById('searchInput').addEventListener('input', searchTable);
+    document.addEventListener("DOMContentLoaded", function () {
+        const close_collector = document.getElementById("personal-details-popup-form-close");
+        const collector_view = document.getElementById("personal-details-popup-box");
+
+        close_collector.addEventListener("click", function () {
+            collector_view.style.display="none"
+        });
+    
+    });
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

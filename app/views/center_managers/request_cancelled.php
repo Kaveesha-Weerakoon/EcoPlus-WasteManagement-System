@@ -149,7 +149,7 @@
                                 }?>
                                 </td>
                                 <td><img onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)" class="add" src="<?php echo IMGROOT?>/location.png" alt=""></td>
-                                <td><img onclick="assign(<?php echo $request->req_id ?>)" class="add" src="<?php echo IMGROOT?>/info.png" alt=""></td>
+                                <td><img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)" class="add" src="<?php echo IMGROOT?>/info.png" alt=""></td>
                                 <td><?php  echo $request->reason?></td>
 
 
@@ -163,7 +163,7 @@
                    
 
                </div>
-               <div class="location_pop">
+                <div class="location_pop">
                  <div class="location_pop_content">
                           <div class="location_pop_map">
                      
@@ -173,12 +173,52 @@
                            </div>
                   </div>
                 </div>
+                <div class="request-details-pop" id="request-details-popup-box">
+                  <div class="request-details-pop-form">                        
+                     <img  src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close" id="request-details-pop-form-close">
+                      <div class="request-details-pop-form-top">
+                        <div class="request-details-topic">Request ID R <div id="req_id3"></div></div>
+                      </div>
+                          
+                      <div class="request-details-pop-form-content"> 
+                                    <div class="personal-details-right-labels">
+                                        <span>Customer Id</span><br>
+                                        <span>Name</span><br>
+                                        <span>Date</span><br>
+                                        <span>Time</span><br>
+                                        <span>Contact No</span><br>
+                                        <span>Instructions</span><br>
+                                    </div>
+                                   <div class="personal-details-right-values">
+                                        <span id="req_id2"></span><br>
+                                        <span id="req_name"></span><br>
+                                        <span id="req_date"></span><br>
+                                        <span id="req_time"></span><br>
+                                        <span id="req_contactno"></span><br>                                        
+                                        <span id="instructions"></span><br>
+                                    </div>   
+                     </div> 
+                  </div>
+                </div>
            </div>
         </div>
     </div>
 </div>
 <script>
-  function initMap(latitude, longitude) {
+    function view_request_details(request){
+        
+        document.getElementById('request-details-popup-box').style.display = "flex";
+        document.getElementById('req_id3').innerText=request.req_id;
+        document.getElementById('req_id2').innerText=request.customer_id;
+        document.getElementById('req_name').innerText=request.name;
+        document.getElementById('req_date').innerText= request.date;
+        document.getElementById('req_time').innerText= request.time;
+        document.getElementById('req_contactno').innerText= request.contact_no;
+        document.getElementById('instructions').innerText=request.instructions;
+        
+    }
+    
+  function initMap(latitude= 7.4, longitude=81.00000000) {
       var mapCenter = { lat: 7.4, lng: 81.00000000 };
 
       var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
@@ -241,5 +281,13 @@
        });
      
     } 
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const close_request_details= document.getElementById("request-details-pop-form-close");
+
+      close_request_details.addEventListener("click", function () {
+            document.getElementById('request-details-popup-box').style.display = "none";
+         });
+    });
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

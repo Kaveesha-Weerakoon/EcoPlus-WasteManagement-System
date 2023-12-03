@@ -59,6 +59,7 @@
     }
 
     public function cancel_request($data) {
+      try{
       $this->db->query('INSERT INTO request_cancelled (req_id, cancelled_by, reason,assinged,collector_id) VALUES (:req_id, :cancelled_by, :reason,:assinged,:collector_id)');
       $this->db->bind(':req_id', $data['request_id']);
       $this->db->bind(':cancelled_by', $data['cancelled_by']);
@@ -74,12 +75,20 @@
           $this->db->bind(':req_id', $data['request_id']);
           
           $updateResult = $this->db->execute();
-  
-          return $updateResult;
+           if($updateResult){
+            return $updateResult;
+           }
+           else{
+            return false;
+           }
+          
       } else {
           return false;
       }
-    }
+    }catch (PDOException $e) {
+      return false;
+  }
+  }
 
     public function get_cancelled_request($customer_id){    
       $query = '

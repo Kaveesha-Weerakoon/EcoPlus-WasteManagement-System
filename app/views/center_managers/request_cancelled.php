@@ -205,7 +205,7 @@
     </div>
 </div>
 <script>
-   function view_request_details(request){
+    function view_request_details(request){
         
         document.getElementById('request-details-popup-box').style.display = "flex";
         document.getElementById('req_id3').innerText=request.req_id;
@@ -218,7 +218,7 @@
         
     }
     
-  function initMap(latitude, longitude) {
+  function initMap(latitude= 7.4, longitude=81.00000000) {
       var mapCenter = { lat: 7.4, lng: 81.00000000 };
 
       var map = new google.maps.Map(document.querySelector('.location_pop_map'), {

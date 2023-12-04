@@ -1,6 +1,10 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Admin_Center_Top">
     <div class="Admin_Center_Add">
+        <script  
+            src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
+            async defer>
+        </script>
         <div class="main">
             <div class="main-top">
                 <a href="<?php echo URLROOT?>/admin">
@@ -56,12 +60,27 @@
                                               </div>
                                       </div>
                                       <div class="main-bottom-down-down-content">
-                                              <p>Address</p>
-                                              <div class="main-bottom-down-down-content-field">
-                                                  <input class="<?php echo isset($data['address_err']) && !empty($data['address_err']) ? 'error-class' : ''; ?>" type="text" name="address" value="<?php echo $data['address']?>">
-                                                  <p><?php echo $data['address_err']?></p>
-                                              </div>
-                                           
+                                                <p>Location</p>
+                                                <div class="main-bottom-down-down-content-maps">
+                                                    <div class="main-bottom-maps" onclick="initMap()">
+                                                       <h4>Maps</h4>
+                                                       <img src="<?php echo IMGROOT?>/location2.png" alt="">                  
+                                                    </div>
+                                                    <div class="main-bottom-down-down-content-field">
+                                                    <?php if ($data['location_success']=='Success') : ?>
+                                                        <div class="main-bottom-map-success">
+                                                            <img src="<?php echo IMGROOT; ?>/check.png" alt="">
+                                                            <p style="width:205px; ">Location Fetched Successfully</p>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                    <?php if ($data['location_err']=='Location Error') : ?>
+                                                        <div class="main-bottom-map-success">
+                                                            <img src="<?php echo IMGROOT; ?>/warning.png" alt="">
+                                                            <p>Pick up location Required</p>
+                                                        </div>
+                                                    <?php endif; ?>
+                                               </div>
+                                        </div>
                                       </div>
                                       <div class="main-bottom-down-down-content">
                                            <label for="centerManager">Center Manager</label>
@@ -83,10 +102,21 @@
                                       <button class="Create_Center_Button" type="submit">
                                           Create Center
                                       </button>
-                            </div>                           
+                            </div>  
+                            <div class="map_pop" id="mapPopup">
+                            <div id="map">
+
+                            </div>
+                            <div class="buttons-container" id="submitForm" >
+                                <button type="submit" formaction="<?php echo URLROOT; ?>/admin/center_add_confirm" method="post" id="markLocationBtn" onclick="getLocation()">Mark Location</button>
+                                <button type="button" id="cancelBtn">Cancel</button>
+                                
+                            </div>
+                            <input type="hidden" id="latitudeInput" value=" <?php echo $data['lattitude']?>" name="latittude">
+                            <input type="hidden" id="longitudeInput" value=" <?php echo $data['longitude']?>" name="longitude">
+                        </div>                           
                           </form>
-                    
-                   
+                       
              </div>
             </div> 
             <?php if($data['center_add_success']=='True') : ?> 
@@ -98,11 +128,67 @@
                     <a href="<?php echo URLROOT?>/admin/center"><button type="button" >OK</button></a>
                  </div>
              </div>
-             <?php endif; ?>
+            <?php endif; ?>
+
         </div>
       
     </div>
 </div>
+
+<script>
+    function initMap() {
+             
+        var defaultLatLng = { 
+            lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 8.00 ?>, 
+            lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>  };
+     
+            map = new google.maps.Map(document.getElementById('map'), {
+            center: defaultLatLng,
+            zoom: 7.6
+        });
+
+        marker = new google.maps.Marker({
+            position: defaultLatLng,
+            map: map,
+            draggable: true
+        });
+
+        google.maps.event.addListener(marker, 'dragend', function (event) {
+            var newLatLng = { lat: event.latLng.lat(), lng: event.latLng.lng() };
+            console.log('New Location:', newLatLng);
+        });
+    }
+
+    function getLocation() {
+
+        var currentLatLng = { lat: marker.getPosition().lat(), lng: marker.getPosition().lng() };
+        console.log('Selected Location:', currentLatLng);
+
+        document.getElementById('latitudeInput').value = currentLatLng.lat;
+        document.getElementById('longitudeInput').value = currentLatLng.lng;//
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var mainBottomMaps = document.querySelector('.main-bottom-maps');
+        var mapPopup = document.getElementById('mapPopup');
+
+        mainBottomMaps.addEventListener('click', function () {
+            mapPopup.style.display = (mapPopup.style.display === 'flex') ? 'none' : 'flex';
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var cancelBtn = document.getElementById('cancelBtn');
+        var mapPopup = document.getElementById('mapPopup');
+        var map = document.getElementById('markLocationBtn');
+        cancelBtn.addEventListener('click', function () {
+            mapPopup.style.display = 'none';
+        });
+        map.addEventListener('click', function () {
+            mapPopup.style.display = 'none';
+        });
+    }); 
+</script>
 
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

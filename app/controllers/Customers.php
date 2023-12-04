@@ -479,7 +479,6 @@
           $data['name_err'] = 'Name cannot exceed 30 characters';
         }
       
-
         if (empty($data['contact_no'])) {
            $data['contact_no_err'] = 'Contact No is required';
         } elseif (!preg_match('/^\d{10}$/', $data['contact_no'])) {

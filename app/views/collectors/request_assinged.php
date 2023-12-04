@@ -138,7 +138,7 @@
                                 <td><?php  echo $request->customer_id?></td>
                                 <td><?php  echo $request->contact_no?></td>
                                 <td><?php  echo $request->instructions?></td>
-                                <td><img onclick="" class="complete_image" src="<?php echo IMGROOT?>/assign.png" alt=""></td>
+                                <td class="cancel-open"><a href="<?php echo URLROOT?>/Collectors/enterWaste_And_GenerateEcoCredits/<?php echo $request->customer_id ?>/<?php echo $request->customer_id ?>">><img class="complete_image" src="<?php echo IMGROOT?>/assign.png" alt=""></td>
                                 <td>
                                     <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel" src="<?php echo IMGROOT?>/cancel.png" alt="">
                                 </td>
@@ -163,6 +163,81 @@
                         </div> 
                    <?php endif; ?>
             </div>
+
+          <?php if($data['popup']=='True') : ?>
+            <div class="personal-details-popup-box" id="personal-details-popup-box">
+            <div class="personal-details-popup-form" id="popup">
+              <div class="form-container">
+                <div class="form-title">Eco Credits Calculation</div>
+                <form action="<?php echo URLROOT;?>/collector/enterWaste_And_GenerateEcoCredits" class="main-right-bottom-content" method="post">
+                  <div class="user-details">
+                    <div class="left-details">
+                      <div class="main-right-bottom-content-content">
+                        <span class="details">Polythene</span>
+                        <div class="input-container">
+                          <i class="icon fas fa-trash"></i>
+                          <input name="polythene_quantity" type="text" placeholder="Enter Quantity in Kg" value="<?php echo $data['polythene']; ?>>
+                        </div>
+                      </div>
+                      <div class="main-right-bottom-content-content">
+                        <span class="details">Plastic</span>
+                        <div class="input-container">
+                          <i class="icon fas fa-box"></i>
+                          <input name="plastic_quantity" type="text" placeholder="Enter Quantity in Kg" value="<?php echo $data['plastic']; ?>>
+                        </div>
+                      </div>
+                      <div class="main-right-bottom-content-content">
+                        <span class="details">Glass</span>
+                        <div class="input-container">
+                          <i class="icon fas fa-glass-whiskey"></i>
+                          <input name="glass_quantity" type="text" placeholder="Enter Quantity in Kg" value="<?php echo $data['glass']; ?>>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="right-details">
+                      <div class="main-right-bottom-content-content">
+                        <span class="details">Paper Waste</span>
+                        <div class="input-container">
+                          <i class="icon fas fa-file-alt"></i>
+                          <input name="paper_waste_quantity" type="text" placeholder="Enter Quantity in Kg" value="<?php echo $data['paper_waste']; ?>>
+                        </div>
+                      </div>
+                      <div class="main-right-bottom-content-content">
+                        <span class="details">Electronic Waste</span>
+                        <div class="input-container">
+                          <i class="icon fas fa-laptop"></i>
+                          <input name="electronic_waste_quantity" type="text" placeholder="Enter Quantity in Kg" value="<?php echo $data['electronic_waste']; ?>>
+                        </div>
+                      </div>
+                      <div class="main-right-bottom-content-content">
+                        <span class="details">Metals</span>
+                        <div class="input-container">
+                          <i class="icon fas fa-box"></i>
+                          <input name="metals_quantity" type="text" placeholder="Enter Quantity in Kg" value="<?php echo $data['metals']; ?>>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="wide-note">
+                      <div class="main-right-bottom-content-content A">
+                        <span class="details">Note</span>
+                        <div class="input-container">
+                          <i class="icon fas fa-sticky-note"></i>
+                          <input name="note" class="note-input" type="text" placeholder="Enter Note" value="<?php echo $data['note']; ?>>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-button">
+                    <button type="submit">Calculate Eco Credits</button>
+                    <button type="button" class="cancel-button">Cancel</button>
+                  </div>  
+                </form>
+              </div>
+            </div>
+          </div>
+         <?php endif; ?>
+
+
             <div class="cancel-confirm" id="cancel-confirm">
               <form class="cancel-confirm-content" id="cancel-form" method="post" action="<?php echo URLROOT?>/collectors/request_assinged">
                    <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
@@ -177,11 +252,15 @@
 
               </form>
             </div>
-    </div>
 
+            
+    </div>
+   
 </div>
 </div>
 </div>
+
+
 <script>
     function initMap() {
        var map = new google.maps.Map(document.getElementById('map-loaction'), {

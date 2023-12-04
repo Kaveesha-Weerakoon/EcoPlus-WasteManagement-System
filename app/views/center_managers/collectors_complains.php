@@ -37,6 +37,7 @@
                         </a>
                     </div>
                 </div>
+                <?php if(!empty($data['collectors_complains'])) : ?>
                 <div class="main-bottom-down">
                     <div class="main-right-bottom-container">
                        
@@ -69,6 +70,16 @@
                         </div>
                     </div>
                 </div>
+                <?php else: ?>
+                <div class="main-right-bottom-two">
+                    <div class="main-right-bottom-two-content">
+                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                            <h1>There are no complaints yet</h1>
+                            <p>Hope you will continue customer satisfaction</p>
+                    </div>
+                </div>
+                <?php endif; ?>
+
             </div>
         </div>
 </div>

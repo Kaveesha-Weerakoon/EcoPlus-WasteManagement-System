@@ -8,28 +8,28 @@
                     <h1>Eco Plus</h1>
                 </div>
                 <div class="main-left-middle">
-                    <a href="<?php echo URLROOT?>/collectors">
+                    <a href="<?php echo URLROOT?>/collectors/index">
                         <div class="main-left-middle-content ">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/Home.png" alt="">
                             <h2>Dashboard</h2>
                         </div>
                     </a>
-                    <a href="">
+                    <a href="<?php echo URLROOT?>/collectors/request_assinged">
                         <div class="main-left-middle-content">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/Request.png" alt="">
                             <h2>Requests</h2>
                         </div>
                     </a>
-                    <a href="">
+                    <a href="<?php echo URLROOT?>/collectors/collector_assistants">
                         <div class="main-left-middle-content Collector current">
                             <div class="main-left-middle-content-line"></div>
                             <img src="<?php echo IMGROOT?>/CollectorAssis.png" alt="">
                             <h2>Collector Assistants</h2>
                         </div>
                     </a>
-                    <a href="">
+                    <a href="<?php echo URLROOT?>/collectors/editprofile">
                         <div class="main-left-middle-content">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">
@@ -75,8 +75,9 @@
 
                     </div>
                 </div>
+                <?php if(!empty($data['collector_assistants'])) : ?>
                 <div class="main-right-bottom">
-                    <div class="main-right-bottom-top "">
+                    <div class="main-right-bottom-top ">
                         <table class="table" >
                             <tr class="table-header" >
                                 <th>Name</th>
@@ -105,6 +106,18 @@
 
                     </div>
                 </div>
+                <?php else: ?>
+                <div class="main-right-bottom-two">
+                    <div class="main-right-bottom-two-content">
+                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                            <h1>There are no collector assistants available</h1>
+                            <p>Register a collector assistant now!</p>
+                            <a href="<?php echo URLROOT?>/collectors/collector_assistants_add"><button>Register</button></a>
+                            
+                    </div>
+                </div>
+            <?php endif; ?>
+
             </div>     
       </div>
       <?php if($data['confirm_delete']=='True') : ?>

@@ -148,7 +148,8 @@
                             <div class="main-right-bottom-two-content">
                                    <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
                                    <h1>You Have No Ongoing Requests</h1>
-                                   <a href="<?php echo URLROOT?>/customers/request_collect"><button>Request a Collect Now</button></a>
+                                   <p>Make a collection request now!</p>
+                                   <a href="<?php echo URLROOT?>/customers/request_collect"><button>Request</button></a>
                                   
                             </div>
                      </div>

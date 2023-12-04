@@ -62,7 +62,7 @@
                                 <td><?php echo $collector->name?></td>
                                 <td><?php echo $collector->email?></td>
                                 <td><a href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/personal_details_icon.png" alt=""></a></td>
-                                <td><a href="<?php echo URLROOT?>/centermanagers/vehicle_details_view/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/car.png" alt=""></a></td>
+                                <td><img  onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))" src="<?php echo IMGROOT ?>/car.png" alt=""></td>
                                 <td><a href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><img src="<?php echo IMGROOT ?>/update.png" alt=""></a></td>
                                 <td class="delete"><a href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>"> <img src="<?php echo IMGROOT ?>/delete.png" alt=""></a></td>
 
@@ -241,10 +241,10 @@
         
     <?php endif; ?>
 
-    <?php if($data['vehicle_details_click']=='True') : ?>
-        <div class="vehicle-details-popup-box">
+   
+    <div class="vehicle-details-popup-box" id="vehicle-details-popup-box"> 
             <div class="vehicle-details-popup-form" id="popup">
-                <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close"></a>
+                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close" id="vehicle-details-popup-form-close">
                 <center><div class="vehicle-details-topic">Vehicle Details</div></center>
                 
                 <div class="vehicle-details-popup" >
@@ -255,17 +255,33 @@
                         <span>Vehicle Type</span><br>
                     </div>
                     <div class="vehicle-details-values">
-                        <span>C<?php echo $data['id']?></span><br>
-                        <span><?php echo $data['name']?></span><br>
-                        <span><?php echo $data['vehicle_no']?></span><br>
-                        <span><?php echo $data['vehicle_type']?></span><br>
+                        <span id="vehicle_collector_id">C</span><br>
+                        <span id="vehicle_collector_name"></span><br>
+                        <span id="vehicle_collector_no"></span><br>
+                        <span id="vehicle_type"></span><br>
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
     
-    <?php endif; ?>
+ 
 
 </div>
+<script>
 
+function openvehicledetails(collector){
+    document.getElementById('vehicle-details-popup-box').style.display="flex";
+    document.getElementById('vehicle_collector_id').textContent=collector.user_id;
+    document.getElementById('vehicle_collector_name').textContent=collector.name;
+    document.getElementById('vehicle_collector_no').textContent=collector.vehicle_no;
+    document.getElementById('vehicle_type').textContent=collector.vehicle_type;
+}   
+
+document.addEventListener('DOMContentLoaded', function () {
+    var close_vehicledetail = document.getElementById('vehicle-details-popup-form-close');
+    close_vehicledetail.addEventListener('click', function () {
+        document.getElementById('vehicle-details-popup-box').style.display="none";
+});
+});
+</script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

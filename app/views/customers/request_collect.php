@@ -24,7 +24,6 @@
                     <img src="<?php echo IMGROOT?>/RequestCollect.jpg" alt="">
                 </div>
                 <div class="main-bottom-component-right">
-
                     <div class="main-bottom-component-right-component-topic">
                         <h2>Request a Collect</h2>
                         <div class="line"></div>
@@ -43,6 +42,7 @@
                         </div>
                     </div>
                     <div class="main-bottom-component-right-component-main">
+
                         <div class="main-bottom-component-right-component">
                             <h2>Date</h2>
                             <input value="<?php echo $data['date']?>" name="date" type="date">
@@ -58,18 +58,18 @@
                         <h2>Your Region</h2>
                         <select name="center" id="centerDropdown">
                             <?php
-                            $centers = $data['centers'];
-                            $selectedRegion = $data['region'];
+                           $centers = $data['centers'];
+                           $selectedRegion = $data['region'];
 
-                            if (!empty($centers)) {
-                                foreach ($centers as $center) {
-                                    $selected = ($center->region == $selectedRegion) ? 'selected' : '';
-                                    echo "<option value=\"$center->region\" $selected>$center->region</option>";
-                            }
-                            }else {
-                                echo "<option value=\"default\">No Centers Available</option>";
-                            }
-                          ?>
+                          if (!empty($centers)) {
+                                 foreach ($centers as $center) {
+                                     $selected = ($center->region == $selectedRegion) ? 'selected' : '';
+                                     echo "<option value=\"$center->region\" $selected>$center->region</option>";
+                          }
+                          } else {
+                            echo "<option value=\"default\">No Centers Available</option>";
+                          }
+                        ?>
                         </select>
                     </div>
                     <div class="main-bottom-component-right-component">
@@ -109,14 +109,12 @@
             <div class="map_pop" id="mapPopup">
                 <div id="map"></div>
                 <div class="buttons-container" id="submitForm">
-                    <button type="submit" formaction="<?php echo URLROOT; ?>/customers/request_collect" method="post"
-                        id="markLocationBtn" onclick="getLocation()">Mark Location</button>
+                    <button type="button" id="markLocationBtn" onclick="submitForm()">Mark Location</button>
                     <button type="button" id="cancelBtn">Cancel</button>
-                    <input type="hidden" id="latitudeInput" value=" <?php echo $data['lattitude']?>" name="latitude">
-                    <input type="hidden" id="longitudeInput" value=" <?php echo $data['longitude']?>" name="longitude">
+                    <input type="hidden" id="latitudeInput" value="<?php echo $data['lattitude']?>" name="latitude">
+                    <input type="hidden" id="longitudeInput" value="<?php echo $data['longitude']?>" name="longitude">
                 </div>
             </div>
-
             <?php if($data['confirm_collect_pop']=='True') : ?>
             <div class="confirm_collect_pop">
                 <div class="popup" id="popup">
@@ -135,7 +133,6 @@
                 </div>
             </div>
             <?php endif; ?>
-
             <?php if($data['success']=='True') : ?>
             <div class="request_success">
                 <div class="popup" id="popup">
@@ -146,17 +143,19 @@
                 </div>
             </div>
             <?php endif; ?>
-
         </form>
 
+        <script>
+        $(document).ready(function() {
+            $('#centerDropdown').select2();
+        });
+        </script>
 
     </div>
+
     <script>
     var map;
     var marker;
-    $(document).ready(function() {
-        $('#centerDropdown').select2();
-    });
 
     function initMap() {
 
@@ -185,18 +184,20 @@
         });
     }
 
-    function getLocation() {
+    function submitForm() {
+        var form = document.getElementById('myForm');
+        form.action = "<?php echo URLROOT;?>/customers/request_mark_map";
+        form.method = 'post';
 
         var currentLatLng = {
             lat: marker.getPosition().lat(),
             lng: marker.getPosition().lng()
         };
         console.log('Selected Location:', currentLatLng);
-
         document.getElementById('latitudeInput').value = currentLatLng.lat;
         document.getElementById('longitudeInput').value = currentLatLng.lng; //
-
-
+        document.body.appendChild(form);
+        form.submit();
     }
 
     document.addEventListener('DOMContentLoaded', function() {

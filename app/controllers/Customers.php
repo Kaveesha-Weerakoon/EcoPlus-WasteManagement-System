@@ -435,7 +435,7 @@
       $centers = $this->center_model->getallCenters();
       return [
           'centers' => $centers,
-          'map_pop' => '',
+       
           'name' => '',
           'contact_no' => '',
           'date' => '',
@@ -562,6 +562,31 @@
         $data=$this->getCommonData();
         $this->view('customers/request_collect', $data);
       }
+    }
+
+    public function request_mark_map(){
+       
+     if($_SERVER['REQUEST_METHOD'] == 'POST'){
+       
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $centers = $this->center_model->getallCenters();
+      $data = $this->getCommonData();
+      $data['name'] = trim($_POST['name']);
+      $data['contact_no'] = trim($_POST['contact_no']);
+      $data['date'] = trim($_POST['date']);
+      $data['time'] = trim($_POST['time']);
+      $data['instructions'] = trim($_POST['instructions']);
+      $data['lattitude'] =trim($_POST['latitude']);
+      $data['longitude'] =trim($_POST['longitude']);
+      $data['region'] =trim($_POST['center']);
+      $data['location_success']='Success';
+      $this->view('customers/request_collect', $data);
+         
+    }
+   else {
+       $data = $this->getCommonData();
+       $this->view('customers/request_collect', $data);
+    }
     }
 
     public function credit_per_waste(){

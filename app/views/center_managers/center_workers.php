@@ -31,6 +31,7 @@
                     </a>
                 </div>
             </div>
+            <?php if(!empty($data['center_workers'])) : ?>
             <div class="main-bottom-down">
                 <div class="main-right-bottom-top">
                     <table class="table">
@@ -62,6 +63,18 @@
                     </table>
                 </div>
             </div>
+            <?php else: ?>
+                <div class="main-right-bottom-two">
+                    <div class="main-right-bottom-two-content">
+                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                            <h1>There are no center workers available</h1>
+                            <p>Register a center worker now!</p>
+                            <a href="<?php echo URLROOT?>/centermanagers/center_workers_add"><button>Register</button></a>
+                            
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <?php if($data['click_update']=='True') : ?>
                 <div class="update_click">
                     <div class="popup-form" id="popup">

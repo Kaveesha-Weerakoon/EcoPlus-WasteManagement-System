@@ -194,20 +194,21 @@
       if(empty($data['name_err']) && empty($data['contactno_err']) && empty($data['city_err']) && empty($data['address_err'])){
        
         if ($_FILES['profile_image']['error'] == 4) {
-           $data['profile_image_name']='';
            $this->customerModel->editprofile($data);
+           $data['profile_image_name']='';
            $data['success_message']="Profile Details Updated Successfully";
            $data['change_pw_success']='True';
-
+        
           
         } else {
           $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/' . $user->image;
-
+         
           if (updateImage($old_image_path, $_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/customer/')) {
             $this->customerModel->editprofile_withimg($data); 
             $data['success_message']="Profile Details Updated Successfully";
             $data['change_pw_success']='True';
             $data['profile_err'] = '';
+           
           } else {
               $data['profile_err'] = 'Error uploading the profile image';
           }

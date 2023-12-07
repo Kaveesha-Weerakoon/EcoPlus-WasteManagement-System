@@ -24,7 +24,7 @@
     }
 
     .table-header {
-        background-color: #B9FFB7;
+        background-color: #ecf0f1;
         font-size: 17px;
         font-family: Montserrat;
         text-align: center;
@@ -63,8 +63,8 @@
     }
 
     .location_pop_content {
-        width: 70%;
-        height: 78%;
+        width: 47%;
+        height: 55%;
         padding: 10px;
         background-color: #f1f2f6;
         border-radius: 10px;

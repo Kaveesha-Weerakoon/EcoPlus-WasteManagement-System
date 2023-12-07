@@ -100,16 +100,17 @@
                                 <button onclick="loadLocations()">Filter</button>
                             </div>
                             <div class="main-right-top-four-right">
-
-                                <div class="main-right-top-four-component" style="background-color: #ecf0f1" id="maps">
+                                <div class="main-right-top-four-component" style="background-color: #ecf0f1"
+                                    id="tables">
+                                    <img src="<?php echo IMGROOT?>/cells.png" alt="">
+                                    <p>Tables</p>
+                                </div>
+                                <div class="main-right-top-four-component" id="maps">
                                     <img src="<?php echo IMGROOT?>/map.png" alt="">
                                     <p>Maps</p>
                                 </div>
 
-                                <div class="main-right-top-four-component" id="tables">
-                                    <img src="<?php echo IMGROOT?>/cells.png" alt="">
-                                    <p>Tables</p>
-                                </div>
+
                             </div>
                         </div>
                     </div>

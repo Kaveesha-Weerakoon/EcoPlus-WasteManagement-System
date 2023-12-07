@@ -22,7 +22,7 @@
     }
 
     .table-header {
-        background-color: #B9FFB7;
+        background-color: #ecf0f1;
         font-size: 17px;
         font-family: Montserrat;
         text-align: center;
@@ -180,37 +180,37 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    
+
     }
-    
+
     .main-right-bottom-two-content {
         width: 55%;
         height: 95%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        
+
     }
-    
-    
+
+
     .main-right-bottom-two-content img {
         width: 450px;
         height: 450px;
-       
+
     }
-    
+
     .main-right-bottom-two-content h1 {
         font-size: 23px;
         color: #333;
         font-weight: 550;
     }
-    
-    .main-right-bottom-two-content p{
+
+    .main-right-bottom-two-content p {
         font-size: 18px;
         margin-top: 7px;
         color: #7c7c7d;
     }
-    
+
     .main-right-bottom-two-content button {
         height: 42px;
         width: 200px;
@@ -227,8 +227,8 @@
         margin-bottom: 20px;
         margin-top: 20px;
     }
-    
-    
+
+
     .main-right-bottom-two-content button:hover {
         background: rgb(28, 79, 64);
     }

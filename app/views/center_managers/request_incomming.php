@@ -241,9 +241,8 @@
 
             function assign($id) {
                 var inputElement = document.querySelector('input[name="id"]');
-                var assign_reqid = document.getElementById('assign_req_id');
-
-                assign_reqid.value = $id;
+                var assign_reqid = document.getElementById('assign_reqid');
+                assign_reqid.innerHTML = '11';
 
                 inputElement.style.display = 'none';
 

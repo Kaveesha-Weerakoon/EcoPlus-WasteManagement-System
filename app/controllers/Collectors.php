@@ -654,12 +654,15 @@
            } else {
         }*/
         } else {
-
-          //$collector_id = $_SESSION['user_id'];
+          $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
+          $jsonData = json_encode($assinged_Requests);
+          $collector_id = $_SESSION['collector_id'];
           //$creditAmount = $this->collectorModel->get_customer_credit_balance($customer_id);
           $data = [
+          'assigned_requests' => $assinged_Requests,
+          'jsonData' => $jsonData,
           'req_id'=>$req_id,
-          //'collector_id' => $collector_id,
+          'collector_id' => $collector_id,
           'polythene' =>'',
           'plastic' => '',
           'glass' => '',
@@ -668,7 +671,15 @@
           'metals' => '',
           'credit_Amount'=> '',
           'note' => '',
-          'popup' => 'True'
+          'popup' => 'True',
+
+          'Polythene_err'=>'',
+          'Plastic_err'=>'',
+          'Glass_err'=>'',
+          'Paper_Waste_err'=>'',
+          'Electronic_Waste_err'=>'',
+          'Metals_err'=>'',
+          'Note_err'=>''
           ];
           $this->view('collectors/request_assinged', $data);
         } 

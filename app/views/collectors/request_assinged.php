@@ -140,7 +140,7 @@
                                         <td><?php  echo $request->instructions?></td>
                                         <td class="cancel-open">
                                             <a
-                                                href="<?php echo URLROOT ?>/Collectors/enterWaste_And_GenerateEcoCredits/<?php echo $request->customer_id ?>/<?php echo $request->customer_id ?>">
+                                                href="<?php echo URLROOT ?>/Collectors/enterWaste_And_GenerateEcoCredits/<?php echo $request->customer_id ?>">
                                                 <img class="complete_image" src="<?php echo IMGROOT ?>/assign.png"
                                                     alt="">
                                             </a>
@@ -186,6 +186,9 @@
                                                 <i class="icon fas fa-trash"></i>
                                                 <input name="polythene_quantity" type="text"
                                                     placeholder="Enter Quantity in Kg">
+                                                    <div class="error-div" style="color:red">
+                                                        <?php echo $data['Polythene_err']?>
+                                                    </div>
                                             </div>
                                         </div>
                                         <div class="main-right-bottom-content-content">
@@ -194,6 +197,9 @@
                                                 <i class="icon fas fa-box"></i>
                                                 <input name="plastic_quantity" type="text"
                                                     placeholder="Enter Quantity in Kg">
+                                                    <div class="error-div" style="color:red">
+                                                      <?php echo $data['Plastic_err']?>
+                                                    </div>
                                             </div>
                                         </div>
                                         <div class="main-right-bottom-content-content">
@@ -202,6 +208,9 @@
                                                 <i class="icon fas fa-glass-whiskey"></i>
                                                 <input name="glass_quantity" type="text"
                                                     placeholder="Enter Quantity in Kg">
+                                                    <div class="error-div" style="color:red">
+                                                      <?php echo $data['Glass_err']?>
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
@@ -212,6 +221,9 @@
                                                 <i class="icon fas fa-file-alt"></i>
                                                 <input name="paper_waste_quantity" type="text"
                                                     placeholder="Enter Quantity in Kg">
+                                                    <div class="error-div" style="color:red">
+                                                      <?php echo $data['Paper_Waste_err']?>
+                                                    </div>
                                             </div>
                                         </div>
                                         <div class="main-right-bottom-content-content">
@@ -220,6 +232,9 @@
                                                 <i class="icon fas fa-laptop"></i>
                                                 <input name="electronic_waste_quantity" type="text"
                                                     placeholder="Enter Quantity in Kg">
+                                                    <div class="error-div" style="color:red">
+                                                      <?php echo $data['Electronic_Waste_err']?>
+                                                    </div>
                                             </div>
                                         </div>
                                         <div class="main-right-bottom-content-content">
@@ -228,6 +243,9 @@
                                                 <i class="icon fas fa-box"></i>
                                                 <input name="metals_quantity" type="text"
                                                     placeholder="Enter Quantity in Kg">
+                                                    <div class="error-div" style="color:red">
+                                                      <?php echo $data['Metals_err']?>
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
@@ -238,13 +256,16 @@
                                                 <i class="icon fas fa-sticky-note"></i>
                                                 <input name="note" class="note-input" type="text"
                                                     placeholder="Enter Note">
+                                                    <div class="error-div" style="color:red">
+                                                      <?php echo $data['Note_err']?>
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-button">
                                     <button type="submit">Calculate Eco Credits</button>
-                                    <button type="button" class="cancel-button">Cancel</button>
+                                    <a href="<?php echo URLROOT?>/collectors/request_assinged"><button type="button" class="cancel-button">Cancel</button>
                                 </div>
 
                             </form>

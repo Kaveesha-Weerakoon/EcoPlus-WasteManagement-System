@@ -629,7 +629,7 @@
     $this->view('collectors/request_cancelled', $data);
    }
 
-   public function enterWaste_And_GenerateEcoCredits($customer_id,$req_id) {
+   public function enterWaste_And_GenerateEcoCredits($req_id) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $collector_id = $_SESSION['user_id'];
@@ -654,7 +654,6 @@
            } else {
         }*/
         } else {
-
           //$collector_id = $_SESSION['user_id'];
           //$creditAmount = $this->collectorModel->get_customer_credit_balance($customer_id);
           $data = [
@@ -683,4 +682,3 @@
 
 
   
-

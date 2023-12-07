@@ -140,7 +140,7 @@
                                         <td><?php  echo $request->instructions?></td>
                                         <td class="cancel-open">
                                             <a
-                                                href="<?php echo URLROOT ?>/Collectors/enterWaste_And_GenerateEcoCredits/<?php echo $request->customer_id ?>/<?php echo $request->customer_id ?>">
+                                                href="<?php echo URLROOT ?>/Collectors/enterWaste_And_GenerateEcoCredits/<?php echo $request->customer_id ?>">
                                                 <img class="complete_image" src="<?php echo IMGROOT ?>/assign.png"
                                                     alt="">
                                             </a>
@@ -305,7 +305,7 @@ function initMap() {
 
 function cancel($id) {
     var inputElement = document.querySelector('input[name="id"]');
-    inputElement.style.display = 'none';
+    inputElement.style.display = 'flex';
     inputElement.value = $id;
     document.getElementById("cancel-confirm").style.display = "flex";
     setTimeout(function() {

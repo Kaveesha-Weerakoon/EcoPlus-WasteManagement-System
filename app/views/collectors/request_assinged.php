@@ -144,7 +144,7 @@
                                                 alt=""></td>
                                         <td>
                                             <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel"
-                                                src="<?php echo IMGROOT?>/cancel.png" alt="">
+                                                src="<?php echo IMGROOT?>/close_popup.png" alt="">
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

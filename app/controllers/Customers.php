@@ -459,6 +459,11 @@
     }
 
     public function request_collect(){
+      $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+
+      $data['contact_no']=$user->mobile_number;
+      $data['name'] =$_SESSION['user_name'];
       
      if($_SERVER['REQUEST_METHOD'] == 'POST'){
        
@@ -535,6 +540,10 @@
       }
      else {
          $data = $this->getCommonData();
+         $id=$_SESSION['user_id']; 
+         $user=$this->customerModel->get_customer($id);
+         $data['contact_no']=$user->mobile_number;
+         $data['name'] =$_SESSION['user_name'];
          $this->view('customers/request_collect', $data);
       }
     }
@@ -583,8 +592,8 @@
       $data['location_success']='Success';
       $this->view('customers/request_collect', $data);
          
-    }
-   else {
+     }
+     else {
        $data = $this->getCommonData();
        $this->view('customers/request_collect', $data);
     }

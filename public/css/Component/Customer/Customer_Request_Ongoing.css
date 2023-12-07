@@ -29,7 +29,7 @@
 }
 
 .table-header {
-    background-color: #A1FFAF;
+    background-color: #ecf0f1;
     font-size: 17px;
     font-family: Montserrat;
     text-align: center;
@@ -127,14 +127,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
 }
 
 
 .main-right-bottom-two-content img {
     width: 450px;
     height: 450px;
-   
+
 }
 
 .main-right-bottom-two-content h1 {
@@ -143,7 +143,7 @@
     font-weight: 550;
 }
 
-.main-right-bottom-two-content p{
+.main-right-bottom-two-content p {
     font-size: 18px;
     margin-top: 7px;
     color: #7c7c7d;
@@ -196,7 +196,7 @@
 
 .bold2 {
     font-weight: bold;
-    background-color: #f8a5c2;
+    background-color: #A1FFAF;
     padding: 6px;
     border-radius: 10px;
 }

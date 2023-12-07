@@ -194,20 +194,21 @@
       if(empty($data['name_err']) && empty($data['contactno_err']) && empty($data['city_err']) && empty($data['address_err'])){
        
         if ($_FILES['profile_image']['error'] == 4) {
-           $data['profile_image_name']='';
            $this->customerModel->editprofile($data);
+           $data['profile_image_name']='';
            $data['success_message']="Profile Details Updated Successfully";
            $data['change_pw_success']='True';
-
+        
           
         } else {
           $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/' . $user->image;
-
+         
           if (updateImage($old_image_path, $_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/customer/')) {
             $this->customerModel->editprofile_withimg($data); 
             $data['success_message']="Profile Details Updated Successfully";
             $data['change_pw_success']='True';
             $data['profile_err'] = '';
+           
           } else {
               $data['profile_err'] = 'Error uploading the profile image';
           }
@@ -435,7 +436,7 @@
       $centers = $this->center_model->getallCenters();
       return [
           'centers' => $centers,
-          'map_pop' => '',
+       
           'name' => '',
           'contact_no' => '',
           'date' => '',
@@ -458,6 +459,11 @@
     }
 
     public function request_collect(){
+      $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+
+      $data['contact_no']=$user->mobile_number;
+      $data['name'] =$_SESSION['user_name'];
       
      if($_SERVER['REQUEST_METHOD'] == 'POST'){
        
@@ -534,6 +540,10 @@
       }
      else {
          $data = $this->getCommonData();
+         $id=$_SESSION['user_id']; 
+         $user=$this->customerModel->get_customer($id);
+         $data['contact_no']=$user->mobile_number;
+         $data['name'] =$_SESSION['user_name'];
          $this->view('customers/request_collect', $data);
       }
     }
@@ -562,6 +572,31 @@
         $data=$this->getCommonData();
         $this->view('customers/request_collect', $data);
       }
+    }
+
+    public function request_mark_map(){
+       
+     if($_SERVER['REQUEST_METHOD'] == 'POST'){
+       
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $centers = $this->center_model->getallCenters();
+      $data = $this->getCommonData();
+      $data['name'] = trim($_POST['name']);
+      $data['contact_no'] = trim($_POST['contact_no']);
+      $data['date'] = trim($_POST['date']);
+      $data['time'] = trim($_POST['time']);
+      $data['instructions'] = trim($_POST['instructions']);
+      $data['lattitude'] =trim($_POST['latitude']);
+      $data['longitude'] =trim($_POST['longitude']);
+      $data['region'] =trim($_POST['center']);
+      $data['location_success']='Success';
+      $this->view('customers/request_collect', $data);
+         
+     }
+     else {
+       $data = $this->getCommonData();
+       $this->view('customers/request_collect', $data);
+    }
     }
 
     public function credit_per_waste(){

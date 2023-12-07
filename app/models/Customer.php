@@ -86,7 +86,7 @@
        }else {
          return false; 
       }
-       }
+    }
     
     
     public function deletecustomer($id){

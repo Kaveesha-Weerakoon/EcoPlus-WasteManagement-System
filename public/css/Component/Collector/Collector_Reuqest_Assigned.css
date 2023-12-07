@@ -1,19 +1,20 @@
 .Collector_Reuqest_Assigned {
-  .main-right-bottom-two {
-    width: 99%;
-    height: 550px;
-    padding-left: 1%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
+    .main-right-bottom-two {
+        width: 99%;
+        height: 550px;
+        padding-left: 1%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-  .main-right-bottom-one {
-    display: none;
-    flex-direction: column;
-    height: 550px;
-  }
+    .main-right-bottom-one {
+        display: flex;
+        flex-direction: column;
+        height: 550px;
+    }
+
 
   .main-right-bottom {
     flex-direction: column;
@@ -148,6 +149,26 @@
     position: relative;
     animation: slideDown 0.5s ease-out forwards;
   }
+
+    .table td {
+        height: 50px;
+        font-size: 15.5px;
+        vertical-align: middle;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .table-header {
+        background-color: #ecf0f1;
+        font-size: 17px;
+        font-family: Montserrat;
+        text-align: center;
+        height: 55px;
+        display: grid;
+        grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
+    }
 
 
   .cancel-confirm-content h2 {

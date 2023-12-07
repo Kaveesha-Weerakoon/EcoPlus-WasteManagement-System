@@ -98,15 +98,20 @@
                                 <button onclick="loadLocations()">Filter</button>
                             </div>
                             <div class="main-right-top-four-right">
+
+                                <div class="main-right-top-four-component" style="background-color: #ecf0f1"
+                                    id="tables">
+                                    <img src="<?php echo IMGROOT?>/cells.png" alt="">
+                                    <p>Tables</p>
+                                </div>
+
+                                <div class="main-right-top-four-component" id="maps">
                                 <div class="main-right-top-four-component" style="background-color: #ecf0f1" id="maps">
                                     <img src="<?php echo IMGROOT?>/map.png" alt="">
                                     <p>Maps</p>
                                 </div>
 
-                                <div class="main-right-top-four-component" id="tables">
-                                    <img src="<?php echo IMGROOT?>/cells.png" alt="">
-                                    <p>Tables</p>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -149,7 +154,7 @@
                                         </td>
                                         <td>
                                             <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel"
-                                                src="<?php echo IMGROOT?>/cancel.png" alt="">
+                                                src="<?php echo IMGROOT?>/close_popup.png" alt="">
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

@@ -42,6 +42,7 @@
                                 <h2>Edit Profile</h2>
                             </div>
                         </a>
+
                     </div>
                     <div class="main-left-bottom">
                         <a href="<?php echo URLROOT?>/collectors/logout">
@@ -65,6 +66,7 @@
                                 <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
                                     alt="">
                             </div>
+
                         </div>
                         <div class="main-right-top-two">
                             <h1>Requests</h1>
@@ -298,7 +300,6 @@
     </div>
 </div>
 
-
 <script>
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map-loaction'), {
@@ -326,7 +327,9 @@ function initMap() {
 
 function cancel($id) {
     var inputElement = document.querySelector('input[name="id"]');
+
     inputElement.style.display = 'none';
+
     inputElement.value = $id;
     document.getElementById("cancel-confirm").style.display = "flex";
     setTimeout(function() {
@@ -369,6 +372,7 @@ function searchTable() {
             row.style.display = 'none'; // Hide the row
         }
     });
+
 
 }
 

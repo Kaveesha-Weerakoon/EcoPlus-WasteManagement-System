@@ -145,7 +145,11 @@
         'center_managers' => $center_managers,
         'confirm_delete' =>'',
         'assigned'=>'',
-        'success'=>''
+        'success'=>'',
+        'click_update' =>'',
+        'update_success'=>'',
+        'confirm_delete'=> '',
+        'personal_details_click'=>''
       ];
      
       $this->view('admin/center_managers', $data);
@@ -160,7 +164,9 @@
           'confirm_delete' =>'True',
           'assigned'=> $centermanger->assinged,
           'center_manager_id'=>$id,
-          'success'=>''
+          'success'=>'',
+          'personal_details_click'=>'',
+          'success'=>'' 
         ];
       }
       else{
@@ -186,7 +192,8 @@
         'center_managers' => $center_managers,
         'confirm_delete' =>'',
         'assigned'=>'',
-        'success'=>'True'
+        'success'=>'True',
+        'personal_details_click'=>''
       ];
     
       $this->view('admin/center_managers', $data);
@@ -376,7 +383,9 @@
                 'nic_err' => '',
                 'dob_err'=>'',
                 'contact_no_err'=>'',
-                'address_err' =>''          
+                'address_err' =>'',
+                'personal_details_click'=>'',
+                'success'=>''  
             ];
 
         //validate name
@@ -446,7 +455,8 @@
           'click_update' =>'True',
           'update_success'=>'',
           'confirm_delete'=> '',
-
+          'personal_details_click'=>'',
+          'success'=>'' ,
           'name_err' => '',
           'nic_err' => '',
           'dob_err'=>'',

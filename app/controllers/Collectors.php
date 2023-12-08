@@ -9,6 +9,7 @@
       $this->collector_complain_Model=$this->model('Collector_Complain');
       $this->userModel=$this->model('User');
       $this->Request_Model=$this->model('Request');
+      $this->Customer_Credit_Model=$this->model('Customer_Credit');
 
       if(!isLoggedIn('collector_id')){
         redirect('users/login');
@@ -628,6 +629,65 @@
     $this->view('collectors/request_cancelled', $data);
    }
 
+   public function enterWaste_And_GenerateEcoCredits($req_id) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $collector_id = $_SESSION['user_id'];
+        $creditAmount = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
+
+        $data = [
+            'req_id'=>$req_id,
+            'collector_id' => $collector_id,
+            'polythene' => $_POST['Polythene'],
+            'plastic' => $_POST['Plastic'],
+            'glass' => $_POST['Glass'],
+            'paper_waste' => $_POST['Paper_Waste'],
+            'electronic_waste' => $_POST['Electronic_Waste'],
+            'metals' => $_POST['Metals'],
+            'credit_Amount'=> $creditAmount,
+            'note' => $_POST['note'],
+            'popup' => ''
+         
+        ];
+
+        /*if ( ) {
+           } else {
+        }*/
+        } else {
+          $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
+          $jsonData = json_encode($assinged_Requests);
+          $collector_id = $_SESSION['collector_id'];
+          //$collector_id = $_SESSION['user_id'];
+          //$creditAmount = $this->collectorModel->get_customer_credit_balance($customer_id);
+          $data = [
+          'assigned_requests' => $assinged_Requests,
+          'jsonData' => $jsonData,
+          'req_id'=>$req_id,
+          'collector_id' => $collector_id,
+          'polythene' =>'',
+          'plastic' => '',
+          'glass' => '',
+          'paper_waste' => '',
+          'electronic_waste' => '',
+          'metals' => '',
+          'credit_Amount'=> '',
+          'note' => '',
+          'popup' => 'True',
+
+          'Polythene_err'=>'',
+          'Plastic_err'=>'',
+          'Glass_err'=>'',
+          'Paper_Waste_err'=>'',
+          'Electronic_Waste_err'=>'',
+          'Metals_err'=>'',
+          'Note_err'=>''
+          ];
+          $this->view('collectors/request_assinged', $data);
+        } 
+}
+
+
+
   
   }
 
@@ -635,4 +695,3 @@
 
 
   
-

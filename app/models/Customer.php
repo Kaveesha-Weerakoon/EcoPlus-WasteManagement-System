@@ -42,6 +42,8 @@
             $this->db->bind(':value', $data['name']);
             $this->db->bind(':id', $_SESSION['user_id']);
             $_SESSION['user_name']=$data['name'];
+            $_SESSION['customer_profile'] =$data['profile_image_name'];
+
             if ($this->db->execute()) {
               $this->db->query('UPDATE customers SET address = :address, mobile_number = :contact_number, city = :city WHERE user_id = :customer_id');
               $this->db->bind(':address',  $data['address']);
@@ -66,7 +68,7 @@
       $this->db->bind(':id', $_SESSION['user_id']);
 
       $_SESSION['user_name']=$data['name'];
-      $_SESSION['collector_profile'] =$data['profile_image_name'];
+      $_SESSION['customer_profile'] =$data['profile_image_name'];
 
       if ($this->db->execute()) {
         $this->db->query('UPDATE customers SET address = :address, mobile_number = :contact_number, city = :city, image = :image WHERE user_id = :customer_id');
@@ -84,7 +86,7 @@
        }else {
          return false; 
       }
-       }
+    }
     
     
     public function deletecustomer($id){

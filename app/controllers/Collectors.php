@@ -632,23 +632,116 @@
    public function enterWaste_And_GenerateEcoCredits($req_id) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        $collector_id = $_SESSION['user_id'];
-        $creditAmount = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
+        $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
+        $jsonData = json_encode($assinged_Requests);
+        $collector_id = $_SESSION['collector_id'];
+        //$creditAmount = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
 
         $data = [
+            'assigned_requests' => $assinged_Requests,
+            'jsonData' => $jsonData,
             'req_id'=>$req_id,
             'collector_id' => $collector_id,
-            'polythene' => $_POST['Polythene'],
-            'plastic' => $_POST['Plastic'],
-            'glass' => $_POST['Glass'],
-            'paper_waste' => $_POST['Paper_Waste'],
-            'electronic_waste' => $_POST['Electronic_Waste'],
-            'metals' => $_POST['Metals'],
-            'credit_Amount'=> $creditAmount,
-            'note' => $_POST['note'],
-            'popup' => ''
+            'polythene_quantity' => trim($_POST['polythene_quantity']),
+            'plastic_quantity' => trim($_POST['plastic_quantity']),
+            'glass_quantity' => trim($_POST['glass_quantity']),
+            'paper_waste_quantity' => trim($_POST['paper_waste_quantity']),
+            'electronic_waste_quantity' => trim($_POST['electronic_waste_quantity']),
+            'metals_quantity' => trim($_POST['metals_quantity']),
+            //'credit_Amount'=> $creditAmount,
+            'note' => trim($_POST['note']),
+            'popup' => 'True',
+
+            'polythene_err'=>'',
+            'plastic_err'=>'',
+            'glass_err'=>'',
+            'paper_waste_err'=>'',
+            'electronic_waste_err'=>'',
+            'metals_err'=>'',
+            'note_err'=>''
          
         ];
+
+        
+        /*  if (empty($data['polythene_quantity'])) {
+            $data['polythene_err'] = 'Please Enter Current Password';
+        }*/
+
+        /* if (empty($data['plastic_quantity'])) {
+            $data['plastic_err'] = 'Please Enter Current Password';
+        }*/
+
+        /*if (empty($data['paper_waste_quantity'])) {
+            $data['glass_err'] = 'Please Enter Current Password';
+        }*/
+
+
+        /*if (empty($data['paper_waste_quantity'])) {
+            $data['paper_waste_err'] = 'Please Enter Current Password';
+        }*/
+
+
+        /* if (empty($data['electronic_waste_quantity'])) {
+            $data['electronic_waste_err'] = 'Please Enter Current Password';
+          }*/
+          /*if (empty($data['metals_quantity'])) {
+            $data['metals_err'] = 'Please Enter Current Password';
+          }*/
+
+        /*if (empty($data['note'])) {
+          $data['note_err'] = 'Please Enter Current Password';
+        }*/
+
+
+      /* $this->view('collectors/request_assinged', $data);
+        if (empty($data['polythene_err']) && empty($data['plastic_err']) && empty($data['glass_err']) && empty($data['paper_waste_err']) && empty($data['electronic_Waste_err']) && empty($data['note_err'])) {
+          // Proceed with processing or redirection
+          $this->view('collectors/request_assinged', $data);
+      } else {
+          // If there are validation errors, re-render the form with the error messages
+          $this->view('collectors/request_assinged', $data);
+      }*/
+   
+      
+
+          // Check if at least one field is filled
+        $fieldsToCheck = ['polythene_quantity', 'plastic_quantity', 'glass_quantity', 'paper_waste_quantity', 'electronic_waste_quantity', 'metals_quantity'];
+        $atLeastOneFilled = false;
+
+        foreach ($fieldsToCheck as $field) {
+            if (!empty($_POST[$field])) {
+                $atLeastOneFilled = true;
+                break; // Exit the loop if at least one field is filled
+            }
+        }
+
+        if (!$atLeastOneFilled || empty($_POST['note'])) {
+            if (!$atLeastOneFilled) {
+                $data['polythene_err'] = 'Please fill at least one field';
+                $data['plastic_err'] = 'Please fill at least one field';
+                $data['glass_err'] = 'Please fill at least one field';
+                $data['paper_waste_err'] = 'Please fill at least one field';
+                $data['electronic_waste_err'] = 'Please fill at least one field';
+                $data['metals_err'] = 'Please fill at least one field';
+                $data['note_err'] = 'Please fill in the Note field';
+                
+            }
+            if (empty($_POST['note'])) {
+                $data['note_err'] = 'Please fill in the Note field';
+            }
+
+            
+        }
+
+            if ($atLeastOneFilled && !empty($_POST['note']) && empty($data['polythene_err']) && empty($data['plastic_err']) /* Add other validation checks */) {
+              // Proceed with processing or redirection
+              $this->view('collectors/request_assinged', $data);
+          } else {
+              // If there are validation errors, re-render the form with the error messages
+             $this->view('collectors/request_assinged', $data);
+          }
+
+
 
         /*if ( ) {
            } else {
@@ -664,23 +757,23 @@
           'jsonData' => $jsonData,
           'req_id'=>$req_id,
           'collector_id' => $collector_id,
-          'polythene' =>'',
-          'plastic' => '',
-          'glass' => '',
-          'paper_waste' => '',
-          'electronic_waste' => '',
-          'metals' => '',
+          'polythene_quantity' =>'',
+          'plastic_quantity' => '',
+          'glass_quantity' => '',
+          'paper_waste_quantity' => '',
+          'electronic_waste_quantity' => '',
+          'metals_quantity' => '',
           'credit_Amount'=> '',
           'note' => '',
           'popup' => 'True',
 
-          'Polythene_err'=>'',
-          'Plastic_err'=>'',
-          'Glass_err'=>'',
-          'Paper_Waste_err'=>'',
-          'Electronic_Waste_err'=>'',
-          'Metals_err'=>'',
-          'Note_err'=>''
+          'polythene_err'=>'',
+          'plastic_err'=>'',
+          'glass_err'=>'',
+          'paper_waste_err'=>'',
+          'electronic_waste_err'=>'',
+          'metals_err'=>'',
+          'note_err'=>''
           ];
           $this->view('collectors/request_assinged', $data);
         } 

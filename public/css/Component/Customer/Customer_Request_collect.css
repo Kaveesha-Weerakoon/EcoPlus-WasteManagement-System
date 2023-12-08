@@ -171,6 +171,10 @@
         width: 93% !important;
     }
 
+    .Time option {
+        cursor: pointer;
+    }
+
     .main-bottom-component-right-component select {
         height: 32px;
         width: 47%;
@@ -210,6 +214,7 @@
     .main-bottom-component-right-component select option {
         font-family: 'Inter', sans-serif;
         font-size: 15px;
+        cursor: pointer;
     }
 
 

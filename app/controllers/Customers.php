@@ -455,7 +455,8 @@
           'location_success'=>'',
           'confirm_collect_pop'=>'',
           'success'=>'' ,
-          'customer_id'=>''];
+          'customer_id'=>'',
+          'region_success'=>''];
     }
 
     public function request_collect(){
@@ -503,17 +504,17 @@
         }
     
 
-        if (empty($data['time'])) {
-          $data['time_err'] = 'Time is required';
-        } else {
-           $selectedTimestamp = strtotime($data['time']);
-           $eightAMTimestamp = strtotime('8:00 AM');
-           $fivePMTimestamp = strtotime('5:00 PM');
+        // if (empty($data['time'])) {
+        //   $data['time_err'] = 'Time is required';
+        // } else {
+        //    $selectedTimestamp = strtotime($data['time']);
+        //    $eightAMTimestamp = strtotime('8:00 AM');
+        //    $fivePMTimestamp = strtotime('5:00 PM');
     
-           if ($selectedTimestamp < $eightAMTimestamp || $selectedTimestamp > $fivePMTimestamp) {
-            $data['time_err'] = 'Select a time between 8 am and 5 pm';
-          }
-        }
+        //    if ($selectedTimestamp < $eightAMTimestamp || $selectedTimestamp > $fivePMTimestamp) {
+        //     $data['time_err'] = 'Select a time between 8 am and 5 pm';
+        //   }
+        // }
     
 
         if (empty($data['instructions'])) {
@@ -590,15 +591,40 @@
       $data['longitude'] =trim($_POST['longitude']);
       $data['region'] =trim($_POST['center']);
       $data['location_success']='Success';
+      $data['region_success']='True';
+
       $this->view('customers/request_collect', $data);
          
      }
      else {
        $data = $this->getCommonData();
        $this->view('customers/request_collect', $data);
+     }
     }
-    }
+    public function get_region(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+       
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);  $centers = $this->center_model->getallCenters();
+        $data = $this->getCommonData();
+        $data['name'] = trim($_POST['name']);
+        $data['contact_no'] = trim($_POST['contact_no']);
+        $data['date'] = trim($_POST['date']);
+        $data['time'] = trim($_POST['time']);
+        $data['instructions'] = trim($_POST['instructions']);
+        $data['lattitude'] =trim($_POST['latitude']);
+        $data['longitude'] =trim($_POST['longitude']);
+        $data['region'] =trim($_POST['center']); 
+        $data['region_success']='True';
+       
+        $center=$this->center_model->findCenterbyRegion( $data['region']);
+        $data['lattitude']=$center->lat;
+        $data['longitude']=$center->longi; 
+        
+        $this->view('customers/request_collect', $data);
 
+      }
+    }
+    
     public function credit_per_waste(){
        $credit= $this->creditModel->get();
       $data = [

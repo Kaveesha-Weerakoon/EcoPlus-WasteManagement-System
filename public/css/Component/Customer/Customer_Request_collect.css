@@ -155,8 +155,8 @@
     .main-bottom-component-right-component h2 {
         font-weight: 500;
         margin-bottom: 5px;
-        font-size: 17px;
-        margin-bottom: 6px;
+        font-size: 18px;
+        margin-bottom: 7px;
     }
 
     .err {
@@ -167,9 +167,13 @@
         color: #e74c3c;
     }
 
+    .Time {
+        width: 93% !important;
+    }
+
     .main-bottom-component-right-component select {
         height: 32px;
-        width: 90%;
+        width: 47%;
         outline: none;
         border-radius: 5px;
         border: 1px solid #ccc;
@@ -178,6 +182,29 @@
         border-bottom-width: 2px;
         transition: all 0.3s ease;
         margin-bottom: 15px;
+    }
+
+    .center_dropdown {
+        height: 50px;
+        display: flex;
+        padding-top: 10px;
+    }
+
+    .center_dropdown button {
+        height: 32px;
+        width: 25%;
+        outline: none;
+        color: white;
+        font-size: 15px;
+        font-weight: 500;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 20px;
+        border: none;
+        margin-top: none;
+        letter-spacing: 1px;
+        background: #1B6652;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
     .main-bottom-component-right-component select option {
@@ -196,6 +223,17 @@
     }
 
     .main-bottom-maps {
+        display: flex;
+        width: 100px;
+        justify-content: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 7px;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .main-bottom-maps2 {
         display: flex;
         width: 100px;
         justify-content: center;
@@ -236,6 +274,16 @@
         margin-right: 8px;
     }
 
+    .main-bottom-maps2 img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .main-bottom-maps2 h4 {
+        font-weight: 500;
+        font-size: 17px;
+        margin-right: 8px;
+    }
 
     .main-bottom-component-right-component-button {
         display: flex;

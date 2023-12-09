@@ -3,11 +3,10 @@
         width: 99%;
         height: 550px;
         padding-left: 1%;
-        display: flex;
+        display: none;
         align-items: center;
         justify-content: center;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-
     }
 
     .main-right-bottom-three {
@@ -17,7 +16,6 @@
     }
 
     .main-right-bottom-three-content {
-
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -40,7 +38,7 @@
     .main-right-bottom {
         flex-direction: column;
         height: 550px;
-        display: none;
+        display: flex;
     }
 
     .table-row {
@@ -64,7 +62,7 @@
     }
 
     .table-header {
-        background-color: #B9FFB7;
+        background-color: #ecf0f1;
         font-size: 17px;
         font-family: Montserrat;
         text-align: center;

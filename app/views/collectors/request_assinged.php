@@ -192,6 +192,7 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-trash"></i>
                                                 <input name="polythene_quantity" type="text"
+
                                                     placeholder="Enter Quantity in Kg" value="<?php echo $data['polythene_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['polythene_quantity_err']?>
@@ -203,6 +204,7 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-box"></i>
                                                 <input name="plastic_quantity" type="text"
+
                                                     placeholder="Enter Quantity in Kg" value="<?php echo $data['plastic_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['plastic_quantity_err']?>
@@ -214,6 +216,7 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-glass-whiskey"></i>
                                                 <input name="glass_quantity" type="text"
+
                                                     placeholder="Enter Quantity in Kg" value="<?php echo $data['glass_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['glass_quantity_err']?>
@@ -227,6 +230,7 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-file-alt"></i>
                                                 <input name="paper_waste_quantity" type="text"
+
                                                     placeholder="Enter Quantity in Kg" value="<?php echo $data['paper_waste_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['paper_waste_quantity_err']?>
@@ -238,6 +242,7 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-laptop"></i>
                                                 <input name="electronic_waste_quantity" type="text"
+
                                                     placeholder="Enter Quantity in Kg" value="<?php echo $data['electronic_waste_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['electronic_waste_quantity_err']?>
@@ -249,6 +254,7 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-box"></i>
                                                 <input name="metals_quantity" type="text"
+
                                                     placeholder="Enter Quantity in Kg" value="<?php echo $data['metals_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['metals_quantity_err']?>
@@ -262,6 +268,7 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-sticky-note"></i>
                                                 <input name="note" class="note-input" type="text"
+
                                                     placeholder="Enter Note" value="<?php echo $data['note']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['note_err']?>

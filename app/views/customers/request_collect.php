@@ -48,16 +48,35 @@
                             <input value="<?php echo $data['date']?>" name="date" type="date">
                             <div class="err"><?php echo $data['date_err']?></div>
                         </div>
-                        <div class="main-bottom-component-right-component">
+                        <div class="main-bottom-component-right-component ">
                             <h2>Time</h2>
-                            <input value="<?php echo $data['time']?>" name="time" type="Time" placeholder="Name">
+                            <select class="Time" name="time">
+                                <option value="8 am - 10 am"
+                                    <?php echo ($data['time'] === '8 am -10 am') ? 'selected' : ''; ?>>8 am -10 am
+                                </option>
+                                <option value="10 am - 12 noon"
+                                    <?php echo ($data['time'] === '10 am - 12 noon') ? 'selected' : ''; ?>>10 am - 12
+                                    noon
+                                </option>
+                                <option value="12 noon -2 pm"
+                                    <?php echo ($data['time'] === '12 noon -2 pm') ? 'selected' : '12 noon -2 pm'; ?>>12
+                                    noon - 2 pm
+
+                                </option>
+                                <option value="2 pm - 4 pm"
+                                    <?php echo ($data['time'] === '2 pm - 4 pm') ? 'selected' : ''; ?>>2 pm - 4 pm
+
+                                </option>
+                            </select>
                             <div class="err"><?php echo $data['time_err']?></div>
                         </div>
+
                     </div>
                     <div class="main-bottom-component-right-component">
                         <h2>Your Region</h2>
-                        <select name="center" id="centerDropdown">
-                            <?php
+                        <div class="center_dropdown">
+                            <select name="center" id="centerDropdown">
+                                <?php
                            $centers = $data['centers'];
                            $selectedRegion = $data['region'];
 
@@ -70,7 +89,9 @@
                             echo "<option value=\"default\">No Centers Available</option>";
                           }
                         ?>
-                        </select>
+                            </select>
+                            <button onclick="getRegion()">Set Region</button>
+                        </div>
                     </div>
                     <div class="main-bottom-component-right-component">
                         <h2>Pick Up Instructions</h2>
@@ -80,23 +101,37 @@
                     </div>
                     <div class="main-bottom-component-right-component Z">
                         <h2>Location</h2>
+                        <?php if ($data['region_success'] == 'True') { ?>
                         <div class="main-bottom-maps" onclick="initMap()">
                             <h4>Maps</h4>
-                            <img src="<?php echo IMGROOT?>/location2.png" alt="">
+                            <img src="<?php echo IMGROOT; ?>/location2.png" alt="">
                         </div>
 
-                        <?php if ($data['location_success']=='Success') : ?>
+                        <?php if ($data['location_success'] == 'Success') : ?>
                         <div class="main-bottom-map-success">
                             <img src="<?php echo IMGROOT; ?>/check.png" alt="">
                             <p>Location Fetched Successfully</p>
                         </div>
                         <?php endif; ?>
-                        <?php if ($data['location_err']=='Location Error') : ?>
+
+                        <?php if ($data['location_err'] == 'Location Error') : ?>
                         <div class="main-bottom-map-success">
                             <img src="<?php echo IMGROOT; ?>/warning.png" alt="">
                             <p>Pick up location Required</p>
                         </div>
                         <?php endif; ?>
+
+                        <?php } else { ?>
+                        <!-- Add code for the else block here -->
+                        <div class="main-bottom-maps2">
+                            <h4>Maps</h4>
+                            <img src=" <?php echo IMGROOT; ?>/location2.png" alt="">
+                        </div>
+                        <div class="main-bottom-map-success">
+                            <img src="<?php echo IMGROOT; ?>/warning.png" alt="">
+                            <p>Select a region</p>
+                        </div>
+                        <?php } ?>
 
                     </div>
                     <div class="main-bottom-component-right-component-button">
@@ -160,13 +195,13 @@
     function initMap() {
 
         var defaultLatLng = {
-            lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 8.00 ?>,
+            lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
             lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
         };
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: defaultLatLng,
-            zoom: 7.6
+            zoom: 14.5
         });
 
         marker = new google.maps.Marker({
@@ -182,6 +217,13 @@
             };
             console.log('New Location:', newLatLng);
         });
+    }
+
+    function getRegion() {
+        var form = document.getElementById('myForm');
+        form.action = "<?php echo URLROOT;?>/customers/get_region";
+        form.method = 'post';
+
     }
 
     function submitForm() {

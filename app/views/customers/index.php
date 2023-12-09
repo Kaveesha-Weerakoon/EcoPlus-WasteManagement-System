@@ -1,52 +1,11 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Customer_Main">
 
-  <div class="Customer_Dashboard">
-    
-     <div class="main">
-            <div class="main-left">
-                <div class="main-left-top">
-                    <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
-                    <h1>Eco Plus</h1>
-                </div>
-                <div class="main-left-middle">
-                    <div class="main-left-middle-content current">
-                        <div class="main-left-middle-content-line"></div>
-                        <img src="<?php echo IMGROOT?>/Customer_DashBoard_Icon.png" alt="">
-                        <h2>Dashboard</h2>
-                    </div>
-                    <a href="<?php echo URLROOT?>/customers/request_main">
-                        <div class="main-left-middle-content">
-                            <div class="main-left-middle-content-line2"></div>
-                            <img src="<?php echo IMGROOT?>/Customer_Request.png" alt="">
-                            <h2>Requests</h2>
-                        </div>
-                    </a>
-                    <a href="<?php echo URLROOT?>/customers/history">
-                        <div class="main-left-middle-content">
-                            <div class="main-left-middle-content-line2"></div>
-                            <img src="<?php echo IMGROOT?>/Customer_tracking _Icon.png" alt="">
-                            <h2>History</h2>
-                        </div>
-                    </a>
-                    <a href="<?php echo URLROOT?>/customers/editprofile">
-                        <div class="main-left-middle-content">
-                            <div class="main-left-middle-content-line2"></div>
-                            <img src="<?php echo IMGROOT?>/Customer_Edit_Pro_Icon.png" alt="">
-                            <h2>Edit Profile</h2>
-                        </div>
-                    </a>
-                </div>
-                <div class="main-left-bottom">
+    <div class="Customer_Dashboard">
 
-                    <a href="<?php echo URLROOT?>/customers/logout">
-                        <div class="main-left-bottom-content">
-                            <img src="<?php echo IMGROOT?>/Logout.png" alt="">
-                            <p>Log out</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+        <div class="main">
+            <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
+
             <div class="main-right">
 
                 <div class="main-right-left">
@@ -61,14 +20,16 @@
                         </div>
                     </div>
                     <div class="main-right-left-two">
-                        <div class="main-right-left-two-component A" style="background-image: url('<?php echo IMGROOT?>/Group 7.1.png');">
+                        <div class="main-right-left-two-component A"
+                            style="background-image: url('<?php echo IMGROOT?>/Group 7.1.png');">
                             <div class="main-right-left-two-component-component">
                                 <p>1 Eco Credit = Rs 00.57</p>
                                 <img src="<?php echo IMGROOT?>/Save_Monet.png" alt="">
                             </div>
 
                         </div>
-                        <div class="main-right-left-two-component B" style="background-image: url('<?php echo IMGROOT?>/Group.png');">
+                        <div class="main-right-left-two-component B"
+                            style="background-image: url('<?php echo IMGROOT?>/Group.png');">
                             <a href="<?php echo URLROOT?>/customers/credit_per_waste">
                                 <div class="main-right-left-two-component-component">
                                     <p>Credits per waste quantity</p>
@@ -81,7 +42,8 @@
 
                         <div class="main-right-left-three-right">
                             <p>Request a collect now & Gain Eco Credits for your Non biodegradable waste</p>
-                            <a href="<?php echo URLROOT?>/customers/request_collect"><button>Request Garbage Collection</button></a>
+                            <a href="<?php echo URLROOT?>/customers/request_collect"><button>Request Garbage
+                                    Collection</button></a>
                         </div>
                     </div>
                     <div class="main-right-left-four">
@@ -118,7 +80,8 @@
                 </div>
                 <div class="main-right-right">
                     <div class="main-right-right-one">
-                        <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>" alt="">
+                        <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
+                            alt="">
                         <h2><?php echo $_SESSION['user_name']?></h2>
                         <p>User ID: C <?php echo $_SESSION['user_id']?></p>
                     </div>
@@ -130,10 +93,10 @@
                         </a>
 
                         <a href="<?php echo URLROOT?>/customers/viewprofile" class="main-right-right-two-component">
-                        <div id="Profile" class="main-right-right-two-component">
-                            <img src="<?php echo IMGROOT?>/Profile.png" alt="">
-                            <p>Profile</p>
-                        </div> 
+                            <div id="Profile" class="main-right-right-two-component">
+                                <img src="<?php echo IMGROOT?>/Profile.png" alt="">
+                                <p>Profile</p>
+                            </div>
                         </a>
 
                         <a href="<?php echo URLROOT?>/customers/complains" class="main-right-right-two-component">
@@ -159,13 +122,14 @@
                 <div id="Profile_Pop" class="Profile">
                     <div class="profile-top">
                         <div class="profile-top-left"></div>
-                        <a href="<?php echo URLROOT?>/customers" >
-                                <img src="<?php echo IMGROOT?>/close_popup.png" id="Profile_close">
+                        <a href="<?php echo URLROOT?>/customers">
+                            <img src="<?php echo IMGROOT?>/close_popup.png" id="Profile_close">
                         </a>
                     </div>
                     <div class="profile-down">
                         <div class="profile-down-top-content">
-                        <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>" alt="">
+                            <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
+                                alt="">
                             <h1 style="font-size: 29px;"><?php echo $_SESSION['user_name']?></h1>
                         </div>
 
@@ -200,13 +164,17 @@
                 </div>
             </div>
             <?php endif; ?>
+        </div>
+
     </div>
 
-  </div>
-    
+
 </div>
 
+<script>
 
+
+</script>
 
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

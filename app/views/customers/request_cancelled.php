@@ -6,50 +6,8 @@
     <div class="Customer_Request_Main">
         <div class="Customer_Request_Cancelled">
             <div class="main">
-                <div class="main-left">
-                    <div class="main-left-top">
-                        <img src="<?php echo IMGROOT ?>/Logo_No_Background.png" alt="">
-                        <h1>Eco Plus</h1>
-                    </div>
-                    <div class="main-left-middle">
-                        <a href="<?php echo URLROOT?>/customers">
-                            <div class="main-left-middle-content ">
-                                <div class="main-left-middle-content-line2"></div>
-                                <img src="<?php echo IMGROOT ?>/Customer_DashBoard_Icon.png" alt="">
-                                <h2>Dashboard</h2>
-                            </div>
-                        </a>
-                        <div class="main-left-middle-content current">
-                            <div class="main-left-middle-content-line"></div>
-                            <img src="<?php echo IMGROOT ?>/Customer_Request.png" alt="">
-                            <h2>Requests</h2>
-                        </div>
-                        <a href="<?php echo URLROOT?>/customers/history">
-                            <div class="main-left-middle-content">
-                                <div class="main-left-middle-content-line2"></div>
-                                <img src="<?php echo IMGROOT ?>/Customer_tracking _Icon.png" alt="">
-                                <h2>History</h2>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/customers/editprofile">
-                            <div class="main-left-middle-content">
-                                <div class="main-left-middle-content-line2"></div>
-                                <img src="<?php echo IMGROOT ?>/Customer_Edit_Pro_Icon.png" alt="">
-                                <h2>Edit Profile</h2>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="main-left-bottom">
+                <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
-                        <a href="<?php echo URLROOT?>/customers/logout">
-
-                            <div class="main-left-bottom-content">
-                                <img src="<?php echo IMGROOT ?>/Logout.png" alt="">
-                                <p>Log out</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
                 <div class="main-right">
                     <div class="main-right-top">
                         <div class="main-right-top-one">
@@ -178,7 +136,7 @@
         function view_collector(image, col_id, name, contact_no, type, vehno) {
             document.getElementById('personal-details-popup-box').style.display = 'flex';
             document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' +
-            image;
+                image;
             document.getElementById('collector_id').innerText = col_id;
             document.getElementById('collector_name').innerText = name;
             document.getElementById('collector_conno').innerText = contact_no;
@@ -200,7 +158,7 @@
 
                 if (center.includes(input) || id.includes(input) || status.includes(input) || date.includes(
                         input) || time.includes(input) || cancelled_By.includes(input) || reason.includes(
-                    input)) {
+                        input)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none'; // Hide the row

@@ -1,72 +1,35 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Customer_Main">
     <div class="Customer_Editprofile">
-    <div class="main">
-            <div class="main-left">
-                <div class="main-left-top">
-                    <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
-                    <h1>Eco Plus</h1>
-                </div>
-                <div class="main-left-middle">
-                    <a href="<?php echo URLROOT?>/customers">
-                        <div class="main-left-middle-content">
-                            <div class="main-left-middle-content-line2"></div>
-                            <img src="<?php echo IMGROOT?>/Customer_DashBoard_Icon.png" alt="">
-                            <h2>Dashboard</h2>
-                        </div>
-                    </a>
-                    <a href="<?php echo URLROOT?>/customers/request_main">
-                        <div class="main-left-middle-content">
-                            <div class="main-left-middle-content-line2"></div>
-                            <img src="<?php echo IMGROOT?>/Customer_Request.png" alt="">
-                            <h2>Requests</h2>
-                        </div>
-                    </a>
-                    <a href="<?php echo URLROOT?>/customers/history">
-                        <div class="main-left-middle-content">
-                            <div class="main-left-middle-content-line2"></div>
-                            <img src="<?php echo IMGROOT?>/Customer_tracking _Icon.png" alt="">
-                            <h2>History</h2>
-                        </div>
-                    </a>
-                 
-                        <div class="main-left-middle-content current">
-                            <div class="main-left-middle-content-line"></div>
-                            <img src="<?php echo IMGROOT?>//Customer_Edit_Pro_Icon.png" alt="">
-                            <h2>Edit Profile</h2>
-                        </div>
-                    
-                </div>
-                <div class="main-left-bottom">
+        <div class="main">
+            <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
-                <a href="<?php echo URLROOT?>/customers">
-                        <div class="main-left-bottom-content">
-                            <img src="<?php echo IMGROOT?>/Logout.png" alt="">
-                            <p>Log out</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
             <div class="main-right">
                 <div class="main-right-top">
                     <div class="main-right-top-component">
-                       <p><?php echo $_SESSION['user_name']?></p>
-                       <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>" alt="">  
+                        <p><?php echo $_SESSION['user_name']?></p>
+                        <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
+                            alt="">
                     </div>
-                                  </div>
+                </div>
                 <div class="main-right-bottom">
-                    <div class="main-right-bottom-content" >
+                    <div class="main-right-bottom-content">
 
                         <div class="main-right-bottom-content-top">
                             <h1>Edit Profile</h1>
                             <div class="Edit-Profile-line"></div>
                         </div>
-                        <div class="main-right-bottom-content-bottom" >
-                            <form class="main-right-bottom-content-bottom-left" action="<?php echo URLROOT;?>/customers/editprofile" method="post" enctype="multipart/form-data">
+                        <div class="main-right-bottom-content-bottom">
+                            <form class="main-right-bottom-content-bottom-left"
+                                action="<?php echo URLROOT;?>/customers/editprofile" method="post"
+                                enctype="multipart/form-data">
                                 <div class="edit-profile-content-profile">
                                     <div class="edit-profile-content-profile-container">
-                                        <img class="edit-profile-main-image" id="profile_image_placeholder" src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>" alt="">
-                                        <img class="edit-profile-second-image" src="<?php echo IMGROOT?>/edit-icon.png" alt="">
+                                        <img class="edit-profile-main-image" id="profile_image_placeholder"
+                                            src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
+                                            alt="">
+                                        <img class="edit-profile-second-image" src="<?php echo IMGROOT?>/edit-icon.png"
+                                            alt="">
                                         <input name='profile_image' type="file" id="profile_image">
                                     </div>
                                 </div>
@@ -78,7 +41,7 @@
                                 </div>
                                 <div class="edit-profile-content">
                                     <h3>Address :</h3>
-                                    <input name="address"  type="text" value="<?php echo $data['address']?>">
+                                    <input name="address" type="text" value="<?php echo $data['address']?>">
                                     <div class="err"><?php echo $data['address_err']?></div>
 
                                 </div>
@@ -94,13 +57,14 @@
                                     <div class="err"><?php echo $data['city_err']?></div>
 
                                 </div>
-                             
-                                   <button type="submit">Save</button>
-                              
-                                
+
+                                <button type="submit">Save</button>
+
+
                             </form>
 
-                            <form class="main-right-bottom-content-bottom-right" action="<?php echo URLROOT;?>/customers/change_password" method="post">
+                            <form class="main-right-bottom-content-bottom-right"
+                                action="<?php echo URLROOT;?>/customers/change_password" method="post">
                                 <div class="edit-profile-content">
                                     <h3>Current Password :</h3>
                                     <input type="password" name="current" value="<?php echo $data['current']?>">
@@ -108,7 +72,7 @@
                                 </div>
                                 <div class="edit-profile-content">
                                     <h3>New Password :</h3>
-                                    <input type="password" name="new_pw" value="<?php echo $data['new_pw']?>">                       
+                                    <input type="password" name="new_pw" value="<?php echo $data['new_pw']?>">
                                     <div class="err"><?php echo $data['new_pw_err']?></div>
 
                                 </div>
@@ -123,24 +87,24 @@
 
                     </div>
                 </div>
-            </div>  
-            
+            </div>
+
             <?php if($data['change_pw_success']=='True') : ?>
-               <div class="center_worker_success">
-                  <div class="popup" id="popup">
+            <div class="center_worker_success">
+                <div class="popup" id="popup">
                     <img src="<?php echo IMGROOT?>/check.png" alt="">
                     <h2>Success!!</h2>
                     <p><?php echo $data['success_message']?></p>
-                    <a href="<?php echo URLROOT?>/customers/editprofile"><button type="button" >OK</button></a>
+                    <a href="<?php echo URLROOT?>/customers/editprofile"><button type="button">OK</button></a>
 
-                  </div>
-               </div>
-             <?php endif; ?>
+                </div>
+            </div>
+            <?php endif; ?>
         </div>
-    </div>  
-  
-    <script src="<?php echo JSROOT?>/Customer_Edit_Profile.js"> </script>        
-  
+    </div>
+
+    <script src="<?php echo JSROOT?>/Customer_Edit_Profile.js"> </script>
+
 </div>
 
 

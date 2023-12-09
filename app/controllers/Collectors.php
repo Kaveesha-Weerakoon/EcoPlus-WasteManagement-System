@@ -10,6 +10,8 @@
       $this->userModel=$this->model('User');
       $this->Request_Model=$this->model('Request');
       $this->Customer_Credit_Model=$this->model('Customer_Credit');
+      $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
+      
 
       if(!isLoggedIn('collector_id')){
         redirect('users/login');
@@ -707,10 +709,32 @@
           
 
             if ($atLeastOneFilled && empty($_POST['note_err']) ) {
+              $creditData = $this->creditModel->get();
+
+              $credit_Amount =
+    (intval($data['polythene_quantity']) * $creditData->polythene) +
+    (intval($data['plastic_quantity']) * $creditData->plastic) +
+    (intval($data['glass_quantity']) * $creditData->glass) +
+    (intval($data['paper_waste_quantity']) * $creditData->paper) +
+    (intval($data['electronic_waste_quantity']) * $creditData->electronic) +
+    (intval($data['metals_quantity']) * $creditData->metal);
+
+
+            $data['credit_Amount'] = $credit_Amount;
+
+            $inserted = $this->Collect_Garbage_Model->insert($data); // Implement insert method in Collect_garbage model
+
+            if ($inserted) {
+                // Data inserted successfully, perform further actions or redirect
+                // For now, render the view with updated data
+                $this->view('collectors/request_assinged', $data);
+            } else {
+                // Handle insertion failure
+                // Show an error message or perform necessary actions
+            }
+            } else {
               $this->view('collectors/request_assinged', $data);
-          } else {
-             $this->view('collectors/request_assinged', $data);
-          }
+            }
 
 
 

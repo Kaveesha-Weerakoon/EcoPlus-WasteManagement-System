@@ -1003,12 +1003,13 @@
           $this->request_incomming();
       } 
       else {
-        if($data['collector_id']=='default'){
+        if($data['collector_id']=='default'){die();
            $this->request_incomming();
         }
         else{
           $this->Request_Model->assing_collector($data);
           $this->request_assigned();
+          
         }
     } 
     }
@@ -1028,6 +1029,7 @@
   }
 
   public function request_assigned(){
+    
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $assined_requests=$this->Request_Model->get_assigned_request_by_center($center->region);
     $jsonData = json_encode($assined_requests);

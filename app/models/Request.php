@@ -148,7 +148,8 @@
     }
 
     public function assing_collector($data) {
-      $this->db->query('INSERT INTO request_assigned (req_id, collector_id) VALUES (:req_id, :collector_id)');
+      try{
+        $this->db->query('INSERT INTO request_assigned (req_id, collector_id) VALUES (:req_id, :collector_id)');
       $this->db->bind(':req_id', $data['request_id']);
       $this->db->bind(':collector_id', $data['collector_id']);
       $insertResult = $this->db->execute();
@@ -162,7 +163,9 @@
           return $updateResult;
       } else {
           return false;
-      }
+      } }catch (PDOException $e) {
+        return false;
+    }
     }
 
     public function get_assigned_request_by_center($region){

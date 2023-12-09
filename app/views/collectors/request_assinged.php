@@ -194,7 +194,7 @@
                                                 <input name="polythene_quantity" type="text"
                                                     placeholder="Enter Quantity in Kg" value="<?php echo $data['polythene_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
-                                                    <?php echo $data['polythene_err']?>
+                                                    <?php echo $data['polythene_quantity_err']?>
                                                 </div>
                                             </div>
                                         </div>
@@ -205,7 +205,7 @@
                                                 <input name="plastic_quantity" type="text"
                                                     placeholder="Enter Quantity in Kg" value="<?php echo $data['plastic_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
-                                                    <?php echo $data['plastic_err']?>
+                                                    <?php echo $data['plastic_quantity_err']?>
                                                 </div>
                                             </div>
                                         </div>
@@ -216,7 +216,7 @@
                                                 <input name="glass_quantity" type="text"
                                                     placeholder="Enter Quantity in Kg" value="<?php echo $data['glass_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
-                                                    <?php echo $data['glass_err']?>
+                                                    <?php echo $data['glass_quantity_err']?>
                                                 </div>
                                             </div>
                                         </div>
@@ -229,7 +229,7 @@
                                                 <input name="paper_waste_quantity" type="text"
                                                     placeholder="Enter Quantity in Kg" value="<?php echo $data['paper_waste_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
-                                                    <?php echo $data['paper_waste_err']?>
+                                                    <?php echo $data['paper_waste_quantity_err']?>
                                                 </div>
                                             </div>
                                         </div>
@@ -240,7 +240,7 @@
                                                 <input name="electronic_waste_quantity" type="text"
                                                     placeholder="Enter Quantity in Kg" value="<?php echo $data['electronic_waste_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
-                                                    <?php echo $data['electronic_waste_err']?>
+                                                    <?php echo $data['electronic_waste_quantity_err']?>
                                                 </div>
                                             </div>
                                         </div>
@@ -251,7 +251,7 @@
                                                 <input name="metals_quantity" type="text"
                                                     placeholder="Enter Quantity in Kg" value="<?php echo $data['metals_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
-                                                    <?php echo $data['metals_err']?>
+                                                    <?php echo $data['metals_quantity_err']?>
                                                 </div>
                                             </div>
                                         </div>

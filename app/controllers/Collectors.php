@@ -652,92 +652,63 @@
             'note' => trim($_POST['note']),
             'popup' => 'True',
 
-            'polythene_err'=>'',
-            'plastic_err'=>'',
-            'glass_err'=>'',
-            'paper_waste_err'=>'',
-            'electronic_waste_err'=>'',
-            'metals_err'=>'',
+            'polythene_quantity_err'=>'',
+            'plastic_quantity_err'=>'',
+            'glass_quantity_err'=>'',
+            'paper_waste_quantity_err'=>'',
+            'electronic_waste_quantity_err'=>'',
+            'metals_quantity_err'=>'',
             'note_err'=>''
          
         ];
 
         
-        /*  if (empty($data['polythene_quantity'])) {
-            $data['polythene_err'] = 'Please Enter Current Password';
-        }*/
-
-        /* if (empty($data['plastic_quantity'])) {
-            $data['plastic_err'] = 'Please Enter Current Password';
-        }*/
-
-        /*if (empty($data['paper_waste_quantity'])) {
-            $data['glass_err'] = 'Please Enter Current Password';
-        }*/
-
-
-        /*if (empty($data['paper_waste_quantity'])) {
-            $data['paper_waste_err'] = 'Please Enter Current Password';
-        }*/
-
-
-        /* if (empty($data['electronic_waste_quantity'])) {
-            $data['electronic_waste_err'] = 'Please Enter Current Password';
-          }*/
-          /*if (empty($data['metals_quantity'])) {
-            $data['metals_err'] = 'Please Enter Current Password';
-          }*/
-
-        /*if (empty($data['note'])) {
-          $data['note_err'] = 'Please Enter Current Password';
-        }*/
-
-
-      /* $this->view('collectors/request_assinged', $data);
-        if (empty($data['polythene_err']) && empty($data['plastic_err']) && empty($data['glass_err']) && empty($data['paper_waste_err']) && empty($data['electronic_Waste_err']) && empty($data['note_err'])) {
-          // Proceed with processing or redirection
-          $this->view('collectors/request_assinged', $data);
-      } else {
-          // If there are validation errors, re-render the form with the error messages
-          $this->view('collectors/request_assinged', $data);
-      }*/
-   
-      
 
           // Check if at least one field is filled
         $fieldsToCheck = ['polythene_quantity', 'plastic_quantity', 'glass_quantity', 'paper_waste_quantity', 'electronic_waste_quantity', 'metals_quantity'];
         $atLeastOneFilled = false;
 
-        foreach ($fieldsToCheck as $field) {
-            if (!empty($_POST[$field])) {
-                $atLeastOneFilled = true;
-                break; // Exit the loop if at least one field is filled
+            foreach ($fieldsToCheck as $field) {
+                if (!empty($_POST[$field])) {
+                    $atLeastOneFilled = true;
+                    break; 
+                }
             }
-        }
 
-        if (!$atLeastOneFilled || empty($_POST['note'])) {
+            foreach ($fieldsToCheck as $field) {
+              if (!empty($_POST[$field])) {
+                if (!is_numeric($_POST[$field])) {
+                  $data["{$field}_err"] = "Please enter a valid number for $field";
+              } else {
+                  // Check if the input has more than two decimal points
+                  $decimalCount = substr_count($_POST[$field], '.');
+                  if ($decimalCount > 1 || (strlen($_POST[$field]) - strrpos($_POST[$field], '.')) > 3) {
+                      $data["{$field}_err"] = "Please enter quantity with two decimal points";
+                  }
+              }
+            }
+          }
+
             if (!$atLeastOneFilled) {
-                $data['polythene_err'] = 'Please fill at least one field';
-                $data['plastic_err'] = 'Please fill at least one field';
-                $data['glass_err'] = 'Please fill at least one field';
-                $data['paper_waste_err'] = 'Please fill at least one field';
-                $data['electronic_waste_err'] = 'Please fill at least one field';
-                $data['metals_err'] = 'Please fill at least one field';
-                $data['note_err'] = 'Please fill in the Note field';
+                $data['polythene_quantity_err'] = 'Please fill polythene quantity';
+                $data['plastic_quantity_err'] = 'Please fill plastic quantity';
+                $data['glass_quantity_err'] = 'Please fill glass quantity';
+                $data['paper_waste_quantity_err'] = 'Please fill paper_waste quantity';
+                $data['electronic_waste_quantity_err'] = 'Please fill electronic_waste quantity';
+                $data['metals_quantity_err'] = 'Please fill metals quantity';
                 
             }
+
             if (empty($_POST['note'])) {
-                $data['note_err'] = 'Please fill in the Note field';
-            }
-
+              $data['note_err'] = 'Please fill in the Note field';
+          }
             
-        }
 
-            if ($atLeastOneFilled && !empty($_POST['note']) && empty($data['polythene_err']) && empty($data['plastic_err']) /* Add other validation checks */) {
-              // Proceed with processing or redirection
+          
+
+            if ($atLeastOneFilled && empty($_POST['note_err']) ) {
               $this->view('collectors/request_assinged', $data);
           } else {
-              // If there are validation errors, re-render the form with the error messages
              $this->view('collectors/request_assinged', $data);
           }
 
@@ -767,12 +738,12 @@
           'note' => '',
           'popup' => 'True',
 
-          'polythene_err'=>'',
-          'plastic_err'=>'',
-          'glass_err'=>'',
-          'paper_waste_err'=>'',
-          'electronic_waste_err'=>'',
-          'metals_err'=>'',
+          'polythene_quantity_err'=>'',
+          'plastic_quantity_err'=>'',
+          'glass_quantity_err'=>'',
+          'paper_waste_quantity_err'=>'',
+          'electronic_waste_quantity_err'=>'',
+          'metals_quantity_err'=>'',
           'note_err'=>''
           ];
           $this->view('collectors/request_assinged', $data);

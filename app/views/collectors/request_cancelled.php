@@ -217,7 +217,7 @@ function initMap(latitude = 7.4, longitude = 81.00000000) {
 
     var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
         center: mapCenter,
-        zoom: 7.4
+        zoom: 14.5
     });
 
     var marker = new google.maps.Marker({

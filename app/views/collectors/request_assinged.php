@@ -312,7 +312,7 @@ function initMap() {
             lat: 7.8731,
             lng: 80.7718
         },
-        zoom: 7.2
+        zoom: 14.5
     });;
     var incomingRequests = <?php echo $data['jsonData']; ?>;
     incomingRequests.forEach(function(coordinate) {

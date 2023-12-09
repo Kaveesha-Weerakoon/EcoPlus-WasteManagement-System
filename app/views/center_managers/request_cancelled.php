@@ -227,13 +227,13 @@ function view_request_details(request) {
 
 function initMap(latitude = 7.4, longitude = 81.00000000) {
     var mapCenter = {
-        lat: 7.4,
-        lng: 81.00000000
+        lat: latitude,
+        lng: longitude
     };
 
     var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
         center: mapCenter,
-        zoom: 7.4
+        zoom: 14.5
     });
 
     var marker = new google.maps.Marker({

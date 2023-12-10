@@ -614,9 +614,12 @@
    }
 
    public function request_completed(){
-    $data = [
-      'title' => 'TraversyMVC',
-    ];
+    $completed_Requests=$this->Collect_Garbage_Model->get_complete_request( $_SESSION['collector_id'] );
+      $jsonData = json_encode($completed_Requests);
+      $data = [
+        'completed_requests' => $completed_Requests,
+        'jsonData' => $jsonData,
+      ];
    
     $this->view('collectors/request_completed', $data);
    }

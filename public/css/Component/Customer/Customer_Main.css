@@ -81,7 +81,7 @@
         height: 28px;
         border-radius: 0px, 4px, 4px, 0px;
         background: radial-gradient(82.23% 108.11% at 101.39% 101.07%, #13C93E 0%, #ADE446 100%);
-        /* background-color: white; */
+        background: none;
     }
 
     .main-left-middle-content-line2 {

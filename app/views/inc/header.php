@@ -8,7 +8,10 @@
         <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/style.css">
         <title><?php echo SITENAME ?></title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
+            async defer>
+        </script>
     </head>
 
     <body>

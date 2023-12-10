@@ -75,9 +75,9 @@
                      </div>
                      <div class="location_close">
                         <button onclick="closemap()">Close</button>
+                    </div>
                 </div>
             </div>
-    </div>
     <?php if($data['delete_center']=='True') : ?>
     <div class="center_delete">
         <div class="popup" id="popup">

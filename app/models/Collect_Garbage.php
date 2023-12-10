@@ -8,7 +8,7 @@
 
    
     public function insert($data){
-      $this->db->query('INSERT INTO collect_garbage (req_id, Polythene, Plastic, Glass, Paper_Waste, Electronic_Waste, Metals, credit_amount, note, added) VALUES (:req_id, :Polythene, :Plastic, :Glass, :Paper_Waste, :Electronic_Waste, :Metals, :credit_amount, :note, :added)');
+      $this->db->query('INSERT INTO request_completed (req_id, Polythene, Plastic, Glass, Paper_Waste, Electronic_Waste, Metals, credit_amount, note, added) VALUES (:req_id, :Polythene, :Plastic, :Glass, :Paper_Waste, :Electronic_Waste, :Metals, :credit_amount, :note, :added)');
       
       $this->db->bind(':req_id', $data['req_id']);
       $this->db->bind(':Polythene', $data['polythene_quantity']);
@@ -23,8 +23,23 @@
       $this->db->bind(':added', $addedValue);
 
       $result = $this->db->execute();
+      if ($result) {
+        $this->db->query('UPDATE request_main SET type = :type WHERE req_id = :req_id');
+        $this->db->bind(':type', 'completed');
+        $this->db->bind(':req_id', $data['req_id']);
+        
+        $updateResult = $this->db->execute();
+         if($updateResult){
+          return $updateResult;
+         }
+         else{
+          return false;
+         }
 
-      return $result;
+        }
+
+      
+      
   }
 
   

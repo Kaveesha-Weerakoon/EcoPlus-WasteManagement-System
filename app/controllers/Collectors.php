@@ -669,29 +669,26 @@
           // Check if at least one field is filled
         $fieldsToCheck = ['polythene_quantity', 'plastic_quantity', 'glass_quantity', 'paper_waste_quantity', 'electronic_waste_quantity', 'metals_quantity'];
         $atLeastOneFilled = false;
+        $allFieldsValid = true;
 
-            foreach ($fieldsToCheck as $field) {
-                if (!empty($_POST[$field])) {
-                    $atLeastOneFilled = true;
-                    break; 
-                }
-            }
-
-            foreach ($fieldsToCheck as $field) {
-              if (!empty($_POST[$field])) {
-                if (!is_numeric($_POST[$field])) {
-                  $data["{$field}_err"] = "Please enter a valid number for $field";
+        foreach ($fieldsToCheck as $field) {
+          if (!empty($_POST[$field])) {
+              if (!is_numeric($_POST[$field])) {
+                  $data["{$field}_err"] = "Please enter a valid number";
+                  $allFieldsValid = false;
+              } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST[$field]) !== 1) {
+                  $data["{$field}_err"] = "Please enter up to two decimal places.";
+                  $allFieldsValid = false;
               } else {
-                  // Check if the input has more than two decimal points
-                  $decimalCount = substr_count($_POST[$field], '.');
-                  if ($decimalCount > 1 || (strlen($_POST[$field]) - strrpos($_POST[$field], '.')) > 3) {
-                      $data["{$field}_err"] = "Please enter quantity with two decimal points";
-                  }
+                  $atLeastOneFilled = true;
               }
-            }
           }
+      }
 
-            if (!$atLeastOneFilled) {
+
+                
+
+            if (!$atLeastOneFilled && $allFieldsValid) {
                 $data['polythene_quantity_err'] = 'Please fill polythene quantity';
                 $data['plastic_quantity_err'] = 'Please fill plastic quantity';
                 $data['glass_quantity_err'] = 'Please fill glass quantity';
@@ -701,32 +698,30 @@
                 
             }
 
-            if (empty($_POST['note'])) {
+            if(empty($_POST['note'])){
               $data['note_err'] = 'Please fill in the Note field';
-          }
-            
+            }
+
 
           
 
-            if ($atLeastOneFilled && empty($_POST['note_err']) ) {
+            if ($atLeastOneFilled && empty($data['note_err']) && $allFieldsValid) {
               $creditData = $this->creditModel->get();
 
               $credit_Amount =
-    (intval($data['polythene_quantity']) * $creditData->polythene) +
-    (intval($data['plastic_quantity']) * $creditData->plastic) +
-    (intval($data['glass_quantity']) * $creditData->glass) +
-    (intval($data['paper_waste_quantity']) * $creditData->paper) +
-    (intval($data['electronic_waste_quantity']) * $creditData->electronic) +
-    (intval($data['metals_quantity']) * $creditData->metal);
+              (floatval($data['polythene_quantity']) * $creditData->polythene) +
+              (floatval($data['plastic_quantity']) * $creditData->plastic) +
+              (floatval($data['glass_quantity']) * $creditData->glass) +
+              (floatval($data['paper_waste_quantity']) * $creditData->paper) +
+              (floatval($data['electronic_waste_quantity']) * $creditData->electronic) +
+              (floatval($data['metals_quantity']) * $creditData->metal);
 
 
             $data['credit_Amount'] = $credit_Amount;
 
-            $inserted = $this->Collect_Garbage_Model->insert($data); // Implement insert method in Collect_garbage model
+            $inserted = $this->Collect_Garbage_Model->insert($data); 
 
             if ($inserted) {
-                // Data inserted successfully, perform further actions or redirect
-                // For now, render the view with updated data
                 $this->view('collectors/request_assinged', $data);
             } else {
                 // Handle insertion failure

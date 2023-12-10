@@ -48,7 +48,9 @@
 
     <div class="main-right">
         <div class="main-top">
-          <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="" />
+          <a href="<?php echo URLROOT?>/admin/center">
+            <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="" />
+          </a>
           <div class="main-top-component">
             <p>Admin</p>
             <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="" />
@@ -65,8 +67,8 @@
             <div class="center-details-card">
               <img src="<?php echo IMGROOT?>/facility.png" alt="" />
               <div class="center-details-card-content">
-                <h2>Kelaniya</h2>
-                <p>Center ID: C56</p>
+                <h2><?php echo $data['center']->region?></h2>
+                <p>Center ID: CEN<?php echo $data['center']->id?></p>
               </div>
             </div>
           </div>
@@ -76,7 +78,6 @@
             <div class="analytics">
               <div class="analytic">
                 <div class="analytic-icon">
-                  <!-- <span class="las la-eye"></span> -->
                   <img src="<?php echo IMGROOT?>/blue_collector.png" class="icon-image" alt="" />
                 </div>
                 <div class="analytic-info">
@@ -87,7 +88,6 @@
   
               <div class="analytic">
                 <div class="analytic-icon">
-                  <!-- <span class="las la-clock"></span> -->
                   <img src="<?php echo IMGROOT?>/red_worker.png" class="icon-image" alt="" />
                 </div>
                 <div class="analytic-info">
@@ -98,7 +98,6 @@
   
               <div class="analytic">
                 <div class="analytic-icon">
-                  <!-- <span class="las la-users"></span> -->
                   <img src="<?php echo IMGROOT?>/green_requests.png" class="icon-image" alt="" />
                 </div>
                 <div class="analytic-info">
@@ -109,7 +108,6 @@
   
               <div class="analytic">
                 <div class="analytic-icon">
-                  <!-- <span class="las la-heart"></span> -->
                   <img src="<?php echo IMGROOT?>/brown_bin.png" class="icon-image" alt="" />
                 </div>
                 <div class="analytic-info">
@@ -127,11 +125,13 @@
                 <div class="center-manager-content">
                   <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="" />
                   <div class="center-manager-info">
-                    <h3>Kumara Perera</h3>
-                    <h1>Manager ID: M1234</h1>
+                    <h3><?php echo $data['center']->center_manager_name?></h3>
+                    <h1>Manager ID: CM<?php echo $data['center']->center_manager_id?></h1>
                   </div>
                   <div class="center-manager-change">
-                    <button type="submit">Change</button>
+                    <a href="<?php echo URLROOT?>/admin/center_main_change_cm/<?php echo $data['center']->id?>">
+                      <button>Change</button>
+                    </a>
                   </div>
                 </div>
               </div>

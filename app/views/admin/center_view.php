@@ -59,7 +59,7 @@
                                  <td><img onclick="viewLocation(<?php echo $centers->lat; ?>, <?php echo $centers->longi; ?>)"src="<?php echo IMGROOT?>/location.png" alt=""></td>
                                  <td><?php echo $centers->center_manager_id?></td>
                                  <td><?php echo $centers->center_manager_name?></td>
-                                 <td><a href="<?php echo URLROOT?>/admin/center_main/<?php echo $centers->id?>"><img src="<?php echo IMGROOT?>/View.png" alt=""></a></td>
+                                 <td><a href="<?php echo URLROOT?>/admin/center_main/<?php echo $centers->id?>"><img src="<?php echo IMGROOT?>/Admin_Center.png" alt=""></a></td>
                                  <td><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
                                  <td class="delete"> <a href="<?php echo URLROOT?>/admin/center_delete/<?php echo $centers->id?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
                              </tr>   

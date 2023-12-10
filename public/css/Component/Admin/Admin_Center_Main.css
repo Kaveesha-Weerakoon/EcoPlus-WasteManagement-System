@@ -606,5 +606,68 @@
       
         
       }
+
+      /*Change center manager popup*/
+      .change_center_manager_pop {
+        background-color: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+    }
+
+    .change_center_manager {
+        width: 300px;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 17px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        height: auto;
+    }
+
+    .change_center_manager label,
+    .change_center_manager select,
+    .change_center_manager button {
+        display: block;
+        margin-bottom: 15px;
+        font-family: 'Inter' !important;
+
+    }
+
+    .change_center_manager select,
+    .change_center_manager button {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .change_center_manager button {
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+        border: none;
+    }
+
+    .change_center_manager button.cancel {
+        background-color: #ccc;
+        text-align: center;
+        height: 35px;
+    }
+
+    .change_center_manager button.cancel {
+        background-color: #ff7675;
+
+    }
+
+    .change_center_manager button.cancel:hover {
+        background-color: #ff7675;
+    } 
       
 }

@@ -187,6 +187,7 @@
         }
     }
 
+    /*Center delete popup*/
     .center_delete {
         background-color: rgba(0, 0, 0, 0.5);
         position: fixed;
@@ -206,12 +207,13 @@
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        max-width: 300px;
+        max-width: 400px;
     }
 
     .popup img {
         max-width: 50%;
         height: auto;
+        margin-top: 10px;
         margin-bottom: 10px;
     }
 

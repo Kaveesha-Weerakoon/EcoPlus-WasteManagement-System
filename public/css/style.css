@@ -16,6 +16,7 @@
 
 /* Customer Reqeust Right hand side top of the ui css */
 @import url('Component/Customer/Customer_Request_Main.css');
+@import url('Component/Customer/Customer_Request_Cancelled.css');
 
 @import url('Component/Customer/Customer_Request_Ongoing.css');
 @import url('Component/Customer/Customer_Editprofile.css');
@@ -48,6 +49,9 @@
 
 @import url('Component/Collector/Collector_Complains.css');
 
+@import url('Component/Collector/Collector_Request_Top.css');
+@import url('Component/Collector/Collector_Reuqest_Assigned.css');
+@import url('Component/Collector/Collector_Request_Cancelled.css');
 
 @import url('Component/Collector/Collector_Editprofile.css');
 /* Center Manager CSS */
@@ -65,6 +69,12 @@
 
 @import url('Component/CenterManager/CenterManager_CenterWorker.css');
 @import url('Component/CenterManager/CenterManager_CenterWorker_Add.css');
+
+
+@import url('Component/CenterManager/CenterManager_Request_Main.css');
+@import url('Component/CenterManager/CenterManager_Request_Incomming.css');
+@import url('Component/CenterManager/CenterManager_Request_Cancelled.css');
+@import url('Component/CenterManager/CenterManager_Request_Assinged.css');
 
 @import url('Component/CenterManager/CenterManager_EditProfile.css');
 
@@ -112,6 +122,8 @@ a {
     font-family: inter;
     margin: 0;
     padding: 0;
+}
 
-
+.body {
+    height: 100vh;
 }

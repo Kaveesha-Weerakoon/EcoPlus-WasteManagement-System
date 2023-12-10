@@ -10,6 +10,7 @@
       $this->center_model=$this->model('Center');
       $this->customerModel=$this->model('Customer');
       $this->Customer_Credit_Model=$this->model('Customer_Credit');
+      $this->Request_Model=$this->model('Request');
 
       if(!isLoggedIn('user_id')){
         redirect('users/login');
@@ -26,8 +27,7 @@
      
       $this->view('customers/index', $data);
     }
-    
-    
+      
     public function viewprofile(){
       $data = [
         'title' => 'TraversyMVC',
@@ -51,15 +51,50 @@
      
     }
 
-
     public function request_main(){
+
+      $current_request=$this->Request_Model->get_request_current($_SESSION['user_id']);
+
       $data = [
-        'title' => 'TraversyMVC',
+        'request' => $current_request,
+        'cancel'=>''
       ];
      
       $this->view('customers/request_main', $data);
     }
 
+    public function cancel_request_confirm($req_id){
+
+      $current_request=$this->Request_Model->get_request_current($_SESSION['user_id']);
+
+      $data = [
+        'request' => $current_request,
+        'cancel'=>'True',
+        'request_id'=>$req_id
+      ];
+     
+      $this->view('customers/request_main', $data);
+    }
+
+    public function cancel_request($req_id){
+
+      $data=[
+        'request_id'=>$req_id,
+        'reason' =>'',
+        'cancelled_by'=>'Customer',
+        'assinged'=>'No',
+        'collector_id'=>''
+      ];
+      if($this->Request_Model->get_assigned_request($req_id)){
+        $data['assinged']='Yes';
+      }
+      else{
+        $data['assinged']='No';
+      }
+
+      $this->Request_Model->cancel_request($data);
+      $this->request_cancelled();
+    }
 
     public function request_completed(){
       $data = [
@@ -69,15 +104,13 @@
       $this->view('customers/request_completed', $data);
     }
 
-
     public function request_cancelled(){
+      $cancelled_request=$this->Request_Model->get_cancelled_request($_SESSION['user_id']);
       $data = [
-        'title' => 'TraversyMVC',
+        'cancelled_request' => $cancelled_request
       ];
-     
       $this->view('customers/request_cancelled', $data);
     }
-
 
     public function history(){
       $data = [
@@ -86,7 +119,6 @@
      
       $this->view('customers/history', $data);
     }
-
 
     public function history_complains(){
       $id=$_SESSION['user_id']; 
@@ -107,7 +139,6 @@
      
       $this->view('customers/transfer_history', $data);
     }
-
 
     public function editprofile(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -163,20 +194,21 @@
       if(empty($data['name_err']) && empty($data['contactno_err']) && empty($data['city_err']) && empty($data['address_err'])){
        
         if ($_FILES['profile_image']['error'] == 4) {
-           $data['profile_image_name']='';
            $this->customerModel->editprofile($data);
+           $data['profile_image_name']='';
            $data['success_message']="Profile Details Updated Successfully";
            $data['change_pw_success']='True';
-
+        
           
         } else {
           $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/' . $user->image;
-
+         
           if (updateImage($old_image_path, $_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/customer/')) {
             $this->customerModel->editprofile_withimg($data); 
             $data['success_message']="Profile Details Updated Successfully";
             $data['change_pw_success']='True';
             $data['profile_err'] = '';
+           
           } else {
               $data['profile_err'] = 'Error uploading the profile image';
           }
@@ -404,7 +436,7 @@
       $centers = $this->center_model->getallCenters();
       return [
           'centers' => $centers,
-          'map_pop' => '',
+       
           'name' => '',
           'contact_no' => '',
           'date' => '',
@@ -422,10 +454,17 @@
           'location_err'=>'',
           'location_success'=>'',
           'confirm_collect_pop'=>'',
-          'success'=>'' ];  
+          'success'=>'' ,
+          'customer_id'=>'',
+          'region_success'=>''];
     }
 
     public function request_collect(){
+      $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+
+      $data['contact_no']=$user->mobile_number;
+      $data['name'] =$_SESSION['user_name'];
       
      if($_SERVER['REQUEST_METHOD'] == 'POST'){
        
@@ -447,7 +486,6 @@
           $data['name_err'] = 'Name cannot exceed 30 characters';
         }
       
-
         if (empty($data['contact_no'])) {
            $data['contact_no_err'] = 'Contact No is required';
         } elseif (!preg_match('/^\d{10}$/', $data['contact_no'])) {
@@ -466,17 +504,17 @@
         }
     
 
-        if (empty($data['time'])) {
-          $data['time_err'] = 'Time is required';
-        } else {
-           $selectedTimestamp = strtotime($data['time']);
-           $eightAMTimestamp = strtotime('8:00 AM');
-           $fivePMTimestamp = strtotime('5:00 PM');
+        // if (empty($data['time'])) {
+        //   $data['time_err'] = 'Time is required';
+        // } else {
+        //    $selectedTimestamp = strtotime($data['time']);
+        //    $eightAMTimestamp = strtotime('8:00 AM');
+        //    $fivePMTimestamp = strtotime('5:00 PM');
     
-           if ($selectedTimestamp < $eightAMTimestamp || $selectedTimestamp > $fivePMTimestamp) {
-            $data['time_err'] = 'Select a time between 8 am and 5 pm';
-          }
-        }
+        //    if ($selectedTimestamp < $eightAMTimestamp || $selectedTimestamp > $fivePMTimestamp) {
+        //     $data['time_err'] = 'Select a time between 8 am and 5 pm';
+        //   }
+        // }
     
 
         if (empty($data['instructions'])) {
@@ -493,12 +531,9 @@
             $data['location_success'] = 'Success';        
         }
 
-        if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['date_err']) && empty($data['time_err']) && empty($data['instructions_err'])&& empty($data['location_err']) ){
-         
+        if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['date_err']) && empty($data['time_err']) && empty($data['instructions_err'])&& empty($data['location_err']) ){     
             $data['confirm_collect_pop']="True";        
-            $this->view('customers/request_collect', $data);
-          
-
+            $this->view('customers/request_collect', $data);   
         }
         else{
           $this->view('customers/request_collect', $data);
@@ -506,6 +541,10 @@
       }
      else {
          $data = $this->getCommonData();
+         $id=$_SESSION['user_id']; 
+         $user=$this->customerModel->get_customer($id);
+         $data['contact_no']=$user->mobile_number;
+         $data['name'] =$_SESSION['user_name'];
          $this->view('customers/request_collect', $data);
       }
     }
@@ -524,6 +563,10 @@
       $data['longitude'] =trim($_POST['longitude']);
       $data['region'] =trim($_POST['center']);
       $data['success']='True';
+      $data['customer_id']=$_SESSION['user_id'];
+
+      $this->Request_Model->request_insert($data);
+
       $this->view('customers/request_collect', $data);
       }
       else{
@@ -532,6 +575,56 @@
       }
     }
 
+    public function request_mark_map(){
+       
+     if($_SERVER['REQUEST_METHOD'] == 'POST'){
+       
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $centers = $this->center_model->getallCenters();
+      $data = $this->getCommonData();
+      $data['name'] = trim($_POST['name']);
+      $data['contact_no'] = trim($_POST['contact_no']);
+      $data['date'] = trim($_POST['date']);
+      $data['time'] = trim($_POST['time']);
+      $data['instructions'] = trim($_POST['instructions']);
+      $data['lattitude'] =trim($_POST['latitude']);
+      $data['longitude'] =trim($_POST['longitude']);
+      $data['region'] =trim($_POST['center']);
+      $data['location_success']='Success';
+      $data['region_success']='True';
+
+      $this->view('customers/request_collect', $data);
+         
+     }
+     else {
+       $data = $this->getCommonData();
+       $this->view('customers/request_collect', $data);
+     }
+    }
+    public function get_region(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+       
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);  $centers = $this->center_model->getallCenters();
+        $data = $this->getCommonData();
+        $data['name'] = trim($_POST['name']);
+        $data['contact_no'] = trim($_POST['contact_no']);
+        $data['date'] = trim($_POST['date']);
+        $data['time'] = trim($_POST['time']);
+        $data['instructions'] = trim($_POST['instructions']);
+        $data['lattitude'] =trim($_POST['latitude']);
+        $data['longitude'] =trim($_POST['longitude']);
+        $data['region'] =trim($_POST['center']); 
+        $data['region_success']='True';
+       
+        $center=$this->center_model->findCenterbyRegion( $data['region']);
+        $data['lattitude']=$center->lat;
+        $data['longitude']=$center->longi; 
+        
+        $this->view('customers/request_collect', $data);
+
+      }
+    }
+    
     public function credit_per_waste(){
        $credit= $this->creditModel->get();
       $data = [
@@ -620,6 +713,7 @@
   
             $sender_balance = $this->Customer_Credit_Model->get_customer_credit_balance($sender_id);
             $receiver_balance = $this->Customer_Credit_Model->get_customer_credit_balance($receiver_id);
+
         
             if ($transfer_amount <= $sender_balance) {
                
@@ -627,8 +721,15 @@
                 $new_receiver_balance = $receiver_balance + $transfer_amount;
                 $sender_update = $this->Customer_Credit_Model->update_credit_balance($sender_id, $new_sender_balance);
                 $receiver_update = $this->Customer_Credit_Model->update_credit_balance($receiver_id, $new_receiver_balance);
+                $receiver =$this->customerModel->get_customer($receiver_id);
+                $receiver_image= $receiver->image;
+                $sender=$this->customerModel->get_customer($sender_id);
+                $sender_image= $sender->image;
+                $date = date('Y-m-d'); // Current date
+                $time = date('H:i:s'); // Current time
+                $result = $this->Customer_Credit_Model->record_credit_transfer($sender_id,$sender_image, $receiver_id, $receiver_image, $date, $time, $transfer_amount);
         
-                if ($sender_update && $receiver_update) {
+                if ($sender_update && $receiver_update && $result) {
                     $data['completed'] = 'True';
                     $this->view('customers/transfer', $data);
                 } else {
@@ -654,5 +755,6 @@
       }
        }
 
+       
 }
   ?>

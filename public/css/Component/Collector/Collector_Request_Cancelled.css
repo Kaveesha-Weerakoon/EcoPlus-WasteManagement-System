@@ -1,0 +1,192 @@
+.Collector_Request_Cancelled {
+    .table-row {
+        font-size: 1px;
+        font-family: Montserrat;
+        text-align: left;
+        height: 52px;
+        display: grid;
+        border-bottom: 2px solid #CACACA;
+        grid-template-columns: 11% 10% 10% 15% 11% 13% 40%;
+    }
+
+    .table td {
+        height: 50px;
+        font-size: 15.5px;
+    }
+
+    .table-header {
+        background-color: #ecf0f1;
+        font-size: 17px;
+        font-family: Montserrat;
+        height: 55px;
+        grid-template-columns: 11% 10% 10% 15% 11% 13% 40%;
+    }
+
+    .table th {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    td img {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+    }
+
+    /* location */
+    .location_pop {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .location_pop_content {
+        width: 47%;
+        height: 55%;
+        padding: 10px;
+        background-color: #f1f2f6;
+        border-radius: 10px;
+        padding: 20px;
+        padding-bottom: 40px;
+    }
+
+    .location_pop_map {
+        width: 100;
+        height: 100%;
+        border-radius: 10px;
+    }
+
+    .location_close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 6px;
+    }
+
+    .location_close button {
+        background-color: #ff4757;
+        height: 28px;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+        font-size: 16px;
+        border-radius: 5px;
+        width: 85px;
+    }
+
+    /*request details*/
+    .request-details-pop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .request-details-pop-form {
+        width: 45%;
+        background: white;
+        border-radius: 6px;
+        top: 0;
+        position: relative;
+        text-align: center;
+        padding: 30px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.4s, top 0.4s;
+        flex-direction: column;
+    }
+
+    .request-details-pop-form-top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+        font-size: 18px;
+    }
+
+    .request-details-pop-form-close {
+        width: 25px;
+        height: 25px;
+        margin-left: 100%;
+        margin-top: -3%;
+        cursor: pointer;
+    }
+
+    .request-details-topic {
+        display: flex;
+    }
+
+    .request-details-pop-form-content {
+        display: grid;
+        grid-template-columns: 30% 70%;
+        width: 80%;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+    }
+
+    .request-details-topic::before {
+        content: '';
+        position: absolute;
+        margin-top: 23px;
+        margin-left: 45px;
+        margin-bottom: 15px;
+        height: 4px;
+        width: 67px;
+        background: #1B6652;
+    }
+
+    .personal-details-right-labels {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 40px;
+        padding-bottom: 50px;
+        padding-left: 25px;
+    }
+
+    .personal-details-right-labels span {
+        margin-bottom: 15px;
+        font-size: 15px;
+        color: #7c7c7d;
+    }
+
+    .personal-details-right-values {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 40px;
+        padding-bottom: 50px;
+        padding-left: 32px;
+    }
+
+    .personal-details-right-values span {
+        margin-bottom: 15px;
+        font-size: 15px;
+        color: #767e95;
+        font-weight: 550;
+    }
+
+    /* ------------*/
+
+}

@@ -32,7 +32,7 @@
                         <div class="main-left-middle-content Collector">
                             <div class="main-left-middle-content-line1"></div>
                             <img src="<?php echo IMGROOT?>/Complains.png" alt="">
-                            <h2>Complains</h2>
+                            <h2>Complaints</h2>
                         </div>
                     </a>
                     <a href="./Collector_Edit_Profile/Collector_EditProfile.html">

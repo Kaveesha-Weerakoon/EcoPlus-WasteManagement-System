@@ -116,7 +116,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <?php if(!empty($data['cancelled_request'])) : ?>
                     <div class="main-right-bottom" id="main-right-bottom">
                         <div class="main-right-bottom-top">
                             <table class="table">
@@ -165,6 +165,16 @@
                             </table>
                         </div>
                     </div>
+                    <?php else: ?>
+                    <div class="main-right-bottom-three">
+                        <div class="main-right-bottom-three-content">
+                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                            <h1>You have No Cancelled Requests</h1>
+                            <p>Cancelled requests will be appeared as soon as you cancel a request</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
 
 
                 </div>

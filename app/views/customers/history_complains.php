@@ -28,22 +28,23 @@
                         <div class="main-right-top-three">
                             <a href="<?php echo URLROOT?>/customers/history">
                                 <div class="main-right-top-three-content">
-                                    <p>Discounts History</p>
+                                    <p>Discounts</p>
                                     <div class="line1"></div>
                                 </div>
                             </a>
-                            <a href="">
+
+                            <a href="<?php echo URLROOT?>/customers/history_complains">
                                 <div class="main-right-top-three-content">
-                                    <p><b style="color: #1B6652;">Complaints History</b></p>
+                                    <p><b style="color: #1B6652;">Complaints</b></p>
                                     <div class="line"></div>
                                 </div>
-
-                                <a href="<?php echo URLROOT?>/customers/transfer_history">
-                                    <div class="main-right-top-three-content">
-                                        <p>Transfer History</p>
-                                        <div class="line1"></div>
-                                    </div>
-                                </a>
+                            </a>
+                            <a href="<?php echo URLROOT?>/customers/transfer_history">
+                                <div class="main-right-top-three-content">
+                                    <p>Transfer</p>
+                                    <div class="line1"></div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <?php if(!empty($data['complains'])) : ?>
@@ -82,8 +83,9 @@
                     <?php else: ?>
                     <div class="main-right-bottom-two">
                         <div class="main-right-bottom-two-content">
-                            <img src="<?php echo IMGROOT?>/9264822.jpg" alt="">
-                            <h1>No active complaints</h1>
+                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                            <h1>You Have No Active Complains</h1>
+                            <p></p>
 
                         </div>
                     </div>

@@ -87,7 +87,6 @@
         padding-left: 38px;
         padding-top: 9px;
         padding-bottom: 11px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .main-right-top-three-content {
@@ -107,13 +106,13 @@
 
     .line {
         width: 93px;
-        height: 3px;
+        height: 3px !important;
         background-color: #1B6652;
     }
 
     .line1 {
         width: 93px;
-        height: 3px;
+        height: 3px !important;
         background-color: none;
     }
 

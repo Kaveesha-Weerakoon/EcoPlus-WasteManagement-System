@@ -23,20 +23,22 @@
                             <h1>History</h1>
                         </div>
                         <div class="main-right-top-three">
-                            <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">Discounts History</b></p>
-                                <div class="line"></div>
-                            </div>
+                            <a href="<?php echo URLROOT?>/customers/history">
+                                <div class="main-right-top-three-content">
+                                    <p><b style="color: #1B6652;">Discounts</b></p>
+                                    <div class="line"></div>
+                                </div>
+                            </a>
 
                             <a href="<?php echo URLROOT?>/customers/history_complains">
                                 <div class="main-right-top-three-content">
-                                    <p>Complaints History</p>
+                                    <p>Complaints</p>
                                     <div class="line1"></div>
                                 </div>
                             </a>
                             <a href="<?php echo URLROOT?>/customers/transfer_history">
                                 <div class="main-right-top-three-content">
-                                    <p>Transfer History</p>
+                                    <p>Transfer</p>
                                     <div class="line1"></div>
                                 </div>
                             </a>
@@ -44,14 +46,14 @@
                     </div>
 
                     <div class="main-right-bottom">
-                        <div class="main-right-bottom-container">
-                            <div class="main-right-bottom-container-top">
-                                <div class="circle"></div>
-                                <h4>Discount History</h4>
+                        <div class="main-right-bottom-two">
+                            <div class="main-right-bottom-two-content">
+                                <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                                <h1>You Have No Disccounts On Supermarkets</h1>
+                                <p></p>
+
                             </div>
-
                         </div>
-
                     </div>
 
                 </div>

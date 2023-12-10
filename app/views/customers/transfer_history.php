@@ -25,20 +25,20 @@
 
                             <a href="<?php echo URLROOT?>/customers/history">
                                 <div class="main-right-top-three-content">
-                                    <p>Discounts History</p>
+                                    <p>Discounts</p>
                                     <div class="line1"></div>
                                 </div>
                             </a>
 
                             <a href="<?php echo URLROOT?>/customers/history_complains">
                                 <div class="main-right-top-three-content">
-                                    <p>Complaints History</p>
+                                    <p>Complaints</p>
                                     <div class="line1"></div>
                                 </div>
                             </a>
                             <a href="">
                                 <div class="main-right-top-three-content">
-                                    <p><b style="color: #1B6652;">Transfer History</b></p>
+                                    <p><b style="color: #1B6652;">Transfer</b></p>
                                     <div class="line"></div>
                                 </div>
                             </a>

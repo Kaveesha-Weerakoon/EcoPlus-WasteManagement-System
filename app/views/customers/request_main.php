@@ -1,7 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Customer_Main">
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initMap" async defer>
-    </script>
+
     <div class="Customer_Request_Main">
         <div class="Customer_Request_Ongoing">
             <div class="main">

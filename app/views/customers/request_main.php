@@ -1,56 +1,12 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Customer_Main">
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initMap" async defer>
-    </script>
+
     <div class="Customer_Request_Main">
         <div class="Customer_Request_Ongoing">
             <div class="main">
 
-                <div class="main-left">
-                    <div class="main-left-top">
-                        <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
-                        <h1>Eco Plus</h1>
-                    </div>
-                    <div class="main-left-middle">
-                        <a href="<?php echo URLROOT?>/customers">
-                            <div class="main-left-middle-content">
-                                <div class="main-left-middle-content-line2"></div>
-                                <img src="<?php echo IMGROOT?>/Customer_DashBoard_Icon.png" alt="">
-                                <h2>Dashboard</h2>
-                            </div>
-                        </a>
+                <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
-                        <div class="main-left-middle-content current">
-                            <div class="main-left-middle-content-line"></div>
-                            <img src="<?php echo IMGROOT?>/Customer_Request.png" alt="">
-                            <h2>Requests</h2>
-                        </div>
-
-                        <a href="<?php echo URLROOT?>/customers/history">
-                            <div class="main-left-middle-content">
-                                <div class="main-left-middle-content-line2"></div>
-                                <img src="<?php echo IMGROOT?>/Customer_tracking _Icon.png" alt="">
-                                <h2>History</h2>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/customers/editprofile">
-                            <div class="main-left-middle-content">
-                                <div class="main-left-middle-content-line2"></div>
-                                <img src="<?php echo IMGROOT?>/Customer_Edit_Pro_Icon.png" alt="">
-                                <h2>Edit Profile</h2>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="main-left-bottom">
-
-                        <a href="<?php echo URLROOT?>/customers/logout">
-                            <div class="main-left-bottom-content">
-                                <img src="<?php echo IMGROOT?>/Logout.png" alt="">
-                                <p>Log out</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
 
                 <div class="main-right">
                     <div class="main-right-top">

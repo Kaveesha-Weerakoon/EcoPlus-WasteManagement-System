@@ -436,7 +436,7 @@
       $centers = $this->center_model->getallCenters();
       return [
           'centers' => $centers,
-       
+   
           'name' => '',
           'contact_no' => '',
           'date' => '',
@@ -479,7 +479,8 @@
         $data['lattitude'] =trim($_POST['latitude']);
         $data['longitude'] =trim($_POST['longitude']);
         $data['region'] =trim($_POST['center']);
-       
+        $data['region_success'] =trim($_POST['region_success']);
+
         if (empty($data['name'])) {
            $data['name_err'] = 'Name is required';
         }elseif (strlen($data['name']) > 30) {
@@ -503,19 +504,14 @@
           }
         }
     
-
-        // if (empty($data['time'])) {
-        //   $data['time_err'] = 'Time is required';
-        // } else {
-        //    $selectedTimestamp = strtotime($data['time']);
-        //    $eightAMTimestamp = strtotime('8:00 AM');
-        //    $fivePMTimestamp = strtotime('5:00 PM');
-    
-        //    if ($selectedTimestamp < $eightAMTimestamp || $selectedTimestamp > $fivePMTimestamp) {
-        //     $data['time_err'] = 'Select a time between 8 am and 5 pm';
-        //   }
-        // }
-    
+        if ($data['region_success']='True') {
+          if (empty($data['lattitude']) || empty($data['longitude'])) {
+            $data['location_err'] = 'Location Error';
+            }
+           else{ 
+              $data['location_success'] = 'Success';        
+          }
+        }
 
         if (empty($data['instructions'])) {
           $data['instructions_err'] = 'Instructions is required';
@@ -524,12 +520,7 @@
         }
     
 
-        if (empty($data['lattitude']) || empty($data['longitude'])) {
-          $data['location_err'] = 'Location Error';
-          }
-         else{ 
-            $data['location_success'] = 'Success';        
-        }
+       
 
         if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['date_err']) && empty($data['time_err']) && empty($data['instructions_err'])&& empty($data['location_err']) ){     
             $data['confirm_collect_pop']="True";        
@@ -590,7 +581,8 @@
       $data['lattitude'] =trim($_POST['latitude']);
       $data['longitude'] =trim($_POST['longitude']);
       $data['region'] =trim($_POST['center']);
-      $data['location_success']='Success';
+      $data['location_success']='';
+     
       $data['region_success']='True';
 
       $this->view('customers/request_collect', $data);
@@ -601,6 +593,7 @@
        $this->view('customers/request_collect', $data);
      }
     }
+    
     public function get_region(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
        

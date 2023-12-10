@@ -25,7 +25,6 @@
       redirect('users/login');
  }
 
-    
     public function index(){
       $data = [
         'pop_eco_credits' => '',
@@ -146,7 +145,11 @@
         'center_managers' => $center_managers,
         'confirm_delete' =>'',
         'assigned'=>'',
-        'success'=>''
+        'success'=>'',
+        'click_update' =>'',
+        'update_success'=>'',
+        'confirm_delete'=> '',
+        'personal_details_click'=>''
       ];
      
       $this->view('admin/center_managers', $data);
@@ -161,7 +164,9 @@
           'confirm_delete' =>'True',
           'assigned'=> $centermanger->assinged,
           'center_manager_id'=>$id,
-          'success'=>''
+          'success'=>'',
+          'personal_details_click'=>'',
+          'success'=>'' 
         ];
       }
       else{
@@ -187,7 +192,8 @@
         'center_managers' => $center_managers,
         'confirm_delete' =>'',
         'assigned'=>'',
-        'success'=>'True'
+        'success'=>'True',
+        'personal_details_click'=>''
       ];
     
       $this->view('admin/center_managers', $data);
@@ -377,7 +383,9 @@
                 'nic_err' => '',
                 'dob_err'=>'',
                 'contact_no_err'=>'',
-                'address_err' =>''          
+                'address_err' =>'',
+                'personal_details_click'=>'',
+                'success'=>''  
             ];
 
         //validate name
@@ -447,7 +455,8 @@
           'click_update' =>'True',
           'update_success'=>'',
           'confirm_delete'=> '',
-
+          'personal_details_click'=>'',
+          'success'=>'' ,
           'name_err' => '',
           'nic_err' => '',
           'dob_err'=>'',
@@ -542,17 +551,20 @@
         $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
         $data =[
             'center_managers' => $na_center_managers,
-            'address' => trim($_POST['address']),
             'district' =>trim($_POST['district']),
             'region' =>trim($_POST['region']),
             'center_manager'=>trim($_POST['centerManager']),
-            'address_err' => '',
             'district_err' =>'',
             'region_err' =>'',
             'center_manager_err'=>'',
             'center_manager_data'=>'',
             'center_manager_name'=>'',
-            'center_add_success'=>''
+            'center_add_success'=>'',
+            'lattitude'=>trim($_POST['latittude']),
+            'longitude'=>trim($_POST['longitude']),
+            'location_err'=>'',
+            'location_success'=>''
+
         ];
 
         if(empty($data['address'])){
@@ -569,15 +581,20 @@
         else{
           if($this->center_model->findCenterbyRegion($data['region'])){
             $data['region_err'] = 'Region already exists';
+         }
         }
+        if (empty($data['lattitude']) || empty($data['longitude'])) {
+          $data['location_err'] = 'Location Error';
+          }
+         else{ 
+            $data['location_success'] = 'Success';        
         }
-
         if( $data['center_manager']=='default'){
           $this->view('admin/center_add', $data);
         }
+
         
-        if(empty($data['region_err']) &&  empty($data['address_err']) && empty($data['district_err'] ) && empty($data['center_manager_err'] )){
-            
+        if(empty($data['region_err']) &&  empty($data['district_err']) && empty($data['location_err'] ) && empty($data['center_manager_err'] )){
             $data['center_manager_data']=$this->center_managerModel->getCenterManagerByID($data['center_manager']);
             $data['center_manager_name']=$this->userModel->findUserById($data['center_manager']);
 
@@ -604,11 +621,44 @@
           'district_err' =>'',
           'region_err' =>'',
           'center_manager_err'=>'',
-          'center_add_success'=>''
+          'center_add_success'=>'',
+          'lattitude'=>'',
+          'longitude'=>'',
+          'longitude_err'=>'',
+          'lattitude_err'=>'',
+          'location_success'=>'',
+          'location_err'=>''
         ];
          $this->view('admin/center_add', $data);
       }
       
+    }
+
+    public function center_add_confirm(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
+        $data =[
+            'center_managers' => $na_center_managers,
+            'district' =>trim($_POST['district']),
+            'region' =>trim($_POST['region']),
+            'center_manager'=>trim($_POST['centerManager']),
+            'district_err' =>'',
+            'region_err' =>'',
+            'center_manager_err'=>'',
+            'center_manager_data'=>'',
+            'center_manager_name'=>'',
+            'center_add_success'=>'',
+            'lattitude'=>trim($_POST['latittude']),
+            'longitude'=>trim($_POST['longitude']),
+            'location_err'=>'',
+            'location_success'=>''
+
+        ];
+          $data['location_success']='Success';
+          $this->view('admin/center_add', $data);
+      
+      }
     }
 
     public function center_delete($center_id){

@@ -10,14 +10,14 @@
       </div>
       <!-- Aligning properly -->
       <div class="main-left-middle">
-        <a href="<?php echo IMGROOT?>/Collector_DashBoard.html">
+        <a href="<?php echo URLROOT?>/collectors/index">
           <div class="main-left-middle-content">
             <div class="main-left-middle-content-line1"></div>
             <img src="<?php echo IMGROOT?>/Home.png" alt="">
             <h2>Dashboard</h2>
           </div>
         </a>
-        <a href="">
+        <a href="<?php echo URLROOT?>/collectors/request_assinged">
           <div class="main-left-middle-content">
             <div class="main-left-middle-content-line1"></div>
             <img src="<?php echo IMGROOT?>/Request.png" alt="">
@@ -31,7 +31,7 @@
             <h2>Collector Assistants</h2>
           </div>
         </a>
-        <a href="">
+        <a href="<?php echo URLROOT?>/collectors/editprofile">
           <div class="main-left-middle-content">
             <div class="main-left-middle-content-line1"></div>
             <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">

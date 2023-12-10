@@ -28,6 +28,28 @@
         $this->db->bind(':user_id', $user_id);
         return $this->db->execute();
     }
+
+
+    public function record_credit_transfer($sender_id,$sender_image, $receiver_id, $receiver_image, $date, $time, $transfer_amount) {
+        $this->db->query('INSERT INTO credits_transfer (sender_id,sender_image, receiver_id, receiver_image, date, time, transfer_amount) VALUES (:sender_id,:sender_image, :receiver_id, :receiver_image, :date, :time, :transfer_amount)');
+        $this->db->bind(':sender_id', $sender_id);
+        $this->db->bind(':sender_image', $sender_image);
+        $this->db->bind(':receiver_id', $receiver_id);
+        $this->db->bind(':receiver_image', $receiver_image);
+        $this->db->bind(':date', $date);
+        $this->db->bind(':time', $time);
+        $this->db->bind(':transfer_amount', $transfer_amount);
+
+        return $this->db->execute();
+    }
+
+    // Add a method in the Customer_Credit model to retrieve transaction history
+    public function get_transaction_history($user_id) {
+        $this->db->query('SELECT * FROM credits_transfer WHERE sender_id = :user_id OR receiver_id = :user_id');
+        $this->db->bind(':user_id', $user_id);
+        return $this->db->resultSet();
+    }
+
 }
 
 

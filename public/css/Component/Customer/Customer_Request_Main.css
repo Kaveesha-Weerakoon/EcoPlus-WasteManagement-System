@@ -1,6 +1,14 @@
 .Customer_Request_Main {
 
+    #request {
+        background: #1B6652;
+        background-color: rgba(27, 102, 82, 0.4);
+    }
 
+    #request .main-left-middle-content-line {
+        background: #1B6652;
+        background: radial-gradient(82.23% 108.11% at 101.39% 101.07%, #13C93E 0%, #ADE446 100%);
+    }
 
     .main-right {
         display: grid;
@@ -95,8 +103,6 @@
         font-size: 17px;
         padding-bottom: 5px;
     }
-
-
 
     .line {
         width: 93px;

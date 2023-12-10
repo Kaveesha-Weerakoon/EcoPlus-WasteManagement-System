@@ -1,37 +1,38 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Admin_Center_Main">
+<div class="Admin_Main">
+  <div class="Admin_Center_Main">
    <div class="main">
    <div class="main-left">
         <div class="main-left-top">
-            <img src="Logo_No_Background.png" alt="">
+            <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
             <h1>Eco Plus</h1>
         </div>
         <div class="main-left-middle">
             <a href="./Collector_DashBoard.html">
                 <div class="main-left-middle-content current">
                     <div class="main-left-middle-content-line"></div>
-                    <img src="Home.png" alt="">
+                    <img src="<?php echo IMGROOT?>/Home.png" alt="">
                     <h2>Dashboard</h2>
                 </div>
             </a>
             <a href="./Collector_Requests/Collector_Requests.html">
                 <div class="main-left-middle-content">
                     <div class="main-left-middle-content-line1"></div>
-                    <img src="Reports.png" alt="">
+                    <img src="<?php echo IMGROOT?>/Reports.png" alt="">
                     <h2>Reports</h2>
                 </div>
             </a>
             <a href="./Complains/Complains_customer.html">
                 <div class="main-left-middle-content Collector">
                     <div class="main-left-middle-content-line1"></div>
-                    <img src="Complains.png" alt="">
+                    <img src="<?php echo IMGROOT?>/Complains.png" alt="">
                     <h2>Complains</h2>
                 </div>
             </a>
             <a href="./Collector_Edit_Profile/Collector_EditProfile.html">
                 <div class="main-left-middle-content">
                     <div class="main-left-middle-content-line1"></div>
-                    <img src="EditProfile.png" alt="">
+                    <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">
                     <h2>Edit Profile</h2>
                 </div>
             </a>
@@ -39,7 +40,7 @@
         </div>
         <div class="main-left-bottom">
             <div class="main-left-bottom-content">
-                <img src="logout.png" alt="">
+                <img src="<?php echo IMGROOT?>/logout.png" alt="">
                 <p>Log out</p>
             </div>
         </div>
@@ -47,10 +48,10 @@
 
     <div class="main-right">
         <div class="main-top">
-          <img class="back-button" src="Back.png" alt="" />
+          <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="" />
           <div class="main-top-component">
             <p>Admin</p>
-            <img src="Requests Profile.png" alt="" />
+            <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="" />
           </div>
         </div>
         <div class="main-bottom">
@@ -59,11 +60,10 @@
               <h1>Analytics</h1>
               <p>
                 Display analytics about center
-                <span class="las la-chart-line"></span>
               </p>
             </div>
             <div class="center-details-card">
-              <img src="facility.png" alt="" />
+              <img src="<?php echo IMGROOT?>/facility.png" alt="" />
               <div class="center-details-card-content">
                 <h2>Kelaniya</h2>
                 <p>Center ID: C56</p>
@@ -77,7 +77,7 @@
               <div class="analytic">
                 <div class="analytic-icon">
                   <!-- <span class="las la-eye"></span> -->
-                  <img src="trash-collector.png" class="icon-image" alt="" />
+                  <img src="<?php echo IMGROOT?>/blue_collector.png" class="icon-image" alt="" />
                 </div>
                 <div class="analytic-info">
                   <h4>Garbage Collectors</h4>
@@ -88,7 +88,7 @@
               <div class="analytic">
                 <div class="analytic-icon">
                   <!-- <span class="las la-clock"></span> -->
-                  <img src="worker.png" class="icon-image" alt="" />
+                  <img src="<?php echo IMGROOT?>/red_worker.png" class="icon-image" alt="" />
                 </div>
                 <div class="analytic-info">
                   <h4>Center workers</h4>
@@ -99,7 +99,7 @@
               <div class="analytic">
                 <div class="analytic-icon">
                   <!-- <span class="las la-users"></span> -->
-                  <img src="interview.png" class="icon-image" alt="" />
+                  <img src="<?php echo IMGROOT?>/green_requests.png" class="icon-image" alt="" />
                 </div>
                 <div class="analytic-info">
                   <h4>Total Requests</h4>
@@ -110,7 +110,7 @@
               <div class="analytic">
                 <div class="analytic-icon">
                   <!-- <span class="las la-heart"></span> -->
-                  <img src="bin.png" class="icon-image" alt="" />
+                  <img src="<?php echo IMGROOT?>/brown_bin.png" class="icon-image" alt="" />
                 </div>
                 <div class="analytic-info">
                   <h4>Garbage Stock</h4>
@@ -125,7 +125,7 @@
               <div class="center-manager-card">
                 <h3 class="section-subhead">Center Manager</h3>
                 <div class="center-manager-content">
-                  <img src="profile-pic.jpeg" alt="" />
+                  <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="" />
                   <div class="center-manager-info">
                     <h3>Kumara Perera</h3>
                     <h1>Manager ID: M1234</h1>
@@ -182,7 +182,7 @@
               <div class="location-map-card">
                 <h3 class="section-subhead">Center Location</h3>
                 <div class="center-map-container">
-                  <img src="center-location.png" alt="">
+                  <img src="<?php echo IMGROOT?>/center-location.png" alt="">
                 </div>
                
               </div>
@@ -227,9 +227,6 @@
                 </div>
             </div>
         </div> -->
-      <div class="main-bottom">
-          
-      </div>
    </div>
    <?php if($data['change_cm']=='True') : ?>
    <div class="change_center_manager_pop">
@@ -254,5 +251,8 @@
     </div>
    </div>
    <?php endif; ?>
+  </div>
+
 </div>
+
 <?php require APPROOT . '/views/inc/footer.php'; ?>

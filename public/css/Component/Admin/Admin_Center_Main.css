@@ -519,41 +519,7 @@
       }
       
       /* Animation */
-      @keyframes first {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(90deg);
-        }
-      }
       
-      @keyframes second {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(90deg);
-        }
-      }
-      
-      @keyframes third {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(90deg);
-        }
-      }
-      
-      @keyframes fouth {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(90deg);
-        }
-      }
       
       .graph-container {
         display: flex;

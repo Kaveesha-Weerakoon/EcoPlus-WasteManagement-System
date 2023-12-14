@@ -7,6 +7,38 @@
         display: flex;
     }
 
+    .main-right-bottom-three {
+        display: flex;
+        justify-content: center;
+        height: 550px;
+    }
+
+    .main-right-bottom-three-content {
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+
+    .main-right-bottom-three-content img {
+        width: 450px;
+        height: 430px;
+    }
+
+    .main-right-bottom-three-content h1 {
+        font-size: 23px;
+        color: #333;
+        font-weight: 550;
+    }
+
+    .main-right-bottom-three-content p {
+        font-size: 18px;
+        margin-top: 7px;
+        color: #7c7c7d;
+    }
+
     .map-locations {
         width: 85%;
         height: 90%;
@@ -203,5 +235,6 @@
     }
 
     /* ------------*/
+
 
 }

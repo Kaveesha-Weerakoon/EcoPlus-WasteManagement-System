@@ -235,7 +235,7 @@
       }
       
       .main-bottom {
-        padding: 30px;
+        padding: 12px 30px 30px;
       }
       
       .header-title-wrapper {
@@ -283,7 +283,7 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-gap: 1.5rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
       }
       
       .analytic {
@@ -350,7 +350,7 @@
         color: #4b5876;
         font-weight: 520;
         margin-bottom: 1rem;
-        margin-top: 1rem;
+        margin-top: .5rem;
       }
       
       .section-subhead {

@@ -436,7 +436,6 @@
       $centers = $this->center_model->getallCenters();
       return [
           'centers' => $centers,
-   
           'name' => '',
           'contact_no' => '',
           'date' => '',
@@ -480,6 +479,7 @@
         $data['longitude'] =trim($_POST['longitude']);
         $data['region'] =trim($_POST['center']);
         $data['region_success'] =trim($_POST['region_success']);
+        $data['location_success'] =trim($_POST['location_success']);
 
         if (empty($data['name'])) {
            $data['name_err'] = 'Name is required';
@@ -505,11 +505,11 @@
         }
     
         if ($data['region_success']='True') {
-          if (empty($data['lattitude']) || empty($data['longitude'])) {
-            $data['location_err'] = 'Location Error';
+           if ($data['location_success'] == 'Success') {
+               
             }
            else{ 
-              $data['location_success'] = 'Success';        
+            $data['location_err'] = 'Location Error';     
           }
         }
 
@@ -581,7 +581,7 @@
       $data['lattitude'] =trim($_POST['latitude']);
       $data['longitude'] =trim($_POST['longitude']);
       $data['region'] =trim($_POST['center']);
-      $data['location_success']='';
+      $data['location_success']='Success';
      
       $data['region_success']='True';
 

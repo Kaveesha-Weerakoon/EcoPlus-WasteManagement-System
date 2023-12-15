@@ -112,6 +112,8 @@
                             </div>
                             <div class="main-bottom-component-right-component Z">
                                 <h2>Location</h2>
+                                <input type="hidden" id="location_success"
+                                    value="<?php echo $data['location_success']?>" name="location_success">
                                 <?php if ($data['region_success'] == 'True') { ?>
                                 <div class="main-bottom-maps" onclick="initMap()">
                                     <h4>Maps</h4>
@@ -122,6 +124,7 @@
                                 <div class="main-bottom-map-success">
                                     <img src="<?php echo IMGROOT; ?>/check.png" alt="">
                                     <p>Location Fetched Successfully</p>
+
                                 </div>
                                 <?php endif; ?>
 

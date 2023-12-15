@@ -446,7 +446,7 @@
 
 
 
-   /*request details*/
+   /*collect details*/
    .collect-details-pop {
     position: fixed;
     top: 0;
@@ -481,29 +481,36 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 10px;
     margin-bottom: 25px;
     font-size: 18px;
+    padding-right: 250px;
 }
+
 
 .collect-details-pop-form-close {
     width: 25px;
     height: 25px;
-    margin-left: 100%;
+    margin-left: 650px;
     margin-top: -3%;
     cursor: pointer;
 }
 
+
 .collect-details-topic {
     display: flex;
+    padding-right: 200px;
+    
 }
 
 .collect-details-pop-form-content {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 40% 70%;
     width: 80%;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
+    padding-left: 30px;
 
 }
 
@@ -511,7 +518,7 @@
     content: '';
     position: absolute;
     margin-top: 23px;
-    margin-left: 45px;
+    margin-right: 70px;
     margin-bottom: 15px;
     height: 4px;
     width: 67px;

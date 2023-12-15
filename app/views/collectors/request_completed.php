@@ -94,7 +94,12 @@
                                 <button onclick="loadLocations()">Filter</button>
                             </div>
                             <div class="main-right-top-four-right">
+<<<<<<< HEAD
                                 <div class="main-right-top-four-component" style="background-color: #ecf0f1" id="tables">
+=======
+                                <div class="main-right-top-four-component" style="background-color: #ecf0f1"
+                                    id="tables">
+>>>>>>> 54035dc6a52139ec5d145d94fff2ce2a0d901cf3
                                     <img src="<?php echo IMGROOT?>/cells.png" alt="">
                                     <p>Tables</p>
                                 </div>
@@ -108,7 +113,11 @@
                         </div>
                     </div>
                     <div class="main-right-bottom">
+<<<<<<< HEAD
                     <?php if(!empty($data['completed_requests'])) : ?>
+=======
+                        <?php if(!empty($data['completed_requests'])) : ?>
+>>>>>>> 54035dc6a52139ec5d145d94fff2ce2a0d901cf3
                         <div class="main-right-bottom">
                             <div class="main-right-bottom-one" id="main-right-bottom-one">
                                 <div class="main-right-bottom-top">
@@ -122,7 +131,11 @@
                                             <th>Contact No</th>
                                             <th>Instructions</th>
                                             <th>Complete</th>
+<<<<<<< HEAD
                                             <th>creidt_amount</th>
+=======
+                                            <th>Credits</th>
+>>>>>>> 54035dc6a52139ec5d145d94fff2ce2a0d901cf3
                                         </tr>
                                     </table>
                                 </div>
@@ -138,13 +151,46 @@
                                             <td><?php  echo $request->customer_id?></td>
                                             <td><?php  echo $request->contact_no?></td>
                                             <td><?php  echo $request->instructions?></td>
+<<<<<<< HEAD
                                             <td><img onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
                                                 src="<?php echo IMGROOT?>/view.png" alt=""></td>
+=======
+                                            <td><img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
+                                                    src="<?php echo IMGROOT?>/view.png" alt=""></td>
+>>>>>>> 54035dc6a52139ec5d145d94fff2ce2a0d901cf3
                                             <td><?php  echo $request->credit_amount?></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </table>
+<<<<<<< HEAD
 
+=======
+
+                                </div>
+                            </div>
+                            <div class="main-right-bottom-two" id="main-right-bottom-two">
+                                <div class="map-locations" id="map-loaction">
+
+                                </div>
+                            </div>
+                        </div>
+                        <?php else: ?>
+                        <div class="main-right-bottom-three">
+                            <div class="main-right-bottom-three-content">
+                                <img src="<?php echo IMGROOT?>/Center_Manager_Request_Assign_Empty.jpg" alt="">
+                                <h1>You have No completed Requests</h1>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="request-details-pop" id="request-details-popup-box">
+                        <div class="request-details-pop-form">
+                            <img src="<?php echo IMGROOT?>/close_popup.png" alt=""
+                                class="request-details-pop-form-close" id="request-details-pop-form-close">
+                            <div class="request-details-pop-form-top">
+                                <div class="request-details-topic">Request ID R <div id="req_id3"></div>
+>>>>>>> 54035dc6a52139ec5d145d94fff2ce2a0d901cf3
                                 </div>
                             </div>
                             <div class="main-right-bottom-two" id="main-right-bottom-two">
@@ -199,6 +245,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 
@@ -396,7 +443,5 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
-
 </script>
-<?php require APPROOT . '/views/inc/footer.php'; ?>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

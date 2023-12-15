@@ -26,13 +26,19 @@
 
     .main-right-bottom-three-content img {
         width: 450px;
-        height: 450px;
+        height: 430px;
     }
 
     .main-right-bottom-three-content h1 {
-        font-size: 25px;
-        font-weight: 500;
-        margin-top: 20px;
+        font-size: 23px;
+        color: #333;
+        font-weight: 550;
+    }
+
+    .main-right-bottom-three-content p {
+        font-size: 18px;
+        margin-top: 7px;
+        color: #7c7c7d;
     }
 
     .main-right-bottom {

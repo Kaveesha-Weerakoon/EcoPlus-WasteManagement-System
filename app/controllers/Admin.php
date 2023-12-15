@@ -817,5 +817,16 @@
      
     }
 
+    public function center_main_collectors($center_id){
+      $collectors_in_center = $this->collector_model->get_collectors_bycenterid($center_id);
+
+      $data =[
+        'collectors_in_center' =>$collectors_in_center
+      ];
+
+      $this->view('admin/center_main_collectors', $data);
+
+    }
+
   
   }

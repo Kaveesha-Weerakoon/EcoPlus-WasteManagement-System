@@ -76,15 +76,18 @@
             <div class="analytics-boxes">
               <h3 class="section-head">Overview</h3>
               <div class="analytics">
-                <div class="analytic">
-                  <div class="analytic-icon">
-                    <img src="<?php echo IMGROOT?>/blue_collector.png" class="icon-image" alt="" />
+                <a href="<?php echo URLROOT?>/Admin/center_main_collectors/<?php echo $data['center']->id?>">
+                  <div class="analytic">
+                    <div class="analytic-icon">
+                      <img src="<?php echo IMGROOT?>/blue_collector.png" class="icon-image" alt="" />
+                    </div>
+                    <div class="analytic-info">
+                      <h4>Garbage Collectors</h4>
+                      <h1>10</h1>
+                    </div>
                   </div>
-                  <div class="analytic-info">
-                    <h4>Garbage Collectors</h4>
-                    <h1>10</h1>
-                  </div>
-                </div>
+                </a>
+                
     
                 <div class="analytic">
                   <div class="analytic-icon">

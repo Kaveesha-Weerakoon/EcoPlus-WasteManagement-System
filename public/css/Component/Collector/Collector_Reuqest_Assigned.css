@@ -519,6 +519,45 @@
 
 }
 
+/* Styling for Popup Background */
+.popup-background {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+/* Styling for Popup Content */
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Additional styling for input fields, buttons, etc. */
+.popup-content input,
+.popup-content button {
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.popup-content button {
+  background-color: #1B6652;
+  color: white;
+  cursor: pointer;
+}
+
 /* ------------*/
 
 }

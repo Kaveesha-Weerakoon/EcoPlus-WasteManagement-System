@@ -1,7 +1,8 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Collector_Main">
     <div class="Collector_Request_Top">
-        <div class="Collector_request_completed">
+        <div class="Collector_Reuqest_Completed">
+
             <div class="main">
                 <div class="main-left">
                     <div class="main-left-top">
@@ -93,8 +94,12 @@
                                 <button onclick="loadLocations()">Filter</button>
                             </div>
                             <div class="main-right-top-four-right">
+<<<<<<< HEAD
+                                <div class="main-right-top-four-component" style="background-color: #ecf0f1" id="tables">
+=======
                                 <div class="main-right-top-four-component" style="background-color: #ecf0f1"
                                     id="tables">
+>>>>>>> 54035dc6a52139ec5d145d94fff2ce2a0d901cf3
                                     <img src="<?php echo IMGROOT?>/cells.png" alt="">
                                     <p>Tables</p>
                                 </div>
@@ -108,7 +113,11 @@
                         </div>
                     </div>
                     <div class="main-right-bottom">
+<<<<<<< HEAD
+                    <?php if(!empty($data['completed_requests'])) : ?>
+=======
                         <?php if(!empty($data['completed_requests'])) : ?>
+>>>>>>> 54035dc6a52139ec5d145d94fff2ce2a0d901cf3
                         <div class="main-right-bottom">
                             <div class="main-right-bottom-one" id="main-right-bottom-one">
                                 <div class="main-right-bottom-top">
@@ -122,7 +131,11 @@
                                             <th>Contact No</th>
                                             <th>Instructions</th>
                                             <th>Complete</th>
+<<<<<<< HEAD
+                                            <th>creidt_amount</th>
+=======
                                             <th>Credits</th>
+>>>>>>> 54035dc6a52139ec5d145d94fff2ce2a0d901cf3
                                         </tr>
                                     </table>
                                 </div>
@@ -138,12 +151,20 @@
                                             <td><?php  echo $request->customer_id?></td>
                                             <td><?php  echo $request->contact_no?></td>
                                             <td><?php  echo $request->instructions?></td>
+<<<<<<< HEAD
+                                            <td><img onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
+                                                src="<?php echo IMGROOT?>/view.png" alt=""></td>
+=======
                                             <td><img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
                                                     src="<?php echo IMGROOT?>/view.png" alt=""></td>
+>>>>>>> 54035dc6a52139ec5d145d94fff2ce2a0d901cf3
                                             <td><?php  echo $request->credit_amount?></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </table>
+<<<<<<< HEAD
+
+=======
 
                                 </div>
                             </div>
@@ -169,27 +190,53 @@
                                 class="request-details-pop-form-close" id="request-details-pop-form-close">
                             <div class="request-details-pop-form-top">
                                 <div class="request-details-topic">Request ID R <div id="req_id3"></div>
+>>>>>>> 54035dc6a52139ec5d145d94fff2ce2a0d901cf3
                                 </div>
                             </div>
+                            <div class="main-right-bottom-two" id="main-right-bottom-two">
+                                <div class="map-locations" id="map-loaction">
 
-                            <div class="request-details-pop-form-content">
-                                <div class="personal-details-right-labels">
-                                    <span>Polythene Quantity :-</span><br>
-                                    <span>Plastic Quantity :-</span><br>
-                                    <span>Glass Quantity :-</span><br>
-                                    <span>Paper Waste Quantity :-</span><br>
-                                    <span>Electronic Waste Quantity :-</span><br>
-                                    <span>Metals Quantity :-</span><br>
-                                    <span>Note :-</span><br>
                                 </div>
-                                <div class="personal-details-right-values">
-                                    <span id="Polythene_Quantity"></span><br>
-                                    <span id="Plastic_Quantity">23</span><br>
-                                    <span id="Glass_Quantity">23</span><br>
-                                    <span id="Paper_Waste_Quantity"></span><br>
-                                    <span id="Electronic_Waste_Quantity"></span><br>
-                                    <span id="Metals_Quantity"></span><br>
-                                    <span id="Note"></span><br>
+                            </div>
+                        </div>
+                        <?php else: ?>
+                        <div class="main-right-bottom-three">
+                            <div class="main-right-bottom-three-content">
+                                <img src="<?php echo IMGROOT?>/Center_Manager_Request_Assign_Empty.jpg" alt="">
+                                <h1>You have No completed Requests</h1>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+
+                        <div class="collect-details-pop" id="collect-details-popup-box">
+                            <div class="collect-details-pop-form">
+                                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
+                                    id="collect-details-pop-form-close">
+                                <div class="collect-details-pop-form-top">
+                                    <div class="collect-details-topic">Request ID R <div id="req_id3"></div>
+                                    </div>
+                                </div>
+
+                                <div class="collect-details-pop-form-content">
+                                    <div class="personal-details-right-labels">
+                                        <span>Polythene Quantity :-</span><br>
+                                        <span>Plastic Quantity :-</span><br>
+                                        <span>Glass Quantity :-</span><br>
+                                        <span>Paper Waste Quantity :-</span><br>
+                                        <span>Electronic Waste Quantity :-</span><br>
+                                        <span>Metals Quantity :-</span><br>
+                                        <span>Note :-</span><br>
+                                    </div>
+                                    <div class="personal-details-right-values">
+                                        <span id="Polythene_Quantity"></span><br>
+                                        <span id="Plastic_Quantity">23</span><br>
+                                        <span id="Glass_Quantity">23</span><br>
+                                        <span id="Paper_Waste_Quantity"></span><br>
+                                        <span id="Electronic_Waste_Quantity"></span><br>
+                                        <span id="Metals_Quantity"></span><br>
+                                        <span id="Note"></span><br>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -229,8 +276,8 @@ function initMap() {
     });
 }
 
-function view_request_details(request) {
-    document.getElementById('request-details-popup-box').style.display = "flex";
+function view_collect_details(request) {
+    document.getElementById('collect-details-popup-box').style.display = "flex";
     document.getElementById('Polythene_Quantity').innerText = request.Polythene;
     document.getElementById('Plastic_Quantity').innerText = request.Plastic;
     document.getElementById('Glass_Quantity').innerText = request.Glass;

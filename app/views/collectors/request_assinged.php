@@ -278,7 +278,7 @@
                                     </div>
                                 </div>
                                 <div class="form-button">
-                                    <button type="submit">Calculate Eco Credits</button>
+                                    <button type="submit" onclick="handleFormSubmission()">Calculate Eco Credits</button>
                                     <a href="<?php echo URLROOT?>/collectors/request_assinged"><button type="button"
                                             class="cancel-button">Cancel</button>
                                 </div>
@@ -288,6 +288,13 @@
                     </div>
                 </div>
                 <?php endif; ?>
+                <div class="popup-background" id="ecoCreditsPopup" style="display: none;">
+                <div class="popup-content">
+                    <h2>Calculated Eco Credits</h2>
+                    <p>Eco Credits: <span id="calculatedEcoCredits"></span></p>
+                    <button id="okButtonEcoCredits" onclick="closeCalculatedCreditsPopup()">OK</button>
+                </div>
+            </div>
 
 
                 <div class="cancel-confirm" id="cancel-confirm">

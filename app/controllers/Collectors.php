@@ -722,9 +722,20 @@
 
             $data['credit_Amount'] = $credit_Amount;
 
-            $inserted = $this->Collect_Garbage_Model->insert($data); 
+            $inserted = $this->Collect_Garbage_Model->insert($data);
+            
+            
+            $requst = $this->Request_Model->get_request_by_id($req_id);// Assuming you have the customer ID
+            $customer_id= $requst->customer_id;
+            $current_credit = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
 
-            if ($inserted) {
+            $new_credit_balance = $current_credit + $credit_Amount; // Calculate new credit balance
+
+            // Update the customer credit balance in the database
+            $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
+
+
+            if ($inserted && $update_result ) {
                 $this->view('collectors/request_assinged', $data);
             } else {
                 // Handle insertion failure

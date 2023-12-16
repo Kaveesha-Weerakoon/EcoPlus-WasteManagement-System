@@ -105,8 +105,8 @@
                                     <p>Tables</p>
                                 </div>
 
+
                                 <div class="main-right-top-four-component" id="maps">
-                                <div class="main-right-top-four-component" style="background-color: #ecf0f1" id="maps">
                                     <img src="<?php echo IMGROOT?>/map.png" alt="">
                                     <p>Maps</p>
                                 </div>
@@ -147,7 +147,7 @@
                                         <td><?php  echo $request->instructions?></td>
                                         <td class="cancel-open">
                                             <a
-                                                href="<?php echo URLROOT ?>/Collectors/enterWaste_And_GenerateEcoCredits/<?php echo $request->customer_id ?>">
+                                                href="<?php echo URLROOT ?>/Collectors/enterWaste_And_GenerateEcoCredits/<?php echo $request->req_id ?>">
                                                 <img class="complete_image" src="<?php echo IMGROOT ?>/assign.png"
                                                     alt="">
                                             </a>
@@ -183,7 +183,7 @@
                     <div class="personal-details-popup-form" id="popup">
                         <div class="form-container">
                             <div class="form-title">Eco Credits Calculation</div>
-                            <form action="<?php echo URLROOT;?>/collector/enterWaste_And_GenerateEcoCredits"
+                            <form action="<?php echo URLROOT;?>/collectors/enterWaste_And_GenerateEcoCredits/<?php echo  $data['req_id']?>"
                                 class="main-right-bottom-content" method="post">
                                 <div class="user-details">
                                     <div class="left-details">
@@ -192,7 +192,11 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-trash"></i>
                                                 <input name="polythene_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg">
+
+                                                    placeholder="Enter Quantity in Kg" value="<?php echo $data['polythene_quantity']; ?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['polythene_quantity_err']?>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="main-right-bottom-content-content">
@@ -200,7 +204,11 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-box"></i>
                                                 <input name="plastic_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg">
+
+                                                    placeholder="Enter Quantity in Kg" value="<?php echo $data['plastic_quantity']; ?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['plastic_quantity_err']?>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="main-right-bottom-content-content">
@@ -208,7 +216,11 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-glass-whiskey"></i>
                                                 <input name="glass_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg">
+
+                                                    placeholder="Enter Quantity in Kg" value="<?php echo $data['glass_quantity']; ?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['glass_quantity_err']?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -218,7 +230,11 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-file-alt"></i>
                                                 <input name="paper_waste_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg">
+
+                                                    placeholder="Enter Quantity in Kg" value="<?php echo $data['paper_waste_quantity']; ?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['paper_waste_quantity_err']?>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="main-right-bottom-content-content">
@@ -226,7 +242,11 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-laptop"></i>
                                                 <input name="electronic_waste_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg">
+
+                                                    placeholder="Enter Quantity in Kg" value="<?php echo $data['electronic_waste_quantity']; ?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['electronic_waste_quantity_err']?>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="main-right-bottom-content-content">
@@ -234,7 +254,11 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-box"></i>
                                                 <input name="metals_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg">
+
+                                                    placeholder="Enter Quantity in Kg" value="<?php echo $data['metals_quantity']; ?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['metals_quantity_err']?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -244,14 +268,19 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-sticky-note"></i>
                                                 <input name="note" class="note-input" type="text"
-                                                    placeholder="Enter Note">
+
+                                                    placeholder="Enter Note" value="<?php echo $data['note']; ?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['note_err']?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-button">
                                     <button type="submit">Calculate Eco Credits</button>
-                                    <button type="button" class="cancel-button">Cancel</button>
+                                    <a href="<?php echo URLROOT?>/collectors/request_assinged"><button type="button"
+                                            class="cancel-button">Cancel</button>
                                 </div>
 
                             </form>
@@ -291,7 +320,7 @@ function initMap() {
             lat: 7.8731,
             lng: 80.7718
         },
-        zoom: 7.2
+        zoom: 14.5
     });;
     var incomingRequests = <?php echo $data['jsonData']; ?>;
     incomingRequests.forEach(function(coordinate) {

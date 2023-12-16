@@ -1,4 +1,14 @@
 .Customer_History_Top {
+    #history {
+        background: #1B6652;
+        background-color: rgba(27, 102, 82, 0.4);
+    }
+
+    #history .main-left-middle-content-line {
+        background: #1B6652;
+        background: radial-gradient(82.23% 108.11% at 101.39% 101.07%, #13C93E 0%, #ADE446 100%);
+    }
+
     .main-right {
         display: grid;
         width: 100%;
@@ -77,7 +87,6 @@
         padding-left: 38px;
         padding-top: 9px;
         padding-bottom: 11px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .main-right-top-three-content {
@@ -97,13 +106,13 @@
 
     .line {
         width: 93px;
-        height: 3px;
+        height: 3px !important;
         background-color: #1B6652;
     }
 
     .line1 {
         width: 93px;
-        height: 3px;
+        height: 3px !important;
         background-color: none;
     }
 

@@ -162,13 +162,13 @@
                         </div>
                     </div>
                     <?php else: ?>
-                    <div class="main-right-bottom-three">
-                        <div class="main-right-bottom-three-content">
-                            <img src="<?php echo IMGROOT?>/Center_Manager_Request_Incomming_Empty.jpg" alt="">
-                            <h1>You Have No Incomming Requests</h1>
-
+                        <div class="main-right-bottom-three">
+                            <div class="main-right-bottom-three-content">
+                                <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                                <h1>You Have No Incomming Requests</h1>
+                                <p>Incomming requests will be appeared as soon as customer requests</p>
+                            </div>
                         </div>
-                    </div>
                     <?php endif; ?>
                 </div>
 
@@ -241,6 +241,7 @@
 
             function assign($id) {
                 var inputElement = document.querySelector('input[name="id"]');
+
                 var assign_reqid = document.getElementById('assign_req_id');
 
                 assign_reqid.value = $id;

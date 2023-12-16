@@ -9,12 +9,12 @@
     public function findCenterbyRegion($region){
         $this->db->query('SELECT * FROM center WHERE region = :region');
         $this->db->bind(':region', $region);
-  
+       
         $row = $this->db->single();
   
         // Check row
         if($this->db->rowCount() > 0){
-          return true;
+          return $row;//True was there
         } else {
           return false;
         }

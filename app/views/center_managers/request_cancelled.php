@@ -116,7 +116,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <?php if(!empty($data['cancelled_request'])) : ?>
                     <div class="main-right-bottom" id="main-right-bottom">
                         <div class="main-right-bottom-top">
                             <table class="table">
@@ -165,6 +165,16 @@
                             </table>
                         </div>
                     </div>
+                    <?php else: ?>
+                    <div class="main-right-bottom-three">
+                        <div class="main-right-bottom-three-content">
+                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                            <h1>You have No Cancelled Requests</h1>
+                            <p>Cancelled requests will be appeared as soon as you cancel a request</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
 
 
                 </div>
@@ -227,13 +237,13 @@ function view_request_details(request) {
 
 function initMap(latitude = 7.4, longitude = 81.00000000) {
     var mapCenter = {
-        lat: 7.4,
-        lng: 81.00000000
+        lat: latitude,
+        lng: longitude
     };
 
     var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
         center: mapCenter,
-        zoom: 7.4
+        zoom: 14.5
     });
 
     var marker = new google.maps.Marker({

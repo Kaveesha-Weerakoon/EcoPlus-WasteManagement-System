@@ -723,6 +723,7 @@
      
       $this->view('admin/collectors', $data);
     }
+
     public function vehicle_details_view($collectorId){
         $collectors =$this->collector_model->get_collectors();
         $collector = $this->collector_model->getCollector_ByID_view($collectorId);

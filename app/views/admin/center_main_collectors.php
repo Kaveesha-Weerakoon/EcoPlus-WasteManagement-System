@@ -63,21 +63,6 @@
                         <div class="main-right-top-two">
                             <h1>Collectors</h1>
                         </div>
-                        <!-- <div class="main-right-top-three">
-                            <a href="">
-                                <div class="main-right-top-three-content">
-                                    <p><b style="color: #1B6652;">View</b></p>
-                                    <div class="line"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/admin/center_add">
-                                <div class="main-right-top-three-content">
-                                    <p>Add</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-
-                        </div> -->
                     </div>
                     <div class="main-bottom-down">
                         <div class="main-right-bottom-top ">
@@ -102,13 +87,112 @@
                                         src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>" alt=""></td>
                                     <td><?php echo $collector->name?></td>
                                     <td><?php echo $collector->email?></td>
-                                    <td><a href="<?php echo URLROOT?>/admin/center_main/<?php echo $centers->id?>"><img src="<?php echo IMGROOT?>/Admin_Center.png" alt=""></a></td>
-                                    <td><img src="<?php echo IMGROOT?>/update.png" alt=""></td>
-                                    <td class="delete"> <a href="<?php echo URLROOT?>/admin/center_delete/<?php echo $centers->id?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
+                                    <td><img onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                     src="<?php echo IMGROOT?>/personal_details_icon.png" alt=""></td>
+                                    <td><img onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                     src="<?php echo IMGROOT?>/car.png" alt=""></td>
+                                    <td><img onclick="opencolAssistantsdetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                     src="<?php echo IMGROOT?>/collector_assistants.png" alt=""></td>
                                 </tr>   
                                 <?php endforeach; ?>  
-                                        
+                            </table>            
                         </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="personal-details-popup-box" id="personal-details-popup-box">
+                <div class="personal-details-popup-form">
+                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
+                     id="personal-details-popup-form-close">
+                    <center>
+                        <div class="personal-details-topic">Personal Details</div>
+                    </center>
+
+                    <div class="personal-details-popup">
+                        <div class="personal-details-left">
+                            <!-- <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $data['image']?>" class="profile-pic"
+                                alt=""> -->
+                                <img src="" id="collector_profile_pic" alt="">
+                            <p>Collector ID: <span id="collector_id">C</span></p>
+                        </div>
+                        <div class="personal-details-right">
+                            <div class="personal-details-right-labels">
+                                <span>Name</span><br>
+                                <span>Email</span><br>
+                                <span>NIC</span><br>
+                                <span>Address</span><br>
+                                <span>Contact No</span><br>
+                                <span>DOB</span><br>
+                            </div>
+                            <div class="personal-details-right-values">
+                                <span id="collector_name"></span><br>
+                                <span id="collector_email"></span><br>
+                                <span id="collector_nic"></span><br>
+                                <span id="collector_address"></span><br>
+                                <span id="collector_contact_no"></span><br>
+                                <span id="collector_dob"></span><br>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="vehicle-details-popup-box" id="vehicle-details-popup-box">
+                <div class="vehicle-details-popup-form">
+                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close"
+                        id="vehicle-details-popup-form-close">
+                    <center>
+                        <div class="vehicle-details-topic">Vehicle Details</div>
+                    </center>
+
+                    <div class="vehicle-details-popup">
+                        <div class="vehicle-details-labels">
+                            <span>Collector ID</span><br>
+                            <span>Name</span><br>
+                            <span>Vehicle Plate No</span><br>
+                            <span>Vehicle Type</span><br>
+                        </div>
+                        <div class="vehicle-details-values">
+                            <span id="vehicle_collector_id">C</span><br>
+                            <span id="vehicle_collector_name"></span><br>
+                            <span id="vehicle_collector_no"></span><br>
+                            <span id="vehicle_type"></span><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collector-assis-details-popup-box" id="collector-assis-details-popup-box">
+                <div class="collector-assis-details-popup-table">
+                    <div class="collector-assis-table-top">
+                        <table class="popup-table">
+                            <tr class="popup-table-header">
+                                <th>Name</th>
+                                <th>NIC</th>
+                                <th>Address</th>
+                                <th>Contact No</th>
+                                <th>Date of Birth</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="collector-assis-table-down">
+                        <table class="popup-table">
+                            <?php foreach($data['collector_assistants'] as $assistant) : ?>
+                                <tr class="popup-table-row">
+                                    <td><?php echo $assistant->name?></td>
+                                    <td><?php echo $assistant->nic?></td>
+                                    <td><?php echo $assistant->address?></td>
+                                    <td><?php echo $assistant->contact_no?></td>
+                                    <td><?php echo $assistant->dob?></td>
+                                    
+                                </tr>   
+                                <?php endforeach; ?>
+                        </table>
                     </div>
                 </div>
 
@@ -119,4 +203,44 @@
 
 
 </div>
+
+<script>
+    function openvehicledetails(collector) {
+        document.getElementById('vehicle-details-popup-box').style.display = "flex";
+        document.getElementById('vehicle_collector_id').textContent = collector.user_id;
+        document.getElementById('vehicle_collector_name').textContent = collector.name;
+        document.getElementById('vehicle_collector_no').textContent = collector.vehicle_no;
+        document.getElementById('vehicle_type').textContent = collector.vehicle_type;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var close_vehicledetail = document.getElementById('vehicle-details-popup-form-close');
+        close_vehicledetail.addEventListener('click', function() {
+            document.getElementById('vehicle-details-popup-box').style.display = "none";
+        });
+    });
+
+    function openpersonaldetails(collector){
+        document.getElementById('personal-details-popup-box').style.display = "flex";
+        document.getElementById('collector_id').textContent =collector.user_id;
+        document.getElementById('collector_profile_pic').src =  "<?php echo IMGROOT?>/img_upload/collector/" + collector.image;
+        document.getElementById('collector_name').textContent = collector.name;
+        document.getElementById('collector_email').textContent = collector.email;
+        document.getElementById('collector_nic').textContent = collector.nic;
+        document.getElementById('collector_address').textContent = collector.address;
+        document.getElementById('collector_contact_no').textContent = collector.contact_no;
+        document.getElementById('collector_dob').textContent = collector.dob;
+        
+
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var close_personal_details = document.getElementById('personal-details-popup-form-close');
+        close_personal_details.addEventListener('click', function() {
+            document.getElementById('personal-details-popup-box').style.display = "none";
+        });
+    });
+
+
+</script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

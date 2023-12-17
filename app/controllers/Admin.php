@@ -760,11 +760,13 @@
     public function center_main($center_id){
       $center=$this->center_model->getCenterById($center_id);
       $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
+      $no_of_collectors = $this->collector_model->get_no_of_Collectors($center_id);
 
       $data = [
         'center' =>$center,
         'not_assigned_cm'=>$na_center_managers,
-        'change_cm'=>''
+        'change_cm'=>'',
+        'no_of_collectors' =>$no_of_collectors
       ];
       $this->view('admin/center_main', $data);
     }
@@ -820,9 +822,10 @@
 
     public function center_main_collectors($center_id){
       $collectors_in_center = $this->collector_model->get_collectors_bycenterid($center_id);
-
+      
       $data =[
-        'collectors_in_center' =>$collectors_in_center
+        'collectors_in_center' =>$collectors_in_center,
+        
       ];
 
       $this->view('admin/center_main_collectors', $data);

@@ -83,7 +83,7 @@
                     </div>
                     <div class="analytic-info">
                       <h4>Garbage Collectors</h4>
-                      <h1>10</h1>
+                      <h1><?php echo $data['no_of_collectors']?></h1>
                     </div>
                   </div>
                 </a>

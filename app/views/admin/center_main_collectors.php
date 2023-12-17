@@ -169,31 +169,44 @@
 
             <div class="collector-assis-details-popup-box" id="collector-assis-details-popup-box">
                 <div class="collector-assis-details-popup-table">
-                    <div class="collector-assis-table-top">
-                        <table class="popup-table">
-                            <tr class="popup-table-header">
-                                <th>Name</th>
-                                <th>NIC</th>
-                                <th>Address</th>
-                                <th>Contact No</th>
-                                <th>Date of Birth</th>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="collector-assis-table-down">
-                        <table class="popup-table">
-                            <?php foreach($data['collector_assistants'] as $assistant) : ?>
-                                <tr class="popup-table-row">
-                                    <td><?php echo $assistant->name?></td>
-                                    <td><?php echo $assistant->nic?></td>
-                                    <td><?php echo $assistant->address?></td>
-                                    <td><?php echo $assistant->contact_no?></td>
-                                    <td><?php echo $assistant->dob?></td>
+                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collector-assis-details-popup-table-close"
+                        id="collector-assis-details-popup-table-close">
+                    
+                    <div class="popup-table-container">
+                        <div class="popup-table-caption">
+                            <h2>Collector Assistants</h2>
+                        </div>
+                        <div class="popup-table-container-down">
+                            <div class="collector-assis-table-top">
+                                <table class="popup-table">
+                                    <tr class="popup-table-header">
+                                        <th>Name</th>
+                                        <th>NIC</th>
+                                        <th>Address</th>
+                                        <th>Contact No</th>
+                                        <th>Date of Birth</th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="collector-assis-table-down">
+                                <table class="popup-table">
+                                    <tr class="popup-table-row">
+                                        <td>Dinithi</td>
+                                        <td>200123453456</td>
+                                        <td>kelaniya</td>
+                                        <td>0712223344</td>
+                                        <td>2001-03-26</td>
+                                            
+                                    </tr>  
                                     
-                                </tr>   
-                                <?php endforeach; ?>
-                        </table>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="popup-table-container-bottom">
+                            <button type="button" id="collector-assis-details-popup-table-close1">Close</button>
+                        </div>
                     </div>
+                    
                 </div>
 
             </div>
@@ -238,9 +251,30 @@
         var close_personal_details = document.getElementById('personal-details-popup-form-close');
         close_personal_details.addEventListener('click', function() {
             document.getElementById('personal-details-popup-box').style.display = "none";
+            
         });
     });
 
+    function opencolAssistantsdetails(){
+        document.getElementById('collector-assis-details-popup-box').style.display = "flex";
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("clicked");
+        var close_colAssis_details = document.getElementById('collector-assis-details-popup-table-close');
+        close_colAssis_details.addEventListener('click', function() {
+            document.getElementById('collector-assis-details-popup-box').style.display = "none";
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("clicked");
+        var close_colAssis_details = document.getElementById('collector-assis-details-popup-table-close1');
+        close_colAssis_details.addEventListener('click', function() {
+            document.getElementById('collector-assis-details-popup-box').style.display = "none";
+        });
+    });
 
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

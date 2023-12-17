@@ -64,6 +64,7 @@
                             <h1>Collectors</h1>
                         </div>
                     </div>
+                    <?php if(!empty($data['collectors_in_center'])) : ?>
                     <div class="main-bottom-down">
                         <div class="main-right-bottom-top ">
                             <table class="table">
@@ -99,6 +100,16 @@
                         </div>
 
                     </div>
+                    <?php else: ?>
+                        <div class="main-right-bottom-two">
+                            <div class="main-right-bottom-two-content">
+                                <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                                <h1>There are no collectors in the center</h1>
+                                <p>All the collectors will appear here</p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
 
             </div>

@@ -318,25 +318,25 @@
         height: 3rem;
       }
       
-      .analytic:first-child .analytic-icon {
+      .first-analytic .analytic-icon {
         background: #dce5ff;
         width: 5rem;
         height: 5rem;
       }
       
-      .analytic:nth-child(2) .analytic-icon {
-        background: rgba(255, 0, 0, 0.1);
+      .second-analytic .analytic-icon {
+        background: #FF00001A;
         width: 5rem;
         height: 5rem;
       }
       
-      .analytic:nth-child(3) .analytic-icon {
+      .third-analytic .analytic-icon {
         background: #ebf7f5;
         width: 5rem;
         height: 5rem;
       }
       
-      .analytic:nth-child(4) .analytic-icon {
+      .fourth-analytic .analytic-icon {
         background: #f4e7e7;
         width: 5rem;
         height: 5rem;

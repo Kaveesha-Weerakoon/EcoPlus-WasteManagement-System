@@ -91,6 +91,42 @@
 
     }
 
+     /*Empty table UI*/
+     .main-right-bottom-two {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .main-right-bottom-two-content {
+        width: 55%;
+        height: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+
+    .main-right-bottom-two-content img {
+        width: 450px;
+        height: 430px;
+
+    }
+
+    .main-right-bottom-two-content h1 {
+        font-size: 23px;
+        color: #333;
+        font-weight: 550;
+    }
+
+    .main-right-bottom-two-content p {
+        font-size: 18px;
+        margin-top: 7px;
+        color: #7c7c7d;
+    }
+
     .table {
         padding-left: 1%;
         width: 99%;

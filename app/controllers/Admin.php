@@ -837,5 +837,17 @@
 
     }
 
+    public function center_main_workers($center_id){
+      $workers_in_center = $this->center_workers_model->get_workers_by_centerid($center_id);
+      
+      $data =[
+        'workers_in_center' => $workers_in_center
+        
+      ];
+
+      $this->view('admin/center_main_workers', $data);
+
+    }
+
   
   }

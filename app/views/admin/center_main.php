@@ -77,7 +77,7 @@
               <h3 class="section-head">Overview</h3>
               <div class="analytics">
                 <a href="<?php echo URLROOT?>/Admin/center_main_collectors/<?php echo $data['center']->id?>">
-                  <div class="analytic">
+                  <div class="analytic first-analytic">
                     <div class="analytic-icon">
                       <img src="<?php echo IMGROOT?>/blue_collector.png" class="icon-image" alt="" />
                     </div>
@@ -88,8 +88,8 @@
                   </div>
                 </a>
                 
-    
-                <div class="analytic">
+                <a href="<?php echo URLROOT?>/Admin/center_main_workers/<?php echo $data['center']->id?>">
+                <div class="analytic second-analytic">
                   <div class="analytic-icon">
                     <img src="<?php echo IMGROOT?>/red_worker.png" class="icon-image" alt="" />
                   </div>
@@ -98,8 +98,10 @@
                     <h1><?php echo $data['no_of_workers']?></h1>
                   </div>
                 </div>
+                </a>
     
-                <div class="analytic">
+                <a href="">
+                <div class="analytic third-analytic">
                   <div class="analytic-icon">
                     <img src="<?php echo IMGROOT?>/green_requests.png" class="icon-image" alt="" />
                   </div>
@@ -108,8 +110,10 @@
                     <h1>50</h1>
                   </div>
                 </div>
-    
-                <div class="analytic">
+                </a>
+
+                <a href="">
+                <div class="analytic fourth-analytic">
                   <div class="analytic-icon">
                     <img src="<?php echo IMGROOT?>/brown_bin.png" class="icon-image" alt="" />
                   </div>
@@ -118,6 +122,8 @@
                     <h1>20.7 <small>kg</small></h1>
                   </div>
                 </div>
+                </a>
+
               </div>
             </div>
     

@@ -106,5 +106,15 @@
       return $no_of_workers;
 
     }
+
+    public function get_workers_by_centerid($centerId){
+      $this->db->query('SELECT * FROM center_workers WHERE center_id = :centerId');
+      $this->db->bind(':centerId', $centerId);
+
+      $rows = $this->db->resultSet();
+
+      return $rows;
+      
+    }
   
 }

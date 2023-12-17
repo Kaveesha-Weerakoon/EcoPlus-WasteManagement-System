@@ -761,6 +761,7 @@
 
     public function center_main($center_id){
       $center=$this->center_model->getCenterById($center_id);
+      $center_manager = $this->center_managerModel->getCenterManagerBy_centerId($center_id);
       $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
       $no_of_collectors = $this->collector_model->get_no_of_Collectors($center_id);
       $no_of_workers = $this->center_workers_model->get_no_of_center_workers($center_id);
@@ -770,7 +771,8 @@
         'not_assigned_cm'=>$na_center_managers,
         'change_cm'=>'',
         'no_of_collectors' =>$no_of_collectors,
-        'no_of_workers'=>$no_of_workers
+        'no_of_workers'=>$no_of_workers,
+        'center_manager' =>$center_manager
       ];
       $this->view('admin/center_main', $data);
     }

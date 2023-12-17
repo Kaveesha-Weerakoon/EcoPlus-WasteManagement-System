@@ -132,7 +132,7 @@
                 <div class="center-manager-card">
                   <h3 class="section-subhead">Center Manager</h3>
                   <div class="center-manager-content">
-                    <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="" />
+                    <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $data['center_manager']->image?>" alt="" />
                     <div class="center-manager-info">
                       <h3><?php echo $data['center']->center_manager_name?></h3>
                       <h1>Manager ID: CM<?php echo $data['center']->center_manager_id?></h1>

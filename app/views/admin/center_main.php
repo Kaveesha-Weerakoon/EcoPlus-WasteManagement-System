@@ -95,7 +95,7 @@
                   </div>
                   <div class="analytic-info">
                     <h4>Center workers</h4>
-                    <h1>20</h1>
+                    <h1><?php echo $data['no_of_workers']?></h1>
                   </div>
                 </div>
     

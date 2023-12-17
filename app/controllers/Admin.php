@@ -11,6 +11,8 @@
       $this->center_model=$this->model('Center');
       $this->collector_model=$this->model('Collector');
       $this->collector_complain_Model=$this->model('Collector_Complain');
+      // $this->collector_assistants_Model=$this->model('collector_assistants');
+      $this->center_workers_model=$this->model('Center_Worker');
 
       if(!isLoggedIn('admin_id')){
         redirect('users/login');
@@ -761,12 +763,14 @@
       $center=$this->center_model->getCenterById($center_id);
       $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
       $no_of_collectors = $this->collector_model->get_no_of_Collectors($center_id);
+      $no_of_workers = $this->center_workers_model->get_no_of_center_workers($center_id);
 
       $data = [
         'center' =>$center,
         'not_assigned_cm'=>$na_center_managers,
         'change_cm'=>'',
-        'no_of_collectors' =>$no_of_collectors
+        'no_of_collectors' =>$no_of_collectors,
+        'no_of_workers'=>$no_of_workers
       ];
       $this->view('admin/center_main', $data);
     }
@@ -822,9 +826,10 @@
 
     public function center_main_collectors($center_id){
       $collectors_in_center = $this->collector_model->get_collectors_bycenterid($center_id);
+      // $collector_assistants = $this->collector_assistants_Model->get_collector_assistants_bycolid($collectorId);
       
       $data =[
-        'collectors_in_center' =>$collectors_in_center,
+        'collectors_in_center' =>$collectors_in_center
         
       ];
 

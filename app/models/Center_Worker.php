@@ -95,5 +95,16 @@
         }
 
       }
+
+    public function get_no_of_center_workers($centerId){
+      $this->db->query('SELECT * FROM center_workers WHERE center_id = :centerId');
+      $this->db->bind(':centerId', $centerId);
+
+      $rows = $this->db->resultSet();
+
+      $no_of_workers = $this->db->rowCount();
+      return $no_of_workers;
+
+    }
   
 }

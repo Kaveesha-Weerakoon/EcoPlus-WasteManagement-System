@@ -100,14 +100,14 @@
                 </div>
                 </a>
     
-                <a href="">
+                <a href="<?php echo URLROOT?>/Admin/total_requests/<?php echo $data['center']->id?>">
                 <div class="analytic third-analytic">
                   <div class="analytic-icon">
                     <img src="<?php echo IMGROOT?>/green_requests.png" class="icon-image" alt="" />
                   </div>
                   <div class="analytic-info">
                     <h4>Total Requests</h4>
-                    <h1>50</h1>
+                    <h1><?php echo $data['total_requests']?></h1>
                   </div>
                 </div>
                 </a>

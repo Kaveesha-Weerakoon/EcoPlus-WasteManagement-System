@@ -13,6 +13,7 @@
       $this->collector_complain_Model=$this->model('Collector_Complain');
       // $this->collector_assistants_Model=$this->model('collector_assistants');
       $this->center_workers_model=$this->model('Center_Worker');
+      $this->requests_model=$this->model('Request');
 
       if(!isLoggedIn('admin_id')){
         redirect('users/login');
@@ -759,12 +760,13 @@
       $this->view('admin/complain_collectors', $data);
     }
 
-    public function center_main($center_id){
+    public function center_main($center_id, $region){
       $center=$this->center_model->getCenterById($center_id);
       $center_manager = $this->center_managerModel->getCenterManagerBy_centerId($center_id);
       $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
       $no_of_collectors = $this->collector_model->get_no_of_Collectors($center_id);
       $no_of_workers = $this->center_workers_model->get_no_of_center_workers($center_id);
+      $total_requests = $this->requests_model->get_total_requests_by_region($region);
 
       $data = [
         'center' =>$center,
@@ -772,7 +774,8 @@
         'change_cm'=>'',
         'no_of_collectors' =>$no_of_collectors,
         'no_of_workers'=>$no_of_workers,
-        'center_manager' =>$center_manager
+        'center_manager' =>$center_manager,
+        'total_requests'=>$total_requests
       ];
       $this->view('admin/center_main', $data);
     }
@@ -848,6 +851,10 @@
       ];
 
       $this->view('admin/center_main_workers', $data);
+
+    }
+
+    public function total_requests($center_id){
 
     }
 

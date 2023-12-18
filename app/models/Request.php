@@ -238,4 +238,14 @@
       return $row;
     }
 
+    public function get_total_requests_by_region($region){
+      $this->db->query('SELECT * FROM request_main WHERE region= :region');
+      $this->db->bind(':region', $region);
+
+      $rows = $this->db->resultSet();
+
+      $total_requests = $this->db->rowCount();
+      return $total_requests;
+
+    }
 }

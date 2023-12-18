@@ -854,7 +854,14 @@
 
     }
 
-    public function total_requests($center_id){
+    public function total_requests($region){
+      $incoming_requests = $this->requests_model->get_incoming_request($region);
+
+      $data =[
+        'incoming_requests'=> $incoming_requests
+      ];
+
+      $this->view('admin/center_main_request_incoming', $data);
 
     }
 

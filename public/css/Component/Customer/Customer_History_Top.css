@@ -276,6 +276,25 @@
         height: 100%;
     }
 
+    .main-right-bottom-top {
+        padding-left: 3.5%;
+        width: 96.5%;
+    }
+
+    .main-right-bottom-down {
+        padding-left: 3.5%;
+        width: 96.5%;
+        height: 450px;
+        overflow: scroll;
+    }
+
+    .table {
+        border-collapse: collapse;
+        text-align: center;
+        padding-left: 3.5%;
+        width: 96.5%;
+    }
+
 
     @media screen and (max-width: 1118px) {
         .main-right-top-one-content {

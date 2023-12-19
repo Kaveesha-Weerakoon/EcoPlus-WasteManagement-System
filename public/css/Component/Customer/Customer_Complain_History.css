@@ -12,24 +12,6 @@
         color: inherit;
     }
 
-    .main-right-bottom-top {
-        padding-left: 3.5%;
-        width: 96.5%;
-    }
-
-    .main-right-bottom-down {
-        padding-left: 3.5%;
-        width: 96.5%;
-        height: 450px;
-        overflow: scroll;
-    }
-
-    .table {
-        border-collapse: collapse;
-        text-align: center;
-        padding-left: 3.5%;
-        width: 96.5%;
-    }
 
     .table-header {
         background-color: var(--background-color-two);

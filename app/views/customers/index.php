@@ -2,117 +2,144 @@
 <div class="Customer_Main">
 
     <div class="Customer_Dashboard">
-
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
+            async defer>
+        </script>
         <div class="main">
             <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
             <div class="main-right">
-
-                <div class="main-right-left">
-                    <div class="main-right-left-one">
-                        <div class="main-right-left-one-text">
-                            <div class="change">Welcome back</div> Eco plus
-                        </div>
-                        <div class="main-right-left-one-right">
-                            <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                            <input type="text" placeholder="Search Any thing">
-                            <img src="<?php echo IMGROOT?>/notifications.png" alt="">
-                        </div>
+                <div class="main-right-top">
+                    <div class="main-right-top-search">
+                        <i class='bx bx-search-alt-2'></i>
+                        <input type="text" placeholder="Search">
                     </div>
-                    <div class="main-right-left-two">
-                        <div class="main-right-left-two-component A"
-                            style="background-image: url('<?php echo IMGROOT?>/Group 7.1.png');">
-                            <div class="main-right-left-two-component-component">
-                                <p>1 Eco Credit = Rs 00.57</p>
-                                <img src="<?php echo IMGROOT?>/Save_Monet.png" alt="">
-                            </div>
-
-                        </div>
-                        <div class="main-right-left-two-component B"
-                            style="background-image: url('<?php echo IMGROOT?>/Group.png');">
-                            <a href="<?php echo URLROOT?>/customers/credit_per_waste">
-                                <div class="main-right-left-two-component-component">
-                                    <p>Credits per waste quantity</p>
-                                    <img src="<?php echo IMGROOT?>/Tree.png" alt="">
-                                </div>
-                            </a>
-                        </div>
+                    <div class="main-right-top-notification" id="notification">
+                        <i class='bx bx-bell'></i>
+                        <div class="dot"></div>
                     </div>
-                    <div class="main-right-left-three">
+                    <div id="notification_popup" class="notification_popup">
+                        <h1>Notifications</h1>
+                        <div class="notification">
+                            <div class="notification-green-dot">
 
-                        <div class="main-right-left-three-right">
-                            <p>Request a collect now & Gain Eco Credits for your Non biodegradable waste</p>
-                            <a href="<?php echo URLROOT?>/customers/request_collect"><button>Request Garbage
-                                    Collection</button></a>
+                            </div>
+                            Request 1232 Has been Cancelled
                         </div>
-                    </div>
-                    <div class="main-right-left-four">
-                        <h1>We are Collecting</h1>
-                        <div class="main-right-left-four-bottom">
-                            <div class="main-right-left-four-bottom-component">
-                                <img src="<?php echo IMGROOT?>/Polythene.png" alt="">
-                                <p>Polythene</p>
-                            </div>
-                            <div class="main-right-left-four-bottom-component">
-                                <img src="<?php echo IMGROOT?>/Plastic.png" alt="">
-                                <p>Plastic</p>
-                            </div>
-                            <div class="main-right-left-four-bottom-component">
-                                <img src="<?php echo IMGROOT?>/Glass.png" alt="">
-                                <p>Glass</p>
-                            </div>
-                            <div class="main-right-left-four-bottom-component">
-                                <img src="<?php echo IMGROOT?>/Paper.png" alt="">
-                                <p>Paper Waste</p>
-                            </div>
-                            <div class="main-right-left-four-bottom-component">
-                                <img src="<?php echo IMGROOT?>/Electronic_Waste.png" alt="">
-                                <p>Electonic Waste</p>
-                            </div>
-                            <div class="main-right-left-four-bottom-component">
-                                <img src="<?php echo IMGROOT?>/Metal.png" alt="">
-                                <p>Metals</p>
-                            </div>
+                        <div class="notification">
+                            <div class="notification-green-dot">
 
+                            </div>
+                            Request 1232 Has been Assigned
                         </div>
+                        <div class="notification">
+                            <div class="notification-green-dot">
+
+                            </div>
+                            Request 1232 Has been Cancelled
+                        </div>
+
 
                     </div>
-                </div>
-                <div class="main-right-right">
-                    <div class="main-right-right-one">
+                    <div class="main-right-top-profile">
                         <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
                             alt="">
-                        <h2><?php echo $_SESSION['user_name']?></h2>
-                        <p>User ID: C <?php echo $_SESSION['user_id']?></p>
-                    </div>
-                    <div class="main-right-right-two">
-
-                        <a href="<?php echo URLROOT?>/customers/transfer" class="main-right-right-two-component">
-                            <img src="<?php echo IMGROOT?>/Transfer.png" alt="">
-                            <p>Tranfer Credit</p>
-                        </a>
-
-                        <a href="<?php echo URLROOT?>/customers/viewprofile" class="main-right-right-two-component">
-                            <div id="Profile" class="main-right-right-two-component">
-                                <img src="<?php echo IMGROOT?>/Profile.png" alt="">
-                                <p>Profile</p>
-                            </div>
-                        </a>
-
-                        <a href="<?php echo URLROOT?>/customers/complains" class="main-right-right-two-component">
-                            <img src="<?php echo IMGROOT?>/Complaints.png" alt="">
-                            <p>Complaints</p>
-                        </a>
-                    </div>
-                    <div class="main-right-right-three">
-                        <h1>Eco Credit Balance</h1>
-                        <div class="main-right-right-three-compnent"><?php echo $data['credit_balance']?></div>
-                        <p>Redeem your Eco credits on supermarket bills</p>
-                    </div>
-                    <div class="main-right-right-four">
-                        <div class="main-right-left-three-left">
-                            <img src="<?php echo IMGROOT?>/CustomerDashboard_image_one.png" alt="">
+                        <div class="main-right-top-profile-cont">
+                            <h3>Kaveesha</h3>
+                            <p>ID : C <?php echo $_SESSION['user_id']?></p>
                         </div>
+                    </div>
+                </div>
+                <div class="main-right-bottom">
+                    <div class="main-right-bottom-one">
+                        <div class="main-right-bottom-one-left">
+                            <div class="left">
+                                <h1>Total Balance</h1>
+                                <h3>+Eco 26.23 </h3>
+                                <p>Last Update</p>
+                                <button onclick="redirect_transfercredit()">Transfer Credit</button>
+
+                            </div>
+
+                            <div class="right">
+                                <h1>Eco<span class="main-credit"> <?php echo $data['credit_balance']?>.00</span> </h1>
+                                <h3>WALLET AMOUNT</h3>
+                            </div>
+                        </div>
+                        <div class="main-right-bottom-one-right">
+
+                            <canvas id="myChart" width="688" height="300"></canvas>
+                        </div>
+                    </div>
+                    <div class="main-right-bottom-two">
+                        <div class="main-right-bottom-two-cont A">
+                            <div class="icon_container">
+                                <i class='bx bx-dollar-circle'></i>
+                            </div>
+                            <h3>Credits per Waste Quantity</h3>
+                        </div>
+                        <div class="main-right-bottom-two-cont A">
+                            <div class="icon_container">
+                                <i class='bx bx-money-withdraw'></i>
+                            </div>
+                            <h3>Eco Credit Value</h3>
+                        </div>
+                        <div class="main-right-bottom-two-cont A">
+                            <div class="icon_container">
+                                <i class='bx bxs-bank'></i>
+                            </div>
+                            <h3>Discount Agents</h3>
+                        </div>
+                        <div class="main-right-bottom-two-cont A" onclick="redirect_complains()">
+                            <div class="icon_container">
+                                <i class='bx bx-donate-heart'></i>
+                            </div>
+                            <h3>Complaints</h3>
+                        </div>
+
+                    </div>
+                    <div class="main-right-bottom-three">
+                        <div class="main-right-bottom-three-left">
+                            <h1>Recent Transactions</h1>
+                            <div class="main-right-bottom-three-left-cont">
+                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
+                                <h3>Dayana</h3>
+                                <h2>+$ 12.21</h2>
+                            </div>
+                            <div class="main-right-bottom-three-left-cont">
+                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
+                                <h3>James</h3>
+                                <h2>+$ 12.21</h2>
+                            </div>
+                            <div class="main-right-bottom-three-left-cont">
+                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
+                                <h3>Samantha</h3>
+                                <h2 style="color: #F13E3E;">-$ 12.21</h2>
+                            </div>
+                            <!-- <div class="map" id="map"></div> -->
+                        </div>
+                        <div class="main-right-bottom-three-right">
+                            <div class="main-right-bottom-three-right-left">
+                                <h1>Requests Satisfied</h1>
+                                <div class="main-right-bottom-three-right-cont">
+                                    <div class="circular-progress">
+                                        <span class="progress-value">
+                                            0 %
+                                        </span>
+                                    </div>
+                                </div>
+                                <button onclick="redirect_requests()">
+                                    Request Now
+                                </button>
+                            </div>
+                            <div class="main-right-bottom-three-right-right">
+                                <h1>Centers</h1>
+                                <div class="map" id="map"></div>
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -172,8 +199,265 @@
 </div>
 
 <script>
+var color = "#47b076";
+var textColor = "#414143"
+
+var notification = document.getElementById("notification");
+var notification_pop = document.getElementById("notification_popup");
+notification_pop.style.height = "0px";
+
+let circularProgress = document.querySelector(".circular-progress");
+let progressValue = document.querySelector(".progress-value");
+let progressStartValue = 0;
+let progressEndValue = 75;
+let speed = 30;
+
+function redirect_transfercredit() {
+    var linkUrl = "<?php echo URLROOT?>/customers/transfer";
+    window.location.href = linkUrl;
+}
+
+function redirect_complains() {
+    var linkUrl = "<?php echo URLROOT?>/customers/complains";
+    window.location.href = linkUrl;
+}
+
+function redirect_requests() {
+    var linkUrl = "<?php echo URLROOT?>/customers/request_collect";
+    window.location.href = linkUrl;
+}
+notification.addEventListener("click", function() {
+    if (notification_pop.style.height === "0px") {
+        notification_pop.style.height = "28%";
+        notification_pop.style.visibility = "visible";
+        notification_pop.style.opacity = "1";
+        notification_pop.style.padding = "7px";
+    } else {
+        notification_pop.style.height = "0px";
+        notification_pop.style.visibility = "hidden";
+        notification_pop.style.opacity = "0";
+    }
+});
+
+function initMap() {
+    var center = {
+        lat: 7.7,
+        lng: 80.7718
+    };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: center,
+        zoom: 5.8,
+        styles: [{
+                featureType: 'all',
+                elementType: 'labels.text',
+                stylers: [{
+                        visibility: 'on'
+                    },
+                    {
+                        fontSize: '10px'
+                    }
+                ]
+            },
+            {
+                featureType: 'poi',
+                elementType: 'labels.icon',
+                stylers: [{
+                        visibility: 'off'
+                    } // Hide the icons for points of interest
+                ]
+            },
+            {
+                featureType: 'poi',
+                elementType: 'labels.text',
+                stylers: [{
+                        visibility: 'off'
+                    } // Hide text labels for points of interest
+                ]
+            },
+            {
+                featureType: 'transit',
+                elementType: 'labels.icon',
+                stylers: [{
+                        visibility: 'off'
+                    } // Hide the icons for transit stations
+                ]
+            },
+            {
+                featureType: 'transit',
+                elementType: 'labels.text',
+                stylers: [{
+                        visibility: 'off'
+                    } // Hide text labels for transit stations
+                ]
+            },
+            {
+                featureType: 'all',
+                elementType: 'all',
+                stylers: [{
+                        saturation: -35
+                    } // Adjust the saturation to make the map darker
+                ]
+            }
+        ]
+    });
+
+    var customColoredMarkerIcon = {
+        url: 'https://maps.google.com/mapfiles/ms/micons/green-dot.png',
+        size: new google.maps.Size(31, 31),
+        scaledSize: new google.maps.Size(21, 21)
+    };
+
+    var points = [{
+            lat: 7.1,
+            lng: 80.7718
+        },
+        {
+            lat: 7.2,
+            lng: 79.8394
+        },
+        {
+            lat: 6.9934,
+            lng: 81.0550
+        },
+        {
+            lat: 8.7542,
+            lng: 80.4982
+        },
+        {
+            lat: 7.2912,
+            lng: 81.6724
+        },
+        {
+            lat: 7.8734,
+            lng: 80.7720
+        },
+        {
+            lat: 6.9271,
+            lng: 79.8612
+        },
+        {
+            lat: 6.1429,
+            lng: 81.1212
+        },
+        {
+            lat: 5.9496,
+            lng: 80.5469
+        },
+        {
+            lat: 6.0329,
+            lng: 80.2168
+        },
+        {
+            lat: 6.1429,
+            lng: 81.1212
+        },
+        {
+            lat: 8.0408,
+            lng: 79.8394
+        }
+    ];
+
+    points.forEach((point, index) => {
+        var marker = new google.maps.Marker({
+            position: point,
+            map: map,
+            title: 'Marker ' + (index + 1),
+            icon: customColoredMarkerIcon
+        });
+    });
+}
 
 
+let progress = setInterval(() => {
+    progressStartValue++;
+    progressValue.textContent = `${progressStartValue}%`;
+
+    circularProgress.style.background =
+        `conic-gradient(${color}, ${progressStartValue * 3.6}deg, #ededed 0deg)`;
+
+    if (progressStartValue == progressEndValue) {
+        clearInterval(progress);
+    }
+}, speed);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, config);
+
+    const chartContainer = document.getElementById('chart');
+    actions.forEach(action => {
+        const button = document.createElement('button');
+        button.textContent = action.name;
+        button.addEventListener('click', () => action.handler(myChart));
+        chartContainer.appendChild(button);
+    });
+});
+
+
+function createOrUpdateChart(color, textColor) {
+    console.log(color);
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Plastic', 'Polythene', 'Metal', 'Glass', 'Paper', 'Electronic'],
+            datasets: [{
+                label: 'Kilograms',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: color,
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 14,
+                        }
+                    },
+                    barPercentage: 0.5, // Adjust to decrease the width of the bars
+                    categoryPercentage: 0.3 // Adjust to control the space between bars
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Overall Collection Total',
+                    color: textColor,
+                    font: {
+                        size: 18
+                    },
+                    padding: {
+                        bottom: 25
+                    }
+                }
+            },
+            elements: {
+                bar: {
+                    borderRadius: 10,
+                }
+            },
+            animation: {
+                duration: 700, // Set the duration of the animation in milliseconds
+                easing: 'easeIn' // Set the easing function for the animation
+            }
+        }
+    });
+}
+createOrUpdateChart(color, textColor);
 </script>
 
 

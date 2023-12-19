@@ -159,4 +159,70 @@
     .toggle-container input[type="checkbox"]:checked+.toggle-button .toggle-indicator {
         transform: translateX(13px);
     }
+
+    @media screen and (max-width: 1266px) {
+        .main-left-top h3 {
+            display: none;
+        }
+
+        .main-left-top img {
+            margin-right: 0;
+            width: 75px;
+            height: 75px;
+        }
+    }
+
+    @media screen and (max-width: 1266px) {
+        .main-left-middle-content h3 {
+            font-size: 16px;
+        }
+
+
+    }
+
+    @media screen and (max-width: 1266px) {
+        .main-left-middle-content h3 {
+            font-size: 14px;
+        }
+    }
+
+    @media screen and (max-width: 784px) {
+        .main-left-middle-content h3 {
+            display: none;
+        }
+
+        .main-left-middle-content {
+            justify-content: center;
+        }
+
+        .main-left-middle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 15%;
+            margin-top: 35%;
+
+        }
+
+        .main-left-middle h1 {
+            font-size: 15px;
+            margin-bottom: 13%;
+        }
+
+        .main-left-down h1 {
+            justify-content: center;
+        }
+
+        .main-left-down h1 {
+            font-size: 15px;
+            margin-bottom: 13%;
+        }
+
+        .main-left-down {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 100%;
+        }
+    }
 }

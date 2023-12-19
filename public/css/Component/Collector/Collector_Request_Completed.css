@@ -1,4 +1,4 @@
-.Collector_Reuqest_Assigned {
+.Collector_Request_Completed {
     .main-right-bottom-two {
         width: 99%;
         height: 550px;
@@ -446,8 +446,8 @@
 
 
 
-   /*request details*/
-   .request-details-pop {
+   /*collect details*/
+   .collect-details-pop {
     position: fixed;
     top: 0;
     left: 0;
@@ -460,7 +460,7 @@
     height: 100%;
 }
 
-.request-details-pop-form {
+.collect-details-pop-form {
     width: 45%;
     background: white;
     border-radius: 6px;
@@ -477,41 +477,48 @@
 
 }
 
-.request-details-pop-form-top {
+.collect-details-pop-form-top {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 10px;
     margin-bottom: 25px;
     font-size: 18px;
+    padding-right: 250px;
 }
 
-.request-details-pop-form-close {
+
+.collect-details-pop-form-close {
     width: 25px;
     height: 25px;
-    margin-left: 100%;
+    margin-left: 650px;
     margin-top: -3%;
     cursor: pointer;
 }
 
-.request-details-topic {
+
+.collect-details-topic {
     display: flex;
+    padding-right: 200px;
+    
 }
 
-.request-details-pop-form-content {
+.collect-details-pop-form-content {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 40% 70%;
     width: 80%;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
+    padding-left: 30px;
 
 }
 
-.request-details-topic::before {
+.collect-details-topic::before {
     content: '';
     position: absolute;
     margin-top: 23px;
-    margin-left: 45px;
+    margin-right: 70px;
     margin-bottom: 15px;
     height: 4px;
     width: 67px;

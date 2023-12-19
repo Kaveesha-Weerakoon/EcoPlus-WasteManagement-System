@@ -49,9 +49,9 @@
                                     <th>Req ID</th>
                                     <th>Date</th>
                                     <th>Time</th>
-                                    <th>Type</th>
-                                    <th>Collector Name</th>
-                                    <th>Contact No</th>
+                                    <th>Collector</th>
+                                    <th>Collector Info</th>
+                                    <th>Location</th>
                                     <th>Earned Credits</th>
                                     <th>Details</th>
                                 </tr>
@@ -60,114 +60,215 @@
 
                         <div class="main-right-bottom-down">
                             <table class="table">
+                            <?php foreach($data['completed_request'] as $request) : ?>
                                 <tr class="table-row">
-                                    <td>R1231</td>
-                                    <td>13/05/2022</td>
-                                    <td>12:00 P.M</td>
-                                    <td>Collection</td>
-                                    <td>Samantha</td>
-                                    <td>07712312312</td>
-                                    <td>123</td>
-                                    <td class="x"><img src="../../../src/View.png" alt=""></td>
-                                </tr>
-                                <tr class="table-row">
-                                    <td>R1231</td>
-                                    <td>13/05/2022</td>
-                                    <td>12:00 P.M</td>
-                                    <td>Collection</td>
-                                    <td>Samantha</td>
-                                    <td>07712312312</td>
-                                    <td>123</td>
-                                    <td class="x"><img src="../../../src/View.png" alt=""></td>
-                                </tr>
-                                <tr class="table-row">
-                                    <td>R1231</td>
-                                    <td>13/05/2022</td>
-                                    <td>12:00 P.M</td>
-                                    <td>Collection</td>
-                                    <td>Samantha</td>
-                                    <td>07712312312</td>
-                                    <td>123</td>
-                                    <td class="x"><img src="../../../src/View.png" alt=""></td>
-                                </tr>
-                                <tr class="table-row">
-                                    <td>R1231</td>
-                                    <td>13/05/2022</td>
-                                    <td>12:00 P.M</td>
-                                    <td>Collection</td>
-                                    <td>Samantha</td>
-                                    <td>07712312312</td>
-                                    <td>123</td>
-                                    <td class="x"><img src="../../../src/View.png" alt=""></td>
-                                </tr>
-                                <tr class="table-row">
-                                    <td>R1231</td>
-                                    <td>13/05/2022</td>
-                                    <td>12:00 P.M</td>
-                                    <td>Collection</td>
-                                    <td>Samantha</td>
-                                    <td>07712312312</td>
-                                    <td>123</td>
-                                    <td class="x"><img src="../../../src/View.png" alt=""></td>
-                                </tr>
-                                <tr class="table-row">
-                                    <td>R1231</td>
-                                    <td>13/05/2022</td>
-                                    <td>12:00 P.M</td>
-                                    <td>Collection</td>
-                                    <td>Samantha</td>
-                                    <td>07712312312</td>
-                                    <td>123</td>
-                                    <td class="x"><img src="../../../src/View.png" alt=""></td>
-                                </tr>
+                                            <td>R<?php echo $request->request_id?></td>
+
+                                            <td><?php  echo $request->date?></td>
+
+                                            <td><?php  echo $request->collector_user_id?></td>
+
+                                            <td>
+                                                <?php
+                                                $typeContent = ($request->type === 'complete') ? 
+                                                '<img class="collector_img" src="' . IMGROOT . '/img_upload/collector/' .$request->image . '" alt="1">':
+
+                                                '<img class="collector_img" src="' . IMGROOT . '/collector.png" alt="1">';
+                                                echo $typeContent
+                                            ?>
+                                            </td>
+
+                                            <td class="cancel-open">
+                                                <img src="<?php echo IMGROOT ?>/assign.png"
+                                                <?php if ($request->type === 'completed') { ?>onclick="view_collector('<?php echo $request->collector_image; ?>', '<?php echo $request->collector_user_id; ?>', '<?php echo $request->name; ?>', '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')"
+                                                <?php } ?> alt="">
+                                            </td>
+
+                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/location.png" alt=""
+                                            onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)">
+                                            </td>
+
+                                            <td><?php  echo $request->credit_amount?></td>
+
+                                            <td><img onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
+                                                src="<?php echo IMGROOT?>/view.png" alt="">
+                                            </td>
+
+                                        </tr>
+                                        <?php endforeach; ?> 
                             </table>
 
                         </div>
                     </div>
-                    <div class="View" id="View">
-                        <div class="View-content">
 
-                            <img class="View-content-img" src="../../../src/cancel.png" id="close">
-                            <h2>Details of the Collect</h2>
-                            <div class="View-content-content">
-                                <div class="View-content-content-content">
-                                    <img src="../../../src/Polythene.png" alt="">
-                                    <h6>Polythene</h6>
-                                    <p>12 Kg</p>
-                                </div>
-                                <div class="View-content-content-content">
-                                    <img src="../../../src/Plastic.png" alt="">
-                                    <h6>Plastic</h6>
-                                    <p>12 Kg</p>
-                                </div>
-                                <div class="View-content-content-content">
-                                    <img src="../../../src/Glass.png" alt="">
-                                    <h6>Glass</h6>
-                                    <p>12 Kg</p>
-                                </div>
-                                <div class="View-content-content-content">
-                                    <img src="../../../src/paper.png" alt="">
-                                    <h6>Paper Waste</h6>
-                                    <p>12 Kg</p>
-                                </div>
-                                <div class="View-content-content-content">
-                                    <img src="../../../src/Electronic_Waste.png" alt="">
-                                    <h6>Electronic Waste</h6>
-                                    <p>12 Kg</p>
-                                </div>
-                                <div class="View-content-content-content">
-                                    <img src="../../../src/Metal.png" alt="">
-                                    <h6>Metals</h6>
-                                    <p>12 Kg</p>
+                </div>
+
+                <div class="collect-details-pop" id="collect-details-popup-box">
+                            <div class="collect-details-pop-form">
+                            <a href="<?php echo URLROOT?>/Collectors/request_completed/"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
+                                    id="collect-details-pop-form-close"></a>
+                                <div class="collect-details-pop-form-top">
+                                    <div class="collect-details-topic">collect details<div id="req_id3"></div>
+                                    </div>
                                 </div>
 
+                                <div class="collect-details-pop-form-content">
+                                    <div class="personal-details-right-labels">
+                                        <span>Polythene Quantity :-</span><br>
+                                        <span>Plastic Quantity :-</span><br>
+                                        <span>Glass Quantity :-</span><br>
+                                        <span>Paper Waste Quantity :-</span><br>
+                                        <span>Electronic Waste Quantity :-</span><br>
+                                        <span>Metals Quantity :-</span><br>
+                                        <span>Note :-</span><br>
+                                    </div>
+                                    <div class="personal-details-right-values">
+                                        <span id="Polythene_Quantity"></span><br>
+                                        <span id="Plastic_Quantity">23</span><br>
+                                        <span id="Glass_Quantity">23</span><br>
+                                        <span id="Paper_Waste_Quantity"></span><br>
+                                        <span id="Electronic_Waste_Quantity"></span><br>
+                                        <span id="Metals_Quantity"></span><br>
+                                        <span id="Note"></span><br>
+                                    </div>
+                                </div>
                             </div>
-                            <h3>Credits &nbsp;Earned &nbsp;: &nbsp; 123.231</h3>
                         </div>
 
+
+                <div class="location_pop">
+                    <div class="location_pop_content">
+                        <div class="location_pop_map">
+
+                        </div>
+                        <div class="location_close">
+                            <button onclick="closemap()">Close</button>
+                        </div>
+                    </div>  
+
+
+                <div class="personal-details-popup-box" id="personal-details-popup-box">
+                    <div class="personal-details-popup-form" id="popup">
+                        <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
+                            id="personal-details-popup-form-close">
+                        <center>
+                            <div class="personal-details-topic">Collector Details</div>
+                        </center>
+
+                        <div class="personal-details-popup">
+                            <div class="personal-details-left">
+                                <img id="collector_profile_img" src="<?php echo IMGROOT?>/img_upload/collector/?>"
+                                    class="profile-pic" alt="">
+                                <p>Collector ID: <span id="collector_id">C<?php?></span></p>
+                            </div>
+                            <div class="personal-details-right">
+                                <div class="personal-details-right-labels">
+                                    <span>Name</span><br>
+                                    <span>Contact No</span><br>
+                                    <span>Vehicle No</span><br>
+                                    <span>Vehicle Type</span><br>
+
+                                </div>
+                                <div class="personal-details-right-values">
+                                    <span id="collector_name"></span><br>
+                                    <span id="collector_conno"></span><br>
+                                    <span id="collector_vehicle_no"></span><br>
+                                    <span id="collector_vehicle_type"></span><br>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <script src="./Request_Completed.js"></script>
-                </div>
+
+                </div>                     
+
+
             </div>
         </div>
+
+        <script>
+        function view_collector(image, col_id, name, contact_no, type, vehno) {
+            document.getElementById('personal-details-popup-box').style.display = 'flex';
+            document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + image;
+            document.getElementById('collector_id').innerText = col_id;
+            document.getElementById('collector_name').innerText = name;
+            document.getElementById('collector_conno').innerText = contact_no;
+            document.getElementById('collector_vehicle_no').innerText = vehno;
+            document.getElementById('collector_vehicle_type').innerText = type;
+        }
+
+        function view_collect_details(request) {
+            document.getElementById('collect-details-popup-box').style.display = "flex";
+            document.getElementById('Polythene_Quantity').innerText = request.Polythene;
+            document.getElementById('Plastic_Quantity').innerText = request.Plastic;
+            document.getElementById('Glass_Quantity').innerText = request.Glass;
+            document.getElementById('Paper_Waste_Quantity').innerText = request.Paper_Waste;
+            document.getElementById('Electronic_Waste_Quantity').innerText = request.Electronic_Waste;
+            document.getElementById('Metals_Quantity').innerText = request.Metals;
+            document.getElementById('Note').innerText = request.note;
+        }
+
+        function initMap(latitude, longitude) {
+        var mapCenter = {
+            lat: latitude,
+            lng: longitude
+        };
+
+        var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
+            center: mapCenter,
+            zoom: 14.5
+        });
+
+        var marker = new google.maps.Marker({
+            position: {
+                lat: parseFloat(latitude),
+                lng: parseFloat(longitude)
+            },
+            map: map,
+            title: 'Marked Location'
+        });
+        }
+
+        function viewLocation($lattitude, $longitude) {
+            initMap($lattitude, $longitude);
+            document.querySelector('.location_pop').style.display = 'flex';
+        }
+
+        function closemap() {
+            document.querySelector('.location_pop').style.display = 'none';
+        }
+
+        function searchTable() {
+            var input = document.getElementById('searchInput').value.toLowerCase();
+            var rows = document.querySelectorAll('.table-row');
+            rows.forEach(function(row) {
+                var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+                var status = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+                var date = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+                var time = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+                var center = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+
+                if (center.includes(input) || id.includes(input) || status.includes(input) || date.includes(
+                        input) || time.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none'; // Hide the row
+                }
+            });
+
+        }
+
+        document.getElementById('searchInput').addEventListener('input', searchTable);
+        document.addEventListener("DOMContentLoaded", function() {
+            const close_collector = document.getElementById("personal-details-popup-form-close");
+            const collector_view = document.getElementById("personal-details-popup-box");
+
+            close_collector.addEventListener("click", function() {
+                collector_view.style.display = "none"
+            });
+
+        });
+
+        
+    </script>
+
         <?php require APPROOT . '/views/inc/footer.php'; ?>

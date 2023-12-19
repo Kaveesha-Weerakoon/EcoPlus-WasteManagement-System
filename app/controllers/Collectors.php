@@ -614,9 +614,12 @@
    }
 
    public function request_completed(){
-    $data = [
-      'title' => 'TraversyMVC',
-    ];
+    $completed_Requests=$this->Collect_Garbage_Model->get_complete_request( $_SESSION['collector_id'] );
+      $jsonData = json_encode($completed_Requests);
+      $data = [
+        'completed_requests' => $completed_Requests,
+        'jsonData' => $jsonData,
+      ];
    
     $this->view('collectors/request_completed', $data);
    }
@@ -669,29 +672,26 @@
           // Check if at least one field is filled
         $fieldsToCheck = ['polythene_quantity', 'plastic_quantity', 'glass_quantity', 'paper_waste_quantity', 'electronic_waste_quantity', 'metals_quantity'];
         $atLeastOneFilled = false;
+        $allFieldsValid = true;
 
-            foreach ($fieldsToCheck as $field) {
-                if (!empty($_POST[$field])) {
-                    $atLeastOneFilled = true;
-                    break; 
-                }
-            }
-
-            foreach ($fieldsToCheck as $field) {
-              if (!empty($_POST[$field])) {
-                if (!is_numeric($_POST[$field])) {
-                  $data["{$field}_err"] = "Please enter a valid number for $field";
+        foreach ($fieldsToCheck as $field) {
+          if (!empty($_POST[$field])) {
+              if (!is_numeric($_POST[$field])) {
+                  $data["{$field}_err"] = "Please enter a valid number";
+                  $allFieldsValid = false;
+              } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST[$field]) !== 1) {
+                  $data["{$field}_err"] = "Please enter up to two decimal places.";
+                  $allFieldsValid = false;
               } else {
-                  // Check if the input has more than two decimal points
-                  $decimalCount = substr_count($_POST[$field], '.');
-                  if ($decimalCount > 1 || (strlen($_POST[$field]) - strrpos($_POST[$field], '.')) > 3) {
-                      $data["{$field}_err"] = "Please enter quantity with two decimal points";
-                  }
+                  $atLeastOneFilled = true;
               }
-            }
           }
+      }
 
-            if (!$atLeastOneFilled) {
+
+                
+
+            if (!$atLeastOneFilled && $allFieldsValid) {
                 $data['polythene_quantity_err'] = 'Please fill polythene quantity';
                 $data['plastic_quantity_err'] = 'Please fill plastic quantity';
                 $data['glass_quantity_err'] = 'Please fill glass quantity';
@@ -701,32 +701,41 @@
                 
             }
 
-            if (empty($_POST['note'])) {
+            if(empty($_POST['note'])){
               $data['note_err'] = 'Please fill in the Note field';
-          }
-            
+            }
+
 
           
 
-            if ($atLeastOneFilled && empty($_POST['note_err']) ) {
+            if ($atLeastOneFilled && empty($data['note_err']) && $allFieldsValid) {
               $creditData = $this->creditModel->get();
 
               $credit_Amount =
-    (intval($data['polythene_quantity']) * $creditData->polythene) +
-    (intval($data['plastic_quantity']) * $creditData->plastic) +
-    (intval($data['glass_quantity']) * $creditData->glass) +
-    (intval($data['paper_waste_quantity']) * $creditData->paper) +
-    (intval($data['electronic_waste_quantity']) * $creditData->electronic) +
-    (intval($data['metals_quantity']) * $creditData->metal);
+              (floatval($data['polythene_quantity']) * $creditData->polythene) +
+              (floatval($data['plastic_quantity']) * $creditData->plastic) +
+              (floatval($data['glass_quantity']) * $creditData->glass) +
+              (floatval($data['paper_waste_quantity']) * $creditData->paper) +
+              (floatval($data['electronic_waste_quantity']) * $creditData->electronic) +
+              (floatval($data['metals_quantity']) * $creditData->metal);
 
 
             $data['credit_Amount'] = $credit_Amount;
 
-            $inserted = $this->Collect_Garbage_Model->insert($data); // Implement insert method in Collect_garbage model
+            $inserted = $this->Collect_Garbage_Model->insert($data);
+            
+            
+            $requst = $this->Request_Model->get_request_by_id($req_id);// Assuming you have the customer ID
+            $customer_id= $requst->customer_id;
+            $current_credit = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
 
-            if ($inserted) {
-                // Data inserted successfully, perform further actions or redirect
-                // For now, render the view with updated data
+            $new_credit_balance = $current_credit + $credit_Amount; // Calculate new credit balance
+
+            // Update the customer credit balance in the database
+            $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
+
+
+            if ($inserted && $update_result ) {
                 $this->view('collectors/request_assinged', $data);
             } else {
                 // Handle insertion failure

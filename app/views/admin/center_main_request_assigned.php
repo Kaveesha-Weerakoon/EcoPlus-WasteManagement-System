@@ -3,7 +3,7 @@
     <div class="Admin_Center_Top">
         <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initMap" async defer></script>
     
-        <div class="Admin_Center_Main_Request_Incoming">
+        <div class="Admin_Center_Main_Request_Assigned">
             <div class="main">
 
                 <div class="main-left">
@@ -70,16 +70,16 @@
                                 <h1>Requests</h1>
                             </div>
                             <div class="main-right-top-three">
-                                <a href="">
+                                <a href="<?php echo URLROOT?>/Admin/incoming_requests/<?php echo $data['center_region']?>">
                                     <div class="main-right-top-three-content">
-                                        <p><b style="color: #1B6652;">Incoming</b></p>
-                                        <div class="line"></div>
+                                        <p>Incoming</p>
+                                        <div class="line1"></div>
                                     </div>
                                 </a>
-                                <a href="<?php echo URLROOT?>/Admin/assigned_requests/<?php echo $data['center_region']?>">
+                                <a href="">
                                     <div class="main-right-top-three-content">
-                                        <p>Assigned</p>
-                                        <div class="line1"></div>
+                                        <p><b style="color: #1B6652;">Assigned</b></p>
+                                        <div class="line"></div>
                                     </div>
                                 </a>
 
@@ -104,29 +104,36 @@
                                 <table class="table">
                                     <tr class="table-header">
                                         <th>Req ID</th>
-                                        <th>C ID</th>
-                                        <th>Customer Name</th>
                                         <th>Date</th>
                                         <th>Time</th>
+                                        <th>Customer ID</th>
+                                        <th>Collector ID</th>
+                                        <th>Collector</th>
                                         <th>Location</th>
-                                        <th>Contact No</th>
-                                        <th>Instructions</th>
+                                        <th>Request details</th>
                                        
                                     </tr>
                                 </table>
                             </div>
                             <div class="main-right-bottom-down">
                                 <table class="table">
-                                <?php foreach($data['incoming_requests'] as $incoming_requests) : ?>
+                                <?php foreach($data['assigned_requests'] as $assigned_requests) : ?>
                                     <tr class="table-row">
-                                        <td>R<?php echo $incoming_requests->req_id?></td>
-                                        <td>C<?php echo $incoming_requests->customer_id?></td>
-                                        <td><?php echo $incoming_requests->name?></td>
-                                        <td><?php echo $incoming_requests->date?></td>
-                                        <td><?php echo $incoming_requests->time?></td>
-                                        <td><img onclick="viewLocation(<?php echo $incoming_requests->lat; ?>, <?php echo $incoming_requests->longi; ?>)" src="<?php echo IMGROOT?>/location.png" alt=""></td>
-                                        <td><?php echo $incoming_requests->contact_no?></td>
-                                        <td><?php echo $incoming_requests->instructions?></td>
+                                        <td>R<?php echo $assigned_requests->req_id?></td>
+                                        <td><?php echo $assigned_requests->date?></td>
+                                        <td><?php echo $assigned_requests->time?></td>
+                                        <td>C<?php echo $assigned_requests->customer_id?></td>
+                                        <td><?php echo $assigned_requests->collector_id?></td>
+                                        <td>
+                                        <img onclick="" class="collector_img"
+                                            src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $assigned_requests->image?>"
+                                            alt="">
+                                        </td>
+                                        <td><img onclick="viewLocation(<?php echo $assigned_requests->lat; ?>, <?php echo $assigned_requests->longi; ?>)" src="<?php echo IMGROOT?>/location.png" alt=""></td>
+                                        <td>
+                                        <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($assigned_requests), ENT_QUOTES, 'UTF-8') ?>)"
+                                            class="cancel" src="<?php echo IMGROOT ?>/info.png" alt="">
+                                        </td>
                                     </tr>   
                                     <?php endforeach; ?>  
                                             

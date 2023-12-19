@@ -100,7 +100,7 @@
                 </div>
                 </a>
     
-                <a href="<?php echo URLROOT?>/Admin/total_requests/<?php echo $data['center']->region?>">
+                <a href="<?php echo URLROOT?>/Admin/incoming_requests/<?php echo $data['center']->region?>">
                 <div class="analytic third-analytic">
                   <div class="analytic-icon">
                     <img src="<?php echo IMGROOT?>/green_requests.png" class="icon-image" alt="" />

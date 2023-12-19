@@ -854,14 +854,28 @@
 
     }
 
-    public function total_requests($region){
+    public function incoming_requests($region){
       $incoming_requests = $this->requests_model->get_incoming_request($region);
 
       $data =[
-        'incoming_requests'=> $incoming_requests
+        'incoming_requests'=> $incoming_requests,
+        'center_region'=> $region
       ];
 
       $this->view('admin/center_main_request_incoming', $data);
+
+    }
+
+    public function assigned_requests($region){
+      $assigned_requests = $this->requests_model->get_assigned_request_by_center($region);
+
+      $data =[
+        'assigned_requests'=> $assigned_requests,
+        'center_region'=> $region
+
+      ];
+
+      $this->view('admin/center_main_request_assigned', $data);
 
     }
 

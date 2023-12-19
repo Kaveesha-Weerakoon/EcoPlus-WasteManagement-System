@@ -17,7 +17,7 @@
         height: 100%;
         grid-template-rows: 22% 78%;
         overflow: hidden;
-        background-color: var(--background-color-two);
+        background-color: var(--background-color-right);
         padding-left: 1.5%;
         padding-right: 1.5%;
         padding-top: 0.5%;

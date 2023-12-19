@@ -52,7 +52,7 @@
   
     public function get_request_by_id($req_id){
 
-      $this->db->query('SELECT * FROM request_main  WHERE id = :workerId');
+      $this->db->query('SELECT * FROM request_main  WHERE req_id = :workerId');
       $this->db->bind(':workerId', $req_id);
       $row = $this->db->single();
       return $row;

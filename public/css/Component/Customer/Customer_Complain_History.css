@@ -50,13 +50,6 @@
         justify-content: center;
     }
 
-    .table-row:hover {
-        background-color: var(--background-color-two);
-        cursor: pointer;
-        color: black;
-    }
 
-    .table-row:hover .table td {
-        color: white !important;
-    }
+
 }

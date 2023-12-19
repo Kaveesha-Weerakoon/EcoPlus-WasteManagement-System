@@ -152,3 +152,8 @@ a {
     display: grid;
     margin-bottom: 0px;
 }
+
+.table-row:hover {
+    background-color: var(--table-header);
+    cursor: pointer;
+}

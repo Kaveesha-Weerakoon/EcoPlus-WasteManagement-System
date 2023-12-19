@@ -112,6 +112,18 @@
 
 @import url('Component/Animation/main.css');
 
+:root {
+    --main-text-color: #414143;
+    --green-color-one: #1ca557;
+    --green-color-two: #47b076;
+    --background-color-one: #dcdde1;
+    --background-color-two: #f5f6fa;
+    --background-color-main: #ffff;
+    --background-color-right: #fbfbfb;
+    --notification-hover: #64d798;
+    --box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.25);
+}
+
 a {
     text-decoration: none;
     padding: 0;

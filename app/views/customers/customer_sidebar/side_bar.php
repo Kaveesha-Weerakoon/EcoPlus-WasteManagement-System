@@ -1,40 +1,63 @@
 <div class="main-left">
     <div class="main-left-top">
-        <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
-        <h1>Eco Plus</h1>
+        <img id="top_logo" src="<?php echo IMGROOT?>/Logo.png" alt="logo">
+        <h3>ECO PLUS</h3>
     </div>
     <div class="main-left-middle">
-        <div class="main-left-middle-content" id="dashboard" onclick="redirect_dashboard()">
-            <div class="main-left-middle-content-line"></div>
-            <img src="<?php echo IMGROOT?>/Customer_DashBoard_Icon.png" alt="">
-            <h2>Dashboard</h2>
+        <h1>OVERVIEW</h1>
+        <div class="main-left-middle-content current" onclick="redirect_dashboard()" id="dashboard">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bxs-dashboard'></i>
+            </div>
+            <h3>Dashboard</h3>
         </div>
-        <div class="main-left-middle-content" id="request" onclick="redirect_request()">
-            <div class=" main-left-middle-content-line"></div>
-            <img src="<?php echo IMGROOT?>/Customer_Request.png" alt="">
-            <h2>Requests</h2>
+        <div class="main-left-middle-content" onclick="redirect_request()" id="request">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bx-right-arrow-circle'></i>
+            </div>
+            <h3>Requests</h3>
         </div>
-        <div class="main-left-middle-content" id="history" onclick="redirect_history()">
-            <div class=" main-left-middle-content-line"></div>
-            <img src="<?php echo IMGROOT?>/Customer_tracking _Icon.png" alt="">
-            <h2>History</h2>
+        <div class="main-left-middle-content" onclick="redirect_history()" id="history">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bx-timer'></i>
+            </div>
+            <h3>History</h3>
         </div>
-        <div class="main-left-middle-content" id="edit_profile" onclick="redirect_edit_profile()">
-            <div class=" main-left-middle-content-line"></div>
-            <img src="<?php echo IMGROOT?>/Customer_Edit_Pro_Icon.png" alt="">
-            <h2>Edit Profile</h2>
+        <div class="main-left-middle-content" onclick="redirect_edit_profile()" id="edit_profile">
+            <div class="main-left-middle-content-icon">
+                <i class='bx bx-user-pin'></i>
+            </div>
+            <h3>Profile</h3>
         </div>
-    </div>
-    <div class="main-left-bottom">
 
+    </div>
+    <div class="main-left-down">
+        <h1>SETTINGS</h1>
         <a href="<?php echo URLROOT?>/customers/logout">
-            <div class="main-left-bottom-content">
-                <img src="<?php echo IMGROOT?>/Logout.png" alt="">
-                <p>Log out</p>
+
+            <div class="main-left-middle-content">
+                <div class="main-left-middle-content-icon">
+                    <i style="color:#F13E3E" class='bx bx-log-out'></i>
+                </div>
+                <h3 style="color:#F13E3E">Logout</h3>
             </div>
         </a>
+
+        <div class="main-left-middle-content">
+            <div class="main-left-middle-content-icon">
+                <i class='bx bx-moon'></i>
+            </div>
+            <h3>Dark Mode</h3>
+            <div class="toggle-container">
+                <input type="checkbox" id="toggle-checkbox">
+                <label class="toggle-button" for="toggle-checkbox">
+                    <div class="toggle-indicator"></div>
+                </label>
+            </div>
+        </div>
     </div>
 </div>
+
 <script>
 function redirect_dashboard() {
     var linkUrl = "<?php echo URLROOT?>/customers"; // Replace with your desired URL
@@ -55,4 +78,53 @@ function redirect_edit_profile() {
     var linkUrl = "<?php echo URLROOT?>/customers/editprofile"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
+
+let myChart;
+var checkbox = document.getElementById("toggle-checkbox");
+var root = document.documentElement;
+var logo = document.getElementById("top_logo");
+
+checkbox.addEventListener("change", function() {
+    if (checkbox.checked) {
+        root.style.setProperty("--background-color-main", "#001f3f");
+        root.style.setProperty("--background-color-right", "#001f3f");
+        root.style.setProperty("--main-text-color", "#fff");
+        root.style.setProperty("--green-color-one", "#fff");
+        root.style.setProperty("--green-color-two", "#fff");
+        root.style.setProperty("--background-color-two", "#001f3f");
+        root.style.setProperty("--notification-hover", "#1ca557");
+        root.style.setProperty("--box-shadow", "0.5px 0.5px 1px 0.5px rgba(255, 255, 255, 1)");
+        logo.style.display = "none";
+        textColor = "#ffff";
+        color = "#ffff";
+        circularProgress.style.background =
+            `conic-gradient(${color}, ${progressStartValue * 3.6}deg, #001f3f 0deg)`;
+
+        logo.style.display = "none";
+        if (myChart) {
+            myChart.destroy();
+        }
+        createOrUpdateChart(color, textColor);
+
+    } else {
+        root.style.setProperty("--background-color-main", "#fff");
+        root.style.setProperty("--background-color-right", "#fbfbfb");
+        root.style.setProperty("--main-text-color", "#414143");
+        root.style.setProperty("--green-color-one", "#1ca557");
+        root.style.setProperty("--green-color-two", "#47b076");
+        root.style.setProperty("--notification-hover", "#64d798");
+        root.style.setProperty("--background-color-two", "#fff");
+        root.style.setProperty("--box-shadow", "0 1px 1px 0px rgba(0, 0, 0, 0.1)");
+        logo.style.display = "flex";
+        color = "#47b076";
+        textColor = "#414143";
+        if (myChart) {
+            myChart.destroy();
+        }
+        createOrUpdateChart(color, textColor);
+        circularProgress.style.background =
+            `conic-gradient(${color}, ${progressStartValue * 3.6}deg, #ededed 0deg)`;
+
+    }
+});
 </script>

@@ -23,7 +23,9 @@
         flex-direction: column;
         background-color: var(--background-color-main);
         color: var(--main-text-color);
-        border-right: 0.5px solid rgba(0, 0, 0, 0.1);
+        box-shadow: var(--box-shadow2) !important;
+        z-index: 2;
+
     }
 
     .main-left-top {

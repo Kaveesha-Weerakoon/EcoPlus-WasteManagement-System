@@ -650,7 +650,7 @@ font-size: 13px;
         flex-direction: row;
         align-items: center;
         justify-content: space-around;
-
+        box-shadow: var(--box-shadow2);
         width: 100%;
         box-sizing: border-box;
     }

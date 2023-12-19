@@ -11,6 +11,7 @@
       $this->customerModel=$this->model('Customer');
       $this->Customer_Credit_Model=$this->model('Customer_Credit');
       $this->Request_Model=$this->model('Request');
+      $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
 
       if(!isLoggedIn('user_id')){
         redirect('users/login');
@@ -97,10 +98,12 @@
     }
 
     public function request_completed(){
-      $data = [
-        'title' => 'TraversyMVC',
-      ];
+      $completed_request=$this->Collect_Garbage_Model->get_complete_request_relevent_customer($_SESSION['user_id']);
      
+      $data = [
+        'completed_request' => $completed_request
+        
+      ];
       $this->view('customers/request_completed', $data);
     }
 

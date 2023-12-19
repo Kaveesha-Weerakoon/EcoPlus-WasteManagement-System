@@ -90,22 +90,35 @@
 
                                             <td><?php  echo $request->credit_amount?></td>
 
-                                            <td><img onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
+                                            <td class="cancel-open"><img onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
                                                 src="<?php echo IMGROOT?>/view.png" alt="">
                                             </td>
-
-                                        </tr>
-                                        <?php endforeach; ?> 
+                                </tr>
+                            <?php endforeach; ?> 
                             </table>
-
                         </div>
                     </div>
-
                 </div>
 
-                <div class="collect-details-pop" id="collect-details-popup-box">
+                <div class="location_pop">
+                    <div class="location_pop_content">
+                        <div class="location_pop_map">
+
+                        </div>
+                        <div class="location_close">
+                            <button onclick="closemap()">Close</button>
+                        </div>
+                    </div>  
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="collect-details-pop" id="collect-details-popup-box">
                             <div class="collect-details-pop-form">
-                            <a href="<?php echo URLROOT?>/Collectors/request_completed/"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
+                            <a href="<?php echo URLROOT?>/customers/request_completed/"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
                                     id="collect-details-pop-form-close"></a>
                                 <div class="collect-details-pop-form-top">
                                     <div class="collect-details-topic">collect details<div id="req_id3"></div>
@@ -136,18 +149,7 @@
                         </div>
 
 
-                <div class="location_pop">
-                    <div class="location_pop_content">
-                        <div class="location_pop_map">
-
-                        </div>
-                        <div class="location_close">
-                            <button onclick="closemap()">Close</button>
-                        </div>
-                    </div>  
-
-
-                <div class="personal-details-popup-box" id="personal-details-popup-box">
+        <div class="personal-details-popup-box" id="personal-details-popup-box">
                     <div class="personal-details-popup-form" id="popup">
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
                             id="personal-details-popup-form-close">
@@ -179,11 +181,7 @@
                         </div>
                     </div>
 
-                </div>                     
-
-
-            </div>
-        </div>
+                </div>
 
         <script>
         function view_collector(image, col_id, name, contact_no, type, vehno) {

@@ -639,7 +639,7 @@ font-size: 13px;
     }
 
     .main-right {
-        background-color: var(--background-color-two);
+        background-color: var(--background-color-right);
         display: grid;
         grid-template-rows: 9% 91%;
     }

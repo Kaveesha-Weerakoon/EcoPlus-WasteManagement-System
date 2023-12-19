@@ -18,10 +18,7 @@
         grid-template-rows: 22% 78%;
         overflow: hidden;
         background-color: var(--background-color-right);
-        padding-left: 1.5%;
-        padding-right: 1.5%;
-        padding-top: 0.5%;
-        padding-bottom: 0.7%;
+
         box-sizing: border-box;
         box-shadow: var(--box-shadow);
     }

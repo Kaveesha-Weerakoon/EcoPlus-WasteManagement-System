@@ -6,9 +6,53 @@
       $this->db = new Database;
     }
 
+    public function get_complete_request_relevent_customer($customer_id){
+      $this->db->query('
+          SELECT request_main.*, request_completed.*,request_assigned.*,
+          users.name as name,
+          collectors.user_id AS collector_user_id, 
+          request_main.req_id As request_id,
+          collectors.image AS collector_image,
+          collectors.contact_no AS collector_contact_no,
+          collectors.vehicle_no AS collector_vehicle_no,
+          collectors.vehicle_type AS collector_vehicle_type
+          FROM request_main
+          LEFT JOIN request_completed ON request_main.req_id = request_completed.req_id
+          LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
+          LEFT JOIN collectors  ON request_assigned.collector_id = collectors.user_id
+          LEFT JOIN users ON collectors.user_id=users.id
+          WHERE request_main.customer_id = :customer_id
+          AND request_main.type = "completed"
+      ');
+  
+      $this->db->bind(':customer_id', $customer_id);
+  
+      $results = $this->db->resultSet();
+  
+      return $results;
+  }
+  
+    public function get_complete_request($collector_id){
+      $this->db->query('
+          SELECT request_main.*, request_completed.*
+          FROM request_main
+          LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
+          LEFT JOIN request_completed ON request_main.req_id = request_completed.req_id
+          WHERE request_assigned.collector_id = :collector_id
+          AND request_main.type = "completed"
+      ');
+  
+      $this->db->bind(':collector_id', $collector_id);
+  
+      $results = $this->db->resultSet();
+  
+      return $results;
+  }
+  
+
    
     public function insert($data){
-      $this->db->query('INSERT INTO collect_garbage (req_id, Polythene, Plastic, Glass, Paper_Waste, Electronic_Waste, Metals, credit_amount, note, added) VALUES (:req_id, :Polythene, :Plastic, :Glass, :Paper_Waste, :Electronic_Waste, :Metals, :credit_amount, :note, :added)');
+      $this->db->query('INSERT INTO request_completed (req_id, Polythene, Plastic, Glass, Paper_Waste, Electronic_Waste, Metals, credit_amount, note, added) VALUES (:req_id, :Polythene, :Plastic, :Glass, :Paper_Waste, :Electronic_Waste, :Metals, :credit_amount, :note, :added)');
       
       $this->db->bind(':req_id', $data['req_id']);
       $this->db->bind(':Polythene', $data['polythene_quantity']);
@@ -23,8 +67,23 @@
       $this->db->bind(':added', $addedValue);
 
       $result = $this->db->execute();
+      if ($result) {
+        $this->db->query('UPDATE request_main SET type = :type WHERE req_id = :req_id');
+        $this->db->bind(':type', 'completed');
+        $this->db->bind(':req_id', $data['req_id']);
+        
+        $updateResult = $this->db->execute();
+         if($updateResult){
+          return $updateResult;
+         }
+         else{
+          return false;
+         }
 
-      return $result;
+        }
+
+      
+      
   }
 
   

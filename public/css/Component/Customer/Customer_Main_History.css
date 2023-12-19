@@ -20,7 +20,8 @@
     .main-right-bottom {
         display: grid;
         height: 100%;
-
+        background-color: var(--background-color-main);
+        box-sizing: border-box;
     }
 
     .main-right-bottom-container {

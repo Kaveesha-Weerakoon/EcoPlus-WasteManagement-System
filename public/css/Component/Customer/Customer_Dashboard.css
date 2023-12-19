@@ -639,7 +639,7 @@ font-size: 13px;
     }
 
     .main-right {
-        background-color: var(--background-color-right);
+        background-color: var(--background-color-two);
         display: grid;
         grid-template-rows: 9% 91%;
     }
@@ -651,10 +651,8 @@ font-size: 13px;
         align-items: center;
         justify-content: space-around;
 
-        border: 10px;
         width: 100%;
         box-sizing: border-box;
-        border-radius: 10px;
     }
 
     .main-right-top-search {

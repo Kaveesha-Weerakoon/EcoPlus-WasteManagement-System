@@ -23,6 +23,9 @@
         flex-direction: column;
         background-color: var(--background-color-main);
         color: var(--main-text-color);
+        box-shadow: var(--box-shadow2) !important;
+        z-index: 2;
+
     }
 
     .main-left-top {

@@ -100,30 +100,32 @@
                     </div>
                 </div>
 
-                <div class="location_pop">
-                    <div class="location_pop_content">
-                        <div class="location_pop_map">
+                
 
-                        </div>
-                        <div class="location_close">
-                            <button onclick="closemap()">Close</button>
-                        </div>
-                    </div>  
-
-                </div>
             </div>
         </div>
     </div>
 </div>
 
-        <div class="collect-details-pop" id="collect-details-popup-box">
-                            <div class="collect-details-pop-form">
+                    <div class="location_pop">
+                        <div class="location_pop_content">
+                            <div class="location_pop_map">
+
+                            </div>
+                            <div class="location_close">
+                                <button onclick="closemap()">Close</button>
+                            </div>
+                        </div>  
+                    </div>
+
+                    <div class="collect-details-pop" id="collect-details-popup-box">
+                        <div class="collect-details-pop-form">
                             <a href="<?php echo URLROOT?>/customers/request_completed/"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
                                     id="collect-details-pop-form-close"></a>
                                 <div class="collect-details-pop-form-top">
                                     <div class="collect-details-topic">collect details<div id="req_id3"></div>
-                                    </div>
                                 </div>
+                        </div>
 
                                 <div class="collect-details-pop-form-content">
                                     <div class="personal-details-right-labels">
@@ -145,11 +147,10 @@
                                         <span id="Note"></span><br>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                    </div>
 
 
-        <div class="personal-details-popup-box" id="personal-details-popup-box">
+                <div class="personal-details-popup-box" id="personal-details-popup-box">
                     <div class="personal-details-popup-form" id="popup">
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
                             id="personal-details-popup-form-close">
@@ -180,7 +181,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
         <script>

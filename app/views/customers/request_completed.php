@@ -99,15 +99,7 @@
                         </div>
                     </div>
                 </div>
-
-                
-
-            </div>
-        </div>
-    </div>
-</div>
-
-                    <div class="location_pop">
+                <div class="location_pop">
                         <div class="location_pop_content">
                             <div class="location_pop_map">
 
@@ -116,39 +108,39 @@
                                 <button onclick="closemap()">Close</button>
                             </div>
                         </div>  
-                    </div>
+                </div>
 
-                    <div class="collect-details-pop" id="collect-details-popup-box">
+                 <div class="collect-details-pop-customer" id="collect-details-popup-box">
                         <div class="collect-details-pop-form">
                             <a href="<?php echo URLROOT?>/customers/request_completed/"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
                                     id="collect-details-pop-form-close"></a>
                                 <div class="collect-details-pop-form-top">
-                                    <div class="collect-details-topic">collect details<div id="req_id3"></div>
+                                    <div class="collect-details-topic">Collect Details<div id="req_id3"></div>
                                 </div>
                         </div>
 
                                 <div class="collect-details-pop-form-content">
-                                    <div class="personal-details-right-labels">
-                                        <span>Polythene Quantity :-</span><br>
-                                        <span>Plastic Quantity :-</span><br>
-                                        <span>Glass Quantity :-</span><br>
-                                        <span>Paper Waste Quantity :-</span><br>
-                                        <span>Electronic Waste Quantity :-</span><br>
-                                        <span>Metals Quantity :-</span><br>
-                                        <span>Note :-</span><br>
+                                    <div class="collect-details-pop-form-content-labels">
+                                        <h2>Polythene Quantity :-</h2>
+                                        <h2>Plastic Quantity :-</h2>
+                                        <h2>Glass Quantity :-</h2>
+                                        <h2>Paper Waste Quantity :-</h2>
+                                        <h2>Electronic Waste Quantity :-</h2>
+                                        <h2>Metals Quantity :-</h2>
+                                        <h2>Note :-</h2>
                                     </div>
                                     <div class="personal-details-right-values">
                                         <span id="Polythene_Quantity"></span><br>
-                                        <span id="Plastic_Quantity">23</span><br>
-                                        <span id="Glass_Quantity">23</span><br>
+                                        <span id="Plastic_Quantity"></span><br>
+                                        <span id="Glass_Quantity"></span><br>
                                         <span id="Paper_Waste_Quantity"></span><br>
                                         <span id="Electronic_Waste_Quantity"></span><br>
                                         <span id="Metals_Quantity"></span><br>
                                         <span id="Note"></span><br>
                                     </div>
                                 </div>
-                    </div>
-
+                </div> 
+            
 
                 <div class="personal-details-popup-box" id="personal-details-popup-box">
                     <div class="personal-details-popup-form" id="popup">
@@ -183,6 +175,12 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+</div>
+
+                   
         <script>
         function view_collector(image, col_id, name, contact_no, type, vehno) {
             document.getElementById('personal-details-popup-box').style.display = 'flex';
@@ -266,6 +264,17 @@
 
         });
 
+        
+    document.getElementById('searchInput').addEventListener('input', searchTable);
+    document.addEventListener("DOMContentLoaded", function() {
+        const close_collector = document.getElementById("personal-details-popup-form-close");
+        const collector_view = document.getElementById("personal-details-popup-box");
+
+        close_collector.addEventListener("click", function() {
+            collector_view.style.display = "none"
+        });
+
+    });
         
     </script>
 

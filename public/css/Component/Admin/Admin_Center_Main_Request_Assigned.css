@@ -35,21 +35,21 @@
         text-align: center;
         height: 55px;
         display: grid;
-        grid-template-columns: 8% 8% 14% 13% 13% 13% 13% 16%;
+        grid-template-columns: 10% 13% 13% 12.5% 12.5% 14% 12.5% 12.5%;
     }
 
     .table-row {
         font-size: 1px;
         font-family: Montserrat;
         text-align: center;
-        height: 55px;
+        height: 65px;
         display: grid;
-        grid-template-columns: 8% 8% 14% 13% 13% 13% 13% 16%;
+        grid-template-columns: 10% 13% 13% 12.5% 12.5% 14% 12.5% 12.5%;
         border-bottom: 2px solid #CACACA;
     }
 
     .table td {
-        height: 55px;
+        height: 65px;
         font-size: 16px;
         vertical-align: middle;
         text-align: center;
@@ -59,7 +59,7 @@
         overflow-y: scroll;
     }
 
-    td img {
+    .td img {
         margin: 6px;
         width: 20px;
         height: 20px;
@@ -188,6 +188,119 @@
             width: 140%;
         }
     }
+
+     /*request details*/
+     .request-details-pop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .request-details-pop-form {
+        width: 35%;
+        background: white;
+        border-radius: 6px;
+        top: 0;
+        position: relative;
+        text-align: center;
+        padding: 20px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.4s, top 0.4s;
+        flex-direction: column;
+
+    }
+
+    .request-details-pop-form-top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+        font-size: 18px;
+    }
+
+    .request-details-pop-form-close {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+
+    .request-details-topic {
+        display: flex;
+    }
+
+    .request-details-pop-form-content {
+        display: grid;
+        grid-template-columns: 30% 70%;
+        width: 95%;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+        margin-bottom: 10px;
+
+    }
+
+    .request-details-topic::before {
+        content: '';
+        position: absolute;
+        margin-top: 23px;
+        margin-left: 45px;
+        margin-bottom: 15px;
+        height: 4px;
+        width: 67px;
+        background: #1B6652;
+
+    }
+
+    .request-details-right-labels {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 40px;
+        padding-left: 40px;
+        padding-bottom: 50px;
+       
+    }
+
+    .request-details-right-labels span {
+        margin-bottom: 15px;
+        font-size: 15px;
+        color: #7c7c7d;
+    }
+
+    .request-details-right-values {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 40px;
+        padding-left: 90px;
+        padding-bottom: 50px;
+       
+    }
+
+    .request-details-right-values span {
+        margin-bottom: 15px;
+        font-size: 15px;
+        color: #767e95;
+        font-weight: 550;
+    }
+
 
     
 }

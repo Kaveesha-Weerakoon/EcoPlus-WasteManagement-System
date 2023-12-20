@@ -129,7 +129,9 @@
                                             src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $assigned_requests->image?>"
                                             alt="">
                                         </td>
-                                        <td><img onclick="viewLocation(<?php echo $assigned_requests->lat; ?>, <?php echo $assigned_requests->longi; ?>)" src="<?php echo IMGROOT?>/location.png" alt=""></td>
+                                        <td><img onclick="viewLocation(<?php echo $assigned_requests->lat; ?>, <?php echo $assigned_requests->longi; ?>)" 
+                                        src="<?php echo IMGROOT?>/location.png" alt="" class="location_icon">
+                                        </td>
                                         <td>
                                         <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($assigned_requests), ENT_QUOTES, 'UTF-8') ?>)"
                                             class="cancel" src="<?php echo IMGROOT ?>/info.png" alt="">
@@ -151,6 +153,36 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+
+            <div class="request-details-pop" id="request-details-popup-box">
+                <div class="request-details-pop-form">
+                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
+                        id="request-details-pop-form-close">
+                    <div class="request-details-pop-form-top">
+                        <div class="request-details-topic">Request ID: R <div id="req_id3"></div>
+                        </div>
+                    </div>
+
+                    <div class="request-details-pop-form-content">
+                        <div class="request-details-right-labels">
+                            <span>Customer Id</span><br>
+                            <span>Name</span><br>
+                            <span>Date</span><br>
+                            <span>Time</span><br>
+                            <span>Contact No</span><br>
+                            <span>Instructions</span><br>
+                        </div>
+                        <div class="request-details-right-values">
+                            <span id="req_id2"></span><br>
+                            <span id="req_name"></span><br>
+                            <span id="req_date"></span><br>
+                            <span id="req_time"></span><br>
+                            <span id="req_contactno"></span><br>
+                            <span id="instructions"></span><br>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -181,5 +213,30 @@
     function closemap(){
         document.querySelector('.location_pop').style.display = 'none';
     }
+
+    function view_request_details(request) {
+
+        document.getElementById('request-details-popup-box').style.display = "flex";
+        document.getElementById('req_id3').innerText = request.req_id;
+        document.getElementById('req_id2').innerText = request.customer_id;
+        document.getElementById('req_name').innerText = request.customer_name;
+        document.getElementById('req_date').innerText = request.date;
+        document.getElementById('req_time').innerText = request.time;
+        document.getElementById('req_contactno').innerText = request.customer_contactno;
+        document.getElementById('instructions').innerText = request.instructions;
+
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const close_request_details = document.getElementById("request-details-pop-form-close");
+
+        close_request_details.addEventListener("click", function() {
+        document.getElementById('request-details-popup-box').style.display = "none";
+        });
+
+    });
+
+   
+
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

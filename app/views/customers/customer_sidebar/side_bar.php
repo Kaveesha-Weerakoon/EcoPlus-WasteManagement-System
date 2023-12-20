@@ -113,7 +113,7 @@ checkbox.addEventListener("change", function() {
         root.style.setProperty("--green-color-one", "#1ca557");
         root.style.setProperty("--green-color-two", "#47b076");
         root.style.setProperty("--notification-hover", "#64d798");
-        root.style.setProperty("--background-color-two", "#fff");
+        root.style.setProperty("--background-color-two", "#f5f6fa");
         root.style.setProperty("--box-shadow", "0 1px 1px 0px rgba(0, 0, 0, 0.1)");
         logo.style.display = "flex";
         color = "#47b076";

@@ -66,7 +66,7 @@
 
                                             <td><?php  echo $request->date?></td>
 
-                                            <td><?php  echo $request->collector_user_id?></td>
+                                            <td><?php  echo $request->time?></td>
 
                                             <td>
                                                 <?php
@@ -110,42 +110,43 @@
                         </div>  
                 </div>
 
-                 <div class="collect-details-pop-customer" id="collect-details-popup-box">
-                        <div class="collect-details-pop-form">
-                            <a href="<?php echo URLROOT?>/customers/request_completed/"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
+                <div class="collect-details-pop" id="collect-details-popup-box">
+                            <div class="collect-details-pop-form">
+                            <a href="<?php echo URLROOT?>/Collectors/request_completed/"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
                                     id="collect-details-pop-form-close"></a>
                                 <div class="collect-details-pop-form-top">
-                                    <div class="collect-details-topic">Collect Details<div id="req_id3"></div>
+                                    <div class="collect-details-topic">collect details<div id="req_id3"></div>
+                                    </div>
                                 </div>
-                        </div>
 
                                 <div class="collect-details-pop-form-content">
-                                    <div class="collect-details-pop-form-content-labels">
-                                        <h2>Polythene Quantity :-</h2>
-                                        <h2>Plastic Quantity :-</h2>
-                                        <h2>Glass Quantity :-</h2>
-                                        <h2>Paper Waste Quantity :-</h2>
-                                        <h2>Electronic Waste Quantity :-</h2>
-                                        <h2>Metals Quantity :-</h2>
-                                        <h2>Note :-</h2>
+                                    <div class="personal-details-right-labels">
+                                        <span>Polythene Quantity :-</span><br>
+                                        <span>Plastic Quantity :-</span><br>
+                                        <span>Glass Quantity :-</span><br>
+                                        <span>Paper Waste Quantity :-</span><br>
+                                        <span>Electronic Waste Quantity :-</span><br>
+                                        <span>Metals Quantity :-</span><br>
+                                        <span>Note :-</span><br>
                                     </div>
                                     <div class="personal-details-right-values">
                                         <span id="Polythene_Quantity"></span><br>
-                                        <span id="Plastic_Quantity"></span><br>
-                                        <span id="Glass_Quantity"></span><br>
+                                        <span id="Plastic_Quantity">23</span><br>
+                                        <span id="Glass_Quantity">23</span><br>
                                         <span id="Paper_Waste_Quantity"></span><br>
                                         <span id="Electronic_Waste_Quantity"></span><br>
                                         <span id="Metals_Quantity"></span><br>
                                         <span id="Note"></span><br>
                                     </div>
                                 </div>
-                </div> 
+                            </div>
+                        </div> 
             
 
                 <div class="personal-details-popup-box" id="personal-details-popup-box">
                     <div class="personal-details-popup-form" id="popup">
-                        <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
-                            id="personal-details-popup-form-close">
+                    <a href="<?php echo URLROOT?>/customers/request_completed/"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
+                            id="personal-details-popup-form-close"></a>
                         <center>
                             <div class="personal-details-topic">Collector Details</div>
                         </center>

@@ -879,5 +879,17 @@
 
     }
 
+    public function cancelled_requests($region){
+      $cancelled_requests = $this->requests_model->get_cancelled_request_bycenter($region);
+
+      $data =[
+        'cancelled_requests'=> $cancelled_requests,
+        'center_region'=> $region
+      ];
+
+      $this->view('admin/center_main_request_cancelled', $data);
+
+    }
+
   
   }

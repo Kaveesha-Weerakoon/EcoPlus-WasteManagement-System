@@ -3,7 +3,7 @@
     <div class="Admin_Center_Top">
         <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initMap" async defer></script>
     
-        <div class="Admin_Center_Main_Request_Incoming">
+        <div class="Admin_Center_Main_Request_Cancelled">
             <div class="main">
 
                 <div class="main-left">
@@ -70,30 +70,30 @@
                                 <h1>Requests</h1>
                             </div>
                             <div class="main-right-top-three">
-                                <a href="">
+                                <a href="<?php echo URLROOT?>/Admin/incoming_requests/<?php echo $data['center_region']?>">
                                     <div class="main-right-top-three-content">
-                                        <p><b style="color: #1B6652;">Incoming</b></p>
-                                        <div class="line"></div>
+                                        <p>Incoming</p>
+                                        <div class="line1"></div>
                                     </div>
                                 </a>
-                                <a href="<?php echo URLROOT?>/Admin/assigned_requests/<?php echo $data['center_region']?>">
+                                <a href="">
                                     <div class="main-right-top-three-content">
                                         <p>Assigned</p>
                                         <div class="line1"></div>
                                     </div>
                                 </a>
 
-                                <a href="<?php echo URLROOT?>/Admin/cancelled_requests/<?php echo $data['center_region']?>">
+                                <a href="<?php echo URLROOT?>/admin/center_add">
                                     <div class="main-right-top-three-content">
                                         <p>Completed</p>
                                         <div class="line1"></div>
                                     </div>
                                 </a>
 
-                                <a href="<?php echo URLROOT?>/Admin/cancelled_requests/<?php echo $data['center_region']?>">
+                                <a href="<?php echo URLROOT?>/admin/center_add">
                                     <div class="main-right-top-three-content">
-                                        <p>Cancelled</p>
-                                        <div class="line1"></div>
+                                        <p><b style="color: #1B6652;">Cancelled</b></p>
+                                        <div class="line"></div>
                                     </div>
                                 </a>
 
@@ -104,29 +104,34 @@
                                 <table class="table">
                                     <tr class="table-header">
                                         <th>Req ID</th>
-                                        <th>C ID</th>
-                                        <th>Customer Name</th>
                                         <th>Date</th>
                                         <th>Time</th>
+                                        <th>Customer ID</th>
+                                        <th>Cancelled By</th>
                                         <th>Location</th>
-                                        <th>Contact No</th>
-                                        <th>Instructions</th>
+                                        <th>Request details</th>
+                                        <th>Reason</th>
                                        
                                     </tr>
                                 </table>
                             </div>
                             <div class="main-right-bottom-down">
                                 <table class="table">
-                                <?php foreach($data['incoming_requests'] as $incoming_requests) : ?>
+                                <?php foreach($data['cancelled_requests'] as $cancelled_requests) : ?>
                                     <tr class="table-row">
-                                        <td>R<?php echo $incoming_requests->req_id?></td>
-                                        <td>C<?php echo $incoming_requests->customer_id?></td>
-                                        <td><?php echo $incoming_requests->name?></td>
-                                        <td><?php echo $incoming_requests->date?></td>
-                                        <td><?php echo $incoming_requests->time?></td>
-                                        <td><img onclick="viewLocation(<?php echo $incoming_requests->lat; ?>, <?php echo $incoming_requests->longi; ?>)" src="<?php echo IMGROOT?>/location.png" alt=""></td>
-                                        <td><?php echo $incoming_requests->contact_no?></td>
-                                        <td><?php echo $incoming_requests->instructions?></td>
+                                        <td>R<?php echo $cancelled_requests->req_id?></td>
+                                        <td><?php echo $cancelled_requests->date?></td>
+                                        <td><?php echo $cancelled_requests->time?></td>
+                                        <td>C<?php echo $cancelled_requests->customer_id?></td>
+                                        <td><?php echo $cancelled_requests->cancelled_by?></td>
+                                        <td><img onclick="viewLocation(<?php echo $cancelled_requests->lat; ?>, <?php echo $cancelled_requests->longi; ?>)" 
+                                        src="<?php echo IMGROOT?>/location.png" alt="" class="location_icon">
+                                        </td>
+                                        <td>
+                                        <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($cancelled_requests), ENT_QUOTES, 'UTF-8') ?>)"
+                                            class="cancel" src="<?php echo IMGROOT ?>/info.png" alt="">
+                                        </td>
+                                        <td><?php echo $cancelled_requests->reason?></td>
                                     </tr>   
                                     <?php endforeach; ?>  
                                             
@@ -144,6 +149,36 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+
+            <div class="request-details-pop" id="request-details-popup-box">
+                <div class="request-details-pop-form">
+                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
+                        id="request-details-pop-form-close">
+                    <div class="request-details-pop-form-top">
+                        <div class="request-details-topic">Request ID: R <div id="req_id3"></div>
+                        </div>
+                    </div>
+
+                    <div class="request-details-pop-form-content">
+                        <div class="request-details-right-labels">
+                            <span>Customer Id</span><br>
+                            <span>Name</span><br>
+                            <span>Date</span><br>
+                            <span>Time</span><br>
+                            <span>Contact No</span><br>
+                            <span>Instructions</span><br>
+                        </div>
+                        <div class="request-details-right-values">
+                            <span id="req_id2"></span><br>
+                            <span id="req_name"></span><br>
+                            <span id="req_date"></span><br>
+                            <span id="req_time"></span><br>
+                            <span id="req_contactno"></span><br>
+                            <span id="instructions"></span><br>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -174,5 +209,30 @@
     function closemap(){
         document.querySelector('.location_pop').style.display = 'none';
     }
+
+    function view_request_details(request) {
+
+        document.getElementById('request-details-popup-box').style.display = "flex";
+        document.getElementById('req_id3').innerText = request.req_id;
+        document.getElementById('req_id2').innerText = request.customer_id;
+        document.getElementById('req_name').innerText = request.customer_name;
+        document.getElementById('req_date').innerText = request.date;
+        document.getElementById('req_time').innerText = request.time;
+        document.getElementById('req_contactno').innerText = request.customer_contactno;
+        document.getElementById('instructions').innerText = request.instructions;
+
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const close_request_details = document.getElementById("request-details-pop-form-close");
+
+        close_request_details.addEventListener("click", function() {
+        document.getElementById('request-details-popup-box').style.display = "none";
+        });
+
+    });
+
+   
+
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

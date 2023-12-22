@@ -399,7 +399,7 @@
     
     .collect-details-pop-form-content {
         display: grid;
-        grid-template-columns: 40% 70%;
+        grid-template-columns: 50% 50%;
         width: 80%;
         background-color: white;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

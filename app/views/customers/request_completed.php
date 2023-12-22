@@ -112,7 +112,7 @@
 
                 <div class="collect-details-pop" id="collect-details-popup-box">
                             <div class="collect-details-pop-form">
-                            <a href="<?php echo URLROOT?>/Collectors/request_completed/"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
+                            <a href="<?php echo URLROOT?>/customers/request_completed/"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
                                     id="collect-details-pop-form-close"></a>
                                 <div class="collect-details-pop-form-top">
                                     <div class="collect-details-topic">collect details<div id="req_id3"></div>

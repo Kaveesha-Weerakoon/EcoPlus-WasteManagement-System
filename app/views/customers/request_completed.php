@@ -70,8 +70,8 @@
 
                                             <td>
                                                 <?php
-                                                $typeContent = ($request->type === 'complete') ? 
-                                                '<img class="collector_img" src="' . IMGROOT . '/img_upload/collector/' .$request->image . '" alt="1">':
+                                                $typeContent = ($request->type === 'completed') ? 
+                                                '<img class="collector_img" src="' . IMGROOT . '/img_upload/collector/' .$request->collector_image . '" alt="1">':
 
                                                 '<img class="collector_img" src="' . IMGROOT . '/collector.png" alt="1">';
                                                 echo $typeContent

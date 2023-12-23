@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Customer_Main">
-    <div class="Customer_History_Top">
+    <div class="Customer_History_Top ">
         <div class="Customer_Main_History">
             <div class="main">
                 <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
@@ -77,7 +77,7 @@
                     <div class="main-right-bottom">
                         <div class="main-right-bottom-two">
                             <div class="main-right-bottom-two-content">
-                                <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                                <i class='bx bx-data'></i>
                                 <h1>You Have No Discounts On Supermarkets</h1>
                                 <p></p>
 

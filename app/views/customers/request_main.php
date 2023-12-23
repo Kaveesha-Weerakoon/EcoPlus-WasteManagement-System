@@ -9,43 +9,8 @@
 
 
                 <div class="main-right">
-                    <div class="main-right-top">
-                        <div class="main-right-top-one">
-                            <div class="main-right-top-one-input">
-                                <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                                <input type="text" placeholder="Search" id="searchInput" oninput="searchTable()">
-                            </div>
+                    <?php require APPROOT . '/views/customers/customer_request/customer_request_top.php'; ?>
 
-                            <div class="main-right-top-one-content">
-                                <p><?php echo $_SESSION['user_name']?></p>
-                                <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
-                                    alt="">
-                            </div>
-                        </div>
-                        <div class="main-right-top-two">
-                            <h1>Requests</h1>
-                        </div>
-                        <div class="main-right-top-three">
-
-                            <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">Current</b></p>
-                                <div class="line"></div>
-                            </div>
-
-                            <a href="<?php echo URLROOT?>/customers/request_completed">
-                                <div class="main-right-top-three-content">
-                                    <p>Completed</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/customers/request_cancelled">
-                                <div class="main-right-top-three-content">
-                                    <p>Cancelled</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
                     <?php if(!empty($data['request'])) : ?>
                     <div class="main-right-bottom">
                         <div class="main-right-bottom-top">
@@ -79,31 +44,33 @@
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
                                     <td><?php echo $request->region?></td>
-                                    <td class="cancel-open"><img src="<?php echo IMGROOT?>/location.png" alt=""
-                                            onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)">
+                                    <td>
+
+                                        <i onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
+                                            class='bx bx-map' style="font-size: 29px"></i>
                                     </td>
                                     <td>
                                         <?php
                                         $typeContent = ($request->type === 'assigned') ? 
-                                        '<img class="collector_img" src="' . IMGROOT . '/img_upload/collector/' .$request->image . '" alt="1">':
+                                        '<img class="collector_img" src="' . IMGROOT . '/img_upload/collector/' .$request->image . '" alt="collector image">':
 
-                                        '<img class="collector_img" src="' . IMGROOT . '/collector.png" alt="1">';
+                                        '<img class="collector_img" src="' . IMGROOT . '/collector.png" alt="collector image">';
                                         echo $typeContent
                                     ?>
                                     </td>
 
                                     </td>
                                     <td class="cancel-open">
-                                        <img src="<?php echo IMGROOT ?>/view.png"
-                                            <?php if ($request->type === 'assigned') { ?>onclick="view_collector('<?php echo $request->image; ?>', '<?php echo $request->user_id; ?>', '<?php echo $request->name; ?>', '<?php echo $request->contact_no; ?>', '<?php echo $request->vehicle_no; ?>', '<?php echo $request->vehicle_type; ?>')"
-                                            <?php } ?> alt="">
+                                        <i class='bx bx-info-circle' style="font-size: 29px"
+                                            <?php if ($request->type === 'assigned') { ?>onclick="view_collector('<?php echo $request->image; ?>',
+                                        '<?php echo $request->user_id; ?>', '<?php echo $request->name; ?>',
+                                        '<?php echo $request->contact_no; ?>', '<?php echo $request->vehicle_no; ?>',
+                                        '<?php echo $request->vehicle_type; ?>')" <?php } ?>></i>
                                     <td class="cancel-open">
                                         <?php
                                                 if ($request->type === 'incoming') {
-                                                    // Put your condition here
                                                     echo '<a href="' . URLROOT . '/customers/cancel_request_confirm/' . $request->request_id . '"><img src="' . IMGROOT . '/close_popup.png" alt=""></a>';
                                                 } else {
-                                                    // Handle the else case if needed
                                                     echo '<img src="' . IMGROOT . '/warning.png" alt="">';
 
                                                 }
@@ -120,9 +87,10 @@
                     <?php else: ?>
                     <div class="main-right-bottom-two">
                         <div class="main-right-bottom-two-content">
-                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                            <!-- <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt=""> -->
+                            <i class='bx bx-data' style="font-size: 150px"></i>
                             <h1>You Have No Ongoing Requests</h1>
-                            <p>Make a collection request now!</p>
+                            <p>Request a Collect Now!</p>
                             <a href="<?php echo URLROOT?>/customers/request_collect"><button>Request</button></a>
 
                         </div>
@@ -263,6 +231,7 @@
 
         close_collector.addEventListener("click", function() {
             collector_view.style.display = "none"
+            console.log('as');
         });
 
     });

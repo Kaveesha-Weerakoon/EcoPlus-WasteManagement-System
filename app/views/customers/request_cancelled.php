@@ -8,42 +8,7 @@
                 <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
                 <div class="main-right">
-                    <div class="main-right-top">
-                        <div class="main-right-top-one">
-                            <div class="main-right-top-one-input">
-                                <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                                <input type="text" placeholder="Search" id="searchInput">
-                            </div>
-                            <div class="main-right-top-one-content">
-                                <p><?php echo $_SESSION['user_name']?></p>
-                                <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
-                                    alt="">
-                            </div>
-                        </div>
-                        <div class="main-right-top-two">
-                            <h1>Requests</h1>
-                        </div>
-                        <div class="main-right-top-three">
-                            <a href="<?php echo URLROOT?>/customers/request_main">
-                                <div class="main-right-top-three-content">
-                                    <p>Current</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/customers/request_completed">
-                                <div class="main-right-top-three-content">
-                                    <p>Completed</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-
-                            <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">Cancelled</b></p>
-                                <div class="line"></div>
-                            </div>
-
-                        </div>
-                    </div>
+                    <?php require APPROOT . '/views/customers/customer_request/customer_request_top.php'; ?>
 
                     <div class="main-right-bottom">
                         <div class="main-right-bottom-top">
@@ -65,12 +30,12 @@
                             <table class="table">
                                 <?php foreach($data['cancelled_request'] as $request) : ?>
                                 <tr class="table-row">
-                                    <td>R<?php echo $request->req_id?></td>
+                                    <td><?php echo $request->request_id?></td>
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
                                     <td><?php echo $request->region?></td>
-                                    <td><img src="<?php echo IMGROOT?>/location.png"
-                                            onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)">
+                                    <td><i onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
+                                            class='bx bx-map' style="font-size: 29px"></i>
                                     </td>
                                     <td><img src="<?php echo IMGROOT ?>/view.png"
                                             <?php if ($request->assinged === 'Yes') { ?>onclick="view_collector('<?php echo $request->image; ?>', '<?php echo $request->user_id; ?>', '<?php echo $request->name; ?>', '<?php echo $request->contact_no; ?>', '<?php echo $request->vehicle_no; ?>', '<?php echo $request->vehicle_type; ?>')"

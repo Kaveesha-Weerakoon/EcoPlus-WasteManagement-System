@@ -94,6 +94,14 @@
 
     }
 
+    public function getCenterManagerBy_centerId($center_id){
+      $this->db->query('SELECT * FROM center_managers WHERE assigned_center_id = :centerId');
+      $this->db->bind(':centerId', $center_id);
+
+      $row = $this->db->single();
+      return $row;
+    }
+
     public function get_Non_Assigned_CenterManger(){
       $this->db->query('SELECT *,
               center_managers.id as cmID,

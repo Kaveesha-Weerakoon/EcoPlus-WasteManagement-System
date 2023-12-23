@@ -156,6 +156,8 @@
                     </div>
 
                 </div>
+                <div class="overlay" id="overlay"></div>
+
             </div>
         </div>
     </div>
@@ -163,6 +165,8 @@
     function view_collector(image, col_id, name, contact_no, type, vehno) {
         var locationPop = document.querySelector('.personal-details-popup-box');
         locationPop.classList.add('active');
+        document.getElementById('overlay').style.display = "flex";
+
         document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + image;
         document.getElementById('collector_id').innerText = col_id;
         document.getElementById('collector_name').innerText = name;
@@ -175,6 +179,7 @@
         var newRequestId = id;
         var newURL = "<?php echo URLROOT?>/customers/cancel_request/" + newRequestId;
         document.getElementById('cancelLink').href = newURL;
+        document.getElementById('overlay').style.display = "flex";
 
         document.getElementById('cancel_confirm').classList.add('active');
     }
@@ -204,12 +209,16 @@
         initMap($lattitude, $longitude);
         var locationPop = document.querySelector('.location_pop');
         locationPop.classList.add('active');
+        document.getElementById('overlay').style.display = "flex";
+
 
     }
 
     function closemap() {
         var locationPop = document.querySelector('.location_pop');
         locationPop.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
     }
 
     function searchTable() {
@@ -240,10 +249,14 @@
 
         close_collector.addEventListener("click", function() {
             collector_view.classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
+
         });
 
         close_cancel.addEventListener("click", function() {
             document.getElementById('cancel_confirm').classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
+
         });
     });
     </script>

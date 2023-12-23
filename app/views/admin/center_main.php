@@ -1,6 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Admin_Main">
   <div class="Admin_Center_Main">
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initMap" async defer></script>
    <div class="main">
       <div class="main-left">
           <div class="main-left-top">
@@ -191,7 +192,10 @@
                 <div class="location-map-card">
                   <h3 class="section-subhead">Center Location</h3>
                   <div class="center-map-container">
-                    <img src="<?php echo IMGROOT?>/center-location.png" alt="">
+                    <div class="center-location-map-container">
+                        <!-- <img src="<?php echo IMGROOT?>/center-location.png" alt=""> -->
+                    </div>
+                    
                   </div>
                 
                 </div>
@@ -263,5 +267,38 @@
   </div>
 
 </div>
+<script>
+    function initMap(latitude, longitude) {
+        var mapCenter = { lat: latitude, lng: longitude };
+
+        var map = new google.maps.Map(document.querySelector('.center-location-map-container'), {
+          center: mapCenter,
+          zoom: 10
+        });
+
+        var marker = new google.maps.Marker({
+        position: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+        map: map,
+        title: 'Marked Location'
+    });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+            
+            var latitude = <?php echo $data['center']->lat; ?>;
+            var longitude = <?php echo $data['center']->longi; ?>;
+
+            if (typeof google === 'object' && typeof google.maps === 'object') {
+                // If loaded, call initMap immediately
+                initMap(latitude, longitude);
+            } else {
+                // If not loaded, set a callback to initMap when the API is loaded
+                window.initMap = function() {
+                    initMap(latitude, longitude);
+                };
+            }
+    });
+
+</script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

@@ -591,21 +591,24 @@
         background: #e5fa70;
       }
       
-      .center-map-container{
-       
-        /* box-shadow: rgba(17, 17, 26, 0.1) 2px 2px 16px; */
-      
-      }
-      
-      
-      .center-map-container img{
+      .center-location-map-container{
         width: 300px;
         height: 315px;
         border-radius: 15px;
         /* box-shadow: rgba(17, 17, 26, 0.1) 2px 2px 16px; */
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      
+       
       }
+      
+      
+      /* .center-map-container img{
+        width: 300px;
+        height: 315px;
+        border-radius: 15px;
+        box-shadow: rgba(17, 17, 26, 0.1) 2px 2px 16px; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      
+      } */
       
       @media only screen and (max-width: 1136px){
         .analytics{

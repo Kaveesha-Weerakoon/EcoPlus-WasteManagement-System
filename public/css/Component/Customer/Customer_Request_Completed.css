@@ -1,7 +1,6 @@
 .Customer_Request_Completed {
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
 
-
     * {
         margin: 0;
         padding: 0;
@@ -121,85 +120,123 @@
     }
 
 
-
     /*collect details*/
+
     .collect-details-pop {
+        display: flex;
         position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
         z-index: 4;
-        display: none;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 100%;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+    }
+
+    .collect-details-pop.active {
+        transform: translate(-50%, -50%) scale(1);
     }
 
     .collect-details-pop-form {
-        width: 45%;
-        background: white;
-        border-radius: 6px;
+        box-sizing: border-box;
+        width: 100%;
+        background: var(--background-color-main);
+        border-radius: 10px !important;
         top: 0;
         position: relative;
         text-align: center;
         padding: 30px;
-        color: #333;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: transform 0.4s, top 0.4s;
         flex-direction: column;
-
+        color: var(--main-text-color);
     }
 
     .collect-details-pop-form-top {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 10px;
         margin-bottom: 25px;
         font-size: 18px;
-        padding-right: 250px;
     }
 
+    .collect-details-topic::before {
+        content: '';
+        position: absolute;
+        margin-top: 28px;
+        margin-left: 40px;
+        margin-bottom: 15px;
+        height: 4px;
+        width: 75px;
+        background: var(--green-color-two);
+    }
 
     .collect-details-pop-form-close {
         width: 25px;
         height: 25px;
-        margin-left: 650px;
+        margin-left: 600px;
         margin-top: -3%;
         cursor: pointer;
-    }
-
-
-    .collect-details-topic {
-        display: flex;
-        padding-right: 200px;
-
     }
 
     .collect-details-pop-form-content {
         display: grid;
         grid-template-columns: 50% 50%;
         width: 80%;
-        background-color: white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        border-radius: 6px;
-        padding-left: 30px;
+        background: var(--background-color-main);
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        padding: 10px;
+        height: 300px;
     }
 
-    .collect-details-topic::before {
-        content: '';
-        position: absolute;
-        margin-top: 23px;
-        margin-right: 70px;
-        margin-bottom: 15px;
-        height: 4px;
-        width: 67px;
-        background: #1B6652;
+    .collect-details-pop-form-content span {
+        width: 250px;
     }
 
+    .collect-details-pop-form-content-labels {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .collect-details-pop-form-content-labels h3 {
+        font-weight: 300;
+        font-size: 14px;
+        margin-bottom: 5%;
+        width: 300px;
+        text-align: left;
+        margin-left: 45%;
+    }
+
+    .collect-details-pop-form-content-right-values {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .collect-details-pop-form-content-right-values-cont h3 {
+        width: 45px;
+    }
+
+    .collect-details-pop-form-content-right-values-cont {
+        display: flex;
+        margin-bottom: 4%;
+    }
+
+    .collect-details-pop-form-content-right-values h3 {
+        font-weight: 300;
+        font-size: 14px;
+    }
 
     /*View Collector Pop*/
 
@@ -222,7 +259,6 @@
         }
 
         .main-left-bottom-content {
-
             padding-right: 0px;
         }
 
@@ -240,13 +276,10 @@
         .main-right-top-one-content {
             width: 250px;
             margin-left: 1%;
-
         }
 
         .table td {
-
             font-size: 12px;
-
         }
 
         .table-header {
@@ -255,8 +288,7 @@
 
         .table-row img {
             width: 20px;
-            height: 20px;
-
+            height: 20px
         }
 
     }
@@ -270,25 +302,19 @@
 
         .main-right-top-one input {
             width: 20%;
-
         }
 
         .main-right-top-three-content p {
             font-size: 14px;
-
         }
-
 
         .line {
             width: 86px;
             height: 2px;
-
         }
 
         .table td {
-
             font-size: 10px;
-
         }
 
         .table-header {
@@ -298,17 +324,12 @@
         .table-row img {
             width: 17px;
             height: 17px;
-
         }
     }
 
     @media screen and (max-width: 692px) {
-
-
         .table td {
-
             font-size: 9px;
-
         }
 
         .table-header {
@@ -318,9 +339,7 @@
         .table-row img {
             width: 15px;
             height: 15px;
-
         }
-
     }
 
     @media screen and (max-width:1412px) {
@@ -331,7 +350,6 @@
 
         .View-content-content-content h6 {
             font-size: 16px;
-
         }
 
         .View-content-content-content p {
@@ -351,17 +369,14 @@
 
         .View-content-content-content h6 {
             font-size: 15px;
-
         }
 
         .View-content h3 {
             font-size: 18px;
-
         }
 
         .View-content h1 {
             font-size: 21px;
-
         }
 
         .View-content-content-content p {

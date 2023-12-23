@@ -40,6 +40,7 @@
         box-sizing: border-box;
         height: 42%;
         box-shadow: var(--box-shadow2);
+        background-color: var(--background-color-right);
 
     }
 

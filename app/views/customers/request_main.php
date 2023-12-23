@@ -69,7 +69,7 @@
                                     <td class="cancel-open">
                                         <?php
                                                 if ($request->type === 'incoming') {
-                                                    echo '<a href="' . URLROOT . '/customers/cancel_request_confirm/' . $request->request_id . '"><img src="' . IMGROOT . '/close_popup.png" alt=""></a>';
+                                                    echo '<img onclick="cancel_request(\'' . $request->request_id . '\')" src="' . IMGROOT . '/close_popup.png" alt="">';
                                                 } else {
                                                     echo '<img src="' . IMGROOT . '/warning.png" alt="">';
 
@@ -100,21 +100,17 @@
 
                 </div>
 
-                <?php if($data['cancel']=='True') : ?>
-                <div class="delete_confirm">
+                <div class="delete_confirm" id="cancel_confirm">
                     <div class="popup" id="popup">
                         <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
                         <h2>Cancel the Request?</h2>
                         <p>This action will cancel the request </p>
                         <div class="btns">
-                            <a href="<?php echo URLROOT?>/customers/cancel_request/<?php echo $data['request_id']?>"><button
-                                    type="button" class="deletebtn">Confirm</button></a>
-                            <a href="<?php echo URLROOT?>/customers/request_main"><button type="button"
-                                    class="cancelbtn">Cancel</button></a>
+                            <a id="cancelLink"><button type="button" class="deletebtn">Confirm</button></a>
+                            <a id="close_cancel"><button type="button" class="cancelbtn">Cancel</button></a>
                         </div>
                     </div>
                 </div>
-                <?php endif; ?>
 
                 <div class="location_pop">
                     <div class="location_pop_content">
@@ -165,13 +161,22 @@
     </div>
     <script>
     function view_collector(image, col_id, name, contact_no, type, vehno) {
-        document.getElementById('personal-details-popup-box').style.display = 'flex';
+        var locationPop = document.querySelector('.personal-details-popup-box');
+        locationPop.classList.add('active');
         document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + image;
         document.getElementById('collector_id').innerText = col_id;
         document.getElementById('collector_name').innerText = name;
         document.getElementById('collector_conno').innerText = contact_no;
         document.getElementById('collector_vehicle_no').innerText = vehno;
         document.getElementById('collector_vehicle_type').innerText = type;
+    }
+
+    function cancel_request(id) {
+        var newRequestId = id;
+        var newURL = "<?php echo URLROOT?>/customers/cancel_request/" + newRequestId;
+        document.getElementById('cancelLink').href = newURL;
+
+        document.getElementById('cancel_confirm').classList.add('active');
     }
 
     function initMap(latitude, longitude) {
@@ -182,7 +187,7 @@
 
         var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
             center: mapCenter,
-            zoom: 14.5
+            zoom: 12.5
         });
 
         var marker = new google.maps.Marker({
@@ -197,11 +202,14 @@
 
     function viewLocation($lattitude, $longitude) {
         initMap($lattitude, $longitude);
-        document.querySelector('.location_pop').style.display = 'flex';
+        var locationPop = document.querySelector('.location_pop');
+        locationPop.classList.add('active');
+
     }
 
     function closemap() {
-        document.querySelector('.location_pop').style.display = 'none';
+        var locationPop = document.querySelector('.location_pop');
+        locationPop.classList.remove('active');
     }
 
     function searchTable() {
@@ -228,12 +236,15 @@
     document.addEventListener("DOMContentLoaded", function() {
         const close_collector = document.getElementById("personal-details-popup-form-close");
         const collector_view = document.getElementById("personal-details-popup-box");
+        const close_cancel = document.getElementById("close_cancel");
 
         close_collector.addEventListener("click", function() {
-            collector_view.style.display = "none"
-            console.log('as');
+            collector_view.classList.remove('active');
         });
 
+        close_cancel.addEventListener("click", function() {
+            document.getElementById('cancel_confirm').classList.remove('active');
+        });
     });
     </script>
     <?php require APPROOT . '/views/inc/footer.php'; ?>

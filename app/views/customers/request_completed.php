@@ -15,6 +15,7 @@
                                     <th>Req ID</th>
                                     <th>Date</th>
                                     <th>Time</th>
+                                    <th>Center</th>
                                     <th>Collector</th>
                                     <th>Collector Info</th>
                                     <th>Location</th>
@@ -33,6 +34,7 @@
                                     <td><?php  echo $request->date?></td>
 
                                     <td><?php  echo $request->time?></td>
+                                    <td><?php  echo $request->region?></td>
 
                                     <td>
                                         <?php
@@ -50,8 +52,8 @@
                                             <?php } ?> alt="">
                                     </td>
 
-                                    <td class="cancel-open"><img src="<?php echo IMGROOT?>/location.png" alt=""
-                                            onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)">
+                                    <td class="cancel-open"><i class='bx bx-map' style="font-size: 29px"
+                                            onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
                                     </td>
 
                                     <td><?php  echo $request->credit_amount?></td>
@@ -114,9 +116,8 @@
 
                 <div class="personal-details-popup-box" id="personal-details-popup-box">
                     <div class="personal-details-popup-form" id="popup">
-                        <a href="<?php echo URLROOT?>/customers/request_completed/"><img
-                                src="<?php echo IMGROOT?>/close_popup.png" alt=""
-                                class="personal-details-popup-form-close" id="personal-details-popup-form-close"></a>
+                        <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
+                            id="personal-details-popup-form-close">
                         <center>
                             <div class="personal-details-topic">Collector Details</div>
                         </center>
@@ -154,7 +155,8 @@
 
 <script>
 function view_collector(image, col_id, name, contact_no, type, vehno) {
-    document.getElementById('personal-details-popup-box').style.display = 'flex';
+    var locationPop = document.querySelector('.personal-details-popup-box');
+    locationPop.classList.add('active');
     document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + image;
     document.getElementById('collector_id').innerText = col_id;
     document.getElementById('collector_name').innerText = name;
@@ -182,7 +184,7 @@ function initMap(latitude, longitude) {
 
     var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
         center: mapCenter,
-        zoom: 14.5
+        zoom: 12.5
     });
 
     var marker = new google.maps.Marker({
@@ -197,11 +199,13 @@ function initMap(latitude, longitude) {
 
 function viewLocation($lattitude, $longitude) {
     initMap($lattitude, $longitude);
-    document.querySelector('.location_pop').style.display = 'flex';
+    var locationPop = document.querySelector('.location_pop');
+    locationPop.classList.add('active');
 }
 
 function closemap() {
-    document.querySelector('.location_pop').style.display = 'none';
+    var locationPop = document.querySelector('.location_pop');
+    locationPop.classList.remove('active');
 }
 
 function searchTable() {
@@ -230,19 +234,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const collector_view = document.getElementById("personal-details-popup-box");
 
     close_collector.addEventListener("click", function() {
-        collector_view.style.display = "none"
-    });
-
-});
-
-
-document.getElementById('searchInput').addEventListener('input', searchTable);
-document.addEventListener("DOMContentLoaded", function() {
-    const close_collector = document.getElementById("personal-details-popup-form-close");
-    const collector_view = document.getElementById("personal-details-popup-box");
-
-    close_collector.addEventListener("click", function() {
-        collector_view.style.display = "none"
+        collector_view.classList.remove('active');
     });
 
 });

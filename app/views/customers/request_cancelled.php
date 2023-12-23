@@ -139,7 +139,7 @@
 
             var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
                 center: mapCenter,
-                zoom: 14.5
+                zoom: 12.5
             });
 
             var marker = new google.maps.Marker({
@@ -154,11 +154,13 @@
 
         function viewLocation($lattitude, $longitude) {
             initMap($lattitude, $longitude);
-            document.querySelector('.location_pop').style.display = 'flex';
+            var locationPop = document.querySelector('.location_pop');
+            locationPop.classList.add('active');
         }
 
         function closemap() {
-            document.querySelector('.location_pop').style.display = 'none';
+            var locationPop = document.querySelector('.location_pop');
+            locationPop.classList.remove('active');
         }
 
         document.getElementById('searchInput').addEventListener('input', searchTable);

@@ -25,19 +25,23 @@
 
     .table-row {
         height: 52px;
-        display: grid;
         grid-template-columns: 12% 12% 10% 12% 12% 20% 12% 10%;
     }
 
     .table td {
         height: 50px;
-
     }
 
     .table-row img {
         width: 25px;
         height: 25px;
         cursor: pointer;
+    }
+
+    .collector_img {
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 50%;
     }
 
     .View {
@@ -47,8 +51,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 4;
         align-items: center;
         justify-content: center;
     }
@@ -78,7 +82,6 @@
         justify-content: center;
         flex-direction: row;
         margin-top: 35px;
-
     }
 
     .View-content h2 {
@@ -116,6 +119,237 @@
         font-size: 20px;
         font-weight: 600;
     }
+
+
+
+    /*collect details*/
+    .collect-details-pop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 4;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .collect-details-pop-form {
+        width: 45%;
+        background: white;
+        border-radius: 6px;
+        top: 0;
+        position: relative;
+        text-align: center;
+        padding: 30px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.4s, top 0.4s;
+        flex-direction: column;
+
+    }
+
+    .collect-details-pop-form-top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+        margin-bottom: 25px;
+        font-size: 18px;
+        padding-right: 250px;
+    }
+
+
+    .collect-details-pop-form-close {
+        width: 25px;
+        height: 25px;
+        margin-left: 650px;
+        margin-top: -3%;
+        cursor: pointer;
+    }
+
+
+    .collect-details-topic {
+        display: flex;
+        padding-right: 200px;
+
+    }
+
+    .collect-details-pop-form-content {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        width: 80%;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+        padding-left: 30px;
+
+    }
+
+    .collect-details-topic::before {
+        content: '';
+        position: absolute;
+        margin-top: 23px;
+        margin-right: 70px;
+        margin-bottom: 15px;
+        height: 4px;
+        width: 67px;
+        background: #1B6652;
+
+    }
+
+
+    /*View Collector Pop*/
+    .personal-details-popup-box {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 4;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .personal-details-popup-form {
+        width: 45%;
+        background: white;
+        border-radius: 6px;
+        top: 0;
+        position: relative;
+        text-align: center;
+        padding: 0 30px 30px;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.4s, top 0.4s;
+    }
+
+    .personal-details-popup-form-close {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+
+    .personal-details-popup {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        width: 100%;
+        border-radius: 4px;
+        height: 100%;
+        padding-top: 10px;
+        margin-top: 17px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .personal-details-topic {
+        letter-spacing: 0.03rem;
+    }
+
+    .personal-details-topic::before {
+        content: '';
+        position: absolute;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        height: 3px;
+        width: 70px;
+        margin-left: 25%;
+        background: #1B6652;
+    }
+
+    .personal-details-right {
+        display: grid;
+        grid-template-columns: 30% 70%;
+    }
+
+    .personal-details-right-labels {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 40px;
+        padding-bottom: 50px;
+        padding-left: 25px;
+    }
+
+    .personal-details-right-labels span {
+        margin-bottom: 15px;
+        font-size: 15px;
+        color: #7c7c7d;
+    }
+
+    .personal-details-right-values {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 40px;
+        padding-bottom: 50px;
+        padding-left: 32px;
+    }
+
+    .personal-details-right-values span {
+        margin-bottom: 15px;
+        font-size: 15px;
+        color: #767e95;
+        font-weight: 550;
+    }
+
+    .personal-details-left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        flex-direction: column;
+    }
+
+    .personal-details-left img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .personal-details-left p {
+        margin-top: 5px;
+        font-size: 15px;
+        color: #7c7c7d;
+    }
+
+    .personal-details-left span {
+        color: #767e95;
+        font-weight: 550;
+    }
+
+    .profile-pic {
+        width: 70%;
+        height: auto;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-bottom: 8px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .personal-details-topic {
+        font-size: 18px;
+        font-weight: 500;
+        position: relative;
+        margin-inline-end: auto;
+        margin-top: 15px;
+    }
+
+
 
     @media screen and (max-width: 1250px) {
         .main-left-middle-content h2 {
@@ -304,237 +538,6 @@
             display: 1px solid red;
         }
     }
-
-    /*collect details*/
-    .collect-details-pop {
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-    }
-
-    .collect-details-pop-form {
-        width: 45%;
-        background: white;
-        border-radius: 6px;
-        top: 0;
-        position: relative;
-        text-align: center;
-        padding: 30px;
-        color: #333;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.4s, top 0.4s;
-        flex-direction: column;
-
-    }
-
-    .collect-details-pop-form-top {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 10px;
-        margin-bottom: 25px;
-        font-size: 18px;
-        padding-right: 250px;
-    }
-
-
-    .collect-details-pop-form-close {
-        width: 25px;
-        height: 25px;
-        margin-left: 650px;
-        margin-top: -3%;
-        cursor: pointer;
-    }
-
-
-    .collect-details-topic {
-        display: flex;
-        padding-right: 200px;
-
-    }
-
-    .collect-details-pop-form-content {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        width: 80%;
-        background-color: white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        border-radius: 6px;
-        padding-left: 30px;
-
-    }
-
-    .collect-details-topic::before {
-        content: '';
-        position: absolute;
-        margin-top: 23px;
-        margin-right: 70px;
-        margin-bottom: 15px;
-        height: 4px;
-        width: 67px;
-        background: #1B6652;
-
-    }
-
-
-    /*View Collector Pop*/
-    .personal-details-popup-box {
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-    }
-
-    .personal-details-popup-form {
-        width: 45%;
-        background: white;
-        border-radius: 6px;
-        top: 0;
-        position: relative;
-        text-align: center;
-        padding: 0 30px 30px;
-        color: #333;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.4s, top 0.4s;
-    }
-
-    .personal-details-popup-form-close {
-        width: 25px;
-        height: 25px;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 20px;
-        height: 20px;
-        cursor: pointer;
-    }
-
-    .personal-details-popup {
-        display: grid;
-        grid-template-columns: 40% 60%;
-        width: 100%;
-        border-radius: 4px;
-        height: 100%;
-        padding-top: 10px;
-        margin-top: 17px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .personal-details-right {
-        display: grid;
-        grid-template-columns: 30% 70%;
-
-    }
-
-    .personal-details-right-labels {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        padding-top: 40px;
-        padding-bottom: 50px;
-        padding-left: 25px;
-    }
-
-    .personal-details-right-labels span {
-        margin-bottom: 15px;
-        font-size: 15px;
-        color: #7c7c7d;
-    }
-
-
-    .personal-details-right-values {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        padding-top: 40px;
-        padding-bottom: 50px;
-        padding-left: 32px;
-    }
-
-    .personal-details-right-values span {
-        margin-bottom: 15px;
-        font-size: 15px;
-        color: #767e95;
-        font-weight: 550;
-
-    }
-
-    .personal-details-left {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        flex-direction: column;
-    }
-
-    .personal-details-left img {
-        width: 150px;
-        height: 150px;
-    }
-
-    .personal-details-left p {
-        margin-top: 5px;
-        font-size: 15px;
-        color: #7c7c7d;
-    }
-
-    .personal-details-left span {
-        color: #767e95;
-        font-weight: 550;
-
-    }
-
-    .profile-pic {
-        width: 70%;
-        height: auto;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-bottom: 8px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-
-    }
-
-    .personal-details-topic {
-        font-size: 18px;
-        font-weight: 500;
-        position: relative;
-        margin-inline-end: auto;
-        margin-top: 15px;
-
-    }
-
-    .personal-details-topic::before {
-        content: '';
-        position: absolute;
-        margin-top: 23px;
-        margin-left: 45px;
-        margin-bottom: 15px;
-        height: 3px;
-        width: 45px;
-        background: #1B6652;
-
-    }
-
 
 
 }

@@ -87,9 +87,10 @@
                     <?php else: ?>
                     <div class="main-right-bottom-two">
                         <div class="main-right-bottom-two-content">
-                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                            <!-- <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt=""> -->
+                            <i class='bx bx-data' style="font-size: 150px"></i>
                             <h1>You Have No Ongoing Requests</h1>
-                            <p>Make a collection request now!</p>
+                            <p>Request a Collect Now!</p>
                             <a href="<?php echo URLROOT?>/customers/request_collect"><button>Request</button></a>
 
                         </div>

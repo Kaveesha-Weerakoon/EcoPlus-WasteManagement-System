@@ -50,6 +50,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
 
     }
 
@@ -61,19 +62,22 @@
 
     .main-right-bottom-two-content h1 {
         font-size: 23px;
-        color: #333;
+        color: var(--main-text-color);
         font-weight: 550;
+        margin-top: 2%;
     }
 
     .main-right-bottom-two-content p {
         font-size: 18px;
         margin-top: 7px;
-        color: #7c7c7d;
+        color: var(--main-text-color);
     }
 
+    .bx bx-data {}
+
     .main-right-bottom-two-content button {
-        height: 42px;
-        width: 200px;
+        height: 40px;
+        width: 175px;
         outline: none;
         color: white;
         font-size: 19px;
@@ -82,17 +86,15 @@
         cursor: pointer;
         border: none;
         letter-spacing: 1px;
-        background: #1B6652;
+        background: var(--green-color-one);
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
         margin-bottom: 20px;
-        margin-top: 20px;
+        margin-top: 10%;
     }
-
 
     .main-right-bottom-two-content button:hover {
-        background: rgb(28, 79, 64);
+        background: var(--green-color-one);
     }
-
 
     .processing {
         width: 35px;
@@ -246,6 +248,21 @@
         transition: transform 0.4s, top 0.4s;
     }
 
+    .personal-details-topic {
+        letter-spacing: 0.03rem;
+    }
+
+    .personal-details-topic::before {
+        content: '';
+        position: absolute;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        height: 3px;
+        width: 70px;
+        margin-left: 25%;
+        background: #1B6652;
+    }
+
     .personal-details-popup-form-close {
         width: 25px;
         height: 25px;
@@ -347,16 +364,6 @@
         margin-top: 15px;
     }
 
-    .personal-details-topic::before {
-        content: '';
-        position: absolute;
-        margin-top: 23px;
-        margin-left: 45px;
-        margin-bottom: 15px;
-        height: 3px;
-        width: 45px;
-        background: #1B6652;
-    }
 
     /*---------------*/
 

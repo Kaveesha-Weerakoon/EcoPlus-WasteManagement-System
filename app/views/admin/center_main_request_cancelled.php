@@ -76,7 +76,7 @@
                                         <div class="line1"></div>
                                     </div>
                                 </a>
-                                <a href="">
+                                <a href="<?php echo URLROOT?>/Admin/assigned_requests/<?php echo $data['center_region']?>">
                                     <div class="main-right-top-three-content">
                                         <p>Assigned</p>
                                         <div class="line1"></div>
@@ -90,7 +90,7 @@
                                     </div>
                                 </a>
 
-                                <a href="<?php echo URLROOT?>/admin/center_add">
+                                <a href="">
                                     <div class="main-right-top-three-content">
                                         <p><b style="color: #1B6652;">Cancelled</b></p>
                                         <div class="line"></div>

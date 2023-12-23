@@ -90,7 +90,7 @@
                                     </div>
                                 </a>
 
-                                <a href="<?php echo URLROOT?>/admin/center_add">
+                                <a href="<?php echo URLROOT?>/Admin/cancelled_requests/<?php echo $data['center_region']?>">
                                     <div class="main-right-top-three-content">
                                         <p>Cancelled</p>
                                         <div class="line1"></div>

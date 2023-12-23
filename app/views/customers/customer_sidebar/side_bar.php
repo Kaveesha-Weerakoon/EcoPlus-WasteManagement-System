@@ -92,6 +92,7 @@ checkbox.addEventListener("change", function() {
         root.style.setProperty("--green-color-one", "#fff");
         root.style.setProperty("--green-color-two", "#fff");
         root.style.setProperty("--background-color-two", "#001f3f");
+        root.style.setProperty("--table-header", "#001f3f");
         root.style.setProperty("--notification-hover", "#1ca557");
         root.style.setProperty("--box-shadow", "0.5px 0.5px 1px 0.5px rgba(255, 255, 255, 1)");
         logo.style.display = "none";
@@ -115,6 +116,7 @@ checkbox.addEventListener("change", function() {
         root.style.setProperty("--notification-hover", "#64d798");
         root.style.setProperty("--background-color-two", "#f5f6fa");
         root.style.setProperty("--box-shadow", "0 1px 1px 0px rgba(0, 0, 0, 0.1)");
+        root.style.setProperty("--table-header", "#e9f6ef");
         logo.style.display = "flex";
         color = "#47b076";
         textColor = "#414143";

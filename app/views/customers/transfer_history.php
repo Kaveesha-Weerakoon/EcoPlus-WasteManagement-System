@@ -103,10 +103,10 @@
                                             <td><?php echo $transaction->date . ' ' . $transaction->time; ?></td>
                                             <td>
                                                 <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
-                                                <img class="status" src="<?php echo IMGROOT; ?>/send.png" alt="">
+                                                <i class='bx bxs-send'></i>
                                                 <p>Sent</p>
                                                 <?php else: ?>
-                                                <img class="status" src="<?php echo IMGROOT; ?>/recieved.png" alt="">
+                                                <i class='bx bxs-chevrons-down'></i>
                                                 <p>Received</p>
                                                 <?php endif; ?>
                                             </td>

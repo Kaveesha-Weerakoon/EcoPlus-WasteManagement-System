@@ -18,7 +18,7 @@
 @import url('Component/Customer/Customer_Request_Main.css');
 @import url('Component/Customer/Customer_Request_Completed.css');
 @import url('Component/Customer/Customer_Request_Ongoing.css');
-@import url('Component/Customer/Customer_Request_Ongoing.css');
+@import url('Component/Customer/Customer_Request_Cancelled.css');
 @import url('Component/Customer/Customer_Editprofile.css');
 @import url('Component/Customer/Customer_Complains.css');
 
@@ -144,6 +144,13 @@ a {
     height: 100vh;
 }
 
+.table-header th {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0px;
+}
+
 .table-header {
     background-color: var(--table-header);
     font-size: 15px;
@@ -153,7 +160,38 @@ a {
     margin-bottom: 0px;
 }
 
+.table-header th {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0px;
+}
+
+.table td {
+    font-size: 14px;
+    text-align: center !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .table-row:hover {
     background-color: var(--table-header);
     cursor: pointer;
+}
+
+.table-row {
+    margin-bottom: 2px;
+    text-align: center;
+    display: grid;
+    border-bottom: 1px solid var(--background-color-two);
+}
+
+.table {
+    border-collapse: collapse;
+    text-align: center;
+    padding-left: 3.5%;
+    width: 96.5%;
+    background-color: var(--background-color-main) !important;
+    color: var(--main-text-color);
 }

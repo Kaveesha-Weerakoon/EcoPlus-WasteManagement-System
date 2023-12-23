@@ -69,7 +69,22 @@
         cursor: pointer;
     }
 
+
     /*Location Pop*/
+    .location_pop {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
     .location_pop_content {
         width: 70%;
         height: 78%;

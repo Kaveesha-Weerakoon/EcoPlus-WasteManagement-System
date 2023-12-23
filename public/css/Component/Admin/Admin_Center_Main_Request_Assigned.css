@@ -59,6 +59,13 @@
         overflow-y: scroll;
     }
 
+    .collector_img{
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
     .td img {
         margin: 6px;
         width: 20px;
@@ -69,9 +76,24 @@
         width: 25px;
         height: 25px;
         cursor: pointer;
+        
     }
 
     /*Location Pop*/
+    .location_pop {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
     .location_pop_content {
         width: 70%;
         height: 78%;

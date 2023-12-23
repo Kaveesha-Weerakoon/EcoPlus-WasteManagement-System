@@ -215,10 +215,10 @@
         document.getElementById('request-details-popup-box').style.display = "flex";
         document.getElementById('req_id3').innerText = request.req_id;
         document.getElementById('req_id2').innerText = request.customer_id;
-        document.getElementById('req_name').innerText = request.customer_name;
+        document.getElementById('req_name').innerText = request.name;
         document.getElementById('req_date').innerText = request.date;
         document.getElementById('req_time').innerText = request.time;
-        document.getElementById('req_contactno').innerText = request.customer_contactno;
+        document.getElementById('req_contactno').innerText = request.contact_no;
         document.getElementById('instructions').innerText = request.instructions;
 
     }

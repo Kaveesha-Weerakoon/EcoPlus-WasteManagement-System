@@ -834,7 +834,8 @@
       // $collector_assistants = $this->collector_assistants_Model->get_collector_assistants_bycolid($collectorId);
       
       $data =[
-        'collectors_in_center' =>$collectors_in_center
+        'collectors_in_center' =>$collectors_in_center,
+        'center_id'=> $center_id
         
       ];
 

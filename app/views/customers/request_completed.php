@@ -82,37 +82,56 @@
 
                 <div class="collect-details-pop" id="collect-details-popup-box">
                     <div class="collect-details-pop-form">
-                        <a href="<?php echo URLROOT?>/customers/request_completed/"><img
-                                src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
-                                id="collect-details-pop-form-close"></a>
+                        <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
+                            id="collect-details-pop-form-close">
                         <div class="collect-details-pop-form-top">
-                            <div class="collect-details-topic">collect details<div id="req_id3"></div>
+                            <div class="collect-details-topic">Completed Details<div id="req_id3"></div>
                             </div>
                         </div>
 
                         <div class="collect-details-pop-form-content">
-                            <div class="personal-details-right-labels">
-                                <span>Polythene Quantity :-</span><br>
-                                <span>Plastic Quantity :-</span><br>
-                                <span>Glass Quantity :-</span><br>
-                                <span>Paper Waste Quantity :-</span><br>
-                                <span>Electronic Waste Quantity :-</span><br>
-                                <span>Metals Quantity :-</span><br>
-                                <span>Note :-</span><br>
+                            <div class="collect-details-pop-form-content-labels">
+                                <h3>Polythene Quantity</h3>
+                                <h3>Plastic Quantity</h3>
+                                <h3>Glass Quantity </h3>
+                                <h3>Paper Waste Quantity</h3>
+                                <h3>Electronic Waste Quantity </h3>
+                                <h3>Metals Quantity</h3>
+                                <h3>Details</h3>
                             </div>
-                            <div class="personal-details-right-values">
-                                <span id="Polythene_Quantity"></span><br>
-                                <span id="Plastic_Quantity">23</span><br>
-                                <span id="Glass_Quantity">23</span><br>
-                                <span id="Paper_Waste_Quantity"></span><br>
-                                <span id="Electronic_Waste_Quantity"></span><br>
-                                <span id="Metals_Quantity"></span><br>
-                                <span id="Note"></span><br>
+                            <div class="collect-details-pop-form-content-right-values">
+                                <div class="collect-details-pop-form-content-right-values-cont">
+                                    <h3 id="Polythene_Quantity"></h3>
+                                    <h3>&nbsp Kg</h3>
+                                </div>
+                                <div class="collect-details-pop-form-content-right-values-cont">
+                                    <h3 id="Plastic_Quantity"></h3>
+                                    <h3>&nbsp Kg</h3>
+                                </div>
+                                <div class="collect-details-pop-form-content-right-values-cont">
+                                    <h3 id="Glass_Quantity"></h3>
+                                    <h3>&nbsp Kg</h3>
+                                </div>
+                                <div class="collect-details-pop-form-content-right-values-cont">
+                                    <h3 id="Paper_Waste_Quantity"></h3>
+                                    <h3>&nbsp Kg</h3>
+                                </div>
+                                <div class="collect-details-pop-form-content-right-values-cont">
+                                    <h3 id="Electronic_Waste_Quantity"></h3>
+                                    <h3>&nbsp Kg</h3>
+                                </div>
+                                <div class="collect-details-pop-form-content-right-values-cont">
+                                    <h3 id="Metals_Quantity"></h3>
+                                    <h3>&nbsp Kg</h3>
+                                </div>
+                                <div class="collect-details-pop-form-content-right-values-cont">
+                                    <h3 id="Note"></h3>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <div class="overlay" id="overlay"></div>
 
                 <div class="personal-details-popup-box" id="personal-details-popup-box">
                     <div class="personal-details-popup-form" id="popup">
@@ -155,8 +174,9 @@
 
 <script>
 function view_collector(image, col_id, name, contact_no, type, vehno) {
-    var locationPop = document.querySelector('.personal-details-popup-box');
+    var locationPop = document.getElementById('personal-details-popup-box');
     locationPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
     document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + image;
     document.getElementById('collector_id').innerText = col_id;
     document.getElementById('collector_name').innerText = name;
@@ -166,7 +186,10 @@ function view_collector(image, col_id, name, contact_no, type, vehno) {
 }
 
 function view_collect_details(request) {
-    document.getElementById('collect-details-popup-box').style.display = "flex";
+    var locationPop = document.getElementById('collect-details-popup-box');
+    locationPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
     document.getElementById('Polythene_Quantity').innerText = request.Polythene;
     document.getElementById('Plastic_Quantity').innerText = request.Plastic;
     document.getElementById('Glass_Quantity').innerText = request.Glass;
@@ -199,6 +222,8 @@ function initMap(latitude, longitude) {
 
 function viewLocation($lattitude, $longitude) {
     initMap($lattitude, $longitude);
+    document.getElementById('overlay').style.display = "flex";
+
     var locationPop = document.querySelector('.location_pop');
     locationPop.classList.add('active');
 }
@@ -206,6 +231,8 @@ function viewLocation($lattitude, $longitude) {
 function closemap() {
     var locationPop = document.querySelector('.location_pop');
     locationPop.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
+
 }
 
 function searchTable() {
@@ -232,9 +259,18 @@ document.getElementById('searchInput').addEventListener('input', searchTable);
 document.addEventListener("DOMContentLoaded", function() {
     const close_collector = document.getElementById("personal-details-popup-form-close");
     const collector_view = document.getElementById("personal-details-popup-box");
+    const close_view = document.getElementById("collect-details-pop-form-close")
 
     close_collector.addEventListener("click", function() {
         collector_view.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+    });
+
+    close_view.addEventListener("click", function() {
+        var locationPop = document.getElementById('collect-details-popup-box');
+        locationPop.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
     });
 
 });

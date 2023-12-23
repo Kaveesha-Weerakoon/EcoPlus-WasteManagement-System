@@ -20,6 +20,8 @@
     .main-right-top {
         display: flex;
         flex-direction: column;
+        background-color: var(--background-color-main);
+
     }
 
     .main-right-top-one {

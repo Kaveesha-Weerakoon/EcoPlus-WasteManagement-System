@@ -1,50 +1,27 @@
 .Customer_Transfer_History {
 
 
-
-
     .table-header {
-
         grid-template-columns: 15% 20% 15% 20% 15% 15%;
     }
 
-
-    .table-header th {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 0px;
-    }
-
     .table-row {
-        margin-bottom: 2px;
-        font-size: 1px;
-        text-align: center;
         height: 50px;
-        display: grid;
         grid-template-columns: 15% 20% 15% 20% 15% 15%;
         border-bottom: 1px solid var(--background-color-two);
     }
 
     .table td {
         height: 50px;
-        font-size: 14px;
-        text-align: center !important;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     .table td p {
         width: 50px;
         text-align: left;
-
     }
-
 
     .status {
         margin-right: 5px;
-        width: 25px;
         height: 23px;
         margin-right: 8%;
     }
@@ -53,5 +30,17 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
+    }
+
+    .bxs-send {
+        font-size: 24px;
+        margin-right: 8%;
+        width: 25px;
+    }
+
+    .bxs-chevrons-down {
+        font-size: 24px;
+        margin-right: 8%;
+        width: 25px;
     }
 }

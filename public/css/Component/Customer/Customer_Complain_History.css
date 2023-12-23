@@ -14,29 +14,12 @@
 
 
     .table-header {
-        background-color: #e9f6ef;
-        font-size: 15px;
-        text-align: center;
-        height: 45px;
-        display: grid;
-        margin-bottom: 0px;
         grid-template-columns: 20% 20% 20% 40%;
     }
 
 
-    .table-header th {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 0px;
-    }
-
     .table-row {
-        margin-bottom: 2px;
-        font-size: 1px;
-        text-align: center;
         height: 45px;
-        display: grid;
         grid-template-columns: 20% 20% 20% 40%;
         border-bottom: 1px solid var(--background-color-two);
     }
@@ -45,11 +28,7 @@
         height: 40px;
         font-size: 14px;
         text-align: center !important;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
-
 
 
 }

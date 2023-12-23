@@ -38,6 +38,7 @@
 
     .main-right-bottom-two {
         background-color: var(--background-color-right);
+        height: 450px;
     }
 
     .main-right-bottom-two-content h1 {
@@ -99,28 +100,13 @@
         height: 52px;
         display: grid;
         border-bottom: 2px solid #CACACA;
-
-    }
-
-    .table-header th {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 0px;
-
     }
 
     .table-row {
-        margin-bottom: 2px;
-        font-size: 1px;
-        font-family: Montserrat;
-        text-align: center;
         height: 52px;
         display: grid;
         grid-template-columns: 17% 12% 12% 17% 13% 14% 15%;
         border-bottom: 2px solid #CACACA;
-
-
     }
 
     .table td {
@@ -138,4 +124,29 @@
         height: 25px;
         cursor: pointer;
     }
+
+    .main-right-bottom-two-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+        font-size: 67px !important;
+    }
+
+    .main-right-bottom-two-content h1 {
+        font-size: 21px !important;
+        letter-spacing: 0.05rem;
+    }
+
+
+    .main-right-bottom-two-content i {
+        font-size: 150px;
+        margin-bottom: 1%;
+    }
+
+    .main-right-bottom-two {
+        height: 600px;
+    }
+
 }

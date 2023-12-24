@@ -295,11 +295,14 @@
             margin-bottom: 4px;
             font-size: 14px;
             margin-top: 5px;
+            letter-spacing: 0.03rem;
+
         }
 
         .region_p {
             margin-top: 5px;
             margin-bottom: 20px !important;
+            letter-spacing: 0.03rem;
         }
 
         .err {

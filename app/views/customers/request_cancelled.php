@@ -18,6 +18,7 @@
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Center</th>
+                                    <th>Assigned</th>
                                     <th>Location</th>
                                     <th>Collector</th>
                                     <th>Cancelled By</th>
@@ -34,12 +35,14 @@
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
                                     <td><?php echo $request->region?></td>
+                                    <td><?php echo $request->assinged?></td>
+
                                     <td><i onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
                                             class='bx bx-map' style="font-size: 29px"></i>
                                     </td>
-                                    <td><img src="<?php echo IMGROOT ?>/view.png"
+                                    <td><i class='bx bx-info-circle' style="font-size: 29px"
                                             <?php if ($request->assinged === 'Yes') { ?>onclick="view_collector('<?php echo $request->image; ?>', '<?php echo $request->user_id; ?>', '<?php echo $request->name; ?>', '<?php echo $request->contact_no; ?>', '<?php echo $request->vehicle_no; ?>', '<?php echo $request->vehicle_type; ?>')"
-                                            <?php } ?> alt=""></td>
+                                            <?php } ?>> </i></td>
 
                                     <td><?php echo $request->cancelled_by?></td>
                                     <td><?php echo ($request->reason ? $request->reason : 'None'); ?></td>
@@ -94,11 +97,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="overlay" id="overlay"></div>
+
             </div>
         </div>
         <script>
         function view_collector(image, col_id, name, contact_no, type, vehno) {
-            document.getElementById('personal-details-popup-box').style.display = 'flex';
+            var locationPop = document.querySelector('.personal-details-popup-box');
+            locationPop.classList.add('active');
+            document.getElementById('overlay').style.display = "flex";
             document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' +
                 image;
             document.getElementById('collector_id').innerText = col_id;
@@ -155,12 +162,14 @@
         function viewLocation($lattitude, $longitude) {
             initMap($lattitude, $longitude);
             var locationPop = document.querySelector('.location_pop');
+            document.getElementById('overlay').style.display = "flex";
             locationPop.classList.add('active');
         }
 
         function closemap() {
             var locationPop = document.querySelector('.location_pop');
             locationPop.classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
         }
 
         document.getElementById('searchInput').addEventListener('input', searchTable);
@@ -169,7 +178,9 @@
             const collector_view = document.getElementById("personal-details-popup-box");
 
             close_collector.addEventListener("click", function() {
-                collector_view.style.display = "none"
+                document.getElementById('overlay').style.display = "none";
+                var locationPop = document.querySelector('.personal-details-popup-box');
+                locationPop.classList.remove('active');
             });
 
         });

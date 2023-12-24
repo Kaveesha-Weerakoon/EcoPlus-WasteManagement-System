@@ -12,6 +12,10 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="./chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
+            async defer>
+        </script>
     </head>
 
     <body>

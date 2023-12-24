@@ -1,14 +1,4 @@
 .Customer_Complains {
-    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap");
-    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap");
-
-    * {
-        margin: 0;
-        padding: 0;
-        font-family: Inter;
-    }
-
-
 
     #dashboard i {
         color: var(--green-color-one);
@@ -34,7 +24,6 @@
             box-sizing: border-box;
             box-shadow: var(--box-shadow2);
         }
-
 
         .main-right-top-search {
             display: flex;
@@ -176,7 +165,6 @@
             font-size: 14px;
         }
 
-
         .main-bottom {
             display: flex;
             align-items: center;
@@ -186,13 +174,12 @@
         .main-bottom-component {
             width: 65%;
             height: 80%;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow2);
             border-radius: 10px;
             padding: 40px;
             display: grid;
             grid-template-columns: 50% 50%;
         }
-
 
         .main-bottom-component-right {
             display: flex;
@@ -202,8 +189,8 @@
 
         .main-bottom-component-right img {
             width: 100%;
-            height: 100%;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            height: 95%;
+            box-shadow: var(--box-shadow2);
             border-radius: 10px;
         }
 
@@ -213,19 +200,21 @@
         }
 
         .main-bottom-component-left-topic {
-            margin-bottom: 15px;
+            margin-bottom: 35px;
         }
 
         .line {
             height: 4px;
             width: 60px;
-            background: #1B6652;
+            background-color: var(--green-color-one);
             margin-top: 3px;
         }
 
         .main-bottom-component-left-topic h2 {
-            font-size: 24px;
+            font-size: 21px;
             font-weight: 500;
+            letter-spacing: 0.01rem;
+
         }
 
         .main-bottom-component-left-component {
@@ -236,13 +225,13 @@
         .main-bottom-component-left-component {
             display: flex;
             flex-direction: column;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .main-bottom-component-left-component h2 {
             font-weight: 500;
             margin-bottom: 5px;
-            font-size: 17px;
+            font-size: 15px;
             margin-bottom: 7px;
         }
 
@@ -254,16 +243,18 @@
         }
 
         .main-bottom-component-left-component input {
-            height: 32px;
+            height: 29px;
             width: 80%;
             outline: none;
             border-radius: 5px;
             border: 1px solid #ccc;
             padding-left: 15px;
-            font-size: 16px;
-            border-bottom-width: 2px;
+            font-size: 14px;
+            margin-bottom: 3px;
             transition: all 0.3s ease;
-            margin-bottom: 6px;
+            background-color: var(--background-color-two);
+            color: var(--main-text-color);
+            transition: all 0.6s ease-in;
         }
 
         .main-bottom-component-left-component input:focus {
@@ -276,10 +267,10 @@
 
         .err {
             height: 10px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             margin-bottom: 5px;
-            color: #e74c3c;
+            color: #F13E3E;
         }
 
         .main-bottom-component-left-button {
@@ -290,35 +281,35 @@
         }
 
         .main-bottom-component-left button {
-            height: 42px;
+            height: 33px;
+            margin-top: 10px;
             width: 83%;
             outline: none;
-            color: white;
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 500;
             border-radius: 5px;
             cursor: pointer;
             border: none;
-            letter-spacing: 1px;
-            background: #1B6652;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.03rem;
+            background: var(--green-color-one);
+            color: var(--background-color-main);
+            transition: background-color 0.6s ease-in;
         }
 
 
         /*Success popup*/
-        .center_worker_success {
+        .complain_success {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            height: 100%;
+
         }
 
         .popup {
@@ -340,6 +331,7 @@
 
         .popup img {
             width: 100px;
+            height: 100px;
             margin-top: 35px;
             border-radius: 50%;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -355,12 +347,12 @@
             width: 100%;
             margin-top: 30px;
             padding: 10px 0;
-            background: #6fd649;
+            background: var(--green-color-one);
             color: white;
             border: 0;
             outline: none;
-            font-size: 18px;
-            border-radius: 4px;
+            font-size: 15px;
+            border-radius: 6px;
             cursor: pointer;
             box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
         }

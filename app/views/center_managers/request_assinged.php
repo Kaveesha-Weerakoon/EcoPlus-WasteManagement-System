@@ -5,7 +5,8 @@
     <div class="CenterManager_Request_Main">
         <div class="CenterManager_Request_Assinged">
             <div class="main">
-                <div class="main-left">
+            <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
+                <!-- <div class="main-left">
                     <div class="main-left-top">
                         <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
                         <h1>Eco Plus</h1>
@@ -48,7 +49,7 @@
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> -->
                 <div class="main-right">
 
                     <div class="main-right-top">
@@ -229,12 +230,12 @@
                     <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
                         id="request-details-pop-form-close">
                     <div class="request-details-pop-form-top">
-                        <div class="request-details-topic">Request ID R <div id="req_id3"></div>
+                        <div class="request-details-topic">Request ID: R <div id="req_id3"></div>
                         </div>
                     </div>
 
                     <div class="request-details-pop-form-content">
-                        <div class="personal-details-right-labels">
+                        <div class="request-details-right-labels">
                             <span>Customer Id</span><br>
                             <span>Name</span><br>
                             <span>Date</span><br>
@@ -242,7 +243,7 @@
                             <span>Contact No</span><br>
                             <span>Instructions</span><br>
                         </div>
-                        <div class="personal-details-right-values">
+                        <div class="request-details-right-values">
                             <span id="req_id2">23</span><br>
                             <span id="req_name">23</span><br>
                             <span id="req_date"></span><br>

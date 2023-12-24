@@ -7,6 +7,14 @@
         display: flex;
     }
 
+    #request i {
+        color: var(--green-color-one);
+    }
+
+    #request h3 {
+        color: var(--green-color-one);
+    }
+
     .main-right-bottom-three {
         display: flex;
         justify-content: center;

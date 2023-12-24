@@ -210,6 +210,7 @@
         .main-bottom-component-right {
             display: flex;
             flex-direction: column;
+            justify-content: center;
             padding-left: 30px;
             font-size: 45px;
             font-family: inter;

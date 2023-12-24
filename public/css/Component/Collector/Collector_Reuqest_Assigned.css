@@ -1,4 +1,12 @@
 .Collector_Reuqest_Assigned {
+
+      #request i {
+        color: var(--green-color-one);
+    }
+
+    #request h3 {
+        color: var(--green-color-one);
+    }
     .main-right-bottom-two {
         width: 99%;
         height: 550px;

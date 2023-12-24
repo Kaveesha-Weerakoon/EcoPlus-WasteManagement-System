@@ -3,6 +3,16 @@
         background-color: none;
     }
 
+    
+    #dashboard i {
+        color: var(--green-color-one);
+    }
+
+    #dashboard h3 {
+        color: var(--green-color-one);
+    }
+
+
     .main-right {
         display: grid;
         height: 100%;

@@ -1,5 +1,16 @@
 .Collector_assistants-main {
 
+    #Collector_Assistants i {
+        color: var(--green-color-one);
+    }
+
+    #Collector_Assistants h3 {
+        color: var(--green-color-one);
+    }
+
+
+
+    
 
     .main-right a {
         text-decoration: none;

@@ -79,21 +79,22 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                <?php if($data['completed']=='True') : ?>
+                <div class="credit_transfer_success">
+                    <div class="popup" id="popup">
+                        <img src="<?php echo IMGROOT?>/check.png" alt="">
+                        <h2>Success!!</h2>
+                        <p>Credit Transferd Successfully</p>
+                        <a href="<?php echo URLROOT?>/customers/transfer_history"><button type="button">OK</button></a>
 
-        <?php if($data['completed']=='True') : ?>
-        <div class="credit_transfer_success">
-            <div class="popup" id="popup">
-                <img src="<?php echo IMGROOT?>/check.png" alt="">
-                <h2>Success!!</h2>
-                <p>credit_transfer_successfully</p>
-                <a href="<?php echo URLROOT?>/customers/transfer_history"><button type="button">OK</button></a>
-
+                    </div>
+                </div>
             </div>
+            <?php endif; ?>
         </div>
     </div>
-    <?php endif; ?>
+
+
 
 </div>
 

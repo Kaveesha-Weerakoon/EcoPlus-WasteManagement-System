@@ -94,5 +94,15 @@
         return $result;
        
       }
+
+      public function get_collector_assistants_bycolid($collectorId){
+        $this->db->query('SELECT * FROM collector_assistants WHERE collector_id = :collectorId');
+        $this->db->bind(':collectorId', $collectorId);
+
+        $rows = $this->db->resultSet();
+
+        return $rows;
+
+      }
   
 }

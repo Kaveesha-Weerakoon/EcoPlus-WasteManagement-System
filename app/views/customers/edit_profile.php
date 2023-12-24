@@ -41,7 +41,7 @@
                         <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
                             alt="">
                         <div class="main-right-top-profile-cont">
-                            <h3>Kaveesha</h3>
+                            <h3><?php echo $_SESSION['user_name']?></h3>
                             <p>ID : C <?php echo $_SESSION['user_id']?></p>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                     <div class="main-right-bottom-content">
 
                         <div class="main-right-bottom-content-top">
-                            <h1>Edit Profile</h1>
+                            <h1>Profile</h1>
                             <div class="Edit-Profile-line"></div>
                         </div>
                         <div class="main-right-bottom-content-bottom">
@@ -68,25 +68,31 @@
                                     </div>
                                 </div>
                                 <div class="edit-profile-content">
-                                    <h3>Name :</h3>
+                                    <h3>Name </h3>
                                     <input name="name" type="text" value="<?php echo $data['name']?>">
                                     <div class="err"><?php echo $data['name_err']?></div>
 
                                 </div>
                                 <div class="edit-profile-content">
-                                    <h3>Address :</h3>
+                                    <h3>Email </h3>
+                                    <input name="email" type="text" value="<?php echo $data['email']?>" readonly>
+                                    <div class="err"></div>
+
+                                </div>
+                                <div class="edit-profile-content">
+                                    <h3>Address </h3>
                                     <input name="address" type="text" value="<?php echo $data['address']?>">
                                     <div class="err"><?php echo $data['address_err']?></div>
 
                                 </div>
                                 <div class="edit-profile-content">
-                                    <h3>Contact Number :</h3>
+                                    <h3>Contact Number </h3>
                                     <input name="contactno" type="text" value="<?php echo $data['contactno']?>">
                                     <div class="err"><?php echo $data['contactno_err']?></div>
 
                                 </div>
                                 <div class="edit-profile-content">
-                                    <h3>City :</h3>
+                                    <h3>City </h3>
                                     <input name="city" type="text" value="<?php echo $data['city']?>">
                                     <div class="err"><?php echo $data['city_err']?></div>
 
@@ -100,18 +106,18 @@
                             <form class="main-right-bottom-content-bottom-right"
                                 action="<?php echo URLROOT;?>/customers/change_password" method="post">
                                 <div class="edit-profile-content">
-                                    <h3>Current Password :</h3>
+                                    <h3>Current Password </h3>
                                     <input type="password" name="current" value="<?php echo $data['current']?>">
                                     <div class="err"><?php echo $data['current_err']?></div>
                                 </div>
                                 <div class="edit-profile-content">
-                                    <h3>New Password :</h3>
+                                    <h3>New Password </h3>
                                     <input type="password" name="new_pw" value="<?php echo $data['new_pw']?>">
                                     <div class="err"><?php echo $data['new_pw_err']?></div>
 
                                 </div>
                                 <div class="edit-profile-content">
-                                    <h3> Re-enter Password :</h3>
+                                    <h3> Re-enter Password </h3>
                                     <input type="password" name="re_enter_pw" value="<?php echo $data['re_enter_pw']?>">
                                     <div class="err"><?php echo $data['re_enter_pw_err']?></div>
 

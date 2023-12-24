@@ -6,8 +6,8 @@
                 defer></script>
 
             <div class="main">
-
-                <div class="main-left">
+                <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
+                <!-- <div class="main-left">
                     <div class="main-left-top">
                         <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
                         <h1>Eco Plus</h1>
@@ -51,7 +51,8 @@
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> -->
+
                 <div class="main-right">
                     <div class="main-right-top">
                         <div class="main-right-top-one">

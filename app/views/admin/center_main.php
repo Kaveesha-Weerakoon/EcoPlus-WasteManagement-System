@@ -1,6 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Admin_Main">
   <div class="Admin_Center_Main">
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initMap" async defer></script>
    <div class="main">
       <div class="main-left">
           <div class="main-left-top">
@@ -76,37 +77,44 @@
             <div class="analytics-boxes">
               <h3 class="section-head">Overview</h3>
               <div class="analytics">
-                <div class="analytic">
-                  <div class="analytic-icon">
-                    <img src="<?php echo IMGROOT?>/blue_collector.png" class="icon-image" alt="" />
+                <a href="<?php echo URLROOT?>/Admin/center_main_collectors/<?php echo $data['center']->id?>">
+                  <div class="analytic first-analytic">
+                    <div class="analytic-icon">
+                      <img src="<?php echo IMGROOT?>/blue_collector.png" class="icon-image" alt="" />
+                    </div>
+                    <div class="analytic-info">
+                      <h4>Garbage Collectors</h4>
+                      <h1><?php echo $data['no_of_collectors']?></h1>
+                    </div>
                   </div>
-                  <div class="analytic-info">
-                    <h4>Garbage Collectors</h4>
-                    <h1>10</h1>
-                  </div>
-                </div>
-    
-                <div class="analytic">
+                </a>
+                
+                <a href="<?php echo URLROOT?>/Admin/center_main_workers/<?php echo $data['center']->id?>">
+                <div class="analytic second-analytic">
                   <div class="analytic-icon">
                     <img src="<?php echo IMGROOT?>/red_worker.png" class="icon-image" alt="" />
                   </div>
                   <div class="analytic-info">
                     <h4>Center workers</h4>
-                    <h1>20</h1>
+                    <h1><?php echo $data['no_of_workers']?></h1>
                   </div>
                 </div>
+                </a>
     
-                <div class="analytic">
+                <a href="<?php echo URLROOT?>/Admin/incoming_requests/<?php echo $data['center']->region?>">
+                <div class="analytic third-analytic">
                   <div class="analytic-icon">
                     <img src="<?php echo IMGROOT?>/green_requests.png" class="icon-image" alt="" />
                   </div>
                   <div class="analytic-info">
                     <h4>Total Requests</h4>
-                    <h1>50</h1>
+                    <h1><?php echo $data['total_requests']?></h1>
                   </div>
                 </div>
-    
-                <div class="analytic">
+                </a>
+
+                <a href="">
+                <div class="analytic fourth-analytic">
                   <div class="analytic-icon">
                     <img src="<?php echo IMGROOT?>/brown_bin.png" class="icon-image" alt="" />
                   </div>
@@ -115,6 +123,8 @@
                     <h1>20.7 <small>kg</small></h1>
                   </div>
                 </div>
+                </a>
+
               </div>
             </div>
     
@@ -123,7 +133,7 @@
                 <div class="center-manager-card">
                   <h3 class="section-subhead">Center Manager</h3>
                   <div class="center-manager-content">
-                    <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="" />
+                    <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $data['center_manager']->image?>" alt="" />
                     <div class="center-manager-info">
                       <h3><?php echo $data['center']->center_manager_name?></h3>
                       <h1>Manager ID: CM<?php echo $data['center']->center_manager_id?></h1>
@@ -182,7 +192,10 @@
                 <div class="location-map-card">
                   <h3 class="section-subhead">Center Location</h3>
                   <div class="center-map-container">
-                    <img src="<?php echo IMGROOT?>/center-location.png" alt="">
+                    <div class="center-location-map-container">
+                        <!-- <img src="<?php echo IMGROOT?>/center-location.png" alt=""> -->
+                    </div>
+                    
                   </div>
                 
                 </div>
@@ -254,5 +267,38 @@
   </div>
 
 </div>
+<script>
+    function initMap(latitude, longitude) {
+        var mapCenter = { lat: latitude, lng: longitude };
+
+        var map = new google.maps.Map(document.querySelector('.center-location-map-container'), {
+          center: mapCenter,
+          zoom: 10
+        });
+
+        var marker = new google.maps.Marker({
+        position: { lat: parseFloat(latitude), lng: parseFloat(longitude) },
+        map: map,
+        title: 'Marked Location'
+    });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+            
+            var latitude = <?php echo $data['center']->lat; ?>;
+            var longitude = <?php echo $data['center']->longi; ?>;
+
+            if (typeof google === 'object' && typeof google.maps === 'object') {
+                // If loaded, call initMap immediately
+                initMap(latitude, longitude);
+            } else {
+                // If not loaded, set a callback to initMap when the API is loaded
+                window.initMap = function() {
+                    initMap(latitude, longitude);
+                };
+            }
+    });
+
+</script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

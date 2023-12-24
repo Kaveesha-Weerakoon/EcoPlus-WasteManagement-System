@@ -11,6 +11,9 @@
       $this->center_model=$this->model('Center');
       $this->collector_model=$this->model('Collector');
       $this->collector_complain_Model=$this->model('Collector_Complain');
+      // $this->collector_assistants_Model=$this->model('collector_assistants');
+      $this->center_workers_model=$this->model('Center_Worker');
+      $this->requests_model=$this->model('Request');
 
       if(!isLoggedIn('admin_id')){
         redirect('users/login');
@@ -723,6 +726,7 @@
      
       $this->view('admin/collectors', $data);
     }
+
     public function vehicle_details_view($collectorId){
         $collectors =$this->collector_model->get_collectors();
         $collector = $this->collector_model->getCollector_ByID_view($collectorId);
@@ -756,14 +760,22 @@
       $this->view('admin/complain_collectors', $data);
     }
 
-    public function center_main($center_id){
+    public function center_main($center_id, $region){
       $center=$this->center_model->getCenterById($center_id);
+      $center_manager = $this->center_managerModel->getCenterManagerBy_centerId($center_id);
       $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
+      $no_of_collectors = $this->collector_model->get_no_of_Collectors($center_id);
+      $no_of_workers = $this->center_workers_model->get_no_of_center_workers($center_id);
+      $total_requests = $this->requests_model->get_total_requests_by_region($region);
 
       $data = [
         'center' =>$center,
         'not_assigned_cm'=>$na_center_managers,
-        'change_cm'=>''
+        'change_cm'=>'',
+        'no_of_collectors' =>$no_of_collectors,
+        'no_of_workers'=>$no_of_workers,
+        'center_manager' =>$center_manager,
+        'total_requests'=>$total_requests
       ];
       $this->view('admin/center_main', $data);
     }
@@ -815,6 +827,69 @@
         $this->view('admin/center_main', $data);
       }
      
+    }
+
+    public function center_main_collectors($center_id){
+      $collectors_in_center = $this->collector_model->get_collectors_bycenterid($center_id);
+      // $collector_assistants = $this->collector_assistants_Model->get_collector_assistants_bycolid($collectorId);
+      
+      $data =[
+        'collectors_in_center' =>$collectors_in_center,
+        'center_id'=> $center_id
+        
+      ];
+
+      $this->view('admin/center_main_collectors', $data);
+
+    }
+
+    public function center_main_workers($center_id){
+      $workers_in_center = $this->center_workers_model->get_workers_by_centerid($center_id);
+      
+      $data =[
+        'workers_in_center' => $workers_in_center
+        
+      ];
+
+      $this->view('admin/center_main_workers', $data);
+
+    }
+
+    public function incoming_requests($region){
+      $incoming_requests = $this->requests_model->get_incoming_request($region);
+
+      $data =[
+        'incoming_requests'=> $incoming_requests,
+        'center_region'=> $region
+      ];
+
+      $this->view('admin/center_main_request_incoming', $data);
+
+    }
+
+    public function assigned_requests($region){
+      $assigned_requests = $this->requests_model->get_assigned_request_by_center($region);
+
+      $data =[
+        'assigned_requests'=> $assigned_requests,
+        'center_region'=> $region
+
+      ];
+
+      $this->view('admin/center_main_request_assigned', $data);
+
+    }
+
+    public function cancelled_requests($region){
+      $cancelled_requests = $this->requests_model->get_cancelled_request_bycenter($region);
+
+      $data =[
+        'cancelled_requests'=> $cancelled_requests,
+        'center_region'=> $region
+      ];
+
+      $this->view('admin/center_main_request_cancelled', $data);
+
     }
 
   

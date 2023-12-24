@@ -17,7 +17,7 @@
             </div>
             <h3>Requests</h3>
         </div>
-        <div class="main-left-middle-content" onclick="redirect_waste_management()" id="history">
+        <div class="main-left-middle-content" onclick="redirect_waste_management()" id="waste_management">
             <div class=" main-left-middle-content-icon">
                 <i class='bx bx-timer'></i>
             </div>

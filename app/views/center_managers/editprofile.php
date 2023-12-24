@@ -2,7 +2,8 @@
 <div class="CenterManager_Main">
      <div class="CenterManager_EditProfile">
      <div class="main" >
-            <div class="main-left" style="background: #8CF889;">
+            <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
+            <!-- <div class="main-left" style="background: #8CF889;">
                 <div class="main-left-top">
                     <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
                     <h1>Eco Plus</h1>
@@ -47,9 +48,9 @@
                     </div>
                   </a>
                 </div>
-            </div>
+            </div> -->
             <div class="main-right">
-            <div class="main-right-top">
+                <div class="main-right-top">
                     <p><?php echo $_SESSION['center_manager_name']?></p>
                     <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>" alt="">
                 </div>

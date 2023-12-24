@@ -131,6 +131,7 @@
                                     </select>
                                     <button onclick="getRegion()">Set Region</button>
                                 </div>
+                                <p class="region_p">Choose the Center Region Closest to Your Pickup Location</p>
                             </div>
                             <div class="main-bottom-component-right-component">
                                 <h2>Pick Up Instructions</h2>
@@ -249,7 +250,7 @@
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: defaultLatLng,
-            zoom: 14.5
+            zoom: 12.5
         });
 
         marker = new google.maps.Marker({

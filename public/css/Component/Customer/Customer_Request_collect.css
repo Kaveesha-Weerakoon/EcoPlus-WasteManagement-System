@@ -256,7 +256,7 @@
             margin-bottom: 6px;
             background-color: var(--background-color-two);
             color: var(--main-text-color);
-            transition: all 0.3s ease;
+            transition: all 0.6s ease-in;
         }
 
         .main-bottom-component-right-component input:focus {
@@ -273,11 +273,10 @@
             padding-left: 15px;
             font-size: 14px;
             border-bottom-width: 2px;
-
             margin-bottom: 6px;
             background-color: var(--background-color-two);
             color: var(--main-text-color);
-            transition: all 0.3s ease;
+            transition: all 0.6s ease-in;
         }
 
         .main-bottom-component-right-component input:focus {
@@ -287,8 +286,20 @@
 
         .main-bottom-component-right-component h2 {
             font-weight: 500;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             font-size: 15px;
+        }
+
+        .main-bottom-component-right-component p {
+            font-weight: 500;
+            margin-bottom: 4px;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .region_p {
+            margin-top: 5px;
+            margin-bottom: 20px !important;
         }
 
         .err {
@@ -296,7 +307,7 @@
             font-size: 14px;
             font-weight: 500;
             margin-bottom: 5px;
-            color: #e74c3c;
+            color: #F13E3E;
         }
 
         .Time {
@@ -305,6 +316,7 @@
 
         .Time option {
             cursor: pointer;
+
         }
 
         .main-bottom-component-right-component select {
@@ -320,11 +332,11 @@
             margin-bottom: 15px;
             background-color: var(--background-color-two);
             color: var(--main-text-color);
-            transition: all 0.3s ease;
+            transition: all 0.6s ease;
         }
 
         .center_dropdown {
-            height: 50px;
+            height: 35px;
             display: flex;
             padding-top: 10px;
         }
@@ -346,6 +358,9 @@
             background: var(--green-color-one);
             font-size: 15px;
             color: var(--background-color-main);
+            transition: background-color 0.6s ease-in;
+
+
         }
 
         .main-bottom-component-right-component select option {
@@ -357,6 +372,7 @@
         .Z {
             flex-direction: row;
             align-items: center;
+            margin-top: 10px;
         }
 
         .Z h2 {
@@ -445,6 +461,8 @@
             background: var(--green-color-one);
             font-size: 15px;
             color: var(--background-color-main);
+            transition: background-color 0.6s ease-in;
+
         }
 
         .moving-image {
@@ -503,7 +521,7 @@
         }
 
         #cancelBtn {
-            background-color: #e74c3c;
+            background-color: #F13E3E;
             color: #fff;
         }
 

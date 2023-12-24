@@ -83,7 +83,7 @@
                                     <div class="err"><?php echo $data['date_err']?></div>
                                 </div>
                                 <div class="main-bottom-component-right-component ">
-                                    <h2>Time</h2>
+                                    <h2>Time Slot</h2>
                                     <select class="Time" name="time">
                                         <option value="8 am - 10 am"
                                             <?php echo ($data['time'] === '8 am -10 am') ? 'selected' : ''; ?>>8 am -10

@@ -20,8 +20,6 @@
     .main-right-top {
         display: flex;
         flex-direction: column;
-        background-color: var(--background-color-main);
-
     }
 
     .main-right-top-one {
@@ -34,6 +32,8 @@
         box-sizing: border-box;
         height: 39%;
         box-shadow: var(--box-shadow2);
+        background-color: var(--background-color-main);
+        z-index: 1;
     }
 
     .main-right-top-search {
@@ -178,6 +178,8 @@
         display: flex;
         align-items: center;
         padding-left: 33px;
+        background-color: var(--background-color-right);
+
     }
 
     .main-right-top-two h1 {
@@ -191,6 +193,8 @@
         flex-direction: row;
         padding-left: 34px;
         margin: 0.6%;
+        background-color: var(--background-color-right);
+
     }
 
     .main-right-top-three-content {

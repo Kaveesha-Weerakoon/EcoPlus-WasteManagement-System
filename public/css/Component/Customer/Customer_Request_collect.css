@@ -201,10 +201,10 @@
         }
 
         .main-bottom-component-left img {
-            width: 88%;
-            height: 88%;
-            box-shadow: var(--box-shadow2);
+            width: 85%;
+            height: 82%;
             border-radius: 10px;
+            box-shadow: var(--box-shadow2);
         }
 
         .main-bottom-component-right {
@@ -240,12 +240,11 @@
         .main-bottom-component-right-component {
             display: flex;
             flex-direction: column;
-            margin-bottom: 5px;
         }
 
         .main-bottom-component-right-component input {
             height: 29px;
-            width: 93%;
+            width: 96%;
             outline: none;
             border-radius: 5px;
             border: 1px solid #ccc;
@@ -266,7 +265,7 @@
 
         .main-bottom-component-right-component-main input {
             height: 29px;
-            width: 85%;
+            width: 90%;
             outline: none;
             border-radius: 5px;
             border: 1px solid #ccc;
@@ -311,17 +310,17 @@
         }
 
         .Time {
-            width: 93% !important;
+            width: 96% !important;
         }
 
         .Time option {
             cursor: pointer;
-
         }
 
+
         .main-bottom-component-right-component select {
-            height: 29px;
-            width: 47%;
+            height: 30px;
+            width: 48%;
             outline: none;
             border-radius: 5px;
             border: 1px solid #ccc;
@@ -342,25 +341,20 @@
         }
 
         .center_dropdown button {
-            height: 32px;
+            height: 29px;
             width: 25%;
             outline: none;
-            color: white;
             font-size: 15px;
             font-weight: 500;
-            border-radius: 5px;
+            border-radius: 7px;
             cursor: pointer;
-            margin-left: 20px;
+            margin-left: 23px;
             border: none;
             margin-top: none;
-            letter-spacing: 1px;
             letter-spacing: 0.03rem;
             background: var(--green-color-one);
-            font-size: 15px;
             color: var(--background-color-main);
             transition: background-color 0.6s ease-in;
-
-
         }
 
         .main-bottom-component-right-component select option {
@@ -451,10 +445,10 @@
 
         .main-bottom-component-right-component-button button {
             height: 35px;
-            width: 95%;
+            width: 100%;
             outline: none;
             font-weight: 500;
-            border-radius: 10px;
+            border-radius: 7px;
             cursor: pointer;
             border: none;
             letter-spacing: 0.03rem;
@@ -536,8 +530,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -546,12 +540,13 @@
 
         .popup1 {
             width: 400px;
-            background: white;
+            background: var(--background-color-main);
             font-family: 'poppins', sans-serif;
             border-radius: 6px;
             text-align: center;
             padding: 0 30px 30px;
             color: #333;
+            border-radius: 10px;
             transition: transform 0.4s, top 0.4s;
         }
 
@@ -603,7 +598,7 @@
             margin-top: 30px;
             margin-right: 20px;
             padding: 10px 0;
-            background: #1B6652;
+            background: var(--green-color-one);
             color: white;
             border: 0;
             outline: none;
@@ -633,8 +628,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -643,7 +638,7 @@
 
         .popup {
             width: 400px;
-            background: white;
+            background: var(--background-color-main);
             font-family: 'poppins', sans-serif;
             border-radius: 6px;
             text-align: center;
@@ -677,7 +672,7 @@
             width: 100%;
             margin-top: 30px;
             padding: 10px 0;
-            background: #6fd649;
+            background: var(--green-color-one);
             color: white;
             border: 0;
             outline: none;

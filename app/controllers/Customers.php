@@ -362,7 +362,8 @@
     }
    
     public function complains(){
-    
+     
+      
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -409,7 +410,7 @@
         if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
           if($this->customer_complain_Model->complains($data)){
             $data['completed']="True";
-            $this->view('customers/complains', $data);
+            $this->view('customers/complains', $data);         
            
           } else {
             die('Something went wrong');
@@ -419,7 +420,8 @@
               $this->view('customers/complains', $data);         
         }
       }
-      else
+      else{
+        
       $data =[
         'name' => '',
         'contact_no' => '',
@@ -432,9 +434,14 @@
         'subject_err' => '' ,
         'complain_err' => ''  ,
         'completed'=>''      
-      ];{
+      ];
+       $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+
+      $data['contact_no']=$user->mobile_number;
+      $data['name'] =$_SESSION['user_name'];
         $this->view('customers/complains', $data);
-      }
+    }
      
     }
 

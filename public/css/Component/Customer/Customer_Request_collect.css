@@ -191,7 +191,7 @@
             padding: 20px;
             border-radius: 10px;
             display: grid;
-            grid-template-columns: 45% 55%;
+            grid-template-columns: 47% 53%;
         }
 
         .main-bottom-component-left {
@@ -201,8 +201,8 @@
         }
 
         .main-bottom-component-left img {
-            width: 85%;
-            height: 82%;
+            width: 94%;
+            height: 68%;
             border-radius: 10px;
             box-shadow: var(--box-shadow2);
         }

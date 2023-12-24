@@ -54,7 +54,7 @@
 
                     <div class="main-bottom-component">
                         <div class="main-bottom-component-left">
-                            <img src="<?php echo IMGROOT?>/RequestCollect.jpg" alt="">
+                            <img src="<?php echo IMGROOT?>/request_collect3.jpg" alt="">
                         </div>
                         <div class="main-bottom-component-right">
                             <div class="main-bottom-component-right-component-topic">
@@ -68,7 +68,7 @@
                                         placeholder="Name">
                                     <div class="err"><?php echo $data['name_err']?></div>
                                 </div>
-                                <div class="main-bottom-component-right-component">
+                                <div class="main-bottom-component-right-component" style="margin-left:10px">
                                     <h2>Contact Number</h2>
                                     <input value="<?php echo $data['contact_no']?>" name="contact_no" type="text"
                                         placeholder="Contact Number">
@@ -82,8 +82,8 @@
                                     <input value="<?php echo $data['date']?>" name="date" type="date">
                                     <div class="err"><?php echo $data['date_err']?></div>
                                 </div>
-                                <div class="main-bottom-component-right-component ">
-                                    <h2>Time</h2>
+                                <div class="main-bottom-component-right-component" style="margin-left:10px">
+                                    <h2>Time Slot</h2>
                                     <select class="Time" name="time">
                                         <option value="8 am - 10 am"
                                             <?php echo ($data['time'] === '8 am -10 am') ? 'selected' : ''; ?>>8 am -10
@@ -131,6 +131,7 @@
                                     </select>
                                     <button onclick="getRegion()">Set Region</button>
                                 </div>
+                                <p class="region_p">Choose the Center Region Closest to Your Pickup Location</p>
                             </div>
                             <div class="main-bottom-component-right-component">
                                 <h2>Pick Up Instructions</h2>
@@ -249,7 +250,7 @@
 
         map = new google.maps.Map(document.getElementById('map'), {
             center: defaultLatLng,
-            zoom: 14.5
+            zoom: 12.5
         });
 
         marker = new google.maps.Marker({

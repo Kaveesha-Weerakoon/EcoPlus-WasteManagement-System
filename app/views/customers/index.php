@@ -2,10 +2,7 @@
 <div class="Customer_Main">
 
     <div class="Customer_Dashboard">
-        <script
-            src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
-            async defer>
-        </script>
+
         <div class="main">
             <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
@@ -73,7 +70,7 @@
                         </div>
                     </div>
                     <div class="main-right-bottom-two">
-                        <div class="main-right-bottom-two-cont A">
+                        <div class="main-right-bottom-two-cont A" id="credit_per_waste_quantity">
                             <div class="icon_container">
                                 <i class='bx bx-dollar-circle'></i>
                             </div>
@@ -142,6 +139,13 @@
 
                     </div>
                 </div>
+
+            </div>
+            <div class="eco_credit_per_quantity" id="eco_credit_per_quantiy_pop">
+                Eco Credits Per Waste Qunatity
+            </div>
+            <div class="overlay" id="overlay">
+
             </div>
             <script src="CustomerDashboard.js"></script>
             <?php if($data['pop']=='True') : ?>
@@ -202,10 +206,11 @@
 var color = "#47b076";
 var textColor = "#414143"
 
+var credit_per_waste_quantity = document.getElementById("credit_per_waste_quantity");
+
 var notification = document.getElementById("notification");
 var notification_pop = document.getElementById("notification_popup");
 notification_pop.style.height = "0px";
-
 let circularProgress = document.querySelector(".circular-progress");
 let progressValue = document.querySelector(".progress-value");
 let progressStartValue = 0;
@@ -226,6 +231,7 @@ function redirect_requests() {
     var linkUrl = "<?php echo URLROOT?>/customers/request_collect";
     window.location.href = linkUrl;
 }
+
 notification.addEventListener("click", function() {
     if (notification_pop.style.height === "0px") {
         notification_pop.style.height = "28%";
@@ -238,6 +244,12 @@ notification.addEventListener("click", function() {
         notification_pop.style.opacity = "0";
     }
 });
+
+document.getElementById("credit_per_waste_quantity").addEventListener("click", function() {
+    document.getElementById("eco_credit_per_quantiy_pop").classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+});
+
 
 function initMap() {
     var center = {

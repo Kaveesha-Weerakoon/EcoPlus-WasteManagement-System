@@ -1,5 +1,4 @@
 .Customer_Request_collect {
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
 
     * {
         margin: 0;
@@ -32,7 +31,6 @@
             box-sizing: border-box;
             box-shadow: var(--box-shadow2);
         }
-
 
         .main-right-top-search {
             display: flex;
@@ -189,11 +187,11 @@
         .main-bottom-component {
             width: 90%;
             height: 88%;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow2);
             padding: 20px;
             border-radius: 10px;
             display: grid;
-            grid-template-columns: 50% 50%;
+            grid-template-columns: 47% 53%;
         }
 
         .main-bottom-component-left {
@@ -203,14 +201,16 @@
         }
 
         .main-bottom-component-left img {
-            width: 90%;
-            height: 90%;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            width: 94%;
+            height: 68%;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow2);
         }
 
         .main-bottom-component-right {
             display: flex;
             flex-direction: column;
+            justify-content: center;
             padding-left: 30px;
             font-size: 45px;
             font-family: inter;
@@ -218,16 +218,17 @@
         }
 
         .main-bottom-component-right-component-topic {
-            margin-bottom: 25px;
+            margin-bottom: 35px;
         }
 
         .main-bottom-component-right-component-topic h2 {
-            font-size: 27px;
-            margin-bottom: 7px;
+            font-size: 21px;
+            margin-bottom: 4px;
+            letter-spacing: 0.01rem;
         }
 
         .line {
-            background-color: #1B6652;
+            background-color: var(--green-color-one);
             width: 65px;
             height: 4px;
         }
@@ -240,65 +241,90 @@
         .main-bottom-component-right-component {
             display: flex;
             flex-direction: column;
-            margin-bottom: 5px;
         }
 
         .main-bottom-component-right-component input {
-            height: 32px;
-            width: 87%;
+            height: 29px;
+            width: 96%;
             outline: none;
             border-radius: 5px;
             border: 1px solid #ccc;
             padding-left: 15px;
-            font-size: 16px;
+            font-size: 14px;
             border-bottom-width: 2px;
             transition: all 0.3s ease;
             margin-bottom: 6px;
-        }
-
-        .main-bottom-component-right-component-main input {
-            height: 32px;
-            width: 87%;
-            outline: none;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            padding-left: 15px;
-            font-size: 15px;
-            border-bottom-width: 2px;
-            transition: all 0.3s ease;
-            margin-bottom: 6px;
+            background-color: var(--background-color-two);
+            color: var(--main-text-color);
+            transition: all 0.6s ease-in;
         }
 
         .main-bottom-component-right-component input:focus {
-            border-color: #4dccaa;
+            border-color: var(--green-color-one);
+            outline: none;
+        }
+
+        .main-bottom-component-right-component-main input {
+            height: 29px;
+            width: 90%;
+            outline: none;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding-left: 15px;
+            font-size: 14px;
+            border-bottom-width: 2px;
+            margin-bottom: 6px;
+            background-color: var(--background-color-two);
+            color: var(--main-text-color);
+            transition: all 0.6s ease-in;
+        }
+
+        .main-bottom-component-right-component input:focus {
+            border-color: var(--green-color-one);
+            outline: none;
         }
 
         .main-bottom-component-right-component h2 {
             font-weight: 500;
-            margin-bottom: 5px;
-            font-size: 17px;
-            margin-bottom: 7px;
+            margin-bottom: 4px;
+            font-size: 15px;
+        }
+
+        .main-bottom-component-right-component p {
+            font-weight: 500;
+            margin-bottom: 4px;
+            font-size: 14px;
+            margin-top: 5px;
+            letter-spacing: 0.03rem;
+
+        }
+
+        .region_p {
+            margin-top: 5px;
+            margin-bottom: 20px !important;
+            letter-spacing: 0.03rem;
         }
 
         .err {
             height: 10px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             margin-bottom: 5px;
-            color: #e74c3c;
+            color: #F13E3E;
         }
 
         .Time {
-            width: 93% !important;
+            width: 96% !important;
         }
 
         .Time option {
             cursor: pointer;
         }
 
+
         .main-bottom-component-right-component select {
-            height: 32px;
-            width: 47%;
+            height: 30px;
+            width: 48%;
             outline: none;
             border-radius: 5px;
             border: 1px solid #ccc;
@@ -307,29 +333,32 @@
             border-bottom-width: 2px;
             transition: all 0.3s ease;
             margin-bottom: 15px;
+            background-color: var(--background-color-two);
+            color: var(--main-text-color);
+            transition: all 0.6s ease;
         }
 
         .center_dropdown {
-            height: 50px;
+            height: 35px;
             display: flex;
             padding-top: 10px;
         }
 
         .center_dropdown button {
-            height: 32px;
+            height: 29px;
             width: 25%;
             outline: none;
-            color: white;
             font-size: 15px;
             font-weight: 500;
-            border-radius: 5px;
+            border-radius: 7px;
             cursor: pointer;
-            margin-left: 20px;
+            margin-left: 23px;
             border: none;
             margin-top: none;
-            letter-spacing: 1px;
-            background: #1B6652;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.03rem;
+            background: var(--green-color-one);
+            color: var(--background-color-main);
+            transition: background-color 0.6s ease-in;
         }
 
         .main-bottom-component-right-component select option {
@@ -338,10 +367,10 @@
             cursor: pointer;
         }
 
-
         .Z {
             flex-direction: row;
             align-items: center;
+            margin-top: 10px;
         }
 
         .Z h2 {
@@ -350,7 +379,7 @@
 
         .main-bottom-maps {
             display: flex;
-            width: 100px;
+            width: 80px;
             justify-content: center;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -361,7 +390,7 @@
 
         .main-bottom-maps2 {
             display: flex;
-            width: 100px;
+            width: 80px;
             justify-content: center;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -390,25 +419,25 @@
         }
 
         .main-bottom-maps img {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
         }
 
         .main-bottom-maps h4 {
             font-weight: 500;
-            font-size: 17px;
-            margin-right: 8px;
+            font-size: 15px;
+            margin-right: 6px;
         }
 
         .main-bottom-maps2 img {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
         }
 
         .main-bottom-maps2 h4 {
             font-weight: 500;
-            font-size: 17px;
-            margin-right: 8px;
+            font-size: 15px;
+            margin-right: 6px;
         }
 
         .main-bottom-component-right-component-button {
@@ -419,18 +448,19 @@
         }
 
         .main-bottom-component-right-component-button button {
-            height: 42px;
-            width: 95%;
+            height: 35px;
+            width: 100%;
             outline: none;
-            color: white;
-            font-size: 18px;
             font-weight: 500;
-            border-radius: 5px;
+            border-radius: 7px;
             cursor: pointer;
             border: none;
-            letter-spacing: 1px;
-            background: #1B6652;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.03rem;
+            background: var(--green-color-one);
+            font-size: 15px;
+            color: var(--background-color-main);
+            transition: background-color 0.6s ease-in;
+
         }
 
         .moving-image {
@@ -489,7 +519,7 @@
         }
 
         #cancelBtn {
-            background-color: #e74c3c;
+            background-color: #F13E3E;
             color: #fff;
         }
 
@@ -504,8 +534,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -514,12 +544,13 @@
 
         .popup1 {
             width: 400px;
-            background: white;
+            background: var(--background-color-main);
             font-family: 'poppins', sans-serif;
             border-radius: 6px;
             text-align: center;
             padding: 0 30px 30px;
             color: #333;
+            border-radius: 10px;
             transition: transform 0.4s, top 0.4s;
         }
 
@@ -571,7 +602,7 @@
             margin-top: 30px;
             margin-right: 20px;
             padding: 10px 0;
-            background: #1B6652;
+            background: var(--green-color-one);
             color: white;
             border: 0;
             outline: none;
@@ -601,8 +632,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -611,7 +642,7 @@
 
         .popup {
             width: 400px;
-            background: white;
+            background: var(--background-color-main);
             font-family: 'poppins', sans-serif;
             border-radius: 6px;
             text-align: center;
@@ -645,7 +676,7 @@
             width: 100%;
             margin-top: 30px;
             padding: 10px 0;
-            background: #6fd649;
+            background: var(--green-color-one);
             color: white;
             border: 0;
             outline: none;

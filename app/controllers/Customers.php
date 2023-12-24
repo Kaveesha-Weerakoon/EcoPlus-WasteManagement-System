@@ -155,7 +155,9 @@
         'contactno'=>trim($_POST['contactno']),
         'address'=>trim($_POST['address']),
         'city'=>trim($_POST['city']),
-        'current'=>'',
+        'current'=>'',       
+        'email'=>trim($_POST['email']),
+
         'new_pw'=>'',
         're_enter_pw'=>'',
         'current_err'=>'',
@@ -171,25 +173,25 @@
       ];
 
       if (empty($data['name'])) {
-        $data['name_err'] = 'Please Enter a Name';
+        $data['name_err'] = 'Please enter a name';
       } elseif (strlen($data['name']) > 200) {
         $data['name_err'] = 'Name should be at most 200 characters';
       }
 
       if (empty($data['contactno'])) {
-        $data['contactno_err'] = 'Please Enter a Contact No';
+        $data['contactno_err'] = 'Please enter a contact no';
       } elseif (!preg_match('/^\d{10}$/', $data['contactno'])) {
-        $data['contactno_err'] = 'Contact No should be 10 digits ';
+        $data['contactno_err'] = 'Contact no should be 10 digits ';
       }
 
       if (empty($data['city'])) {
-       $data['city_err'] = 'Please Enter a City';
+       $data['city_err'] = 'Please enter a city';
       } elseif (strlen($data['city']) > 200) {
         $data['city_err'] = 'City should be at most 200 characters';
        }
 
      if (empty($data['address'])) {
-        $data['address_err'] = 'Please Enter an Address';
+        $data['address_err'] = 'Please enter an address';
      } elseif (strlen($data['address']) > 200) {
         $data['address_err'] = 'Address should be at most 200 characters';
       }
@@ -201,7 +203,6 @@
            $data['profile_image_name']='';
            $data['success_message']="Profile Details Updated Successfully";
            $data['change_pw_success']='True';
-        
           
         } else {
           $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/' . $user->image;
@@ -265,7 +266,8 @@
           'userid'=>'',
           'email'=>'',
           'contactno'=>'',
-          'address'=>'',
+          'address'=>'',          
+          'email'=>'',
           'city'=>'',
           'current'=>trim($_POST['current']),
           'new_pw'=>trim($_POST['new_pw']),
@@ -289,39 +291,40 @@
         $data['contactno']=$user->mobile_number;
         $data['address']=$user->address;
         $data['city']=$user->city;
-  
+        $data['email']=$_SESSION['user_email'];
+
         if (empty($data['current'])) {
-          $data['current_err'] = 'Please Enter Current Password';
+          $data['current_err'] = 'Please enter current password';
       }
       
       if (empty($data['new_pw'])) {
           $data['new_pw_err'] = 'Please Enter New Password';
       } elseif (strlen($data['new_pw']) < 6) {
-          $data['new_pw_err'] = 'New Password must be at least 6 characters';
+          $data['new_pw_err'] = 'New password must be at least 6 characters';
       }
       
       if (empty($data['re_enter_pw'])) {
-          $data['re_enter_pw_err'] = 'Please Confirm New Password';
+          $data['re_enter_pw_err'] = 'Please confirm new password';
       } elseif (strlen($data['re_enter_pw']) < 6) {
-          $data['re_enter_pw_err'] = 'Confirmed Password must be at least 6 characters';
+          $data['re_enter_pw_err'] = 'Confirmed password must be at least 6 characters';
       }
   
       if(empty($data['new_pw_err']) && empty($data['current_err']) && empty($data['re_enter_pw_err'])) {
            
               if($this->userModel->pw_check($_SESSION['user_id'],$data['current'])){
                 if($data['new_pw']!=$data['re_enter_pw']){
-                  $data['new_pw_err'] = 'Passwords Does not match';
+                  $data['new_pw_err'] = 'Passwords does not match';
                 }
                 else{
                   if($this->userModel->change_pw($_SESSION['user_id'],$data['re_enter_pw'])){
-                    $data['success_message']="Password Changed Successfully";
+                    $data['success_message']="Password changed successfully";
                     $data['change_pw_success']='True';
                     $this->view('customers/edit_profile', $data);
                   }
                 }
               }
               else{
-                $data['current_err'] = 'Invalid Password';
+                $data['current_err'] = 'Invalid password';
               }
                    
         }
@@ -359,7 +362,8 @@
     }
    
     public function complains(){
-    
+     
+      
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -406,7 +410,7 @@
         if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
           if($this->customer_complain_Model->complains($data)){
             $data['completed']="True";
-            $this->view('customers/complains', $data);
+            $this->view('customers/complains', $data);         
            
           } else {
             die('Something went wrong');
@@ -416,7 +420,8 @@
               $this->view('customers/complains', $data);         
         }
       }
-      else
+      else{
+        
       $data =[
         'name' => '',
         'contact_no' => '',
@@ -429,9 +434,14 @@
         'subject_err' => '' ,
         'complain_err' => ''  ,
         'completed'=>''      
-      ];{
+      ];
+       $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+
+      $data['contact_no']=$user->mobile_number;
+      $data['name'] =$_SESSION['user_name'];
         $this->view('customers/complains', $data);
-      }
+    }
      
     }
 

@@ -50,8 +50,8 @@
                 </div>
                 <div class="main-bottom">
                     <div class="main-bottom-component">
-                        <form class="main-bottom-component-left" action="<?php echo URLROOT;?>/customers/transfer"
-                            method="post">
+                        <form id="myForm" class="main-bottom-component-left"
+                            action="<?php echo URLROOT;?>/customers/transfer" method="post">
                             <div class="main-bottom-component-left-topic">
                                 <h2>Transfer your Eco-credits</h2>
                                 <div class="line"></div>
@@ -89,12 +89,37 @@
 
                     </div>
                 </div>
+
             </div>
             <?php endif; ?>
+            <?php if($data['transfer_confirm']=='True') : ?>
+            <div class="delete_confirm" id="cancel_confirm">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
+                    <h2>Transfer Confirmation</h2>
+                    <p>This action will Transfer <?php echo $data['credit_amount']?> credit from your account</p>
+                    <div class="btns">
+                        <a id="cancelLink"><button type="button" class="deletebtn"
+                                onclick="submitForm()">Confirm</button></a>
+                        <a href="<?php echo URLROOT;?>/customers/transfer"><button type="button"
+                                class="cancelbtn">Cancel</button></a>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+
+
         </div>
     </div>
 
-
+    <script>
+    function submitForm() {
+        var form = document.getElementById('myForm');
+        form.action = "<?php echo URLROOT;?>/customers/transfer_complete";
+        form.method = 'post';
+        form.submit();
+    }
+    </script>
 
 </div>
 

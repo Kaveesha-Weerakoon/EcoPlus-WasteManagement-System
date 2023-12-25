@@ -140,10 +140,11 @@
                     <?php else: ?>
                     <div class="main-right-bottom-two">
                         <div class="main-right-bottom-two-content">
-                            <img src="<?php echo IMGROOT?>/customer_trasfer_empty.jpg" alt="">
+                            <i class='bx bx-data' style="font-size: 150px"></i>
                             <h1>Your credit transfer is currently unavailable</h1>
-                            <a href="<?php echo URLROOT?>/customers/transfer"><button>Transfer Credits</button></a>
-
+                            <p>Transfer Credits Now!</p>
+                            <a href="<?php echo URLROOT?>/customers/transfer"><button>Transfer
+                                    Credits</button></a>
                         </div>
                     </div>
                     <?php endif; ?>

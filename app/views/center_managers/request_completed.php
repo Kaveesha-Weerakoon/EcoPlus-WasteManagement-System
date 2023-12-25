@@ -4,54 +4,9 @@
     </script>
 
     <div class="CenterManager_Request_Main">
-        <div class="CenterManager_Request_Cancelled">
+        <div class="CenterManager_Request_Completed">
             <div class="main">
                 <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
-                <!-- <div class="main-left">
-                    <div class="main-left-top">
-                        <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
-                        <h1>Eco Plus</h1>
-                    </div>
-                    <div class="main-left-middle">
-                        <a href="<?php echo URLROOT?>/centermanagers">
-                            <div class="main-left-middle-content ">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/Home.png" alt="">
-                                <h2>Dashboard</h2>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="main-left-middle-content current">
-                                <div class="main-left-middle-content-line"></div>
-                                <img src="<?php echo IMGROOT?>/Request.png" alt="">
-                                <h2>Requests</h2>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="main-left-middle-content Collector ">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/Center.png" alt="">
-                                <h2>Center Waste Management</h2>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/centermanagers/editprofile">
-                            <div class="main-left-middle-content">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">
-                                <h2>Edit Profile</h2>
-                            </div>
-                        </a>
-
-                    </div>
-                    <a href="<?php echo URLROOT?>/centermanagers/logout">
-                        <div class="main-left-bottom">
-                            <div class="main-left-bottom-content">
-                                <img src="<?php echo IMGROOT?>/logout.png" alt="">
-                                <p>Log out</p>
-                            </div>
-                        </div>
-                    </a>
-                </div> -->
                 <div class="main-right">
                     <div class="main-right-top">
                         <div class="main-right-top-one">
@@ -82,16 +37,16 @@
                                     <div class="line1"></div>
                                 </div>
                             </a>
-                            <a href="<?php echo URLROOT?>/centermanagers/request_completed">
-                                <div class="main-right-top-three-content">
-                                    <p>Completed</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
                             <a href="">
                                 <div class="main-right-top-three-content">
-                                    <p><b style="color: #1B6652;">Cancelled</b></p>
+                                    <p><b style="color: #1B6652;">Completed</b></p>
                                     <div class="line"></div>
+                                </div>
+                            </a>
+                            <a href="<?php echo URLROOT?>/centermanagers/request_cancelled">
+                                <div class="main-right-top-three-content">
+                                    <p>Cancelled</p>
+                                    <div class="line1"></div>
                                 </div>
                             </a>
                         </div>
@@ -117,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                    <?php if(!empty($data['cancelled_request'])) : ?>
+                    <?php if(!empty($data['completed_requests'])) : ?>
                     <div class="main-right-bottom" id="main-right-bottom">
                         <div class="main-right-bottom-top">
                             <table class="table">
@@ -125,38 +80,41 @@
                                     <th>Req ID</th>
                                     <th>Date</th>
                                     <th>Time</th>
-                                    <th>Customer ID</th>
-                                    <th>Cancelled By</th>
+                                    <th>Customer</th>
+                                    <th>Collector</th>
+                                    <th>Collector info</th>
                                     <th>Location</th>
-                                    <th>Request Details</th>
-                                    <th>Reason</th>
+                                    <th>Earned credits</th>
+                                    <th>Collection details</th>
+                                    <th>Confirmed</th>
                                 </tr>
                             </table>
                         </div>
                         <div class="main-right-bottom-down">
                             <table class="table">
-                                <?php foreach($data['cancelled_request'] as $request) : ?>
+                                <?php foreach($data['completed_requests'] as $request) : ?>
                                 <tr class="table-row" id="table-row">
                                     <td>R<?php echo $request->req_id?></td>
                                     <td><?php  echo $request->date?></td>
                                     <td><?php  echo $request->time?></td>
-                                    <td><?php  echo $request->customer_id?></td>
-                                    <td><?php  if ($request->cancelled_by === 'Me') {
-                                  echo 'Customer';
-                                } else {
-                                  if (empty($request->collector_id)){
-                                    echo $request->cancelled_by;
-                                  }
-                                  else{
-                                    echo 'Collector '.$request->collector_id;
-                                  }
-                                }?>
+                                    <td><?php  echo $request->customer_name?></td>
+                                    <td><?php  echo $request->name?></td>
+                                    <td class="cancel-open">
+                                        <img src="<?php echo IMGROOT ?>/assign.png"
+                                            <?php if ($request->type === 'completed') { ?>onclick="view_collector('<?php echo $request->collector_image; ?>', '<?php echo $request->collector_id; ?>', '<?php echo $request->name; ?>', 
+                                            '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')"
+                                            <?php } ?> alt="">
                                     </td>
                                     <td><img onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
                                             class="add" src="<?php echo IMGROOT?>/location.png" alt=""></td>
-                                    <td><img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                            class="add" src="<?php echo IMGROOT?>/info.png" alt=""></td>
-                                    <td><?php  echo $request->reason?></td>
+
+                                    <td><?php  echo $request->credit_amount?></td>
+
+                                    <td class="cancel-open"><img
+                                            onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
+                                            src="<?php echo IMGROOT?>/view.png" alt="">
+                                    </td>
+                                    <td><button>Confirmed</button></td>
 
 
 
@@ -170,8 +128,8 @@
                     <div class="main-right-bottom-three">
                         <div class="main-right-bottom-three-content">
                             <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
-                            <h1>You have No Cancelled Requests</h1>
-                            <p>Cancelled requests will be appeared as soon as you cancel a request</p>
+                            <h1>You have No Completed Requests</h1>
+                            <p>Completed requests will be appeared as soon as collector completes it</p>
                         </div>
                     </div>
                 <?php endif; ?>

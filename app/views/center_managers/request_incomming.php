@@ -83,7 +83,7 @@
                                     <div class="line1"></div>
                                 </div>
                             </a>
-                            <a href="">
+                            <a href="<?php echo URLROOT?>/centermanagers/request_completed">
                                 <div class="main-right-top-three-content">
                                     <p>Completed</p>
                                     <div class="line1"></div>

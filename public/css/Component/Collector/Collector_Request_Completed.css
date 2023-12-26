@@ -1,26 +1,27 @@
 .Collector_Request_Completed {
-    .main-right-bottom-two {
-        width: 99%;
-        height: 550px;
-        padding-left: 1%;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    #request i {
-        color: var(--green-color-one);
-    }
+  .main-right-bottom-two {
+    width: 99%;
+    height: 550px;
+    padding-left: 1%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
 
-    #request h3 {
-        color: var(--green-color-one);
-    }
+  #request i {
+    color: var(--green-color-one);
+  }
 
-    .main-right-bottom-one {
-        display: flex;
-        flex-direction: column;
-        height: 550px;
-    }
+  #request h3 {
+    color: var(--green-color-one);
+  }
+
+  .main-right-bottom-one {
+    display: flex;
+    flex-direction: column;
+    height: 550px;
+  }
 
 
   .main-right-bottom {
@@ -36,13 +37,9 @@
   }
 
   .table-row {
-    font-size: 1px;
-    font-family: Montserrat;
-    text-align: center;
     height: 52px;
     display: grid;
     grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
-    border-bottom: 2px solid #CACACA;
   }
 
   .table td {
@@ -157,25 +154,25 @@
     animation: slideDown 0.5s ease-out forwards;
   }
 
-    .table td {
-        height: 50px;
-        font-size: 15.5px;
-        vertical-align: middle;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+  .table td {
+    height: 50px;
+    font-size: 15.5px;
+    vertical-align: middle;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .table-header {
-        background-color: #ecf0f1;
-        font-size: 17px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 55px;
-        display: grid;
-        grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
-    }
+  .table-header {
+    background-color: #ecf0f1;
+    font-size: 17px;
+    font-family: Montserrat;
+    text-align: center;
+    height: 55px;
+    display: grid;
+    grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
+  }
 
 
   .cancel-confirm-content h2 {
@@ -370,16 +367,17 @@
       left: 10px;
       color: #555;
     }
+
     .error-div {
       color: red;
       font-size: 0.8em;
       margin-top: 4px;
       margin-bottom: 4px;
-      text-align: left; 
+      text-align: left;
       position: absolute;
-      bottom: -20px; 
+      bottom: -20px;
       left: 0;
-  }
+    }
 
     .main-right-bottom-content-content input {
       height: 45px;
@@ -453,8 +451,8 @@
 
 
 
-   /*collect details*/
-   .collect-details-pop {
+  /*collect details*/
+  .collect-details-pop {
     position: fixed;
     top: 0;
     left: 0;
@@ -465,9 +463,9 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-}
+  }
 
-.collect-details-pop-form {
+  .collect-details-pop-form {
     width: 45%;
     background: white;
     border-radius: 6px;
@@ -482,9 +480,9 @@
     transition: transform 0.4s, top 0.4s;
     flex-direction: column;
 
-}
+  }
 
-.collect-details-pop-form-top {
+  .collect-details-pop-form-top {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -492,25 +490,25 @@
     margin-bottom: 25px;
     font-size: 18px;
     padding-right: 250px;
-}
+  }
 
 
-.collect-details-pop-form-close {
+  .collect-details-pop-form-close {
     width: 25px;
     height: 25px;
     margin-left: 650px;
     margin-top: -3%;
     cursor: pointer;
-}
+  }
 
 
-.collect-details-topic {
+  .collect-details-topic {
     display: flex;
     padding-right: 200px;
-    
-}
 
-.collect-details-pop-form-content {
+  }
+
+  .collect-details-pop-form-content {
     display: grid;
     grid-template-columns: 40% 70%;
     width: 80%;
@@ -519,9 +517,9 @@
     border-radius: 6px;
     padding-left: 30px;
 
-}
+  }
 
-.collect-details-topic::before {
+  .collect-details-topic::before {
     content: '';
     position: absolute;
     margin-top: 23px;
@@ -531,49 +529,49 @@
     width: 67px;
     background: #1B6652;
 
-}
+  }
 
-/* Styling for Popup Background */
-.popup-background {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-}
+  /* Styling for Popup Background */
+  .popup-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+  }
 
 
 
-/* Styling for Popup Content */
-.popup-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  text-align: center;
-}
+  /* Styling for Popup Content */
+  .popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+  }
 
-/* Additional styling for input fields, buttons, etc. */
-.popup-content input,
-.popup-content button {
-  margin: 10px 0;
-  padding: 8px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-}
+  /* Additional styling for input fields, buttons, etc. */
+  .popup-content input,
+  .popup-content button {
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
 
-.popup-content button {
-  background-color: #1B6652;
-  color: white;
-  cursor: pointer;
-}
+  .popup-content button {
+    background-color: #1B6652;
+    color: white;
+    cursor: pointer;
+  }
 
-/* ------------*/
+  /* ------------*/
 
 }

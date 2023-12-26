@@ -1,7 +1,7 @@
 .Collector_Request_Cancelled {
 
 
-    
+
     #request i {
         color: var(--green-color-one);
     }
@@ -9,6 +9,7 @@
     #request h3 {
         color: var(--green-color-one);
     }
+
     .table-row {
         font-size: 1px;
         font-family: Montserrat;
@@ -26,17 +27,9 @@
 
     .table-header {
         background-color: #ecf0f1;
-        font-size: 17px;
         font-family: Montserrat;
         height: 55px;
         grid-template-columns: 11% 10% 10% 15% 11% 13% 40%;
-    }
-
-    .table th {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
     }
 
     td img {

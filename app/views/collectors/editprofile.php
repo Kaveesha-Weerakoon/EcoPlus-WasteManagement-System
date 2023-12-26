@@ -5,9 +5,46 @@
             <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
             <div class="main-right">
                 <div class="main-right-top">
-                    <p><?php echo $_SESSION['collector_name']?></p>
-                    <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
-                        alt="">
+                    <div class="main-right-top-search">
+                        <i class='bx bx-search-alt-2'></i>
+                        <input type="text" id="searchInput" placeholder="Search">
+                    </div>
+                    <div class="main-right-top-notification" id="notification">
+                        <i class='bx bx-bell'></i>
+                        <div class="dot"></div>
+                    </div>
+                    <div id="notification_popup" class="notification_popup">
+                        <h1>Notifications</h1>
+                        <div class="notification">
+                            <div class="notification-green-dot">
+
+                            </div>
+                            Request 1232 Has been Cancelled
+                        </div>
+                        <div class="notification">
+                            <div class="notification-green-dot">
+
+                            </div>
+                            Request 1232 Has been Assigned
+                        </div>
+                        <div class="notification">
+                            <div class="notification-green-dot">
+
+                            </div>
+                            Request 1232 Has been Cancelled
+                        </div>
+
+
+                    </div>
+                    <div class="main-right-top-profile">
+                        <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
+                            alt="">
+                        <div class="main-right-top-profile-cont">
+                            <h3><?php echo $_SESSION['collector_name']?></h3>
+                            <p>ID : C <?php echo $_SESSION['collector_id']?></p>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="main-right-bottom">
                     <div class="main-right-bottom-content">

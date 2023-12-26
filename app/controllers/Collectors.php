@@ -379,7 +379,7 @@
         $data=[
           'name'=>trim($_POST['name']),
          'userid'=>'',
-         'email'=>'',
+         'email'=>trim($_POST['email']),
          'profile_image_name' => $_SESSION['collector_email'].'_'.$_FILES['profile_image']['name'],
          'contactno'=>trim($_POST['contactno']),
          'address'=>trim($_POST['address']),
@@ -468,7 +468,9 @@
         $user=$this->collectorModel->getCollectorById($id);
         $data['name']=$_SESSION['collector_name'];
         $data['contactno']=$user->contact_no;
-        $data['address']=$user->address;
+        $data['address']=$user->address;      
+        $data['email']=$_SESSION['collector_email'];
+
         $this->view('collectors/editprofile', $data);
        }
   

@@ -12,6 +12,7 @@
       $this->Customer_Credit_Model=$this->model('Customer_Credit');
       $this->Request_Model=$this->model('Request');
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
+      $this->Center_Model=$this->model('Center');
 
       if(!isLoggedIn('user_id')){
         redirect('users/login');
@@ -21,12 +22,20 @@
     public function index(){
       $balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
       $credit= $this->creditModel->get();
-   
+      $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']); 
+      $centers = $this->Center_Model->getallCenters();
+
+      
+       $jsonData = json_encode($centers );
+
       $data = [
         'title' => 'TraversyMVC',
         'eco_credit_per'=>$credit,
         'credit_balance'=>$balance ,
-        'pop'=>''    
+        'pop'=>'',
+        'transaction_history' =>$transaction_history,
+        'centers'=>$jsonData
+         
         ];
      
       $this->view('customers/index', $data);
@@ -686,7 +695,10 @@
             $data['credit_amount_err'] = 'Please enter a credit amount greater than 0';
         } elseif (!filter_var($data['credit_amount'], FILTER_VALIDATE_FLOAT)) {
             $data['credit_amount_err'] = 'Credit amount should be a valid number';
-        } else {
+        }  elseif (!preg_match('/^\d+(\.\d{1,3})?$/', $data['credit_amount'] )){
+          $data['credit_amount_err'] = 'Credit amount should be a valid number with up to 3 decimal places';
+      }
+         else {
             $user_balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
             if ($data['credit_amount'] > $user_balance) {
                 $data['credit_amount_err'] = 'Transfer amount cannot exceed your available credit balance';

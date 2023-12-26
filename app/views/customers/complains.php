@@ -99,19 +99,22 @@
 
                     </div>
                 </div>
-            </div>
-        </div>
-        <?php if($data['completed']=='True') : ?>
-        <div class="center_worker_success">
-            <div class="popup" id="popup">
-                <img src="<?php echo IMGROOT?>/check.png" alt="">
-                <h2>Success!!</h2>
-                <p>Complain has been reported successfully</p>
-                <a href="<?php echo URLROOT?>/customers/history_complains"><button type="button">OK</button></a>
+                <?php if($data['completed']=='True') : ?>
+                <div class="complain_success" style="">
+                    <div class="popup" id="popup">
+                        <img src="<?php echo IMGROOT?>/check.png" alt="">
+                        <h2>Success!!</h2>
+                        <p>Complain has been reported successfully</p>
+                        <a href="<?php echo URLROOT?>/customers/history_complains"><button type="button">OK</button></a>
 
+
+                    </div>
+                </div>
+                <?php endif; ?>
             </div>
+
         </div>
-        <?php endif; ?>
+
     </div>
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

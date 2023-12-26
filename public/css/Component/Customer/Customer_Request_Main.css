@@ -20,8 +20,6 @@
     .main-right-top {
         display: flex;
         flex-direction: column;
-        background-color: var(--background-color-main);
-
     }
 
     .main-right-top-one {
@@ -34,6 +32,8 @@
         box-sizing: border-box;
         height: 39%;
         box-shadow: var(--box-shadow2);
+        background-color: var(--background-color-main);
+        z-index: 1;
     }
 
     .main-right-top-search {
@@ -178,6 +178,8 @@
         display: flex;
         align-items: center;
         padding-left: 33px;
+        background-color: var(--background-color-right);
+
     }
 
     .main-right-top-two h1 {
@@ -191,6 +193,8 @@
         flex-direction: row;
         padding-left: 34px;
         margin: 0.6%;
+        background-color: var(--background-color-right);
+
     }
 
     .main-right-top-three-content {
@@ -224,6 +228,56 @@
         width: 96.5%;
         height: 450px;
         overflow: scroll;
+    }
+
+    .main-right-bottom-two {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-right-bottom-two-content {
+        width: 55%;
+        height: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-right-bottom-two-content img {
+        width: 450px;
+        height: 450px;
+    }
+
+    .main-right-bottom-two-content h1 {
+        font-size: 23px;
+        color: var(--main-text-color);
+        font-weight: 550;
+        margin-top: 2%;
+    }
+
+    .main-right-bottom-two-content p {
+        font-size: 18px;
+        margin-top: 7px;
+        color: var(--main-text-color);
+    }
+
+    .main-right-bottom-two-content button {
+        height: 40px;
+        width: 175px;
+        outline: none;
+        color: white;
+        font-size: 19px;
+        font-weight: 500;
+        border-radius: 5px;
+        cursor: pointer;
+        border: none;
+        letter-spacing: 1px;
+        background: var(--green-color-one);
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+        margin-top: 10%;
     }
 
     .location_pop {
@@ -295,6 +349,7 @@
         transition: transform 0.4s ease-in, background-color 0.4s ease-in;
         box-shadow: var(--box-shadow);
         border-radius: 10px;
+        background-color: #333;
     }
 
     .overlay {
@@ -380,6 +435,7 @@
         padding-top: 40px;
         padding-bottom: 50px;
         padding-left: 25px;
+        width: 200%;
     }
 
     .personal-details-right-labels span {

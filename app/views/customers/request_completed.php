@@ -7,6 +7,7 @@
 
                 <div class="main-right">
                     <?php require APPROOT . '/views/customers/customer_request/customer_request_top.php'; ?>
+                    <?php if(!empty($data['completed_request'])) : ?>
 
                     <div class="main-right-bottom">
                         <div class="main-right-bottom-top">
@@ -67,6 +68,18 @@
                             </table>
                         </div>
                     </div>
+                    <?php else: ?>
+                    <div class="main-right-bottom-two">
+                        <div class="main-right-bottom-two-content">
+                            <!-- <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt=""> -->
+                            <i class='bx bx-data' style="font-size: 150px"></i>
+                            <h1>You Have No Completed Requests</h1>
+                            <p>Request a Collect Now!</p>
+                            <a href="<?php echo URLROOT?>/customers/request_collect"><button>Request</button></a>
+
+                        </div>
+                    </div>
+                    <?php endif; ?>
                 </div>
                 <div class="location_pop">
                     <div class="location_pop_content">

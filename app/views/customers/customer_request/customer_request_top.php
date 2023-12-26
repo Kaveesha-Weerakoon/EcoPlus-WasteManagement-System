@@ -1,3 +1,6 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
+    async defer>
+</script>
 <div class="main-right-top">
     <div class="main-right-top-one">
         <div class="main-right-top-search">

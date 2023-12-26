@@ -12,6 +12,7 @@
       $this->Customer_Credit_Model=$this->model('Customer_Credit');
       $this->Request_Model=$this->model('Request');
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
+      $this->Center_Model=$this->model('Center');
 
       if(!isLoggedIn('user_id')){
         redirect('users/login');
@@ -20,11 +21,22 @@
     
     public function index(){
       $balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
+      $credit= $this->creditModel->get();
+      $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']); 
+      $centers = $this->Center_Model->getallCenters();
+
+      
+       $jsonData = json_encode($centers );
+
       $data = [
         'title' => 'TraversyMVC',
+        'eco_credit_per'=>$credit,
+        'credit_balance'=>$balance ,
         'pop'=>'',
-        'credit_balance'=>$balance 
-      ];
+        'transaction_history' =>$transaction_history,
+        'centers'=>$jsonData
+         
+        ];
      
       $this->view('customers/index', $data);
     }
@@ -155,7 +167,9 @@
         'contactno'=>trim($_POST['contactno']),
         'address'=>trim($_POST['address']),
         'city'=>trim($_POST['city']),
-        'current'=>'',
+        'current'=>'',       
+        'email'=>trim($_POST['email']),
+
         'new_pw'=>'',
         're_enter_pw'=>'',
         'current_err'=>'',
@@ -171,25 +185,25 @@
       ];
 
       if (empty($data['name'])) {
-        $data['name_err'] = 'Please Enter a Name';
+        $data['name_err'] = 'Please enter a name';
       } elseif (strlen($data['name']) > 200) {
         $data['name_err'] = 'Name should be at most 200 characters';
       }
 
       if (empty($data['contactno'])) {
-        $data['contactno_err'] = 'Please Enter a Contact No';
+        $data['contactno_err'] = 'Please enter a contact no';
       } elseif (!preg_match('/^\d{10}$/', $data['contactno'])) {
-        $data['contactno_err'] = 'Contact No should be 10 digits ';
+        $data['contactno_err'] = 'Contact no should be 10 digits ';
       }
 
       if (empty($data['city'])) {
-       $data['city_err'] = 'Please Enter a City';
+       $data['city_err'] = 'Please enter a city';
       } elseif (strlen($data['city']) > 200) {
         $data['city_err'] = 'City should be at most 200 characters';
        }
 
      if (empty($data['address'])) {
-        $data['address_err'] = 'Please Enter an Address';
+        $data['address_err'] = 'Please enter an address';
      } elseif (strlen($data['address']) > 200) {
         $data['address_err'] = 'Address should be at most 200 characters';
       }
@@ -201,7 +215,6 @@
            $data['profile_image_name']='';
            $data['success_message']="Profile Details Updated Successfully";
            $data['change_pw_success']='True';
-        
           
         } else {
           $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/' . $user->image;
@@ -265,7 +278,8 @@
           'userid'=>'',
           'email'=>'',
           'contactno'=>'',
-          'address'=>'',
+          'address'=>'',          
+          'email'=>'',
           'city'=>'',
           'current'=>trim($_POST['current']),
           'new_pw'=>trim($_POST['new_pw']),
@@ -289,39 +303,40 @@
         $data['contactno']=$user->mobile_number;
         $data['address']=$user->address;
         $data['city']=$user->city;
-  
+        $data['email']=$_SESSION['user_email'];
+
         if (empty($data['current'])) {
-          $data['current_err'] = 'Please Enter Current Password';
+          $data['current_err'] = 'Please enter current password';
       }
       
       if (empty($data['new_pw'])) {
           $data['new_pw_err'] = 'Please Enter New Password';
       } elseif (strlen($data['new_pw']) < 6) {
-          $data['new_pw_err'] = 'New Password must be at least 6 characters';
+          $data['new_pw_err'] = 'New password must be at least 6 characters';
       }
       
       if (empty($data['re_enter_pw'])) {
-          $data['re_enter_pw_err'] = 'Please Confirm New Password';
+          $data['re_enter_pw_err'] = 'Please confirm new password';
       } elseif (strlen($data['re_enter_pw']) < 6) {
-          $data['re_enter_pw_err'] = 'Confirmed Password must be at least 6 characters';
+          $data['re_enter_pw_err'] = 'Confirmed password must be at least 6 characters';
       }
   
       if(empty($data['new_pw_err']) && empty($data['current_err']) && empty($data['re_enter_pw_err'])) {
            
               if($this->userModel->pw_check($_SESSION['user_id'],$data['current'])){
                 if($data['new_pw']!=$data['re_enter_pw']){
-                  $data['new_pw_err'] = 'Passwords Does not match';
+                  $data['new_pw_err'] = 'Passwords does not match';
                 }
                 else{
                   if($this->userModel->change_pw($_SESSION['user_id'],$data['re_enter_pw'])){
-                    $data['success_message']="Password Changed Successfully";
+                    $data['success_message']="Password changed successfully";
                     $data['change_pw_success']='True';
                     $this->view('customers/edit_profile', $data);
                   }
                 }
               }
               else{
-                $data['current_err'] = 'Invalid Password';
+                $data['current_err'] = 'Invalid password';
               }
                    
         }
@@ -359,7 +374,7 @@
     }
    
     public function complains(){
-    
+        
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -406,7 +421,7 @@
         if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
           if($this->customer_complain_Model->complains($data)){
             $data['completed']="True";
-            $this->view('customers/complains', $data);
+            $this->view('customers/complains', $data);         
            
           } else {
             die('Something went wrong');
@@ -416,7 +431,8 @@
               $this->view('customers/complains', $data);         
         }
       }
-      else
+      else{
+        
       $data =[
         'name' => '',
         'contact_no' => '',
@@ -429,10 +445,14 @@
         'subject_err' => '' ,
         'complain_err' => ''  ,
         'completed'=>''      
-      ];{
+      ];
+       $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+
+      $data['contact_no']=$user->mobile_number;
+      $data['name'] =$_SESSION['user_name'];
         $this->view('customers/complains', $data);
-      }
-     
+     } 
     }
 
     private function getCommonData() {
@@ -644,32 +664,16 @@
           $data = [
               'customer_id' => trim($_POST['customer_id']),
               'credit_amount' => trim($_POST['credit_amount']),
-  
+              'transfer_confirm'=>'False',
               'customer_id_err' => '',
               'credit_amount_err' => '',
               'completed' => ''
           ];
   
   
-           // Extract numeric part from the user input
            $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
-           // Convert extracted numeric part to an integer
            $customer_id = (int)$numeric_part;
-  
-          /* if (empty($data['customer_id'])) {
-            $data['customer_id_err'] = 'Please enter customer id';
-        } else {
-            if ($customer_id === $_SESSION['user_id']) {
-                $data['customer_id_err'] = 'You cannot transfer credits to yourself';
-            } else {
-                // Check if the user input matches the required format
-                if (!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
-                    $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
-                } elseif (!$this->customerModel->get_customer($customer_id)) {
-                    $data['customer_id_err'] = 'Customer ID does not exist';
-                }
-            }
-        }*/
+
   
           if (empty($data['customer_id'])) {
               $data['customer_id_err'] = 'Please enter customer id';
@@ -687,8 +691,90 @@
           }
       
         
+          if (empty($data['credit_amount']) || $data['credit_amount'] <= 0) {
+            $data['credit_amount_err'] = 'Please enter a credit amount greater than 0';
+        } elseif (!filter_var($data['credit_amount'], FILTER_VALIDATE_FLOAT)) {
+            $data['credit_amount_err'] = 'Credit amount should be a valid number';
+        }  elseif (!preg_match('/^\d+(\.\d{1,3})?$/', $data['credit_amount'] )){
+          $data['credit_amount_err'] = 'Credit amount should be a valid number with up to 3 decimal places';
+      }
+         else {
+            $user_balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
+            if ($data['credit_amount'] > $user_balance) {
+                $data['credit_amount_err'] = 'Transfer amount cannot exceed your available credit balance';
+            }
+        }
   
   
+        
+          if (empty($data['customer_id_err']) && empty($data['credit_amount_err'])) {
+            $sender_id = $_SESSION['user_id'];
+            $receiver_id = $customer_id;
+            $transfer_amount = $data['credit_amount'];
+  
+            $sender_balance = $this->Customer_Credit_Model->get_customer_credit_balance($sender_id);
+            $receiver_balance = $this->Customer_Credit_Model->get_customer_credit_balance($receiver_id);
+
+        
+            if ($transfer_amount <= $sender_balance) {
+                $data['transfer_confirm']="True";           
+                $this->view('customers/transfer', $data);
+            } else {
+                $data['credit_amount_err'] = 'Transfer amount exceeds available credit balance';             
+                $this->view('customers/transfer', $data);
+
+            }
+          } else {
+              $this->view('customers/transfer', $data);
+          }
+  
+          }else {
+            $data = [
+              'customer_id' => '',
+              'credit_amount' => '',
+              'customer_id_err' => '',
+              'credit_amount_err' => '',
+              'completed' => ''
+          ];
+  
+          $this->view('customers/transfer', $data);
+      }
+    }
+    
+
+    public function transfer_complete() {
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+          $data = [
+              'customer_id' => trim($_POST['customer_id']),
+              'credit_amount' => trim($_POST['credit_amount']),
+              'transfer_confirm'=>'False',
+              'customer_id_err' => '',
+              'credit_amount_err' => '',
+              'completed' => ''
+          ];
+  
+  
+           $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
+           $customer_id = (int)$numeric_part;
+
+  
+          if (empty($data['customer_id'])) {
+              $data['customer_id_err'] = 'Please enter customer id';
+          } else {
+                if(!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
+                    $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
+                } elseif($customer_id === $_SESSION['user_id']) {
+                    $data['customer_id_err'] = 'You cannot transfer credits to yourself';
+                } else {
+                    if (!$this->customerModel->get_customer($customer_id)) {
+                          $data['customer_id_err'] = 'Customer ID does not exist';
+                    }
+                }
+          }
+      
+        
           if (empty($data['credit_amount']) || $data['credit_amount'] <= 0) {
             $data['credit_amount_err'] = 'Please enter a credit amount greater than 0';
         } elseif (!filter_var($data['credit_amount'], FILTER_VALIDATE_FLOAT)) {
@@ -712,7 +798,8 @@
 
         
             if ($transfer_amount <= $sender_balance) {
-               
+          
+
                 $new_sender_balance = $sender_balance - $transfer_amount;
                 $new_receiver_balance = $receiver_balance + $transfer_amount;
                 $sender_update = $this->Customer_Credit_Model->update_credit_balance($sender_id, $new_sender_balance);
@@ -732,7 +819,9 @@
                   die('Something went wrong');
                 }
             } else {
-                $data['credit_amount_err'] = 'Transfer amount exceeds available credit balance';
+                $data['credit_amount_err'] = 'Transfer amount exceeds available credit balance';             
+                $this->view('customers/transfer', $data);
+
             }
           } else {
               $this->view('customers/transfer', $data);
@@ -749,8 +838,6 @@
   
           $this->view('customers/transfer', $data);
       }
-       }
-
-       
+    }
 }
   ?>

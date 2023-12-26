@@ -54,7 +54,8 @@
 
                     <div class="main-bottom-component">
                         <div class="main-bottom-component-left">
-                            <img src="<?php echo IMGROOT?>/request_collect3.jpg" alt="">
+                            <!-- <img src="<?php echo IMGROOT?>/request_collect1.jpg" alt=""> -->
+                            <i class='bx bx-task' style="font-size:300px"></i>
                         </div>
                         <div class="main-bottom-component-right">
                             <div class="main-bottom-component-right-component-topic">

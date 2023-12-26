@@ -1005,14 +1005,14 @@ font-size: 13px;
     .main-right-bottom-three-left-cont h3 {
         font-size: 15px;
         width: 250px;
-        margin-left: -20%;
+        margin-left: -14%;
     }
 
     .main-right-bottom-three-left-cont h2 {
         font-size: 18px;
-        width: 100px;
         color: var(--green-color-one);
-        width: 150px;
+        width: 175px;
+
     }
 
     .main-right-bottom-three-right {

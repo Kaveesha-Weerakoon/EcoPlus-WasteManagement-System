@@ -53,10 +53,10 @@
                     method="post">
 
                     <div class="main-bottom-component">
-                        <div class="main-bottom-component-left">
-                            <!-- <img src="<?php echo IMGROOT?>/request_collect1.jpg" alt=""> -->
+                        <!-- <div class="main-bottom-component-left">
+                            <img src="<?php echo IMGROOT?>/request_collect1.jpg" alt="">
                             <i class='bx bx-task' style="font-size:300px"></i>
-                        </div>
+                        </div> -->
                         <div class="main-bottom-component-right">
                             <div class="main-bottom-component-right-component-topic">
                                 <h2>Request a Collect</h2>

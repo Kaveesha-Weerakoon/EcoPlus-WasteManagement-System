@@ -6,64 +6,46 @@
                 defer></script>
 
             <div class="main">
-                <div class="main-left">
-                    <div class="main-left-top">
-                        <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
-                        <h1>Eco Plus</h1>
-                    </div>
-
-                    <div class="main-left-middle">
-                        <a href="<?php echo URLROOT?>/collectors">
-                            <div class="main-left-middle-content ">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/Home.png" alt="">
-                                <h2>Dashboard</h2>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="main-left-middle-content current ">
-                                <div class="main-left-middle-content-line"></div>
-                                <img src="<?php echo IMGROOT?>/Request.png" alt="">
-                                <h2>Requests</h2>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/collectors/collector_assistants">
-                            <div class="main-left-middle-content Collector">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/CollectorAssis.png" alt="">
-                                <h2>Collector Assistants</h2>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/collectors/editprofile">
-                            <div class="main-left-middle-content ">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">
-                                <h2>Edit Profile</h2>
-                            </div>
-                        </a>
-
-                    </div>
-                    <div class="main-left-bottom">
-                        <a href="<?php echo URLROOT?>/collectors/logout">
-                            <div class="main-left-bottom-content">
-                                <img src="<?php echo IMGROOT?>/logout.png" alt="">
-                                <p>Log out</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
                 <div class="main-right">
                     <div class="main-right-top">
                         <div class="main-right-top-one">
-                            <div class="main-right-top-one-search">
-                                <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                                <input id="searchInput" type="text" placeholder="Search">
+                            <div class="main-right-top-search">
+                                <i class='bx bx-search-alt-2'></i>
+                                <input type="text" id="searchInput" placeholder="Search">
                             </div>
+                            <div class="main-right-top-notification" id="notification">
+                                <i class='bx bx-bell'></i>
+                                <div class="dot"></div>
+                            </div>
+                            <div id="notification_popup" class="notification_popup">
+                                <h1>Notifications</h1>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
 
-                            <div class="main-right-top-one-content">
-                                <p><?php echo $_SESSION['collector_name']?></p>
+                                    </div>
+                                    Request 1232 Has been Cancelled
+                                </div>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
+
+                                    </div>
+                                    Request 1232 Has been Assigned
+                                </div>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
+
+                                    </div>
+                                    Request 1232 Has been Cancelled
+                                </div>
+                            </div>
+                            <div class="main-right-top-profile">
                                 <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
                                     alt="">
+                                <div class="main-right-top-profile-cont">
+                                    <h3>Kaveesha</h3>
+                                    <p>ID : Col <?php echo $_SESSION['collector_id']?></p>
+                                </div>
                             </div>
                         </div>
                         <div class="main-right-top-two">
@@ -84,7 +66,7 @@
                             </a>
                             <a href=>
                                 <div class="main-right-top-three-content">
-                                    <p><b style="color: #1B6652;">Cancelled</b></p>
+                                    <p><b style="color: #1ca557;">Cancelled</b></p>
                                     <div class="line"></div>
                                 </div>
                             </a>

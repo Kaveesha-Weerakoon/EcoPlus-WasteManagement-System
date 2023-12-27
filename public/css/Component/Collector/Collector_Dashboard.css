@@ -3,6 +3,16 @@
         background-color: none;
     }
 
+    
+    #dashboard i {
+        color: var(--green-color-one);
+    }
+
+    #dashboard h3 {
+        color: var(--green-color-one);
+    }
+
+
     .main-right {
         display: grid;
         height: 100%;
@@ -11,7 +21,6 @@
     }
 
     .main-right-left {
-        background-color: #FAFBFC;
         margin: 5px;
     }
 
@@ -119,7 +128,6 @@
         border: 1px solid black;
         border-radius: 10px;
         height: 220px;
-        background-color: white;
         margin-top: 4%;
     }
 

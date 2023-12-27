@@ -36,8 +36,6 @@
         cursor: pointer;
     }
 
-
-
     .main-right-bottom-two-content button:hover {
         background: var(--green-color-one);
     }

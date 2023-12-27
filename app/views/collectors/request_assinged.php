@@ -164,7 +164,7 @@
                     <div class="personal-details-popup-form" id="popup">
                         <div class="form-container">
                             <div class="form-title">Eco Credits Calculation</div>
-                            <form
+                            <form id="myForm"
                                 action="<?php echo URLROOT;?>/collectors/enterWaste_And_GenerateEcoCredits/<?php echo  $data['req_id']?>"
                                 class="main-right-bottom-content" method="post">
                                 <div class="user-details">
@@ -262,9 +262,111 @@
                                     <button type="submit" onclick="handleFormSubmission()">Calculate Eco
                                         Credits</button>
                                     <a href="<?php echo URLROOT?>/collectors/request_assinged"><button type="button"
-                                            class="cancel-button">Cancel</button>
+                                            class="cancel-button">Cancel</button></a>
+                                </div>
+                                <?php if($data['popup_confirm_collect']=='True') : ?>
+                                <div class="pop_up_confirm_collect">
+                                    <div class="pop_up_confirm_collect_cont">
+                                        <h1>Credit Calculation</h1>
+                                        <div class="cont">
+                                            <h5></h5>
+                                            <h6>Kg</h6>
+                                            <h6></h6>
+                                            <h6>
+                                                Credits
+                                            </h6>
+                                            <h6></h6>
+                                            <h6>
+                                            </h6>
+
+                                        </div>
+                                        <div class="cont">
+                                            <h5>Plastic</h5>
+                                            <h6><?php echo empty($data['plastic_quantity']) ? 0 : $data['plastic_quantity'] ?>
+                                            </h6>
+                                            <h6>*</h6>
+                                            <h6>
+                                                <?php echo $data['creditData']->plastic?>
+                                            </h6>
+                                            <h6>=</h6>
+                                            <h6><?php echo floatval($data['plastic_quantity']) * ($data['creditData']->plastic) ?>
+                                            </h6>
+
+                                        </div>
+                                        <div class="cont">
+                                            <h5>Polythene</h5>
+                                            <h6><?php echo empty($data['polythene_quantity']) ? 0 : $data['polythene_quantity']  ?>
+                                            </h6>
+                                            <h6>*</h6>
+                                            <h6>
+                                                <?php echo $data['creditData']->polythene?>
+                                            </h6>
+                                            <h6>=</h6>
+                                            <h6><?php echo floatval($data['polythene_quantity']) * ($data['creditData']->polythene) ?>
+                                            </h6>
+                                        </div>
+                                        <div class="cont">
+                                            <h5>Glass</h5>
+                                            <h6><?php echo empty($data['glass_quantity']) ? 0 : $data['glass_quantity'] ?>
+                                            </h6>
+                                            <h6>*</h6>
+                                            <h6>
+                                                <?php echo $data['creditData']->glass?>
+                                            </h6>
+                                            <h6>=</h6>
+                                            <h6><?php echo floatval($data['glass_quantity']) * ($data['creditData']->glass) ?>
+                                            </h6>
+
+                                        </div>
+                                        <div class="cont">
+                                            <h5>Paper</h5>
+                                            <h6><?php echo empty($data['paper_waste_quantity']) ? 0 : $data['paper_waste_quantity'] ?>
+                                            </h6>
+                                            <h6>*</h6>
+                                            <h6>
+                                                <?php echo $data['creditData']->paper?>
+                                            </h6>
+                                            <h6>=</h6>
+                                            <h6><?php echo floatval($data['paper_waste_quantity']) * ($data['creditData']->paper) ?>
+                                            </h6>
+
+                                        </div>
+                                        <div class="cont">
+                                            <h5>Electronic</h5>
+                                            <h6><?php echo empty($data['electronic_waste_quantity']) ? 0 : $data['electronic_waste_quantity']  ?>
+                                            </h6>
+                                            <h6>*</h6>
+                                            <h6>
+                                                <?php echo $data['creditData']->electronic?>
+                                            </h6>
+                                            <h6>=</h6>
+                                            <h6><?php echo floatval($data['electronic_waste_quantity']) * ($data['creditData']->electronic) ?>
+                                            </h6>
+
+                                        </div>
+                                        <div class="cont">
+                                            <h5>Metal</h5>
+                                            <h6><?php echo empty($data['metals_quantity']) ? 0 : $data['metals_quantity']  ?>
+                                            </h6>
+                                            <h6>*</h6>
+                                            <h6>
+                                                <?php echo $data['creditData']->metal?>
+                                            </h6>
+                                            <h6>=</h6>
+                                            <h6><?php echo floatval($data['metals_quantity']) * ($data['creditData']->metal) ?>
+                                            </h6>
+                                        </div>
+
+                                        <h4>Total = <?php echo $data['credit_Amount']?></h4>
+                                        <div class="buttons">
+                                            <button onclick="submitForm(<?php echo $data['req_id']?>)">Complete</button>
+                                            <a href="<?php echo URLROOT?>/collectors/request_assinged"><button
+                                                    type="button">Cancel</button></a>
+                                        </div>
+                                    </div>
                                 </div>
 
+                                <?php endif; ?>
                             </form>
                         </div>
                     </div>
@@ -465,6 +567,13 @@ function updateMapForDate(selectedDate) {
     });
 }
 
+function submitForm($id) {
+    var form = document.getElementById('myForm');
+    form.action = "<?php echo URLROOT;?>/collectors/Eco_Credit_Insert/" + $id;
+    form.method = 'post';
+    form.submit();
+
+}
 document.addEventListener("DOMContentLoaded", function() {
     const maps = document.getElementById("maps");
     const table = document.getElementById("tables");

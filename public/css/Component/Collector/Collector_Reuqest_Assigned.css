@@ -210,8 +210,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -221,6 +221,8 @@
     padding: 0;
     box-sizing: border-box;
   }
+
+
 
   .personal-details-popup-box {
     .personal-details-popup-form {
@@ -267,7 +269,7 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      margin-bottom: 20px;
+
     }
 
     .main-right-bottom-content-content {
@@ -351,7 +353,10 @@
       align-items: center;
       width: 100%;
       height: 50px;
-      margin-right: 45px;
+    }
+
+    .a {
+      height: auto !important;
     }
 
     .form-button button[type="submit"] {
@@ -396,15 +401,13 @@
 
   }
 
-
-
   /*request details*/
   .request-details-pop {
     position: fixed;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    z-index: 3;
     display: none;
     align-items: center;
     justify-content: center;
@@ -510,6 +513,82 @@
     background-color: #1B6652;
     color: white;
     cursor: pointer;
+  }
+
+  /*pop_up_confirm_collect*/
+  .pop_up_confirm_collect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+  }
+
+  .pop_up_confirm_collect_cont {
+    width: 35%;
+    height: 75%;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+  }
+
+  .pop_up_confirm_collect_cont h1 {
+    font-size: 25px;
+    letter-spacing: 0.03;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .pop_up_confirm_collect_cont .cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .pop_up_confirm_collect_cont .cont h5 {
+    font-size: 16px;
+    width: 150px;
+    margin-right: 10px;
+    font-weight: 100;
+
+  }
+
+  .pop_up_confirm_collect_cont .cont h6 {
+    font-size: 15px;
+    width: 45px;
+    margin-right: 10px;
+    font-weight: 100;
+    text-align: center;
+  }
+
+  .pop_up_confirm_collect_cont h4 {
+    font-size: 24px;
+    font-weight: 100;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .pop_up_confirm_collect_cont .buttons {
+    width: 225px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .pop_up_confirm_collect_cont .buttons button {
+    width: 100px;
+    height: 35px;
+    font-size: 19px;
   }
 
   /* ------------*/

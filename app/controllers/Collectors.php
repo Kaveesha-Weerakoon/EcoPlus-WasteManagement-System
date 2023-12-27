@@ -592,7 +592,10 @@
         'cancelled_by'=>'Collector',
         'assinged'=>'Yes',
         'collector_id'=>($_SESSION['collector_id']),
-        'popup'=>''
+        'popup'=>'',
+        'popup_confirm_collect'=>'',
+        'creditData'=>''
+
       ];
       if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
         $this->view('collectors/request_assinged', $data);
@@ -609,7 +612,10 @@
       $data = [
         'assigned_requests' => $assinged_Requests,
         'jsonData' => $jsonData,
-        'popup'=>''
+        'popup'=>'',
+        'popup_confirm_collect'=>'',
+        'creditData'=>''
+
 
       ];
      
@@ -661,15 +667,16 @@
             //'credit_Amount'=> $creditAmount,
             'note' => trim($_POST['note']),
             'popup' => 'True',
-
+            'popup_confirm_collect'=>'',
             'polythene_quantity_err'=>'',
             'plastic_quantity_err'=>'',
             'glass_quantity_err'=>'',
             'paper_waste_quantity_err'=>'',
             'electronic_waste_quantity_err'=>'',
             'metals_quantity_err'=>'',
-            'note_err'=>''
-         
+            'note_err'=>'',
+            'creditData'=>''
+
         ];
 
         
@@ -723,38 +730,35 @@
               (floatval($data['paper_waste_quantity']) * $creditData->paper) +
               (floatval($data['electronic_waste_quantity']) * $creditData->electronic) +
               (floatval($data['metals_quantity']) * $creditData->metal);
-
-
+              
+            $data['creditData']=$creditData ;
             $data['credit_Amount'] = $credit_Amount;
+            $data['popup_confirm_collect'] ="True";
+            $this->view('collectors/request_assinged', $data);
 
-            $inserted = $this->Collect_Garbage_Model->insert($data);
+            // $inserted = $this->Collect_Garbage_Model->insert($data);
             
             
-            $requst = $this->Request_Model->get_request_by_id($req_id);// Assuming you have the customer ID
-            $customer_id= $requst->customer_id;
-            $current_credit = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
+            // $requst = $this->Request_Model->get_request_by_id($req_id);// Assuming you have the customer ID
+            // $customer_id= $requst->customer_id;
+            // $current_credit = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
 
-            $new_credit_balance = $current_credit + $credit_Amount; // Calculate new credit balance
+            // $new_credit_balance = $current_credit + $credit_Amount; // Calculate new credit balance
 
-            // Update the customer credit balance in the database
-            $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
+            // // Update the customer credit balance in the database
+            // $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
 
 
-            if ($inserted && $update_result ) {
-                $this->view('collectors/request_assinged', $data);
-            } else {
-                // Handle insertion failure
-                // Show an error message or perform necessary actions
-            }
+            // if ($inserted && $update_result ) {
+            //     $this->view('collectors/request_assinged', $data);
+            // } else {
+            //     // Handle insertion failure
+            //     // Show an error message or perform necessary actions
+            // }
             } else {
               $this->view('collectors/request_assinged', $data);
             }
-
-
-
-        /*if ( ) {
-           } else {
-        }*/
+          
         } else {
           $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
           $jsonData = json_encode($assinged_Requests);
@@ -775,19 +779,156 @@
           'credit_Amount'=> '',
           'note' => '',
           'popup' => 'True',
-
+          'popup_confirm_collect'=>'',
           'polythene_quantity_err'=>'',
           'plastic_quantity_err'=>'',
           'glass_quantity_err'=>'',
           'paper_waste_quantity_err'=>'',
           'electronic_waste_quantity_err'=>'',
           'metals_quantity_err'=>'',
-          'note_err'=>''
+          'note_err'=>'',
+          'creditData'=>''
           ];
           $this->view('collectors/request_assinged', $data);
         } 
 }
 
+   public function Eco_Credit_Insert($req_id) {
+     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
+      $jsonData = json_encode($assinged_Requests);
+      $collector_id = $_SESSION['collector_id'];
+      //$creditAmount = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
+
+      $data = [
+          'assigned_requests' => $assinged_Requests,
+          'jsonData' => $jsonData,
+          'req_id'=>$req_id,
+          'collector_id' => $collector_id,
+          'polythene_quantity' => trim($_POST['polythene_quantity']),
+          'plastic_quantity' => trim($_POST['plastic_quantity']),
+          'glass_quantity' => trim($_POST['glass_quantity']),
+          'paper_waste_quantity' => trim($_POST['paper_waste_quantity']),
+          'electronic_waste_quantity' => trim($_POST['electronic_waste_quantity']),
+          'metals_quantity' => trim($_POST['metals_quantity']),
+          //'credit_Amount'=> $creditAmount,
+          'note' => trim($_POST['note']),
+          'popup' => 'True',
+          'popup_confirm_collect'=>'',
+          'polythene_quantity_err'=>'',
+          'plastic_quantity_err'=>'',
+          'glass_quantity_err'=>'',
+          'paper_waste_quantity_err'=>'',
+          'electronic_waste_quantity_err'=>'',
+          'metals_quantity_err'=>'',
+          'note_err'=>'',
+          'creditData'=>''
+      ];
+
+        // Check if at least one field is filled
+      $fieldsToCheck = ['polythene_quantity', 'plastic_quantity', 'glass_quantity', 'paper_waste_quantity', 'electronic_waste_quantity', 'metals_quantity'];
+      $atLeastOneFilled = false;
+      $allFieldsValid = true;
+
+      foreach ($fieldsToCheck as $field) {
+        if (!empty($_POST[$field])) {
+            if (!is_numeric($_POST[$field])) {
+                $data["{$field}_err"] = "Please enter a valid number";
+                $allFieldsValid = false;
+            } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST[$field]) !== 1) {
+                $data["{$field}_err"] = "Please enter up to two decimal places.";
+                $allFieldsValid = false;
+            } else {
+                $atLeastOneFilled = true;
+            }
+        }
+    }
+
+          if (!$atLeastOneFilled && $allFieldsValid) {
+              $data['polythene_quantity_err'] = 'Please fill polythene quantity';
+              $data['plastic_quantity_err'] = 'Please fill plastic quantity';
+              $data['glass_quantity_err'] = 'Please fill glass quantity';
+              $data['paper_waste_quantity_err'] = 'Please fill paper_waste quantity';
+              $data['electronic_waste_quantity_err'] = 'Please fill electronic_waste quantity';
+              $data['metals_quantity_err'] = 'Please fill metals quantity';     
+          }
+
+          if(empty($_POST['note'])){
+            $data['note_err'] = 'Please fill in the Note field';
+          }
+
+          if ($atLeastOneFilled && empty($data['note_err']) && $allFieldsValid) {
+            $creditData = $this->creditModel->get();
+
+            $credit_Amount =
+            (floatval($data['polythene_quantity']) * $creditData->polythene) +
+            (floatval($data['plastic_quantity']) * $creditData->plastic) +
+            (floatval($data['glass_quantity']) * $creditData->glass) +
+            (floatval($data['paper_waste_quantity']) * $creditData->paper) +
+            (floatval($data['electronic_waste_quantity']) * $creditData->electronic) +
+            (floatval($data['metals_quantity']) * $creditData->metal);
+            
+          $data['creditData']=$creditData ;
+          $data['credit_Amount'] = $credit_Amount;
+
+
+          $inserted = $this->Collect_Garbage_Model->insert($data);
+          
+          
+          $requst = $this->Request_Model->get_request_by_id($req_id);// Assuming you have the customer ID
+          $customer_id= $requst->customer_id;
+          $current_credit = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
+
+          $new_credit_balance = $current_credit + $credit_Amount; // Calculate new credit balance
+
+          // Update the customer credit balance in the database
+          $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
+
+
+          if ($inserted && $update_result ) {
+              $this->request_completed();
+          } else {
+            $data['popup']='';
+            $this->view('collectors/request_assinged', $data);
+          }
+          } else {
+            $this->view('collectors/request_assinged', $data);
+          }
+        
+      } else {
+        $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
+        $jsonData = json_encode($assinged_Requests);
+        $collector_id = $_SESSION['collector_id'];
+        //$collector_id = $_SESSION['user_id'];
+        //$creditAmount = $this->collectorModel->get_customer_credit_balance($customer_id);
+        $data = [
+        'assigned_requests' => $assinged_Requests,
+        'jsonData' => $jsonData,
+        'req_id'=>$req_id,
+        'collector_id' => $collector_id,
+        'polythene_quantity' =>'',
+        'plastic_quantity' => '',
+        'glass_quantity' => '',
+        'paper_waste_quantity' => '',
+        'electronic_waste_quantity' => '',
+        'metals_quantity' => '',
+        'credit_Amount'=> '',
+        'note' => '',
+        'popup' => 'True',
+        'popup_confirm_collect'=>'',
+        'polythene_quantity_err'=>'',
+        'plastic_quantity_err'=>'',
+        'glass_quantity_err'=>'',
+        'paper_waste_quantity_err'=>'',
+        'electronic_waste_quantity_err'=>'',
+        'metals_quantity_err'=>'',
+        'note_err'=>'',
+        'creditData'=>''
+        ];
+        $this->view('collectors/request_assinged', $data);
+      } 
+}
 
 
   

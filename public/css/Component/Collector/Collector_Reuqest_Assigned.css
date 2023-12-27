@@ -1,33 +1,11 @@
 .Collector_Reuqest_Assigned {
 
-      #request i {
-        color: var(--green-color-one);
-    }
+  #request i {
+    color: var(--green-color-one);
+  }
 
-    #request h3 {
-        color: var(--green-color-one);
-    }
-    .main-right-bottom-two {
-        width: 99%;
-        height: 550px;
-        padding-left: 1%;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .main-right-bottom-one {
-        display: flex;
-        flex-direction: column;
-        height: 550px;
-    }
-
-
-  .main-right-bottom {
-    flex-direction: column;
-    height: 550px;
-    display: flex;
+  #request h3 {
+    color: var(--green-color-one);
   }
 
   .map-locations {
@@ -37,37 +15,46 @@
   }
 
   .table-row {
-    font-size: 1px;
-    font-family: Montserrat;
-    text-align: center;
-    height: 52px;
-    display: grid;
+    height: 55px;
     grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
-    border-bottom: 2px solid #CACACA;
   }
 
   .table td {
-    height: 50px;
-    font-size: 15.5px;
-    vertical-align: middle;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 55px;
   }
 
   .table-header {
-    background-color: #B9FFB7;
-    font-size: 17px;
-    font-family: Montserrat;
-    text-align: center;
-    height: 55px;
-    display: grid;
     grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
   }
 
   td img {
     margin: 7px;
+    height: 25px;
+    width: 25px;
+  }
+
+  .main-right-bottom-three {
+    display: flex;
+    justify-content: center;
+    height: 450px;
+  }
+
+  .main-right-bottom-three-content {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-right-bottom-three-content img {
+    width: 450px;
+    height: 450px;
+  }
+
+  .main-right-bottom-three-content h1 {
+    font-size: 25px;
+    font-weight: 500;
+    margin-top: 20px;
   }
 
   .Location {
@@ -103,30 +90,7 @@
     color: #2B2B2B;
   }
 
-  .main-right-bottom-three {
-    display: flex;
-    justify-content: center;
-    height: 550px;
-  }
 
-  .main-right-bottom-three-content {
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-
-  .main-right-bottom-three-content img {
-    width: 450px;
-    height: 450px;
-  }
-
-  .main-right-bottom-three-content h1 {
-    font-size: 25px;
-    font-weight: 500;
-    margin-top: 20px;
-  }
 
   .cancel-confirm {
     display: none;
@@ -135,8 +99,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 2;
     align-items: center;
     justify-content: center;
   }
@@ -146,7 +110,7 @@
     height: 0px;
     background: white;
     font-family: 'poppins', sans-serif;
-    border-radius: 6px;
+    border-radius: 10px;
     text-align: center;
     padding: 0 30px 30px;
     color: #333;
@@ -157,27 +121,6 @@
     position: relative;
     animation: slideDown 0.5s ease-out forwards;
   }
-
-    .table td {
-        height: 50px;
-        font-size: 15.5px;
-        vertical-align: middle;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .table-header {
-        background-color: #ecf0f1;
-        font-size: 17px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 55px;
-        display: grid;
-        grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
-    }
-
 
   .cancel-confirm-content h2 {
     font-size: 23px;
@@ -202,17 +145,18 @@
   .cancel-confirm-content input {
     width: 70%;
     text-align: center;
-    font-size: 17px;
-    border-radius: 5px;
-    border: 1px solid black;
-    display: flex;
-    margin-top: 18px;
-    outline: none;
-    display: none;
+    height: 30px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    font-size: 14px;
+    letter-spacing: 0.03rem;
+    background-color: var(--background-color-two);
+    color: var(--main-text-color);
+    margin-top: 10px;
   }
 
   .cancel-confirm-content input:focus {
-    border: 2px solid green;
+    border-color: var(--green-color-one);
     outline: none;
   }
 
@@ -226,7 +170,7 @@
   .deletebtn {
     width: 150px;
     margin-right: 20px;
-    padding: 10px 0;
+    padding: 8px 0;
     background: rgb(220, 39, 39);
     color: white;
     border: 0;
@@ -239,7 +183,7 @@
 
   .cancelbtn {
     width: 150px;
-    padding: 10px 0;
+    padding: 8px 0;
     background: #bab3b3;
     color: white;
     border: 0;
@@ -249,7 +193,6 @@
     cursor: pointer;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
   }
-
 
   .cancel-confirm-top-close {
     display: flex;
@@ -371,16 +314,17 @@
       left: 10px;
       color: #555;
     }
+
     .error-div {
       color: red;
       font-size: 0.8em;
       margin-top: 4px;
       margin-bottom: 4px;
-      text-align: left; 
+      text-align: left;
       position: absolute;
-      bottom: -20px; 
+      bottom: -20px;
       left: 0;
-  }
+    }
 
     .main-right-bottom-content-content input {
       height: 45px;
@@ -454,8 +398,8 @@
 
 
 
-   /*request details*/
-   .request-details-pop {
+  /*request details*/
+  .request-details-pop {
     position: fixed;
     top: 0;
     left: 0;
@@ -466,9 +410,9 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-}
+  }
 
-.request-details-pop-form {
+  .request-details-pop-form {
     width: 45%;
     background: white;
     border-radius: 6px;
@@ -483,29 +427,29 @@
     transition: transform 0.4s, top 0.4s;
     flex-direction: column;
 
-}
+  }
 
-.request-details-pop-form-top {
+  .request-details-pop-form-top {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 25px;
     font-size: 18px;
-}
+  }
 
-.request-details-pop-form-close {
+  .request-details-pop-form-close {
     width: 25px;
     height: 25px;
     margin-left: 100%;
     margin-top: -3%;
     cursor: pointer;
-}
+  }
 
-.request-details-topic {
+  .request-details-topic {
     display: flex;
-}
+  }
 
-.request-details-pop-form-content {
+  .request-details-pop-form-content {
     display: grid;
     grid-template-columns: 30% 70%;
     width: 80%;
@@ -513,9 +457,9 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
 
-}
+  }
 
-.request-details-topic::before {
+  .request-details-topic::before {
     content: '';
     position: absolute;
     margin-top: 23px;
@@ -525,49 +469,49 @@
     width: 67px;
     background: #1B6652;
 
-}
+  }
 
-/* Styling for Popup Background */
-.popup-background {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
-}
+  /* Styling for Popup Background */
+  .popup-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+  }
 
 
 
-/* Styling for Popup Content */
-.popup-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  text-align: center;
-}
+  /* Styling for Popup Content */
+  .popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+  }
 
-/* Additional styling for input fields, buttons, etc. */
-.popup-content input,
-.popup-content button {
-  margin: 10px 0;
-  padding: 8px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-}
+  /* Additional styling for input fields, buttons, etc. */
+  .popup-content input,
+  .popup-content button {
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
 
-.popup-content button {
-  background-color: #1B6652;
-  color: white;
-  cursor: pointer;
-}
+  .popup-content button {
+    background-color: #1B6652;
+    color: white;
+    cursor: pointer;
+  }
 
-/* ------------*/
+  /* ------------*/
 
 }

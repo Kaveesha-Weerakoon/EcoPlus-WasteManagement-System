@@ -1,13 +1,4 @@
 .Collector_Request_Completed {
-  .main-right-bottom-two {
-    width: 99%;
-    height: 550px;
-    padding-left: 1%;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
 
   #request i {
     color: var(--green-color-one);
@@ -17,53 +8,52 @@
     color: var(--green-color-one);
   }
 
-  .main-right-bottom-one {
-    display: flex;
-    flex-direction: column;
-    height: 550px;
+
+  .table-row {
+    height: 55px;
+    grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
   }
 
+  .table td {
+    height: 55px;
+  }
 
-  .main-right-bottom {
-    flex-direction: column;
-    height: 550px;
+  .table-header {
+    grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
+  }
+
+  td img {
+    margin: 7px;
+  }
+
+  .main-right-bottom-three {
     display: flex;
+    justify-content: center;
+    height: 450px;
+  }
+
+  .main-right-bottom-three-content {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-right-bottom-three-content img {
+    width: 450px;
+    height: 450px;
+  }
+
+  .main-right-bottom-three-content h1 {
+    font-size: 25px;
+    font-weight: 500;
+    margin-top: 20px;
   }
 
   .map-locations {
     width: 85%;
     height: 90%;
     border-radius: 10px;
-  }
-
-  .table-row {
-    height: 52px;
-    display: grid;
-    grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
-  }
-
-  .table td {
-    height: 50px;
-    font-size: 15.5px;
-    vertical-align: middle;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .table-header {
-    background-color: #B9FFB7;
-    font-size: 17px;
-    font-family: Montserrat;
-    text-align: center;
-    height: 55px;
-    display: grid;
-    grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
-  }
-
-  td img {
-    margin: 7px;
   }
 
   .Location {
@@ -99,31 +89,6 @@
     color: #2B2B2B;
   }
 
-  .main-right-bottom-three {
-    display: flex;
-    justify-content: center;
-    height: 550px;
-  }
-
-  .main-right-bottom-three-content {
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-
-  .main-right-bottom-three-content img {
-    width: 450px;
-    height: 450px;
-  }
-
-  .main-right-bottom-three-content h1 {
-    font-size: 25px;
-    font-weight: 500;
-    margin-top: 20px;
-  }
-
   .cancel-confirm {
     display: none;
     position: fixed;
@@ -152,26 +117,6 @@
     align-items: center;
     position: relative;
     animation: slideDown 0.5s ease-out forwards;
-  }
-
-  .table td {
-    height: 50px;
-    font-size: 15.5px;
-    vertical-align: middle;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .table-header {
-    background-color: #ecf0f1;
-    font-size: 17px;
-    font-family: Montserrat;
-    text-align: center;
-    height: 55px;
-    display: grid;
-    grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
   }
 
 

@@ -591,7 +591,8 @@
         'reason'=>trim($_POST['reason']),
         'cancelled_by'=>'Collector',
         'assinged'=>'Yes',
-        'collector_id'=>($_SESSION['collector_id'])
+        'collector_id'=>($_SESSION['collector_id']),
+        'popup'=>''
       ];
       if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
         $this->view('collectors/request_assinged', $data);
@@ -608,6 +609,8 @@
       $data = [
         'assigned_requests' => $assinged_Requests,
         'jsonData' => $jsonData,
+        'popup'=>''
+
       ];
      
       $this->view('collectors/request_assinged', $data);

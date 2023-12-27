@@ -213,6 +213,88 @@
         letter-spacing: 0.03rem;
     }
 
+    .main-right-top-four {
+        display: flex;
+        align-items: start;
+        height: 24%;
+        padding-right: 19px;
+        justify-content: space-between;
+    }
+
+    .main-right-top-four-left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ddd;
+        padding-left: 20px;
+        margin-left: 50px;
+        border-radius: 10px;
+        height: 34px;
+    }
+
+    .main-right-top-four-left input {
+        height: 25px;
+        margin-left: 15px;
+        width: 120px;
+        text-align: center;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        margin-right: 9px;
+    }
+
+    .main-right-top-four-left p {
+        font-size: 14px;
+        letter-spacing: 0.03rem;
+    }
+
+    .main-right-top-four-left button {
+        margin-right: 5px;
+        font-weight: bold;
+        background-color: #f6e58d;
+        height: 25px;
+        border-radius: 10px;
+        border: none;
+        width: 100px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 1s;
+        letter-spacing: 0.05rem;
+    }
+
+    .main-right-top-four-left button:hover {
+        background-color: #f0932b;
+    }
+
+    .main-right-top-four-right {
+        display: flex;
+    }
+
+    .main-right-top-four img {
+        width: 2-px;
+        height: 20px;
+        margin-right: 4px;
+    }
+
+    .main-right-top-four-component {
+        font-size: 15px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        padding: 5px;
+        box-sizing: border-box;
+        margin: 5px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        width: 80px;
+        height: 36px;
+        cursor: pointer;
+    }
+
+ 
+
     .line {
         width: 90px;
         height: 3px;
@@ -278,7 +360,7 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
         margin-bottom: 20px;
         margin-top: 10%;
-    }
+    } 
 
     .location_pop {
         display: flex;

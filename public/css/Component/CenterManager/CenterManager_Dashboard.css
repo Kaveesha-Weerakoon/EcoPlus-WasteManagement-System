@@ -5,6 +5,14 @@
         font-family: inter;
     }
 
+    #dashboard i {
+        color: var(--green-color-one);
+    }
+
+    #dashboard h3 {
+        color: var(--green-color-one);
+    }
+
     a {
         text-decoration: none;
         width: 100%;

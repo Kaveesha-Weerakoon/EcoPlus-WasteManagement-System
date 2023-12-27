@@ -7,6 +7,15 @@
         display: flex;
     }
 
+    #cancelled p {
+        color: var(--green-color-two);
+        font-weight: bold;
+    }
+
+    #cancelled .line {
+        background-color: var(--green-color-two);
+    }
+
     .main-right-bottom-three {
         display: flex;
         justify-content: center;

@@ -10,6 +10,16 @@
 
     }
 
+    #incoming p {
+        color: var(--green-color-two);
+        font-weight: bold;
+    }
+
+    #incoming .line {
+        background-color: var(--green-color-two);
+    }
+
+
     .main-right-bottom {
         flex-direction: column;
         height: 550px;

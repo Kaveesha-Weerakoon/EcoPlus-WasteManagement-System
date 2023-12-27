@@ -312,7 +312,7 @@
       unset($_SESSION['user_id']);
       unset($_SESSION['user_email']);
       unset($_SESSION['user_name']);
-       unset($_SESSION['customer_profile']);
+      unset($_SESSION['customer_profile']);
       session_destroy();
       redirect('users/login');
     }

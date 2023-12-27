@@ -10,13 +10,15 @@
 
     }
 
-    #request i {
-        color: var(--green-color-one);
+    #incoming p {
+        color: var(--green-color-two);
+        font-weight: bold;
     }
 
-    #request h3 {
-        color: var(--green-color-one);
+    #incoming .line {
+        background-color: var(--green-color-two);
     }
+
 
     .main-right-bottom {
         flex-direction: column;

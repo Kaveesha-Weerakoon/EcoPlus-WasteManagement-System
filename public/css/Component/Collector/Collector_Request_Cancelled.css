@@ -1,32 +1,26 @@
 .Collector_Request_Cancelled {
+
+
+
+    #request i {
+        color: var(--green-color-one);
+    }
+
+    #request h3 {
+        color: var(--green-color-one);
+    }
+
     .table-row {
-        font-size: 1px;
-        font-family: Montserrat;
-        text-align: left;
-        height: 52px;
-        display: grid;
-        border-bottom: 2px solid #CACACA;
-        grid-template-columns: 11% 10% 10% 15% 11% 13% 40%;
-    }
-
-    .table td {
-        height: 50px;
-        font-size: 15.5px;
-    }
-
-    .table-header {
-        background-color: #ecf0f1;
-        font-size: 17px;
-        font-family: Montserrat;
         height: 55px;
         grid-template-columns: 11% 10% 10% 15% 11% 13% 40%;
     }
 
-    .table th {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .table td {
+        height: 55px;
+    }
 
+    .table-header {
+        grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
     }
 
     td img {

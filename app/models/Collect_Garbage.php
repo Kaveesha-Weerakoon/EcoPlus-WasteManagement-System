@@ -7,6 +7,7 @@
     }
 
     public function get_complete_request_relevent_customer($customer_id){
+      try{
       $this->db->query('
           SELECT request_main.*, request_completed.*,request_assigned.*,
           users.name as name,
@@ -30,6 +31,9 @@
       $results = $this->db->resultSet();
   
       return $results;
+      }catch (PDOException $e) {
+        return false;
+    }
   }
   
     public function get_complete_request($collector_id){
@@ -52,6 +56,7 @@
 
    
     public function insert($data){
+      try{
       $this->db->query('INSERT INTO request_completed (req_id, Polythene, Plastic, Glass, Paper_Waste, Electronic_Waste, Metals, credit_amount, note, added) VALUES (:req_id, :Polythene, :Plastic, :Glass, :Paper_Waste, :Electronic_Waste, :Metals, :credit_amount, :note, :added)');
       
       $this->db->bind(':req_id', $data['req_id']);
@@ -81,6 +86,9 @@
          }
 
         }
+      }catch (PDOException $e) {
+        return false;
+    }
 
       
       

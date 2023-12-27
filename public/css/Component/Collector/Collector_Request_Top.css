@@ -221,6 +221,7 @@
         align-items: center;
         height: 24%;
         padding-right: 19px;
+        margin-bottom: 10px;
         justify-content: space-between;
     }
 
@@ -232,7 +233,7 @@
         padding-left: 20px;
         margin-left: 50px;
         border-radius: 10px;
-        height: 25px;
+        height: 34px;
     }
 
     .main-right-top-four-left input {
@@ -273,6 +274,7 @@
 
     .main-right-top-four-right {
         display: flex;
+        padding-right: 20px;
     }
 
     .main-right-top-four img {

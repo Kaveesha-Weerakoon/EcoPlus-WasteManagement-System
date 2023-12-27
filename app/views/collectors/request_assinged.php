@@ -7,66 +7,47 @@
                 defer></script>
 
             <div class="main">
-                <div class="main-left">
-                    <div class="main-left-top">
-                        <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
-                        <h1>Eco Plus</h1>
-                    </div>
-
-                    <div class="main-left-middle">
-                        <a href="<?php echo URLROOT?>/collectors">
-                            <div class="main-left-middle-content ">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/Home.png" alt="">
-                                <h2>Dashboard</h2>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="main-left-middle-content current ">
-                                <div class="main-left-middle-content-line"></div>
-                                <img src="<?php echo IMGROOT?>/Request.png" alt="">
-                                <h2>Requests</h2>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/collectors/collector_assistants">
-                            <div class="main-left-middle-content Collector">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/CollectorAssis.png" alt="">
-                                <h2>Collector Assistants</h2>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/collectors/editprofile">
-                            <div class="main-left-middle-content ">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">
-                                <h2>Edit Profile</h2>
-                            </div>
-                        </a>
-
-                    </div>
-                    <div class="main-left-bottom">
-                        <a href="<?php echo URLROOT?>/collectors/logout">
-                            <div class="main-left-bottom-content">
-                                <img src="<?php echo IMGROOT?>/logout.png" alt="">
-                                <p>Log out</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
                 <div class="main-right">
                     <div class="main-right-top">
                         <div class="main-right-top-one">
-                            <div class="main-right-top-one-search">
-                                <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                                <input id="searchInput" type="text" placeholder="Search">
+                            <div class="main-right-top-search">
+                                <i class='bx bx-search-alt-2'></i>
+                                <input type="text" id="searchInput" placeholder="Search">
                             </div>
+                            <div class="main-right-top-notification" id="notification">
+                                <i class='bx bx-bell'></i>
+                                <div class="dot"></div>
+                            </div>
+                            <div id="notification_popup" class="notification_popup">
+                                <h1>Notifications</h1>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
 
-                            <div class="main-right-top-one-content">
-                                <p><?php echo $_SESSION['collector_name']?></p>
+                                    </div>
+                                    Request 1232 Has been Cancelled
+                                </div>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
+
+                                    </div>
+                                    Request 1232 Has been Assigned
+                                </div>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
+
+                                    </div>
+                                    Request 1232 Has been Cancelled
+                                </div>
+                            </div>
+                            <div class="main-right-top-profile">
                                 <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
                                     alt="">
+                                <div class="main-right-top-profile-cont">
+                                    <h3>Kaveesha</h3>
+                                    <p>ID : Col <?php echo $_SESSION['collector_id']?></p>
+                                </div>
                             </div>
-
                         </div>
                         <div class="main-right-top-two">
                             <h1>Requests</h1>
@@ -74,7 +55,7 @@
                         <div class="main-right-top-three">
                             <a href="">
                                 <div class="main-right-top-three-content">
-                                    <p><b style="color: #1B6652;">Assigned</b></p>
+                                    <p><b style="color:#1ca557;">Assigned</b></p>
                                     <div class="line"></div>
                                 </div>
                             </a>
@@ -183,7 +164,8 @@
                     <div class="personal-details-popup-form" id="popup">
                         <div class="form-container">
                             <div class="form-title">Eco Credits Calculation</div>
-                            <form action="<?php echo URLROOT;?>/collectors/enterWaste_And_GenerateEcoCredits/<?php echo  $data['req_id']?>"
+                            <form id="myForm"
+                                action="<?php echo URLROOT;?>/collectors/enterWaste_And_GenerateEcoCredits/<?php echo  $data['req_id']?>"
                                 class="main-right-bottom-content" method="post">
                                 <div class="user-details">
                                     <div class="left-details">
@@ -192,8 +174,8 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-trash"></i>
                                                 <input name="polythene_quantity" type="text"
-
-                                                    placeholder="Enter Quantity in Kg" value="<?php echo $data['polythene_quantity']; ?>">
+                                                    placeholder="Enter Quantity in Kg"
+                                                    value="<?php echo $data['polythene_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['polythene_quantity_err']?>
                                                 </div>
@@ -204,8 +186,8 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-box"></i>
                                                 <input name="plastic_quantity" type="text"
-
-                                                    placeholder="Enter Quantity in Kg" value="<?php echo $data['plastic_quantity']; ?>">
+                                                    placeholder="Enter Quantity in Kg"
+                                                    value="<?php echo $data['plastic_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['plastic_quantity_err']?>
                                                 </div>
@@ -216,8 +198,8 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-glass-whiskey"></i>
                                                 <input name="glass_quantity" type="text"
-
-                                                    placeholder="Enter Quantity in Kg" value="<?php echo $data['glass_quantity']; ?>">
+                                                    placeholder="Enter Quantity in Kg"
+                                                    value="<?php echo $data['glass_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['glass_quantity_err']?>
                                                 </div>
@@ -230,8 +212,8 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-file-alt"></i>
                                                 <input name="paper_waste_quantity" type="text"
-
-                                                    placeholder="Enter Quantity in Kg" value="<?php echo $data['paper_waste_quantity']; ?>">
+                                                    placeholder="Enter Quantity in Kg"
+                                                    value="<?php echo $data['paper_waste_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['paper_waste_quantity_err']?>
                                                 </div>
@@ -242,8 +224,8 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-laptop"></i>
                                                 <input name="electronic_waste_quantity" type="text"
-
-                                                    placeholder="Enter Quantity in Kg" value="<?php echo $data['electronic_waste_quantity']; ?>">
+                                                    placeholder="Enter Quantity in Kg"
+                                                    value="<?php echo $data['electronic_waste_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['electronic_waste_quantity_err']?>
                                                 </div>
@@ -254,8 +236,8 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-box"></i>
                                                 <input name="metals_quantity" type="text"
-
-                                                    placeholder="Enter Quantity in Kg" value="<?php echo $data['metals_quantity']; ?>">
+                                                    placeholder="Enter Quantity in Kg"
+                                                    value="<?php echo $data['metals_quantity']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['metals_quantity_err']?>
                                                 </div>
@@ -268,7 +250,6 @@
                                             <div class="input-container">
                                                 <i class="icon fas fa-sticky-note"></i>
                                                 <input name="note" class="note-input" type="text"
-
                                                     placeholder="Enter Note" value="<?php echo $data['note']; ?>">
                                                 <div class="error-div" style="color:red">
                                                     <?php echo $data['note_err']?>
@@ -278,23 +259,126 @@
                                     </div>
                                 </div>
                                 <div class="form-button">
-                                    <button type="submit" onclick="handleFormSubmission()">Calculate Eco Credits</button>
+                                    <button type="submit" onclick="handleFormSubmission()">Calculate Eco
+                                        Credits</button>
                                     <a href="<?php echo URLROOT?>/collectors/request_assinged"><button type="button"
-                                            class="cancel-button">Cancel</button>
+                                            class="cancel-button">Cancel</button></a>
+                                </div>
+                                <?php if($data['popup_confirm_collect']=='True') : ?>
+                                <div class="pop_up_confirm_collect">
+                                    <div class="pop_up_confirm_collect_cont">
+                                        <h1>Credit Calculation</h1>
+                                        <div class="cont">
+                                            <h5></h5>
+                                            <h6>Kg</h6>
+                                            <h6></h6>
+                                            <h6>
+                                                Credits
+                                            </h6>
+                                            <h6></h6>
+                                            <h6>
+                                            </h6>
+
+                                        </div>
+                                        <div class="cont">
+                                            <h5>Plastic</h5>
+                                            <h6><?php echo empty($data['plastic_quantity']) ? 0 : $data['plastic_quantity'] ?>
+                                            </h6>
+                                            <h6>*</h6>
+                                            <h6>
+                                                <?php echo $data['creditData']->plastic?>
+                                            </h6>
+                                            <h6>=</h6>
+                                            <h6><?php echo floatval($data['plastic_quantity']) * ($data['creditData']->plastic) ?>
+                                            </h6>
+
+                                        </div>
+                                        <div class="cont">
+                                            <h5>Polythene</h5>
+                                            <h6><?php echo empty($data['polythene_quantity']) ? 0 : $data['polythene_quantity']  ?>
+                                            </h6>
+                                            <h6>*</h6>
+                                            <h6>
+                                                <?php echo $data['creditData']->polythene?>
+                                            </h6>
+                                            <h6>=</h6>
+                                            <h6><?php echo floatval($data['polythene_quantity']) * ($data['creditData']->polythene) ?>
+                                            </h6>
+                                        </div>
+                                        <div class="cont">
+                                            <h5>Glass</h5>
+                                            <h6><?php echo empty($data['glass_quantity']) ? 0 : $data['glass_quantity'] ?>
+                                            </h6>
+                                            <h6>*</h6>
+                                            <h6>
+                                                <?php echo $data['creditData']->glass?>
+                                            </h6>
+                                            <h6>=</h6>
+                                            <h6><?php echo floatval($data['glass_quantity']) * ($data['creditData']->glass) ?>
+                                            </h6>
+
+                                        </div>
+                                        <div class="cont">
+                                            <h5>Paper</h5>
+                                            <h6><?php echo empty($data['paper_waste_quantity']) ? 0 : $data['paper_waste_quantity'] ?>
+                                            </h6>
+                                            <h6>*</h6>
+                                            <h6>
+                                                <?php echo $data['creditData']->paper?>
+                                            </h6>
+                                            <h6>=</h6>
+                                            <h6><?php echo floatval($data['paper_waste_quantity']) * ($data['creditData']->paper) ?>
+                                            </h6>
+
+                                        </div>
+                                        <div class="cont">
+                                            <h5>Electronic</h5>
+                                            <h6><?php echo empty($data['electronic_waste_quantity']) ? 0 : $data['electronic_waste_quantity']  ?>
+                                            </h6>
+                                            <h6>*</h6>
+                                            <h6>
+                                                <?php echo $data['creditData']->electronic?>
+                                            </h6>
+                                            <h6>=</h6>
+                                            <h6><?php echo floatval($data['electronic_waste_quantity']) * ($data['creditData']->electronic) ?>
+                                            </h6>
+
+                                        </div>
+                                        <div class="cont">
+                                            <h5>Metal</h5>
+                                            <h6><?php echo empty($data['metals_quantity']) ? 0 : $data['metals_quantity']  ?>
+                                            </h6>
+                                            <h6>*</h6>
+                                            <h6>
+                                                <?php echo $data['creditData']->metal?>
+                                            </h6>
+                                            <h6>=</h6>
+                                            <h6><?php echo floatval($data['metals_quantity']) * ($data['creditData']->metal) ?>
+                                            </h6>
+                                        </div>
+
+                                        <h4>Total = <?php echo $data['credit_Amount']?></h4>
+                                        <div class="buttons">
+                                            <button onclick="submitForm(<?php echo $data['req_id']?>)">Complete</button>
+                                            <a href="<?php echo URLROOT?>/collectors/request_assinged"><button
+                                                    type="button">Cancel</button></a>
+                                        </div>
+                                    </div>
                                 </div>
 
+                                <?php endif; ?>
                             </form>
                         </div>
                     </div>
                 </div>
                 <?php endif; ?>
                 <div class="popup-background" id="ecoCreditsPopup" style="display: none;">
-                <div class="popup-content">
-                    <h2>Calculated Eco Credits</h2>
-                    <p>Eco Credits: <span id="calculatedEcoCredits"></span></p>
-                    <button id="okButtonEcoCredits" onclick="closeCalculatedCreditsPopup()">OK</button>
+                    <div class="popup-content">
+                        <h2>Calculated Eco Credits</h2>
+                        <p>Eco Credits: <span id="calculatedEcoCredits"></span></p>
+                        <button id="okButtonEcoCredits" onclick="closeCalculatedCreditsPopup()">OK</button>
+                    </div>
                 </div>
-            </div>
 
 
                 <div class="cancel-confirm" id="cancel-confirm">
@@ -483,6 +567,13 @@ function updateMapForDate(selectedDate) {
     });
 }
 
+function submitForm($id) {
+    var form = document.getElementById('myForm');
+    form.action = "<?php echo URLROOT;?>/collectors/Eco_Credit_Insert/" + $id;
+    form.method = 'post';
+    form.submit();
+
+}
 document.addEventListener("DOMContentLoaded", function() {
     const maps = document.getElementById("maps");
     const table = document.getElementById("tables");
@@ -506,7 +597,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     table.addEventListener("click", function() {
         if (main_right_bottom !== null) {
-            main_right_bottom.style.display = "flex";
+            main_right_bottom.style.display = "grid";
         }
         if (main_right_bottom_two !== null) {
             main_right_bottom_two.style.display = "none";

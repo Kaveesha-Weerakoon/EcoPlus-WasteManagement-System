@@ -185,19 +185,19 @@
         }
 
         .main-bottom-component {
-            width: 90%;
+            width: 60%;
             height: 88%;
             box-shadow: var(--box-shadow2);
-            padding: 20px;
             border-radius: 10px;
-            display: grid;
-            grid-template-columns: 47% 53%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .main-bottom-component-left {
             display: flex;
             align-items: center;
-            justify-content: center;
+
         }
 
         .main-bottom-component-left img {
@@ -211,10 +211,10 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-left: 30px;
             font-size: 45px;
             font-family: inter;
             height: 100%;
+            width: 85%;
         }
 
         .main-bottom-component-right-component-topic {
@@ -477,7 +477,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1;
+            z-index: 3;
             display: none;
             align-items: center;
             justify-content: center;

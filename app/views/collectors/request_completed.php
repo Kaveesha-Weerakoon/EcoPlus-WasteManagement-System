@@ -4,64 +4,46 @@
         <div class="Collector_Request_Completed">
 
             <div class="main">
-                <div class="main-left">
-                    <div class="main-left-top">
-                        <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
-                        <h1>Eco Plus</h1>
-                    </div>
-
-                    <div class="main-left-middle">
-                        <a href="<?php echo URLROOT?>/collectors">
-                            <div class="main-left-middle-content ">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/Home.png" alt="">
-                                <h2>Dashboard</h2>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="main-left-middle-content current ">
-                                <div class="main-left-middle-content-line"></div>
-                                <img src="<?php echo IMGROOT?>/Request.png" alt="">
-                                <h2>Requests</h2>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/collectors/collector_assistants">
-                            <div class="main-left-middle-content Collector">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/CollectorAssis.png" alt="">
-                                <h2>Collector Assistants</h2>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/collectors/editprofile">
-                            <div class="main-left-middle-content ">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">
-                                <h2>Edit Profile</h2>
-                            </div>
-                        </a>
-
-                    </div>
-                    <div class="main-left-bottom">
-                        <a href="<?php echo URLROOT?>/collectors/logout">
-                            <div class="main-left-bottom-content">
-                                <img src="<?php echo IMGROOT?>/logout.png" alt="">
-                                <p>Log out</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
                 <div class="main-right">
                     <div class="main-right-top">
                         <div class="main-right-top-one">
-                            <div class="main-right-top-one-search">
-                                <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                                <input id="searchInput" type="text" placeholder="Search">
+                            <div class="main-right-top-search">
+                                <i class='bx bx-search-alt-2'></i>
+                                <input type="text" id="searchInput" placeholder="Search">
                             </div>
+                            <div class="main-right-top-notification" id="notification">
+                                <i class='bx bx-bell'></i>
+                                <div class="dot"></div>
+                            </div>
+                            <div id="notification_popup" class="notification_popup">
+                                <h1>Notifications</h1>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
 
-                            <div class="main-right-top-one-content">
-                                <p><?php echo $_SESSION['collector_name']?></p>
+                                    </div>
+                                    Request 1232 Has been Cancelled
+                                </div>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
+
+                                    </div>
+                                    Request 1232 Has been Assigned
+                                </div>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
+
+                                    </div>
+                                    Request 1232 Has been Cancelled
+                                </div>
+                            </div>
+                            <div class="main-right-top-profile">
                                 <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
                                     alt="">
+                                <div class="main-right-top-profile-cont">
+                                    <h3>Kaveesha</h3>
+                                    <p>ID : Col <?php echo $_SESSION['collector_id']?></p>
+                                </div>
                             </div>
                         </div>
                         <div class="main-right-top-two">
@@ -76,7 +58,7 @@
                             </a>
                             <a href="<?php echo URLROOT?>/collectors/request_completed">
                                 <div class="main-right-top-three-content">
-                                    <p><b style="color: #1B6652;">Completed</b></p>
+                                    <p><b style="color: #1ca557;">Completed</b></p>
                                     <div class="line"></div>
                                 </div>
                             </a>
@@ -94,7 +76,8 @@
                                 <button onclick="loadLocations()">Filter</button>
                             </div>
                             <div class="main-right-top-four-right">
-                                <div class="main-right-top-four-component" style="background-color: #ecf0f1" id="tables">
+                                <div class="main-right-top-four-component" style="background-color: #ecf0f1"
+                                    id="tables">
                                     <img src="<?php echo IMGROOT?>/cells.png" alt="">
                                     <p>Tables</p>
                                 </div>
@@ -108,7 +91,7 @@
                         </div>
                     </div>
                     <div class="main-right-bottom">
-                    <?php if(!empty($data['completed_requests'])) : ?>
+                        <?php if(!empty($data['completed_requests'])) : ?>
                         <div class="main-right-bottom">
                             <div class="main-right-bottom-one" id="main-right-bottom-one">
                                 <div class="main-right-bottom-top">
@@ -139,7 +122,7 @@
                                             <td><?php  echo $request->contact_no?></td>
                                             <td><?php  echo $request->instructions?></td>
                                             <td><img onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                                src="<?php echo IMGROOT?>/view.png" alt=""></td>
+                                                    src="<?php echo IMGROOT?>/view.png" alt=""></td>
                                             <td><?php  echo $request->credit_amount?></td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -162,34 +145,34 @@
                         <?php endif; ?>
                     </div>
 
-                        <div class="collect-details-pop" id="collect-details-popup-box">
-                            <div class="collect-details-pop-form">
-                            <a href="<?php echo URLROOT?>/Collectors/request_completed/"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
-                                    id="collect-details-pop-form-close"></a>
-                                <div class="collect-details-pop-form-top">
-                                    <div class="collect-details-topic">collect details<div id="req_id3"></div>
-                                    </div>
+                    <div class="collect-details-pop" id="collect-details-popup-box">
+                        <div class="collect-details-pop-form">
+                            <a href="<?php echo URLROOT?>/Collectors/request_completed/"><img
+                                    src="<?php echo IMGROOT?>/close_popup.png" alt=""
+                                    class="collect-details-pop-form-close" id="collect-details-pop-form-close"></a>
+                            <div class="collect-details-pop-form-top">
+                                <div class="collect-details-topic">collect details<div id="req_id3"></div>
                                 </div>
+                            </div>
 
-                                <div class="collect-details-pop-form-content">
-                                    <div class="personal-details-right-labels">
-                                        <span>Polythene Quantity :-</span><br>
-                                        <span>Plastic Quantity :-</span><br>
-                                        <span>Glass Quantity :-</span><br>
-                                        <span>Paper Waste Quantity :-</span><br>
-                                        <span>Electronic Waste Quantity :-</span><br>
-                                        <span>Metals Quantity :-</span><br>
-                                        <span>Note :-</span><br>
-                                    </div>
-                                    <div class="personal-details-right-values">
-                                        <span id="Polythene_Quantity"></span><br>
-                                        <span id="Plastic_Quantity">23</span><br>
-                                        <span id="Glass_Quantity">23</span><br>
-                                        <span id="Paper_Waste_Quantity"></span><br>
-                                        <span id="Electronic_Waste_Quantity"></span><br>
-                                        <span id="Metals_Quantity"></span><br>
-                                        <span id="Note"></span><br>
-                                    </div>
+                            <div class="collect-details-pop-form-content">
+                                <div class="personal-details-right-labels">
+                                    <span>Polythene Quantity :-</span><br>
+                                    <span>Plastic Quantity :-</span><br>
+                                    <span>Glass Quantity :-</span><br>
+                                    <span>Paper Waste Quantity :-</span><br>
+                                    <span>Electronic Waste Quantity :-</span><br>
+                                    <span>Metals Quantity :-</span><br>
+                                    <span>Note :-</span><br>
+                                </div>
+                                <div class="personal-details-right-values">
+                                    <span id="Polythene_Quantity"></span><br>
+                                    <span id="Plastic_Quantity">23</span><br>
+                                    <span id="Glass_Quantity">23</span><br>
+                                    <span id="Paper_Waste_Quantity"></span><br>
+                                    <span id="Electronic_Waste_Quantity"></span><br>
+                                    <span id="Metals_Quantity"></span><br>
+                                    <span id="Note"></span><br>
                                 </div>
                             </div>
                         </div>
@@ -198,6 +181,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 
@@ -260,8 +244,6 @@ function searchTable() {
             row.style.display = 'none'; // Hide the row
         }
     });
-
-
 }
 
 function handleMarkerClick(marker, coordinate) {
@@ -374,7 +356,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     table.addEventListener("click", function() {
         if (main_right_bottom !== null) {
-            main_right_bottom.style.display = "flex";
+            main_right_bottom.style.display = "grid";
         }
         if (main_right_bottom_two !== null) {
             main_right_bottom_two.style.display = "none";

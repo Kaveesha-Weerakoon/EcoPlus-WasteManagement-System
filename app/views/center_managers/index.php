@@ -1,8 +1,10 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
- <div class="CenterManager_Main">
+<div class="CenterManager_Main">
+
     <div class="CenterManager_Dashboard">
         <div class="main">
-            <div class="main-left">
+            <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
+            <!-- <div class="main-left">
                 <div class="main-left-top">
                     <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
                     <h1>Eco Plus</h1>
@@ -45,7 +47,7 @@
                         </div>                  
                       </a>
                 </div>
-            </div>
+            </div> -->
             <div class="main-right">
                 <div class="main-right-left">
                     <div class="main-right-left-one">

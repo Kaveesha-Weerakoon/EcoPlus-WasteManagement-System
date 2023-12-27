@@ -7,6 +7,14 @@
         font-family: inter;
     }
 
+    #dashboard i {
+        color: var(--green-color-one);
+    }
+
+    #dashboard h3 {
+        color: var(--green-color-one);
+    }
+
     a {
         text-decoration: none;
         font-family: inter;
@@ -14,7 +22,15 @@
 
     }
 
-    .main {
+    /* .main {
+        width: 100%;
+        height: 727px;
+        display: grid;
+        grid-template-rows: 8% 92%;
+        overflow: hidden;
+    } */
+
+    .main-right {
         width: 100%;
         height: 727px;
         display: grid;

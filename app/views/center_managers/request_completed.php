@@ -8,7 +8,8 @@
             <div class="main">
                 <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
                 <div class="main-right">
-                    <div class="main-right-top">
+                    <?php require APPROOT . '/views/center_managers/centermanager_requests/requests_top_bar.php'; ?>
+                    <!-- <div class="main-right-top">
                         <div class="main-right-top-one">
                             <div class="main-right-top-one-search">
                                 <img src="<?php echo IMGROOT?>/Search.png" alt="">
@@ -71,7 +72,7 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <?php if(!empty($data['completed_requests'])) : ?>
                     <div class="main-right-bottom" id="main-right-bottom">
                         <div class="main-right-bottom-top">

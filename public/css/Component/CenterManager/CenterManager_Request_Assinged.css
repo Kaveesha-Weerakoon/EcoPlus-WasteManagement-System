@@ -9,13 +9,15 @@
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    #request i {
-        color: var(--green-color-one);
+    #assigned p {
+        color: var(--green-color-two);
+        font-weight: bold;
     }
 
-    #request h3 {
-        color: var(--green-color-one);
+    #assigned .line {
+        background-color: var(--green-color-two);
     }
+
 
     .main-right-bottom-three {
         display: flex;

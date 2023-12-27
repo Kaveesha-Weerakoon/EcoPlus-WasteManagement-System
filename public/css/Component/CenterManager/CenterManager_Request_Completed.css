@@ -7,12 +7,13 @@
         display: flex;
     }
 
-    #request i {
-        color: var(--green-color-one);
+    #completed p {
+        color: var(--green-color-two);
+        font-weight: bold;
     }
 
-    #request h3 {
-        color: var(--green-color-one);
+    #completed .line {
+        background-color: var(--green-color-two);
     }
 
     .main-right-bottom-three {

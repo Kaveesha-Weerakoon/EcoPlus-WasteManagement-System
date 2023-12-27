@@ -51,8 +51,9 @@
                     </a>
                 </div> -->
                 <div class="main-right">
+                    <?php require APPROOT . '/views/center_managers/centermanager_requests/requests_top_bar.php'; ?>
 
-                    <div class="main-right-top">
+                    <!-- <div class="main-right-top">
                         <div class="main-right-top-one">
                             <div class="main-right-top-one-search">
                                 <img src="<?php echo IMGROOT?>/Search.png" alt="">
@@ -114,7 +115,8 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
                     <?php if(!empty($data['assined_requests'])) : ?>
 
                     <div class="main-right-bottom" id="main-right-bottom">
@@ -205,7 +207,7 @@
                         <div class="personal-details-left">
                             <img id="collector_profile_img" src="<?php echo IMGROOT?>/img_upload/collector/?>"
                                 class="profile-pic" alt="">
-                            <p>Collector ID: <span id="collector_id">C<?php?></span></p>
+                            <p>Collector ID: <span id="collector_id">C</span></p>
                         </div>
                         <div class="personal-details-right">
                             <div class="personal-details-right-labels">

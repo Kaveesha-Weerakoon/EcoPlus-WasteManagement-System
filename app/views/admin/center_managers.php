@@ -64,37 +64,6 @@
                         </div>
                     </div>
 
-                    <!-- <div class="main-top">
-                        <a href="<?php echo URLROOT?>/admin">
-                            <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
-                        </a>
-
-                        <div class="main-top-component">
-                            <p>Admin</p>
-                            <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="">
-                        </div>
-                    </div>
-                  
-                    <div class="main-bottom-top">
-                        <div class="main-right-top-two">
-                            <h1>Center Managers</h1>
-                        </div>
-                        <div class="main-right-top-three">
-                            <a href="">
-                                <div class="main-right-top-three-content">
-                                    <p><b style="color: #1B6652;">View</b></p>
-                                    <div class="line"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/admin/center_managers_add">
-                                <div class="main-right-top-three-content">
-                                    <p>Register</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-
-                        </div>
-                    </div> -->
 
                     <div class="main-right-bottom">
                         <div class="main-right-bottom-top ">
@@ -136,6 +105,7 @@
                 </div>
             </div>
         </div> 
+
         <?php if($data['confirm_delete']=='True') : ?>
         <div class="delete_confirm">
                 <div class="popup" id="popup">

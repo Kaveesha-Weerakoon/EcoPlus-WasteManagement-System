@@ -1,4 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
+
+
 <div class="Customer_Main">
 
     <div class="Customer_Dashboard">
@@ -9,8 +11,8 @@
             <div class="main-right">
                 <div class="main-right-top">
                     <div class="main-right-top-search">
-                        <i class='bx bx-search-alt-2'></i>
-                        <input type="text" placeholder="Search">
+                        <i class='bx bxl-sketch'></i> <input type="text" placeholder="Welcome Back !" id="searchInput"
+                            readonly oninput="highlightMatchingText()">
                     </div>
                     <div class="main-right-top-notification" id="notification">
                         <i class='bx bx-bell'></i>
@@ -219,9 +221,10 @@ var notification_pop = document.getElementById("notification_popup");
 notification_pop.style.height = "0px";
 let circularProgress = document.querySelector(".circular-progress");
 let progressValue = document.querySelector(".progress-value");
-let progressStartValue = 0;
-let progressEndValue = 75;
+let progressStartValue = -1;
+let progressEndValue = <?php echo intval($data['percentage']); ?>;
 let speed = 30;
+console.log(progressEndValue);
 
 function redirect_transfercredit() {
     var linkUrl = "<?php echo URLROOT?>/customers/transfer";
@@ -353,6 +356,9 @@ function initMap() {
 
 
 let progress = setInterval(() => {
+    if (progressStartValue == progressEndValue) {
+        clearInterval(progress);
+    }
     progressStartValue++;
     progressValue.textContent = `${progressStartValue}%`;
 

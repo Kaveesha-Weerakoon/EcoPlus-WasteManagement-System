@@ -29,8 +29,26 @@
  }
 
     public function index(){
+      $credit= $this->creditModel->get();
+      $center_managers = $this->center_managerModel->get_center_managers();
+      $customers = $this->customerModel->get_all();
+      $collectors =$this->collector_model->get_collectors();
+      $centers = $this->center_model->getallCenters();
+      $jsonData = json_encode($centers );
       $data = [
         'pop_eco_credits' => '',
+        'credit' => $credit,
+        'plastic_credit' =>$credit->plastic,
+        'polythene_credit'=>$credit->polythene,
+        'paper_credit'=>$credit->paper,
+        'glass_credit'=>$credit->glass,
+        'electronic_credit'=>$credit->electronic,
+        'metal_credit'=>$credit->metal,
+        'cm_count'=>count($center_managers),      
+        'customer_count'=>count($customers),
+        'collector_count'=>count( $collectors),
+        'centers'=>$jsonData
+
       ];
      
       $this->view('admin/index', $data);

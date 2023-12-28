@@ -260,7 +260,7 @@
                 ?>
             </select>
             <button type="submit">Change Center Manager</button>
-            <a href="<?php echo URLROOT?>/admin/center_main/<?php echo $data['center']->id?>"><button type="button" class="cancel">Cancel</button></a>
+            <a href="<?php echo URLROOT?>/admin/center_main/<?php echo $data['center']->id?>/<?php echo $data['center']->region?>"><button type="button" class="cancel">Cancel</button></a>
         </form>
     </div>
    </div>

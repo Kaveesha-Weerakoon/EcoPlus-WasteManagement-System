@@ -49,7 +49,7 @@
 
             <div class="main-right">
                 <div class="main-top">
-                    <a href="<?php echo URLROOT?>/admin">
+                    <a href="<?php echo URLROOT?>/admin/center_main/<?php echo $data['center']->id?>/<?php echo $data['center']->region?>">
                         <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
                     </a>
 

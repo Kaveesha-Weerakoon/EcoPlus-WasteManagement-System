@@ -850,11 +850,13 @@
 
     public function center_main_collectors($center_id){
       $collectors_in_center = $this->collector_model->get_collectors_bycenterid($center_id);
+      $center=$this->center_model->getCenterById($center_id);
       // $collector_assistants = $this->collector_assistants_Model->get_collector_assistants_bycolid($collectorId);
       
       $data =[
         'collectors_in_center' =>$collectors_in_center,
-        'center_id'=> $center_id
+        'center_id'=> $center_id,
+        'center'=>$center
         
       ];
 
@@ -864,9 +866,11 @@
 
     public function center_main_workers($center_id){
       $workers_in_center = $this->center_workers_model->get_workers_by_centerid($center_id);
-      
+      $center=$this->center_model->getCenterById($center_id);
+
       $data =[
-        'workers_in_center' => $workers_in_center
+        'workers_in_center' => $workers_in_center,
+        'center'=> $center
         
       ];
 
@@ -876,10 +880,12 @@
 
     public function incoming_requests($region){
       $incoming_requests = $this->requests_model->get_incoming_request($region);
+      $center=$this->center_model->getCenterByRegion($region);
 
       $data =[
         'incoming_requests'=> $incoming_requests,
-        'center_region'=> $region
+        'center_region'=> $region,
+        'center'=> $center
       ];
 
       $this->view('admin/center_main_request_incoming', $data);
@@ -888,10 +894,12 @@
 
     public function assigned_requests($region){
       $assigned_requests = $this->requests_model->get_assigned_request_by_center($region);
+      $center=$this->center_model->getCenterByRegion($region);
 
       $data =[
         'assigned_requests'=> $assigned_requests,
-        'center_region'=> $region
+        'center_region'=> $region,
+        'center'=> $center
 
       ];
 
@@ -901,10 +909,12 @@
 
     public function cancelled_requests($region){
       $cancelled_requests = $this->requests_model->get_cancelled_request_bycenter($region);
+      $center=$this->center_model->getCenterByRegion($region);
 
       $data =[
         'cancelled_requests'=> $cancelled_requests,
-        'center_region'=> $region
+        'center_region'=> $region,
+        'center'=> $center
       ];
 
       $this->view('admin/center_main_request_cancelled', $data);

@@ -5,8 +5,8 @@
     
         <div class="Admin_Center_Main_Request_Assigned">
             <div class="main">
-
-                <div class="main-left">
+                <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
+                <!-- <div class="main-left">
                 <div class="main-left-top">
                     <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
                     <h1>Eco Plus</h1>
@@ -50,12 +50,12 @@
                     </div>
                 </div>
                 </a>
-                </div>
+                </div> -->
                 
 
                 <div class="main-right">
                     <div class="main-top">
-                        <a href="<?php echo URLROOT?>/admin">
+                        <a href="<?php echo URLROOT?>/admin/center_main/<?php echo $data['center']->id?>/<?php echo $data['center']->region?>">
                             <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
                         </a>
 

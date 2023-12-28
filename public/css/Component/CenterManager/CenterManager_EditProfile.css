@@ -188,6 +188,7 @@
         box-sizing: border-box;
         padding: 10px;
         overflow: hidden !important;
+        
     }
 
     .main-right-bottom-content {
@@ -274,7 +275,7 @@
     }
 
     .edit-profile-content input {
-        height: 35px;
+        height: 28.5px;
         width: 325px;
         border-radius: 5px;
         border: 1px solid #ccc;

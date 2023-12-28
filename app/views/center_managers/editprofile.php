@@ -68,6 +68,12 @@
                                     <div class="err"><?php echo $data['name_err']?></div>
                                 </div>
                                 <div class="edit-profile-content">
+                                    <h3>Email </h3>
+                                    <input name="email" type="text" value="<?php echo $data['email']?>" readonly>
+                                    <div class="err"></div>
+
+                                </div>
+                                <div class="edit-profile-content">
                                     <h3>Address :</h3>
                                     <input name="address"  type="text" value="<?php echo $data['address']?>">
                                     <div class="err"><?php echo $data['address_err']?></div>

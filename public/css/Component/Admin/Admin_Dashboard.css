@@ -21,8 +21,9 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-around;
-        margin: 5px;
+        box-shadow: var(--box-shadow2);
         border: 10px;
+        z-index: 1;
     }
 
     .main-right-top-search {

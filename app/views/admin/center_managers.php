@@ -4,9 +4,67 @@
         <div class="Admin_Center_Manger_View">
         <div class="main">
                 <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
-                
+
                 <div class="main-right">
-                    <div class="main-top">
+                    <div class="main-right-top">
+                        <div class="main-right-top-one">
+                            <div class="main-right-top-search">
+                                <i class='bx bx-search-alt-2'></i>
+                                <input type="text" id="searchInput" placeholder="Search">
+                            </div>
+                            <div class="main-right-top-notification" id="notification">
+                                <i class='bx bx-bell'></i>
+                                <div class="dot"></div>
+                            </div>
+                            <div id="notification_popup" class="notification_popup">
+                                <h1>Notifications</h1>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
+
+                                    </div>
+                                    Request 1232 Has been Cancelled
+                                </div>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
+
+                                    </div>
+                                    Request 1232 Has been Assigned
+                                </div>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
+
+                                    </div>
+                                    Request 1232 Has been Cancelled
+                                </div>
+                            </div>
+                            <div class="main-right-top-profile">
+                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
+                                <div class="main-right-top-profile-cont">
+                                    <h3>Admin</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-right-top-two">
+                            <h1>Center Managers</h1>
+                        </div>
+                        <div class="main-right-top-three">
+                            <a href="<?php echo URLROOT?>/admin/center_managers">
+                                <div class="main-right-top-three-content">
+                                    <p><b style="color:#1ca557;">View</b></p>
+                                    <div class="line" style="background-color: #1ca557;"></div>
+                                </div>
+                            </a>
+                            <a href="<?php echo URLROOT?>/admin/center_managers_add">
+                                <div class="main-right-top-three-content">
+                                    <p>Register</p>
+                                    <div class="line"></div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <!-- <div class="main-top">
                         <a href="<?php echo URLROOT?>/admin">
                             <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
                         </a>
@@ -16,64 +74,65 @@
                             <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="">
                         </div>
                     </div>
-                    <div class="main-bottom">
-                        <div class="main-bottom-top">
-                            <div class="main-right-top-two">
-                                <h1>Center Managers</h1>
-                            </div>
-                            <div class="main-right-top-three">
-                                <a href="">
-                                    <div class="main-right-top-three-content">
-                                        <p><b style="color: #1B6652;">View</b></p>
-                                        <div class="line"></div>
-                                    </div>
-                                </a>
-                                <a href="<?php echo URLROOT?>/admin/center_managers_add">
-                                    <div class="main-right-top-three-content">
-                                        <p>Register</p>
-                                        <div class="line1"></div>
-                                    </div>
-                                </a>
-
-                            </div>
+                  
+                    <div class="main-bottom-top">
+                        <div class="main-right-top-two">
+                            <h1>Center Managers</h1>
                         </div>
-                        <div class="main-bottom-down">
-                            <div class="main-right-bottom-top ">
-                                <table class="table">
-                                    <tr class="table-header">
-                                        <th>Center Manager ID</th>
-                                        <th>Profile</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Assigned</th>
-                                        <th>Assigned Center ID</th>
-                                        <th>Personal Details</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
+                        <div class="main-right-top-three">
+                            <a href="">
+                                <div class="main-right-top-three-content">
+                                    <p><b style="color: #1B6652;">View</b></p>
+                                    <div class="line"></div>
+                                </div>
+                            </a>
+                            <a href="<?php echo URLROOT?>/admin/center_managers_add">
+                                <div class="main-right-top-three-content">
+                                    <p>Register</p>
+                                    <div class="line1"></div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div> -->
+
+                    <div class="main-right-bottom">
+                        <div class="main-right-bottom-top ">
+                            <table class="table">
+                                <tr class="table-header">
+                                    <th>Center Manager ID</th>
+                                    <th>Profile</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Assigned</th>
+                                    <th>Assigned Center ID</th>
+                                    <th>Personal Details</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="main-right-bottom-down">
+                            <table class="table">
+                                <?php foreach($data['center_managers'] as $center_manager) : ?>
+                                        <tr class="table-row">
+                                            <td>CM <?php echo $center_manager->user_id?></td>
+                                            <td><img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $center_manager->image?>" alt="" class="manager_img"></td>
+                                            <td><?php echo $center_manager->name?></td>
+                                            <td><?php echo $center_manager->email?></td>
+                                            <td> <?php echo $center_manager->assinged?></td>
+                                            <td> <?php echo $center_manager->assigned_center_id?></td>
+                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/cm_personal_details_view/<?php echo $center_manager->user_id ?>"><img src="<?php echo IMGROOT?>/personal_details_icon.png" alt=""></a></td>
+                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_update/<?php echo $center_manager->user_id ?>"><img src="<?php echo IMGROOT?>/update.png" alt=""></a></td>
+                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_delete_confirm/<?php echo $center_manager->user_id?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
                                     </tr>
-                                </table>
-                            </div>
-                            <div class="main-right-bottom-down">
-                                <table class="table">
-                                    <?php foreach($data['center_managers'] as $center_manager) : ?>
-                                            <tr class="table-row">
-                                                <td>CM <?php echo $center_manager->user_id?></td>
-                                                <td class="cm-profile-img"><img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $center_manager->image?>" alt=""></td>
-                                                <td><?php echo $center_manager->name?></td>
-                                                <td><?php echo $center_manager->email?></td>
-                                                <td> <?php echo $center_manager->assinged?></td>
-                                                <td> <?php echo $center_manager->assigned_center_id?></td>
-                                                <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/cm_personal_details_view/<?php echo $center_manager->user_id ?>"><img src="<?php echo IMGROOT?>/personal_details_icon.png" alt=""></a></td>
-                                                <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_update/<?php echo $center_manager->user_id ?>"><img src="<?php echo IMGROOT?>/update.png" alt=""></a></td>
-                                                <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_delete_confirm/<?php echo $center_manager->user_id?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </table>
-                        
-        
-                            </div>
+                                <?php endforeach; ?>
+                            </table>
+                    
+    
                         </div>
                     </div>
+                   
                 </div>
             </div>
         </div> 

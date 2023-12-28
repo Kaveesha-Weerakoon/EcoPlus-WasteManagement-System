@@ -1,84 +1,53 @@
 .Admin_Center_Manger_View {
 
-
     .main-right-bottom-down {
-        width: 98%;
-        overflow: scroll !important;
-        padding-left: 2%;
-        padding-right: 2%;
-        margin-bottom: 40px;
+        padding-left: 3.5%;
+        width: 96.5%;
+        height: 450px;
+        overflow: scroll;
     }
 
     .main-right-bottom-top {
-        width: 98%;
-        padding-left: 2%;
-        padding-right: 2%;
+        padding-left: 3.5%;
+        width: 96.5%;
     }
 
-    .table {
-        padding-left: 2%;
-        width: 99%;
-        border-collapse: collapse;
-        text-align: center;
-        padding-right: 2%;
-        height: 100%;
+    .logout_anchor {
+        width: auto;
     }
 
     .table-header {
-        background-color: #B9FFB7;
-        font-size: 17px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 55px;
-        display: grid;
         grid-template-columns: 12% 9% 12% 17% 10% 15% 11% 7% 7%;
-    }
-
-    .table-header th {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
     }
 
     .table-row {
-        font-size: 1px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 100px;
+        height: 52px;
         display: grid;
-        grid-template-columns: 12% 9% 12% 17% 10% 15% 11% 7% 7%;
-        border-bottom: 2px solid #CACACA;
+        grid-template-columns:  12% 9% 12% 17% 10% 15% 11% 7% 7%;
     }
 
     .table td {
-        height: 100px;
-        font-size: 17px;
-        vertical-align: middle;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow-y: scroll;
+        height: 55px;
     }
+
+    .manager_img{
+        width: 35px !important;
+        height: 35px !important;
+        border-radius: 50%;
+    }
+
 
     td img {
         margin: 6px;
     }
 
-    .cancel-open img {
+    .table-row img {
         width: 25px;
         height: 25px;
         cursor: pointer;
     }
 
-    .cm-profile-img img {
-        width: 67px;
-        height: 67px;
-        border-radius: 50%;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        /* Adjust values as needed */
-    }
+   
 
     @media screen and (max-width: 1118px) {
         .main-right-top-one-content {

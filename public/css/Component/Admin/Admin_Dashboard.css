@@ -6,6 +6,15 @@
         grid-template-rows: 9% 91%;
     }
 
+    #dashboard i {
+        color: var(--green-color-one);
+    }
+
+    #dashboard h3 {
+        color: var(--green-color-one);
+    }
+
+
     .main-right-top {
         background-color: var(--background-color-main);
         display: flex;

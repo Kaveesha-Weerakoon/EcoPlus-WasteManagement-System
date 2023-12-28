@@ -7,6 +7,14 @@
 
     }
 
+    #centers i {
+        color: var(--green-color-one);
+    }
+
+    #centers h3 {
+        color: var(--green-color-one);
+    }
+
     .main-right-bottom-top {
         width: 99%;
         padding-left: 1%;

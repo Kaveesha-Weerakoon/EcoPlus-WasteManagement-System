@@ -9,6 +9,15 @@
 
     }
 
+    
+    #centers i {
+        color: var(--green-color-one);
+    }
+
+    #centers h3 {
+        color: var(--green-color-one);
+    }
+
     .main-bottom-down-top {
         display: flex;
         align-items: center;

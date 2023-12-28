@@ -5,6 +5,15 @@
         font-family: inter;
     }
 
+    #complaints i {
+        color: var(--green-color-one);
+    }
+
+    #complaints h3 {
+        color: var(--green-color-one);
+    }
+
+
     .main-right-bottom {}
 
     .main-right-bottom-top {

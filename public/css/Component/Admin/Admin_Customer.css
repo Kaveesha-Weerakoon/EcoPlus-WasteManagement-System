@@ -13,6 +13,15 @@
         color: inherit;
     }
 
+    #dashboard i {
+        color: var(--green-color-one);
+    }
+
+    #dashboard h3 {
+        color: var(--green-color-one);
+    }
+
+
     .main-right {
         width: 100%;
         height: 727px;

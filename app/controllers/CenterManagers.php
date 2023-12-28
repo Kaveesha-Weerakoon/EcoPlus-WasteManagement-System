@@ -714,7 +714,7 @@
         $data=[
           'name'=>trim($_POST['name']),
          'userid'=>'',
-         'email'=>'',
+         'email'=>trim($_POST['email']),
          'profile_image_name' => $_SESSION['center_manager_email'].'_'.$_FILES['profile_image']['name'],
          'contactno'=>trim($_POST['contactno']),
          'address'=>trim($_POST['address']),
@@ -803,6 +803,7 @@
         $user=$this->centermanagerModel->getCenterManagerByID($id);
         $data['name']=$_SESSION['center_manager_name'];
         $data['contactno']=$user->contact_no;
+        $data['email']=$_SESSION['center_manager_email'];
         $data['address']=$user->address;
        
         $this->view('/center_managers/editprofile', $data);

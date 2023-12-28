@@ -55,6 +55,25 @@
     }
 
     .table-row {
+        height: 55px;
+        grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+      }
+    
+      .table td {
+        height: 55px;
+      }
+    
+      .table-header {
+        grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+      }
+    
+      td img {
+        margin: 7px;
+        height: 25px;
+        width: 25px;
+      }
+
+    /* .table-row {
         font-size: 1px;
         font-family: Montserrat;
         text-align: center;
@@ -82,12 +101,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    }
+    } */
 
-    .add {
+    /* .add {
         width: 402px;
         height: 40px;
-    }
+    } */
 
     /*Location popup*/
     .location_pop {

@@ -41,7 +41,7 @@
                                 <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
                                     alt="">
                                 <div class="main-right-top-profile-cont">
-                                    <h3>Kaveesha</h3>
+                                    <h3><?php echo $_SESSION['collector_name']?></h3>
                                     <p>ID : Col <?php echo $_SESSION['collector_id']?></p>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                                             <th>Contact No</th>
                                             <th>Instructions</th>
                                             <th>Complete</th>
-                                            <th>creidt_amount</th>
+                                            <th>credit amount</th>
                                         </tr>
                                     </table>
                                 </div>

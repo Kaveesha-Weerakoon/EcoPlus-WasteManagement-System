@@ -53,8 +53,6 @@
       return $results;
   }
   
-
-   
     public function insert($data){
       try{
       $this->db->query('INSERT INTO request_completed (req_id, Polythene, Plastic, Glass, Paper_Waste, Electronic_Waste, Metals, credit_amount, note, added) VALUES (:req_id, :Polythene, :Plastic, :Glass, :Paper_Waste, :Electronic_Waste, :Metals, :credit_amount, :note, :added)');
@@ -88,11 +86,7 @@
         }
       }catch (PDOException $e) {
         return false;
-    }
-
-      
-
-      
+    } 
     }
 
     public function get_completed_requests_bycenter($region){

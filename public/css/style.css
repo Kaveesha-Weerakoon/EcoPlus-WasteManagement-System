@@ -84,6 +84,7 @@
 
 /*Admin Main left hand side CSS This is used in left hand side of all the Center Manager uis*/
 @import url('Component/Admin/Admin_Main.css');
+@import url('Component/Admin/Admin_Main_Left.css');
 
 @import url('Component/Admin/Admin_Dashboard.css');
 /* Admin Main Right hand side of the dashboard CSS */

@@ -24,9 +24,16 @@
       $credit= $this->creditModel->get();
       $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']); 
       $centers = $this->Center_Model->getallCenters();
-
+      $completed_requests=count($this->Collect_Garbage_Model->get_complete_request_relevent_customer($_SESSION['user_id']));
+      $total_requests=count($this->Request_Model->get_total_requests_by_customer($_SESSION['user_id']));
       
-       $jsonData = json_encode($centers );
+      if ($total_requests > 0) {
+        $percentage_completed = json_encode(($completed_requests / $total_requests) * 100);
+         } else {
+          $percentage_completed =json_encode(0);
+    }    
+
+      $jsonData = json_encode($centers );
 
       $data = [
         'title' => 'TraversyMVC',
@@ -34,8 +41,8 @@
         'credit_balance'=>$balance ,
         'pop'=>'',
         'transaction_history' =>$transaction_history,
-        'centers'=>$jsonData
-         
+        'centers'=>$jsonData,
+        'percentage'=> $percentage_completed 
         ];
      
       $this->view('customers/index', $data);

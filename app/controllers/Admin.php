@@ -718,6 +718,7 @@
       $data = [
         'collectors' =>$collectors,
         'delete_confirm'=>'',
+        'vehicle_details_click'=> ''
       ];
      
       $this->view('admin/collectors', $data);

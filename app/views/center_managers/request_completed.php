@@ -9,70 +9,7 @@
                 <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
                 <div class="main-right">
                     <?php require APPROOT . '/views/center_managers/centermanager_requests/requests_top_bar.php'; ?>
-                    <!-- <div class="main-right-top">
-                        <div class="main-right-top-one">
-                            <div class="main-right-top-one-search">
-                                <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                                <input id="searchInput" type="text" placeholder="Search">
-                            </div>
 
-                            <div class="main-right-top-one-content">
-                                <p><?php echo $_SESSION['center_manager_name']?></p>
-                                <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
-                                    alt="">
-                            </div>
-                        </div>
-                        <div class="main-right-top-two">
-                            <h1>Requests</h1>
-                        </div>
-                        <div class="main-right-top-three">
-                            <a href="<?php echo URLROOT?>/centermanagers/request_incomming">
-                                <div class="main-right-top-three-content">
-                                    <p>Incoming</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/centermanagers/request_assigned">
-                                <div class="main-right-top-three-content">
-                                    <p>Assigned</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                            <a href="">
-                                <div class="main-right-top-three-content">
-                                    <p><b style="color: #1B6652;">Completed</b></p>
-                                    <div class="line"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/centermanagers/request_cancelled">
-                                <div class="main-right-top-three-content">
-                                    <p>Cancelled</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="main-right-top-four">
-                            <div class="main-right-top-four-left">
-                                <p>Date</p>
-                                <input type="date" id="selected-date">
-                                <button onclick="loadLocations()">Filter</button>
-
-                            </div>
-                            <div class="main-right-top-four-right">
-                                <div class="main-right-top-four-component" id="tables"
-                                    style="background-color: #ecf0f1;">
-                                    <img src="<?php echo IMGROOT?>/cells.png" alt="">
-                                    <p>Tables</p>
-                                </div>
-                                <div class="main-right-top-four-component" style="" id="maps">
-                                    <img src="<?php echo IMGROOT?>/map.png" alt="">
-                                    <p>Maps</p>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div> -->
                     <?php if(!empty($data['completed_requests'])) : ?>
                     <div class="main-right-bottom" id="main-right-bottom">
                         <div class="main-right-bottom-top">
@@ -104,7 +41,7 @@
                                         <img src="<?php echo IMGROOT ?>/assign.png"
                                             onclick="view_collector('<?php echo $request->collector_image; ?>', '<?php echo $request->collector_id; ?>', '<?php echo $request->name; ?>', 
                                             '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')"
-                                         alt="">
+                                            alt="">
                                     </td>
                                     <td><img onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
                                             class="add" src="<?php echo IMGROOT?>/location.png" alt=""></td>
@@ -133,12 +70,12 @@
                             <p>Completed requests will be appeared as soon as collector completes it</p>
                         </div>
                     </div>
-                <?php endif; ?>
+                    <?php endif; ?>
 
 
 
                 </div>
-                <div class="location_pop">
+                <div class="location_pop" id="location_pop">
                     <div class="location_pop_content">
                         <div class="location_pop_map">
 
@@ -290,12 +227,15 @@ function initMap(latitude = 7.4, longitude = 81.00000000) {
 
 function viewLocation($lattitude, $longitude) {
     initMap($lattitude, $longitude);
-    document.querySelector('.location_pop').style.display = 'flex';
+    var locationPop = document.getElementById('location_pop');
+    locationPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
 }
 
 function closemap() {
-    document.querySelector('.location_pop').style.display = 'none';
-
+    var locationPop = document.getElementById('location_pop');
+    locationPop.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
 }
 
 function loadLocations() {
@@ -329,7 +269,8 @@ function searchTable() {
         var conctact_no = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
         var instructions = row.querySelector('td:nth-child(7)').innerText.toLowerCase();
 
-        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(input) ||
+        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(
+                input) ||
             cid.includes(input) || conctact_no.includes(input) || instructions.includes(input)) {
             row.style.display = '';
         } else {
@@ -358,7 +299,5 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
-
-
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

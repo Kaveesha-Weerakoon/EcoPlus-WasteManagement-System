@@ -27,7 +27,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-
     }
 
 
@@ -57,56 +56,21 @@
     .table-row {
         height: 55px;
         grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-      }
-    
-      .table td {
-        height: 55px;
-      }
-    
-      .table-header {
-        grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-      }
-    
-      td img {
-        margin: 7px;
-        height: 25px;
-        width: 25px;
-      }
-
-    /* .table-row {
-        font-size: 1px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 52px;
-        display: grid;
-        grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10% ;
-        border-bottom: 2px solid #CACACA;
-    }
-
-    .table-header {
-        background-color: #ecf0f1;
-        font-size: 17px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 55px;
-        display: grid;
-        grid-template-columns:10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
     }
 
     .table td {
-        height: 50px;
-        font-size: 15.5px;
-        vertical-align: middle;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    } */
+        height: 55px;
+    }
 
-    /* .add {
-        width: 402px;
-        height: 40px;
-    } */
+    .table-header {
+        grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+    }
+
+    td img {
+        margin: 7px;
+        height: 25px;
+        width: 25px;
+    }
 
     /*Location popup*/
     .location_pop {
@@ -164,7 +128,7 @@
     }
 
     /* ------------*/
-    
+
     /*collect details*/
 
     .collect-details-pop {
@@ -351,7 +315,7 @@
     }
 
     .personal-details-popup-form-close {
-      
+
         position: absolute;
         top: 10px;
         right: 10px;
@@ -449,7 +413,7 @@
         margin-top: 15px;
     }
 
-    .confirmed_button{
+    .confirmed_button {
         padding: 7px;
         background-color: var(--green-color-one);
         color: white;
@@ -461,7 +425,7 @@
 
     }
 
-    .confirmed_button:hover{
+    .confirmed_button:hover {
         background-color: #19954e;
     }
 

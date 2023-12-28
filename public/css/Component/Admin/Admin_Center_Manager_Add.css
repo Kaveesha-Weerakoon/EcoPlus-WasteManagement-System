@@ -3,6 +3,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+       
     }
 
     .main-bottom-down-content {
@@ -33,7 +34,7 @@
     .registration-line {
         height: 4px;
         width: 60px;
-        background: #1B6652;
+        background: var(--green-color-one);
         margin-top: 3px;
     }
 
@@ -171,12 +172,12 @@
         cursor: pointer;
         border: none;
         letter-spacing: 1px;
-        background: #1B6652;
+        background: var(--green-color-one);
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
     .main-bottom-down-content-bottom-button button :hover {
-        background: rgb(28, 79, 64);
+        background: #19954e;
     }
 
     .center_manager_success {

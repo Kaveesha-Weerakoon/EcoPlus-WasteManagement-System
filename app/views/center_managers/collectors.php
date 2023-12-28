@@ -70,96 +70,60 @@
                     </div>
                 </div>
 
-                <!-- <div class="main-top">
-                    <a href="<?php echo URLROOT?>/centermanagers">
-                        <img class="back-button" src="<?php echo IMGROOT ?>/Back.png" alt="">
-                    </a>
+                <?php if(!empty($data['collectors'])) : ?>
+                <div class="main-right-bottom">
+                    <div class="main-right-bottom-top ">
+                        <table class="table">
+                            <tr class="table-header">
+                                <th>Collector ID</th>
+                                <th>Profile Pic</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Personal Details</th>
+                                <th>Vehicle Details</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="main-right-bottom-down">
+                        <table class="table">
+                            <?php foreach($data['collectors'] as $collector) : ?>
+                            <tr class="table-row">
+                                <td><?php echo $collector->user_id?></td>
+                                <td><img
+                                        src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>"
+                                        alt="" class="collector_img"></td>
+                                <td><?php echo $collector->name?></td>
+                                <td><?php echo $collector->email?></td>
+                                <td><a
+                                        href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><img
+                                            src="<?php echo IMGROOT ?>/personal_details_icon.png" alt=""></a></td>
+                                <td><img onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                        src="<?php echo IMGROOT ?>/car.png" alt=""></td>
+                                <td><a
+                                        href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><img
+                                            src="<?php echo IMGROOT ?>/update.png" alt=""></a></td>
+                                <td class="delete"><a
+                                        href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>">
+                                        <img src="<?php echo IMGROOT ?>/delete.png" alt=""></a></td>
 
-                    <div class="main-top-component">
-                        <p><?php echo $_SESSION['center_manager_name']?></p>
-                        <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>" alt="">
+                            </tr>
+                            <?php endforeach; ?>
+
                     </div>
                 </div>
-            
-                <div class="main-bottom-top">
-                    <div class="main-right-top-two">
-                        <h1>Collectors</h1>
-                    </div>
-                    <div class="main-right-top-three">
-                        <a href="">
-                            <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">View</b></p>
-                                <div class="line"></div>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/centermanagers/collectors_add">
-                            <div class="main-right-top-three-content">
-                                <p>Register</p>
-                                <div class="line1"></div>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/centermanagers/collectors_complains">
-                            <div class="main-right-top-three-content">
-                                <p>Complaints</p>
-                                <div class="line1"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div> -->
-                    <?php if(!empty($data['collectors'])) : ?>
-                    <div class="main-right-bottom">
-                        <div class="main-right-bottom-top ">
-                            <table class="table">
-                                <tr class="table-header">
-                                    <th>Collector ID</th>
-                                    <th>Profile Pic</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Personal Details</th>
-                                    <th>Vehicle Details</th>
-                                    <th>Update</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="main-right-bottom-down">
-                            <table class="table">
-                                <?php foreach($data['collectors'] as $collector) : ?>
-                                <tr class="table-row">
-                                    <td><?php echo $collector->user_id?></td>
-                                    <td><img
-                                            src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>"
-                                            alt="" class="collector_img"></td>
-                                    <td><?php echo $collector->name?></td>
-                                    <td><?php echo $collector->email?></td>
-                                    <td><a
-                                            href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><img
-                                                src="<?php echo IMGROOT ?>/personal_details_icon.png" alt=""></a></td>
-                                    <td><img onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                            src="<?php echo IMGROOT ?>/car.png" alt=""></td>
-                                    <td><a
-                                            href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><img
-                                                src="<?php echo IMGROOT ?>/update.png" alt=""></a></td>
-                                    <td class="delete"><a
-                                            href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>">
-                                            <img src="<?php echo IMGROOT ?>/delete.png" alt=""></a></td>
+                <?php else: ?>
+                <div class="main-right-bottom-two">
+                    <div class="main-right-bottom-two-content">
+                        <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                        <h1>There are no collectors available</h1>
+                        <p>Register a collector now!</p>
+                        <a href="<?php echo URLROOT?>/centermanagers/collectors_add"><button>Register</button></a>
 
-                                </tr>
-                                <?php endforeach; ?>
-
-                        </div>
                     </div>
-                    <?php else: ?>
-                    <div class="main-right-bottom-two">
-                        <div class="main-right-bottom-two-content">
-                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
-                            <h1>There are no collectors available</h1>
-                            <p>Register a collector now!</p>
-                            <a href="<?php echo URLROOT?>/centermanagers/collectors_add"><button>Register</button></a>
-
-                        </div>
-                    </div>
-                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
 
               
             </div>

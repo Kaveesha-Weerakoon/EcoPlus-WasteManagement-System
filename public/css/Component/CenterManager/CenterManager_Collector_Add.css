@@ -388,7 +388,7 @@
     }
 
     .line3 {
-        background-color: #1B6652;
+        background-color: var(--green-color-one);
         width: 50px;
         height: 4px;
     }
@@ -516,8 +516,12 @@
         cursor: pointer;
         border: none;
         letter-spacing: 1px;
-        background: #1B6652;
+        background: var(--green-color-one);
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .main-bottom-down-content-button button:hover{
+        background: #19954e;
     }
 
     .collector_success {

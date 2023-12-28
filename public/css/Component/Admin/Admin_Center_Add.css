@@ -141,7 +141,7 @@
     .Create_Center_Button {
         width: 45%;
         height: 45px;
-        background: #1B6652;
+        background: var(--green-color-one);
         font-size: 20px;
         color: white;
         border: none;
@@ -152,7 +152,7 @@
     }
 
     .Create_Center_Button:hover {
-        background: #155843;
+        background: #19954e;
     }
 
     .center_add_success {

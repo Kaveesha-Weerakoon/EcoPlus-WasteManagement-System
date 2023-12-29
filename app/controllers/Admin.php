@@ -14,6 +14,7 @@
       // $this->collector_assistants_Model=$this->model('collector_assistants');
       $this->center_workers_model=$this->model('Center_Worker');
       $this->requests_model=$this->model('Request');
+     
 
       if(!isLoggedIn('admin_id')){
         redirect('users/login');

@@ -11,19 +11,19 @@
             </div>
             <h3>Dashboard</h3>
         </div>
-        <div class="main-left-middle-content"  id=" request">
+        <div class="main-left-middle-content"  id=" reports">
             <div class=" main-left-middle-content-icon">
                 <i class='bx bx-right-arrow-circle'></i>
             </div>
             <h3>Reports</h3>
         </div>
-        <div class="main-left-middle-content" onclick="redirect_complains()">
+        <div class="main-left-middle-content" onclick="redirect_complains()" id="complaints">
             <div class=" main-left-middle-content-icon">
                 <i class='bx bx-donate-heart'></i>
             </div>
             <h3>Complaints</h3>
         </div>
-        <div class="main-left-middle-content" onclick="redirect_centers()">
+        <div class="main-left-middle-content" onclick="redirect_centers()" id="centers">
             <div class=" main-left-middle-content-icon">
                 <i class='bx bx-home-smile'></i>
             </div>

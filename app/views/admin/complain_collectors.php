@@ -4,59 +4,44 @@
     <div class="main">
             <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
 
-             <!-- <div class="main-left">
-                <div class="main-left-top">
-                    <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
-                    <h1>Eco Plus</h1>
-                </div>
-                <div class="main-left-middle">
-                    <a href="<?php echo URLROOT?>/admin">
-                        <div class="main-left-middle-content ">
-                            <div class="main-left-middle-content-line1"></div>
-                            <img src="<?php echo IMGROOT?>/Home.png" alt="">
-                            <h2>Dashboard</h2>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div class="main-left-middle-content">
-                            <div class="main-left-middle-content-line1"></div>
-                            <img src="<?php echo IMGROOT?>/Reports.png" alt="">
-                            <h2>Reports</h2>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div class="main-left-middle-content current">
-                            <div class="main-left-middle-content-line"></div>
-                            <img src="<?php echo IMGROOT?>/Complains.png" alt="">
-                            <h2>Complains</h2>
-                        </div>
-                    </a>
-                    <a href="./Collector_Edit_Profile/Collector_EditProfile.html">
-                        <div class="main-left-middle-content">
-                            <div class="main-left-middle-content-line1"></div>
-                            <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">
-                            <h2>Edit Profile</h2>
-                        </div>
-                    </a>
-
-                </div>
-                <a href="<?php echo URLROOT?>/admin/logout">
-                <div class="main-left-bottom">
-                    <div class="main-left-bottom-content">
-                        <img src="<?php echo IMGROOT?>/logout.png" alt="">
-                        <p>Log out</p>
-                    </div>
-                </div>
-                </a>
-             </div> -->
              <div class="main-right">
+
                 <div class="main-right-top">
                     <div class="main-right-top-one">
-                        <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                        <input type="text" placeholder="Search">
-                        <div class="main-right-top-one-content">
-                            <p>Admin Account</p>
-                            <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="">
+                        <div class="main-right-top-search">
+                            <i class='bx bx-search-alt-2'></i>
+                            <input type="text" id="searchInput" placeholder="Search">
+                        </div>
+                        <div class="main-right-top-notification" id="notification">
+                            <i class='bx bx-bell'></i>
+                            <div class="dot"></div>
+                        </div>
+                        <div id="notification_popup" class="notification_popup">
+                            <h1>Notifications</h1>
+                            <div class="notification">
+                                <div class="notification-green-dot">
+
+                                </div>
+                                Request 1232 Has been Cancelled
+                            </div>
+                            <div class="notification">
+                                <div class="notification-green-dot">
+
+                                </div>
+                                Request 1232 Has been Assigned
+                            </div>
+                            <div class="notification">
+                                <div class="notification-green-dot">
+
+                                </div>
+                                Request 1232 Has been Cancelled
+                            </div>
+                        </div>
+                        <div class="main-right-top-profile">
+                            <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
+                            <div class="main-right-top-profile-cont">
+                                <h3>Admin</h3>
+                            </div>
                         </div>
                     </div>
                     <div class="main-right-top-two">
@@ -66,23 +51,25 @@
                         <a href="<?php echo URLROOT?>/Admin/complain_customers">
                             <div class="main-right-top-three-content">
                                 <p>Customers</p>
-                                <div class="line1"></div>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">Collectors</b></p>
                                 <div class="line"></div>
                             </div>
                         </a>
-                        <a href="">
+                        <a href="<?php echo URLROOT?>/Admin/complain_collectors">
                             <div class="main-right-top-three-content">
-                                <p>Credit Discount Agent</p>
-                                <div class="line1"></div>
+                                <p><b style="color:#1ca557;">Collectors</b></p>
+                                <div class="line"  style="background-color: #1ca557;"></div>
                             </div>
                         </a>
+                        <a href="">
+                            <div class="main-right-top-three-content">
+                                <p>Credit Discount Agents</p>
+                                <div class="line"></div>
+                            </div>
+                        </a>
+
                     </div>
                 </div>
+              
                 <div class="main-right-bottom">
                     <div class="main-right-bottom-top">
                         <table class="table">

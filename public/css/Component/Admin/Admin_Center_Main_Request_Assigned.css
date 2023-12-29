@@ -15,76 +15,59 @@
         color: var(--green-color-one);
     }
 
+    #assigned p {
+        color: var(--green-color-two);
+        font-weight: bold;
+    }
+
+    #assigned .line {
+        background-color: var(--green-color-two);
+    }
+
+    .main-right-bottom-down {
+        padding-left: 3.5%;
+        width: 96.5%;
+        height: 450px;
+        overflow: scroll;
+    }
+
     .main-right-bottom-top {
-        width: 99%;
-        padding-left: 1%;
-
+        padding-left: 3.5%;
+        width: 96.5%;
     }
 
-    .table {
-        padding-left: 1%;
-        width: 99%;
-        border-collapse: collapse;
-        text-align: center;
-        padding-left: 1%;
-    }
-
-    .table-header th {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
+    .logout_anchor {
+        width: auto;
     }
 
     .table-header {
-        background-color: #ecf0f1;
-        font-size: 17px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 55px;
-        display: grid;
         grid-template-columns: 10% 13% 13% 12.5% 12.5% 14% 12.5% 12.5%;
     }
 
     .table-row {
-        font-size: 1px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 65px;
+        height: 52px;
         display: grid;
         grid-template-columns: 10% 13% 13% 12.5% 12.5% 14% 12.5% 12.5%;
-        border-bottom: 2px solid #CACACA;
     }
 
     .table td {
-        height: 65px;
-        font-size: 16px;
-        vertical-align: middle;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow-y: scroll;
+        height: 55px;
     }
 
-    .collector_img{
-        width: 50px !important;
-        height: 50px !important;
-        border-radius: 50%;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .td img {
+    td img {
         margin: 6px;
-        width: 20px;
-        height: 20px;
     }
 
     .table-row img {
         width: 25px;
         height: 25px;
         cursor: pointer;
-        
+    }
+
+    .collector_img{
+        width: 35px !important;
+        height: 35px !important;
+        border-radius: 50%;
     }
 
     /*Location Pop*/

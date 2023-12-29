@@ -8,94 +8,128 @@
                 <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
                 
                 <div class="main-right">
-                    <div class="main-top">
-                        <a href="<?php echo URLROOT?>/admin/center_main/<?php echo $data['center']->id?>/<?php echo $data['center']->region?>">
-                            <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
-                        </a>
+                    <div class="main-right-top">
+                        <div class="main-right-top-one">
+                            <a href="<?php echo URLROOT?>/admin/center_main/<?php echo $data['center']->id?>/<?php echo $data['center']->region?>">
+                            <div class="main-right-top-back-button">
+                                <i class='bx bxs-chevrons-left'></i>
+                            </div>
+                            </a>
+                            <div class="main-right-top-search">
+                                <i class='bx bx-search-alt-2'></i>
+                                <input type="text" id="searchInput" placeholder="Search">
+                            </div>
+                            <div class="main-right-top-notification"  style="visibility: hidden;" id="notification">
+                                <i class='bx bx-bell'></i>
+                                <div class="dot"></div>
+                            </div>
+                            <div id="notification_popup" class="notification_popup">
+                                <h1>Notifications</h1>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
 
-                        <div class="main-top-component">
-                            <p>Admin</p>
-                            <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="">
+                                    </div>
+                                    Request 1232 Has been Cancelled
+                                </div>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
+
+                                    </div>
+                                    Request 1232 Has been Assigned
+                                </div>
+                                <div class="notification">
+                                    <div class="notification-green-dot">
+
+                                    </div>
+                                    Request 1232 Has been Cancelled
+                                </div>
+
+
+                            </div>
+                            <div class="main-right-top-profile">
+                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
+                                <div class="main-right-top-profile-cont">
+                                    <h3>Admin</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-right-top-two">
+                            <h1>Requests</h1>
+                        </div>
+                        <div class="main-right-top-three">
+                            <a href="<?php echo URLROOT?>/Admin/incoming_requests/<?php echo $data['center_region']?>" id="incoming">
+
+                                <div class="main-right-top-three-content" id="current">
+                                    <p>Incoming</p>
+                                    <div class="line"></div>
+                                </div>
+                            </a>
+                            <a href="<?php echo URLROOT?>/Admin/assigned_requests/<?php echo $data['center_region']?>" id="assigned">
+                                <div class="main-right-top-three-content">
+                                    <p>Assigned</p>
+                                    <div class="line"></div>
+                                </div>
+                            </a>
+
+                            <a href="" id="completed">
+                                <div class="main-right-top-three-content">
+                                    <p>Completed</p>
+                                    <div class="line"></div>
+                                </div>
+                            </a>
+                            <a href="<?php echo URLROOT?>/Admin/cancelled_requests/<?php echo $data['center_region']?>" id="cancelled">
+                                <div class="main-right-top-three-content">
+                                    <p>Cancelled</p>
+                                    <div class="line"></div>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                    <div class="main-bottom">
-                        <div class="main-bottom-top">
-                            <div class="main-right-top-two">
-                                <h1>Requests</h1>
-                            </div>
-                            <div class="main-right-top-three">
-                                <a href="<?php echo URLROOT?>/Admin/incoming_requests/<?php echo $data['center_region']?>">
-                                    <div class="main-right-top-three-content">
-                                        <p>Incoming</p>
-                                        <div class="line1"></div>
-                                    </div>
-                                </a>
-                                <a href="">
-                                    <div class="main-right-top-three-content">
-                                        <p><b style="color: #1B6652;">Assigned</b></p>
-                                        <div class="line"></div>
-                                    </div>
-                                </a>
+                    
 
-                                <a href="<?php echo URLROOT?>/admin/center_add">
-                                    <div class="main-right-top-three-content">
-                                        <p>Completed</p>
-                                        <div class="line1"></div>
-                                    </div>
-                                </a>
-
-                                <a href="<?php echo URLROOT?>/Admin/cancelled_requests/<?php echo $data['center_region']?>">
-                                    <div class="main-right-top-three-content">
-                                        <p>Cancelled</p>
-                                        <div class="line1"></div>
-                                    </div>
-                                </a>
-
-                            </div>
+                    <div class="main-right-bottom">
+                        <div class="main-right-bottom-top ">
+                            <table class="table">
+                                <tr class="table-header">
+                                    <th>Req ID</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Customer ID</th>
+                                    <th>Collector ID</th>
+                                    <th>Collector</th>
+                                    <th>Location</th>
+                                    <th>Request details</th>
+                                    
+                                </tr>
+                            </table>
                         </div>
-                        <div class="main-bottom-down">
-                            <div class="main-right-bottom-top ">
-                                <table class="table">
-                                    <tr class="table-header">
-                                        <th>Req ID</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
-                                        <th>Customer ID</th>
-                                        <th>Collector ID</th>
-                                        <th>Collector</th>
-                                        <th>Location</th>
-                                        <th>Request details</th>
-                                       
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="main-right-bottom-down">
-                                <table class="table">
-                                <?php foreach($data['assigned_requests'] as $assigned_requests) : ?>
-                                    <tr class="table-row">
-                                        <td>R<?php echo $assigned_requests->req_id?></td>
-                                        <td><?php echo $assigned_requests->date?></td>
-                                        <td><?php echo $assigned_requests->time?></td>
-                                        <td>C<?php echo $assigned_requests->customer_id?></td>
-                                        <td><?php echo $assigned_requests->collector_id?></td>
-                                        <td>
-                                        <img onclick="" class="collector_img"
-                                            src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $assigned_requests->image?>"
-                                            alt="">
-                                        </td>
-                                        <td><img onclick="viewLocation(<?php echo $assigned_requests->lat; ?>, <?php echo $assigned_requests->longi; ?>)" 
-                                        src="<?php echo IMGROOT?>/location.png" alt="" class="location_icon">
-                                        </td>
-                                        <td>
-                                        <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($assigned_requests), ENT_QUOTES, 'UTF-8') ?>)"
-                                            class="cancel" src="<?php echo IMGROOT ?>/info.png" alt="">
-                                        </td>
-                                    </tr>   
-                                    <?php endforeach; ?>  
-                                            
-                            </div>
+                        <div class="main-right-bottom-down">
+                            <table class="table">
+                            <?php foreach($data['assigned_requests'] as $assigned_requests) : ?>
+                                <tr class="table-row">
+                                    <td>R<?php echo $assigned_requests->req_id?></td>
+                                    <td><?php echo $assigned_requests->date?></td>
+                                    <td><?php echo $assigned_requests->time?></td>
+                                    <td>C<?php echo $assigned_requests->customer_id?></td>
+                                    <td><?php echo $assigned_requests->collector_id?></td>
+                                    <td>
+                                    <img onclick="" class="collector_img"
+                                        src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $assigned_requests->image?>"
+                                        alt="">
+                                    </td>
+                                    <td><img onclick="viewLocation(<?php echo $assigned_requests->lat; ?>, <?php echo $assigned_requests->longi; ?>)" 
+                                    src="<?php echo IMGROOT?>/location.png" alt="" class="location_icon">
+                                    </td>
+                                    <td>
+                                    <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($assigned_requests), ENT_QUOTES, 'UTF-8') ?>)"
+                                        class="cancel" src="<?php echo IMGROOT ?>/info.png" alt="">
+                                    </td>
+                                </tr>   
+                                <?php endforeach; ?>  
+                                        
                         </div>
                     </div>
+                
                     <div class="location_pop">
                         <div class="location_pop_content">
                             <div class="location_pop_map">

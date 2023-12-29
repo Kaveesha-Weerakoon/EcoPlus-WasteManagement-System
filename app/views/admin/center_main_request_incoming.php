@@ -57,7 +57,7 @@
                             <h1>Requests</h1>
                         </div>
                         <div class="main-right-top-three">
-                            <a href="" id="incoming">
+                            <a href="<?php echo URLROOT?>/Admin/incoming_requests/<?php echo $data['center_region']?>" id="incoming">
 
                                 <div class="main-right-top-three-content" id="current">
                                     <p>Incoming</p>
@@ -85,51 +85,6 @@
                             </a>
                         </div>
                     </div>
-                    <!-- <div class="main-top">
-                        <a href="<?php echo URLROOT?>/admin/center_main/<?php echo $data['center']->id?>/<?php echo $data['center']->region?>">
-                            <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
-                        </a>
-
-                        <div class="main-top-component">
-                            <p>Admin</p>
-                            <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="">
-                        </div>
-                    </div>
-                    
-                    <div class="main-bottom-top">
-                        <div class="main-right-top-two">
-                            <h1>Requests</h1>
-                        </div>
-                        <div class="main-right-top-three">
-                            <a href="">
-                                <div class="main-right-top-three-content">
-                                    <p><b style="color: #1B6652;">Incoming</b></p>
-                                    <div class="line"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/Admin/assigned_requests/<?php echo $data['center_region']?>">
-                                <div class="main-right-top-three-content">
-                                    <p>Assigned</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-
-                            <a href="<?php echo URLROOT?>/Admin/cancelled_requests/<?php echo $data['center_region']?>">
-                                <div class="main-right-top-three-content">
-                                    <p>Completed</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-
-                            <a href="<?php echo URLROOT?>/Admin/cancelled_requests/<?php echo $data['center_region']?>">
-                                <div class="main-right-top-three-content">
-                                    <p>Cancelled</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-
-                        </div>
-                    </div> -->
 
                     <div class="main-right-bottom">
                         <div class="main-right-bottom-top ">

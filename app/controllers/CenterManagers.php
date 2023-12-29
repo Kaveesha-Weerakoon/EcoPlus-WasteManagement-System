@@ -10,6 +10,7 @@
       $this->centerworkerModel=$this->model('Center_Worker');      
       $this->Request_Model=$this->model('Request');
       $this->collect_garbage_Model=$this->model('Collect_Garbage');
+      $this->garbage_Model=$this->model('Garbage_Stock');
 
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
@@ -1100,14 +1101,17 @@
   }
 
   public function confirm_garbage_details($req_id){
+    $center = $this->center_model->getCenterById($_SESSION['center_id']);
+    $assigned_request = $this->Request_Model->get_assigned_request($req_id);
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
       $data = [
-        'assigned_requests' => $assinged_Requests,
-        'jsonData' => $jsonData,
         'req_id'=>$req_id,
-        'collector_id' => $collector_id,
+        'center_id'=>$_SESSION['center_id'],
+        'region'=>$center->region,
+        'collector_id'=>$assigned_request->collector_id,
         'polythene_quantity' => trim($_POST['polythene_quantity']),
         'plastic_quantity' => trim($_POST['plastic_quantity']),
         'glass_quantity' => trim($_POST['glass_quantity']),
@@ -1127,6 +1131,52 @@
 
       ];
 
+      $fieldsToCheck = ['polythene_quantity', 'plastic_quantity', 'glass_quantity', 'paper_waste_quantity', 'electronic_waste_quantity', 'metals_quantity'];
+      $atLeastOneFilled = false;
+      $allFieldsValid = true;
+
+      foreach ($fieldsToCheck as $field) {
+        if (!empty($_POST[$field])) {
+            if (!is_numeric($_POST[$field])) {
+                $data["{$field}_err"] = "Please enter a valid number";
+                $allFieldsValid = false;
+            } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST[$field]) !== 1) {
+                $data["{$field}_err"] = "Please enter up to two decimal places.";
+                $allFieldsValid = false;
+            } else {
+                $atLeastOneFilled = true;
+            }
+        }
+      }
+
+      if (!$atLeastOneFilled && $allFieldsValid) {
+        $data['polythene_quantity_err'] = 'Please fill polythene quantity';
+        $data['plastic_quantity_err'] = 'Please fill plastic quantity';
+        $data['glass_quantity_err'] = 'Please fill glass quantity';
+        $data['paper_waste_quantity_err'] = 'Please fill paper_waste quantity';
+        $data['electronic_waste_quantity_err'] = 'Please fill electronic_waste quantity';
+        $data['metals_quantity_err'] = 'Please fill metals quantity';
+        
+      }
+
+      if(empty($_POST['note'])){
+        $data['note_err'] = 'Please fill in the Note field';
+      }
+
+      if ($atLeastOneFilled && empty($data['note_err']) && $allFieldsValid) {
+        if($this->garbage_Model->garbage_details_confirm($data)){
+          die('success');
+          // $data['update_success']='True';       
+          $this->view('center_managers/request_completed',$data);
+        } else {
+          die('Something went wrong');
+        }
+
+      }else{
+        $this->view('center_managers/request_completed', $data);
+      }
+
+
 
 
 
@@ -1136,6 +1186,7 @@
       $completed_request = $this->collect_garbage_Model->get_completed_request_byreqId($req_id);
 
       $data =[
+        'req_id'=>$req_id,
         'completed_requests'=>$completed_requests,
         'polythene_quantity'=>$completed_request->Polythene,
         'plastic_quantity'=>$completed_request->Plastic,
@@ -1149,7 +1200,8 @@
         'glass_quantity_err'=>'',
         'paper_waste_quantity_err'=>'',
         'electronic_waste_quantity_err'=>'',
-        'metals_quantity_err'=>''
+        'metals_quantity_err'=>'',
+        'note_err'=>''
 
 
       ];

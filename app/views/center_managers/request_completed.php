@@ -178,9 +178,7 @@
                         <div class="confirm-garbage-popup-form" id="popup">
                             <div class="form-container">
                                 <div class="form-title">Garbage Details</div>
-                                <form id="myForm"
-                                    action=""
-                                    class="main-right-bottom-content" method="post">
+                                <form action="<?php echo URLROOT;?>/centermanagers/confirm_garbage_details/<?php echo $data['req_id'];?>" class="main-right-bottom-content" method="post">
                                     <div class="user-details">
                                         <div class="left-details">
                                             <div class="main-right-bottom-content-content">
@@ -190,9 +188,9 @@
                                                     <input name="polythene_quantity" type="text"
                                                         placeholder="Enter Quantity in Kg"
                                                         value="<?php echo $data['polythene_quantity']?>">
-                                                    <!-- <div class="error-div" style="color:red">
+                                                    <div class="error-div" style="color:red">
                                                         <?php echo $data['polythene_quantity_err']?>
-                                                    </div> -->
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="main-right-bottom-content-content">
@@ -202,9 +200,9 @@
                                                     <input name="plastic_quantity" type="text"
                                                         placeholder="Enter Quantity in Kg"
                                                         value="<?php echo $data['plastic_quantity']?>">
-                                                    <!-- <div class="error-div" style="color:red">
+                                                    <div class="error-div" style="color:red">
                                                         <?php echo $data['plastic_quantity_err']?>
-                                                    </div> -->
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="main-right-bottom-content-content">
@@ -214,9 +212,9 @@
                                                     <input name="glass_quantity" type="text"
                                                         placeholder="Enter Quantity in Kg"
                                                         value="<?php echo $data['glass_quantity']?>">
-                                                    <!-- <div class="error-div" style="color:red">
+                                                    <div class="error-div" style="color:red">
                                                         <?php echo $data['glass_quantity_err']?>
-                                                    </div> -->
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -228,9 +226,9 @@
                                                     <input name="paper_waste_quantity" type="text"
                                                         placeholder="Enter Quantity in Kg"
                                                         value="<?php echo $data['paper_waste_quantity']?>">
-                                                    <!-- <div class="error-div" style="color:red">
+                                                    <div class="error-div" style="color:red">
                                                         <?php echo $data['paper_waste_quantity_err']?>
-                                                    </div> -->
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="main-right-bottom-content-content">
@@ -240,9 +238,9 @@
                                                     <input name="electronic_waste_quantity" type="text"
                                                         placeholder="Enter Quantity in Kg"
                                                         value="<?php echo $data['electronic_waste_quantity']?>">
-                                                    <!-- <div class="error-div" style="color:red">
+                                                    <div class="error-div" style="color:red">
                                                         <?php echo $data['electronic_waste_quantity_err']?>
-                                                    </div> -->
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="main-right-bottom-content-content">
@@ -252,9 +250,9 @@
                                                     <input name="metals_quantity" type="text"
                                                         placeholder="Enter Quantity in Kg"
                                                         value="<?php echo $data['metals_quantity']?>">
-                                                    <!-- <div class="error-div" style="color:red">
+                                                    <div class="error-div" style="color:red">
                                                         <?php echo $data['metals_quantity_err']?>
-                                                    </div> -->
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -265,9 +263,9 @@
                                                     <i class="icon fas fa-sticky-note"></i>
                                                     <input name="note" class="note-input" type="text"
                                                         placeholder="Enter Note" value="">
-                                                    <!-- <div class="error-div" style="color:red">
+                                                    <div class="error-div" style="color:red">
                                                         <?php echo $data['note_err']?>
-                                                    </div> -->
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

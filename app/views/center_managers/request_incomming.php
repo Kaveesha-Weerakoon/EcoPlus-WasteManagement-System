@@ -6,8 +6,8 @@
                 defer></script>
 
             <div class="main">
-
-                <div class="main-left">
+                <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
+                <!-- <div class="main-left">
                     <div class="main-left-top">
                         <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
                         <h1>Eco Plus</h1>
@@ -51,9 +51,12 @@
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> -->
+
                 <div class="main-right">
-                    <div class="main-right-top">
+
+                    <?php require APPROOT . '/views/center_managers/centermanager_requests/requests_top_bar.php'; ?>
+                    <!-- <div class="main-right-top">
                         <div class="main-right-top-one">
                             <div class="main-right-top-one-search">
                                 <img src="<?php echo IMGROOT?>/Search.png" alt="">
@@ -82,7 +85,7 @@
                                     <div class="line1"></div>
                                 </div>
                             </a>
-                            <a href="">
+                            <a href="<?php echo URLROOT?>/centermanagers/request_completed">
                                 <div class="main-right-top-three-content">
                                     <p>Completed</p>
                                     <div class="line1"></div>
@@ -115,7 +118,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+                    
                     <?php if(!empty($data['incoming_requests'])) : ?>
                     <div class="main-right-bottom" id="main-right-bottom">
                         <div class="main-right-bottom-top">

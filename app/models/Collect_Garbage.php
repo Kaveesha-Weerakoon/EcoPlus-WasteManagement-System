@@ -53,8 +53,6 @@
       return $results;
   }
   
-
-   
     public function insert($data){
       try{
       $this->db->query('INSERT INTO request_completed (req_id, Polythene, Plastic, Glass, Paper_Waste, Electronic_Waste, Metals, credit_amount, note, added) VALUES (:req_id, :Polythene, :Plastic, :Glass, :Paper_Waste, :Electronic_Waste, :Metals, :credit_amount, :note, :added)');
@@ -88,11 +86,37 @@
         }
       }catch (PDOException $e) {
         return false;
+    } 
     }
 
-      
-      
-  }
+    public function get_completed_requests_bycenter($region){
+      $this->db->query('
+          SELECT request_main.*, request_completed.*,request_assigned.*,
+          users.name AS name,
+          collectors.user_id AS collector_id, 
+          request_main.req_id AS request_id,
+          request_main.name AS customer_name,
+          collectors.image AS collector_image,
+          collectors.contact_no AS collector_contact_no,
+          collectors.vehicle_no AS collector_vehicle_no,
+          collectors.vehicle_type AS collector_vehicle_type
+          FROM request_main
+          LEFT JOIN request_completed ON request_main.req_id = request_completed.req_id
+          LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
+          LEFT JOIN collectors  ON request_assigned.collector_id = collectors.user_id
+          LEFT JOIN users ON collectors.user_id=users.id
+          WHERE request_main.region = :region
+          AND request_main.type = "completed"
+      ');
+  
+      $this->db->bind(':region', $region);
+  
+      $result = $this->db->resultSet();
+  
+      return $result;
+
+
+    }
 
   
 }

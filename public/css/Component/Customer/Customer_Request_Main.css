@@ -402,8 +402,8 @@
     }
 
     .personal-details-popup-form-close {
-        width: 30px;
-        height: 23px;
+        /* width: 30px;
+        height: 23px; */
         position: absolute;
         top: 10px;
         right: 10px;
@@ -424,7 +424,7 @@
 
     .personal-details-right {
         display: grid;
-        grid-template-columns: 30% 70%;
+        grid-template-columns: 35% 65%;
     }
 
     .personal-details-right-labels {

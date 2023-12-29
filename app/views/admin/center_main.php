@@ -3,7 +3,8 @@
   <div class="Admin_Center_Main">
     <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initMap" async defer></script>
    <div class="main">
-      <div class="main-left">
+      <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
+      <!-- <div class="main-left">
           <div class="main-left-top">
               <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
               <h1>Eco Plus</h1>
@@ -45,7 +46,7 @@
                   <p>Log out</p>
               </div>
           </div>
-      </div>
+      </div> -->
 
       <div class="main-right">
           <div class="main-top">
@@ -259,7 +260,7 @@
                 ?>
             </select>
             <button type="submit">Change Center Manager</button>
-            <a href="<?php echo URLROOT?>/admin/center_main/<?php echo $data['center']->id?>"><button type="button" class="cancel">Cancel</button></a>
+            <a href="<?php echo URLROOT?>/admin/center_main/<?php echo $data['center']->id?>/<?php echo $data['center']->region?>"><button type="button" class="cancel">Cancel</button></a>
         </form>
     </div>
    </div>

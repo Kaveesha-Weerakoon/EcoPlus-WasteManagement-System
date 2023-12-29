@@ -248,4 +248,16 @@
       return $total_requests;
 
     }
+
+    public function get_total_requests_by_customer($customer_id){
+      try {
+          $this->db->query('SELECT * FROM request_main WHERE customer_id= :customer_id');
+          $this->db->bind(':customer_id', $customer_id);
+          $rows = $this->db->resultSet();
+    
+          return $rows;
+      } catch (PDOException $e) {
+          return false;
+      }
+  }
 }

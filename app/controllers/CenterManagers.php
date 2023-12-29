@@ -9,6 +9,7 @@
       $this->centermanagerModel=$this->model('Center_Manager');
       $this->centerworkerModel=$this->model('Center_Worker');      
       $this->Request_Model=$this->model('Request');
+      $this->collect_garbage_Model=$this->model('Collect_Garbage');
 
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
@@ -713,7 +714,7 @@
         $data=[
           'name'=>trim($_POST['name']),
          'userid'=>'',
-         'email'=>'',
+         'email'=>trim($_POST['email']),
          'profile_image_name' => $_SESSION['center_manager_email'].'_'.$_FILES['profile_image']['name'],
          'contactno'=>trim($_POST['contactno']),
          'address'=>trim($_POST['address']),
@@ -802,6 +803,7 @@
         $user=$this->centermanagerModel->getCenterManagerByID($id);
         $data['name']=$_SESSION['center_manager_name'];
         $data['contactno']=$user->contact_no;
+        $data['email']=$_SESSION['center_manager_email'];
         $data['address']=$user->address;
        
         $this->view('/center_managers/editprofile', $data);
@@ -1085,8 +1087,17 @@
     }
    }
 
-
+  public function request_completed(){
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $completed_requests = $this->collect_garbage_Model->get_completed_requests_bycenter($center->region);
+    $data=[
+      'completed_requests'=>$completed_requests
+    ];
+    $this->view('center_managers/request_completed', $data);
 
   }
+
+  }
+
 
 ?>

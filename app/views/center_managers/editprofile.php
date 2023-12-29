@@ -2,56 +2,50 @@
 <div class="CenterManager_Main">
      <div class="CenterManager_EditProfile">
      <div class="main" >
-            <div class="main-left" style="background: #8CF889;">
-                <div class="main-left-top">
-                    <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
-                    <h1>Eco Plus</h1>
-                </div>
+            <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
 
-                <div class="main-left-middle">
-                <a href="<?php echo URLROOT?>/collectors/index">
-                        <div class="main-left-middle-content">
-                            <div class="main-left-middle-content-line1"></div>
-                            <img src="<?php echo IMGROOT?>/Home.png" alt="">
-                            <h2>Dashboard</h2>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div class="main-left-middle-content ">
-                            <div class="main-left-middle-content-line1"></div>
-                            <img src="<?php echo IMGROOT?>/Request.png" alt="">
-                            <h2>Requests</h2>
-                        </div>
-                    </a>
-                    <a href="<?php echo URLROOT?>/collectors/collector_assistants">
-                        <div class="main-left-middle-content Collector">
-                            <div class="main-left-middle-content-line1"></div>
-                            <img src="<?php echo IMGROOT?>/Center.png" alt="">
-                            <h2>Center Waste Management</h2>
-                        </div>
-                    </a>
-                    <a href="<?php echo URLROOT?>/centermanagers/editprofile">
-                        <div class="main-left-middle-content  current">
-                            <div class="main-left-middle-content-line"></div>
-                            <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">
-                            <h2>Edit Profile</h2>
-                        </div>
-                    </a>
-
-                </div>             
-                <div class="main-left-bottom">
-                  <a href="<?php echo URLROOT?>/collectors/logout">
-                    <div class="main-left-bottom-content">
-                        <img src="<?php echo IMGROOT?>/logout.png" alt="">
-                        <p>Log out</p>
-                    </div>
-                  </a>
-                </div>
-            </div>
             <div class="main-right">
-            <div class="main-right-top">
-                    <p><?php echo $_SESSION['center_manager_name']?></p>
-                    <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>" alt="">
+                <div class="main-right-top">
+                    <div class="main-right-top-search">
+                        <i class='bx bx-search-alt-2'></i>
+                        <input type="text" id="searchInput" placeholder="Search">
+                    </div>
+                    <div class="main-right-top-notification" id="notification">
+                        <i class='bx bx-bell'></i>
+                        <div class="dot"></div>
+                    </div>
+                    <div id="notification_popup" class="notification_popup">
+                        <h1>Notifications</h1>
+                        <div class="notification">
+                            <div class="notification-green-dot">
+
+                            </div>
+                            Request 1232 Has been Cancelled
+                        </div>
+                        <div class="notification">
+                            <div class="notification-green-dot">
+
+                            </div>
+                            Request 1232 Has been Assigned
+                        </div>
+                        <div class="notification">
+                            <div class="notification-green-dot">
+
+                            </div>
+                            Request 1232 Has been Cancelled
+                        </div>
+
+
+                    </div>
+                    <div class="main-right-top-profile">
+                        <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
+                            alt="">
+                        <div class="main-right-top-profile-cont">
+                            <h3><?php echo $_SESSION['center_manager_name']?></h3>
+                            <p>ID : C <?php echo $_SESSION['center_manager_id']?></p>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="main-right-bottom">
                     <div class="main-right-bottom-content" >
@@ -72,6 +66,12 @@
                                     <h3>Name :</h3>
                                     <input name="name" type="text" value="<?php echo $data['name']?>">
                                     <div class="err"><?php echo $data['name_err']?></div>
+                                </div>
+                                <div class="edit-profile-content">
+                                    <h3>Email </h3>
+                                    <input name="email" type="text" value="<?php echo $data['email']?>" readonly>
+                                    <div class="err"></div>
+
                                 </div>
                                 <div class="edit-profile-content">
                                     <h3>Address :</h3>

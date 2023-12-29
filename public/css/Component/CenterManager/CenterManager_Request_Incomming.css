@@ -10,6 +10,15 @@
 
     }
 
+    #incoming p {
+        color: var(--green-color-two);
+        font-weight: bold;
+    }
+
+    #incoming .line {
+        background-color: var(--green-color-two);
+    }
+
     .main-right-bottom {
         flex-direction: column;
         height: 550px;
@@ -55,6 +64,25 @@
     }
 
     .table-row {
+        height: 55px;
+        grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
+      }
+    
+      .table td {
+        height: 55px;
+      }
+    
+      .table-header {
+        grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
+      }
+    
+      td img {
+        margin: 7px;
+        height: 25px;
+        width: 25px;
+      }
+
+    /* .table-row {
         font-size: 1px;
         font-family: Montserrat;
         text-align: center;
@@ -86,7 +114,7 @@
 
     td img {
         margin: 7px;
-    }
+    } */
 
     .Location {
         display: flex;

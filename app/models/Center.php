@@ -82,6 +82,15 @@
       }
     }
 
+    public function getCenterByRegion($region){
+      $this->db->query('SELECT * FROM center WHERE region = :region');
+      $this->db->bind(':region', $region);
+      
+      $result = $this->db->single();
+      return $result;
+
+    }
+
     public function changeCentermanager($centerid,$center_manager,$assigning_manager_name){
 
       $sql = 'UPDATE center SET center_manager_id = :newManagerId, center_manager_name = :newManagerName WHERE id = :centerId';

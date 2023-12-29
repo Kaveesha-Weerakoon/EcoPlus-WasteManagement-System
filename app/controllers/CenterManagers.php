@@ -1091,9 +1091,73 @@
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $completed_requests = $this->collect_garbage_Model->get_completed_requests_bycenter($center->region);
     $data=[
-      'completed_requests'=>$completed_requests
+      'completed_requests'=>$completed_requests,
+      'confirm_popup'=> ''
+      
     ];
     $this->view('center_managers/request_completed', $data);
+
+  }
+
+  public function confirm_garbage_details($req_id){
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+        'assigned_requests' => $assinged_Requests,
+        'jsonData' => $jsonData,
+        'req_id'=>$req_id,
+        'collector_id' => $collector_id,
+        'polythene_quantity' => trim($_POST['polythene_quantity']),
+        'plastic_quantity' => trim($_POST['plastic_quantity']),
+        'glass_quantity' => trim($_POST['glass_quantity']),
+        'paper_waste_quantity' => trim($_POST['paper_waste_quantity']),
+        'electronic_waste_quantity' => trim($_POST['electronic_waste_quantity']),
+        'metals_quantity' => trim($_POST['metals_quantity']),
+        'note' => trim($_POST['note']),
+        'confirm_popup' => 'True',
+        'polythene_quantity_err'=>'',
+        'plastic_quantity_err'=>'',
+        'glass_quantity_err'=>'',
+        'paper_waste_quantity_err'=>'',
+        'electronic_waste_quantity_err'=>'',
+        'metals_quantity_err'=>'',
+        'note_err'=>'',
+      
+
+      ];
+
+
+
+
+    }else{
+      $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+      $completed_requests = $this->collect_garbage_Model->get_completed_requests_bycenter($center->region);
+      $completed_request = $this->collect_garbage_Model->get_completed_request_byreqId($req_id);
+
+      $data =[
+        'completed_requests'=>$completed_requests,
+        'polythene_quantity'=>$completed_request->Polythene,
+        'plastic_quantity'=>$completed_request->Plastic,
+        'glass_quantity' => $completed_request->Glass,
+        'paper_waste_quantity' => $completed_request->Paper_Waste,
+        'electronic_waste_quantity' => $completed_request->Electronic_Waste,
+        'metals_quantity' => $completed_request->Metals,
+        'confirm_popup' => 'True',
+        'polythene_quantity_err'=>'',
+        'plastic_quantity_err'=>'',
+        'glass_quantity_err'=>'',
+        'paper_waste_quantity_err'=>'',
+        'electronic_waste_quantity_err'=>'',
+        'metals_quantity_err'=>''
+
+
+      ];
+
+
+      $this->view('center_managers/request_completed', $data);
+
+    }
 
   }
 

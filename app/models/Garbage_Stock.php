@@ -96,5 +96,9 @@
 
     }
 
+    public function get_confirmed_requests_by_centerId($center_id){
+      $this->db->query('SELECT * FROM ');
+    }
+
 
 }  

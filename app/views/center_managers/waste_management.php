@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="CenterManager_Main">
-    <div class="CenterManger_CenterWorker">
+    <div class="CenterManager_Waste_Management">
         <div class="main">
             <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
             <div class="main-right">
@@ -45,12 +45,12 @@
                         </div>
                     </div>
                     <div class="main-right-top-two">
-                        <h1>Center Workers</h1>
+                        <h1>Center Waste Management</h1>
                     </div>
                     <div class="main-right-top-three">
                         <a href="<?php echo URLROOT?>/centermanagers/center_workers">
                             <div class="main-right-top-three-content">
-                                <p><b style="color:#1ca557;">View</b></p>
+                                <p><b style="color:#1ca557;">Confirmed Garbage</b></p>
                                 <div class="line" style="background-color: #1ca557;"></div>
                             </div>
                         </a>

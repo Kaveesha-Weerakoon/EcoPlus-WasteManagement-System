@@ -1215,6 +1215,11 @@
 
   }
 
+  public function waste_management(){
+    redirect('centermanagers/waste_management');
+
+  }
+
   }
 
 

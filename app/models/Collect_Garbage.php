@@ -118,5 +118,15 @@
 
     }
 
+    public function get_completed_request_byreqId($req_id){
+      $this->db->query('SELECT * FROM request_completed WHERE req_id = :req_id');
+      $this->db->bind(':req_id', $req_id);
+      $result = $this->db->single();
+
+      return $result;
+
+    }
+
+
   
 }

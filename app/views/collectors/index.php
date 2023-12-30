@@ -422,6 +422,21 @@
                 console.log('as');
                 </script> -->
                 <script>
+
+                var color = "#47b076";
+                var textColor = "#414143"
+
+                var credit_per_waste_quantity = document.getElementById("credit_per_waste_quantity");
+
+                document.getElementById("credit_per_waste_quantity").addEventListener("click", function() {
+                     document.getElementById("eco_credit_per_quantiy_pop").classList.add('active');
+                     document.getElementById('overlay').style.display = "flex";
+                 });
+
+                 document.getElementById("close_eco_credit_per_quantiy_pop").addEventListener("click", function() {
+                     document.getElementById("eco_credit_per_quantiy_pop").classList.remove('active');
+                     document.getElementById('overlay').style.display = "none";
+                 });
                 function redirectToAssignedRequests() {
                     console.log('as');
                     var linkUrl = "<?php echo URLROOT?>/collectors/request_assinged"; // Replace with your desired URL

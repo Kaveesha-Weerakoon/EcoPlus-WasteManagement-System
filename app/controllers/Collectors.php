@@ -19,12 +19,17 @@
     }
     
     public function index(){
-      $credit= $this->creditModel->get();
-      $data = [
-        'title' => 'TraversyMVC',
-        'eco_credit_per'=>$credit
-      ];
      
+      $credit= $this->creditModel->get();
+   
+
+      $data = [
+        
+        'eco_credit_per'=>$credit,
+       
+        'pop'=>'',
+         
+        ];
       $this->view('collectors/index', $data);
     }
     

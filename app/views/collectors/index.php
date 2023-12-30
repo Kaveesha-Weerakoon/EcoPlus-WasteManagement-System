@@ -203,10 +203,10 @@ let speed = 30;
 console.log(progressEndValue);
 
 function redirect_assignedrequests() {
-    console.log("Redirect function called!");
     var linkUrl = "<?php echo URLROOT?>/collectors/request_assinged";
     window.location.href = linkUrl;
 }
+
 
 function redirect_complains() {
     var linkUrl = "<?php echo URLROOT?>/collectors/complains";

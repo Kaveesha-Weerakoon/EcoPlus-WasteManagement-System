@@ -413,6 +413,22 @@
         margin-top: 15px;
     }
 
+    .confirm_button {
+        padding: 7px;
+        background-color: #f6e58d;
+        color: var(--main-text-color);
+        border-radius: 5px;
+        box-shadow: var(--box-shadow);
+        outline: none;
+        border: none;
+        cursor: pointer;
+
+    }
+
+    .confirm_button:hover {
+        background-color: #ddce7f;
+    }
+
     .confirmed_button {
         padding: 7px;
         background-color: var(--green-color-one);

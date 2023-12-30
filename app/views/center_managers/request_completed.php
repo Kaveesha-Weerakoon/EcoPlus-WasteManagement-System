@@ -24,7 +24,7 @@
                                     <th>Location</th>
                                     <th>Earned credits</th>
                                     <th>Collection details</th>
-                                    <th>Confirmed</th>
+                                    <th>Confirmation</th>
                                 </tr>
                             </table>
                         </div>
@@ -52,7 +52,7 @@
                                             onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
                                             src="<?php echo IMGROOT?>/view.png" alt="">
                                     </td>
-                                    <td><a href="<?php echo URLROOT?>/centermanagers/confirm_garbage_details/<?php echo $request->req_id?>"><button class="confirmed_button">Confirmed</button></a></td>
+                                    <td><a href="<?php echo URLROOT?>/centermanagers/confirm_garbage_details/<?php echo $request->req_id?>"><button class="confirm_button">Confirm</button></a></td>
 
 
 

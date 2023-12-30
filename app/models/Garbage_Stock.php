@@ -13,9 +13,9 @@
         $result1=$this->db->execute();
 
         if($result1){
-          $insertQuery1 = 'INSERT INTO garbage_confirmed (req_id, collector_id, plastic, ploythene, metal, glass, paper, electronic, note)
+          $insertQuery = 'INSERT INTO garbage_confirmed (req_id, collector_id, plastic, polythene, metals, glass, paper_waste, electronic_waste, note)
                           VALUES (:req_id, :col_id, :plastic, :polythene, :metal, :glass, :paper, :electronic, :note)';
-          $this->db->query($insertQuery1);
+          $this->db->query($insertQuery);
           $this->db->bind(':req_id', $data['req_id']);
           $this->db->bind(':col_id', $data['collector_id']);
           $this->db->bind(':plastic', $data['plastic_quantity']);
@@ -29,13 +29,24 @@
           $result2=$this->db->execute();
 
           if($result2){
-            $insertQuery2 = 'INSERT INTO center_garbage (center_id, region, current_plastic, total_plastic, current_polythene, total_polythene, current_metal, total_metal,
-                            current_glass, total_glass, current_paper, total_paper, current_electronic, total_electronic )
-                            VALUES (:center_id, :region, :cur_plastic, :tot_plastic, :cur_polythene, :tot_polythene, :cur_metal, :tot_metal,
-                                    :cur_glass, :tot_glass, :cur_paper, :tot_paper, :cur_electronic, :tot_electronic )';
-            $this->db->query($insertQuery2);
-            $this->db->bind(':center_id', $data['center_id']);
-            $this->db->bind(':region', $data['region']);
+            $updateQuery = 'UPDATE center_garbage
+                            SET
+                              current_plastic = :cur_plastic,
+                              total_plastic = :tot_plastic,
+                              current_polythene = :cur_polythene,
+                              total_polythene = :tot_polythene,
+                              current_metal = :cur_metal,
+                              total_metal = :tot_metal,
+                              current_glass = :cur_glass,
+                              total_glass = :tot_glass,
+                              current_paper = :cur_paper,
+                              total_paper = :tot_paper,
+                              current_electronic = :cur_electronic,
+                              total_electronic = :tot_electronic
+                            WHERE
+                              center_id = :center_id;';
+
+            $this->db->query($updateQuery);
             $this->db->bind(':cur_plastic', $data['plastic_quantity']);
             $this->db->bind(':tot_plastic', $data['plastic_quantity']);
             $this->db->bind(':cur_polythene', $data['polythene_quantity']);
@@ -48,6 +59,7 @@
             $this->db->bind(':tot_paper', $data['paper_waste_quantity']);
             $this->db->bind(':cur_electronic', $data['electronic_waste_quantity']);
             $this->db->bind(':tot_electronic', $data['electronic_waste_quantity']);
+            $this->db->bind(':center_id', $data['center_id']);
 
             $result3=$this->db->execute();
 
@@ -69,7 +81,8 @@
 
         
       } catch (PDOException $e) {
-          return false;
+        echo 'Error: ' . $e->getMessage();
+        return false;
       }
 
     }

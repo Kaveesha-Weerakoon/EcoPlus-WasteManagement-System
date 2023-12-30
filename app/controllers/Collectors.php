@@ -267,8 +267,8 @@
       ];
 
         $id=$_SESSION['collector_id']; 
-        $user=$this->collectorModel->get_collectors($id);
-        $data['contact_no'] = $user['contact_no'];
+        $user=$this->collectorModel->get_collector($id);
+        $data['contact_no']=$user->contact_no;
         $data['name'] =$_SESSION['collector_name'];
         $this->view('collectors/complains', $data);
       }

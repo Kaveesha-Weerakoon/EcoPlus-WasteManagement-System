@@ -52,10 +52,16 @@
                                             onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
                                             src="<?php echo IMGROOT?>/view.png" alt="">
                                     </td>
-                                    <td><a href="<?php echo URLROOT?>/centermanagers/confirm_garbage_details/<?php echo $request->req_id?>"><button class="confirm_button">Confirm</button></a></td>
-
-
-
+                                    <!-- <td><a href="<?php echo URLROOT?>/centermanagers/confirm_garbage_details/<?php echo $request->req_id?>"><button class="confirm_button">Confirm</button></a></td> -->
+                                   
+                                    <td>
+                                        <?php
+                                        $type = ($request->added === 'no') ?
+                                            '<a href="' . URLROOT . '/centermanagers/confirm_garbage_details/' . $request->req_id . '"><button class="confirm_button">Confirm</button></a>' :
+                                            '<button class="confirmed_button" disabled>Confirmed</button>';
+                                        echo $type;
+                                        ?>
+                                    </td>
                                 </tr>
                                 <?php endforeach; ?>
 
@@ -281,6 +287,17 @@
                         </div>
                     </div>
                 <?php endif; ?>
+                
+                <?php if($data['confirm_success']=='True') : ?>
+                <div class="request_success">
+                    <div class="popup" id="popup">
+                        <img src="<?php echo IMGROOT?>/check.png" alt="">
+                        <h2>Success!!</h2>
+                        <p>Garbage details updated successfully</p>
+                        <a href="<?php echo URLROOT?>/centermanagers/request_completed"><button type="button">OK</button></a>
+                    </div>
+                </div>
+                <?php endif; ?>
 
             </div>
         </div>
@@ -321,6 +338,7 @@ function view_collect_details(request) {
 //     // document.getElementById('cancel_confirm').classList.add('active');
 //     document.getElementById('confirm-garbage-popup-box').style.display = "flex";
 // }
+
 
 function initMap(latitude = 7.4, longitude = 81.00000000) {
     var mapCenter = {

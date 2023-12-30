@@ -31,18 +31,18 @@
           if($result2){
             $updateQuery = 'UPDATE center_garbage
                             SET
-                              current_plastic = :cur_plastic,
-                              total_plastic = :tot_plastic,
-                              current_polythene = :cur_polythene,
-                              total_polythene = :tot_polythene,
-                              current_metal = :cur_metal,
-                              total_metal = :tot_metal,
-                              current_glass = :cur_glass,
-                              total_glass = :tot_glass,
-                              current_paper = :cur_paper,
-                              total_paper = :tot_paper,
-                              current_electronic = :cur_electronic,
-                              total_electronic = :tot_electronic
+                              current_plastic = current_plastic + :cur_plastic,
+                              total_plastic = total_plastic + :tot_plastic,
+                              current_polythene = current_polythene + :cur_polythene,
+                              total_polythene = total_polythene + :tot_polythene,
+                              current_metal = current_metal+ :cur_metal,
+                              total_metal = total_metal + :tot_metal,
+                              current_glass = current_glass + :cur_glass,
+                              total_glass = total_glass+ :tot_glass,
+                              current_paper = current_paper + :cur_paper,
+                              total_paper = total_paper + :tot_paper,
+                              current_electronic = current_electronic + :cur_electronic,
+                              total_electronic = total_electronic + :tot_electronic
                             WHERE
                               center_id = :center_id;';
 
@@ -86,5 +86,15 @@
       }
 
     }
+
+    public function get_center_garbage_details($center_id){
+      $this->db->query('SELECT * FROM center_garbage WHERE center_id = :center_id');
+      $this->db->bind(':center_id', $center_id);
+      $result = $this->db->resultSet();
+  
+      return $result;
+
+    }
+
 
 }  

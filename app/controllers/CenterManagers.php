@@ -1093,7 +1093,8 @@
     $completed_requests = $this->collect_garbage_Model->get_completed_requests_bycenter($center->region);
     $data=[
       'completed_requests'=>$completed_requests,
-      'confirm_popup'=> ''
+      'confirm_popup'=> '',
+      'confirm_success'=> ''
       
     ];
     $this->view('center_managers/request_completed', $data);
@@ -1103,6 +1104,8 @@
   public function confirm_garbage_details($req_id){
     $center = $this->center_model->getCenterById($_SESSION['center_id']);
     $assigned_request = $this->Request_Model->get_assigned_request($req_id);
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $completed_requests = $this->collect_garbage_Model->get_completed_requests_bycenter($center->region);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1112,6 +1115,7 @@
         'center_id'=>$_SESSION['center_id'],
         'region'=>$center->region,
         'collector_id'=>$assigned_request->collector_id,
+        'completed_requests'=>$completed_requests,
         'polythene_quantity' => trim($_POST['polythene_quantity']),
         'plastic_quantity' => trim($_POST['plastic_quantity']),
         'glass_quantity' => trim($_POST['glass_quantity']),
@@ -1164,9 +1168,9 @@
       }
 
       if ($atLeastOneFilled && empty($data['note_err']) && $allFieldsValid) {
-        if($this->garbage_Model->garbage_details_confirm($data)){
-          die('success');
-          // $data['update_success']='True';       
+        
+        if($this->garbage_Model->garbage_details_confirm($data)){ 
+          $data['confirm_success'] = 'True';
           $this->view('center_managers/request_completed',$data);
         } else {
           die('Something went wrong');
@@ -1175,9 +1179,6 @@
       }else{
         $this->view('center_managers/request_completed', $data);
       }
-
-
-
 
 
     }else{
@@ -1195,6 +1196,7 @@
         'electronic_waste_quantity' => $completed_request->Electronic_Waste,
         'metals_quantity' => $completed_request->Metals,
         'confirm_popup' => 'True',
+        'confirm_success'=> '',
         'polythene_quantity_err'=>'',
         'plastic_quantity_err'=>'',
         'glass_quantity_err'=>'',

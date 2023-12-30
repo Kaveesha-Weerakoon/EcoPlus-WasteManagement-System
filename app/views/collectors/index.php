@@ -56,14 +56,15 @@
                                 <h1>Total Balance</h1>
                                 <h3>+Eco 26.23 </h3>
                                 <p>Last Update</p>
-                                <button onclick="redirect_AssignedRequests()">Transfer Credit</button>
+                                <button onclick="redirect_assignedrequests()">AssignedRequests</button>
+
 
                             </div>
 
-                            <div class="right">
+                            <!--<div class="right">
                                 <h1>Eco<span class="main-credit"> <?php echo $data['credit_balance']?></span> </h1>
                                 <h3>WALLET AMOUNT</h3>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="main-right-bottom-one-right">
 
@@ -179,9 +180,6 @@
             </div>
             <div class="overlay" id="overlay">
 
-            </div>
-            <script src="CustomerDashboard.js"></script>
-        </div>
 
     </div>
 
@@ -204,7 +202,8 @@ let progressEndValue = <?php echo intval($data['percentage']); ?>;
 let speed = 30;
 console.log(progressEndValue);
 
-function redirect_AssignedRequests() {
+function redirect_assignedrequests() {
+    console.log("Redirect function called!");
     var linkUrl = "<?php echo URLROOT?>/collectors/request_assinged";
     window.location.href = linkUrl;
 }

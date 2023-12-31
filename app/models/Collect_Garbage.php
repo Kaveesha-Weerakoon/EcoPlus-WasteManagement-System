@@ -118,5 +118,40 @@
 
     }
 
+    public function updateGarbageTotals($req_id) {
+      try {
+          $this->db->query('SELECT * FROM request_completed WHERE req_id = :req_id');
+          $this->db->bind(':req_id', $req_id);
+          $completedRequest = $this->db->single();
+
+          $this->db->query('SELECT customer_id FROM request_main WHERE req_id = :req_id');
+          $this->db->bind(':req_id', $req_id);
+          $customer_id = $this->db->single()->customer_id;
+
+          $this->db->query('UPDATE customer_total_garbage 
+                            SET total_Polythene = total_Polythene + :polythene,
+                                total_Plastic = total_Plastic + :plastic,
+                                total_Metals = total_Metals + :metals,
+                                total_Glass = total_Glass + :glass,
+                                total_Paper_Waste = total_Paper_Waste + :paper,
+                                total_Electronic_Waste = total_Electronic_Waste + :electronic
+                            WHERE user_id = :customer_id');
+
+          $this->db->bind(':polythene', $completedRequest->Polythene);
+          $this->db->bind(':plastic', $completedRequest->Plastic);
+          $this->db->bind(':metals', $completedRequest->Metals);
+          $this->db->bind(':glass', $completedRequest->Glass);
+          $this->db->bind(':paper', $completedRequest->Paper_Waste);
+          $this->db->bind(':electronic', $completedRequest->Electronic_Waste);
+          $this->db->bind(':customer_id', $customer_id);
+
+          
+          $this->db->execute();
+
+          return true;
+      } catch (PDOException $e) {
+          return false; 
+      }
   
+}
 }

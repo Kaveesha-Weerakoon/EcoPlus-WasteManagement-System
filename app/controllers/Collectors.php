@@ -894,10 +894,11 @@
 
           // Update the customer credit balance in the database
           $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
+          $updatedGarbageTotals = $this->Collect_Garbage_Model->updateGarbageTotals($req_id);
 
-
-          if ($inserted && $update_result ) {
+          if ($inserted && $update_result && $updatedGarbageTotals ) {
               $this->request_completed();
+
           } else {
             $data['popup']='';
             $this->view('collectors/request_assinged', $data);
@@ -938,6 +939,12 @@
         ];
         $this->view('collectors/request_assinged', $data);
       } 
+}
+
+public function displayCustomerTotalGarbage() {
+  $customerGarbageData = $this->Collect_Garbage_Model->getCustomerTotalGarbage();
+  $data['customerGarbageData'] = $customerGarbageData;
+  $this->view('customer_total_garbage_view', $data);
 }
 
 

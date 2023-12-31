@@ -207,7 +207,7 @@
     .main-right-top-three {
         display: flex;
         flex-direction: row;
-        padding-left: 34px;
+        padding-left: 38px;
         margin: 0.6%;
         background-color: var(--background-color-right);
     }
@@ -217,7 +217,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-right: 15px;
+        margin-right: 25px;
         cursor: pointer;
     }
 
@@ -233,105 +233,94 @@
         height: 3px;
     }
 
-
-    .main-right-bottom-down {
-        padding-left: 3.5%;
-        width: 96.5%;
-        height: 450px;
-        overflow: scroll;
-    }
-
-    .main-right-bottom-top {
-        padding-left: 3.5%;
-        width: 96.5%;
-    }
-
-    .logout_anchor {
-        width: auto;
-    }
-
-    .table-header {
-        grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 20% ;
-    }
-
-    .table-row {
-        height: 52px;
+    .main-right-bottom{
         display: grid;
-        grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 20% ;
+        grid-template-rows: 80% 20%;
     }
 
-    .table td {
-        height: 55px;
-    }
-
-    td img {
-        margin: 6px;
-    }
-
-    .table-row img {
-        width: 25px;
-        height: 25px;
-        cursor: pointer;
-    }
-
-    /*Empty table UI*/
-    .main-right-bottom-two {
+    .main-right-bottom-top{
         display: flex;
         align-items: center;
         justify-content: center;
+        /* border: 1px solid blue; */
+    }
+
+    .main-right-bottom-top-box{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+        /* border: 1px solid red; */
 
     }
 
-    .main-right-bottom-two-content {
-        width: 55%;
-        height: 95%;
+    .box-content{
+        
         display: flex;
-        flex-direction: column;
         align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: white;
+        box-shadow: var(--box-shadow);
+        border-radius: 7px;
+        width: 150px;
+        height: 150px;
+        padding: 10px;
+        
+    }
+
+    .box-content:hover{
+        background-color: #e6e6e6;
+    }
+
+    .box-content i{
+        font-size: 30px;
+        margin-bottom: 14px;
+    }
+
+    .box-content p{
+        font-size: 16px;
+        margin-bottom: 7px;
 
     }
 
-
-    .main-right-bottom-two-content img {
-        width: 450px;
-        height: 450px;
-
-    }
-
-    .main-right-bottom-two-content h1 {
+    .box-content span{
         font-size: 23px;
-        color: #333;
         font-weight: 550;
+
     }
 
-    .main-right-bottom-two-content p {
-        font-size: 18px;
-        margin-top: 7px;
-        color: #7c7c7d;
+
+    .main-right-bottom-down{
+        display: flex;
+        align-items: start;
+        justify-content: center;
+        /* border: 1px solid green; */
     }
 
-    .main-right-bottom-two-content button {
-        height: 42px;
-        width: 200px;
+    .release-button {
+    
+        width: 200px; 
         outline: none;
         color: white;
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 500;
         border-radius: 5px;
         cursor: pointer;
         border: none;
         letter-spacing: 1px;
-        background: #1B6652;
+        background: var(--green-color-one);
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-        margin-bottom: 20px;
-        margin-top: 20px;
+        padding: 10px;
+       
+
+    }
+
+    .release-button:hover {
+        background: #19954e;
     }
 
 
-    .main-right-bottom-two-content button:hover {
-        background: rgb(28, 79, 64);
-    }
-
+   
 
     @media screen and (max-width: 1178px) {
         .image2 {
@@ -362,24 +351,6 @@
 
         }
 
-        .table td {
-
-            font-size: 12px;
-
-        }
-
-        .table-header {
-            font-size: 14px;
-        }
-
-        .table-row img {
-            width: 20px;
-            height: 20px;
-
-        }
-
-
-
     }
 
     @media screen and (max-width:862px) {
@@ -406,50 +377,9 @@
 
         }
 
-        .table td {
-
-            font-size: 10px;
-
-        }
-
-        .table-header {
-            font-size: 12px;
-        }
-
-        .table-row img {
-            width: 17px;
-            height: 17px;
-
-        }
-
 
     }
 
-    @media screen and (max-width: 692px) {
-
-
-        .table td {
-
-            font-size: 9px;
-
-        }
-
-        .table-header {
-            font-size: 10px;
-        }
-
-        .table-row img {
-            width: 15px;
-            height: 15px;
-
-        }
-
-        .main-right-bottom {
-            width: 140%;
-        }
-
-
-
-    }
+   
 
 }

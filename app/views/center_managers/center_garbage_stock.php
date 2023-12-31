@@ -71,6 +71,47 @@
                 </div>
 
                 <div class="main-right-bottom">
+                    <div class="main-right-bottom-top">
+                        <div class="main-right-bottom-top-box">
+                            <div class="box-content">
+                                <i class="icon fas fa-trash"></i>
+                                <p>Polythene</p>
+                                <span>2 <small> kg</small></span>
+                            </div>
+                            <div class="box-content">
+                                <i class="icon fas fa-box"></i>
+                                <p>Plastics</p>
+                                <span>3 <small> kg</small></span>
+                            </div>
+                            <div class="box-content">
+                                <i class="icon fas fa-glass-whiskey"></i>
+                                <p>Glass</p>
+                                <span>4 <small> kg</small></span>
+                            </div>
+                            <div class="box-content">
+                                <i class="icon fas fa-file-alt"></i>
+                                <p>Paper Waste</p>
+                                <span>6 <small> kg</small></span>
+                            </div>
+                            <div class="box-content">
+                                <i class="icon fas fa-laptop"></i>
+                                <p>Electronic Waste</p>
+                                <span>9 <small> kg</small></span>
+                            </div>
+                            <div class="box-content">
+                                <i class="icon fas fa-box"></i>
+                                <p>Metals</p>
+                                <span>7 <small> kg</small></span>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="main-right-bottom-down">
+                        <a href=""><button class="release-button">Release Stock</button></a>
+                    </div>
+
                     
                 </div>
                 
@@ -82,6 +123,9 @@
 
     </div>
 </div>
+<script>
+
+</script>
 
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

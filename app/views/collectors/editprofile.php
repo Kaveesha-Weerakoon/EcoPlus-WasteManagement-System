@@ -2,7 +2,7 @@
 <div class="Collector_Main">
     <div class="Collector_Editprofile">
         <div class="main">
-            <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
+          <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
             <div class="main-right">
                 <div class="main-right-top">
                     <div class="main-right-top-search">

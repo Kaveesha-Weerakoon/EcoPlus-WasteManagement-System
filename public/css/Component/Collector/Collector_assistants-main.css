@@ -274,7 +274,7 @@
         background: rgb(28, 79, 64);
     }
 
-    /* 
+    
     .delete_confirm {
         position: fixed;
         top: 0;
@@ -357,7 +357,7 @@
         border-radius: 4px;
         cursor: pointer;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-    } */
+    } 
 
     .main-right-bottom-down {
         padding-left: 3.5%;

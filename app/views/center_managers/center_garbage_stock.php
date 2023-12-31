@@ -109,7 +109,7 @@
 
                     </div>
                     <div class="main-right-bottom-down">
-                        <a href=""><button class="release-button">Release Stocks</button></a>
+                        <a href="<?php echo URLROOT?>/centermanagers/release_stocks"><button class="release-button">Release Stocks</button></a>
                     </div>
 
                     
@@ -118,47 +118,48 @@
             </div>
         </div>
 
+        <?php if($data['release_popup']=='True') : ?>
         <div class="garbage-release-popup-box" id="garbage-release-popup-box">
             <div class="garbage-release-popup-form" id="popup">
                 <div class="form-container">
                     <div class="form-title">Release Stocks</div>
-                    <form action="" class="main-right-bottom-content" method="post">
+                    <form action="<?php echo URLROOT?>/centermanagers/release_stocks" class="main-right-bottom-content" method="post">
                         <div class="user-details">
                             <div class="left-details">
                                 <div class="main-right-bottom-content-content">
                                     <span class="details">Polythene</span>
                                     <div class="input-container">
                                         <i class="icon fas fa-trash"></i>
-                                        <input name="polythene_quantity" type="text"
+                                        <input name="polythene" type="text"
                                             placeholder="Enter Quantity in Kg"
                                             value="">
-                                        <!-- <div class="error-div" style="color:red">
-                                            <?php echo $data['polythene_quantity_err']?>
-                                        </div> -->
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['polythene_err']?>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="main-right-bottom-content-content">
                                     <span class="details">Plastic</span>
                                     <div class="input-container">
                                         <i class="icon fas fa-box"></i>
-                                        <input name="plastic_quantity" type="text"
+                                        <input name="plastic" type="text"
                                             placeholder="Enter Quantity in Kg"
                                             value="">
-                                        <!-- <div class="error-div" style="color:red">
-                                            <?php echo $data['plastic_quantity_err']?>
-                                        </div> -->
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['plastic_err']?>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="main-right-bottom-content-content">
                                     <span class="details">Glass</span>
                                     <div class="input-container">
                                         <i class="icon fas fa-glass-whiskey"></i>
-                                        <input name="glass_quantity" type="text"
+                                        <input name="glass" type="text"
                                             placeholder="Enter Quantity in Kg"
                                             value="">
-                                        <!-- <div class="error-div" style="color:red">
-                                            <?php echo $data['glass_quantity_err']?>
-                                        </div> -->
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['glass_err']?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -167,36 +168,36 @@
                                     <span class="details">Paper Waste</span>
                                     <div class="input-container">
                                         <i class="icon fas fa-file-alt"></i>
-                                        <input name="paper_waste_quantity" type="text"
+                                        <input name="paper_waste" type="text"
                                             placeholder="Enter Quantity in Kg"
                                             value="">
-                                        <!-- <div class="error-div" style="color:red">
-                                            <?php echo $data['paper_waste_quantity_err']?>
-                                        </div> -->
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['paper_waste_err']?>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="main-right-bottom-content-content">
                                     <span class="details">Electronic Waste</span>
                                     <div class="input-container">
                                         <i class="icon fas fa-laptop"></i>
-                                        <input name="electronic_waste_quantity" type="text"
+                                        <input name="electronic_waste" type="text"
                                             placeholder="Enter Quantity in Kg"
                                             value="">
-                                        <!-- <div class="error-div" style="color:red">
-                                            <?php echo $data['electronic_waste_quantity_err']?>
-                                        </div> -->
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['electronic_waste_err']?>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="main-right-bottom-content-content">
                                     <span class="details">Metals</span>
                                     <div class="input-container">
                                         <i class="icon fas fa-box"></i>
-                                        <input name="metals_quantity" type="text"
+                                        <input name="metals" type="text"
                                             placeholder="Enter Quantity in Kg"
                                             value="">
-                                        <!-- <div class="error-div" style="color:red">
-                                            <?php echo $data['metals_quantity_err']?>
-                                        </div> -->
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['metals_err']?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -205,22 +206,22 @@
                                     <span class="details">Released Person</span>
                                     <div class="input-container">
                                         <i class="icon fas fa-sticky-note"></i>
-                                        <input name="note" class="note-input" type="text"
+                                        <input name="released_person" class="note-input" type="text"
                                             placeholder="Enter Released Person" value="">
-                                        <!-- <div class="error-div" style="color:red">
-                                            <?php echo $data['note_err']?>
-                                        </div> -->
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['released_person_err']?>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="main-right-bottom-content-content A">
-                                    <span class="details">Center Manager Note</span>
+                                    <span class="details">Release Note</span>
                                     <div class="input-container">
                                         <i class="icon fas fa-sticky-note"></i>
-                                        <input name="note" class="note-input" type="text"
+                                        <input name="relaese_note" class="note-input" type="text"
                                             placeholder="Enter Note" value="">
-                                        <!-- <div class="error-div" style="color:red">
-                                            <?php echo $data['note_err']?>
-                                        </div> -->
+                                        <div class="error-div" style="color:red">
+                                            <?php echo $data['release_note_err']?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -235,6 +236,7 @@
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
     </div>
 </div>

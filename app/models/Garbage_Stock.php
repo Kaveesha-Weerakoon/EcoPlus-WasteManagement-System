@@ -111,8 +111,14 @@
       $this->db->query('SELECT * FROM center_garbage WHERE center_id = :center_id');
       $this->db->bind(':center_id', $center_id);
       $result = $this->db->single();
-      
+
       return $result;
+
+    }
+
+    public function release_garbage_stocks(){
+      $this->db->query('INSERT INTO released_stocks (center_id, plastic, polythene, metals, glass, paper_waste, electronic_waste, released_person, release_note)
+                        VALUES (:center_id, :plastic, :polythene, :metals, :glass, :paper_waste, :electronic_waste, :released_person, :release_note)');
 
     }
 

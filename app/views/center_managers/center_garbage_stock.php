@@ -50,19 +50,19 @@
                     <div class="main-right-top-three">
                         <a href="<?php echo URLROOT?>/centermanagers/waste_management">
                             <div class="main-right-top-three-content">
-                                <p>Confirmed Garbage</p>
+                                <p>Waste Handover</p>
                                 <div class="line"></div>
                             </div>
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/center_garbage_stock">
                             <div class="main-right-top-three-content">
-                                <p><b style="color:#1ca557;">Center Garbage Stock</b></p>
+                                <p><b style="color:#1ca557;">Garbage Stock</b></p>
                                 <div class="line" style="background-color: #1ca557;"></div>
                             </div>
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/center_workers_add">
                             <div class="main-right-top-three-content">
-                                <p>Stock Relaese Details</p>
+                                <p>Stock Relaeses</p>
                                 <div class="line"></div>
                             </div>
                         </a>
@@ -76,32 +76,32 @@
                             <div class="box-content">
                                 <i class="icon fas fa-trash"></i>
                                 <p>Polythene</p>
-                                <span>2 <small> kg</small></span>
+                                <span><?php echo $data['current_polythene']?> <small> kg</small></span>
                             </div>
                             <div class="box-content">
                                 <i class="icon fas fa-box"></i>
                                 <p>Plastics</p>
-                                <span>3 <small> kg</small></span>
+                                <span><?php echo $data['current_plastic']?> <small> kg</small></span>
                             </div>
                             <div class="box-content">
                                 <i class="icon fas fa-glass-whiskey"></i>
                                 <p>Glass</p>
-                                <span>4 <small> kg</small></span>
+                                <span><?php echo $data['current_glass']?> <small> kg</small></span>
                             </div>
                             <div class="box-content">
                                 <i class="icon fas fa-file-alt"></i>
                                 <p>Paper Waste</p>
-                                <span>6 <small> kg</small></span>
+                                <span><?php echo $data['current_paper_waste']?> <small> kg</small></span>
                             </div>
                             <div class="box-content">
                                 <i class="icon fas fa-laptop"></i>
                                 <p>Electronic Waste</p>
-                                <span>9 <small> kg</small></span>
+                                <span><?php echo $data['current_electronic_waste']?> <small> kg</small></span>
                             </div>
                             <div class="box-content">
                                 <i class="icon fas fa-box"></i>
                                 <p>Metals</p>
-                                <span>7 <small> kg</small></span>
+                                <span><?php echo $data['current_metals']?> <small> kg</small></span>
                             </div>
 
                         </div>
@@ -109,15 +109,130 @@
 
                     </div>
                     <div class="main-right-bottom-down">
-                        <a href=""><button class="release-button">Release Stock</button></a>
+                        <a href=""><button class="release-button">Release Stocks</button></a>
                     </div>
 
                     
                 </div>
-                
 
-                
-        
+            </div>
+        </div>
+
+        <div class="garbage-release-popup-box" id="garbage-release-popup-box">
+            <div class="garbage-release-popup-form" id="popup">
+                <div class="form-container">
+                    <div class="form-title">Release Stocks</div>
+                    <form action="" class="main-right-bottom-content" method="post">
+                        <div class="user-details">
+                            <div class="left-details">
+                                <div class="main-right-bottom-content-content">
+                                    <span class="details">Polythene</span>
+                                    <div class="input-container">
+                                        <i class="icon fas fa-trash"></i>
+                                        <input name="polythene_quantity" type="text"
+                                            placeholder="Enter Quantity in Kg"
+                                            value="">
+                                        <!-- <div class="error-div" style="color:red">
+                                            <?php echo $data['polythene_quantity_err']?>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="main-right-bottom-content-content">
+                                    <span class="details">Plastic</span>
+                                    <div class="input-container">
+                                        <i class="icon fas fa-box"></i>
+                                        <input name="plastic_quantity" type="text"
+                                            placeholder="Enter Quantity in Kg"
+                                            value="">
+                                        <!-- <div class="error-div" style="color:red">
+                                            <?php echo $data['plastic_quantity_err']?>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="main-right-bottom-content-content">
+                                    <span class="details">Glass</span>
+                                    <div class="input-container">
+                                        <i class="icon fas fa-glass-whiskey"></i>
+                                        <input name="glass_quantity" type="text"
+                                            placeholder="Enter Quantity in Kg"
+                                            value="">
+                                        <!-- <div class="error-div" style="color:red">
+                                            <?php echo $data['glass_quantity_err']?>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right-details">
+                                <div class="main-right-bottom-content-content">
+                                    <span class="details">Paper Waste</span>
+                                    <div class="input-container">
+                                        <i class="icon fas fa-file-alt"></i>
+                                        <input name="paper_waste_quantity" type="text"
+                                            placeholder="Enter Quantity in Kg"
+                                            value="">
+                                        <!-- <div class="error-div" style="color:red">
+                                            <?php echo $data['paper_waste_quantity_err']?>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="main-right-bottom-content-content">
+                                    <span class="details">Electronic Waste</span>
+                                    <div class="input-container">
+                                        <i class="icon fas fa-laptop"></i>
+                                        <input name="electronic_waste_quantity" type="text"
+                                            placeholder="Enter Quantity in Kg"
+                                            value="">
+                                        <!-- <div class="error-div" style="color:red">
+                                            <?php echo $data['electronic_waste_quantity_err']?>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="main-right-bottom-content-content">
+                                    <span class="details">Metals</span>
+                                    <div class="input-container">
+                                        <i class="icon fas fa-box"></i>
+                                        <input name="metals_quantity" type="text"
+                                            placeholder="Enter Quantity in Kg"
+                                            value="">
+                                        <!-- <div class="error-div" style="color:red">
+                                            <?php echo $data['metals_quantity_err']?>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wide-note">
+                                <div class="main-right-bottom-content-content A">
+                                    <span class="details">Released Person</span>
+                                    <div class="input-container">
+                                        <i class="icon fas fa-sticky-note"></i>
+                                        <input name="note" class="note-input" type="text"
+                                            placeholder="Enter Released Person" value="">
+                                        <!-- <div class="error-div" style="color:red">
+                                            <?php echo $data['note_err']?>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="main-right-bottom-content-content A">
+                                    <span class="details">Center Manager Note</span>
+                                    <div class="input-container">
+                                        <i class="icon fas fa-sticky-note"></i>
+                                        <input name="note" class="note-input" type="text"
+                                            placeholder="Enter Note" value="">
+                                        <!-- <div class="error-div" style="color:red">
+                                            <?php echo $data['note_err']?>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-button">
+                            <button type="submit">Release</button>
+                            <a href="<?php echo URLROOT?>/centermanagers/center_garbage_stock"><button type="button"
+                                    class="cancel-button">Cancel</button></a>
+                        </div>
+                        
+                    </form>
+                </div>
             </div>
         </div>
 

@@ -284,7 +284,7 @@
     }
 
     .box-content span{
-        font-size: 23px;
+        font-size: 18px;
         font-weight: 550;
 
     }
@@ -318,9 +318,6 @@
     .release-button:hover {
         background: #19954e;
     }
-
-
-   
 
     @media screen and (max-width: 1178px) {
         .image2 {
@@ -379,6 +376,203 @@
 
 
     }
+
+     /*Garbage release popup*/
+     .garbage-release-popup-box {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    
+    
+    
+    .garbage-release-popup-box {
+        .garbage-release-popup-form {
+          width: 45%;
+          background: white;
+          border-radius: 6px;
+          position: relative;
+          text-align: center;
+          padding: 40px;
+          color: #333;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          transition: transform 0.4s, top 0.4s;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    
+        .form-title {
+          font-size: 25px;
+          font-weight: 500;
+          position: relative;
+          margin-bottom: 20px;
+        }
+    
+        .form-title::before {
+          content: '';
+          position: absolute;
+          height: 4px;
+          width: 60px;
+          background: #1B6652;
+          margin-top: 33px;
+          margin-bottom: 5px;
+        }
+    
+        .form-container {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+        }
+    
+        .user-details {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+    
+        }
+    
+        .main-right-bottom-content-content {
+          width: 300px;
+          /* margin-bottom: 20px; */
+          position: relative;
+        }
+    
+        .details {
+          display: block;
+          font-weight: 500;
+          margin-bottom: 5px;
+          text-align: left;
+    
+        }
+    
+        .input-container {
+          position: relative;
+          margin-bottom: 20px;
+        }
+    
+        .wide-note {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-bottom: 10px;
+        }
+    
+        .wide-note .main-right-bottom-content-content {
+          width: calc(100% - 4px);
+        }
+    
+        .note-input {
+          width: 100%;
+          height: 200px;
+          padding-left: 20px;
+          padding-right: 2px;
+        }
+    
+        .icon {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 10px;
+          color: #555;
+        }
+    
+        .error-div {
+          color: red;
+          font-size: 0.8em;
+          margin-top: 4px;
+          margin-bottom: 4px;
+          text-align: left;
+          position: absolute;
+          bottom: -20px;
+          left: 0;
+        }
+    
+        .main-right-bottom-content-content input {
+          height: 45px;
+          width: 90%;
+          outline: none;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          padding-left: 35px;
+          font-size: 16px;
+          transition: all 0.3s ease;
+        }
+    
+        .main-right-bottom-content-content input:focus {
+          border-color: #4dccaa;
+        }
+    
+        .wide-note input {
+          width: 96%;
+        }
+    
+        .form-button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 50px;
+        }
+    
+        .a {
+          height: auto !important;
+        }
+    
+        .form-button button[type="submit"] {
+          height: 50px;
+          outline: none;
+          width: 260px;
+          color: white;
+          font-size: 18px;
+          font-weight: 500;
+          border-radius: 5px;
+          cursor: pointer;
+          border: none;
+          letter-spacing: 1px;
+          background: #1B6652;
+          padding: 0 20px;
+        }
+    
+        .form-button button[type="submit"]:hover {
+          background: rgb(28, 79, 64);
+        }
+    
+        .cancel-button {
+          width: 230px;
+          height: 50px;
+          outline: none;
+          color: #333;
+          font-size: 18px;
+          font-weight: 500;
+          border-radius: 5px;
+          cursor: pointer;
+          border: none;
+          letter-spacing: 1px;
+          background: #ccc;
+          padding: 0 15px;
+          margin-left: 45px;
+    
+        }
+    
+        .cancel-button:hover {
+          background: #ddd;
+        }
+    
+      }
 
    
 

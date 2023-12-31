@@ -1229,11 +1229,16 @@
 
   public function center_garbage_stock(){
 
-    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
-    $confirmed_requests = $this->garbage_Model->get_confirmed_requests_by_region($center->region);
+    $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
 
     $data =[
-      'confirmed_requests'=>$confirmed_requests,
+      'current_polythene'=>$current_quantities->current_polythene,
+      'current_plastic'=>$current_quantities->current_plastic,
+      'current_glass'=>$current_quantities->current_glass,
+      'current_paper_waste'=>$current_quantities->current_paper,
+      'current_electronic_waste'=>$current_quantities->current_electronic,
+      'current_metals'=>$current_quantities->current_metal
+
     ];
 
     $this->view('center_managers/center_garbage_stock', $data);

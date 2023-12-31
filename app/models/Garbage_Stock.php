@@ -107,5 +107,14 @@
       return $result;
     }
 
+    public function get_current_quantities_of_garbage($center_id){
+      $this->db->query('SELECT * FROM center_garbage WHERE center_id = :center_id');
+      $this->db->bind(':center_id', $center_id);
+      $result = $this->db->single();
+      
+      return $result;
+
+    }
+
 
 }  

@@ -96,8 +96,15 @@
 
     }
 
-    public function get_confirmed_requests_by_centerId($center_id){
-      $this->db->query('SELECT * FROM ');
+    public function get_confirmed_requests_by_region($region){
+      $this->db->query('SELECT garbage_confirmed.* 
+                        FROM garbage_confirmed
+                        LEFT JOIN request_main ON garbage_confirmed.req_id = request_main.req_id
+                        WHERE request_main.region = :region');
+      $this->db->bind(':region', $region);
+      $result = $this->db->resultSet();
+  
+      return $result;
     }
 
 

@@ -19,12 +19,17 @@
     }
     
     public function index(){
-      $credit= $this->creditModel->get();
-      $data = [
-        'title' => 'TraversyMVC',
-        'eco_credit_per'=>$credit
-      ];
      
+      $credit= $this->creditModel->get();
+   
+
+      $data = [
+        
+        'eco_credit_per'=>$credit,
+       
+        'pop'=>'',
+         
+        ];
       $this->view('collectors/index', $data);
     }
     
@@ -246,7 +251,7 @@
               $this->view('collectors/complains', $data);         
         }
       }
-      else
+      else{
       $data =[
         'name' => '',
         'contact_no' => '',
@@ -259,7 +264,12 @@
         'subject_err' => '' ,
         'complain_err' => ''  ,
         'completed'=>''      
-      ];{
+      ];
+
+        $id=$_SESSION['collector_id']; 
+        $user=$this->collectorModel->get_collector($id);
+        $data['contact_no']=$user->contact_no;
+        $data['name'] =$_SESSION['collector_name'];
         $this->view('collectors/complains', $data);
       }
      
@@ -884,10 +894,11 @@
 
           // Update the customer credit balance in the database
           $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
+          $updatedGarbageTotals = $this->Collect_Garbage_Model->updateGarbageTotals($req_id);
 
-
-          if ($inserted && $update_result ) {
+          if ($inserted && $update_result && $updatedGarbageTotals ) {
               $this->request_completed();
+
           } else {
             $data['popup']='';
             $this->view('collectors/request_assinged', $data);
@@ -928,6 +939,12 @@
         ];
         $this->view('collectors/request_assinged', $data);
       } 
+}
+
+public function displayCustomerTotalGarbage() {
+  $customerGarbageData = $this->Collect_Garbage_Model->getCustomerTotalGarbage();
+  $data['customerGarbageData'] = $customerGarbageData;
+  $this->view('customer_total_garbage_view', $data);
 }
 
 

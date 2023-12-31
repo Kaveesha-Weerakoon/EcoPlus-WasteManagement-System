@@ -60,7 +60,7 @@
 
 <script>
 function redirect_dashboard() {
-    var linkUrl = "<?php echo URLROOT?>/collectors/index"; // Replace with your desired URL
+    var linkUrl = "<?php echo URLROOT?>/collectors"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
 

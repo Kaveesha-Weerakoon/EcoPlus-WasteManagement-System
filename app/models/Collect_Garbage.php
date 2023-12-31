@@ -165,4 +165,14 @@
     }
 
 
+
+    public function getGarbageDetailsForCustomer($customer_id) {
+      $this->db->query('SELECT * FROM customer_total_garbage WHERE user_id = :customer_id');
+      $this->db->bind(':customer_id', $customer_id);
+      $result = $this->db->single();
+
+      return $result;
+  }
+
+
 }

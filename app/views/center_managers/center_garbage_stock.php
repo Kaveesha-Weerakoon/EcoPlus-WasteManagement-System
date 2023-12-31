@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="CenterManager_Main">
-    <div class="CenterManager_Waste_Management">
+    <div class="CenterManager_Center_Garbage_Stock">
         <div class="main">
             <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
             <div class="main-right">
@@ -50,14 +50,14 @@
                     <div class="main-right-top-three">
                         <a href="<?php echo URLROOT?>/centermanagers/waste_management">
                             <div class="main-right-top-three-content">
-                                <p><b style="color:#1ca557;">Confirmed Garbage</b></p>
-                                <div class="line" style="background-color: #1ca557;"></div>
+                                <p>Confirmed Garbage</p>
+                                <div class="line"></div>
                             </div>
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/center_garbage_stock">
                             <div class="main-right-top-three-content">
-                                <p>Center Garbage Stock</p>
-                                <div class="line"></div>
+                                <p><b style="color:#1ca557;">Center Garbage Stock</b></p>
+                                <div class="line" style="background-color: #1ca557;"></div>
                             </div>
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/center_workers_add">
@@ -70,55 +70,10 @@
                     </div>
                 </div>
 
-                
-                <?php if(!empty($data['confirmed_requests'])) : ?>
                 <div class="main-right-bottom">
-                    <div class="main-right-bottom-top">
-                        <table class="table">
-                            <tr class="table-header">
-                                <th>Req id</th>
-                                <th>Collector id</th>
-                                <th>Plastic</th>
-                                <th>Polythene</th>
-                                <th>Metals</th>
-                                <th>Glass</th>
-                                <th>Paper waste</th>
-                                <th>Electronic waste</th>
-                                <th>Center Manager Note</th>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="main-right-bottom-down">
-                        <table class="table">
-                            <?php foreach($data['confirmed_requests'] as $request) : ?>
-                            <tr class="table-row">
-                                <td> <?php echo $request->req_id?></td>
-                                <td><?php echo $request->collector_id?></td>
-                                <td><?php echo $request->plastic?></td>
-                                <td> <?php echo $request->polythene?></td>
-                                <td> <?php echo $request->metals?></td>
-                                <td> <?php echo $request->glass?></td>
-                                <td> <?php echo $request->paper_waste?></td>
-                                <td> <?php echo $request->electronic_waste?></td>
-                                <td> <?php echo $request->note?></td>
-                                
-                            </tr>
-                            <?php endforeach; ?>
-
-                        </table>
-                    </div>
+                    
                 </div>
-                <?php else: ?>
-                <div class="main-right-bottom-two">
-                    <div class="main-right-bottom-two-content">
-                        <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
-                        <h1>There are no confirmed requests</h1>
-                        <p>All the requests confirmed bu the center manager will appear here</p>
-                        
-
-                    </div>
-                </div>
-                <?php endif; ?>
+                
 
                 
         

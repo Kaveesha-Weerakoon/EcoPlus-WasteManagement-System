@@ -1227,6 +1227,19 @@
 
   }
 
+  public function center_garbage_stock(){
+
+    // $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    // $confirmed_requests = $this->garbage_Model->get_confirmed_requests_by_region($center->region);
+
+    // $data =[
+    //   'confirmed_requests'=>$confirmed_requests,
+    // ];
+
+    // $this->view('center_managers/center_garbage_stock', $data);
+
+  }
+
   }
 
 

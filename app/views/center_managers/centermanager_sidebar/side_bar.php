@@ -19,7 +19,7 @@
         </div>
         <div class="main-left-middle-content" onclick="redirect_waste_management()" id="waste_management">
             <div class=" main-left-middle-content-icon">
-                <i class='bx bx-timer'></i>
+                <i class='bx bx-trash' ></i>
             </div>
             <h3>Center Waste Management</h3>
         </div>

@@ -13,7 +13,7 @@
         </div>
         <div class="main-left-middle-content"  id=" reports">
             <div class=" main-left-middle-content-icon">
-                <i class='bx bx-right-arrow-circle'></i>
+                <i class='bx bxs-report'></i>
             </div>
             <h3>Reports</h3>
         </div>

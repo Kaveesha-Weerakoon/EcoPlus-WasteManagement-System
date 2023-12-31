@@ -6,7 +6,54 @@
            
 
             <div class="main-right">
-                <div class="main-top">
+                <div class="main-right-top">
+                    <a href="<?php echo URLROOT?>/admin/center_main/<?php echo $data['center']->id?>/<?php echo $data['center']->region?>">
+                    <div class="main-right-top-back-button">
+                        <i class='bx bxs-chevrons-left'></i>
+                    </div>
+                    </a>
+                    <div class="main-right-top-search">
+                        <i class='bx bx-search-alt-2'></i>
+                        <input type="text" placeholder="Search">
+                    </div>
+                    <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
+                        <i class='bx bx-bell'></i>
+                        <div class="dot"></div>
+                    </div>
+                    <div id="notification_popup" class="notification_popup">
+                        <h1>Notifications</h1>
+                        <div class="notification">
+                            <div class="notification-green-dot">
+
+                            </div>
+                            Request 1232 Has been Cancelled
+                        </div>
+                        <div class="notification">
+                            <div class="notification-green-dot">
+
+                            </div>
+                            Request 1232 Has been Assigned
+                        </div>
+                        <div class="notification">
+                            <div class="notification-green-dot">
+
+                            </div>
+                            Request 1232 Has been Cancelled
+                        </div>
+
+
+                    </div>
+                    <div class="main-right-top-profile">
+                        <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
+                        <div class="main-right-top-profile-cont">
+                            <h3>Admin</h3>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+                <!-- <div class="main-top">
                     <a href="<?php echo URLROOT?>/admin/center_main/<?php echo $data['center']->id?>/<?php echo $data['center']->region?>">
                         <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
                     </a>
@@ -16,59 +63,63 @@
                         <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="">
                     </div>
                 </div>
-                <div class="main-bottom">
-                    <div class="main-bottom-top">
-                        <div class="main-right-top-two">
-                            <h1>Collectors</h1>
-                        </div>
+               
+                <div class="main-bottom-top">
+                    <div class="main-right-top-two">
+                        <h1>Collectors</h1>
                     </div>
-                    <?php if(!empty($data['collectors_in_center'])) : ?>
-                    <div class="main-bottom-down">
-                        <div class="main-right-bottom-top ">
-                            <table class="table">
-                                <tr class="table-header">
-                                    <th>Collector ID</th>
-                                    <th>Profile Pic</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Personal details</th>
-                                    <th>Vehicle details</th>
-                                    <th>Collector Assitants</th>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="main-right-bottom-down">
-                            <table class="table">
-                            <?php foreach($data['collectors_in_center'] as $collector) : ?>
-                                <tr class="table-row">
-                                    <td>C<?php echo $collector->id?></td>
-                                    <td class="collector_image"><img
-                                        src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>" alt=""></td>
-                                    <td><?php echo $collector->name?></td>
-                                    <td><?php echo $collector->email?></td>
-                                    <td><img onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                     src="<?php echo IMGROOT?>/personal_details_icon.png" alt=""></td>
-                                    <td><img onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                     src="<?php echo IMGROOT?>/car.png" alt=""></td>
-                                    <td><img onclick="opencolAssistantsdetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                     src="<?php echo IMGROOT?>/collector_assistants.png" alt=""></td>
-                                </tr>   
-                                <?php endforeach; ?>  
-                            </table>            
-                        </div>
+                </div> -->
 
+                <?php if(!empty($data['collectors_in_center'])) : ?>
+                <div class="main-right-bottom">
+                    <div class="main-right-top-two">
+                        <h1>Collectors</h1>
                     </div>
-                    <?php else: ?>
-                        <div class="main-right-bottom-two">
-                            <div class="main-right-bottom-two-content">
-                                <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
-                                <h1>There are no collectors in the center</h1>
-                                <p>All the collectors will appear here</p>
-                            </div>
-                        </div>
-                    <?php endif; ?>
+                    <div class="main-right-bottom-top ">
+                        <table class="table">
+                            <tr class="table-header">
+                                <th>Collector ID</th>
+                                <th>Profile Pic</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Personal details</th>
+                                <th>Vehicle details</th>
+                                <th>Collector Assitants</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="main-right-bottom-down">
+                        <table class="table">
+                        <?php foreach($data['collectors_in_center'] as $collector) : ?>
+                            <tr class="table-row">
+                                <td>C<?php echo $collector->id?></td>
+                                <td><img
+                                    src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>" alt="" class="collector_img"></td>
+                                <td><?php echo $collector->name?></td>
+                                <td><?php echo $collector->email?></td>
+                                <td><img onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                    src="<?php echo IMGROOT?>/personal_details_icon.png" alt=""></td>
+                                <td><img onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                    src="<?php echo IMGROOT?>/car.png" alt=""></td>
+                                <td><img onclick="opencolAssistantsdetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                    src="<?php echo IMGROOT?>/collector_assistants.png" alt=""></td>
+                            </tr>   
+                            <?php endforeach; ?>  
+                        </table>            
+                    </div>
 
                 </div>
+                <?php else: ?>
+                    <div class="main-right-bottom-two">
+                        <div class="main-right-bottom-two-content">
+                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                            <h1>There are no collectors in the center</h1>
+                            <p>All the collectors will appear here</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+            
 
             </div>
 

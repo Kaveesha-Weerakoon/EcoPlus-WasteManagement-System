@@ -24,7 +24,7 @@
                                     <th>Location</th>
                                     <th>Earned credits</th>
                                     <th>Collection details</th>
-                                    <th>Confirmed</th>
+                                    <th>Confirmation</th>
                                 </tr>
                             </table>
                         </div>
@@ -52,10 +52,16 @@
                                             onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
                                             src="<?php echo IMGROOT?>/view.png" alt="">
                                     </td>
-                                    <td><button class="confirmed_button">Confirmed</button></td>
-
-
-
+                                    <!-- <td><a href="<?php echo URLROOT?>/centermanagers/confirm_garbage_details/<?php echo $request->req_id?>"><button class="confirm_button">Confirm</button></a></td> -->
+                                   
+                                    <td>
+                                        <?php
+                                        $type = ($request->added === 'no') ?
+                                            '<a href="' . URLROOT . '/centermanagers/confirm_garbage_details/' . $request->req_id . '"><button class="confirm_button">Confirm</button></a>' :
+                                            '<button class="confirmed_button" disabled>Confirmed</button>';
+                                        echo $type;
+                                        ?>
+                                    </td>
                                 </tr>
                                 <?php endforeach; ?>
 
@@ -172,6 +178,126 @@
                         </div>
                     </div>
                 </div>
+                
+                <?php if($data['confirm_popup']=='True') : ?>
+                    <div class="confirm-garbage-popup-box" id="confirm-garbage-popup-box">
+                        <div class="confirm-garbage-popup-form" id="popup">
+                            <div class="form-container">
+                                <div class="form-title">Garbage Details</div>
+                                <form action="<?php echo URLROOT;?>/centermanagers/confirm_garbage_details/<?php echo $data['req_id'];?>" class="main-right-bottom-content" method="post">
+                                    <div class="user-details">
+                                        <div class="left-details">
+                                            <div class="main-right-bottom-content-content">
+                                                <span class="details">Polythene</span>
+                                                <div class="input-container">
+                                                    <i class="icon fas fa-trash"></i>
+                                                    <input name="polythene_quantity" type="text"
+                                                        placeholder="Enter Quantity in Kg"
+                                                        value="<?php echo $data['polythene_quantity']?>">
+                                                    <div class="error-div" style="color:red">
+                                                        <?php echo $data['polythene_quantity_err']?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="main-right-bottom-content-content">
+                                                <span class="details">Plastic</span>
+                                                <div class="input-container">
+                                                    <i class="icon fas fa-box"></i>
+                                                    <input name="plastic_quantity" type="text"
+                                                        placeholder="Enter Quantity in Kg"
+                                                        value="<?php echo $data['plastic_quantity']?>">
+                                                    <div class="error-div" style="color:red">
+                                                        <?php echo $data['plastic_quantity_err']?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="main-right-bottom-content-content">
+                                                <span class="details">Glass</span>
+                                                <div class="input-container">
+                                                    <i class="icon fas fa-glass-whiskey"></i>
+                                                    <input name="glass_quantity" type="text"
+                                                        placeholder="Enter Quantity in Kg"
+                                                        value="<?php echo $data['glass_quantity']?>">
+                                                    <div class="error-div" style="color:red">
+                                                        <?php echo $data['glass_quantity_err']?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="right-details">
+                                            <div class="main-right-bottom-content-content">
+                                                <span class="details">Paper Waste</span>
+                                                <div class="input-container">
+                                                    <i class="icon fas fa-file-alt"></i>
+                                                    <input name="paper_waste_quantity" type="text"
+                                                        placeholder="Enter Quantity in Kg"
+                                                        value="<?php echo $data['paper_waste_quantity']?>">
+                                                    <div class="error-div" style="color:red">
+                                                        <?php echo $data['paper_waste_quantity_err']?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="main-right-bottom-content-content">
+                                                <span class="details">Electronic Waste</span>
+                                                <div class="input-container">
+                                                    <i class="icon fas fa-laptop"></i>
+                                                    <input name="electronic_waste_quantity" type="text"
+                                                        placeholder="Enter Quantity in Kg"
+                                                        value="<?php echo $data['electronic_waste_quantity']?>">
+                                                    <div class="error-div" style="color:red">
+                                                        <?php echo $data['electronic_waste_quantity_err']?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="main-right-bottom-content-content">
+                                                <span class="details">Metals</span>
+                                                <div class="input-container">
+                                                    <i class="icon fas fa-box"></i>
+                                                    <input name="metals_quantity" type="text"
+                                                        placeholder="Enter Quantity in Kg"
+                                                        value="<?php echo $data['metals_quantity']?>">
+                                                    <div class="error-div" style="color:red">
+                                                        <?php echo $data['metals_quantity_err']?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="wide-note">
+                                            <div class="main-right-bottom-content-content A">
+                                                <span class="details">Center Manager Note</span>
+                                                <div class="input-container">
+                                                    <i class="icon fas fa-sticky-note"></i>
+                                                    <input name="note" class="note-input" type="text"
+                                                        placeholder="Enter Note" value="">
+                                                    <div class="error-div" style="color:red">
+                                                        <?php echo $data['note_err']?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-button">
+                                        <button type="submit">Confirm</button>
+                                        <a href="<?php echo URLROOT?>/centermanagers/request_completed"><button type="button"
+                                                class="cancel-button">Cancel</button></a>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                
+                <?php if($data['confirm_success']=='True') : ?>
+                <div class="request_success">
+                    <div class="popup" id="popup">
+                        <img src="<?php echo IMGROOT?>/check.png" alt="">
+                        <h2>Success!!</h2>
+                        <p>Garbage details updated successfully</p>
+                        <a href="<?php echo URLROOT?>/centermanagers/request_completed"><button type="button">OK</button></a>
+                    </div>
+                </div>
+                <?php endif; ?>
 
             </div>
         </div>
@@ -203,6 +329,16 @@ function view_collect_details(request) {
     document.getElementById('Metals_Quantity').innerText = request.Metals;
     document.getElementById('Note').innerText = request.note;
 }
+
+// function openConfirmGarbageDetails(req_id){
+//     var newRequestId = req_id;
+//     var newURL = "<?php echo URLROOT?>/centermanagers/confirm_garbage_details/" + newRequestId;
+//     document.getElementById('garbage_confirm').href = newURL;
+//     // document.getElementById('overlay').style.display = "flex";
+//     // document.getElementById('cancel_confirm').classList.add('active');
+//     document.getElementById('confirm-garbage-popup-box').style.display = "flex";
+// }
+
 
 function initMap(latitude = 7.4, longitude = 81.00000000) {
     var mapCenter = {

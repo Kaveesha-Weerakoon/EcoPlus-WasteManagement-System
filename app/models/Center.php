@@ -52,10 +52,25 @@
                 $this->db->bind(':center_manager_id', $centerManagers->user_id);
                 $result_2 = $this->db->execute();
 
+                // if ($result_2) {
+                //     return true;
+                // } else {
+                //     return false;
+                // }
                 if ($result_2) {
+                  $this->db->query('INSERT INTO center_garbage (center_id,region) VALUES (:center_id, :region)');
+                  $this->db->bind(':center_id', $id);
+                  $this->db->bind(':region', $data['region']);
+                  $result_3 = $this->db->execute();
+
+                  if ($result_3) {
                     return true;
-                } else {
+                  }else{
                     return false;
+                  }
+
+                } else{
+                  return false;
                 }
             }
             else {

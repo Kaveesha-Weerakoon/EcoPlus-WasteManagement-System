@@ -259,5 +259,6 @@
       } catch (PDOException $e) {
           return false;
       }
-  }
+    }
+
 }

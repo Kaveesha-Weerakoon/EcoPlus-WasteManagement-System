@@ -1268,7 +1268,7 @@
         'electronic_waste' => trim($_POST['electronic_waste']),
         'metals' => trim($_POST['metals']),
         'released_person'=> trim($_POST['released_person']),
-        'relaese_note' => trim($_POST['relaese_note']),
+        'release_note' => trim($_POST['release_note']),
         'release_popup' => 'True',
         'polythene_err'=>'',
         'plastic_err'=>'',
@@ -1321,10 +1321,10 @@
         $data['release_note_err'] = 'Please fill in the Note field';
       }
 
-      if ($atLeastOneFilled && empty($data['note_err']) && empty($data['note_err']) && $allFieldsValid) {
+      if ($atLeastOneFilled && empty($data['release_note_err']) && empty($data['released_person_err']) && $allFieldsValid) {
         
         if($this->garbage_Model->release_garbage_stocks($data)){ 
-          $data['confirm_success'] = 'True';
+          $data['release_success'] = 'True';
           $this->view('center_managers/center_garbage_stock',$data);
         } else {
           die('Something went wrong');
@@ -1355,7 +1355,7 @@
         'electronic_waste' => '',
         'metals' => '',
         'released_person'=> '',
-        'relaese_note' => '',
+        'release_note' => '',
         'release_popup' => 'True',
         'polythene_err'=>'',
         'plastic_err'=>'',
@@ -1374,6 +1374,8 @@
     }
     
   }
+
+  
 
   }
 

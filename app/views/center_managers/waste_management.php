@@ -50,19 +50,19 @@
                     <div class="main-right-top-three">
                         <a href="<?php echo URLROOT?>/centermanagers/waste_management">
                             <div class="main-right-top-three-content">
-                                <p><b style="color:#1ca557;">Confirmed Garbage</b></p>
+                                <p><b style="color:#1ca557;">Waste Handover</b></p>
                                 <div class="line" style="background-color: #1ca557;"></div>
                             </div>
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/center_garbage_stock">
                             <div class="main-right-top-three-content">
-                                <p>Center Garbage Stock</p>
+                                <p>Garbage Stock</p>
                                 <div class="line"></div>
                             </div>
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/center_workers_add">
                             <div class="main-right-top-three-content">
-                                <p>Stock Relaese Details</p>
+                                <p>Stock Relaeses</p>
                                 <div class="line"></div>
                             </div>
                         </a>

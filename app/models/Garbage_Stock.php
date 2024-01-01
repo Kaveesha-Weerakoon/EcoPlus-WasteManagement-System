@@ -116,9 +116,53 @@
 
     }
 
-    public function release_garbage_stocks(){
+    public function release_garbage_stocks($data){
       $this->db->query('INSERT INTO released_stocks (center_id, plastic, polythene, metals, glass, paper_waste, electronic_waste, released_person, release_note)
                         VALUES (:center_id, :plastic, :polythene, :metals, :glass, :paper_waste, :electronic_waste, :released_person, :release_note)');
+      $this->db->bind(':center_id', $data['center_id']);
+      $this->db->bind(':plastic', $data['plastic']);
+      $this->db->bind(':polythene', $data['polythene']);
+      $this->db->bind(':metals', $data['metals']);
+      $this->db->bind(':glass', $data['glass']);
+      $this->db->bind(':paper_waste', $data['paper_waste']);
+      $this->db->bind(':electronic_waste', $data['electronic_waste']);
+      $this->db->bind(':released_person', $data['released_person']);
+      $this->db->bind(':release_note', $data['release_note']);
+      $result1 = $this->db->execute();
+
+      if($result1){
+        $updateQuery = 'UPDATE center_garbage
+                        SET
+                          current_plastic = current_plastic - :plastic,
+                          current_polythene = current_polythene - :polythene,
+                          current_metal = current_metal - :metals,
+                          current_glass = current_glass - :glass,
+                          current_paper = current_paper - :paper_waste,
+                          current_electronic = current_electronic - :electronic_waste
+                        WHERE
+                          center_id = :center_id;';
+
+        $this->db->query($updateQuery);
+        $this->db->bind(':center_id', $data['center_id']);
+        $this->db->bind(':plastic', $data['plastic']);
+        $this->db->bind(':polythene', $data['polythene']);
+        $this->db->bind(':metals', $data['metals']);
+        $this->db->bind(':glass', $data['glass']);
+        $this->db->bind(':paper_waste', $data['paper_waste']);
+        $this->db->bind(':electronic_waste', $data['electronic_waste']);
+        $result2=$this->db->execute();
+
+        if($result2){
+          return true;
+
+        }else{
+          return false;
+        }
+
+        
+      }else{
+        return false;
+      }
 
     }
 

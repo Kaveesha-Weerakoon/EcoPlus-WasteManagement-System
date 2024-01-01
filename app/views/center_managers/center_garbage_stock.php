@@ -132,7 +132,7 @@
                                         <i class="icon fas fa-trash"></i>
                                         <input name="polythene" type="text"
                                             placeholder="Enter Quantity in Kg"
-                                            value="">
+                                            value="<?php echo $data['polythene']?>">
                                         <div class="error-div" style="color:red">
                                             <?php echo $data['polythene_err']?>
                                         </div>
@@ -144,7 +144,7 @@
                                         <i class="icon fas fa-box"></i>
                                         <input name="plastic" type="text"
                                             placeholder="Enter Quantity in Kg"
-                                            value="">
+                                            value="<?php echo $data['plastic']?>">
                                         <div class="error-div" style="color:red">
                                             <?php echo $data['plastic_err']?>
                                         </div>
@@ -156,7 +156,7 @@
                                         <i class="icon fas fa-glass-whiskey"></i>
                                         <input name="glass" type="text"
                                             placeholder="Enter Quantity in Kg"
-                                            value="">
+                                            value="<?php echo $data['glass']?>">
                                         <div class="error-div" style="color:red">
                                             <?php echo $data['glass_err']?>
                                         </div>
@@ -170,7 +170,7 @@
                                         <i class="icon fas fa-file-alt"></i>
                                         <input name="paper_waste" type="text"
                                             placeholder="Enter Quantity in Kg"
-                                            value="">
+                                            value="<?php echo $data['paper_waste']?>">
                                         <div class="error-div" style="color:red">
                                             <?php echo $data['paper_waste_err']?>
                                         </div>
@@ -182,7 +182,7 @@
                                         <i class="icon fas fa-laptop"></i>
                                         <input name="electronic_waste" type="text"
                                             placeholder="Enter Quantity in Kg"
-                                            value="">
+                                            value="<?php echo $data['electronic_waste']?>">
                                         <div class="error-div" style="color:red">
                                             <?php echo $data['electronic_waste_err']?>
                                         </div>
@@ -194,7 +194,7 @@
                                         <i class="icon fas fa-box"></i>
                                         <input name="metals" type="text"
                                             placeholder="Enter Quantity in Kg"
-                                            value="">
+                                            value="<?php echo $data['metals']?>">
                                         <div class="error-div" style="color:red">
                                             <?php echo $data['metals_err']?>
                                         </div>
@@ -207,7 +207,7 @@
                                     <div class="input-container">
                                         <i class="icon fas fa-sticky-note"></i>
                                         <input name="released_person" class="note-input" type="text"
-                                            placeholder="Enter Released Person" value="">
+                                            placeholder="Enter Released Person" value="<?php echo $data['released_person']?>">
                                         <div class="error-div" style="color:red">
                                             <?php echo $data['released_person_err']?>
                                         </div>
@@ -217,8 +217,8 @@
                                     <span class="details">Release Note</span>
                                     <div class="input-container">
                                         <i class="icon fas fa-sticky-note"></i>
-                                        <input name="relaese_note" class="note-input" type="text"
-                                            placeholder="Enter Note" value="">
+                                        <input name="release_note" class="note-input" type="text"
+                                            placeholder="Enter Note" value="<?php echo $data['release_note']?>">
                                         <div class="error-div" style="color:red">
                                             <?php echo $data['release_note_err']?>
                                         </div>
@@ -236,6 +236,17 @@
                 </div>
             </div>
         </div>
+        <?php endif; ?>
+
+        <?php if($data['release_success']=='True') : ?>
+            <div class="request_success">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/check.png" alt="">
+                    <h2>Success!!</h2>
+                    <p>Garbage released successfully</p>
+                    <a href="<?php echo URLROOT?>/centermanagers/center_garbage_stock"><button type="button">OK</button></a>
+                </div>
+            </div>
         <?php endif; ?>
 
     </div>

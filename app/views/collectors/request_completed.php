@@ -157,13 +157,13 @@
 
                             <div class="collect-details-pop-form-content">
                                 <div class="personal-details-right-labels">
-                                    <span>Polythene Quantity :-</span><br>
-                                    <span>Plastic Quantity :-</span><br>
-                                    <span>Glass Quantity :-</span><br>
-                                    <span>Paper Waste Quantity :-</span><br>
-                                    <span>Electronic Waste Quantity :-</span><br>
-                                    <span>Metals Quantity :-</span><br>
-                                    <span>Note :-</span><br>
+                                    <span>Polythene Quantity </span><br>
+                                    <span>Plastic Quantity </span><br>
+                                    <span>Glass Quantity </span><br>
+                                    <span>Paper Waste Quantity </span><br>
+                                    <span>Electronic Waste Quantity </span><br>
+                                    <span>Metals Quantity </span><br>
+                                    <span>Note </span><br>
                                 </div>
                                 <div class="personal-details-right-values">
                                     <span id="Polythene_Quantity"></span><br>

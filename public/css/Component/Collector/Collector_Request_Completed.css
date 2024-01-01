@@ -412,6 +412,7 @@
 
   .collect-details-pop-form {
     width: 45%;
+    height: 35%;
     background: white;
     border-radius: 6px;
     top: 0;
@@ -457,10 +458,13 @@
     display: grid;
     grid-template-columns: 40% 70%;
     width: 80%;
+    height: 90%;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
     padding-left: 30px;
+    margin-top: 3%;
+    padding-top: 2%;
 
   }
 
@@ -475,6 +479,9 @@
     background: #1B6652;
 
   }
+
+  
+
 
   /* Styling for Popup Background */
   .popup-background {

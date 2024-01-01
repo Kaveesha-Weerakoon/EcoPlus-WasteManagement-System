@@ -19,22 +19,23 @@
       }
     }
     
-    public function index(){
+    public function index(){ 
       $balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
       $credit= $this->creditModel->get();
       $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']); 
       $centers = $this->Center_Model->getallCenters();
       $completed_requests=count($this->Collect_Garbage_Model->get_complete_request_relevent_customer($_SESSION['user_id']));
       $total_requests=count($this->Request_Model->get_total_requests_by_customer($_SESSION['user_id']));
-      
+      $total_garbage=$this->customerModel->getTotalGarbage($_SESSION['user_id']);
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
       if ($total_requests > 0) {
         $percentage_completed = json_encode(($completed_requests / $total_requests) * 100);
          } else {
           $percentage_completed =json_encode(0);
-    }    
+     }    
 
-      $jsonData = json_encode($centers );
-
+      $jsonData = json_encode($centers);
+      $json_Total_Garbage = json_encode($total_garbage);
       $data = [
         'title' => 'TraversyMVC',
         'eco_credit_per'=>$credit,
@@ -42,10 +43,23 @@
         'pop'=>'',
         'transaction_history' =>$transaction_history,
         'centers'=>$jsonData,
-        'percentage'=> $percentage_completed 
+        'percentage'=> $percentage_completed,
+        'total_garbage'=> $json_Total_Garbage,
+        'notification'=> $Notifications 
         ];
-     
-      $this->view('customers/index', $data);
+
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $Notifications1 = $this->customerModel->view_Notification($_SESSION['user_id']);
+        $Notifications2 = $this->customerModel->get_Notification($_SESSION['user_id']);
+        $data['notification']=  $Notifications2 ;
+         $this->view('customers/index', $data);
+
+      }
+      else{
+        $this->view('customers/index', $data);
+      }
+    
     }
       
     public function viewprofile(){

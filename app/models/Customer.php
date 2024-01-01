@@ -87,7 +87,6 @@
       }
     }
     
-    
     public function deletecustomer($id){
       $this->db->query('DELETE FROM users WHERE id = :id');
       $this->db->bind(':id', $id);
@@ -98,5 +97,48 @@
        return false;
      }
     }
+
+    public function getTotalGarbage($id){
+      try{
+        $this->db->query('SELECT * FROM customer_total_garbage WHERE user_id = :id');
+        $this->db->bind(':id', $id);
+        $results = $this->db->single();
+         return $results;
+      }
+      catch (PDOException $e) {
+        return false;
+      }
+    }
+
+    public function get_Notification($id) {
+      try {
+          $this->db->query('SELECT * FROM customer_nofification WHERE customer_id = :id AND mark_as_read IN ("False")');
+          $this->db->bind(':id', $id);          
+          $results = $this->db->resultSet();
+          return $results;
+      } catch (PDOException $e) {
+          return false;
+      }
+  }
+ 
+  public function view_Notification($id){
+    try {
+      $this->db->query('UPDATE customer_nofification SET mark_as_read = :new_value WHERE customer_id = :id AND mark_as_read IN ("False")');
+      
+      $new_value = "True";
+      $this->db->bind(':new_value', $new_value);
+      $this->db->bind(':id', $id);
+      
+      $this->db->execute();
+  
+      if ($this->db->rowCount() > 0) {
+          return true;
+      } else {
+          return false;
+      }
+  } catch (PDOException $e) {
+      return false;
+  }
+  }
 }
-    
+       

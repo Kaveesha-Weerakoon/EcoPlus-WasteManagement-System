@@ -244,7 +244,7 @@
                     <img src="<?php echo IMGROOT?>/check.png" alt="">
                     <h2>Success!!</h2>
                     <p>Garbage released successfully</p>
-                    <a href="<?php echo URLROOT?>/centermanagers/center_garbage_stock"><button type="button">OK</button></a>
+                    <a href="<?php echo URLROOT?>/centermanagers/stock_release_details"><button type="button">OK</button></a>
                 </div>
             </div>
         <?php endif; ?>

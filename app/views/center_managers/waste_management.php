@@ -62,7 +62,7 @@
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/stock_release_details">
                             <div class="main-right-top-three-content">
-                                <p>Stock Relaeses</p>
+                                <p>Stock Releases</p>
                                 <div class="line"></div>
                             </div>
                         </a>

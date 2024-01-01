@@ -45,7 +45,7 @@
                         <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
                             alt="">
                         <div class="main-right-top-profile-cont">
-                            <h3>Kaveesha</h3>
+                            <h3><?php echo $_SESSION['user_name']?></h3>
                             <p>ID : C <?php echo $_SESSION['user_id']?></p>
                         </div>
                     </div>

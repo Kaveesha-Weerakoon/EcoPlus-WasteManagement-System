@@ -1124,6 +1124,7 @@
         'metals_quantity' => trim($_POST['metals_quantity']),
         'note' => trim($_POST['note']),
         'confirm_popup' => 'True',
+        'confirm_success'=> '',
         'polythene_quantity_err'=>'',
         'plastic_quantity_err'=>'',
         'glass_quantity_err'=>'',
@@ -1195,6 +1196,7 @@
         'paper_waste_quantity' => $completed_request->Paper_Waste,
         'electronic_waste_quantity' => $completed_request->Electronic_Waste,
         'metals_quantity' => $completed_request->Metals,
+        'note'=> '',
         'confirm_popup' => 'True',
         'confirm_success'=> '',
         'polythene_quantity_err'=>'',
@@ -1270,6 +1272,7 @@
         'released_person'=> trim($_POST['released_person']),
         'release_note' => trim($_POST['release_note']),
         'release_popup' => 'True',
+        'release_success'=> '',
         'polythene_err'=>'',
         'plastic_err'=>'',
         'glass_err'=>'',
@@ -1357,6 +1360,7 @@
         'released_person'=> '',
         'release_note' => '',
         'release_popup' => 'True',
+        'release_success'=> '',
         'polythene_err'=>'',
         'plastic_err'=>'',
         'glass_err'=>'',
@@ -1377,6 +1381,13 @@
 
   public function stock_release_details(){
     $release_details = $this->garbage_Model->get_release_details($_SESSION['center_id']);
+
+    $data = [
+      'release_details'=>$release_details
+    ];
+
+    $this->view('center_managers/stock_releases', $data);
+
   }
 
 

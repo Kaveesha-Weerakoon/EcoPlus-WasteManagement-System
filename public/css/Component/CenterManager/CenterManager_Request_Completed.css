@@ -610,12 +610,12 @@
           cursor: pointer;
           border: none;
           letter-spacing: 1px;
-          background: #1B6652;
+          background: var(--green-color-one);
           padding: 0 20px;
         }
     
         .form-button button[type="submit"]:hover {
-          background: rgb(28, 79, 64);
+          background: #19954e;
         }
     
         .cancel-button {

@@ -1124,6 +1124,7 @@
         'metals_quantity' => trim($_POST['metals_quantity']),
         'note' => trim($_POST['note']),
         'confirm_popup' => 'True',
+        'confirm_success'=> '',
         'polythene_quantity_err'=>'',
         'plastic_quantity_err'=>'',
         'glass_quantity_err'=>'',
@@ -1195,6 +1196,7 @@
         'paper_waste_quantity' => $completed_request->Paper_Waste,
         'electronic_waste_quantity' => $completed_request->Electronic_Waste,
         'metals_quantity' => $completed_request->Metals,
+        'note'=> '',
         'confirm_popup' => 'True',
         'confirm_success'=> '',
         'polythene_quantity_err'=>'',
@@ -1215,7 +1217,184 @@
 
   }
 
+  public function waste_management(){
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $confirmed_requests = $this->garbage_Model->get_confirmed_requests_by_region($center->region);
+
+    $data =[
+      'confirmed_requests'=>$confirmed_requests,
+    ];
+    
+    $this->view('center_managers/waste_management', $data);
+
   }
+
+  public function center_garbage_stock(){
+
+    $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+
+    $data =[
+      'current_polythene'=>$current_quantities->current_polythene,
+      'current_plastic'=>$current_quantities->current_plastic,
+      'current_glass'=>$current_quantities->current_glass,
+      'current_paper_waste'=>$current_quantities->current_paper,
+      'current_electronic_waste'=>$current_quantities->current_electronic,
+      'current_metals'=>$current_quantities->current_metal
+
+    ];
+
+    $this->view('center_managers/center_garbage_stock', $data);
+
+  }
+
+  public function release_stocks(){
+
+    $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+
+        'center_id'=>$_SESSION['center_id'],
+        'current_polythene'=>$current_quantities->current_polythene,
+        'current_plastic'=>$current_quantities->current_plastic,
+        'current_glass'=>$current_quantities->current_glass,
+        'current_paper_waste'=>$current_quantities->current_paper,
+        'current_electronic_waste'=>$current_quantities->current_electronic,
+        'current_metals'=>$current_quantities->current_metal,
+        'polythene' => trim($_POST['polythene']),
+        'plastic' => trim($_POST['plastic']),
+        'glass' => trim($_POST['glass']),
+        'paper_waste' => trim($_POST['paper_waste']),
+        'electronic_waste' => trim($_POST['electronic_waste']),
+        'metals' => trim($_POST['metals']),
+        'released_person'=> trim($_POST['released_person']),
+        'release_note' => trim($_POST['release_note']),
+        'release_popup' => 'True',
+        'release_success'=> '',
+        'polythene_err'=>'',
+        'plastic_err'=>'',
+        'glass_err'=>'',
+        'paper_waste_err'=>'',
+        'electronic_waste_err'=>'',
+        'metals_err'=>'',
+        'released_person_err'=> '',
+        'release_note_err'=>''
+      
+
+      ];
+
+      $fieldsToCheck = ['polythene', 'plastic', 'glass', 'paper_waste', 'electronic_waste', 'metals'];
+      $atLeastOneFilled = false;
+      $allFieldsValid = true;
+
+      foreach ($fieldsToCheck as $field) {
+        if (!empty($_POST[$field])) {
+            if (!is_numeric($_POST[$field])) {
+                $data["{$field}_err"] = "Please enter a valid number";
+                $allFieldsValid = false;
+            } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST[$field]) !== 1) {
+                $data["{$field}_err"] = "Please enter up to two decimal places.";
+                $allFieldsValid = false;
+            } elseif ($_POST[$field] > $data["current_{$field}"]) {
+                $data["{$field}_err"] = "Please enter a valid quantity within the available stock";
+                $allFieldsValid = false;
+            }else {
+                $atLeastOneFilled = true;
+            }
+        }
+      }
+
+      if (!$atLeastOneFilled && $allFieldsValid) {
+        $data['polythene_err'] = 'Please fill polythene quantity';
+        $data['plastic_err'] = 'Please fill plastic quantity';
+        $data['glass_err'] = 'Please fill glass quantity';
+        $data['paper_waste_err'] = 'Please fill paper_waste quantity';
+        $data['electronic_waste_err'] = 'Please fill electronic_waste quantity';
+        $data['metals_err'] = 'Please fill metals quantity';
+        
+      } 
+
+      if(empty($_POST['released_person'])){
+        $data['released_person_err'] = 'Please fill in the released person field';
+      }
+
+      if(empty($_POST['release_note'])){
+        $data['release_note_err'] = 'Please fill in the Note field';
+      }
+
+      if ($atLeastOneFilled && empty($data['release_note_err']) && empty($data['released_person_err']) && $allFieldsValid) {
+        
+        if($this->garbage_Model->release_garbage_stocks($data)){ 
+          $data['release_success'] = 'True';
+          $this->view('center_managers/center_garbage_stock',$data);
+        } else {
+          die('Something went wrong');
+        }
+
+      }else{
+        $this->view('center_managers/center_garbage_stock', $data);
+      }
+
+
+
+    } else {
+
+      $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+
+      $data = [
+        'center_id'=>$_SESSION['center_id'],
+        'current_polythene'=>$current_quantities->current_polythene,
+        'current_plastic'=>$current_quantities->current_plastic,
+        'current_glass'=>$current_quantities->current_glass,
+        'current_paper_waste'=>$current_quantities->current_paper,
+        'current_electronic_waste'=>$current_quantities->current_electronic,
+        'current_metals'=>$current_quantities->current_metal,
+        'polythene' => '',
+        'plastic' => '',
+        'glass' => '',
+        'paper_waste' => '',
+        'electronic_waste' => '',
+        'metals' => '',
+        'released_person'=> '',
+        'release_note' => '',
+        'release_popup' => 'True',
+        'release_success'=> '',
+        'polythene_err'=>'',
+        'plastic_err'=>'',
+        'glass_err'=>'',
+        'paper_waste_err'=>'',
+        'electronic_waste_err'=>'',
+        'metals_err'=>'',
+        'released_person_err'=> '',
+        'release_note_err'=>''
+      
+
+      ];
+
+      $this->view('center_managers/center_garbage_stock', $data);
+
+    }
+    
+  }
+
+  public function stock_release_details(){
+    $release_details = $this->garbage_Model->get_release_details($_SESSION['center_id']);
+
+    $data = [
+      'release_details'=>$release_details
+    ];
+
+    $this->view('center_managers/stock_releases', $data);
+
+  }
+
+
+
+  }
+
+  
 
 
 ?>

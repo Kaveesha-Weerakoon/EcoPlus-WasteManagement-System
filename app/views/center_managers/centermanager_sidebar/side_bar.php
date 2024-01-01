@@ -70,7 +70,7 @@ function redirect_request() {
 }
 
 function redirect_waste_management() {
-    var linkUrl = "<?php echo URLROOT?>/centermanagers"; // Replace with your desired URL
+    var linkUrl = "<?php echo URLROOT?>/centermanagers/waste_management"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
 

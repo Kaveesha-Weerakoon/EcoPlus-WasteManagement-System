@@ -4,7 +4,15 @@
 
     public function __construct(){
       $this->db = new Database;
+    } 
+    
+    public function get_request_by_id($req_id){
+      $this->db->query('SELECT * FROM request_main  WHERE req_id = :workerId');
+      $this->db->bind(':workerId', $req_id);
+      $row = $this->db->single();
+      return $row;
     }
+
 
     public function get_complete_request_relevent_customer($customer_id){
       try{
@@ -76,8 +84,14 @@
         $this->db->bind(':req_id', $data['req_id']);
         
         $updateResult = $this->db->execute();
-         if($updateResult){
-          return $updateResult;
+        $request=$this->get_request_by_id($data['req_id']);
+
+         if($updateResult  && $request){
+          $this->db->query('INSERT INTO customer_nofification (customer_id, notification) VALUES (:customer_id, :notification)');
+          $this->db->bind(':customer_id',$request->customer_id);
+          $this->db->bind(':notification', "Req ID {$data['req_id']} Has been Completed");
+          $this->db->execute();
+          return true;
          }
          else{
           return false;
@@ -118,43 +132,6 @@
 
     }
 
-    public function updateGarbageTotals($req_id) {
-      try {
-          $this->db->query('SELECT * FROM request_completed WHERE req_id = :req_id');
-          $this->db->bind(':req_id', $req_id);
-          $completedRequest = $this->db->single();
-
-          $this->db->query('SELECT customer_id FROM request_main WHERE req_id = :req_id');
-          $this->db->bind(':req_id', $req_id);
-          $customer_id = $this->db->single()->customer_id;
-
-          $this->db->query('UPDATE customer_total_garbage 
-                            SET total_Polythene = total_Polythene + :polythene,
-                                total_Plastic = total_Plastic + :plastic,
-                                total_Metals = total_Metals + :metals,
-                                total_Glass = total_Glass + :glass,
-                                total_Paper_Waste = total_Paper_Waste + :paper,
-                                total_Electronic_Waste = total_Electronic_Waste + :electronic
-                            WHERE user_id = :customer_id');
-
-          $this->db->bind(':polythene', $completedRequest->Polythene);
-          $this->db->bind(':plastic', $completedRequest->Plastic);
-          $this->db->bind(':metals', $completedRequest->Metals);
-          $this->db->bind(':glass', $completedRequest->Glass);
-          $this->db->bind(':paper', $completedRequest->Paper_Waste);
-          $this->db->bind(':electronic', $completedRequest->Electronic_Waste);
-          $this->db->bind(':customer_id', $customer_id);
-
-          
-          $this->db->execute();
-
-          return true;
-      } catch (PDOException $e) {
-          return false; 
-      }
-
-    }
-
     public function get_completed_request_byreqId($req_id){
       $this->db->query('SELECT * FROM request_completed WHERE req_id = :req_id');
       $this->db->bind(':req_id', $req_id);
@@ -165,14 +142,5 @@
     }
 
 
-
-    public function getGarbageDetailsForCustomer($customer_id) {
-      $this->db->query('SELECT * FROM customer_total_garbage WHERE user_id = :customer_id');
-      $this->db->bind(':customer_id', $customer_id);
-      $result = $this->db->single();
-
-      return $result;
-  }
-
-
+  
 }

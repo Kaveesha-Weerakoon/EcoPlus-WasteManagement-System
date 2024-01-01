@@ -51,7 +51,6 @@
   }
   
     public function get_request_by_id($req_id){
-
       $this->db->query('SELECT * FROM request_main  WHERE req_id = :workerId');
       $this->db->bind(':workerId', $req_id);
       $row = $this->db->single();
@@ -73,21 +72,31 @@
           $this->db->query('UPDATE request_main SET type = :type WHERE req_id = :req_id');
           $this->db->bind(':type', 'cancelled');
           $this->db->bind(':req_id', $data['request_id']);
-          
+          $request=$this->get_request_by_id($data['request_id']);
+
           $updateResult = $this->db->execute();
-           if($updateResult){
-            return $updateResult;
-           }
-           else{
+          if( $updateResult && $request){
+            $this->db->query('INSERT INTO customer_nofification (customer_id, notification) VALUES (:customer_id, :notification)');
+            $this->db->bind(':customer_id',$request->customer_id);
+            $this->db->bind(':notification', "Req ID {$data['request_id']} Has been Cancelled");
+            $result= $this->db->execute();
+            if($result){
+              return $result;
+             }
+             else{
+              return false;
+             }
+          }else{
             return false;
-           }
+          };
+          
           
       } else {
           return false;
       }
-    }catch (PDOException $e) {
+      }catch (PDOException $e) {
       return false;
-  }
+     }
   }
 
     public function get_cancelled_request($customer_id){    
@@ -144,6 +153,7 @@
       $this->db->bind(':region', $center);
       $this->db->bind(':type', 'cancelled');
       $results = $this->db->resultSet();
+     
       return $results;
     }
 
@@ -153,14 +163,21 @@
       $this->db->bind(':req_id', $data['request_id']);
       $this->db->bind(':collector_id', $data['collector_id']);
       $insertResult = $this->db->execute();
-  
-      if ($insertResult) {
+      $request=$this->get_request_by_id($data['request_id']);
+      
+      if ($insertResult && $request) {
           $this->db->query('UPDATE request_main SET type = :type WHERE req_id = :req_id');
-          $this->db->bind(':type', 'assigned'); // Corrected the typo from 'assinged' to 'assigned'
+          $this->db->bind(':type', 'assigned'); 
           $this->db->bind(':req_id', $data['request_id']);
           $updateResult = $this->db->execute();
-  
-          return $updateResult;
+          
+
+          if($updateResult){
+            $this->db->query('INSERT INTO customer_nofification (customer_id, notification) VALUES (:customer_id, :notification)');
+            $this->db->bind(':customer_id',$request->customer_id);
+            $this->db->bind(':notification', "Req ID {$data['request_id']} Has been Assigned");
+            $this->db->execute();
+          };
       } else {
           return false;
       } }catch (PDOException $e) {

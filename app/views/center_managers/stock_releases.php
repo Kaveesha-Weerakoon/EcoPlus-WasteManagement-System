@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="CenterManager_Main">
-    <div class="CenterManager_Waste_Management">
+    <div class="CenterManager_Stock_Releases">
         <div class="main">
             <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
             <div class="main-right">
@@ -50,8 +50,8 @@
                     <div class="main-right-top-three">
                         <a href="<?php echo URLROOT?>/centermanagers/waste_management">
                             <div class="main-right-top-three-content">
-                                <p><b style="color:#1ca557;">Waste Handover</b></p>
-                                <div class="line" style="background-color: #1ca557;"></div>
+                                <p>Waste Handover</p>
+                                <div class="line"></div>
                             </div>
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/center_garbage_stock">
@@ -62,8 +62,8 @@
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/stock_release_details">
                             <div class="main-right-top-three-content">
-                                <p>Stock Relaeses</p>
-                                <div class="line"></div>
+                                <p><b style="color:#1ca557;">Stock Relaeses</b></p>
+                                <div class="line"  style="background-color: #1ca557;"></div>
                             </div>
                         </a>
 

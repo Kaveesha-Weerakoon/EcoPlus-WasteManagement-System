@@ -1375,7 +1375,11 @@
     
   }
 
-  
+  public function stock_release_details(){
+    $release_details = $this->garbage_Model->get_release_details($_SESSION['center_id']);
+  }
+
+
 
   }
 

@@ -1086,7 +1086,7 @@
       ];
       $this->view('center_managers/request_assigned', $data);
     }
-   }
+  }
 
   public function request_completed(){
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 

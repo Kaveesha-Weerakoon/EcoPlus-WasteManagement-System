@@ -90,7 +90,7 @@
                                 <div class="err"><?php echo $data['complain_err']; ?></div>
                             </div>
                             <div class="main-bottom-component-left-button">
-                                <button type="submit">Make Complain</button>
+                                <button type="submit">Submit</button>
                             </div>
                         </form>
                         <div class="main-bottom-component-right">

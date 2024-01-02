@@ -296,6 +296,10 @@
             transition: background-color 0.6s ease-in;
         }
 
+        .main-bottom-component-left button:hover{
+            background: #19954e;
+        }
+
 
         /*Success popup*/
         .complain_success {

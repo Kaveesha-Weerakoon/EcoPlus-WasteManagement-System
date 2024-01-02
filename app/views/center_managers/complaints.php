@@ -70,27 +70,20 @@
                             </div>
 
                             <div class="main-bottom-component-left-component">
-                                <h2>Region</h2>
-                                <input type="text" value="<?php echo $data['region']; ?>" name="region"
-                                    placeholder="Region">
-                                <div class="err"><?php echo $data['region_err']; ?></div>
-                            </div>
-
-                            <div class="main-bottom-component-left-component">
                                 <h2>Subject</h2>
                                 <input value="<?php echo $data['subject']; ?>" name="subject" type="text"
                                     placeholder="Subject">
                                 <div class="err"><?php echo $data['subject_err']; ?></div>
                             </div>
 
-                            <div class="main-bottom-component-left-component">
+                            <div class="main-bottom-component-left-component A">
                                 <h2>Complaint</h2>
-                                <input value="<?php echo $data['complain']; ?>" name="complain" type="text"
-                                    placeholder="Complain">
-                                <div class="err"><?php echo $data['complain_err']; ?></div>
+                                <input value="<?php echo $data['complaint']; ?>" name="complaint" type="text"
+                                    placeholder="Complaint">
+                                <div class="err"><?php echo $data['complaint_err']; ?></div>
                             </div>
                             <div class="main-bottom-component-left-button">
-                                <button type="submit">Make Complain</button>
+                                <button type="submit">Submit</button>
                             </div>
                         </form>
                         <div class="main-bottom-component-right">

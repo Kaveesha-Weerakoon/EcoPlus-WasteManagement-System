@@ -250,8 +250,8 @@
         window.location.href = linkUrl;
     }
 
-    function redirect_center_workers() {
-        var linkUrl = "<?php echo URLROOT?>/centermanagers/center_workers";
+    function redirect_complaints() {
+        var linkUrl = "<?php echo URLROOT?>/centermanagers/complaints";
         window.location.href = linkUrl;
     }
 

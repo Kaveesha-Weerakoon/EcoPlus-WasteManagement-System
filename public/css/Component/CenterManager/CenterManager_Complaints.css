@@ -243,7 +243,7 @@
         }
 
         .main-bottom-component-left-component input {
-            height: 29px;
+            height: 32px;
             width: 80%;
             outline: none;
             border-radius: 5px;
@@ -259,6 +259,10 @@
 
         .main-bottom-component-left-component input:focus {
             border-color: #4dccaa;
+        }
+
+        .A input{
+            height: 50px;
         }
 
         .complain {
@@ -281,7 +285,7 @@
         }
 
         .main-bottom-component-left button {
-            height: 33px;
+            height: 35px;
             margin-top: 10px;
             width: 83%;
             outline: none;
@@ -294,6 +298,10 @@
             background: var(--green-color-one);
             color: var(--background-color-main);
             transition: background-color 0.6s ease-in;
+        }
+
+        .main-bottom-component-left button:hover{
+            background: #19954e;
         }
 
 

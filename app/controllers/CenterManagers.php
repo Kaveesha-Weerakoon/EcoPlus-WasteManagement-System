@@ -1391,7 +1391,81 @@
   }
 
   public function complaints(){
-    
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $data =[
+        'name' => trim($_POST['name']),
+        'contact_no' => trim($_POST['contact_no']),
+        'subject' => trim($_POST['subject']),
+        'complaint' => trim($_POST['complaint']),
+        'name_err' => '',
+        'contact_no_err' => '',
+        'region_err' => '',
+        'subject_err' => '' ,
+        'complain_err' => '' ,
+        'completed'=>''    
+      ];
+      
+      //validate name
+      if(empty($data['name'])){
+        $data['name_err'] = 'Please enter name';
+      }elseif (strlen($data['name']) > 255) {
+        $data['name_err'] = 'Name is too long';
+      }
+     
+      // Validate contact number
+      if(empty($data['contact_no'])){
+        $data['contact_no_err'] = 'Please enter contact no';
+      }elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+        $data['contact_no_err'] = 'Please enter a valid contact number';
+      }
+
+      //validate subject
+      if(empty($data['subject'])){
+        $data['subject_err'] = 'Please enter subject';
+      }elseif (strlen($data['subject']) > 255) {
+        $data['subject_err'] = 'Subject is too long';
+      }
+      
+      //validate complaint
+      if(empty($data['complaint'])){
+        $data['complaint_err'] = 'Please enter the complaint';
+      }
+
+      if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
+        if($this->center_complaint_Model->complains($data)){
+          $data['completed']="True";
+          $this->view('center_managers/complaints', $data);         
+         
+        } else {
+          die('Something went wrong');
+        }
+      }
+      else{     
+            $this->view('center_managers/complaints', $data);         
+      }
+    }
+    else{
+      
+    $data =[
+      'name' => '',
+      'contact_no' => '',
+      'region' => '',
+      'subject' => '',
+      'complaint' => '',
+      'name_err' => '',
+      'contact_no_err' => '',
+      'region_err' => '',
+      'subject_err' => '' ,
+      'complaint_err' => ''  ,
+      'completed'=>''      
+    ];
+
+    $this->view('center_managers/complaints', $data);
+     
+   } 
+
   }
 
 

@@ -268,7 +268,7 @@
                                                 <div class="input-container">
                                                     <i class="icon fas fa-sticky-note"></i>
                                                     <input name="note" class="note-input" type="text"
-                                                        placeholder="Enter Note" value="">
+                                                        placeholder="Enter Note" value="<?php echo $data['note']?>">
                                                     <div class="error-div" style="color:red">
                                                         <?php echo $data['note_err']?>
                                                     </div>

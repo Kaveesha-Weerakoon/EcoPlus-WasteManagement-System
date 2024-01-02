@@ -1,11 +1,10 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Admin_Main">
-    <div class="Admin_Collectors_Complains">
-    <div class="main">
+ <div class="Admin_Main">
+    <div class="Admin_Centers_Complaints">
+        <div class="main">
             <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
 
              <div class="main-right">
-
                 <div class="main-right-top">
                     <div class="main-right-top-one">
                         <div class="main-right-top-search">
@@ -56,14 +55,14 @@
                         </a>
                         <a href="<?php echo URLROOT?>/Admin/complain_collectors">
                             <div class="main-right-top-three-content">
-                                <p><b style="color:#1ca557;">Collectors</b></p>
-                                <div class="line"  style="background-color: #1ca557;"></div>
+                                <p>Collectors</p>
+                                <div class="line"></div>
                             </div>
                         </a>
                         <a href="<?php echo URLROOT?>/Admin/complaint_centers">
                             <div class="main-right-top-three-content">
-                                <p>Centers</p>
-                                <div class="line"></div>
+                                <p><b style="color:#1ca557;">Centers</b></p>
+                                <div class="line" style="background-color: #1ca557;"></div>
                             </div>
                         </a>
                         <a href="">
@@ -75,17 +74,16 @@
 
                     </div>
                 </div>
-              
+
                 <div class="main-right-bottom">
                     <div class="main-right-bottom-top">
                         <table class="table">
                             <tr class="table-header">
-                                <th>Complaint ID</th>
-                                <th>Collector ID</th>
-                                <th>Center</th>
+                                <th>Complain ID</th>
+                                <th>Customer ID</th>
                                 <th>Date</th>
-                                <th>Contact No</th>
-                                <th>Collector Name</th>
+                                <th>Contact NO</th>
+                                <th>Customer Name</th>
                                 <th>Subject</th>
                                 <th>Complaint</th>
                                 <th>Delete</th>
@@ -93,17 +91,16 @@
                         </table>
                     </div>
                     <div class="main-right-bottom-down">
-                    <table class="table">
-                                   <?php foreach($data['complains'] as $complaint) : ?>
+                        <table class="table">
+                        <?php foreach($data['complaints'] as $complaint) : ?>
                                        <tr class="table-row">
-                                           <td>CoC<?php echo $complaint->id?></td>
-                                           <td>Co<?php echo $complaint->collector_id?></td>
-                                           <td>Cen<?php echo $complaint->center_id?></td>
+                                           <td>Com <?php echo $complaint->id?></td>
+                                           <td>C<?php echo $complaint->customer_id?></td>
                                            <td><?php echo $complaint->date?></td>
                                            <td><?php echo $complaint->contact_no?></td>
                                            <td><?php echo $complaint->name?></td>
                                            <td><?php echo $complaint->subject?></td>
-                                           <td class="cancel-open"><img src="<?php echo IMGROOT?>/view.png" alt=""></td>             
+                                           <td><?php echo $complaint->complaint?></td>                                   
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
                                         </tr>
                                   <?php endforeach; ?>
@@ -113,6 +110,10 @@
                 </div>
              </div>
         </div>
-    </div>
-</div>
+
+    </div> 
+ </div>
+    
+
+
 <?php require APPROOT . '/views/inc/footer.php'; ?>

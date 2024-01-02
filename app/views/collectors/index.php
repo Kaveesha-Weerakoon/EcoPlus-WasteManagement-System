@@ -99,22 +99,26 @@
                     </div>
                     <div class="main-right-bottom-three">
                         <div class="main-right-bottom-three-left">
-                            <h1>Recent Transactions</h1>
+                            <h1>Recently Completed Request</h1>
+
+                            <?php
+                                 $req_completed_history = $data['req_completed_history'];
+                                 $limited_completed_history = array_slice($req_completed_history, 0, 3);
+
+                                 foreach ($limited_completed_history as $completion):
+                            ?>
                             <div class="main-right-bottom-three-left-cont">
-                                <img src="./1.jpg" alt="">
-                                <h3>Dayana</h3>
-                                <h2>+$ 12.21</h2>
+                                <img class="td-pro_pic"
+                                    src="<?php echo (empty($completion->image) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/collector/' . $completion->image) ) ? IMGROOT . '/img_upload/collector/Profile.png': IMGROOT . '/img_upload/collector/' . $completion->image; ?>"
+                                    alt="">
+                                <h3>
+                                    C <?php echo $completion->customer_id; ?>
+                                </h3>
+                                <h2>
+                                    <?php echo $completion->credit_amount;?>
+                                </h2>
                             </div>
-                            <div class="main-right-bottom-three-left-cont">
-                                <img src="./2.jpg" alt="">
-                                <h3>James</h3>
-                                <h2>+$ 12.21</h2>
-                            </div>
-                            <div class="main-right-bottom-three-left-cont">
-                                <img src="./3.jpg" alt="">
-                                <h3>Samantha</h3>
-                                <h2 style="color: #F13E3E;">-$ 12.21</h2>
-                            </div>
+                            <?php endforeach; ?>
                             <!-- <div class="map" id="map"></div> -->
                         </div>
                         <div class="main-right-bottom-three-right">

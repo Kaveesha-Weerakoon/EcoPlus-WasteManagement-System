@@ -109,7 +109,7 @@
                             ?>
                             <div class="main-right-bottom-three-left-cont">
                                 <img class="td-pro_pic"
-                                    src="<?php echo (empty($completion->image) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/collector/' . $completion->image) ) ? IMGROOT . '/img_upload/collector/Profile.png': IMGROOT . '/img_upload/collector/' . $completion->image; ?>"
+                                    src="<?php echo  $completion->customer_image; ?>"
                                     alt="">
                                 <h3>
                                     C <?php echo $completion->customer_id; ?>

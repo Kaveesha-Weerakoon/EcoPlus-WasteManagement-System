@@ -63,10 +63,11 @@
 
   public function get_complete_request_cus($collector_id){
     $this->db->query('
-        SELECT request_main.*, request_completed.*
+        SELECT request_main.*, request_completed.*,customers.*,customers.image  AS customer_image
         FROM request_main
         LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
         LEFT JOIN request_completed ON request_main.req_id = request_completed.req_id
+        LEFT JOIN customers ON request_main.customer_id = customers.user_id
         WHERE request_assigned.collector_id = :collector_id 
         AND request_main.type = "completed"
     ');

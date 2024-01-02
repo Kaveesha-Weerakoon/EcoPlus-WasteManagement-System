@@ -309,17 +309,18 @@
     }
 
     .table-header {
-        grid-template-columns: 10% 10% 8% 10% 14% 12% 25% 10%;
+        grid-template-columns: 9% 9% 9% 11% 11% 12% 13% 17% 9%;
     }
 
     .table-row {
         height: 52px;
         display: grid;
-        grid-template-columns:  10% 10% 8% 10% 14% 12% 25% 10%;
+        grid-template-columns: 9% 9% 9% 11% 11% 12% 13% 17% 9%;
     }
 
     .table td {
         height: 55px;
+        overflow: auto;
     }
 
     .manager_img{

@@ -80,10 +80,11 @@
                         <table class="table">
                             <tr class="table-header">
                                 <th>Complain ID</th>
-                                <th>Customer ID</th>
+                                <th>Center ID</th>
+                                <th>Center</th>
                                 <th>Date</th>
-                                <th>Contact NO</th>
-                                <th>Customer Name</th>
+                                <th>Center Manager</th>
+                                <th>Contact No</th>
                                 <th>Subject</th>
                                 <th>Complaint</th>
                                 <th>Delete</th>
@@ -94,11 +95,12 @@
                         <table class="table">
                         <?php foreach($data['complaints'] as $complaint) : ?>
                                        <tr class="table-row">
-                                           <td>Com <?php echo $complaint->id?></td>
-                                           <td>C<?php echo $complaint->customer_id?></td>
-                                           <td><?php echo $complaint->date?></td>
+                                           <td>Com <?php echo $complaint->complaint_id?></td>
+                                           <td>C<?php echo $complaint->center_id?></td>
+                                           <td><?php echo $complaint->region?></td>
+                                           <td><?php echo $complaint->date_time?></td>
+                                           <td><?php echo $complaint->center_manager_name?></td>
                                            <td><?php echo $complaint->contact_no?></td>
-                                           <td><?php echo $complaint->name?></td>
                                            <td><?php echo $complaint->subject?></td>
                                            <td><?php echo $complaint->complaint?></td>                                   
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>

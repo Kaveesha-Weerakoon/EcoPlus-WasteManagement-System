@@ -21,13 +21,14 @@
     public function index(){
      
       $credit= $this->creditModel->get();
+      $req_completed_history = $this->Collect_Garbage_Model->get_complete_request_cus($_SESSION['collector_id']); 
    
 
       $data = [
         
         'eco_credit_per'=>$credit,
-       
-        'pop'=>'',
+        'req_completed_history' =>$req_completed_history,
+        'pop'=>''
          
         ];
       $this->view('collectors/index', $data);

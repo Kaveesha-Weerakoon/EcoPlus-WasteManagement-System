@@ -101,8 +101,18 @@
                         <div class="main-right-bottom-three-left">
                             <h1>Recently Completed Request</h1>
 
-                            <?php
+                                 <?php
                                  $req_completed_history = $data['req_completed_history'];
+                         
+                                 // Sort the completed history by completion date (assuming completion_datetime property)
+                                 usort($req_completed_history, function ($a, $b) {
+                                     $dateA = strtotime($a->completed_datetime);
+                                     $dateB = strtotime($b->completed_datetime);
+                         
+                                     return $dateB - $dateA; // Sort in descending order (most recent first)
+                                 });
+                         
+                                 // Extract the first three elements after sorting
                                  $limited_completed_history = array_slice($req_completed_history, 0, 3);
 
                                  foreach ($limited_completed_history as $completion):

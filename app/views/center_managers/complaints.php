@@ -98,7 +98,7 @@
                         <img src="<?php echo IMGROOT?>/check.png" alt="">
                         <h2>Success!!</h2>
                         <p>Complaint has been reported successfully</p>
-                        <a href="<?php echo URLROOT?>/customers/history_complains"><button type="button">OK</button></a>
+                        <a href="<?php echo URLROOT?>/centermanagers/complaints"><button type="button">OK</button></a>
 
 
                     </div>
@@ -110,7 +110,5 @@
 
     </div>
 </div>
-<script>
 
-</script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

@@ -11,6 +11,7 @@
       $this->Request_Model=$this->model('Request');
       $this->collect_garbage_Model=$this->model('Collect_Garbage');
       $this->garbage_Model=$this->model('Garbage_Stock');
+      $this->center_complaints_model=$this->model('Center_Complaints');
 
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
@@ -1391,19 +1392,23 @@
   }
 
   public function complaints(){
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
       $data =[
+        'center_id'=> $_SESSION['center_id'],
+        'region'=> $center->region,
+        'cm_id' => $_SESSION['center_manager_id'],
         'name' => trim($_POST['name']),
         'contact_no' => trim($_POST['contact_no']),
         'subject' => trim($_POST['subject']),
         'complaint' => trim($_POST['complaint']),
         'name_err' => '',
         'contact_no_err' => '',
-        'region_err' => '',
         'subject_err' => '' ,
-        'complain_err' => '' ,
+        'complaint_err' => '' ,
         'completed'=>''    
       ];
       
@@ -1433,8 +1438,8 @@
         $data['complaint_err'] = 'Please enter the complaint';
       }
 
-      if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
-        if($this->center_complaint_Model->complains($data)){
+      if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
+        if($this->center_complaints_model->submit_complaint($data)){
           $data['completed']="True";
           $this->view('center_managers/complaints', $data);         
          
@@ -1447,22 +1452,21 @@
       }
     }
     else{
+      $center_manager = $this->centermanagerModel->getCenterManagerByID($_SESSION['center_manager_id']);
       
-    $data =[
-      'name' => '',
-      'contact_no' => '',
-      'region' => '',
-      'subject' => '',
-      'complaint' => '',
-      'name_err' => '',
-      'contact_no_err' => '',
-      'region_err' => '',
-      'subject_err' => '' ,
-      'complaint_err' => ''  ,
-      'completed'=>''      
-    ];
+      $data =[
+        'name' => $_SESSION['center_manager_name'],
+        'contact_no' => $center_manager->contact_no,
+        'subject' => '',
+        'complaint' => '',
+        'name_err' => '',
+        'contact_no_err' => '',
+        'subject_err' => '' ,
+        'complaint_err' => ''  ,
+        'completed'=>''      
+      ];
 
-    $this->view('center_managers/complaints', $data);
+      $this->view('center_managers/complaints', $data);
      
    } 
 

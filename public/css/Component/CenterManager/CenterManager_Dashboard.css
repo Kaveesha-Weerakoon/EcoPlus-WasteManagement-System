@@ -290,6 +290,10 @@
         letter-spacing: 0.05rem;
     }
 
+    .main-right-bottom-one-left .right i {
+        font-size: 40px;
+    }
+
     .main-right-bottom-one-left .right .main-credit {
         font-size: 29px;
         font-weight: bolder;

@@ -16,6 +16,7 @@
             src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
             async defer>
         </script>
+        <script src="https://kit.fontawesome.com/6293c3d0e8.js" crossorigin="anonymous"></script>
     </head>
 
     <body>

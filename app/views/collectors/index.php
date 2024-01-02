@@ -53,17 +53,17 @@
                     <div class="main-right-bottom-one">
                         <div class="main-right-bottom-one-left">
                             <div class="left">
-                                <h1>Total Balance</h1>
-                                <h3>+Eco 26.23 </h3>
+                                <h1>Assigned Requests</h1>
+                                <h3>2</h3>
                                 <p>Last Update</p>
-                                <button onclick="redirectToAssignedRequests()">Assigned Requests</button>
+                                <button onclick="redirectToAssignedRequests()">view </button>
 
                             </div>
 
-                            <!--<div class="right">
-                                <h1>Eco<span class="main-credit"> <?php echo $data['credit_balance']?></span> </h1>
+                            <div class="right">
+                                <h1><!--Eco<span class="main-credit"> <?php echo $data['credit_balance']?>-->o</span> </h1>
                                 <h3>WALLET AMOUNT</h3>
-                            </div>-->
+                            </div>
                         </div>
                         <div class="main-right-bottom-one-right">
 
@@ -116,19 +116,19 @@
                                  $limited_completed_history = array_slice($req_completed_history, 0, 3);
 
                                  foreach ($limited_completed_history as $completion):
-                            ?>
-                            <div class="main-right-bottom-three-left-cont">
-                                <img class="td-pro_pic"
-                                    src="<?php echo  $completion->customer_image; ?>"
-                                    alt="">
-                                <h3>
-                                    C <?php echo $completion->customer_id; ?>
-                                </h3>
-                                <h2>
-                                    <?php echo $completion->credit_amount;?>
-                                </h2>
-                            </div>
-                            <?php endforeach; ?>
+                                    ?>
+                                    <div class="main-right-bottom-three-left-cont">
+                                        <img class="td-pro_pic"
+                                        src="<?php echo (empty($completion->customer_image) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/'. $completion->customer_image) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $completion->customer_image; ?>"
+                                            alt="">
+                                        <h3>
+                                            C <?php echo $completion->customer_id; ?>
+                                        </h3>
+                                        <h2>
+                                            <?php echo $completion->credit_amount;?>
+                                        </h2>
+                                    </div>
+                                <?php endforeach; ?>
                             <!-- <div class="map" id="map"></div> -->
                         </div>
                         <div class="main-right-bottom-three-right">

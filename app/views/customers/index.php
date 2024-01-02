@@ -16,36 +16,35 @@
                     </div>
                     <div class="main-right-top-notification" id="notification">
                         <i class='bx bx-bell'></i>
+                        <?php if (!empty($data['notification'])) : ?>
                         <div class="dot"></div>
+                        <?php endif; ?>
                     </div>
                     <div id="notification_popup" class="notification_popup">
                         <h1>Notifications</h1>
-                        <div class="notification">
-                            <div class="notification-green-dot">
+                        <div class="notification_cont">
+                            <?php foreach($data['notification'] as $notification) : ?>
 
+                            <div class="notification">
+                                <div class="notification-green-dot">
+
+                                </div>
+                                <?php echo $notification->notification?>
                             </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
+                            <?php endforeach; ?>
 
-                            </div>
-                            Request 1232 Has been Assigned
                         </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-
+                        <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/customers/">
+                            <i class='bx bx-signal-4'></i>
+                            <button type="submit">Mark all as read</button>
+                        </form>
 
                     </div>
                     <div class="main-right-top-profile">
                         <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
                             alt="">
                         <div class="main-right-top-profile-cont">
-                            <h3>Kaveesha</h3>
+                            <h3><?php echo $_SESSION['user_name']?></h3>
                             <p>ID : C <?php echo $_SESSION['user_id']?></p>
                         </div>
                     </div>
@@ -68,7 +67,7 @@
                         </div>
                         <div class="main-right-bottom-one-right">
 
-                            <canvas id="myChart" width="688" height="300"></canvas>
+                            <canvas id="myChart" width="700" height="300"></canvas>
                         </div>
                     </div>
                     <div class="main-right-bottom-two">
@@ -242,15 +241,28 @@ function redirect_requests() {
 }
 
 notification.addEventListener("click", function() {
-    if (notification_pop.style.height === "0px") {
-        notification_pop.style.height = "28%";
-        notification_pop.style.visibility = "visible";
-        notification_pop.style.opacity = "1";
-        notification_pop.style.padding = "7px";
-    } else {
-        notification_pop.style.height = "0px";
-        notification_pop.style.visibility = "hidden";
-        notification_pop.style.opacity = "0";
+    var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
+
+    if (!isNotificationEmpty) {
+        var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
+        if (notification_pop.style.height === "0px") {
+            if (notificationArraySize >= 3) {
+                notification_pop.style.height = "28%";
+            }
+            if (notificationArraySize == 2) {
+                notification_pop.style.height = "21%";
+            }
+            if (notificationArraySize == 1) {
+                notification_pop.style.height = "15%";
+            }
+            notification_pop.style.visibility = "visible";
+            notification_pop.style.opacity = "1";
+            notification_pop.style.padding = "7px";
+        } else {
+            notification_pop.style.height = "0px";
+            notification_pop.style.visibility = "hidden";
+            notification_pop.style.opacity = "0";
+        }
     }
 });
 
@@ -385,7 +397,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function createOrUpdateChart(color, textColor) {
-    console.log(color);
+    var Total_Garbage = <?php echo $data['total_garbage']?>;
     const ctx = document.getElementById('myChart').getContext('2d');
 
     myChart = new Chart(ctx, {
@@ -394,7 +406,13 @@ function createOrUpdateChart(color, textColor) {
             labels: ['Plastic', 'Polythene', 'Metal', 'Glass', 'Paper', 'Electronic'],
             datasets: [{
                 label: 'Kilograms',
-                data: [12, 19, 3, 5, 2, 3],
+                data: [Total_Garbage.total_Plastic,
+                    Total_Garbage.total_Polythene,
+                    Total_Garbage.total_Metals,
+                    Total_Garbage.total_Glass,
+                    Total_Garbage.total_Paper_Waste,
+                    Total_Garbage.total_Electronic_Waste
+                ],
                 backgroundColor: color,
             }]
         },
@@ -414,6 +432,13 @@ function createOrUpdateChart(color, textColor) {
                 },
                 y: {
                     beginAtZero: true,
+                    suggestedMax: Math.max.apply(null, [Total_Garbage.total_Plastic,
+                        Total_Garbage.total_Polythene,
+                        Total_Garbage.total_Metals,
+                        Total_Garbage.total_Glass,
+                        Total_Garbage.total_Paper_Waste,
+                        Total_Garbage.total_Electronic_Waste
+                    ]) + 1, // Add some padding to the maximum value
                     grid: {
                         display: false
                     }

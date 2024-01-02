@@ -31,20 +31,27 @@
               $this->db->bind(':image', $data['profile_image_name']);
               $result_customer_insert = $this->db->execute();
 
-            if ($result_customer_insert) {
+              if ($result_customer_insert) {
                 $this->db->query('INSERT INTO customer_credits (user_id, credit_amount) VALUES (:user_id, 100)');
                 $this->db->bind(':user_id', $user_id);
-
                 $result_credit_insert = $this->db->execute();
-
-                return $result_credit_insert;
-            }else {
-              
-              $result = $this->db->execute();
-      
-              return $result;
-          } 
-
+    
+                if ($result_credit_insert) {
+                    $this->db->query('INSERT INTO customer_total_garbage (user_id, total_Polythene, total_Plastic, total_Metals, total_Glass, total_Paper_Waste, total_Electronic_Waste) VALUES (:user_id, 0, 0, 0, 0, 0, 0)');
+                    $this->db->bind(':user_id', $user_id);
+                    $result_garbage_insert = $this->db->execute();
+    
+                    if ($result_garbage_insert) {
+                        return true; // Registration and default values inserted successfully
+                    } else {
+                        return false; // Failed to insert default garbage values
+                    }
+                } else {
+                    return false; // Failed to insert credit amount
+                }
+            } else {
+                return false; // Failed to insert customer data
+            }
           } else {
             return false;
         }

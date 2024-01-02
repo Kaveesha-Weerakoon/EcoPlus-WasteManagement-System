@@ -46,7 +46,13 @@
         return true;
        
       }
-
+      public function get_collector($id){
+        $this->db->query('SELECT * FROM collectors WHERE user_id = :id');
+       $this->db->bind(':id', $id);
+       $results = $this->db->single();
+       // print_r($results);
+        return $results;
+      }
 
     public function get_collectors(){
         $this->db->query('SELECT *,

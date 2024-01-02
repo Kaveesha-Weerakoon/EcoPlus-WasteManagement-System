@@ -64,35 +64,7 @@
                     </div>
                 </div>
 
-                <!-- <div class="main-top">
-                    <a href="<?php echo URLROOT?>/centermanagers">
-                        <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
-                    </a>
-                    <div class="main-top-component">
-                        <p><?php echo $_SESSION['center_manager_name']?></p>
-                        <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>" alt="">
-                    </div>
-                </div>
-              
-                <div class="main-bottom-top">
-                    <div class="main-right-top-two">
-                        <h1>Center Workers</h1>
-                    </div>
-                    <div class="main-right-top-three">
-                        <a href="Collectors.html">
-                            <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">View</b></p>
-                                <div class="line"></div>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/centermanagers/center_workers_add">
-                            <div class="main-right-top-three-content">
-                                <p>Register</p>
-                                <div class="line1"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div> -->
+                
                 <?php if(!empty($data['center_workers'])) : ?>
                 <div class="main-right-bottom">
                     <div class="main-right-bottom-top">

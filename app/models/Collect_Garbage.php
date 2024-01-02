@@ -4,7 +4,15 @@
 
     public function __construct(){
       $this->db = new Database;
+    } 
+    
+    public function get_request_by_id($req_id){
+      $this->db->query('SELECT * FROM request_main  WHERE req_id = :workerId');
+      $this->db->bind(':workerId', $req_id);
+      $row = $this->db->single();
+      return $row;
     }
+
 
     public function get_complete_request_relevent_customer($customer_id){
       try{
@@ -76,8 +84,14 @@
         $this->db->bind(':req_id', $data['req_id']);
         
         $updateResult = $this->db->execute();
-         if($updateResult){
-          return $updateResult;
+        $request=$this->get_request_by_id($data['req_id']);
+
+         if($updateResult  && $request){
+          $this->db->query('INSERT INTO customer_nofification (customer_id, notification) VALUES (:customer_id, :notification)');
+          $this->db->bind(':customer_id',$request->customer_id);
+          $this->db->bind(':notification', "Req ID {$data['req_id']} Has been Completed");
+          $this->db->execute();
+          return true;
          }
          else{
           return false;

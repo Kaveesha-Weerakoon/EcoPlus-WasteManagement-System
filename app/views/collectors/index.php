@@ -54,15 +54,18 @@
                         <div class="main-right-bottom-one-left">
                             <div class="left">
                                 <h1>Assigned Requests</h1>
-                                <h3>2</h3>
+                                <h3><?php echo $data['assinged_Requests_count']?></h3>
                                 <p>Last Update</p>
                                 <button onclick="redirectToAssignedRequests()">view </button>
 
                             </div>
 
                             <div class="right">
-                                <h1><!--Eco<span class="main-credit"> <?php echo $data['credit_balance']?>-->o</span> </h1>
-                                <h3>WALLET AMOUNT</h3>
+                                <div class="icon_container">
+                                    <i class='bx bxs-bank' style='font-size: 50px;'></i>
+                                </div>
+                                <h1><?php echo $data['collector']->center_name?></h1>
+                                <h5>Center ID: CEN <?php echo $data['collector']->center_id?> </h5>
                             </div>
                         </div>
                         <div class="main-right-bottom-one-right">
@@ -83,17 +86,17 @@
                             </div>
                             <h3>Eco Credit Value</h3>
                         </div>
-                        <div class="main-right-bottom-two-cont A">
+                        <div class="main-right-bottom-two-cont A" onclick="redirect_complains()">
                             <div class="icon_container">
                                 <i class='bx bxs-bank'></i>
                             </div>
-                            <h3>Discount Agents</h3>
+                            <h3>Complaints</h3>
                         </div>
-                        <div class="main-right-bottom-two-cont A" onclick="redirect_complains()">
+                        <div class="main-right-bottom-two-cont A" onclick="redirect_complains_history()">
                             <div class="icon_container">
                                 <i class='bx bx-donate-heart'></i>
                             </div>
-                            <h3>Complaints</h3>
+                            <h3>Complaints History</h3>
                         </div>
 
                     </div>
@@ -101,55 +104,55 @@
                         <div class="main-right-bottom-three-left">
                             <h1>Recently Completed Request</h1>
 
-                                 <?php
-                                 $req_completed_history = $data['req_completed_history'];
-                         
-                                 // Sort the completed history by completion date (assuming completion_datetime property)
-                                 usort($req_completed_history, function ($a, $b) {
-                                     $dateA = strtotime($a->completed_datetime);
-                                     $dateB = strtotime($b->completed_datetime);
-                         
-                                     return $dateB - $dateA; // Sort in descending order (most recent first)
-                                 });
-                         
-                                 // Extract the first three elements after sorting
-                                 $limited_completed_history = array_slice($req_completed_history, 0, 3);
+                                    <?php
+                                    $req_completed_history = $data['req_completed_history'];
+                            
+                                    // Sort the completed history by completion date (assuming completion_datetime property)
+                                    usort($req_completed_history, function ($a, $b) {
+                                        $dateA = strtotime($a->completed_datetime);
+                                        $dateB = strtotime($b->completed_datetime);
+                            
+                                        return $dateB - $dateA; // Sort in descending order (most recent first)
+                                    });
+                            
+                                    // Extract the first three elements after sorting
+                                    $limited_completed_history = array_slice($req_completed_history, 0, 3);
 
-                                 foreach ($limited_completed_history as $completion):
-                                    ?>
-                                    <div class="main-right-bottom-three-left-cont">
-                                        <img class="td-pro_pic"
-                                        src="<?php echo (empty($completion->customer_image) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/'. $completion->customer_image) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $completion->customer_image; ?>"
-                                            alt="">
-                                        <h3>
-                                            C <?php echo $completion->customer_id; ?>
-                                        </h3>
-                                        <h2>
-                                            <?php echo $completion->credit_amount;?>
-                                        </h2>
+                                    foreach ($limited_completed_history as $completion):
+                                        ?>
+                                        <div class="main-right-bottom-three-left-cont">
+                                            <img class="td-pro_pic"
+                                            src="<?php echo (empty($completion->customer_image) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/'. $completion->customer_image) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $completion->customer_image; ?>"
+                                                alt="">
+                                            <h3>
+                                                C <?php echo $completion->customer_id; ?>
+                                            </h3>
+                                            <h2>
+                                                Eco  <?php echo $completion->credit_amount;?>
+                                            </h2>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <!-- <div class="map" id="map"></div> -->
+                            </div>
+                                <div class="main-right-bottom-three-right">
+                                    <div class="main-right-bottom-three-right-left">
+                                            <h1>Requests Satisfied</h1>
+                                            <div class="main-right-bottom-three-right-cont">
+                                                <div class="circular-progress">
+                                                    <span class="progress-value">
+                                                        0 %
+                                                    </span>
+                                                </div>
+                                            </div>  
                                     </div>
-                                <?php endforeach; ?>
-                            <!-- <div class="map" id="map"></div> -->
-                        </div>
-                        <div class="main-right-bottom-three-right">
-                            <div class="main-right-bottom-three-right-left">
-                                <h1>Requests Satisfied</h1>
-                                <div class="main-right-bottom-three-right-cont">
-                                    <div class="circular-progress">
-                                        <span class="progress-value">
-                                            0 %
-                                        </span>
-                                    </div>
-
                                     <div class="main-right-bottom-three-right-right">
-                                        <h1>Centers</h1>
+                                        <h1>Assigned Requests</h1>
                                         <div class="map" id="map"></div>
 
                                     </div>
                                 </div>
-
                             </div>
-                        </div>
+                    </div>
 
                     </div>
                     <div class="eco_credit_per_quantity" id="eco_credit_per_quantiy_pop">
@@ -451,6 +454,7 @@
                      document.getElementById("eco_credit_per_quantiy_pop").classList.remove('active');
                      document.getElementById('overlay').style.display = "none";
                  });
+
                 function redirectToAssignedRequests() {
                     console.log('as');
                     var linkUrl = "<?php echo URLROOT?>/collectors/request_assinged"; // Replace with your desired URL
@@ -460,6 +464,102 @@
                 function redirect_complains() {
                     var linkUrl = "<?php echo URLROOT?>/collectors/complains";
                     window.location.href = linkUrl;
+                }
+
+                function redirect_complains_history() {
+                    var linkUrl = "<?php echo URLROOT?>/collectors/complains_history";
+                    window.location.href = linkUrl;
+                }
+
+
+
+                function initMap() {
+                    var center = {
+                        lat: 7.7,
+                        lng: 80.7718
+                    };
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        center: center,
+                        zoom: 5.8,
+                        styles: [{
+                                featureType: 'all',
+                                elementType: 'labels.text',
+                                stylers: [{
+                                        visibility: 'on'
+                                    },
+                                    {
+                                        fontSize: '10px'
+                                    }
+                                ]
+                            },
+                            {
+                                featureType: 'poi',
+                                elementType: 'labels.icon',
+                                stylers: [{
+                                        visibility: 'off'
+                                    } // Hide the icons for points of interest
+                                ]
+                            },
+                            {
+                                featureType: 'poi',
+                                elementType: 'labels.text',
+                                stylers: [{
+                                        visibility: 'off'
+                                    } // Hide text labels for points of interest
+                                ]
+                            },
+                            {
+                                featureType: 'transit',
+                                elementType: 'labels.icon',
+                                stylers: [{
+                                        visibility: 'off'
+                                    } // Hide the icons for transit stations
+                                ]
+                            },
+                            {
+                                featureType: 'transit',
+                                elementType: 'labels.text',
+                                stylers: [{
+                                        visibility: 'off'
+                                    } // Hide text labels for transit stations
+                                ]
+                            },
+                            {
+                                featureType: 'all',
+                                elementType: 'all',
+                                stylers: [{
+                                        saturation: -35
+                                    } // Adjust the saturation to make the map darker
+                                ]
+                            }
+                        ]
+                    });
+
+                    var customColoredMarkerIcon = {
+                        url: 'https://maps.google.com/mapfiles/ms/micons/green-dot.png',
+                        size: new google.maps.Size(31, 31),
+                        scaledSize: new google.maps.Size(19, 18)
+                    };
+
+                    var points = <?php echo $data['assigned_requests']; ?>;;
+                    points.forEach((point) => {
+                        var marker = new google.maps.Marker({
+                            position: {
+                                lat: parseFloat(point.lat),
+                                lng: parseFloat(point.longi)
+                            },
+                            map: map,
+                            title: point.region,
+                            icon: customColoredMarkerIcon
+                        });
+
+                        marker.addListener('click', function() {
+                            var infowindow = new google.maps.InfoWindow({
+                                content: point.region
+                            });
+                            infowindow.open(map, marker);
+                        });
+                    });
                 }
                 </script>
 

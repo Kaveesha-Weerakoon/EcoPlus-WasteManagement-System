@@ -65,16 +65,16 @@
       $this->db->bind(':reason', $data['reason']);
       $this->db->bind(':assinged', $data['assinged']);
       $this->db->bind(':collector_id', $data['collector_id']);
-
       $insertResult = $this->db->execute();
-  
+     
       if ($insertResult) {
           $this->db->query('UPDATE request_main SET type = :type WHERE req_id = :req_id');
           $this->db->bind(':type', 'cancelled');
           $this->db->bind(':req_id', $data['request_id']);
-          $request=$this->get_request_by_id($data['request_id']);
-
           $updateResult = $this->db->execute();
+
+          $request=$this->get_request_by_id($data['request_id']);
+          
           if( $updateResult && $request){
             $this->db->query('INSERT INTO customer_nofification (customer_id, notification) VALUES (:customer_id, :notification)');
             $this->db->bind(':customer_id',$request->customer_id);
@@ -94,9 +94,10 @@
       } else {
           return false;
       }
-      }catch (PDOException $e) {
+    } catch (PDOException $e) {
       return false;
-     }
+  }
+      
   }
 
     public function get_cancelled_request($customer_id){    

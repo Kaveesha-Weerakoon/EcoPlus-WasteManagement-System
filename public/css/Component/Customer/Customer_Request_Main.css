@@ -114,7 +114,6 @@
     .notification_popup h1 {
         font-size: 19px;
         letter-spacing: 0.001rem;
-        margin-bottom: 13px;
         margin-top: 5px;
         margin-left: 8px;
     }
@@ -127,13 +126,43 @@
     }
 
     .notification {
-        height: 43px !important;
+        height: 38px !important;
         margin-top: 10px;
         display: flex;
         align-items: center;
         padding-left: 10px;
         font-size: 14px;
         cursor: pointer;
+    }
+
+    .mark_as_read {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .notification_cont {
+        overflow: scroll;
+        max-height: 150px;
+    }
+
+    .mark_as_read button {
+        margin-top: 2px;
+        font-size: 13px;
+        text-align: center;
+        margin-top: 4px;
+        font-weight: 700;
+        border: none;
+        background-color: none !important;
+        background: none;
+        cursor: pointer !important;
+        color: var(--main-text-color);
+
+    }
+
+    .mark_as_read .bx {
+        font-size: 26px;
     }
 
     .notification:hover {

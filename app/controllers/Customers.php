@@ -447,9 +447,11 @@
           $data['name_err'] = 'Please enter name';
         }
        
-        // Validate Password
+        // Validate contact number
         if(empty($data['contact_no'])){
           $data['contact_no_err'] = 'Please enter contact no';
+        }elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter a valid contact number';
         }
 
         if(empty($data['region'])){

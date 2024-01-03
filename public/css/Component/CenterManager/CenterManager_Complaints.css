@@ -1,4 +1,4 @@
-.Customer_Complains {
+.CenterManager_Complaints {
 
     #dashboard i {
         color: var(--green-color-one);
@@ -243,7 +243,7 @@
         }
 
         .main-bottom-component-left-component input {
-            height: 29px;
+            height: 32px;
             width: 80%;
             outline: none;
             border-radius: 5px;
@@ -259,6 +259,10 @@
 
         .main-bottom-component-left-component input:focus {
             border-color: #4dccaa;
+        }
+
+        .A input{
+            height: 50px;
         }
 
         .complain {
@@ -281,7 +285,7 @@
         }
 
         .main-bottom-component-left button {
-            height: 33px;
+            height: 35px;
             margin-top: 10px;
             width: 83%;
             outline: none;

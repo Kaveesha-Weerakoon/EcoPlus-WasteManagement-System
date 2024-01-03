@@ -88,10 +88,13 @@
     public function request_main(){
 
       $current_request=$this->Request_Model->get_request_current($_SESSION['user_id']);
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
 
       $data = [
         'request' => $current_request,
-        'cancel'=>''
+        'cancel'=>'',      
+        'notification'=> $Notifications ,
+
       ];
      
       $this->view('customers/request_main', $data);
@@ -132,25 +135,33 @@
 
     public function request_completed(){
       $completed_request=$this->Collect_Garbage_Model->get_complete_request_relevent_customer($_SESSION['user_id']);
-     
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+
       $data = [
-        'completed_request' => $completed_request
-        
+        'completed_request' => $completed_request,       
+        'notification'=> $Notifications ,     
       ];
       $this->view('customers/request_completed', $data);
     }
 
     public function request_cancelled(){
-      $cancelled_request=$this->Request_Model->get_cancelled_request($_SESSION['user_id']);
+      $cancelled_request=$this->Request_Model->get_cancelled_request($_SESSION['user_id']);      
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+
       $data = [
-        'cancelled_request' => $cancelled_request
+        'cancelled_request' => $cancelled_request,        
+        'notification'=> $Notifications ,
+
       ];
       $this->view('customers/request_cancelled', $data);
     }
 
-    public function history(){
+    public function history(){      
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+
       $data = [
-        'title' => 'TraversyMVC',
+        'title' => 'TraversyMVC',     
+        'notification'=> $Notifications ,
       ];
      
       $this->view('customers/history', $data);
@@ -159,24 +170,32 @@
     public function history_complains(){
       $id=$_SESSION['user_id']; 
       $complains = $this->customer_complain_Model->get_complains($id);
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
 
       $data = [
-        'complains' => $complains
+        'complains' => $complains ,  
+        'notification'=> $Notifications ,
+
       ];
      
       $this->view('customers/history_complains', $data);
     }
 
     public function transfer_history(){
-      $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']); 
+      $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']);   
+         $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+ 
       $data = [
-        'transaction_history' =>$transaction_history
+        'transaction_history' =>$transaction_history,  
+        'notification'=> $Notifications 
       ];
      
       $this->view('customers/transfer_history', $data);
     }
 
     public function editprofile(){
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $id=$_SESSION['user_id']; 
         $user=$this->customerModel->get_customer($id);
@@ -190,6 +209,7 @@
         'city'=>trim($_POST['city']),
         'current'=>'',       
         'email'=>trim($_POST['email']),
+        'notification'=> $Notifications ,
 
         'new_pw'=>'',
         're_enter_pw'=>'',
@@ -275,7 +295,9 @@
         'contactno_err' =>'',
         'city_err'=>'',
         'profile_err'=>'',
-        'success_message'=>''
+        'success_message'=>'',       
+         'notification'=> $Notifications ,
+
 
       ];
       $id=$_SESSION['user_id']; 
@@ -292,6 +314,7 @@
     }
 
     public function change_password(){
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
       
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); $data=[
@@ -314,7 +337,9 @@
           'contactno_err' =>'',
           'city_err'=>'' ,
           'profile_err'=>'',
-          'success_message'=>''
+          'success_message'=>'',      
+          'notification'=> $Notifications ,
+ 
         ];
   
   
@@ -384,9 +409,9 @@
             'contactno_err' =>'',
             'city_err'=>'',
             'profile_err'=>'',
-            'success_message'=>''
-  
-  
+            'success_message'=>'',          
+            'notification'=> $Notifications ,
+
           ];
           $this->view('customers/editprofile', $data);
   
@@ -422,9 +447,11 @@
           $data['name_err'] = 'Please enter name';
         }
        
-        // Validate Password
+        // Validate contact number
         if(empty($data['contact_no'])){
           $data['contact_no_err'] = 'Please enter contact no';
+        }elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter a valid contact number';
         }
 
         if(empty($data['region'])){

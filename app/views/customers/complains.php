@@ -42,7 +42,7 @@
                         <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
                             alt="">
                         <div class="main-right-top-profile-cont">
-                            <h3>Kaveesha</h3>
+                            <h3><?php echo $_SESSION['user_name']?></h3>
                             <p>ID : C <?php echo $_SESSION['user_id']?></p>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                         <form class="main-bottom-component-left" action="<?php echo URLROOT;?>/customers/complains"
                             method="post">
                             <div class="main-bottom-component-left-topic">
-                                <h2>Make a Complain</h2>
+                                <h2>Make a Complaint</h2>
                                 <div class="line"></div>
                             </div>
 
@@ -84,13 +84,13 @@
                             </div>
 
                             <div class="main-bottom-component-left-component">
-                                <h2>Complain</h2>
+                                <h2>Complaint</h2>
                                 <input value="<?php echo $data['complain']; ?>" name="complain" type="text"
                                     placeholder="Complain">
                                 <div class="err"><?php echo $data['complain_err']; ?></div>
                             </div>
                             <div class="main-bottom-component-left-button">
-                                <button type="submit">Make Complain</button>
+                                <button type="submit">Submit</button>
                             </div>
                         </form>
                         <div class="main-bottom-component-right">
@@ -104,7 +104,7 @@
                     <div class="popup" id="popup">
                         <img src="<?php echo IMGROOT?>/check.png" alt="">
                         <h2>Success!!</h2>
-                        <p>Complain has been reported successfully</p>
+                        <p>Complaint has been reported successfully</p>
                         <a href="<?php echo URLROOT?>/customers/history_complains"><button type="button">OK</button></a>
 
 

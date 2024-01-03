@@ -2,7 +2,6 @@
 
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Mukta:wght@500&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital,wght@0,400;0,500;1,400&family=Rubik:wght@500&family=Shrikhand&display=swap');
 
-
     * {
         padding: 0;
         margin: 0;
@@ -25,7 +24,6 @@
         color: var(--main-text-color);
         box-shadow: var(--box-shadow2) !important;
         z-index: 2;
-
     }
 
     .main-left-top {
@@ -58,8 +56,6 @@
         padding-left: 16%;
         padding-top: 15%;
     }
-
-
 
     .main-left-middle h1 {
         font-size: 18px;
@@ -130,7 +126,6 @@
         display: none;
     }
 
-    /* Style for the toggle button */
     .toggle-button {
         display: inline-block;
         cursor: pointer;
@@ -142,7 +137,6 @@
         transition: background-color 0.3s ease;
     }
 
-    /* Style for the toggle indicator */
     .toggle-indicator {
         position: absolute;
         top: 3px;
@@ -154,7 +148,6 @@
         transition: transform 0.3s ease;
     }
 
-    /* Change button color and move indicator on toggle */
     .toggle-container input[type="checkbox"]:checked+.toggle-button {
         background-color: black;
     }
@@ -163,7 +156,9 @@
         transform: translateX(13px);
     }
 
-    @media screen and (max-width: 1266px) {
+
+
+    @media screen and (max-width: 1207px) {
         .main-left-top h3 {
             display: none;
         }
@@ -173,20 +168,24 @@
             width: 75px;
             height: 75px;
         }
-    }
 
-    @media screen and (max-width: 1266px) {
         .main-left-middle-content h3 {
             font-size: 16px;
         }
 
+        .toggle-container {
+            margin-right: 7px;
+        }
 
     }
 
-    @media screen and (max-width: 1266px) {
+    @media screen and (max-width: 927px) {
         .main-left-middle-content h3 {
-            font-size: 14px;
+            font-size: 14px !important;
         }
+
+
+
     }
 
     @media screen and (max-width: 784px) {

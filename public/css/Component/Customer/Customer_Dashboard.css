@@ -145,6 +145,8 @@
         background-color: none !important;
         background: none;
         cursor: pointer !important;
+        color: var(--main-text-color);
+
     }
 
     .mark_as_read .bx {
@@ -187,7 +189,6 @@
     .main-right-top-profile-cont p {
         font-size: 14px;
     }
-
 
     /*main right bottom*/
     .main-right-bottom {
@@ -274,13 +275,11 @@
         color: white !important;
         letter-spacing: 0.03rem;
         transition: background-color 0.6s ease-in;
-
     }
 
     .main-right-bottom-one-left .right h1 {
         font-size: 18px;
-        color: var(--background-color-two);
-
+        color: var(--background-color-two)
     }
 
     .main-right-bottom-one-left .right h3 {
@@ -294,7 +293,6 @@
         font-size: 29px;
         font-weight: bolder;
     }
-
 
     .main-right-bottom-one-right {
         width: 50%;
@@ -408,7 +406,6 @@
         font-size: 18px;
         color: var(--green-color-one);
         width: 175px;
-
     }
 
     .main-right-bottom-three-right {
@@ -549,7 +546,6 @@
         font-size: 18px;
         margin-top: 5px;
         font-weight: 500;
-
     }
 
     .Eco_Credit_Per_Cont {
@@ -576,10 +572,7 @@
     .Eco_Credit_Per_Cont .Cont .bx {
         font-size: 29px;
         margin-bottom: 10px;
-
     }
-
-
 
     .overlay {
         position: fixed;
@@ -592,13 +585,63 @@
         display: none;
     }
 
+
+    @media screen and (max-width: 1320px) {
+        .eco_credit_per_quantity {
+            width: 80%;
+            height: 40%;
+            overflow: scroll;
+
+        }
+
+        .Eco_Credit_Per_Cont .Cont {
+            margin-left: 35px;
+            margin-right: 35px;
+        }
+    }
+
     @media screen and (max-width: 1108px) {
         .main-right-bottom {}
+
+        .main-right {
+            background-color: var(--background-color-right);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-right-top {
+            background-color: var(--background-color-main);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            box-shadow: var(--box-shadow2);
+            width: 100%;
+            box-sizing: border-box;
+            height: 100px;
+            margin-bottom: 50px;
+        }
+
+        .main-right-top-search {
+            display: none;
+        }
+
+        .notification_popup {
+            top: 11%;
+            right: 19%;
+            width: 25%;
+        }
+
+        .notification_popup h1 {
+            font-size: 19px;
+            letter-spacing: 0.001rem;
+            margin-top: 5px;
+            margin-left: 8px;
+        }
 
         .main-right-bottom-one {
             flex-direction: column;
             height: 500px;
-
         }
 
         .main-right-bottom-one-left {
@@ -647,7 +690,6 @@
             flex-direction: column;
             height: auto;
             width: 90%;
-
         }
 
         .main-right-bottom-three-right {
@@ -669,7 +711,6 @@
             height: 25px;
         }
 
-
         .map {
             width: 90%;
             padding-top: 2%;
@@ -685,8 +726,35 @@
 
     @media screen and (max-width: 844px) {
         .main-right-top-notification {
-
             margin-left: 5%;
+        }
+
+        .notification_popup {
+            top: 11%;
+            right: 46%;
+            width: 31%;
+        }
+
+        .notification_popup h1 {
+            font-size: 19px;
+            letter-spacing: 0.001rem;
+            margin-top: 5px;
+            margin-left: 8px;
+        }
+
+        .main-right-bottom-one-left h1 {
+            font-size: 21px !important;
+            margin-top: 22px;
+        }
+
+        .main-right-bottom-one-left h2 {
+            font-size: 15px !important;
+            margin-bottom: 5px;
+        }
+
+        .main-right-bottom-one-left button {
+            width: 175px !important;
+            height: 45px !important;
         }
 
         .map {
@@ -696,6 +764,44 @@
             border-radius: 10px;
             box-shadow: var(--box-shadow);
         }
+
+        .main-right-bottom-three-left-cont h3 {
+            font-size: 15px;
+            width: 250px;
+            margin-left: 0%;
+        }
+
+        .Eco_Credit_Per_Cont {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .eco_credit_per_quantity {
+            width: 65%;
+            height: 50%;
+        }
+
+        .Eco_Credit_Per_Cont .Cont {
+            margin: 15px;
+        }
+
+        .eco_credit_per_quantity h2 {
+            margin-bottom: 10px !important;
+        }
+
     }
 
+    @media screen and (max-width: 683px) {
+        .notification {
+            height: 41px !important;
+            margin-top: 6px;
+            font-size: 13px;
+
+        }
+
+        .notification_popup h1 {
+            font-size: 17px;
+        }
+
+    }
 }

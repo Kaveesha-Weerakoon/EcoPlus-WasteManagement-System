@@ -444,7 +444,7 @@
         cursor: pointer;
         border: none;
         letter-spacing: 1px;
-        background: #1B6652;
+        background: var(--green-color-one);
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
         margin-bottom: 20px;
         margin-top: 20px;
@@ -463,7 +463,7 @@
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -547,7 +547,7 @@
         top: 0;
         left: 0;
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -597,7 +597,7 @@
         width: 50%;
         margin-right: 20px;
         padding: 10px 0;
-        background: rgb(44, 196, 42);
+        background: var(--green-color-one);
         color: white;
         border: 0;
         outline: none;
@@ -606,6 +606,10 @@
         cursor: pointer;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 
+    }
+
+    .updatebtn:hover{
+        background:#19954e ;
     }
 
     .cancelbtn1 {
@@ -629,7 +633,7 @@
     .update-topic-line {
         width: 93px;
         height: 4px;
-        background-color: #1B6652;
+        background-color: var(--green-color-one);
         margin-bottom: 15px;
     }
 
@@ -702,7 +706,7 @@
         margin-left: 1px;
         height: 3px;
         width: 30px;
-        background: #1B6652;
+        background: var(--green-color-one);
 
 
     }
@@ -729,7 +733,7 @@
         top: 0;
         left: 0;
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -773,7 +777,7 @@
         width: 100%;
         margin-top: 30px;
         padding: 10px 0;
-        background: #6fd649;
+        background: var(--green-color-one);
         color: white;
         border: 0;
         outline: none;
@@ -784,13 +788,17 @@
 
     }
 
+    .popup1 button:hover{
+        background: #19954e;
+    }
+
     /*personal details popup*/
     .personal-details-popup-box {
         position: fixed;
         top: 0;
         left: 0;
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -933,7 +941,7 @@
         margin-bottom: 15px;
         height: 3px;
         width: 45px;
-        background: #1B6652;
+        background: var(--green-color-one);
 
     }
 
@@ -953,7 +961,7 @@
         top: 0;
         left: 0;
         background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1056,7 +1064,7 @@
         margin-bottom: 15px;
         height: 3px;
         width: 45px;
-        background: #1B6652;
+        background: var(--green-color-one);
 
     }
 

@@ -59,6 +59,12 @@
                                 <div class="line"></div>
                             </div>
                         </a>
+                        <a href="<?php echo URLROOT?>/Admin/complaint_centers">
+                            <div class="main-right-top-three-content">
+                                <p>Centers</p>
+                                <div class="line"></div>
+                            </div>
+                        </a>
                         <a href="">
                             <div class="main-right-top-three-content">
                                 <p>Credit Discount Agents</p>
@@ -73,28 +79,28 @@
                     <div class="main-right-bottom-top">
                         <table class="table">
                             <tr class="table-header">
-                                <th>Complain ID</th>
+                                <th>Complaint ID</th>
                                 <th>Customer ID</th>
                                 <th>Date</th>
                                 <th>Contact NO</th>
                                 <th>Customer Name</th>
                                 <th>Subject</th>
-                                <th>Complain</th>
-                                <th>Action</th>
+                                <th>Complaint</th>
+                                <th>Delete</th>
                             </tr>
                         </table>
                     </div>
                     <div class="main-right-bottom-down">
                         <table class="table">
-                        <?php foreach($data['complains'] as $post) : ?>
+                        <?php foreach($data['complains'] as $complaint) : ?>
                                        <tr class="table-row">
-                                           <td>Com <?php echo $post->id?></td>
-                                           <td>C<?php echo $post->customer_id?></td>
-                                           <td><?php echo $post->date?></td>
-                                           <td><?php echo $post->contact_no?></td>
-                                           <td><?php echo $post->name?></td>
-                                           <td><?php echo $post->subject?></td>
-                                           <td><?php echo $post->complaint?></td>                                   
+                                           <td>Com <?php echo $complaint->id?></td>
+                                           <td>C<?php echo $complaint->customer_id?></td>
+                                           <td><?php echo $complaint->date?></td>
+                                           <td><?php echo $complaint->contact_no?></td>
+                                           <td><?php echo $complaint->name?></td>
+                                           <td><?php echo $complaint->subject?></td>
+                                           <td><?php echo $complaint->complaint?></td>                                   
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
                                         </tr>
                                   <?php endforeach; ?>

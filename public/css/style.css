@@ -98,6 +98,7 @@
 
 @import url('Component/Admin/Admin_Customer_Complains.css');
 @import url('Component/Admin/Admin_Collectors_Complains.css');
+@import url('Component/Admin/Admin_Centers_Complains.css');
 
 @import url('Component/Admin/Admin_Center_Manager_Add.css');
 @import url('Component/Admin/Admin_Center_Manager.css');
@@ -130,6 +131,7 @@
     --main-text-color: #414143;
     --green-color-one: #1ca557;
     --green-color-two: #47b076;
+    --button-hover-green: #19954e;
     --background-color-one: #dcdde1;
     --background-color-two: #f5f6fa;
     --background-color-main: #ffff;

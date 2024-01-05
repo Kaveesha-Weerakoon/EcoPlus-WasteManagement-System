@@ -40,11 +40,16 @@
                                     <td><?php  echo $request->customer_id?></td>
                                     <td><?php  echo $request->contact_no?></td>
                                     <td><?php  echo $request->instructions?></td>
-                                    <td><img onclick="assign(<?php echo $request->req_id ?>)" class="add"
-                                            src="<?php echo IMGROOT?>/assign.png" alt=""></td>
                                     <td>
-                                        <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel"
-                                            src="<?php echo IMGROOT?>/close_popup.png" alt="">
+                                        <i class='bx bxs-user-check' style="font-size: 32px;" onclick="assign(<?php echo $request->req_id ?>)"></i>
+                                        <!-- <img onclick="assign(<?php echo $request->req_id ?>)" class="add"
+                                            src="<?php echo IMGROOT?>/assign.png" alt=""> -->
+                                    </td>
+                                    <td>
+                                        <i class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"
+                                        onclick="cancel(<?php echo $request->req_id ?>)"></i>
+                                        <!-- <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel"
+                                            src="<?php echo IMGROOT?>/close_popup.png" alt=""> -->
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

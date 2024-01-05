@@ -45,12 +45,19 @@
                                             alt="">
                                     </td>
                                     <td>
-                                        <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                            class="cancel" src="<?php echo IMGROOT ?>/info.png" alt="">
+                                        <i class='bx bx-info-circle' style="font-size: 29px"
+                                            onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
+                                            ></i>
+
+                                        <!-- <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
+                                            class="cancel" src="<?php echo IMGROOT ?>/info.png" alt=""> -->
                                     </td>
                                     <td>
-                                        <img onclick="cancel(<?php echo $request->req_id ?>,<?php echo  $request->collector_id ?>)"
-                                            class="cancel" src="<?php echo IMGROOT?>/close_popup.png" alt="">
+                                        <i class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"
+                                        onclick="cancel(<?php echo $request->req_id ?>,<?php echo  $request->collector_id ?>)"></i>
+
+                                        <!-- <img onclick="cancel(<?php echo $request->req_id ?>,<?php echo  $request->collector_id ?>)"
+                                            class="cancel" src="<?php echo IMGROOT?>/close_popup.png" alt=""> -->
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

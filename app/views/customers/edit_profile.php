@@ -148,11 +148,30 @@
                                 </div> <button type=submit>Change Password</button>
                             </form>
                         </div>
+                        <div class="main-right-bottom-content-delete-account">
+                            <div class="main-right-bottom-content-delete-account-cont" onClick="delete_confirm()">
+                                <i class="fa-solid fa-trash-can"></i>
+                                <p>Delete My Account</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overlay" id="overlay">
 
                     </div>
                 </div>
             </div>
-
+            <form class="delete_confirm" id="cancel_confirm" action="<?php echo URLROOT;?>/customers/deleteaccount"
+                method="post">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
+                    <h2>Delete Account?</h2>
+                    <p>This action is permanent and irreversible. Confirm?</p>
+                    <div class="btns">
+                        <a id="cancelLink"><button type="submit" class="deletebtn">Confirm</button></a>
+                        <a id="close_delete"><button type="button" class="cancelbtn">Cancel</button></a>
+                    </div>
+                </div>
+            </form>
             <?php if($data['change_pw_success']=='True') : ?>
             <div class="center_worker_success">
                 <div class="popup" id="popup">
@@ -196,7 +215,20 @@
             }
         }
     });
+
+    function delete_confirm() {
+        document.getElementById('overlay').style.display = "flex";
+        var locationPop = document.querySelector('.delete_confirm ');
+        locationPop.classList.add('active');
+    }
+
+    document.getElementById('close_delete').onclick = function() {
+        document.getElementById('overlay').style.display = "none"; // Fix the syntax error here
+        var locationPop = document.querySelector('.delete_confirm');
+        locationPop.classList.remove('active');
+    };
     </script>
+
     <script src="<?php echo JSROOT?>/Customer_Edit_Profile.js"> </script>
 
 </div>

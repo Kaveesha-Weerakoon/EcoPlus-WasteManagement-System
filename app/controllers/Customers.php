@@ -13,6 +13,7 @@
       $this->Request_Model=$this->model('Request');
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
       $this->Center_Model=$this->model('Center');
+      $this->User_Model=$this->model('User');
 
       if(!isLoggedIn('user_id')){
         redirect('users/login');
@@ -197,11 +198,11 @@
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
       $centers = $this->center_model->getallCenters();
 
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $id=$_SESSION['user_id']; 
         $user=$this->customerModel->get_customer($id);
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-      $data = [
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+       $data = [
         'name'=>trim($_POST['name']),
         'userid'=>'',
         'profile_image_name' => $_SESSION['user_email'].'_'.$_FILES['profile_image']['name'],
@@ -225,35 +226,35 @@
         'profile_err'=>'',
         'success_message'=>'',
         'centers' => $centers
-      ];
+       ];
 
-      if (empty($data['name'])) {
+       if (empty($data['name'])) {
         $data['name_err'] = 'Please enter a name';
-      } elseif (strlen($data['name']) > 200) {
-        $data['name_err'] = 'Name should be at most 200 characters';
-      }
-
-      if (empty($data['contactno'])) {
-        $data['contactno_err'] = 'Please enter a contact no';
-      } elseif (!preg_match('/^\d{10}$/', $data['contactno'])) {
-        $data['contactno_err'] = 'Contact no should be 10 digits ';
-      }
-
-      if (empty($data['city'])) {
-       $data['city_err'] = 'Please enter a city';
-      } elseif (strlen($data['city']) > 200) {
-        $data['city_err'] = 'City should be at most 200 characters';
+       } elseif (strlen($data['name']) > 200) {
+         $data['name_err'] = 'Name should be at most 200 characters';
        }
 
-     if (empty($data['address'])) {
-        $data['address_err'] = 'Please enter an address';
-     } elseif (strlen($data['address']) > 200) {
-        $data['address_err'] = 'Address should be at most 200 characters';
-      }
+       if (empty($data['contactno'])) {
+        $data['contactno_err'] = 'Please enter a contact no';
+       }  elseif (!preg_match('/^\d{10}$/', $data['contactno'])) {
+        $data['contactno_err'] = 'Contact no should be 10 digits ';
+       }
 
-      if(empty($data['name_err']) && empty($data['contactno_err']) && empty($data['city_err']) && empty($data['address_err'])){
+       if (empty($data['city'])) {
+       $data['city_err'] = 'Please enter a city';
+       } elseif (strlen($data['city']) > 200) {
+        $data['city_err'] = 'City should be at most 200 characters';
+        }
+
+       if (empty($data['address'])) {
+        $data['address_err'] = 'Please enter an address';
+       } elseif (strlen($data['address']) > 200) {
+        $data['address_err'] = 'Address should be at most 200 characters';
+       }
+
+       if(empty($data['name_err']) && empty($data['contactno_err']) && empty($data['city_err']) && empty($data['address_err'])){
        
-        if ($_FILES['profile_image']['error'] == 4) {
+         if ($_FILES['profile_image']['error'] == 4) {
            $this->customerModel->editprofile($data);
            $data['profile_image_name']='';
            $data['success_message']="Profile Details Updated Successfully";
@@ -273,10 +274,10 @@
           }
           
         }
-      } 
+       } 
     
-      $this->view('customers/edit_profile', $data);
-     }
+       $this->view('customers/edit_profile', $data);
+       }
      else{
       $data = [
         'name'=>'',
@@ -788,7 +789,6 @@
       }
     }
     
-
     public function transfer_complete() {
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -886,5 +886,50 @@
           $this->view('customers/transfer', $data);
       }
     }
+
+    public function deleteaccount(){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $this->User_Model->deleteuser($_SESSION['user_id']);
+      $this->logout();
+    }
+    else{
+      $data = [
+        'name'=>'',
+        'userid'=>'',
+        'email'=>'',
+        'contactno'=>'',
+        'address'=>'',
+        'city'=>'',
+        'current'=>'',
+        'new_pw'=>'',
+        're_enter_pw'=>'',
+        'current_err'=>'',
+        'new_pw_err'=>'',
+        're_enter_pw_err'=>'',
+        'change_pw_success'=>'',
+        'name_err'=>'',
+        'address_err'=>'',
+        'contactno_err' =>'',
+        'city_err'=>'',
+        'profile_err'=>'',
+        'success_message'=>'',       
+         'notification'=> $Notifications ,
+         'centers' => $centers
+
+
+      ];
+      $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+      $data['name']=$_SESSION['user_name'];
+      $data['userid']=$_SESSION['user_id'];
+      $data['email']=$_SESSION['user_email'];
+      $data['contactno']=$user->mobile_number;
+      $data['address']=$user->address;
+      $data['city']=$user->city;
+     
+      $this->view('customers/edit_profile', $data);
+    }
+   }
+
 }
   ?>

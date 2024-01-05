@@ -70,6 +70,7 @@
     
       .table td {
         height: 55px;
+        overflow: auto;
       }
     
       .table-header {
@@ -182,17 +183,6 @@
 
     }
 
-    /* .cancel-confirm-content input {
-        width: 70%;
-        height: 40px;
-        margin-bottom: 10px;
-        margin-top: 12px;
-        text-align: center;
-        font-size: 20px;
-        border-radius: 5px;
-        border: 1px solid black;
-    } */
-
     .cancel-confirm-content input {
         height: 60px;
         width: 97.5%;
@@ -271,16 +261,9 @@
     }
 
 
-    .cancel-confirm-content-warning {
-        width: 100px;
-        height: 100px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
     /*Assign popup*/
     .View {
-        display: none;
+        /* display: none;
         position: fixed;
         top: 0;
         left: 0;
@@ -289,7 +272,27 @@
         background-color: rgba(0, 0, 0, 0.1);
         z-index: 2;
         align-items: center;
+        justify-content: center; */
+        display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 3;
+        align-items: center;
         justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        background-color: #333;
+
+    }
+
+    .View.active {
+        transform: translate(-50%, -50%) scale(1);
+        background-color: rgba(0, 0, 0, 0);
     }
 
     .View-content {

@@ -78,14 +78,20 @@
             <div class="cancel-confirm" id="cancel-confirm">
                 <form class="cancel-confirm-content" id="cancel-form" method="post"
                     action="<?php echo URLROOT?>/centermanagers/assinged_request_cancell">
-                    <div class="cancel-confirm-top-close">
+                    <!-- <div class="cancel-confirm-top-close">
                         <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop">
-                    </div>
+                    </div> -->
                     <h1>Cancel the Request?</h1>
                     <input name="reason" type="text" placeholder="Input the Reason">
                     <input name="id" type="text">
                     <input name="collector_id" id="collector_id" type="text">
-                    <button onclick="validateCancelForm()" id="cancel-pop" >OK</button>
+                    <div class="cancel-confirm-button-container">
+                        <button type="button" onclick="validateCancelForm()" id="cancel-pop" 
+                            class="cancel-reason-submit-button">Submit</button>
+                        <button type="button" onclick="closecancel()" id="cancel-pop"
+                            class="cancel-reason-cancel-button">Cancel</button>
+                    </div>
+                    
                 </form>
 
             </div>
@@ -168,7 +174,12 @@ function cancel(id, collector_id) {
     inputElement.value = id;
     collector_id.value = collector_id;
 
-    document.getElementById("cancel-confirm").style.display = "flex"
+    // document.getElementById("cancel-confirm").style.display = "flex"
+    var cancel_popup = document.getElementById('cancel-confirm');
+    cancel_popup.classList.add('active');
+
+    document.getElementById('overlay').style.display = "flex";
+    
 }
 
 function searchTable() {
@@ -335,6 +346,14 @@ function updateMapForDate(selectedDate) {
         });
     });
 }
+
+function closecancel() {
+    const popup = document.getElementById("cancel-confirm");
+
+    popup.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
+}
+
 document.addEventListener("DOMContentLoaded", function() {
 
     const closeButton = document.getElementById("cancel-pop");

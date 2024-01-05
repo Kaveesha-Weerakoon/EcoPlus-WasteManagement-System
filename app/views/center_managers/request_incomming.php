@@ -129,6 +129,7 @@
                     alert("Please enter a reason");
                 } else {
                     document.getElementById("cancel-form").submit();
+                    closecancel();
                 }
             }
 
@@ -152,7 +153,12 @@
                 inputElement.style.display = 'none';
 
                 assign_reqid.innerHTML = $id;
-                document.getElementById("View").style.display = "flex"
+
+                // document.getElementById("View").style.display = "flex"
+                var assign_popup = document.getElementById('View');
+                assign_popup.classList.add('active');
+
+                document.getElementById('overlay').style.display = "flex";
             }
 
             function cancel($id) {
@@ -355,7 +361,9 @@
                 });
 
                 closeassign.addEventListener("click", function() {
-                    assign.style.display = "none";
+                    assign.classList.remove('active');
+                    document.getElementById('overlay').style.display = "none";
+                    // assign.style.display = "none";
                 });
 
 

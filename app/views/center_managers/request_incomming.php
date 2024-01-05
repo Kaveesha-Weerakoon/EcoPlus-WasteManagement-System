@@ -73,16 +73,21 @@
                 <div class="cancel-confirm" id="cancel-confirm">
                     <form class="cancel-confirm-content" id="cancel-form" method="post"
                         action="<?php echo URLROOT?>/centermanagers/request_cancell">
-                        <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop">
+                        <!-- <img class="confirm-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop"> -->
                         <h1>Cancel the Request?</h1>
-                        <img class="cancel-confirm-content-warning" src="<?php echo IMGROOT?>/warning.png" alt="">
                         <input name="reason" type="text" placeholder="Input the Reason">
                         <input name="id" type="text">
-                        <button onclick="validateCancelForm()" id="cancel-pop"
-                            style="background-color: tomato;">OK</button>
+                        <div class="cancel-confirm-button-container">
+                            <button onclick="validateCancelForm()" id="cancel-pop" class="cancel-reason-submit-button">Submit</button>
+                            <button id="cancel-pop" class="cancel-reason-cancel-button">Cancel</button>
+                        </div>
+                        
                     </form>
 
                 </div>
+
+                <div class="overlay" id="overlay"></div>
+
                 <div class="View" id="View">
                     <form class="View-content" id="assignForm" method="post"
                         action="<?php echo URLROOT?>/centermanagers/assing">
@@ -91,7 +96,7 @@
 
                         <img class="view_assing" src="<?php echo IMGROOT?>/selection.png" alt="">
                         <div class="view_assing_middle">
-                            <h3>Req ID <b>R <div id="assign_reqid" style="display: inline;"></div></b></h3>
+                            <h3>Req ID: <b>R <div id="assign_reqid" style="display: inline;"></div></b></h3>
                         </div>
                         <input name="assign_req_id" type="text" id="assign_req_id" style="display: none;">
 
@@ -153,7 +158,11 @@
                 var inputElement = document.querySelector('input[name="id"]');
                 inputElement.style.display = 'none';
                 inputElement.value = $id;
-                document.getElementById("cancel-confirm").style.display = "flex"
+                // document.getElementById('cancel-confirm').style.display = "flex";
+                var cancel_popup = document.getElementById('cancel-confirm');
+                cancel_popup.classList.add('active');
+                
+                document.getElementById('overlay').style.display = "flex";
             }
 
             function initMap() {
@@ -333,7 +342,9 @@
 
 
                 closeButton.addEventListener("click", function() {
-                    popup.style.display = "none";
+                    popup.classList.remove('active');
+                    document.getElementById('overlay').style.display = "none";
+                    //popup.style.display = "none";
                 });
 
                 closeassign.addEventListener("click", function() {

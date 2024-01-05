@@ -38,19 +38,21 @@
                                     <td><?php  echo $request->customer_name?></td>
                                     <td><?php  echo $request->name?></td>
                                     <td class="cancel-open">
-                                        <img src="<?php echo IMGROOT ?>/personal_details_icon.png"
+                                            <i class='bx bxs-user' style="font-size: 29px;"
                                             onclick="view_collector('<?php echo $request->collector_image; ?>', '<?php echo $request->collector_id; ?>', '<?php echo $request->name; ?>', 
-                                            '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')"
-                                            alt="">
+                                            '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')"></i>
                                     </td>
-                                    <td><img onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
-                                            class="add" src="<?php echo IMGROOT?>/location.png" alt=""></td>
+                                    <td>
+                                            <i class='bx bx-map' style="font-size: 29px;"
+                                             onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
+                                    </td>
 
                                     <td><?php  echo $request->credit_amount?></td>
 
-                                    <td class="cancel-open"><img
+                                    <td class="cancel-open">
+                                            <i class='bx bx-info-circle' style="font-size: 29px"
                                             onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                            src="<?php echo IMGROOT?>/view.png" alt="">
+                                            ></i>
                                     </td>
                                     <!-- <td><a href="<?php echo URLROOT?>/centermanagers/confirm_garbage_details/<?php echo $request->req_id?>"><button class="confirm_button">Confirm</button></a></td> -->
                                    

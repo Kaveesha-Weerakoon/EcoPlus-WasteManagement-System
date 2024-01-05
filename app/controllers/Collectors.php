@@ -25,7 +25,7 @@
       $jsonData = json_encode($assinged_Requests);
       $assinged_Requests_count=count($this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] ));
       $completed_requests=count($this->Collect_Garbage_Model->get_complete_request($_SESSION['collector_id']));
-      
+      $total_garbage=$this->Collect_Garbage_Model->get_completed_garbage_totals_by_collector($_SESSION['collector_id']);
       $credit= $this->creditModel->get();
       $req_completed_history = $this->Collect_Garbage_Model->get_complete_request_cus($_SESSION['collector_id']); 
 
@@ -35,7 +35,7 @@
           $percentage_completed =json_encode(0);
      } 
    
-
+     $json_Total_Garbage = json_encode($total_garbage);
       $data = [
         'collector' =>$collector,
         'assinged_Requests_count' => $assinged_Requests_count,
@@ -43,6 +43,7 @@
         'eco_credit_per'=>$credit,
         'req_completed_history' =>$req_completed_history,
         'percentage'=> $percentage_completed,
+        'total_garbage'=> $json_Total_Garbage,
         'pop'=>''
          
         ];

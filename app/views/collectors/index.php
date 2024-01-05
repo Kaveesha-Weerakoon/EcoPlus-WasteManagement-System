@@ -379,69 +379,82 @@
                     window.location.href = linkUrl;
                 }
 
-                 function createOrUpdateChart(color, textColor) {
-                     console.log(color);
-                     const ctx = document.getElementById('myChart').getContext('2d');
+                function createOrUpdateChart(color, textColor) {
+                        var Total_Garbage = <?php echo $data['total_garbage']?>;
+                        const ctx = document.getElementById('myChart').getContext('2d');
 
                         myChart = new Chart(ctx, {
-                         type: 'bar',
-                         data: {
-                             labels: ['Plastic', 'Polythene', 'Metal', 'Glass', 'Paper', 'Electronic'],
-                             datasets: [{
-                                 label: 'Kilograms',
-                                 data: [12, 19, 3, 5, 2, 3],
-                                 backgroundColor: color,
-                             }]
-                         },
-                         options: {
-                             scales: {
-                                 x: {
-                                     grid: {
-                                         display: false
-                                     },
-                                     ticks: {
-                                         font: {
-                                             size: 14,
-                                         }
-                                     },
-                                     barPercentage: 0.5, // Adjust to decrease the width of the bars
-                                     categoryPercentage: 0.3 // Adjust to control the space between bars
-                                 },
-                                 y: {
-                                     beginAtZero: true,
-                                     grid: {
-                                         display: false
-                                     }
-                                 }
-                             },
-                             plugins: {
-                                 legend: {
-                                     display: false
-                                 },
-                                 title: {
-                                     display: true,
-                                     text: 'Overall Collection Total',
-                                     color: textColor,
-                                     font: {
-                                         size: 18
-                                     },
-                                     padding: {
-                                         bottom: 25
+                            type: 'bar',
+                            data: {
+                                labels: ['Plastic', 'Polythene', 'Metal', 'Glass', 'Paper', 'Electronic'],
+                                datasets: [{
+                                    label: 'Kilograms',
+                                    data: [Total_Garbage.total_plastic,
+                                        Total_Garbage.total_polythene,
+                                        Total_Garbage.total_metals,
+                                        Total_Garbage.total_glass,
+                                        Total_Garbage.total_paper_waste,
+                                        Total_Garbage.total_electronic_waste
+                                    ],
+                                    backgroundColor: color,
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    x: {
+                                        grid: {
+                                            display: false
+                                        },
+                                        ticks: {
+                                            font: {
+                                                size: 14,
+                                            }
+                                        },
+                                        barPercentage: 0.5, // Adjust to decrease the width of the bars
+                                        categoryPercentage: 0.3 // Adjust to control the space between bars
+                                    },
+                                    y: {
+                                        beginAtZero: true,
+                                        suggestedMax: Math.max.apply(null, [Total_Garbage.total_plastic,
+                                            Total_Garbage.total_polythene,
+                                            Total_Garbage.total_metals,
+                                            Total_Garbage.total_glass,
+                                            Total_Garbage.total_paper_waste,
+                                            Total_Garbage.total_electronic_waste
+                                        ]) + 1, // Add some padding to the maximum value
+                                        grid: {
+                                            display: false
+                                        }
                                     }
-                                 }
-                             },
-                             elements: {
-                                 bar: {
-                                     borderRadius: 10,
-                                 }
-                             },
-                             animation: {
-                                 duration: 700, // Set the duration of the animation in milliseconds
-                                 easing: 'easeIn' // Set the easing function for the animation
-                             }
-                         }
-                     });
-                 }
+                                },
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'Overall Collection Total',
+                                        color: textColor,
+                                        font: {
+                                            size: 18
+                                        },
+                                        padding: {
+                                            bottom: 25
+                                        }
+                                    }
+                                },
+                                elements: {
+                                    bar: {
+                                        borderRadius: 10,
+                                    }
+                                },
+                                animation: {
+                                    duration: 700, // Set the duration of the animation in milliseconds
+                                    easing: 'easeIn' // Set the easing function for the animation
+                                }
+                            }
+                        });
+                    }
                  createOrUpdateChart(color, textColor);
                 console.log('as');
 

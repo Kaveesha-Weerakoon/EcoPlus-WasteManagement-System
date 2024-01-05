@@ -48,9 +48,9 @@
                                     </td>
 
                                     <td class="cancel-open">
-                                        <img src="<?php echo IMGROOT ?>/assign.png"
-                                            <?php if ($request->type === 'completed') { ?>onclick="view_collector('<?php echo $request->collector_image; ?>', '<?php echo $request->collector_user_id; ?>', '<?php echo $request->name; ?>', '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')"
-                                            <?php } ?> alt="">
+                                        <i <?php if ($request->type === 'completed') { ?>onclick="view_collector('<?php echo $request->collector_image; ?>', '<?php echo $request->collector_user_id; ?>', '<?php echo $request->name; ?>', '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')"
+                                            <?php } ?> class="bx bx-info-circle"></i>
+
                                     </td>
 
                                     <td class="cancel-open"><i class='bx bx-map' style="font-size: 29px"
@@ -59,9 +59,9 @@
 
                                     <td><?php  echo $request->credit_amount?></td>
 
-                                    <td class="cancel-open"><img
-                                            onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                            src="<?php echo IMGROOT?>/view.png" alt="">
+                                    <td class="cancel-open">
+                                        <i onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
+                                            class="fa-regular fa-eye"></i>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -110,7 +110,7 @@
                                 <h3>Paper Waste Quantity</h3>
                                 <h3>Electronic Waste Quantity </h3>
                                 <h3>Metals Quantity</h3>
-                                <h3>Details</h3>
+                                <h3 class="note">Details</h3>
                             </div>
                             <div class="collect-details-pop-form-content-right-values">
                                 <div class="collect-details-pop-form-content-right-values-cont">
@@ -137,7 +137,7 @@
                                     <h3 id="Metals_Quantity"></h3>
                                     <h3>&nbsp Kg</h3>
                                 </div>
-                                <div class="collect-details-pop-form-content-right-values-cont">
+                                <div class="collect-details-pop-form-content-right-values-cont note">
                                     <h3 id="Note"></h3>
                                 </div>
                             </div>

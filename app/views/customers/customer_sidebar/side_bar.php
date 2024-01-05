@@ -13,7 +13,7 @@
         </div>
         <div class="main-left-middle-content" onclick="redirect_request()" id="request">
             <div class=" main-left-middle-content-icon">
-                <i class='bx bx-right-arrow-circle'></i>
+                <i class='bx bx-send'></i>
             </div>
             <h3>Requests</h3>
         </div>
@@ -96,6 +96,8 @@ function setDarkModeStyle(isDarkMode) {
     root.style.setProperty("--green-color-two", isDarkMode ? "#fff" : "#47b076");
     root.style.setProperty("--notification-hover", isDarkMode ? "#1ca557" : "#64d798");
     root.style.setProperty("--background-color-two", isDarkMode ? "#001f3f" : "#f5f6fa");
+    root.style.setProperty("--yellow-color", isDarkMode ? "#fff" : "#f6e58d");
+
     root.style.setProperty("--box-shadow", isDarkMode ? "0.5px 0.5px 1px 0.5px rgba(255, 255, 255, 1)" :
         "0 1px 1px 0px rgba(0, 0, 0, 0.1)");
     root.style.setProperty("--table-header", isDarkMode ? "#001f3f" : "#e9f6ef");

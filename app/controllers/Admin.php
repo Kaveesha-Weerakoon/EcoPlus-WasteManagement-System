@@ -14,6 +14,7 @@
       // $this->collector_assistants_Model=$this->model('collector_assistants');
       $this->center_workers_model=$this->model('Center_Worker');
       $this->requests_model=$this->model('Request');
+      $this->center_complaints_model=$this->model('Center_Complaints');
      
 
       if(!isLoggedIn('admin_id')){
@@ -935,6 +936,16 @@
 
       $this->view('admin/center_main_request_cancelled', $data);
 
+    }
+
+    public function complaint_centers(){
+
+      $center_complaints= $this->center_complaints_model->get_center_complaints();
+
+      $data = [
+        'complaints' => $center_complaints
+      ];
+      $this->view('admin/complain_centers', $data);
     }
 
   

@@ -82,40 +82,6 @@
         width: 25px;
       }
 
-    /* .table-row {
-        font-size: 1px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 52px;
-        display: grid;
-        grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
-        border-bottom: 2px solid #CACACA;
-    }
-
-    .table td {
-        height: 50px;
-        font-size: 15.5px;
-        vertical-align: middle;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .table-header {
-        background-color: #ecf0f1;
-        font-size: 17px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 55px;
-        display: grid;
-        grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
-    }
-
-    td img {
-        margin: 7px;
-    } */
-
     .Location {
         display: flex;
         position: fixed;

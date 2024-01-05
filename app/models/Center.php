@@ -107,7 +107,7 @@
     }
 
     public function changeCentermanager($centerid,$center_manager,$assigning_manager_name){
-
+      try{
       $sql = 'UPDATE center SET center_manager_id = :newManagerId, center_manager_name = :newManagerName WHERE id = :centerId';
 
       $this->db->query($sql);
@@ -115,7 +115,11 @@
       $this->db->bind(':newManagerName', $assigning_manager_name->name);
       $this->db->bind(':centerId', $centerid);
  
-      $result= $this->db->execute();    
+      $result= $this->db->execute();   
+     }
+     catch (PDOException $e) {
+      return false;
+  }
     }
 
     public function delete_center($center_id){

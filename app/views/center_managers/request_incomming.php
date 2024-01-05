@@ -2,17 +2,16 @@
 <div class="CenterManager_Main">
     <div class="CenterManager_Request_Main">
         <div class="CenterManager_Request_Incomming">
-            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&callback=initMap" async
-                defer></script>
+
 
             <div class="main">
                 <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
-                
+
                 <div class="main-right">
 
                     <?php require APPROOT . '/views/center_managers/centermanager_requests/requests_top_bar.php'; ?>
-                   
-                    
+
+
                     <?php if(!empty($data['incoming_requests'])) : ?>
                     <div class="main-right-bottom" id="main-right-bottom">
                         <div class="main-right-bottom-top">
@@ -59,13 +58,13 @@
                         </div>
                     </div>
                     <?php else: ?>
-                        <div class="main-right-bottom-three">
-                            <div class="main-right-bottom-three-content">
-                                <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
-                                <h1>You Have No Incomming Requests</h1>
-                                <p>Incomming requests will be appeared as soon as customer requests</p>
-                            </div>
+                    <div class="main-right-bottom-three">
+                        <div class="main-right-bottom-three-content">
+                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                            <h1>You Have No Incomming Requests</h1>
+                            <p>Incomming requests will be appeared as soon as customer requests</p>
                         </div>
+                    </div>
                     <?php endif; ?>
                 </div>
 
@@ -78,10 +77,12 @@
                         <input name="reason" type="text" placeholder="Input the Reason">
                         <input name="id" type="text">
                         <div class="cancel-confirm-button-container">
-                            <button onclick="validateCancelForm()" id="cancel-pop" class="cancel-reason-submit-button">Submit</button>
-                            <button id="cancel-pop" class="cancel-reason-cancel-button">Cancel</button>
+                            <button type="button" onclick="validateCancelForm()" id="cancel-pop"
+                                class="cancel-reason-submit-button">Submit</button>
+                            <button type="button" onclick="closecancel()" id="cancel-pop"
+                                class="cancel-reason-cancel-button">Cancel</button>
                         </div>
-                        
+
                     </form>
 
                 </div>
@@ -161,7 +162,7 @@
                 // document.getElementById('cancel-confirm').style.display = "flex";
                 var cancel_popup = document.getElementById('cancel-confirm');
                 cancel_popup.classList.add('active');
-                
+
                 document.getElementById('overlay').style.display = "flex";
             }
 
@@ -303,6 +304,13 @@
                 });
             }
 
+            function closecancel() {
+                const popup = document.getElementById("cancel-confirm");
+
+                popup.classList.remove('active');
+                document.getElementById('overlay').style.display = "none";
+            }
+
             document.addEventListener("DOMContentLoaded", function() {
 
                 const closeButton = document.getElementById("cancel-pop");
@@ -342,9 +350,8 @@
 
 
                 closeButton.addEventListener("click", function() {
-                    popup.classList.remove('active');
-                    document.getElementById('overlay').style.display = "none";
-                    //popup.style.display = "none";
+
+                    console.log('as');
                 });
 
                 closeassign.addEventListener("click", function() {

@@ -29,13 +29,17 @@
                                 <div class="notification-green-dot">
 
                                 </div>
-                                <?php echo $notification->notification?>
+                                <div class="notification_right">
+                                    <p><?php echo $notification->datetime?></p>
+                                    <?php echo $notification->notification?>
+
+                                </div>
                             </div>
                             <?php endforeach; ?>
 
                         </div>
                         <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/customers/">
-                            <i class='bx bx-signal-4'></i>
+                            <i class="fa-solid fa-check"> </i>
                             <button type="submit">Mark all as read</button>
                         </form>
 
@@ -264,7 +268,7 @@ notification.addEventListener("click", function() {
         var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
         if (notification_pop.style.height === "0px") {
             if (notificationArraySize >= 3) {
-                notification_pop.style.height = "200px";
+                notification_pop.style.height = "205px";
             }
             if (notificationArraySize == 2) {
                 notification_pop.style.height = "150px";

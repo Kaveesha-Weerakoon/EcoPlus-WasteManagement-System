@@ -32,12 +32,13 @@
                             <table class="table" id="dataTable">
                                 <?php foreach($data['request'] as $request) : ?>
                                 <tr class="table-row">
-                                    <td><?php echo $request->request_id?></td>
+                                    <td>R<?php echo $request->request_id?></td>
                                     <td>
                                         <?php
                                         $typeContent = ($request->type === 'incoming') ? 
-                                        '<img class="processing" src="' . IMGROOT . '/process.png" alt="1">'.'<p class="bold1">Pending</p>'  : 
-                                        '<img class="assinged" src="' . IMGROOT . '/GarbageTruck.png" alt="1">'.'<p class="bold2">Assigned</p>';
+                                        '<i class="fa-solid fa-spinner processing"></i><p class="bold1">Pending</p>':
+                                        '<i class="fa-solid fa-truck-arrow-right assinged"></i><p class="bold2">Assigned</p>';
+ 
                                         echo $typeContent
                                  ?>
                                     </td>
@@ -54,7 +55,7 @@
                                         $typeContent = ($request->type === 'assigned') ? 
                                         '<img class="collector_img" src="' . IMGROOT . '/img_upload/collector/' .$request->image . '" alt="collector image">':
 
-                                        '<img class="collector_img" src="' . IMGROOT . '/collector.png" alt="collector image">';
+                                        '<i class="fa-solid fa-user-large"></i>';
                                         echo $typeContent
                                     ?>
                                     </td>

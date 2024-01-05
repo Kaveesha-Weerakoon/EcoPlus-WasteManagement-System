@@ -35,6 +35,18 @@
 
         }
 
+        public function get_center_complaints(){
+            try{
+                $this->db->query('SELECT * FROM center_complaints ORDER BY center_complaints.date_time DESC');
+                $results = $this->db->resultSet();
+                return $results;
+
+
+            }catch (PDOException $e) {
+                return false;
+            }
+        }
+
 
 
 

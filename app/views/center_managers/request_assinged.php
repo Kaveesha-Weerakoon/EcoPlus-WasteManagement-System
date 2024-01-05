@@ -64,13 +64,13 @@
                     </div>
                 </div>
                 <?php else: ?>
-                    <div class="main-right-bottom-three">
-                        <div class="main-right-bottom-three-content">
-                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
-                            <h1>You have No Assinged Requests</h1>
-                            <p>Assigned requests will be appeared as soon as you assign collectors</p>
-                        </div>
+                <div class="main-right-bottom-three">
+                    <div class="main-right-bottom-three-content">
+                        <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                        <h1>You have No Assinged Requests</h1>
+                        <p>Assigned requests will be appeared as soon as you assign collectors</p>
                     </div>
+                </div>
                 <?php endif; ?>
             </div>
 

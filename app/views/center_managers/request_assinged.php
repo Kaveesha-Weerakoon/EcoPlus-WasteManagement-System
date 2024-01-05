@@ -73,6 +73,8 @@
                     </div>
                 <?php endif; ?>
             </div>
+
+            <!-- cancel popup -->
             <div class="cancel-confirm" id="cancel-confirm">
                 <form class="cancel-confirm-content" id="cancel-form" method="post"
                     action="<?php echo URLROOT?>/centermanagers/assinged_request_cancell">
@@ -80,14 +82,14 @@
                         <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop">
                     </div>
                     <h1>Cancel the Request?</h1>
-                    <img class="cancel-confirm-content-warning" src="<?php echo IMGROOT?>/warning.png" alt="">
                     <input name="reason" type="text" placeholder="Input the Reason">
                     <input name="id" type="text">
                     <input name="collector_id" id="collector_id" type="text">
-                    <button onclick="validateCancelForm()" id="cancel-pop" style="background-color: tomato;">OK</button>
+                    <button onclick="validateCancelForm()" id="cancel-pop" >OK</button>
                 </form>
 
             </div>
+
             <div class="personal-details-popup-box" id="personal-details-popup-box">
                 <div class="personal-details-popup-form" id="popup">
                     <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"

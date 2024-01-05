@@ -136,7 +136,7 @@
                             </div>
                                 <div class="main-right-bottom-three-right">
                                     <div class="main-right-bottom-three-right-left">
-                                            <h1>Requests Satisfied</h1>
+                                            <h1>Requests Completed</h1>
                                             <div class="main-right-bottom-three-right-cont">
                                             <div class="circular-progress">
                                                 <span class="progress-value">0%</span>

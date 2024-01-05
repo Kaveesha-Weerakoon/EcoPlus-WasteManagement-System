@@ -5,11 +5,12 @@
     <div class="CenterManager_Request_Main">
         <div class="CenterManager_Request_Assinged">
             <div class="main">
-                <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
-
+            <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
+               
                 <div class="main-right">
                     <?php require APPROOT . '/views/center_managers/centermanager_requests/requests_top_bar.php'; ?>
 
+                   
                     <?php if(!empty($data['assined_requests'])) : ?>
 
                     <div class="main-right-bottom" id="main-right-bottom">
@@ -120,6 +121,9 @@
                     </div>
                 </div>
             </div>
+
+            <div class="overlay" id="overlay"></div>
+
             <div class="request-details-pop" id="request-details-popup-box">
                 <div class="request-details-pop-form">
                     <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
@@ -209,7 +213,11 @@ function view_collector(image, col_id, name, contact_no, type, vehno, request_id
 
 function view_request_details(request) {
 
-    document.getElementById('request-details-popup-box').style.display = "flex";
+    var requestDetails_popup = document.getElementById('request-details-popup-box');
+    requestDetails_popup.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    // document.getElementById('request-details-popup-box').style.display = "flex";
     document.getElementById('req_id3').innerText = request.req_id;
     document.getElementById('req_id2').innerText = request.customer_id;
     document.getElementById('req_name').innerText = request.customer_name;
@@ -371,7 +379,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     close_request_details.addEventListener("click", function() {
-        document.getElementById('request-details-popup-box').style.display = "none";
+        var request_popup = document.getElementById("request-details-popup-box");
+        request_popup.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
     });
 });
 

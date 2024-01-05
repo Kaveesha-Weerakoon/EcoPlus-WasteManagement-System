@@ -113,6 +113,7 @@
         border-radius: 10px;
     }
 
+    /*cancel confirm*/
     .cancel-confirm {
         display: none;
         position: fixed;
@@ -120,8 +121,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 2;
         align-items: center;
         justify-content: center;
     }
@@ -336,8 +337,19 @@
         margin-bottom: 15px;
         height: 3px;
         width: 45px;
-        background: #1B6652;
+        background: var(--green-color-one);
 
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        display: none;
     }
 
     /* ----------- */
@@ -416,20 +428,40 @@
     } */
      /*request details*/
      .request-details-pop {
-        position: fixed;
+        /* position: fixed;
         top: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 2;
         display: none;
         align-items: center;
         justify-content: center;
         width: 100%;
-        height: 100%;
+        height: 100%; */
+        display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 4;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        background-color: #333;
+       
+    }
+
+    .request-details-pop.active {
+        transform: translate(-50%, -50%) scale(1);
+        background-color: rgba(0, 0, 0, 0);
     }
 
     .request-details-pop-form {
-        width: 35%;
+        width: 500px;
         background: white;
         border-radius: 6px;
         top: 0;

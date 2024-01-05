@@ -19,10 +19,8 @@
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Customer</th>
-                                    <th>Collector</th>
                                     <th>Collector info</th>
                                     <th>Location</th>
-                                    <th>Earned credits</th>
                                     <th>Collection details</th>
                                     <th>Confirmation</th>
                                 </tr>
@@ -36,18 +34,17 @@
                                     <td><?php  echo $request->date?></td>
                                     <td><?php  echo $request->time?></td>
                                     <td><?php  echo $request->customer_name?></td>
-                                    <td><?php  echo $request->name?></td>
                                     <td class="cancel-open">
-                                            <i class='bx bxs-user' style="font-size: 29px;"
+                                        <img class="collector_img" src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->collector_image?>"
                                             onclick="view_collector('<?php echo $request->collector_image; ?>', '<?php echo $request->collector_id; ?>', '<?php echo $request->name; ?>', 
-                                            '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')"></i>
+                                            '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')" >
                                     </td>
                                     <td>
                                             <i class='bx bx-map' style="font-size: 29px;"
                                              onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
                                     </td>
 
-                                    <td><?php  echo $request->credit_amount?></td>
+                                    
 
                                     <td class="cancel-open">
                                             <i class='bx bx-info-circle' style="font-size: 29px"
@@ -111,7 +108,8 @@
                                 <h3>Paper Waste Quantity</h3>
                                 <h3>Electronic Waste Quantity </h3>
                                 <h3>Metals Quantity</h3>
-                                <h3>Details</h3>
+                                <h3>Note</h3>
+                                <h3>Earned Credits</h3>
                             </div>
                             <div class="collect-details-pop-form-content-right-values">
                                 <div class="collect-details-pop-form-content-right-values-cont">
@@ -140,6 +138,9 @@
                                 </div>
                                 <div class="collect-details-pop-form-content-right-values-cont">
                                     <h3 id="Note"></h3>
+                                </div>
+                                <div class="collect-details-pop-form-content-right-values-cont">
+                                    <h3 id="Earned_Credits"></h3>
                                 </div>
                             </div>
                         </div>
@@ -330,6 +331,7 @@ function view_collect_details(request) {
     document.getElementById('Electronic_Waste_Quantity').innerText = request.Electronic_Waste;
     document.getElementById('Metals_Quantity').innerText = request.Metals;
     document.getElementById('Note').innerText = request.note;
+    document.getElementById('Earned_Credits').innerText = request.credit_amount;
 }
 
 // function openConfirmGarbageDetails(req_id){

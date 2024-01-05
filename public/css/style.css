@@ -140,7 +140,8 @@
     --notification-hover: #64d798;
     --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     --box-shadow2: 0 1px 10px rgba(0, 0, 0, 0.1);
-    --table-header: #e9f6ef
+    --table-header: #e9f6ef;
+    --yellow-color: #f6e58d;
 }
 
 a {

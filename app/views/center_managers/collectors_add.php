@@ -70,42 +70,7 @@
 
                     </div>
                 </div>
-                <!-- <div class="main-top">
-                    <a href="<?php echo URLROOT?>/centermanagers">
-                        <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
-                    </a>
-
-                    <div class="main-top-component">
-                        <p><?php echo $_SESSION['center_manager_name']?></p>
-                        <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>" alt="">
-                    </div>
-                </div>
-                
-                <div class="main-bottom-top">
-                    <div class="main-right-top-two">
-                        <h1>Collectors</h1>
-                    </div>
-                    <div class="main-right-top-three">
-                        <a href="<?php echo URLROOT?>/centermanagers/collectors">
-                            <div class="main-right-top-three-content">
-                                <p>View</p>
-                                <div class="line1"></div>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">Register</b></p>
-                                <div class="line"></div>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/centermanagers/collectors_complains">
-                            <div class="main-right-top-three-content">
-                                <p>Complaints</p>
-                                <div class="line1"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div> -->
+               
                 <div class="main-right-bottom-down">
                     <form class="main-bottom-down" method="post" action="<?php echo URLROOT;?>/centermanagers/collectors_add"
                         enctype="multipart/form-data">
@@ -196,7 +161,7 @@
                                     <label>Vehicle Type</label>
                                     <input type="text" name="vehicle_type" placeholder="Vehicle Type"
                                         value="<?php echo $data['vehicle_type']?>">
-                                    <div class="err"> <?php echo $data['vehicleNo_err']?></div>
+                                    <div class="err"> <?php echo $data['vehicleType_err']?></div>
                                 </div>
                             </div>
                             <div class="main-bottom-down-content-one">
@@ -227,21 +192,23 @@
                      
             </div>
 
+            
+            <?php if($data['registered']=='True') : ?>
+            <div class="collector_success">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/check.png" alt="">
+                    <h2>Success!!</h2>
+                    <p>Collector has been registered successfully</p>
+                    <a href="<?php echo URLROOT?>/centermanagers/collectors"><button type="button">OK</button></a>
+
+                </div>
+            </div>
+            <?php endif; ?>
+
         </div>
         <script src="<?php echo JSROOT?>/Center_Manager_Collector.js"> </script>
 
 
-        <?php if($data['registered']=='True') : ?>
-        <div class="collector_success">
-            <div class="popup" id="popup">
-                <img src="<?php echo IMGROOT?>/check.png" alt="">
-                <h2>Success!!</h2>
-                <p>Collector has been registered successfully</p>
-                <a href="<?php echo URLROOT?>/centermanagers/collectors"><button type="button">OK</button></a>
-
-            </div>
-        </div>
-        <?php endif; ?>
 
     </div>
 </div>

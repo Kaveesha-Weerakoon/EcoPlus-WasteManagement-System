@@ -38,19 +38,21 @@
                                     <td><?php  echo $request->customer_name?></td>
                                     <td><?php  echo $request->name?></td>
                                     <td class="cancel-open">
-                                        <img src="<?php echo IMGROOT ?>/assign.png"
+                                            <i class='bx bxs-user' style="font-size: 29px;"
                                             onclick="view_collector('<?php echo $request->collector_image; ?>', '<?php echo $request->collector_id; ?>', '<?php echo $request->name; ?>', 
-                                            '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')"
-                                            alt="">
+                                            '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')"></i>
                                     </td>
-                                    <td><img onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
-                                            class="add" src="<?php echo IMGROOT?>/location.png" alt=""></td>
+                                    <td>
+                                            <i class='bx bx-map' style="font-size: 29px;"
+                                             onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
+                                    </td>
 
                                     <td><?php  echo $request->credit_amount?></td>
 
-                                    <td class="cancel-open"><img
+                                    <td class="cancel-open">
+                                            <i class='bx bx-info-circle' style="font-size: 29px"
                                             onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                            src="<?php echo IMGROOT?>/view.png" alt="">
+                                            ></i>
                                     </td>
                                     <!-- <td><a href="<?php echo URLROOT?>/centermanagers/confirm_garbage_details/<?php echo $request->req_id?>"><button class="confirm_button">Confirm</button></a></td> -->
                                    
@@ -97,7 +99,7 @@
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
                             id="collect-details-pop-form-close">
                         <div class="collect-details-pop-form-top">
-                            <div class="collect-details-topic">Completed Details<div id="req_id3"></div>
+                            <div class="collect-details-topic">Collection Details<div id="req_id3"></div>
                             </div>
                         </div>
 
@@ -278,8 +280,8 @@
                                     </div>
                                     <div class="form-button">
                                         <button type="submit">Confirm</button>
-                                        <a href="<?php echo URLROOT?>/centermanagers/request_completed"><button type="button"
-                                                class="cancel-button">Cancel</button></a>
+                                        <button type="button" class="cancel-button" id="cancelBtn">Cancel</button>
+                                        
                                     </div>
                                     
                                 </form>
@@ -420,7 +422,8 @@ document.getElementById('searchInput').addEventListener('input', searchTable);
 document.addEventListener("DOMContentLoaded", function() {
     const close_collector = document.getElementById("personal-details-popup-form-close");
     const collector_view = document.getElementById("personal-details-popup-box");
-    const close_view = document.getElementById("collect-details-pop-form-close")
+    const close_view = document.getElementById("collect-details-pop-form-close");
+    
 
     close_collector.addEventListener("click", function() {
         collector_view.classList.remove('active');
@@ -435,5 +438,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
+
+document.getElementById('cancelBtn').addEventListener('click', function() {
+        // Redirect to the specified URL
+        window.location.href = "<?php echo URLROOT?>/centermanagers/request_completed";
+});
+
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

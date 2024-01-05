@@ -393,7 +393,7 @@
         transition: transform 0.4s ease-in, background-color 0.4s ease-in;
         box-shadow: var(--box-shadow);
         border-radius: 10px;
-        background-color: #333;
+        background-color: var(--main-text-color);
     }
 
     .overlay {

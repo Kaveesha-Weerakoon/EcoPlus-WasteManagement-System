@@ -195,6 +195,7 @@
 
     public function editprofile(){
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $centers = $this->center_model->getallCenters();
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $id=$_SESSION['user_id']; 
@@ -206,7 +207,7 @@
         'profile_image_name' => $_SESSION['user_email'].'_'.$_FILES['profile_image']['name'],
         'contactno'=>trim($_POST['contactno']),
         'address'=>trim($_POST['address']),
-        'city'=>trim($_POST['city']),
+        'city'=>trim($_POST['region']),
         'current'=>'',       
         'email'=>trim($_POST['email']),
         'notification'=> $Notifications ,
@@ -222,7 +223,8 @@
         'contactno_err' =>'',
         'city_err'=>'',
         'profile_err'=>'',
-        'success_message'=>''
+        'success_message'=>'',
+        'centers' => $centers
       ];
 
       if (empty($data['name'])) {
@@ -297,6 +299,7 @@
         'profile_err'=>'',
         'success_message'=>'',       
          'notification'=> $Notifications ,
+         'centers' => $centers
 
 
       ];
@@ -420,7 +423,8 @@
     }
    
     public function complains(){
-        
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -435,7 +439,8 @@
           'region_err' => '',
           'subject_err' => '' ,
           'complain_err' => '' ,
-          'completed'=>''    
+          'completed'=>'',     
+          'notification'=> $Notifications   
         ];
         
         if($data['completed']=='True'){
@@ -492,7 +497,8 @@
         'region_err' => '',
         'subject_err' => '' ,
         'complain_err' => ''  ,
-        'completed'=>''      
+        'completed'=>''   ,     
+        'notification'=> $Notifications ,   
       ];
        $id=$_SESSION['user_id']; 
       $user=$this->customerModel->get_customer($id);
@@ -504,7 +510,9 @@
     }
 
     private function getCommonData() {
-      $centers = $this->center_model->getallCenters();
+      $centers = $this->center_model->getallCenters();    
+        $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+
       return [
           'centers' => $centers,
           'name' => '',
@@ -526,16 +534,19 @@
           'confirm_collect_pop'=>'',
           'success'=>'' ,
           'customer_id'=>'',
-          'region_success'=>''];
+          'region_success'=>'',      
+          'notification'=> $Notifications]  ;
+        
     }
 
     public function request_collect(){
       $id=$_SESSION['user_id']; 
       $user=$this->customerModel->get_customer($id);
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
 
       $data['contact_no']=$user->mobile_number;
       $data['name'] =$_SESSION['user_name'];
-      
+      $data['region']=$user->city;
      if($_SERVER['REQUEST_METHOD'] == 'POST'){
        
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -548,9 +559,8 @@
         $data['instructions'] = trim($_POST['instructions']);
         $data['lattitude'] =trim($_POST['latitude']);
         $data['longitude'] =trim($_POST['longitude']);
-        $data['region'] =trim($_POST['center']);
-        $data['region_success'] =trim($_POST['region_success']);
         $data['location_success'] =trim($_POST['location_success']);
+        $data['region']=$user->city;
 
         if (empty($data['name'])) {
            $data['name_err'] = 'Name is required';
@@ -590,9 +600,6 @@
            $data['instructions_err'] = 'Instructions cannot exceed 100 characters';
         }
     
-
-       
-
         if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['date_err']) && empty($data['time_err']) && empty($data['instructions_err'])&& empty($data['location_err']) ){     
             $data['confirm_collect_pop']="True";        
             $this->view('customers/request_collect', $data);   
@@ -604,16 +611,27 @@
      else {
          $data = $this->getCommonData();
          $id=$_SESSION['user_id']; 
+         
          $user=$this->customerModel->get_customer($id);
-         $data['contact_no']=$user->mobile_number;
-         $data['name'] =$_SESSION['user_name'];
-         $this->view('customers/request_collect', $data);
+         $center=$this->Center_Model->findCenterbyRegion($user->city);
+         if($user && $center){
+             $data['lattitude']=$center->lat;
+             $data['longitude']=$center->longi;
+             $data['region']=$user->city;
+
+             $data['contact_no']=$user->mobile_number;
+             $data['name'] =$_SESSION['user_name'];
+             $this->view('customers/request_collect', $data);
+        }
+        
       }
     }
 
     public function request_confirm(){
+      $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
-       
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
       $data = $this->getCommonData();
       $data['name'] = trim($_POST['name']);
@@ -623,9 +641,9 @@
       $data['instructions'] = trim($_POST['instructions']);
       $data['lattitude'] =trim($_POST['latitude']);
       $data['longitude'] =trim($_POST['longitude']);
-      $data['region'] =trim($_POST['center']);
       $data['success']='True';
       $data['customer_id']=$_SESSION['user_id'];
+      $data['region']=$user->city;
 
       $this->Request_Model->request_insert($data);
 
@@ -638,57 +656,34 @@
     }
 
     public function request_mark_map(){
-       
-     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-       
-      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-      $centers = $this->center_model->getallCenters();
-      $data = $this->getCommonData();
-      $data['name'] = trim($_POST['name']);
-      $data['contact_no'] = trim($_POST['contact_no']);
-      $data['date'] = trim($_POST['date']);
-      $data['time'] = trim($_POST['time']);
-      $data['instructions'] = trim($_POST['instructions']);
-      $data['lattitude'] =trim($_POST['latitude']);
-      $data['longitude'] =trim($_POST['longitude']);
-      $data['region'] =trim($_POST['center']);
-      $data['location_success']='Success';
-     
-      $data['region_success']='True';
-
-      $this->view('customers/request_collect', $data);
-         
-     }
-     else {
-       $data = $this->getCommonData();
-       $this->view('customers/request_collect', $data);
-     }
-    }
-    
-    public function get_region(){
+      $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+      
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
-       
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);  $centers = $this->center_model->getallCenters();
-        $data = $this->getCommonData();
-        $data['name'] = trim($_POST['name']);
-        $data['contact_no'] = trim($_POST['contact_no']);
-        $data['date'] = trim($_POST['date']);
-        $data['time'] = trim($_POST['time']);
-        $data['instructions'] = trim($_POST['instructions']);
-        $data['lattitude'] =trim($_POST['latitude']);
-        $data['longitude'] =trim($_POST['longitude']);
-        $data['region'] =trim($_POST['center']); 
-        $data['region_success']='True';
-       
-        $center=$this->center_model->findCenterbyRegion( $data['region']);
-        $data['lattitude']=$center->lat;
-        $data['longitude']=$center->longi; 
         
-        $this->view('customers/request_collect', $data);
+       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+       $centers = $this->center_model->getallCenters();
+       $data = $this->getCommonData();
+       $data['name'] = trim($_POST['name']);
+       $data['contact_no'] = trim($_POST['contact_no']);
+       $data['date'] = trim($_POST['date']);
+       $data['time'] = trim($_POST['time']);
+       $data['instructions'] = trim($_POST['instructions']);
+       $data['lattitude'] =trim($_POST['latitude']);
+       $data['longitude'] =trim($_POST['longitude']);
+       $data['location_success']='Success';
+       $data['region']=$user->city;
 
+       $this->view('customers/request_collect', $data);
+          
+      }
+      else { 
+         $data['region']=$user->city;
+        $data = $this->getCommonData();
+        $this->view('customers/request_collect', $data);
       }
     }
-    
+
     public function credit_per_waste(){
        $credit= $this->creditModel->get();
       $data = [
@@ -705,7 +700,9 @@
       redirect('users/login');
     }
 
-    public function transfer() {
+    public function transfer() {        
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
   
@@ -715,7 +712,8 @@
               'transfer_confirm'=>'False',
               'customer_id_err' => '',
               'credit_amount_err' => '',
-              'completed' => ''
+              'completed' => '',     
+              'notification'=> $Notifications   
           ];
   
   
@@ -782,7 +780,8 @@
               'credit_amount' => '',
               'customer_id_err' => '',
               'credit_amount_err' => '',
-              'completed' => ''
+              'completed' => '',     
+              'notification'=> $Notifications   
           ];
   
           $this->view('customers/transfer', $data);

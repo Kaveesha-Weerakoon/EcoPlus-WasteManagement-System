@@ -79,6 +79,36 @@
 
                                 </div>
                                 <div class="edit-profile-content">
+                                    <h3>Region</h3>
+                                    <select name="region" id="centerDropdown">
+                                        <?php
+                                              $centers = $data['centers'];
+                                              $selectedRegion = $data['city'];
+                                              $regionFound = false;
+
+                                        if (!empty($centers)) {
+                                           foreach ($centers as $center) {
+                                               $selected = ($center->region == $selectedRegion) ? 'selected' : '';
+
+                                               if ($selected) {
+                                                  $regionFound = true;
+                                               }
+        
+                                            echo "<option value=\"$center->region\" $selected>$center->region</option>";
+                                        }
+
+                                        if (!$regionFound) {
+                                            echo "<option value=\"default\" selected>$selectedRegion</option>";
+                                         }
+                                        } else {
+                                             echo "<option value=\"default\">No Centers Available</option>";
+                                         }
+                                          ?>
+                                    </select>
+                                    <div class="err1">Choose the closest center for your location! </div>
+
+                                </div>
+                                <div class="edit-profile-content">
                                     <h3>Address </h3>
                                     <input name="address" type="text" value="<?php echo $data['address']?>">
                                     <div class="err"><?php echo $data['address_err']?></div>
@@ -90,12 +120,7 @@
                                     <div class="err"><?php echo $data['contactno_err']?></div>
 
                                 </div>
-                                <div class="edit-profile-content">
-                                    <h3>City </h3>
-                                    <input name="city" type="text" value="<?php echo $data['city']?>">
-                                    <div class="err"><?php echo $data['city_err']?></div>
 
-                                </div>
 
                                 <button type="submit">Save</button>
 

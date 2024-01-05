@@ -41,6 +41,7 @@
           WHERE
               rm.customer_id = :customer_id
               AND rm.type IN ("incoming", "assigned")
+              ORDER BY CONCAT(date, " ", time) DESC
       ';
   
       $this->db->query($query);
@@ -122,7 +123,7 @@
         users u ON c.user_id = u.id
        WHERE
         rm.customer_id = :customer_id
-        AND rm.type = :type
+        AND rm.type = :type ORDER BY CONCAT(date, " ", time) DESC
       ';
 
        $this->db->query($query);

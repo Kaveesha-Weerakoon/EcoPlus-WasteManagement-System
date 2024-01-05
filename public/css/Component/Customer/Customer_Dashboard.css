@@ -558,7 +558,7 @@
         font-size: 14px;
     }
 
-    .Eco_Credit_Per_Cont .Cont .bx {
+    .Eco_Credit_Per_Cont .Cont .icon {
         font-size: 29px;
         margin-bottom: 10px;
     }
@@ -590,7 +590,6 @@
     }
 
     @media screen and (max-width: 1108px) {
-        .main-right-bottom {}
 
         .main-right {
             background-color: var(--background-color-right);

@@ -921,6 +921,10 @@
           $data['creditData']=$creditData ;
           $data['credit_Amount'] = $credit_Amount;
 
+          $collector = $this->collectorModel->getCollectorById($_SESSION['collector_id']);
+          $data['center_id'] = $collector->center_id;
+          $data['region'] = $collector->center_name;
+
 
           $inserted = $this->Collect_Garbage_Model->insert($data);
           

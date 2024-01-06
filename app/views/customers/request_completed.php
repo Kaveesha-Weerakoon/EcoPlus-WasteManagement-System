@@ -18,7 +18,6 @@
                                     <th>Time</th>
                                     <th>Center</th>
                                     <th>Collector</th>
-                                    <th>Collector Info</th>
                                     <th>Location</th>
                                     <th>Earned Credits</th>
                                     <th>Details</th>
@@ -39,17 +38,16 @@
 
                                     <td>
                                         <?php
-                                                $typeContent = ($request->type === 'completed') ? 
-                                                '<img class="collector_img" src="' . IMGROOT . '/img_upload/collector/' .$request->collector_image . '" alt="1">':
+                                    $typeContent = ($request->type === 'completed') ?
+                                    '<img onclick="view_collector(\'' . $request->collector_image . '\',
+                                    \'' . $request->collector_user_id . '\', \'' . $request->name . '\',
+                                    \'' . $request->collector_contact_no . '\', \'' . $request->collector_vehicle_no . '\',
+                                    \'' . $request->collector_vehicle_type . '\')" class="collector_img" src="'
+                                    . IMGROOT . '/img_upload/collector/' . $request->collector_image . '" alt="1">' :
 
-                                                '<img class="collector_img" src="' . IMGROOT . '/collector.png" alt="1">';
-                                                echo $typeContent
-                                            ?>
-                                    </td>
-
-                                    <td class="cancel-open">
-                                        <i <?php if ($request->type === 'completed') { ?>onclick="view_collector('<?php echo $request->collector_image; ?>', '<?php echo $request->collector_user_id; ?>', '<?php echo $request->name; ?>', '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')"
-                                            <?php } ?> class="bx bx-info-circle"></i>
+                                    '<img class="collector_img" src="' . IMGROOT . '/collector.png" alt="1">';
+                                    echo $typeContent;
+                                    ?>
 
                                     </td>
 

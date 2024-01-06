@@ -957,7 +957,8 @@
 
       } else {
         $this->Request_Model->cancel_request($data);
-        $this->request_incomming();
+        // $this->request_incomming();
+        $this->request_cancelled();
     }
     
     }

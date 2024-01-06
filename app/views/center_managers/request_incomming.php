@@ -40,11 +40,16 @@
                                     <td><?php  echo $request->customer_id?></td>
                                     <td><?php  echo $request->contact_no?></td>
                                     <td><?php  echo $request->instructions?></td>
-                                    <td><img onclick="assign(<?php echo $request->req_id ?>)" class="add"
-                                            src="<?php echo IMGROOT?>/assign.png" alt=""></td>
                                     <td>
-                                        <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel"
-                                            src="<?php echo IMGROOT?>/close_popup.png" alt="">
+                                        <i class='bx bxs-user-check' style="font-size: 32px;" onclick="assign(<?php echo $request->req_id ?>)"></i>
+                                        <!-- <img onclick="assign(<?php echo $request->req_id ?>)" class="add"
+                                            src="<?php echo IMGROOT?>/assign.png" alt=""> -->
+                                    </td>
+                                    <td>
+                                        <i class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"
+                                        onclick="cancel(<?php echo $request->req_id ?>)"></i>
+                                        <!-- <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel"
+                                            src="<?php echo IMGROOT?>/close_popup.png" alt=""> -->
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -129,6 +134,7 @@
                     alert("Please enter a reason");
                 } else {
                     document.getElementById("cancel-form").submit();
+                    closecancel();
                 }
             }
 
@@ -152,7 +158,12 @@
                 inputElement.style.display = 'none';
 
                 assign_reqid.innerHTML = $id;
-                document.getElementById("View").style.display = "flex"
+
+                // document.getElementById("View").style.display = "flex"
+                var assign_popup = document.getElementById('View');
+                assign_popup.classList.add('active');
+
+                document.getElementById('overlay').style.display = "flex";
             }
 
             function cancel($id) {
@@ -355,7 +366,9 @@
                 });
 
                 closeassign.addEventListener("click", function() {
-                    assign.style.display = "none";
+                    assign.classList.remove('active');
+                    document.getElementById('overlay').style.display = "none";
+                    // assign.style.display = "none";
                 });
 
 

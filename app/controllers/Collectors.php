@@ -19,15 +19,31 @@
     }
     
     public function index(){
-     
+
+      $collector=$this->collectorModel->get_collector( $_SESSION['collector_id'] );
+      $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
+      $jsonData = json_encode($assinged_Requests);
+      $assinged_Requests_count=count($this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] ));
+      $completed_requests=count($this->Collect_Garbage_Model->get_complete_request($_SESSION['collector_id']));
+      $total_garbage=$this->Collect_Garbage_Model->get_completed_garbage_totals_by_collector($_SESSION['collector_id']);
       $credit= $this->creditModel->get();
       $req_completed_history = $this->Collect_Garbage_Model->get_complete_request_cus($_SESSION['collector_id']); 
-   
 
+      if ($completed_requests > 0) {
+        $percentage_completed = json_encode(($completed_requests / ($assinged_Requests_count+$completed_requests)) * 100);
+         } else {
+          $percentage_completed =json_encode(0);
+     } 
+   
+     $json_Total_Garbage = json_encode($total_garbage);
       $data = [
-        
+        'collector' =>$collector,
+        'assinged_Requests_count' => $assinged_Requests_count,
+        'assigned_requests' => $jsonData,
         'eco_credit_per'=>$credit,
         'req_completed_history' =>$req_completed_history,
+        'percentage'=> $percentage_completed,
+        'total_garbage'=> $json_Total_Garbage,
         'pop'=>''
          
         ];
@@ -274,6 +290,17 @@
         $this->view('collectors/complains', $data);
       }
      
+    }
+
+    public function complains_history(){
+      $id=$_SESSION['collector_id']; 
+      $complains = $this->collector_complain_Model->get_complains_by_collector($id);
+
+      $data = [
+        'complains' => $complains
+      ];
+     
+      $this->view('collectors/complains_history', $data);
     }
 
     public function collector_assistants_update($assisId){

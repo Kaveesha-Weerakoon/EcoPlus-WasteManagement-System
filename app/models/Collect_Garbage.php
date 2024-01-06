@@ -208,6 +208,27 @@
 
     }
 
-
+    public function get_completed_garbage_totals_by_collector($collector_id){
+      $this->db->query('
+          SELECT 
+              SUM(Polythene) AS total_polythene,
+              SUM(Plastic) AS total_plastic,
+              SUM(Glass) AS total_glass,
+              SUM(Paper_Waste) AS total_paper_waste,
+              SUM(Electronic_Waste) AS total_electronic_waste,
+              SUM(Metals) AS total_metals
+          FROM request_completed
+          LEFT JOIN request_assigned ON request_completed.req_id = request_assigned.req_id
+          WHERE request_assigned.collector_id = :collector_id 
+          AND request_completed.req_id IS NOT NULL
+      ');
+  
+      $this->db->bind(':collector_id', $collector_id);
+  
+      $result = $this->db->single();
+  
+      return $result;
+  }
+  
   
 }

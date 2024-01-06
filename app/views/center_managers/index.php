@@ -149,7 +149,7 @@
                     </div>
                     <div class="main-right-bottom-three">
                         <div class="main-right-bottom-three-left">
-                            
+                            <canvas id="myChart" width="630" height="300"></canvas>
                             
                         </div>
 
@@ -235,6 +235,9 @@
  </div>
 <script>
 
+    var color = "#47b076";
+    var textColor = "#414143"
+
     function redirect_incoming_requests() {
         var linkUrl = "<?php echo URLROOT?>/centermanagers/request_incomming";
         window.location.href = linkUrl;
@@ -259,6 +262,99 @@
         var linkUrl = "<?php echo URLROOT?>/centermanagers/request_completed";
         window.location.href = linkUrl;
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, config);
+
+    const chartContainer = document.getElementById('chart');
+    actions.forEach(action => {
+        const button = document.createElement('button');
+        button.textContent = action.name;
+        button.addEventListener('click', () => action.handler(myChart));
+        chartContainer.appendChild(button);
+    });
+});
+
+
+function createOrUpdateChart(color, textColor) {
+    var Current_Garbage = <?php echo $data['current_garbage']?>;
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Plastic', 'Polythene', 'Metal', 'Glass', 'Paper', 'Electronic'],
+            datasets: [{
+                label: 'Kilograms',
+                data: [Current_Garbage.current_plastic,
+                    Current_Garbage.current_polythene,
+                    Current_Garbage.current_metal,
+                    Current_Garbage.current_glass,
+                    Current_Garbage.current_paper,
+                    Current_Garbage.current_electronic
+                ],
+                backgroundColor: color,
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 14,
+                        }
+                    },
+                    barPercentage: 0.5, // Adjust to decrease the width of the bars
+                    categoryPercentage: 0.3 // Adjust to control the space between bars
+                },
+                y: {
+                    beginAtZero: true,
+                    suggestedMax: Math.max.apply(null, [Current_Garbage.current_plastic,
+                        Current_Garbage.current_polythene,
+                        Current_Garbage.current_metal,
+                        Current_Garbage.current_glass,
+                        Current_Garbage.current_paper,
+                        Current_Garbage.current_electronic
+                    ]) + 1, // Add some padding to the maximum value
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Current Garbage Stock',
+                    color: textColor,
+                    font: {
+                        size: 18
+                    },
+                    padding: {
+                        bottom: 25
+                    }
+                }
+            },
+            elements: {
+                bar: {
+                    borderRadius: 10,
+                }
+            },
+            animation: {
+                duration: 700, // Set the duration of the animation in milliseconds
+                easing: 'easeIn' // Set the easing function for the animation
+            }
+        }
+    });
+}
+
+createOrUpdateChart(color, textColor);
 
 
 

@@ -21,10 +21,13 @@
     public function index(){
 
       $center=$this->center_model->getCenterById($_SESSION['center_id']);
+      $current_garbage_stock = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+      $json_Current_Garbage = json_encode($current_garbage_stock);
 
       $data = [
         'center_id' => $center->id,
-        'center_name' => $center->region
+        'center_name' => $center->region,
+        'current_garbage'=> $json_Current_Garbage
       ];
      
       $this->view('center_managers/index', $data);

@@ -583,9 +583,11 @@
   width: 100px;
   height: 35px;
   font-size: 19px;
-  background-color: #1B6652; /* Example Complete button background color */
-  color: #ffffff; /* Example text color */
+  background-color: #1B6652;
+  color: #ffffff; 
   border: none;
+  border-radius: 5px;
+      cursor: pointer;
 }
 
 .pop_up_confirm_collect_cont .buttons .complete-btn:hover {
@@ -598,15 +600,16 @@
   width: 100px;
   height: 35px;
   font-size: 19px;
-  background-color: #757474; /* Example Cancel button background color */
-  color: #ffffff; /* Example text color */
+  background-color: #757474; 
+  color: #ffffff; 
   border: none; 
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .pop_up_confirm_collect_cont .buttons .cancel-btn:hover {
-  /* Add hover styles if needed */
+  
   background-color: #979494; 
-  /* Add any other hover effects */
 }
 
 

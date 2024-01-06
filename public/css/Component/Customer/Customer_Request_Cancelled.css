@@ -24,15 +24,22 @@
     }
 
     .table-header {
-        grid-template-columns: 10% 10% 9% 11% 10% 9% 11% 12% 18%;
+        grid-template-columns: 10% 12% 17% 10% 15% 10% 15% 10%;
     }
 
     .table-row {
-        grid-template-columns: 10% 10% 9% 11% 10% 9% 11% 12% 18%;
+        grid-template-columns: 10% 12% 17% 10% 15% 10% 15% 10%;
+    }
+
+    .collector_img {
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 50%;
     }
 
     .table td {
         height: 55px;
+        overflow-y: scroll;
     }
 
     .table-row img {

@@ -568,14 +568,9 @@
 
         }
 
-        .popup h2 {
-            font-size: 38px;
-            font-weight: 500;
-            margin: 10px 0 10px;
-        }
 
         .request_success .popup button {
-            width: 100%;
+            width: 75%;
             margin-top: 30px;
             padding: 10px 0;
             background: var(--green-color-one);
@@ -586,7 +581,10 @@
             border-radius: 4px;
             cursor: pointer;
             box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+        }
 
+        .request_success .popup button:hover {
+            background: var(--button-hover-green);
         }
 
 

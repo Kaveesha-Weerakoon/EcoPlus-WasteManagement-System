@@ -20,7 +20,22 @@
         $this->db->bind(':longi', $data['longitude']);
         $insertResult = $this->db->execute();
 
-        
+        if($insertResult){
+          $notificationText = "Customer C{$data['customer_id']} has been requested";
+          $this->db->query("INSERT INTO center_notification (center_id, region, notification) VALUES (:center_id, :region, :notification)");
+          $this->db->bind(":center_id", $data["center_id"]);
+          $this->db->bind(":region", $data["region"]);
+          $this->db->bind(":notification", $notificationText);
+          $insertNotification = $this->db->execute();
+
+          if($insertNotification){
+            return $insertNotification;
+          }
+          else{
+            return false;
+          }
+
+        }
 
 
 

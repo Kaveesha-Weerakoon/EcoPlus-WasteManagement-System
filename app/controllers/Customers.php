@@ -631,6 +631,7 @@
     public function request_confirm(){
       $id=$_SESSION['user_id']; 
       $user=$this->customerModel->get_customer($id);
+      $center = $this->Center_Model->findCenterbyRegion($user->city);
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -645,6 +646,7 @@
       $data['success']='True';
       $data['customer_id']=$_SESSION['user_id'];
       $data['region']=$user->city;
+      $data['center_id'] =$center->id;
 
       $this->Request_Model->request_insert($data);
 

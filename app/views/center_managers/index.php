@@ -12,7 +12,39 @@
                         <i class='bx bx-search-alt-2'></i>
                         <input type="text" placeholder="Search">
                     </div>
+
                     <div class="main-right-top-notification" id="notification">
+                        <i class='bx bx-bell'></i>
+                        <?php if (!empty($data['notification'])) : ?>
+                        <div class="dot"></div>
+                        <?php endif; ?>
+                    </div>
+                    <div id="notification_popup" class="notification_popup">
+                        <h1>Notifications</h1>
+                        <div class="notification_cont">
+                            <?php foreach($data['notification'] as $notification) : ?>
+
+                            <div class="notification">
+                                <div class="notification-green-dot">
+
+                                </div>
+                                <div class="notification_right">
+                                    <?php echo $notification->notification?>
+
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+
+                        </div>
+                        <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/centermanagers/">
+                            <i class="fa-solid fa-check"> </i>
+                            <button type="submit">Mark all as read</button>
+                        </form>
+
+                    </div>
+
+
+                    <!-- <div class="main-right-top-notification" id="notification">
                         <i class='bx bx-bell'></i>
                         <div class="dot"></div>
                     </div>
@@ -36,9 +68,8 @@
                             </div>
                             Request 1232 Has been Cancelled
                         </div>
+                    </div> -->
 
-
-                    </div>
                     <div class="main-right-top-profile">
                         <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
                             alt="">

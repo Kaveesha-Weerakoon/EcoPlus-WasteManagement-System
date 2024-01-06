@@ -12,6 +12,7 @@
       $this->collect_garbage_Model=$this->model('Collect_Garbage');
       $this->garbage_Model=$this->model('Garbage_Stock');
       $this->center_complaints_model=$this->model('Center_Complaints');
+      $this->notification_Model=$this->model('Notifications');
 
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
@@ -23,15 +24,27 @@
       $center=$this->center_model->getCenterById($_SESSION['center_id']);
       $current_garbage_stock = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
       $json_Current_Garbage = json_encode($current_garbage_stock);
+      $Notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       //$incoming_requests_count = $this->request_Model->get_incoming_requests_
 
       $data = [
         'center_id' => $center->id,
         'center_name' => $center->region,
-        'current_garbage'=> $json_Current_Garbage
+        'current_garbage'=> $json_Current_Garbage,
+        'notification'=> $Notifications
       ];
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $Notifications1 = $this->notification_Model->view_center_Notification($_SESSION['center_id']);
+        $Notifications2 = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+        $data['notification']=  $Notifications2 ;
+        $this->view('center_managers/index', $data);
+      }
+      else{
+        $this->view('center_managers/index', $data);
+      }
      
-      $this->view('center_managers/index', $data);
+      //$this->view('center_managers/index', $data);
     }
     
     public function logout(){

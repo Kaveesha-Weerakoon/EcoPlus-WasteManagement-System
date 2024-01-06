@@ -104,8 +104,8 @@
                                             <th>C ID</th>
                                             <th>Contact No</th>
                                             <th>Instructions</th>
+                                            <th>Location</th>
                                             <th>Complete</th>
-                                            <th>credit amount</th>
                                         </tr>
                                     </table>
                                 </div>
@@ -121,9 +121,13 @@
                                             <td><?php  echo $request->customer_id?></td>
                                             <td><?php  echo $request->contact_no?></td>
                                             <td><?php  echo $request->instructions?></td>
+                                            <td>
+                                            <i class='bx bx-map' style="font-size: 29px;"
+                                             onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
+                                            </td>
                                             <td><img onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
                                                     src="<?php echo IMGROOT?>/view.png" alt=""></td>
-                                            <td><?php  echo $request->credit_amount?></td>
+                                            
                                         </tr>
                                         <?php endforeach; ?>
                                     </table>
@@ -145,14 +149,14 @@
                         <?php endif; ?>
                     </div>
 
-                            <div class="collect-details-pop" id="collect-details-popup-box">
-                                <div class="collect-details-pop-form">
-                                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
-                                        id="collect-details-pop-form-close">
-                                    <div class="collect-details-pop-form-top">
-                                        <div class="collect-details-topic">Completed Details<div id="req_id3"></div>
-                                        </div>
-                                    </div>
+                    <div class="collect-details-pop" id="collect-details-popup-box">
+                        <div class="collect-details-pop-form">
+                            <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
+                                id="collect-details-pop-form-close">
+                            <div class="collect-details-pop-form-top">
+                                <div class="collect-details-topic">Collection Details<div id="req_id3"></div>
+                                </div>
+                            </div>
 
                                     <div class="collect-details-pop-form-content">
                                         <div class="collect-details-pop-form-content-labels">
@@ -162,7 +166,8 @@
                                             <h3>Paper Waste Quantity</h3>
                                             <h3>Electronic Waste Quantity </h3>
                                             <h3>Metals Quantity</h3>
-                                            <h3>Details</h3>
+                                            <h3>Note</h3>
+                                            <h3>Earned Credits</h3>
                                         </div>
                                         <div class="collect-details-pop-form-content-right-values">
                                             <div class="collect-details-pop-form-content-right-values-cont">
@@ -192,10 +197,14 @@
                                             <div class="collect-details-pop-form-content-right-values-cont">
                                                 <h3 id="Note"></h3>
                                             </div>
+                                            <div class="collect-details-pop-form-content-right-values-cont">
+                                                <h3 id="Earned_Credits"></h3>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="overlay" id="overlay"></div>
                         </div>
                     </div>
@@ -208,189 +217,60 @@
 
 
 
-<!--<script>
-/*function initMap() {
-    var map = new google.maps.Map(document.getElementById('map-loaction'), {
-        center: {
-            lat: 7.8731,
-            lng: 80.7718
-        },
+
+
+<script>
+
+
+function initMap(latitude = 7.4, longitude = 81.00000000) {
+    var mapCenter = {
+        lat: latitude,
+        lng: longitude
+    };
+
+    var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
+        center: mapCenter,
         zoom: 14.5
-    });;
-    var incomingRequests = <?php echo $data['jsonData']; ?>;
-    incomingRequests.forEach(function(coordinate) {
-        var marker = new google.maps.Marker({
-            position: {
-                lat: parseFloat(coordinate.lat),
-                lng: parseFloat(coordinate.longi)
-            },
-            map: map,
-            title: 'Marker'
-        });
-        marker.addListener('click', function() {
-            handleMarkerClick(marker, coordinate);
-        });
     });
-}*/
 
-
-/*function searchTable() {
-    var input = document.getElementById('searchInput').value.toLowerCase();
-    var rows = document.querySelectorAll('.table-row');
-
-    rows.forEach(function(row) {
-        var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
-        var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
-        var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-        var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
-        var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
-        var conctact_no = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
-        var instructions = row.querySelector('td:nth-child(7)').innerText.toLowerCase();
-
-        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(input) ||
-            cid.includes(input) || conctact_no.includes(input) || instructions.includes(input)) {
-            row.style.display = '';
-        } else {
-            row.style.display = 'none'; // Hide the row
-        }
+    var marker = new google.maps.Marker({
+        position: {
+            lat: parseFloat(latitude),
+            lng: parseFloat(longitude)
+        },
+        map: map,
+        title: 'Marked Location'
     });
-}*/
+}
 
-/*function handleMarkerClick(marker, coordinate) {
-    const adddetails = document.getElementById("View");
-    var assign_reqid = document.getElementById('assign_reqid');
-    assign_reqid.innerHTML = coordinate.req_id;
-    adddetails.style.display = "flex";
+function viewLocation($lattitude, $longitude) {
+    initMap($lattitude, $longitude);
+    var locationPop = document.getElementById('location_pop');
+    locationPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+}
+
+function closemap() {
+    var locationPop = document.getElementById('location_pop');
+    locationPop.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
 }
 
 function loadLocations() {
-    var selectedDate = document.getElementById('selected-date').value;
-    if (selectedDate.trim() !== "") {
-        updateMapForDate(selectedDate);
+    var selectedDate = document.getElementById("selected-date").value;
+    var rows = document.querySelectorAll('.table-row');
 
-        var rows = document.querySelectorAll('.table-row');
-        rows.forEach(function(row) {
-            console.log('d');
-            var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
-            if (date.includes(selectedDate)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    } else {
-        var rows = document.querySelectorAll('.table-row');
-        rows.forEach(function(row) {
+    rows.forEach(function(row) {
+        var date = row.querySelector('td:nth-child(2)').innerText;
 
+        if (date.includes(selectedDate)) {
             row.style.display = '';
-
-        });
-
-        var map = new google.maps.Map(document.getElementById('map-loaction'), {
-            center: {
-                lat: 7.8731,
-                lng: 80.7718
-            },
-            zoom: 7.2
-        });
-
-        var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
-
-        incomingRequestsForDate.forEach(function(coordinate) {
-            var marker = new google.maps.Marker({
-                position: {
-                    lat: parseFloat(coordinate.lat),
-                    lng: parseFloat(coordinate.longi)
-                },
-                map: map,
-                title: 'Marker'
-            });
-
-            marker.addListener('click', function() {
-                handleMarkerClick(marker);
-            });
-        });
-    }
-}
-
-function updateMapForDate(selectedDate) {
-    var map = new google.maps.Map(document.getElementById('map-loaction'), {
-        center: {
-            lat: 7.8731,
-            lng: 80.7718
-        },
-        zoom: 7.2
-    });
-
-    var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
-    var filteredRequests = incomingRequestsForDate.filter(function(coordinate) {
-        return coordinate.date === selectedDate;
-    });
-
-    filteredRequests.forEach(function(coordinate) {
-        var marker = new google.maps.Marker({
-            position: {
-                lat: parseFloat(coordinate.lat),
-                lng: parseFloat(coordinate.longi)
-            },
-            map: map,
-            title: 'Marker'
-        });
-
-        marker.addListener('click', function() {
-            handleMarkerClick(marker);
-        });
+        } else {
+            row.style.display = 'none';
+        }
     });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    const maps = document.getElementById("maps");
-    const table = document.getElementById("tables");
-    const main_right_bottom = document.getElementById("main-right-bottom-one");
-    const main_right_bottom_two = document.getElementById("main-right-bottom-two");
-    const closeButton = document.getElementById("cancel-pop");
-    const cancel_popup = document.getElementById("cancel-confirm");
-    const cancel_form = document.getElementById("cancel-form");
-    const btns = document.getElementById("btns");
-
-    maps.addEventListener("click", function() {
-        if (main_right_bottom !== null) {
-            main_right_bottom.style.display = "none";
-        }
-        if (main_right_bottom_two !== null) {
-            main_right_bottom_two.style.display = "flex";
-        }
-        maps.style.backgroundColor = "#ecf0f1";
-        table.style.backgroundColor = "";
-    });
-
-    table.addEventListener("click", function() {
-        if (main_right_bottom !== null) {
-            main_right_bottom.style.display = "grid";
-        }
-        if (main_right_bottom_two !== null) {
-            main_right_bottom_two.style.display = "none";
-        }
-        table.style.backgroundColor = "#ecf0f1";
-        maps.style.backgroundColor = "";
-
-    });
-
-    closeButton.addEventListener("click", function() {
-        cancel_form.style.width = "0px";
-        cancel_form.style.height = "0px";
-        cancel_popup.style.display = "none";
-        btns.style.display = "none";
-        document.querySelector("#cancel-confirm img").style.display = "none";
-        document.querySelector("#cancel-confirm h2").style.display = "none";
-        document.querySelector("#cancel-confirm input").style.display = "none";
-        document.querySelector("#cancel-confirm p").style.display = "none";
-    });
-
-});*/
-</script> --->
-
-<script>
 
 function view_collect_details(request) {
     var locationPop = document.getElementById('collect-details-popup-box');
@@ -404,13 +284,15 @@ function view_collect_details(request) {
     document.getElementById('Electronic_Waste_Quantity').innerText = request.Electronic_Waste;
     document.getElementById('Metals_Quantity').innerText = request.Metals;
     document.getElementById('Note').innerText = request.note;
+    document.getElementById('Earned_Credits').innerText = request.credit_amount;
 }
 
 document.getElementById('searchInput').addEventListener('input', searchTable);
 document.addEventListener("DOMContentLoaded", function() {
     const close_collector = document.getElementById("personal-details-popup-form-close");
     const collector_view = document.getElementById("personal-details-popup-box");
-    const close_view = document.getElementById("collect-details-pop-form-close")
+    const close_view = document.getElementById("collect-details-pop-form-close");
+    
 
     close_collector.addEventListener("click", function() {
         collector_view.classList.remove('active');

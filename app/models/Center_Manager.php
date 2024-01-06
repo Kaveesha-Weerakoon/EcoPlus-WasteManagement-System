@@ -129,6 +129,7 @@
     
 
     public function change_center_managers($new_manager, $old_manager, $center_id) {
+     try{
       $updateManagerQuery = 'UPDATE center_managers SET assinged = "True", assigned_center_id = :assigned_center_id WHERE user_id = :centerManagerId';
   
       $this->db->query($updateManagerQuery);
@@ -145,6 +146,9 @@
         $this->re->bind(':centerManagerId2', $old_manager->user_id);
          $this->re->execute();
       }
+    }catch (PDOException $e) {
+      return false;
+  }
   }
 
     public function Remove_Assign($center_manager_id){

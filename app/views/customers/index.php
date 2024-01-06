@@ -30,7 +30,6 @@
 
                                 </div>
                                 <div class="notification_right">
-                                    <p><?php echo $notification->datetime?></p>
                                     <?php echo $notification->notification?>
 
                                 </div>

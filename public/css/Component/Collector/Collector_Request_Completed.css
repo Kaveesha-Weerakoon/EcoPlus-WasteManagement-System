@@ -520,62 +520,62 @@
   }
 
 
-  
-    /*Location popup*/
-    .location_pop {
-      display: flex;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      background-color: rgba(0, 0, 0, 0);
-      z-index: 4;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      overflow: hidden;
-      transition: transform 0.4s ease-in, background-color 0.4s ease-in;
-  }
+      /*Location popup*/
+      .location_pop {
+        display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background-color: rgba(0, 0, 0, 0);
+        z-index: 4;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+    }
 
-  .location_pop.active {
-      transform: translate(-50%, -50%) scale(1);
-  }
+    .location_pop.active {
+        transform: translate(-50%, -50%) scale(1);
+    }
 
-  .location_pop_content {
-      width: 700px;
-      padding: 10px;
-      background-color: #f1f2f6;
-      border-radius: 10px;
-      padding: 20px;
-      padding-bottom: 40px;
-      height: 350px;
-      overflow: hidden;
-  }
+    .location_pop_content {
+        width: 700px;
+        padding: 10px;
+        background-color: #f1f2f6;
+        border-radius: 10px;
+        padding: 20px;
+        padding-bottom: 40px;
+        height: 350px;
+        overflow: hidden;
+    }
 
-  .location_pop_map {
-      width: 100;
-      height: 100%;
-      border-radius: 10px;
-  }
+    .location_pop_map {
+        width: 100;
+        height: 100%;
+        border-radius: 10px;
+    }
 
-  .location_close {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 6px;
-  }
+    .location_close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 6px;
+    }
 
-  .location_close button {
-      background-color: #ff4757;
-      color: #fff;
-      cursor: pointer;
-      border: none;
-      font-size: 16px;
-      border-radius: 5px;
-      width: 85px;
-      height: 28px;
-  }
+    .location_close button {
+        background-color: #ff4757;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+        font-size: 16px;
+        border-radius: 5px;
+        width: 85px;
+        height: 28px;
+    }
 
+    
 
 
   /* Styling for Popup Background */

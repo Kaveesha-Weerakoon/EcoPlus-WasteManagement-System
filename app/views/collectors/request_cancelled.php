@@ -119,10 +119,11 @@
                                     <td><?php  echo $request->cancelled_by?></td>
                                     <td><img onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
                                             src="<?php echo IMGROOT?>/location.png" alt=""></td>
-                                    
-                                    <td><img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                            src="<?php echo IMGROOT?>/view.png" alt=""></td>
-                                    
+
+                                    <td>
+                                        <i class='bx bx-info-circle' style="font-size: 29px"
+                                            onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
+                                    </td>
                                     <td><?php  echo $request->reason?> </td>
 
                                 </tr>
@@ -147,7 +148,7 @@
                 <div class="request-details-pop" id="request-details-popup-box">
                     <div class="request-details-pop-form">
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
-                            id="request-details-pop-form-close">
+                            id="request-details-pop-form-close" onclick="close_request_details()">
                         <div class="request-details-pop-form-top">
                             <div class="request-details-topic">Request ID: R <div id="req_id3"></div>
                             </div>
@@ -179,8 +180,6 @@
     </div>
 </div>
 <script>
-
-
 function view_request_details(request) {
 
     var requestDetails_popup = document.getElementById('request-details-popup-box');
@@ -196,6 +195,13 @@ function view_request_details(request) {
     document.getElementById('req_contactno').innerText = request.contact_no;
     document.getElementById('instructions').innerText = request.instructions;
 
+}
+
+function close_request_details() {
+    var requestDetails_popup = document.getElementById('request-details-popup-box');
+    requestDetails_popup.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
+    console.log("");
 }
 
 function initMap(latitude = 7.4, longitude = 81.00000000) {
@@ -248,12 +254,33 @@ function loadLocations() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    const close_request_details = document.getElementById("request-details-pop-form-close");
+function searchTable() {
+    var input = document.getElementById('searchInput').value.toLowerCase();
+    var rows = document.querySelectorAll('.table-row');
 
-    close_request_details.addEventListener("click", function() {
-        document.getElementById('request-details-popup-box').style.display = "none";
+    rows.forEach(function(row) {
+        var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+        var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+        var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+        var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+        var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+        var conctact_no = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
+        var instructions = row.querySelector('td:nth-child(7)').innerText.toLowerCase();
+
+        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(input) ||
+            cid.includes(input) || conctact_no.includes(input) || instructions.includes(input)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
     });
+
+
+}
+document.getElementById('searchInput').addEventListener('input', searchTable);
+
+document.addEventListener("DOMContentLoaded", function() {
+
 });
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

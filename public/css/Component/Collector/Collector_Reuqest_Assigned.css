@@ -36,7 +36,7 @@
   .main-right-bottom-three {
     display: flex;
     justify-content: center;
-    height: 450px;
+    height: 500px;
   }
 
   .main-right-bottom-three-content {
@@ -92,67 +92,87 @@
 
 
 
-  .cancel-confirm {
-    display: none;
+  .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    display: none;
+  }
+
+
+  /*cancel confirm popup*/
+  .cancel-confirm {
+    /* display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%) scale(0);
     background-color: rgba(0, 0, 0, 0.1);
     z-index: 2;
+    transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+    align-items: center;
+    justify-content: center; */
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 4;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+    background-color: #333;
+  }
+
+  .cancel-confirm.active {
+    transform: translate(-50%, -50%) scale(1);
+    background-color: rgba(0, 0, 0, 0);
   }
 
   .cancel-confirm-content {
-    width: 0px;
-    height: 0px;
+    width: 500px;
     background: white;
     font-family: 'poppins', sans-serif;
-    border-radius: 10px;
-    text-align: center;
-    padding: 0 30px 30px;
-    color: #333;
+    border-radius: 6px;
+    padding: 30px;
+    position: relative;
+    color: var(--main-text-color);
     transition: transform 0.4s, top 0.4s;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    position: relative;
-    animation: slideDown 0.5s ease-out forwards;
+    justify-content: center;
   }
 
-  .cancel-confirm-content h2 {
-    font-size: 23px;
-    font-weight: 600;
-    margin-bottom: 5px;
-    display: none;
-  }
+  .confirm-content-img {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    cursor: pointer;
 
-  .cancel-confirm-content img {
-    width: 100px;
-    margin-top: 28px;
-    margin-bottom: 15px;
-    border-radius: 50%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    display: none;
-  }
-
-  .cancel-confirm-content p {
-    display: none;
   }
 
   .cancel-confirm-content input {
-    width: 70%;
-    text-align: center;
-    height: 30px;
+    height: 60px;
+    width: 97.5%;
+    border-radius: 5px;
     border: 1px solid #ccc;
     padding-left: 10px;
+    margin: 12px 0;
     font-size: 14px;
     letter-spacing: 0.03rem;
     background-color: var(--background-color-two);
     color: var(--main-text-color);
-    margin-top: 10px;
   }
 
   .cancel-confirm-content input:focus {
@@ -160,49 +180,63 @@
     outline: none;
   }
 
-  .btns {
-    display: none;
-    flex-direction: row;
+  .cancel-confirm-content h1 {
+
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .confim-cancel-content-box {
+    display: flex;
     align-items: center;
-    margin-top: 16px;
+    justify-content: center;
+    flex-direction: row;
   }
 
-  .deletebtn {
-    width: 150px;
-    margin-right: 20px;
-    padding: 8px 0;
-    background: rgb(220, 39, 39);
-    color: white;
-    border: 0;
-    outline: none;
-    font-size: 18px;
-    border-radius: 4px;
-    cursor: pointer;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  }
-
-  .cancelbtn {
-    width: 150px;
-    padding: 8px 0;
-    background: #bab3b3;
-    color: white;
-    border: 0;
-    outline: none;
-    font-size: 18px;
-    border-radius: 4px;
-    cursor: pointer;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  }
-
-  .cancel-confirm-top-close {
+  .cancel-confirm-button-container {
     display: flex;
     justify-content: flex-end;
-    padding-top: 3px;
-    width: 105%;
+    align-items: center;
   }
 
-  .cancel-confirm-top-close img {
+  .cancel-reason-submit-button {
+    width: 20%;
+    height: 32px;
+    font-size: 14px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    margin-top: 10px;
+    background-color: rgb(220, 39, 39);
     cursor: pointer;
+    color: white;
+  }
+
+
+  .cancel-reason-submit-button:hover {
+    background: #c62323;
+  }
+
+  .cancel-reason-cancel-button {
+    width: 20%;
+    height: 32px;
+    font-size: 14px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    margin-left: 10px;
+    margin-top: 10px;
+    background-color: #bab3b3;
+    cursor: pointer;
+    color: white;
+  }
+
+  .cancel-reason-cancel-button:hover {
+    background: #a7a1a1;
   }
 
   /* Styles for the form */
@@ -579,35 +613,39 @@
   }
 
 
-.pop_up_confirm_collect_cont .buttons .complete-btn {
-  width: 100px;
-  height: 35px;
-  font-size: 19px;
-  background-color: #1B6652; /* Example Complete button background color */
-  color: #ffffff; /* Example text color */
-  border: none;
-}
+  .pop_up_confirm_collect_cont .buttons .complete-btn {
+    width: 100px;
+    height: 35px;
+    font-size: 19px;
+    background-color: #1B6652;
+    /* Example Complete button background color */
+    color: #ffffff;
+    /* Example text color */
+    border: none;
+  }
 
-.pop_up_confirm_collect_cont .buttons .complete-btn:hover {
+  .pop_up_confirm_collect_cont .buttons .complete-btn:hover {
 
-  background-color: #269074; 
-}
+    background-color: #269074;
+  }
 
 
-.pop_up_confirm_collect_cont .buttons .cancel-btn {
-  width: 100px;
-  height: 35px;
-  font-size: 19px;
-  background-color: #757474; /* Example Cancel button background color */
-  color: #ffffff; /* Example text color */
-  border: none; 
-}
+  .pop_up_confirm_collect_cont .buttons .cancel-btn {
+    width: 100px;
+    height: 35px;
+    font-size: 19px;
+    background-color: #757474;
+    /* Example Cancel button background color */
+    color: #ffffff;
+    /* Example text color */
+    border: none;
+  }
 
-.pop_up_confirm_collect_cont .buttons .cancel-btn:hover {
-  /* Add hover styles if needed */
-  background-color: #979494; 
-  /* Add any other hover effects */
-}
+  .pop_up_confirm_collect_cont .buttons .cancel-btn:hover {
+    /* Add hover styles if needed */
+    background-color: #979494;
+    /* Add any other hover effects */
+  }
 
 
   /* ------------*/

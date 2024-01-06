@@ -77,7 +77,7 @@
           $request=$this->get_request_by_id($data['request_id']);
           
           if( $updateResult && $request){
-            $this->db->query('INSERT INTO customer_nofification (customer_id, notification) VALUES (:customer_id, :notification)');
+            $this->db->query('INSERT INTO user_notification (user_id, notification) VALUES (:customer_id, :notification)');
             $this->db->bind(':customer_id',$request->customer_id);
             $this->db->bind(':notification', "Req ID {$data['request_id']} Has been Cancelled");
             $result= $this->db->execute();
@@ -175,10 +175,9 @@
           
 
           if($updateResult){
-            $this->db->query('INSERT INTO customer_nofification (customer_id, notification) VALUES (:customer_id, :notification)');
-            $this->db->bind(':customer_id',$request->customer_id);
-            $this->db->bind(':notification', "Req ID {$data['request_id']} Has been Assigned");
-            $this->db->execute();
+            $notificationText = "Req ID {$data['request_id']} Has been Assigned";
+            $this->insert_notification($request->customer_id, $notificationText);
+            $this->insert_notification($data['collector_id'], $notificationText);
           };
       } else {
           return false;
@@ -186,6 +185,19 @@
         return false;
     }
     }
+
+    public function insert_notification($user_id, $notification) {
+      try {
+          $this->db->query('INSERT INTO user_notification (user_id, notification, mark_as_read) VALUES (:user_id, :notification, :mark_as_read)');
+          $this->db->bind(':user_id', $user_id);
+          $this->db->bind(':notification', $notification);
+          $this->db->bind(':mark_as_read', 'False', PDO::PARAM_STR);
+          $this->db->execute();
+          return true;
+      } catch (PDOException $e) {
+          return false;
+      }
+  }
 
     public function get_assigned_request_by_center($region){
       $this->db->query('

@@ -19,7 +19,6 @@
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Center</th>
-                                    <th>Assigned</th>
                                     <th>Location</th>
                                     <th>Collector</th>
                                     <th>Cancelled By</th>
@@ -36,15 +35,25 @@
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
                                     <td><?php echo $request->region?></td>
-                                    <td><?php echo $request->assinged?></td>
 
                                     <td><i onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
                                             class='bx bx-map' style="font-size: 29px"></i>
                                     </td>
-                                    <td><i class='bx bx-info-circle' style="font-size: 29px"
-                                            <?php if ($request->assinged === 'Yes') { ?>onclick="view_collector('<?php echo $request->image; ?>', '<?php echo $request->user_id; ?>', '<?php echo $request->name; ?>', '<?php echo $request->contact_no; ?>', '<?php echo $request->vehicle_no; ?>', '<?php echo $request->vehicle_type; ?>')"
-                                            <?php } ?>> </i></td>
 
+
+                                    <td>
+                                        <?php
+                                             $typeContent = ($request->assinged === 'Yes') ? 
+                                            '<img class="collector_img" src="' . IMGROOT . '/img_upload/collector/' .$request->image . '" alt="collector image"
+                                             onclick="view_collector(\'' . $request->image . '\',
+                                             \'' . $request->user_id . '\', \'' . $request->name . '\',
+                                             \'' . $request->contact_no . '\', \'' . $request->vehicle_no . '\',
+                                             \'' . $request->vehicle_type . '\')">' :
+                                             '<i class="fa-solid fa-user-large"></i>';
+                                             echo $typeContent;
+                                             ?>
+
+                                    </td>
                                     <td><?php echo $request->cancelled_by?></td>
                                     <td><?php echo ($request->reason ? $request->reason : 'None'); ?></td>
                                 </tr>

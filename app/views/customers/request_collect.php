@@ -176,7 +176,7 @@
                     <div class="confirm_collect_pop">
                         <div class="popup" id="popup">
                             <img src="<?php echo IMGROOT?>/Collector_Dashboard3.jpg" alt="">
-                            <h2>Request Confirm!</h2>
+                            <h2>Confirm Your Request!</h2>
                             <p> Request will forwarded to our <b><?php echo $data['region']?></b> center</p>
                             <div class="btns">
                                 <a href="">

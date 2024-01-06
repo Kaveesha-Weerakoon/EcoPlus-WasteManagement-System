@@ -12,7 +12,7 @@
       $this->Customer_Credit_Model=$this->model('Customer_Credit');
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
       $this->customerModel=$this->model('Customer'); 
-      
+      $this->centerModel=$this->model('Center');
 
       if(!isLoggedIn('collector_id')){
         redirect('users/login');
@@ -629,7 +629,10 @@
 
    public function request_assinged(){
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $collector=$this->collectorModel->get_collector( $_SESSION['collector_id'] );
+    $center=$this->centerModel->getCenterById($collector->center_id);
+
+   if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
       $jsonData = json_encode($assinged_Requests);
        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -643,7 +646,8 @@
         'collector_id'=>($_SESSION['collector_id']),
         'popup'=>'',
         'popup_confirm_collect'=>'',
-        'creditData'=>''
+        'creditData'=>'',
+        'center'=>$center
 
       ];
       if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
@@ -663,11 +667,11 @@
         'jsonData' => $jsonData,
         'popup'=>'',
         'popup_confirm_collect'=>'',
-        'creditData'=>''
-
+        'creditData'=>'' ,
+        'center'=>$center
 
       ];
-     
+    
       $this->view('collectors/request_assinged', $data);
     }
     

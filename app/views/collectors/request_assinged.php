@@ -359,9 +359,10 @@
 
                                         <h4>Total = <?php echo $data['credit_Amount']?></h4>
                                         <div class="buttons">
-                                            <button onclick="submitForm(<?php echo $data['req_id']?>)">Complete</button>
-                                            <a href="<?php echo URLROOT?>/collectors/request_assinged"><button
-                                                    type="button">Cancel</button></a>
+                                            <button class="complete-btn" onclick="submitForm(<?php echo $data['req_id']?>)">Complete</button>
+                                            <a href="<?php echo URLROOT?>/collectors/request_assinged">
+                                                <button class="cancel-btn" type="button">Cancel</button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

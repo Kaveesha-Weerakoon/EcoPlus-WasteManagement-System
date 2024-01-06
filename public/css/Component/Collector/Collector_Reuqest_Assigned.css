@@ -578,18 +578,37 @@
     font-weight: 600;
   }
 
-  .pop_up_confirm_collect_cont .buttons {
-    width: 225px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
 
-  .pop_up_confirm_collect_cont .buttons button {
-    width: 100px;
-    height: 35px;
-    font-size: 19px;
-  }
+.pop_up_confirm_collect_cont .buttons .complete-btn {
+  width: 100px;
+  height: 35px;
+  font-size: 19px;
+  background-color: #1B6652; /* Example Complete button background color */
+  color: #ffffff; /* Example text color */
+  border: none;
+}
+
+.pop_up_confirm_collect_cont .buttons .complete-btn:hover {
+
+  background-color: #269074; 
+}
+
+
+.pop_up_confirm_collect_cont .buttons .cancel-btn {
+  width: 100px;
+  height: 35px;
+  font-size: 19px;
+  background-color: #757474; /* Example Cancel button background color */
+  color: #ffffff; /* Example text color */
+  border: none; 
+}
+
+.pop_up_confirm_collect_cont .buttons .cancel-btn:hover {
+  /* Add hover styles if needed */
+  background-color: #979494; 
+  /* Add any other hover effects */
+}
+
 
   /* ------------*/
 

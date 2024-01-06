@@ -165,8 +165,14 @@
         background: none;
         cursor: pointer !important;
         color: var(--main-text-color);
+        margin-left: 5px;
 
     }
+
+    .mark_as_read button:hover{
+        color: var(--button-hover-green);
+    }
+
 
     .mark_as_read .fa-solid {
         font-size: 20px;

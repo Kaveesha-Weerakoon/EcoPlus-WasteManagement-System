@@ -456,7 +456,7 @@
         width: 100%;
         margin-top: 30px;
         padding: 10px 0;
-        background: #6fd649;
+        background: var(--green-color-one);
         color: white;
         border: 0;
         outline: none;
@@ -465,6 +465,10 @@
         cursor: pointer;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 
+    }
+
+    .popup button:hover{
+        background: var(--button-hover-green);
     }
 
     @media screen and (max-width: 1416px) {

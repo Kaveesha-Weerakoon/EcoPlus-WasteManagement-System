@@ -11,6 +11,7 @@
       $this->Request_Model=$this->model('Request');
       $this->Customer_Credit_Model=$this->model('Customer_Credit');
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
+      $this->customerModel=$this->model('Customer'); 
       
 
       if(!isLoggedIn('collector_id')){
@@ -28,6 +29,7 @@
       $total_garbage=$this->Collect_Garbage_Model->get_completed_garbage_totals_by_collector($_SESSION['collector_id']);
       $credit= $this->creditModel->get();
       $req_completed_history = $this->Collect_Garbage_Model->get_complete_request_cus($_SESSION['collector_id']); 
+      $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
 
       if ($completed_requests > 0) {
         $percentage_completed = json_encode(($completed_requests / ($assinged_Requests_count+$completed_requests)) * 100);
@@ -44,9 +46,18 @@
         'req_completed_history' =>$req_completed_history,
         'percentage'=> $percentage_completed,
         'total_garbage'=> $json_Total_Garbage,
+        'notification'=> $Notifications,
         'pop'=>''
          
         ];
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+          $Notifications1 = $this->customerModel->view_Notification($_SESSION['collector_id']);
+          $Notifications2 = $this->customerModel->get_Notification($_SESSION['collector_id']);
+          $data['notification']=  $Notifications2 ;
+           $this->view('collectors/index', $data);
+  
+        }
       $this->view('collectors/index', $data);
     }
     

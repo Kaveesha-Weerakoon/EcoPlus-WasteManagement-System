@@ -14,16 +14,13 @@
         background-color: var(--green-color-two);
     }
 
-    .main-right-bottom {}
-
     .table-header {
-        grid-template-columns: 10% 12% 12% 10% 13% 10% 12% 11% 10%;
+        grid-template-columns: 10% 12% 17% 10% 15% 10% 15% 10%;
     }
 
     .table-row {
         height: 55px;
-        display: grid;
-        grid-template-columns: 10% 12% 12% 10% 13% 10% 12% 11% 10%;
+        grid-template-columns: 10% 12% 17% 10% 15% 10% 15% 10%;
     }
 
     .table td {

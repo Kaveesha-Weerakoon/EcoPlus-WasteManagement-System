@@ -13,31 +13,34 @@
                         <i class='bx bxl-sketch'></i> <input type="text" placeholder="Welcome Back !" id="searchInput"
                             readonly oninput="highlightMatchingText()">
                     </div>
-                    <div class="main-right-top-notification" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <div class="dot"></div>
-                    </div>
-                    <div id="notification_popup" class="notification_popup">
-                        <h1>Notifications</h1>
-                        <div class="notification">
-                            <div class="notification-green-dot">
+                        <div class="main-right-top-notification" id="notification">
+                            <i class='bx bx-bell'></i>
+                            <?php if (!empty($data['notification'])) : ?>
+                            <div class="dot"></div>
+                            <?php endif; ?>
+                        </div>
+                        <div id="notification_popup" class="notification_popup">
+                            <h1>Notifications</h1>
+                            <div class="notification_cont">
+                                <?php foreach($data['notification'] as $notification) : ?>
+
+                                <div class="notification">
+                                    <div class="notification-green-dot">
+
+                                    </div>
+                                    <div class="notification_right">
+                                        
+                                        <?php echo $notification->notification?>
+
+                                    </div>
+                                </div>
+                                <?php endforeach; ?>
 
                             </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Assigned
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-
+                        <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/collectors/">
+                            <i class="fa-solid fa-check"> </i>
+                            <button type="submit">Mark all as read</button>
+                        </form>
 
                     </div>
                     <div class="main-right-top-profile">
@@ -342,6 +345,10 @@
                 </script> -->
                 <script>
 
+                var notification = document.getElementById("notification");
+                var notification_pop = document.getElementById("notification_popup");
+                notification_pop.style.height = "0px";
+
                 var color = "#47b076";
                 var textColor = "#414143"
                 let circularProgress = document.querySelector(".circular-progress");
@@ -378,6 +385,32 @@
                     var linkUrl = "<?php echo URLROOT?>/collectors/complains_history";
                     window.location.href = linkUrl;
                 }
+
+                notification.addEventListener("click", function() {
+                        var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
+
+                        if (!isNotificationEmpty) {
+                            var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
+                            if (notification_pop.style.height === "0px") {
+                                if (notificationArraySize >= 3) {
+                                    notification_pop.style.height = "205px";
+                                }
+                                if (notificationArraySize == 2) {
+                                    notification_pop.style.height = "150px";
+                                }
+                                if (notificationArraySize == 1) {
+                                    notification_pop.style.height = "105px";
+                                }
+                                notification_pop.style.visibility = "visible";
+                                notification_pop.style.opacity = "1";
+                                notification_pop.style.padding = "7px";
+                            } else {
+                                notification_pop.style.height = "0px";
+                                notification_pop.style.visibility = "hidden";
+                                notification_pop.style.opacity = "0";
+                            }
+                        }
+                    });
 
                 function createOrUpdateChart(color, textColor) {
                         var Total_Garbage = <?php echo $data['total_garbage']?>;
@@ -575,6 +608,20 @@
                         chartContainer.appendChild(button);
                     });
                 });
+
+                function getDarkModeSetting() {
+                        const storedValue = localStorage.getItem("darkMode");
+                        return storedValue ? JSON.parse(storedValue) : true;
+                    }
+
+                    isDarkMode = getDarkModeSetting();
+                    if (getDarkModeSetting()) {
+
+                        color = "white"
+                        textColor = " white";
+                        circularProgress.style.background =
+                            `conic-gradient(${color}, ${progressStartValue * 3.6}deg, ${isDarkMode ? "#001f3f" : "#ededed"} 0deg)`;
+                    }
 
                 checkbox.addEventListener("change", function() {
 

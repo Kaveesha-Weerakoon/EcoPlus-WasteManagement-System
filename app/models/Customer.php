@@ -112,7 +112,7 @@
 
     public function get_Notification($id) {
       try {
-          $this->db->query('SELECT * FROM customer_nofification WHERE customer_id = :id AND mark_as_read IN ("False")');
+          $this->db->query('SELECT * FROM user_notification WHERE user_id = :id AND mark_as_read IN ("False")');
           $this->db->bind(':id', $id);          
           $results = $this->db->resultSet();
           return $results;
@@ -123,7 +123,7 @@
  
   public function view_Notification($id){
     try {
-      $this->db->query('UPDATE customer_nofification SET mark_as_read = :new_value WHERE customer_id = :id AND mark_as_read IN ("False")');
+      $this->db->query('UPDATE user_notification SET mark_as_read = :new_value WHERE user_id = :id AND mark_as_read IN ("False")');
       
       $new_value = "True";
       $this->db->bind(':new_value', $new_value);

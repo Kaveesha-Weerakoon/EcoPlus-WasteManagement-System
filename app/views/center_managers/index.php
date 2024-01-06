@@ -147,7 +147,11 @@
 </div>
 <script>
 var color = "#47b076";
-var textColor = "#414143"
+var textColor = "#414143";
+
+var notification = document.getElementById("notification");
+var notification_pop = document.getElementById("notification_popup");
+notification_pop.style.height = "0px";
 
 function redirect_incoming_requests() {
     var linkUrl = "<?php echo URLROOT?>/centermanagers/request_incomming";
@@ -173,6 +177,32 @@ function redirect_completed_requests() {
     var linkUrl = "<?php echo URLROOT?>/centermanagers/request_completed";
     window.location.href = linkUrl;
 }
+
+notification.addEventListener("click", function() {
+    var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
+
+    if (!isNotificationEmpty) {
+        var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
+        if (notification_pop.style.height === "0px") {
+            if (notificationArraySize >= 3) {
+                notification_pop.style.height = "205px";
+            }
+            if (notificationArraySize == 2) {
+                notification_pop.style.height = "150px";
+            }
+            if (notificationArraySize == 1) {
+                notification_pop.style.height = "105px";
+            }
+            notification_pop.style.visibility = "visible";
+            notification_pop.style.opacity = "1";
+            notification_pop.style.padding = "7px";
+        } else {
+            notification_pop.style.height = "0px";
+            notification_pop.style.visibility = "hidden";
+            notification_pop.style.opacity = "0";
+        }
+    }
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('myChart').getContext('2d');

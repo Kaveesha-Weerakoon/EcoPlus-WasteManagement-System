@@ -7,7 +7,7 @@
     }
 
     public function request_insert($data){
-
+      try{
         $this->db->query('INSERT INTO request_main (region, customer_id, name,contact_no, date, time,instructions,lat,longi) VALUES (:region, :customer_id, :name,:contact_no, :date, :time,:instructions,:lat,:longi)');
         $this->db->bind(':region', $data['region']);
         $this->db->bind(':customer_id', $data['customer_id']);
@@ -18,7 +18,17 @@
         $this->db->bind(':instructions', $data['instructions']);
         $this->db->bind(':lat', $data['lattitude']);
         $this->db->bind(':longi', $data['longitude']);
-        $result = $this->db->execute();
+        $insertResult = $this->db->execute();
+
+        
+
+
+
+      }catch(Exception $e){
+        return false;
+      }
+
+        
     }
 
     public function get_request_current($user_id) {

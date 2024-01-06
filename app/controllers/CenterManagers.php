@@ -23,6 +23,7 @@
       $center=$this->center_model->getCenterById($_SESSION['center_id']);
       $current_garbage_stock = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
       $json_Current_Garbage = json_encode($current_garbage_stock);
+      //$incoming_requests_count = $this->request_Model->get_incoming_requests_
 
       $data = [
         'center_id' => $center->id,

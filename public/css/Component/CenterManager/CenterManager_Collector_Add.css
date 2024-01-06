@@ -252,6 +252,7 @@
         }
     }
 
+    /*Form*/
     .main-right-bottom-down {
         padding-left: 3.5%;
         width: 96.5%;
@@ -422,14 +423,15 @@
         background: #19954e;
     }
 
+    /*Success popup*/
     .collector_success {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -473,7 +475,7 @@
         width: 100%;
         margin-top: 30px;
         padding: 10px 0;
-        background: #6fd649;
+        background: var(--green-color-one);
         color: white;
         border: 0;
         outline: none;
@@ -482,6 +484,10 @@
         cursor: pointer;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 
+    }
+
+    .popup button:hover{
+        background: var(--button-hover-green);
     }
 
     @media screen and (max-width: 860px) {

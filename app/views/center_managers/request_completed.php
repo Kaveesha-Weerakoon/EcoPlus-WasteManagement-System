@@ -19,10 +19,8 @@
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Customer</th>
-                                    <th>Collector</th>
                                     <th>Collector info</th>
                                     <th>Location</th>
-                                    <th>Earned credits</th>
                                     <th>Collection details</th>
                                     <th>Confirmation</th>
                                 </tr>
@@ -36,21 +34,22 @@
                                     <td><?php  echo $request->date?></td>
                                     <td><?php  echo $request->time?></td>
                                     <td><?php  echo $request->customer_name?></td>
-                                    <td><?php  echo $request->name?></td>
                                     <td class="cancel-open">
-                                        <img src="<?php echo IMGROOT ?>/assign.png"
+                                        <img class="collector_img" src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->collector_image?>"
                                             onclick="view_collector('<?php echo $request->collector_image; ?>', '<?php echo $request->collector_id; ?>', '<?php echo $request->name; ?>', 
-                                            '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')"
-                                            alt="">
+                                            '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')" >
                                     </td>
-                                    <td><img onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
-                                            class="add" src="<?php echo IMGROOT?>/location.png" alt=""></td>
+                                    <td>
+                                            <i class='bx bx-map' style="font-size: 29px;"
+                                             onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
+                                    </td>
 
-                                    <td><?php  echo $request->credit_amount?></td>
+                                    
 
-                                    <td class="cancel-open"><img
+                                    <td class="cancel-open">
+                                            <i class='bx bx-info-circle' style="font-size: 29px"
                                             onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                            src="<?php echo IMGROOT?>/view.png" alt="">
+                                            ></i>
                                     </td>
                                     <!-- <td><a href="<?php echo URLROOT?>/centermanagers/confirm_garbage_details/<?php echo $request->req_id?>"><button class="confirm_button">Confirm</button></a></td> -->
                                    
@@ -97,7 +96,7 @@
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
                             id="collect-details-pop-form-close">
                         <div class="collect-details-pop-form-top">
-                            <div class="collect-details-topic">Completed Details<div id="req_id3"></div>
+                            <div class="collect-details-topic">Collection Details<div id="req_id3"></div>
                             </div>
                         </div>
 
@@ -109,7 +108,8 @@
                                 <h3>Paper Waste Quantity</h3>
                                 <h3>Electronic Waste Quantity </h3>
                                 <h3>Metals Quantity</h3>
-                                <h3>Details</h3>
+                                <h3>Note</h3>
+                                <h3>Earned Credits</h3>
                             </div>
                             <div class="collect-details-pop-form-content-right-values">
                                 <div class="collect-details-pop-form-content-right-values-cont">
@@ -138,6 +138,9 @@
                                 </div>
                                 <div class="collect-details-pop-form-content-right-values-cont">
                                     <h3 id="Note"></h3>
+                                </div>
+                                <div class="collect-details-pop-form-content-right-values-cont">
+                                    <h3 id="Earned_Credits"></h3>
                                 </div>
                             </div>
                         </div>
@@ -278,8 +281,8 @@
                                     </div>
                                     <div class="form-button">
                                         <button type="submit">Confirm</button>
-                                        <a href="<?php echo URLROOT?>/centermanagers/request_completed"><button type="button"
-                                                class="cancel-button">Cancel</button></a>
+                                        <button type="button" class="cancel-button" id="cancelBtn">Cancel</button>
+                                        
                                     </div>
                                     
                                 </form>
@@ -328,6 +331,7 @@ function view_collect_details(request) {
     document.getElementById('Electronic_Waste_Quantity').innerText = request.Electronic_Waste;
     document.getElementById('Metals_Quantity').innerText = request.Metals;
     document.getElementById('Note').innerText = request.note;
+    document.getElementById('Earned_Credits').innerText = request.credit_amount;
 }
 
 // function openConfirmGarbageDetails(req_id){
@@ -420,7 +424,8 @@ document.getElementById('searchInput').addEventListener('input', searchTable);
 document.addEventListener("DOMContentLoaded", function() {
     const close_collector = document.getElementById("personal-details-popup-form-close");
     const collector_view = document.getElementById("personal-details-popup-box");
-    const close_view = document.getElementById("collect-details-pop-form-close")
+    const close_view = document.getElementById("collect-details-pop-form-close");
+    
 
     close_collector.addEventListener("click", function() {
         collector_view.classList.remove('active');
@@ -435,5 +440,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
+
+document.getElementById('cancelBtn').addEventListener('click', function() {
+        // Redirect to the specified URL
+        window.location.href = "<?php echo URLROOT?>/centermanagers/request_completed";
+});
+
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

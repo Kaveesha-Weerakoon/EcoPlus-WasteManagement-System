@@ -13,7 +13,7 @@
         </div>
         <div class="main-left-middle-content" onclick="redirect_request()" id="request">
             <div class=" main-left-middle-content-icon">
-                <i class='bx bx-right-arrow-circle'></i>
+                <i class='bx bx-send'></i>
             </div>
             <h3>Requests</h3>
         </div>

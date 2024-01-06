@@ -25,13 +25,15 @@
       $current_garbage_stock = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
       $json_Current_Garbage = json_encode($current_garbage_stock);
       $Notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
-      //$incoming_requests_count = $this->request_Model->get_incoming_requests_
+      $center = $this->center_model->getCenterById($_SESSION['center_id']);
+      $incoming_requests_count = $this->Request_Model->get_incoming_requests_count($center->region);
 
       $data = [
         'center_id' => $center->id,
         'center_name' => $center->region,
         'current_garbage'=> $json_Current_Garbage,
-        'notification'=> $Notifications
+        'notification'=> $Notifications,
+        'incoming_request_count'=> $incoming_requests_count
       ];
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){

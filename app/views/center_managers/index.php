@@ -43,33 +43,6 @@
 
                     </div>
 
-
-                    <!-- <div class="main-right-top-notification" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <div class="dot"></div>
-                    </div>
-                    <div id="notification_popup" class="notification_popup">
-                        <h1>Notifications</h1>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Assigned
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-                    </div> -->
-
                     <div class="main-right-top-profile">
                         <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
                             alt="">
@@ -85,7 +58,7 @@
                         <div class="main-right-bottom-one-left">
                             <div class="left">
                                 <h1>Incoming Requests</h1>
-                                <h3>10</h3>
+                                <h3><?php echo $data['incoming_request_count']?></h3>
                                 <p>Last Update</p>
                                 <button onclick="redirect_incoming_requests()">View</button>
 

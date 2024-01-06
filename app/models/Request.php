@@ -317,4 +317,19 @@
       }
     }
 
+    public function get_incoming_requests_count($region){
+      try {
+        $this->db->query('SELECT * FROM request_main WHERE region = :region AND type IN ("incoming")');
+        $this->db->bind(':region', $region);
+        $rows = $this->db->resultSet();
+    
+        $request_count = $this->db->rowCount();
+        return $request_count;
+
+      } catch (PDOException $e) {
+        echo 'Error: ' . $e->getMessage();
+        return false;
+      }
+    }
+
 }

@@ -2,17 +2,16 @@
 <div class="CenterManager_Main">
     <div class="CenterManager_Request_Main">
         <div class="CenterManager_Request_Incomming">
-            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&callback=initMap" async
-                defer></script>
+
 
             <div class="main">
                 <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
-                
+
                 <div class="main-right">
 
                     <?php require APPROOT . '/views/center_managers/centermanager_requests/requests_top_bar.php'; ?>
-                   
-                    
+
+
                     <?php if(!empty($data['incoming_requests'])) : ?>
                     <div class="main-right-bottom" id="main-right-bottom">
                         <div class="main-right-bottom-top">
@@ -41,11 +40,16 @@
                                     <td><?php  echo $request->customer_id?></td>
                                     <td><?php  echo $request->contact_no?></td>
                                     <td><?php  echo $request->instructions?></td>
-                                    <td><img onclick="assign(<?php echo $request->req_id ?>)" class="add"
-                                            src="<?php echo IMGROOT?>/assign.png" alt=""></td>
                                     <td>
-                                        <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel"
-                                            src="<?php echo IMGROOT?>/close_popup.png" alt="">
+                                        <i class='bx bxs-user-check' style="font-size: 32px;" onclick="assign(<?php echo $request->req_id ?>)"></i>
+                                        <!-- <img onclick="assign(<?php echo $request->req_id ?>)" class="add"
+                                            src="<?php echo IMGROOT?>/assign.png" alt=""> -->
+                                    </td>
+                                    <td>
+                                        <i class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"
+                                        onclick="cancel(<?php echo $request->req_id ?>)"></i>
+                                        <!-- <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel"
+                                            src="<?php echo IMGROOT?>/close_popup.png" alt=""> -->
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -59,13 +63,13 @@
                         </div>
                     </div>
                     <?php else: ?>
-                        <div class="main-right-bottom-three">
-                            <div class="main-right-bottom-three-content">
-                                <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
-                                <h1>You Have No Incomming Requests</h1>
-                                <p>Incomming requests will be appeared as soon as customer requests</p>
-                            </div>
+                    <div class="main-right-bottom-three">
+                        <div class="main-right-bottom-three-content">
+                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                            <h1>You Have No Incomming Requests</h1>
+                            <p>Incomming requests will be appeared as soon as customer requests</p>
                         </div>
+                    </div>
                     <?php endif; ?>
                 </div>
 
@@ -73,16 +77,23 @@
                 <div class="cancel-confirm" id="cancel-confirm">
                     <form class="cancel-confirm-content" id="cancel-form" method="post"
                         action="<?php echo URLROOT?>/centermanagers/request_cancell">
-                        <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop">
+                        <!-- <img class="confirm-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop"> -->
                         <h1>Cancel the Request?</h1>
-                        <img class="cancel-confirm-content-warning" src="<?php echo IMGROOT?>/warning.png" alt="">
                         <input name="reason" type="text" placeholder="Input the Reason">
                         <input name="id" type="text">
-                        <button onclick="validateCancelForm()" id="cancel-pop"
-                            style="background-color: tomato;">OK</button>
+                        <div class="cancel-confirm-button-container">
+                            <button type="button" onclick="validateCancelForm()" id="cancel-pop"
+                                class="cancel-reason-submit-button">Submit</button>
+                            <button type="button" onclick="closecancel()" id="cancel-pop"
+                                class="cancel-reason-cancel-button">Cancel</button>
+                        </div>
+
                     </form>
 
                 </div>
+
+                <div class="overlay" id="overlay"></div>
+
                 <div class="View" id="View">
                     <form class="View-content" id="assignForm" method="post"
                         action="<?php echo URLROOT?>/centermanagers/assing">
@@ -91,7 +102,7 @@
 
                         <img class="view_assing" src="<?php echo IMGROOT?>/selection.png" alt="">
                         <div class="view_assing_middle">
-                            <h3>Req ID <b>R <div id="assign_reqid" style="display: inline;"></div></b></h3>
+                            <h3>Req ID: <b>R <div id="assign_reqid" style="display: inline;"></div></b></h3>
                         </div>
                         <input name="assign_req_id" type="text" id="assign_req_id" style="display: none;">
 
@@ -123,6 +134,7 @@
                     alert("Please enter a reason");
                 } else {
                     document.getElementById("cancel-form").submit();
+                    closecancel();
                 }
             }
 
@@ -146,14 +158,23 @@
                 inputElement.style.display = 'none';
 
                 assign_reqid.innerHTML = $id;
-                document.getElementById("View").style.display = "flex"
+
+                // document.getElementById("View").style.display = "flex"
+                var assign_popup = document.getElementById('View');
+                assign_popup.classList.add('active');
+
+                document.getElementById('overlay').style.display = "flex";
             }
 
             function cancel($id) {
                 var inputElement = document.querySelector('input[name="id"]');
                 inputElement.style.display = 'none';
                 inputElement.value = $id;
-                document.getElementById("cancel-confirm").style.display = "flex"
+                // document.getElementById('cancel-confirm').style.display = "flex";
+                var cancel_popup = document.getElementById('cancel-confirm');
+                cancel_popup.classList.add('active');
+
+                document.getElementById('overlay').style.display = "flex";
             }
 
             function initMap() {
@@ -294,6 +315,13 @@
                 });
             }
 
+            function closecancel() {
+                const popup = document.getElementById("cancel-confirm");
+
+                popup.classList.remove('active');
+                document.getElementById('overlay').style.display = "none";
+            }
+
             document.addEventListener("DOMContentLoaded", function() {
 
                 const closeButton = document.getElementById("cancel-pop");
@@ -333,11 +361,14 @@
 
 
                 closeButton.addEventListener("click", function() {
-                    popup.style.display = "none";
+
+                    console.log('as');
                 });
 
                 closeassign.addEventListener("click", function() {
-                    assign.style.display = "none";
+                    assign.classList.remove('active');
+                    document.getElementById('overlay').style.display = "none";
+                    // assign.style.display = "none";
                 });
 
 

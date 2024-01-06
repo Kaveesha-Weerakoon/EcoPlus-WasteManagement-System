@@ -228,8 +228,7 @@
                         </div>
                         <div class="form-button">
                             <button type="submit">Release</button>
-                            <a href="<?php echo URLROOT?>/centermanagers/center_garbage_stock"><button type="button"
-                                    class="cancel-button">Cancel</button></a>
+                            <button type="button" class="cancel-button" id="cancelBtn">Cancel</button>
                         </div>
                         
                     </form>
@@ -252,6 +251,10 @@
     </div>
 </div>
 <script>
+    document.getElementById('cancelBtn').addEventListener('click', function() {
+        // Redirect to the specified URL
+        window.location.href = "<?php echo URLROOT?>/centermanagers/center_garbage_stock";
+    });
 
 </script>
 

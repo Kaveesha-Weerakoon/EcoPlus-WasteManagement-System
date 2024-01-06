@@ -170,33 +170,33 @@
                 <div class="Eco_Credit_Per_Cont">
                     <div class="Cont">
                         <h3>Plastic</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-box"></i>
                         <p><?php echo $data['eco_credit_per']->plastic?></p>
                     </div>
                     <div class="Cont">
                         <h3>Polythene</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-trash"></i>
                         <p><?php echo $data['eco_credit_per']->polythene?></p>
                     </div>
                     <div class="Cont">
                         <h3>Metal</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-box"></i>
                         <p><?php echo $data['eco_credit_per']->metal?></p>
                     </div>
                     <div class="Cont">
                         <h3> Glass</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-glass-whiskey"></i>
                         <p><?php echo $data['eco_credit_per']->glass?></p>
                     </div>
 
                     <div class="Cont">
                         <h3>Paper</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-file-alt"></i>
                         <p><?php echo $data['eco_credit_per']->paper?></p>
                     </div>
                     <div class="Cont">
                         <h3>Electronic</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-laptop"></i>
                         <p><?php echo $data['eco_credit_per']->electronic?></p>
                     </div>
                 </div>

@@ -97,16 +97,19 @@
                                 <td><?php echo $collector->name?></td>
                                 <td><?php echo $collector->email?></td>
                                 <td><a
-                                        href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><img
-                                            src="<?php echo IMGROOT ?>/personal_details_icon.png" alt=""></a></td>
-                                <td><img onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                        src="<?php echo IMGROOT ?>/car.png" alt=""></td>
+                                        href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><i class='bx bxs-user' style="font-size: 29px;"></i>
+                                    </a></td>
+                                <td>
+                                    <i class='bx bxs-truck' style="font-size: 29px;"
+                                    onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"></i>
+
+                                </td>
                                 <td><a
-                                        href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><img
-                                            src="<?php echo IMGROOT ?>/update.png" alt=""></a></td>
+                                        href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><i class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"></i>
+                                        </a></td>
                                 <td class="delete"><a
                                         href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>">
-                                        <img src="<?php echo IMGROOT ?>/delete.png" alt=""></a></td>
+                                        <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
 
                             </tr>
                             <?php endforeach; ?>
@@ -127,140 +130,144 @@
 
               
             </div>
-        </div>
 
+            <?php if($data['click_update']=='True') : ?>
+            <div class="update_click">
+                <div class="popup-form" id="popup">
+                    <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png"
+                            class="update-popup-img" alt=""></a>
+                    <h2>Update Details</h2>
+                    <center>
+                        <div class="update-topic-line"></div>
+                    </center>
+                    <form class="updatePopupform"
+                        action="<?php echo URLROOT;?>/centermanagers/collectors_update/<?php echo $data['id'];?>" method="post">
+                        <div class="updatePopupform-div">
+                            <div class="personal-details">Personal Details</div>
+                            <div class="top-personal-details">
+                                <div class="updateData">
+                                    <label>Name</label><br>
+                                    <input type="text" name="name" placeholder="Enter name"
+                                        value="<?php echo $data['name']; ?>"><br>
+                                    <div class="error-div" style="color:red">
+                                        <?php echo $data['name_err']?>
+                                    </div>
+                                </div>
+                                <div class="updateData">
+                                    <label>NIC</label><br>
+                                    <input type="text" name="nic" placeholder="Enter NIC"
+                                        value="<?php echo $data['nic']; ?>"><br>
+                                    <div class="error-div" style="color:red">
+                                        <?php echo $data['nic_err']?>
+                                    </div>
+                                </div>
+                                <div class="updateData">
+                                    <label>Address</label><br>
+                                    <input type="text" name="address" placeholder="Enter Address"
+                                        value="<?php echo $data['address']; ?>"><br>
+                                    <div class="error-div" style="color:red">
+                                        <?php echo $data['address_err']?>
+                                    </div>
+                                </div>
+                                <div class="updateData">
+                                    <label>Contact No</label><br>
+                                    <input type="text" name="contact_no" placeholder="Enter Contact No"
+                                        value="<?php echo $data['contact_no']; ?>"><br>
+                                    <div class="error-div" style="color:red">
+                                        <?php echo $data['contact_no_err']?>
+                                    </div>
+                                </div>
+                                <div class="updateData">
+                                    <label>DOB</label><br>
+                                    <input type="date" name="dob" placeholder="Enter DOB"
+                                        value="<?php echo $data['dob']; ?>"><br>
+                                    <div class="error-div" style="color:red">
+                                        <?php echo $data['dob_err']?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="vehicle-details">Vehicle Details</div>
+                            <div class="bottom-vehicle-details">
+                                <div class="updateData">
+                                    <label>Vehicle Plate No</label><br>
+                                    <input type="text" name="vehicle_no" placeholder="Enter Vehicle Plate No"
+                                        value="<?php echo $data['vehicle_no']; ?>"><br>
+                                    <div class="error-div" style="color:red">
+                                        <?php echo $data['vehicle_no_err']?>
+                                    </div>
+                                </div>
+                                <div class="updateData">
+                                    <label>Vehicle Type</label><br>
+                                    <input type="text" name="vehicle_type" placeholder="Enter Vehicle Type"
+                                        value="<?php echo $data['vehicle_type']; ?>"><br>
+                                    <div class="error-div" style="color:red">
+                                        <?php echo $data['vehicle_type_err']?>
+                                    </div>
+                                </div>
 
-        <?php if($data['click_update']=='True') : ?>
-        <div class="update_click">
-            <div class="popup-form" id="popup">
-                <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png"
-                        class="update-popup-img" alt=""></a>
-                <h2>Update Details</h2>
-                <center>
-                    <div class="update-topic-line"></div>
-                </center>
-                <form class="updatePopupform"
-                    action="<?php echo URLROOT;?>/centermanagers/collectors_update/<?php echo $data['id'];?>" method="post">
-                    <div class="updatePopupform-div">
-                        <div class="personal-details">Personal Details</div>
-                        <div class="top-personal-details">
-                            <div class="updateData">
-                                <label>Name</label><br>
-                                <input type="text" name="name" placeholder="Enter name"
-                                    value="<?php echo $data['name']; ?>"><br>
-                                <div class="error-div" style="color:red">
-                                    <?php echo $data['name_err']?>
-                                </div>
                             </div>
-                            <div class="updateData">
-                                <label>NIC</label><br>
-                                <input type="text" name="nic" placeholder="Enter NIC"
-                                    value="<?php echo $data['nic']; ?>"><br>
-                                <div class="error-div" style="color:red">
-                                    <?php echo $data['nic_err']?>
-                                </div>
+
+                            <div class="btns1">
+                                <button type="submit" class="updatebtn">Update</button>
+                                <button type="button" class="cancelbtn1"><a
+                                        href="<?php echo URLROOT?>/centermanagers/collectors">Cancel</a></button>
                             </div>
-                            <div class="updateData">
-                                <label>Address</label><br>
-                                <input type="text" name="address" placeholder="Enter Address"
-                                    value="<?php echo $data['address']; ?>"><br>
-                                <div class="error-div" style="color:red">
-                                    <?php echo $data['address_err']?>
-                                </div>
-                            </div>
-                            <div class="updateData">
-                                <label>Contact No</label><br>
-                                <input type="text" name="contact_no" placeholder="Enter Contact No"
-                                    value="<?php echo $data['contact_no']; ?>"><br>
-                                <div class="error-div" style="color:red">
-                                    <?php echo $data['contact_no_err']?>
-                                </div>
-                            </div>
-                            <div class="updateData">
-                                <label>DOB</label><br>
-                                <input type="date" name="dob" placeholder="Enter DOB"
-                                    value="<?php echo $data['dob']; ?>"><br>
-                                <div class="error-div" style="color:red">
-                                    <?php echo $data['dob_err']?>
-                                </div>
-                            </div>
+
                         </div>
-                        <div class="vehicle-details">Vehicle Details</div>
-                        <div class="bottom-vehicle-details">
-                            <div class="updateData">
-                                <label>Vehicle Plate No</label><br>
-                                <input type="text" name="vehicle_no" placeholder="Enter Vehicle Plate No"
-                                    value="<?php echo $data['vehicle_no']; ?>"><br>
-                                <div class="error-div" style="color:red">
-                                    <?php echo $data['vehicle_no_err']?>
-                                </div>
-                            </div>
-                            <div class="updateData">
-                                <label>Vehicle Type</label><br>
-                                <input type="text" name="vehicle_type" placeholder="Enter Vehicle Type"
-                                    value="<?php echo $data['vehicle_type']; ?>"><br>
-                                <div class="error-div" style="color:red">
-                                    <?php echo $data['vehicle_type_err']?>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="btns1">
-                            <button type="submit" class="updatebtn">Update</button>
-                            <button type="button" class="cancelbtn1"><a
-                                    href="<?php echo URLROOT?>/centermanagers/collectors">Cancel</a></button>
-                        </div>
-
-                    </div>
 
 
-                </form>
-            </div>
-        </div>
-
-        <?php endif; ?>
-
-
-        <?php if($data['confirm_delete']== 'True') : ?>
-        <div class="delete_confirm">
-            <div class="popup" id="popup">
-                <img src="<?php echo IMGROOT?>/trash.png" alt="">
-                <h2>Delete this collector?</h2>
-                <p>This action will permanently delete this collector</p>
-                <div class="btns">
-                    <a href="<?php echo URLROOT?>/centermanagers/collector_delete/<?php echo $data['collector_id'] ?>"><button
-                            type="button" class="deletebtn">Delete</button></a>
-                    <a href="<?php echo URLROOT?>/centermanagers/collectors ?>"><button type="button"
-                            class="cancelbtn">Cancel</button></a>
+                    </form>
                 </div>
             </div>
-        </div>
-        <?php endif; ?>
+            <?php endif; ?>
 
-        <?php if($data['update_success']=='True') : ?>
-        <div class="success_popup_box">
-            <div class="popup1" id="popup1">
-                <img src="<?php echo IMGROOT?>/check.png" alt="">
-                <h2>Success!!</h2>
-                <p>Collector details has updated successfully</p>
-                <a href="<?php echo URLROOT?>/centermanagers/collectors"><button type="button">OK</button></a>
-
+                
+            <?php if($data['confirm_delete']== 'True') : ?>
+            <div class="delete_confirm">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/trash.png" alt="">
+                    <h2>Delete this collector?</h2>
+                    <p>This action will permanently delete this collector</p>
+                    <div class="btns">
+                        <a href="<?php echo URLROOT?>/centermanagers/collector_delete/<?php echo $data['collector_id'] ?>"><button
+                                type="button" class="deletebtn">Delete</button></a>
+                        <a href="<?php echo URLROOT?>/centermanagers/collectors ?>"><button type="button"
+                                class="cancelbtn">Cancel</button></a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <?php endif; ?>
+            <?php endif; ?>
 
-        <?php if($data['delete_success']=='True') : ?>
-        <div class="success_popup_box">
-            <div class="popup1" id="popup1">
-                <img src="<?php echo IMGROOT?>/check.png" alt="">
-                <h2>Success!!</h2>
-                <p>Collector has deleted successfully</p>
-                <a href="<?php echo URLROOT?>/centermanagers/collectors"><button type="button">OK</button></a>
+            
+            <?php if($data['update_success']=='True') : ?>
+            <div class="success_popup_box">
+                <div class="popup1" id="popup1">
+                    <img src="<?php echo IMGROOT?>/check.png" alt="">
+                    <h2>Success!!</h2>
+                    <p>Collector details has updated successfully</p>
+                    <a href="<?php echo URLROOT?>/centermanagers/collectors"><button type="button">OK</button></a>
+
+                </div>
             </div>
-        </div>
-        <?php endif; ?>
+            <?php endif; ?>
 
+                
+            <?php if($data['delete_success']=='True') : ?>
+            <div class="success_popup_box">
+                <div class="popup1" id="popup1">
+                    <img src="<?php echo IMGROOT?>/check.png" alt="">
+                    <h2>Success!!</h2>
+                    <p>Collector has deleted successfully</p>
+                    <a href="<?php echo URLROOT?>/centermanagers/collectors"><button type="button">OK</button></a>
+                </div>
+            </div>
+            <?php endif; ?>
+
+
+        </div>
+
+        <div class="overlay" id="overlay"></div>
+        
         <?php if($data['personal_details_click']=='True') : ?>
         <div class="personal-details-popup-box">
             <div class="personal-details-popup-form" id="popup">
@@ -334,7 +341,12 @@
 </div>
 <script>
 function openvehicledetails(collector) {
-    document.getElementById('vehicle-details-popup-box').style.display = "flex";
+
+    var locationPop = document.getElementById('vehicle-details-popup-box');
+    locationPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    // document.getElementById('vehicle-details-popup-box').style.display = "flex";
     document.getElementById('vehicle_collector_id').textContent = collector.user_id;
     document.getElementById('vehicle_collector_name').textContent = collector.name;
     document.getElementById('vehicle_collector_no').textContent = collector.vehicle_no;
@@ -343,9 +355,15 @@ function openvehicledetails(collector) {
 
 document.addEventListener('DOMContentLoaded', function() {
     var close_vehicledetail = document.getElementById('vehicle-details-popup-form-close');
+
     close_vehicledetail.addEventListener('click', function() {
-        document.getElementById('vehicle-details-popup-box').style.display = "none";
+        var vehicle_pop = document.getElementById('vehicle-details-popup-box');
+        vehicle_pop.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+        // document.getElementById('vehicle-details-popup-box').style.display = "none";
     });
 });
+
+
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

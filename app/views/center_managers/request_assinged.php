@@ -6,117 +6,11 @@
         <div class="CenterManager_Request_Assinged">
             <div class="main">
             <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
-                <!-- <div class="main-left">
-                    <div class="main-left-top">
-                        <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
-                        <h1>Eco Plus</h1>
-                    </div>
-                    <div class="main-left-middle">
-                        <a href="<?php echo URLROOT?>/centermanagers">
-                            <div class="main-left-middle-content ">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/Home.png" alt="">
-                                <h2>Dashboard</h2>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="main-left-middle-content current">
-                                <div class="main-left-middle-content-line"></div>
-                                <img src="<?php echo IMGROOT?>/Request.png" alt="">
-                                <h2>Requests</h2>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="main-left-middle-content Collector ">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/Center.png" alt="">
-                                <h2>Center Waste Management</h2>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/centermanagers/editprofile">
-                            <div class="main-left-middle-content">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">
-                                <h2>Edit Profile</h2>
-                            </div>
-                        </a>
-                    </div>
-                    <a href="<?php echo URLROOT?>/centermanagers/logout">
-                        <div class="main-left-bottom">
-                            <div class="main-left-bottom-content">
-                                <img src="<?php echo IMGROOT?>/logout.png" alt="">
-                                <p>Log out</p>
-                            </div>
-                        </div>
-                    </a>
-                </div> -->
+               
                 <div class="main-right">
                     <?php require APPROOT . '/views/center_managers/centermanager_requests/requests_top_bar.php'; ?>
 
-                    <!-- <div class="main-right-top">
-                        <div class="main-right-top-one">
-                            <div class="main-right-top-one-search">
-                                <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                                <input id="searchInput" type="text" placeholder="Search">
-                            </div>
-
-                            <div class="main-right-top-one-content">
-                                <p><?php echo $_SESSION['center_manager_name']?></p>
-                                <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
-                                    alt="">
-                            </div>
-                        </div>
-                        <div class="main-right-top-two">
-                            <h1>Requests</h1>
-                        </div>
-                        <div class="main-right-top-three">
-                            <a href="<?php echo URLROOT?>/centermanagers/request_incomming">
-                                <div class="main-right-top-three-content">
-                                    <p>Incoming</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/centermanagers/request_assigned">
-                                <div class="main-right-top-three-content">
-                                    <p><b style="color: #1B6652;">Assigned</b></p>
-                                    <div class="line"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/centermanagers/request_completed">
-                                <div class="main-right-top-three-content">
-                                    <p>Completed</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/centermanagers/request_cancelled">
-                                <div class="main-right-top-three-content">
-                                    <p>Cancelled</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="main-right-top-four">
-                            <div class="main-right-top-four-left">
-                                <p>Date</p>
-                                <input type="date" id="selected-date">
-                                <button onclick="loadLocations()">Filter</button>
-                            </div>
-                            <div class="main-right-top-four-right">
-                                <div class="main-right-top-four-component" style="background-color: #ecf0f1"
-                                    id="tables">
-                                    <img src="<?php echo IMGROOT?>/cells.png" alt="">
-                                    <p>Tables</p>
-                                </div>
-                                <div class="main-right-top-four-component" id="maps">
-                                    <img src="<?php echo IMGROOT?>/map.png" alt="">
-                                    <p>Maps</p>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div> -->
-
+                   
                     <?php if(!empty($data['assined_requests'])) : ?>
 
                     <div class="main-right-bottom" id="main-right-bottom">
@@ -151,12 +45,19 @@
                                             alt="">
                                     </td>
                                     <td>
-                                        <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                            class="cancel" src="<?php echo IMGROOT ?>/info.png" alt="">
+                                        <i class='bx bx-info-circle' style="font-size: 29px"
+                                            onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
+                                            ></i>
+
+                                        <!-- <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
+                                            class="cancel" src="<?php echo IMGROOT ?>/info.png" alt=""> -->
                                     </td>
                                     <td>
-                                        <img onclick="cancel(<?php echo $request->req_id ?>,<?php echo  $request->collector_id ?>)"
-                                            class="cancel" src="<?php echo IMGROOT?>/close_popup.png" alt="">
+                                        <i class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"
+                                        onclick="cancel(<?php echo $request->req_id ?>,<?php echo  $request->collector_id ?>)"></i>
+
+                                        <!-- <img onclick="cancel(<?php echo $request->req_id ?>,<?php echo  $request->collector_id ?>)"
+                                            class="cancel" src="<?php echo IMGROOT?>/close_popup.png" alt=""> -->
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -170,30 +71,38 @@
                     </div>
                 </div>
                 <?php else: ?>
-                    <div class="main-right-bottom-three">
-                        <div class="main-right-bottom-three-content">
-                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
-                            <h1>You have No Assinged Requests</h1>
-                            <p>Assigned requests will be appeared as soon as you assign collectors</p>
-                        </div>
+                <div class="main-right-bottom-three">
+                    <div class="main-right-bottom-three-content">
+                        <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                        <h1>You have No Assinged Requests</h1>
+                        <p>Assigned requests will be appeared as soon as you assign collectors</p>
                     </div>
+                </div>
                 <?php endif; ?>
             </div>
+
+            <!-- cancel popup -->
             <div class="cancel-confirm" id="cancel-confirm">
                 <form class="cancel-confirm-content" id="cancel-form" method="post"
                     action="<?php echo URLROOT?>/centermanagers/assinged_request_cancell">
-                    <div class="cancel-confirm-top-close">
+                    <!-- <div class="cancel-confirm-top-close">
                         <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop">
-                    </div>
+                    </div> -->
                     <h1>Cancel the Request?</h1>
-                    <img class="cancel-confirm-content-warning" src="<?php echo IMGROOT?>/warning.png" alt="">
                     <input name="reason" type="text" placeholder="Input the Reason">
                     <input name="id" type="text">
                     <input name="collector_id" id="collector_id" type="text">
-                    <button onclick="validateCancelForm()" id="cancel-pop" style="background-color: tomato;">OK</button>
+                    <div class="cancel-confirm-button-container">
+                        <button type="button" onclick="validateCancelForm()" id="cancel-pop" 
+                            class="cancel-reason-submit-button">Submit</button>
+                        <button type="button" onclick="closecancel()" id="cancel-pop"
+                            class="cancel-reason-cancel-button">Cancel</button>
+                    </div>
+                    
                 </form>
 
             </div>
+
             <div class="personal-details-popup-box" id="personal-details-popup-box">
                 <div class="personal-details-popup-form" id="popup">
                     <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
@@ -227,6 +136,9 @@
                     </div>
                 </div>
             </div>
+
+            <div class="overlay" id="overlay"></div>
+
             <div class="request-details-pop" id="request-details-popup-box">
                 <div class="request-details-pop-form">
                     <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
@@ -269,7 +181,12 @@ function cancel(id, collector_id) {
     inputElement.value = id;
     collector_id.value = collector_id;
 
-    document.getElementById("cancel-confirm").style.display = "flex"
+    // document.getElementById("cancel-confirm").style.display = "flex"
+    var cancel_popup = document.getElementById('cancel-confirm');
+    cancel_popup.classList.add('active');
+
+    document.getElementById('overlay').style.display = "flex";
+    
 }
 
 function searchTable() {
@@ -316,7 +233,11 @@ function view_collector(image, col_id, name, contact_no, type, vehno, request_id
 
 function view_request_details(request) {
 
-    document.getElementById('request-details-popup-box').style.display = "flex";
+    var requestDetails_popup = document.getElementById('request-details-popup-box');
+    requestDetails_popup.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    // document.getElementById('request-details-popup-box').style.display = "flex";
     document.getElementById('req_id3').innerText = request.req_id;
     document.getElementById('req_id2').innerText = request.customer_id;
     document.getElementById('req_name').innerText = request.customer_name;
@@ -432,6 +353,14 @@ function updateMapForDate(selectedDate) {
         });
     });
 }
+
+function closecancel() {
+    const popup = document.getElementById("cancel-confirm");
+
+    popup.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
+}
+
 document.addEventListener("DOMContentLoaded", function() {
 
     const closeButton = document.getElementById("cancel-pop");
@@ -478,7 +407,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     close_request_details.addEventListener("click", function() {
-        document.getElementById('request-details-popup-box').style.display = "none";
+        var request_popup = document.getElementById("request-details-popup-box");
+        request_popup.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
     });
 });
 

@@ -5,12 +5,12 @@
     <div class="CenterManager_Request_Main">
         <div class="CenterManager_Request_Assinged">
             <div class="main">
-            <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
-               
+                <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
+
                 <div class="main-right">
                     <?php require APPROOT . '/views/center_managers/centermanager_requests/requests_top_bar.php'; ?>
 
-                   
+
                     <?php if(!empty($data['assined_requests'])) : ?>
 
                     <div class="main-right-bottom" id="main-right-bottom">
@@ -46,15 +46,14 @@
                                     </td>
                                     <td>
                                         <i class='bx bx-info-circle' style="font-size: 29px"
-                                            onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                            ></i>
+                                            onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
 
                                         <!-- <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
                                             class="cancel" src="<?php echo IMGROOT ?>/info.png" alt=""> -->
                                     </td>
                                     <td>
                                         <i class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"
-                                        onclick="cancel(<?php echo $request->req_id ?>,<?php echo  $request->collector_id ?>)"></i>
+                                            onclick="cancel(<?php echo $request->req_id ?>,<?php echo  $request->collector_id ?>)"></i>
 
                                         <!-- <img onclick="cancel(<?php echo $request->req_id ?>,<?php echo  $request->collector_id ?>)"
                                             class="cancel" src="<?php echo IMGROOT?>/close_popup.png" alt=""> -->
@@ -93,12 +92,12 @@
                     <input name="id" type="text">
                     <input name="collector_id" id="collector_id" type="text">
                     <div class="cancel-confirm-button-container">
-                        <button type="button" onclick="validateCancelForm()" id="cancel-pop" 
+                        <button type="button" onclick="validateCancelForm()" id="cancel-pop"
                             class="cancel-reason-submit-button">Submit</button>
                         <button type="button" onclick="closecancel()" id="cancel-pop"
                             class="cancel-reason-cancel-button">Cancel</button>
                     </div>
-                    
+
                 </form>
 
             </div>
@@ -186,7 +185,7 @@ function cancel(id, collector_id) {
     cancel_popup.classList.add('active');
 
     document.getElementById('overlay').style.display = "flex";
-    
+
 }
 
 function searchTable() {
@@ -218,6 +217,8 @@ function validateCancelForm() {
     } else {
         document.getElementById("cancel-form").submit();
     }
+    document.getElementById('overlay').style.display = "none";
+
 }
 
 function view_collector(image, col_id, name, contact_no, type, vehno, request_id) {

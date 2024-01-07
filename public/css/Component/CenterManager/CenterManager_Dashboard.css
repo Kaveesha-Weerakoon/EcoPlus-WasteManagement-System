@@ -368,45 +368,133 @@
         background-color: var(--green-color-two);
     }
 
+     /*calendar*/
     .main-right-bottom-one-right .right {
-        border: 1px solid var(--green-color-one);
         width: 110%;
-        /* border-top-left-radius: 110px;
-        border-bottom-left-radius: 110px;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px; */
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
         color: white !important;
-        letter-spacing: 0.03rem;
+        letter-spacing: 0.03rem;   
         transition: background-color 0.6s ease-in;
 
     }
 
-    .main-right-bottom-one-right .right h1 {
+     .wrapper{
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        border-radius: 10px;
+        color: var(--main-text-color);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        box-sizing: border-box;
+      }
+
+      .wrapper header{
+        display: flex;
+        align-items: center;
+        padding: 12px 30px 7px;
+        justify-content: space-between;
+      }
+
+      header .icons{
+        display: flex;
+      }
+
+      header .icons i{
+        height: 25px;
+        width: 25px;
+        margin: 0 1px;
+        cursor: pointer;
+        color: #878787;
+        text-align: center;
+        line-height: 25px;
+        /* font-size: 1.9rem; */
         font-size: 18px;
-        color: var(--background-color-two);
+        user-select: none;
+        border-radius: 50%;
+     
+      }
 
-    }
+      .icons i:last-child{
+        margin-right: -10px;
+      }
 
-    .main-right-bottom-one-right .right h3 {
-        font-size: 14px;
-        color: var(--background-color-two);
-        margin-top: 2%;
-        letter-spacing: 0.05rem;
-    }
+      header .icons i:hover{
+        background: #f2f2f2;
+      }
 
-    .main-right-bottom-one-right .right i {
-        font-size: 40px;
-    }
+      header .current-date{
+        /* font-size: 1.45rem; */
+        font-size: 15px;
+        font-weight: 500;
+      }
 
-    .main-right-bottom-one-right .right .main-credit {
-        font-size: 29px;
-        font-weight: bolder;
-    }
+      .calendar{
+        padding: 10px 20px;
+      }
 
+      .calendar ul{
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        text-align: center;
+      }
+
+      .calendar .days{
+        margin-bottom: 10px;
+      }
+
+      .calendar li{
+        color: #333;
+        width: calc(100% / 7);
+        /* font-size: 1.07rem; */
+        font-size: 10px;
+      }
+
+      .calendar .weeks li{
+        font-weight: 500;
+        cursor: default;
+      }
+
+      .calendar .days li{
+        z-index: 1;
+        cursor: pointer;
+        position: relative;
+        margin-top: 12px;
+      }
+
+      .days li.inactive{
+        color: #aaa;
+      }
+
+      .days li.active{
+        color: #fff;
+      }
+
+      .days li::before{
+        position: absolute;
+        content: "";
+        left: 50%;
+        top: 50%;
+        height: 20px;
+        width: 20px;
+        z-index: -1;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .days li.active::before{
+        background: var(--green-color-one);
+      }
+
+      .days li:not(.active):hover::before{
+        background: #f2f2f2;
+      }
+
+
+   
 
 
     /* .main-right-bottom-one-right {
@@ -781,6 +869,7 @@
         }
     }
 
+   
 }
 
 

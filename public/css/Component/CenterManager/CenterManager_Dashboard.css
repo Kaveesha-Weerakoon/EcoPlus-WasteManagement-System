@@ -248,6 +248,7 @@
         font-weight: 700;
     }
 
+
     .main-right-bottom-one-left .left button {
         background-color: var(--green-color-one);
         border: none;
@@ -321,8 +322,8 @@
         flex-direction: column;
         width: 100%;
         padding-top: 5%;
-        padding-left: 8%;
-        border: 1px solid red;
+        padding-left: 5%;
+        /* border: 1px solid red; */
     }
 
     .main-right-bottom-one-right .left h1 {
@@ -332,7 +333,7 @@
 
     .main-right-bottom-one-right .left h3 {
         font-size: 18px;
-        margin-bottom: 1%;
+        margin-bottom: 2%;
         color: var(--green-color-one);
     }
 
@@ -341,6 +342,12 @@
         margin-bottom: 6%;
         letter-spacing: 0.05rem;
         font-weight: 700;
+    }
+
+    .main-right-bottom-one-right .left span {
+        margin-top: 5px;
+        color:rgb(220, 39, 39) ;
+        font-size: 14px;
     }
 
     .main-right-bottom-one-right .left button {

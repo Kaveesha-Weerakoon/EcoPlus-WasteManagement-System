@@ -74,8 +74,9 @@
                             <div class="left">
                                 <!-- <h1>Incoming Requests</h1> -->
                                 <h3>Available Hours: 8am to 5pm</h3>
-                                <p>Except Holidays</p>
-                                <!-- <button onclick="redirect_incoming_requests()">View</button> -->
+                                <p>Set holidays for the center</p>
+                                <button>Set</button>
+                                <span>*This action is not reversible</span>
 
                             </div>
 

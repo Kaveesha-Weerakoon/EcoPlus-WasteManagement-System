@@ -75,7 +75,7 @@
                                 <!-- <h1>Incoming Requests</h1> -->
                                 <h3>Available Hours: 8am to 5pm</h3>
                                 <p>Set holidays for the center</p>
-                                <button>Set</button>
+                                <button type="button" id="setButton">Set</button>
                                 <span>*This action is not reversible</span>
 
                             </div>
@@ -178,6 +178,26 @@
 
                     </div>
                 </div>
+
+            </div>
+
+            <div class="overlay" id="overlay"></div>
+
+            <div class="confirm-hoildays-popup" id="confirm-hoildays-popup">
+                <form class="confirm-hoildays-form" id="confirm-hoildays-form" method="post"
+                    action="<?php echo URLROOT?>/centermanagers/mark_holidays">
+                    <h1>Mark this date as a holiday?</h1>
+                    <p>This date will be marked as a off-day</p>
+                    <span>Customers won't be able to request on off-days</span>
+                    <input type="text" class="holiday" id="holiday"> 
+                    <div class="cancel-confirm-button-container">
+                        <button type="button" onclick="validateHolidayForm()" id="cancel-pop"
+                            class="holiday-submit-button">Mark</button>
+                        <button type="button" onclick="closeHolidayPopup()" id="cancel-pop"
+                            class="holiday-cancel-button">Cancel</button>
+                    </div>
+
+                </form>
 
             </div>
 
@@ -393,6 +413,67 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
         renderCalendar(); // calling renderCalendar function
     });
 });
+
+function openHolidayPopup(holiday) {
+    if (holiday) {
+        // Set the selected date in the popup
+        document.getElementById('holiday').value = holiday;
+
+        // Show the popup
+        var cancel_popup = document.getElementById('confirm-hoildays-popup');
+        cancel_popup.classList.add('active');
+
+        document.getElementById('overlay').style.display = "flex";
+    } else {
+        // Display an error message because no date is selected
+        alert("Please select a date before marking it as a holiday.");
+    }
+    
+    // //document.getElementById('confirm-hoildays-popup').style.display = 'flex';
+
+}
+
+const calendarBody = document.querySelector(".days");
+calendarBody.addEventListener('click', selectDate);
+var selectedDate; // Variable to store the selected date
+var holiday;
+
+// Function to handle date cell click
+function selectDate(event) {
+    
+    // Reset the selected date class
+    document.querySelectorAll('.days li').forEach(function(day) {
+        day.classList.remove('selected');
+    });
+
+    // Get the clicked date
+    selectedDate = event.target.innerHTML;
+    //console.log(selectedDate);
+
+    holiday = `${currYear}-${(currMonth + 1).toString().padStart(2, '0')}-${selectedDate.toString().padStart(2, '0')}`;
+    console.log(holiday);
+    //console.log(holiday);
+
+
+    // Highlight the selected date
+    event.target.classList.add('selected');    
+
+}
+
+document.getElementById('setButton').addEventListener('click', function() {
+        openHolidayPopup(holiday);
+});
+
+
+// Function to close the popup
+function closeHolidayPopup() {
+    // Hide the popup
+    //document.getElementById('confirm-hoildays-popup').style.display = 'none';
+    var cancel_popup = document.getElementById('confirm-hoildays-popup');
+    cancel_popup.classList.remove('active');
+
+    document.getElementById('overlay').style.display = "none";
+}
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

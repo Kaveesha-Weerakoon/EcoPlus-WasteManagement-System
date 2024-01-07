@@ -144,7 +144,7 @@
                             </div>
                             <div class="content_container">
                                 <h3>Region Customers</h3>
-                                <!-- <h2><?php echo $data['completed_request_count']?></h2> -->
+                                <h2><?php echo $data['customers_count']?></h2>
                             </div>
                         </div>
 

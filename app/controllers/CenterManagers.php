@@ -13,6 +13,7 @@
       $this->garbage_Model=$this->model('Garbage_Stock');
       $this->center_complaints_model=$this->model('Center_Complaints');
       $this->notification_Model=$this->model('Notifications');
+      $this->Customer_Model=$this->model('Customer');
 
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
@@ -30,6 +31,7 @@
       $no_of_collectors = $this->collectorModel->get_no_of_Collectors($_SESSION['center_id']);
       $no_of_workers = $this->centerworkerModel->get_no_of_center_workers($_SESSION['center_id']);
       $completed_requests_count = $this->Request_Model->get_completed_requests_count($center->region);
+      $customers_count = $this->Customer_Model->get_customers_count($center->region);
 
       $data = [
         'center_id' => $center->id,
@@ -39,7 +41,8 @@
         'incoming_request_count'=> $incoming_requests_count,
         'collectors_count'=> $no_of_collectors,
         'center_workers_count'=> $no_of_workers,
-        'completed_request_count'=> $completed_requests_count
+        'completed_request_count'=> $completed_requests_count,
+        'customers_count'=> $customers_count
       ];
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){

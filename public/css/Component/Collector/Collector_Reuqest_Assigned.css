@@ -613,16 +613,18 @@
   }
 
 
-  .pop_up_confirm_collect_cont .buttons .complete-btn {
-    width: 100px;
-    height: 35px;
-    font-size: 19px;
-    background-color: #1B6652;
-    /* Example Complete button background color */
-    color: #ffffff;
-    /* Example text color */
-    border: none;
-  }
+.pop_up_confirm_collect_cont .buttons .complete-btn {
+  width: 200px;
+  height: 50px;
+  font-size: 19px;
+  background-color: #1B6652;
+  color: #ffffff; 
+  border: none;
+  border-radius: 5px;
+      cursor: pointer;
+      margin-right: 20px;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
 
   .pop_up_confirm_collect_cont .buttons .complete-btn:hover {
 
@@ -630,22 +632,24 @@
   }
 
 
-  .pop_up_confirm_collect_cont .buttons .cancel-btn {
-    width: 100px;
-    height: 35px;
-    font-size: 19px;
-    background-color: #757474;
-    /* Example Cancel button background color */
-    color: #ffffff;
-    /* Example text color */
-    border: none;
-  }
+.pop_up_confirm_collect_cont .buttons .cancel-btn {
+  width: 200px;
+  height: 50px;
+  font-size: 19px;
+  background-color: #b8b8b8; 
+  color: #ffffff; 
+  border: none; 
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  margin-right: 0; /* Reset margin for the last button */
 
-  .pop_up_confirm_collect_cont .buttons .cancel-btn:hover {
-    /* Add hover styles if needed */
-    background-color: #979494;
-    /* Add any other hover effects */
-  }
+}
+
+.pop_up_confirm_collect_cont .buttons .cancel-btn:hover {
+  
+  background-color: #979494; 
+}
 
 
   /* ------------*/

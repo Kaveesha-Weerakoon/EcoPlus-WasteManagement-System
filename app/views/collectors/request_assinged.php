@@ -381,17 +381,18 @@
                         <button id="okButtonEcoCredits" onclick="closeCalculatedCreditsPopup()">OK</button>
                     </div>
                 </div>
-                <div class="overlay" id="overlay"></div>
-
 
 
                 <div class="cancel-confirm" id="cancel-confirm">
                     <form class="cancel-confirm-content" id="cancel-form" method="post"
                         action="<?php echo URLROOT?>/collectors/request_assinged">
-                        <img class="confirm-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop">
+                        <!-- <div class="cancel-confirm-top-close">
+                        <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop">
+                    </div> -->
                         <h1>Cancel the Request?</h1>
                         <input name="reason" type="text" placeholder="Input the Reason">
                         <input name="id" type="text">
+                        <input name="collector_id" id="collector_id" type="text">
                         <div class="cancel-confirm-button-container">
                             <button type="button" onclick="validateCancelForm()" id="cancel-pop"
                                 class="cancel-reason-submit-button">Submit</button>
@@ -402,6 +403,7 @@
                     </form>
 
                 </div>
+                <div class="overlay" id="overlay"></div>
 
             </div>
 
@@ -413,10 +415,10 @@
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map-loaction'), {
         center: {
-            lat: <?php echo $data['center']->lat;?>,
-            lng: <?php echo $data['center']->longi;?>
+            lat: 7.8731,
+            lng: 80.7718
         },
-        zoom: 11
+        zoom: 14.5
     });;
     var incomingRequests = <?php echo $data['jsonData']; ?>;
     incomingRequests.forEach(function(coordinate) {
@@ -438,21 +440,13 @@ function cancel($id) {
     var inputElement = document.querySelector('input[name="id"]');
 
     inputElement.style.display = 'none';
-
+    var collector_id = document.getElementById('collector_id');
+    collector_id.style.display = 'none';
     inputElement.value = $id;
     var cancel_popup = document.getElementById('cancel-confirm');
     cancel_popup.classList.add('active');
 
     document.getElementById('overlay').style.display = "flex";
-
-
-}
-
-function closecancel() {
-    const popup = document.getElementById("cancel-confirm");
-
-    popup.classList.remove('active');
-    document.getElementById('overlay').style.display = "none";
 
 }
 
@@ -463,6 +457,13 @@ function validateCancelForm() {
     } else {
         document.getElementById("cancel-form").submit();
     }
+}
+
+function closecancel() {
+    const popup = document.getElementById("cancel-confirm");
+
+    popup.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
 }
 
 function searchTable() {
@@ -591,7 +592,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeButton = document.getElementById("cancel-pop");
     const cancel_popup = document.getElementById("cancel-confirm");
     const cancel_form = document.getElementById("cancel-form");
-    const btns = document.getElementById("btns");
 
     maps.addEventListener("click", function() {
         if (main_right_bottom !== null) {
@@ -616,16 +616,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     });
 
-    closeButton.addEventListener("click", function() {
-        cancel_form.style.width = "0px";
-        cancel_form.style.height = "0px";
-        cancel_popup.style.display = "none";
-        btns.style.display = "none";
-        document.querySelector("#cancel-confirm img").style.display = "none";
-        document.querySelector("#cancel-confirm h2").style.display = "none";
-        document.querySelector("#cancel-confirm input").style.display = "none";
-        document.querySelector("#cancel-confirm p").style.display = "none";
-    });
+
 
 });
 

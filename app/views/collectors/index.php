@@ -147,13 +147,14 @@
                                     <div class="circular-progress">
                                         <span class="progress-value">0%</span>
                                     </div>
-                                    <button onclick="redirect_completed_req()">Completed Requests</button>
+                                   
                                 </div>
                             </div>
                             <div class="main-right-bottom-three-right-right">
                                 <h1>Assigned Requests</h1>
-                                <div class="map" id="map"></div>
-
+                                <div class="map" id="map">
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -249,10 +250,6 @@
             window.location.href = linkUrl;
         }
 
-        function redirect_completed_req() {
-            var linkUrl = "<?php echo URLROOT?>/collectors/request_completed";
-            window.location.href = linkUrl;
-        }
 
         notification.addEventListener("click", function() {
             var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
@@ -362,13 +359,13 @@
 
 
         function initMap() {
-            var center = {
-                lat: 7.7,
-                lng: 80.7718
+            var defaultLatLng = {
+            lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
+            lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
             };
             var map = new google.maps.Map(document.getElementById('map'), {
-                center: center,
-                zoom: 5.8,
+                center: defaultLatLng,
+                zoom: 12.5,
                 styles: [{
                         featureType: 'all',
                         elementType: 'labels.text',

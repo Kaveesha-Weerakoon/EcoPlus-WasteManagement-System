@@ -20,8 +20,9 @@
     }
     
     public function index(){
-
+     
       $collector=$this->collectorModel->get_collector( $_SESSION['collector_id'] );
+      $center=$this->centerModel->findCenterbyRegion($collector->center_name);
       $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
       $jsonData = json_encode($assinged_Requests);
       $assinged_Requests_count=count($this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] ));
@@ -53,6 +54,9 @@
          
         ];
 
+        
+        $data['lattitude']=$center->lat;
+        $data['longitude']=$center->longi;
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
           $Notifications1 = $this->customerModel->view_Notification($_SESSION['collector_id']);
           $Notifications2 = $this->customerModel->get_Notification($_SESSION['collector_id']);

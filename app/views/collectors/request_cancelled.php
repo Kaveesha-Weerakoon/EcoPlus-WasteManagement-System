@@ -99,9 +99,10 @@
                                     <th>Req ID</th>
                                     <th>Date</th>
                                     <th>Time</th>
-                                    <th>Request Details</th>
-                                    <th>Location</th>
+                                    <th>Customer ID</th>
                                     <th>Cancelled By</th>
+                                    <th>Location</th>
+                                    <th>Request Details</th>
                                     <th>Reason</th>
                                 </tr>
                             </table>
@@ -114,11 +115,15 @@
                                     <td>R<?php echo $request->req_id?></td>
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
-                                    <td><img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                            src="<?php echo IMGROOT?>/view.png" alt=""></td>
+                                    <td><?php  echo $request->customer_id?></td>
+                                    <td><?php  echo $request->cancelled_by?></td>
                                     <td><img onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
                                             src="<?php echo IMGROOT?>/location.png" alt=""></td>
-                                    <td><?php  echo $request->cancelled_by?></td>
+
+                                    <td>
+                                        <i class='bx bx-info-circle' style="font-size: 29px"
+                                            onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
+                                    </td>
                                     <td><?php  echo $request->reason?> </td>
 
                                 </tr>
@@ -138,17 +143,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="overlay" id="overlay"></div>
+
                 <div class="request-details-pop" id="request-details-popup-box">
                     <div class="request-details-pop-form">
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
-                            id="request-details-pop-form-close">
+                            id="request-details-pop-form-close" onclick="close_request_details()">
                         <div class="request-details-pop-form-top">
-                            <div class="request-details-topic">Request ID R <div id="req_id3"></div>
+                            <div class="request-details-topic">Request ID: R <div id="req_id3"></div>
                             </div>
                         </div>
 
                         <div class="request-details-pop-form-content">
-                            <div class="personal-details-right-labels">
+                            <div class="request-details-right-labels">
                                 <span>Customer Id</span><br>
                                 <span>Name</span><br>
                                 <span>Date</span><br>
@@ -156,7 +163,7 @@
                                 <span>Contact No</span><br>
                                 <span>Instructions</span><br>
                             </div>
-                            <div class="personal-details-right-values">
+                            <div class="request-details-right-values">
                                 <span id="req_id2"></span><br>
                                 <span id="req_name"></span><br>
                                 <span id="req_date"></span><br>
@@ -167,6 +174,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -174,7 +182,11 @@
 <script>
 function view_request_details(request) {
 
-    document.getElementById('request-details-popup-box').style.display = "flex";
+    var requestDetails_popup = document.getElementById('request-details-popup-box');
+    requestDetails_popup.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    // document.getElementById('request-details-popup-box').style.display = "flex";
     document.getElementById('req_id3').innerText = request.req_id;
     document.getElementById('req_id2').innerText = request.customer_id;
     document.getElementById('req_name').innerText = request.name;
@@ -185,10 +197,11 @@ function view_request_details(request) {
 
 }
 
-function viewLocation($lattitude, $longitude) {
-    initMap($lattitude, $longitude);
-    console.log('as');
-    document.querySelector('.location_pop').style.display = 'flex';
+function close_request_details() {
+    var requestDetails_popup = document.getElementById('request-details-popup-box');
+    requestDetails_popup.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
+    console.log("");
 }
 
 function initMap(latitude = 7.4, longitude = 81.00000000) {
@@ -212,16 +225,62 @@ function initMap(latitude = 7.4, longitude = 81.00000000) {
     });
 }
 
+function viewLocation($lattitude, $longitude) {
+    initMap($lattitude, $longitude);
+    var locationPop = document.getElementById('location_pop');
+    locationPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+}
+
 function closemap() {
-    document.querySelector('.location_pop').style.display = 'none';
+    var locationPop = document.getElementById('location_pop');
+    locationPop.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
 
 }
-document.addEventListener("DOMContentLoaded", function() {
-    const close_request_details = document.getElementById("request-details-pop-form-close");
 
-    close_request_details.addEventListener("click", function() {
-        document.getElementById('request-details-popup-box').style.display = "none";
+function loadLocations() {
+    var selectedDate = document.getElementById("selected-date").value;
+    var rows = document.querySelectorAll('.table-row');
+
+    rows.forEach(function(row) {
+        var date = row.querySelector('td:nth-child(2)').innerText;
+
+        if (date.includes(selectedDate)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
     });
+}
+
+function searchTable() {
+    var input = document.getElementById('searchInput').value.toLowerCase();
+    var rows = document.querySelectorAll('.table-row');
+
+    rows.forEach(function(row) {
+        var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+        var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+        var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+        var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+        var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+        var conctact_no = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
+        var instructions = row.querySelector('td:nth-child(7)').innerText.toLowerCase();
+
+        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(input) ||
+            cid.includes(input) || conctact_no.includes(input) || instructions.includes(input)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+
+
+}
+document.getElementById('searchInput').addEventListener('input', searchTable);
+
+document.addEventListener("DOMContentLoaded", function() {
+
 });
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

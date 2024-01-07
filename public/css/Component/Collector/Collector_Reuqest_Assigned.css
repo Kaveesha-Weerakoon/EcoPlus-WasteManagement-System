@@ -580,14 +580,16 @@
 
 
 .pop_up_confirm_collect_cont .buttons .complete-btn {
-  width: 100px;
-  height: 35px;
+  width: 200px;
+  height: 50px;
   font-size: 19px;
   background-color: #1B6652;
   color: #ffffff; 
   border: none;
   border-radius: 5px;
       cursor: pointer;
+      margin-right: 20px;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .pop_up_confirm_collect_cont .buttons .complete-btn:hover {
@@ -597,14 +599,17 @@
 
 
 .pop_up_confirm_collect_cont .buttons .cancel-btn {
-  width: 100px;
-  height: 35px;
+  width: 200px;
+  height: 50px;
   font-size: 19px;
-  background-color: #757474; 
+  background-color: #b8b8b8; 
   color: #ffffff; 
   border: none; 
   border-radius: 5px;
   cursor: pointer;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  margin-right: 0; /* Reset margin for the last button */
+
 }
 
 .pop_up_confirm_collect_cont .buttons .cancel-btn:hover {

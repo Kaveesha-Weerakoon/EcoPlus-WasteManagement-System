@@ -60,6 +60,12 @@
                                 <div class="line"  style="background-color: #1ca557;"></div>
                             </div>
                         </a>
+                        <a href="<?php echo URLROOT?>/Admin/complaint_centers">
+                            <div class="main-right-top-three-content">
+                                <p>Centers</p>
+                                <div class="line"></div>
+                            </div>
+                        </a>
                         <a href="">
                             <div class="main-right-top-three-content">
                                 <p>Credit Discount Agents</p>
@@ -74,29 +80,29 @@
                     <div class="main-right-bottom-top">
                         <table class="table">
                             <tr class="table-header">
-                                <th>Complain ID</th>
+                                <th>Complaint ID</th>
                                 <th>Collector ID</th>
                                 <th>Center</th>
                                 <th>Date</th>
                                 <th>Contact No</th>
                                 <th>Collector Name</th>
                                 <th>Subject</th>
-                                <th>Complain</th>
-                                <th>Action</th>
+                                <th>Complaint</th>
+                                <th>Delete</th>
                             </tr>
                         </table>
                     </div>
                     <div class="main-right-bottom-down">
                     <table class="table">
-                                   <?php foreach($data['complains'] as $post) : ?>
+                                   <?php foreach($data['complains'] as $complaint) : ?>
                                        <tr class="table-row">
-                                           <td>CoC<?php echo $post->id?></td>
-                                           <td>Co<?php echo $post->collector_id?></td>
-                                           <td>Cen<?php echo $post->center_id?></td>
-                                           <td><?php echo $post->date?></td>
-                                           <td><?php echo $post->contact_no?></td>
-                                           <td><?php echo $post->name?></td>
-                                           <td><?php echo $post->subject?></td>
+                                           <td>CoC<?php echo $complaint->id?></td>
+                                           <td>Co<?php echo $complaint->collector_id?></td>
+                                           <td>Cen<?php echo $complaint->center_id?></td>
+                                           <td><?php echo $complaint->date?></td>
+                                           <td><?php echo $complaint->contact_no?></td>
+                                           <td><?php echo $complaint->name?></td>
+                                           <td><?php echo $complaint->subject?></td>
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/view.png" alt=""></td>             
                                            <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
                                         </tr>

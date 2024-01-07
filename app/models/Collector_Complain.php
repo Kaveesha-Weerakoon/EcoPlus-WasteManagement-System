@@ -34,7 +34,13 @@
         }
     }
   
-
+    public function get_complains_by_collector($id) {
+      $this->db->query('SELECT * FROM collector_complains WHERE collector_id = :id ORDER BY collector_complains.date DESC');
+      $this->db->bind(':id', $id);
+      $results = $this->db->resultSet();
+    
+      return $results;
+  }
     public function get_complains() {
      
         $this->db->query('SELECT * FROM collector_complains  ORDER BY collector_complains.date DESC');

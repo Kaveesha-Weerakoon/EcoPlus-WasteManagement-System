@@ -139,102 +139,6 @@
         margin-right: 2.5%;
     }
 
-    .dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: #F13E3E;
-        margin-top: -14px;
-        margin-left: -12px;
-    }
-
-    .main-right-top-notification i {
-        font-size: 29px;
-        cursor: pointer;
-    }
-
-    .notification_popup {
-        height: 0;
-        position: absolute;
-        top: 9%;
-        right: 11%;
-        background-color: var(--background-color-main);
-        border-radius: 10px;
-        padding: 0;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: height 0.6s ease-in;
-        width: 18%;
-        visibility: hidden;
-        opacity: 0;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        overflow: scroll;
-        border: 1px solid #dcdde1;
-    }
-
-    .notification_popup h1 {
-        font-size: 19px;
-        letter-spacing: 0.001rem;
-        margin-bottom: 13px;
-        margin-top: 5px;
-        margin-left: 8px;
-    }
-
-    .notification_popup.active {
-        height: 200px;
-        padding: 10px;
-        visibility: visible;
-        opacity: 1;
-    }
-
-    .notification {
-        height: 43px !important;
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        padding-left: 10px;
-        font-size: 14px;
-        cursor: pointer;
-    }
-
-    .notification:hover {
-        background-color: var(--notification-hover);
-    }
-
-    .notification-green-dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: var(--green-color-one);
-        margin-right: 10px;
-    }
-
-    .main-right-top-profile {
-        display: flex;
-        margin-right: 40px;
-    }
-
-    .main-right-top-profile img {
-        width: 50px;
-        height: 50px;
-        margin-right: 15px;
-        border-radius: 10px;
-    }
-
-    .main-right-top-profile-cont {
-        margin-top: 7px;
-    }
-
-    .main-right-top-profile-cont h3 {
-        font-size: 18px;
-        letter-spacing: 0.03rem;
-    }
-
-    .main-right-top-profile-cont p {
-        font-size: 14px;
-    }
-
     .main-right-top-two {
         height: 50px;
         display: flex;
@@ -351,16 +255,8 @@
 
 
     @media screen and (max-width: 1118px) {
-        .main-right-top-one-content {
-            width: 250px;
-            margin-left: 1%;
-
-        }
-
         .table td {
-
             font-size: 12px;
-
         }
 
         .table-header {
@@ -370,70 +266,89 @@
         .table-row img {
             width: 20px;
             height: 20px;
-
         }
 
+        .main-right-top-search {
+            margin-left: 40px;
+        }
+    }
+
+    @media screen and (max-width: 1108px) {
+        .notification_popup h1 {
+            font-size: 19px;
+            letter-spacing: 0.001rem;
+            margin-top: 5px;
+            margin-left: 8px;
+        }
+
+        .notification_popup {
+            width: 25%;
+        }
     }
 
     @media screen and (max-width:862px) {
-        .main-right-top-one-content {
-            width: 250px;
-            margin-left: 0;
-            padding-left: 5%;
-        }
-
-        .main-right-top-one input {
-            width: 20%;
-
-        }
 
         .main-right-top-three-content p {
             font-size: 14px;
-
         }
-
 
         .line {
             width: 86px;
             height: 2px;
-
         }
 
-        .table td {
 
-            font-size: 10px;
+    }
 
+    @media screen and (max-width: 844px) {
+        .main-right-top-notification {
+            margin-left: 5%;
         }
 
-        .table-header {
-            font-size: 12px;
+        .notification_popup {
+            top: 11%;
+            right: 20%;
+            width: 31%;
         }
 
-        .table-row img {
-            width: 17px;
-            height: 17px;
+        .notification_popup h1 {
+            font-size: 19px;
+            letter-spacing: 0.001rem;
+            margin-top: 5px;
+            margin-left: 8px;
+        }
 
+        .main-right-top-search {
+            margin-left: 1px;
         }
     }
 
+
     @media screen and (max-width: 692px) {
-
-
-        .table td {
-
-            font-size: 9px;
-
+        .notification {
+            height: 41px !important;
+            margin-top: 6px;
+            font-size: 13px;
         }
 
-        .table-header {
-            font-size: 10px;
+        .notification_popup h1 {
+            font-size: 17px;
         }
 
-        .table-row img {
-            width: 15px;
-            height: 15px;
-
+        .main-right-top-search {
+            margin-left: 40px;
         }
+
+        .main-right {
+            width: 140% !important;
+        }
+
+        .notification_popup {
+            top: 11%;
+            right: -1%;
+            width: 40%;
+        }
+
 
     }
 }

@@ -11,7 +11,8 @@
       $this->Request_Model=$this->model('Request');
       $this->Customer_Credit_Model=$this->model('Customer_Credit');
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
-      
+      $this->customerModel=$this->model('Customer'); 
+      $this->centerModel=$this->model('Center');
 
       if(!isLoggedIn('collector_id')){
         redirect('users/login');
@@ -19,18 +20,44 @@
     }
     
     public function index(){
-     
+
+      $collector=$this->collectorModel->get_collector( $_SESSION['collector_id'] );
+      $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
+      $jsonData = json_encode($assinged_Requests);
+      $assinged_Requests_count=count($this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] ));
+      $completed_requests=count($this->Collect_Garbage_Model->get_complete_request($_SESSION['collector_id']));
+      $total_garbage=$this->Collect_Garbage_Model->get_completed_garbage_totals_by_collector($_SESSION['collector_id']);
       $credit= $this->creditModel->get();
       $req_completed_history = $this->Collect_Garbage_Model->get_complete_request_cus($_SESSION['collector_id']); 
-   
+      $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
 
+      if ($completed_requests > 0) {
+        $percentage_completed = json_encode(($completed_requests / ($assinged_Requests_count+$completed_requests)) * 100);
+         } else {
+          $percentage_completed =json_encode(0);
+     } 
+   
+     $json_Total_Garbage = json_encode($total_garbage);
       $data = [
-        
+        'collector' =>$collector,
+        'assinged_Requests_count' => $assinged_Requests_count,
+        'assigned_requests' => $jsonData,
         'eco_credit_per'=>$credit,
         'req_completed_history' =>$req_completed_history,
+        'percentage'=> $percentage_completed,
+        'total_garbage'=> $json_Total_Garbage,
+        'notification'=> $Notifications,
         'pop'=>''
          
         ];
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+          $Notifications1 = $this->customerModel->view_Notification($_SESSION['collector_id']);
+          $Notifications2 = $this->customerModel->get_Notification($_SESSION['collector_id']);
+          $data['notification']=  $Notifications2 ;
+           $this->view('collectors/index', $data);
+  
+        }
       $this->view('collectors/index', $data);
     }
     
@@ -274,6 +301,17 @@
         $this->view('collectors/complains', $data);
       }
      
+    }
+
+    public function complains_history(){
+      $id=$_SESSION['collector_id']; 
+      $complains = $this->collector_complain_Model->get_complains_by_collector($id);
+
+      $data = [
+        'complains' => $complains
+      ];
+     
+      $this->view('collectors/complains_history', $data);
     }
 
     public function collector_assistants_update($assisId){
@@ -591,7 +629,10 @@
 
    public function request_assinged(){
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $collector=$this->collectorModel->get_collector( $_SESSION['collector_id'] );
+    $center=$this->centerModel->getCenterById($collector->center_id);
+
+   if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
       $jsonData = json_encode($assinged_Requests);
        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -605,7 +646,8 @@
         'collector_id'=>($_SESSION['collector_id']),
         'popup'=>'',
         'popup_confirm_collect'=>'',
-        'creditData'=>''
+        'creditData'=>'',
+        'center'=>$center
 
       ];
       if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
@@ -625,11 +667,11 @@
         'jsonData' => $jsonData,
         'popup'=>'',
         'popup_confirm_collect'=>'',
-        'creditData'=>''
-
+        'creditData'=>'' ,
+        'center'=>$center
 
       ];
-     
+    
       $this->view('collectors/request_assinged', $data);
     }
     
@@ -882,6 +924,10 @@
             
           $data['creditData']=$creditData ;
           $data['credit_Amount'] = $credit_Amount;
+
+          $collector = $this->collectorModel->getCollectorById($_SESSION['collector_id']);
+          $data['center_id'] = $collector->center_id;
+          $data['region'] = $collector->center_name;
 
 
           $inserted = $this->Collect_Garbage_Model->insert($data);

@@ -90,11 +90,11 @@
                                 <td> <?php echo $center_worker->contact_no?></td>
                                 <td> <?php echo $center_worker->dob?></td>
                                 <td class="cancel-open"><a
-                                        href="<?php echo URLROOT?>/centermanagers/center_workers_update/<?php echo $center_worker->id ?>"><img
-                                            src="<?php echo IMGROOT?>/update.png" alt=""></a></td>
+                                        href="<?php echo URLROOT?>/centermanagers/center_workers_update/<?php echo $center_worker->id ?>">
+                                        <i class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"></a></td>
                                 <td class="cancel-open"><a
-                                        href="<?php echo URLROOT?>/centermanagers/center_workers_delete_confirm/<?php echo $center_worker->id ?>"><img
-                                            src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
+                                        href="<?php echo URLROOT?>/centermanagers/center_workers_delete_confirm/<?php echo $center_worker->id ?>">
+                                        <i class='bx bxs-trash' style="font-size: 29px;"></a></td>
                             </tr>
                             <?php endforeach; ?>
 

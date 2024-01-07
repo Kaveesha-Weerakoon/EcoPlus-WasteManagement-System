@@ -17,7 +17,7 @@
                     <div class="main-right-top-notification" id="notification">
                         <i class='bx bx-bell'></i>
                         <?php if (!empty($data['notification'])) : ?>
-                        <div class="dot"></div>
+                        <div class="dot"><?php echo count($data['notification'])?></div>
                         <?php endif; ?>
                     </div>
                     <div id="notification_popup" class="notification_popup">
@@ -29,13 +29,16 @@
                                 <div class="notification-green-dot">
 
                                 </div>
-                                <?php echo $notification->notification?>
+                                <div class="notification_right">
+                                    <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
+                                    <?php echo $notification->notification ?>
+                                </div>
                             </div>
                             <?php endforeach; ?>
 
                         </div>
                         <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/customers/">
-                            <i class='bx bx-signal-4'></i>
+                            <i class="fa-solid fa-check"> </i>
                             <button type="submit">Mark all as read</button>
                         </form>
 
@@ -56,7 +59,9 @@
                                 <h1>Total Balance</h1>
                                 <h3>+Eco 26.23 </h3>
                                 <p>Last Update</p>
-                                <button onclick="redirect_transfercredit()">Transfer Credit</button>
+                                <button onclick="redirect_requests()">
+                                    Request a Collect
+                                </button>
 
                             </div>
 
@@ -138,14 +143,14 @@
                             <div class="main-right-bottom-three-right-left">
                                 <h1>Requests Satisfied</h1>
                                 <div class="main-right-bottom-three-right-cont">
-                                    <div class="circular-progress">
+                                    <div class="circular-progress" id="circular-progress">
                                         <span class="progress-value">
                                             0 %
                                         </span>
                                     </div>
                                 </div>
-                                <button onclick="redirect_requests()">
-                                    Request Now
+                                <button onclick="redirect_transfercredit()">
+                                    Transfer Credit
                                 </button>
                             </div>
                             <div class="main-right-bottom-three-right-right">
@@ -165,33 +170,33 @@
                 <div class="Eco_Credit_Per_Cont">
                     <div class="Cont">
                         <h3>Plastic</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-box"></i>
                         <p><?php echo $data['eco_credit_per']->plastic?></p>
                     </div>
                     <div class="Cont">
                         <h3>Polythene</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-trash"></i>
                         <p><?php echo $data['eco_credit_per']->polythene?></p>
                     </div>
                     <div class="Cont">
                         <h3>Metal</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-box"></i>
                         <p><?php echo $data['eco_credit_per']->metal?></p>
                     </div>
                     <div class="Cont">
                         <h3> Glass</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-glass-whiskey"></i>
                         <p><?php echo $data['eco_credit_per']->glass?></p>
                     </div>
 
                     <div class="Cont">
                         <h3>Paper</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-file-alt"></i>
                         <p><?php echo $data['eco_credit_per']->paper?></p>
                     </div>
                     <div class="Cont">
                         <h3>Electronic</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-laptop"></i>
                         <p><?php echo $data['eco_credit_per']->electronic?></p>
                     </div>
                 </div>
@@ -213,6 +218,8 @@
 var color = "#47b076";
 var textColor = "#414143"
 
+var checkbox = document.getElementById('toggle-checkbox');
+
 var credit_per_waste_quantity = document.getElementById("credit_per_waste_quantity");
 
 var notification = document.getElementById("notification");
@@ -223,7 +230,20 @@ let progressValue = document.querySelector(".progress-value");
 let progressStartValue = -1;
 let progressEndValue = <?php echo intval($data['percentage']); ?>;
 let speed = 30;
-console.log(progressEndValue);
+
+function getDarkModeSetting() {
+    const storedValue = localStorage.getItem("darkMode");
+    return storedValue ? JSON.parse(storedValue) : true;
+}
+
+isDarkMode = getDarkModeSetting();
+if (getDarkModeSetting()) {
+
+    color = "white"
+    textColor = " white";
+    circularProgress.style.background =
+        `conic-gradient(${color}, ${progressStartValue * 3.6}deg, ${isDarkMode ? "#001f3f" : "#ededed"} 0deg)`;
+}
 
 function redirect_transfercredit() {
     var linkUrl = "<?php echo URLROOT?>/customers/transfer";
@@ -247,13 +267,13 @@ notification.addEventListener("click", function() {
         var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
         if (notification_pop.style.height === "0px") {
             if (notificationArraySize >= 3) {
-                notification_pop.style.height = "28%";
+                notification_pop.style.height = "205px";
             }
             if (notificationArraySize == 2) {
-                notification_pop.style.height = "21%";
+                notification_pop.style.height = "150px";
             }
             if (notificationArraySize == 1) {
-                notification_pop.style.height = "15%";
+                notification_pop.style.height = "105px";
             }
             notification_pop.style.visibility = "visible";
             notification_pop.style.opacity = "1";
@@ -373,9 +393,15 @@ let progress = setInterval(() => {
     }
     progressStartValue++;
     progressValue.textContent = `${progressStartValue}%`;
+    if (!getDarkModeSetting()) {
+        circularProgress.style.background =
+            circularProgress.style.background =
+            `conic-gradient(${color}, ${progressStartValue * 3.6}deg, #ededed 0deg)`;
+    } else {
+        circularProgress.style.background =
+            `conic-gradient(${color}, ${progressStartValue * 3.6}deg, #001f3f 0deg)`;
+    }
 
-    circularProgress.style.background =
-        `conic-gradient(${color}, ${progressStartValue * 3.6}deg, #ededed 0deg)`;
 
     if (progressStartValue == progressEndValue) {
         clearInterval(progress);
@@ -472,6 +498,26 @@ function createOrUpdateChart(color, textColor) {
         }
     });
 }
+
+checkbox.addEventListener("change", function() {
+
+    if (getDarkModeSetting()) {
+        color = "white";
+        textColor = "white";
+        circularProgress.style.background =
+            `conic-gradient(${color}, ${progressStartValue * 3.6}deg, ${isDarkMode ? "#001f3f" : "#001f3f"} 0deg)`;
+    } else {
+        color = "#47b076";
+        textColor = "#414143";
+        circularProgress.style.background =
+            `conic-gradient(${color}, ${progressStartValue * 3.6}deg, #ededed 0deg)`;
+    }
+    if (myChart) {
+        myChart.destroy();
+    }
+    createOrUpdateChart(color, textColor);
+});
+
 createOrUpdateChart(color, textColor);
 </script>
 

@@ -65,130 +65,6 @@
         margin-right: 0;
     }
 
-    .dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: #F13E3E;
-        margin-top: -14px;
-        margin-left: -12px;
-    }
-
-    .main-right-top-notification i {
-        font-size: 29px;
-        cursor: pointer;
-    }
-
-    .notification_popup {
-        height: 0;
-        position: absolute;
-        top: 9%;
-        right: 11%;
-        background-color: var(--background-color-main);
-        border-radius: 10px;
-        padding: 0;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: height 0.6s ease-in;
-        width: 18%;
-        visibility: hidden;
-        opacity: 0;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        overflow: scroll;
-        border: 1px solid #dcdde1;
-    }
-
-    .notification_popup h1 {
-        font-size: 19px;
-        letter-spacing: 0.001rem;
-        margin-top: 5px;
-        margin-left: 8px;
-    }
-
-    .notification_popup.active {
-        height: 200px;
-        padding: 10px;
-        visibility: visible;
-        opacity: 1;
-    }
-
-    .notification {
-        height: 38px !important;
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        padding-left: 10px;
-        font-size: 14px;
-        cursor: pointer;
-    }
-
-    .mark_as_read {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-    }
-
-    .notification_cont {
-        overflow: scroll;
-        max-height: 150px;
-    }
-
-    .mark_as_read button {
-        margin-top: 2px;
-        font-size: 13px;
-        text-align: center;
-        margin-top: 4px;
-        font-weight: 700;
-        border: none;
-        background-color: none !important;
-        background: none;
-        cursor: pointer !important;
-    }
-
-    .mark_as_read .bx {
-        font-size: 26px;
-    }
-
-    .notification:hover {
-        background-color: var(--notification-hover);
-    }
-
-    .notification-green-dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: var(--green-color-one);
-        margin-right: 10px;
-    }
-
-    .main-right-top-profile {
-        display: flex;
-        margin-right: 22px;
-    }
-
-    .main-right-top-profile img {
-        width: 50px;
-        height: 50px;
-        margin-right: 15px;
-        border-radius: 10px;
-    }
-
-    .main-right-top-profile-cont {
-        margin-top: 7px;
-    }
-
-    .main-right-top-profile-cont h3 {
-        font-size: 18px;
-        letter-spacing: 0.03rem;
-    }
-
-    .main-right-top-profile-cont p {
-        font-size: 14px;
-    }
-
-
     /*main right bottom*/
     .main-right-bottom {
         display: flex;
@@ -274,13 +150,11 @@
         color: white !important;
         letter-spacing: 0.03rem;
         transition: background-color 0.6s ease-in;
-
     }
 
     .main-right-bottom-one-left .right h1 {
         font-size: 18px;
-        color: var(--background-color-two);
-
+        color: var(--background-color-two)
     }
 
     .main-right-bottom-one-left .right h3 {
@@ -294,7 +168,6 @@
         font-size: 29px;
         font-weight: bolder;
     }
-
 
     .main-right-bottom-one-right {
         width: 50%;
@@ -408,7 +281,6 @@
         font-size: 18px;
         color: var(--green-color-one);
         width: 175px;
-
     }
 
     .main-right-bottom-three-right {
@@ -549,7 +421,6 @@
         font-size: 18px;
         margin-top: 5px;
         font-weight: 500;
-
     }
 
     .Eco_Credit_Per_Cont {
@@ -573,13 +444,10 @@
         font-size: 14px;
     }
 
-    .Eco_Credit_Per_Cont .Cont .bx {
+    .Eco_Credit_Per_Cont .Cont .icon {
         font-size: 29px;
         margin-bottom: 10px;
-
     }
-
-
 
     .overlay {
         position: fixed;
@@ -592,13 +460,62 @@
         display: none;
     }
 
+
+    @media screen and (max-width: 1320px) {
+        .eco_credit_per_quantity {
+            width: 80%;
+            height: 40%;
+            overflow: scroll;
+
+        }
+
+        .Eco_Credit_Per_Cont .Cont {
+            margin-left: 35px;
+            margin-right: 35px;
+        }
+    }
+
     @media screen and (max-width: 1108px) {
-        .main-right-bottom {}
+
+        .main-right {
+            background-color: var(--background-color-right);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-right-top {
+            background-color: var(--background-color-main);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            box-shadow: var(--box-shadow2);
+            width: 100%;
+            box-sizing: border-box;
+            height: 100px;
+            margin-bottom: 50px;
+        }
+
+        .main-right-top-search {
+            display: none;
+        }
+
+        .notification_popup {
+            top: 11%;
+            right: 19%;
+            width: 25%;
+        }
+
+        .notification_popup h1 {
+            font-size: 19px;
+            letter-spacing: 0.001rem;
+            margin-top: 5px;
+            margin-left: 8px;
+        }
 
         .main-right-bottom-one {
             flex-direction: column;
             height: 500px;
-
         }
 
         .main-right-bottom-one-left {
@@ -647,7 +564,6 @@
             flex-direction: column;
             height: auto;
             width: 90%;
-
         }
 
         .main-right-bottom-three-right {
@@ -669,7 +585,6 @@
             height: 25px;
         }
 
-
         .map {
             width: 90%;
             padding-top: 2%;
@@ -685,8 +600,35 @@
 
     @media screen and (max-width: 844px) {
         .main-right-top-notification {
-
             margin-left: 5%;
+        }
+
+        .notification_popup {
+            top: 11%;
+            right: 46%;
+            width: 31%;
+        }
+
+        .notification_popup h1 {
+            font-size: 19px;
+            letter-spacing: 0.001rem;
+            margin-top: 5px;
+            margin-left: 8px;
+        }
+
+        .main-right-bottom-one-left h1 {
+            font-size: 21px !important;
+            margin-top: 22px;
+        }
+
+        .main-right-bottom-one-left h2 {
+            font-size: 15px !important;
+            margin-bottom: 5px;
+        }
+
+        .main-right-bottom-one-left button {
+            width: 175px !important;
+            height: 45px !important;
         }
 
         .map {
@@ -696,6 +638,44 @@
             border-radius: 10px;
             box-shadow: var(--box-shadow);
         }
+
+        .main-right-bottom-three-left-cont h3 {
+            font-size: 15px;
+            width: 250px;
+            margin-left: 0%;
+        }
+
+        .Eco_Credit_Per_Cont {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .eco_credit_per_quantity {
+            width: 65%;
+            height: 50%;
+        }
+
+        .Eco_Credit_Per_Cont .Cont {
+            margin: 15px;
+        }
+
+        .eco_credit_per_quantity h2 {
+            margin-bottom: 10px !important;
+        }
+
     }
 
+    @media screen and (max-width: 683px) {
+        .notification {
+            height: 41px !important;
+            margin-top: 6px;
+            font-size: 13px;
+
+        }
+
+        .notification_popup h1 {
+            font-size: 17px;
+        }
+
+    }
 }

@@ -31,7 +31,7 @@
           LEFT JOIN collectors  ON request_assigned.collector_id = collectors.user_id
           LEFT JOIN users ON collectors.user_id=users.id
           WHERE request_main.customer_id = :customer_id
-          AND request_main.type = "completed"
+          AND request_main.type = "completed" ORDER BY CONCAT(date, " ", time) DESC
       ');
   
       $this->db->bind(':customer_id', $customer_id);
@@ -105,11 +105,30 @@
         $request=$this->get_request_by_id($data['req_id']);
 
          if($updateResult  && $request){
-          $this->db->query('INSERT INTO customer_nofification (customer_id, notification) VALUES (:customer_id, :notification)');
+          $this->db->query('INSERT INTO user_notification (user_id, notification) VALUES (:customer_id, :notification)');
           $this->db->bind(':customer_id',$request->customer_id);
           $this->db->bind(':notification', "Req ID {$data['req_id']} Has been Completed");
-          $this->db->execute();
-          return true;
+          $result1 = $this->db->execute();
+          
+          if($result1){
+            $notificationText = "Req ID {$data['req_id']} has been completed";
+            $this->db->query("INSERT INTO center_notification (center_id, region, notification) VALUES (:center_id, :region, :notification)");
+            $this->db->bind(':center_id', $data['center_id']);
+            $this->db->bind(':region', $data['region']);
+            $this->db->bind(':notification', $notificationText);
+            $result2 = $this->db->execute();
+
+            if($result2){
+              return true;
+              
+            }else{
+              return false;
+            }
+
+          }else{
+            return false;
+          }
+
          }
          else{
           return false;
@@ -208,6 +227,27 @@
 
     }
 
-
+    public function get_completed_garbage_totals_by_collector($collector_id){
+      $this->db->query('
+          SELECT 
+              SUM(Polythene) AS total_polythene,
+              SUM(Plastic) AS total_plastic,
+              SUM(Glass) AS total_glass,
+              SUM(Paper_Waste) AS total_paper_waste,
+              SUM(Electronic_Waste) AS total_electronic_waste,
+              SUM(Metals) AS total_metals
+          FROM request_completed
+          LEFT JOIN request_assigned ON request_completed.req_id = request_assigned.req_id
+          WHERE request_assigned.collector_id = :collector_id 
+          AND request_completed.req_id IS NOT NULL
+      ');
+  
+      $this->db->bind(':collector_id', $collector_id);
+  
+      $result = $this->db->single();
+  
+      return $result;
+  }
+  
   
 }

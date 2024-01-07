@@ -14,6 +14,7 @@
       // $this->collector_assistants_Model=$this->model('collector_assistants');
       $this->center_workers_model=$this->model('Center_Worker');
       $this->requests_model=$this->model('Request');
+      $this->center_complaints_model=$this->model('Center_Complaints');
      
 
       if(!isLoggedIn('admin_id')){
@@ -800,10 +801,14 @@
       $this->view('admin/center_main', $data);
     }
 
-    public function center_main_change_cm($center_id){
+    public function center_main_change_cm($center_id){       
+       $center=$this->center_model->getCenterById($center_id);
+       $no_of_collectors = $this->collector_model->get_no_of_Collectors($center_id);
+       $total_requests = $this->requests_model->get_total_requests_by_region($center->region);
+       $no_of_workers = $this->center_workers_model->get_no_of_center_workers($center_id);
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
        
-        $center=$this->center_model->getCenterById($center_id);
         $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
   
         $data = [
@@ -823,6 +828,7 @@
 
           $this->center_model->changeCentermanager($center->id,$assining_manger,$assigning_manager_name );
           $result=$this->center_managerModel->change_center_managers($assining_manger,$old_manager,$center_id );
+
           if( $result){
             $center=$this->center_model->getCenterById($center_id);
           }   
@@ -831,18 +837,28 @@
             'not_assigned_cm'=>$na_center_managers,
             'change_cm'=>'',
             'center_manager'=>trim($_POST['centerManager']),
+            'no_of_collectors' =>$no_of_collectors,
+            'no_of_workers'=>$no_of_workers,
+            'total_requests'=>$total_requests
           ];
-          $this->center_main($center_id);
+          $this->center_main($center_id, $center->region);
         }
         
       }else{
         $center=$this->center_model->getCenterById($center_id);
         $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
-  
+        $center=$this->center_model->getCenterById($center_id);
+        $center_manager = $this->center_managerModel->getCenterManagerBy_centerId($center_id);
+        $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
+     
         $data = [
           'center' =>$center,
           'not_assigned_cm'=>$na_center_managers,
-          'change_cm'=>'True'
+          'change_cm'=>'True',
+          'no_of_collectors' =>$no_of_collectors,
+          'no_of_workers'=>$no_of_workers,
+          'center_manager' =>$center_manager,
+          'total_requests'=>$total_requests
         ];
         $this->view('admin/center_main', $data);
       }
@@ -920,6 +936,16 @@
 
       $this->view('admin/center_main_request_cancelled', $data);
 
+    }
+
+    public function complaint_centers(){
+
+      $center_complaints= $this->center_complaints_model->get_center_complaints();
+
+      $data = [
+        'complaints' => $center_complaints
+      ];
+      $this->view('admin/complain_centers', $data);
     }
 
   

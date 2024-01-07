@@ -21,9 +21,8 @@
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Center</th>
-                                    <th>Location</th>
                                     <th>Collector</th>
-                                    <th>Collector Info</th>
+                                    <th>Location</th>
                                     <th>Cancel</th>
                                 </tr>
                             </table>
@@ -32,46 +31,47 @@
                             <table class="table" id="dataTable">
                                 <?php foreach($data['request'] as $request) : ?>
                                 <tr class="table-row">
-                                    <td><?php echo $request->request_id?></td>
+                                    <td>R<?php echo $request->request_id?></td>
                                     <td>
                                         <?php
                                         $typeContent = ($request->type === 'incoming') ? 
-                                        '<img class="processing" src="' . IMGROOT . '/process.png" alt="1">'.'<p class="bold1">Pending</p>'  : 
-                                        '<img class="assinged" src="' . IMGROOT . '/GarbageTruck.png" alt="1">'.'<p class="bold2">Assigned</p>';
+                                        '<i class="fa-solid fa-spinner processing"></i><p class="bold1">Pending</p>':
+                                        '<i class="fa-solid fa-truck-arrow-right assinged"></i><p class="bold2">Assigned</p>';
+ 
                                         echo $typeContent
                                  ?>
                                     </td>
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
                                     <td><?php echo $request->region?></td>
+
+                                    <td>
+                                        <?php
+                                             $typeContent = ($request->type === 'assigned') ? 
+                                            '<img class="collector_img" src="' . IMGROOT . '/img_upload/collector/' .$request->image . '" alt="collector image"
+                                             onclick="view_collector(\'' . $request->image . '\',
+                                             \'' . $request->user_id . '\', \'' . $request->name . '\',
+                                             \'' . $request->contact_no . '\', \'' . $request->vehicle_no . '\',
+                                             \'' . $request->vehicle_type . '\')">' :
+                                             '<i class="fa-solid fa-user-large"></i>';
+                                             echo $typeContent;
+                                             ?>
+
+                                    </td>
                                     <td>
 
                                         <i onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
                                             class='bx bx-map' style="font-size: 29px"></i>
                                     </td>
-                                    <td>
-                                        <?php
-                                        $typeContent = ($request->type === 'assigned') ? 
-                                        '<img class="collector_img" src="' . IMGROOT . '/img_upload/collector/' .$request->image . '" alt="collector image">':
-
-                                        '<img class="collector_img" src="' . IMGROOT . '/collector.png" alt="collector image">';
-                                        echo $typeContent
-                                    ?>
                                     </td>
 
-                                    </td>
-                                    <td class="cancel-open">
-                                        <i class='bx bx-info-circle' style="font-size: 29px"
-                                            <?php if ($request->type === 'assigned') { ?>onclick="view_collector('<?php echo $request->image; ?>',
-                                        '<?php echo $request->user_id; ?>', '<?php echo $request->name; ?>',
-                                        '<?php echo $request->contact_no; ?>', '<?php echo $request->vehicle_no; ?>',
-                                        '<?php echo $request->vehicle_type; ?>')" <?php } ?>></i>
                                     <td class="cancel-open">
                                         <?php
                                                 if ($request->type === 'incoming') {
-                                                    echo '<img onclick="cancel_request(\'' . $request->request_id . '\')" src="' . IMGROOT . '/close_popup.png" alt="">';
+                                                    echo '   <i class="bx bx-x-circle" style="font-size: 29px; color:#DC2727;" onclick="cancel_request(\'' . $request->request_id . '\')"></i>';
+                                                    // echo '<img onclick="cancel_request(\'' . $request->request_id . '\')" src="' . IMGROOT . '/close_popup.png" alt="">';
                                                 } else {
-                                                    echo '<img src="' . IMGROOT . '/warning.png" alt="">';
+                                                    echo '<i class="fa-solid fa-triangle-exclamation" style="font-size: 24px; color:#DC2727;"></i>';
 
                                                 }
                                                 ?>

@@ -144,7 +144,7 @@
                                     <div class="circular-progress">
                                         <span class="progress-value">0%</span>
                                     </div>
-                                    <button>Completed Requests</button>
+                                    <button onclick="redirect_completed_req()">Completed Requests</button>
                                 </div>
                             </div>
                             <div class="main-right-bottom-three-right-right">
@@ -243,6 +243,11 @@
 
         function redirect_complains_history() {
             var linkUrl = "<?php echo URLROOT?>/collectors/complains_history";
+            window.location.href = linkUrl;
+        }
+
+        function redirect_completed_req() {
+            var linkUrl = "<?php echo URLROOT?>/collectors/request_completed";
             window.location.href = linkUrl;
         }
 

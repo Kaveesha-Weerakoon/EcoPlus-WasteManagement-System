@@ -112,8 +112,7 @@
 
     public function get_Notification($id) {
       try {
-          $this->db->query('SELECT * FROM user_notification WHERE user_id = :id AND mark_as_read IN ("False")');
-          $this->db->bind(':id', $id);          
+        $this->db->query('SELECT * FROM user_notification WHERE user_id = :id AND mark_as_read = "False" ORDER BY datetime DESC');          $this->db->bind(':id', $id);          
           $results = $this->db->resultSet();
           return $results;
       } catch (PDOException $e) {

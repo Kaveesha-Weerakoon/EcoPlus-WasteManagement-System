@@ -15,7 +15,7 @@
                     <div class="main-right-top-notification" id="notification">
                         <i class='bx bx-bell'></i>
                         <?php if (!empty($data['notification'])) : ?>
-                        <div class="dot"></div>
+                        <div class="dot"><?php echo count($data['notification'])?></div>
                         <?php endif; ?>
                     </div>
                     <div id="notification_popup" class="notification_popup">
@@ -28,9 +28,8 @@
 
                                 </div>
                                 <div class="notification_right">
-                                    <p><?php echo $notification->datetime?></p>
-                                    <?php echo $notification->notification?>
-
+                                    <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
+                                    <?php echo $notification->notification ?>
                                 </div>
                             </div>
                             <?php endforeach; ?>

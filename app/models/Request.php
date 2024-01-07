@@ -7,7 +7,7 @@
     }
 
     public function request_insert($data){
-
+      try{
         $this->db->query('INSERT INTO request_main (region, customer_id, name,contact_no, date, time,instructions,lat,longi) VALUES (:region, :customer_id, :name,:contact_no, :date, :time,:instructions,:lat,:longi)');
         $this->db->bind(':region', $data['region']);
         $this->db->bind(':customer_id', $data['customer_id']);
@@ -18,7 +18,32 @@
         $this->db->bind(':instructions', $data['instructions']);
         $this->db->bind(':lat', $data['lattitude']);
         $this->db->bind(':longi', $data['longitude']);
-        $result = $this->db->execute();
+        $insertResult = $this->db->execute();
+
+        if($insertResult){
+          $notificationText = "Customer C{$data['customer_id']} has been requested";
+          $this->db->query("INSERT INTO center_notification (center_id, region, notification) VALUES (:center_id, :region, :notification)");
+          $this->db->bind(":center_id", $data["center_id"]);
+          $this->db->bind(":region", $data["region"]);
+          $this->db->bind(":notification", $notificationText);
+          $insertNotification = $this->db->execute();
+
+          if($insertNotification){
+            return $insertNotification;
+          }
+          else{
+            return false;
+          }
+
+        }
+
+
+
+      }catch(Exception $e){
+        return false;
+      }
+
+        
     }
 
     public function get_request_current($user_id) {
@@ -289,6 +314,21 @@
           return $rows;
       } catch (PDOException $e) {
           return false;
+      }
+    }
+
+    public function get_incoming_requests_count($region){
+      try {
+        $this->db->query('SELECT * FROM request_main WHERE region = :region AND type IN ("incoming")');
+        $this->db->bind(':region', $region);
+        $rows = $this->db->resultSet();
+    
+        $request_count = $this->db->rowCount();
+        return $request_count;
+
+      } catch (PDOException $e) {
+        echo 'Error: ' . $e->getMessage();
+        return false;
       }
     }
 

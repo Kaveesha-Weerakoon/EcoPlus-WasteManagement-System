@@ -108,8 +108,27 @@
           $this->db->query('INSERT INTO user_notification (user_id, notification) VALUES (:customer_id, :notification)');
           $this->db->bind(':customer_id',$request->customer_id);
           $this->db->bind(':notification', "Req ID {$data['req_id']} Has been Completed");
-          $this->db->execute();
-          return true;
+          $result1 = $this->db->execute();
+          
+          if($result1){
+            $notificationText = "Req ID {$data['req_id']} has been completed";
+            $this->db->query("INSERT INTO center_notification (center_id, region, notification) VALUES (:center_id, :region, :notification)");
+            $this->db->bind(':center_id', $data['center_id']);
+            $this->db->bind(':region', $data['region']);
+            $this->db->bind(':notification', $notificationText);
+            $result2 = $this->db->execute();
+
+            if($result2){
+              return true;
+              
+            }else{
+              return false;
+            }
+
+          }else{
+            return false;
+          }
+
          }
          else{
           return false;

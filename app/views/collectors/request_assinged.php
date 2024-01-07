@@ -359,8 +359,7 @@
 
                                         <h4>Total = <?php echo $data['credit_Amount']?></h4>
                                         <div class="buttons">
-                                            <button class="complete-btn"
-                                                onclick="submitForm(<?php echo $data['req_id']?>)">Complete</button>
+                                            <button class="complete-btn" onclick="submitForm(<?php echo $data['req_id']?>)">Complete</button>
                                             <a href="<?php echo URLROOT?>/collectors/request_assinged">
                                                 <button class="cancel-btn" type="button">Cancel</button>
                                             </a>
@@ -381,27 +380,24 @@
                         <button id="okButtonEcoCredits" onclick="closeCalculatedCreditsPopup()">OK</button>
                     </div>
                 </div>
-                <div class="overlay" id="overlay"></div>
-
 
 
                 <div class="cancel-confirm" id="cancel-confirm">
                     <form class="cancel-confirm-content" id="cancel-form" method="post"
                         action="<?php echo URLROOT?>/collectors/request_assinged">
-                        <img class="confirm-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop">
-                        <h1>Cancel the Request?</h1>
+                        <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
+                        <h2>Cancel the Request?</h2>
+                        <p>This action will cancel the request </p>
                         <input name="reason" type="text" placeholder="Input the Reason">
                         <input name="id" type="text">
-                        <div class="cancel-confirm-button-container">
-                            <button type="button" onclick="validateCancelForm()" id="cancel-pop"
-                                class="cancel-reason-submit-button">Submit</button>
-                            <button type="button" onclick="closecancel()" id="cancel-pop"
-                                class="cancel-reason-cancel-button">Cancel</button>
+                        <div class="btns" id="btns">
+                            <button onclick="validateCancelForm()" class="deletebtn">OK</button>
+                            <button id="cancel-pop" type="button" class="cancelbtn">Cancel</button></a>
                         </div>
 
                     </form>
-
                 </div>
+
 
             </div>
 
@@ -413,10 +409,10 @@
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map-loaction'), {
         center: {
-            lat: <?php echo $data['center']->lat;?>,
-            lng: <?php echo $data['center']->longi;?>
+            lat: 7.8731,
+            lng: 80.7718
         },
-        zoom: 11
+        zoom: 14.5
     });;
     var incomingRequests = <?php echo $data['jsonData']; ?>;
     incomingRequests.forEach(function(coordinate) {
@@ -440,19 +436,15 @@ function cancel($id) {
     inputElement.style.display = 'none';
 
     inputElement.value = $id;
-    var cancel_popup = document.getElementById('cancel-confirm');
-    cancel_popup.classList.add('active');
+    document.getElementById("cancel-confirm").style.display = "flex";
+    setTimeout(function() {
+        document.getElementById("btns").style.display = "flex";
+        document.querySelector("#cancel-confirm img").style.display = "flex";
+        document.querySelector("#cancel-confirm h2").style.display = "flex";
+        document.querySelector("#cancel-confirm input").style.display = "flex";
+        document.querySelector("#cancel-confirm p").style.display = "flex";
 
-    document.getElementById('overlay').style.display = "flex";
-
-
-}
-
-function closecancel() {
-    const popup = document.getElementById("cancel-confirm");
-
-    popup.classList.remove('active');
-    document.getElementById('overlay').style.display = "none";
+    }, 350);
 
 }
 

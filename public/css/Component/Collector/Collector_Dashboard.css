@@ -125,6 +125,40 @@
         cursor: pointer;
     }
 
+    .mark_as_read {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    /* .notification_cont {
+        overflow: scroll;
+        max-height: 150px;
+    } */
+
+    .mark_as_read button {
+        margin-top: 2px;
+        font-size: 13px;
+        text-align: center;
+        margin-top: 4px;
+        font-weight: 700;
+        border: none;
+        background-color: none !important;
+        background: none;
+        cursor: pointer !important;
+        color: var(--main-text-color);
+        margin-left: 5px;
+    }
+
+    .mark_as_read button:hover{
+        color: var(--button-hover-green);
+    }
+
+    .mark_as_read .bx {
+        font-size: 26px;
+    }
+
     .notification:hover {
         background-color: var(--notification-hover);
     }

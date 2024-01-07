@@ -27,13 +27,17 @@
       $Notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $center = $this->center_model->getCenterById($_SESSION['center_id']);
       $incoming_requests_count = $this->Request_Model->get_incoming_requests_count($center->region);
+      $no_of_collectors = $this->collectorModel->get_no_of_Collectors($_SESSION['center_id']);
+      $no_of_workers = $this->centerworkerModel->get_no_of_center_workers($_SESSION['center_id']);
 
       $data = [
         'center_id' => $center->id,
         'center_name' => $center->region,
         'current_garbage'=> $json_Current_Garbage,
         'notification'=> $Notifications,
-        'incoming_request_count'=> $incoming_requests_count
+        'incoming_request_count'=> $incoming_requests_count,
+        'collectors_count'=> $no_of_collectors,
+        'center_workers_count'=> $no_of_workers
       ];
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){

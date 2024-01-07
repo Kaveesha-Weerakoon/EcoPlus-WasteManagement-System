@@ -326,20 +326,15 @@
         /* border: 1px solid red; */
     }
 
-    .main-right-bottom-one-right .left h1 {
-        font-size: 25px;
-        margin-bottom: 5%;
-    }
-
     .main-right-bottom-one-right .left h3 {
         font-size: 18px;
-        margin-bottom: 2%;
+        margin-bottom: 5%;
         color: var(--green-color-one);
     }
 
     .main-right-bottom-one-right .left p {
         font-size: 14px;
-        margin-bottom: 6%;
+        margin-bottom: 7%;
         letter-spacing: 0.05rem;
         font-weight: 700;
     }
@@ -387,7 +382,8 @@
         background: #fff;
         border-radius: 10px;
         color: var(--main-text-color);
-        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        /* box-shadow: 0 15px 40px rgba(0,0,0,0.12); */
+        box-shadow: var(--box-shadow);
         box-sizing: border-box;
       }
 
@@ -544,6 +540,17 @@
     .icon_container {
         width: 45px;
         margin-right: 10px;
+    }
+
+    .content_container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content_container h2{
+        margin-top: 5px;
+        font-size: 22px;
+        
     }
 
     .main-right-bottom-two-cont i {

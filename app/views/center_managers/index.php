@@ -87,8 +87,6 @@
                                         <div class="icons">
                                         <i id="prev" class='bx bx-chevron-left'></i>
                                         <i id="next" class='bx bx-chevron-right'></i>
-                                        <!-- <span id="prev" class="material-symbols-rounded">chevron_left</span>
-                                        <span id="next" class="material-symbols-rounded">chevron_right</span> -->
                                         </div>
                                     </header>
                                     <div class="calendar">
@@ -115,22 +113,30 @@
                             <div class="icon_container">
                                 <i class='bx bx-user'></i>
                             </div>
-                            <h3>Collectors</h3>
-                            <h2>10</h2>
+                            <div class="content_container">
+                                <h3>Regional Collectors</h3>
+                                <h2><?php echo $data['collectors_count']?></h2>
+                            </div>
+                            
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_center_workers()">
                             <div class="icon_container">
                                 <i class='bx bx-group'></i>
                             </div>
-                            <h3>Center Workers</h3>
-                            <h2>12</h2>
+                            <div class="content_container">
+                                <h3>Center Workers</h3>
+                                <h2><?php echo $data['center_workers_count']?></h2>
+                            </div>
+                            
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_completed_requests()">
                             <div class="icon_container">
                                 <i class='bx bx-message-alt-check'></i>
                             </div>
-                            <h3>Fulfilled Requests</h3>
-                            <h2>14</h2>
+                            <div class="content_container">
+                                <h3>Fulfilled Requests</h3>
+                                <h2>14</h2>
+                            </div>
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_complaints()">
                             <div class="icon_container">
@@ -161,8 +167,8 @@
                                 </button>
                             </div>
                             <div class="main-right-bottom-three-right-right">
-                                <h1>Centers</h1>
-                                <div class="map" id="map"></div>
+                                <h1>Complaints</h1>
+                                
 
                             </div>
                         </div>

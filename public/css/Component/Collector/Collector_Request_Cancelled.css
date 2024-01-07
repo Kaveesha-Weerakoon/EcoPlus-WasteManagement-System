@@ -1,7 +1,5 @@
 .Collector_Request_Cancelled {
 
-
-
     #request i {
         color: var(--green-color-one);
     }
@@ -12,8 +10,20 @@
 
     .main-right-bottom {
         flex-direction: column;
-        height: 550px;
+        height: 500px;
+        overflow: scroll;
         display: flex;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        display: none;
     }
 
     #cancelled p {
@@ -28,7 +38,7 @@
     .main-right-bottom-three {
         display: flex;
         justify-content: center;
-        height: 550px;
+        height: 500px;
     }
 
     .main-right-bottom-three-content {
@@ -80,7 +90,7 @@
         width: 25px;
     }
 
-   
+
 
     /*Location popup*/
     .location_pop {
@@ -137,11 +147,11 @@
         height: 28px;
     }
 
-    
+
 
     /*request details*/
     .request-details-pop {
-        
+
         display: flex;
         position: fixed;
         top: 50%;
@@ -156,7 +166,7 @@
         box-shadow: var(--box-shadow);
         border-radius: 10px;
         background-color: #333;
-       
+
     }
 
     .request-details-pop.active {
@@ -235,7 +245,7 @@
         padding-top: 40px;
         padding-left: 40px;
         padding-bottom: 50px;
-       
+
     }
 
     .request-details-right-labels span {
@@ -252,7 +262,7 @@
         padding-top: 40px;
         padding-left: 90px;
         padding-bottom: 50px;
-       
+
     }
 
     .request-details-right-values span {

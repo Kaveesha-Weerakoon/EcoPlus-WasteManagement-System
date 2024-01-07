@@ -122,12 +122,12 @@
                                             <td><?php  echo $request->contact_no?></td>
                                             <td><?php  echo $request->instructions?></td>
                                             <td>
-                                            <i class='bx bx-map' style="font-size: 29px;"
-                                             onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
+                                                <i class='bx bx-map' style="font-size: 29px;"
+                                                    onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
                                             </td>
                                             <td><img onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
                                                     src="<?php echo IMGROOT?>/view.png" alt=""></td>
-                                            
+
                                         </tr>
                                         <?php endforeach; ?>
                                     </table>
@@ -151,67 +151,76 @@
 
                     <div class="collect-details-pop" id="collect-details-popup-box">
                         <div class="collect-details-pop-form">
-                            <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
-                                id="collect-details-pop-form-close">
+                            <img src="<?php echo IMGROOT?>/close_popup.png" alt=""
+                                class="collect-details-pop-form-close" id="collect-details-pop-form-close">
                             <div class="collect-details-pop-form-top">
                                 <div class="collect-details-topic">Collection Details<div id="req_id3"></div>
                                 </div>
                             </div>
 
-                                    <div class="collect-details-pop-form-content">
-                                        <div class="collect-details-pop-form-content-labels">
-                                            <h3>Polythene Quantity</h3>
-                                            <h3>Plastic Quantity</h3>
-                                            <h3>Glass Quantity </h3>
-                                            <h3>Paper Waste Quantity</h3>
-                                            <h3>Electronic Waste Quantity </h3>
-                                            <h3>Metals Quantity</h3>
-                                            <h3>Note</h3>
-                                            <h3>Earned Credits</h3>
-                                        </div>
-                                        <div class="collect-details-pop-form-content-right-values">
-                                            <div class="collect-details-pop-form-content-right-values-cont">
-                                                <h3 id="Polythene_Quantity"></h3>
-                                                <h3>&nbsp Kg</h3>
-                                            </div>
-                                            <div class="collect-details-pop-form-content-right-values-cont">
-                                                <h3 id="Plastic_Quantity"></h3>
-                                                <h3>&nbsp Kg</h3>
-                                            </div>
-                                            <div class="collect-details-pop-form-content-right-values-cont">
-                                                <h3 id="Glass_Quantity"></h3>
-                                                <h3>&nbsp Kg</h3>
-                                            </div>
-                                            <div class="collect-details-pop-form-content-right-values-cont">
-                                                <h3 id="Paper_Waste_Quantity"></h3>
-                                                <h3>&nbsp Kg</h3>
-                                            </div>
-                                            <div class="collect-details-pop-form-content-right-values-cont">
-                                                <h3 id="Electronic_Waste_Quantity"></h3>
-                                                <h3>&nbsp Kg</h3>
-                                            </div>
-                                            <div class="collect-details-pop-form-content-right-values-cont">
-                                                <h3 id="Metals_Quantity"></h3>
-                                                <h3>&nbsp Kg</h3>
-                                            </div>
-                                            <div class="collect-details-pop-form-content-right-values-cont">
-                                                <h3 id="Note"></h3>
-                                            </div>
-                                            <div class="collect-details-pop-form-content-right-values-cont">
-                                                <h3 id="Earned_Credits"></h3>
-                                            </div>
-                                        </div>
+                            <div class="collect-details-pop-form-content">
+                                <div class="collect-details-pop-form-content-labels">
+                                    <h3>Polythene Quantity</h3>
+                                    <h3>Plastic Quantity</h3>
+                                    <h3>Glass Quantity </h3>
+                                    <h3>Paper Waste Quantity</h3>
+                                    <h3>Electronic Waste Quantity </h3>
+                                    <h3>Metals Quantity</h3>
+                                    <h3>Note</h3>
+                                    <h3>Earned Credits</h3>
+                                </div>
+                                <div class="collect-details-pop-form-content-right-values">
+                                    <div class="collect-details-pop-form-content-right-values-cont">
+                                        <h3 id="Polythene_Quantity"></h3>
+                                        <h3>&nbsp Kg</h3>
+                                    </div>
+                                    <div class="collect-details-pop-form-content-right-values-cont">
+                                        <h3 id="Plastic_Quantity"></h3>
+                                        <h3>&nbsp Kg</h3>
+                                    </div>
+                                    <div class="collect-details-pop-form-content-right-values-cont">
+                                        <h3 id="Glass_Quantity"></h3>
+                                        <h3>&nbsp Kg</h3>
+                                    </div>
+                                    <div class="collect-details-pop-form-content-right-values-cont">
+                                        <h3 id="Paper_Waste_Quantity"></h3>
+                                        <h3>&nbsp Kg</h3>
+                                    </div>
+                                    <div class="collect-details-pop-form-content-right-values-cont">
+                                        <h3 id="Electronic_Waste_Quantity"></h3>
+                                        <h3>&nbsp Kg</h3>
+                                    </div>
+                                    <div class="collect-details-pop-form-content-right-values-cont">
+                                        <h3 id="Metals_Quantity"></h3>
+                                        <h3>&nbsp Kg</h3>
+                                    </div>
+                                    <div class="collect-details-pop-form-content-right-values-cont">
+                                        <h3 id="Note"></h3>
+                                    </div>
+                                    <div class="collect-details-pop-form-content-right-values-cont">
+                                        <h3 id="Earned_Credits"></h3>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="overlay" id="overlay"></div>
                         </div>
                     </div>
+                    <div class="location_pop" id="location_pop">
+                        <div class="location_pop_content">
+                            <div class="location_pop_map">
+
+                            </div>
+                            <div class="location_close">
+                                <button onclick="closemap()">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overlay" id="overlay"></div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 
 
@@ -220,8 +229,6 @@
 
 
 <script>
-
-
 function initMap(latitude = 7.4, longitude = 81.00000000) {
     var mapCenter = {
         lat: latitude,
@@ -287,17 +294,40 @@ function view_collect_details(request) {
     document.getElementById('Earned_Credits').innerText = request.credit_amount;
 }
 
+function searchTable() {
+    var input = document.getElementById('searchInput').value.toLowerCase();
+    var rows = document.querySelectorAll('.table-row');
+
+    rows.forEach(function(row) {
+        var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+        var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+        var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+        var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+        var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+        var conctact_no = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
+        var instructions = row.querySelector('td:nth-child(7)').innerText.toLowerCase();
+
+        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(input) ||
+            cid.includes(input) || conctact_no.includes(input) || instructions.includes(input)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+
+
+}
 document.getElementById('searchInput').addEventListener('input', searchTable);
 document.addEventListener("DOMContentLoaded", function() {
-    const close_collector = document.getElementById("personal-details-popup-form-close");
+    // const close_collector = document.getElementById("personal-details-popup-form-close");
     const collector_view = document.getElementById("personal-details-popup-box");
     const close_view = document.getElementById("collect-details-pop-form-close");
-    
 
-    close_collector.addEventListener("click", function() {
-        collector_view.classList.remove('active');
-        document.getElementById('overlay').style.display = "none";
-    });
+
+    // close_collector.addEventListener("click", function() {
+    //     collector_view.classList.remove('active');
+    //     document.getElementById('overlay').style.display = "none";
+    // });
 
     close_view.addEventListener("click", function() {
         var locationPop = document.getElementById('collect-details-popup-box');

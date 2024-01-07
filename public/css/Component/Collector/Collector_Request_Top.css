@@ -305,7 +305,8 @@
     .main-right-bottom-down {
         padding-left: 3.5%;
         width: 96.5%;
-        height: 450px;
+        height: 480px;
+        overflow: scroll;
     }
 
     .main-right-bottom-top {
@@ -324,7 +325,7 @@
 
     .main-right-bottom-two {
         width: 99%;
-        height: 550px;
+        height: 525px;
         padding-left: 1%;
         display: none;
         align-items: center;

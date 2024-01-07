@@ -130,6 +130,9 @@
                                 <h3>
                                     C <?php echo $completion->customer_id; ?>
                                 </h3>
+                                <h3>
+                                    R <?php echo $completion->req_id; ?>
+                                </h3>
                                 <h2>
                                     Eco <?php echo $completion->credit_amount;?>
                                 </h2>

@@ -409,13 +409,15 @@
     .main-right-bottom-three-left-cont h3 {
         font-size: 15px;
         width: 250px;
-        margin-left: -14%;
+        margin-left: 1%;
     }
+    
 
     .main-right-bottom-three-left-cont h2 {
         font-size: 18px;
         color: var(--green-color-one);
         width: 175px;
+        margin-right: 16%;
 
     }
 

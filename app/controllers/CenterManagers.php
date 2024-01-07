@@ -29,6 +29,7 @@
       $incoming_requests_count = $this->Request_Model->get_incoming_requests_count($center->region);
       $no_of_collectors = $this->collectorModel->get_no_of_Collectors($_SESSION['center_id']);
       $no_of_workers = $this->centerworkerModel->get_no_of_center_workers($_SESSION['center_id']);
+      $completed_requests_count = $this->Request_Model->get_completed_requests_count($center->region);
 
       $data = [
         'center_id' => $center->id,
@@ -37,7 +38,8 @@
         'notification'=> $Notifications,
         'incoming_request_count'=> $incoming_requests_count,
         'collectors_count'=> $no_of_collectors,
-        'center_workers_count'=> $no_of_workers
+        'center_workers_count'=> $no_of_workers,
+        'completed_request_count'=> $completed_requests_count
       ];
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){

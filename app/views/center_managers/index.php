@@ -135,14 +135,17 @@
                             </div>
                             <div class="content_container">
                                 <h3>Fulfilled Requests</h3>
-                                <h2>14</h2>
+                                <h2><?php echo $data['completed_request_count']?></h2>
                             </div>
                         </div>
-                        <div class="main-right-bottom-two-cont A" onclick="redirect_complaints()">
+                        <div class="main-right-bottom-two-cont A">
                             <div class="icon_container">
-                                <i class='bx bx-donate-heart'></i>
+                                <i class='bx bx-user'></i>
                             </div>
-                            <h3>Complaints</h3>
+                            <div class="content_container">
+                                <h3>Region Customers</h3>
+                                <!-- <h2><?php echo $data['completed_request_count']?></h2> -->
+                            </div>
                         </div>
 
                     </div>
@@ -167,7 +170,7 @@
                                 </button>
                             </div>
                             <div class="main-right-bottom-three-right-right">
-                                <h1>Complaints</h1>
+                                <h1 onclick="redirect_complaints()">Complaints</h1>
                                 
 
                             </div>

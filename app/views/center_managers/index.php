@@ -164,13 +164,29 @@
                                             0 %
                                         </span>
                                     </div>
+                                    <div class="legend-container">
+                                        <div class="legend LL">
+                                            <div class="uncompleted"></div>
+                                            <span>Uncompleted</span>
+                                        </div>
+                                        <div class="legend LR">
+                                            <div class="completed"></div>
+                                            <span>Completed</span>
+                                        </div>   
+                                    </div>
                                 </div>
-                                <!-- <button>
-                                    Request Now
-                                </button> -->
                             </div>
                             <div class="main-right-bottom-three-right-right">
-                                <h1 onclick="redirect_complaints()">Complaints</h1>
+                                
+                                <div class="complaints-container">
+                                    <h1 >Complaints</h1>
+                                    <i class='bx bx-message-error'></i>
+                                    <p>If there's any issue regarding center, make a complaint from here</p>
+                                    <!-- <p>If you encounter any issues, please submit a complaint here</p> -->
+                                    <button type="button" onclick="redirect_complaints()">Complaint</button>
+                                    <a href=""><span>View History >></span></a>
+
+                                </div>
                                 
 
                             </div>

@@ -201,6 +201,17 @@
 
             </div>
 
+            <?php if($data['holiday_success']=='True') : ?>
+                <div class="holiday_success">
+                    <div class="popup" id="popup">
+                        <img src="<?php echo IMGROOT?>/check.png" alt="">
+                        <h2>Success!!</h2>
+                        <p>Holiday marked successfully</p>
+                        <a href="<?php echo URLROOT?>/centermanagers"><button type="button">OK</button></a>
+                    </div>
+                </div>
+            <?php endif; ?>
+
 
         </div>
     </div>
@@ -367,6 +378,8 @@ let date = new Date(),
 currYear = date.getFullYear(),
 currMonth = date.getMonth();
 
+var markedHolidays = <?php echo json_encode($data['marked_holidays']); ?>;
+
 // storing full name of all months in array
 const months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
@@ -386,7 +399,14 @@ const renderCalendar = () => {
         // adding active class to li if the current day, month, and year matched
         let isToday = i === date.getDate() && currMonth === new Date().getMonth() 
                      && currYear === new Date().getFullYear() ? "active" : "";
-        liTag += `<li class="${isToday}">${i}</li>`;
+
+        let isMarked = markedHolidays.some(function(holiday) {
+            return holiday.date === `${currYear}-${(currMonth + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
+        });
+
+        liTag += `<li class="${isToday} ${isMarked ? 'marked' : ''}">${i}</li>`;
+        //liTag += `<li class="${isToday}">${i}</li>`;
+
     }
 
     for (let i = lastDayofMonth; i < 6; i++) { // creating li of next month first days
@@ -452,8 +472,6 @@ function selectDate(event) {
 
     holiday = `${currYear}-${(currMonth + 1).toString().padStart(2, '0')}-${selectedDate.toString().padStart(2, '0')}`;
     console.log(holiday);
-    //console.log(holiday);
-
 
     // Highlight the selected date
     event.target.classList.add('selected');    
@@ -466,15 +484,27 @@ document.getElementById('setButton').addEventListener('click', function() {
 
 function validateHolidayForm() {
     var holidayInput = document.getElementById("holiday").value;
+    
+    console.log(markedHolidays);
+
 
     if (holidayInput.trim() === "") {
         alert("Something went wrong");
     }else if (!/^\d{4}-\d{2}-\d{2}$/.test(holidayInput.trim())) {
         alert("Invalid date format");
-    } else {
-        //alert("Success")
-        document.getElementById("confirm-hoildays-form").submit();
+    }  else {
+        var isDateAlreadyMarked = markedHolidays.some(function(holiday) {
+            return holiday.date === holidayInput.trim();
+        });
+
+        if (isDateAlreadyMarked) {
+            alert("This date is already marked as a holiday");
+        } else {
+            // If the date is not already marked, submit the form
+            document.getElementById("confirm-hoildays-form").submit();
+        }
     }
+    
     document.getElementById('overlay').style.display = "none";
 
 }

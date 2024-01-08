@@ -32,6 +32,7 @@
       $no_of_workers = $this->centerworkerModel->get_no_of_center_workers($_SESSION['center_id']);
       $completed_requests_count = $this->Request_Model->get_completed_requests_count($center->region);
       $customers_count = $this->Customer_Model->get_customers_count($center->region);
+      $marked_holidays = $this->centermanagerModel->get_marked_holidays($center->region);
 
       $data = [
         'center_id' => $center->id,
@@ -42,7 +43,9 @@
         'collectors_count'=> $no_of_collectors,
         'center_workers_count'=> $no_of_workers,
         'completed_request_count'=> $completed_requests_count,
-        'customers_count'=> $customers_count
+        'customers_count'=> $customers_count,
+        'holiday_success'=> '',
+        'marked_holidays'=> $marked_holidays
       ];
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -1505,24 +1508,31 @@
     $center=$this->center_model->getCenterById($_SESSION['center_id']);
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       
-    
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
       $data = [
         'holiday' => trim($_POST['holiday']),
         'center_id'=> $_SESSION['center_id'],
-        'region'=> $center->region
+        'region'=> $center->region,
+        'holiday_success'=> ''
         
       ];
 
       if (empty($data['holiday']) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $data['holiday'])) {
-        die('vlidaiton block');
         $this->view('center_managers/index', $data);
 
       } else {
-        $this->centermanagerModel->mark_holidays($data);
-        die('success');
-        $this->view('center_managers/index', $data);
+        if($this->centermanagerModel->mark_holidays($data)){
+          $data['holiday_success']='True';      
+          $this->index();
+          //$this->view('center_managers/index',$data);
+          
+
+        } else {
+          die('Something went wrong');
+        }
+        
+        
         
         //$this->index();
        
@@ -1531,7 +1541,7 @@
     
     }
     else{
-      die('else block');
+
       $this->index();
     }
     

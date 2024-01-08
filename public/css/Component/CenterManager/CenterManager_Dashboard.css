@@ -443,9 +443,8 @@
       }
 
       .calendar li{
-        color: #333;
+        color: var(--main-text-color);
         width: calc(100% / 7);
-        /* font-size: 1.07rem; */
         font-size: 10px;
       }
 
@@ -463,6 +462,7 @@
 
       .days li.inactive{
         color: #aaa;
+        
       }
 
       .days li.active{
@@ -489,16 +489,26 @@
         background: #f2f2f2;
       }
 
-      .days li.selected {
-        /* position: relative;
-        height: 20px;
-        width: 20px; */
-        background-color: #3498db; 
+      .days li.selected{
         color: #fff;
-        border-radius: 50%;  
-        z-index: 3;
-       
-        } 
+      }
+
+      .days li.selected::before {
+        background: #3498db;   
+    } 
+
+      .days li.selected:hover::before {
+        background: #3498db;  
+        color: #fff; 
+    } 
+
+      .days li.marked {
+        color: var(--main-text-color);
+    }
+
+    .days li.marked::before{
+        background:#ffcccb ;
+    }
 
 
    
@@ -1043,6 +1053,68 @@
 
     .holiday-cancel-button:hover{
         background: #a7a1a1;
+    }
+
+    /*Holiday success popup*/
+    .holiday_success {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .popup {
+        width: 400px;
+        background: var(--background-color-main);
+        font-family: 'poppins', sans-serif;
+        border-radius: 6px;
+        text-align: center;
+        padding: 0 30px 30px;
+        color: #333;
+        transition: transform 0.4s, top 0.4s;
+    }
+
+    .open-popup {
+        visibility: visible;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .holiday_success .popup img {
+        width: 100px;
+        margin-top: 35px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        animation: bounceAndMove 2s ease infinite;
+
+    }
+
+    .popup h2 {
+        font-size: 38px;
+        font-weight: 500;
+        margin: 10px 0 10px;
+    }
+
+    .holiday_success .popup button {
+        width: 100%;
+        margin-top: 30px;
+        padding: 10px 0;
+        background: var(--green-color-one);
+        color: white;
+        border: 0;
+        outline: none;
+        font-size: 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+
     }
 
    

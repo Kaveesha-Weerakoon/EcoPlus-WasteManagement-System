@@ -253,10 +253,10 @@
 
     public function mark_holidays($data){
       try{
-        $this->db->query('INSERT INTO holidays (center_id, region, holiday) VALUES (:center_id, :region, :holiday)');
+        $this->db->query('INSERT INTO holidays (center_id, region, date) VALUES (:center_id, :region, :date)');
         $this->db->bind(':center_id', $data['center_id']);
         $this->db->bind(':region', $data['region']);
-        $this->db->bind(':holiday', $data['holiday']);
+        $this->db->bind(':date', $data['holiday']);
         $result = $this->db->execute();
 
         if($result){
@@ -268,8 +268,24 @@
 
 
       }catch(Exception $e){
+        //echo 'Error: ' . $e->getMessage();
         return false;
+        
 
+      }
+
+    }
+
+    public function get_marked_holidays($region){
+      try{
+        $this->db->query('SELECT date FROM holidays WHERE region = :region');
+        $this->db->bind(':region', $region);
+        $results = $this->db->resultSet();
+
+        return $results;
+
+      }catch(Exception $e){
+        return false;
       }
 
     }

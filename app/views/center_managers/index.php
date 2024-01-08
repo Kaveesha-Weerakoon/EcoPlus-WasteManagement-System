@@ -187,9 +187,8 @@
                 <form class="confirm-hoildays-form" id="confirm-hoildays-form" method="post"
                     action="<?php echo URLROOT?>/centermanagers/mark_holidays">
                     <h1>Mark this date as a holiday?</h1>
-                    <p>This date will be marked as a off-day</p>
-                    <span>Customers won't be able to request on off-days</span>
-                    <input type="text" class="holiday" id="holiday" name="holiday"> 
+                    <input type="text" class="holiday" id="holiday" name="holiday" readonly>
+                    <p>This date will be marked as a off-day. Customers won't be able to request on off-days</p> 
                     <div class="cancel-confirm-button-container">
                         <button type="button" onclick="validateHolidayForm()" id="cancel-pop"
                             class="holiday-submit-button">Mark</button>
@@ -435,7 +434,7 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
 });
 
 function openHolidayPopup(holiday) {
-    if (holiday) {
+    if (holiday && !document.querySelector('.selected').classList.contains('inactive') && !document.querySelector('.selected').classList.contains('active')) {
         // Set the selected date in the popup
         document.getElementById('holiday').value = holiday;
 
@@ -444,9 +443,11 @@ function openHolidayPopup(holiday) {
         cancel_popup.classList.add('active');
 
         document.getElementById('overlay').style.display = "flex";
+
+        document.querySelector('.wrapper').classList.remove('invalid-selection');
     } else {
         // Display an error message because no date is selected
-        alert("Please select a date before marking it as a holiday.");
+        document.querySelector('.wrapper').classList.add('invalid-selection');
     }
     
     // //document.getElementById('confirm-hoildays-popup').style.display = 'flex';
@@ -469,6 +470,11 @@ function selectDate(event) {
     // Get the clicked date
     selectedDate = event.target.innerHTML;
     //console.log(selectedDate);
+
+    if (event.target.classList.contains('inactive')) {
+        // Prevent any action for inactive days
+        return;
+    }
 
     holiday = `${currYear}-${(currMonth + 1).toString().padStart(2, '0')}-${selectedDate.toString().padStart(2, '0')}`;
     console.log(holiday);

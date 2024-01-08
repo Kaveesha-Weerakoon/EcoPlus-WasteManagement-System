@@ -33,6 +33,15 @@
       $completed_requests_count = $this->Request_Model->get_completed_requests_count($center->region);
       $customers_count = $this->Customer_Model->get_customers_count($center->region);
       $marked_holidays = $this->centermanagerModel->get_marked_holidays($center->region);
+      $completed_requests = count($this->collect_garbage_Model->get_completed_requests_bycenter($center->region));
+      $total_requests = $this->Request_Model->get_total_requests_by_region($center->region);
+
+      if ($total_requests > 0) {
+        $percentage_completed = json_encode(($completed_requests / $total_requests) * 100);
+      } else {
+        $percentage_completed =json_encode(0);
+      }    
+
 
       $data = [
         'center_id' => $center->id,
@@ -45,7 +54,8 @@
         'completed_request_count'=> $completed_requests_count,
         'customers_count'=> $customers_count,
         'holiday_success'=> '',
-        'marked_holidays'=> $marked_holidays
+        'marked_holidays'=> $marked_holidays,
+        'percentage'=> $percentage_completed
       ];
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){

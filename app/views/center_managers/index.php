@@ -165,9 +165,9 @@
                                         </span>
                                     </div>
                                 </div>
-                                <button>
+                                <!-- <button>
                                     Request Now
-                                </button>
+                                </button> -->
                             </div>
                             <div class="main-right-bottom-three-right-right">
                                 <h1 onclick="redirect_complaints()">Complaints</h1>
@@ -219,9 +219,53 @@
 var color = "#47b076";
 var textColor = "#414143";
 
+var checkbox = document.getElementById('toggle-checkbox');
+
 var notification = document.getElementById("notification");
 var notification_pop = document.getElementById("notification_popup");
 notification_pop.style.height = "0px";
+let circularProgress = document.querySelector(".circular-progress");
+let progressValue = document.querySelector(".progress-value");
+let progressStartValue = -1;
+let progressEndValue = <?php echo intval($data['percentage']); ?>;
+let speed = 30;
+
+function getDarkModeSetting() {
+    const storedValue = localStorage.getItem("darkMode");
+    return storedValue ? JSON.parse(storedValue) : true;
+}
+
+isDarkMode = getDarkModeSetting();
+if (getDarkModeSetting()) {
+
+    color = "white"
+    textColor = " white";
+    circularProgress.style.background =
+        `conic-gradient(${color}, ${progressStartValue * 3.6}deg, ${isDarkMode ? "#001f3f" : "#ededed"} 0deg)`;
+}
+
+let progress = setInterval(() => {
+    if (progressStartValue == progressEndValue) {
+        clearInterval(progress);
+    }
+    progressStartValue++;
+    progressValue.textContent = `${progressStartValue}%`;
+    if (!getDarkModeSetting()) {
+        circularProgress.style.background =
+            circularProgress.style.background =
+            `conic-gradient(${color}, ${progressStartValue * 3.6}deg, #ededed 0deg)`;
+    } else {
+        circularProgress.style.background =
+            `conic-gradient(${color}, ${progressStartValue * 3.6}deg, #001f3f 0deg)`;
+    }
+
+
+    if (progressStartValue == progressEndValue) {
+        clearInterval(progress);
+    }
+}, speed);
+
+
 
 function redirect_incoming_requests() {
     var linkUrl = "<?php echo URLROOT?>/centermanagers/request_incomming";
@@ -515,7 +559,6 @@ function validateHolidayForm() {
 
 }
 
-
 // Function to close the popup
 function closeHolidayPopup() {
     // Hide the popup
@@ -525,6 +568,25 @@ function closeHolidayPopup() {
 
     document.getElementById('overlay').style.display = "none";
 }
+
+checkbox.addEventListener("change", function() {
+
+if (getDarkModeSetting()) {
+    color = "white";
+    textColor = "white";
+    circularProgress.style.background =
+        `conic-gradient(${color}, ${progressStartValue * 3.6}deg, ${isDarkMode ? "#001f3f" : "#001f3f"} 0deg)`;
+} else {
+    color = "#47b076";
+    textColor = "#414143";
+    circularProgress.style.background =
+        `conic-gradient(${color}, ${progressStartValue * 3.6}deg, #ededed 0deg)`;
+}
+if (myChart) {
+    myChart.destroy();
+}
+createOrUpdateChart(color, textColor);
+});
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

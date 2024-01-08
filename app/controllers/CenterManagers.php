@@ -1502,6 +1502,38 @@
   }
 
   public function mark_holidays(){
+    $center=$this->center_model->getCenterById($_SESSION['center_id']);
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      
+    
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+        'holiday' => trim($_POST['holiday']),
+        'center_id'=> $_SESSION['center_id'],
+        'region'=> $center->region
+        
+      ];
+
+      if (empty($data['holiday']) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $data['holiday'])) {
+        die('vlidaiton block');
+        $this->view('center_managers/index', $data);
+
+      } else {
+        $this->centermanagerModel->mark_holidays($data);
+        die('success');
+        $this->view('center_managers/index', $data);
+        
+        //$this->index();
+       
+        
+      }
+    
+    }
+    else{
+      die('else block');
+      $this->index();
+    }
     
     
   }

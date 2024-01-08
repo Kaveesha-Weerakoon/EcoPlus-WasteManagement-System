@@ -189,7 +189,7 @@
                     <h1>Mark this date as a holiday?</h1>
                     <p>This date will be marked as a off-day</p>
                     <span>Customers won't be able to request on off-days</span>
-                    <input type="text" class="holiday" id="holiday"> 
+                    <input type="text" class="holiday" id="holiday" name="holiday"> 
                     <div class="cancel-confirm-button-container">
                         <button type="button" onclick="validateHolidayForm()" id="cancel-pop"
                             class="holiday-submit-button">Mark</button>
@@ -463,6 +463,21 @@ function selectDate(event) {
 document.getElementById('setButton').addEventListener('click', function() {
         openHolidayPopup(holiday);
 });
+
+function validateHolidayForm() {
+    var holidayInput = document.getElementById("holiday").value;
+
+    if (holidayInput.trim() === "") {
+        alert("Something went wrong");
+    }else if (!/^\d{4}-\d{2}-\d{2}$/.test(holidayInput.trim())) {
+        alert("Invalid date format");
+    } else {
+        //alert("Success")
+        document.getElementById("confirm-hoildays-form").submit();
+    }
+    document.getElementById('overlay').style.display = "none";
+
+}
 
 
 // Function to close the popup

@@ -250,4 +250,27 @@
            return false; 
       }
     }
+
+    public function mark_holidays($data){
+      try{
+        $this->db->query('INSERT INTO holidays (center_id, region, holiday) VALUES (:center_id, :region, :holiday)');
+        $this->db->bind(':center_id', $data['center_id']);
+        $this->db->bind(':region', $data['region']);
+        $this->db->bind(':holiday', $data['holiday']);
+        $result = $this->db->execute();
+
+        if($result){
+          return $result;
+
+        }else{
+          return false;
+        }
+
+
+      }catch(Exception $e){
+        return false;
+
+      }
+
+    }
 }

@@ -33,7 +33,7 @@
         $percentage_completed = json_encode(($completed_requests / $total_requests) * 100);
          } else {
           $percentage_completed =json_encode(0);
-     }    
+      }    
 
       $jsonData = json_encode($centers);
       $json_Total_Garbage = json_encode($total_garbage);

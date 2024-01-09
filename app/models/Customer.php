@@ -110,6 +110,21 @@
       }
     }
 
+    public function get_customers_count($region) {
+      try {
+        $this->db->query('SELECT * FROM customers WHERE city= :region');
+        $this->db->bind(':region', $region);
+
+        $rows = $this->db->resultSet();
+    
+        $customer_count = $this->db->rowCount();
+        return $customer_count; 
+
+      }catch (PDOException $e) {
+        return false;
+      }
+    }
+
     public function get_Notification($id) {
       try {
         $this->db->query('SELECT * FROM user_notification WHERE user_id = :id AND mark_as_read = "False" ORDER BY datetime DESC');          $this->db->bind(':id', $id);          
@@ -118,7 +133,7 @@
       } catch (PDOException $e) {
           return false;
       }
-  }
+    }
  
   public function view_Notification($id){
     try {

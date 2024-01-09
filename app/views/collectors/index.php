@@ -57,16 +57,16 @@
                         <div class="main-right-bottom-one-left">
                             <div class="left">
                                 <h1>Assigned Requests</h1>
-                                <h3><?php echo $data['assinged_Requests_count']?></h3>
-                                <p>Last Update</p>
-                                <button onclick="redirectToAssignedRequests()">view </button>
+                                <h3 style="font-weight:bold" id="assign_count"></h3>
+                                <p>request</p>
+                                <button onclick="redirectToAssignedRequests()">View </button>
 
                             </div>
 
                             <div class="right">
-                                <div class="icon_container">
-                                    <i class='bx bxs-bank' style='font-size: 50px;'></i>
-                                </div>
+                                
+                                <i class='bx bx-building-house'></i>
+                               
                                 <h1><?php echo $data['collector']->center_name?></h1>
                                 <h5>Center ID: CEN <?php echo $data['collector']->center_id?> </h5>
                             </div>
@@ -91,13 +91,13 @@
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_complains()">
                             <div class="icon_container">
-                                <i class='bx bxs-bank'></i>
+                                <i class='bx bx-error-circle'></i>
                             </div>
                             <h3>Complaints</h3>
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_complains_history()">
                             <div class="icon_container">
-                                <i class='bx bx-donate-heart'></i>
+                                <i class='bx bx-archive'></i>
                             </div>
                             <h3>Complaints History</h3>
                         </div>
@@ -249,8 +249,18 @@
             var linkUrl = "<?php echo URLROOT?>/collectors/complains_history";
             window.location.href = linkUrl;
         }
+        const assign_count = <?php echo $data['assinged_Requests_count']?>;
+        const assignCountElement = document.getElementById('assign_count');
 
+        function updateCount(currentValue) {
+            assignCountElement.textContent = currentValue;
+        }
 
+        for (let i = 0; i <= assign_count; i++) {
+            setTimeout(() => {
+                updateCount(i);
+            }, i * 200); // Change 1000 to control the speed of counting (milliseconds)
+        }
         notification.addEventListener("click", function() {
             var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
 
@@ -365,7 +375,7 @@
             };
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: defaultLatLng,
-                zoom: 12.5,
+                zoom: 9,
                 styles: [{
                         featureType: 'all',
                         elementType: 'labels.text',

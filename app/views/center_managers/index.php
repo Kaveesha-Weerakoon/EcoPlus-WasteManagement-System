@@ -181,8 +181,8 @@
                                 <div class="complaints-container">
                                     <h1 >Complaints</h1>
                                     <i class='bx bx-message-error'></i>
-                                    <p>If there's any issue regarding center, make a complaint from here</p>
-                                    <!-- <p>If you encounter any issues, please submit a complaint here</p> -->
+                                    <!-- <p>If there's any issue regarding center, make a complaint from here</p> -->
+                                    <p>If you encounter any issues, submit a complaint here</p>
                                     <button type="button" onclick="redirect_complaints()">Complaint</button>
                                     <a href=""><span>View History >></span></a>
 

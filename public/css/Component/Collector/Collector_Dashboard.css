@@ -594,7 +594,10 @@
 
     }
 
-
+    .Eco_Credit_Per_Cont .Cont .icon {
+        font-size: 29px;
+        margin-bottom: 10px;
+    }
 
     .overlay {
         position: fixed;

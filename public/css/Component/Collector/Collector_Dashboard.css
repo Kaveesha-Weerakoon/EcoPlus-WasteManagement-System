@@ -374,7 +374,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        width: 100%;
+        width: 95%;
         height: 45%;
     }
 
@@ -426,7 +426,7 @@
     }
 
     .main-right-bottom-three-right {
-        width: 50%;
+        width: 200%;
         height: 90%;
         margin: 15px;
         border-radius: 10px;

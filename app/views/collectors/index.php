@@ -375,7 +375,9 @@
             };
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: defaultLatLng,
-                zoom: 9,
+                zoom: 11,
+
+
                 styles: [{
                         featureType: 'all',
                         elementType: 'labels.text',

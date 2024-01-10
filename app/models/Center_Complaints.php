@@ -47,6 +47,19 @@
             }
         }
 
+        public function get_center_complaints_history($center_id){
+            try{
+                $this->db->query('SELECT * FROM center_complaints WHERE center_id = :center_id ORDER BY center_complaints.date_time DESC');
+                $this->db->bind(':center_id', $center_id);
+                $results = $this->db->resultSet();
+                
+                return $results;
+
+            }catch (PDOException $e) {
+                return false;
+            }
+        }
+
 
 
 

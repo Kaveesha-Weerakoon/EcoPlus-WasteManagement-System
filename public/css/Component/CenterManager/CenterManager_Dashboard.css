@@ -803,7 +803,7 @@
         box-shadow: var(--box-shadow);
     }
 
-    .eco_credit_per_quantity {
+    /* .eco_credit_per_quantity {
         display: flex;
         position: fixed;
         top: 50%;
@@ -872,7 +872,7 @@
         font-size: 29px;
         margin-bottom: 10px;
 
-    }
+    } */
 
 
 

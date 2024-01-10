@@ -1558,6 +1558,20 @@
     
   }
 
+  public function complaints_history(){
+    $complaints_history = $this->center_complaints_model->get_center_complaints_history($_SESSION['center_id']);
+
+    $data=[
+      'complaints_history'=>$complaints_history,
+     
+      
+    ];
+
+    $this->view('center_managers/complaints_history', $data);
+
+
+  }
+
 
 
   }

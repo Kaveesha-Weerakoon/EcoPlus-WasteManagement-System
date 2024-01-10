@@ -743,6 +743,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        text-align: center;
         flex-direction: column;
         border-radius: 10px;
         padding: 10px 20px;
@@ -778,9 +779,7 @@
         font-size: 14px;
         line-height: 1.5;
         letter-spacing: 0.02em;
-        margin-bottom: 13px;
-        margin-left: 5px;
-       
+        margin-bottom: 13px;    
 
     }
 
@@ -804,7 +803,7 @@
         box-shadow: var(--box-shadow);
     }
 
-    .eco_credit_per_quantity {
+    /* .eco_credit_per_quantity {
         display: flex;
         position: fixed;
         top: 50%;
@@ -873,7 +872,7 @@
         font-size: 29px;
         margin-bottom: 10px;
 
-    }
+    } */
 
 
 
@@ -1093,7 +1092,8 @@
         font-weight: 500;
         /* color: rgb(220, 39, 39); */
         margin-bottom: 5px;
-        line-height: 18px;
+        line-height: 1.5;
+        letter-spacing: 0.03rem;
 
     }
 

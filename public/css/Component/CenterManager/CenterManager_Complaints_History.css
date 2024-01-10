@@ -1,4 +1,4 @@
-.CenterManager_Stock_Releases {
+.CenterManager_Complaints_History {
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
 
     * {
@@ -11,44 +11,31 @@
         text-decoration: none;
         font-family: inter;
         color: inherit;
-
     }
 
     
-    #waste_management i {
+    #dashboard i {
         color: var(--green-color-one);
     }
 
-    #waste_management h3 {
+    #dashboard h3 {
         color: var(--green-color-one);
     }
-
 
     .main-right {
-        display: grid;
-        width: 100%;
-        height: 100%;
-        grid-template-rows: 23% 77%;
         background-color: var(--background-color-right);
-
+        display: grid;
+        grid-template-rows: 9% 91%;
     }
 
     .main-right-top {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .main-right-top-one {
+        background-color: var(--background-color-main);
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-around;
-        border: 10px;
-        width: 100%;
-        box-sizing: border-box;
-        height: 39%;
         box-shadow: var(--box-shadow2);
-        background-color: var(--background-color-main);
+        border: 10px;
         z-index: 1;
     }
 
@@ -89,8 +76,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 35%;
-        margin-right: 2.5%;
+        margin-left: 30%;
     }
 
     .dot {
@@ -166,6 +152,8 @@
 
     .main-right-top-profile {
         display: flex;
+        align-items: center;
+        justify-content: center;
         margin-right: 40px;
     }
 
@@ -204,36 +192,6 @@
         margin-top: 1%;
     }
 
-    .main-right-top-three {
-        display: flex;
-        flex-direction: row;
-        padding-left: 38px;
-        margin: 0.6%;
-        background-color: var(--background-color-right);
-    }
-
-    .main-right-top-three-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-right: 25px;
-        cursor: pointer;
-    }
-
-    .main-right-top-three-content p {
-        font-size: 15px;
-        padding-bottom: 5px;
-        color: var(--main-text-color);
-        letter-spacing: 0.03rem;
-    }
-
-    .line {
-        width: 80px;
-        height: 3px;
-    }
-
-
     .main-right-bottom-down {
         padding-left: 3.5%;
         width: 96.5%;
@@ -251,13 +209,13 @@
     }
 
     .table-header {
-        grid-template-columns: 25% 25% 30% 20% ;
+        grid-template-columns: 15% 30% 30% 25%;
     }
 
     .table-row {
         height: 52px;
         display: grid;
-        grid-template-columns: 25% 25% 30% 20% ;
+        grid-template-columns:  15% 30% 30% 25%;
     }
 
     .table td {
@@ -274,163 +232,12 @@
         cursor: pointer;
     }
 
-    /*Empty table UI*/
-    .main-right-bottom-two {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
+    .collector_img {
+        width: 35px !important;
+        height: 35px !important;
+        border-radius: 50%;
     }
 
-    .main-right-bottom-two-content {
-        width: 55%;
-        height: 95%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-    }
-
-
-    .main-right-bottom-two-content img {
-        width: 450px;
-        height: 450px;
-
-    }
-
-    .main-right-bottom-two-content h1 {
-        font-size: 23px;
-        color: #333;
-        font-weight: 550;
-    }
-
-    .main-right-bottom-two-content p {
-        font-size: 18px;
-        margin-top: 7px;
-        color: #7c7c7d;
-    }
-
-    .main-right-bottom-two-content button {
-        height: 42px;
-        width: 200px;
-        outline: none;
-        color: white;
-        font-size: 19px;
-        font-weight: 500;
-        border-radius: 5px;
-        cursor: pointer;
-        border: none;
-        letter-spacing: 1px;
-        background: #1B6652;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-        margin-bottom: 20px;
-        margin-top: 20px;
-    }
-
-
-    .main-right-bottom-two-content button:hover {
-        background: rgb(28, 79, 64);
-    }
-
-    /*Release garbage details popup*/
-     .release_garbage_details_popup {
-        display: flex;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0);
-        z-index: 4;
-        align-items: center;
-        flex-direction: column;
-        overflow: hidden;
-        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
-        box-shadow: var(--box-shadow);
-        border-radius: 10px;
-        background-color: var(--background-color-main);
-        width: 47%;
-        height: 40%;
-    }
-
-    .release_garbage_details_popup.active {
-        transform: translate(-50%, -50%) scale(1);
-    }
-
-    .release_garbage_details_popup img {
-        width: 20px;
-        height: 20px;
-        margin-left: 95%;
-        margin-top: 1%;
-        cursor: pointer;
-    }
-
-    .release_garbage_details_popup h1 {
-        font-size: 21px;
-        letter-spacing: 0.01rem;
-        margin-top: 10px;
-        margin-bottom: 15px;
-    }
-
-    /* .release_garbage_details_popup h1::before{
-        content: '';
-        position: absolute;
-        margin-top: 26px;
-        margin-bottom: 25px;
-        height: 3px;
-        width: 64px;
-        margin-left: 14%;
-        background: var(--green-color-one);
-
-    } */
-
-    .release_garbage_details_popup h2 {
-        font-size: 14px;
-        margin-top: 5px;
-        font-weight: 500;
-        
-
-    }
-
-    .Eco_Credit_Per_Cont {
-        display: flex;
-    }
-
-    .Eco_Credit_Per_Cont .Cont {
-        display: flex;
-        flex-direction: column;
-        margin: 30px;
-        align-items: center;
-    }
-
-    .Eco_Credit_Per_Cont .Cont h3 {
-        font-size: 15px;
-        margin-bottom: 15px;
-        font-weight: 500;
-    }
-
-    .Eco_Credit_Per_Cont .Cont p {
-        font-size: 14px;
-    }
-
-    .Eco_Credit_Per_Cont .Cont .fas {
-        font-size: 29px;
-        margin-bottom: 15px;
-        color: #7c7c7d;
-     
-
-    }
-
-
-
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.1);
-        z-index: 2;
-        display: none;
-    }
 
 
     @media screen and (max-width: 1178px) {
@@ -454,7 +261,6 @@
         }
     }
 
-   
     @media screen and (max-width: 1118px) {
         .main-right-top-one-content {
             width: 250px;
@@ -469,7 +275,7 @@
         }
 
         .table-header {
-            font-size: 14px;
+            font-size: 14px !important;
         }
 
         .table-row img {
@@ -477,7 +283,6 @@
             height: 20px;
 
         }
-
 
 
     }
@@ -496,13 +301,34 @@
 
         .main-right-top-three-content p {
             font-size: 14px;
-
         }
 
+        .main-right-bottom-top {
+            width: 130%;
+        }
 
-        .line {
-            width: 86px;
-            height: 2px;
+        .main-right-bottom-down {
+            width: 130%;
+        }
+
+    }
+
+    @media screen and (max-width: 762px) {
+        .main-right-top-two button {
+            width: 125px;
+            font-size: 15px;
+        }
+
+        .main-right-top-three-content p {
+            font-size: 14px;
+            padding-bottom: 5px;
+        }
+    }
+
+    @media screen and (max-width: 738px) {
+        .main-right-top-one-content {
+            width: 250px;
+            margin-left: 1%;
 
         }
 
@@ -513,41 +339,40 @@
         }
 
         .table-header {
-            font-size: 12px;
+            font-size: 12px !important;
         }
 
         .table-row img {
-            width: 17px;
-            height: 17px;
+            width: 20px;
+            height: 20px;
 
         }
 
 
     }
 
-    @media screen and (max-width: 692px) {
+    @media screen and (max-width: 612px) {
+        .main-right-top-one-content {
+            width: 250px;
+            margin-left: 1%;
 
+        }
 
         .table td {
 
-            font-size: 9px;
+            font-size: 8.5px;
 
         }
 
         .table-header {
-            font-size: 10px;
+            font-size: 11px !important;
         }
 
         .table-row img {
-            width: 15px;
-            height: 15px;
+            width: 20px;
+            height: 20px;
 
         }
-
-        .main-right-bottom {
-            width: 140%;
-        }
-
 
 
     }

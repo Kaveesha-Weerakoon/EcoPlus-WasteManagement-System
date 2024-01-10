@@ -161,7 +161,7 @@
     }
 
     public function login(){
-      if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id'])  || isset($_SESSION['admin_id'])){
+      if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id'])  || isset($_SESSION['admin_id']) || isset($_SESSION['agent_id']) ){
         if(isset($_SESSION['user_id'])){
           redirect('customers');
         }
@@ -174,6 +174,10 @@
 
         if(isset($_SESSION['admin_id'])){
           redirect('admin');
+        }
+
+        if(isset($_SESSION['agent_id'])){
+          redirect('CreditDiscountsAgent');
         }
       }
       else{
@@ -254,6 +258,10 @@
               else if($loggedInUser->role=="admin"){
                 $this->createAdminSession($loggedInUser);
               }
+
+             else if($loggedInUser->role=="discountagent"){
+                $this->createDiscountAgentSession($loggedInUser);
+              }
               
             } else {
               $data['password_err'] = 'Password incorrect';
@@ -306,6 +314,13 @@
       $_SESSION['admin_email'] = $user->email;
       $_SESSION['admin_name'] = $user->name;
       redirect('admin');
+    }
+
+    public function createDiscountAgentSession($user){
+      $_SESSION['agent_id'] = $user->id;
+      $_SESSION['agent_email'] = $user->email;
+      $_SESSION['agent_name'] = $user->name;
+      redirect('CreditDiscountsAgent');
     }
 
     public function logout(){

@@ -19,7 +19,7 @@
         </div>
         <div class="main-left-middle-content" onclick="redirect_history()" id="Collector_Assistants">
             <div class=" main-left-middle-content-icon">
-                <i class='bx bx-timer'></i>
+                <i class='bx bx-group'></i>
             </div>
             <h3>Collector Assistants</h3>
         </div>

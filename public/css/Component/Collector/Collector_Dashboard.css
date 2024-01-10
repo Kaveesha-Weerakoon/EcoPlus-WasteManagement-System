@@ -325,6 +325,7 @@
         box-sizing: border-box;
     }
 
+
     .main-right-bottom-two {
         display: flex;
         flex-direction: row;
@@ -426,7 +427,7 @@
     }
 
     .main-right-bottom-three-right {
-        width: 100%;
+        width: 50%;
         height: 90%;
         margin: 15px;
         border-radius: 10px;
@@ -443,10 +444,9 @@
     }
 
     .main-right-bottom-three-right-left h1 {
-        font-size: 18px;
-        margin-bottom: 8%;
-        font-size: 18px;
-        margin-top: 5%;
+        margin-bottom: 7.2%;
+        font-size: 17px;
+        margin-top: 5.4%;
     }
 
     .main-right-bottom-three-right-cont {
@@ -458,24 +458,61 @@
 
     .circular-progress {
         position: relative;
-        height: 140px;
-        width: 140px;
+        height: 150px;
+        width: 150px;
         border-radius: 50%;
         background: conic-gradient(var(--green-color-two), 3.6deg, var(--background-color-two) 0deg);
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: 15%;
     }
 
     .circular-progress::before {
         content: "";
         position: absolute;
-        height: 95px;
-        width: 95px;
+        height: 115px;
+        width: 115px;
         border-radius: 50%;
         background-color: var(--background-color-main);
         flex: 2;
+    }
+    .legend-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 7%;
+   }
+
+   .uncompleted{
+        width: 15px;
+        height: 15px;
+        background:var(--background-color-two) ;
+        margin-right: 5px;
+   }
+
+   .completed{
+        width: 15px;
+        height: 15px;
+        background:var(--green-color-two);
+        margin-right: 5px;
+    }
+
+    .legend{
+        display: flex;
+
+    }
+
+    .LL{
+        margin-right: 20px;
+    }
+
+    .LR{
+        margin-left: 20px;
+    }
+
+    .legend span{
+        font-size: 14px;
+        
     }
 
     .progress-value {

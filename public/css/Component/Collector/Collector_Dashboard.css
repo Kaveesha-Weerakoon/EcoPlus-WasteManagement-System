@@ -256,7 +256,7 @@
         border-radius: 10px;
         width: 60%;
         height: 23%;
-        font-size: 15px;
+        font-size: 17px;
         color: var(--background-color-main);
         cursor: pointer;
         letter-spacing: 0.03rem;
@@ -289,6 +289,10 @@
         font-size: 18px;
         color: var(--background-color-two);
 
+    }
+    
+    .main-right-bottom-one-left .right i {
+        font-size: 40px;
     }
 
     .main-right-bottom-one-left .right h3 {
@@ -370,7 +374,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        width: 100%;
+        width: 95%;
         height: 45%;
     }
 
@@ -422,7 +426,7 @@
     }
 
     .main-right-bottom-three-right {
-        width: 50%;
+        width: 200%;
         height: 90%;
         margin: 15px;
         border-radius: 10px;
@@ -590,7 +594,10 @@
 
     }
 
-
+    .Eco_Credit_Per_Cont .Cont .icon {
+        font-size: 29px;
+        margin-bottom: 10px;
+    }
 
     .overlay {
         position: fixed;

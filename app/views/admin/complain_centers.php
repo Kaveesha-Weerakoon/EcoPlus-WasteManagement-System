@@ -87,7 +87,7 @@
                                 <th>Contact No</th>
                                 <th>Subject</th>
                                 <th>Complaint</th>
-                                <th>Delete</th>
+                    
                             </tr>
                         </table>
                     </div>
@@ -103,7 +103,7 @@
                                            <td><?php echo $complaint->contact_no?></td>
                                            <td><?php echo $complaint->subject?></td>
                                            <td><?php echo $complaint->complaint?></td>                                   
-                                           <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
+                                           
                                         </tr>
                                   <?php endforeach; ?>
                         </table>

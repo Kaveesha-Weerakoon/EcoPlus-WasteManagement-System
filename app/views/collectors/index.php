@@ -147,6 +147,16 @@
                                     <div class="circular-progress">
                                         <span class="progress-value">0%</span>
                                     </div>
+                                    <div class="legend-container">
+                                        <div class="legend LL">
+                                            <div class="uncompleted"></div>
+                                            <span>Uncompleted</span>
+                                        </div>
+                                        <div class="legend LR">
+                                            <div class="completed"></div>
+                                            <span>Completed</span>
+                                        </div>   
+                                    </div>
                                    
                                 </div>
                             </div>

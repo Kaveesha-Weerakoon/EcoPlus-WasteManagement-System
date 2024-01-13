@@ -66,12 +66,18 @@
     }
 
     .dot {
-        width: 11px;
-        height: 11px;
+        width: 15.5px;
+        height: 15.5px;
         border-radius: 50%;
         background-color: #F13E3E;
-        margin-top: -14px;
-        margin-left: -12px;
+        margin-top: -11px;
+        margin-left: -15px;
+        color: var(--background-color-main);
+        font-size: 11px;
+        font-weight: 501;
+        box-sizing: border-box;
+        padding-left: 4.6px;
+        padding-top: 1.8px;
     }
 
     .main-right-top-notification i {
@@ -167,6 +173,10 @@
         border-radius: 50%;
         background-color: var(--green-color-one);
         margin-right: 10px;
+    }
+
+    .notification_right p {
+        font-size: 13px;
     }
 
     .main-right-top-profile {

@@ -16,7 +16,7 @@
                     <div class="main-right-top-notification" id="notification">
                         <i class='bx bx-bell'></i>
                         <?php if (!empty($data['notification'])) : ?>
-                        <div class="dot"></div>
+                            <div class="dot"><?php echo count($data['notification'])?></div>
                         <?php endif; ?>
                     </div>
                     <div id="notification_popup" class="notification_popup">
@@ -29,8 +29,8 @@
 
                                 </div>
                                 <div class="notification_right">
+                                    <p><?php echo date('Y-m-d', strtotime($notification->date_time)); ?></p>
                                     <?php echo $notification->notification?>
-
                                 </div>
                             </div>
                             <?php endforeach; ?>
@@ -240,6 +240,7 @@ var checkbox = document.getElementById('toggle-checkbox');
 var notification = document.getElementById("notification");
 var notification_pop = document.getElementById("notification_popup");
 notification_pop.style.height = "0px";
+notification_pop.style.zIndex = 2;
 let circularProgress = document.querySelector(".circular-progress");
 let progressValue = document.querySelector(".progress-value");
 let progressStartValue = -1;

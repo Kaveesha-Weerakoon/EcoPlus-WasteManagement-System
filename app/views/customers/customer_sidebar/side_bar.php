@@ -102,8 +102,7 @@ function setDarkModeStyle(isDarkMode) {
         "0 1px 1px 0px rgba(0, 0, 0, 0.1)");
     root.style.setProperty("--table-header", isDarkMode ? "#001f3f" : "#e9f6ef");
     logo.style.display = isDarkMode ? "none" : "flex";
-    // circularProgress.style.background =
-    //     `conic-gradient(${color}, ${progressStartValue * 3.6}deg, ${isDarkMode ? "#001f3f" : "#ededed"} 0deg)`;
+
 }
 
 function getDarkModeSetting() {

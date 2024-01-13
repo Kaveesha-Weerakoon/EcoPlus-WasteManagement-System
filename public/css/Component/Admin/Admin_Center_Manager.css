@@ -233,15 +233,15 @@
         height: 3px;
     }
 
-
+    /*Delete confirm popup*/
     .delete_confirm {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -257,7 +257,7 @@
         top: 0;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         transition: transform 0.4s, top 0.4s;
     }
 
@@ -305,6 +305,10 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
+    .delete_confirm .deletebtn:hover{
+        background: #c62323;;
+    }
+
     .delete_confirm .cancelbtn {
         width: 150px;
         margin-top: 30px;
@@ -319,14 +323,19 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
+    .delete_confirm .cancelbtn:hover {
+        background: #a7a1a1;
+    }
+
+    /*Success popup*/
     .center_manager_success {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -352,7 +361,7 @@
         border-radius: 6px;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         transition: transform 0.4s, top 0.4s;
     }
 
@@ -379,7 +388,7 @@
         width: 100%;
         margin-top: 30px;
         padding: 10px 0;
-        background: #6fd649;
+        background: var(--green-color-one);
         color: white;
         border: 0;
         outline: none;
@@ -388,6 +397,10 @@
         cursor: pointer;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 
+    }
+
+    .popup button:hover{
+        background: var(--button-hover-green);
     }
 
     @media screen and (max-width: 1178px) {
@@ -416,8 +429,8 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -433,7 +446,7 @@
         position: relative;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         transition: transform 0.4s, top 0.4s;
     }
 
@@ -468,7 +481,7 @@
         width: 42%;
         margin-left: 5px;
         padding: 10px 0;
-        background: rgb(44, 196, 42);
+        background: var(--green-color-one);
         color: white;
         border: 0;
         outline: none;
@@ -477,6 +490,10 @@
         cursor: pointer;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 
+    }
+
+    .updatebtn:hover{
+        background: var(--button-hover-green);
     }
 
     .cancelbtn1 {
@@ -492,6 +509,10 @@
         cursor: pointer;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 
+    }
+
+    .cancelbtn1:hover {
+        background: #a7a1a1;
     }
 
     .updateData {
@@ -516,7 +537,7 @@
     .update-topic-line {
         width: 93px;
         height: 4px;
-        background-color: #1B6652;
+        background-color: var(--green-color-one);
         margin-bottom: 15px;
 
     }
@@ -588,7 +609,7 @@
         border-radius: 6px;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         transition: transform 0.4s, top 0.4s;
     }
 
@@ -615,7 +636,7 @@
         width: 100%;
         margin-top: 30px;
         padding: 10px 0;
-        background: #6fd649;
+        background: var(--green-color-one);
         color: white;
         border: 0;
         outline: none;
@@ -626,13 +647,17 @@
 
     }
 
+    .popup1 button:hover{
+        background: var(--button-hover-green);
+    }
+
     /*personal details popup*/
     .personal-details-popup-box {
         position: fixed;
         top: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -648,7 +673,7 @@
         position: relative;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -774,7 +799,7 @@
         margin-bottom: 15px;
         height: 3px;
         width: 45px;
-        background: #1B6652;
+        background: var(--green-color-one);
 
     }
 

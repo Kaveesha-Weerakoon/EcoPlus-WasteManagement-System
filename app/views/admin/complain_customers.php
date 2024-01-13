@@ -82,11 +82,11 @@
                                 <th>Complaint ID</th>
                                 <th>Customer ID</th>
                                 <th>Date</th>
-                                <th>Contact NO</th>
+                                <th>Contact No</th>
                                 <th>Customer Name</th>
                                 <th>Subject</th>
                                 <th>Complaint</th>
-                                <th>Delete</th>
+                               
                             </tr>
                         </table>
                     </div>
@@ -101,7 +101,7 @@
                                            <td><?php echo $complaint->name?></td>
                                            <td><?php echo $complaint->subject?></td>
                                            <td><?php echo $complaint->complaint?></td>                                   
-                                           <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
+
                                         </tr>
                                   <?php endforeach; ?>
                         </table>

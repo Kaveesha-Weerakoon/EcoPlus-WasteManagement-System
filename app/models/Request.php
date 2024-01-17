@@ -332,4 +332,18 @@
       }
     }
 
+    public function get_completed_requests_count( $region ){
+      try {
+        $this->db->query('SELECT * FROM request_main WHERE region = :region AND type IN ("completed")');  
+        $this->db->bind(':region', $region);
+        $rows = $this->db->resultSet();
+    
+        $request_count = $this->db->rowCount();
+        return $request_count;   
+
+      }catch (PDOException $e) {
+        return false;
+      }
+    }
+
 }

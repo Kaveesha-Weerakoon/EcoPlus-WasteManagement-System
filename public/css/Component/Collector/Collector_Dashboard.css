@@ -256,7 +256,7 @@
         border-radius: 10px;
         width: 60%;
         height: 23%;
-        font-size: 15px;
+        font-size: 17px;
         color: var(--background-color-main);
         cursor: pointer;
         letter-spacing: 0.03rem;
@@ -290,6 +290,10 @@
         color: var(--background-color-two);
 
     }
+    
+    .main-right-bottom-one-left .right i {
+        font-size: 40px;
+    }
 
     .main-right-bottom-one-left .right h3 {
         font-size: 14px;
@@ -320,6 +324,7 @@
         padding-top: 1%;
         box-sizing: border-box;
     }
+
 
     .main-right-bottom-two {
         display: flex;
@@ -375,7 +380,7 @@
     }
 
     .main-right-bottom-three-left {
-        width: 50%;
+        width: 48%;
         height: 90%;
         margin: 15px;
         border-radius: 10px;
@@ -409,13 +414,15 @@
     .main-right-bottom-three-left-cont h3 {
         font-size: 15px;
         width: 250px;
-        margin-left: -14%;
+        margin-left: 1%;
     }
+    
 
     .main-right-bottom-three-left-cont h2 {
         font-size: 18px;
         color: var(--green-color-one);
         width: 175px;
+        margin-right: 16%;
 
     }
 
@@ -437,10 +444,9 @@
     }
 
     .main-right-bottom-three-right-left h1 {
-        font-size: 18px;
-        margin-bottom: 8%;
-        font-size: 18px;
-        margin-top: 5%;
+        margin-bottom: 7.2%;
+        font-size: 17px;
+        margin-top: 5.4%;
     }
 
     .main-right-bottom-three-right-cont {
@@ -452,8 +458,8 @@
 
     .circular-progress {
         position: relative;
-        height: 115px;
-        width: 115px;
+        height: 150px;
+        width: 150px;
         border-radius: 50%;
         background: conic-gradient(var(--green-color-two), 3.6deg, var(--background-color-two) 0deg);
         display: flex;
@@ -464,11 +470,49 @@
     .circular-progress::before {
         content: "";
         position: absolute;
-        height: 80px;
-        width: 80px;
+        height: 115px;
+        width: 115px;
         border-radius: 50%;
         background-color: var(--background-color-main);
         flex: 2;
+    }
+    .legend-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 7%;
+   }
+
+   .uncompleted{
+        width: 15px;
+        height: 15px;
+        background:var(--background-color-two) ;
+        margin-right: 5px;
+   }
+
+   .completed{
+        width: 15px;
+        height: 15px;
+        background:var(--green-color-two);
+        margin-right: 5px;
+    }
+
+    .legend{
+        display: flex;
+
+    }
+
+    .LL{
+        margin-right: 20px;
+    }
+
+    .LR{
+        margin-left: 20px;
+    }
+
+    .legend span{
+        font-size: 14px;
+        
     }
 
     .progress-value {
@@ -482,15 +526,15 @@
         background-color: var(--green-color-one);
         border: none;
         border-radius: 10px;
-        width: 60%;
-        height: 15%;
+        width: 115%;
+        height: 30%;
         font-size: 15px;
         color: var(--background-color-main);
         cursor: pointer;
         letter-spacing: 0.03rem;
         font-weight: bolder;
         transition: background-color 0.6s ease-in;
-        margin-top: 6.1%;
+        margin-top: 16%;
         animation: pulse 2s infinite;
 
     }
@@ -513,6 +557,8 @@
         padding-top: 2%;
         height: 72%;
         border-radius: 10px;
+        margin-right: 5px;
+        margin-left: 10px;
         box-shadow: var(--box-shadow);
     }
 
@@ -587,7 +633,10 @@
 
     }
 
-
+    .Eco_Credit_Per_Cont .Cont .icon {
+        font-size: 29px;
+        margin-bottom: 10px;
+    }
 
     .overlay {
         position: fixed;

@@ -57,16 +57,16 @@
                         <div class="main-right-bottom-one-left">
                             <div class="left">
                                 <h1>Assigned Requests</h1>
-                                <h3><?php echo $data['assinged_Requests_count']?></h3>
-                                <p>Last Update</p>
-                                <button onclick="redirectToAssignedRequests()">view </button>
+                                <h3 style="font-weight:bold" id="assign_count"></h3>
+                                <p>request</p>
+                                <button onclick="redirectToAssignedRequests()">View </button>
 
                             </div>
 
                             <div class="right">
-                                <div class="icon_container">
-                                    <i class='bx bxs-bank' style='font-size: 50px;'></i>
-                                </div>
+                                
+                                <i class='bx bx-building-house'></i>
+                               
                                 <h1><?php echo $data['collector']->center_name?></h1>
                                 <h5>Center ID: CEN <?php echo $data['collector']->center_id?> </h5>
                             </div>
@@ -91,13 +91,13 @@
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_complains()">
                             <div class="icon_container">
-                                <i class='bx bxs-bank'></i>
+                                <i class='bx bx-error-circle'></i>
                             </div>
                             <h3>Complaints</h3>
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_complains_history()">
                             <div class="icon_container">
-                                <i class='bx bx-donate-heart'></i>
+                                <i class='bx bx-archive'></i>
                             </div>
                             <h3>Complaints History</h3>
                         </div>
@@ -130,6 +130,9 @@
                                 <h3>
                                     C <?php echo $completion->customer_id; ?>
                                 </h3>
+                                <h3>
+                                    R <?php echo $completion->req_id; ?>
+                                </h3>
                                 <h2>
                                     Eco <?php echo $completion->credit_amount;?>
                                 </h2>
@@ -144,13 +147,24 @@
                                     <div class="circular-progress">
                                         <span class="progress-value">0%</span>
                                     </div>
-                                    <button>Completed Requests</button>
+                                    <div class="legend-container">
+                                        <div class="legend LL">
+                                            <div class="uncompleted"></div>
+                                            <span>Uncompleted</span>
+                                        </div>
+                                        <div class="legend LR">
+                                            <div class="completed"></div>
+                                            <span>Completed</span>
+                                        </div>   
+                                    </div>
+                                   
                                 </div>
                             </div>
                             <div class="main-right-bottom-three-right-right">
                                 <h1>Assigned Requests</h1>
-                                <div class="map" id="map"></div>
-
+                                <div class="map" id="map">
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -163,33 +177,33 @@
                 <div class="Eco_Credit_Per_Cont">
                     <div class="Cont">
                         <h3>Plastic</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-box"></i>
                         <p><?php echo $data['eco_credit_per']->plastic?></p>
                     </div>
                     <div class="Cont">
                         <h3>Polythene</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-trash"></i>
                         <p><?php echo $data['eco_credit_per']->polythene?></p>
                     </div>
                     <div class="Cont">
                         <h3>Metal</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-box"></i>
                         <p><?php echo $data['eco_credit_per']->metal?></p>
                     </div>
                     <div class="Cont">
                         <h3> Glass</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-glass-whiskey"></i>
                         <p><?php echo $data['eco_credit_per']->glass?></p>
                     </div>
 
                     <div class="Cont">
                         <h3>Paper</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-file-alt"></i>
                         <p><?php echo $data['eco_credit_per']->paper?></p>
                     </div>
                     <div class="Cont">
                         <h3>Electronic</h3>
-                        <i class='bx bx-purchase-tag'></i>
+                        <i class="icon fas fa-laptop"></i>
                         <p><?php echo $data['eco_credit_per']->electronic?></p>
                     </div>
                 </div>
@@ -245,7 +259,18 @@
             var linkUrl = "<?php echo URLROOT?>/collectors/complains_history";
             window.location.href = linkUrl;
         }
+        const assign_count = <?php echo $data['assinged_Requests_count']?>;
+        const assignCountElement = document.getElementById('assign_count');
 
+        function updateCount(currentValue) {
+            assignCountElement.textContent = currentValue;
+        }
+
+        for (let i = 0; i <= assign_count; i++) {
+            setTimeout(() => {
+                updateCount(i);
+            }, i * 200); // Change 1000 to control the speed of counting (milliseconds)
+        }
         notification.addEventListener("click", function() {
             var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
 
@@ -354,13 +379,15 @@
 
 
         function initMap() {
-            var center = {
-                lat: 7.7,
-                lng: 80.7718
+            var defaultLatLng = {
+            lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
+            lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
             };
             var map = new google.maps.Map(document.getElementById('map'), {
-                center: center,
-                zoom: 5.8,
+                center: defaultLatLng,
+                zoom: 11,
+
+
                 styles: [{
                         featureType: 'all',
                         elementType: 'labels.text',

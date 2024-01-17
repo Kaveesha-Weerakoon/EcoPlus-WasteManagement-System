@@ -33,7 +33,7 @@
         $percentage_completed = json_encode(($completed_requests / $total_requests) * 100);
          } else {
           $percentage_completed =json_encode(0);
-     }    
+      }    
 
       $jsonData = json_encode($centers);
       $json_Total_Garbage = json_encode($total_garbage);
@@ -687,14 +687,6 @@
       }
     }
 
-    public function credit_per_waste(){
-       $credit= $this->creditModel->get();
-      $data = [
-        'eco_credit_per'=>$credit
-      ];
-      $this->view('customers/credits_per_waste', $data);
-    }
-
     public function logout(){
       unset($_SESSION['user_id']);
       unset($_SESSION['user_email']);
@@ -890,11 +882,11 @@
     }
 
     public function deleteaccount(){
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $this->User_Model->deleteuser($_SESSION['user_id']);
       $this->logout();
-    }
-    else{
+     }
+     else{
       $data = [
         'name'=>'',
         'userid'=>'',
@@ -930,8 +922,21 @@
       $data['city']=$user->city;
      
       $this->view('customers/edit_profile', $data);
+     }
     }
-   }
+
+    public function view_notification($url){
+      
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+       
+        $Notifications1 = $this->customerModel->view_Notification($_SESSION['user_id']);
+        $Notifications2 = $this->customerModel->get_Notification($_SESSION['user_id']);
+        $data['notification']=  $Notifications2 ;
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $this->$url();
+
+     }
+    }
 
 }
   ?>

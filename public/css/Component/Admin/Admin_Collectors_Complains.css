@@ -201,7 +201,7 @@
     .main-right-top-three {
         display: flex;
         flex-direction: row;
-        padding-left: 34px;
+        padding-left: 38px;
         margin: 0.6%;
         background-color: var(--background-color-right);
     }
@@ -211,7 +211,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-right: 15px;
+        margin-right: 18px;
         cursor: pointer;
     }
 
@@ -244,13 +244,13 @@
     }
 
     .table-header {
-        grid-template-columns: 9% 10% 11% 10% 14% 12% 15% 9% 9%;
+        grid-template-columns: 11% 11% 11% 11% 11% 11% 14% 20%;
     }
 
     .table-row {
         height: 52px;
         display: grid;
-        grid-template-columns:  9% 10% 11% 10% 14% 12% 15% 9% 9%;
+        grid-template-columns: 11% 11% 11% 11% 11% 11% 14% 20%;
     }
 
     .table td {

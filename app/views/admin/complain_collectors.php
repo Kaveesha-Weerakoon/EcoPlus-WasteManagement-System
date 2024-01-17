@@ -88,7 +88,7 @@
                                 <th>Collector Name</th>
                                 <th>Subject</th>
                                 <th>Complaint</th>
-                                <th>Delete</th>
+                               
                             </tr>
                         </table>
                     </div>
@@ -103,8 +103,8 @@
                                            <td><?php echo $complaint->contact_no?></td>
                                            <td><?php echo $complaint->name?></td>
                                            <td><?php echo $complaint->subject?></td>
-                                           <td class="cancel-open"><img src="<?php echo IMGROOT?>/view.png" alt=""></td>             
-                                           <td class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
+                                           <td><?php echo $complaint->complaint?></td>             
+                                           
                                         </tr>
                                   <?php endforeach; ?>
                         </table>

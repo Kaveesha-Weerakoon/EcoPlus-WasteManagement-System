@@ -123,7 +123,7 @@
                         <div class="popup" id="popup">
                             <img src="<?php echo IMGROOT?>/check.png" alt="">
                             <h2>Success!!</h2>
-                            <p>collector Assistant has been registered successfully</p>
+                            <p>Collector Assistant has been registered successfully</p>
                             <a href="<?php echo URLROOT?>/collectors/collector_assistants"><button
                                     type="button">OK</button></a>
                         </div>

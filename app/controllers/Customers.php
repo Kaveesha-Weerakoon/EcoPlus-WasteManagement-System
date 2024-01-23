@@ -14,6 +14,7 @@
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
       $this->Center_Model=$this->model('Center');
       $this->User_Model=$this->model('User');
+      $this->centermanagerModel=$this->model('Center_Manager');
 
       if(!isLoggedIn('user_id')){
         redirect('users/login');
@@ -541,9 +542,11 @@
     }
 
     public function request_collect(){
+      
       $id=$_SESSION['user_id']; 
       $user=$this->customerModel->get_customer($id);
-      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $Notifications = $this->customerModel->get_Notification($user->city);
+      $marked_holidays = $this->centermanagerModel->get_marked_holidays($center->region);
 
       $data['contact_no']=$user->mobile_number;
       $data['name'] =$_SESSION['user_name'];
@@ -562,6 +565,7 @@
         $data['longitude'] =trim($_POST['longitude']);
         $data['location_success'] =trim($_POST['location_success']);
         $data['region']=$user->city;
+        
 
         if (empty($data['name'])) {
            $data['name_err'] = 'Name is required';

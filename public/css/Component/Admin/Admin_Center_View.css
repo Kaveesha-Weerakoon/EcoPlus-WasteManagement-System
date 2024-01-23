@@ -62,92 +62,37 @@
         cursor: pointer;
     }
 
-    /* .main-right-bottom-top {
-        width: 99%;
-        padding-left: 1%;
-
-    }
-
-    .table {
-        padding-left: 1%;
-        width: 99%;
-        border-collapse: collapse;
-        text-align: center;
-        padding-left: 1%;
-    }
-
-    .table-header th {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .table-header {
-        background-color: #ecf0f1;
-        font-size: 17px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 55px;
-        display: grid;
-        grid-template-columns: 10% 12% 12% 12% 22% 12% 10% 10%;
-    }
-
-    .table-row {
-        font-size: 1px;
-        font-family: Montserrat;
-        text-align: center;
-        height: 52px;
-        display: grid;
-        grid-template-columns: 10% 12% 12% 12% 22% 12% 10% 10%;
-        border-bottom: 2px solid #CACACA;
-    }
-
-    .table td {
-        height: 50px;
-        font-size: 16px;
-        vertical-align: middle;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow-y: scroll;
-    }
-
-    td img {
-        margin: 6px;
-    }
-
-    .table-row img {
-        width: 25px;
-        height: 25px;
-        cursor: pointer;
-    } */
-
+    
 
     /*Location Pop*/
     .location_pop {
-        display: none;
+        display: flex;
         position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
-        display: none;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background-color: rgba(0, 0, 0, 0);
+        z-index: 4;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 100%;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+    }
+
+    .location_pop.active {
+        transform: translate(-50%, -50%) scale(1);
     }
 
     .location_pop_content {
-        width: 70%;
-        height: 78%;
+        width: 700px;
         padding: 10px;
         background-color: #f1f2f6;
         border-radius: 10px;
         padding: 20px;
         padding-bottom: 40px;
+        height: 350px;
+        overflow: hidden;
     }
 
     .location_pop_map {
@@ -165,13 +110,24 @@
 
     .location_close button {
         background-color: #ff4757;
-        height: 28px;
         color: #fff;
         cursor: pointer;
         border: none;
         font-size: 16px;
         border-radius: 5px;
         width: 85px;
+        height: 28px;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        display: none;
     }
 
     /* ------ */
@@ -259,65 +215,95 @@
 
     /*Center delete popup*/
     .center_delete {
-        background-color: rgba(0, 0, 0, 0.5);
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 1;
+        width: 100%;
+        height: 100%;
+
     }
 
     .popup {
+        width: 400px;
+        background: white;
+        border-radius: 6px;
+        top: 0;
         text-align: center;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        max-width: 400px;
+        padding: 0 30px 30px;
+        transition: transform 0.4s, top 0.4s;
+    }
+
+    .popup a {
+        width: auto;
+    }
+
+    .open-popup {
+        visibility: visible;
+        top: 50%;
     }
 
     .popup img {
-        max-width: 50%;
-        height: auto;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        width: 100px;
+        margin-top: 35px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .popup p {
-        margin-top: 10px;
+    .popup h2 {
+        font-size: 23px;
+        font-weight: 600;
+        margin: 10px 0 10px;
     }
 
     .btns {
         display: flex;
+        flex-direction: row;
+        align-items: center;
         justify-content: center;
-        margin-top: 15px;
-        width: 100%;
     }
 
-    .btns a {
-        text-decoration: none;
-    }
-
-    .btns button {
-        padding: 10px 20px;
-        margin: 0 10px;
+    .deletebtn {
+        width: 150px;
+        margin-top: 30px;
+        margin-right: 20px;
+        padding: 10px 0;
+        background: rgb(220, 39, 39);
+        color: white;
+        border: 0;
+        outline: none;
+        font-size: 18px;
+        border-radius: 4px;
         cursor: pointer;
-        background-color: #e74c3c;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .btns button:hover {
-        background-color: #c0392b;
+    .deletebtn:hover{
+        background: #c62323;
     }
 
     .cancelbtn {
-        background-color: #b2bec3 !important;
+        width: 150px;
+        margin-top: 30px;
+        padding: 10px 0;
+        background: #bab3b3;
+        color: white;
+        border: 0;
+        outline: none;
+        font-size: 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
+
+    .cancelbtn:hover{
+        background: #a7a1a1 ;
+    }
+
 }

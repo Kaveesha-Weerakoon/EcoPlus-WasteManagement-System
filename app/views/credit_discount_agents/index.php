@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Creit_Discount_Agent_Main">
+<div class="Agent_Main">
     <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
         async defer>
     </script>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="main-right-bottom">
+                <!--<div class="main-right-bottom">
                     <div class="main-right-bottom-one">
                         <div class="main-right-bottom-one-left">
                             <div class="left">
@@ -62,7 +62,7 @@
                         </div>
                         <div class="main-right-bottom-one-right">
 
-                            <!-- <canvas id="myChart" width="688" height="300"></canvas> -->
+                             <canvas id="myChart" width="688" height="300"></canvas>
                         </div>
                     </div>
                     <div class="main-right-bottom-two">
@@ -117,7 +117,7 @@
                                 <h3>Samantha</h3>
                                 <h2 style="color: #F13E3E;">-$ 12.21</h2>
                             </div>
-                            <!-- <div class="map" id="map"></div> -->
+                            <div class="map" id="map"></div>
                         </div>
                         <div class="main-right-bottom-three-right">
                             <div class="main-right-bottom-three-right-left">
@@ -134,11 +134,11 @@
                         </div>
 
                     </div>
-                </div>
+                </div> -->
             </div>
 
 
-            <div class="pop-eco_credits" id="pop-eco_credits">
+            <!--<div class="pop-eco_credits" id="pop-eco_credits">
                 <form class="Eco_Credits-main" method="post" action="<?php echo URLROOT;?>/admin/pop_eco_credit">
                     <div class="Eco_Credits-main-top">
                         <h1> Eco Credits Per Kilogram</h1>
@@ -195,10 +195,8 @@
                 </div>
 
             </div>
-            <div class="overlay" id="overlay">
+            <div class="overlay" id="overlay">-->
 
-            </div>
         </div>
-        <!-- <script src="Admin_Dashboard.js"></script> -->
     </div>
 </div>

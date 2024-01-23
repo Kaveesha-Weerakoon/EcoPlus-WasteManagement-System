@@ -88,7 +88,7 @@
 @import url('Component/CenterManager/CenterManager_Stock_Releases.css');
 
 /* Agent CSS */
-@import url('Component/Agent/Agent_Dashboard.css');
+@import url('Component/Agent/Agent_Dashboard.css'); 
 @import url('Component/Agent/Agent_Sidebar.css');
 @import url('Component/Agent/Agent_Main.css');
 

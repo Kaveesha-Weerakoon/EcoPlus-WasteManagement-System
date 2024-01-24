@@ -56,11 +56,143 @@
                     method="post">
 
                     <div class="main-bottom-component">
-                        <!-- <div class="main-bottom-component-left">
-                            <img src="<?php echo IMGROOT?>/request_collect1.jpg" alt="">
-                            <i class='bx bx-task' style="font-size:300px"></i>
-                        </div> -->
-                        <div class="main-bottom-component-right">
+                        <div class="Topic">
+                            <h2>Request a Collect</h2>
+                            <div class="line"></div>
+                        </div>
+                        <div class="Content">
+                            <div class="Content-Content">
+                                <h2>Name</h2>
+                                <input value="<?php echo $data['name']?>" name="name" type="text" placeholder="Name">
+                                <div class="err"><?php echo $data['name_err']?></div>
+                            </div>
+                            <div class="Content-Content">
+                                <h2>Contact Number</h2>
+                                <input value="<?php echo $data['contact_no']?>" name="contact_no" type="text"
+                                    placeholder="Contact Number">
+                                <div class="err"><?php echo $data['contact_no_err']?></div>
+                            </div>
+                        </div>
+                        <div class="Content">
+                            <div class="Content-Content">
+                                <input type="hidden" value="<?php echo $data['region_success']?>" name="region_success">
+                                <div class="main-bottom-component-right-component">
+                                    <h2>Date</h2>
+                                    <input value="<?php echo $data['date']?>" name="date" type="date">
+                                    <div class="err"><?php echo $data['date_err']?></div>
+                                </div>
+                            </div>
+                            <div class="Content-Content">
+                                <h2>Time Slot</h2>
+                                <select class="Time" name="time">
+                                    <option value="8 am - 10 am"
+                                        <?php echo ($data['time'] === '8 am -10 am') ? 'selected' : ''; ?>>8 am -10
+                                        am
+                                    </option>
+                                    <option value="10 am - 12 noon"
+                                        <?php echo ($data['time'] === '10 am - 12 noon') ? 'selected' : ''; ?>>10 am
+                                        -
+                                        12
+                                        noon
+                                    </option>
+                                    <option value="12 noon -2 pm"
+                                        <?php echo ($data['time'] === '12 noon -2 pm') ? 'selected' : '12 noon -2 pm'; ?>>
+                                        12
+                                        noon - 2 pm
+
+                                    </option>
+                                    <option value="2 pm - 4 pm"
+                                        <?php echo ($data['time'] === '2 pm - 4 pm') ? 'selected' : ''; ?>>2 pm - 4
+                                        pm
+
+                                    </option>
+                                </select>
+                                <div class="err"><?php echo $data['time_err']?></div>
+                            </div>
+                        </div>
+                        <div class="Content">
+                            <div class="Content-Content">
+                                <h2>Your Region</h2>
+                                <input value="<?php echo $data['region']?>" type="text" readonly>
+                            </div>
+                            <div class="Content-Content">
+                                <h2>Pick Up Instructions</h2>
+                                <input value="<?php echo $data['instructions']?>" name="instructions" type="Text"
+                                    placeholder="Pick Up Instructions">
+                                <div class="err"><?php echo $data['instructions_err']?></div>
+                            </div>
+                        </div>
+                        <div class="Content X">
+                            <h2>Location</h2>
+                            <input type="hidden" id="location_success" value="<?php echo $data['location_success']?>"
+                                name="location_success">
+                            <?php if ($data['region_success'] == 'True')  ?>
+                            <div class="main-bottom-maps" onclick="initMap()">
+                                <h4>Maps</h4>
+                                <img src="<?php echo IMGROOT; ?>/location2.png" alt="">
+                            </div>
+
+                            <?php if ($data['location_success'] == 'Success') : ?>
+                            <div class="main-bottom-map-success">
+                                <img src="<?php echo IMGROOT; ?>/check.png" alt="">
+                                <p>Location Fetched Successfully</p>
+
+                            </div>
+                            <?php endif; ?>
+
+                            <?php if ($data['location_err'] == 'Location Error') : ?>
+                            <div class="main-bottom-map-success">
+                                <img src="<?php echo IMGROOT; ?>/warning.png" alt="">
+                                <p>Pick up location Required</p>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="Waste_Amounts">
+                            <div class="Cont">
+                                <h3>Plastic</h3>
+                                <i class="icon fas fa-box"></i>
+                                <p>1 Kg</p>
+                            </div>
+                            <div class="Cont">
+                                <h3>Polythene</h3>
+                                <i class="icon fas fa-trash"></i>
+                                <p>1 Kg</p>
+                            </div>
+                            <div class="Cont">
+                                <h3>Metal</h3>
+                                <i class="icon fas fa-box"></i>
+                                <p>1 Kg</p>
+                            </div>
+                            <div class="Cont">
+                                <h3> Glass</h3>
+                                <i class="icon fas fa-glass-whiskey"></i>
+                                <p>1 Kg</p>
+                            </div>
+
+                            <div class="Cont">
+                                <h3>Paper</h3>
+                                <i class="icon fas fa-file-alt"></i>
+                                <p>1 Kg</p>
+                            </div>
+                            <div class="Cont">
+                                <h3>Electronic</h3>
+                                <i class="icon fas fa-laptop"></i>
+                                <p>1 Kg</p>
+                            </div>
+                        </div>
+                        <div class="Warning_Message">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            Please have at least one of the above unit
+                            of waste for the collection.otherwise,<br>
+                            your request
+                            will be
+                            cancelled with a 50 Eco fine
+                        </div>
+                        <div class="Submit-botton">
+                            <Button type="submit">Request Now</Button>
+                        </div>
+
+                        <!-- <div class="main-bottom-component_Main">
                             <div class="main-bottom-component-right-component-topic">
                                 <h2>Request a Collect</h2>
                                 <div class="line"></div>
@@ -118,7 +250,6 @@
                             <div class="main-bottom-component-right-component Y">
                                 <h2>Your Region</h2>
                                 <input value="<?php echo $data['region']?>" type="text" readonly>
-
                             </div>
                             <div class="main-bottom-component-right-component Y">
                                 <h2>Pick Up Instructions</h2>
@@ -154,12 +285,17 @@
 
 
                             </div>
+                            <div class="Waste-type-description">
+                                a
+                            </div>
                             <div class="main-bottom-component-right-component-button">
                                 <Button type="submit">Request Now</Button>
                             </div>
 
-                        </div>
+                        </div> -->
                     </div>
+
+
 
                     <div class="map_pop" id="mapPopup">
                         <div id="map"></div>

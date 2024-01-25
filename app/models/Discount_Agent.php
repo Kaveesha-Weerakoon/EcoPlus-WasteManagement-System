@@ -44,13 +44,13 @@
        }
     }
 
-    public function get_center_managers(){
+    public function get_discount_agent(){
       $this->db->query('SELECT *,
-              center_managers.id as cmID,
+              discount_agents.id as cmID,
               users.id as userId
-              FROM center_managers
+              FROM discount_agents
               INNER JOIN users
-              ON center_managers.user_id = users.id');
+              ON discount_agents.user_id = users.id');
       $results = $this->db->resultSet();
       return $results;
     }

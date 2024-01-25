@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Admin_Main">
-    <div class="Admin_Center_Manager">
-        <div class="Admin_Center_Manger_View">
+    <div class="Admin_Discount_Agent">
+        <div class="Admin_Discount_Agent_View">
         <div class="main">
                 <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
 
@@ -48,13 +48,13 @@
                             <h1>Center Managers</h1>
                         </div>
                         <div class="main-right-top-three">
-                            <a href="<?php echo URLROOT?>/admin/center_managers">
+                            <a href="<?php echo URLROOT?>/admin/discount_agent">
                                 <div class="main-right-top-three-content">
                                     <p><b style="color:#1ca557;">View</b></p>
                                     <div class="line" style="background-color: #1ca557;"></div>
                                 </div>
                             </a>
-                            <a href="<?php echo URLROOT?>/admin/center_managers_add">
+                            <a href="<?php echo URLROOT?>/admin/discount_agent_add">
                                 <div class="main-right-top-three-content">
                                     <p>Register</p>
                                     <div class="line"></div>
@@ -83,17 +83,17 @@
                         </div>
                         <div class="main-right-bottom-down">
                             <table class="table">
-                                <?php foreach($data['center_managers'] as $center_manager) : ?>
+                                <?php foreach($data['discount_agent'] as $discount_agent) : ?>
                                         <tr class="table-row">
-                                            <td>CM <?php echo $center_manager->user_id?></td>
-                                            <td><img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $center_manager->image?>" alt="" class="manager_img"></td>
-                                            <td><?php echo $center_manager->name?></td>
-                                            <td><?php echo $center_manager->email?></td>
-                                            <td> <?php echo $center_manager->assinged?></td>
-                                            <td> <?php echo $center_manager->assigned_center_id?></td>
+                                            <td>CM <?php echo $discount_agent->user_id?></td>
+                                            <td><img src="<?php echo IMGROOT?>/img_upload/discount_agent/<?php echo $discount_agent->image?>" alt="" class="manager_img"></td>
+                                            <td><?php echo $discount_agent->name?></td>
+                                            <td><?php echo $discount_agent->email?></td>
+                                            <!--<td> <?php echo $discount_agent->assinged?></td>
+                                            <td> <?php echo $discount_agent->assigned_center_id?></td>
                                             <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/cm_personal_details_view/<?php echo $center_manager->user_id ?>"><img src="<?php echo IMGROOT?>/personal_details_icon.png" alt=""></a></td>
                                             <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_update/<?php echo $center_manager->user_id ?>"><img src="<?php echo IMGROOT?>/update.png" alt=""></a></td>
-                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_delete_confirm/<?php echo $center_manager->user_id?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
+                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_delete_confirm/<?php echo $center_manager->user_id?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>-->
                                     </tr>
                                 <?php endforeach; ?>
                             </table>
@@ -106,7 +106,7 @@
             </div>
         </div> 
 
-        <?php if($data['confirm_delete']=='True') : ?>
+       <!-- <?php if($data['confirm_delete']=='True') : ?>
         <div class="delete_confirm">
                 <div class="popup" id="popup">
                     <img src="<?php echo IMGROOT?>/trash.png" alt="">
@@ -244,7 +244,7 @@
 
                     </div>
             
-                <?php endif; ?>
+                <?php endif; ?>-->
     </div>
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

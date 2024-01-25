@@ -15,6 +15,8 @@
       $this->center_workers_model=$this->model('Center_Worker');
       $this->requests_model=$this->model('Request');
       $this->center_complaints_model=$this->model('Center_Complaints');
+      $this->discount_agentModel=$this->model('Discount_Agent');
+      
      
 
       if(!isLoggedIn('admin_id')){
@@ -525,7 +527,7 @@
 
   }
 
-  public function discount_agent(){
+  public function discount_agents(){
 
     $discount_agent = $this->discount_agentModel->get_discount_agent();
     $data = [
@@ -543,7 +545,7 @@
   }
 
 
-  
+
 
     public function customers(){
       

@@ -382,21 +382,6 @@
 
 
     /*personal details popup*/
-    /* .personal-details-popup-box {
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.1);
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        display: none;
-       
-    } */
-
     .personal-details-popup-box {
         display: flex;
         position: fixed;

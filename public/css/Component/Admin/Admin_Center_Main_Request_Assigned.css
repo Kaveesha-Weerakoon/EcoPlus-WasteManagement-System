@@ -250,7 +250,7 @@
         position: relative;
         text-align: center;
         padding: 20px;
-        color: #333;
+        color: var(--main-text-color);
         display: flex;
         align-items: center;
         justify-content: center;

@@ -23,6 +23,12 @@
             </div>
             <h3>History</h3>
         </div>
+        <div class="main-left-middle-content" onclick="redirect_complains()" id="history">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bx-message-error'></i>
+            </div>
+            <h3>Complaints</h3>
+        </div>
         <div class="main-left-middle-content" onclick="redirect_edit_profile()" id="edit_profile">
             <div class="main-left-middle-content-icon">
                 <i class='bx bx-user-pin'></i>
@@ -80,6 +86,12 @@ function redirect_edit_profile() {
     var linkUrl = "<?php echo URLROOT?>/customers/editprofile"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
+
+function redirect_complains() {
+    var linkUrl = "<?php echo URLROOT?>/customers/complains";
+    window.location.href = linkUrl;
+}
+
 var checkbox = document.getElementById('toggle-checkbox');
 
 function setDarkModeStyle(isDarkMode) {

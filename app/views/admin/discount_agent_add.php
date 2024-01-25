@@ -47,7 +47,7 @@
                             <h1>Credit Discount Agent</h1>
                         </div>
                         <div class="main-right-top-three">
-                            <a href="<?php echo URLROOT?>/admin/discount_agent">
+                            <a href="<?php echo URLROOT?>/admin/discount_agents">
                                 <div class="main-right-top-three-content">
                                     <p>View</p>
                                     <div class="line"></div>
@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="main-bottom-down">         
-                            <form class="main-bottom-down-content" action="<?php echo URLROOT;?>/admin/center_managers_add" method="post" enctype="multipart/form-data">
+                            <form class="main-bottom-down-content" action="<?php echo URLROOT;?>/admin/discount_agent_add" method="post" enctype="multipart/form-data">
                             <div class="main-bottom-down-content-top">
                                 <div class="main-bottom-down-content-top-content">
                                         <h3>Registration Form</h3>

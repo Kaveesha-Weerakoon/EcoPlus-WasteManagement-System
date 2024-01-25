@@ -541,7 +541,7 @@
       'personal_details_click'=>''
     ];
    
-    $this->view('admin/discount_agent', $data);
+    $this->view('admin/discount_agents', $data);
   }
 
 

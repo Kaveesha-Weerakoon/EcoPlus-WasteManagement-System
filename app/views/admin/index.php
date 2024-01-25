@@ -81,7 +81,7 @@
 
                             <h3>Collectors</h3>
                         </div>
-                        <div class="main-right-bottom-two-cont A" onclick="redirect_discountAgent()">
+                        <div class="main-right-bottom-two-cont A" onclick="redirect_discountAgents()">
                             <div class="icon_container">
                                 <i class='bx bx-group'></i>
                             </div>
@@ -220,7 +220,7 @@ function redirect_centermanagers() {
     window.location.href = linkUrl;
 }
 
-function redirect_discountAgent() {
+function redirect_discountAgents() {
     var linkUrl = "<?php echo URLROOT?>/admin/discount_agents"; // Replace with your desired URL
     window.location.href = linkUrl1
 }

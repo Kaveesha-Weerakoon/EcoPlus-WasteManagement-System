@@ -222,7 +222,9 @@ function redirect_centermanagers() {
 
 function redirect_discountAgents() {
     var linkUrl = "<?php echo URLROOT?>/admin/discount_agents"; // Replace with your desired URL
-    window.location.href = linkUrl1
+   
+    window.location.href = linkUrl;
+  
 }
 
 function redirect_credits_per() {

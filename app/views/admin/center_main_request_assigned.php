@@ -130,7 +130,7 @@
                         </div>
                     </div>
                 
-                    <div class="location_pop">
+                    <div class="location_pop" id="location_pop">
                         <div class="location_pop_content">
                             <div class="location_pop_map">
                             
@@ -143,6 +143,8 @@
 
                 </div>
             </div>
+
+            <div class="overlay" id="overlay"></div>
 
             <div class="request-details-pop" id="request-details-popup-box">
                 <div class="request-details-pop-form">
@@ -193,18 +195,34 @@
     });
     }
 
-    function viewLocation($lattitude,$longitude){
-        initMap($lattitude,$longitude);
-        document.querySelector('.location_pop').style.display = 'flex';
-    }  
+    // function viewLocation($lattitude,$longitude){
+    //     initMap($lattitude,$longitude);
+    //     document.querySelector('.location_pop').style.display = 'flex';
+    // }  
      
-    function closemap(){
-        document.querySelector('.location_pop').style.display = 'none';
+    // function closemap(){
+    //     document.querySelector('.location_pop').style.display = 'none';
+    // }
+
+    function viewLocation($lattitude, $longitude) {
+        initMap($lattitude, $longitude);
+        var locationPop = document.getElementById('location_pop');
+        locationPop.classList.add('active');
+        document.getElementById('overlay').style.display = "flex";
+    }
+
+    function closemap() {
+        var locationPop = document.getElementById('location_pop');
+        locationPop.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
     }
 
     function view_request_details(request) {
+        var personalPop = document.getElementById('request-details-popup-box');
+        personalPop.classList.add('active');
+        document.getElementById('overlay').style.display = "flex";
 
-        document.getElementById('request-details-popup-box').style.display = "flex";
+        //document.getElementById('request-details-popup-box').style.display = "flex";
         document.getElementById('req_id3').innerText = request.req_id;
         document.getElementById('req_id2').innerText = request.customer_id;
         document.getElementById('req_name').innerText = request.customer_name;
@@ -219,7 +237,10 @@
         const close_request_details = document.getElementById("request-details-pop-form-close");
 
         close_request_details.addEventListener("click", function() {
-        document.getElementById('request-details-popup-box').style.display = "none";
+            //document.getElementById('request-details-popup-box').style.display = "none";
+            const request_details = document.getElementById("request-details-popup-box");
+            request_details.classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
         });
 
     });

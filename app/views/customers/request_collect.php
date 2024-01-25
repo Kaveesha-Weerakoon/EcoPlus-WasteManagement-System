@@ -449,6 +449,7 @@
         }
     });
     </script>
+    <script src="<?php echo JSROOT?>/Customer.js"> </script>
 
 </div>
 

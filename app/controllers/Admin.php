@@ -178,6 +178,23 @@
       $this->view('admin/center_managers', $data);
     }
 
+    public function discount_agent(){
+
+      $discount_agent = $this->discount_agentModel->get_discount_agent();
+      $data = [
+        'discount_agent' => $discount_agent,
+        'confirm_delete' =>'',
+        'assigned'=>'',
+        'success'=>'',
+        'click_update' =>'',
+        'update_success'=>'',
+        'confirm_delete'=> '',
+        'personal_details_click'=>''
+      ];
+     
+      $this->view('admin/discount_agent', $data);
+    }
+
     public function center_managers_delete_confirm($id){
       $center_managers = $this->center_managerModel->get_center_managers();
       $centermanger = $this->center_managerModel->getCenterManagerByID($id);

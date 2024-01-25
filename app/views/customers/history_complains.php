@@ -41,7 +41,8 @@
                                     <?php endforeach; ?>
 
                                 </div>
-                                <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/customers/">
+                                <form class="mark_as_read" method="post"
+                                    action="<?php echo URLROOT;?>/customers/view_notification/history_complains">
                                     <i class="fa-solid fa-check"> </i>
                                     <button type="submit">Mark all as read</button>
                                 </form>
@@ -164,7 +165,7 @@
             var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
             if (notification_pop.style.height === "0px") {
                 if (notificationArraySize >= 3) {
-                    notification_pop.style.height = "200px";
+                    notification_pop.style.height = "198px";
                 }
                 if (notificationArraySize == 2) {
                     notification_pop.style.height = "150px";
@@ -183,4 +184,6 @@
         }
     });
     </script>
+    <script src="<?php echo JSROOT?>/Customer.js"> </script>
+
     <?php require APPROOT . '/views/inc/footer.php'; ?>

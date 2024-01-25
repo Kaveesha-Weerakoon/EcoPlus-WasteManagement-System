@@ -13,12 +13,6 @@
                     <div class="main-right-top-notification" id="notification">
                         <i class='bx bx-bell'></i>
                         <?php if (!empty($data['notification'])) : ?>
-                        <div class="dot"></div>
-                        <?php endif; ?>
-                    </div>
-                    <div class="main-right-top-notification" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <?php if (!empty($data['notification'])) : ?>
                         <div class="dot"><?php echo count($data['notification'])?></div>
                         <?php endif; ?>
                     </div>
@@ -39,11 +33,20 @@
                             <?php endforeach; ?>
 
                         </div>
-                        <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/customers/">
+                        <form class="mark_as_read" method="post"
+                            action="<?php echo URLROOT;?>/customers/view_notification/editprofile">
                             <i class="fa-solid fa-check"> </i>
                             <button type="submit">Mark all as read</button>
                         </form>
 
+                    </div>
+                    <div class="main-right-top-profile">
+                        <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
+                            alt="">
+                        <div class="main-right-top-profile-cont">
+                            <h3>Kaveesha</h3>
+                            <p>ID : C <?php echo $_SESSION['user_id']?></p>
+                        </div>
                     </div>
                 </div>
                 <div class="main-right-bottom">
@@ -198,7 +201,7 @@
             var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
             if (notification_pop.style.height === "0px") {
                 if (notificationArraySize >= 3) {
-                    notification_pop.style.height = "200px";
+                    notification_pop.style.height = "198px";
                 }
                 if (notificationArraySize == 2) {
                     notification_pop.style.height = "150px";

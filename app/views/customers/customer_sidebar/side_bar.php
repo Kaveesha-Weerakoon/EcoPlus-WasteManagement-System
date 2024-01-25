@@ -23,6 +23,12 @@
             </div>
             <h3>History</h3>
         </div>
+        <div class="main-left-middle-content" onclick="redirect_complains()" id="history">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bx-message-error'></i>
+            </div>
+            <h3>Complaints</h3>
+        </div>
         <div class="main-left-middle-content" onclick="redirect_edit_profile()" id="edit_profile">
             <div class="main-left-middle-content-icon">
                 <i class='bx bx-user-pin'></i>
@@ -80,6 +86,12 @@ function redirect_edit_profile() {
     var linkUrl = "<?php echo URLROOT?>/customers/editprofile"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
+
+function redirect_complains() {
+    var linkUrl = "<?php echo URLROOT?>/customers/complains";
+    window.location.href = linkUrl;
+}
+
 var checkbox = document.getElementById('toggle-checkbox');
 
 function setDarkModeStyle(isDarkMode) {
@@ -102,8 +114,7 @@ function setDarkModeStyle(isDarkMode) {
         "0 1px 1px 0px rgba(0, 0, 0, 0.1)");
     root.style.setProperty("--table-header", isDarkMode ? "#001f3f" : "#e9f6ef");
     logo.style.display = isDarkMode ? "none" : "flex";
-    // circularProgress.style.background =
-    //     `conic-gradient(${color}, ${progressStartValue * 3.6}deg, ${isDarkMode ? "#001f3f" : "#ededed"} 0deg)`;
+
 }
 
 function getDarkModeSetting() {

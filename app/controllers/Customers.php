@@ -14,6 +14,7 @@
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
       $this->Center_Model=$this->model('Center');
       $this->User_Model=$this->model('User');
+      $this->centermanagerModel=$this->model('Center_Manager');
 
       if(!isLoggedIn('user_id')){
         redirect('users/login');
@@ -543,8 +544,8 @@
     public function request_collect(){
       $id=$_SESSION['user_id']; 
       $user=$this->customerModel->get_customer($id);
-      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
-
+      $Notifications = $this->customerModel->get_Notification($id);
+      $marked_holidays = $this->centermanagerModel->get_marked_holidays($user->city);
       $data['contact_no']=$user->mobile_number;
       $data['name'] =$_SESSION['user_name'];
       $data['region']=$user->city;
@@ -562,28 +563,43 @@
         $data['longitude'] =trim($_POST['longitude']);
         $data['location_success'] =trim($_POST['location_success']);
         $data['region']=$user->city;
+        
 
         if (empty($data['name'])) {
            $data['name_err'] = 'Name is required';
-        }elseif (strlen($data['name']) > 30) {
+         }elseif (strlen($data['name']) > 30) {
           $data['name_err'] = 'Name cannot exceed 30 characters';
         }
       
         if (empty($data['contact_no'])) {
            $data['contact_no_err'] = 'Contact No is required';
-        } elseif (!preg_match('/^\d{10}$/', $data['contact_no'])) {
+         } elseif (!preg_match('/^\d{10}$/', $data['contact_no'])) {
           $data['contact_no_err'] = 'Invalid Contact No';
         }
 
-
         if (empty($data['date'])) {
           $data['date_err'] = 'Date is required';
-        } else {
-          $selectedTimestamp = strtotime($data['date']);
-          $currentTimestamp = strtotime('tomorrow');
-          if ($selectedTimestamp < $currentTimestamp) {
-            $data['date_err'] = 'Select a date from tomorrow onwards';
-          }
+        } 
+        else {
+            $isHoliday = false;
+
+            foreach ($marked_holidays as $holiday) {
+                if ($holiday->date === $data['date']) {
+                    $isHoliday = true;
+                    break;
+                }
+            } 
+
+            if ($isHoliday) {
+                $data['date_err'] = 'Sorry, the center is not available on this day';
+            }
+            else{
+              $selectedTimestamp = strtotime($data['date']);
+              $currentTimestamp = strtotime('tomorrow');
+              if ($selectedTimestamp < $currentTimestamp) {
+                $data['date_err'] = 'Select a date from tomorrow onwards';
+              }
+            }
         }
     
         if ($data['region_success']='True') {
@@ -604,12 +620,12 @@
         if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['date_err']) && empty($data['time_err']) && empty($data['instructions_err'])&& empty($data['location_err']) ){     
             $data['confirm_collect_pop']="True";        
             $this->view('customers/request_collect', $data);   
-        }
-        else{
+         }
+         else{
           $this->view('customers/request_collect', $data);
-        }        
-      }
-     else {
+         }        
+         }
+          else {
          $data = $this->getCommonData();
          $id=$_SESSION['user_id']; 
          
@@ -685,14 +701,6 @@
         $data = $this->getCommonData();
         $this->view('customers/request_collect', $data);
       }
-    }
-
-    public function credit_per_waste(){
-       $credit= $this->creditModel->get();
-      $data = [
-        'eco_credit_per'=>$credit
-      ];
-      $this->view('customers/credits_per_waste', $data);
     }
 
     public function logout(){
@@ -890,11 +898,11 @@
     }
 
     public function deleteaccount(){
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $this->User_Model->deleteuser($_SESSION['user_id']);
       $this->logout();
-    }
-    else{
+     }
+     else{
       $data = [
         'name'=>'',
         'userid'=>'',
@@ -930,8 +938,21 @@
       $data['city']=$user->city;
      
       $this->view('customers/edit_profile', $data);
+     }
     }
-   }
+
+    public function view_notification($url){
+      
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+       
+        $Notifications1 = $this->customerModel->view_Notification($_SESSION['user_id']);
+        $Notifications2 = $this->customerModel->get_Notification($_SESSION['user_id']);
+        $data['notification']=  $Notifications2 ;
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $this->$url();
+
+     }
+    }
 
 }
   ?>

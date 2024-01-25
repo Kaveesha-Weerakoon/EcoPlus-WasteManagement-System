@@ -545,6 +545,152 @@
   }
 
 
+  public function discount_agent_add(){
+     
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $data =[
+        'name' => trim($_POST['name']),
+        'profile' => $_FILES['profile_image'],
+        'contact_no' => trim($_POST['contact_no']),
+        'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+        'address' => trim($_POST['address']),
+        'email' => trim($_POST['email']),
+        'password' => trim($_POST['password']),
+        'confirm_password' => trim($_POST['confirm_password']),
+        'name_err' => '',
+        'contact_no_err' => '',
+        'address_err' => '' ,
+        'email_err' => '' ,
+        'password_err' => '' ,
+        'complain_err' => '' ,
+        'profile_err'=>'',
+        'confirm_password_err'=>'' ,
+        'registered'=>'',
+         'profile_upload_error'=>''   
+      ];
+
+  
+   
+     //validate email
+      if(empty($data['email'])){
+        $data['email_err'] = 'Please enter an email';
+      } else {
+        if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+          $data['email_err'] = 'Invalid email format';
+        } 
+        else{
+          if($this->userModel->findUserByEmail($data['email'])){
+            $data['email_err'] = 'Email is already taken';
+          }
+        }   
+      }
+
+      // Validate Name
+      if(empty($data['name'])){
+        $data['name_err'] = 'Please enter name';
+      }
+      elseif (strlen($data['name']) > 255) {
+        $data['name_err'] = 'name is too long ';
+      }
+
+    
+
+      // Validate Contact no
+      if (empty($data['contact_no'])) {
+        $data['contact_no_err'] = 'Please enter a contact number';
+      } elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter a valid contact number';
+      }
+    
+
+      // Validate Adress
+      if(empty($data['address'])){
+        $data['address_err'] = 'Please enter an address';
+      }
+      elseif (strlen($data['address']) > 255) {
+        $data['address_err'] = 'address is too long ';
+      }
+
+
+      // Validate Password
+      if(empty($data['password'])){
+        $data['password_err'] = 'Please enter password';
+      } elseif(strlen($data['password']) < 6){
+        $data['password_err'] = 'Password must be at least 6 characters';
+      }
+
+      // Validate Confirm Password
+      if(empty($data['confirm_password'])){
+        $data['confirm_password_err'] = 'Please confirm password';
+      } else {
+        if($data['password'] != $data['confirm_password']){
+          $data['confirm_password_err'] = 'Passwords do not match';
+        }
+      } 
+      if ($_FILES['profile_image']['error'] == 4) {
+        $data['profile_err'] = 'Upload a image';
+   
+      }
+
+      if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['address_err'])){
+        if ($_FILES['profile_image']['error'] == 4) {
+          $data['profile_err'] = 'Upload a image';
+      } else {
+          if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/credit_discount_agent/')) {
+            $data['profile_err'] = '';
+
+          } else {
+              $data['profile_err'] = 'Error uploading the profile image';
+          }
+      }
+      }
+
+      if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['address_err']) && empty($data['profile_err'])){
+        // Validated
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        if($this->discount_agentModel->register_discount_agent($data)){
+          $data['registered']='True';        
+          $this->view('admin/center_managers_add',$data);
+        } else {
+          die('Something went wrong');
+        }
+      }
+      else{
+       
+        $this->view('admin/center_managers_add', $data);
+      }
+
+
+    }
+    else{
+      
+      $data = [
+        'name' =>'',
+        'profile'=>'',
+        'contact_no' => '',
+        'address' => '',
+        'email' => '',
+        'password' => '',
+        'confirm_password' => '',
+        'name_err' => '',
+        'contact_no_err' => '',
+        'address_err' => '' ,
+        'email_err' => '' ,
+        'profile_err'=>'',
+        'password_err' => '' ,
+        'complain_err' => '' ,
+        'confirm_password_err'=>'',
+        'registered'=>'' ,         
+        'profile_upload_error'=>''   
+
+      ];
+      $this->view('admin/discount_agent_add', $data);
+    }
+  
+  }
+
+
 
 
     public function customers(){

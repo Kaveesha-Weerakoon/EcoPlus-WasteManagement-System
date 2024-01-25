@@ -16,6 +16,7 @@
                                 <i class='bx bx-bell'></i>
                                 <div class="dot"></div>
                             </div>
+
                             <div id="notification_popup" class="notification_popup">
                                 <h1>Notifications</h1>
                                 <div class="notification">
@@ -37,16 +38,20 @@
                                     Request 1232 Has been Cancelled
                                 </div>
                             </div>
+
                             <div class="main-right-top-profile">
                                 <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
                                 <div class="main-right-top-profile-cont">
                                     <h3>Admin</h3>
                                 </div>
                             </div>
+
                         </div>
+
                         <div class="main-right-top-two">
                             <h1>Center Managers</h1>
                         </div>
+
                         <div class="main-right-top-three">
                             <a href="<?php echo URLROOT?>/admin/discount_agents">
                                 <div class="main-right-top-three-content">
@@ -60,10 +65,10 @@
                                     <div class="line"></div>
                                 </div>
                             </a>
-                            </div
-
                         </div>
+
                     </div>
+                </div>
 
 
                     <div class="main-right-bottom">
@@ -78,6 +83,7 @@
                                 </tr>
                             </table>
                         </div>
+
                         <div class="main-right-bottom-down">
                             <table class="table">
                                 <?php foreach($data['discount_agent'] as $discount_agent) : ?>
@@ -95,9 +101,9 @@
                                 <?php endforeach; ?>
                             </table>
                     
-    
                         </div>
                     </div>
+
                    
                 </div>
             </div>

@@ -43,7 +43,7 @@
                         </form>
 
                     </div>
-                    <div class="main-right-top-profile">
+                    <div class="main-right-top-profile" id="profile">
                         <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
                             alt="">
                         <div class="main-right-top-profile-cont">
@@ -59,8 +59,8 @@
                                 <h1>Total Balance</h1>
                                 <h3>+Eco 26.23 </h3>
                                 <p>Last Update</p>
-                                <button onclick="redirect_requests()">
-                                    Request a Collect
+                                <button onclick="redirect_transfercredit()">
+                                    Transfer Credit
                                 </button>
 
                             </div>
@@ -71,39 +71,6 @@
                             </div>
                         </div>
                         <div class="main-right-bottom-one-right">
-
-                            <canvas id="myChart" width="700" height="300"></canvas>
-                        </div>
-                    </div>
-                    <div class="main-right-bottom-two">
-                        <div class="main-right-bottom-two-cont A" id="credit_per_waste_quantity">
-                            <div class="icon_container">
-                                <i class='bx bx-dollar-circle'></i>
-                            </div>
-                            <h3>Credits per Waste Quantity</h3>
-                        </div>
-                        <div class="main-right-bottom-two-cont A">
-                            <div class="icon_container">
-                                <i class='bx bx-money-withdraw'></i>
-                            </div>
-                            <h3>Eco Credit Value</h3>
-                        </div>
-                        <div class="main-right-bottom-two-cont A">
-                            <div class="icon_container">
-                                <i class='bx bxs-bank'></i>
-                            </div>
-                            <h3>Discount Agents</h3>
-                        </div>
-                        <div class="main-right-bottom-two-cont A" onclick="redirect_complains()">
-                            <div class="icon_container">
-                                <i class='bx bx-donate-heart'></i>
-                            </div>
-                            <h3>Complaints</h3>
-                        </div>
-
-                    </div>
-                    <div class="main-right-bottom-three">
-                        <div class="main-right-bottom-three-left">
                             <h1>Recent Transactions</h1>
 
                             <?php
@@ -112,7 +79,7 @@
 
                                  foreach ($limited_transactions as $transaction):
                             ?>
-                            <div class="main-right-bottom-three-left-cont">
+                            <div class="main-right-bottom-one-right-cont">
                                 <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
                                 <img class="td-pro_pic"
                                     src="<?php echo (empty($transaction->receiver_image) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/' . $transaction->receiver_image) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->receiver_image; ?>"
@@ -128,36 +95,95 @@
                                     C <?php echo $transaction->sender_id; ?>
                                     <?php endif; ?>
                                 </h3>
+                                <p>
+                                    <?php echo $transaction->date ?>
+                                </p>
                                 <h2
                                     style="color: <?php echo ($transaction->sender_id == $_SESSION['user_id']) ? '#F13E3E' : '#1ca557'; ?>;">
                                     <?php
-                                          echo ($transaction->sender_id == $_SESSION['user_id']) ? "-Eco " : "+Eco ";
-                                          echo $transaction->transfer_amount;
+                                        echo ($transaction->sender_id == $_SESSION['user_id']) ? "-Eco " : "+Eco ";
+                                        echo $transaction->transfer_amount;
                                     ?>
                                 </h2>
                             </div>
                             <?php endforeach; ?>
-                            <!-- <div class="map" id="map"></div> -->
                         </div>
-                        <div class="main-right-bottom-three-right">
-                            <div class="main-right-bottom-three-right-left">
+                    </div>
+                    <div class="main-right-bottom-two">
+                        <div class="main-right-bottom-two-cont A">
+                            <div class="icon_container">
+                                <i class="fa-solid fa-house"></i>
+                            </div>
+                            <div class="content_container">
+                                <h3>Centers</h3>
+                                <h2>14</h2>
+                            </div>
+                        </div>
+                        <div class="main-right-bottom-two-cont A" onclick="redirect_completed()">
+                            <div class="icon_container">
+                                <i class='bx bx-message-alt-check'></i>
+                            </div>
+                            <div class="content_container">
+                                <h3>Fulfilled Requests</h3>
+                                <h2>12</h2>
+                            </div>
+                        </div>
+
+                        <div class="main-right-bottom-two-cont A">
+                            <div class="icon_container">
+                                <i class='bx bxs-bank'></i>
+                            </div>
+                            <div class="content_container">
+                                <h3>Discount Agents</h3>
+                                <h2>6</h2>
+                            </div>
+                        </div>
+
+                        <div class="main-right-bottom-two-cont A" id="credit_per_waste_quantity">
+                            <div class="icon_container">
+                                <i class='bx bx-dollar-circle'></i>
+                            </div>
+                            <div class="content_container">
+                                <h3>Garbage Types</h3>
+                                <h2>6</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-right-bottom-three">
+                        <div class="main-right-bottom-three-left">
+                            <div class="main-right-bottom-three-left-left">
+                                <h3>Available Hours: 8am to 4pm</h3>
+                                <p>Request a collect Now</p>
+                                <button onclick="redirect_requests()" type="button" id="setButton">Request Now</button>
+                                <!-- <span>*Please choose a location close to your default regional center</span> -->
+                            </div>
+                            <div class="main-right-bottom-three-left-right">
                                 <h1>Requests Satisfied</h1>
-                                <div class="main-right-bottom-three-right-cont">
-                                    <div class="circular-progress" id="circular-progress">
+                                <div class="main-right-bottom-three-left-right-cont">
+                                    <div class="circular-progress">
                                         <span class="progress-value">
                                             0 %
                                         </span>
                                     </div>
+                                    <div class="legend-container">
+                                        <div class="legend LL">
+                                            <div class="uncompleted"></div>
+                                            <span>Uncompleted</span>
+                                        </div>
+                                        <div class="legend LR">
+                                            <div class="completed"></div>
+                                            <span>Completed</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <button onclick="redirect_transfercredit()">
-                                    Transfer Credit
-                                </button>
                             </div>
-                            <div class="main-right-bottom-three-right-right">
-                                <h1>Centers</h1>
-                                <div class="map" id="map"></div>
 
-                            </div>
+                            <!-- <div class="map" id="map"></div> -->
+                        </div>
+
+                        <div class="main-right-bottom-three-right">
+                            <canvas id="myChart" width="600" height="250"></canvas>
+
                         </div>
 
                     </div>
@@ -250,8 +276,8 @@ function redirect_transfercredit() {
     window.location.href = linkUrl;
 }
 
-function redirect_complains() {
-    var linkUrl = "<?php echo URLROOT?>/customers/complains";
+function redirect_completed() {
+    var linkUrl = "<?php echo URLROOT?>/customers/request_completed";
     window.location.href = linkUrl;
 }
 
@@ -267,7 +293,7 @@ notification.addEventListener("click", function() {
         var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
         if (notification_pop.style.height === "0px") {
             if (notificationArraySize >= 3) {
-                notification_pop.style.height = "205px";
+                notification_pop.style.height = "198px";
             }
             if (notificationArraySize == 2) {
                 notification_pop.style.height = "150px";
@@ -520,6 +546,5 @@ checkbox.addEventListener("change", function() {
 
 createOrUpdateChart(color, textColor);
 </script>
-
-
+<script src="<?php echo JSROOT?>/Customer.js"> </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

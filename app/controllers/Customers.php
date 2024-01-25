@@ -47,7 +47,9 @@
         'centers'=>$jsonData,
         'percentage'=> $percentage_completed,
         'total_garbage'=> $json_Total_Garbage,
-        'notification'=> $Notifications 
+        'notification'=> $Notifications,
+        'completed_request_count'=>$completed_requests,
+        'no_of_centers'=>count($centers)
         ];
 
 

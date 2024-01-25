@@ -23,7 +23,7 @@
             </div>
             <h3>History</h3>
         </div>
-        <div class="main-left-middle-content" onclick="redirect_complains()" id="history">
+        <div class="main-left-middle-content" onclick="redirect_complains()" id="complaints">
             <div class=" main-left-middle-content-icon">
                 <i class='bx bx-message-error'></i>
             </div>

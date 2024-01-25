@@ -225,6 +225,7 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        margin-top: 4px;
     }
 
     .notification_cont {
@@ -273,6 +274,10 @@
     .main-right-top-profile {
         display: flex;
         margin-right: 40px;
+    }
+
+    .main-right-top-profile:hover {
+        cursor: pointer;
     }
 
     .main-right-top-profile img {

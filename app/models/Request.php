@@ -246,7 +246,8 @@
 
     public function get_assigned_request_by_collector($collector_id){
       $this->db->query('
-         SELECT request_main.*
+         SELECT request_main.*,
+         status
          FROM request_main
          JOIN request_assigned ON request_main.req_id = request_assigned.req_id
          WHERE request_assigned.collector_id = :collector_id
@@ -265,6 +266,7 @@
       SELECT
       request_main.*,
       request_cancelled.*
+     
       FROM
       request_main
       JOIN

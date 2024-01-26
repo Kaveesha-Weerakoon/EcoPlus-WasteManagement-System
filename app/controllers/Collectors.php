@@ -638,7 +638,7 @@
     $collector=$this->collectorModel->get_collector( $_SESSION['collector_id'] );
     $center=$this->centerModel->getCenterById($collector->center_id);
 
-   if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
       $jsonData = json_encode($assinged_Requests);
        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);

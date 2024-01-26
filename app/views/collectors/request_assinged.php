@@ -109,7 +109,7 @@
                                         <th>C ID</th>
                                         <th>Contact No</th>
                                         <th>Instructions</th>
-                                        <th>Complete</th>
+                                        <th>Status</th>
                                         <th>Cancel</th>
                                     </tr>
                                 </table>
@@ -127,11 +127,17 @@
                                         <td><?php  echo $request->contact_no?></td>
                                         <td><?php  echo $request->instructions?></td>
                                         <td class="cancel-open">
-                                            <a
-                                                href="<?php echo URLROOT ?>/Collectors/enterWaste_And_GenerateEcoCredits/<?php echo $request->req_id ?>">
-                                                <img class="complete_image" src="<?php echo IMGROOT ?>/assign.png"
-                                                    alt="">
-                                            </a>
+                                            <?php
+                                           
+                                             if ($request->status== "assinged") {
+                                                echo '<a href="' . URLROOT . '/Collectors/enterWaste_And_GenerateEcoCredits/' . $request->req_id . '" class="fa-solid fa-arrow-up-right-dots"><i></i></a>';
+                                            } else {
+                                                echo '<a href="' . URLROOT . '/Collectors/enterWaste_And_GenerateEcoCredits/' . $request->req_id . '">
+                                                <img class="complete_image" src="' . IMGROOT . '/assign.png" alt="">
+                                             </a>';
+                                            }
+                                             ?>
+
                                         </td>
                                         <td>
                                             <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel"

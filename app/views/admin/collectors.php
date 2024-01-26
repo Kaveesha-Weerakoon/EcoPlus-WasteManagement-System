@@ -77,7 +77,7 @@
                                             <td><?php echo $collector->center_name?></td>
                                             <td><?php echo $collector->name?></td>
                                             <td><i onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                                 class='bx bxs-user' style="font-size: 29px;"></td>
+                                                 class='bx bxs-user' style="font-size: 29px;"></i></td>
                                             <!-- <td><img onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
                                                 class="location" src="<?php echo IMGROOT?>/view.png" alt=""></td> -->
                                             <td><a href="<?php echo URLROOT?>/admin/vehicle_details_view/<?php echo $collector->user_id ?>"><i class='bx bxs-truck' style="font-size: 29px;"></i></a></td>

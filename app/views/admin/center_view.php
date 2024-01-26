@@ -95,11 +95,11 @@
                                     <td><?php echo $centers->center_manager_id?></td>
                                     <td><?php echo $centers->center_manager_name?></td>
                                     <td><a
-                                            href="<?php echo URLROOT?>/admin/center_main/<?php echo $centers->id?>/<?php echo $centers->region?>"><img
-                                                src="<?php echo IMGROOT?>/Admin_Center.png" alt=""></a></td>
+                                            href="<?php echo URLROOT?>/admin/center_main/<?php echo $centers->id?>/<?php echo $centers->region?>">
+                                            <i class='bx bxs-school' style="font-size: 29px;"></i></a></td>
                                     <td class="delete"> <a
-                                            href="<?php echo URLROOT?>/admin/center_delete/<?php echo $centers->id?>"><img
-                                                src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
+                                            href="<?php echo URLROOT?>/admin/center_delete/<?php echo $centers->id?>">
+                                            <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
                                 </tr>
                                 <?php endforeach; ?>
 

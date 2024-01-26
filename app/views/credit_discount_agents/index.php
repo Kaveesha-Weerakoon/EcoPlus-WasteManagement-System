@@ -42,7 +42,7 @@
                     <div class="main-right-top-profile">
                         <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
                         <div class="main-right-top-profile-cont">
-                            <h3>Credit Discount Agent</h3>
+                        <h3><?php echo $_SESSION['agent_name']?></h3>
                         </div>
                     </div>
                 </div>

@@ -120,9 +120,9 @@
       } else {
           return false;
       }
-    } catch (PDOException $e) {
+     } catch (PDOException $e) {
       return false;
-  }
+     }
       
   }
 
@@ -346,6 +346,25 @@
       }catch (PDOException $e) {
         return false;
       }
+    }
+
+    public function markontheway($id){
+      try{
+        $this->db->query('UPDATE request_assigned SET status =:type WHERE req_id = :req_id');
+        $this->db->bind(':type', 'ontheway'); 
+        $this->db->bind(':req_id', $id);
+        $updateResult = $this->db->execute();
+        $request=$this->get_request_by_id($id);
+
+        if($updateResult &&  $request){
+          $notificationText = "Req ID {$id} Collector is On the Way";
+          $this->insert_notification($request->customer_id, $notificationText);
+        }
+      }
+      catch (PDOException $e) {
+        return false;
+      }
+
     }
 
 }

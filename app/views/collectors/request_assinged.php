@@ -130,18 +130,22 @@
                                             <?php
                                            
                                              if ($request->status== "assinged") {
-                                                echo '<a href="' . URLROOT . '/Collectors/enterWaste_And_GenerateEcoCredits/' . $request->req_id . '" class="fa-solid fa-arrow-up-right-dots"><i></i></a>';
+                                                echo '<i onclick="ontheway(' . $request->req_id . ')" class="fa-solid fa-arrow-up-right-dots"></i>';
+
+
                                             } else {
-                                                echo '<a href="' . URLROOT . '/Collectors/enterWaste_And_GenerateEcoCredits/' . $request->req_id . '">
+                                            echo '<a
+                                                href="' . URLROOT . '/Collectors/enterWaste_And_GenerateEcoCredits/' . $request->req_id . '">
                                                 <img class="complete_image" src="' . IMGROOT . '/assign.png" alt="">
-                                             </a>';
+                                            </a>';
                                             }
-                                             ?>
+                                            ?>
 
                                         </td>
                                         <td>
-                                            <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel"
-                                                src="<?php echo IMGROOT?>/close_popup.png" alt="">
+                                            <i onclick="cancel(<?php echo $request->req_id ?>)" class='bx bx-x-circle'
+                                                style="font-size: 29px; color:#DC2727;"> </i>
+
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
@@ -388,13 +392,29 @@
                     </div>
                 </div>
 
+                <form class="on_the_way" id="ontheway" action="<?php echo URLROOT?>/collectors/request_ontheway"
+                    method="post">
+                    <div class="content">
+                        <div class="content-top">
+                            <h2>Req ID&nbsp
+                            </h2>
+                            <h2 id="on_the_way_req_id"></h2>
+                        </div>
+                        <input type="text" style="display:hidden" id="post_req_id" name="post_req_id">
+                        <h3>Mark as On the way</h3>
+                        <div class="content-left">
+                            <button type="button" onclick="markontheway()" class="left"
+                                id="mark-on-the-way">Mark</button>
+                            <button type="button" onclick="closemarkontheway()">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+
 
                 <div class="cancel-confirm" id="cancel-confirm">
                     <form class="cancel-confirm-content" id="cancel-form" method="post"
                         action="<?php echo URLROOT?>/collectors/request_assinged">
-                        <!-- <div class="cancel-confirm-top-close">
-                        <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop">
-                    </div> -->
+
                         <h1>Cancel the Request?</h1>
                         <input name="reason" type="text" placeholder="Input the Reason">
                         <input name="id" type="text">
@@ -442,9 +462,29 @@ function initMap() {
     });
 }
 
+function ontheway($id) {
+    var id = document.getElementById('on_the_way_req_id');
+    id.textContent = $id;
+    var ontheway = document.getElementById('ontheway');
+    var id1 = document.getElementById('post_req_id');
+    id1.value = $id;
+    ontheway.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+}
+
+function markontheway() {
+    var form = document.getElementById('ontheway');
+    form.submit();
+}
+
+function closemarkontheway() {
+    var ontheway = document.getElementById('ontheway');
+    ontheway.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
+}
+
 function cancel($id) {
     var inputElement = document.querySelector('input[name="id"]');
-
     inputElement.style.display = 'none';
     var collector_id = document.getElementById('collector_id');
     collector_id.style.display = 'none';
@@ -467,10 +507,11 @@ function validateCancelForm() {
 
 function closecancel() {
     const popup = document.getElementById("cancel-confirm");
-
     popup.classList.remove('active');
     document.getElementById('overlay').style.display = "none";
 }
+
+
 
 function searchTable() {
     var input = document.getElementById('searchInput').value.toLowerCase();
@@ -588,8 +629,8 @@ function submitForm($id) {
     form.action = "<?php echo URLROOT;?>/collectors/Eco_Credit_Insert/" + $id;
     form.method = 'post';
     form.submit();
-
 }
+
 document.addEventListener("DOMContentLoaded", function() {
     const maps = document.getElementById("maps");
     const table = document.getElementById("tables");

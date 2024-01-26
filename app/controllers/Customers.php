@@ -57,7 +57,8 @@
         $Notifications1 = $this->customerModel->view_Notification($_SESSION['user_id']);
         $Notifications2 = $this->customerModel->get_Notification($_SESSION['user_id']);
         $data['notification']=  $Notifications2 ;
-         $this->view('customers/index', $data);
+        header("Location: " . URLROOT . "/customers");        
+
 
       }
       else{
@@ -950,8 +951,7 @@
         $Notifications1 = $this->customerModel->view_Notification($_SESSION['user_id']);
         $Notifications2 = $this->customerModel->get_Notification($_SESSION['user_id']);
         $data['notification']=  $Notifications2 ;
-        $_SERVER['REQUEST_METHOD'] = 'GET';
-        $this->$url();
+        header("Location: " . URLROOT . "/customers/.$url.");        
 
      }
     }

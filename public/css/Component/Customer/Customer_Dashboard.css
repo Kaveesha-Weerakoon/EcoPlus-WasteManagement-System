@@ -543,6 +543,58 @@
         display: none;
     }
 
+    .Centers_pop {
+        display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 4;
+        align-items: center;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        background-color: var(--background-color-main);
+        width: 41%;
+        height: 50%;
+    }
+
+    .Centers_pop.active {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .centers_top {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    .Centers_pop h2 {
+        margin-top: 12px;
+        margin-bottom: 12px;
+        font-size: 21px;
+        letter-spacing: 0.01rem;
+        margin-left: 15px;
+    }
+
+    .centers_close {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        position: relative;
+        left: 92%;
+    }
+
+    .centers {
+        width: 90%;
+        height: 81%;
+        border-radius: 10px;
+    }
+
+
+
 
     @media screen and (max-width: 1320px) {
         .eco_credit_per_quantity {

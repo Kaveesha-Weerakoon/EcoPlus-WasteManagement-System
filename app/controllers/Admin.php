@@ -651,14 +651,14 @@
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         if($this->discount_agentModel->register_discount_agent($data)){
           $data['registered']='True';        
-          $this->view('admin/center_managers_add',$data);
+          $this->view('admin/discount_agent_add',$data);
         } else {
           die('Something went wrong');
         }
       }
       else{
        
-        $this->view('admin/center_managers_add', $data);
+        $this->view('admin/discount_agent_add', $data);
       }
 
 

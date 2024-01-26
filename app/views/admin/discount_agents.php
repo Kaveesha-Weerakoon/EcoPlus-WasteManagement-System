@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="main-right-top-two">
-                            <h1>Center Managers</h1>
+                            <h1>Credit Discount Agent</h1>
                         </div>
 
                         <div class="main-right-top-three">
@@ -86,7 +86,7 @@
                                 <?php foreach($data['discount_agent'] as $discount_agent) : ?>
                                 <tr class="table-row">
                                     <td>CM <?php echo $discount_agent->user_id?></td>
-                                    <td><img src="<?php echo IMGROOT?>/img_upload/discount_agent/<?php echo $discount_agent->image?>"
+                                    <td><img src="<?php echo IMGROOT?>/img_upload/credit_discount_agent/<?php echo $discount_agent->image?>"
                                             alt="" class="manager_img"></td>
                                     <td><?php echo $discount_agent->name?></td>
                                     <td><?php echo $discount_agent->email?></td>

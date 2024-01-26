@@ -97,12 +97,14 @@
                                     src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>" alt="" class="collector_img"></td>
                                 <td><?php echo $collector->name?></td>
                                 <td><?php echo $collector->email?></td>
-                                <td><img onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                    src="<?php echo IMGROOT?>/personal_details_icon.png" alt=""></td>
-                                <td><img onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                    src="<?php echo IMGROOT?>/car.png" alt=""></td>
-                                <td><img onclick="opencolAssistantsdetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                    src="<?php echo IMGROOT?>/collector_assistants.png" alt=""></td>
+                                <td><i onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                     class='bx bxs-user' style="font-size: 29px;"></i></td>
+            
+                                <td><i onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                    class='bx bxs-truck' style="font-size: 29px;"></i></td>
+                                
+                                <td><i onclick="opencolAssistantsdetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                    class='bx bxs-group' style="font-size: 29px;"></i></td>
                             </tr>   
                             <?php endforeach; ?>  
                         </table>            

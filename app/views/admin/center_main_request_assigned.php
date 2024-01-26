@@ -117,13 +117,12 @@
                                         src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $assigned_requests->image?>"
                                         alt="">
                                     </td>
-                                    <td><img onclick="viewLocation(<?php echo $assigned_requests->lat; ?>, <?php echo $assigned_requests->longi; ?>)" 
-                                    src="<?php echo IMGROOT?>/location.png" alt="" class="location_icon">
-                                    </td>
-                                    <td>
-                                    <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($assigned_requests), ENT_QUOTES, 'UTF-8') ?>)"
-                                        class="cancel" src="<?php echo IMGROOT ?>/info.png" alt="">
-                                    </td>
+                                    <td><i onclick="viewLocation(<?php echo $assigned_requests->lat; ?>, <?php echo $assigned_requests->longi; ?>)"
+                                        class='bx bx-map' style="font-size: 29px;"></i></td>
+                            
+                                    <td><i onclick="view_request_details(<?php echo htmlspecialchars(json_encode($assigned_requests), ENT_QUOTES, 'UTF-8') ?>)"
+                                        class='bx bx-info-circle' style="font-size: 29px"></i></td>
+                                    
                                 </tr>   
                                 <?php endforeach; ?>  
                                         

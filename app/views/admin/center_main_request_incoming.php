@@ -111,7 +111,9 @@
                                     <td><?php echo $incoming_requests->name?></td>
                                     <td><?php echo $incoming_requests->date?></td>
                                     <td><?php echo $incoming_requests->time?></td>
-                                    <td><img onclick="viewLocation(<?php echo $incoming_requests->lat; ?>, <?php echo $incoming_requests->longi; ?>)" src="<?php echo IMGROOT?>/location.png" alt=""></td>
+                                    <td><i onclick="viewLocation(<?php echo $incoming_requests->lat; ?>, <?php echo $incoming_requests->longi; ?>)"
+                                        class='bx bx-map' style="font-size: 29px;"></i></td>
+                                    <!-- <td><img onclick="viewLocation(<?php echo $incoming_requests->lat; ?>, <?php echo $incoming_requests->longi; ?>)" src="<?php echo IMGROOT?>/location.png" alt=""></td> -->
                                     <td><?php echo $incoming_requests->contact_no?></td>
                                     <td><?php echo $incoming_requests->instructions?></td>
                                 </tr>   

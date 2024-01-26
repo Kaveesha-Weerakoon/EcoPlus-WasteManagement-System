@@ -113,13 +113,17 @@
                                     <td><?php echo $cancelled_requests->time?></td>
                                     <td>C<?php echo $cancelled_requests->customer_id?></td>
                                     <td><?php echo $cancelled_requests->cancelled_by?></td>
-                                    <td><img onclick="viewLocation(<?php echo $cancelled_requests->lat; ?>, <?php echo $cancelled_requests->longi; ?>)" 
+                                    <td><i onclick="viewLocation(<?php echo $cancelled_requests->lat; ?>, <?php echo $cancelled_requests->longi; ?>)" 
+                                        class='bx bx-map' style="font-size: 29px;"></i></td>
+                                    <!-- <td><img onclick="viewLocation(<?php echo $cancelled_requests->lat; ?>, <?php echo $cancelled_requests->longi; ?>)" 
                                     src="<?php echo IMGROOT?>/location.png" alt="" class="location_icon">
-                                    </td>
-                                    <td>
+                                    </td> -->
+                                    <!-- <td>
                                     <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($cancelled_requests), ENT_QUOTES, 'UTF-8') ?>)"
                                         class="cancel" src="<?php echo IMGROOT ?>/info.png" alt="">
-                                    </td>
+                                    </td> -->
+                                    <td><i onclick="view_request_details(<?php echo htmlspecialchars(json_encode($cancelled_requests), ENT_QUOTES, 'UTF-8') ?>)"
+                                        class='bx bx-info-circle' style="font-size: 29px"></i></td>
                                     <td><?php echo $cancelled_requests->reason?></td>
                                 </tr>   
                                 <?php endforeach; ?>  

@@ -76,14 +76,12 @@
                                             <td><img class="collector_img" src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $collector->image?>" alt=""></td>
                                             <td><?php echo $collector->center_name?></td>
                                             <td><?php echo $collector->name?></td>
-                                            <!-- <td> <?php echo $collector->nic?></td>
-                                            <td> <?php echo $collector->email?></td>
-                                            <td> <?php echo $collector->contact_no?></td>
-                                            <td> <?php echo $collector->address?></td> -->
-                                            <td><img onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                                class="location" src="<?php echo IMGROOT?>/view.png" alt=""></td>
-                                            <td><a href="<?php echo URLROOT?>/admin/vehicle_details_view/<?php echo $collector->user_id ?>"><img class="location" src="<?php echo IMGROOT?>/car.png" alt=""></a></td>
-                                            <td><a href="<?php echo URLROOT?>/admin/collectorsdelete_confirm/<?php echo $collector->user_id ?>"><img class="location" src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
+                                            <td><i onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                                 class='bx bxs-user' style="font-size: 29px;"></td>
+                                            <!-- <td><img onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                                class="location" src="<?php echo IMGROOT?>/view.png" alt=""></td> -->
+                                            <td><a href="<?php echo URLROOT?>/admin/vehicle_details_view/<?php echo $collector->user_id ?>"><i class='bx bxs-truck' style="font-size: 29px;"></i></a></td>
+                                            <td><a href="<?php echo URLROOT?>/admin/collectorsdelete_confirm/<?php echo $collector->user_id ?>"><i class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
                                 <?php endforeach; ?>
                     </table>
                     

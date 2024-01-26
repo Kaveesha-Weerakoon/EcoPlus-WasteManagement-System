@@ -2,7 +2,7 @@
 <div class="Admin_Main">
     <div class="Admin_Discount_Agent">
         <div class="Admin_Discount_Agent_View">
-        <div class="main">
+            <div class="main">
                 <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
 
                 <div class="main-right">
@@ -68,9 +68,6 @@
                         </div>
 
                     </div>
-                </div>
-
-
                     <div class="main-right-bottom">
                         <div class="main-right-bottom-top ">
                             <table class="table">
@@ -79,7 +76,7 @@
                                     <th>Profile</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    
+
                                 </tr>
                             </table>
                         </div>
@@ -87,29 +84,29 @@
                         <div class="main-right-bottom-down">
                             <table class="table">
                                 <?php foreach($data['discount_agent'] as $discount_agent) : ?>
-                                        <tr class="table-row">
-                                            <td>CM <?php echo $discount_agent->user_id?></td>
-                                            <td><img src="<?php echo IMGROOT?>/img_upload/discount_agent/<?php echo $discount_agent->image?>" alt="" class="manager_img"></td>
-                                            <td><?php echo $discount_agent->name?></td>
-                                            <td><?php echo $discount_agent->email?></td>
-                                            <!--<td> <?php echo $discount_agent->assinged?></td>
-                                            <td> <?php echo $discount_agent->assigned_center_id?></td>
-                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/cm_personal_details_view/<?php echo $center_manager->user_id ?>"><img src="<?php echo IMGROOT?>/personal_details_icon.png" alt=""></a></td>
-                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_update/<?php echo $center_manager->user_id ?>"><img src="<?php echo IMGROOT?>/update.png" alt=""></a></td>
-                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_delete_confirm/<?php echo $center_manager->user_id?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>-->
-                                        </tr>
+                                <tr class="table-row">
+                                    <td>CM <?php echo $discount_agent->user_id?></td>
+                                    <td><img src="<?php echo IMGROOT?>/img_upload/discount_agent/<?php echo $discount_agent->image?>"
+                                            alt="" class="manager_img"></td>
+                                    <td><?php echo $discount_agent->name?></td>
+                                    <td><?php echo $discount_agent->email?></td>
+                                </tr>
                                 <?php endforeach; ?>
                             </table>
-                    
+
                         </div>
                     </div>
-
-                   
                 </div>
-            </div>
-        </div> 
 
- 
+
+
+
+
+            </div>
+        </div>
     </div>
+
+
+</div>
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

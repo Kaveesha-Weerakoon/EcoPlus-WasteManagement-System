@@ -1,147 +1,147 @@
 .Admin_Discount_Agent_View {
 
-  .main-right-bottom-down {
-      padding-left: 3.5%;
-      width: 96.5%;
-      height: 450px;
-      overflow: scroll;
-  }
+    .main-right-bottom-down {
+        padding-left: 3.5%;
+        width: 96.5%;
+        height: 450px;
+        overflow: scroll;
+    }
 
-  .main-right-bottom-top {
-      padding-left: 3.5%;
-      width: 96.5%;
-  }
+    .main-right-bottom-top {
+        padding-left: 3.5%;
+        width: 96.5%;
+    }
 
-  .logout_anchor {
-      width: auto;
-  }
+    .logout_anchor {
+        width: auto;
+    }
 
-  .table-header {
-      grid-template-columns: 12% 9% 12% 17% 10% 15% 11% 7% 7%;
-  }
+    .table-header {
+        grid-template-columns: 25% 25% 25% 25%;
+    }
 
-  .table-row {
-      height: 52px;
-      display: grid;
-      grid-template-columns:  12% 9% 12% 17% 10% 15% 11% 7% 7%;
-  }
+    .table-row {
+        height: 52px;
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+    }
 
-  .table td {
-      height: 55px;
-  }
+    .table td {
+        height: 55px;
+    }
 
-  .manager_img{
-      width: 35px !important;
-      height: 35px !important;
-      border-radius: 50%;
-  }
+    .manager_img {
+        width: 35px !important;
+        height: 35px !important;
+        border-radius: 50%;
+    }
 
 
-  td img {
-      margin: 6px;
-  }
+    td img {
+        margin: 6px;
+    }
 
-  .table-row img {
-      width: 25px;
-      height: 25px;
-      cursor: pointer;
-  }
-
- 
-
-  @media screen and (max-width: 1118px) {
-      .main-right-top-one-content {
-          width: 250px;
-          margin-left: 1%;
-
-      }
-
-      .table td {
-
-          font-size: 12px;
-
-      }
-
-      .table-header {
-          font-size: 14px;
-      }
-
-      .table-row img {
-          width: 20px;
-          height: 20px;
-
-      }
+    .table-row img {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+    }
 
 
 
-  }
+    @media screen and (max-width: 1118px) {
+        .main-right-top-one-content {
+            width: 250px;
+            margin-left: 1%;
 
-  @media screen and (max-width:862px) {
-      .main-right-top-one-content {
-          width: 250px;
-          margin-left: 0;
-          padding-left: 5%;
-      }
+        }
 
-      .main-right-top-one input {
-          width: 20%;
+        .table td {
 
-      }
+            font-size: 12px;
 
-      .main-right-top-three-content p {
-          font-size: 14px;
+        }
 
-      }
+        .table-header {
+            font-size: 14px;
+        }
 
+        .table-row img {
+            width: 20px;
+            height: 20px;
 
-      .line {
-          width: 86px;
-          height: 2px;
-
-      }
-
-      .table td {
-
-          font-size: 10px;
-
-      }
-
-      .table-header {
-          font-size: 12px;
-      }
-
-      .table-row img {
-          width: 17px;
-          height: 17px;
-
-      }
+        }
 
 
-  }
 
-  @media screen and (max-width: 692px) {
+    }
 
+    @media screen and (max-width:862px) {
+        .main-right-top-one-content {
+            width: 250px;
+            margin-left: 0;
+            padding-left: 5%;
+        }
 
-      .table td {
+        .main-right-top-one input {
+            width: 20%;
 
-          font-size: 9px;
+        }
 
-      }
+        .main-right-top-three-content p {
+            font-size: 14px;
 
-      .table-header {
-          font-size: 10px;
-      }
-
-      .table-row img {
-          width: 15px;
-          height: 15px;
-
-      }
-
-      .main-right-bottom {
-          width: 140%;
-      }
+        }
 
 
-  }
+        .line {
+            width: 86px;
+            height: 2px;
+
+        }
+
+        .table td {
+
+            font-size: 10px;
+
+        }
+
+        .table-header {
+            font-size: 12px;
+        }
+
+        .table-row img {
+            width: 17px;
+            height: 17px;
+
+        }
+
+
+    }
+
+    @media screen and (max-width: 692px) {
+
+
+        .table td {
+
+            font-size: 9px;
+
+        }
+
+        .table-header {
+            font-size: 10px;
+        }
+
+        .table-row img {
+            width: 15px;
+            height: 15px;
+
+        }
+
+        .main-right-bottom {
+            width: 140%;
+        }
+
+
+    }
 }

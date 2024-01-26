@@ -1,10 +1,10 @@
 .Customer_Complains {
 
-    #dashboard i {
+    #complaints i {
         color: var(--green-color-one);
     }
 
-    #dashboard h3 {
+    #complaints h3 {
         color: var(--green-color-one);
     }
 

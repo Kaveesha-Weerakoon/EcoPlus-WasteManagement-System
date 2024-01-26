@@ -189,6 +189,7 @@
   .main-right-top-back-button i {
     font-size: 28px;
     font-weight: 600;
+    color: var(--main-text-color);
   }
 
   .main-right-top-back-button i:hover {
@@ -209,13 +210,15 @@
   }
 
   .header-title h1 {
-    color: #4b5876;
+    color: var(--main-text-color);
     font-weight: 600;
+    font-size: 21px;
+    margin-bottom: 5px;
   }
 
   .header-title p {
-    color: #666;
-    font-size: 16px;
+    color: var(--main-text-color);
+    font-size: 15px;
   }
 
   .header-title p span {
@@ -235,12 +238,14 @@
   }
 
   .center-details-card-content h2 {
-    color: #4b5876;
+    color: var(--main-text-color);
     margin-bottom: 0.2rem;
+    font-size: 18px;
   }
 
   .center-details-card-content p {
-    color: #666;
+    color: var(--main-text-color);
+    font-size: 15px;
   }
 
   .analytics {
@@ -262,17 +267,18 @@
   .analytic:hover {
     background-color: #e4ffe2;
     box-shadow: rgba(17, 17, 26, 0.2) 4px 4px 20px;
-    scale: 1.1;
+    
   }
 
   .analytic-info h3 {
-    font-weight: 400;
-    color: #555;
-    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--main-text-color);
+    font-size: 15px;
   }
 
   .analytic-info h1 {
-    color: #4b5876;
+    color: var(--main-text-color);
+    font-size: 22px;
     font-weight: 600;
   }
 
@@ -281,7 +287,7 @@
     height: 3rem;
   }
 
-  .first-analytic .analytic-icon {
+  /* .first-analytic .analytic-icon {
     background: #dce5ff;
     width: 5rem;
     height: 5rem;
@@ -303,6 +309,12 @@
     background: #f4e7e7;
     width: 5rem;
     height: 5rem;
+  } */
+
+  .analytic-icon i{
+    font-size: 36px;
+    width: 5rem;
+    height: 5rem;
   }
 
   .analytic-icon {
@@ -315,16 +327,16 @@
   }
 
   .section-head {
-    font-size: 1.8rem;
-    color: #4b5876;
+    font-size: 18px;
+    color: var(--main-text-color);
     font-weight: 520;
     margin-bottom: 1rem;
     margin-top: .5rem;
   }
 
   .section-subhead {
-    font-size: 1.5rem;
-    color: #4b5876;
+    font-size: 18px;
+    color: var(--main-text-color);
     font-weight: 520;
     margin-bottom: 1rem;
     margin-top: 1rem;
@@ -368,19 +380,20 @@
 
   .center-manager-info h3,
   .center-manager-info h1 {
-    color: #4b5876;
+    color: var(--main-text-color);
   }
 
   .center-manager-info h3 {
     font-weight: 600;
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
+    font-size: 16px;
   }
 
   .center-manager-info h1 {
     font-weight: 400;
-    font-size: 1rem;
-    color: #555;
+    font-size: 15px;
+    color: var(--main-text-color);
   }
 
   .center-manager-change {
@@ -388,22 +401,22 @@
   }
 
   .center-manager-change button {
-    width: 100%;
-    height: 2.5rem;
+    width: 90%;
+    height: 33px;
     outline: none;
     color: white;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 500;
     border-radius: 5px;
     cursor: pointer;
     border: none;
     letter-spacing: 1px;
-    background: #1b6652;
+    background: var(--green-color-one);
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
   }
 
   .center-manager-change button:hover {
-    background: rgb(28, 79, 64);
+    background: var(--button-hover-green);
   }
 
   * {

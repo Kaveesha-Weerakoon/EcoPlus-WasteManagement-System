@@ -87,10 +87,11 @@
                                 href="<?php echo URLROOT?>/Admin/center_main_collectors/<?php echo $data['center']->id?>">
                                 <div class="analytic first-analytic">
                                     <div class="analytic-icon">
-                                        <img src="<?php echo IMGROOT?>/blue_collector.png" class="icon-image" alt="" />
+                                        <!-- <img src="<?php echo IMGROOT?>/blue_collector.png" class="icon-image" alt="" /> -->
+                                        <i class='bx bx-group'></i>
                                     </div>
                                     <div class="analytic-info">
-                                        <h4>Garbage Collectors</h4>
+                                        <h3>Garbage Collectors</h3>
                                         <h1><?php echo $data['no_of_collectors']?></h1>
                                     </div>
                                 </div>
@@ -99,10 +100,11 @@
                             <a href="<?php echo URLROOT?>/Admin/center_main_workers/<?php echo $data['center']->id?>">
                                 <div class="analytic second-analytic">
                                     <div class="analytic-icon">
-                                        <img src="<?php echo IMGROOT?>/red_worker.png" class="icon-image" alt="" />
+                                        <!-- <img src="<?php echo IMGROOT?>/red_worker.png" class="icon-image" alt="" /> -->
+                                        <i class='bx bx-group'></i>
                                     </div>
                                     <div class="analytic-info">
-                                        <h4>Center workers</h4>
+                                        <h3>Center workers</h3>
                                         <h1><?php echo $data['no_of_workers']?></h1>
                                     </div>
                                 </div>
@@ -111,10 +113,11 @@
                             <a href="<?php echo URLROOT?>/Admin/incoming_requests/<?php echo $data['center']->region?>">
                                 <div class="analytic third-analytic">
                                     <div class="analytic-icon">
-                                        <img src="<?php echo IMGROOT?>/green_requests.png" class="icon-image" alt="" />
+                                        <!-- <img src="<?php echo IMGROOT?>/green_requests.png" class="icon-image" alt="" /> -->
+                                        <i class='bx bx-send'></i>
                                     </div>
                                     <div class="analytic-info">
-                                        <h4>Total Requests</h4>
+                                        <h3>Total Requests</h3>
                                         <h1><?php echo $data['total_requests']?></h1>
                                     </div>
                                 </div>
@@ -123,10 +126,11 @@
                             <a href="">
                                 <div class="analytic fourth-analytic">
                                     <div class="analytic-icon">
-                                        <img src="<?php echo IMGROOT?>/brown_bin.png" class="icon-image" alt="" />
+                                        <!-- <img src="<?php echo IMGROOT?>/brown_bin.png" class="icon-image" alt="" /> -->
+                                        
                                     </div>
                                     <div class="analytic-info">
-                                        <h4>Garbage Stock</h4>
+                                        <h3>Garbage Stock</h3>
                                         <h1>20.7 <small>kg</small></h1>
                                     </div>
                                 </div>

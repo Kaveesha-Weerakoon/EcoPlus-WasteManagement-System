@@ -638,7 +638,7 @@
     $collector=$this->collectorModel->get_collector( $_SESSION['collector_id'] );
     $center=$this->centerModel->getCenterById($collector->center_id);
 
-   if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
       $jsonData = json_encode($assinged_Requests);
        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -676,8 +676,9 @@
         'creditData'=>'' ,
         'center'=>$center
 
-      ];
-    
+      ];        
+      $_SERVER['REQUEST_METHOD'] = 'GET';
+
       $this->view('collectors/request_assinged', $data);
     }
     
@@ -703,6 +704,45 @@
    
     $this->view('collectors/request_cancelled', $data);
    }
+
+   public function request_ontheway(){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $data=[
+        'id'=>trim($_POST['post_req_id'])
+      ];
+
+      $this->Request_Model->markontheway($data['id']);
+      header("Location: " . URLROOT . "/collectors/request_assinged");
+    }
+    else{ 
+    $data = [
+    'name'=>'',
+    'userid'=>'',
+    'email'=>'',
+    'contactno'=>'',
+    'address'=>'',
+    'city'=>'',
+    'current'=>'',
+    'new_pw'=>'',
+    're_enter_pw'=>'',
+    'current_err'=>'',
+    'new_pw_err'=>'',
+    're_enter_pw_err'=>'',
+    'change_pw_success'=>'',
+    'name_err'=>'',
+    'address_err'=>'',
+    'contactno_err' =>'',
+    'city_err'=>'',
+    'profile_err'=>'',
+    'success_message'=>''
+
+
+    ];
+    $this->view('collectors/request_assinged', $data);
+
+    }
+  }
 
    public function enterWaste_And_GenerateEcoCredits($req_id) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {

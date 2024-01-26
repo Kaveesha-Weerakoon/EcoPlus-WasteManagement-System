@@ -10,7 +10,7 @@
     }
 
     public function register_discount_agent($data){
-      $this->db->query('INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, "DiscountAgent")');
+      $this->db->query('INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, "discountagent")');
       // Bind values
       $this->db->bind(':name', $data['name']);
       $this->db->bind(':email', $data['email']);

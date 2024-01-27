@@ -163,7 +163,7 @@
             <img src="<?php echo IMGROOT?>/check.png" alt="">
             <h2>Success!!</h2>
             <p>Center Manager has been registered successfully</p>
-            <a href="<?php echo URLROOT?>/admin/discount_agent"><button type="button" >OK</button></a>
+            <a href="<?php echo URLROOT?>/admin/discount_agents"><button type="button" >OK</button></a>
 
         </div>
         </div>

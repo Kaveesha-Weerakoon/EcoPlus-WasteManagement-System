@@ -70,29 +70,46 @@
         border-radius: 50%;
     }
 
-    /*Location Pop*/
-    .location_pop {
-        display: none;
+    .overlay {
         position: fixed;
         top: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
-        display: none;
-        align-items: center;
-        justify-content: center;
         width: 100%;
         height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        display: none;
+    }
+
+    /*Location Pop*/
+    .location_pop {
+        display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background-color: rgba(0, 0, 0, 0);
+        z-index: 4;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+    }
+
+    .location_pop.active {
+        transform: translate(-50%, -50%) scale(1);
     }
 
     .location_pop_content {
-        width: 70%;
-        height: 78%;
+        width: 700px;
         padding: 10px;
         background-color: #f1f2f6;
         border-radius: 10px;
         padding: 20px;
         padding-bottom: 40px;
+        height: 350px;
+        overflow: hidden;
     }
 
     .location_pop_map {
@@ -204,27 +221,36 @@
 
      /*request details*/
      .request-details-pop {
+        display: flex;
         position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
-        display: none;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 4;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 100%;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        background-color: var(--main-text-color);
+    }
+
+    .request-details-pop.active {
+        transform: translate(-50%, -50%) scale(1);
+            
     }
 
     .request-details-pop-form {
-        width: 35%;
+        width: 550px;
         background: white;
         border-radius: 6px;
         top: 0;
         position: relative;
         text-align: center;
         padding: 20px;
-        color: #333;
+        color: var(--main-text-color);
         display: flex;
         align-items: center;
         justify-content: center;

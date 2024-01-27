@@ -69,33 +69,41 @@
                         <div class="main-right-bottom-two-cont A" onclick="redirect_customers()">
                             <div class="icon_container">
                                 <i class='bx bx-group'></i>
+                            </div>   
+                            <div class="content_container">
+                                <h3>Customers</h3>
+                                <h2 id="customer_count" style="font-weight:bold"></h2>
                             </div>
-                            <h4 id="customer_count" style="font-weight:bold"></h4>
-                            <h3>Customers</h3>
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_collectors()">
                             <div class=" icon_container">
                                 <i class='bx bx-group'></i>
                             </div>
-                            <h4 id="collector_count" style="font-weight:bold"></h4>
-
-                            <h3>Collectors</h3>
+                            <div class="content_container">
+                                <h3>Collectors</h3>
+                                <h2 id="collector_count" style="font-weight:bold"></h2>
+                            </div>
+                            
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_discountAgents()">
                             <div class="icon_container">
                                 <i class='bx bx-group'></i>
                             </div>
-                            <h4 style="font-weight:bold">12</h4>
-
-                            <h3>Discount Agents</h3>
+                            <div class="content_container">
+                                <h3>Discount Agents</h3>
+                                <h2 style="font-weight:bold">12</h2>
+                            </div>
+                    
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_centermanagers()">
                             <div class=" icon_container">
                                 <i class='bx bx-group'></i>
                             </div>
-                            <h4 style="font-weight:bold" id="cm_count"></h4>
-
-                            <h3>Center Managers</h3>
+                            <div class="content_container">
+                                <h3>Center Managers</h3>
+                                <h2 style="font-weight:bold" id="cm_count"></h2>
+                            </div>
+                               
                         </div>
 
                     </div>

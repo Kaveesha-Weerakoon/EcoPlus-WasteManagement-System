@@ -85,7 +85,7 @@
                             </div>
                             
                         </div>
-                        <div class="main-right-bottom-two-cont A">
+                        <div class="main-right-bottom-two-cont A" onclick="redirect_discountAgents()">
                             <div class="icon_container">
                                 <i class='bx bx-group'></i>
                             </div>
@@ -226,6 +226,13 @@ function redirect_collectors() {
 function redirect_centermanagers() {
     var linkUrl = "<?php echo URLROOT?>/admin/center_managers"; // Replace with your desired URL
     window.location.href = linkUrl;
+}
+
+function redirect_discountAgents() {
+    var linkUrl = "<?php echo URLROOT?>/admin/discount_agents"; // Replace with your desired URL
+   
+    window.location.href = linkUrl;
+  
 }
 
 function redirect_credits_per() {

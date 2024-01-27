@@ -91,9 +91,9 @@
                                             <td><?php echo $center_manager->email?></td>
                                             <td> <?php echo $center_manager->assinged?></td>
                                             <td> <?php echo $center_manager->assigned_center_id?></td>
-                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/cm_personal_details_view/<?php echo $center_manager->user_id ?>"><img src="<?php echo IMGROOT?>/personal_details_icon.png" alt=""></a></td>
-                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_update/<?php echo $center_manager->user_id ?>"><img src="<?php echo IMGROOT?>/update.png" alt=""></a></td>
-                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_delete_confirm/<?php echo $center_manager->user_id?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
+                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/cm_personal_details_view/<?php echo $center_manager->user_id ?>"><i class='bx bxs-user' style="font-size: 29px;"></i></a></td>
+                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_update/<?php echo $center_manager->user_id ?>"><i class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"></i></a></td>
+                                            <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/center_managers_delete_confirm/<?php echo $center_manager->user_id?>"><i class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </table>

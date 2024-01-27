@@ -91,10 +91,10 @@
                                 <td> <?php echo $center_worker->dob?></td>
                                 <td class="cancel-open"><a
                                         href="<?php echo URLROOT?>/centermanagers/center_workers_update/<?php echo $center_worker->id ?>">
-                                        <i class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"></a></td>
+                                        <i class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"></i></a></td>
                                 <td class="cancel-open"><a
                                         href="<?php echo URLROOT?>/centermanagers/center_workers_delete_confirm/<?php echo $center_worker->id ?>">
-                                        <i class='bx bxs-trash' style="font-size: 29px;"></a></td>
+                                        <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
                             </tr>
                             <?php endforeach; ?>
 

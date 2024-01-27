@@ -2,6 +2,7 @@
   class CreditDiscountsAgent extends Controller {
     public function __construct(){
       $this->User_Model=$this->model('User');
+      $this->discount_agentModel=$this->model('Discount_Agent');
 
    
         
@@ -29,19 +30,17 @@
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-        $id=$_SESSION['collector_id']; 
-        $user=$this->collectorModel->getCollectorById($id);
+        $id=$_SESSION['agent_id']; 
+        $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($id);
 
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         
         $data=[
           'name'=>trim($_POST['name']),
-         'userid'=>'',
          'email'=>trim($_POST['email']),
-         'profile_image_name' => $_SESSION['collector_email'].'_'.$_FILES['profile_image']['name'],
+         'profile_image_name' => $_SESSION['agent_email'].'_'.$_FILES['profile_image']['name'],
          'contactno'=>trim($_POST['contactno']),
          'address'=>trim($_POST['address']),
-         'city'=>'',
          'current'=>'',
          'new_pw'=>'',
          're_enter_pw'=>'',
@@ -52,7 +51,6 @@
          'name_err'=>'',
          'address_err'=>'',
          'contactno_err' =>'',
-         'city_err'=>'',
          'profile_err'=>'',
          'success_message'=>''];
 
@@ -78,13 +76,13 @@
         if(empty($data['name_err']) && empty($data['contactno_err'])  && empty($data['address_err'])){
        
            if ($_FILES['profile_image']['error'] == 4) {
-                $this->collectorModel->editprofile($data);
+                $this->discount_agentModel->editprofile($data);
                 $data['success_message']="Profile Details Updated Successfully";
                 $data['change_pw_success']='True';
                 $data['profile_err'] = '';
            } else {
-             $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/collector/' . $user->image;    
-            if (updateImage($old_image_path, $_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/collector/')) {
+             $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/credit_discount_agent/' .$agent_by_id->image;    
+            if (updateImage($old_image_path, $_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/credit_discount_agent/')) {
               $this->collectorModel->editprofile_withimg($data);
               $data['success_message']="Profile Details Updated Successfully";
               $data['change_pw_success']='True';
@@ -92,22 +90,20 @@
             
             } else {
                 $data['profile_err'] = 'Error uploading the profile image';
-                $this->view('collectors/editprofile', $data); 
+                $this->view('credit_discount_agents/editprofile', $data); 
             }
             
           }
         }
 
-        $this->view('collectors/editprofile', $data);
+        $this->view('credit_discount_agents/editprofile', $data);
        }
        else{ 
 
         $data=['name'=>'',
-        'userid'=>'',
         'email'=>'',
         'contactno'=>'',
         'address'=>'',
-        'city'=>'',
         'current'=>'',
         'new_pw'=>'',
         're_enter_pw'=>'',
@@ -118,18 +114,17 @@
         'name_err'=>'',
         'address_err'=>'',
         'contactno_err' =>'',
-        'city_err'=>'',
         'profile_err'=>'',
         'success_message'=>''];
 
-        $id=$_SESSION['collector_id']; 
-        $user=$this->collectorModel->getCollectorById($id);
-        $data['name']=$_SESSION['collector_name'];
-        $data['contactno']=$user->contact_no;
-        $data['address']=$user->address;      
-        $data['email']=$_SESSION['collector_email'];
+        $id=$_SESSION['agent_id']; 
+        $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($id);
+        $data['name']=$_SESSION['agent_name'];
+        $data['contactno']=$agent_by_id->contact_no;
+        $data['address']=$agent_by_id->address;      
+        $data['email']=$_SESSION['agent_email'];
 
-        $this->view('collectors/editprofile', $data);
+        $this->view('credit_discount_agents/editprofile', $data);
        }
   
    
@@ -141,11 +136,9 @@
       
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); $data=[
           'name'=>'',
-          'userid'=>'',
           'email'=>'',
           'contactno'=>'',
           'address'=>'',
-          'city'=>'',
           'current'=>trim($_POST['current']),
           'new_pw'=>trim($_POST['new_pw']),
           're_enter_pw'=>trim($_POST['re_enter_pw']),
@@ -156,17 +149,16 @@
           'name_err'=>'',
           'address_err'=>'',
           'contactno_err' =>'',
-          'city_err'=>'' ,
           'profile_err'=>'',
           'success_message'=>''
         ];
   
   
-        $id=$_SESSION['collector_id']; 
-        $user=$this->collectorModel->getCollectorById($id);
-        $data['name']=$_SESSION['collector_name'];
-        $data['contactno']=$user->contact_no;
-        $data['address']=$user->address;
+        $id=$_SESSION['agent_id']; 
+        $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($id);
+        $data['name']=$_SESSION['agent_name'];
+        $data['contactno']=$agent_by_id->contact_no;
+        $data['address']=$agent_by_id->address; 
      
   
         if (empty($data['current'])) {
@@ -187,15 +179,15 @@
   
       if(empty($data['new_pw_err']) && empty($data['current_err']) && empty($data['re_enter_pw_err'])) {
            
-              if($this->userModel->pw_check($_SESSION['collector_id'],$data['current'])){
+              if($this->userModel->pw_check($_SESSION['agent_id'],$data['current'])){
                 if($data['new_pw']!=$data['re_enter_pw']){
                   $data['new_pw_err'] = 'Passwords Does not match';
                 }
                 else{
-                  if($this->userModel->change_pw($_SESSION['collector_id'],$data['re_enter_pw'])){
+                  if($this->userModel->change_pw($_SESSION['agent_id'],$data['re_enter_pw'])){
                     $data['success_message']="Password Changed Successfully";
                     $data['change_pw_success']='True';
-                    $this->view('collectors/editprofile', $data);
+                    $this->view('credit_discount_agents/editprofile', $data);
                   }
                 }
               }
@@ -205,16 +197,14 @@
                    
         }
   
-        $this->view('collectors/editprofile', $data);
+        $this->view('credit_discount_agents/editprofile', $data);
         }
         else{
           $data = [
             'name'=>'',
-            'userid'=>'',
             'email'=>'',
             'contactno'=>'',
             'address'=>'',
-            'city'=>'',
             'current'=>'',
             'new_pw'=>'',
             're_enter_pw'=>'',
@@ -225,13 +215,12 @@
             'name_err'=>'',
             'address_err'=>'',
             'contactno_err' =>'',
-            'city_err'=>'',
             'profile_err'=>'',
             'success_message'=>''
   
   
           ];
-          $this->view('customers/editprofile', $data);
+          $this->view('credit_discount_agents/editprofile', $data);
   
         }
   

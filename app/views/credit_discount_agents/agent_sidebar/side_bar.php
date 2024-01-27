@@ -77,7 +77,7 @@ function redirect_history() {
 }
 
 function redirect_edit_profile() {
-    var linkUrl = "<?php echo URLROOT?>/customers/editprofile"; // Replace with your desired URL
+    var linkUrl = "<?php echo URLROOT?>/CreditDiscountsAgent/editprofile"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
 var checkbox = document.getElementById('toggle-checkbox');

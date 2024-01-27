@@ -5,6 +5,7 @@
            $this->center_managerModel=$this->model('Center_Manager');
            $this->collectorModel=$this->model('Collector');
            $this->customerModel=$this->model('Customer');
+           $this->discount_agentModel=$this->model('Discount_Agent');
           }
 
     public function register(){
@@ -260,7 +261,10 @@
               }
 
              else if($loggedInUser->role=="discountagent"){
+                $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($loggedInUser->id);
+
                 $this->createDiscountAgentSession($loggedInUser);
+                $_SESSION['agent_profile'] = $agent_by_id->image;
               }
               
             } else {

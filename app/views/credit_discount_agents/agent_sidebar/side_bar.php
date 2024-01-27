@@ -33,7 +33,7 @@
     </div>
     <div class="main-left-down">
         <h1>SETTINGS</h1>
-        <a href="<?php echo URLROOT?>/customers/logout">
+        <a href="<?php echo URLROOT?>/CreditDiscountsAgent/logout">
 
             <div class="main-left-middle-content">
                 <div class="main-left-middle-content-icon">

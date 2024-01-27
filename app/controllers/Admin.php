@@ -944,6 +944,18 @@
 
     }
 
+    public function completed_requests($region){
+      $center=$this->center_model->getCenterByRegion($region);
+
+      $data =[
+        'center_region'=> $region,
+        'center'=> $center
+      ];
+
+      $this->view('admin/center_main_request_completed', $data);
+
+    }
+
     public function complaint_centers(){
 
       $center_complaints= $this->center_complaints_model->get_center_complaints();

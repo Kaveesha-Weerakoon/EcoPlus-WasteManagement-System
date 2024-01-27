@@ -46,7 +46,7 @@
 
     public function get_discount_agent(){
       $this->db->query('SELECT *,
-              discount_agents.id as cmID,
+              discount_agents.id as AgentID,
               users.id as userId
               FROM discount_agents
               INNER JOIN users
@@ -54,6 +54,31 @@
       $results = $this->db->resultSet();
       return $results;
     }
+
+    public function getDiscountAgentByID($data){
+
+      $this->db->query('SELECT * FROM discount_agents WHERE user_id = :agentId');
+      $this->db->bind(':agentId', $data);
+
+      $row = $this->db->single();
+
+      return $row;
+    }
+
+
+    public function discount_agent_delete($id){
+      $this->db->query('DELETE FROM users WHERE id = :discountAgentId');
+      $this->db->bind(':discountAgentId', $id);
+
+      if($this->db->execute()){
+        return true;
+      }
+      else{
+        return false;
+      }
+
+    }
+    
 
  
   }

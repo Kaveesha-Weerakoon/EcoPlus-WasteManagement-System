@@ -40,9 +40,10 @@
 
                     </div>
                     <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
+                    <img src="<?php echo IMGROOT?>/img_upload/credit_discount_agent/<?php echo $_SESSION['agent_profile']?>" alt="">
                         <div class="main-right-top-profile-cont">
                         <h3><?php echo $_SESSION['agent_name']?></h3>
+                        <p>ID : D <?php echo $_SESSION['agent_id']?></p>
                         </div>
                     </div>
                 </div>

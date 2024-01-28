@@ -657,6 +657,7 @@
 
    public function request_assinged(){
     $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
+    $types=$this->garbageTypeModel->get_all();
 
     $collector=$this->collectorModel->get_collector( $_SESSION['collector_id'] );
     $center=$this->centerModel->getCenterById($collector->center_id);
@@ -666,6 +667,7 @@
       $jsonData = json_encode($assinged_Requests);
        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
        $data = [
+        'types'=>$types,
         'assigned_requests' => $assinged_Requests,
         'jsonData' => $jsonData,
         'request_id'=>trim($_POST['id']),
@@ -712,7 +714,8 @@
     else{
       $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
       $jsonData = json_encode($assinged_Requests);
-      $data = [
+      $data = [        
+        'types'=>$types,
         'assigned_requests' => $assinged_Requests,
         'jsonData' => $jsonData,
         'popup'=>'',
@@ -816,7 +819,8 @@
             'popup' => 'True',
             'popup_confirm_collect'=>$pop_eco,
             'note_err'=>'',
-            'creditData'=>''
+            'creditData'=>'',
+            'types'=>$types
         ];
 
         foreach ($types as $type) {
@@ -906,7 +910,8 @@
           'note' => '',
           'popup' => 'True',
           'popup_confirm_collect'=>'',
-         
+          'types'=>$types,
+
           'note_err'=>'',
           'creditData'=>''
           ]; 
@@ -944,16 +949,11 @@
           'jsonData' => $jsonData,
           'req_id'=>$req_id,
           'collector_id' => $collector_id,
-          'polythene_quantity' => trim($_POST['polythene_quantity']),
-          'plastic_quantity' => trim($_POST['plastic_quantity']),
-          'glass_quantity' => trim($_POST['glass_quantity']),
-          'paper_quantity' => trim($_POST['paper_quantity']),
-          'electronic_quantity' => trim($_POST['electronic_quantity']),
-          'metals_quantity' => trim($_POST['metals_quantity']),
           'note' => trim($_POST['note']),
           'popup' => 'True',
           'popup_confirm_collect'=>$pop_eco,
-          
+          'types'=>$types,
+
           'note_err'=>'',
           'creditData'=>''
        ];
@@ -1070,7 +1070,9 @@
         'note' => '',
         'popup' => 'True',
         'popup_confirm_collect'=>'',
-        'note_err'=>'',
+        'note_err'=>'',         
+       'types'=>$types,
+
         'creditData'=>''
         ]; 
         foreach ($types as $type) {

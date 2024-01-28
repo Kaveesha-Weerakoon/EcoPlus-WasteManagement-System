@@ -136,17 +136,19 @@
 
     public function release_garbage_stocks($data){
       try{
-        $this->db->query('INSERT INTO released_stocks (center_id, plastic, polythene, metals, glass, paper_waste, electronic_waste, released_person, release_note)
-                        VALUES (:center_id, :plastic, :polythene, :metals, :glass, :paper_waste, :electronic_waste, :released_person, :release_note)');
+        $this->db->query('INSERT INTO released_stocks (center_id, plastic, polythene, metals, glass, paper_waste, electronic_waste, released_person, release_note,income)
+                        VALUES (:center_id, :plastic, :polythene, :metals, :glass, :paper_waste, :electronic_waste, :released_person, :release_note,:income)');
         $this->db->bind(':center_id', $data['center_id']);
         $this->db->bind(':plastic', $data['plastic']);
         $this->db->bind(':polythene', $data['polythene']);
         $this->db->bind(':metals', $data['metals']);
         $this->db->bind(':glass', $data['glass']);
-        $this->db->bind(':paper_waste', $data['paper_waste']);
-        $this->db->bind(':electronic_waste', $data['electronic_waste']);
+        $this->db->bind(':paper_waste', $data['paper']);
+        $this->db->bind(':electronic_waste', $data['electronic']);
         $this->db->bind(':released_person', $data['released_person']);
         $this->db->bind(':release_note', $data['release_note']);
+        $this->db->bind(':income', $data['total_sell_price']);
+
         $result1 = $this->db->execute();
 
         if($result1){
@@ -167,8 +169,8 @@
           $this->db->bind(':polythene', $data['polythene']);
           $this->db->bind(':metals', $data['metals']);
           $this->db->bind(':glass', $data['glass']);
-          $this->db->bind(':paper_waste', $data['paper_waste']);
-          $this->db->bind(':electronic_waste', $data['electronic_waste']);
+          $this->db->bind(':paper_waste', $data['paper']);
+          $this->db->bind(':electronic_waste', $data['electronic']);
           $result2=$this->db->execute();
 
           if($result2){

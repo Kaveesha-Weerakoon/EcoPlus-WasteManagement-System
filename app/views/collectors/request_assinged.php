@@ -402,7 +402,7 @@
                         <h2>Major Reason</h2>
                         <div class="cancel_fine_container">
                             <label>
-                                <input type="radio" name="attribute" value="No_Response">
+                                <input type="radio" name="attribute" value="No Response">
                                 No Response
                             </label>
 

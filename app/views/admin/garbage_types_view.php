@@ -74,7 +74,7 @@
                                 <tr class="table-header">
                                     <th>Garbage ID</th>
                                     <th>Garbage Type</th>
-                                    <th>credits per waste quantity</th>
+                                    <th>Credits per waste quantity</th>
                                     <th>Approximate Amount</th>
                                     <th>Minimum Amount</th>
                                     <th>Selling Price</th>
@@ -116,52 +116,51 @@
                             <div class="update-topic-line"></div>
                         </center>
                         <form class="updatePopupform" method="post"
-                            action="<?php echo URLROOT;?>/centermanagers/center_workers_update/<?php echo $data['id'];?>">
+                            action="<?php echo URLROOT;?>/admin/garbage_types_update/<?php echo $data['id'];?>">
                             <div class="updateData A">
-                                <label>Name</label><br>
-                                <input type="text" name="name" placeholder="Enter name"
-                                    value="<?php echo $data['name']; ?>"><br>
+                                <label>Garbage Type</label><br>
+                                <input type="text" name="garbage_type" placeholder="Enter garbage type"
+                                    value="<?php echo $data['garbage_type']; ?>" disabled><br>
                                 <div class="error-div" style="color:red">
-                                    <?php echo $data['name_err']?>
+                                    <?php echo $data['garbage_type_err']?>
                                 </div>
                             </div>
                             <div class="updateData">
-                                <label>NIC</label><br>
-                                <input type="text" name="nic" placeholder="Enter NIC"
-                                    value="<?php echo $data['nic']; ?>"><br>
-                                <div class="error-div" style="color:red">
-                                    <?php echo $data['nic_err']?>
-                                </div>
+                                <label>Credits per waste quantity</label><br>
+                                <input type="text" name="credit_per_waste_quantity" placeholder="Enter Credits per waste quantity"
+                                    value="<?php echo $data['credit_per_waste_quantity']; ?>"><br>
+                                <!-- <div class="error-div" style="color:red">
+                                    <?php echo $data['credit_per_waste_quantity_err']?>
+                                </div> -->
                             </div>
                             <div class="updateData">
-                                <label>Address</label><br>
-                                <input type="text" name="address" placeholder="Enter Address"
-                                    value="<?php echo $data['address']; ?>"><br>
-                                <div class="error-div" style="color:red">
-                                    <?php echo $data['address_err']?>
-                                </div>
+                                <label>Approximate Amount</label><br>
+                                <input type="text" name="approximate_amount" placeholder="Enter Approximate Amount"
+                                    value="<?php echo $data['approximate_amount']; ?>"><br>
+                                <!-- <div class="error-div" style="color:red">
+                                    <?php echo $data['approximate_amount_err']?>
+                                </div> -->
                             </div>
                             <div class="updateData">
-                                <label>Contact No</label><br>
-                                <input type="text" name="contact_no" placeholder="Enter Contact No"
-                                    value="<?php echo $data['contact_no']; ?>"><br>
-                                <div class="error-div" style="color:red">
-                                    <?php echo $data['contact_no_err']?>
-                                </div>
+                                <label>Minimum Amount</label><br>
+                                <input type="text" name="minimum_amount" placeholder="Enter Minimum Amount"
+                                    value="<?php echo $data['minimum_amount']; ?>"><br>
+                                <!-- <div class="error-div" style="color:red">
+                                    <?php echo $data['minimum_amount_err']?>
+                                </div> -->
                             </div>
                             <div class="updateData B">
-                                <label>DOB</label><br>
-                                <input type="date" name="dob" placeholder="Enter DOB"
-                                    value="<?php echo $data['dob']; ?>"><br>
-                                <div class="error-div" style="color:red">
-                                    <?php echo $data['dob_err']?>
-                                </div>
+                                <label>Selling Price</label><br>
+                                <input type="text" name="selling_price" placeholder="Enter Selling Price"
+                                    value="<?php echo $data['selling_price']; ?>"><br>
+                                <!-- <div class="error-div" style="color:red">
+                                    <?php echo $data['selling_price_err']?>
+                                </div> -->
                             </div>
 
                             <div class="btns1">
                                 <button type="submit" class="updatebtn">Update</button>
-                                <a href="<?php echo URLROOT?>/centermanagers/center_workers"><button type="button"
-                                        class="cancelbtn1">Cancel</button></a>
+                               <button type="button" class="cancelbtn1" id="close_update_popup">Cancel</button></a>
                             </div>
 
                         </form>
@@ -183,6 +182,16 @@ function open_update_popup(){
     document.getElementById('overlay').style.display = "flex";
 
 }
+
+document.addEventListener('DOMContentLoaded', function(){
+    var close_update_popup =document.getElementById('close_update_popup');
+
+    close_update_popup.addEventListener('click', function(){
+        var updatePopup = document.getElementById('update_popup');
+        updatePopup.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+    });
+});
 
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

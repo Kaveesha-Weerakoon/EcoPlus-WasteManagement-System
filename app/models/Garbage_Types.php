@@ -17,4 +17,17 @@
     }
     }
 
+    public function get_details_by_id($id){
+      try{
+        $this->db->query('SELECT * FROM garbage_types WHERE ID= :id');
+        $this->db->bind(':id', $id);
+
+        $result = $this->db->single();
+        return $result;
+
+      }catch (PDOException $e){
+        return false;
+      }
+    }
+
   }

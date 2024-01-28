@@ -94,7 +94,7 @@
                                     <td><?php echo $garbage_type->minimum_amount?></td>
                                     <td><?php echo $garbage_type->selling_price?></td>
                                     <td><i class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"
-                                        onclick="open_update_popup()"></i></td>
+                                        onclick="open_update_popup(<?php echo $garbage_type->ID?>)"></i></td>
                                     
                                 </tr>
                                 <?php endforeach; ?>
@@ -116,7 +116,7 @@
                             <div class="update-topic-line"></div>
                         </center>
                         <form class="updatePopupform" method="post"
-                            action="<?php echo URLROOT;?>/admin/garbage_types_update/<?php echo $data['id'];?>">
+                            action="<?php echo URLROOT;?>/admin/garbage_types_update/<?php echo $data['id'];?>" id="update_form">
                             <div class="updateData A">
                                 <label>Garbage Type</label><br>
                                 <input type="text" name="garbage_type" placeholder="Enter garbage type"
@@ -176,11 +176,23 @@
 </div>
 <script>
 
-function open_update_popup(){
+function open_update_popup(garbage_id){
+
+    var url = "<?php echo URLROOT ?>/admin/garbage_types_update/" + garbage_id;
+    window.location.href = url;
+    
     var updatePopup = document.getElementById('update_popup');
     updatePopup.classList.add('active');
     document.getElementById('overlay').style.display = "flex";
 
+    
+}
+
+function submitForm($garbage_id){
+    var form = document.getElementById('update_form');
+    form.action = "<?php echo URLROOT;?>/admin/garbage_types_update/" + $garbage_id;
+    form.method = 'post';
+    form.submit();
 }
 
 document.addEventListener('DOMContentLoaded', function(){

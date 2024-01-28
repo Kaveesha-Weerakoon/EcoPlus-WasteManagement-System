@@ -1200,11 +1200,14 @@
     }
 
     public function garbage_types_update($id){
+      $garbage_types = $this->garbage_types_model->get_all();
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $data =[
           'id'=> $id,
+          'garbage_types'=> $garbage_types,
           'garbage_type'=> trim($_POST['garbage_type']),
           'credit_per_waste_quantity' => trim($_POST['credit_per_waste_quantity']),
           'approximate_amount'=> trim($_POST['approximate_amount']),
@@ -1222,16 +1225,18 @@
 
 
       }else{
-
-        $garbage_types = $this->garbage_types_model->get_details_by_id($id);
+        
+        $garbage_types = $this->garbage_types_model->get_all();
+        $garbage_type = $this->garbage_types_model->get_details_by_id($id);
 
         $data =[
           'id'=> $id,
-          'garbage_type'=> $garbage_types->name,
-          'credit_per_waste_quantity' => $garbage_types->credits_per_waste_quantity,
-          'approximate_amount'=> $garbage_types->approxiamte_amount,
-          'minimum_amount'=> $garbage_types->minimum_amount,
-          'selling_price'=> $garbage_types->selling_price,
+          'garbage_types'=> $garbage_types,
+          'garbage_type'=> $garbage_type->name,
+          'credit_per_waste_quantity' => $garbage_type->credits_per_waste_quantity,
+          'approximate_amount'=> $garbage_type->approxiamte_amount,
+          'minimum_amount'=> $garbage_type->minimum_amount,
+          'selling_price'=> $garbage_type->selling_price,
           'garbage_type_err'=>'',
           'credit_per_waste_quantity_err'=>'',
           'approximate_amount_err'=>'',

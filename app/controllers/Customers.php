@@ -15,6 +15,8 @@
       $this->Center_Model=$this->model('Center');
       $this->User_Model=$this->model('User');
       $this->centermanagerModel=$this->model('Center_Manager');
+      $this->discount_agentModel=$this->model('Discount_Agent');
+
 
       if(!isLoggedIn('user_id')){
         redirect('users/login');
@@ -954,6 +956,22 @@
         header("Location: " . URLROOT . "/customers/.$url.");        
 
      }
+    }
+
+    public function discount_agents(){
+
+      $discount_agent = $this->discount_agentModel->get_discount_agent();
+      $data = [
+        'discount_agents' => $discount_agent,
+        'confirm_delete' =>'',
+        'success'=>'',
+        'click_update' =>'',
+        'update_success'=>'',
+        'confirm_delete'=> '',
+        'personal_details_click'=>''
+      ];
+     
+      $this->view('customers/discount_agents', $data);
     }
 
 }

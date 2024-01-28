@@ -191,8 +191,23 @@
                                 action="<?php echo URLROOT;?>/collectors/enterWaste_And_GenerateEcoCredits/<?php echo  $data['req_id']?>"
                                 class="main-right-bottom-content" method="post">
                                 <div class="user-details">
-                                    <div class="left-details">
+                                    <div class="user-details-cont">
+                                        <?php foreach($data['types'] as $type) : ?>
                                         <div class="main-right-bottom-content-content">
+                                            <span class="details"><?php echo ucfirst($type->name); ?></span>
+                                            <div class="input-container">
+                                                <i class="<?php echo $type->icon?>"></i>
+                                                <input name="<?php echo $type->name?>_quantity" type="text"
+                                                    placeholder="Enter Quantity in Kg"
+                                                    value="<?php echo $data["{$type->name}_quantity"]; ?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data["{$type->name}_quantity_err"]?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php endforeach; ?>
+
+                                        <!-- <div class="main-right-bottom-content-content">
                                             <span class="details">Polythene</span>
                                             <div class="input-container">
                                                 <i class="icon fas fa-trash"></i>
@@ -228,8 +243,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="right-details">
                                         <div class="main-right-bottom-content-content">
                                             <span class="details">Paper Waste</span>
                                             <div class="input-container">
@@ -265,8 +278,10 @@
                                                     <?php echo $data['metals_quantity_err']?>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
+
                                     </div>
+
                                     <div class="wide-note">
                                         <div class="main-right-bottom-content-content A">
                                             <span class="details">Note</span>
@@ -317,19 +332,22 @@
                             </h6>
 
                         </div>
-                        <?php foreach($data['creditData'] as $type) : ?>
-                        <div class="cont">
-                            <h5><?php echo $type->name; ?></h5>
-                            <h6><?php echo empty($data[$type->name . '_quantity']) ? 0 : $data[$type->name . '_quantity']; ?>
-                            </h6>
-                            <h6>*</h6>
-                            <h6><?php echo $type->credits_per_waste_quantity; ?></h6>
-                            <h6>=</h6>
-                            <h6><?php echo floatval($data[$type->name . '_quantity']) * $type->credits_per_waste_quantity; ?>
-                            </h6>
-                        </div>
-                        <?php endforeach; ?>
+                        <div class="details">
 
+
+                            <?php foreach($data['creditData'] as $type) : ?>
+                            <div class="cont">
+                                <h5><?php echo $type->name; ?></h5>
+                                <h6><?php echo empty($data[$type->name . '_quantity']) ? 0 : $data[$type->name . '_quantity']; ?>
+                                </h6>
+                                <h6>*</h6>
+                                <h6><?php echo $type->credits_per_waste_quantity; ?></h6>
+                                <h6>=</h6>
+                                <h6><?php echo floatval($data[$type->name . '_quantity']) * $type->credits_per_waste_quantity; ?>
+                                </h6>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
 
                         <h4>Total = <?php echo $data['credit_Amount']?></h4>
                         <div class="buttons">

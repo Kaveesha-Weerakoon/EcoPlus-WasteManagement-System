@@ -17,13 +17,13 @@
   }
 
   .table-header {
-      grid-template-columns: 20% 20% 20% 20% 20%;
+      grid-template-columns: 16% 16% 16% 16% 16% 20%;
   }
 
   .table-row {
       height: 52px;
       display: grid;
-      grid-template-columns: 20% 20% 20% 20% 20%;
+      grid-template-columns: 16% 16% 16% 16% 16% 20%;
   }
 
   .table td {

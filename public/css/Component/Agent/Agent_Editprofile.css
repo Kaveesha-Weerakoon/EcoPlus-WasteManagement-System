@@ -176,13 +176,13 @@
       align-items: center;
       display: flex;
       background-color: var(--background-color-right);
-      overflow: scroll;
+     
       box-sizing: border-box;
   }
 
   .main-right-bottom-content {
       width: 70%;
-      height: 93%;
+      height: 98%;
       box-shadow: var(--box-shadow2);
       border-radius: 10px;
       box-sizing: border-box;

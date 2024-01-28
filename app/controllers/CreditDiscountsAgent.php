@@ -179,12 +179,12 @@
   
       if(empty($data['new_pw_err']) && empty($data['current_err']) && empty($data['re_enter_pw_err'])) {
            
-              if($this->userModel->pw_check($_SESSION['agent_id'],$data['current'])){
+              if($this->User_Model->pw_check($_SESSION['agent_id'],$data['current'])){
                 if($data['new_pw']!=$data['re_enter_pw']){
                   $data['new_pw_err'] = 'Passwords Does not match';
                 }
                 else{
-                  if($this->userModel->change_pw($_SESSION['agent_id'],$data['re_enter_pw'])){
+                  if($this->User_Model->change_pw($_SESSION['agent_id'],$data['re_enter_pw'])){
                     $data['success_message']="Password Changed Successfully";
                     $data['change_pw_success']='True';
                     $this->view('credit_discount_agents/editprofile', $data);

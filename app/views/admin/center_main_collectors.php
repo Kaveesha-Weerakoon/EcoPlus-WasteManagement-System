@@ -103,8 +103,8 @@
                                 <td><i onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
                                     class='bx bxs-truck' style="font-size: 29px;"></i></td>
                                 
-                                <td><i onclick="opencolAssistantsdetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                    class='bx bxs-group' style="font-size: 29px;"></i></td>
+                                <td><a href="" id="collector_assistants_pop"><i onclick="opencolAssistantsdetails(<?php echo $collector->id ?>)"
+                                    class='bx bxs-group' style="font-size: 29px;"></i></a></td>
                             </tr>   
                             <?php endforeach; ?>  
                         </table>            
@@ -214,14 +214,16 @@
                             </div>
                             <div class="collector-assis-table-down">
                                 <table class="popup-table">
+                                <?php foreach($data['collector_assistants'] as $collector_assistant) : ?>
                                     <tr class="popup-table-row">
-                                        <td>Dinithi</td>
-                                        <td>200123453456</td>
-                                        <td>kelaniya</td>
-                                        <td>0712223344</td>
-                                        <td>2001-03-26</td>
+                                        <td><?php echo $collector_assistant->name ?></td>
+                                        <td><?php echo $collector_assistant->nic ?></td>
+                                        <td><?php echo $collector_assistant->address ?></td>
+                                        <td><?php echo $collector_assistant->contact_no ?></td>
+                                        <td><?php echo $collector_assistant->dob ?></td>
                                             
-                                    </tr>  
+                                    </tr> 
+                                <?php endforeach; ?>   
                                 </table>
                             </div>
                         </div>
@@ -289,8 +291,12 @@
         });
     });
 
-    function opencolAssistantsdetails(){
-        // document.getElementById('collector-assis-details-popup-box').style.display = "flex";
+    function opencolAssistantsdetails(collector_id){
+
+        // var url = "<?php echo URLROOT?>/admin/get_collector_assistants/" + collector_id;
+        // document.getElementById('collector_assistants_pop').href = url;
+
+       
         var assistantPop = document.getElementById('collector-assis-details-popup-box');
         assistantPop.classList.add('active');
         document.getElementById('overlay').style.display = "flex";

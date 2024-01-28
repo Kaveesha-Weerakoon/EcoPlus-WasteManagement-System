@@ -78,6 +78,55 @@
       }
 
     }
+
+
+    public function editprofile($data){
+
+      $this->db->query('UPDATE users SET name = :value WHERE id = :id');
+      $this->db->bind(':value', $data['name']);
+      $this->db->bind(':id', $_SESSION['agent_id']);
+      $_SESSION['agent_name']=$data['name'];
+      if ($this->db->execute()) {
+        $this->db->query('UPDATE discount_agents SET address = :address, contact_no = :contact_number WHERE user_id = :agent_id');
+        $this->db->bind(':address',  $data['address']);
+        $this->db->bind(':contact_number',  $data['contactno']);
+        $this->db->bind(':agent_id',  $_SESSION['agent_id']);
+       
+        if ($this->db->execute()) {
+            return true; 
+        } else {
+            return false; 
+        }          
+      }else {
+       return false; 
+      }
+       }
+
+  public function editprofile_withimg($data){
+
+        $this->db->query('UPDATE users SET name = :value WHERE id = :id');
+        $this->db->bind(':value', $data['name']);
+        $this->db->bind(':id', $_SESSION['collector_id']);
+
+        $_SESSION['user_name']=$data['name'];
+         $_SESSION['collector_profile'] =$data['profile_image_name'];
+
+        if ($this->db->execute()) {
+           $this->db->query('UPDATE discount_agents SET address = :address, contact_no = :contact_number,  image = :image WHERE agent_id = :agent_id');
+           $this->db->bind(':address', $data['address']);
+           $this->db->bind(':contact_number', $data['contactno']);
+           $this->db->bind(':agent_id', $_SESSION['agent_id']);
+           $this->db->bind(':image', $data['profile_image_name']);
+  
+        if ($this->db->execute()) {
+            return true;
+          } else {
+          return false;
+         }          
+         }else {
+           return false; 
+}
+ }
     
 
  

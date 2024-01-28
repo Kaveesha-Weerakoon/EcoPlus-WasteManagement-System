@@ -34,6 +34,9 @@
 
 @import url('Component/Customer/Customer_Transfercredit.css');
 
+@import url('Component/Customer/Customer_Discount_Agent_View.css');
+@import url('Component/Customer/Customer_Discount_Agent.css');
+
 /* Colletor CSS */
 
 
@@ -91,6 +94,7 @@
 @import url('Component/Agent/Agent_Dashboard.css');
 @import url('Component/Agent/Agent_Sidebar.css');
 @import url('Component/Agent/Agent_Main.css');
+@import url('Component/Agent/Agent_Editprofile.css');
 
 
 /* Admin CSS */

@@ -129,7 +129,7 @@
                             </div>
                         </div>
 
-                        <div class="main-right-bottom-two-cont A">
+                        <div class="main-right-bottom-two-cont A" onclick="redirect_discountAgents()">
                             <div class="icon_container">
                                 <i class='bx bxs-bank'></i>
                             </div>
@@ -298,6 +298,13 @@ function redirect_completed() {
 function redirect_requests() {
     var linkUrl = "<?php echo URLROOT?>/customers/request_collect";
     window.location.href = linkUrl;
+}
+
+function redirect_discountAgents() {
+    var linkUrl = "<?php echo URLROOT?>/customers/discount_agents"; // Replace with your desired URL
+   
+    window.location.href = linkUrl;
+  
 }
 
 notification.addEventListener("click", function() {

@@ -2,7 +2,7 @@
 <div class="Agent_Main">
     <div class="Agent_Editprofile">
         <div class="main">
-          <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
+        <?php require APPROOT . '/views/credit_discount_agents/agent_sidebar/side_bar.php'; ?>
             <div class="main-right">
                 <div class="main-right-top">
                     <div class="main-right-top-search">
@@ -37,11 +37,10 @@
 
                     </div>
                     <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
-                            alt="">
+                    <img src="<?php echo IMGROOT?>/img_upload/credit_discount_agent/<?php echo $_SESSION['agent_profile']?>" alt="">
                         <div class="main-right-top-profile-cont">
-                            <h3><?php echo $_SESSION['collector_name']?></h3>
-                            <p>ID : C <?php echo $_SESSION['collector_id']?></p>
+                        <h3><?php echo $_SESSION['agent_name']?></h3>
+                        <p>ID : D <?php echo $_SESSION['agent_id']?></p>
                         </div>
                     </div>
 
@@ -95,7 +94,7 @@
                             </form>
 
                             <form class="main-right-bottom-content-bottom-right"
-                                action="<?php echo URLROOT;?>/collectors/change_password" method="post">
+                                action="<?php echo URLROOT;?>/CreditDiscountsAgent/change_password" method="post">
                                 <div class="edit-profile-content">
                                     <h3>Current Password :</h3>
                                     <input type="password" name="current" value="<?php echo $data['current']?>">
@@ -125,7 +124,7 @@
                     <img src="<?php echo IMGROOT?>/check.png" alt="">
                     <h2>Success!!</h2>
                     <p><?php echo $data['success_message']?></p>
-                    <a href="<?php echo URLROOT?>/collectors/editprofile"><button type="button">OK</button></a>
+                    <a href="<?php echo URLROOT?>/CreditDiscountsAgent/editprofile"><button type="button">OK</button></a>
 
                 </div>
             </div>

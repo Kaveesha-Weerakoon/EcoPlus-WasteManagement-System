@@ -72,7 +72,7 @@
                                 </div>
                             </a>
 
-                            <a href="" id="completed">
+                            <a href="<?php echo URLROOT?>/Admin/completed_requests/<?php echo $data['center_region']?>" id="completed">
                                 <div class="main-right-top-three-content">
                                     <p>Completed</p>
                                     <div class="line"></div>

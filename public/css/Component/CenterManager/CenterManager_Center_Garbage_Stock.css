@@ -831,4 +831,108 @@
 
     }
 
+    /*sell price popup*/
+    .pop_up_confirm_collect {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+  
+    .pop_up_confirm_collect_cont {
+      width: 35%;
+      height: 75%;
+      background-color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+  
+    }
+  
+    .pop_up_confirm_collect_cont h1 {
+      font-size: 25px;
+      letter-spacing: 0.03;
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+  
+    .pop_up_confirm_collect_cont .cont {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+  
+    .pop_up_confirm_collect_cont .cont h5 {
+      font-size: 16px;
+      width: 150px;
+      margin-right: 10px;
+      font-weight: 100;
+  
+    }
+  
+    .pop_up_confirm_collect_cont .cont h6 {
+      font-size: 15px;
+      width: 45px;
+      margin-right: 10px;
+      font-weight: 100;
+      text-align: center;
+    }
+  
+    .pop_up_confirm_collect_cont h4 {
+      font-size: 24px;
+      font-weight: 100;
+      margin-top: 15px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+  
+  
+    .pop_up_confirm_collect_cont .buttons .complete-btn {
+      width: 200px;
+      height: 50px;
+      font-size: 19px;
+      background-color: #1B6652;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 20px;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    }
+  
+    .pop_up_confirm_collect_cont .buttons .complete-btn:hover {
+  
+      background-color: #269074;
+    }
+  
+  
+    .pop_up_confirm_collect_cont .buttons .cancel-btn {
+      width: 200px;
+      height: 50px;
+      font-size: 19px;
+      background-color: #b8b8b8;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+      margin-right: 0;
+      /* Reset margin for the last button */
+  
+    }
+  
+    .pop_up_confirm_collect_cont .buttons .cancel-btn:hover {
+  
+      background-color: #979494;
+    }
+  
+
 }

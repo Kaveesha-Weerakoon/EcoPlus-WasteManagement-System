@@ -998,8 +998,7 @@
 
       } else {
         $this->Request_Model->cancel_request($data);
-        // $this->request_incomming();
-        $this->request_cancelled();
+        header("Location: " . URLROOT . "/centermanagers/request_cancelled");        
     }
     
     }

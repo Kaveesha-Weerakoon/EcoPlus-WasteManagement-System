@@ -14,28 +14,32 @@
                             </div>
                             <div class="main-right-top-notification" id="notification">
                                 <i class='bx bx-bell'></i>
-                                <div class="dot"></div>
+                                <?php if (!empty($data['notification'])) : ?>
+                                <div class="dot"><?php echo count($data['notification'])?></div>
+                                <?php endif; ?>
                             </div>
                             <div id="notification_popup" class="notification_popup">
                                 <h1>Notifications</h1>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
+                                <div class="notification_cont">
+                                    <?php foreach($data['notification'] as $notification) : ?>
 
-                                    </div>
-                                    Request 1232 Has been Cancelled
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
+                                    <div class="notification">
+                                        <div class="notification-green-dot">
 
+                                        </div>
+                                        <div class="notification_right">
+                                            <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
+                                            <?php echo $notification->notification ?>
+                                        </div>
                                     </div>
-                                    Request 1232 Has been Assigned
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
+                                    <?php endforeach; ?>
 
-                                    </div>
-                                    Request 1232 Has been Cancelled
                                 </div>
+                                <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/collectors/">
+                                    <i class="fa-solid fa-check"> </i>
+                                    <button type="submit">Mark all as read</button>
+                                </form>
+
                             </div>
                             <div class="main-right-top-profile">
                                 <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
@@ -100,12 +104,9 @@
                                             <th>Req ID</th>
                                             <th>Date</th>
                                             <th>Time</th>
-                                            <th>Customer</th>
-                                            <th>C ID</th>
-                                            <th>Contact No</th>
-                                            <th>Instructions</th>
+                                            <th>Request Details</th>
                                             <th>Location</th>
-                                            <th>Complete</th>
+                                            <th>Collection Details</th>
                                         </tr>
                                     </table>
                                 </div>
@@ -117,16 +118,16 @@
                                             <td>R<?php echo $request->req_id?></td>
                                             <td><?php  echo $request->date?></td>
                                             <td><?php  echo $request->time?></td>
-                                            <td><?php  echo $request->name?></td>
-                                            <td><?php  echo $request->customer_id?></td>
-                                            <td><?php  echo $request->contact_no?></td>
-                                            <td><?php  echo $request->instructions?></td>
+                                            <td> <i class='bx bx-info-circle' style="font-size: 29px"
+                                                    onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)">
+                                                </i></td>
                                             <td>
                                                 <i class='bx bx-map' style="font-size: 29px;"
                                                     onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
                                             </td>
-                                            <td><img onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                                    src="<?php echo IMGROOT?>/view.png" alt=""></td>
+                                            <td><i class='fa-solid fa-coins' style="font-size: 22px"
+                                                    onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)">
+                                                </i></td>
 
                                         </tr>
                                         <?php endforeach; ?>
@@ -215,6 +216,36 @@
                         </div>
                     </div>
                     <div class="overlay" id="overlay"></div>
+                    <div class="request-details-pop" id="request-details-popup-box">
+                        <div class="request-details-pop-form">
+                            <img src="<?php echo IMGROOT?>/close_popup.png" alt=""
+                                class="request-details-pop-form-close" id="request-details-pop-form-close"
+                                onclick="close_request_details()">
+                            <div class="request-details-pop-form-top">
+                                <div class="request-details-topic">Request ID: R <div id="req_id4"></div>
+                                </div>
+                            </div>
+
+                            <div class="request-details-pop-form-content">
+                                <div class="request-details-right-labels">
+                                    <span>Customer Id</span><br>
+                                    <span>Name</span><br>
+                                    <span>Date</span><br>
+                                    <span>Time</span><br>
+                                    <span>Contact No</span><br>
+                                    <span>Instructions</span><br>
+                                </div>
+                                <div class="request-details-right-values">
+                                    <span id="req_id2"></span><br>
+                                    <span id="req_name"></span><br>
+                                    <span id="req_date"></span><br>
+                                    <span id="req_time"></span><br>
+                                    <span id="req_contactno"></span><br>
+                                    <span id="instructions"></span><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -294,6 +325,29 @@ function view_collect_details(request) {
     document.getElementById('Earned_Credits').innerText = request.credit_amount;
 }
 
+function view_request_details(request) {
+
+    var requestDetails_popup = document.getElementById('request-details-popup-box');
+    requestDetails_popup.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    document.getElementById('req_id4').innerText = request.req_id;
+    document.getElementById('req_id2').innerText = request.customer_id;
+    document.getElementById('req_name').innerText = request.name;
+    document.getElementById('req_date').innerText = request.date;
+    document.getElementById('req_time').innerText = request.time;
+    document.getElementById('req_contactno').innerText = request.contact_no;
+    document.getElementById('instructions').innerText = request.instructions;
+
+}
+
+function close_request_details() {
+    var requestDetails_popup = document.getElementById('request-details-popup-box');
+    requestDetails_popup.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
+    console.log("");
+}
+
 function searchTable() {
     var input = document.getElementById('searchInput').value.toLowerCase();
     var rows = document.querySelectorAll('.table-row');
@@ -319,15 +373,9 @@ function searchTable() {
 }
 document.getElementById('searchInput').addEventListener('input', searchTable);
 document.addEventListener("DOMContentLoaded", function() {
-    // const close_collector = document.getElementById("personal-details-popup-form-close");
+
     const collector_view = document.getElementById("personal-details-popup-box");
     const close_view = document.getElementById("collect-details-pop-form-close");
-
-
-    // close_collector.addEventListener("click", function() {
-    //     collector_view.classList.remove('active');
-    //     document.getElementById('overlay').style.display = "none";
-    // });
 
     close_view.addEventListener("click", function() {
         var locationPop = document.getElementById('collect-details-popup-box');

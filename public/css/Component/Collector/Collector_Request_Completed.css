@@ -21,7 +21,7 @@
 
   .table-row {
     height: 55px;
-    grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
+    grid-template-columns: 13% 14% 14% 21% 19% 19% 13%;
   }
 
   .table td {
@@ -29,7 +29,7 @@
   }
 
   .table-header {
-    grid-template-columns: 11% 10% 9% 13% 10% 12% 17% 9% 9%;
+    grid-template-columns: 13% 14% 14% 21% 19% 19% 13%;
   }
 
   td img {

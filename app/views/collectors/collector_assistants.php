@@ -12,28 +12,32 @@
                         </div>
                         <div class="main-right-top-notification" id="notification">
                             <i class='bx bx-bell'></i>
-                            <div class="dot"></div>
+                            <?php if (!empty($data['notification'])) : ?>
+                            <div class="dot"><?php echo count($data['notification'])?></div>
+                            <?php endif; ?>
                         </div>
                         <div id="notification_popup" class="notification_popup">
                             <h1>Notifications</h1>
-                            <div class="notification">
-                                <div class="notification-green-dot">
+                            <div class="notification_cont">
+                                <?php foreach($data['notification'] as $notification) : ?>
 
-                                </div>
-                                Request 1232 Has been Cancelled
-                            </div>
-                            <div class="notification">
-                                <div class="notification-green-dot">
+                                <div class="notification">
+                                    <div class="notification-green-dot">
 
+                                    </div>
+                                    <div class="notification_right">
+                                        <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
+                                        <?php echo $notification->notification ?>
+                                    </div>
                                 </div>
-                                Request 1232 Has been Assigned
-                            </div>
-                            <div class="notification">
-                                <div class="notification-green-dot">
+                                <?php endforeach; ?>
 
-                                </div>
-                                Request 1232 Has been Cancelled
                             </div>
+                            <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/collectors/">
+                                <i class="fa-solid fa-check"> </i>
+                                <button type="submit">Mark all as read</button>
+                            </form>
+
                         </div>
                         <div class="main-right-top-profile">
                             <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
@@ -88,11 +92,11 @@
                                 <td> <?php echo $collector_assistant->contact_no?></td>
                                 <td> <?php echo $collector_assistant->dob?></td>
                                 <td class="cancel-open"><a
-                                        href="<?php echo URLROOT?>/Collectors/collector_assistants_update/<?php echo $collector_assistant->id ?>"><img
-                                            src="<?php echo IMGROOT?>/update.png" alt=""></td>
+                                        href="<?php echo URLROOT?>/Collectors/collector_assistants_update/<?php echo $collector_assistant->id ?>">
+                                        <i class='bx bx-refresh' style="font-size:30px; "></i> </td>
                                 <td class="cancel-open"><a
-                                        href="<?php echo URLROOT?>/Collectors/collector_assistants_delete_confirm/<?php echo $collector_assistant->id ?>"><img
-                                            src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
+                                        href="<?php echo URLROOT?>/Collectors/collector_assistants_delete_confirm/<?php echo $collector_assistant->id ?>">
+                                        <i class='bx bxs-trash' style="font-size:29px"></i></a></td>
                             </tr>
                             <?php endforeach; ?>
 
@@ -224,6 +228,10 @@
     </div>
 </div>
 
+
+<script>
+
+</script>
 
 
 

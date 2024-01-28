@@ -87,8 +87,8 @@
       $this->db->bind(':Polythene', $data['polythene_quantity']);
       $this->db->bind(':Plastic', $data['plastic_quantity']);
       $this->db->bind(':Glass', $data['glass_quantity']);
-      $this->db->bind(':Paper_Waste', $data['paper_waste_quantity']);
-      $this->db->bind(':Electronic_Waste', $data['electronic_waste_quantity']);
+      $this->db->bind(':Paper_Waste', $data['paper_quantity']);
+      $this->db->bind(':Electronic_Waste', $data['electronic_quantity']);
       $this->db->bind(':Metals', $data['metals_quantity']);
       $this->db->bind(':credit_amount', $data['credit_Amount']);
       $this->db->bind(':note', $data['note']);
@@ -206,8 +206,6 @@
       }
 
     }
-
-
 
 
     public function getGarbageDetailsForCustomer($customer_id) {

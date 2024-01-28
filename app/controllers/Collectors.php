@@ -797,60 +797,59 @@
   }
 
   public function enterWaste_And_GenerateEcoCredits($req_id,$pop_eco="False") {
+    $types=$this->garbageTypeModel->get_all();
+    
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
         $jsonData = json_encode($assinged_Requests);
         $collector_id = $_SESSION['collector_id'];
-        $types=$this->garbageTypeModel->get_all();
+        $atLeastOneFilled = false;
+        $allFieldsValid = true;
         
         $data = [
             'assigned_requests' => $assinged_Requests,
             'jsonData' => $jsonData,
             'req_id'=>$req_id,
             'collector_id' => $collector_id,
-            'polythene_quantity' => trim($_POST['polythene_quantity']),
-            'plastic_quantity' => trim($_POST['plastic_quantity']),
-            'glass_quantity' => trim($_POST['glass_quantity']),
-            'paper_quantity' => trim($_POST['paper_quantity']),
-            'electronic_quantity' => trim($_POST['electronic_quantity']),
-            'metals_quantity' => trim($_POST['metals_quantity']),
             'note' => trim($_POST['note']),
             'popup' => 'True',
             'popup_confirm_collect'=>$pop_eco,
-            'polythene_quantity_err'=>'',
-            'plastic_quantity_err'=>'',
-            'glass_quantity_err'=>'',
-            'paper_quantity_err'=>'',
-            'electronic_quantity_err'=>'',
-            'metals_quantity_err'=>'',
             'note_err'=>'',
             'creditData'=>''
-
         ];
 
-        $fieldsToCheck = ['polythene', 'plastic', 'glass', 'paper', 'electronic', 'metals'];
-        $atLeastOneFilled = false;
-        $allFieldsValid = true;
-        
+        foreach ($types as $type) {
+          if ($type) {
+              $typeName = strtolower($type->name);
+              $data["{$typeName}_quantity"] = trim($_POST["{$typeName}_quantity"]);
+          }
+       }
+
+        foreach ($types as $type) {
+          if ($type) {
+              $typeName = strtolower($type->name);
+              $data["{$typeName}_quantity_err"] = '';
+          }
+       }
         foreach ($types as $type) {
           if ($type) {
               $typeName = strtolower($type->name);
               ${$typeName . '_min'} = $type->minimum_amount; 
           }
-      }
+        }
 
-        foreach ($fieldsToCheck as $field) {
-          if (!empty($_POST["{$field}_quantity"])) {
-            if (!is_numeric($_POST["{$field}_quantity"])) {
+        foreach ($types as $field) {
+          if (!empty($_POST["{$field->name}_quantity"])) {
+            if (!is_numeric($_POST["{$field->name}_quantity"])) {
                 $data["{$field}_quantity_err"] = "Please enter a valid number";
                 $allFieldsValid = false;
-              } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST["{$field}_quantity"]) !== 1) {
-                  $data["{$field}_quantity_err"] = "Please enter up to two decimal places.";
+              } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST["{$field->name}_quantity"]) !== 1) {
+                  $data["{$field->name}_quantity_err"] = "Please enter up to two decimal places.";
                   $allFieldsValid = false;
-                } elseif ($_POST["{$field}_quantity"] <= ${$field . '_min'}) {
-                  $name="{$field}_min";
-                  $data["{$field}_quantity_err"] = "Minimum required amount is {$$name}";
+                } elseif ($_POST["{$field->name}_quantity"] <= ${$field->name . '_min'}) {
+                  $name="{$field->name}_min";
+                  $data["{$field->name}_quantity_err"] = "Minimum required amount is {$$name}";
                   $allFieldsValid = false;
 
                 }
@@ -862,12 +861,12 @@
         }
 
         if (!$atLeastOneFilled && $allFieldsValid) {
-                $data['polythene_quantity_err'] = 'Please fill polythene quantity';
-                $data['plastic_quantity_err'] = 'Please fill plastic quantity';
-                $data['glass_quantity_err'] = 'Please fill glass quantity';
-                $data['paper_quantity_err'] = 'Please fill paper_waste quantity';
-                $data['electronic_uantity_err'] = 'Please fill electronic_waste quantity';
-                $data['metals_quantity_err'] = 'Please fill metals quantity';        
+                foreach ($types as $type) {
+                  if ($type) {
+                    $typeName = strtolower($type->name);
+                    $data["{$typeName}_quantity_err"] = "Please fill {$typeName} quantity";
+                  }
+              }      
             }
 
             if(empty($_POST['note'])){
@@ -881,8 +880,8 @@
               if ($type) {
                   $typeName = strtolower($type->name);
                   $credit_Amount+=(floatval($data["{$type->name}_quantity"]) * $type->credits_per_waste_quantity);
-              }
             }
+          }
               
             $data['creditData']=$types ;
             $data['credit_Amount'] = $credit_Amount;
@@ -893,7 +892,7 @@
               $this->view('collectors/request_assinged', $data);
             }
           
-         } else {
+        } else {
           $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
           $jsonData = json_encode($assinged_Requests);
           $collector_id = $_SESSION['collector_id'];
@@ -903,25 +902,26 @@
           'jsonData' => $jsonData,
           'req_id'=>$req_id,
           'collector_id' => $collector_id,
-          'polythene_quantity' =>'',
-          'plastic_quantity' => '',
-          'glass_quantity' => '',
-          'paper_quantity' => '',
-          'electronic_quantity' => '',
-          'metals_quantity' => '',
           'credit_Amount'=> '',
           'note' => '',
           'popup' => 'True',
           'popup_confirm_collect'=>'',
-          'polythene_quantity_err'=>'',
-          'plastic_quantity_err'=>'',
-          'glass_quantity_err'=>'',
-          'paper_quantity_err'=>'',
-          'electronic_quantity_err'=>'',
-          'metals_quantity_err'=>'',
+         
           'note_err'=>'',
           'creditData'=>''
-          ];
+          ]; 
+          foreach ($types as $type) {
+            if ($type) {
+                $typeName = strtolower($type->name);
+                $data["{$typeName}_quantity_err"] = '';
+            }
+         }
+         foreach ($types as $type) {
+          if ($type) {
+              $typeName = strtolower($type->name);
+              $data["{$typeName}_quantity"] = '';
+          }
+       }
           $this->view('collectors/request_assinged', $data);
         } 
 
@@ -930,13 +930,15 @@
 
   public function Eco_Credit_Insert($req_id,$pop_eco="False") {
     $types=$this->garbageTypeModel->get_all();
-
+   
      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
       $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
       $jsonData = json_encode($assinged_Requests);
       $collector_id = $_SESSION['collector_id'];
-        
+      $atLeastOneFilled = false;
+      $allFieldsValid = true;
+      
       $data = [
           'assigned_requests' => $assinged_Requests,
           'jsonData' => $jsonData,
@@ -951,19 +953,24 @@
           'note' => trim($_POST['note']),
           'popup' => 'True',
           'popup_confirm_collect'=>$pop_eco,
-          'polythene_quantity_err'=>'',
-          'plastic_quantity_err'=>'',
-          'glass_quantity_err'=>'',
-          'paper_quantity_err'=>'',
-          'electronic_quantity_err'=>'',
-          'metals_quantity_err'=>'',
+          
           'note_err'=>'',
           'creditData'=>''
-      ];
-
+       ];
+      foreach ($types as $type) {
+        if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}_quantity"] = trim($_POST["{$typeName}_quantity"]);
+        }
+      }
+      foreach ($types as $type) {
+        if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}_quantity_err"] = '';
+        }
+      }
       $fieldsToCheck = ['polythene', 'plastic', 'glass', 'paper', 'electronic', 'metals'];
-      $atLeastOneFilled = false;
-      $allFieldsValid = true;
+     
       
       foreach ($types as $type) {
         if ($type) {
@@ -972,17 +979,17 @@
         }
       }
 
-      foreach ($fieldsToCheck as $field) {
-        if (!empty($_POST["{$field}_quantity"])) {
-          if (!is_numeric($_POST["{$field}_quantity"])) {
+      foreach ($types as $field) {
+        if (!empty($_POST["{$field->name}_quantity"])) {
+          if (!is_numeric($_POST["{$field->name}_quantity"])) {
               $data["{$field}_quantity_err"] = "Please enter a valid number";
               $allFieldsValid = false;
-            } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST["{$field}_quantity"]) !== 1) {
-                $data["{$field}_quantity_err"] = "Please enter up to two decimal places.";
+            } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST["{$field->name}_quantity"]) !== 1) {
+                $data["{$field->name}_quantity_err"] = "Please enter up to two decimal places.";
                 $allFieldsValid = false;
-              } elseif ($_POST["{$field}_quantity"] <= ${$field . '_min'}) {
-                $name="{$field}_min";
-                $data["{$field}_quantity_err"] = "Minimum required amount is {$$name}";
+              } elseif ($_POST["{$field->name}_quantity"] <= ${$field->name . '_min'}) {
+                $name="{$field->name}_min";
+                $data["{$field->name}_quantity_err"] = "Minimum required amount is {$$name}";
                 $allFieldsValid = false;
 
               }
@@ -994,15 +1001,15 @@
       }
 
       if (!$atLeastOneFilled && $allFieldsValid) {
-              $data['polythene_quantity_err'] = 'Please fill polythene quantity';
-              $data['plastic_quantity_err'] = 'Please fill plastic quantity';
-              $data['glass_quantity_err'] = 'Please fill glass quantity';
-              $data['paper_quantity_err'] = 'Please fill paper_waste quantity';
-              $data['electronic_uantity_err'] = 'Please fill electronic_waste quantity';
-              $data['metals_quantity_err'] = 'Please fill metals quantity';        
+        foreach ($types as $type) {
+          if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}_quantity_err"] = "Please fill {$typeName} quantity";
           }
+      }      
+      }
 
-          if(empty($_POST['note'])){
+      if(empty($_POST['note'])){
             $data['note_err'] = 'Please fill in the Note field';
       }    
 
@@ -1036,47 +1043,49 @@
           // Update the customer credit balance in the database
           $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
           $updatedGarbageTotals = $this->Collect_Garbage_Model->updateGarbageTotals($req_id);
-
+           
           if ($inserted && $update_result && $updatedGarbageTotals ) {
-              header("Location: " . URLROOT . "/collectors/request_assinged");        
+            header("Location: " . URLROOT . "/collectors/request_completed");        
+    
 
           } else {
-            header("Location: " . URLROOT . "/collectors/request_completed");        
-
+            header("Location: " . URLROOT . "/collectors/request_assinged"); 
           }
-      } else {
+       } else {
             $this->view('collectors/request_assinged', $data);
           }
         
-       } else {
+       } 
+    else {
         $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
         $jsonData = json_encode($assinged_Requests);
         $collector_id = $_SESSION['collector_id'];
-     
+       
         $data = [
         'assigned_requests' => $assinged_Requests,
         'jsonData' => $jsonData,
         'req_id'=>$req_id,
         'collector_id' => $collector_id,
-        'polythene_quantity' =>'',
-        'plastic_quantity' => '',
-        'glass_quantity' => '',
-        'paper_quantity' => '',
-        'electronic_quantity' => '',
-        'metals_quantity' => '',
         'credit_Amount'=> '',
         'note' => '',
         'popup' => 'True',
         'popup_confirm_collect'=>'',
-        'polythene_quantity_err'=>'',
-        'plastic_quantity_err'=>'',
-        'glass_quantity_err'=>'',
-        'paper_quantity_err'=>'',
-        'electronic_quantity_err'=>'',
-        'metals_quantity_err'=>'',
         'note_err'=>'',
         'creditData'=>''
-        ];
+        ]; 
+        foreach ($types as $type) {
+          if ($type) {
+              $typeName = strtolower($type->name);
+              $data["{$typeName}_quantity_err"] = '';
+          }
+       } 
+       
+       foreach ($types as $type) {
+        if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}_quantity"] = '';
+        }
+     }
         $this->view('collectors/request_assinged', $data);
       } 
    }

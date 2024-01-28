@@ -62,62 +62,7 @@
         cursor: pointer;
     }
 
-    
 
-    /*Location Pop*/
-    .location_pop {
-        display: flex;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0);
-        background-color: rgba(0, 0, 0, 0);
-        z-index: 4;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        overflow: hidden;
-        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
-    }
-
-    .location_pop.active {
-        transform: translate(-50%, -50%) scale(1);
-    }
-
-    .location_pop_content {
-        width: 700px;
-        padding: 10px;
-        background-color: #f1f2f6;
-        border-radius: 10px;
-        padding: 20px;
-        padding-bottom: 40px;
-        height: 350px;
-        overflow: hidden;
-    }
-
-    .location_pop_map {
-        width: 100;
-        height: 100%;
-        border-radius: 10px;
-    }
-
-    .location_close {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 6px;
-    }
-
-    .location_close button {
-        background-color: #ff4757;
-        color: #fff;
-        cursor: pointer;
-        border: none;
-        font-size: 16px;
-        border-radius: 5px;
-        width: 85px;
-        height: 28px;
-    }
 
     .overlay {
         position: fixed;
@@ -213,68 +158,75 @@
         }
     }
 
-    /*Center delete popup*/
-    .center_delete {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.1);
-        z-index: 2;
+    
+    /*Update popup*/
+    .update_click {
         display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 4;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 100%;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        background-color: var(--main-text-color);
 
     }
 
-    .popup {
-        width: 400px;
+    .update_click.active {
+        transform: translate(-50%, -50%) scale(1);
+       
+       
+    }
+
+    .popup-form {
+        width: 500px;
         background: white;
         border-radius: 6px;
         top: 0;
+        position: relative;
         text-align: center;
         padding: 0 30px 30px;
         transition: transform 0.4s, top 0.4s;
     }
 
-    .popup a {
-        width: auto;
+    .popup-form h2 {
+        font-size: 20px;
+        font-weight: 550;
+        margin: 10px 0 4px;
+        margin-top: 25px;
     }
 
-    .open-popup {
-        visibility: visible;
-        top: 50%;
+    .update-popup-img {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
     }
 
-    .popup img {
-        width: 100px;
-        margin-top: 35px;
-        border-radius: 50%;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    .popup h2 {
-        font-size: 23px;
-        font-weight: 600;
-        margin: 10px 0 10px;
-    }
-
-    .btns {
+    .btns1 {
+        margin-top: 5px;
+        margin-bottom: 25px;
         display: flex;
-        flex-direction: row;
         align-items: center;
         justify-content: center;
+        flex-direction: row;
+
+
     }
 
-    .deletebtn {
-        width: 150px;
-        margin-top: 30px;
-        margin-right: 20px;
+    .updatebtn {
+        width: 42%;
+        margin-left: 5px;
         padding: 10px 0;
-        background: rgb(220, 39, 39);
+        background: var(--green-color-one);
         color: white;
         border: 0;
         outline: none;
@@ -282,15 +234,16 @@
         border-radius: 4px;
         cursor: pointer;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+
     }
 
-    .deletebtn:hover{
-        background: #c62323;
+    .updatebtn:hover{
+        background: var(--button-hover-green);
     }
 
-    .cancelbtn {
-        width: 150px;
-        margin-top: 30px;
+    .cancelbtn1 {
+        width: 319px;
+        margin-left: 10px;
         padding: 10px 0;
         background: #bab3b3;
         color: white;
@@ -300,10 +253,82 @@
         border-radius: 4px;
         cursor: pointer;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+
     }
 
-    .cancelbtn:hover{
+    .cancelbtn1:hover{
         background: #a7a1a1 ;
+    }
+
+    .updateData {
+        width: 100%;
+        margin-bottom: 15px;
+        margin-left: 65px;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+    }
+
+    .A {
+        margin-top: 17px;
+    }
+
+    .B {
+        margin-bottom: 17px;
+    }
+
+    .update-topic-line {
+        width: 90px;
+        height: 4px;
+        background-color: var(--green-color-one);
+        margin-bottom: 15px;
+
+    }
+
+    .updateData input {
+        width: 80%;
+        padding: 6px 12px;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+
+
+    }
+
+    .updateData label {
+
+        margin-bottom: 7px;
+    }
+
+    .updatePopupform {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-radius: 4px;
+        height: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    @media screen and(max-width: 946px) {
+
+        .updateData {
+            margin-left: 10px;
+
+        }
+
+        .cancelbtn1 {
+            width: 100px;
+        }
+
+        .updatebtn {
+            width: 100px;
+        }
+
     }
 
 }

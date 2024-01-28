@@ -17,6 +17,7 @@
       $this->center_complaints_model=$this->model('Center_Complaints');
       $this->discount_agentModel=$this->model('Discount_Agent');
       $this->collect_garbage_Model=$this->model('Collect_Garbage');
+      $this->garbage_types_model = $this->model('Garbage_types');
       
      
 
@@ -1187,8 +1188,10 @@
 
     public function garbage_types(){
 
+      $garbage_types = $this->garbage_types_model->get_all();
+
       $data=[
-        ''
+        'garbage_types'=> $garbage_types
       ];
 
       $this->view('admin/garbage_types_view', $data);

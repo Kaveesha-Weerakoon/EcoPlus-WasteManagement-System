@@ -52,7 +52,7 @@
                             <h1>Garbage Types</h1>
                         </div>
                         <div class="main-right-top-three">
-                            <a href="<?php echo URLROOT?>/Admin/Center">
+                            <a href="">
                                 <div class="main-right-top-three-content">
                                     <p><b style="color:#1ca557;">View</b></p>
                                     <div class="line"  style="background-color: #1ca557;"></div>
@@ -85,22 +85,17 @@
                         </div>
                         <div class="main-right-bottom-down">
                             <table class="table">
-                                <?php foreach($data['centers'] as $centers) : ?>
+                                <?php foreach($data['garbage_types'] as $garbage_type) : ?>
                                 <tr class="table-row">
-                                    <td>C<?php echo $centers->id?></td>
-                                    <td><?php echo $centers->region?></td>
-                                    <!-- <td><img onclick="viewLocation(<?php echo $centers->lat; ?>, <?php echo $centers->longi; ?>)"
-                                            src="<?php echo IMGROOT?>/location.png" alt=""></td> -->
-                                    <td><i class='bx bx-map' style="font-size: 29px;"
-                                             onclick="viewLocation(<?php echo $centers->lat; ?>, <?php echo $centers->longi; ?>)"></i></td>
-                                    <td><?php echo $centers->center_manager_id?></td>
-                                    <td><?php echo $centers->center_manager_name?></td>
-                                    <td><a
-                                            href="<?php echo URLROOT?>/admin/center_main/<?php echo $centers->id?>/<?php echo $centers->region?>">
-                                            <i class='bx bxs-school' style="font-size: 29px;"></i></a></td>
-                                    <td class="delete"> <a
-                                            href="<?php echo URLROOT?>/admin/center_delete/<?php echo $centers->id?>">
-                                            <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
+                                    <td><?php echo $garbage_type->ID?></td>
+                                    <td><?php echo $garbage_type->name?></td>
+                                    <td><?php echo $garbage_type->credits_per_waste_quantity?></td>
+                                    <td><?php echo $garbage_type->approxiamte_amount?></td>
+                                    <td><?php echo $garbage_type->minimum_amount?></td>
+                                    <td><?php echo $garbage_type->selling_price?></td>
+                                    <td><i class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"
+                                        onclick="open_update_popup()"></i></td>
+                                    
                                 </tr>
                                 <?php endforeach; ?>
 
@@ -108,82 +103,86 @@
                     </div>
                   
                 </div>
-                <div class="location_pop" id="location_pop">
-                    <div class="location_pop_content">
-                        <div class="location_pop_map">
-
-                        </div>
-                        <div class="location_close">
-                            <button onclick="closemap()">Close</button>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <div class="overlay" id="overlay"></div>
 
-                <?php if($data['delete_center']=='True') : ?>
-                <div class="center_delete">
-                    <div class="popup" id="popup">
-                        <img src="<?php echo IMGROOT?>/trash.png" alt="">
-                        <h2>Delete this Center?</h2>
-                        <p>This action will permanently delete this Center</p>
-                        <div class="btns">
-                            <a href="<?php echo URLROOT?>/admin/center_delete_confirm/<?php echo $data['center_id']?>"><button
-                                    type="button" class="deletebtn">Delete</button></a>
-                            <a href="<?php echo URLROOT?>/admin/center"><button type="button"
-                                    class="cancelbtn">Cancel</button></a>
-                        </div>
+                <div class="update_click" id="update_popup">
+                    <div class="popup-form" id="popup">
+                        <a href="<?php echo URLROOT?>/admin/garbage_types"><img
+                                src="<?php echo IMGROOT?>/close_popup.png" class="update-popup-img" alt=""></a>
+                        <h2>Update Details</h2>
+                        <center>
+                            <div class="update-topic-line"></div>
+                        </center>
+                        <form class="updatePopupform" method="post"
+                            action="<?php echo URLROOT;?>/centermanagers/center_workers_update/<?php echo $data['id'];?>">
+                            <div class="updateData A">
+                                <label>Name</label><br>
+                                <input type="text" name="name" placeholder="Enter name"
+                                    value="<?php echo $data['name']; ?>"><br>
+                                <div class="error-div" style="color:red">
+                                    <?php echo $data['name_err']?>
+                                </div>
+                            </div>
+                            <div class="updateData">
+                                <label>NIC</label><br>
+                                <input type="text" name="nic" placeholder="Enter NIC"
+                                    value="<?php echo $data['nic']; ?>"><br>
+                                <div class="error-div" style="color:red">
+                                    <?php echo $data['nic_err']?>
+                                </div>
+                            </div>
+                            <div class="updateData">
+                                <label>Address</label><br>
+                                <input type="text" name="address" placeholder="Enter Address"
+                                    value="<?php echo $data['address']; ?>"><br>
+                                <div class="error-div" style="color:red">
+                                    <?php echo $data['address_err']?>
+                                </div>
+                            </div>
+                            <div class="updateData">
+                                <label>Contact No</label><br>
+                                <input type="text" name="contact_no" placeholder="Enter Contact No"
+                                    value="<?php echo $data['contact_no']; ?>"><br>
+                                <div class="error-div" style="color:red">
+                                    <?php echo $data['contact_no_err']?>
+                                </div>
+                            </div>
+                            <div class="updateData B">
+                                <label>DOB</label><br>
+                                <input type="date" name="dob" placeholder="Enter DOB"
+                                    value="<?php echo $data['dob']; ?>"><br>
+                                <div class="error-div" style="color:red">
+                                    <?php echo $data['dob_err']?>
+                                </div>
+                            </div>
+
+                            <div class="btns1">
+                                <button type="submit" class="updatebtn">Update</button>
+                                <a href="<?php echo URLROOT?>/centermanagers/center_workers"><button type="button"
+                                        class="cancelbtn1">Cancel</button></a>
+                            </div>
+
+                        </form>
+
                     </div>
                 </div>
-                <?php endif; ?>
+
+                
             </div>
         </div>
 
     </div>
 </div>
 <script>
-function initMap(latitude, longitude) {
-    var mapCenter = {
-        lat: latitude,
-        lng: longitude
-    };
 
-    var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
-        center: mapCenter,
-        zoom: 8
-    });
-
-    var marker = new google.maps.Marker({
-        position: {
-            lat: parseFloat(latitude),
-            lng: parseFloat(longitude)
-        },
-        map: map,
-        title: 'Marked Location'
-    });
-}
-
-
-// function viewLocation($lattitude, $longitude) {
-//     initMap($lattitude, $longitude);
-//     document.querySelector('.location_pop').style.display = 'flex';
-// }
-
-// function closemap() {
-//     document.querySelector('.location_pop').style.display = 'none';
-// }
-
-function viewLocation($lattitude, $longitude) {
-    initMap($lattitude, $longitude);
-    var locationPop = document.getElementById('location_pop');
-    locationPop.classList.add('active');
+function open_update_popup(){
+    var updatePopup = document.getElementById('update_popup');
+    updatePopup.classList.add('active');
     document.getElementById('overlay').style.display = "flex";
+
 }
 
-function closemap() {
-    var locationPop = document.getElementById('location_pop');
-    locationPop.classList.remove('active');
-    document.getElementById('overlay').style.display = "none";
-}
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

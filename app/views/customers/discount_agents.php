@@ -57,8 +57,8 @@
                         <div class="main-right-top-three">
                             <a href="<?php echo URLROOT?>/admin/discount_agents">
                                 <div class="main-right-top-three-content">
-                                    <p><b style="color:#1ca557;">View</b></p>
-                                    <div class="line" style="background-color: #1ca557;"></div>
+                                    <p style="color:#000000;">Redeem your Eco credits through the listed agents.</p>
+                                    
                                 </div>
                             </a>
                             

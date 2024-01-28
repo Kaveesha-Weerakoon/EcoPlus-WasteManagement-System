@@ -3,7 +3,7 @@
   .main-right-bottom-down {
       padding-left: 3.5%;
       width: 96.5%;
-      height: 450px;
+      height: 600px;
       overflow: scroll;
   }
 
@@ -21,18 +21,18 @@
   }
 
   .table-row {
-      height: 52px;
+      height: 65px;
       display: grid;
       grid-template-columns: 16% 16% 16% 16% 16% 20%;
   }
 
   .table td {
-      height: 55px;
+      height: 60px;
   }
 
   .manager_img {
-      width: 35px !important;
-      height: 35px !important;
+      width: 49px !important;
+      height: 49px !important;
       border-radius: 50%;
   }
 

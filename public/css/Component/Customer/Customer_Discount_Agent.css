@@ -224,11 +224,13 @@
       padding-bottom: 5px;
       color: var(--main-text-color);
       letter-spacing: 0.03rem;
+      margin-left: 7px;
   }
 
   .line {
       width: 80px;
       height: 3px;
+      margin-right: 300px;
   }
 
   /*Delete confirm popup*/

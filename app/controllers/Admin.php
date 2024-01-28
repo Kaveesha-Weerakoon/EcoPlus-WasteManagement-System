@@ -1185,5 +1185,15 @@
       $this->view('admin/center_main_collectors', $data);
     }
 
+    public function garbage_types(){
+
+      $data=[
+        ''
+      ];
+
+      $this->view('admin/garbage_types_view', $data);
+
+    }
+
   
   }

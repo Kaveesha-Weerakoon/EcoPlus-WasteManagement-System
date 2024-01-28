@@ -130,7 +130,7 @@
                         <div class="main-right-bottom-three-right">
                             <div class="main-right-bottom-three-right-left">
                                 <h1>Credits per Waste Qunatity</h1>
-                                <i class='bx bx-dollar-circle'></i> <button onclick="redirect_credits_per()">
+                                <i class='bx bx-dollar-circle'></i> <button onclick="redirect_garbage_types()">
                                     Change
                                 </button>
                             </div>
@@ -146,7 +146,7 @@
             </div>
 
 
-            <div class="pop-eco_credits" id="pop-eco_credits">
+            <!-- <div class="pop-eco_credits" id="pop-eco_credits">
                 <form class="Eco_Credits-main" method="post" action="<?php echo URLROOT;?>/admin/pop_eco_credit">
                     <div class="Eco_Credits-main-top">
                         <h1> Eco Credits Per Kilogram</h1>
@@ -188,7 +188,8 @@
 
                     <button type="submit">Update</button>
                 </form>
-            </div>
+            </div> -->
+
             <div class="pop-rupee_value" id="pop-rupee_value">
                 <div class="rupee-main">
                     <div class="rupee-main-top">
@@ -235,10 +236,16 @@ function redirect_discountAgents() {
   
 }
 
-function redirect_credits_per() {
-    var locationPop = document.querySelector('.pop-eco_credits');
-    locationPop.classList.add('active');
-    document.getElementById('overlay').style.display = "flex";
+// function redirect_credits_per() {
+//     var locationPop = document.querySelector('.pop-eco_credits');
+//     locationPop.classList.add('active');
+//     document.getElementById('overlay').style.display = "flex";
+// }
+
+function redirect_garbage_types(){
+    var linkUrl = "<?php echo URLROOT?>/admin/garbage_types"; 
+   
+    window.location.href = linkUrl;
 }
 
 var close_pop_ecocredits = document.getElementById('close-eco_credits');

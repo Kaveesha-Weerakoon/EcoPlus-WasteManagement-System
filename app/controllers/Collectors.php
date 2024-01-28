@@ -696,7 +696,7 @@
 
        
         }
-        else if($data['fine_type']=="No_Response"){
+        else if($data['fine_type']=="No Response"){
           $data['fine_amount']=10;
           $this->Request_Model->cancel_request($data);
 

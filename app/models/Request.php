@@ -168,7 +168,7 @@
         users u ON c.user_id = u.id
        WHERE
         rm.customer_id = :customer_id
-        AND rm.type = :type ORDER BY CONCAT(date, " ", time) DESC
+        AND rm.type = :type ORDER BY CONCAT(rc.cancelled_time) DESC
       ';
 
        $this->db->query($query);
@@ -295,7 +295,8 @@
       request_cancelled ON request_main.req_id = request_cancelled.req_id
       WHERE
       request_assigned.collector_id = :collector_id
-      AND request_main.type = "cancelled";
+      AND request_main.type = "cancelled"
+      ORDER BY CONCAT(request_cancelled.cancelled_time)  DESC;
       ');
 
      $this->db->bind(':collector_id', $collector_id);

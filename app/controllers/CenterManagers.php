@@ -14,6 +14,7 @@
       $this->center_complaints_model=$this->model('Center_Complaints');
       $this->notification_Model=$this->model('Notifications');
       $this->Customer_Model=$this->model('Customer');
+      $this->garbageTypeModel=$this->model('Garbage_Types');
 
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
@@ -1279,8 +1280,8 @@
       'current_polythene'=>$current_quantities->current_polythene,
       'current_plastic'=>$current_quantities->current_plastic,
       'current_glass'=>$current_quantities->current_glass,
-      'current_paper_waste'=>$current_quantities->current_paper,
-      'current_electronic_waste'=>$current_quantities->current_electronic,
+      'current_paper'=>$current_quantities->current_paper,
+      'current_electronic'=>$current_quantities->current_electronic,
       'current_metals'=>$current_quantities->current_metal
 
     ];
@@ -1289,7 +1290,155 @@
 
   }
 
-  public function release_stocks(){
+  public function release_stocks($complete="False",$pop="False"){
+    $types=$this->garbageTypeModel->get_all();
+
+    $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+   
+      $data = [
+
+        'center_id'=>$_SESSION['center_id'],
+        'current_polythene'=>$current_quantities->current_polythene,
+        'current_plastic'=>$current_quantities->current_plastic,
+        'current_glass'=>$current_quantities->current_glass,
+        'current_paper'=>$current_quantities->current_paper,
+        'current_electronic'=>$current_quantities->current_electronic,
+        'current_metals'=>$current_quantities->current_metal,
+        'released_person'=> trim($_POST['released_person']),
+        'release_note' => trim($_POST['release_note']),
+        'release_popup' => 'True',
+        'release_success'=> '',
+        'sell_price_pop'=>$pop,
+        'released_person_err'=> '',
+        'release_note_err'=>'',
+        'types'=>$types,
+        'total_selling_price'=>''
+      ];
+
+      foreach ($types as $type) {
+        if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}"] = trim($_POST["{$typeName}"]);
+        }
+     } 
+     
+     foreach ($types as $type) {
+      if ($type) {
+          $typeName = strtolower($type->name);
+          $data["{$typeName}_err"] = '';
+      }
+     }
+
+      $fieldsToCheck = ['polythene', 'plastic', 'glass', 'paper_waste', 'electronic_waste', 'metals'];
+      $atLeastOneFilled = false;
+      $allFieldsValid = true;
+
+      foreach ($types as $field) {
+        if (!empty($_POST["{$field->name}"])) {
+          if (!is_numeric($_POST["{$field->name}"])) {
+              $data["{$field}_quantity_err"] = "Please enter a valid number";
+              $allFieldsValid = false;
+            } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST["{$field->name}"]) !== 1) {
+                $data["{$field->name}_err"] = "Please enter up to two decimal places.";
+                $allFieldsValid = false;
+              }elseif ($_POST["{$field->name}"] > $data["current_{$field->name}"]) {
+                $data["{$field->name}_err"] = "Please enter a valid quantity within the available stock";
+                $allFieldsValid = false;
+            }else {
+                $atLeastOneFilled = true;
+            }
+        }
+      }
+      if (!$atLeastOneFilled && $allFieldsValid) {
+        foreach ($types as $type) {
+          if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}_err"] = "Please fill {$typeName} quantity";
+          }
+      }      
+    }
+
+    if(empty($_POST['note'])){
+      $data['note_err'] = 'Please fill in the Note field';
+     }  
+
+      if(empty($_POST['released_person'])){
+        $data['released_person_err'] = 'Please fill in the released person field';
+      }
+
+      if(empty($_POST['release_note'])){
+        $data['release_note_err'] = 'Please fill in the Note field';
+      }
+      
+      if ($atLeastOneFilled && empty($data['release_note_err']) && empty($data['released_person_err']) && $allFieldsValid) {
+        
+          $total_price=0;
+
+          foreach ($types as $type) {
+            if ($type) {
+                $total_price+= (floatval($data["$type->name"]) * $type->selling_price);
+            }
+         } 
+          $data['total_sell_price'] = $total_price;
+          $data['sell_price_pop'] = 'True';
+          if($complete=="True"){
+            $this->garbage_Model->release_garbage_stocks($data);
+
+            header("Location: " . URLROOT . "/centermanagers/center_garbage_stock");        
+          }
+          $this->view('center_managers/center_garbage_stock',$data);
+       
+
+       }else{
+        $this->view('center_managers/center_garbage_stock', $data);
+      }
+     } else {
+
+      $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+
+      $data = [
+        'center_id'=>$_SESSION['center_id'],
+        'current_polythene'=>$current_quantities->current_polythene,
+        'current_plastic'=>$current_quantities->current_plastic,
+        'current_glass'=>$current_quantities->current_glass,
+        'current_paper'=>$current_quantities->current_paper,
+        'current_electronic'=>$current_quantities->current_electronic,
+        'current_metals'=>$current_quantities->current_metal,
+        'released_person'=> '',
+        'release_note' => '',
+        'release_popup' => 'True',
+        'release_success'=> '',
+        'released_person_err'=> '',
+        'release_note_err'=>'',
+        'sell_price_pop'=>'',
+        'types'=>$types
+
+      ]; 
+      foreach ($types as $type) {
+        if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}_err"] = '';
+        }
+     } 
+     
+     foreach ($types as $type) {
+      if ($type) {
+          $typeName = strtolower($type->name);
+          $data["{$typeName}"] = '';
+      }
+     }
+
+      $this->view('center_managers/center_garbage_stock', $data);
+
+    }
+    
+  }
+
+  public function realease_stocks2(){
+    $types=$this->garbageTypeModel->get_all();
 
     $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
 
@@ -1302,62 +1451,66 @@
         'current_polythene'=>$current_quantities->current_polythene,
         'current_plastic'=>$current_quantities->current_plastic,
         'current_glass'=>$current_quantities->current_glass,
-        'current_paper_waste'=>$current_quantities->current_paper,
-        'current_electronic_waste'=>$current_quantities->current_electronic,
+        'current_paper'=>$current_quantities->current_paper,
+        'current_electronic'=>$current_quantities->current_electronic,
         'current_metals'=>$current_quantities->current_metal,
-        'polythene' => trim($_POST['polythene']),
-        'plastic' => trim($_POST['plastic']),
-        'glass' => trim($_POST['glass']),
-        'paper_waste' => trim($_POST['paper_waste']),
-        'electronic_waste' => trim($_POST['electronic_waste']),
-        'metals' => trim($_POST['metals']),
         'released_person'=> trim($_POST['released_person']),
         'release_note' => trim($_POST['release_note']),
         'release_popup' => 'True',
         'release_success'=> '',
         'sell_price_pop'=>'',
-        'polythene_err'=>'',
-        'plastic_err'=>'',
-        'glass_err'=>'',
-        'paper_waste_err'=>'',
-        'electronic_waste_err'=>'',
-        'metals_err'=>'',
         'released_person_err'=> '',
-        'release_note_err'=>''
-      
-
+        'release_note_err'=>'',
+        'types'=>$types,
+        'total_selling_price'=>''
       ];
+
+      foreach ($types as $type) {
+        if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}"] = trim($_POST["{$typeName}"]);
+        }
+     } 
+     
+     foreach ($types as $type) {
+      if ($type) {
+          $typeName = strtolower($type->name);
+          $data["{$typeName}_err"] = '';
+      }
+   }
 
       $fieldsToCheck = ['polythene', 'plastic', 'glass', 'paper_waste', 'electronic_waste', 'metals'];
       $atLeastOneFilled = false;
       $allFieldsValid = true;
 
-      foreach ($fieldsToCheck as $field) {
-        if (!empty($_POST[$field])) {
-            if (!is_numeric($_POST[$field])) {
-                $data["{$field}_err"] = "Please enter a valid number";
+      foreach ($types as $field) {
+        if (!empty($_POST["{$field->name}"])) {
+          if (!is_numeric($_POST["{$field->name}"])) {
+              $data["{$field}_quantity_err"] = "Please enter a valid number";
+              $allFieldsValid = false;
+            } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST["{$field->name}"]) !== 1) {
+                $data["{$field->name}_err"] = "Please enter up to two decimal places.";
                 $allFieldsValid = false;
-            } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST[$field]) !== 1) {
-                $data["{$field}_err"] = "Please enter up to two decimal places.";
-                $allFieldsValid = false;
-            } elseif ($_POST[$field] > $data["current_{$field}"]) {
-                $data["{$field}_err"] = "Please enter a valid quantity within the available stock";
+              }elseif ($_POST["{$field->name}"] > $data["current_{$field->name}"]) {
+                $data["{$field->name}_err"] = "Please enter a valid quantity within the available stock";
                 $allFieldsValid = false;
             }else {
                 $atLeastOneFilled = true;
             }
         }
       }
-
       if (!$atLeastOneFilled && $allFieldsValid) {
-        $data['polythene_err'] = 'Please fill polythene quantity';
-        $data['plastic_err'] = 'Please fill plastic quantity';
-        $data['glass_err'] = 'Please fill glass quantity';
-        $data['paper_waste_err'] = 'Please fill paper_waste quantity';
-        $data['electronic_waste_err'] = 'Please fill electronic_waste quantity';
-        $data['metals_err'] = 'Please fill metals quantity';
-        
-      } 
+        foreach ($types as $type) {
+          if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}_err"] = "Please fill {$typeName} quantity";
+          }
+      }      
+    }
+
+    if(empty($_POST['note'])){
+      $data['note_err'] = 'Please fill in the Note field';
+   }  
 
       if(empty($_POST['released_person'])){
         $data['released_person_err'] = 'Please fill in the released person field';
@@ -1369,32 +1522,19 @@
 
       if ($atLeastOneFilled && empty($data['release_note_err']) && empty($data['released_person_err']) && $allFieldsValid) {
         
-        if($this->garbage_Model->release_garbage_stocks($data)){ 
-          $priceData = [
-            'plastic'=> 12.00,
-            'polythene'=> 10.00,
-            'glass'=> 25.50,
-            'metals'=> 75.50,
-            'paper_waste'=> 25.00,
-            'electronic_waste'=> 30.35
-          ];
+          $total_price=0;
 
-          $total_price =
-            (floatval($data['polythene']) * $priceData['polythene']) +
-            (floatval($data['plastic']) * $priceData['plastic']) +
-            (floatval($data['glass']) * $priceData['glass']) +
-            (floatval($data['paper_waste']) * $priceData['paper_waste']) +
-            (floatval($data['electronic_waste']) * $priceData['electronic_waste']) +
-            (floatval($data['metals']) * $priceData['metals']);
-
-
+          foreach ($types as $type) {
+            if ($type) {
+                $total_price+= (floatval($data["$type->name"]) * $type->selling_price);
+            }
+         } 
+        
           $data['total_sell_price'] = $total_price;
           $data['garbage_prices'] = $priceData;
           $data['sell_price_pop'] = 'True';
           $this->view('center_managers/center_garbage_stock',$data);
-        } else {
-          die('Something went wrong');
-        }
+       
 
       }else{
         $this->view('center_managers/center_garbage_stock', $data);
@@ -1411,35 +1551,36 @@
         'current_polythene'=>$current_quantities->current_polythene,
         'current_plastic'=>$current_quantities->current_plastic,
         'current_glass'=>$current_quantities->current_glass,
-        'current_paper_waste'=>$current_quantities->current_paper,
-        'current_electronic_waste'=>$current_quantities->current_electronic,
+        'current_paper'=>$current_quantities->current_paper,
+        'current_electronic'=>$current_quantities->current_electronic,
         'current_metals'=>$current_quantities->current_metal,
-        'polythene' => '',
-        'plastic' => '',
-        'glass' => '',
-        'paper_waste' => '',
-        'electronic_waste' => '',
-        'metals' => '',
         'released_person'=> '',
         'release_note' => '',
         'release_popup' => 'True',
         'release_success'=> '',
-        'polythene_err'=>'',
-        'plastic_err'=>'',
-        'glass_err'=>'',
-        'paper_waste_err'=>'',
-        'electronic_waste_err'=>'',
-        'metals_err'=>'',
         'released_person_err'=> '',
-        'release_note_err'=>''
-      
+        'release_note_err'=>'',
+        'sell_price_pop'=>'',
+        'types'=>$types
 
-      ];
+      ]; 
+      foreach ($types as $type) {
+        if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}_err"] = '';
+        }
+     } 
+     
+     foreach ($types as $type) {
+      if ($type) {
+          $typeName = strtolower($type->name);
+          $data["{$typeName}"] = '';
+      }
+   }
 
       $this->view('center_managers/center_garbage_stock', $data);
 
     }
-    
   }
 
   public function stock_release_details(){

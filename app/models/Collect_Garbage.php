@@ -31,7 +31,7 @@
           LEFT JOIN collectors  ON request_assigned.collector_id = collectors.user_id
           LEFT JOIN users ON collectors.user_id=users.id
           WHERE request_main.customer_id = :customer_id
-          AND request_main.type = "completed" ORDER BY CONCAT(date, " ", time) DESC
+          AND request_main.type = "completed" ORDER BY CONCAT(request_completed.completed_datetime) DESC
       ');
   
       $this->db->bind(':customer_id', $customer_id);
@@ -51,7 +51,7 @@
           LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
           LEFT JOIN request_completed ON request_main.req_id = request_completed.req_id
           WHERE request_assigned.collector_id = :collector_id
-          AND request_main.type = "completed"
+          AND request_main.type = "completed" ORDER BY CONCAT(request_completed.completed_datetime) DESC
       ');
   
       $this->db->bind(':collector_id', $collector_id);

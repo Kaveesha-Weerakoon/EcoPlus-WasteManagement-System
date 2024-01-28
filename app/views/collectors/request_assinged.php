@@ -178,10 +178,6 @@
                     <?php endif; ?>
                 </div>
 
-
-
-
-
                 <?php if($data['popup']=='True') : ?>
                 <div class="personal-details-popup-box" id="personal-details-popup-box">
                     <div class="personal-details-popup-form" id="popup">
@@ -406,7 +402,7 @@
                         <h2>Major Reason</h2>
                         <div class="cancel_fine_container">
                             <label>
-                                <input type="radio" name="attribute" value="No_Response">
+                                <input type="radio" name="attribute" value="No Response">
                                 No Response
                             </label>
 

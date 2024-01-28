@@ -19,10 +19,13 @@
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Center</th>
+                                    <th>Cancelled By</th>
+
+                                    <th>Reason</th>
+
                                     <th>Location</th>
                                     <th>Collector</th>
-                                    <th>Cancelled By</th>
-                                    <th>Reason</th>
+                                    <th>Fine</th>
                                 </tr>
                             </table>
                         </div>
@@ -35,6 +38,9 @@
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
                                     <td><?php echo $request->region?></td>
+                                    <td><?php echo $request->cancelled_by?></td>
+
+                                    <td><?php echo ($request->reason ? $request->reason : 'None'); ?></td>
 
                                     <td><i onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
                                             class='bx bx-map' style="font-size: 29px"></i>
@@ -54,8 +60,17 @@
                                              ?>
 
                                     </td>
-                                    <td><?php echo $request->cancelled_by?></td>
-                                    <td><?php echo ($request->reason ? $request->reason : 'None'); ?></td>
+                                    <td>
+                                        <?php 
+                                                if ($request->fine != 0) {
+                                                    echo '<b style="color:#F13E3E;"> Eco ' . $request->fine . ' ' . $request->fine_type . '</b>';     
+                                                }
+                                                else{
+                                                    echo "<b>None</b>" ;
+                                                }
+                                        ?>
+                                    </td>
+
                                 </tr>
                                 <?php endforeach; ?>
                             </table>
@@ -65,7 +80,6 @@
                     <?php else: ?>
                     <div class="main-right-bottom-two">
                         <div class="main-right-bottom-two-content">
-                            <!-- <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt=""> -->
                             <i class='bx bx-data' style="font-size: 150px"></i>
                             <h1>You Have No Cancelled Requests</h1>
                             <p>Request a Collect Now!</p>

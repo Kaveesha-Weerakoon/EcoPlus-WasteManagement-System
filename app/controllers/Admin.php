@@ -16,6 +16,7 @@
       $this->requests_model=$this->model('Request');
       $this->center_complaints_model=$this->model('Center_Complaints');
       $this->discount_agentModel=$this->model('Discount_Agent');
+      $this->collect_garbage_Model=$this->model('Collect_Garbage');
       
      
 
@@ -945,11 +946,13 @@
     }
 
     public function completed_requests($region){
+      $completed_requests = $this->collect_garbage_Model->get_completed_requests_bycenter($region);
       $center=$this->center_model->getCenterByRegion($region);
 
       $data =[
         'center_region'=> $region,
-        'center'=> $center
+        'center'=> $center,
+        'completed_requests'=> $completed_requests
       ];
 
       $this->view('admin/center_main_request_completed', $data);

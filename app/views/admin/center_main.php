@@ -127,7 +127,7 @@
                                 <div class="analytic fourth-analytic">
                                     <div class="analytic-icon">
                                         <!-- <img src="<?php echo IMGROOT?>/brown_bin.png" class="icon-image" alt="" /> -->
-                                        
+                                        <i class='bx bx-trash-alt'></i>
                                     </div>
                                     <div class="analytic-info">
                                         <h3>Garbage Stock</h3>

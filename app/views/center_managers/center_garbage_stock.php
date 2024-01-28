@@ -237,6 +237,110 @@
         </div>
         <?php endif; ?>
 
+        <?php if($data['sell_price_pop']=='True') : ?>
+            <div class="pop_up_confirm_collect">
+                <div class="pop_up_confirm_collect_cont">
+                    <h1>Sell Price Calculation</h1>
+                    <div class="cont">
+                        <h5></h5>
+                        <h6>Kg</h6>
+                        <h6></h6>
+                        <h6>
+                            Price
+                        </h6>
+                        <h6></h6>
+                        <h6>
+                        </h6>
+
+                    </div>
+                    <div class="cont">
+                        <h5>Plastic</h5>
+                        <h6><?php echo empty($data['plastic']) ? 0 : $data['plastic'] ?>
+                        </h6>
+                        <h6>*</h6>
+                        <h6>
+                            <?php echo $data['garbage_prices']['plastic']?>
+                        </h6>
+                        <h6>=</h6>
+                        <h6><?php echo floatval($data['plastic']) * ($data['garbage_prices']['plastic']) ?>
+                        </h6>
+
+                    </div>
+                    <div class="cont">
+                        <h5>Polythene</h5>
+                        <h6><?php echo empty($data['polythene']) ? 0 : $data['polythene']  ?>
+                        </h6>
+                        <h6>*</h6>
+                        <h6>
+                            <?php echo $data['garbage_prices']['polythene']?>
+                        </h6>
+                        <h6>=</h6>
+                        <h6><?php echo floatval($data['polythene']) * ($data['garbage_prices']['polythene']) ?>
+                        </h6>
+                    </div>
+                    <div class="cont">
+                        <h5>Glass</h5>
+                        <h6><?php echo empty($data['glass']) ? 0 : $data['glass'] ?>
+                        </h6>
+                        <h6>*</h6>
+                        <h6>
+                            <?php echo $data['garbage_prices']['glass']?>
+                        </h6>
+                        <h6>=</h6>
+                        <h6><?php echo floatval($data['glass']) * ($data['garbage_prices']['glass']) ?>
+                        </h6>
+
+                    </div>
+                    <div class="cont">
+                        <h5>Paper</h5>
+                        <h6><?php echo empty($data['paper_waste']) ? 0 : $data['paper_waste'] ?>
+                        </h6>
+                        <h6>*</h6>
+                        <h6>
+                            <?php echo $data['garbage_prices']['paper_waste']?>
+                        </h6>
+                        <h6>=</h6>
+                        <h6><?php echo floatval($data['paper_waste']) * ($data['garbage_prices']['paper_waste']) ?>
+                        </h6>
+
+                    </div>
+                    <div class="cont">
+                        <h5>Electronic</h5>
+                        <h6><?php echo empty($data['electronic_waste']) ? 0 : $data['electronic_waste']  ?>
+                        </h6>
+                        <h6>*</h6>
+                        <h6>
+                            <?php echo $data['garbage_prices']['electronic_waste']?>
+                        </h6>
+                        <h6>=</h6>
+                        <h6><?php echo floatval($data['electronic_waste']) * ($data['garbage_prices']['electronic_waste']) ?>
+                        </h6>
+
+                    </div>
+                    <div class="cont">
+                        <h5>Metal</h5>
+                        <h6><?php echo empty($data['metals']) ? 0 : $data['metals']  ?>
+                        </h6>
+                        <h6>*</h6>
+                        <h6>
+                            <?php echo $data['garbage_prices']['metals']?>
+                        </h6>
+                        <h6>=</h6>
+                        <h6><?php echo floatval($data['metals']) * ($data['garbage_prices']['metals']) ?>
+                        </h6>
+                    </div>
+
+                    <h4>Total Price= <?php echo $data['total_sell_price']?></h4>
+                    <div class="buttons">
+                        <button class="complete-btn" id="complete-btn">OK</button>
+                        <a href="<?php echo URLROOT?>/centermanagers/center_garbage_stock">
+                            <button class="cancel-btn" type="button">Cancel</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
         <?php if($data['release_success']=='True') : ?>
             <div class="request_success">
                 <div class="popup" id="popup">
@@ -252,6 +356,11 @@
 </div>
 <script>
     document.getElementById('cancelBtn').addEventListener('click', function() {
+        // Redirect to the specified URL
+        window.location.href = "<?php echo URLROOT?>/centermanagers/center_garbage_stock";
+    });
+
+    document.getElementById('complete-btn').addEventListener('click', function() {
         // Redirect to the specified URL
         window.location.href = "<?php echo URLROOT?>/centermanagers/center_garbage_stock";
     });

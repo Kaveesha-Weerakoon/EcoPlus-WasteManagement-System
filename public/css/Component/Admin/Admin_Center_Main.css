@@ -262,6 +262,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100px;
   }
 
   .analytic:hover {
@@ -313,8 +314,10 @@
 
   .analytic-icon i{
     font-size: 36px;
-    width: 5rem;
-    height: 5rem;
+    color: var(--main-text-color);
+   
+    /* width: 5rem;
+    height: 5rem; */
   }
 
   .analytic-icon {

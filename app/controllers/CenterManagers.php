@@ -1315,6 +1315,7 @@
         'release_note' => trim($_POST['release_note']),
         'release_popup' => 'True',
         'release_success'=> '',
+        'sell_price_pop'=>'',
         'polythene_err'=>'',
         'plastic_err'=>'',
         'glass_err'=>'',
@@ -1369,7 +1370,27 @@
       if ($atLeastOneFilled && empty($data['release_note_err']) && empty($data['released_person_err']) && $allFieldsValid) {
         
         if($this->garbage_Model->release_garbage_stocks($data)){ 
-          $data['release_success'] = 'True';
+          $priceData = [
+            'plastic'=> 12.00,
+            'polythene'=> 10.00,
+            'glass'=> 25.50,
+            'metals'=> 75.50,
+            'paper_waste'=> 25.00,
+            'electronic_waste'=> 30.35
+          ];
+
+          $total_price =
+            (floatval($data['polythene']) * $priceData['polythene']) +
+            (floatval($data['plastic']) * $priceData['plastic']) +
+            (floatval($data['glass']) * $priceData['glass']) +
+            (floatval($data['paper_waste']) * $priceData['paper_waste']) +
+            (floatval($data['electronic_waste']) * $priceData['electronic_waste']) +
+            (floatval($data['metals']) * $priceData['metals']);
+
+
+          $data['total_sell_price'] = $total_price;
+          $data['garbage_prices'] = $priceData;
+          $data['sell_price_pop'] = 'True';
           $this->view('center_managers/center_garbage_stock',$data);
         } else {
           die('Something went wrong');

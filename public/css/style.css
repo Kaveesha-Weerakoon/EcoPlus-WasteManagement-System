@@ -138,6 +138,9 @@
 @import url('Component/Admin/Admin_Center_Main_Request_Incoming.css');
 @import url('Component/Admin/Admin_Center_Main_Request_Assigned.css');
 @import url('Component/Admin/Admin_Center_Main_Request_Cancelled.css');
+@import url('Component/Admin/Admin_Center_Main_Request_Completed.css');
+
+@import url('Component/Admin/Admin_Garbage_Types_View.css');
 
 
 

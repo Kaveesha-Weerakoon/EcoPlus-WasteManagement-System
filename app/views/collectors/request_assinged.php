@@ -178,10 +178,6 @@
                     <?php endif; ?>
                 </div>
 
-
-
-
-
                 <?php if($data['popup']=='True') : ?>
                 <div class="personal-details-popup-box" id="personal-details-popup-box">
                     <div class="personal-details-popup-form" id="popup">

@@ -14,6 +14,7 @@
       $this->center_complaints_model=$this->model('Center_Complaints');
       $this->notification_Model=$this->model('Notifications');
       $this->Customer_Model=$this->model('Customer');
+      $this->garbageTypeModel=$this->model('Garbage_Types');
 
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
@@ -1290,6 +1291,7 @@
   }
 
   public function release_stocks(){
+    $types=$this->garbageTypeModel->get_all();
 
     $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
 
@@ -1368,12 +1370,10 @@
 
       if ($atLeastOneFilled && empty($data['release_note_err']) && empty($data['released_person_err']) && $allFieldsValid) {
         
-        if($this->garbage_Model->release_garbage_stocks($data)){ 
+        // if($this->garbage_Model->release_garbage_stocks($data)){ 
           $data['release_success'] = 'True';
           $this->view('center_managers/center_garbage_stock',$data);
-        } else {
-          die('Something went wrong');
-        }
+       
 
       }else{
         $this->view('center_managers/center_garbage_stock', $data);

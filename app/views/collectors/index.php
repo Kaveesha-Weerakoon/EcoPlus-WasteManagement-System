@@ -13,10 +13,11 @@
                         <i class='bx bxl-sketch'></i> <input type="text" placeholder="Welcome Back !" id="searchInput"
                             readonly oninput="highlightMatchingText()">
                     </div>
+
                     <div class="main-right-top-notification" id="notification">
                         <i class='bx bx-bell'></i>
                         <?php if (!empty($data['notification'])) : ?>
-                        <div class="dot"></div>
+                        <div class="dot"><?php echo count($data['notification'])?></div>
                         <?php endif; ?>
                     </div>
                     <div id="notification_popup" class="notification_popup">
@@ -29,9 +30,8 @@
 
                                 </div>
                                 <div class="notification_right">
-
-                                    <?php echo $notification->notification?>
-
+                                    <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
+                                    <?php echo $notification->notification ?>
                                 </div>
                             </div>
                             <?php endforeach; ?>
@@ -58,48 +58,62 @@
                             <div class="left">
                                 <h1>Assigned Requests</h1>
                                 <h3 style="font-weight:bold" id="assign_count"></h3>
-                                <p>request</p>
+                                <p>Requests</p>
                                 <button onclick="redirectToAssignedRequests()">View </button>
 
                             </div>
 
                             <div class="right">
-                                
+
                                 <i class='bx bx-building-house'></i>
-                               
+
                                 <h1><?php echo $data['collector']->center_name?></h1>
                                 <h5>Center ID: CEN <?php echo $data['collector']->center_id?> </h5>
                             </div>
                         </div>
                         <div class="main-right-bottom-one-right">
 
-                            <canvas id="myChart" width="688" height="300"></canvas>
+                            <canvas id="myChart" width="600" height="250"></canvas>
                         </div>
                     </div>
                     <div class="main-right-bottom-two">
-                        <div class="main-right-bottom-two-cont A" id="credit_per_waste_quantity">
+
+                        <div class="main-right-bottom-two-cont A" onclick="redirect_history()">
                             <div class="icon_container">
-                                <i class='bx bx-dollar-circle'></i>
+                                <i class='bx bx-group'></i>
                             </div>
-                            <h3>Credits per Waste Quantity</h3>
-                        </div>
-                        <div class="main-right-bottom-two-cont A">
-                            <div class="icon_container">
-                                <i class='bx bx-money-withdraw'></i>
+                            <div class="content_container">
+                                <h3> Assistants</h3>
+                                <h2 id="garbage_count"><?php echo $data['assistant_count']?></h2>
                             </div>
-                            <h3>Eco Credit Value</h3>
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_complains()">
                             <div class="icon_container">
                                 <i class='bx bx-error-circle'></i>
                             </div>
-                            <h3>Complaints</h3>
-                        </div>
-                        <div class="main-right-bottom-two-cont A" onclick="redirect_complains_history()">
-                            <div class="icon_container">
-                                <i class='bx bx-archive'></i>
+                            <div class="content_container">
+                                <h3>Complaints</h3>
+                                <h2>12</h2>
                             </div>
-                            <h3>Complaints History</h3>
+                        </div>
+
+                        <div class="main-right-bottom-two-cont A" onclick="redirect_completed()">
+                            <div class="icon_container">
+                                <i class='bx bx-message-alt-check'></i>
+                            </div>
+                            <div class="content_container">
+                                <h3>Fulfilled Requests</h3>
+                                <h2 id="request_count"><?php echo $data['completed_request_count']?></h2>
+                            </div>
+                        </div>
+                        <div class="main-right-bottom-two-cont A" id="credit_per_waste_quantity">
+                            <div class="icon_container">
+                                <i class='bx bx-dollar-circle'></i>
+                            </div>
+                            <div class="content_container">
+                                <h3>Garbage Types</h3>
+                                <h2 id="garbage_count">6</h2>
+                            </div>
                         </div>
 
                     </div>
@@ -155,22 +169,23 @@
                                         <div class="legend LR">
                                             <div class="completed"></div>
                                             <span>Completed</span>
-                                        </div>   
+                                        </div>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                             <div class="main-right-bottom-three-right-right">
                                 <h1>Assigned Requests</h1>
                                 <div class="map" id="map">
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
 
             </div>
+
             <div class="eco_credit_per_quantity" id="eco_credit_per_quantiy_pop">
                 <img src="<?php echo IMGROOT?>/close_popup.png" alt="" id="close_eco_credit_per_quantiy_pop">
                 <h1>Eco Credits per Waste Qunatity</h1>
@@ -210,11 +225,8 @@
                 <h2>Per Kg</h2>
 
             </div>
-            <div class="overlay" id="overlay">
 
-
-            </div>
-
+            <div class="overlay" id="overlay"></div>
 
         </div>
 
@@ -230,7 +242,6 @@
         let progressStartValue = 0;
         let progressEndValue = <?php echo intval($data['percentage']); ?>;
         let speed = 30;
-        console.log(progressEndValue);
 
         var credit_per_waste_quantity = document.getElementById("credit_per_waste_quantity");
 
@@ -250,8 +261,18 @@
             window.location.href = linkUrl;
         }
 
+        function redirect_completed() {
+            var linkUrl = "<?php echo URLROOT?>/collectors/request_completed";
+            window.location.href = linkUrl;
+        }
+
         function redirect_complains() {
             var linkUrl = "<?php echo URLROOT?>/collectors/complains";
+            window.location.href = linkUrl;
+        }
+
+        function redirect_history() {
+            var linkUrl = "<?php echo URLROOT?>/collectors/collector_assistants"; // Replace with your desired URL
             window.location.href = linkUrl;
         }
 
@@ -259,6 +280,7 @@
             var linkUrl = "<?php echo URLROOT?>/collectors/complains_history";
             window.location.href = linkUrl;
         }
+
         const assign_count = <?php echo $data['assinged_Requests_count']?>;
         const assignCountElement = document.getElementById('assign_count');
 
@@ -269,7 +291,7 @@
         for (let i = 0; i <= assign_count; i++) {
             setTimeout(() => {
                 updateCount(i);
-            }, i * 200); // Change 1000 to control the speed of counting (milliseconds)
+            }, i * 50); // Change 1000 to control the speed of counting (milliseconds)
         }
         notification.addEventListener("click", function() {
             var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
@@ -380,8 +402,8 @@
 
         function initMap() {
             var defaultLatLng = {
-            lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
-            lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
+                lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
+                lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
             };
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: defaultLatLng,

@@ -16,28 +16,32 @@
                             </div>
                             <div class="main-right-top-notification" id="notification">
                                 <i class='bx bx-bell'></i>
-                                <div class="dot"></div>
+                                <?php if (!empty($data['notification'])) : ?>
+                                <div class="dot"><?php echo count($data['notification'])?></div>
+                                <?php endif; ?>
                             </div>
                             <div id="notification_popup" class="notification_popup">
                                 <h1>Notifications</h1>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
+                                <div class="notification_cont">
+                                    <?php foreach($data['notification'] as $notification) : ?>
 
-                                    </div>
-                                    Request 1232 Has been Cancelled
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
+                                    <div class="notification">
+                                        <div class="notification-green-dot">
 
+                                        </div>
+                                        <div class="notification_right">
+                                            <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
+                                            <?php echo $notification->notification ?>
+                                        </div>
                                     </div>
-                                    Request 1232 Has been Assigned
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
+                                    <?php endforeach; ?>
 
-                                    </div>
-                                    Request 1232 Has been Cancelled
                                 </div>
+                                <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/collectors/">
+                                    <i class="fa-solid fa-check"> </i>
+                                    <button type="submit">Mark all as read</button>
+                                </form>
+
                             </div>
                             <div class="main-right-top-profile">
                                 <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
@@ -99,7 +103,6 @@
                                     <th>Req ID</th>
                                     <th>Date</th>
                                     <th>Time</th>
-                                    <th>Customer ID</th>
                                     <th>Cancelled By</th>
                                     <th>Location</th>
                                     <th>Request Details</th>
@@ -115,7 +118,6 @@
                                     <td>R<?php echo $request->req_id?></td>
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
-                                    <td><?php  echo $request->customer_id?></td>
                                     <td><?php  echo $request->cancelled_by?></td>
                                     <td><img onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
                                             src="<?php echo IMGROOT?>/location.png" alt=""></td>

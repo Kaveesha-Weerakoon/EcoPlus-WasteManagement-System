@@ -136,8 +136,8 @@
         $data['assinged']='No';
       }
 
-      $this->Request_Model->cancel_request($data);
-      $this->request_cancelled();
+      $this->Request_Model->cancel_request($data);       
+       header("Location: " . URLROOT . "/customers/request_cancelled");        
     }
 
     public function request_completed(){

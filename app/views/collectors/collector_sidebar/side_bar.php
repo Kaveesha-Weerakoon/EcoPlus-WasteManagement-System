@@ -17,11 +17,11 @@
             </div>
             <h3>Requests</h3>
         </div>
-        <div class="main-left-middle-content" onclick="redirect_history()" id="Collector_Assistants">
+        <div class="main-left-middle-content" onclick="redirect_complains() " id="complains">
             <div class=" main-left-middle-content-icon">
-                <i class='bx bx-group'></i>
+                <i class='bx bx-message-error'></i>
             </div>
-            <h3>Collector Assistants</h3>
+            <h3>Complaints</h3>
         </div>
         <div class="main-left-middle-content" onclick="redirect_edit_profile()" id="edit_profile">
             <div class="main-left-middle-content-icon">
@@ -69,8 +69,8 @@ function redirect_request() {
     window.location.href = linkUrl;
 }
 
-function redirect_history() {
-    var linkUrl = "<?php echo URLROOT?>/collectors/collector_assistants"; // Replace with your desired URL
+function redirect_complains() {
+    var linkUrl = "<?php echo URLROOT?>/collectors/complains";
     window.location.href = linkUrl;
 }
 

@@ -13,6 +13,7 @@
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
       $this->customerModel=$this->model('Customer'); 
       $this->centerModel=$this->model('Center');
+      $this->garbageTypeModel=$this->model('Garbage_Types');
 
       if(!isLoggedIn('collector_id')){
         redirect('users/login');
@@ -32,7 +33,7 @@
       $credit= $this->creditModel->get();
       $req_completed_history = $this->Collect_Garbage_Model->get_complete_request_cus($_SESSION['collector_id']); 
       $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
-      
+      $assistant_count=count( $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']));
 
       if ($completed_requests > 0) {
         $percentage_completed = json_encode(($completed_requests / ($assinged_Requests_count+$completed_requests+$cancel_Requests_count)) * 100);
@@ -50,7 +51,9 @@
         'percentage'=> $percentage_completed,
         'total_garbage'=> $json_Total_Garbage,
         'notification'=> $Notifications,
-        'pop'=>''
+        'pop'=>'',
+        'completed_request_count'=> $completed_requests,
+        'assistant_count'=>$assistant_count
          
         ];
 
@@ -79,7 +82,7 @@
     }
 
     public function collector_assistants(){
-
+      $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
       $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
       $data = [
         'collector_assistants' => $collector_assistants,
@@ -87,15 +90,17 @@
         'confirm_delete' =>'',
         'delete_success'=>'',
         'confirm_update' => '',
-        'update_success'=>''
-        
+        'update_success'=>'',
+        'notification'=> $Notifications,
+
       ];
      
       $this->view('collectors/collector_assistants', $data);
     }
 
     public function collector_assistants_add(){
-     
+      $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
@@ -110,7 +115,9 @@
                'nic_err' => '',
                'dob_err'=>'',
                'contact_no_err'=>'',
-               'address_err' =>''       
+               'address_err' =>'',
+               'notification'=> $Notifications,
+       
         ];
 
         //validate name
@@ -175,7 +182,9 @@
           'nic_err' => '',
           'dob_err'=>'',
           'contact_no_err'=>'',
-          'address_err' =>''
+          'address_err' =>'',
+          'notification'=> $Notifications,
+
         ];
         
         $this->view('collectors/collector_assistants_add', $data);
@@ -185,6 +194,7 @@
     }
 
     public function collector_assistants_delete_confirm($assisId){
+      $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
       $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
       $data = [
         'collector_assistants' => $collector_assistants,
@@ -192,7 +202,8 @@
         'collector_assistant_id'=>$assisId,
         'delete_success'=>'',
         'confirm_update' =>'',
-        'update_success'=> ''
+        'update_success'=> '',
+        'notification'=> $Notifications,
       ];
      
       $this->view('collectors/collector_assistants', $data);
@@ -205,7 +216,8 @@
         'delete_success'=>'',
         'confirm_delete' =>'',
         'confirm_update' =>'',
-        'update_success'=> ''
+        'update_success'=> '',
+        'notification'=> $Notifications,
 
       ];
       $collector_assistant = $this->collector_assistantModel->getCollectorAssisById($assisId);
@@ -225,7 +237,9 @@
     }
 
     public function complains(){
-    
+      $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
+
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -241,13 +255,10 @@
           'subject_err' => '' ,
           'complain_err' => '' ,
           'completed'=>  '',
-          'center_id'=>''
+          'center_id'=>'',
+          'notification'=> $Notifications,
         ];
         
-        /*if($data['completed']=='True'){
-          $data['completed']=='';
-          $this->view('collectors/complains', $data);
-        }*/
 
         if(empty($data['name'])){
           $data['name_err'] = 'Please enter the name';
@@ -297,7 +308,9 @@
         'region_err' => '',
         'subject_err' => '' ,
         'complain_err' => ''  ,
-        'completed'=>''      
+        'completed'=>''  ,          
+        'notification'=> $Notifications,
+    
       ];
 
         $id=$_SESSION['collector_id']; 
@@ -312,16 +325,20 @@
     public function complains_history(){
       $id=$_SESSION['collector_id']; 
       $complains = $this->collector_complain_Model->get_complains_by_collector($id);
+      $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
 
       $data = [
-        'complains' => $complains
+        'complains' => $complains,
+        'notification'=> $Notifications
+
       ];
      
       $this->view('collectors/complains_history', $data);
     }
 
     public function collector_assistants_update($assisId){
-  
+      $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
@@ -342,7 +359,8 @@
                'nic_err' => '',
                'dob_err'=>'',
                'contact_no_err'=>'',
-               'address_err' =>''            
+               'address_err' =>'' ,
+               'notification'=> $Notifications,           
         ];
   
         //validate name
@@ -415,7 +433,8 @@
           'nic_err' =>'',
           'dob_err'=> '',
           'contact_no_err'=> '',
-          'address_err' => ''
+          'address_err' => '',
+          'notification'=> $Notifications,
         ];
         
         $this->view('collectors/collector_assistants', $data);
@@ -423,6 +442,7 @@
     }
 
     public function editprofile(){
+      $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -451,7 +471,8 @@
          'contactno_err' =>'',
          'city_err'=>'',
          'profile_err'=>'',
-         'success_message'=>''];
+         'success_message'=>'',
+         'notification'=> $Notifications];
 
         
        if (empty($data['name'])) {
@@ -517,7 +538,8 @@
         'contactno_err' =>'',
         'city_err'=>'',
         'profile_err'=>'',
-        'success_message'=>''];
+        'success_message'=>'',
+        'notification'=> $Notifications];
 
         $id=$_SESSION['collector_id']; 
         $user=$this->collectorModel->getCollectorById($id);
@@ -634,6 +656,7 @@
    }
 
    public function request_assinged(){
+    $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
 
     $collector=$this->collectorModel->get_collector( $_SESSION['collector_id'] );
     $center=$this->centerModel->getCenterById($collector->center_id);
@@ -653,17 +676,38 @@
         'popup'=>'',
         'popup_confirm_collect'=>'',
         'creditData'=>'',
-        'center'=>$center
+        'center'=>$center,
+        'lattitude'=>$center->lat,
+        'longitude'=>$center->longi,
+        'notification'=> $Notifications,
+        'fine_type' => isset($_POST['attribute']) ? trim($_POST['attribute']) : 'None'
+      ]; 
+      
+      if (empty($data['reason']) || str_word_count($data['reason']) > 200) {        
+        header("Location: " . URLROOT . "/collectors/request_assinged");        
+        
+      } else { 
+        if($data['fine_type']=="None"){
+          $data['fine_amount']=0;
+        
+          $this->Request_Model->cancel_request($data);
 
-      ];
-      if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
-        $this->view('collectors/request_assinged', $data);
+       
+        }
+        else if($data['fine_type']=="No_Response"){
+          $data['fine_amount']=10;
+          $this->Request_Model->cancel_request($data);
 
-      } else {
-        $this->Request_Model->cancel_request($data);
-        $this->request_cancelled();
+        }
+        else if($data['fine_type']=="Unmeasurable"){
+          $data['fine_amount']=50;
+          $this->Request_Model->cancel_request($data);
+
+        } 
+        header("Location: " . URLROOT . "/collectors/request_cancelled");        
+
       }
-
+      
     }
     else{
       $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
@@ -674,7 +718,10 @@
         'popup'=>'',
         'popup_confirm_collect'=>'',
         'creditData'=>'' ,
-        'center'=>$center
+        'center'=>$center,
+        'lattitude'=>$center->lat,
+        'longitude'=>$center->longi,
+        'notification'=> $Notifications
 
       ];        
       $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -685,21 +732,26 @@
    }
 
    public function request_completed(){
+
+    $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
     $completed_Requests=$this->Collect_Garbage_Model->get_complete_request( $_SESSION['collector_id'] );
       $jsonData = json_encode($completed_Requests);
       $data = [
         'completed_requests' => $completed_Requests,
         'jsonData' => $jsonData,
+        'notification'=> $Notifications
       ];
    
     $this->view('collectors/request_completed', $data);
    }
 
    public function request_cancelled(){
+    $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
 
     $cancelled_requests=$this->Request_Model->get_cancelled_request_by_collector($_SESSION['collector_id']);
     $data = [
-      'cancelled_requests' => $cancelled_requests,
+      'cancelled_requests' => $cancelled_requests, 
+      'notification'=> $Notifications
     ];
    
     $this->view('collectors/request_cancelled', $data);
@@ -744,14 +796,14 @@
     }
   }
 
-   public function enterWaste_And_GenerateEcoCredits($req_id) {
+  public function enterWaste_And_GenerateEcoCredits($req_id,$pop_eco="False") {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
         $jsonData = json_encode($assinged_Requests);
         $collector_id = $_SESSION['collector_id'];
-        //$creditAmount = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
-
+        $types=$this->garbageTypeModel->get_all();
+        
         $data = [
             'assigned_requests' => $assinged_Requests,
             'jsonData' => $jsonData,
@@ -760,110 +812,92 @@
             'polythene_quantity' => trim($_POST['polythene_quantity']),
             'plastic_quantity' => trim($_POST['plastic_quantity']),
             'glass_quantity' => trim($_POST['glass_quantity']),
-            'paper_waste_quantity' => trim($_POST['paper_waste_quantity']),
-            'electronic_waste_quantity' => trim($_POST['electronic_waste_quantity']),
+            'paper_quantity' => trim($_POST['paper_quantity']),
+            'electronic_quantity' => trim($_POST['electronic_quantity']),
             'metals_quantity' => trim($_POST['metals_quantity']),
-            //'credit_Amount'=> $creditAmount,
             'note' => trim($_POST['note']),
             'popup' => 'True',
-            'popup_confirm_collect'=>'',
+            'popup_confirm_collect'=>$pop_eco,
             'polythene_quantity_err'=>'',
             'plastic_quantity_err'=>'',
             'glass_quantity_err'=>'',
-            'paper_waste_quantity_err'=>'',
-            'electronic_waste_quantity_err'=>'',
+            'paper_quantity_err'=>'',
+            'electronic_quantity_err'=>'',
             'metals_quantity_err'=>'',
             'note_err'=>'',
             'creditData'=>''
 
         ];
 
-        
-
-          // Check if at least one field is filled
-        $fieldsToCheck = ['polythene_quantity', 'plastic_quantity', 'glass_quantity', 'paper_waste_quantity', 'electronic_waste_quantity', 'metals_quantity'];
+        $fieldsToCheck = ['polythene', 'plastic', 'glass', 'paper', 'electronic', 'metals'];
         $atLeastOneFilled = false;
         $allFieldsValid = true;
-
-        foreach ($fieldsToCheck as $field) {
-          if (!empty($_POST[$field])) {
-              if (!is_numeric($_POST[$field])) {
-                  $data["{$field}_err"] = "Please enter a valid number";
-                  $allFieldsValid = false;
-              } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST[$field]) !== 1) {
-                  $data["{$field}_err"] = "Please enter up to two decimal places.";
-                  $allFieldsValid = false;
-              } else {
-                  $atLeastOneFilled = true;
-              }
+        
+        foreach ($types as $type) {
+          if ($type) {
+              $typeName = strtolower($type->name);
+              ${$typeName . '_min'} = $type->minimum_amount; 
           }
       }
 
+        foreach ($fieldsToCheck as $field) {
+          if (!empty($_POST["{$field}_quantity"])) {
+            if (!is_numeric($_POST["{$field}_quantity"])) {
+                $data["{$field}_quantity_err"] = "Please enter a valid number";
+                $allFieldsValid = false;
+              } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST["{$field}_quantity"]) !== 1) {
+                  $data["{$field}_quantity_err"] = "Please enter up to two decimal places.";
+                  $allFieldsValid = false;
+                } elseif ($_POST["{$field}_quantity"] <= ${$field . '_min'}) {
+                  $name="{$field}_min";
+                  $data["{$field}_quantity_err"] = "Minimum required amount is {$$name}";
+                  $allFieldsValid = false;
 
-                
+                }
+              else{
+                $atLeastOneFilled = true;
 
-            if (!$atLeastOneFilled && $allFieldsValid) {
+              }
+          }
+        }
+
+        if (!$atLeastOneFilled && $allFieldsValid) {
                 $data['polythene_quantity_err'] = 'Please fill polythene quantity';
                 $data['plastic_quantity_err'] = 'Please fill plastic quantity';
                 $data['glass_quantity_err'] = 'Please fill glass quantity';
-                $data['paper_waste_quantity_err'] = 'Please fill paper_waste quantity';
-                $data['electronic_waste_quantity_err'] = 'Please fill electronic_waste quantity';
-                $data['metals_quantity_err'] = 'Please fill metals quantity';
-                
+                $data['paper_quantity_err'] = 'Please fill paper_waste quantity';
+                $data['electronic_uantity_err'] = 'Please fill electronic_waste quantity';
+                $data['metals_quantity_err'] = 'Please fill metals quantity';        
             }
 
             if(empty($_POST['note'])){
               $data['note_err'] = 'Please fill in the Note field';
+        }    
+  
+        if ($atLeastOneFilled && empty($data['note_err']) && $allFieldsValid) {
+          $credit_Amount =0;
+           
+          foreach ($types as $type) {
+              if ($type) {
+                  $typeName = strtolower($type->name);
+                  $credit_Amount+=(floatval($data["{$type->name}_quantity"]) * $type->credits_per_waste_quantity);
+              }
             }
-
-
-          
-
-            if ($atLeastOneFilled && empty($data['note_err']) && $allFieldsValid) {
-              $creditData = $this->creditModel->get();
-
-              $credit_Amount =
-              (floatval($data['polythene_quantity']) * $creditData->polythene) +
-              (floatval($data['plastic_quantity']) * $creditData->plastic) +
-              (floatval($data['glass_quantity']) * $creditData->glass) +
-              (floatval($data['paper_waste_quantity']) * $creditData->paper) +
-              (floatval($data['electronic_waste_quantity']) * $creditData->electronic) +
-              (floatval($data['metals_quantity']) * $creditData->metal);
               
-            $data['creditData']=$creditData ;
+            $data['creditData']=$types ;
             $data['credit_Amount'] = $credit_Amount;
             $data['popup_confirm_collect'] ="True";
             $this->view('collectors/request_assinged', $data);
 
-            // $inserted = $this->Collect_Garbage_Model->insert($data);
-            
-            
-            // $requst = $this->Request_Model->get_request_by_id($req_id);// Assuming you have the customer ID
-            // $customer_id= $requst->customer_id;
-            // $current_credit = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
-
-            // $new_credit_balance = $current_credit + $credit_Amount; // Calculate new credit balance
-
-            // // Update the customer credit balance in the database
-            // $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
-
-
-            // if ($inserted && $update_result ) {
-            //     $this->view('collectors/request_assinged', $data);
-            // } else {
-            //     // Handle insertion failure
-            //     // Show an error message or perform necessary actions
-            // }
             } else {
               $this->view('collectors/request_assinged', $data);
             }
           
-        } else {
+         } else {
           $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
           $jsonData = json_encode($assinged_Requests);
           $collector_id = $_SESSION['collector_id'];
-          //$collector_id = $_SESSION['user_id'];
-          //$creditAmount = $this->collectorModel->get_customer_credit_balance($customer_id);
+        
           $data = [
           'assigned_requests' => $assinged_Requests,
           'jsonData' => $jsonData,
@@ -872,8 +906,8 @@
           'polythene_quantity' =>'',
           'plastic_quantity' => '',
           'glass_quantity' => '',
-          'paper_waste_quantity' => '',
-          'electronic_waste_quantity' => '',
+          'paper_quantity' => '',
+          'electronic_quantity' => '',
           'metals_quantity' => '',
           'credit_Amount'=> '',
           'note' => '',
@@ -882,24 +916,27 @@
           'polythene_quantity_err'=>'',
           'plastic_quantity_err'=>'',
           'glass_quantity_err'=>'',
-          'paper_waste_quantity_err'=>'',
-          'electronic_waste_quantity_err'=>'',
+          'paper_quantity_err'=>'',
+          'electronic_quantity_err'=>'',
           'metals_quantity_err'=>'',
           'note_err'=>'',
           'creditData'=>''
           ];
           $this->view('collectors/request_assinged', $data);
         } 
-}
 
-   public function Eco_Credit_Insert($req_id) {
+  }
+
+
+  public function Eco_Credit_Insert($req_id,$pop_eco="False") {
+    $types=$this->garbageTypeModel->get_all();
+
      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
       $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
       $jsonData = json_encode($assinged_Requests);
       $collector_id = $_SESSION['collector_id'];
-      //$creditAmount = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
-
+        
       $data = [
           'assigned_requests' => $assinged_Requests,
           'jsonData' => $jsonData,
@@ -908,67 +945,78 @@
           'polythene_quantity' => trim($_POST['polythene_quantity']),
           'plastic_quantity' => trim($_POST['plastic_quantity']),
           'glass_quantity' => trim($_POST['glass_quantity']),
-          'paper_waste_quantity' => trim($_POST['paper_waste_quantity']),
-          'electronic_waste_quantity' => trim($_POST['electronic_waste_quantity']),
+          'paper_quantity' => trim($_POST['paper_quantity']),
+          'electronic_quantity' => trim($_POST['electronic_quantity']),
           'metals_quantity' => trim($_POST['metals_quantity']),
-          //'credit_Amount'=> $creditAmount,
           'note' => trim($_POST['note']),
           'popup' => 'True',
-          'popup_confirm_collect'=>'',
+          'popup_confirm_collect'=>$pop_eco,
           'polythene_quantity_err'=>'',
           'plastic_quantity_err'=>'',
           'glass_quantity_err'=>'',
-          'paper_waste_quantity_err'=>'',
-          'electronic_waste_quantity_err'=>'',
+          'paper_quantity_err'=>'',
+          'electronic_quantity_err'=>'',
           'metals_quantity_err'=>'',
           'note_err'=>'',
           'creditData'=>''
       ];
 
-        // Check if at least one field is filled
-      $fieldsToCheck = ['polythene_quantity', 'plastic_quantity', 'glass_quantity', 'paper_waste_quantity', 'electronic_waste_quantity', 'metals_quantity'];
+      $fieldsToCheck = ['polythene', 'plastic', 'glass', 'paper', 'electronic', 'metals'];
       $atLeastOneFilled = false;
       $allFieldsValid = true;
+      
+      foreach ($types as $type) {
+        if ($type) {
+            $typeName = strtolower($type->name);
+            ${$typeName . '_min'} = $type->minimum_amount; 
+        }
+      }
 
       foreach ($fieldsToCheck as $field) {
-        if (!empty($_POST[$field])) {
-            if (!is_numeric($_POST[$field])) {
-                $data["{$field}_err"] = "Please enter a valid number";
+        if (!empty($_POST["{$field}_quantity"])) {
+          if (!is_numeric($_POST["{$field}_quantity"])) {
+              $data["{$field}_quantity_err"] = "Please enter a valid number";
+              $allFieldsValid = false;
+            } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST["{$field}_quantity"]) !== 1) {
+                $data["{$field}_quantity_err"] = "Please enter up to two decimal places.";
                 $allFieldsValid = false;
-            } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST[$field]) !== 1) {
-                $data["{$field}_err"] = "Please enter up to two decimal places.";
+              } elseif ($_POST["{$field}_quantity"] <= ${$field . '_min'}) {
+                $name="{$field}_min";
+                $data["{$field}_quantity_err"] = "Minimum required amount is {$$name}";
                 $allFieldsValid = false;
-            } else {
-                $atLeastOneFilled = true;
+
+              }
+            else{
+              $atLeastOneFilled = true;
+
             }
         }
-    }
+      }
 
-          if (!$atLeastOneFilled && $allFieldsValid) {
+      if (!$atLeastOneFilled && $allFieldsValid) {
               $data['polythene_quantity_err'] = 'Please fill polythene quantity';
               $data['plastic_quantity_err'] = 'Please fill plastic quantity';
               $data['glass_quantity_err'] = 'Please fill glass quantity';
-              $data['paper_waste_quantity_err'] = 'Please fill paper_waste quantity';
-              $data['electronic_waste_quantity_err'] = 'Please fill electronic_waste quantity';
-              $data['metals_quantity_err'] = 'Please fill metals quantity';     
+              $data['paper_quantity_err'] = 'Please fill paper_waste quantity';
+              $data['electronic_uantity_err'] = 'Please fill electronic_waste quantity';
+              $data['metals_quantity_err'] = 'Please fill metals quantity';        
           }
 
           if(empty($_POST['note'])){
             $data['note_err'] = 'Please fill in the Note field';
-          }
+      }    
 
-          if ($atLeastOneFilled && empty($data['note_err']) && $allFieldsValid) {
-            $creditData = $this->creditModel->get();
+      if ($atLeastOneFilled && empty($data['note_err']) && $allFieldsValid) {
 
-            $credit_Amount =
-            (floatval($data['polythene_quantity']) * $creditData->polythene) +
-            (floatval($data['plastic_quantity']) * $creditData->plastic) +
-            (floatval($data['glass_quantity']) * $creditData->glass) +
-            (floatval($data['paper_waste_quantity']) * $creditData->paper) +
-            (floatval($data['electronic_waste_quantity']) * $creditData->electronic) +
-            (floatval($data['metals_quantity']) * $creditData->metal);
-            
-          $data['creditData']=$creditData ;
+            $credit_Amount =0;
+           
+          foreach ($types as $type) {
+              if ($type) {
+                  $typeName = strtolower($type->name);
+                  $credit_Amount=(floatval($data["{$type->name}_quantity"]) * $type->credits_per_waste_quantity);
+              }
+            }
+          $data['creditData']=$types ;
           $data['credit_Amount'] = $credit_Amount;
 
           $collector = $this->collectorModel->getCollectorById($_SESSION['collector_id']);
@@ -990,22 +1038,21 @@
           $updatedGarbageTotals = $this->Collect_Garbage_Model->updateGarbageTotals($req_id);
 
           if ($inserted && $update_result && $updatedGarbageTotals ) {
-              $this->request_completed();
+              header("Location: " . URLROOT . "/collectors/request_assinged");        
 
           } else {
-            $data['popup']='';
-            $this->view('collectors/request_assinged', $data);
+            header("Location: " . URLROOT . "/collectors/request_completed");        
+
           }
-          } else {
+      } else {
             $this->view('collectors/request_assinged', $data);
           }
         
-      } else {
+       } else {
         $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
         $jsonData = json_encode($assinged_Requests);
         $collector_id = $_SESSION['collector_id'];
-        //$collector_id = $_SESSION['user_id'];
-        //$creditAmount = $this->collectorModel->get_customer_credit_balance($customer_id);
+     
         $data = [
         'assigned_requests' => $assinged_Requests,
         'jsonData' => $jsonData,
@@ -1014,8 +1061,8 @@
         'polythene_quantity' =>'',
         'plastic_quantity' => '',
         'glass_quantity' => '',
-        'paper_waste_quantity' => '',
-        'electronic_waste_quantity' => '',
+        'paper_quantity' => '',
+        'electronic_quantity' => '',
         'metals_quantity' => '',
         'credit_Amount'=> '',
         'note' => '',
@@ -1024,25 +1071,33 @@
         'polythene_quantity_err'=>'',
         'plastic_quantity_err'=>'',
         'glass_quantity_err'=>'',
-        'paper_waste_quantity_err'=>'',
-        'electronic_waste_quantity_err'=>'',
+        'paper_quantity_err'=>'',
+        'electronic_quantity_err'=>'',
         'metals_quantity_err'=>'',
         'note_err'=>'',
         'creditData'=>''
         ];
         $this->view('collectors/request_assinged', $data);
       } 
-}
+   }
 
-public function displayCustomerTotalGarbage() {
-  $customerGarbageData = $this->Collect_Garbage_Model->getCustomerTotalGarbage();
-  $data['customerGarbageData'] = $customerGarbageData;
-  $this->view('customer_total_garbage_view', $data);
-}
+  
+  
+   public function request_pop_cancel($id){
+ 
+    header("Location: " . URLROOT . "/collectors/enterWaste_And_GenerateEcoCredits/{$id}/False");        
+
+  }
+
+  public function displayCustomerTotalGarbage() {
+    $customerGarbageData = $this->Collect_Garbage_Model->getCustomerTotalGarbage();
+    $data['customerGarbageData'] = $customerGarbageData;
+    $this->view('customer_total_garbage_view', $data);
+  }
 
 
   
-  }
+}
 
 
 

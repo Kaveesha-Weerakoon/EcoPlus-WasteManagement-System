@@ -84,47 +84,67 @@
     }
 
     public function cancel_request($data) {
-      try{
-      $this->db->query('INSERT INTO request_cancelled (req_id, cancelled_by, reason,assinged,collector_id) VALUES (:req_id, :cancelled_by, :reason,:assinged,:collector_id)');
-      $this->db->bind(':req_id', $data['request_id']);
-      $this->db->bind(':cancelled_by', $data['cancelled_by']);
-      $this->db->bind(':reason', $data['reason']);
-      $this->db->bind(':assinged', $data['assinged']);
-      $this->db->bind(':collector_id', $data['collector_id']);
-      $insertResult = $this->db->execute();
-     
-      if ($insertResult) {
-          $this->db->query('UPDATE request_main SET type = :type WHERE req_id = :req_id');
-          $this->db->bind(':type', 'cancelled');
+      try { 
+          $this->db->query('INSERT INTO request_cancelled (req_id, cancelled_by, reason, assinged, collector_id, fine, fine_type) VALUES (:req_id, :cancelled_by, :reason, :assinged, :collector_id, :fine, :fine_type)');
           $this->db->bind(':req_id', $data['request_id']);
-          $updateResult = $this->db->execute();
-
-          $request=$this->get_request_by_id($data['request_id']);
-          
-          if( $updateResult && $request){
-            $this->db->query('INSERT INTO user_notification (user_id, notification) VALUES (:customer_id, :notification)');
-            $this->db->bind(':customer_id',$request->customer_id);
-            $this->db->bind(':notification', "Req ID {$data['request_id']} Has been Cancelled");
-            $result= $this->db->execute();
-            if($result){
-              return $result;
-             }
-             else{
+          $this->db->bind(':cancelled_by', $data['cancelled_by']);
+          $this->db->bind(':reason', $data['reason']);
+          $this->db->bind(':assinged', $data['assinged']);
+          $this->db->bind(':collector_id', $data['collector_id']);
+          $this->db->bind(':fine', $data['fine_amount'] ?? '0');
+          $this->db->bind(':fine_type', $data['fine_type'] ?? "None");
+          $insertResult = $this->db->execute();
+         if ($insertResult) {
+              $this->db->query('UPDATE request_main SET type = :type WHERE req_id = :req_id');
+              $this->db->bind(':type', 'cancelled');
+              $this->db->bind(':req_id', $data['request_id']);
+              $updateResult = $this->db->execute();
+           
+              $request = $this->get_request_by_id($data['request_id']);
+  
+              if ($updateResult && $request) {
+                  $this->db->query('INSERT INTO user_notification (user_id, notification) VALUES (:customer_id, :notification)');
+                  $this->db->bind(':customer_id', $request->customer_id);
+                  $this->db->bind(':notification', "Req ID {$data['request_id']} Has been Cancelled");
+                  $result = $this->db->execute();
+  
+                  if ($data['fine_type'] !== "None") {
+                      if ($result) {
+                          $c=$this->db->query('SELECT credit_amount FROM customer_credits WHERE user_id = :customer_id');
+                          $this->db->bind(':customer_id', $request->customer_id);
+                          $credit  =$this->db->single();
+  
+                          if ($credit ) {
+                              $balance=$credit->credit_amount - $data['fine_amount'];
+                              $this->db->query('UPDATE customer_credits SET credit_amount = :credit_amount WHERE user_id= :customer_id');
+                              $this->db->bind(':customer_id', $request->customer_id);
+                              $this->db->bind(':credit_amount',$balance);
+                              $updateResult = $this->db->execute();
+  
+                              if ($updateResult) {
+                                  return true;
+                              } else {
+                                  return false;
+                              }
+                          } else {
+                              return false;
+                          }
+                      } else {
+                          return false;
+                      }
+                  }
+              } else {
+                  return false;
+              }
+          } else {
               return false;
-             }
-          }else{
-            return false;
-          };
-          
-          
-      } else {
+          }
+      } catch (PDOException $e) {
+      
           return false;
       }
-     } catch (PDOException $e) {
-      return false;
-     }
-      
   }
+  
 
     public function get_cancelled_request($customer_id){    
       $query = '
@@ -208,7 +228,7 @@
           return false;
       } }catch (PDOException $e) {
         return false;
-    }
+     }
     }
 
     public function insert_notification($user_id, $notification) {

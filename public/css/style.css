@@ -87,6 +87,12 @@
 @import url('Component/CenterManager/CenterManager_Center_Garbage_Stock.css');
 @import url('Component/CenterManager/CenterManager_Stock_Releases.css');
 
+/* Agent CSS */
+@import url('Component/Agent/Agent_Dashboard.css');
+@import url('Component/Agent/Agent_Sidebar.css');
+@import url('Component/Agent/Agent_Main.css');
+
+
 /* Admin CSS */
 
 /*Admin Main left hand side CSS This is used in left hand side of all the Center Manager uis*/
@@ -105,6 +111,10 @@
 @import url('Component/Admin/Admin_Center_Manager_Add.css');
 @import url('Component/Admin/Admin_Center_Manager.css');
 @import url('Component/Admin/Admin_Center_Manager_View.css');
+
+@import url('Component/Admin/Admin_Discount_Agent_Add.css');
+@import url('Component/Admin/Admin_Discount_Agent_View.css');
+@import url('Component/Admin/Admin_Discount_Agent.css');
 
 @import url('Component/Admin/Admin_Collector.css');
 

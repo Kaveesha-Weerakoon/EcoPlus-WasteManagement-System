@@ -88,16 +88,18 @@
                                 <tr class="table-row">
                                     <td>C<?php echo $centers->id?></td>
                                     <td><?php echo $centers->region?></td>
-                                    <td><img onclick="viewLocation(<?php echo $centers->lat; ?>, <?php echo $centers->longi; ?>)"
-                                            src="<?php echo IMGROOT?>/location.png" alt=""></td>
+                                    <!-- <td><img onclick="viewLocation(<?php echo $centers->lat; ?>, <?php echo $centers->longi; ?>)"
+                                            src="<?php echo IMGROOT?>/location.png" alt=""></td> -->
+                                    <td><i class='bx bx-map' style="font-size: 29px;"
+                                             onclick="viewLocation(<?php echo $centers->lat; ?>, <?php echo $centers->longi; ?>)"></i></td>
                                     <td><?php echo $centers->center_manager_id?></td>
                                     <td><?php echo $centers->center_manager_name?></td>
                                     <td><a
-                                            href="<?php echo URLROOT?>/admin/center_main/<?php echo $centers->id?>/<?php echo $centers->region?>"><img
-                                                src="<?php echo IMGROOT?>/Admin_Center.png" alt=""></a></td>
+                                            href="<?php echo URLROOT?>/admin/center_main/<?php echo $centers->id?>/<?php echo $centers->region?>">
+                                            <i class='bx bxs-school' style="font-size: 29px;"></i></a></td>
                                     <td class="delete"> <a
-                                            href="<?php echo URLROOT?>/admin/center_delete/<?php echo $centers->id?>"><img
-                                                src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
+                                            href="<?php echo URLROOT?>/admin/center_delete/<?php echo $centers->id?>">
+                                            <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
                                 </tr>
                                 <?php endforeach; ?>
 
@@ -105,7 +107,7 @@
                     </div>
                   
                 </div>
-                <div class="location_pop">
+                <div class="location_pop" id="location_pop">
                     <div class="location_pop_content">
                         <div class="location_pop_map">
 
@@ -115,6 +117,9 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="overlay" id="overlay"></div>
+
                 <?php if($data['delete_center']=='True') : ?>
                 <div class="center_delete">
                     <div class="popup" id="popup">
@@ -157,13 +162,27 @@ function initMap(latitude, longitude) {
     });
 }
 
+
+// function viewLocation($lattitude, $longitude) {
+//     initMap($lattitude, $longitude);
+//     document.querySelector('.location_pop').style.display = 'flex';
+// }
+
+// function closemap() {
+//     document.querySelector('.location_pop').style.display = 'none';
+// }
+
 function viewLocation($lattitude, $longitude) {
     initMap($lattitude, $longitude);
-    document.querySelector('.location_pop').style.display = 'flex';
+    var locationPop = document.getElementById('location_pop');
+    locationPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
 }
 
 function closemap() {
-    document.querySelector('.location_pop').style.display = 'none';
+    var locationPop = document.getElementById('location_pop');
+    locationPop.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
 }
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

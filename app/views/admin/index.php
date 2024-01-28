@@ -69,7 +69,7 @@
                         <div class="main-right-bottom-two-cont A" onclick="redirect_customers()">
                             <div class="icon_container">
                                 <i class='bx bx-group'></i>
-                            </div>   
+                            </div>
                             <div class="content_container">
                                 <h3>Customers</h3>
                                 <h2 id="customer_count" style="font-weight:bold"></h2>
@@ -83,7 +83,7 @@
                                 <h3>Collectors</h3>
                                 <h2 id="collector_count" style="font-weight:bold"></h2>
                             </div>
-                            
+
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_discountAgents()">
                             <div class="icon_container">
@@ -93,7 +93,7 @@
                                 <h3>Discount Agents</h3>
                                 <h2 style="font-weight:bold">12</h2>
                             </div>
-                    
+
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_centermanagers()">
                             <div class=" icon_container">
@@ -103,7 +103,7 @@
                                 <h3>Center Managers</h3>
                                 <h2 style="font-weight:bold" id="cm_count"></h2>
                             </div>
-                               
+
                         </div>
 
                     </div>
@@ -231,9 +231,9 @@ function redirect_centermanagers() {
 
 function redirect_discountAgents() {
     var linkUrl = "<?php echo URLROOT?>/admin/discount_agents"; // Replace with your desired URL
-   
+
     window.location.href = linkUrl;
-  
+
 }
 
 // function redirect_credits_per() {
@@ -242,19 +242,19 @@ function redirect_discountAgents() {
 //     document.getElementById('overlay').style.display = "flex";
 // }
 
-function redirect_garbage_types(){
-    var linkUrl = "<?php echo URLROOT?>/admin/garbage_types"; 
-   
+function redirect_garbage_types() {
+    var linkUrl = "<?php echo URLROOT?>/admin/garbage_types";
+
     window.location.href = linkUrl;
 }
 
-var close_pop_ecocredits = document.getElementById('close-eco_credits');
-close_pop_ecocredits.addEventListener('click', function() {
-    var locationPop = document.querySelector('.pop-eco_credits');
-    locationPop.classList.remove('active');
-    document.getElementById('overlay').style.display = "none";
+// var close_pop_ecocredits = document.getElementById('close-eco_credits');
+// // close_pop_ecocredits.addEventListener('click', function() {
+// //     var locationPop = document.querySelector('.pop-eco_credits');
+// //     locationPop.classList.remove('active');
+// //     document.getElementById('overlay').style.display = "none";
 
-});
+// // });
 
 
 const customer_count = <?php echo $data['customer_count']?>;

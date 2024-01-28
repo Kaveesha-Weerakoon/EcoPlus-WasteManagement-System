@@ -1,9 +1,9 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Admin_Main">
-    <div class="Admin_Discount_Agent">
-        <div class="Admin_Discount_Agent_View">
+<div class="Customer_Main">
+    <div class="Customer_Discount_Agent">
+        <div class="Customer_Discount_Agent_View">
             <div class="main">
-                <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
+            <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
                 <div class="main-right">
                     <div class="main-right-top">
@@ -40,9 +40,11 @@
                             </div>
 
                             <div class="main-right-top-profile">
-                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
+                                <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
+                                    alt="">
                                 <div class="main-right-top-profile-cont">
-                                    <h3>Admin</h3>
+                                    <h3><?php echo $_SESSION['user_name']?></h3>
+                                    <p>ID : C <?php echo $_SESSION['user_id']?></p>
                                 </div>
                             </div>
 
@@ -85,7 +87,7 @@
                                             alt="" class="manager_img"></td>
                                     <td><?php echo $discount_agent->name?></td>
                                     <td><?php echo $discount_agent->email?></td>
-                                    <td class="cancel-open"><a href="<?php echo URLROOT?>/admin/discount_agent_delete_confirm/<?php echo $discount_agent->user_id?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
+                                    <!--<td class="cancel-open"><a href="<?php echo URLROOT?>/admin/discount_agent_delete_confirm/<?php echo $discount_agent->user_id?>"><img src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>-->
                                 </tr>
                                 <?php endforeach; ?>
                             </table>

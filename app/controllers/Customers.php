@@ -964,7 +964,6 @@
       $data = [
         'discount_agents' => $discount_agent,
         'confirm_delete' =>'',
-        'assigned'=>'',
         'success'=>'',
         'click_update' =>'',
         'update_success'=>'',
@@ -972,7 +971,7 @@
         'personal_details_click'=>''
       ];
      
-      $this->view('admin/discount_agents', $data);
+      $this->view('customers/discount_agents', $data);
     }
 
 }

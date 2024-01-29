@@ -334,8 +334,43 @@
         }
   
   
+        if (empty($data['customer_id_err']) && empty($data['credit_amount_err']) && empty($data['center_err'])) {
+          $discount_amount= floatval($data['discount_amount']); // Convert to float
+      
+
+          $user_balance = floatval($this->Customer_Credit_Model->get_customer_credit_balance($customer_id));
+
+
+      
+          if ($discount_amount <= $user_balance) {
         
+              echo'user balance'.$user_balance;
+              echo'id'.$customer_id;
+              echo'discount'.$discount_amount;
+
+              
+
+              $new_balance = $user_balance - $discount_amount;
+              $balance_update = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_balance);
+             
+      
+              if ($balance_update) {
+                echo'user balance'.$user_balance;
+              echo'id'.$customer_id;
+              echo'discount'.$discount_amount;
+                  $this->view('credit_discount_agents/agent_discount', $data);
+              } else {
+                die('Something went wrong');
+              }
+          } else {
+              $data['credit_amount_err'] = 'Transfer amount exceeds available credit balance';             
+              $this->view('credit_discount_agents/agent_discount', $data);
+
+          }
+        } else {
           $this->view('credit_discount_agents/agent_discount', $data);
+        }
+
   
           }else {
             $data = [

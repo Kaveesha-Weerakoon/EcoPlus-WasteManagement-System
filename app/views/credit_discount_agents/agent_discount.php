@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="main-bottom-down">         
-                    <form action="?action=validateUser" method="POST">
+                    <form action="<?php echo URLROOT;?>/CreditDiscountsAgent/balance_validation" method="post">
                         <h1>Validate User</h1>
 
                         <label for="customer_id">Customer ID:</label>

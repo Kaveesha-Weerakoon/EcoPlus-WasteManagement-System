@@ -4,7 +4,10 @@
 <div class="Customer_Main">
 
     <div class="Customer_Dashboard">
-
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
+            async defer>
+        </script>
         <div class="main">
             <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
@@ -241,7 +244,6 @@
 
                 </div>
             </div>
-            <script src="CustomerDashboard.js"></script>
         </div>
 
     </div>
@@ -252,7 +254,6 @@
 <script>
 var color = "#47b076";
 var textColor = "#414143"
-
 var checkbox = document.getElementById('toggle-checkbox');
 
 var credit_per_waste_quantity = document.getElementById("credit_per_waste_quantity");
@@ -302,9 +303,7 @@ function redirect_requests() {
 
 function redirect_discountAgents() {
     var linkUrl = "<?php echo URLROOT?>/customers/discount_agents"; // Replace with your desired URL
-
     window.location.href = linkUrl;
-
 }
 
 notification.addEventListener("click", function() {
@@ -342,6 +341,7 @@ document.getElementById("close_eco_credit_per_quantiy_pop").addEventListener("cl
     document.getElementById("eco_credit_per_quantiy_pop").classList.remove('active');
     document.getElementById('overlay').style.display = "none";
 });
+
 document.getElementById("centers_close").addEventListener("click", function() {
     document.getElementById("centers").classList.remove('active');
     document.getElementById('overlay').style.display = "none";
@@ -454,22 +454,56 @@ function initMap() {
             }
         ]
     });
+    var customColoredMarkerIcon = {
+        url: 'https://maps.google.com/mapfiles/ms/micons/green-dot.png',
+        size: new google.maps.Size(31, 31),
+        scaledSize: new google.maps.Size(35, 35)
+    };
 
-
-
+    var activeMarker = null;
+    var activeCircle = null;
     var points = <?php echo $data['centers']; ?>;
     points.forEach((point) => {
         var marker = new google.maps.Marker({
             position: {
                 lat: parseFloat(point.lat),
-                lng: parseFloat(point.longi)
+                lng: parseFloat(point.longi),
+
             },
             map: map,
             title: point.region,
-
+            icon: customColoredMarkerIcon
         });
+        var defaultRadius = parseFloat(point.radius);
 
         marker.addListener('click', function() {
+            if (activeMarker) {
+                activeMarker.setIcon(customColoredMarkerIcon);
+            }
+
+            if (activeCircle) {
+                activeCircle.setMap(null);
+            }
+
+            activeMarker = marker;
+
+            marker.setIcon({
+                url: 'https://maps.google.com/mapfiles/ms/micons/green-dot.png',
+                size: new google.maps.Size(31, 31),
+                scaledSize: new google.maps.Size(35, 34)
+            });
+
+            activeCircle = new google.maps.Circle({
+                map: map,
+                center: marker.getPosition(),
+                radius: defaultRadius,
+                fillColor: '#008000',
+                fillOpacity: 0.3,
+                strokeColor: '#008000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2
+            });
+
             var infowindow = new google.maps.InfoWindow({
                 content: point.region
             });
@@ -477,7 +511,6 @@ function initMap() {
         });
     });
 }
-
 
 let progress = setInterval(() => {
     if (progressStartValue == progressEndValue) {
@@ -502,6 +535,7 @@ let progress = setInterval(() => {
 
 document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('myChart').getContext('2d');
+    var config = null;
     const myChart = new Chart(ctx, config);
 
     const chartContainer = document.getElementById('chart');
@@ -513,11 +547,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
 function createOrUpdateChart(color, textColor) {
     var Total_Garbage = <?php echo $data['total_garbage']?>;
     const ctx = document.getElementById('myChart').getContext('2d');
-
+    if (myChart) {
+        myChart.destroy();
+    }
     myChart = new Chart(ctx, {
         type: 'bar',
         data: {

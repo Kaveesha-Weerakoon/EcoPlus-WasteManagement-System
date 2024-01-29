@@ -101,14 +101,24 @@
               $updateResult = $this->db->execute();
            
               $request = $this->get_request_by_id($data['request_id']);
-  
+            
               if ($updateResult && $request) {
-                  $this->db->query('INSERT INTO user_notification (user_id, notification) VALUES (:customer_id, :notification)');
-                  $this->db->bind(':customer_id', $request->customer_id);
-                  $this->db->bind(':notification', "Req ID {$data['request_id']} Has been Cancelled");
-                  $result = $this->db->execute();
-  
+                
+                  if ($data['cancelled_by'] === "Customer") {
+                      $this->db->query('INSERT INTO user_notification (user_id, notification) VALUES (:customer_id, :notification)');
+                      $this->db->bind(':customer_id',$data['collector_id']);
+                      $this->db->bind(':notification', "Req ID {$data['request_id']} Cancelled By Customer");
+                      $result = $this->db->execute();     
+                  }
+                  else{
+                    $this->db->query('INSERT INTO user_notification (user_id, notification) VALUES (:customer_id, :notification)');
+                    $this->db->bind(':customer_id', $request->customer_id);
+                    $this->db->bind(':notification', "Req ID {$data['request_id']} Has been Cancelled");
+                    $result = $this->db->execute();die(); 
+                  }
+
                   if ($data['fine_type'] !== "None") {
+                   
                       if ($result) {
                           $c=$this->db->query('SELECT credit_amount FROM customer_credits WHERE user_id = :customer_id');
                           $this->db->bind(':customer_id', $request->customer_id);
@@ -140,7 +150,7 @@
               return false;
           }
       } catch (PDOException $e) {
-      
+          die($e);
           return false;
       }
   }

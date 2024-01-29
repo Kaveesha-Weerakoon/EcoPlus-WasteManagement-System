@@ -73,8 +73,8 @@
                         <div class="err"><?php echo $data['customer_id_err']; ?></div>
 
                         <label for="customer_id">Discount:</label>
-                        <input value="<?php echo $data['credit_amount']; ?>" type="text" name="credit_amount">
-                        <div class="err"><?php echo $data['credit_amount_err']; ?></div>
+                        <input value="<?php echo $data['discount_amount']; ?>" type="text" name="discount_amount">
+                        <div class="err"><?php echo $data['discount_amount_err']; ?></div>
 
                         <label for="customer_id">Center:</label>
                         <input value="<?php echo $data['center']; ?>" type="text" name="center">

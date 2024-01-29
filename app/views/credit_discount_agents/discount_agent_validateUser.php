@@ -67,8 +67,10 @@
                     <div class="main-bottom-down">         
                     <form action="?action=validateUser" method="POST">
                         <h1>Validate User</h1>
+
                         <label for="customer_id">Customer ID:</label>
-                        <input type="text" name="customer_id" required>
+                        <input value="<?php echo $data['customer_id']; ?>" type="text" name="customer_id">
+                        <div class="err"><?php echo $data['customer_id_err']; ?></div>
                         <button type="submit">Validate</button>
                     </form>
 
@@ -79,18 +81,7 @@
             </div>
         </div>
 
-        <?php if($data['registered']=='True') : ?>
-        <div class="center_manager_success">
-        <div class="popup" id="popup">
-            <img src="<?php echo IMGROOT?>/check.png" alt="">
-            <h2>Success!!</h2>
-            <p>Discount Agent has been registered successfully</p>
-            <a href="<?php echo URLROOT?>/admin/discount_agents"><button type="button" >OK</button></a>
-
-        </div>
-        </div>
-        <?php endif; ?>
-    
+       
     </div> 
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

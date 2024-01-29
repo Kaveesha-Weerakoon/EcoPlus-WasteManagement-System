@@ -75,7 +75,7 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 320px;
-    height: 300px; /* Set the width of the form */
+    height: 350px; /* Set the width of the form */
 }
 
 h1 {
@@ -166,6 +166,16 @@ button:hover {
       margin-bottom: 5px;
       color: #e74c3c;
   }
+
+  .err {
+    height: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%; 
+    color: #e74c3c;
+    margin-top: -10px; 
+    margin-bottom: 10px;
+}
 
 
 

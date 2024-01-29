@@ -52,7 +52,7 @@
                             <h1>Garbage Types</h1>
                         </div>
                         <div class="main-right-top-three">
-                            <a href="">
+                            <a href="<?php echo URLROOT?>/admin/garbage_types">
                                 <div class="main-right-top-three-content">
                                     <p><b style="color:#1ca557;">View</b></p>
                                     <div class="line"  style="background-color: #1ca557;"></div>
@@ -87,10 +87,10 @@
                             <table class="table">
                                 <?php foreach($data['garbage_types'] as $garbage_type) : ?>
                                 <tr class="table-row">
-                                    <td><?php echo $garbage_type->ID?></td>
+                                    <td>G<?php echo $garbage_type->ID?></td>
                                     <td><?php echo $garbage_type->name?></td>
                                     <td><?php echo $garbage_type->credits_per_waste_quantity?></td>
-                                    <td><?php echo $garbage_type->approxiamte_amount?></td>
+                                    <td><?php echo $garbage_type->approximate_amount?></td>
                                     <td><?php echo $garbage_type->minimum_amount?></td>
                                     <td><?php echo $garbage_type->selling_price?></td>
                                     <td><a href="<?php echo URLROOT ?>/admin/garbage_types_update/<?php echo $garbage_type->ID?>"><i class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"></i></a></td>
@@ -168,6 +168,19 @@
                 </div>
 
                 <?php endif; ?>
+
+                <?php if($data['update_success']=='True') : ?>
+                <div class="center_worker_update_success">
+                    <div class="popup1" id="popup1">
+                        <img src="<?php echo IMGROOT?>/check.png" alt="">
+                        <h2>Success!!</h2>
+                        <p>Garbage Type details has updated successfully</p>
+                        <button type="button" onclick="redirect_garbage_types()">OK</button>
+
+                    </div>
+                </div>
+                <?php endif; ?>
+
             </div>
         </div>
 
@@ -175,6 +188,10 @@
 </div>
 <script>
 
+function redirect_garbage_types(){
+    var linkUrl = "<?php echo URLROOT?>/admin/garbage_types"; 
+    window.location.href = linkUrl;
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     const element = document.getElementById('update_popup');

@@ -1192,7 +1192,8 @@
 
       $data=[
         'garbage_types'=> $garbage_types,
-        'click_update'=>''
+        'click_update'=>'',
+        'update_success'=>''
         
       ];
 
@@ -1299,7 +1300,7 @@
           'garbage_types'=> $garbage_types,
           'garbage_type'=> $garbage_type->name,
           'credit_per_waste_quantity' => $garbage_type->credits_per_waste_quantity,
-          'approximate_amount'=> $garbage_type->approxiamte_amount,
+          'approximate_amount'=> $garbage_type->approximate_amount,
           'minimum_amount'=> $garbage_type->minimum_amount,
           'selling_price'=> $garbage_type->selling_price,
           'click_update'=> 'True',

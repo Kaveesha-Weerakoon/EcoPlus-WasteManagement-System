@@ -31,7 +31,7 @@
     }
 
     public function update_garbage_types($data){
-      $this->db->query('UPDATE garbage_types SET name= :garbage_type, credits_per_waste_quantity = :credits, approxiamte_amount= :approximate_amount, minimum_amount=:minimum_amount, selling_price=:selling_price WHERE ID =:garbage_id');
+      $this->db->query('UPDATE garbage_types SET name= :garbage_type, credits_per_waste_quantity = :credits, approximate_amount= :approximate_amount, minimum_amount=:minimum_amount, selling_price=:selling_price WHERE ID =:garbage_id');
       $this->db->bind(':garbage_id', $data['id']);
       $this->db->bind(':garbage_type', $data['garbage_type']);
       $this->db->bind(':credits', $data['credit_per_waste_quantity']);

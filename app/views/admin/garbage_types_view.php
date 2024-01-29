@@ -93,8 +93,7 @@
                                     <td><?php echo $garbage_type->approxiamte_amount?></td>
                                     <td><?php echo $garbage_type->minimum_amount?></td>
                                     <td><?php echo $garbage_type->selling_price?></td>
-                                    <td><i class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"
-                                        onclick="open_update_popup(<?php echo $garbage_type->ID?>)"></i></td>
+                                    <td><a href="<?php echo URLROOT ?>/admin/garbage_types_update/<?php echo $garbage_type->ID?>"><i class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"></i></a></td>
                                     
                                 </tr>
                                 <?php endforeach; ?>
@@ -107,10 +106,10 @@
 
                 <div class="overlay" id="overlay"></div>
 
+                <?php if($data['click_update']=='True') : ?>
                 <div class="update_click" id="update_popup">
                     <div class="popup-form" id="popup">
-                        <a href="<?php echo URLROOT?>/admin/garbage_types"><img
-                                src="<?php echo IMGROOT?>/close_popup.png" class="update-popup-img" alt=""></a>
+                        <img src="<?php echo IMGROOT?>/close_popup.png" class="update-popup-img" alt="" id="close_update">
                         <h2>Update Details</h2>
                         <center>
                             <div class="update-topic-line"></div>
@@ -120,7 +119,7 @@
                             <div class="updateData A">
                                 <label>Garbage Type</label><br>
                                 <input type="text" name="garbage_type" placeholder="Enter garbage type"
-                                    value="<?php echo $data['garbage_type']; ?>" disabled><br>
+                                    value="<?php echo $data['garbage_type']; ?>" ><br>
                                 <div class="error-div" style="color:red">
                                     <?php echo $data['garbage_type_err']?>
                                 </div>
@@ -129,33 +128,33 @@
                                 <label>Credits per waste quantity</label><br>
                                 <input type="text" name="credit_per_waste_quantity" placeholder="Enter Credits per waste quantity"
                                     value="<?php echo $data['credit_per_waste_quantity']; ?>"><br>
-                                <!-- <div class="error-div" style="color:red">
+                                <div class="error-div" style="color:red">
                                     <?php echo $data['credit_per_waste_quantity_err']?>
-                                </div> -->
+                                </div>
                             </div>
                             <div class="updateData">
                                 <label>Approximate Amount</label><br>
                                 <input type="text" name="approximate_amount" placeholder="Enter Approximate Amount"
                                     value="<?php echo $data['approximate_amount']; ?>"><br>
-                                <!-- <div class="error-div" style="color:red">
+                                <div class="error-div" style="color:red">
                                     <?php echo $data['approximate_amount_err']?>
-                                </div> -->
+                                </div>
                             </div>
                             <div class="updateData">
                                 <label>Minimum Amount</label><br>
                                 <input type="text" name="minimum_amount" placeholder="Enter Minimum Amount"
                                     value="<?php echo $data['minimum_amount']; ?>"><br>
-                                <!-- <div class="error-div" style="color:red">
+                                <div class="error-div" style="color:red">
                                     <?php echo $data['minimum_amount_err']?>
-                                </div> -->
+                                </div>
                             </div>
                             <div class="updateData B">
                                 <label>Selling Price</label><br>
                                 <input type="text" name="selling_price" placeholder="Enter Selling Price"
                                     value="<?php echo $data['selling_price']; ?>"><br>
-                                <!-- <div class="error-div" style="color:red">
+                                <div class="error-div" style="color:red">
                                     <?php echo $data['selling_price_err']?>
-                                </div> -->
+                                </div>
                             </div>
 
                             <div class="btns1">
@@ -168,7 +167,7 @@
                     </div>
                 </div>
 
-                
+                <?php endif; ?>
             </div>
         </div>
 
@@ -176,33 +175,37 @@
 </div>
 <script>
 
-function open_update_popup(garbage_id){
 
-    var url = "<?php echo URLROOT ?>/admin/garbage_types_update/" + garbage_id;
-    window.location.href = url;
+document.addEventListener('DOMContentLoaded', function() {
+    const element = document.getElementById('update_popup');
+    const overlay = document.getElementById('overlay');
     
-    var updatePopup = document.getElementById('update_popup');
-    updatePopup.classList.add('active');
-    document.getElementById('overlay').style.display = "flex";
 
-    
-}
+    if (element) {
+        element.classList.add('active');
+        overlay.style.display = "flex";
 
-function submitForm($garbage_id){
-    var form = document.getElementById('update_form');
-    form.action = "<?php echo URLROOT;?>/admin/garbage_types_update/" + $garbage_id;
-    form.method = 'post';
-    form.submit();
-}
+    }
+
+});
 
 document.addEventListener('DOMContentLoaded', function(){
-    var close_update_popup =document.getElementById('close_update_popup');
+    const close_update_popup =document.getElementById('close_update_popup');
+    const close_update_button = document.getElementById('close_update');
 
     close_update_popup.addEventListener('click', function(){
         var updatePopup = document.getElementById('update_popup');
         updatePopup.classList.remove('active');
         document.getElementById('overlay').style.display = "none";
     });
+
+    close_update_button.addEventListener('click', function(){
+        var updatePopup = document.getElementById('update_popup');
+        updatePopup.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
+    });
+
 });
 
 </script>

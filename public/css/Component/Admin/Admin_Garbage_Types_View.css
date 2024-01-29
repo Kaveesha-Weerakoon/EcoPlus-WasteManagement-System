@@ -212,8 +212,8 @@
     }
 
     .btns1 {
-        margin-top: 5px;
-        margin-bottom: 25px;
+        margin-top: 10px;
+        margin-bottom: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -224,13 +224,14 @@
 
     .updatebtn {
         width: 42%;
-        margin-left: 5px;
+        margin-right: 5px;
         padding: 10px 0;
         background: var(--green-color-one);
         color: white;
         border: 0;
         outline: none;
-        font-size: 18px;
+        font-size: 16px;
+        letter-spacing: 0.003rem;
         border-radius: 4px;
         cursor: pointer;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
@@ -242,14 +243,15 @@
     }
 
     .cancelbtn1 {
-        width: 319px;
-        margin-left: 10px;
+        width: 42%;
+        margin-left: 5px;
         padding: 10px 0;
         background: #bab3b3;
         color: white;
         border: 0;
         outline: none;
-        font-size: 18px;
+        font-size: 16px;
+        letter-spacing: 0.003rem;
         border-radius: 4px;
         cursor: pointer;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
@@ -263,7 +265,7 @@
     .updateData {
         width: 100%;
         margin-bottom: 15px;
-        margin-left: 65px;
+        margin-left: 37px;
         border-radius: 4px;
         display: flex;
         flex-direction: column;

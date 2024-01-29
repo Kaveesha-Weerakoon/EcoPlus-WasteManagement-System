@@ -1192,6 +1192,7 @@
 
       $data=[
         'garbage_types'=> $garbage_types,
+        'click_update'=>''
         
       ];
 
@@ -1213,6 +1214,7 @@
           'approximate_amount'=> trim($_POST['approximate_amount']),
           'minimum_amount'=> trim($_POST['minimum_amount']),
           'selling_price'=> trim($_POST['selling_price']),
+          'click_update'=> 'True',
           'update_success'=>'',
           'garbage_type_err'=>'',
           'credit_per_waste_quantity_err'=>'',
@@ -1225,7 +1227,7 @@
         //validate garbage type
         if(empty($data['garbage_type'])){
           $data['garbage_type_err'] = 'Please enter garbage type';
-        }elseif(strlen($data['name']) > 50) {
+        }elseif(strlen($data['garbage_type']) > 50) {
           $data['garbage_type_err'] = 'Garbage type is too long';
         }
 
@@ -1300,6 +1302,7 @@
           'approximate_amount'=> $garbage_type->approxiamte_amount,
           'minimum_amount'=> $garbage_type->minimum_amount,
           'selling_price'=> $garbage_type->selling_price,
+          'click_update'=> 'True',
           'update_success'=>'',
           'garbage_type_err'=>'',
           'credit_per_waste_quantity_err'=>'',

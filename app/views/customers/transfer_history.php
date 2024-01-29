@@ -123,11 +123,11 @@
                                             <td>
                                                 <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
                                                 <img class="td-pro_pic"
-                                                    src="<?php echo (empty($transaction->receiver_image) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/' . $transaction->receiver_image) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->receiver_image; ?>"
+                                                    src="<?php echo (empty($transaction->receiver_img) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/' . $transaction->receiver_img) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->receiver_img; ?>"
                                                     alt="">
                                                 <?php else: ?>
                                                 <img class="td-pro_pic"
-                                                    src="<?php echo (empty($transaction->sender_image) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/'. $transaction->sender_image) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->sender_image; ?>"
+                                                    src="<?php echo (empty($transaction->sender_img) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/'. $transaction->sender_img) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->sender_img; ?>"
                                                     alt="">
                                                 <?php endif; ?>
                                             </td>
@@ -188,7 +188,7 @@
             var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
             if (notification_pop.style.height === "0px") {
                 if (notificationArraySize >= 3) {
-                    notification_pop.style.height = "198px";
+                    notification_pop.style.height = "210px";
                 }
                 if (notificationArraySize == 2) {
                     notification_pop.style.height = "150px";

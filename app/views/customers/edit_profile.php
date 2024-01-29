@@ -201,7 +201,7 @@
             var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
             if (notification_pop.style.height === "0px") {
                 if (notificationArraySize >= 3) {
-                    notification_pop.style.height = "198px";
+                    notification_pop.style.height = "210px";
                 }
                 if (notificationArraySize == 2) {
                     notification_pop.style.height = "150px";

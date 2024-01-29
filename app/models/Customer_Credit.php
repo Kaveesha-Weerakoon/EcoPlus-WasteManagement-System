@@ -53,7 +53,25 @@
 
     public function get_transaction_history($user_id) {
         try{
-        $this->db->query('SELECT * FROM credits_transfer WHERE sender_id = :user_id OR receiver_id = :user_id ORDER BY CONCAT(date, " ", time) DESC');
+        $this->db->query('
+        SELECT 
+        credits_transfer.*, 
+        c.image AS sender_img, 
+        c2.image AS receiver_img
+    FROM 
+        credits_transfer
+    JOIN 
+        customers c ON c.user_id = credits_transfer.sender_id 
+    JOIN 
+        customers c2 ON c2.user_id = credits_transfer.receiver_id
+    WHERE 
+        credits_transfer.sender_id = :user_id OR credits_transfer.receiver_id = :user_id 
+    ORDER BY 
+        CONCAT(credits_transfer.date, " ", credits_transfer.time) DESC;
+    
+       ');
+
+
         $this->db->bind(':user_id', $user_id);
         return $this->db->resultSet();
     }catch (PDOException $e) {

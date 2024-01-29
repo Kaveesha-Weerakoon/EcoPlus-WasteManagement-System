@@ -91,7 +91,7 @@
                                 <td><?php echo $collector_assistant->address?></td>
                                 <td> <?php echo $collector_assistant->contact_no?></td>
                                 <td> <?php echo $collector_assistant->dob?></td>
-                                <td class="cancel-open"><a
+                                <td class="cancel-open" id="update"><a
                                         href="<?php echo URLROOT?>/Collectors/collector_assistants_update/<?php echo $collector_assistant->id ?>">
                                         <i class='bx bx-refresh' style="font-size:30px; "></i> </td>
                                 <td class="cancel-open"><a
@@ -116,8 +116,11 @@
 
             </div>
         </div>
+        <div class="overlay" id="overlay">
+
+        </div>
         <?php if($data['confirm_delete']=='True') : ?>
-        <div class="delete_confirm">
+        <div class="delete_confirm" id="delete_confirm">
             <div class="popup" id="popup">
                 <img src="<?php echo IMGROOT?>/trash.png" alt="">
                 <h2>Delete this collector assistant?</h2>
@@ -135,7 +138,7 @@
 
 
         <?php if($data['confirm_update']=='True') : ?>
-        <div class="update_click">
+        <div class="update_click" id="update_click">
             <div class="popup-form" id="popup">
                 <a href="<?php echo URLROOT?>/Collectors/collector_assistants/"><img
                         src="<?php echo IMGROOT?>/close_popup.png" class="update-popup-img" alt=""></a>
@@ -198,6 +201,7 @@
                 </form>
 
             </div>
+
         </div>
 
         <?php endif; ?>
@@ -230,7 +234,22 @@
 
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const element = document.getElementById('update_click');
+    const overlay = document.getElementById('overlay');
+    const delete_confirm = document.getElementById('delete_confirm');
 
+    if (element) {
+        element.classList.add('active');
+        overlay.style.display = "flex";
+
+    }
+
+    if (delete_confirm) {
+        delete_confirm.classList.add('active');
+        overlay.style.display = "flex";
+    }
+});
 </script>
 
 

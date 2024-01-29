@@ -266,27 +266,7 @@
     
   
   
-        
-         /* if (empty($data['customer_id_err']) && empty($data['credit_amount_err'])) {
-            $sender_id = $_SESSION['user_id'];
-            $receiver_id = $customer_id;
-            $transfer_amount = $data['credit_amount'];
-  
-            $sender_balance = $this->Customer_Credit_Model->get_customer_credit_balance($sender_id);
-            $receiver_balance = $this->Customer_Credit_Model->get_customer_credit_balance($receiver_id);
-
-        
-            if ($transfer_amount <= $sender_balance) {
-                $data['transfer_confirm']="True";           
-                $this->view('customers/transfer', $data);
-            } else {
-                $data['credit_amount_err'] = 'Transfer amount exceeds available credit balance';             
-                $this->view('customers/transfer', $data);
-
-            }
-          } else {
-              $this->view('customers/transfer', $data);
-          }*/
+   
 
           $this->view('credit_discount_agents/discount_agent_validateUser', $data);
   
@@ -355,25 +335,6 @@
   
   
         
-          /*if (empty($data['customer_id_err']) && empty($data['discount_amount_err']) && empty($data['center_err']) ) {
-            $receiver_id = $customer_id;
-            $transfer_amount = $data['discount_amount'];
-  
-            $sender_balance = $this->Customer_Credit_Model->get_customer_credit_balance($sender_id);
-            $receiver_balance = $this->Customer_Credit_Model->get_customer_credit_balance($receiver_id);
-
-        
-            if ($transfer_amount <= $sender_balance) {
-                $data['transfer_confirm']="True";           
-                $this->view('customers/transfer', $data);
-            } else {
-                $data['credit_amount_err'] = 'Transfer amount exceeds available credit balance';             
-                $this->view('credit_discount_agents/discount_agent_validateUser', $data);
-
-            }
-          } else {
-            $this->view('credit_discount_agents/agent_discount', $data);
-          }*/
           $this->view('credit_discount_agents/agent_discount', $data);
   
           }else {

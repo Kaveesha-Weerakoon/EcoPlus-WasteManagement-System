@@ -1,4 +1,4 @@
-.Discount_Agent_ValidateUser {
+.Discount_Agent_Discount {
   .main-bottom-down {
       display: flex;
       align-items: center;
@@ -75,7 +75,7 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 320px;
-    height: 200px; /* Set the width of the form */
+    height: 300px; /* Set the width of the form */
 }
 
 h1 {
@@ -93,9 +93,9 @@ label {
 input {
     width: 100%;
     padding: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 9px;
     box-sizing: border-box;
-    margin-top: 20px;
+    margin-top: 1px;
 }
 
 button {

@@ -241,6 +241,14 @@
       $this->view('credit_discount_agents/discount_agent_validateUser', $data);
     }
 
+    public function balance_validation(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+     
+      $this->view('credit_discount_agents/agent_discount', $data);
+    }
+
 
 
 }

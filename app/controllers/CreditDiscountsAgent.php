@@ -17,6 +17,8 @@
       $this->view('credit_discount_agents/index', $data);
     }
 
+
+
     public function logout(){
       unset($_SESSION['agent_id']);
       unset($_SESSION['agent_email']);
@@ -24,6 +26,8 @@
       session_destroy();
       redirect('users/login');
     }
+
+
 
 
     public function editprofile(){
@@ -131,6 +135,8 @@
     }
 
 
+
+
     public function change_password(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
       
@@ -225,6 +231,16 @@
         }
   
      }
+
+
+   public function validateUser(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+     
+      $this->view('credit_discount_agents/discount_agent_validateUser', $data);
+    }
+
 
 
 }

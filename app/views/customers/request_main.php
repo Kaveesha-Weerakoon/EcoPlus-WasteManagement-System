@@ -69,9 +69,8 @@
                                         <?php
                                                 if ($request->type === 'incoming') {
                                                     echo '   <i class="bx bx-x-circle" style="font-size: 29px; color:#DC2727;" onclick="cancel_request(\'' . $request->request_id . '\')"></i>';
-                                                    // echo '<img onclick="cancel_request(\'' . $request->request_id . '\')" src="' . IMGROOT . '/close_popup.png" alt="">';
                                                 } else {
-                                                    echo '<i class="fa-solid fa-triangle-exclamation" style="font-size: 24px; color:#DC2727;"></i>';
+                                                    echo '<i class="fa-solid fa-triangle-exclamation" style="font-size: 24px; color:#DC2727;" onclick="cancel_request2(\'' . $request->request_id . '\')"></i>';
 
                                                 }
                                                 ?>
@@ -87,7 +86,6 @@
                     <?php else: ?>
                     <div class="main-right-bottom-two">
                         <div class="main-right-bottom-two-content">
-                            <!-- <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt=""> -->
                             <i class='bx bx-data' style="font-size: 150px"></i>
                             <h1>You Have No Ongoing Requests</h1>
                             <p>Request a Collect Now!</p>
@@ -111,7 +109,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="delete_confirm" id="cancel_confirm2">
+                    <div class="popup" id="popup">
+                        <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
+                        <h2>Cancel the Request?</h2>
+                        <p>Canceling incurs a fine. Minimize frequent actions for uninterrupted service</p>
 
+                        <div class="btns">
+                            <a id="cancelLink2"><button type="button" class="deletebtn">Confirm</button></a>
+                            <a id="close_cancel2"><button type="button" class="cancelbtn">Cancel</button></a>
+                        </div>
+                    </div>
+                </div>
                 <div class="location_pop">
                     <div class="location_pop_content">
                         <div class="location_pop_map">
@@ -184,6 +193,15 @@
         document.getElementById('cancel_confirm').classList.add('active');
     }
 
+    function cancel_request2(id) {
+        var newRequestId = id;
+        var newURL = "<?php echo URLROOT?>/customers/cancel_request/" + newRequestId;
+        document.getElementById('cancelLink2').href = newURL;
+        document.getElementById('overlay').style.display = "flex";
+
+        document.getElementById('cancel_confirm2').classList.add('active');
+    }
+
     function initMap(latitude, longitude) {
         var mapCenter = {
             lat: latitude,
@@ -210,15 +228,12 @@
         var locationPop = document.querySelector('.location_pop');
         locationPop.classList.add('active');
         document.getElementById('overlay').style.display = "flex";
-
-
     }
 
     function closemap() {
         var locationPop = document.querySelector('.location_pop');
         locationPop.classList.remove('active');
         document.getElementById('overlay').style.display = "none";
-
     }
 
     function searchTable() {
@@ -246,18 +261,23 @@
         const close_collector = document.getElementById("personal-details-popup-form-close");
         const collector_view = document.getElementById("personal-details-popup-box");
         const close_cancel = document.getElementById("close_cancel");
+        const close_cancel2 = document.getElementById("close_cancel2");
 
         close_collector.addEventListener("click", function() {
             collector_view.classList.remove('active');
             document.getElementById('overlay').style.display = "none";
-
         });
 
         close_cancel.addEventListener("click", function() {
             document.getElementById('cancel_confirm').classList.remove('active');
             document.getElementById('overlay').style.display = "none";
-
         });
+
+        close_cancel2.addEventListener("click", function() {
+            document.getElementById('cancel_confirm2').classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
+        });
+
     });
     </script>
     <?php require APPROOT . '/views/inc/footer.php'; ?>

@@ -129,13 +129,17 @@
         'assinged'=>'No',
         'collector_id'=>'',
         'fine_amount'=>'',
-        'fine_type'=>''
+        'fine_type'=>'',
+        'collector_id'=>'',
+        'reason'=>"none"
       ];
-      if($this->Request_Model->get_assigned_request($req_id)){
+
+      $Request=$this->Request_Model->get_assigned_request($req_id);
+      $data['collector_id']=strval($Request->collector_id);
+      if($Request){
         $data['assinged']='Yes';
         $data['fine_amount']='100';     
         $data['fine_type']='Cancelled Assigned Req';
-
       }
       else{
         $data['assinged']='No';

@@ -1213,6 +1213,7 @@
           'approximate_amount'=> trim($_POST['approximate_amount']),
           'minimum_amount'=> trim($_POST['minimum_amount']),
           'selling_price'=> trim($_POST['selling_price']),
+          'update_success'=>'',
           'garbage_type_err'=>'',
           'credit_per_waste_quantity_err'=>'',
           'approximate_amount_err'=>'',
@@ -1221,8 +1222,70 @@
 
         ];
 
-        $this->view('admin/garbage_types_view', $data);
+        //validate garbage type
+        if(empty($data['garbage_type'])){
+          $data['garbage_type_err'] = 'Please enter garbage type';
+        }elseif(strlen($data['name']) > 50) {
+          $data['garbage_type_err'] = 'Garbage type is too long';
+        }
 
+        //validate credit per waste quantity
+        if(empty($data['credit_per_waste_quantity'])){
+          $data['credit_per_waste_quantity_err'] = 'Please enter credits per waste quantity';
+        }elseif(!(is_numeric($data['credit_per_waste_quantity']))){
+          $data['credit_per_waste_quantity_err'] = 'Please enter a numeric value';
+        } elseif (!filter_var($data['credit_per_waste_quantity'], FILTER_VALIDATE_INT) || $data['credit_per_waste_quantity'] <= 0 ) {
+          $data['credit_per_waste_quantity_err'] = 'Credit value should be a positive whole number';
+        }
+
+        //validate approximate amount
+        if(empty($data['approximate_amount'])){
+          $data['approximate_amount_err'] = 'Please enter approximate amount';
+        }elseif(!(is_numeric($data['approximate_amount']))){
+          $data['approximate_amount_err'] = 'Please enter a numeric value';
+        }elseif (!preg_match('/^\d+(\.\d{1})?$/', $data['approximate_amount']) || $data['approximate_amount'] <= 0) {
+          $data['approximate_amount_err'] = 'Please enter a positive value up to 1 decimal place';
+        }elseif($data['approximate_amount'] <= $data['minimum_amount']){
+          $data['approximate_amount_err'] = 'Approximate amount must exceed the minimum amount';
+        }
+
+        //validate minimum amount
+        if(empty($data['minimum_amount'])){
+          $data['minimum_amount_err'] = 'Please enter minimum amount';
+        }elseif(!(is_numeric($data['minimum_amount']))){
+          $data['minimum_amount_err'] = 'Please enter a numeric value';
+        }elseif (!preg_match('/^\d+(\.\d{1})?$/', $data['minimum_amount']) || $data['minimum_amount'] <= 0) {
+          $data['minimum_amount_err'] = 'Please enter a positive value up to 1 decimal place';
+        }elseif($data['minimum_amount'] >= $data['approximate_amount']){
+          $data['minimum_amount_err'] = 'Minimum amount should not exceed the approximate value';
+        }
+
+        //validate sell price
+        if(empty($data['selling_price'])){
+          $data['selling_price_err'] = 'Please enter selling price';
+        }elseif(!(is_numeric($data['selling_price']))){
+          $data['selling_price_err'] = 'Please enter a numeric value';
+        }elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['selling_price']) || $data['selling_price'] <= 0) {
+          $data['selling_price_err'] = 'Please enter a positive value up to 2 decimal places';
+        }
+
+        if(empty($data['garbage_type_err']) && empty($data['credit_per_waste_quantity_err']) && empty($data['approximate_amount_err']) && 
+        empty($data['minimum_amount_err']) && empty($data['selling_price_err'])){
+          if($this->garbage_types_model->update_garbage_types($data)){
+            //die('sucess');
+            $data['update_success']='True';       
+            $this->view('admin/garbage_types_view', $data);
+          } else {
+            die('Something went wrong');
+          }
+
+        }else{
+          $this->view('admin/garbage_types_view', $data);
+
+        }
+
+
+       
 
       }else{
         
@@ -1237,6 +1300,7 @@
           'approximate_amount'=> $garbage_type->approxiamte_amount,
           'minimum_amount'=> $garbage_type->minimum_amount,
           'selling_price'=> $garbage_type->selling_price,
+          'update_success'=>'',
           'garbage_type_err'=>'',
           'credit_per_waste_quantity_err'=>'',
           'approximate_amount_err'=>'',

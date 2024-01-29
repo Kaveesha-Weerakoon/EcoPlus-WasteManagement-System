@@ -391,10 +391,10 @@
   /* Styles for the form */
   .personal-details-popup-box {
     position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    z-index: 2;
+    top: 50%;
+    left: 50%;
+    background-color: transparent !important;
+    z-index: 4 !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -403,6 +403,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+  }
+
+  .personal-details-popup-box.active {
+    transform: translate(-50%, -50%) scale(1);
   }
 
   .personal-details-popup-box {
@@ -499,7 +505,9 @@
 
     .main-right-bottom-content-content {
       width: 100%;
+      box-sizing: border-box;
       margin: 5px solid red;
+      padding-right: 25px;
     }
 
     .main-right-bottom-content-content input {
@@ -540,7 +548,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
       height: 50px;
     }
 
@@ -551,7 +558,7 @@
     .form-button button[type="submit"] {
       height: 40px;
       outline: none;
-      width: 350px;
+      width: 300px;
       color: white;
       font-size: 17px;
       font-weight: 500;
@@ -568,7 +575,7 @@
     }
 
     .cancel-button {
-      width: 290px;
+      width: 300px;
       height: 40px;
       outline: none;
       color: white;
@@ -640,12 +647,12 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 6 !important;
   }
 
   .pop_up_confirm_collect_cont {
     width: 35%;
-    height: 75%;
+    height: 78%;
     background-color: white;
     border-radius: 10px;
     display: flex;
@@ -670,7 +677,7 @@
 
   .pop_up_confirm_collect .details {
     overflow: scroll;
-    height: 280px;
+    height: 300px;
   }
 
   .pop_up_confirm_collect_cont .cont h5 {

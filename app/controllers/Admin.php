@@ -11,11 +11,13 @@
       $this->center_model=$this->model('Center');
       $this->collector_model=$this->model('Collector');
       $this->collector_complain_Model=$this->model('Collector_Complain');
-      // $this->collector_assistants_Model=$this->model('collector_assistants');
+      $this->collector_assistants_Model=$this->model('collector_Assistant');
       $this->center_workers_model=$this->model('Center_Worker');
       $this->requests_model=$this->model('Request');
       $this->center_complaints_model=$this->model('Center_Complaints');
       $this->discount_agentModel=$this->model('Discount_Agent');
+      $this->collect_garbage_Model=$this->model('Collect_Garbage');
+      $this->garbage_types_model = $this->model('Garbage_types');
       
      
 
@@ -944,6 +946,20 @@
 
     }
 
+    public function completed_requests($region){
+      $completed_requests = $this->collect_garbage_Model->get_completed_requests_bycenter($region);
+      $center=$this->center_model->getCenterByRegion($region);
+
+      $data =[
+        'center_region'=> $region,
+        'center'=> $center,
+        'completed_requests'=> $completed_requests
+      ];
+
+      $this->view('admin/center_main_request_completed', $data);
+
+    }
+
     public function complaint_centers(){
 
       $center_complaints= $this->center_complaints_model->get_center_complaints();
@@ -1158,6 +1174,28 @@
       ];
     
       $this->view('admin/discount_agents', $data);
+    }
+
+    public function get_collector_assistants($collector_id){
+      $collector_assistants = $this->collector_assistants_Model->get_collector_assistants_bycolid($collector_id);
+
+      $data=[
+        'collector_assistants'=> $collector_assistants
+      ];
+
+      $this->view('admin/center_main_collectors', $data);
+    }
+
+    public function garbage_types(){
+
+      $garbage_types = $this->garbage_types_model->get_all();
+
+      $data=[
+        'garbage_types'=> $garbage_types
+      ];
+
+      $this->view('admin/garbage_types_view', $data);
+
     }
 
   

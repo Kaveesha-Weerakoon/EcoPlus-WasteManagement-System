@@ -178,10 +178,6 @@
                     <?php endif; ?>
                 </div>
 
-
-
-
-
                 <?php if($data['popup']=='True') : ?>
                 <div class="personal-details-popup-box" id="personal-details-popup-box">
                     <div class="personal-details-popup-form" id="popup">
@@ -206,79 +202,6 @@
                                             </div>
                                         </div>
                                         <?php endforeach; ?>
-
-                                        <!-- <div class="main-right-bottom-content-content">
-                                            <span class="details">Polythene</span>
-                                            <div class="input-container">
-                                                <i class="icon fas fa-trash"></i>
-                                                <input name="polythene_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg"
-                                                    value="<?php echo $data['polythene_quantity']; ?>">
-                                                <div class="error-div" style="color:red">
-                                                    <?php echo $data['polythene_quantity_err']?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="main-right-bottom-content-content">
-                                            <span class="details">Plastic</span>
-                                            <div class="input-container">
-                                                <i class="icon fas fa-box"></i>
-                                                <input name="plastic_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg"
-                                                    value="<?php echo $data['plastic_quantity']; ?>">
-                                                <div class="error-div" style="color:red">
-                                                    <?php echo $data['plastic_quantity_err']?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="main-right-bottom-content-content">
-                                            <span class="details">Glass</span>
-                                            <div class="input-container">
-                                                <i class="icon fas fa-glass-whiskey"></i>
-                                                <input name="glass_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg"
-                                                    value="<?php echo $data['glass_quantity']; ?>">
-                                                <div class="error-div" style="color:red">
-                                                    <?php echo $data['glass_quantity_err']?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="main-right-bottom-content-content">
-                                            <span class="details">Paper Waste</span>
-                                            <div class="input-container">
-                                                <i class="icon fas fa-file-alt"></i>
-                                                <input name="paper_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg"
-                                                    value="<?php echo $data['paper_quantity']; ?>">
-                                                <div class="error-div" style="color:red">
-                                                    <?php echo $data['paper_quantity_err']?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="main-right-bottom-content-content">
-                                            <span class="details">Electronic Waste</span>
-                                            <div class="input-container">
-                                                <i class="icon fas fa-laptop"></i>
-                                                <input name="electronic_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg"
-                                                    value="<?php echo $data['electronic_quantity']; ?>">
-                                                <div class="error-div" style="color:red">
-                                                    <?php echo $data['electronic_quantity_err']?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="main-right-bottom-content-content">
-                                            <span class="details">Metals</span>
-                                            <div class="input-container">
-                                                <i class="icon fas fa-box"></i>
-                                                <input name="metals_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg"
-                                                    value="<?php echo $data['metals_quantity']; ?>">
-                                                <div class="error-div" style="color:red">
-                                                    <?php echo $data['metals_quantity_err']?>
-                                                </div>
-                                            </div>
-                                        </div> -->
 
                                     </div>
 
@@ -406,7 +329,7 @@
                         <h2>Major Reason</h2>
                         <div class="cancel_fine_container">
                             <label>
-                                <input type="radio" name="attribute" value="No_Response">
+                                <input type="radio" name="attribute" value="No Response">
                                 No Response
                             </label>
 
@@ -770,7 +693,6 @@ function updateMapForDate(selectedDate) {
     });
 }
 
-
 function submitForm($id) {
     var form = document.getElementById('myForm');
     form.action = "<?php echo URLROOT;?>/collectors/Eco_Credit_Insert/" + $id;
@@ -786,6 +708,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeButton = document.getElementById("cancel-pop");
     const cancel_popup = document.getElementById("cancel-confirm");
     const cancel_form = document.getElementById("cancel-form");
+
+    const overlay = document.getElementById('overlay');
+    const personal_details_popup_box = document.getElementById('personal-details-popup-box');
 
     maps.addEventListener("click", function() {
         if (main_right_bottom !== null) {
@@ -809,6 +734,18 @@ document.addEventListener("DOMContentLoaded", function() {
         maps.style.backgroundColor = "";
 
     });
+
+    if (personal_details_popup_box) {
+        if (
+            <?php echo json_encode($data['popup']); ?> == "True" &&
+            <?php echo json_encode($data['popup_confirm_collect']); ?> == "False") {
+            personal_details_popup_box.classList.add('active');
+            overlay.style.display = "flex";
+        }
+
+    }
+
+
 
 
 

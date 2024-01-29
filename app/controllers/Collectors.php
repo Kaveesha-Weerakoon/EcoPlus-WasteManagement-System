@@ -209,6 +209,111 @@
       $this->view('collectors/collector_assistants', $data);
     } 
 
+    public function collector_assistants_update($assisId){
+      $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
+            $data = [
+               'collector_assistants' => $collector_assistants,
+               'id' => $assisId,
+               'name' =>trim($_POST['name']),
+               'nic' => trim($_POST['nic']),
+               'dob'=>trim($_POST['dob']),
+               'contact_no'=>trim($_POST['contact_no']),
+               'address' =>trim($_POST['address']),
+               'confirm_update' =>'True',
+               'update_success'=>'',
+               'confirm_delete'=>'',
+               'delete_success'=>'',
+               'completed'=>'',
+               'name_err' => '',
+               'nic_err' => '',
+               'dob_err'=>'',
+               'contact_no_err'=>'',
+               'address_err' =>'' ,
+               'notification'=> $Notifications,           
+        ];
+  
+        //validate name
+        if(empty($data['name'])){
+          $data['name_err'] = 'Please enter name';
+        } elseif (strlen($data['name']) > 255) {
+          $data['name_err'] = 'Name is too long';
+        }
+  
+        //validate NIC
+        if(empty($data['nic'])){
+          $data['nic_err'] = 'Please enter NIC';
+        }elseif(!(is_numeric($data['nic']) && (strlen($data['nic']) == 12)) && !preg_match('/^[0-9]{9}[vV]$/', $data['nic'])){
+          $data['nic_err'] = 'Please enter a valid NIC';
+        }elseif($this->collector_assistantModel->getCollectorAssisByNIC_except($data['nic'] , $assisId)){
+          $data['nic_err'] = 'Already exists a center worker under this NIC';
+        }
+  
+        //validate DOB
+        if(empty($data['dob'])){
+          $data['dob_err'] = 'Please enter dob';
+        }
+  
+        // Validate Contact no
+        if(empty($data['contact_no'])){
+          $data['contact_no_err'] = 'Please enter contact no';
+        }elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter a valid contact number';
+        }
+  
+        // Validate Address
+        if(empty($data['address'])){
+          $data['address_err'] = 'Please enter adress';
+        } elseif (strlen($data['address']) > 500) {
+          $data['address_err'] = 'Address is too long ';
+        }
+  
+        if(empty($data['address_err']) && empty($data['contact_no_err']) && empty($data['dob_err']) && empty($data['nic_err']) && empty($data['name_err']) ){
+          if($this->collector_assistantModel->update_collector_assistants($data)){
+            $data['update_success']='True';        
+            $this->view('collectors/collector_assistants',$data);
+          } else {
+            die('Something went wrong');
+          }
+        }
+        else{
+          $this->view('collectors/collector_assistants',$data);
+        }
+      }
+
+ 
+      else{
+        $ass = $this -> collector_assistantModel -> getCollectorAssisById($assisId);
+        $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
+
+        $data = [
+          'collector_assistants' => $collector_assistants,
+          'id' => $assisId,
+          'name' => $ass->name,
+          'nic' => $ass->nic,
+          'dob'=> $ass->dob,
+          'contact_no'=> $ass->contact_no,
+          'address' => $ass->address,
+          'confirm_update' =>'True',
+          'update_success'=> '',
+          'confirm_delete'=>'',
+          'delete_success'=>'',
+
+          'name_err' => '',
+          'nic_err' =>'',
+          'dob_err'=> '',
+          'contact_no_err'=> '',
+          'address_err' => '',
+          'notification'=> $Notifications,
+        ];
+        
+        $this->view('collectors/collector_assistants', $data);
+      }
+    }
+    
     public function collector_assistants_delete($assisId){
       $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
       $data = [
@@ -336,111 +441,7 @@
       $this->view('collectors/complains_history', $data);
     }
 
-    public function collector_assistants_update($assisId){
-      $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
-
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
-            $data = [
-               'collector_assistants' => $collector_assistants,
-               'id' => $assisId,
-               'name' =>trim($_POST['name']),
-               'nic' => trim($_POST['nic']),
-               'dob'=>trim($_POST['dob']),
-               'contact_no'=>trim($_POST['contact_no']),
-               'address' =>trim($_POST['address']),
-               'confirm_update' =>'True',
-               'update_success'=>'',
-               'confirm_delete'=>'',
-               'delete_success'=>'',
-               'completed'=>'',
-               'name_err' => '',
-               'nic_err' => '',
-               'dob_err'=>'',
-               'contact_no_err'=>'',
-               'address_err' =>'' ,
-               'notification'=> $Notifications,           
-        ];
   
-        //validate name
-        if(empty($data['name'])){
-          $data['name_err'] = 'Please enter name';
-        } elseif (strlen($data['name']) > 255) {
-          $data['name_err'] = 'Name is too long';
-        }
-  
-        //validate NIC
-        if(empty($data['nic'])){
-          $data['nic_err'] = 'Please enter NIC';
-        }elseif(!(is_numeric($data['nic']) && (strlen($data['nic']) == 12)) && !preg_match('/^[0-9]{9}[vV]$/', $data['nic'])){
-          $data['nic_err'] = 'Please enter a valid NIC';
-        }elseif($this->collector_assistantModel->getCollectorAssisByNIC_except($data['nic'] , $assisId)){
-          $data['nic_err'] = 'Already exists a center worker under this NIC';
-        }
-  
-        //validate DOB
-        if(empty($data['dob'])){
-          $data['dob_err'] = 'Please enter dob';
-        }
-  
-        // Validate Contact no
-        if(empty($data['contact_no'])){
-          $data['contact_no_err'] = 'Please enter contact no';
-        }elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
-          $data['contact_no_err'] = 'Please enter a valid contact number';
-        }
-  
-        // Validate Address
-        if(empty($data['address'])){
-          $data['address_err'] = 'Please enter adress';
-        } elseif (strlen($data['address']) > 500) {
-          $data['address_err'] = 'Address is too long ';
-        }
-  
-        if(empty($data['address_err']) && empty($data['contact_no_err']) && empty($data['dob_err']) && empty($data['nic_err']) && empty($data['name_err']) ){
-          if($this->collector_assistantModel->update_collector_assistants($data)){
-            $data['update_success']='True';        
-            $this->view('collectors/collector_assistants',$data);
-          } else {
-            die('Something went wrong');
-          }
-        }
-        else{
-          $this->view('collectors/collector_assistants',$data);
-        }
-      }
-
- 
-      else{
-        $ass = $this -> collector_assistantModel -> getCollectorAssisById($assisId);
-        $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
-
-        $data = [
-          'collector_assistants' => $collector_assistants,
-          'id' => $assisId,
-          'name' => $ass->name,
-          'nic' => $ass->nic,
-          'dob'=> $ass->dob,
-          'contact_no'=> $ass->contact_no,
-          'address' => $ass->address,
-          'confirm_update' =>'True',
-          'update_success'=> '',
-          'confirm_delete'=>'',
-          'delete_success'=>'',
-
-          'name_err' => '',
-          'nic_err' =>'',
-          'dob_err'=> '',
-          'contact_no_err'=> '',
-          'address_err' => '',
-          'notification'=> $Notifications,
-        ];
-        
-        $this->view('collectors/collector_assistants', $data);
-      }
-    }
-
     public function editprofile(){
       $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
 
@@ -696,7 +697,7 @@
 
        
         }
-        else if($data['fine_type']=="No_Response"){
+        else if($data['fine_type']=="No Response"){
           $data['fine_amount']=10;
           $this->Request_Model->cancel_request($data);
 
@@ -823,6 +824,7 @@
             'types'=>$types
         ];
 
+
         foreach ($types as $type) {
           if ($type) {
               $typeName = strtolower($type->name);
@@ -909,7 +911,7 @@
           'credit_Amount'=> '',
           'note' => '',
           'popup' => 'True',
-          'popup_confirm_collect'=>'',
+          'popup_confirm_collect'=>$pop_eco,
           'types'=>$types,
 
           'note_err'=>'',

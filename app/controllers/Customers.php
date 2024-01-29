@@ -527,7 +527,10 @@
 
     private function getCommonData() {
       $centers = $this->center_model->getallCenters();    
-        $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);    
+      $center=$this->Center_Model->findCenterbyRegion($user->city);
 
       return [
           'centers' => $centers,
@@ -550,7 +553,10 @@
           'confirm_collect_pop'=>'',
           'success'=>'' ,
           'customer_id'=>'',
-          'region_success'=>'',      
+          'region_success'=>'', 
+          'radius'=>'',
+          'center_lat'=>$center->lat,
+          'center_long'=>$center->longi,
           'notification'=> $Notifications]  ;
         
     }
@@ -562,7 +568,10 @@
       $marked_holidays = $this->centermanagerModel->get_marked_holidays($user->city);
       $data['contact_no']=$user->mobile_number;
       $data['name'] =$_SESSION['user_name'];
-      $data['region']=$user->city;
+      $data['region']=$user->city;     
+      $center=$this->Center_Model->findCenterbyRegion($user->city);
+      $data['radius']=$center->radius;
+
      if($_SERVER['REQUEST_METHOD'] == 'POST'){
        
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -638,22 +647,24 @@
          else{
           $this->view('customers/request_collect', $data);
          }        
-         }
+      }
           else {
          $data = $this->getCommonData();
          $id=$_SESSION['user_id']; 
          
          $user=$this->customerModel->get_customer($id);
-         $center=$this->Center_Model->findCenterbyRegion($user->city);
          if($user && $center){
              $data['lattitude']=$center->lat;
              $data['longitude']=$center->longi;
              $data['region']=$user->city;
+             $data['radius']=$center->radius;
 
              $data['contact_no']=$user->mobile_number;
              $data['name'] =$_SESSION['user_name'];
+          
              $this->view('customers/request_collect', $data);
         }
+
         
       }
     }
@@ -661,8 +672,8 @@
     public function request_confirm(){
       $id=$_SESSION['user_id']; 
       $user=$this->customerModel->get_customer($id);
-      $center = $this->Center_Model->findCenterbyRegion($user->city);
-
+      $center=$this->Center_Model->findCenterbyRegion($user->city);
+      $data['radius']=$center->radius;
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
       $data = $this->getCommonData();
@@ -677,6 +688,7 @@
       $data['customer_id']=$_SESSION['user_id'];
       $data['region']=$user->city;
       $data['center_id'] =$center->id;
+      $data['radius']=$center->radius;
 
       $this->Request_Model->request_insert($data);
 
@@ -691,12 +703,15 @@
     public function request_mark_map(){
       $id=$_SESSION['user_id']; 
       $user=$this->customerModel->get_customer($id);
-      
+      $center=$this->Center_Model->findCenterbyRegion($user->city);
+     
+
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         
        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
        $centers = $this->center_model->getallCenters();
-       $data = $this->getCommonData();
+       $data = $this->getCommonData(); $data['radius']=$center->radius;
        $data['name'] = trim($_POST['name']);
        $data['contact_no'] = trim($_POST['contact_no']);
        $data['date'] = trim($_POST['date']);
@@ -705,8 +720,7 @@
        $data['lattitude'] =trim($_POST['latitude']);
        $data['longitude'] =trim($_POST['longitude']);
        $data['location_success']='Success';
-       $data['region']=$user->city;
-
+       $data['region']=$user->city;     
        $this->view('customers/request_collect', $data);
           
       }

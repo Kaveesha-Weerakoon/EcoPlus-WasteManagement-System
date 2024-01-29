@@ -355,6 +355,7 @@ function initMap() {
         ]
     });
 
+    // Default radius in meters
     var customColoredMarkerIcon = {
         url: 'https://maps.google.com/mapfiles/ms/micons/green-dot.png',
         size: new google.maps.Size(31, 31),
@@ -362,6 +363,9 @@ function initMap() {
     };
 
     var points = <?php echo $data['centers']; ?>;
+    var activeMarker = null;
+    var activeCircle = null;
+
     points.forEach((point) => {
         var marker = new google.maps.Marker({
             position: {
@@ -372,8 +376,35 @@ function initMap() {
             title: point.region,
             icon: customColoredMarkerIcon
         });
-
+        var defaultRadius = parseFloat(point.radius);
         marker.addListener('click', function() {
+            if (activeMarker) {
+                activeMarker.setIcon(customColoredMarkerIcon);
+            }
+
+            if (activeCircle) {
+                activeCircle.setMap(null);
+            }
+
+            activeMarker = marker;
+
+            marker.setIcon({
+                url: 'https://maps.google.com/mapfiles/ms/micons/green-dot.png',
+                size: new google.maps.Size(31, 31),
+                scaledSize: new google.maps.Size(35, 34)
+            });
+
+            activeCircle = new google.maps.Circle({
+                map: map,
+                center: marker.getPosition(),
+                radius: defaultRadius,
+                fillColor: '#008000',
+                fillOpacity: 0.3,
+                strokeColor: '#008000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2
+            });
+
             var infowindow = new google.maps.InfoWindow({
                 content: point.region
             });

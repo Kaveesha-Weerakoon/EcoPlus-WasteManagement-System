@@ -2,7 +2,7 @@
 <div class="Admin_Main">
     <div class="Admin_Center_Top">
         <div class="Admin_Center_Add">
-            <script  
+            <script
                 src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
                 async defer>
             </script>
@@ -67,56 +67,61 @@
 
                         </div>
                     </div>
-    
-                    <div class="main-bottom-down">  
-                            <form  class="main-bottom-down-downn" action="<?php echo URLROOT;?>/admin/center_add" method="post">                           
-                                    
-                                <div class="main-bottom-down-top">
-                                    <img src="<?php echo IMGROOT?>/Admin_Center.png" alt="">
-                                    <p>Add a Center</p>
+
+                    <div class="main-bottom-down">
+                        <form class="main-bottom-down-downn" action="<?php echo URLROOT;?>/admin/center_add"
+                            method="post">
+
+                            <div class="main-bottom-down-top">
+                                <img src="<?php echo IMGROOT?>/Admin_Center.png" alt="">
+                                <p>Add a Center</p>
+                            </div>
+                            <div class="main-bottom-down-down">
+                                <div class="main-bottom-down-down-content">
+                                    <p>Region</p>
+                                    <div class="main-bottom-down-down-content-field">
+                                        <input
+                                            class="<?php echo isset($data['region_err']) && !empty($data['region_err']) ? 'error-class' : ''; ?>"
+                                            type="text" name="region" value="<?php echo $data['region']?>">
+                                        <p><?php echo $data['region_err']?></p>
+                                    </div>
                                 </div>
-                                <div class="main-bottom-down-down">
-                                        <div class="main-bottom-down-down-content">
-                                                <p>Region</p>
-                                                <div class="main-bottom-down-down-content-field">
-                                                    <input class="<?php echo isset($data['region_err']) && !empty($data['region_err']) ? 'error-class' : ''; ?>" type="text" name="region" value="<?php echo $data['region']?>">
-                                                    <p><?php echo $data['region_err']?></p>
-                                                </div>
-                                        </div>                                     
-                                        <div class="main-bottom-down-down-content">
-                                                <p>District</p>
-                                                <div class="main-bottom-down-down-content-field">
-                                                    <input class="<?php echo isset($data['district_err']) && !empty($data['district_err']) ? 'error-class' : ''; ?>" type="text" name="district" value="<?php echo $data['district']?>">
-                                                    <p><?php echo $data['district_err']?></p>
-                                                </div>
+                                <div class="main-bottom-down-down-content">
+                                    <p>District</p>
+                                    <div class="main-bottom-down-down-content-field">
+                                        <input
+                                            class="<?php echo isset($data['district_err']) && !empty($data['district_err']) ? 'error-class' : ''; ?>"
+                                            type="text" name="district" value="<?php echo $data['district']?>">
+                                        <p><?php echo $data['district_err']?></p>
+                                    </div>
+                                </div>
+                                <div class="main-bottom-down-down-content">
+                                    <p>Location</p>
+                                    <div class="main-bottom-down-down-content-maps">
+                                        <div class="main-bottom-maps" onclick="initMap()">
+                                            <h4>Maps</h4>
+                                            <img src="<?php echo IMGROOT?>/location2.png" alt="">
                                         </div>
-                                        <div class="main-bottom-down-down-content">
-                                                    <p>Location</p>
-                                                    <div class="main-bottom-down-down-content-maps">
-                                                        <div class="main-bottom-maps" onclick="initMap()">
-                                                        <h4>Maps</h4>
-                                                        <img src="<?php echo IMGROOT?>/location2.png" alt="">                  
-                                                        </div>
-                                                        <div class="main-bottom-down-down-content-field">
-                                                        <?php if ($data['location_success']=='Success') : ?>
-                                                            <div class="main-bottom-map-success">
-                                                                <img src="<?php echo IMGROOT; ?>/check.png" alt="">
-                                                                <p style="width:205px; ">Location Fetched Successfully</p>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                        <?php if ($data['location_err']=='Location Error') : ?>
-                                                            <div class="main-bottom-map-success">
-                                                                <img src="<?php echo IMGROOT; ?>/warning.png" alt="">
-                                                                <p>Pick up location Required</p>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                </div>
+                                        <div class="main-bottom-down-down-content-field">
+                                            <?php if ($data['location_success']=='Success') : ?>
+                                            <div class="main-bottom-map-success">
+                                                <img src="<?php echo IMGROOT; ?>/check.png" alt="">
+                                                <p style="width:205px; ">Location Fetched Successfully</p>
                                             </div>
+                                            <?php endif; ?>
+                                            <?php if ($data['location_err']=='Location Error') : ?>
+                                            <div class="main-bottom-map-success">
+                                                <img src="<?php echo IMGROOT; ?>/warning.png" alt="">
+                                                <p>Pick up location Required</p>
+                                            </div>
+                                            <?php endif; ?>
                                         </div>
-                                        <div class="main-bottom-down-down-content">
-                                            <label for="centerManager">Center Manager</label>
-                                            <select name="centerManager" id="centerManager">
-                                            <?php
+                                    </div>
+                                </div>
+                                <div class="main-bottom-down-down-content">
+                                    <label for="centerManager">Center Manager</label>
+                                    <select name="centerManager" id="centerManager">
+                                        <?php
                                                     $centerManagers = $data['center_managers'];
                                                     if (!empty($centerManagers)) {
                                                         foreach ($centerManagers as $manager) {
@@ -126,103 +131,123 @@
                                                         echo "<option value=\"default\">No Center Managers Available</option>";
                                                         }
                                                         ?>
-                                            </select>
-                                            <p><?php echo $data['center_manager_err']?></p>
-                                        </div>
+                                    </select>
+                                    <p><?php echo $data['center_manager_err']?></p>
+                                </div>
 
-                                        <button class="Create_Center_Button" type="submit">
-                                            Create Center
-                                        </button>
-                                </div>  
-                                <div class="map_pop" id="mapPopup">
+                                <button class="Create_Center_Button" type="submit">
+                                    Create Center
+                                </button>
+                            </div>
+                            <div class="map_pop" id="mapPopup">
                                 <div id="map">
 
                                 </div>
-                                <div class="buttons-container" id="submitForm" >
-                                    <button type="submit" formaction="<?php echo URLROOT; ?>/admin/center_add_confirm" method="post" id="markLocationBtn" onclick="getLocation()">Mark Location</button>
+                                <div class="buttons-container" id="submitForm">
+                                    <button type="submit" formaction="<?php echo URLROOT; ?>/admin/center_add_confirm"
+                                        method="post" id="markLocationBtn" onclick="getLocation()">Mark
+                                        Location</button>
                                     <button type="button" id="cancelBtn">Cancel</button>
-                                    
+
                                 </div>
-                                <input type="hidden" id="latitudeInput" value=" <?php echo $data['lattitude']?>" name="latittude">
-                                <input type="hidden" id="longitudeInput" value=" <?php echo $data['longitude']?>" name="longitude">
-                            </div>                           
-                            </form>
-                        
+                                <input type="hidden" id="latittude" value=" <?php echo $data['lattitude']?>"
+                                    name="latittude">
+                                <input type="hidden" id="longitude" value=" <?php echo $data['longitude']?>"
+                                    name="longitude"> <input type="hidden" id="longitude">
+                                <input type="hidden" id="radius" value=" <?php echo $data['radius']?>" name="radius">
+
+                            </div>
+                        </form>
+
                     </div>
-                   
+
 
                 </div>
-                
 
-                <?php if($data['center_add_success']=='True') : ?> 
+
+                <?php if($data['center_add_success']=='True') : ?>
                 <div class="center_add_success">
                     <div class="popup" id="popup">
-                    <img src="<?php echo IMGROOT?>/check.png" alt="">
-                    <h2>Success!!</h2>
-                        <p>Center has been created successfully  </p>
-                        <a href="<?php echo URLROOT?>/admin/center"><button type="button" >OK</button></a>
+                        <img src="<?php echo IMGROOT?>/check.png" alt="">
+                        <h2>Success!!</h2>
+                        <p>Center has been created successfully </p>
+                        <a href="<?php echo URLROOT?>/admin/center"><button type="button">OK</button></a>
                     </div>
                 </div>
                 <?php endif; ?>
 
             </div>
-        
+
         </div>
     </div>
 </div>
 <script>
-    function initMap() {
-             
-        var defaultLatLng = { 
-            lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 8.00 ?>, 
-            lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>  };
-     
-            map = new google.maps.Map(document.getElementById('map'), {
-            center: defaultLatLng,
-            zoom: 7.6
-        });
+var map;
+var circle;
 
-        marker = new google.maps.Marker({
-            position: defaultLatLng,
-            map: map,
-            draggable: true
-        });
+function initMap() {
+    var defaultLatLng = {
+        lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 8.00 ?>,
+        lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
+    };
 
-        google.maps.event.addListener(marker, 'dragend', function (event) {
-            var newLatLng = { lat: event.latLng.lat(), lng: event.latLng.lng() };
-            console.log('New Location:', newLatLng);
-        });
-    }
-
-    function getLocation() {
-
-        var currentLatLng = { lat: marker.getPosition().lat(), lng: marker.getPosition().lng() };
-        console.log('Selected Location:', currentLatLng);
-
-        document.getElementById('latitudeInput').value = currentLatLng.lat;
-        document.getElementById('longitudeInput').value = currentLatLng.lng;//
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        var mainBottomMaps = document.querySelector('.main-bottom-maps');
-        var mapPopup = document.getElementById('mapPopup');
-
-        mainBottomMaps.addEventListener('click', function () {
-            mapPopup.style.display = (mapPopup.style.display === 'flex') ? 'none' : 'flex';
-        });
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: defaultLatLng,
+        zoom: 7
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        var cancelBtn = document.getElementById('cancelBtn');
-        var mapPopup = document.getElementById('mapPopup');
-        var map = document.getElementById('markLocationBtn');
-        cancelBtn.addEventListener('click', function () {
-            mapPopup.style.display = 'none';
-        });
-        map.addEventListener('click', function () {
-            mapPopup.style.display = 'none';
-        });
-    }); 
+    // Draw a circle around the marker
+    circle = new google.maps.Circle({
+        map: map,
+        center: defaultLatLng,
+        radius: 40000, // Set the initial radius in meters
+        fillColor: '#47b076',
+        fillOpacity: 0.3,
+        strokeColor: '#47b076',
+        strokeOpacity: 1,
+        strokeWeight: 2,
+        editable: true, // Make the circle editable
+        draggable: true // Make the circle draggable
+    });
+
+    // Event listener for radius change
+    google.maps.event.addListener(circle, 'radius_changed', function() {
+        console.log("Radius changed: " + circle.getCenter().lat());
+    });
+}
+
+function getLocation() {
+    var currentLatLng = {
+        lat: circle.getCenter().lat(),
+        lng: circle.getCenter().lng()
+    };
+    console.log('Selected Location:', currentLatLng);
+
+    document.getElementById('latittude').value = currentLatLng.lat;
+    document.getElementById('longitude').value = currentLatLng.lng;
+    document.getElementById('radius').value = circle.getRadius(); // Log radius information
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var mainBottomMaps = document.querySelector('.main-bottom-maps');
+    var mapPopup = document.getElementById('mapPopup');
+
+    mainBottomMaps.addEventListener('click', function() {
+        mapPopup.style.display = (mapPopup.style.display === 'flex') ? 'none' : 'flex';
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var cancelBtn = document.getElementById('cancelBtn');
+    var mapPopup = document.getElementById('mapPopup');
+    var map = document.getElementById('markLocationBtn');
+    cancelBtn.addEventListener('click', function() {
+        mapPopup.style.display = 'none';
+    });
+    map.addEventListener('click', function() {
+        mapPopup.style.display = 'none';
+    });
+});
 </script>
 
 

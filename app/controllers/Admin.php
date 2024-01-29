@@ -182,8 +182,6 @@
       $this->view('admin/center_managers', $data);
     }
 
-   
-
     public function center_managers_delete_confirm($id){
       $center_managers = $this->center_managerModel->get_center_managers();
       $centermanger = $this->center_managerModel->getCenterManagerByID($id);
@@ -529,7 +527,6 @@
 
   }
 
- 
 
     public function customers(){
       
@@ -1132,9 +1129,6 @@
     
     }
   
-  
-  
-
 
     public function discount_agent_delete_confirm($id){
       $discount_agent = $this->discount_agentModel->get_discount_agent();
@@ -1186,14 +1180,14 @@
       $this->view('admin/center_main_collectors', $data);
     }
 
-    public function garbage_types(){
+    public function garbage_types($success="False"){
 
       $garbage_types = $this->garbage_types_model->get_all();
 
       $data=[
         'garbage_types'=> $garbage_types,
         'click_update'=>'',
-        'update_success'=>''
+        'update_success'=>$success
         
       ];
 
@@ -1275,9 +1269,9 @@
         if(empty($data['garbage_type_err']) && empty($data['credit_per_waste_quantity_err']) && empty($data['approximate_amount_err']) && 
         empty($data['minimum_amount_err']) && empty($data['selling_price_err'])){
           if($this->garbage_types_model->update_garbage_types($data)){
-            //die('sucess');
-            $data['update_success']='True';       
-            $this->view('admin/garbage_types_view', $data);
+         
+            header("Location: " . URLROOT . "/admin/garbage_types/True");        
+
           } else {
             die('Something went wrong');
           }
@@ -1286,9 +1280,6 @@
           $this->view('admin/garbage_types_view', $data);
 
         }
-
-
-       
 
       }else{
         

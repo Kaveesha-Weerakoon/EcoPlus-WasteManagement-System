@@ -96,9 +96,9 @@
                                 <button type="submit">Submit</button>
                             </div>
                         </form>
-                        <div class="main-bottom-component-right">
+                        <!-- <div class="main-bottom-component-right">
                             <img src="<?php echo IMGROOT?>/makeComplaints.png" alt="" />
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>

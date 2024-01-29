@@ -4,7 +4,10 @@
 <div class="Customer_Main">
 
     <div class="Customer_Dashboard">
-
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
+            async defer>
+        </script>
         <div class="main">
             <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
@@ -241,7 +244,6 @@
 
                 </div>
             </div>
-            <script src="CustomerDashboard.js"></script>
         </div>
 
     </div>
@@ -252,7 +254,6 @@
 <script>
 var color = "#47b076";
 var textColor = "#414143"
-
 var checkbox = document.getElementById('toggle-checkbox');
 
 var credit_per_waste_quantity = document.getElementById("credit_per_waste_quantity");
@@ -302,9 +303,7 @@ function redirect_requests() {
 
 function redirect_discountAgents() {
     var linkUrl = "<?php echo URLROOT?>/customers/discount_agents"; // Replace with your desired URL
-
     window.location.href = linkUrl;
-
 }
 
 notification.addEventListener("click", function() {
@@ -342,6 +341,7 @@ document.getElementById("close_eco_credit_per_quantiy_pop").addEventListener("cl
     document.getElementById("eco_credit_per_quantiy_pop").classList.remove('active');
     document.getElementById('overlay').style.display = "none";
 });
+
 document.getElementById("centers_close").addEventListener("click", function() {
     document.getElementById("centers").classList.remove('active');
     document.getElementById('overlay').style.display = "none";
@@ -512,7 +512,6 @@ function initMap() {
     });
 }
 
-
 let progress = setInterval(() => {
     if (progressStartValue == progressEndValue) {
         clearInterval(progress);
@@ -536,6 +535,7 @@ let progress = setInterval(() => {
 
 document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('myChart').getContext('2d');
+    var config = null;
     const myChart = new Chart(ctx, config);
 
     const chartContainer = document.getElementById('chart');
@@ -547,11 +547,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
 function createOrUpdateChart(color, textColor) {
     var Total_Garbage = <?php echo $data['total_garbage']?>;
     const ctx = document.getElementById('myChart').getContext('2d');
-
+    if (myChart) {
+        myChart.destroy();
+    }
     myChart = new Chart(ctx, {
         type: 'bar',
         data: {

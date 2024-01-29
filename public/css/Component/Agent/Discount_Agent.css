@@ -1,4 +1,4 @@
-.Admin_Discount_Agent {
+.Discount_Agent {
   * {
       margin: 0px;
       padding: 0px;
@@ -191,13 +191,13 @@
       height: 50px;
       display: flex;
       align-items: center;
-      padding-left: 33px;
       background-color: var(--background-color-right);
+
   }
 
   .main-right-top-two h1 {
       font-size: 19px;
-      margin-left: 1%;
+      margin-right: 885px;
       letter-spacing: 0.03rem;
       margin-top: 1%;
   }
@@ -208,6 +208,7 @@
       padding-left: 34px;
       margin: 0.6%;
       background-color: var(--background-color-right);
+      margin-right: 900px;
   }
 
   .main-right-top-three-content {

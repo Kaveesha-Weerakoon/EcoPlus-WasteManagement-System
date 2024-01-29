@@ -1,4 +1,4 @@
-.Admin_Discount_Agent_Add {
+.Discount_Agent_ValidateUser {
   .main-bottom-down {
       display: flex;
       align-items: center;
@@ -83,6 +83,7 @@ h1 {
     color: #333;
 }
 
+
 label {
     display: block;
     margin-bottom: 8px;
@@ -93,6 +94,7 @@ input {
     padding: 8px;
     margin-bottom: 16px;
     box-sizing: border-box;
+    margin-top: 20px;
 }
 
 button {
@@ -103,6 +105,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
+    margin-top: 2px;
 }
 
 button:hover {

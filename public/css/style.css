@@ -96,6 +96,9 @@
 @import url('Component/Agent/Agent_Main.css');
 @import url('Component/Agent/Agent_Editprofile.css');
 
+@import url('Component/Agent/Discount_Agent.css');
+@import url('Component/Agent/Discount_Agent_ValidateUser.css');
+
 
 /* Admin CSS */
 

@@ -593,6 +593,7 @@
             'center_add_success'=>'',
             'lattitude'=>trim($_POST['latittude']),
             'longitude'=>trim($_POST['longitude']),
+            'radius'=>trim($_POST['radius']),
             'location_err'=>'',
             'location_success'=>''
 
@@ -658,7 +659,8 @@
           'longitude_err'=>'',
           'lattitude_err'=>'',
           'location_success'=>'',
-          'location_err'=>''
+          'location_err'=>'',
+          'radius'=>''
         ];
          $this->view('admin/center_add', $data);
       }
@@ -682,6 +684,7 @@
             'center_add_success'=>'',
             'lattitude'=>trim($_POST['latittude']),
             'longitude'=>trim($_POST['longitude']),
+            'radius'=>trim($_POST['radius']),
             'location_err'=>'',
             'location_success'=>''
 
@@ -766,12 +769,6 @@
           'vehicle_no'=> $collector->vehicle_no,
           'vehicle_type'=> $collector->vehicle_type,
           'vehicle_details_click'=> 'True',
-          // 'confirm_delete' => '',
-          // 'delete_success' =>'',
-          // 'click_update' =>'',
-          // 'update_success'=>'',
-          
-
         ];
       
       

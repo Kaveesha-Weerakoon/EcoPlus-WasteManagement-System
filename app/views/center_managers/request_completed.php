@@ -16,7 +16,7 @@
                             <table class="table">
                                 <tr class="table-header">
                                     <th>Req ID</th>
-                                    <th>Customer</th>
+                                    <!-- <th>Customer</th> -->
                                     <th>Date</th>
                                     <th>Time</th>   
                                     <th>Collector info</th>
@@ -31,7 +31,7 @@
                                 <?php foreach($data['completed_requests'] as $request) : ?>
                                 <tr class="table-row" id="table-row">
                                     <td>R<?php echo $request->req_id?></td>
-                                    <td><?php  echo $request->customer_name?></td>
+                                    <!-- <td><?php  echo $request->customer_name?></td> -->
                                     <td><?php  echo $request->date?></td>
                                     <td><?php  echo $request->time?></td>            
                                     <td class="cancel-open">

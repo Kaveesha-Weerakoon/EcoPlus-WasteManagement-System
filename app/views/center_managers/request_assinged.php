@@ -18,10 +18,9 @@
                             <table class="table">
                                 <tr class="table-header">
                                     <th>Req ID</th>
-                                    <th>Customer</th>
+                                    <!-- <th>Customer</th> -->
                                     <th>Date</th>
                                     <th>Time</th>    
-                                    <!-- <th>Collector ID</th> -->
                                     <th>Collector info</th>
                                     <th>Request Details</th>
                                     <th>Cancel</th>
@@ -34,7 +33,7 @@
 
                                 <tr class="table-row">
                                     <td>R <?php echo $request->req_id?></td>
-                                    <td><?php echo $request->name?></td>
+                                    <!-- <td><?php echo $request->name?></td> -->
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
                                     <!-- <td><?php echo $request->collector_id?></td> -->

@@ -59,7 +59,7 @@
 
     .table-row {
         height: 55px;
-        grid-template-columns: 14% 14% 15% 15% 14% 14% 14%;
+        grid-template-columns: 16% 16% 16% 20% 16% 16% ;
     }
 
     .table td {
@@ -67,7 +67,7 @@
     }
 
     .table-header {
-        grid-template-columns: 14% 14% 15% 15% 14% 14% 14%;
+        grid-template-columns:  16% 16% 16% 20% 16% 16% ;
     }
 
     td img {

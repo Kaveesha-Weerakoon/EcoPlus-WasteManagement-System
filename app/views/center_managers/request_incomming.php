@@ -95,15 +95,6 @@
                 <div class="overlay" id="overlay"></div>
 
                 <div class="View" id="View">
-                <!-- <?php
-                if (is_array($data['assigned_requests_count'])) {
-                    foreach ($data['assigned_requests_count'] as $collectorId => $requestCount) {
-                        echo "Collector ID: $collectorId, Assigned Requests Count: $requestCount<br>";
-                    }
-                } else {
-                    echo $data['assigned_requests_count']; // Display single count if not an array
-                }
-                ?> -->
 
                     <form class="View-content" id="assignForm" method="post"
                         action="<?php echo URLROOT?>/centermanagers/assing">
@@ -115,6 +106,7 @@
                             <h3>Req ID: <b>R <div id="assign_reqid" style="display: inline;"></div></b></h3>
                         </div>
                         <input name="assign_req_id" type="text" id="assign_req_id" style="display: none;">
+                       
 
                         <select id="dropdown" name="collectors">
                             <?php

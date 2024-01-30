@@ -3,9 +3,8 @@
     public function __construct(){
       $this->User_Model=$this->model('User');
       $this->discount_agentModel=$this->model('Discount_Agent');
-
-   
-        
+      $this->customerModel=$this->model('Customer'); 
+      $this->Customer_Credit_Model=$this->model('Customer_Credit');
     }
 
 
@@ -24,7 +23,6 @@
       session_destroy();
       redirect('users/login');
     }
-
 
     public function editprofile(){
 
@@ -130,7 +128,6 @@
    
     }
 
-
     public function change_password(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
       
@@ -226,5 +223,150 @@
   
      }
 
+
+
+  
+     public function validateUser() {   
+
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+          $data = [
+              'customer_id' => trim($_POST['customer_id']),
+              'customer_id_err' => ''
+          ];
+  
+  
+           $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
+           $customer_id = (int)$numeric_part;
+
+  
+          if (empty($data['customer_id'])) {
+              $data['customer_id_err'] = 'Please enter customer id';
+          } else {
+                if(!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
+                    $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
+                }else {
+              // Check if the user input matches the required format
+                    if (!$this->customerModel->get_customer($customer_id)) {
+                          $data['customer_id_err'] = 'Customer ID does not exist';
+                    }
+                }
+          }
+    
+  
+  
+   
+
+          $this->view('credit_discount_agents/discount_agent_validateUser', $data);
+  
+          }else {
+            $data = [
+              'customer_id' => '',
+              'customer_id_err' => '',   
+          ];
+  
+          $this->view('credit_discount_agents/discount_agent_validateUser', $data);
+      }
+    }
+
+    
+    public function balance_validation() {     
+
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+          $data = [
+              'customer_id' => trim($_POST['customer_id']),
+              'discount_amount' => trim($_POST['discount_amount']),
+              'center' => trim($_POST['center']),
+              'customer_id_err' => '',
+              'center_err' => '',
+              'discount_amount_err' => ''
+
+          ];
+
+
+          if (empty($data['center'])) {
+            $data['center_err'] = 'Please enter center name';
+          }
+  
+           $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
+           $customer_id = (int)$numeric_part;
+
+  
+          if (empty($data['customer_id'])) {
+              $data['customer_id_err'] = 'Please enter customer id';
+          } else {
+                if(!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
+                    $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
+                } else {
+              // Check if the user input matches the required format
+                    if (!$this->customerModel->get_customer($customer_id)) {
+                          $data['customer_id_err'] = 'Customer ID does not exist';
+                    }
+                }
+          }
+      
+        
+          if (empty($data['discount_amount']) || $data['discount_amount'] <= 0) {
+            $data['discount_amount_err'] = 'Please enter a discount amount greater than 0';
+        } elseif (!filter_var($data['discount_amount'], FILTER_VALIDATE_FLOAT)) {
+            $data['discount_amount_err'] = 'discount amount should be a valid number';
+          } elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['discount_amount'])) {
+            $data['discount_amount_err'] = 'please enter up to 2 decimal places';
+        }        
+         else {
+            $user_balance = $this->Customer_Credit_Model->get_customer_credit_balance( $customer_id);
+           
+            if ($data['discount_amount'] > $user_balance) {
+                $data['discount_amount_err'] = 'discount can not exceed your credit balance';
+            }
+        }
+  
+  
+        if (empty($data['customer_id_err']) && empty($data['credit_amount_err']) && empty($data['center_err'])) {
+          $discount_amount= floatval($data['discount_amount']); // Convert to float
+      
+
+          $user_balance = floatval($this->Customer_Credit_Model->get_customer_credit_balance($customer_id));
+
+          if ($discount_amount <= $user_balance) {
+        
+       
+              $new_balance = $user_balance - $discount_amount;
+              $balance_update = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_balance);
+             
+      
+              if ($balance_update) {
+         
+                  $this->view('credit_discount_agents/agent_discount', $data);
+              } else {
+                die('Something went wrong');
+              }
+          } else {
+              $data['credit_amount_err'] = 'Transfer amount exceeds available credit balance';             
+              $this->view('credit_discount_agents/agent_discount', $data);
+
+          }
+        } else {
+          $this->view('credit_discount_agents/agent_discount', $data);
+        }
+
+  
+          }else {
+            $data = [
+              'customer_id' => '',
+              'discount_amount' => '',
+              'center' => '',
+              'customer_id_err' => '',
+              'discount_amount_err' => '',
+              'center_err' => ''   
+          ];
+  
+          $this->view('credit_discount_agents/agent_discount', $data);
+      }
+    }
+    
 
 }

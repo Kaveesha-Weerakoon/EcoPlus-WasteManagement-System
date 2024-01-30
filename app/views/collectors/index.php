@@ -2,6 +2,7 @@
 
 <div class="Collector_Main">
 
+    </script>
     <div class="Collector_Dashboard">
 
         <div class="main">
@@ -322,7 +323,9 @@
         function createOrUpdateChart(color, textColor) {
             var Total_Garbage = <?php echo $data['total_garbage']?>;
             const ctx = document.getElementById('myChart').getContext('2d');
-
+            if (myChart) {
+                myChart.destroy();
+            }
             myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {

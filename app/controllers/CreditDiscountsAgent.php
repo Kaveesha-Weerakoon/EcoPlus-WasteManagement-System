@@ -4,10 +4,7 @@
       $this->User_Model=$this->model('User');
       $this->discount_agentModel=$this->model('Discount_Agent');
       $this->customerModel=$this->model('Customer'); 
-      
       $this->Customer_Credit_Model=$this->model('Customer_Credit');
-   
-        
     }
 
 
@@ -18,8 +15,6 @@
      
       $this->view('credit_discount_agents/index', $data);
     }
-
-
 
     public function logout(){
       unset($_SESSION['agent_id']);

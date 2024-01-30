@@ -287,8 +287,35 @@
       $this->db->bind(':collector_id', $collector_id);
 
       $results = $this->db->resultSet();
-
+      
       return $results;
+    }
+
+    public function get_assigned_requests_count_by_collector_for_day($collector_id){
+      $today = date("Y-m-d");
+      //var_dump($today);
+      $this->db->query('
+         SELECT request_main.*,
+         status
+         FROM request_main
+         JOIN request_assigned ON request_main.req_id = request_assigned.req_id
+         WHERE request_assigned.collector_id = :collector_id
+         AND request_main.type = "assigned"
+         AND request_main.date = :today
+         
+      ');
+
+      $this->db->bind(':collector_id', $collector_id);
+      $this->db->bind(':today', '2024-01-31');
+
+      $results = $this->db->resultSet();
+      // var_dump($results);
+
+      $request_count = $this->db->rowCount();
+      //var_dump($request_count);
+      return $request_count;
+      
+      
     }
 
     public function get_cancelled_request_by_collector($collector_id){

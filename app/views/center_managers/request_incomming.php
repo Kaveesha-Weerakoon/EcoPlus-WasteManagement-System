@@ -95,6 +95,16 @@
                 <div class="overlay" id="overlay"></div>
 
                 <div class="View" id="View">
+                <!-- <?php
+                if (is_array($data['assigned_requests_count'])) {
+                    foreach ($data['assigned_requests_count'] as $collectorId => $requestCount) {
+                        echo "Collector ID: $collectorId, Assigned Requests Count: $requestCount<br>";
+                    }
+                } else {
+                    echo $data['assigned_requests_count']; // Display single count if not an array
+                }
+                ?> -->
+
                     <form class="View-content" id="assignForm" method="post"
                         action="<?php echo URLROOT?>/centermanagers/assing">
                         <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-assing">
@@ -109,9 +119,13 @@
                         <select id="dropdown" name="collectors">
                             <?php
                          $collectors = $data['collectors'];
+                         $assigned_requests_count = $data['assigned_requests_count'];
                           if (!empty($collectors)) {
                              foreach ($collectors as $collector) {
-                                 echo "<option value=\"$collector->id\">C $collector->id $collector->name</option>";
+                                $request_count = isset($assigned_requests_count[$collector->id]) ? $assigned_requests_count[$collector->id] : 0;
+                                //$request_count = $assigned_requests_count[$collector->id] ?? 12;
+
+                                 echo "<option value=\"$collector->id\">C $collector->id $collector->name $collector->vehicle_type $request_count</option>";
                             }
                           } else {
                                echo "<option value=\"default\">No Collectors Available</option>";
@@ -119,6 +133,7 @@
                          ?>
 
                         </select>
+
                         <Button type="submit" onclick="assing_complete()">Assign</Button>
                     </form>
                 </div>

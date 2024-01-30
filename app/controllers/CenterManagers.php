@@ -962,12 +962,19 @@
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
     $jsonData = json_encode($incoming_requests);
+
+    $assigned_requests_count = [];
+    foreach ($collectors as $collector) {
+        $assigned_requests_count[$collector->id] = $this->Request_Model->get_assigned_requests_count_by_collector_for_day($collector->id);
+    }
+
     $data = [
       'incoming_requests' => $incoming_requests,
       'jsonData' => $jsonData,
       'pop_location'=>'',
       'map'=>'',
-      'collectors'=>$collectors
+      'collectors'=>$collectors,
+      'assigned_requests_count' => $assigned_requests_count
     ];
     $this->view('center_managers/request_incomming', $data);
 

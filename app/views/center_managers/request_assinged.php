@@ -20,7 +20,7 @@
                                     <th>Req ID</th>
                                     <!-- <th>Customer</th> -->
                                     <th>Date</th>
-                                    <th>Time</th>    
+                                    <th>Time</th>
                                     <th>Collector info</th>
                                     <th>Request Details</th>
                                     <th>Cancel</th>
@@ -38,14 +38,17 @@
                                     <td><?php echo $request->time?></td>
                                     <!-- <td><?php echo $request->collector_id?></td> -->
                                     <td class="cancel-open">
-                                        <img class="collector_img" src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->image?>"
+                                        <!-- <img class="collector_img" src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->image?>"
                                             onclick="view_collector('<?php echo $request->image; ?>', '<?php echo $request->collector_id; ?>', '<?php echo $request->name; ?>', 
-                                            '<?php echo $request->contact_no; ?>', '<?php echo $request->vehicle_no; ?>', '<?php echo $request->vehicle_type; ?>')" >
+                                            '<?php echo $request->contact_no; ?>', '<?php echo $request->vehicle_no; ?>', '<?php echo $request->vehicle_type; ?>')" > -->
+                                        <img class="collector_img"
+                                            src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->image?>"
+                                            onclick="view_collector(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)">
                                     </td>
                                     <td>
                                         <i class='bx bx-info-circle' style="font-size: 29px"
                                             onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
-                                        
+
                                     </td>
                                     <td>
                                         <i class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"
@@ -248,16 +251,17 @@ function validateCancelForm() {
 
 }
 
-function view_collector(image, col_id, name, contact_no, type, vehno) {
+function view_collector(request) {
     var Pop = document.getElementById('personal-details-popup-box');
     Pop.classList.add('active');
     document.getElementById('overlay').style.display = "flex";
-    document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + image;
-    document.getElementById('collector_id').innerText = col_id;
-    document.getElementById('collector_name').innerText = name;
-    document.getElementById('collector_conno').innerText = contact_no;
-    document.getElementById('collector_vehicle_no').innerText = vehno;
-    document.getElementById('collector_vehicle_type').innerText = type;
+    document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + request
+        .image;
+    document.getElementById('collector_id').innerText = request.col_id;
+    document.getElementById('collector_name').innerText = request.collector_name;
+    document.getElementById('collector_conno').innerText = request.contact_no;
+    document.getElementById('collector_vehicle_no').innerText = request.vehicle_no;
+    document.getElementById('collector_vehicle_type').innerText = request.type;
 }
 
 function view_request_details(request) {

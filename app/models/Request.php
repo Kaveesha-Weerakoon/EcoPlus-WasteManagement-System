@@ -261,10 +261,12 @@
                request_main.name AS customer_name,
                request_main.contact_no AS customer_contactno,
                request_assigned.collector_id, 
-               collectors.*
+               collectors.*,
+               users.name as collector_name
             FROM request_main
             LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
             LEFT JOIN collectors ON request_assigned.collector_id = collectors.user_id
+            JOIN users ON users.id=collectors.user_id
             WHERE request_main.region= :region AND request_main.type = :type
      ');
 

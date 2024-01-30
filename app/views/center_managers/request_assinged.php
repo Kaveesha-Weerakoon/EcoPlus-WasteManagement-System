@@ -97,7 +97,7 @@
 
             </div>
 
-            <div class="personal-details-popup-box" id="personal-details-popup-box">
+            <!-- <div class="personal-details-popup-box" id="personal-details-popup-box">
                 <div class="personal-details-popup-form" id="popup">
                     <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
                         id="personal-details-popup-form-close">
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="overlay" id="overlay"></div>
 
@@ -175,7 +175,7 @@
                         <div class="personal-details-left">
                             <img id="collector_profile_img" src="<?php echo IMGROOT?>/img_upload/collector/?>"
                                 class="profile-pic" alt="">
-                            <p>Collector ID: <span id="collector_id">C</span></p>
+                            <p>Collector ID: <span id="collector_id"></span></p>
                         </div>
                         <div class="personal-details-right">
                             <div class="personal-details-right-labels">
@@ -253,13 +253,12 @@ function view_collector(request) {
     var Pop = document.getElementById('personal-details-popup-box');
     Pop.classList.add('active');
     document.getElementById('overlay').style.display = "flex";
-    document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + request
-        .image;
-    document.getElementById('collector_id').innerText = request.col_id;
+    document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + request.image;
+    document.getElementById('collector_id').innerText = request.collector_id;
     document.getElementById('collector_name').innerText = request.collector_name;
     document.getElementById('collector_conno').innerText = request.contact_no;
     document.getElementById('collector_vehicle_no').innerText = request.vehicle_no;
-    document.getElementById('collector_vehicle_type').innerText = request.type;
+    document.getElementById('collector_vehicle_type').innerText = request.vehicle_type;
 }
 
 function view_request_details(request) {

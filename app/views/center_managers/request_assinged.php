@@ -20,7 +20,7 @@
                                     <th>Req ID</th>
                                     <!-- <th>Customer</th> -->
                                     <th>Date</th>
-                                    <th>Time</th>    
+                                    <th>Time</th>   
                                     <th>Collector info</th>
                                     <th>Request Details</th>
                                     <th>Cancel</th>
@@ -78,9 +78,7 @@
             <div class="cancel-confirm" id="cancel-confirm">
                 <form class="cancel-confirm-content" id="cancel-form" method="post"
                     action="<?php echo URLROOT?>/centermanagers/assinged_request_cancell">
-                    <!-- <div class="cancel-confirm-top-close">
-                        <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop">
-                    </div> -->
+                   
                     <h1>Cancel the Request?</h1>
                     <input name="reason" type="text" placeholder="Input the Reason">
                     <input name="id" type="text">
@@ -281,8 +279,8 @@ function view_request_details(request) {
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map-loaction'), {
         center: {
-            lat: 7.8731,
-            lng: 80.7718
+            lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
+            lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
         },
         zoom: 14.5
     });

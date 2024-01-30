@@ -18,7 +18,8 @@
                                     <th>Req ID</th>
                                     <!-- <th>Customer</th> -->
                                     <th>Date</th>
-                                    <th>Time</th>   
+                                    <th>Time</th> 
+                                    <th>Request details</th>  
                                     <th>Collector info</th>
                                     <th>Location</th>
                                     <th>Collection details</th>
@@ -33,7 +34,11 @@
                                     <td>R<?php echo $request->req_id?></td>
                                     <!-- <td><?php  echo $request->customer_name?></td> -->
                                     <td><?php  echo $request->date?></td>
-                                    <td><?php  echo $request->time?></td>            
+                                    <td><?php  echo $request->time?></td>  
+                                    <td>
+                                    <i class='bx bx-comment-detail' style="font-size: 29px;"
+                                    onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
+                                    </td>          
                                     <td class="cancel-open">
                                         <img class="collector_img" src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->collector_image?>"
                                             onclick="view_collector('<?php echo $request->collector_image; ?>', '<?php echo $request->collector_id; ?>', '<?php echo $request->name; ?>', 
@@ -96,7 +101,7 @@
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collect-details-pop-form-close"
                             id="collect-details-pop-form-close">
                         <div class="collect-details-pop-form-top">
-                            <div class="collect-details-topic">Collection Details<div id="req_id3"></div>
+                            <div class="collect-details-topic">Collection Details
                             </div>
                         </div>
 
@@ -177,6 +182,36 @@
                                     <span id="collector_vehicle_no"></span><br>
                                     <span id="collector_vehicle_type"></span><br>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="request-details-pop" id="request-details-popup-box">
+                    <div class="request-details-pop-form">
+                        <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
+                            id="request-details-pop-form-close">
+                        <div class="request-details-pop-form-top">
+                            <div class="request-details-topic">Request ID: R <div id="req_id3"></div>
+                            </div>
+                        </div>
+
+                        <div class="request-details-pop-form-content">
+                            <div class="request-details-right-labels">
+                                <span>Customer Id</span><br>
+                                <span>Name</span><br>
+                                <span>Date</span><br>
+                                <span>Time</span><br>
+                                <span>Contact No</span><br>
+                                <span>Instructions</span><br>
+                            </div>
+                            <div class="request-details-right-values">
+                                <span id="req_id2">23</span><br>
+                                <span id="req_name">23</span><br>
+                                <span id="req_date"></span><br>
+                                <span id="req_time"></span><br>
+                                <span id="req_contactno"></span><br>
+                                <span id="instructions"></span><br>
                             </div>
                         </div>
                     </div>
@@ -319,6 +354,23 @@ function view_collector(image, col_id, name, contact_no, type, vehno) {
     document.getElementById('collector_vehicle_type').innerText = type;
 }
 
+function view_request_details(request) {
+
+var requestDetails_popup = document.getElementById('request-details-popup-box');
+requestDetails_popup.classList.add('active');
+document.getElementById('overlay').style.display = "flex";
+
+// document.getElementById('request-details-popup-box').style.display = "flex";
+document.getElementById('req_id3').innerText = request.request_id;
+document.getElementById('req_id2').innerText = request.customer_id;
+document.getElementById('req_name').innerText = request.customer_name;
+document.getElementById('req_date').innerText = request.date;
+document.getElementById('req_time').innerText = request.time;
+document.getElementById('req_contactno').innerText = request.contact_no;
+document.getElementById('instructions').innerText = request.instructions;
+
+}
+
 function view_collect_details(request) {
     var locationPop = document.getElementById('collect-details-popup-box');
     locationPop.classList.add('active');
@@ -425,6 +477,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const close_collector = document.getElementById("personal-details-popup-form-close");
     const collector_view = document.getElementById("personal-details-popup-box");
     const close_view = document.getElementById("collect-details-pop-form-close");
+    const close_request_details = document.getElementById("request-details-pop-form-close");
     
 
     close_collector.addEventListener("click", function() {
@@ -437,6 +490,12 @@ document.addEventListener("DOMContentLoaded", function() {
         locationPop.classList.remove('active');
         document.getElementById('overlay').style.display = "none";
 
+    });
+
+    close_request_details.addEventListener("click", function() {
+        var request_popup = document.getElementById("request-details-popup-box");
+        request_popup.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
     });
 
 });

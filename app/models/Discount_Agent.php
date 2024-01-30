@@ -125,9 +125,20 @@
          }          
          }else {
            return false; 
-}
+        }
  }
-    
+
+
+      public function addDiscount($customer_id, $customer_name, $discount_amount, $center) {
+        $this->db->query('INSERT INTO discounts (customer_id, customer_name, discount_amount, center) VALUES (:customer_id, :customer_name, :discount_amount, :center)');
+        $this->db->bind(':customer_id', $customer_id);
+        $this->db->bind(':customer_name', $customer_name);
+        $this->db->bind(':discount_amount', $discount_amount);
+        $this->db->bind(':center', $center);
+
+        return $this->db->execute();
+      }
+          
 
  
   }

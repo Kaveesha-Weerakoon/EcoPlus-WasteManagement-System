@@ -125,7 +125,7 @@
                                 $request_count = isset($assigned_requests_count[$collector->id]) ? $assigned_requests_count[$collector->id] : 0;
                                 //$request_count = $assigned_requests_count[$collector->id] ?? 12;
 
-                                 echo "<option value=\"$collector->id\">C $collector->id $collector->name $collector->vehicle_type $request_count</option>";
+                                 echo "<option value=\"$collector->id\">C $collector->id $collector->name $collector->vehicle_type <span class=\"assigned_count\">$request_count</span></option>";
                             }
                           } else {
                                echo "<option value=\"default\">No Collectors Available</option>";

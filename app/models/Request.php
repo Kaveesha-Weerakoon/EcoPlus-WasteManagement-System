@@ -306,7 +306,7 @@
       ');
 
       $this->db->bind(':collector_id', $collector_id);
-      $this->db->bind(':today', '2024-01-31');
+      $this->db->bind(':today', $today);
 
       $results = $this->db->resultSet();
       // var_dump($results);

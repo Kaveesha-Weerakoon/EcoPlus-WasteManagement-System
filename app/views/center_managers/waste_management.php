@@ -78,13 +78,14 @@
                             <tr class="table-header">
                                 <th>Req id</th>
                                 <th>Collector id</th>
-                                <th>Plastic</th>
+                                <!-- <th>Plastic</th>
                                 <th>Polythene</th>
                                 <th>Metals</th>
                                 <th>Glass</th>
                                 <th>Paper waste</th>
-                                <th>Electronic waste</th>
+                                <th>Electronic waste</th> -->
                                 <th>Center Manager Note</th>
+                                <th></th>
                             </tr>
                         </table>
                     </div>

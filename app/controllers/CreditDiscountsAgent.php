@@ -29,9 +29,6 @@
       redirect('users/login');
     }
 
-
-
-
     public function editprofile(){
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -136,9 +133,6 @@
    
     }
 
-
-
-
     public function change_password(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
       
@@ -236,7 +230,8 @@
 
 
 
-    public function validateUser() {   
+  
+     public function validateUser() {   
 
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -328,6 +323,7 @@
         }        
          else {
             $user_balance = $this->Customer_Credit_Model->get_customer_credit_balance( $customer_id);
+           
             if ($data['discount_amount'] > $user_balance) {
                 $data['discount_amount_err'] = 'discount can not exceed your credit balance';
             }
@@ -340,24 +336,15 @@
 
           $user_balance = floatval($this->Customer_Credit_Model->get_customer_credit_balance($customer_id));
 
-
-      
           if ($discount_amount <= $user_balance) {
         
-              echo'user balance'.$user_balance;
-              echo'id'.$customer_id;
-              echo'discount'.$discount_amount;
-
-              
-
+       
               $new_balance = $user_balance - $discount_amount;
               $balance_update = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_balance);
              
       
               if ($balance_update) {
-                echo'user balance'.$user_balance;
-              echo'id'.$customer_id;
-              echo'discount'.$discount_amount;
+         
                   $this->view('credit_discount_agents/agent_discount', $data);
               } else {
                 die('Something went wrong');

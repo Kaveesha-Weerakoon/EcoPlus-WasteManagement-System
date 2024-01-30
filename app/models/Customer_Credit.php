@@ -29,6 +29,7 @@
         $this->db->bind(':user_id', $user_id);
         return $this->db->execute();
         }catch (PDOException $e) {
+          
             return false;
         }
     }

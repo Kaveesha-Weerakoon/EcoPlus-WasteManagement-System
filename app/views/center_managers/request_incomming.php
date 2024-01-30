@@ -18,12 +18,10 @@
                             <table class="table">
                                 <tr class="table-header">
                                     <th>Req ID</th>
+                                    <th>Customer</th>
                                     <th>Date</th>
                                     <th>Time</th>
-                                    <th>Customer</th>
-                                    <th>C ID</th>
-                                    <th>Contact No</th>
-                                    <th>Instructions</th>
+                                    <th>Request details</th>
                                     <th>Assign</th>
                                     <th>Cancel</th>
                                 </tr>
@@ -34,22 +32,22 @@
                                 <?php foreach($data['incoming_requests'] as $request) : ?>
                                 <tr class="table-row">
                                     <td>R<?php echo $request->req_id?></td>
+                                    <td><?php  echo $request->name?></td>
                                     <td><?php  echo $request->date?></td>
                                     <td><?php  echo $request->time?></td>
-                                    <td><?php  echo $request->name?></td>
-                                    <td><?php  echo $request->customer_id?></td>
-                                    <td><?php  echo $request->contact_no?></td>
-                                    <td><?php  echo $request->instructions?></td>
+                                  
+                                    <td>
+                                        <i class='bx bx-info-circle' style="font-size: 29px"
+                                            onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
+                                    </td>
                                     <td>
                                         <i class='bx bxs-user-check' style="font-size: 32px;" onclick="assign(<?php echo $request->req_id ?>)"></i>
-                                        <!-- <img onclick="assign(<?php echo $request->req_id ?>)" class="add"
-                                            src="<?php echo IMGROOT?>/assign.png" alt=""> -->
+                                       
                                     </td>
                                     <td>
                                         <i class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"
                                         onclick="cancel(<?php echo $request->req_id ?>)"></i>
-                                        <!-- <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel"
-                                            src="<?php echo IMGROOT?>/close_popup.png" alt=""> -->
+                                        
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -128,6 +126,36 @@
 
                         <Button type="submit" onclick="assing_complete()">Assign</Button>
                     </form>
+                </div>
+
+                <div class="request-details-pop" id="request-details-popup-box">
+                    <div class="request-details-pop-form">
+                        <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
+                            id="request-details-pop-form-close">
+                        <div class="request-details-pop-form-top">
+                            <div class="request-details-topic">Request ID: R <div id="req_id3"></div>
+                            </div>
+                        </div>
+
+                        <div class="request-details-pop-form-content">
+                            <div class="request-details-right-labels">
+                                <span>Customer Id</span><br>
+                                <span>Name</span><br>
+                                <span>Date</span><br>
+                                <span>Time</span><br>
+                                <span>Contact No</span><br>
+                                <span>Instructions</span><br>
+                            </div>
+                            <div class="request-details-right-values">
+                                <span id="req_id2">23</span><br>
+                                <span id="req_name">23</span><br>
+                                <span id="req_date"></span><br>
+                                <span id="req_time"></span><br>
+                                <span id="req_contactno"></span><br>
+                                <span id="instructions"></span><br>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -329,6 +357,23 @@
                 document.getElementById('overlay').style.display = "none";
             }
 
+            function view_request_details(request) {
+
+                var requestDetails_popup = document.getElementById('request-details-popup-box');
+                requestDetails_popup.classList.add('active');
+                document.getElementById('overlay').style.display = "flex";
+
+                // document.getElementById('request-details-popup-box').style.display = "flex";
+                document.getElementById('req_id3').innerText = request.req_id;
+                document.getElementById('req_id2').innerText = request.customer_id;
+                document.getElementById('req_name').innerText = request.name;
+                document.getElementById('req_date').innerText = request.date;
+                document.getElementById('req_time').innerText = request.time;
+                document.getElementById('req_contactno').innerText = request.contact_no;
+                document.getElementById('instructions').innerText = request.instructions;
+
+            }
+
             document.addEventListener("DOMContentLoaded", function() {
 
                 const closeButton = document.getElementById("cancel-pop");
@@ -341,6 +386,7 @@
                 const table = document.getElementById("tables");
                 const main_right_bottom = document.getElementById("main-right-bottom");
                 const main_right_bottom_two = document.getElementById("main-right-bottom-two");
+                const close_request_details = document.getElementById("request-details-pop-form-close");
 
 
                 maps.addEventListener("click", function() {
@@ -376,6 +422,12 @@
                     assign.classList.remove('active');
                     document.getElementById('overlay').style.display = "none";
                     // assign.style.display = "none";
+                });
+
+                close_request_details.addEventListener("click", function() {
+                    var request_popup = document.getElementById("request-details-popup-box");
+                    request_popup.classList.remove('active');
+                    document.getElementById('overlay').style.display = "none";
                 });
 
 

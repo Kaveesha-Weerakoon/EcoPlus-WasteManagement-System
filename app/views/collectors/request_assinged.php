@@ -577,6 +577,64 @@ function initMap() {
             handleMarkerClick(marker, coordinate);
         });
     });
+    calculateTSPRoute(map, incomingRequests);
+}
+
+function calculateTSPRoute(map, locations) {
+    // Use the DirectionsService to get road-based directions between locations
+    let directionsService = new google.maps.DirectionsService();
+    let minDistance = Infinity;
+    let tspRoute;
+
+    // Try starting from each location
+    for (let i = 0; i < locations.length; i++) {
+        let waypoints = locations.map(location => ({
+            location: new google.maps.LatLng(parseFloat(location.lat), parseFloat(location.longi))
+        }));
+
+        // Circular permutation to try each starting point
+        waypoints = [...waypoints.slice(i), ...waypoints.slice(0, i)];
+
+        let request = {
+            origin: waypoints[0].location,
+            destination: waypoints[waypoints.length - 1].location,
+            waypoints: waypoints.slice(1, -1),
+            optimizeWaypoints: true,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+
+        directionsService.route(request, function(response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+                let route = response.routes[0];
+                let totalDistance = route.legs.reduce((sum, leg) => sum + leg.distance.value, 0);
+
+                if (totalDistance < minDistance) {
+                    minDistance = totalDistance;
+                    tspRoute = route;
+                }
+            } else {
+                console.error("Directions request failed with status:", status);
+            }
+
+            // Draw the TSP route with the best starting point on the map
+            if (i === locations.length - 1) {
+                let pathCoordinates = [];
+                for (let leg of tspRoute.legs) {
+                    pathCoordinates.push(...leg.steps.map(step => step.path).flat());
+                }
+
+                let path = new google.maps.Polyline({
+                    path: pathCoordinates,
+                    geodesic: true,
+                    strokeColor: "#0000FF",
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2.5
+                });
+
+                path.setMap(map);
+            }
+        });
+    }
 }
 
 function initMap2(latitude = 7.4, longitude = 81.00000000) {
@@ -691,6 +749,8 @@ function updateMapForDate(selectedDate) {
             handleMarkerClick(marker);
         });
     });
+    calculateTSPRoute(map, filteredRequests);
+
 }
 
 function submitForm($id) {

@@ -16,9 +16,9 @@
                             <table class="table">
                                 <tr class="table-header">
                                     <th>Req ID</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
                                     <th>Customer</th>
+                                    <th>Date</th>
+                                    <th>Time</th>   
                                     <th>Collector info</th>
                                     <th>Location</th>
                                     <th>Collection details</th>
@@ -31,9 +31,9 @@
                                 <?php foreach($data['completed_requests'] as $request) : ?>
                                 <tr class="table-row" id="table-row">
                                     <td>R<?php echo $request->req_id?></td>
-                                    <td><?php  echo $request->date?></td>
-                                    <td><?php  echo $request->time?></td>
                                     <td><?php  echo $request->customer_name?></td>
+                                    <td><?php  echo $request->date?></td>
+                                    <td><?php  echo $request->time?></td>            
                                     <td class="cancel-open">
                                         <img class="collector_img" src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->collector_image?>"
                                             onclick="view_collector('<?php echo $request->collector_image; ?>', '<?php echo $request->collector_id; ?>', '<?php echo $request->name; ?>', 

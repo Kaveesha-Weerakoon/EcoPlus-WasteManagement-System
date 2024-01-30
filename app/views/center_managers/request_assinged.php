@@ -18,11 +18,11 @@
                             <table class="table">
                                 <tr class="table-header">
                                     <th>Req ID</th>
+                                    <th>Customer</th>
                                     <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Customer ID</th>
-                                    <th>Collector ID</th>
-                                    <th>Collector</th>
+                                    <th>Time</th>    
+                                    <!-- <th>Collector ID</th> -->
+                                    <th>Collector info</th>
                                     <th>Request Details</th>
                                     <th>Cancel</th>
                                 </tr>
@@ -34,29 +34,24 @@
 
                                 <tr class="table-row">
                                     <td>R <?php echo $request->req_id?></td>
+                                    <td><?php echo $request->name?></td>
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
-                                    <td><?php echo $request->customer_id?></td>
-
-                                    <td><?php echo $request->collector_id?></td>
-                                    <td>
-                                        <img onclick="" class="collector_img"
-                                            src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->image?>"
-                                            alt="">
+                                    <!-- <td><?php echo $request->collector_id?></td> -->
+                                    <td class="cancel-open">
+                                        <img class="collector_img" src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->image?>"
+                                            onclick="view_collector('<?php echo $request->image; ?>', '<?php echo $request->collector_id; ?>', '<?php echo $request->name; ?>', 
+                                            '<?php echo $request->contact_no; ?>', '<?php echo $request->vehicle_no; ?>', '<?php echo $request->vehicle_type; ?>')" >
                                     </td>
                                     <td>
                                         <i class='bx bx-info-circle' style="font-size: 29px"
                                             onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
-
-                                        <!-- <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                            class="cancel" src="<?php echo IMGROOT ?>/info.png" alt=""> -->
+                                        
                                     </td>
                                     <td>
                                         <i class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"
                                             onclick="cancel(<?php echo $request->req_id ?>,<?php echo  $request->collector_id ?>)"></i>
 
-                                        <!-- <img onclick="cancel(<?php echo $request->req_id ?>,<?php echo  $request->collector_id ?>)"
-                                            class="cancel" src="<?php echo IMGROOT?>/close_popup.png" alt=""> -->
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -167,6 +162,39 @@
                     </div>
                 </div>
             </div>
+
+            <div class="personal-details-popup-box" id="personal-details-popup-box">
+                <div class="personal-details-popup-form" id="popup">
+                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
+                        id="personal-details-popup-form-close">
+                    <center>
+                        <div class="personal-details-topic">Collector Details</div>
+                    </center>
+
+                    <div class="personal-details-popup">
+                        <div class="personal-details-left">
+                            <img id="collector_profile_img" src="<?php echo IMGROOT?>/img_upload/collector/?>"
+                                class="profile-pic" alt="">
+                            <p>Collector ID: <span id="collector_id">C</span></p>
+                        </div>
+                        <div class="personal-details-right">
+                            <div class="personal-details-right-labels">
+                                <span>Name</span><br>
+                                <span>Contact No</span><br>
+                                <span>Vehicle No</span><br>
+                                <span>Vehicle Type</span><br>
+
+                            </div>
+                            <div class="personal-details-right-values">
+                                <span id="collector_name"></span><br>
+                                <span id="collector_conno"></span><br>
+                                <span id="collector_vehicle_no"></span><br>
+                                <span id="collector_vehicle_type"></span><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -221,15 +249,16 @@ function validateCancelForm() {
 
 }
 
-function view_collector(image, col_id, name, contact_no, type, vehno, request_id) {
-    document.getElementById('personal-details-popup-box').style.display = 'flex';
+function view_collector(image, col_id, name, contact_no, type, vehno) {
+    var Pop = document.getElementById('personal-details-popup-box');
+    Pop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
     document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + image;
     document.getElementById('collector_id').innerText = col_id;
     document.getElementById('collector_name').innerText = name;
     document.getElementById('collector_conno').innerText = contact_no;
     document.getElementById('collector_vehicle_no').innerText = vehno;
     document.getElementById('collector_vehicle_type').innerText = type;
-    document.getElementById('req_id').innerText = request_id;
 }
 
 function view_request_details(request) {
@@ -400,7 +429,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     close_collector_pop.addEventListener("click", function() {
-        document.getElementById('personal-details-popup-box').style.display = "none";
+        const collector_view = document.getElementById("personal-details-popup-box");
+        collector_view.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
     });
 
     closeButton.addEventListener("click", function() {

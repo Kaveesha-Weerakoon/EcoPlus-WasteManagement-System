@@ -77,16 +77,55 @@
                         </div>
                     </div>
 
+                    <?php if(!empty($data['discount'])) : ?>
                     <div class="main-right-bottom">
-                        <div class="main-right-bottom-two">
-                            <div class="main-right-bottom-two-content">
-                                <i class='bx bx-data'></i>
-                                <h1>You Have No Discounts On Supermarkets</h1>
-                                <p></p>
-
+                        <div class="main-right-bottom-container">
+                            <div class="main-right-bottom-container-top">
+                                <div class="circle"></div>
+                                <h4>Complaints</h4>
+                            </div>
+                            <div class="main-right-bottom-container-container">
+                                <div class="main-right-bottom-top">
+                                    <table class="table">
+                                        <tr class="table-header">
+                                            <th>Discount ID</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Discount</th>
+                                            <th>Center</th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="main-right-bottom-down">
+                                    <table class="table">
+                                        <?php foreach($data['discount'] as $post) : ?>
+                                        <tr class="table-row">
+                                            <td>Com <?php echo $post->discount_id?></td>
+                                            <?php
+                                                $date = date('Y-m-d', strtotime($post->created_at));
+                                                $time = date('H:i:s', strtotime($post->created_at));
+                                                ?>
+                                                <td><?php echo $date ?></td>
+                                                <td><?php echo $time ?></td>
+                                            <td><?php echo $post->discount_amount?></td>
+                                            <td><?php echo $post->center?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <?php else: ?>
+                    <div class="main-right-bottom-two">
+                        <div class="main-right-bottom-two-content">
+                            <i class='bx bx-data' style="font-size: 150px"></i>
+                            <h1>You Have No Active Complains</h1>
+                            <p></p>
+
+                        </div>
+                    </div>
+                    <?php endif; ?>
 
                 </div>
             </div>

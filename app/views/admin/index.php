@@ -61,6 +61,7 @@
                             </div>
                         </div>
                         <div class="main-right-bottom-one-right">
+                            <button class="fine_button" onclick="open_fine_set()" >Set fine</button>
 
                             <!-- <canvas id="myChart" width="688" height="300"></canvas> -->
                         </div>
@@ -143,6 +144,51 @@
 
                     </div>
                 </div>
+            </div>
+
+            <div class="fine_set_popup" id="fine_popup">
+                <div class="fine_popup_form">
+                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="fine_popup_form_close"
+                        id="fine_popup_form_close">
+                    <div class="fine_popup_form_top">
+                        <div class="set_fine_topic">Set Fine </div>
+                       
+                    </div>
+
+                    <div class="fine-pop-form-content-container">
+                        <div class="fine-pop-form-content">
+                            <span>Minimum Collect</span>
+                            <input type="text" name="" id="" value="" placeholder="19">
+                        </div>
+                        <div class="fine-pop-form-content">
+                            <span>No Response</span>
+                            <input type="text" name="" id="" value="" placeholder="19">
+                        </div>
+                        <div class="fine-pop-form-content">
+                            <span>Cancelling assigned</span>
+                            <input type="text" name="" id="" value="" placeholder="19">
+                        </div>
+                        <!-- <div class="fine-right-labels">
+                            <span>Minimum Collect</span><br>
+                            <span>No Response</span><br>
+                            <span>Cancelling assigned</span><br>
+                           
+                        </div>
+                        <div class="fine-right-values">
+                           <input type="text" name="" id="" value="" placeholder="19">
+                           <input type="text" name="" id="" value="" placeholder="10">
+                           <input type="text" name="" id="" value="" placeholder="10">
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="fine_set_popup" id="fine_popup">
+                <div class="fine_popup_form">
+                    <h3>Set Fine</h3>
+
+                </div>
+
             </div>
 
 
@@ -233,6 +279,13 @@ function redirect_discountAgents() {
     var linkUrl = "<?php echo URLROOT?>/admin/discount_agents"; // Replace with your desired URL
 
     window.location.href = linkUrl;
+
+}
+
+function open_fine_set(){
+    var finePop = document.getElementById('fine_popup');
+    finePop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
 
 }
 
@@ -412,6 +465,18 @@ function initMap() {
         });
     });
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+        const close_request_details = document.getElementById("fine_popup_form_close");
+
+        close_request_details.addEventListener("click", function() {
+            //document.getElementById('request-details-popup-box').style.display = "none";
+            const request_details = document.getElementById("fine_popup");
+            request_details.classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
+        });
+
+    });
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

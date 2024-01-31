@@ -182,8 +182,6 @@
       $this->view('admin/center_managers', $data);
     }
 
-   
-
     public function center_managers_delete_confirm($id){
       $center_managers = $this->center_managerModel->get_center_managers();
       $centermanger = $this->center_managerModel->getCenterManagerByID($id);
@@ -529,7 +527,6 @@
 
   }
 
- 
 
     public function customers(){
       
@@ -1129,9 +1126,6 @@
     
     }
   
-  
-  
-
 
     public function discount_agent_delete_confirm($id){
       $discount_agent = $this->discount_agentModel->get_discount_agent();
@@ -1183,16 +1177,132 @@
       $this->view('admin/center_main_collectors', $data);
     }
 
-    public function garbage_types(){
+    public function garbage_types($success="False"){
 
       $garbage_types = $this->garbage_types_model->get_all();
 
       $data=[
-        'garbage_types'=> $garbage_types
+        'garbage_types'=> $garbage_types,
+        'click_update'=>'',
+        'update_success'=>$success
+        
       ];
 
       $this->view('admin/garbage_types_view', $data);
 
+    }
+
+    public function garbage_types_update($id){
+      $garbage_types = $this->garbage_types_model->get_all();
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data =[
+          'id'=> $id,
+          'garbage_types'=> $garbage_types,
+          'garbage_type'=> trim($_POST['garbage_type']),
+          'credit_per_waste_quantity' => trim($_POST['credit_per_waste_quantity']),
+          'approximate_amount'=> trim($_POST['approximate_amount']),
+          'minimum_amount'=> trim($_POST['minimum_amount']),
+          'selling_price'=> trim($_POST['selling_price']),
+          'click_update'=> 'True',
+          'update_success'=>'',
+          'garbage_type_err'=>'',
+          'credit_per_waste_quantity_err'=>'',
+          'approximate_amount_err'=>'',
+          'minimum_amount_err'=>'',
+          'selling_price_err'=>''
+
+        ];
+
+        //validate garbage type
+        if(empty($data['garbage_type'])){
+          $data['garbage_type_err'] = 'Please enter garbage type';
+        }elseif(strlen($data['garbage_type']) > 50) {
+          $data['garbage_type_err'] = 'Garbage type is too long';
+        }
+
+        //validate credit per waste quantity
+        if(empty($data['credit_per_waste_quantity'])){
+          $data['credit_per_waste_quantity_err'] = 'Please enter credits per waste quantity';
+        }elseif(!(is_numeric($data['credit_per_waste_quantity']))){
+          $data['credit_per_waste_quantity_err'] = 'Please enter a numeric value';
+        } elseif (!filter_var($data['credit_per_waste_quantity'], FILTER_VALIDATE_INT) || $data['credit_per_waste_quantity'] <= 0 ) {
+          $data['credit_per_waste_quantity_err'] = 'Credit value should be a positive whole number';
+        }
+
+        //validate approximate amount
+        if(empty($data['approximate_amount'])){
+          $data['approximate_amount_err'] = 'Please enter approximate amount';
+        }elseif(!(is_numeric($data['approximate_amount']))){
+          $data['approximate_amount_err'] = 'Please enter a numeric value';
+        }elseif (!preg_match('/^\d+(\.\d{1})?$/', $data['approximate_amount']) || $data['approximate_amount'] <= 0) {
+          $data['approximate_amount_err'] = 'Please enter a positive value up to 1 decimal place';
+        }elseif($data['approximate_amount'] <= $data['minimum_amount']){
+          $data['approximate_amount_err'] = 'Approximate amount must exceed the minimum amount';
+        }
+
+        //validate minimum amount
+        if(empty($data['minimum_amount'])){
+          $data['minimum_amount_err'] = 'Please enter minimum amount';
+        }elseif(!(is_numeric($data['minimum_amount']))){
+          $data['minimum_amount_err'] = 'Please enter a numeric value';
+        }elseif (!preg_match('/^\d+(\.\d{1})?$/', $data['minimum_amount']) || $data['minimum_amount'] <= 0) {
+          $data['minimum_amount_err'] = 'Please enter a positive value up to 1 decimal place';
+        }elseif($data['minimum_amount'] >= $data['approximate_amount']){
+          $data['minimum_amount_err'] = 'Minimum amount should not exceed the approximate value';
+        }
+
+        //validate sell price
+        if(empty($data['selling_price'])){
+          $data['selling_price_err'] = 'Please enter selling price';
+        }elseif(!(is_numeric($data['selling_price']))){
+          $data['selling_price_err'] = 'Please enter a numeric value';
+        }elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['selling_price']) || $data['selling_price'] <= 0) {
+          $data['selling_price_err'] = 'Please enter a positive value up to 2 decimal places';
+        }
+
+        if(empty($data['garbage_type_err']) && empty($data['credit_per_waste_quantity_err']) && empty($data['approximate_amount_err']) && 
+        empty($data['minimum_amount_err']) && empty($data['selling_price_err'])){
+          if($this->garbage_types_model->update_garbage_types($data)){
+         
+            header("Location: " . URLROOT . "/admin/garbage_types/True");        
+
+          } else {
+            die('Something went wrong');
+          }
+
+        }else{
+          $this->view('admin/garbage_types_view', $data);
+
+        }
+
+      }else{
+        
+        $garbage_types = $this->garbage_types_model->get_all();
+        $garbage_type = $this->garbage_types_model->get_details_by_id($id);
+
+        $data =[
+          'id'=> $id,
+          'garbage_types'=> $garbage_types,
+          'garbage_type'=> $garbage_type->name,
+          'credit_per_waste_quantity' => $garbage_type->credits_per_waste_quantity,
+          'approximate_amount'=> $garbage_type->approximate_amount,
+          'minimum_amount'=> $garbage_type->minimum_amount,
+          'selling_price'=> $garbage_type->selling_price,
+          'click_update'=> 'True',
+          'update_success'=>'',
+          'garbage_type_err'=>'',
+          'credit_per_waste_quantity_err'=>'',
+          'approximate_amount_err'=>'',
+          'minimum_amount_err'=>'',
+          'selling_price_err'=>''
+
+        ];
+
+        $this->view('admin/garbage_types_view', $data);
+      }
     }
 
   

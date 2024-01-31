@@ -256,16 +256,20 @@
 
     public function get_assigned_request_by_center($region){
       $this->db->query('
-            SELECT 
-               request_main.*, 
-               request_main.name AS customer_name,
-               request_main.contact_no AS customer_contactno,
-               request_assigned.collector_id, 
-               collectors.*
-            FROM request_main
-            LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
-            LEFT JOIN collectors ON request_assigned.collector_id = collectors.user_id
-            WHERE request_main.region= :region AND request_main.type = :type
+      SELECT 
+      request_main.*, 
+      request_main.name AS customer_name,
+      request_main.contact_no AS customer_contactno,
+      request_assigned.collector_id, 
+      collectors.*,
+      collectors.user_id as collector_id,
+      users.name as collector_name
+  FROM request_main
+  LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
+  LEFT JOIN collectors ON request_assigned.collector_id = collectors.user_id
+  JOIN users ON users.id = collectors.user_id
+  WHERE request_main.region = :region AND request_main.type = :type;
+  
      ');
 
       $this->db->bind(':region', $region);
@@ -287,8 +291,35 @@
       $this->db->bind(':collector_id', $collector_id);
 
       $results = $this->db->resultSet();
-
+      
       return $results;
+    }
+
+    public function get_assigned_requests_count_by_collector_for_day($collector_id){
+      $today = date("Y-m-d");
+      //var_dump($today);
+      $this->db->query('
+         SELECT request_main.*,
+         status
+         FROM request_main
+         JOIN request_assigned ON request_main.req_id = request_assigned.req_id
+         WHERE request_assigned.collector_id = :collector_id
+         AND request_main.type = "assigned"
+         AND request_main.date = :today
+         
+      ');
+
+      $this->db->bind(':collector_id', $collector_id);
+      $this->db->bind(':today', $today);
+
+      $results = $this->db->resultSet();
+      // var_dump($results);
+
+      $request_count = $this->db->rowCount();
+      //var_dump($request_count);
+      return $request_count;
+      
+      
     }
 
     public function get_cancelled_request_by_collector($collector_id){

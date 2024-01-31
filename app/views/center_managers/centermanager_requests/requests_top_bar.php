@@ -1,6 +1,3 @@
-<script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
-    async defer>
-</script>
 <div class="main-right-top">
     <div class="main-right-top-one">
         <div class="main-right-top-search">
@@ -81,8 +78,7 @@
         </div>
         <div class="main-right-top-four-right">
 
-            <div class="main-right-top-four-component" style="background-color: #ecf0f1"
-                id="tables">
+            <div class="main-right-top-four-component" style="background-color: #ecf0f1" id="tables">
                 <img src="<?php echo IMGROOT?>/cells.png" alt="">
                 <p>Tables</p>
             </div>

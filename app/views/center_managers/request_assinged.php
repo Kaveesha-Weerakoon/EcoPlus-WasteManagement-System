@@ -20,7 +20,7 @@
                                     <th>Req ID</th>
                                     <!-- <th>Customer</th> -->
                                     <th>Date</th>
-                                    <th>Time</th>   
+                                    <th>Time</th>
                                     <th>Collector info</th>
                                     <th>Request Details</th>
                                     <th>Cancel</th>
@@ -38,9 +38,7 @@
                                     <td><?php echo $request->time?></td>
                                     <!-- <td><?php echo $request->collector_id?></td> -->
                                     <td class="cancel-open">
-                                        <!-- <img class="collector_img" src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->image?>"
-                                            onclick="view_collector('<?php echo $request->image; ?>', '<?php echo $request->collector_id; ?>', '<?php echo $request->name; ?>', 
-                                            '<?php echo $request->contact_no; ?>', '<?php echo $request->vehicle_no; ?>', '<?php echo $request->vehicle_type; ?>')" > -->
+
                                         <img class="collector_img"
                                             src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->image?>"
                                             onclick="view_collector(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)">
@@ -81,7 +79,7 @@
             <div class="cancel-confirm" id="cancel-confirm">
                 <form class="cancel-confirm-content" id="cancel-form" method="post"
                     action="<?php echo URLROOT?>/centermanagers/assinged_request_cancell">
-                   
+
                     <h1>Cancel the Request?</h1>
                     <input name="reason" type="text" placeholder="Input the Reason">
                     <input name="id" type="text">
@@ -96,40 +94,6 @@
                 </form>
 
             </div>
-
-            <!-- <div class="personal-details-popup-box" id="personal-details-popup-box">
-                <div class="personal-details-popup-form" id="popup">
-                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
-                        id="personal-details-popup-form-close">
-                    <center>
-                        <div class="personal-details-topic">Request ID R<div id="req_id"></div>
-                        </div>
-                    </center>
-
-                    <div class="personal-details-popup">
-                        <div class="personal-details-left">
-                            <img id="collector_profile_img" src="<?php echo IMGROOT?>/img_upload/collector/?>"
-                                class="profile-pic" alt="">
-                            <p>Collector ID: <span id="collector_id">C</span></p>
-                        </div>
-                        <div class="personal-details-right">
-                            <div class="personal-details-right-labels">
-                                <span>Name</span><br>
-                                <span>Contact No</span><br>
-                                <span>Vehicle No</span><br>
-                                <span>Vehicle Type</span><br>
-
-                            </div>
-                            <div class="personal-details-right-values">
-                                <span id="collector_name"></span><br>
-                                <span id="collector_conno"></span><br>
-                                <span id="collector_vehicle_no"></span><br>
-                                <span id="collector_vehicle_type"></span><br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
 
             <div class="overlay" id="overlay"></div>
 
@@ -175,7 +139,7 @@
                         <div class="personal-details-left">
                             <img id="collector_profile_img" src="<?php echo IMGROOT?>/img_upload/collector/?>"
                                 class="profile-pic" alt="">
-                            <p>Collector ID: <span id="collector_id"></span></p>
+                            <p>Collector ID: <span id="col_id">C</span></p>
                         </div>
                         <div class="personal-details-right">
                             <div class="personal-details-right-labels">
@@ -253,8 +217,9 @@ function view_collector(request) {
     var Pop = document.getElementById('personal-details-popup-box');
     Pop.classList.add('active');
     document.getElementById('overlay').style.display = "flex";
-    document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + request.image;
-    document.getElementById('collector_id').innerText = request.collector_id;
+    document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + request
+        .image;
+    document.getElementById('col_id').innerText = request.collector_id;
     document.getElementById('collector_name').innerText = request.collector_name;
     document.getElementById('collector_conno').innerText = request.contact_no;
     document.getElementById('collector_vehicle_no').innerText = request.vehicle_no;
@@ -267,7 +232,6 @@ function view_request_details(request) {
     requestDetails_popup.classList.add('active');
     document.getElementById('overlay').style.display = "flex";
 
-    // document.getElementById('request-details-popup-box').style.display = "flex";
     document.getElementById('req_id3').innerText = request.req_id;
     document.getElementById('req_id2').innerText = request.customer_id;
     document.getElementById('req_name').innerText = request.customer_name;

@@ -18,8 +18,8 @@
                                     <th>Req ID</th>
                                     <!-- <th>Customer</th> -->
                                     <th>Date</th>
-                                    <th>Time</th> 
-                                    <th>Request details</th>  
+                                    <th>Time</th>
+                                    <th>Request details</th>
                                     <th>Collector info</th>
                                     <th>Location</th>
                                     <th>Collection details</th>
@@ -34,30 +34,30 @@
                                     <td>R<?php echo $request->req_id?></td>
                                     <!-- <td><?php  echo $request->customer_name?></td> -->
                                     <td><?php  echo $request->date?></td>
-                                    <td><?php  echo $request->time?></td>  
+                                    <td><?php  echo $request->time?></td>
                                     <td>
-                                    <i class='bx bx-comment-detail' style="font-size: 29px;"
-                                    onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
-                                    </td>          
+                                        <i class='bx bx-comment-detail' style="font-size: 29px;"
+                                            onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
+                                    </td>
                                     <td class="cancel-open">
-                                        <img class="collector_img" src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->collector_image?>"
+                                        <img class="collector_img"
+                                            src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $request->collector_image?>"
                                             onclick="view_collector('<?php echo $request->collector_image; ?>', '<?php echo $request->collector_id; ?>', '<?php echo $request->name; ?>', 
-                                            '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')" >
+                                            '<?php echo $request->collector_contact_no; ?>', '<?php echo $request->collector_vehicle_no; ?>', '<?php echo $request->collector_vehicle_type; ?>')">
                                     </td>
                                     <td>
-                                            <i class='bx bx-map' style="font-size: 29px;"
-                                             onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
+                                        <i class='bx bx-map' style="font-size: 29px;"
+                                            onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
                                     </td>
 
-                                    
+
 
                                     <td class="cancel-open">
-                                            <i class='bx bx-info-circle' style="font-size: 29px"
-                                            onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                            ></i>
+                                        <i class='bx bx-info-circle' style="font-size: 29px"
+                                            onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
                                     </td>
                                     <!-- <td><a href="<?php echo URLROOT?>/centermanagers/confirm_garbage_details/<?php echo $request->req_id?>"><button class="confirm_button">Confirm</button></a></td> -->
-                                   
+
                                     <td>
                                         <?php
                                         $type = ($request->added === 'no') ?
@@ -216,123 +216,126 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <?php if($data['confirm_popup']=='True') : ?>
-                    <div class="confirm-garbage-popup-box" id="confirm-garbage-popup-box">
-                        <div class="confirm-garbage-popup-form" id="popup">
-                            <div class="form-container">
-                                <div class="form-title">Garbage Details</div>
-                                <form action="<?php echo URLROOT;?>/centermanagers/confirm_garbage_details/<?php echo $data['req_id'];?>" class="main-right-bottom-content" method="post">
-                                    <div class="user-details">
-                                        <div class="left-details">
-                                            <div class="main-right-bottom-content-content">
-                                                <span class="details">Polythene</span>
-                                                <div class="input-container">
-                                                    <i class="icon fas fa-trash"></i>
-                                                    <input name="polythene_quantity" type="text"
-                                                        placeholder="Enter Quantity in Kg"
-                                                        value="<?php echo $data['polythene_quantity']?>">
-                                                    <div class="error-div" style="color:red">
-                                                        <?php echo $data['polythene_quantity_err']?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="main-right-bottom-content-content">
-                                                <span class="details">Plastic</span>
-                                                <div class="input-container">
-                                                    <i class="icon fas fa-box"></i>
-                                                    <input name="plastic_quantity" type="text"
-                                                        placeholder="Enter Quantity in Kg"
-                                                        value="<?php echo $data['plastic_quantity']?>">
-                                                    <div class="error-div" style="color:red">
-                                                        <?php echo $data['plastic_quantity_err']?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="main-right-bottom-content-content">
-                                                <span class="details">Glass</span>
-                                                <div class="input-container">
-                                                    <i class="icon fas fa-glass-whiskey"></i>
-                                                    <input name="glass_quantity" type="text"
-                                                        placeholder="Enter Quantity in Kg"
-                                                        value="<?php echo $data['glass_quantity']?>">
-                                                    <div class="error-div" style="color:red">
-                                                        <?php echo $data['glass_quantity_err']?>
-                                                    </div>
+                <div class="confirm-garbage-popup-box" id="confirm-garbage-popup-box">
+                    <div class="confirm-garbage-popup-form" id="popup">
+                        <div class="form-container">
+                            <div class="form-title">Garbage Details</div>
+                            <form
+                                action="<?php echo URLROOT;?>/centermanagers/confirm_garbage_details/<?php echo $data['req_id'];?>"
+                                class="main-right-bottom-content" method="post">
+                                <div class="user-details">
+                                    <div class="left-details">
+                                        <div class="main-right-bottom-content-content">
+                                            <span class="details">Polythene</span>
+                                            <div class="input-container">
+                                                <i class="icon fas fa-trash"></i>
+                                                <input name="polythene_quantity" type="text"
+                                                    placeholder="Enter Quantity in Kg"
+                                                    value="<?php echo $data['polythene_quantity']?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['polythene_quantity_err']?>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="right-details">
-                                            <div class="main-right-bottom-content-content">
-                                                <span class="details">Paper Waste</span>
-                                                <div class="input-container">
-                                                    <i class="icon fas fa-file-alt"></i>
-                                                    <input name="paper_waste_quantity" type="text"
-                                                        placeholder="Enter Quantity in Kg"
-                                                        value="<?php echo $data['paper_waste_quantity']?>">
-                                                    <div class="error-div" style="color:red">
-                                                        <?php echo $data['paper_waste_quantity_err']?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="main-right-bottom-content-content">
-                                                <span class="details">Electronic Waste</span>
-                                                <div class="input-container">
-                                                    <i class="icon fas fa-laptop"></i>
-                                                    <input name="electronic_waste_quantity" type="text"
-                                                        placeholder="Enter Quantity in Kg"
-                                                        value="<?php echo $data['electronic_waste_quantity']?>">
-                                                    <div class="error-div" style="color:red">
-                                                        <?php echo $data['electronic_waste_quantity_err']?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="main-right-bottom-content-content">
-                                                <span class="details">Metals</span>
-                                                <div class="input-container">
-                                                    <i class="icon fas fa-box"></i>
-                                                    <input name="metals_quantity" type="text"
-                                                        placeholder="Enter Quantity in Kg"
-                                                        value="<?php echo $data['metals_quantity']?>">
-                                                    <div class="error-div" style="color:red">
-                                                        <?php echo $data['metals_quantity_err']?>
-                                                    </div>
+                                        <div class="main-right-bottom-content-content">
+                                            <span class="details">Plastic</span>
+                                            <div class="input-container">
+                                                <i class="icon fas fa-box"></i>
+                                                <input name="plastic_quantity" type="text"
+                                                    placeholder="Enter Quantity in Kg"
+                                                    value="<?php echo $data['plastic_quantity']?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['plastic_quantity_err']?>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="wide-note">
-                                            <div class="main-right-bottom-content-content A">
-                                                <span class="details">Center Manager Note</span>
-                                                <div class="input-container">
-                                                    <i class="icon fas fa-sticky-note"></i>
-                                                    <input name="note" class="note-input" type="text"
-                                                        placeholder="Enter Note" value="<?php echo $data['note']?>">
-                                                    <div class="error-div" style="color:red">
-                                                        <?php echo $data['note_err']?>
-                                                    </div>
+                                        <div class="main-right-bottom-content-content">
+                                            <span class="details">Glass</span>
+                                            <div class="input-container">
+                                                <i class="icon fas fa-glass-whiskey"></i>
+                                                <input name="glass_quantity" type="text"
+                                                    placeholder="Enter Quantity in Kg"
+                                                    value="<?php echo $data['glass_quantity']?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['glass_quantity_err']?>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-button">
-                                        <button type="submit">Confirm</button>
-                                        <button type="button" class="cancel-button" id="cancelBtn">Cancel</button>
-                                        
+                                    <div class="right-details">
+                                        <div class="main-right-bottom-content-content">
+                                            <span class="details">Paper Waste</span>
+                                            <div class="input-container">
+                                                <i class="icon fas fa-file-alt"></i>
+                                                <input name="paper_waste_quantity" type="text"
+                                                    placeholder="Enter Quantity in Kg"
+                                                    value="<?php echo $data['paper_waste_quantity']?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['paper_waste_quantity_err']?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="main-right-bottom-content-content">
+                                            <span class="details">Electronic Waste</span>
+                                            <div class="input-container">
+                                                <i class="icon fas fa-laptop"></i>
+                                                <input name="electronic_waste_quantity" type="text"
+                                                    placeholder="Enter Quantity in Kg"
+                                                    value="<?php echo $data['electronic_waste_quantity']?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['electronic_waste_quantity_err']?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="main-right-bottom-content-content">
+                                            <span class="details">Metals</span>
+                                            <div class="input-container">
+                                                <i class="icon fas fa-box"></i>
+                                                <input name="metals_quantity" type="text"
+                                                    placeholder="Enter Quantity in Kg"
+                                                    value="<?php echo $data['metals_quantity']?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['metals_quantity_err']?>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    
-                                </form>
-                            </div>
+                                    <div class="wide-note">
+                                        <div class="main-right-bottom-content-content A">
+                                            <span class="details">Center Manager Note</span>
+                                            <div class="input-container">
+                                                <i class="icon fas fa-sticky-note"></i>
+                                                <input name="note" class="note-input" type="text"
+                                                    placeholder="Enter Note" value="<?php echo $data['note']?>">
+                                                <div class="error-div" style="color:red">
+                                                    <?php echo $data['note_err']?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-button">
+                                    <button type="submit">Confirm</button>
+                                    <button type="button" class="cancel-button" id="cancelBtn">Cancel</button>
+
+                                </div>
+
+                            </form>
                         </div>
                     </div>
+                </div>
                 <?php endif; ?>
-                
+
                 <?php if($data['confirm_success']=='True') : ?>
                 <div class="request_success">
                     <div class="popup" id="popup">
                         <img src="<?php echo IMGROOT?>/check.png" alt="">
                         <h2>Success!!</h2>
                         <p>Garbage details updated successfully</p>
-                        <a href="<?php echo URLROOT?>/centermanagers/request_completed"><button type="button">OK</button></a>
+                        <a href="<?php echo URLROOT?>/centermanagers/request_completed"><button
+                                type="button">OK</button></a>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -356,18 +359,18 @@ function view_collector(image, col_id, name, contact_no, type, vehno) {
 
 function view_request_details(request) {
 
-var requestDetails_popup = document.getElementById('request-details-popup-box');
-requestDetails_popup.classList.add('active');
-document.getElementById('overlay').style.display = "flex";
+    var requestDetails_popup = document.getElementById('request-details-popup-box');
+    requestDetails_popup.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
 
-// document.getElementById('request-details-popup-box').style.display = "flex";
-document.getElementById('req_id3').innerText = request.request_id;
-document.getElementById('req_id2').innerText = request.customer_id;
-document.getElementById('req_name').innerText = request.customer_name;
-document.getElementById('req_date').innerText = request.date;
-document.getElementById('req_time').innerText = request.time;
-document.getElementById('req_contactno').innerText = request.contact_no;
-document.getElementById('instructions').innerText = request.instructions;
+    // document.getElementById('request-details-popup-box').style.display = "flex";
+    document.getElementById('req_id3').innerText = request.request_id;
+    document.getElementById('req_id2').innerText = request.customer_id;
+    document.getElementById('req_name').innerText = request.customer_name;
+    document.getElementById('req_date').innerText = request.date;
+    document.getElementById('req_time').innerText = request.time;
+    document.getElementById('req_contactno').innerText = request.contact_no;
+    document.getElementById('instructions').innerText = request.instructions;
 
 }
 
@@ -386,14 +389,6 @@ function view_collect_details(request) {
     document.getElementById('Earned_Credits').innerText = request.credit_amount;
 }
 
-// function openConfirmGarbageDetails(req_id){
-//     var newRequestId = req_id;
-//     var newURL = "<?php echo URLROOT?>/centermanagers/confirm_garbage_details/" + newRequestId;
-//     document.getElementById('garbage_confirm').href = newURL;
-//     // document.getElementById('overlay').style.display = "flex";
-//     // document.getElementById('cancel_confirm').classList.add('active');
-//     document.getElementById('confirm-garbage-popup-box').style.display = "flex";
-// }
 
 
 function initMap(latitude = 7.4, longitude = 81.00000000) {
@@ -478,7 +473,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const collector_view = document.getElementById("personal-details-popup-box");
     const close_view = document.getElementById("collect-details-pop-form-close");
     const close_request_details = document.getElementById("request-details-pop-form-close");
-    
+
 
     close_collector.addEventListener("click", function() {
         collector_view.classList.remove('active');
@@ -501,9 +496,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.getElementById('cancelBtn').addEventListener('click', function() {
-        // Redirect to the specified URL
-        window.location.href = "<?php echo URLROOT?>/centermanagers/request_completed";
+    // Redirect to the specified URL
+    window.location.href = "<?php echo URLROOT?>/centermanagers/request_completed";
 });
-
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

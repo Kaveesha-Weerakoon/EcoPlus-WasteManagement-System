@@ -256,18 +256,20 @@
 
     public function get_assigned_request_by_center($region){
       $this->db->query('
-            SELECT 
-               request_main.*, 
-               request_main.name AS customer_name,
-               request_main.contact_no AS customer_contactno,
-               request_assigned.collector_id, 
-               collectors.*,
-               users.name as collector_name
-            FROM request_main
-            LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
-            LEFT JOIN collectors ON request_assigned.collector_id = collectors.user_id
-            JOIN users ON users.id=collectors.user_id
-            WHERE request_main.region= :region AND request_main.type = :type
+      SELECT 
+      request_main.*, 
+      request_main.name AS customer_name,
+      request_main.contact_no AS customer_contactno,
+      request_assigned.collector_id, 
+      collectors.*,
+      collectors.user_id as collector_id,
+      users.name as collector_name
+  FROM request_main
+  LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
+  LEFT JOIN collectors ON request_assigned.collector_id = collectors.user_id
+  JOIN users ON users.id = collectors.user_id
+  WHERE request_main.region = :region AND request_main.type = :type;
+  
      ');
 
       $this->db->bind(':region', $region);

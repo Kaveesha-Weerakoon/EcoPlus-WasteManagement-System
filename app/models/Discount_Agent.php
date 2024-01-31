@@ -138,6 +138,16 @@
 
         return $this->db->execute();
       }
+
+
+      public function get_discount($id) {
+        $this->db->query('SELECT * FROM discounts WHERE customer_id = :id ');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+      
+        return $results;
+    }
+  
           
 
  

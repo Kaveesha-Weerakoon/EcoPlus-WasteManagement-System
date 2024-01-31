@@ -150,4 +150,31 @@
         height: 600px;
     }
 
+    
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+
+    .table-header {
+        background-color: #ecf0f1;
+        grid-template-columns: 20% 20% 20% 20% 20%;
+    }
+
+
+    .table-row {
+        height: 45px;
+        grid-template-columns: 20% 20% 20% 20% 20%;
+        border-bottom: 1px solid var(--background-color-two);
+    }
+
+    .table td {
+        height: 40px;
+        font-size: 14px;
+        text-align: center !important;
+    }
+
+    
+
 }

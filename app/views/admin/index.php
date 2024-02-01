@@ -147,50 +147,37 @@
             </div>
 
             <div class="fine_set_popup" id="fine_popup">
-                <div class="fine_popup_form">
-                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="fine_popup_form_close"
-                        id="fine_popup_form_close">
-                    <div class="fine_popup_form_top">
-                        <div class="set_fine_topic">Set Fine </div>
-                       
-                    </div>
+                <form action="" method="post">
+                    <div class="fine_popup_form">
+                        <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="fine_popup_form_close"
+                            id="fine_popup_form_close">
+                        <div class="fine_popup_form_top">
+                            <div class="set_fine_topic">Set Fine </div>
+                        
+                        </div>
 
-                    <div class="fine-pop-form-content-container">
-                        <div class="fine-pop-form-content">
-                            <span>Minimum Collect</span>
-                            <input type="text" name="" id="" value="" placeholder="19">
+                        <div class="fine-pop-form-content-container">
+                            <div class="fine-pop-form-content">
+                                <span>Minimum Collect</span>
+                                <input type="text" name="" id="" value="" placeholder="19">
+                            </div>
+                            <div class="fine-pop-form-content">
+                                <span>No Response</span>
+                                <input type="text" name="" id="" value="" placeholder="19">
+                            </div>
+                            <div class="fine-pop-form-content">
+                                <span>Cancelling assigned</span>
+                                <input type="text" name="" id="" value="" placeholder="19">
+                            </div>
+                            <button type="submit" class="set_fine_button">Set</button>
+                        
                         </div>
-                        <div class="fine-pop-form-content">
-                            <span>No Response</span>
-                            <input type="text" name="" id="" value="" placeholder="19">
-                        </div>
-                        <div class="fine-pop-form-content">
-                            <span>Cancelling assigned</span>
-                            <input type="text" name="" id="" value="" placeholder="19">
-                        </div>
-                        <!-- <div class="fine-right-labels">
-                            <span>Minimum Collect</span><br>
-                            <span>No Response</span><br>
-                            <span>Cancelling assigned</span><br>
-                           
-                        </div>
-                        <div class="fine-right-values">
-                           <input type="text" name="" id="" value="" placeholder="19">
-                           <input type="text" name="" id="" value="" placeholder="10">
-                           <input type="text" name="" id="" value="" placeholder="10">
-                        </div> -->
                     </div>
-                </div>
+                </form>
+                
             </div>
 
-            <div class="fine_set_popup" id="fine_popup">
-                <div class="fine_popup_form">
-                    <h3>Set Fine</h3>
-
-                </div>
-
-            </div>
-
+           
 
             <!-- <div class="pop-eco_credits" id="pop-eco_credits">
                 <form class="Eco_Credits-main" method="post" action="<?php echo URLROOT;?>/admin/pop_eco_credit">

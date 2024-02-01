@@ -795,7 +795,48 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         border-radius: 6px;
         margin-bottom: 10px;
+       
 
+    }
+
+    .fine-pop-form-content{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 30px;
+       
+    }
+
+    .fine-pop-form-content input{
+        padding: 7px;
+        width: 30%;
+        background-color: #f7f9fc;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+        outline: none;
+
+    }
+
+    .set_fine_button{
+        background-color: var(--green-color-one);
+        border: none;
+        border-radius: 10px;
+        width: 30%;
+        height: 35px;
+        font-size: 15px;
+        color: var(--background-color-main);
+        cursor: pointer;
+        letter-spacing: 0.03rem;
+        font-weight: bolder;
+        transition: background-color 0.3s ease-in;
+        margin: 0 20px 20px;
+       
+
+    }
+
+    .set_fine_button:hover{
+        background-color: var(--button-hover-green);
     }
 
     .set_fine_topic::before {

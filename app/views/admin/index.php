@@ -147,7 +147,7 @@
             </div>
 
             <div class="fine_set_popup" id="fine_popup">
-                <form action="" method="post">
+                <form action="<?php echo URLROOT;?>/admin/set_fine" method="post">
                     <div class="fine_popup_form">
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="fine_popup_form_close"
                             id="fine_popup_form_close">
@@ -159,15 +159,15 @@
                         <div class="fine-pop-form-content-container">
                             <div class="fine-pop-form-content">
                                 <span>Minimum Collect</span>
-                                <input type="text" name="" id="" value="" placeholder="19">
+                                <input type="text" name="minimum_collect" id="" value="<?php echo $data['minimum_collect']?>" placeholder="19">
                             </div>
                             <div class="fine-pop-form-content">
                                 <span>No Response</span>
-                                <input type="text" name="" id="" value="" placeholder="19">
+                                <input type="text" name="no_response" id="" value="<?php echo $data['no_response']?>" placeholder="19">
                             </div>
                             <div class="fine-pop-form-content">
                                 <span>Cancelling assigned</span>
-                                <input type="text" name="" id="" value="" placeholder="19">
+                                <input type="text" name="cancelling_assigned" id="" value="<?php echo $data['cancelling_assigned']?>" placeholder="19">
                             </div>
                             <button type="submit" class="set_fine_button">Set</button>
                         

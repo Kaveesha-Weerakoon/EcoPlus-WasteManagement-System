@@ -340,6 +340,28 @@
     </div>
 </div>
 <script>
+    
+function searchTable() {
+    var input = document.getElementById('searchInput').value.toLowerCase();
+    var rows = document.querySelectorAll('.table-row');
+
+    rows.forEach(function(row) {
+        var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+        var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+        var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+        var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+        var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+
+        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(input) ||
+            cid.includes(input)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+
+}
+
 function openvehicledetails(collector) {
 
     var locationPop = document.getElementById('vehicle-details-popup-box');

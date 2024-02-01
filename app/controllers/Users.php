@@ -225,17 +225,23 @@
             if($loggedInUser){
               if($loggedInUser->role=="customer"){
                 $customer=$this->customerModel->get_customer($loggedInUser->id);
-                if($customer->image==''){
-                  $_SESSION['customer_profile'] = "Profile.png";
+                if($customer->blocked==TRUE){
+                      $data['email_err'] = 'Your Account has been Blocked Contact Our Team';
+                      $this->view('users/login', $data);
                 }
                 else{
-                  $_SESSION['customer_profile'] = $customer->image;
-                }
-               
-
-                echo $customer->image;
-                $this->createUserSession($loggedInUser); 
+                  if($customer->image==''){
+                    $_SESSION['customer_profile'] = "Profile.png";
+                  }
+                  else{
+                    $_SESSION['customer_profile'] = $customer->image;
+                  }
+                  echo $customer->image;
+                  $this->createUserSession($loggedInUser); 
+                
+                } 
               }
+              
               else if($loggedInUser->role=="collector"){
                 $collector = $this->collectorModel->getCollectorById($loggedInUser->id);
                 $_SESSION['center_id'] = $collector->center_id;

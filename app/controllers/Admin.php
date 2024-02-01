@@ -1323,6 +1323,7 @@
 
     public function set_fine(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        
         $fine_details = $this->fine_model->get_fine_details();
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -1338,52 +1339,69 @@
 
         
 
-        // foreach($fine_details as $fine ){
-        //   if($fine){
-        //     $fine_type = strtolower($fine->type);
+        foreach($fine_details as $fine ){
+          
+          if($fine){
+            $fine_type = strtolower($fine->type);
+
+            if(empty($data["{$fine_type}"])){
+              $data["{$fine_type}_err"] = 'Please enter selling price';
+            }elseif(!(is_numeric($data["{$fine_type}"]))){
+              $data["{$fine_type}_err"] = 'Please enter a numeric value';
+            }elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data["{$fine_type}"]) || $data["{$fine_type}"] < 0) {
+              $data["{$fine_type}_err"] = 'Please enter a positive value up to 2 decimal places';
+            }
             
-            
-        //   }
+          }
+        }
+
+        // if(empty($data['minimum_collect'])){
+        //   $data['minimum_collect_err'] = 'Please enter selling price';
+        // }elseif(!(is_numeric($data['minimum_collect']))){
+        //   $data['minimum_collect_err'] = 'Please enter a numeric value';
+        // }elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['minimum_collect']) || $data['minimum_collect'] <= 0) {
+        //   $data['minimum_collect_err'] = 'Please enter a positive value up to 2 decimal places';
         // }
 
-        if(empty($data['minimum_collect'])){
-          $data['minimum_collect_err'] = 'Please enter selling price';
-        }elseif(!(is_numeric($data['minimum_collect']))){
-          $data['minimum_collect_err'] = 'Please enter a numeric value';
-        }elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['minimum_collect']) || $data['minimum_collect'] <= 0) {
-          $data['minimum_collect_err'] = 'Please enter a positive value up to 2 decimal places';
-        }
+        // if(empty($data['no_response'])){
+        //   $data['no_response_err'] = 'Please enter selling price';
+        // }elseif(!(is_numeric($data['no_response']))){
+        //   $data['no_response_err'] = 'Please enter a numeric value';
+        // }elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['no_response']) || $data['no_response'] <= 0) {
+        //   $data['no_response_err'] = 'Please enter a positive value up to 2 decimal places';
+        // }
 
-        if(empty($data['no_response'])){
-          $data['no_response_err'] = 'Please enter selling price';
-        }elseif(!(is_numeric($data['no_response']))){
-          $data['no_response_err'] = 'Please enter a numeric value';
-        }elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['no_response']) || $data['no_response'] <= 0) {
-          $data['no_response_err'] = 'Please enter a positive value up to 2 decimal places';
-        }
-
-        if(empty($data['cancelling_assigned'])){
-          $data['cancelling_assigned_err'] = 'Please enter selling price';
-        }elseif(!(is_numeric($data['cancelling_assigned']))){
-          $data['cancelling_assigned_err'] = 'Please enter a numeric value';
-        }elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['cancelling_assigned']) || $data['cancelling_assigned'] <= 0) {
-          $data['cancelling_assigned_err'] = 'Please enter a positive value up to 2 decimal places';
-        }
+        // if(empty($data['cancelling_assigned'])){
+        //   $data['cancelling_assigned_err'] = 'Please enter selling price';
+        // }elseif(!(is_numeric($data['cancelling_assigned']))){
+        //   $data['cancelling_assigned_err'] = 'Please enter a numeric value';
+        // }elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['cancelling_assigned']) || $data['cancelling_assigned'] <= 0) {
+        //   $data['cancelling_assigned_err'] = 'Please enter a positive value up to 2 decimal places';
+        // }
 
         if(empty($data['minimum_collect_err']) && empty($data['no_response_err']) && empty($data['cancelling_assigned_err']) ){
-          if($this->fine_model->update_fines($data)){
-            $this->view('admin/index', $data);
+          
+          if($this->fine_model->set_fine($data)){
+            // die('sucess model');
+         
+            header("Location: " . URLROOT . "/admin/index");  
           }
           else{
+            // die('unsucess model');
             die('Something went wrong');
           }
 
+        }else{
+          $this->view('admin/index', $data);
         }
+
+        $this->view('admin/index', $data);
 
         
       }
       else{
 
+       
         $fine_details = $this->fine_model->get_fine_details();
 
         foreach($fine_details as $fine ){

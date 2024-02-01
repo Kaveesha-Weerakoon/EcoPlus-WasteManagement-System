@@ -159,15 +159,36 @@
                         <div class="fine-pop-form-content-container">
                             <div class="fine-pop-form-content">
                                 <span>Minimum Collect</span>
-                                <input type="text" name="minimum_collect" id="" value="<?php echo $data['minimum_collect']?>" placeholder="19">
+                                <div class="input-box">
+                                    <input type="text" name="minimum_collect" id="" value="<?php echo $data['minimum_collect']?>" >
+                                    <span class="error-div" style="color:red">
+                                        <?php echo $data['minimum_collect_err']?>
+                                        
+                                    </span>
+                                </div>
+                                
                             </div>
                             <div class="fine-pop-form-content">
                                 <span>No Response</span>
-                                <input type="text" name="no_response" id="" value="<?php echo $data['no_response']?>" placeholder="19">
+                                <div class="input-box">
+                                    <input type="text" name="no_response" id="" value="<?php echo $data['no_response']?>" >
+                                    <span class="error-div" style="color:red">
+                                        <?php echo $data['no_response_err']?>
+                                        
+                                    </span>
+                                </div>
+                                
                             </div>
                             <div class="fine-pop-form-content">
                                 <span>Cancelling assigned</span>
-                                <input type="text" name="cancelling_assigned" id="" value="<?php echo $data['cancelling_assigned']?>" placeholder="19">
+                                <div class="input-box">
+                                    <input type="text" name="cancelling_assigned" id="" value="<?php echo $data['cancelling_assigned']?>" >
+                                    <span class="error-div" style="color:red">
+                                        <?php echo $data['cancelling_assigned_err']?>
+                                        
+                                    </span>
+                                </div>
+                                
                             </div>
                             <button type="submit" class="set_fine_button">Set</button>
                         

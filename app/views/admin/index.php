@@ -70,32 +70,40 @@
                             <div class="icon_container">
                                 <i class='bx bx-group'></i>
                             </div>
-                            <h4 id="customer_count" style="font-weight:bold"></h4>
-                            <h3>Customers</h3>
+                            <div class="content_container">
+                                <h3>Customers</h3>
+                                <h2 id="customer_count" style="font-weight:bold"></h2>
+                            </div>
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_collectors()">
                             <div class=" icon_container">
                                 <i class='bx bx-group'></i>
                             </div>
-                            <h4 id="collector_count" style="font-weight:bold"></h4>
+                            <div class="content_container">
+                                <h3>Collectors</h3>
+                                <h2 id="collector_count" style="font-weight:bold"></h2>
+                            </div>
 
-                            <h3>Collectors</h3>
                         </div>
-                        <div class="main-right-bottom-two-cont A">
+                        <div class="main-right-bottom-two-cont A" onclick="redirect_discountAgents()">
                             <div class="icon_container">
                                 <i class='bx bx-group'></i>
                             </div>
-                            <h4 style="font-weight:bold">12</h4>
+                            <div class="content_container">
+                                <h3>Discount Agents</h3>
+                                <h2 style="font-weight:bold">12</h2>
+                            </div>
 
-                            <h3>Discount Agents</h3>
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_centermanagers()">
                             <div class=" icon_container">
                                 <i class='bx bx-group'></i>
                             </div>
-                            <h4 style="font-weight:bold" id="cm_count"></h4>
+                            <div class="content_container">
+                                <h3>Center Managers</h3>
+                                <h2 style="font-weight:bold" id="cm_count"></h2>
+                            </div>
 
-                            <h3>Center Managers</h3>
                         </div>
 
                     </div>
@@ -122,7 +130,7 @@
                         <div class="main-right-bottom-three-right">
                             <div class="main-right-bottom-three-right-left">
                                 <h1>Credits per Waste Qunatity</h1>
-                                <i class='bx bx-dollar-circle'></i> <button onclick="redirect_credits_per()">
+                                <i class='bx bx-dollar-circle'></i> <button onclick="redirect_garbage_types()">
                                     Change
                                 </button>
                             </div>
@@ -138,7 +146,7 @@
             </div>
 
 
-            <div class="pop-eco_credits" id="pop-eco_credits">
+            <!-- <div class="pop-eco_credits" id="pop-eco_credits">
                 <form class="Eco_Credits-main" method="post" action="<?php echo URLROOT;?>/admin/pop_eco_credit">
                     <div class="Eco_Credits-main-top">
                         <h1> Eco Credits Per Kilogram</h1>
@@ -180,7 +188,8 @@
 
                     <button type="submit">Update</button>
                 </form>
-            </div>
+            </div> -->
+
             <div class="pop-rupee_value" id="pop-rupee_value">
                 <div class="rupee-main">
                     <div class="rupee-main-top">
@@ -220,19 +229,32 @@ function redirect_centermanagers() {
     window.location.href = linkUrl;
 }
 
-function redirect_credits_per() {
-    var locationPop = document.querySelector('.pop-eco_credits');
-    locationPop.classList.add('active');
-    document.getElementById('overlay').style.display = "flex";
+function redirect_discountAgents() {
+    var linkUrl = "<?php echo URLROOT?>/admin/discount_agents"; // Replace with your desired URL
+
+    window.location.href = linkUrl;
+
 }
 
-var close_pop_ecocredits = document.getElementById('close-eco_credits');
-close_pop_ecocredits.addEventListener('click', function() {
-    var locationPop = document.querySelector('.pop-eco_credits');
-    locationPop.classList.remove('active');
-    document.getElementById('overlay').style.display = "none";
+// function redirect_credits_per() {
+//     var locationPop = document.querySelector('.pop-eco_credits');
+//     locationPop.classList.add('active');
+//     document.getElementById('overlay').style.display = "flex";
+// }
 
-});
+function redirect_garbage_types() {
+    var linkUrl = "<?php echo URLROOT?>/admin/garbage_types";
+
+    window.location.href = linkUrl;
+}
+
+// var close_pop_ecocredits = document.getElementById('close-eco_credits');
+// // close_pop_ecocredits.addEventListener('click', function() {
+// //     var locationPop = document.querySelector('.pop-eco_credits');
+// //     locationPop.classList.remove('active');
+// //     document.getElementById('overlay').style.display = "none";
+
+// // });
 
 
 const customer_count = <?php echo $data['customer_count']?>;
@@ -333,6 +355,7 @@ function initMap() {
         ]
     });
 
+    // Default radius in meters
     var customColoredMarkerIcon = {
         url: 'https://maps.google.com/mapfiles/ms/micons/green-dot.png',
         size: new google.maps.Size(31, 31),
@@ -340,6 +363,9 @@ function initMap() {
     };
 
     var points = <?php echo $data['centers']; ?>;
+    var activeMarker = null;
+    var activeCircle = null;
+
     points.forEach((point) => {
         var marker = new google.maps.Marker({
             position: {
@@ -350,8 +376,35 @@ function initMap() {
             title: point.region,
             icon: customColoredMarkerIcon
         });
-
+        var defaultRadius = parseFloat(point.radius);
         marker.addListener('click', function() {
+            if (activeMarker) {
+                activeMarker.setIcon(customColoredMarkerIcon);
+            }
+
+            if (activeCircle) {
+                activeCircle.setMap(null);
+            }
+
+            activeMarker = marker;
+
+            marker.setIcon({
+                url: 'https://maps.google.com/mapfiles/ms/micons/green-dot.png',
+                size: new google.maps.Size(31, 31),
+                scaledSize: new google.maps.Size(35, 34)
+            });
+
+            activeCircle = new google.maps.Circle({
+                map: map,
+                center: marker.getPosition(),
+                radius: defaultRadius,
+                fillColor: '#008000',
+                fillOpacity: 0.3,
+                strokeColor: '#008000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2
+            });
+
             var infowindow = new google.maps.InfoWindow({
                 content: point.region
             });

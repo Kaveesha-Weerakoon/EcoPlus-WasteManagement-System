@@ -72,7 +72,7 @@
                                 </div>
                             </a>
 
-                            <a href="" id="completed">
+                            <a href="<?php echo URLROOT?>/Admin/completed_requests/<?php echo $data['center_region']?>" id="completed">
                                 <div class="main-right-top-three-content">
                                     <p>Completed</p>
                                     <div class="line"></div>
@@ -113,21 +113,27 @@
                                     <td><?php echo $cancelled_requests->time?></td>
                                     <td>C<?php echo $cancelled_requests->customer_id?></td>
                                     <td><?php echo $cancelled_requests->cancelled_by?></td>
-                                    <td><img onclick="viewLocation(<?php echo $cancelled_requests->lat; ?>, <?php echo $cancelled_requests->longi; ?>)" 
+                                    <td><i onclick="viewLocation(<?php echo $cancelled_requests->lat; ?>, <?php echo $cancelled_requests->longi; ?>)" 
+                                        class='bx bx-map' style="font-size: 29px;"></i></td>
+                                    <!-- <td><img onclick="viewLocation(<?php echo $cancelled_requests->lat; ?>, <?php echo $cancelled_requests->longi; ?>)" 
                                     src="<?php echo IMGROOT?>/location.png" alt="" class="location_icon">
-                                    </td>
-                                    <td>
+                                    </td> -->
+                                    <!-- <td>
                                     <img onclick="view_request_details(<?php echo htmlspecialchars(json_encode($cancelled_requests), ENT_QUOTES, 'UTF-8') ?>)"
                                         class="cancel" src="<?php echo IMGROOT ?>/info.png" alt="">
-                                    </td>
+                                    </td> -->
+                                    <td><i onclick="view_request_details(<?php echo htmlspecialchars(json_encode($cancelled_requests), ENT_QUOTES, 'UTF-8') ?>)"
+                                        class='bx bx-info-circle' style="font-size: 29px"></i></td>
                                     <td><?php echo $cancelled_requests->reason?></td>
                                 </tr>   
                                 <?php endforeach; ?>  
                                         
                         </div>
                     </div>
+
+                    <div class="overlay" id="overlay"></div>
                 
-                    <div class="location_pop">
+                    <div class="location_pop" id="location_pop">
                         <div class="location_pop_content">
                             <div class="location_pop_map">
                             
@@ -190,18 +196,34 @@
     });
     }
 
-    function viewLocation($lattitude,$longitude){
-        initMap($lattitude,$longitude);
-        document.querySelector('.location_pop').style.display = 'flex';
-    }  
+    // function viewLocation($lattitude,$longitude){
+    //     initMap($lattitude,$longitude);
+    //     document.querySelector('.location_pop').style.display = 'flex';
+    // }  
      
-    function closemap(){
-        document.querySelector('.location_pop').style.display = 'none';
+    // function closemap(){
+    //     document.querySelector('.location_pop').style.display = 'none';
+    // }
+
+    function viewLocation($lattitude, $longitude) {
+        initMap($lattitude, $longitude);
+        var locationPop = document.getElementById('location_pop');
+        locationPop.classList.add('active');
+        document.getElementById('overlay').style.display = "flex";
+    }
+
+    function closemap() {
+        var locationPop = document.getElementById('location_pop');
+        locationPop.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
     }
 
     function view_request_details(request) {
+        var personalPop = document.getElementById('request-details-popup-box');
+        personalPop.classList.add('active');
+        document.getElementById('overlay').style.display = "flex";
 
-        document.getElementById('request-details-popup-box').style.display = "flex";
+        //document.getElementById('request-details-popup-box').style.display = "flex";
         document.getElementById('req_id3').innerText = request.req_id;
         document.getElementById('req_id2').innerText = request.customer_id;
         document.getElementById('req_name').innerText = request.name;
@@ -216,7 +238,10 @@
         const close_request_details = document.getElementById("request-details-pop-form-close");
 
         close_request_details.addEventListener("click", function() {
-        document.getElementById('request-details-popup-box').style.display = "none";
+            //document.getElementById('request-details-popup-box').style.display = "none";
+            const request_details = document.getElementById("request-details-popup-box");
+            request_details.classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
         });
 
     });

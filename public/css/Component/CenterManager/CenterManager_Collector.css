@@ -824,7 +824,7 @@
         position: relative;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         display: flex;
         flex-direction: column;
         align-items: center;

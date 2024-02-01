@@ -70,18 +70,19 @@
                     <div class="main-right-bottom-down">
                     
                         <table class="table">
-                                <?php foreach($data['customers'] as $post) : ?>
+                                <?php foreach($data['customers'] as $customer) : ?>
                                         <tr class="table-row">
-                                            <td>C <?php echo $post->user_id?></td>
-                                            <td><?php echo $post->name?></td>
-                                            <td><img class="customer_img" src="<?php echo IMGROOT ?>/img_upload/customer/<?php echo ($post->image == '') ? 'Profile.png' : $post->image; ?>" alt=""></td>
-                                            <td><?php echo $post->email?></td>
-                                            <td> <?php echo $post->mobile_number?></td>
-                                            <td> <?php echo $post->address?></td>
-                                            <td> <?php echo $post->city?></td>
+                                            <td>C <?php echo $customer->user_id?></td>
+                                            <td><?php echo $customer->name?></td>
+                                            <td><img class="customer_img" src="<?php echo IMGROOT ?>/img_upload/customer/<?php echo ($customer->image == '') ? 'Profile.png' : $customer->image; ?>" alt=""></td>
+                                            <td><?php echo $customer->email?></td>
+                                            <td> <?php echo $customer->mobile_number?></td>
+                                            <td> <?php echo $customer->address?></td>
+                                            <td> <?php echo $customer->city?></td>
                                             <td> 0</td>
-                                            <td><img class="location" src="<?php echo IMGROOT?>/View.png" alt=""></td>
-                                            <td><a href="<?php echo URLROOT?>/Admin/customerdelete_confirm/<?php echo $post->user_id?>"><img class="location" src="<?php echo IMGROOT?>/delete.png" alt=""></a></td>
+                                            <td><i class='bx bx-info-circle' style="font-size: 29px"></i></td>
+                                            <td><a href="<?php echo URLROOT?>/Admin/customerdelete_confirm/<?php echo $customer->user_id?>"><i class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
+                                            <!-- <td><a href="<?php echo URLROOT?>/Admin/customerdelete_confirm/<?php echo $customer->user_id?>"><img class="location" src="<?php echo IMGROOT?>/delete.png" alt=""></a></td> -->
                                 <?php endforeach; ?>
                         </table>
                     

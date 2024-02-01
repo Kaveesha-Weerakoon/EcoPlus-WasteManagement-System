@@ -17,28 +17,32 @@
                             </div>
                             <div class="main-right-top-notification" id="notification">
                                 <i class='bx bx-bell'></i>
-                                <div class="dot"></div>
+                                <?php if (!empty($data['notification'])) : ?>
+                                <div class="dot"><?php echo count($data['notification'])?></div>
+                                <?php endif; ?>
                             </div>
                             <div id="notification_popup" class="notification_popup">
                                 <h1>Notifications</h1>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
+                                <div class="notification_cont">
+                                    <?php foreach($data['notification'] as $notification) : ?>
 
-                                    </div>
-                                    Request 1232 Has been Cancelled
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
+                                    <div class="notification">
+                                        <div class="notification-green-dot">
 
+                                        </div>
+                                        <div class="notification_right">
+                                            <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
+                                            <?php echo $notification->notification ?>
+                                        </div>
                                     </div>
-                                    Request 1232 Has been Assigned
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
+                                    <?php endforeach; ?>
 
-                                    </div>
-                                    Request 1232 Has been Cancelled
                                 </div>
+                                <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/collectors/">
+                                    <i class="fa-solid fa-check"> </i>
+                                    <button type="submit">Mark all as read</button>
+                                </form>
+
                             </div>
                             <div class="main-right-top-profile">
                                 <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
@@ -95,6 +99,7 @@
 
                             </div>
                         </div>
+
                     </div>
                     <?php if(!empty($data['assigned_requests'])) : ?>
                     <div class="main-right-bottom">
@@ -105,10 +110,8 @@
                                         <th>Req ID</th>
                                         <th>Date</th>
                                         <th>Time</th>
-                                        <th>Customer</th>
-                                        <th>C ID</th>
-                                        <th>Contact No</th>
-                                        <th>Instructions</th>
+                                        <th>Request Details</th>
+                                        <th>Location</th>
                                         <th>Status</th>
                                         <th>Cancel</th>
                                     </tr>
@@ -122,10 +125,14 @@
                                         <td>R<?php echo $request->req_id?></td>
                                         <td><?php  echo $request->date?></td>
                                         <td><?php  echo $request->time?></td>
-                                        <td><?php  echo $request->name?></td>
-                                        <td><?php  echo $request->customer_id?></td>
-                                        <td><?php  echo $request->contact_no?></td>
-                                        <td><?php  echo $request->instructions?></td>
+
+                                        <td> <i class='bx bx-info-circle' style="font-size: 29px"
+                                                onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)">
+                                            </i></td>
+                                        <td> <i class='bx bx-map'
+                                                onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
+                                                style="font-size: 29px;"> </i></td>
+
                                         <td class="cancel-open">
                                             <?php
                                            
@@ -143,8 +150,10 @@
 
                                         </td>
                                         <td>
-                                            <i onclick="cancel(<?php echo $request->req_id ?>)" class='bx bx-x-circle'
-                                                style="font-size: 29px; color:#DC2727;"> </i>
+
+                                            <i onclick="<?php echo ($request->status == "assinged") ? 'cancel2(' . $request->req_id . ')' : 'cancel(' . $request->req_id . ')'; ?>"
+                                                class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"> </i>
+
 
                                         </td>
                                     </tr>
@@ -178,82 +187,24 @@
                                 action="<?php echo URLROOT;?>/collectors/enterWaste_And_GenerateEcoCredits/<?php echo  $data['req_id']?>"
                                 class="main-right-bottom-content" method="post">
                                 <div class="user-details">
-                                    <div class="left-details">
+                                    <div class="user-details-cont">
+                                        <?php foreach($data['types'] as $type) : ?>
                                         <div class="main-right-bottom-content-content">
-                                            <span class="details">Polythene</span>
+                                            <span class="details"><?php echo ucfirst($type->name); ?></span>
                                             <div class="input-container">
-                                                <i class="icon fas fa-trash"></i>
-                                                <input name="polythene_quantity" type="text"
+                                                <i class="<?php echo $type->icon?>"></i>
+                                                <input name="<?php echo $type->name?>_quantity" type="text"
                                                     placeholder="Enter Quantity in Kg"
-                                                    value="<?php echo $data['polythene_quantity']; ?>">
+                                                    value="<?php echo $data["{$type->name}_quantity"]; ?>">
                                                 <div class="error-div" style="color:red">
-                                                    <?php echo $data['polythene_quantity_err']?>
+                                                    <?php echo $data["{$type->name}_quantity_err"]?>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="main-right-bottom-content-content">
-                                            <span class="details">Plastic</span>
-                                            <div class="input-container">
-                                                <i class="icon fas fa-box"></i>
-                                                <input name="plastic_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg"
-                                                    value="<?php echo $data['plastic_quantity']; ?>">
-                                                <div class="error-div" style="color:red">
-                                                    <?php echo $data['plastic_quantity_err']?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="main-right-bottom-content-content">
-                                            <span class="details">Glass</span>
-                                            <div class="input-container">
-                                                <i class="icon fas fa-glass-whiskey"></i>
-                                                <input name="glass_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg"
-                                                    value="<?php echo $data['glass_quantity']; ?>">
-                                                <div class="error-div" style="color:red">
-                                                    <?php echo $data['glass_quantity_err']?>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <?php endforeach; ?>
+
                                     </div>
-                                    <div class="right-details">
-                                        <div class="main-right-bottom-content-content">
-                                            <span class="details">Paper Waste</span>
-                                            <div class="input-container">
-                                                <i class="icon fas fa-file-alt"></i>
-                                                <input name="paper_waste_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg"
-                                                    value="<?php echo $data['paper_waste_quantity']; ?>">
-                                                <div class="error-div" style="color:red">
-                                                    <?php echo $data['paper_waste_quantity_err']?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="main-right-bottom-content-content">
-                                            <span class="details">Electronic Waste</span>
-                                            <div class="input-container">
-                                                <i class="icon fas fa-laptop"></i>
-                                                <input name="electronic_waste_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg"
-                                                    value="<?php echo $data['electronic_waste_quantity']; ?>">
-                                                <div class="error-div" style="color:red">
-                                                    <?php echo $data['electronic_waste_quantity_err']?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="main-right-bottom-content-content">
-                                            <span class="details">Metals</span>
-                                            <div class="input-container">
-                                                <i class="icon fas fa-box"></i>
-                                                <input name="metals_quantity" type="text"
-                                                    placeholder="Enter Quantity in Kg"
-                                                    value="<?php echo $data['metals_quantity']; ?>">
-                                                <div class="error-div" style="color:red">
-                                                    <?php echo $data['metals_quantity_err']?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <div class="wide-note">
                                         <div class="main-right-bottom-content-content A">
                                             <span class="details">Note</span>
@@ -274,111 +225,7 @@
                                     <a href="<?php echo URLROOT?>/collectors/request_assinged"><button type="button"
                                             class="cancel-button">Cancel</button></a>
                                 </div>
-                                <?php if($data['popup_confirm_collect']=='True') : ?>
-                                <div class="pop_up_confirm_collect">
-                                    <div class="pop_up_confirm_collect_cont">
-                                        <h1>Credit Calculation</h1>
-                                        <div class="cont">
-                                            <h5></h5>
-                                            <h6>Kg</h6>
-                                            <h6></h6>
-                                            <h6>
-                                                Credits
-                                            </h6>
-                                            <h6></h6>
-                                            <h6>
-                                            </h6>
 
-                                        </div>
-                                        <div class="cont">
-                                            <h5>Plastic</h5>
-                                            <h6><?php echo empty($data['plastic_quantity']) ? 0 : $data['plastic_quantity'] ?>
-                                            </h6>
-                                            <h6>*</h6>
-                                            <h6>
-                                                <?php echo $data['creditData']->plastic?>
-                                            </h6>
-                                            <h6>=</h6>
-                                            <h6><?php echo floatval($data['plastic_quantity']) * ($data['creditData']->plastic) ?>
-                                            </h6>
-
-                                        </div>
-                                        <div class="cont">
-                                            <h5>Polythene</h5>
-                                            <h6><?php echo empty($data['polythene_quantity']) ? 0 : $data['polythene_quantity']  ?>
-                                            </h6>
-                                            <h6>*</h6>
-                                            <h6>
-                                                <?php echo $data['creditData']->polythene?>
-                                            </h6>
-                                            <h6>=</h6>
-                                            <h6><?php echo floatval($data['polythene_quantity']) * ($data['creditData']->polythene) ?>
-                                            </h6>
-                                        </div>
-                                        <div class="cont">
-                                            <h5>Glass</h5>
-                                            <h6><?php echo empty($data['glass_quantity']) ? 0 : $data['glass_quantity'] ?>
-                                            </h6>
-                                            <h6>*</h6>
-                                            <h6>
-                                                <?php echo $data['creditData']->glass?>
-                                            </h6>
-                                            <h6>=</h6>
-                                            <h6><?php echo floatval($data['glass_quantity']) * ($data['creditData']->glass) ?>
-                                            </h6>
-
-                                        </div>
-                                        <div class="cont">
-                                            <h5>Paper</h5>
-                                            <h6><?php echo empty($data['paper_waste_quantity']) ? 0 : $data['paper_waste_quantity'] ?>
-                                            </h6>
-                                            <h6>*</h6>
-                                            <h6>
-                                                <?php echo $data['creditData']->paper?>
-                                            </h6>
-                                            <h6>=</h6>
-                                            <h6><?php echo floatval($data['paper_waste_quantity']) * ($data['creditData']->paper) ?>
-                                            </h6>
-
-                                        </div>
-                                        <div class="cont">
-                                            <h5>Electronic</h5>
-                                            <h6><?php echo empty($data['electronic_waste_quantity']) ? 0 : $data['electronic_waste_quantity']  ?>
-                                            </h6>
-                                            <h6>*</h6>
-                                            <h6>
-                                                <?php echo $data['creditData']->electronic?>
-                                            </h6>
-                                            <h6>=</h6>
-                                            <h6><?php echo floatval($data['electronic_waste_quantity']) * ($data['creditData']->electronic) ?>
-                                            </h6>
-
-                                        </div>
-                                        <div class="cont">
-                                            <h5>Metal</h5>
-                                            <h6><?php echo empty($data['metals_quantity']) ? 0 : $data['metals_quantity']  ?>
-                                            </h6>
-                                            <h6>*</h6>
-                                            <h6>
-                                                <?php echo $data['creditData']->metal?>
-                                            </h6>
-                                            <h6>=</h6>
-                                            <h6><?php echo floatval($data['metals_quantity']) * ($data['creditData']->metal) ?>
-                                            </h6>
-                                        </div>
-
-                                        <h4>Total = <?php echo $data['credit_Amount']?></h4>
-                                        <div class="buttons">
-                                            <button class="complete-btn"
-                                                onclick="submitForm(<?php echo $data['req_id']?>)">Complete</button>
-                                            <a href="<?php echo URLROOT?>/collectors/request_assinged">
-                                                <button class="cancel-btn" type="button">Cancel</button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <?php endif; ?>
                             </form>
                         </div>
                     </div>
@@ -392,6 +239,55 @@
                     </div>
                 </div>
 
+                <?php if($data['popup_confirm_collect']=='True') : ?>
+                <div class="pop_up_confirm_collect">
+                    <div class="pop_up_confirm_collect_cont">
+                        <h1>Credit Calculation</h1>
+                        <div class="cont">
+                            <h5></h5>
+                            <h6>Kg</h6>
+                            <h6></h6>
+                            <h6>
+                                Credits
+                            </h6>
+                            <h6></h6>
+                            <h6>
+                            </h6>
+
+                        </div>
+                        <div class="details">
+
+
+                            <?php foreach($data['creditData'] as $type) : ?>
+                            <div class="cont">
+                                <h5><?php echo $type->name; ?></h5>
+                                <h6><?php echo empty($data[$type->name . '_quantity']) ? 0 : $data[$type->name . '_quantity']; ?>
+                                </h6>
+                                <h6>*</h6>
+                                <h6><?php echo $type->credits_per_waste_quantity; ?></h6>
+                                <h6>=</h6>
+                                <h6><?php echo floatval($data[$type->name . '_quantity']) * $type->credits_per_waste_quantity; ?>
+                                </h6>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <h4>Total = <?php echo $data['credit_Amount']?></h4>
+                        <div class="buttons">
+                            <button class="complete-btn"
+                                onclick="submitForm(<?php echo $data['req_id']?>)">Complete</button>
+                            <a
+                                href="<?php echo URLROOT?>/collectors/request_pop_cancel/<?php echo $data['req_id']?>/<?php echo True?>">
+                                <button class="cancel-btn" type="button">Cancel</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <?php endif; ?>
+
+
+
                 <form class="on_the_way" id="ontheway" action="<?php echo URLROOT?>/collectors/request_ontheway"
                     method="post">
                     <div class="content">
@@ -400,7 +296,7 @@
                             </h2>
                             <h2 id="on_the_way_req_id"></h2>
                         </div>
-                        <input type="text" style="display:hidden" id="post_req_id" name="post_req_id">
+                        <input type="text" style="visibility: hidden;" id="post_req_id" name="post_req_id">
                         <h3>Mark as On the way</h3>
                         <div class="content-left">
                             <button type="button" onclick="markontheway()" class="left"
@@ -409,6 +305,17 @@
                         </div>
                     </div>
                 </form>
+
+                <div class="location_pop" id="location_pop">
+                    <div class="location_pop_content">
+                        <div class="location_pop_map">
+
+                        </div>
+                        <div class="location_close">
+                            <button onclick="closemap()">Close</button>
+                        </div>
+                    </div>
+                </div>
 
 
                 <div class="cancel-confirm" id="cancel-confirm">
@@ -419,6 +326,23 @@
                         <input name="reason" type="text" placeholder="Input the Reason">
                         <input name="id" type="text">
                         <input name="collector_id" id="collector_id" type="text">
+                        <h2>Major Reason</h2>
+                        <div class="cancel_fine_container">
+                            <label>
+                                <input type="radio" name="attribute" value="No Response">
+                                No Response
+                            </label>
+
+                            <label>
+                                <input type="radio" name="attribute" value="Unmeasurable">
+                                Unmeasurable
+                            </label>
+
+                            <label>
+                                <input type="radio" name="attribute" value="None">
+                                No of the Above
+                            </label>
+                        </div>
                         <div class="cancel-confirm-button-container">
                             <button type="button" onclick="validateCancelForm()" id="cancel-pop"
                                 class="cancel-reason-submit-button">Submit</button>
@@ -429,8 +353,56 @@
                     </form>
 
                 </div>
-                <div class="overlay" id="overlay"></div>
 
+                <div class="cancel-confirm" id="cancel-confirm-2">
+                    <form class="cancel-confirm-content" id="cancel-form-2" method="post"
+                        action="<?php echo URLROOT?>/collectors/request_assinged">
+
+                        <h1>Cancel the Request?</h1>
+                        <input name="reason" type="text" placeholder="Input the Reason">
+                        <input name="id" id="cancel-req-id-2" type="text">
+                        <input name="collector_id" id="collector_id2" type="text">
+                        <div class="cancel-confirm-button-container">
+                            <button type="button" onclick="validateCancelForm2()" id="cancel-pop"
+                                class="cancel-reason-submit-button">Submit</button>
+                            <button type="button" onclick="closecancel2()" id="cancel-pop"
+                                class="cancel-reason-cancel-button">Cancel</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="overlay" id="overlay"></div>
+                <div class="request-details-pop" id="request-details-popup-box">
+                    <div class="request-details-pop-form">
+                        <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
+                            id="request-details-pop-form-close" onclick="close_request_details()">
+                        <div class="request-details-pop-form-top">
+                            <div class="request-details-topic">Request ID: R <div id="req_id3"></div>
+                            </div>
+                        </div>
+
+                        <div class="request-details-pop-form-content">
+                            <div class="request-details-right-labels">
+                                <span>Customer Id</span><br>
+                                <span>Name</span><br>
+                                <span>Date</span><br>
+                                <span>Time</span><br>
+                                <span>Contact No</span><br>
+                                <span>Instructions</span><br>
+                            </div>
+                            <div class="request-details-right-values">
+                                <span id="req_id2"></span><br>
+                                <span id="req_name"></span><br>
+                                <span id="req_date"></span><br>
+                                <span id="req_time"></span><br>
+                                <span id="req_contactno"></span><br>
+                                <span id="instructions"></span><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -438,28 +410,40 @@
 </div>
 
 <script>
-function initMap() {
-    var map = new google.maps.Map(document.getElementById('map-loaction'), {
-        center: {
-            lat: 7.8731,
-            lng: 80.7718
-        },
-        zoom: 14.5
-    });;
-    var incomingRequests = <?php echo $data['jsonData']; ?>;
-    incomingRequests.forEach(function(coordinate) {
-        var marker = new google.maps.Marker({
-            position: {
-                lat: parseFloat(coordinate.lat),
-                lng: parseFloat(coordinate.longi)
-            },
-            map: map,
-            title: 'Marker'
-        });
-        marker.addListener('click', function() {
-            handleMarkerClick(marker, coordinate);
-        });
-    });
+function viewLocation($lattitude, $longitude) {
+    initMap2($lattitude, $longitude);
+    var locationPop = document.getElementById('location_pop');
+    locationPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+}
+
+function view_request_details(request) {
+
+    var requestDetails_popup = document.getElementById('request-details-popup-box');
+    requestDetails_popup.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    document.getElementById('req_id3').innerText = request.req_id;
+    document.getElementById('req_id2').innerText = request.customer_id;
+    document.getElementById('req_name').innerText = request.name;
+    document.getElementById('req_date').innerText = request.date;
+    document.getElementById('req_time').innerText = request.time;
+    document.getElementById('req_contactno').innerText = request.contact_no;
+    document.getElementById('instructions').innerText = request.instructions;
+
+}
+
+function close_request_details() {
+    var requestDetails_popup = document.getElementById('request-details-popup-box');
+    requestDetails_popup.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
+    console.log("");
+}
+
+function closemap() {
+    var locationPop = document.getElementById('location_pop');
+    locationPop.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
 }
 
 function ontheway($id) {
@@ -491,27 +475,61 @@ function cancel($id) {
     inputElement.value = $id;
     var cancel_popup = document.getElementById('cancel-confirm');
     cancel_popup.classList.add('active');
-
     document.getElementById('overlay').style.display = "flex";
+}
 
+function cancel2($id) {
+    var inputElement = document.getElementById('cancel-req-id-2');
+    inputElement.style.display = 'none';
+    inputElement.value = $id;
+
+    var collector_id = document.getElementById('collector_id2');
+    collector_id.style.display = 'none';
+    var cancel_popup = document.getElementById('cancel-confirm-2');
+    cancel_popup.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
 }
 
 function validateCancelForm() {
     var reasonInput = document.getElementsByName("reason")[0].value;
+    var attributeSelected = document.querySelector('input[name="attribute"]:checked');
+
     if (reasonInput.trim() === "" || reasonInput.split(/\s+/).length > 200) {
         alert("Please enter a reason");
+    } else if (!attributeSelected) {
+        alert("Please select a major reason");
+
     } else {
         document.getElementById("cancel-form").submit();
     }
 }
 
-function closecancel() {
-    const popup = document.getElementById("cancel-confirm");
+function validateCancelForm2() {
+    var reasonInput = document.getElementsByName("reason")[1].value;
+    if (reasonInput.trim() === "" || reasonInput.split(/\s+/).length > 200) {
+        alert("Please enter a reason");
+    } else {
+        document.getElementById("cancel-form-2").submit();
+    }
+}
+
+function closecancel2() {
+    document.getElementsByName("reason")[1].value = "";
+    const popup = document.getElementById("cancel-confirm-2");
     popup.classList.remove('active');
     document.getElementById('overlay').style.display = "none";
 }
 
-
+function closecancel() {
+    document.getElementsByName("reason")[0].value = "";
+    const popup = document.getElementById("cancel-confirm");
+    popup.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
+    var radioButton = document.querySelector('input[name="attribute"]:checked');
+    if (radioButton) {
+        radioButton.checked = false;
+    }
+}
 
 function searchTable() {
     var input = document.getElementById('searchInput').value.toLowerCase();
@@ -535,6 +553,109 @@ function searchTable() {
     });
 
 
+}
+
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map-loaction'), {
+        center: {
+            lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
+            lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
+        },
+        zoom: 11
+    });;
+    var incomingRequests = <?php echo $data['jsonData']; ?>;
+    incomingRequests.forEach(function(coordinate) {
+        var marker = new google.maps.Marker({
+            position: {
+                lat: parseFloat(coordinate.lat),
+                lng: parseFloat(coordinate.longi)
+            },
+            map: map,
+            title: 'Marker'
+        });
+        marker.addListener('click', function() {
+            handleMarkerClick(marker, coordinate);
+        });
+    });
+    calculateTSPRoute(map, incomingRequests);
+}
+
+function calculateTSPRoute(map, locations) {
+    // Use the DirectionsService to get road-based directions between locations
+    let directionsService = new google.maps.DirectionsService();
+    let minDistance = Infinity;
+    let tspRoute;
+
+    // Try starting from each location
+    for (let i = 0; i < locations.length; i++) {
+        let waypoints = locations.map(location => ({
+            location: new google.maps.LatLng(parseFloat(location.lat), parseFloat(location.longi))
+        }));
+
+        // Circular permutation to try each starting point
+        waypoints = [...waypoints.slice(i), ...waypoints.slice(0, i)];
+
+        let request = {
+            origin: waypoints[0].location,
+            destination: waypoints[waypoints.length - 1].location,
+            waypoints: waypoints.slice(1, -1),
+            optimizeWaypoints: true,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+
+        directionsService.route(request, function(response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+                let route = response.routes[0];
+                let totalDistance = route.legs.reduce((sum, leg) => sum + leg.distance.value, 0);
+
+                if (totalDistance < minDistance) {
+                    minDistance = totalDistance;
+                    tspRoute = route;
+                }
+            } else {
+                console.error("Directions request failed with status:", status);
+            }
+
+            // Draw the TSP route with the best starting point on the map
+            if (i === locations.length - 1) {
+                let pathCoordinates = [];
+                for (let leg of tspRoute.legs) {
+                    pathCoordinates.push(...leg.steps.map(step => step.path).flat());
+                }
+
+                let path = new google.maps.Polyline({
+                    path: pathCoordinates,
+                    geodesic: true,
+                    strokeColor: "#0000FF",
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2.5
+                });
+
+                path.setMap(map);
+            }
+        });
+    }
+}
+
+function initMap2(latitude = 7.4, longitude = 81.00000000) {
+    var mapCenter = {
+        lat: latitude,
+        lng: longitude
+    };
+
+    var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
+        center: mapCenter,
+        zoom: 14.5
+    });
+
+    var marker = new google.maps.Marker({
+        position: {
+            lat: parseFloat(latitude),
+            lng: parseFloat(longitude)
+        },
+        map: map,
+        title: 'Marked Location'
+    });
 }
 
 function handleMarkerClick(marker, coordinate) {
@@ -597,16 +718,22 @@ function loadLocations() {
 function updateMapForDate(selectedDate) {
     var map = new google.maps.Map(document.getElementById('map-loaction'), {
         center: {
-            lat: 7.8731,
-            lng: 80.7718
+            lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
+            lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
         },
-        zoom: 7.2
+        zoom: selectedDate ? 11 : 11
     });
 
     var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
-    var filteredRequests = incomingRequestsForDate.filter(function(coordinate) {
-        return coordinate.date === selectedDate;
-    });
+    var filteredRequests;
+
+    if (selectedDate) {
+        filteredRequests = incomingRequestsForDate.filter(function(coordinate) {
+            return coordinate.date === selectedDate;
+        });
+    } else {
+        filteredRequests = incomingRequestsForDate;
+    }
 
     filteredRequests.forEach(function(coordinate) {
         var marker = new google.maps.Marker({
@@ -622,6 +749,8 @@ function updateMapForDate(selectedDate) {
             handleMarkerClick(marker);
         });
     });
+    calculateTSPRoute(map, filteredRequests);
+
 }
 
 function submitForm($id) {
@@ -639,6 +768,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeButton = document.getElementById("cancel-pop");
     const cancel_popup = document.getElementById("cancel-confirm");
     const cancel_form = document.getElementById("cancel-form");
+
+    const overlay = document.getElementById('overlay');
+    const personal_details_popup_box = document.getElementById('personal-details-popup-box');
 
     maps.addEventListener("click", function() {
         if (main_right_bottom !== null) {
@@ -662,6 +794,18 @@ document.addEventListener("DOMContentLoaded", function() {
         maps.style.backgroundColor = "";
 
     });
+
+    if (personal_details_popup_box) {
+        if (
+            <?php echo json_encode($data['popup']); ?> == "True" &&
+            <?php echo json_encode($data['popup_confirm_collect']); ?> == "False") {
+            personal_details_popup_box.classList.add('active');
+            overlay.style.display = "flex";
+        }
+
+    }
+
+
 
 
 

@@ -91,12 +91,12 @@
                             <div class="box-content">
                                 <i class="icon fas fa-file-alt"></i>
                                 <p>Paper Waste</p>
-                                <span><?php echo $data['current_paper_waste']?> <small> kg</small></span>
+                                <span><?php echo $data['current_paper']?> <small> kg</small></span>
                             </div>
                             <div class="box-content">
                                 <i class="icon fas fa-laptop"></i>
                                 <p>Electronic Waste</p>
-                                <span><?php echo $data['current_electronic_waste']?> <small> kg</small></span>
+                                <span><?php echo $data['current_electronic']?> <small> kg</small></span>
                             </div>
                             <div class="box-content">
                                 <i class="icon fas fa-box"></i>
@@ -109,10 +109,11 @@
 
                     </div>
                     <div class="main-right-bottom-down">
-                        <a href="<?php echo URLROOT?>/centermanagers/release_stocks"><button class="release-button">Release Stocks</button></a>
+                        <a href="<?php echo URLROOT?>/centermanagers/release_stocks"><button
+                                class="release-button">Release Stocks</button></a>
                     </div>
 
-                    
+
                 </div>
 
             </div>
@@ -123,83 +124,23 @@
             <div class="garbage-release-popup-form" id="popup">
                 <div class="form-container">
                     <div class="form-title">Release Stocks</div>
-                    <form action="<?php echo URLROOT?>/centermanagers/release_stocks" class="main-right-bottom-content" method="post">
+                    <form action="<?php echo URLROOT?>/centermanagers/release_stocks" class="main-right-bottom-content"
+                        method="post" id="myForm">
                         <div class="user-details">
-                            <div class="left-details">
-                                <div class="main-right-bottom-content-content">
-                                    <span class="details">Polythene</span>
+                            <div class="cont">
+                                <?php foreach($data['types'] as $type) : ?> <div
+                                    class="main-right-bottom-content-content">
+                                    <span class="details"><?php echo ucfirst($type->name);?></span>
                                     <div class="input-container">
-                                        <i class="icon fas fa-trash"></i>
-                                        <input name="polythene" type="text"
-                                            placeholder="Enter Quantity in Kg"
-                                            value="<?php echo $data['polythene']?>">
+                                        <i class="<?php echo $type->icon?>"></i>
+                                        <input name="<?php echo $type->name?>" type="text"
+                                            placeholder="Enter Quantity in Kg" value="<?php echo $data[$type->name]?>">
                                         <div class="error-div" style="color:red">
-                                            <?php echo $data['polythene_err']?>
+                                            <?php echo $data["{$type->name}_err"]?>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="main-right-bottom-content-content">
-                                    <span class="details">Plastic</span>
-                                    <div class="input-container">
-                                        <i class="icon fas fa-box"></i>
-                                        <input name="plastic" type="text"
-                                            placeholder="Enter Quantity in Kg"
-                                            value="<?php echo $data['plastic']?>">
-                                        <div class="error-div" style="color:red">
-                                            <?php echo $data['plastic_err']?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main-right-bottom-content-content">
-                                    <span class="details">Glass</span>
-                                    <div class="input-container">
-                                        <i class="icon fas fa-glass-whiskey"></i>
-                                        <input name="glass" type="text"
-                                            placeholder="Enter Quantity in Kg"
-                                            value="<?php echo $data['glass']?>">
-                                        <div class="error-div" style="color:red">
-                                            <?php echo $data['glass_err']?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="right-details">
-                                <div class="main-right-bottom-content-content">
-                                    <span class="details">Paper Waste</span>
-                                    <div class="input-container">
-                                        <i class="icon fas fa-file-alt"></i>
-                                        <input name="paper_waste" type="text"
-                                            placeholder="Enter Quantity in Kg"
-                                            value="<?php echo $data['paper_waste']?>">
-                                        <div class="error-div" style="color:red">
-                                            <?php echo $data['paper_waste_err']?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main-right-bottom-content-content">
-                                    <span class="details">Electronic Waste</span>
-                                    <div class="input-container">
-                                        <i class="icon fas fa-laptop"></i>
-                                        <input name="electronic_waste" type="text"
-                                            placeholder="Enter Quantity in Kg"
-                                            value="<?php echo $data['electronic_waste']?>">
-                                        <div class="error-div" style="color:red">
-                                            <?php echo $data['electronic_waste_err']?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main-right-bottom-content-content">
-                                    <span class="details">Metals</span>
-                                    <div class="input-container">
-                                        <i class="icon fas fa-box"></i>
-                                        <input name="metals" type="text"
-                                            placeholder="Enter Quantity in Kg"
-                                            value="<?php echo $data['metals']?>">
-                                        <div class="error-div" style="color:red">
-                                            <?php echo $data['metals_err']?>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php endforeach; ?>
                             </div>
                             <div class="wide-note">
                                 <div class="main-right-bottom-content-content A">
@@ -207,7 +148,8 @@
                                     <div class="input-container">
                                         <i class="icon fas fa-sticky-note"></i>
                                         <input name="released_person" class="note-input" type="text"
-                                            placeholder="Enter Released Person" value="<?php echo $data['released_person']?>">
+                                            placeholder="Enter Released Person"
+                                            value="<?php echo $data['released_person']?>">
                                         <div class="error-div" style="color:red">
                                             <?php echo $data['released_person_err']?>
                                         </div>
@@ -230,32 +172,87 @@
                             <button type="submit">Release</button>
                             <button type="button" class="cancel-button" id="cancelBtn">Cancel</button>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>
         </div>
         <?php endif; ?>
 
-        <?php if($data['release_success']=='True') : ?>
-            <div class="request_success">
-                <div class="popup" id="popup">
-                    <img src="<?php echo IMGROOT?>/check.png" alt="">
-                    <h2>Success!!</h2>
-                    <p>Garbage released successfully</p>
-                    <a href="<?php echo URLROOT?>/centermanagers/stock_release_details"><button type="button">OK</button></a>
+        <?php if($data['sell_price_pop']=='True') : ?>
+        <div class="pop_up_confirm_collect">
+            <div class="pop_up_confirm_collect_cont">
+                <h1>Sell Price Calculation</h1>
+                <div class="cont">
+                    <h5></h5>
+                    <h6>Kg</h6>
+                    <h6></h6>
+                    <h6>
+                        Price
+                    </h6>
+                    <h6></h6>
+                    <h6>
+                    </h6>
+
+                </div>
+                <?php foreach($data['types'] as $type) : ?>
+                <div class="cont">
+                    <h5><?php echo ucfirst($type->name); ?></h5>
+                    <h6><?php echo empty($data["{$type->name}"]) ? 0 : $data["{$type->name}"] ?>
+                    </h6>
+                    <h6>*</h6>
+                    <h6>
+                        <?php echo $type->selling_price?>
+                    </h6>
+                    <h6>=</h6>
+                    <h6><?php echo floatval($data["{$type->name}"]) * ($type->selling_price) ?>
+                    </h6>
+
+                </div>
+                <?php endforeach; ?>
+
+
+                <h4>Total Price= <?php echo $data['total_sell_price']?></h4>
+                <div class="buttons">
+                    <button onclick="submitForm()" class="complete-btn" id="complete-btn">OK</button>
+                    <button onclick="cancelForm()" class="cancel-btn" type="button">Cancel</button>
+
                 </div>
             </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if($data['release_success']=='True') : ?>
+        <div class="request_success">
+            <div class="popup" id="popup">
+                <img src="<?php echo IMGROOT?>/check.png" alt="">
+                <h2>Success!!</h2>
+                <p>Garbage released successfully</p>
+                <a href="<?php echo URLROOT?>/centermanagers/stock_release_details"><button
+                        type="button">OK</button></a>
+            </div>
+        </div>
         <?php endif; ?>
 
     </div>
 </div>
 <script>
-    document.getElementById('cancelBtn').addEventListener('click', function() {
-        // Redirect to the specified URL
-        window.location.href = "<?php echo URLROOT?>/centermanagers/center_garbage_stock";
-    });
+document.getElementById('cancelBtn').addEventListener('click', function() {
+    window.location.href = "<?php echo URLROOT?>/centermanagers/center_garbage_stock";
+});
 
+
+function submitForm($id) {
+    var form = document.getElementById('myForm');
+    form.action = "<?php echo URLROOT;?>/centermanagers/release_stocks/True";
+    form.method = 'post';
+    form.submit();
+}
+
+function cancelForm() {
+    var url = "<?php echo URLROOT; ?>/centermanagers/release_stocks/False/Flase";
+    window.location.href = url;
+}
 </script>
 
 

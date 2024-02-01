@@ -97,12 +97,14 @@
                                     src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>" alt="" class="collector_img"></td>
                                 <td><?php echo $collector->name?></td>
                                 <td><?php echo $collector->email?></td>
-                                <td><img onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                    src="<?php echo IMGROOT?>/personal_details_icon.png" alt=""></td>
-                                <td><img onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                    src="<?php echo IMGROOT?>/car.png" alt=""></td>
-                                <td><img onclick="opencolAssistantsdetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                    src="<?php echo IMGROOT?>/collector_assistants.png" alt=""></td>
+                                <td><i onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                     class='bx bxs-user' style="font-size: 29px;"></i></td>
+            
+                                <td><i onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                    class='bx bxs-truck' style="font-size: 29px;"></i></td>
+                                
+                                <td><a href="" id="collector_assistants_pop"><i onclick="opencolAssistantsdetails(<?php echo $collector->id ?>)"
+                                    class='bx bxs-group' style="font-size: 29px;"></i></a></td>
                             </tr>   
                             <?php endforeach; ?>  
                         </table>            
@@ -187,10 +189,12 @@
                 </div>
             </div>
 
+            <div class="overlay" id="overlay"></div>
+
             <div class="collector-assis-details-popup-box" id="collector-assis-details-popup-box">
                 <div class="collector-assis-details-popup-table">
-                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collector-assis-details-popup-table-close"
-                        id="collector-assis-details-popup-table-close">
+                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collector-assis-details-popup-table-close">
+                       
                     
                     <div class="popup-table-container">
                         <div class="popup-table-caption">
@@ -210,20 +214,21 @@
                             </div>
                             <div class="collector-assis-table-down">
                                 <table class="popup-table">
+                                <?php foreach($data['collector_assistants'] as $collector_assistant) : ?>
                                     <tr class="popup-table-row">
-                                        <td>Dinithi</td>
-                                        <td>200123453456</td>
-                                        <td>kelaniya</td>
-                                        <td>0712223344</td>
-                                        <td>2001-03-26</td>
+                                        <td><?php echo $collector_assistant->name ?></td>
+                                        <td><?php echo $collector_assistant->nic ?></td>
+                                        <td><?php echo $collector_assistant->address ?></td>
+                                        <td><?php echo $collector_assistant->contact_no ?></td>
+                                        <td><?php echo $collector_assistant->dob ?></td>
                                             
-                                    </tr>  
-                                    
+                                    </tr> 
+                                <?php endforeach; ?>   
                                 </table>
                             </div>
                         </div>
                         <div class="popup-table-container-bottom">
-                            <button type="button" id="collector-assis-details-popup-table-close1">Close</button>
+                            <button type="button" class="collector-assis-details-popup-table-close" >Close</button>
                         </div>
                     </div>
                     
@@ -239,7 +244,10 @@
 
 <script>
     function openvehicledetails(collector) {
-        document.getElementById('vehicle-details-popup-box').style.display = "flex";
+        var vehiclePop = document.getElementById('vehicle-details-popup-box');
+        vehiclePop.classList.add('active');
+        document.getElementById('overlay').style.display = "flex";
+       
         document.getElementById('vehicle_collector_id').textContent = collector.user_id;
         document.getElementById('vehicle_collector_name').textContent = collector.name;
         document.getElementById('vehicle_collector_no').textContent = collector.vehicle_no;
@@ -249,12 +257,18 @@
     document.addEventListener('DOMContentLoaded', function() {
         var close_vehicledetail = document.getElementById('vehicle-details-popup-form-close');
         close_vehicledetail.addEventListener('click', function() {
-            document.getElementById('vehicle-details-popup-box').style.display = "none";
+            const vehicle_details = document.getElementById("vehicle-details-popup-box");
+            vehicle_details.classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
+            
         });
     });
 
     function openpersonaldetails(collector){
-        document.getElementById('personal-details-popup-box').style.display = "flex";
+        var personalPop = document.getElementById('personal-details-popup-box');
+        personalPop.classList.add('active');
+        document.getElementById('overlay').style.display = "flex";
+       
         document.getElementById('collector_id').textContent =collector.user_id;
         document.getElementById('collector_profile_pic').src =  "<?php echo IMGROOT?>/img_upload/collector/" + collector.image;
         document.getElementById('collector_name').textContent = collector.name;
@@ -270,31 +284,37 @@
     document.addEventListener('DOMContentLoaded', function() {
         var close_personal_details = document.getElementById('personal-details-popup-form-close');
         close_personal_details.addEventListener('click', function() {
-            document.getElementById('personal-details-popup-box').style.display = "none";
+            const personal_details = document.getElementById("personal-details-popup-box");
+            personal_details.classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
             
         });
     });
 
-    function opencolAssistantsdetails(){
-        document.getElementById('collector-assis-details-popup-box').style.display = "flex";
+    function opencolAssistantsdetails(collector_id){
+
+        // var url = "<?php echo URLROOT?>/admin/get_collector_assistants/" + collector_id;
+        // document.getElementById('collector_assistants_pop').href = url;
+
+       
+        var assistantPop = document.getElementById('collector-assis-details-popup-box');
+        assistantPop.classList.add('active');
+        document.getElementById('overlay').style.display = "flex";
     }
 
 
     document.addEventListener('DOMContentLoaded', function() {
-        console.log("clicked");
-        var close_colAssis_details = document.getElementById('collector-assis-details-popup-table-close');
-        close_colAssis_details.addEventListener('click', function() {
-            document.getElementById('collector-assis-details-popup-box').style.display = "none";
-        });
-    });
+    var closeButtons = document.querySelectorAll('.collector-assis-details-popup-table-close');
 
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log("clicked");
-        var close_colAssis_details = document.getElementById('collector-assis-details-popup-table-close1');
-        close_colAssis_details.addEventListener('click', function() {
-            document.getElementById('collector-assis-details-popup-box').style.display = "none";
+    closeButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            const assisDetails = document.getElementById('collector-assis-details-popup-box');
+            assisDetails.classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
         });
     });
+});
+
 
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

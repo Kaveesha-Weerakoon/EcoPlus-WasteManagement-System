@@ -17,12 +17,12 @@
                                 <tr class="table-header">
                                     <th>Req ID</th>
                                     <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Customer ID</th>
+                                    <th>Time</th>    
                                     <th>Cancelled By</th>
+                                    <th>Reason</th>
                                     <th>Location</th>
                                     <th>Request Details</th>
-                                    <th>Reason</th>
+                                    
                                 </tr>
                             </table>
                         </div>
@@ -32,8 +32,7 @@
                                 <tr class="table-row" id="table-row">
                                     <td>R<?php echo $request->req_id?></td>
                                     <td><?php  echo $request->date?></td>
-                                    <td><?php  echo $request->time?></td>
-                                    <td><?php  echo $request->customer_id?></td>
+                                    <td><?php  echo $request->time?></td>               
                                     <td><?php  if ($request->cancelled_by === 'Me') {
                                   echo 'Customer';
                                 } else {
@@ -45,6 +44,7 @@
                                   }
                                 }?>
                                     </td>
+                                    <td><?php  echo $request->reason?></td>
                                     <td>
                                         <i class='bx bx-map' style="font-size: 29px;"
                                         onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
@@ -56,7 +56,7 @@
                                         ></i>
 
                                     </td>
-                                    <td><?php  echo $request->reason?></td>
+                                    
 
                                 </tr>
                                 <?php endforeach; ?>

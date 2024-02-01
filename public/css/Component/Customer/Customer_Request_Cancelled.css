@@ -24,11 +24,11 @@
     }
 
     .table-header {
-        grid-template-columns: 10% 12% 17% 10% 15% 10% 15% 10%;
+        grid-template-columns: 10% 12% 13% 10% 14% 10% 10% 10% 10%;
     }
 
     .table-row {
-        grid-template-columns: 10% 12% 17% 10% 15% 10% 15% 10%;
+        grid-template-columns: 10% 12% 13% 10% 14% 10% 10% 10% 10%;
     }
 
     .collector_img {

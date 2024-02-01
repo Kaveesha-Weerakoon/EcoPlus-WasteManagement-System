@@ -66,111 +66,6 @@
         margin-right: -1%;
     }
 
-    .dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: #F13E3E;
-        margin-top: -14px;
-        margin-left: -12px;
-    }
-
-    .main-right-top-notification i {
-        font-size: 29px;
-        cursor: pointer;
-    }
-
-    .notification_popup {
-        height: 0;
-        position: absolute;
-        top: 9%;
-        right: 11%;
-        background-color: var(--background-color-main);
-        border-radius: 10px;
-        padding: 0;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: height 0.6s ease-in;
-        width: 18%;
-        visibility: hidden;
-        opacity: 0;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        overflow: scroll;
-        border: 1px solid #dcdde1;
-    }
-
-    .notification_popup h1 {
-        font-size: 19px;
-        letter-spacing: 0.001rem;
-        margin-bottom: 13px;
-        margin-top: 5px;
-        margin-left: 8px;
-    }
-
-    .notification_popup.active {
-        height: 200px;
-        padding: 10px;
-        visibility: visible;
-        opacity: 1;
-    }
-
-    .notification {
-        height: 43px !important;
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        padding-left: 10px;
-        font-size: 14px;
-        cursor: pointer;
-    }
-
-    .mark_as_read {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-    }
-
-    /* .notification_cont {
-        overflow: scroll;
-        max-height: 150px;
-    } */
-
-    .mark_as_read button {
-        margin-top: 2px;
-        font-size: 13px;
-        text-align: center;
-        margin-top: 4px;
-        font-weight: 700;
-        border: none;
-        background-color: none !important;
-        background: none;
-        cursor: pointer !important;
-        color: var(--main-text-color);
-        margin-left: 5px;
-    }
-
-    .mark_as_read button:hover{
-        color: var(--button-hover-green);
-    }
-
-    .mark_as_read .bx {
-        font-size: 26px;
-    }
-
-    .notification:hover {
-        background-color: var(--notification-hover);
-    }
-
-    .notification-green-dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: var(--green-color-one);
-        margin-right: 10px;
-    }
-
     .main-right-top-profile {
         display: flex;
         margin-right: 22px;
@@ -290,7 +185,7 @@
         color: var(--background-color-two);
 
     }
-    
+
     .main-right-bottom-one-left .right i {
         font-size: 40px;
     }
@@ -315,14 +210,12 @@
         border-radius: 10px;
         background-color: var(--background-color-main);
         box-shadow: var(--box-shadow);
-        display: flex;
         color: var(--main-text-color);
-        flex-direction: column;
+        padding: 12px;
+        box-sizing: border-box;
+        display: flex;
         align-items: center;
         justify-content: center;
-        padding-bottom: 1%;
-        padding-top: 1%;
-        box-sizing: border-box;
     }
 
 
@@ -353,14 +246,27 @@
         color: var(--background-color-main);
     }
 
+
     .icon_container {
         width: 45px;
         margin-right: 10px;
     }
 
+    .content_container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content_container h2 {
+        margin-top: 5px;
+        font-size: 22px;
+
+    }
+
     .main-right-bottom-two-cont i {
         font-size: 36px;
     }
+
 
     .main-right-bottom-two-cont h3 {
         width: 145px;
@@ -416,7 +322,7 @@
         width: 250px;
         margin-left: 1%;
     }
-    
+
 
     .main-right-bottom-three-left-cont h2 {
         font-size: 18px;
@@ -476,43 +382,44 @@
         background-color: var(--background-color-main);
         flex: 2;
     }
-    .legend-container{
+
+    .legend-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-top: 7%;
-   }
+    }
 
-   .uncompleted{
+    .uncompleted {
         width: 15px;
         height: 15px;
-        background:var(--background-color-two) ;
-        margin-right: 5px;
-   }
-
-   .completed{
-        width: 15px;
-        height: 15px;
-        background:var(--green-color-two);
+        background: var(--background-color-two);
         margin-right: 5px;
     }
 
-    .legend{
+    .completed {
+        width: 15px;
+        height: 15px;
+        background: var(--green-color-two);
+        margin-right: 5px;
+    }
+
+    .legend {
         display: flex;
 
     }
 
-    .LL{
+    .LL {
         margin-right: 20px;
     }
 
-    .LR{
+    .LR {
         margin-left: 20px;
     }
 
-    .legend span{
+    .legend span {
         font-size: 14px;
-        
+
     }
 
     .progress-value {

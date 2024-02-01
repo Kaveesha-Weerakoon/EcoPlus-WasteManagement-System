@@ -77,6 +77,7 @@
             $this->db->bind(':center_id', $center_id);
 
             $results = $this->db->resultSet();
+           
             return $results;
     }
 

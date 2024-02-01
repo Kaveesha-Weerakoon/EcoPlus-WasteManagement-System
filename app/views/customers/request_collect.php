@@ -1,8 +1,13 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Customer_Main">
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
+        async defer>
+    </script>
     <div class="Customer_Request_collect">
-
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
+            async defer>
+        </script>
         <div class="main">
             <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
@@ -355,13 +360,18 @@
     var marker;
 
     function initMap() {
-
         var defaultLatLng = {
             lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
             lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
         };
 
-        map = new google.maps.Map(document.getElementById('map'), {
+        var centerLatLng = {
+            lat: <?= !empty($data['center_lat']) ? $data['center_lat'] : 6 ?>,
+            lng: <?= !empty($data['center_long']) ? $data['center_long'] : 81.00 ?>
+        };
+
+
+        var map = new google.maps.Map(document.getElementById('map'), {
             center: defaultLatLng,
             zoom: 12.5
         });
@@ -372,6 +382,19 @@
             draggable: true
         });
 
+        var defaultRadius = parseFloat(<?php echo $data['radius']; ?>);
+        console.log(defaultRadius);
+        var circle = new google.maps.Circle({
+            map: map,
+            center: centerLatLng,
+            radius: defaultRadius,
+            fillColor: '#008000',
+            fillOpacity: 0.3,
+            strokeColor: '#008000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2
+        });
+
         google.maps.event.addListener(marker, 'dragend', function(event) {
             var newLatLng = {
                 lat: event.latLng.lat(),
@@ -379,7 +402,9 @@
             };
             console.log('New Location:', newLatLng);
         });
+
     }
+
 
     function submitForm() {
         var form = document.getElementById('myForm');
@@ -390,9 +415,11 @@
             lat: marker.getPosition().lat(),
             lng: marker.getPosition().lng()
         };
+
         document.getElementById('latitudeInput').value = currentLatLng.lat;
         document.getElementById('longitudeInput').value = currentLatLng.lng; //
         document.body.appendChild(form);
+
         form.submit();
     }
 

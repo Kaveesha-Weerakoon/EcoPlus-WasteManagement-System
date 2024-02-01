@@ -566,16 +566,28 @@ function validateHolidayForm() {
     }else if (!/^\d{4}-\d{2}-\d{2}$/.test(holidayInput.trim())) {
         alert("Invalid date format");
     }  else {
-        var isDateAlreadyMarked = markedHolidays.some(function(holiday) {
-            return holiday.date === holidayInput.trim();
-        });
 
-        if (isDateAlreadyMarked) {
-            alert("This date is already marked as a holiday");
+        // Convert the input date string to a Date object
+        var selectedDate = new Date(holidayInput.trim());
+        var currentDate = new Date();
+
+        if (selectedDate < currentDate) {
+            alert("You cannot mark a past date as a holiday");
         } else {
-            // If the date is not already marked, submit the form
-            document.getElementById("confirm-hoildays-form").submit();
+            var isDateAlreadyMarked = markedHolidays.some(function(holiday) {
+                return holiday.date === holidayInput.trim();
+            });
+
+            if (isDateAlreadyMarked) {
+                alert("This date is already marked as a holiday");
+            } else {
+                // If the date is not already marked, submit the form
+                document.getElementById("confirm-hoildays-form").submit();
+            }
+
         }
+
+        
     }
     
     document.getElementById('overlay').style.display = "none";

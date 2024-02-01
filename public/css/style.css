@@ -96,6 +96,10 @@
 @import url('Component/Agent/Agent_Main.css');
 @import url('Component/Agent/Agent_Editprofile.css');
 
+@import url('Component/Agent/Discount_Agent.css');
+@import url('Component/Agent/Discount_Agent_ValidateUser.css');
+@import url('Component/Agent/Discount_Agent_Discount.css');
+
 
 /* Admin CSS */
 
@@ -224,6 +228,7 @@ a {
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease;
+    overflow: auto;
 }
 
 .table-row:hover {

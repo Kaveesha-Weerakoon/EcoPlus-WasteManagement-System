@@ -11,11 +11,11 @@
             </div>
             <h3>Dashboard</h3>
         </div>
-        <div class="main-left-middle-content" onclick="redirect_request()" id="request">
+        <div class="main-left-middle-content" onclick="redirect_API()" id="request">
             <div class=" main-left-middle-content-icon">
                 <i class='bx bx-send'></i>
             </div>
-            <h3>Requests</h3>
+            <h3>API</h3>
         </div>
         <div class="main-left-middle-content" onclick="redirect_history()" id="history">
             <div class=" main-left-middle-content-icon">
@@ -66,8 +66,8 @@ function redirect_dashboard() {
     window.location.href = linkUrl;
 }
 
-function redirect_request() {
-    var linkUrl = "<?php echo URLROOT?>/customers/request_main"; // Replace with your desired URL
+function redirect_API() {
+    var linkUrl = "<?php echo URLROOT?>/CreditDiscountsAgent/validateUser"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
 

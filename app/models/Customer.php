@@ -25,6 +25,22 @@
            return $results;
      }
 
+
+
+public function get_Cus_all_details($id){
+      $this->db->query('SELECT *,
+      customers.id as cID,
+      users.id as userId,
+      users.name as name
+      FROM customers
+      INNER JOIN users
+      ON customers.user_id = users.id
+      WHERE user_id = :id');
+       $this->db->bind(':id', $id);
+
+       $result = $this->db->single(); 
+       return $result;
+     }
      public function deletecomplain($id){
        $this->db->query('DELETE FROM customers WHERE id = :id');
        $this->db->bind(':id', $id);

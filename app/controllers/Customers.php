@@ -174,9 +174,10 @@
 
     public function history(){      
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $discount = $this->discount_agentModel->get_discount($_SESSION['user_id']);
 
       $data = [
-        'title' => 'TraversyMVC',     
+        'discount' => $discount,     
         'notification'=> $Notifications ,
       ];
      

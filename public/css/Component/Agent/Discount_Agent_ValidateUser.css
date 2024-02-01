@@ -1,0 +1,238 @@
+.Discount_Agent_ValidateUser {
+  .main-bottom-down {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+     
+  }
+
+  .main-bottom-down-content {
+      width: 60%;
+      height: 502px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      padding: 10px 30px;
+      display: grid;
+      grid-template-rows: 9% 91%;
+  }
+
+  .main-bottom-down-content-top {
+      display: flex;
+      align-items: center;
+  }
+
+  .main-bottom-down-content-top-content {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .main-bottom-down-content-top-content h3 {
+      font-size: 25px;
+      font-weight: 500;
+  }
+
+  .registration-line {
+      height: 4px;
+      width: 60px;
+      background: var(--green-color-one);
+      margin-top: 3px;
+  }
+
+  .main-bottom-down-content-bottom {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .main-bottom-down-content-bottom-one {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      margin-bottom: 8px;
+  }
+
+  .a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+  }
+
+  .form-drag-area {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+
+  }
+
+  .form-drag-area.active {
+      border: 2px dashed #8888;
+      background-color: #d8d8d8;
+  }
+
+
+  form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    height: 200px; /* Set the width of the form */
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.err {
+    height: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    color: #e74c3c;
+    margin-top: -16px; 
+    margin-bottom: 10px; 
+}
+
+
+button {
+    background-color: #1f8134;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+button:hover {
+    background-color: #2aa043;
+}
+
+  .icon {
+      margin-right: 20px;
+  }
+
+  .icon img {
+      border-radius: 50%;
+      height: 100px;
+      width: 100px;
+  }
+
+  .main-bottom-down-content-bottom-one-left .right-content {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .right-content {
+      display: flex;
+  }
+
+  .right-content .description {
+      font-size: 16px;
+      margin-bottom: 8px;
+  }
+
+  .right-content .form-upload {
+      font-size: 16px;
+      margin-bottom: 8px;
+  }
+
+  .profile-image-validation img {
+      display: none;
+  }
+
+  .main-bottom-down-content-bottom-one-right {
+      display: flex;
+      align-items: center;
+  }
+
+  
+
+  .main-bottom-down-content-bottom-content {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      margin-bottom: 8px;
+  }
+
+  .form-fields .err {
+      height: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: #e74c3c;
+  }
+
+
+
+  .main-bottom-down-content-bottom-content-three {
+      display: grid;
+      grid-template-columns: 33% 34% 33%;
+  }
+
+  .main-bottom-down-content-bottom-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 5px;
+  }
+
+  .main-bottom-down-content-bottom-button button {
+      height: 35px;
+      width: 25%;
+      outline: none;
+      color: white;
+      font-size: 18px;
+      font-weight: 500;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+      letter-spacing: 1px;
+      background: var(--green-color-one);
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .main-bottom-down-content-bottom-button button :hover {
+      background: var(--button-hover-green);
+  }
+
+ 
+
+  @media screen and (max-width: 1068px) {
+      .main-bottom-down-content-bottom {
+          overflow: scroll;
+      }
+
+      .main-bottom-down-content-bottom-one {
+          display: flex;
+          flex-direction: column;
+      }
+  }
+
+  @media screen and (max-width: 866px) {
+      .main-bottom-down-content-bottom-content {
+          display: flex;
+          flex-direction: column;
+      }
+
+      .main-bottom-down-content-bottom-content-three {
+          display: flex;
+          flex-direction: column;
+      }
+  }
+}

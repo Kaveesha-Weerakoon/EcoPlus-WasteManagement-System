@@ -18,9 +18,10 @@
       $this->discount_agentModel=$this->model('Discount_Agent');
       $this->collect_garbage_Model=$this->model('Collect_Garbage');
       $this->garbage_types_model = $this->model('Garbage_types');
+      $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
+
       $this->fine_model = $this->model('Fines');
       
-     
 
       if(!isLoggedIn('admin_id')){
         redirect('users/login');
@@ -478,9 +479,7 @@
         else{
           $this->view('admin/center_managers', $data);
         }
-
         //$this->view('admin/center_managers', $data);
-      
       }
       else{
 
@@ -510,10 +509,7 @@
         
         $this->view('admin/center_managers', $data);
 
-        
       }
-
-     
     }
 
     public function cm_personal_details_view($managerId){
@@ -541,15 +537,39 @@
     
       $this->view('admin/center_managers', $data);
 
-  }
+    }
 
+    public function get_customer_fined_requests($customer_id){
+      
+      $fined_requests= $this->customerModel->get_fined_requests($customer_id);
+      $customers = $this->customerModel->get_all();
+      $completed_requests=$this->Collect_Garbage_Model->get_complete_request_relevent_customer($customer_id);
+
+      $data = [
+        'customers' =>$customers,
+        'fined_requests'=>$fined_requests,
+        'delete_confirm'=>'',
+        'completed_requests'=>$completed_requests,
+        'fine'=>'True'
+      ];
+     
+      $this->view('admin/customer_main', $data);
+
+    }
+
+    public function blockuser($id){
+      $this->customerModel->block($id);
+      header("Location: " . URLROOT . "/admin/customers");        
+    }
 
     public function customers(){
       
       $customers = $this->customerModel->get_all();
       $data = [
         'customers' =>$customers,
-        'delete_confirm'=>''
+        'delete_confirm'=>'',
+        'fine'=>''
+
       ];
      
       $this->view('admin/customer_main', $data);

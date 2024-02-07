@@ -2,18 +2,18 @@
 <div class="Agent_Main">
     <div class="Agent_Editprofile">
         <div class="main">
-        <?php require APPROOT . '/views/credit_discount_agents/agent_sidebar/side_bar.php'; ?>
+            <?php require APPROOT . '/views/credit_discount_agents/agent_sidebar/side_bar.php'; ?>
             <div class="main-right">
                 <div class="main-right-top">
                     <div class="main-right-top-search">
                         <i class='bx bx-search-alt-2'></i>
                         <input type="text" id="searchInput" placeholder="Search">
                     </div>
-                    <div class="main-right-top-notification" id="notification">
+                    <div class="main-right-top-notification" style="visibility:hidden" id="notification">
                         <i class='bx bx-bell'></i>
                         <div class="dot"></div>
                     </div>
-                    <div id="notification_popup" class="notification_popup">
+                    <!-- <div id="notification_popup" class="notification_popup">
                         <h1>Notifications</h1>
                         <div class="notification">
                             <div class="notification-green-dot">
@@ -35,12 +35,13 @@
                         </div>
 
 
-                    </div>
+                    </div> -->
                     <div class="main-right-top-profile">
-                    <img src="<?php echo IMGROOT?>/img_upload/credit_discount_agent/<?php echo $_SESSION['agent_profile']?>" alt="">
+                        <img src="<?php echo IMGROOT?>/img_upload/credit_discount_agent/<?php echo $_SESSION['agent_profile']?>"
+                            alt="">
                         <div class="main-right-top-profile-cont">
-                        <h3><?php echo $_SESSION['agent_name']?></h3>
-                        <p>ID : D <?php echo $_SESSION['agent_id']?></p>
+                            <h3><?php echo $_SESSION['agent_name']?></h3>
+                            <p>ID : D <?php echo $_SESSION['agent_id']?></p>
                         </div>
                     </div>
 
@@ -124,7 +125,8 @@
                     <img src="<?php echo IMGROOT?>/check.png" alt="">
                     <h2>Success!!</h2>
                     <p><?php echo $data['success_message']?></p>
-                    <a href="<?php echo URLROOT?>/CreditDiscountsAgent/editprofile"><button type="button">OK</button></a>
+                    <a href="<?php echo URLROOT?>/CreditDiscountsAgent/editprofile"><button
+                            type="button">OK</button></a>
 
                 </div>
             </div>
@@ -133,4 +135,6 @@
         <script src="<?php echo JSROOT?>/Collector_Edit_Profile.js"> </script>
 
     </div>
-    <?php require APPROOT . '/views/inc/footer.php'; ?>
+</div>
+
+<?php require APPROOT . '/views/inc/footer.php'; ?>

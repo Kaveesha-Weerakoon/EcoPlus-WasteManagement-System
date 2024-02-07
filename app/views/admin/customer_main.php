@@ -80,10 +80,11 @@
                                             class='bx bx-info-circle' style="font-size: 29px"></i></a></td>
                                 <td>
                                     <?php if ($customer->blocked ==FALSE) : ?>
-                                    <i class="fa-solid fa-user-lock" style="font-size: 24px;"
+                                    <i class="fa-solid fa-user-lock" style="font-size: 20px;"
                                         onclick="block_user('<?php echo $customer->user_id; ?>')"></i>
                                     <?php else : ?>
-                                    <i class="fa-solid fa-unlock" style="font-size: 24px;" onclick=""></i>
+                                    <i class="fa-solid fa-unlock" style="font-size: 20px;"
+                                        onclick="un_block_user('<?php echo $customer->user_id; ?>')"></i>
                                     <?php endif; ?>
                                 </td>
 
@@ -212,8 +213,19 @@
                 <h2>Block the User?</h2>
                 <p>This action will Block the user </p>
                 <div class="btns">
-                    <a id="cancelLink"><button type="button" class="deletebtn">Confirm</button></a>
+                    <a id="cancelLink"><button type="button" class="deletebtn">Block</button></a>
                     <a id="close_cancel"><button type="button" class="cancelbtn">Cancel</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="delete_confirm2" id="cancel_confirm2">
+            <div class="popup" id="popup">
+                <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
+                <h2>UnBlock the User?</h2>
+                <p>This action will UnBlock the user </p>
+                <div class="btns">
+                    <a id="unblockLink"><button type="button" class="deletebtn">UnBlock</button></a>
+                    <a id="close_unblock"><button type="button" class="cancelbtn">Cancel</button></a>
                 </div>
             </div>
         </div>
@@ -248,12 +260,27 @@ function block_user(id) {
     document.getElementById('cancel_confirm').classList.add('active');
 }
 
+function un_block_user(id) {
+    var userId = id;
+    var newURL = "<?php echo URLROOT?>/admin/unblockuser/" + userId;
+    document.getElementById('unblockLink').href = newURL;
+    document.getElementById('overlay').style.display = "flex";
+    document.getElementById('cancel_confirm2').classList.add('active');
+}
+
 document.addEventListener("DOMContentLoaded", function() {
 
     const close_cancel = document.getElementById("close_cancel");
+    const close_unblock = document.getElementById("close_unblock");
 
     close_cancel.addEventListener("click", function() {
         document.getElementById('cancel_confirm').classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+    });
+
+
+    close_unblock.addEventListener("click", function() {
+        document.getElementById('cancel_confirm2').classList.remove('active');
         document.getElementById('overlay').style.display = "none";
     });
 

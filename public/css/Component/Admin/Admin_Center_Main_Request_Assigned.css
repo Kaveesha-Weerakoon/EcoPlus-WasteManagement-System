@@ -301,7 +301,7 @@
         margin-bottom: 15px;
         height: 4px;
         width: 67px;
-        background: #1B6652;
+        background: var(--green-color-one);
 
     }
 

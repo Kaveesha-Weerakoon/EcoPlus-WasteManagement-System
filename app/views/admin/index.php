@@ -61,6 +61,7 @@
                             </div>
                         </div>
                         <div class="main-right-bottom-one-right">
+                            <button class="fine_button" onclick="open_fine_set()" >Set fine</button>
 
                             <!-- <canvas id="myChart" width="688" height="300"></canvas> -->
                         </div>
@@ -145,6 +146,59 @@
                 </div>
             </div>
 
+            <div class="fine_set_popup" id="fine_popup">
+                <form action="<?php echo URLROOT;?>/admin/set_fine" method="post">
+                    <div class="fine_popup_form">
+                        <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="fine_popup_form_close"
+                            id="fine_popup_form_close">
+                        <div class="fine_popup_form_top">
+                            <div class="set_fine_topic">Set Fine </div>
+                        
+                        </div>
+
+                        <div class="fine-pop-form-content-container">
+                            <div class="fine-pop-form-content">
+                                <span>Minimum Collect</span>
+                                <div class="input-box">
+                                    <input type="text" name="minimum_collect" id="" value="<?php echo $data['minimum_collect']?>" >
+                                    <span class="error-div" style="color:red">
+                                        <?php echo $data['minimum_collect_err']?>
+                                        
+                                    </span>
+                                </div>
+                                
+                            </div>
+                            <div class="fine-pop-form-content">
+                                <span>No Response</span>
+                                <div class="input-box">
+                                    <input type="text" name="no_response" id="" value="<?php echo $data['no_response']?>" >
+                                    <span class="error-div" style="color:red">
+                                        <?php echo $data['no_response_err']?>
+                                        
+                                    </span>
+                                </div>
+                                
+                            </div>
+                            <div class="fine-pop-form-content">
+                                <span>Cancelling assigned</span>
+                                <div class="input-box">
+                                    <input type="text" name="cancelling_assigned" id="" value="<?php echo $data['cancelling_assigned']?>" >
+                                    <span class="error-div" style="color:red">
+                                        <?php echo $data['cancelling_assigned_err']?>
+                                        
+                                    </span>
+                                </div>
+                                
+                            </div>
+                            <button type="submit" class="set_fine_button">Set</button>
+                        
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+
+           
 
             <!-- <div class="pop-eco_credits" id="pop-eco_credits">
                 <form class="Eco_Credits-main" method="post" action="<?php echo URLROOT;?>/admin/pop_eco_credit">
@@ -233,6 +287,13 @@ function redirect_discountAgents() {
     var linkUrl = "<?php echo URLROOT?>/admin/discount_agents"; // Replace with your desired URL
 
     window.location.href = linkUrl;
+
+}
+
+function open_fine_set(){
+    var finePop = document.getElementById('fine_popup');
+    finePop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
 
 }
 
@@ -412,6 +473,18 @@ function initMap() {
         });
     });
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+        const close_request_details = document.getElementById("fine_popup_form_close");
+
+        close_request_details.addEventListener("click", function() {
+            //document.getElementById('request-details-popup-box').style.display = "none";
+            const request_details = document.getElementById("fine_popup");
+            request_details.classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
+        });
+
+    });
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

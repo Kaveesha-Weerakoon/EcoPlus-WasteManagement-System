@@ -71,110 +71,6 @@
         outline: none;
     }
 
-    .main-right-top-notification {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 30%;
-    }
-
-    .dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: #F13E3E;
-        margin-top: -14px;
-        margin-left: -12px;
-    }
-
-    .main-right-top-notification i {
-        font-size: 29px;
-        cursor: pointer;
-    }
-
-    .notification_popup {
-        height: 0;
-        position: absolute;
-        top: 9%;
-        right: 11%;
-        background-color: var(--background-color-main);
-        border-radius: 10px;
-        padding: 0;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: height 0.6s ease-in;
-        width: 18%;
-        visibility: hidden;
-        opacity: 0;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        overflow: scroll;
-        border: 1px solid #dcdde1;
-    }
-
-    .notification_popup h1 {
-        font-size: 19px;
-        letter-spacing: 0.001rem;
-        margin-bottom: 13px;
-        margin-top: 5px;
-        margin-left: 8px;
-    }
-
-    .notification_popup.active {
-        height: 200px;
-        padding: 10px;
-        visibility: visible;
-        opacity: 1;
-    }
-
-    .notification {
-        height: 43px !important;
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        padding-left: 10px;
-        font-size: 14px;
-        cursor: pointer;
-    }
-
-    .notification:hover {
-        background-color: var(--notification-hover);
-    }
-
-    .notification-green-dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: var(--green-color-one);
-        margin-right: 10px;
-    }
-
-    .main-right-top-profile {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 40px;
-    }
-
-    .main-right-top-profile img {
-        width: 50px;
-        height: 50px;
-        margin-right: 15px;
-        border-radius: 10px;
-    }
-
-    .main-right-top-profile-cont {
-        margin-top: 7px;
-    }
-
-    .main-right-top-profile-cont h3 {
-        font-size: 18px;
-        letter-spacing: 0.03rem;
-    }
-
-    .main-right-top-profile-cont p {
-        font-size: 14px;
-    }
 
     .main-right-top-two {
         height: 50px;
@@ -237,103 +133,7 @@
         border-radius: 50%;
     }
 
-    /*Delete confirm popup*/
-    .delete_confirm {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.1);
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
 
-    }
-
-    .delete_confirm {
-
-        .delete_confirm .popup {
-            width: 400px;
-            background: white;
-            border-radius: 6px;
-            top: 0;
-            text-align: center;
-            padding: 0 30px 30px;
-            color: var(--main-text-color);
-            transition: transform 0.4s, top 0.4s;
-        }
-
-        .delete_confirm .popup a {
-            width: auto;
-        }
-
-        .delete_confirm .open-popup {
-            visibility: visible;
-            top: 50%;
-        }
-
-        .delete_confirm .popup img {
-            width: 100px;
-            margin-top: 35px;
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .delete_confirm .popup h2 {
-            font-size: 23px;
-            font-weight: 600;
-            margin: 10px 0 10px;
-        }
-
-        .delete_confirm .btns {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .delete_confirm .deletebtn {
-            width: 150px;
-            margin-top: 30px;
-            margin-right: 20px;
-            padding: 10px 0;
-            background: rgb(220, 39, 39);
-            color: white;
-            border: 0;
-            outline: none;
-            font-size: 18px;
-            border-radius: 4px;
-            cursor: pointer;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .delete_confirm .deletebtn:hover {
-            background: #c62323;
-            ;
-        }
-
-        .delete_confirm .cancelbtn {
-            width: 150px;
-            margin-top: 30px;
-            padding: 10px 0;
-            background: #bab3b3;
-            color: white;
-            border: 0;
-            outline: none;
-            font-size: 18px;
-            border-radius: 4px;
-            cursor: pointer;
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .delete_confirm .cancelbtn:hover {
-            background: #a7a1a1;
-        }
-    }
 
     /*request details*/
     .request-details-pop {
@@ -687,6 +487,104 @@
         }
     }
 
+    /*Delete confirm popup*/
+    .delete_confirm {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+
+    }
+
+    .delete_confirm .popup {
+        width: 400px;
+        background: white;
+        border-radius: 6px;
+        top: 0;
+        text-align: center;
+        padding: 0 30px 30px;
+        color: var(--main-text-color);
+        transition: transform 0.4s, top 0.4s;
+    }
+
+
+
+    .delete_confirm .popup a {
+        width: auto;
+    }
+
+    .delete_confirm .open-popup {
+        visibility: visible;
+        top: 50%;
+    }
+
+    .delete_confirm .popup img {
+        width: 100px;
+        margin-top: 35px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .delete_confirm .popup h2 {
+        font-size: 23px;
+        font-weight: 600;
+        margin: 10px 0 10px;
+    }
+
+    .delete_confirm .btns {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .delete_confirm .deletebtn {
+        width: 150px;
+        margin-top: 30px;
+        margin-right: 20px;
+        padding: 10px 0;
+        background: rgb(220, 39, 39);
+        color: white;
+        border: 0;
+        outline: none;
+        font-size: 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .delete_confirm .deletebtn:hover {
+        background: #c62323;
+        ;
+    }
+
+    .delete_confirm .cancelbtn {
+        width: 150px;
+        margin-top: 30px;
+        padding: 10px 0;
+        background: #bab3b3;
+        color: white;
+        border: 0;
+        outline: none;
+        font-size: 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .delete_confirm .cancelbtn:hover {
+        background: #a7a1a1;
+    }
+
+
     @media screen and (max-width: 1178px) {
         .image2 {
             display: none;
@@ -713,13 +611,10 @@
         .main-right-top-one-content {
             width: 250px;
             margin-left: 1%;
-
         }
 
         .table td {
-
             font-size: 12px;
-
         }
 
         .table-header {
@@ -729,10 +624,7 @@
         .table-row img {
             width: 20px;
             height: 20px;
-
         }
-
-
     }
 
     @media screen and (max-width:862px) {

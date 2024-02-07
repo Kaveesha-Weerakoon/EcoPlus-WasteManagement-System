@@ -145,7 +145,7 @@
                         <div class="main-right-bottom-three-right">
                             <div class="main-right-bottom-three-right-left">
                                 <h1>Set Fine</h1>
-                                <i class='bx bx-coin'></i>
+                                <i class="fa-solid fa-file-invoice-dollar" style="font-size: 45px;"></i>
                                 <p>Set fine for each offence by customer</p>
                                 <button class="fine_button" onclick="open_fine_set()" >Set fine</button>
                             </div>

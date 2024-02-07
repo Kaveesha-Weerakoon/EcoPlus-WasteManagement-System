@@ -63,13 +63,13 @@
 
       ];
 
-      // foreach($fine_details as $fine ){
-      //   if($fine){
-      //     $fine_type = strtolower($fine->type);
-      //     $data["{$fine_type}"] = $fine->fine_amount;
-      //     $data["{$fine_type}_err"] ='';
-      //   }
-      // }
+      foreach($fine_details as $fine ){
+        if($fine){
+          $fine_type = strtolower($fine->type);
+          $data["{$fine_type}"] = $fine->fine_amount;
+          $data["{$fine_type}_err"] ='';
+        }
+      }
 
       //var_dump($data);
 

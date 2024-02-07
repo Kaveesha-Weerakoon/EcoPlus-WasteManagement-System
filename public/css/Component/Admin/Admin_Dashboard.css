@@ -276,14 +276,68 @@
         border-radius: 10px;
         background-color: var(--background-color-main);
         box-shadow: var(--box-shadow);
-        display: flex;
+        display: grid;
+        grid-template-columns: 50% 50%;
         color: var(--main-text-color);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
         padding-bottom: 1%;
         padding-top: 1%;
         box-sizing: border-box;
+    }
+
+    .main-right-bottom-one-right .left{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+    }
+
+    .main-right-bottom-one-right .left h1 {
+        font-size: 18px;
+        margin-bottom: 3%;
+        font-size: 18px;
+        margin-top: 5%;
+        width: 160px;
+        text-align: center;
+    }
+
+    .main-right-bottom-one-right .left .bx {
+        font-size: 70px;
+    }
+
+    .main-right-bottom-one-right .right {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .main-right-bottom-one-right .right .bx-dollar-circle {
+        font-size: 70px;
+    }
+
+    .main-right-bottom-one-right .right h1 {
+        font-size: 18px;
+        margin-bottom: 3%;
+        font-size: 18px;
+        margin-top: 5%;
+        width: 160px;
+        text-align: center;
+    }
+
+    .main-right-bottom-one-right .right button {
+        background-color: var(--green-color-one);
+        border: none;
+        border-radius: 10px;
+        width: 50%;
+        /* height: 15%; */
+        height: 33px;
+        font-size: 15px;
+        color: var(--background-color-main);
+        cursor: pointer;
+        letter-spacing: 0.03rem;
+        font-weight: bolder;
+        transition: background-color 0.6s ease-in;
+        margin-top: 4%;
     }
 
     .main-right-bottom-two {
@@ -362,9 +416,11 @@
         border-radius: 10px;
         background-color: var(--background-color-main);
         box-shadow: var(--box-shadow);
+        padding: 15px;
+        box-sizing: border-box;
     }
 
-    .main-right-bottom-three-left h1 {
+    /* .main-right-bottom-three-left h1 {
         font-size: 18px;
         margin-bottom: 4%;
         padding-left: 7%;
@@ -398,7 +454,7 @@
         width: 100px;
         color: var(--green-color-one);
         width: 150px;
-    }
+    } */
 
     .main-right-bottom-three-right {
         width: 50%;

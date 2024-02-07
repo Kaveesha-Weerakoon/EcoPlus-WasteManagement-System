@@ -50,29 +50,29 @@
                     <div class="main-right-bottom-one">
                         <div class="main-right-bottom-one-left">
                             <div class="left">
-                                <h1>Rupee Value</h1>
-                                <h3>per </h3>
-                                <p>Eco credit</p>
-                                <button>Change Value</button>
+                                <h1>Garbage Types</h1>
+                                <h3>6</h3>
+                                <p>Last update</p>
+                                <button onclick="redirect_garbage_types()" >View</button>
                             </div>
                             <div class="right">
-                                <h1>Rs <span class="main-credit"> 2.62</span> </h1>
-                                <h3>1 ECO CREDIT</h3>
+                                <h1><span class="main-credit"> 200.23</span> </h1>
+                                <h3>TOTAL CREDITS</h3>
                             </div>
                         </div>
 
                         <div class="main-right-bottom-one-right">
                             <div class="left">
-                                <h1>Set Fine</h1>
+                                <!-- <h1>Set Fine</h1>
                                 <i class='bx bx-coin'></i>
-                                <button class="fine_button" onclick="open_fine_set()" >Set fine</button>
+                                <button class="fine_button" onclick="open_fine_set()" >Set fine</button> -->
                             </div>
                             <div class="right">
-                                <h1>Credits per Waste Qunatity</h1>
+                                <!-- <h1>Garbage Types</h1>
                                 <i class='bx bx-dollar-circle'></i> 
                                 <button onclick="redirect_garbage_types()">
                                     Change
-                                </button>
+                                </button> -->
                             </div>
                             
 
@@ -144,10 +144,10 @@
                         </div>
                         <div class="main-right-bottom-three-right">
                             <div class="main-right-bottom-three-right-left">
-                                <!-- <h1>Credits per Waste Qunatity</h1>
-                                <i class='bx bx-dollar-circle'></i> <button onclick="redirect_garbage_types()">
-                                    Change
-                                </button> -->
+                                <h1>Set Fine</h1>
+                                <i class='bx bx-coin'></i>
+                                <p>Set fine for each offence by customer</p>
+                                <button class="fine_button" onclick="open_fine_set()" >Set fine</button>
                             </div>
                             <div class="main-right-bottom-three-right-right">
                                 <h1>Centers</h1>

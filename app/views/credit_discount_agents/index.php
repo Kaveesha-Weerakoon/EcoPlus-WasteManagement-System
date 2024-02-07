@@ -1,53 +1,57 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Agent_Main">
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
-        async defer>
-    </script>
-    <div class="Creit_Discount_Agent_Main_Dashboard ">
-        <div class="main">
-            <?php require APPROOT . '/views/credit_discount_agents/agent_sidebar/side_bar.php'; ?>
-            <div class="main-right">
-                <div class="main-right-top">
-                    <div class="main-right-top-search">
-                        <i class='bx bx-search-alt-2'></i>
-                        <input type="text" placeholder="Search">
-                    </div>
-                    <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <div class="dot"></div>
-                    </div>
-                    <div id="notification_popup" class="notification_popup">
-                        <h1>Notifications</h1>
-                        <div class="notification">
-                            <div class="notification-green-dot">
+    <div class="Agent_Dashboard">
 
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
+            async defer>
+        </script>
+        <div class="Creit_Discount_Agent_Main_Dashboard ">
+            <div class="main">
+                <?php require APPROOT . '/views/credit_discount_agents/agent_sidebar/side_bar.php'; ?>
+                <div class="main-right">
+                    <div class="main-right-top">
+                        <div class="main-right-top-search" style="visibility: hidden;">
+                            <i class='bx bx-search-alt-2'></i>
+                            <input type="text" placeholder="Search">
+                        </div>
+                        <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
+                            <i class='bx bx-bell'></i>
+                            <div class="dot"></div>
+                        </div>
+                        <div id="notification_popup" class="notification_popup">
+                            <h1>Notifications</h1>
+                            <div class="notification">
+                                <div class="notification-green-dot">
+
+                                </div>
+                                Request 1232 Has been Cancelled
                             </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
+                            <div class="notification">
+                                <div class="notification-green-dot">
 
+                                </div>
+                                Request 1232 Has been Assigned
                             </div>
-                            Request 1232 Has been Assigned
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
+                            <div class="notification">
+                                <div class="notification-green-dot">
 
+                                </div>
+                                Request 1232 Has been Cancelled
                             </div>
-                            Request 1232 Has been Cancelled
-                        </div>
 
 
-                    </div>
-                    <div class="main-right-top-profile">
-                    <img src="<?php echo IMGROOT?>/img_upload/credit_discount_agent/<?php echo $_SESSION['agent_profile']?>" alt="">
-                        <div class="main-right-top-profile-cont">
-                        <h3><?php echo $_SESSION['agent_name']?></h3>
-                        <p>ID : D <?php echo $_SESSION['agent_id']?></p>
+                        </div>
+                        <div class="main-right-top-profile">
+                            <img src="<?php echo IMGROOT?>/img_upload/credit_discount_agent/<?php echo $_SESSION['agent_profile']?>"
+                                alt="">
+                            <div class="main-right-top-profile-cont">
+                                <h3><?php echo $_SESSION['agent_name']?></h3>
+                                <p>ID : D <?php echo $_SESSION['agent_id']?></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--<div class="main-right-bottom">
+                    <!--<div class="main-right-bottom">
                     <div class="main-right-bottom-one">
                         <div class="main-right-bottom-one-left">
                             <div class="left">
@@ -136,10 +140,10 @@
 
                     </div>
                 </div> -->
-            </div>
+                </div>
 
 
-            <!--<div class="pop-eco_credits" id="pop-eco_credits">
+                <!--<div class="pop-eco_credits" id="pop-eco_credits">
                 <form class="Eco_Credits-main" method="post" action="<?php echo URLROOT;?>/admin/pop_eco_credit">
                     <div class="Eco_Credits-main-top">
                         <h1> Eco Credits Per Kilogram</h1>
@@ -198,6 +202,7 @@
             </div>
             <div class="overlay" id="overlay">-->
 
+            </div>
         </div>
     </div>
 </div>

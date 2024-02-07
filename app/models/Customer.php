@@ -52,7 +52,18 @@
       } catch (PDOException $e) {
           die($e->getMessage());
       }
-  }
+  } 
+  
+  public function unblock($id){
+    try {
+        $this->db->query('UPDATE customers SET blocked = :value WHERE user_id = :id');
+        $this->db->bind(':value', FALSE); // You need to provide a value for ":value"
+        $this->db->bind(':id', $id);
+        $this->db->execute();
+    } catch (PDOException $e) {
+        die($e->getMessage());
+    }
+}
 
 
 

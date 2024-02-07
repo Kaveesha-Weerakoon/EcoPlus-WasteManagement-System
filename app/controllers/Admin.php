@@ -63,13 +63,13 @@
 
       ];
 
-      foreach($fine_details as $fine ){
-        if($fine){
-          $fine_type = strtolower($fine->type);
-          $data["{$fine_type}"] = $fine->fine_amount;
-          $data["{$fine_type}_err"] ='';
-        }
-      }
+      // foreach($fine_details as $fine ){
+      //   if($fine){
+      //     $fine_type = strtolower($fine->type);
+      //     $data["{$fine_type}"] = $fine->fine_amount;
+      //     $data["{$fine_type}_err"] ='';
+      //   }
+      // }
 
       //var_dump($data);
 
@@ -559,6 +559,12 @@
 
     public function blockuser($id){
       $this->customerModel->block($id);
+      header("Location: " . URLROOT . "/admin/customers");        
+    }
+    
+    public function unblockuser($id){
+
+      $this->customerModel->unblock($id);
       header("Location: " . URLROOT . "/admin/customers");        
     }
 

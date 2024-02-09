@@ -50,18 +50,31 @@
                     <div class="main-right-bottom-one">
                         <div class="main-right-bottom-one-left">
                             <div class="left">
-                                <h1>Rupee Value</h1>
-                                <h3>per </h3>
-                                <p>Eco credit</p>
-                                <button>Change Value</button>
+                                <h1>Garbage Types</h1>
+                                <h3>6</h3>
+                                <p>Last update</p>
+                                <button onclick="redirect_garbage_types()" >View</button>
                             </div>
                             <div class="right">
-                                <h1>Rs <span class="main-credit"> 2.62</span> </h1>
-                                <h3>1 ECO CREDIT</h3>
+                                <h1><span class="main-credit"> 200.23</span> </h1>
+                                <h3>TOTAL CREDITS</h3>
                             </div>
                         </div>
+
                         <div class="main-right-bottom-one-right">
-                            <button class="fine_button" onclick="open_fine_set()" >Set fine</button>
+                            <div class="left">
+                                <!-- <h1>Set Fine</h1>
+                                <i class='bx bx-coin'></i>
+                                <button class="fine_button" onclick="open_fine_set()" >Set fine</button> -->
+                            </div>
+                            <div class="right">
+                                <!-- <h1>Garbage Types</h1>
+                                <i class='bx bx-dollar-circle'></i> 
+                                <button onclick="redirect_garbage_types()">
+                                    Change
+                                </button> -->
+                            </div>
+                            
 
                             <!-- <canvas id="myChart" width="688" height="300"></canvas> -->
                         </div>
@@ -110,7 +123,8 @@
                     </div>
                     <div class="main-right-bottom-three">
                         <div class="main-right-bottom-three-left">
-                            <h1>Recent Transactions</h1>
+                            <canvas id="myChart" width="600" height="250"></canvas>
+                            <!-- <h1>Recent Transactions</h1>
                             <div class="main-right-bottom-three-left-cont">
                                 <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
                                 <h3>Dayana</h3>
@@ -125,15 +139,15 @@
                                 <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
                                 <h3>Samantha</h3>
                                 <h2 style="color: #F13E3E;">-$ 12.21</h2>
-                            </div>
+                            </div> -->
                             <!-- <div class="map" id="map"></div> -->
                         </div>
                         <div class="main-right-bottom-three-right">
                             <div class="main-right-bottom-three-right-left">
-                                <h1>Credits per Waste Qunatity</h1>
-                                <i class='bx bx-dollar-circle'></i> <button onclick="redirect_garbage_types()">
-                                    Change
-                                </button>
+                                <h1>Set Fine</h1>
+                                <i class="fa-solid fa-file-invoice-dollar" style="font-size: 45px;"></i>
+                                <p>Set fine for each offence by customer</p>
+                                <button class="fine_button" onclick="open_fine_set()" >Set fine</button>
                             </div>
                             <div class="main-right-bottom-three-right-right">
                                 <h1>Centers</h1>
@@ -268,6 +282,10 @@
 
 
 <script>
+
+var color = "#47b076";
+var textColor = "#414143";
+
 function redirect_customers() {
     var linkUrl = "<?php echo URLROOT?>/admin/customers"; // Replace with your desired URL
     window.location.href = linkUrl;
@@ -473,6 +491,77 @@ function initMap() {
         });
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, config);
+
+    const chartContainer = document.getElementById('chart');
+    actions.forEach(action => {
+        const button = document.createElement('button');
+        button.textContent = action.name;
+        button.addEventListener('click', () => action.handler(myChart));
+        chartContainer.appendChild(button);
+    });
+
+    // Call the function to create or update the chart
+});
+
+function createOrUpdateChart(color, textColor) {
+    // Define the static data for the chart
+    const staticData = {
+        current_plastic: 100,
+        current_polythene: 80,
+        current_metal: 120,
+        current_glass: 90,
+        current_paper: 110,
+        current_electronic: 70
+    };
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Plastic', 'Polythene', 'Metal', 'Glass', 'Paper', 'Electronic'],
+            datasets: [{
+                label: 'Kilograms',
+                data: [staticData.current_plastic, staticData.current_polythene, staticData.current_metal, staticData.current_glass, staticData.current_paper, staticData.current_electronic],
+                backgroundColor: color,
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: { font: { size: 14 } },
+                    barPercentage: 0.5,
+                    categoryPercentage: 0.3
+                },
+                y: {
+                    beginAtZero: true,
+                    suggestedMax: Math.max(...Object.values(staticData)) + 1,
+                    grid: { display: false }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Current Garbage Stock',
+                    color: textColor,
+                    font: { size: 18 },
+                    padding: { bottom: 25 }
+                }
+            },
+            elements: { bar: { borderRadius: 10 } },
+            animation: { duration: 700, easing: 'easeIn' }
+        }
+    });
+}
+
+createOrUpdateChart(color, textColor); 
+
 
 document.addEventListener("DOMContentLoaded", function() {
         const close_request_details = document.getElementById("fine_popup_form_close");

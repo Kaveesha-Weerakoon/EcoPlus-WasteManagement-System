@@ -81,7 +81,7 @@
            } else {
              $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/credit_discount_agent/' .$agent_by_id->image;    
             if (updateImage($old_image_path, $_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/credit_discount_agent/')) {
-              $this->collectorModel->editprofile_withimg($data);
+              $this->discount_agentModel->editprofile_withimg($data);
               $data['success_message']="Profile Details Updated Successfully";
               $data['change_pw_success']='True';
               $data['profile_err'] = '';

@@ -1,8 +1,8 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Admin_Main">
     <div class="Admin_Center_Main">
-        <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initMap" async defer>
-        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initMaps" async
+            defer></script>
         <div class="main">
             <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
 
@@ -21,29 +21,7 @@
                         <i class='bx bx-bell'></i>
                         <div class="dot"></div>
                     </div>
-                    <div id="notification_popup" class="notification_popup">
-                        <h1>Notifications</h1>
-                        <div class="notification">
-                            <div class="notification-green-dot">
 
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Assigned
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-
-
-                    </div>
                     <div class="main-right-top-profile">
                         <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
                         <div class="main-right-top-profile-cont">
@@ -54,15 +32,6 @@
 
                 </div>
 
-                <!-- <div class="main-top">
-            <a href="<?php echo URLROOT?>/admin/center">
-              <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="" />
-            </a>
-            <div class="main-top-component">
-              <p>Admin</p>
-              <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="" />
-            </div>
-          </div> -->
                 <div class="main-bottom">
                     <div class="header-title-wrapper">
                         <div class="header-title">
@@ -206,15 +175,13 @@
                                 <h3 class="section-subhead">Center Location</h3>
                                 <div class="center-map-container">
                                     <div class="center-location-map-container">
-                                        <!-- <img src="<?php echo IMGROOT?>/center-location.png" alt=""> -->
                                     </div>
-
+                                    <div class="change-location">
+                                        <button onclick="changeCenterLocation()">Change Location</button>
+                                    </div>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
                 </div>
 
@@ -248,46 +215,125 @@
             </div>
         </div>
         <?php endif; ?>
+        <div class="overlay" id="overlay">
+
+        </div>
+
+        <form class="change_center_locationpop" id="change_location"
+            action="<?php echo URLROOT; ?>/admin/center_main/<?php echo $data['center_id']?>/<?php echo $data['region']?>"
+            method="post">
+            <div class="content">
+                <h4>Change Center Location</h4>
+                <div class="content-map" id="center-location-change">
+
+                </div>
+                <div class="button-container">
+                    <button type="button" class="change" onclick="getLocation()">Change</button>
+                    <button type="button" class="cancel" onclick="closeCenterLocation()">Cancel</button>
+                </div>
+                <input type="hidden" id="latittude" value=" <?php echo $data['lattitude']?>" name="latittude">
+                <input type="hidden" id="longitude" value=" <?php echo $data['longitude']?>" name="longitude"> <input
+                    type="hidden" id="longitude">
+                <input type="hidden" id="radius" value=" <?php echo $data['radius']?>" name="radius">
+        </form>
     </div>
+</div>
 
 </div>
 <script>
-function initMap(latitude, longitude) {
+var map;
+var circle;
+
+function initMaps(latitude = <?php echo $data['center']->lat; ?>, longitude = <?php echo $data['center']->longi?>) {
     var mapCenter = {
+        lat: <?php echo $data['center']->lat; ?>,
+        lng: <?php echo $data['center']->longi?>
+    };
+
+    // Initialize the first map
+    var map = new google.maps.Map(document.querySelector('.center-location-map-container'), {
+        center: mapCenter,
+        zoom: 8
+    });
+
+    // Add a marker to the first map
+    var marker = new google.maps.Marker({
+        position: mapCenter,
+        map: map,
+        title: 'Marked Location'
+    });
+
+    // Set the default latitude and longitude
+    var defaultLatLng = {
         lat: latitude,
         lng: longitude
     };
 
-    var map = new google.maps.Map(document.querySelector('.center-location-map-container'), {
-        center: mapCenter,
-        zoom: 10
+    // Add a circle to the first map
+    var circle2 = new google.maps.Circle({
+        map: map,
+        center: defaultLatLng,
+        radius: <?php echo $data['center']->radius?>,
+        fillColor: '#47b076',
+        fillOpacity: 0.3,
+        strokeColor: '#47b076',
+        strokeOpacity: 1,
+        strokeWeight: 2
     });
 
-    var marker = new google.maps.Marker({
-        position: {
-            lat: parseFloat(latitude),
-            lng: parseFloat(longitude)
-        },
-        map: map,
-        title: 'Marked Location'
+    // Initialize the second map
+    var map2 = new google.maps.Map(document.getElementById('center-location-change'), {
+        center: defaultLatLng,
+        zoom: 9
+    });
+
+    // Add a circle to the second map
+    circle = new google.maps.Circle({
+        map: map2,
+        center: defaultLatLng,
+        radius: <?php echo $data['center']->radius?>,
+        fillColor: '#47b076',
+        fillOpacity: 0.3,
+        strokeColor: '#47b076',
+        strokeOpacity: 1,
+        strokeWeight: 2,
+        editable: true, // Make the circle editable
+        draggable: true // Make the circle draggable
+    });
+
+    // Event listener for radius change
+    google.maps.event.addListener(circle, 'radius_changed', function() {
+        console.log("Radius changed: " + circle.getCenter().lat());
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
 
-    var latitude = <?php echo $data['center']->lat; ?>;
-    var longitude = <?php echo $data['center']->longi; ?>;
+function changeCenterLocation() {
+    var change_location = document.getElementById('change_location');
+    change_location.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+}
 
-    if (typeof google === 'object' && typeof google.maps === 'object') {
-        // If loaded, call initMap immediately
-        initMap(latitude, longitude);
-    } else {
-        // If not loaded, set a callback to initMap when the API is loaded
-        window.initMap = function() {
-            initMap(latitude, longitude);
-        };
-    }
-});
+function closeCenterLocation() {
+    var change_location = document.getElementById('change_location');
+    change_location.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
+}
+
+function getLocation() {
+    var currentLatLng = {
+        lat: circle.getCenter().lat(),
+        lng: circle.getCenter().lng()
+    };
+    console.log('Selected Location:', currentLatLng);
+
+    document.getElementById('latittude').value = currentLatLng.lat;
+    document.getElementById('longitude').value = currentLatLng.lng;
+    document.getElementById('radius').value = circle.getRadius(); // Log radius information
+
+    // Submit the form
+    document.getElementById('change_location').submit();
+}
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

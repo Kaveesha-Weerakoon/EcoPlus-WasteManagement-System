@@ -65,84 +65,6 @@
     outline: none;
   }
 
-  .main-right-top-notification {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 30%;
-  }
-
-  .dot {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background-color: #F13E3E;
-    margin-top: -14px;
-    margin-left: -12px;
-  }
-
-  .main-right-top-notification i {
-    font-size: 29px;
-    cursor: pointer;
-  }
-
-  .notification_popup {
-    height: 0;
-    position: absolute;
-    top: 9%;
-    right: 11%;
-    background-color: var(--background-color-main);
-    border-radius: 10px;
-    padding: 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: height 0.6s ease-in;
-    width: 18%;
-    visibility: hidden;
-    opacity: 0;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    overflow: scroll;
-    border: 1px solid #dcdde1;
-  }
-
-  .notification_popup h1 {
-    font-size: 19px;
-    letter-spacing: 0.001rem;
-    margin-bottom: 13px;
-    margin-top: 5px;
-    margin-left: 8px;
-  }
-
-  .notification_popup.active {
-    height: 200px;
-    padding: 10px;
-    visibility: visible;
-    opacity: 1;
-  }
-
-  .notification {
-    height: 43px !important;
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-
-  .notification:hover {
-    background-color: var(--notification-hover);
-  }
-
-  .notification-green-dot {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background-color: var(--green-color-one);
-    margin-right: 10px;
-  }
-
   .main-right-top-profile {
     display: flex;
     align-items: center;
@@ -193,7 +115,6 @@
   }
 
   .main-right-top-back-button i:hover {
-
     color: #1ca557;
   }
 
@@ -268,7 +189,7 @@
   .analytic:hover {
     background-color: #e4ffe2;
     box-shadow: rgba(17, 17, 26, 0.2) 4px 4px 20px;
-    
+
   }
 
   .analytic-info h3 {
@@ -288,36 +209,9 @@
     height: 3rem;
   }
 
-  /* .first-analytic .analytic-icon {
-    background: #dce5ff;
-    width: 5rem;
-    height: 5rem;
-  }
-
-  .second-analytic .analytic-icon {
-    background: #FF00001A;
-    width: 5rem;
-    height: 5rem;
-  }
-
-  .third-analytic .analytic-icon {
-    background: #ebf7f5;
-    width: 5rem;
-    height: 5rem;
-  }
-
-  .fourth-analytic .analytic-icon {
-    background: #f4e7e7;
-    width: 5rem;
-    height: 5rem;
-  } */
-
-  .analytic-icon i{
+  .analytic-icon i {
     font-size: 36px;
     color: var(--main-text-color);
-   
-    /* width: 5rem;
-    height: 5rem; */
   }
 
   .analytic-icon {
@@ -363,7 +257,6 @@
 
   .center-manager-content {
     background: #fff;
-    /* box-shadow: rgba(17, 17, 26, 0.1) 2px 2px 16px; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     padding: 1rem 2rem;
@@ -508,18 +401,13 @@
   }
 
   /* Animation */
-
-
   .graph-container {
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 15px;
     height: 315px;
-    /* border: 1px solid red; */
-    /* box-shadow: rgba(17, 17, 26, 0.1) 2px 2px 16px; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-
   }
 
 
@@ -573,13 +461,130 @@
     background: #e5fa70;
   }
 
-  .center-location-map-container {
-    width: 300px;
+  .center-map-container {
+    background-color: var(--background-color-main);
+    width: 100%;
     height: 315px;
-    border-radius: 15px;
-    /* box-shadow: rgba(17, 17, 26, 0.1) 2px 2px 16px; */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
 
+  .center-location-map-container {
+    width: 270px;
+    height: 255px;
+    border-radius: 15px !important;
+  }
+
+  .location-map-card button {
+    width: 175px;
+    height: 33px;
+    margin-top: 10px;
+    outline: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    letter-spacing: 1px;
+    background: var(--green-color-one);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  }
+
+
+  .change-location {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    display: none;
+  }
+
+  .change_center_locationpop {
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 4;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+    background-color: var(--main-text-color);
+  }
+
+  .change_center_locationpop.active {
+    transform: translate(-50%, -50%) scale(1);
+
+  }
+
+  .change_center_locationpop .content {
+    width: 700px;
+    height: 500px;
+    background-color: var(--background-color-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .change_center_locationpop h4 {
+    margin-bottom: 12px;
+    font-size: 21px !important;
+  }
+
+  .change_center_locationpop .content-map {
+    width: 80%;
+    height: 75%;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+    box-sizing: border-box;
+  }
+
+  .change_center_locationpop .button-container {
+    display: flex;
+    flex-direction: row;
+    width: 65%;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+
+  .change_center_locationpop button {
+    padding: 10px 10px;
+    width: 150px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .change_center_locationpop .change {
+    background-color: #3498db;
+    color: #fff;
+  }
+
+  .change_center_locationpop .cancel {
+    background-color: #F13E3E;
+    color: #fff;
   }
 
 
@@ -587,8 +592,6 @@
     .analytics {
       grid-template-columns: repeat(2, 1fr);
     }
-
-
   }
 
   /*Change center manager popup*/

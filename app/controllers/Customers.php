@@ -16,6 +16,7 @@
       $this->User_Model=$this->model('User');
       $this->centermanagerModel=$this->model('Center_Manager');
       $this->discount_agentModel=$this->model('Discount_Agent');
+      $this->fineModel=$this->model('Fines');
 
 
       if(!isLoggedIn('user_id')){
@@ -137,8 +138,9 @@
       $Request=$this->Request_Model->get_assigned_request($req_id);
       $data['collector_id']=strval($Request->collector_id);
       if($Request){
+        $fines=$this->fineModel->getFineByName("cancelling_assigned");
+        $data['fine_amount']=$fines->fine_amount;
         $data['assinged']='Yes';
-        $data['fine_amount']='100';     
         $data['fine_type']='Cancelled Assigned Req';
       }
       else{

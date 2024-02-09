@@ -1009,6 +1009,7 @@
 
       } else {
         $this->Request_Model->cancel_request($data);
+      
         header("Location: " . URLROOT . "/centermanagers/request_cancelled");        
     }
     

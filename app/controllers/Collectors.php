@@ -14,6 +14,7 @@
       $this->customerModel=$this->model('Customer'); 
       $this->centerModel=$this->model('Center');
       $this->garbageTypeModel=$this->model('Garbage_Types');
+      $this->fineModel=$this->model('Fines');
 
       if(!isLoggedIn('collector_id')){
         redirect('users/login');
@@ -659,7 +660,6 @@
    public function request_assinged(){
     $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
     $types=$this->garbageTypeModel->get_all();
-
     $collector=$this->collectorModel->get_collector( $_SESSION['collector_id'] );
     $center=$this->centerModel->getCenterById($collector->center_id);
 
@@ -698,15 +698,18 @@
        
         }
         else if($data['fine_type']=="No Response"){
-          $data['fine_amount']=10;
+          $fines=$this->fineModel->getFineByName("no_response");
+          $data['fine_amount']=$fines->fine_amount;
           $this->Request_Model->cancel_request($data);
 
         }
         else if($data['fine_type']=="Unmeasurable"){
-          $data['fine_amount']=50;
+          $fines=$this->fineModel->getFineByName("minimum_collect");
+          $data['fine_amount']=$fines->fine_amount;
           $this->Request_Model->cancel_request($data);
-
+         
         } 
+       
         header("Location: " . URLROOT . "/collectors/request_cancelled");        
 
       }

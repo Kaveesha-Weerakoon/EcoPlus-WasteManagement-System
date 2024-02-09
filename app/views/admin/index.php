@@ -16,29 +16,7 @@
                         <i class='bx bx-bell'></i>
                         <div class="dot"></div>
                     </div>
-                    <div id="notification_popup" class="notification_popup">
-                        <h1>Notifications</h1>
-                        <div class="notification">
-                            <div class="notification-green-dot">
 
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Assigned
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-
-
-                    </div>
                     <div class="main-right-top-profile">
                         <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
                         <div class="main-right-top-profile-cont">
@@ -50,17 +28,31 @@
                     <div class="main-right-bottom-one">
                         <div class="main-right-bottom-one-left">
                             <div class="left">
-                                <h1>Rupee Value</h1>
-                                <h3>per </h3>
-                                <p>Eco credit</p>
-                                <button>Change Value</button>
+                                <h1>Garbage Types</h1>
+                                <h3>6</h3>
+                                <p>Last update</p>
+                                <button onclick="redirect_garbage_types()">View</button>
                             </div>
                             <div class="right">
-                                <h1>Rs <span class="main-credit"> 2.62</span> </h1>
-                                <h3>1 ECO CREDIT</h3>
+                                <h1><span class="main-credit"> 200.23</span> </h1>
+                                <h3>TOTAL CREDITS</h3>
                             </div>
                         </div>
+
                         <div class="main-right-bottom-one-right">
+                            <div class="left">
+                                <!-- <h1>Set Fine</h1>
+                                <i class='bx bx-coin'></i>
+                                <button class="fine_button" onclick="open_fine_set()" >Set fine</button> -->
+                            </div>
+                            <div class="right">
+                                <!-- <h1>Garbage Types</h1>
+                                <i class='bx bx-dollar-circle'></i> 
+                                <button onclick="redirect_garbage_types()">
+                                    Change
+                                </button> -->
+                            </div>
+
 
                             <!-- <canvas id="myChart" width="688" height="300"></canvas> -->
                         </div>
@@ -109,30 +101,14 @@
                     </div>
                     <div class="main-right-bottom-three">
                         <div class="main-right-bottom-three-left">
-                            <h1>Recent Transactions</h1>
-                            <div class="main-right-bottom-three-left-cont">
-                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                                <h3>Dayana</h3>
-                                <h2>+$ 12.21</h2>
-                            </div>
-                            <div class="main-right-bottom-three-left-cont">
-                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                                <h3>James</h3>
-                                <h2>+$ 12.21</h2>
-                            </div>
-                            <div class="main-right-bottom-three-left-cont">
-                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                                <h3>Samantha</h3>
-                                <h2 style="color: #F13E3E;">-$ 12.21</h2>
-                            </div>
-                            <!-- <div class="map" id="map"></div> -->
+                            <canvas id="myChart" width="600" height="250"></canvas>
                         </div>
                         <div class="main-right-bottom-three-right">
                             <div class="main-right-bottom-three-right-left">
-                                <h1>Credits per Waste Qunatity</h1>
-                                <i class='bx bx-dollar-circle'></i> <button onclick="redirect_garbage_types()">
-                                    Change
-                                </button>
+                                <h1>Set Fine</h1>
+                                <i class="fa-solid fa-file-invoice-dollar" style="font-size: 45px;"></i>
+                                <p>Set fine for each offence by customer</p>
+                                <button class="fine_button" onclick="open_fine_set()">Set fine</button>
                             </div>
                             <div class="main-right-bottom-three-right-right">
                                 <h1>Centers</h1>
@@ -145,67 +121,52 @@
                 </div>
             </div>
 
+            <div class="fine_set_popup" id="fine_popup">
+                <form action="<?php echo URLROOT;?>/admin/set_fine" method="post" id="fine_pop">
+                    <div class="fine_popup_form">
+                        <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="fine_popup_form_close"
+                            id="fine_popup_form_close">
+                        <div class="fine_popup_form_top">
+                            <div class="set_fine_topic">Set Fine</div>
+                        </div>
 
-            <!-- <div class="pop-eco_credits" id="pop-eco_credits">
-                <form class="Eco_Credits-main" method="post" action="<?php echo URLROOT;?>/admin/pop_eco_credit">
-                    <div class="Eco_Credits-main-top">
-                        <h1> Eco Credits Per Kilogram</h1>
-                        <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="close-eco_credits">
+                        <div class="fine-pop-form-content-container">
+                            <div class="fine-pop-form-content">
+                                <span>Minimum Collect</span>
+                                <div class="input-box">
+                                    <input type="text" name="minimum_collect" id="min_collect"
+                                        value="<?php echo $data['minimum_collect']?>">
+                                    <span class="error-div" style="color:red">
+                                        <?php echo $data['minimum_collect_err']?>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="fine-pop-form-content">
+                                <span>No Response</span>
+                                <div class="input-box">
+                                    <input type="text" name="no_response" id="no_response"
+                                        value="<?php echo $data['no_response']?>">
+                                    <span class="error-div" style="color:red">
+                                        <?php echo $data['no_response_err']?>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="fine-pop-form-content">
+                                <span>Cancelling assigned</span>
+                                <div class="input-box">
+                                    <input type="text" name="cancelling_assigned" id="cancel_assigned"
+                                        value="<?php echo $data['cancelling_assigned']?>">
+                                    <span class="error-div" style="color:red">
+                                        <?php echo $data['cancelling_assigned_err']?>
+                                    </span>
+                                </div>
+                            </div>
+                            <button type="button" onclick="validateAndSubmit()" class="set_fine_button">Set</button>
+                        </div>
                     </div>
-                    <div class="View-content-content">
-                        <div class="View-content-content-content">
-                            <i class='bx bx-purchase-tag'></i>
-                            <h6>Polythene</h6>
-                            <input type="text" name="polythene" value="<?php echo $data['polythene_credit']; ?>">
-                        </div>
-                        <div class="View-content-content-content">
-                            <i class='bx bx-purchase-tag'></i>
-                            <h6>Plastic</h6>
-                            <input type="text" name="plastic" value="<?php echo $data['plastic_credit']; ?>">
-                        </div>
-                        <div class="View-content-content-content">
-                            <i class='bx bx-purchase-tag'></i>
-                            <h6>Glass</h6>
-                            <input type="text" name="glass" value="<?php echo $data['glass_credit']; ?>">
-                        </div>
-                        <div class="View-content-content-content">
-                            <i class='bx bx-purchase-tag'></i>
-                            <h6>Paper Waste</h6>
-                            <input type="text" name="paper" value="<?php echo $data['paper_credit']; ?>">
-                        </div>
-                        <div class="View-content-content-content">
-                            <i class='bx bx-purchase-tag'></i>
-                            <h6>Electronic Waste</h6>
-                            <input type="text" name="electronic" value="<?php echo $data['electronic_credit']; ?>">
-                        </div>
-                        <div class="View-content-content-content">
-                            <i class='bx bx-purchase-tag'></i>
-                            <h6>Metals</h6>
-                            <input type="text" name="metal" value="<?php echo $data['metal_credit']; ?>">
-                        </div>
-
-                    </div>
-
-                    <button type="submit">Update</button>
                 </form>
-            </div> -->
-
-            <div class="pop-rupee_value" id="pop-rupee_value">
-                <div class="rupee-main">
-                    <div class="rupee-main-top">
-                        <h1>Rupee Value per Eco Credit </h1>
-                        <img class="View-content-img" src="<?php echo IMGROOT?>/cancel.png" id="close-rupee">
-                    </div>
-                    <div class="rupee-main-down">
-                        <h4>1 Eco Credit =</h4>
-                        <input type="text" value="100">
-                    </div>
-                    <button>Update</button>
-                </div>
-
             </div>
             <div class="overlay" id="overlay">
-
             </div>
         </div>
         <!-- <script src="Admin_Dashboard.js"></script> -->
@@ -214,48 +175,78 @@
 
 
 <script>
+var color = "#47b076";
+var textColor = "#414143";
+
+function validateAndSubmit() {
+    var initialMinCollect = document.getElementById('min_collect').value;
+    var initialNoResponse = document.getElementById('no_response').value;
+    var initialCancelAssigned = document.getElementById('cancel_assigned').value;
+
+    var minCollect = initialMinCollect.trim();
+    var noResponse = initialNoResponse.trim();
+    var cancelAssigned = initialCancelAssigned.trim();
+
+    var numberPattern = /^\d+(\.\d{1,2})?$/;
+
+    if (!numberPattern.test(minCollect) || !numberPattern.test(noResponse) || !numberPattern.test(cancelAssigned)) {
+        alert('Please enter valid numeric values with up to two decimal places.');
+        document.getElementById('min_collect').value = <?php echo $data['minimum_collect']?>;
+        document.getElementById('no_response').value = <?php echo $data['no_response']?>;
+        document.getElementById('cancel_assigned').value = <?php echo $data['cancelling_assigned']?>;
+
+        return;
+    }
+
+    document.getElementById('fine_pop').submit();
+}
+
+
 function redirect_customers() {
-    var linkUrl = "<?php echo URLROOT?>/admin/customers"; // Replace with your desired URL
+    var linkUrl = "<?php echo URLROOT?>/admin/customers";
     window.location.href = linkUrl;
 }
 
 function redirect_collectors() {
-    var linkUrl = "<?php echo URLROOT?>/admin/collectors"; // Replace with your desired URL
+    var linkUrl = "<?php echo URLROOT?>/admin/collectors";
     window.location.href = linkUrl;
 }
 
 function redirect_centermanagers() {
-    var linkUrl = "<?php echo URLROOT?>/admin/center_managers"; // Replace with your desired URL
+    var linkUrl = "<?php echo URLROOT?>/admin/center_managers";
     window.location.href = linkUrl;
 }
 
 function redirect_discountAgents() {
-    var linkUrl = "<?php echo URLROOT?>/admin/discount_agents"; // Replace with your desired URL
-
+    var linkUrl = "<?php echo URLROOT?>/admin/discount_agents";
     window.location.href = linkUrl;
-
 }
 
-// function redirect_credits_per() {
-//     var locationPop = document.querySelector('.pop-eco_credits');
-//     locationPop.classList.add('active');
-//     document.getElementById('overlay').style.display = "flex";
-// }
+function open_fine_set() {
+    var finePop = document.getElementById('fine_popup');
+    finePop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+}
 
 function redirect_garbage_types() {
     var linkUrl = "<?php echo URLROOT?>/admin/garbage_types";
-
     window.location.href = linkUrl;
 }
 
-// var close_pop_ecocredits = document.getElementById('close-eco_credits');
-// // close_pop_ecocredits.addEventListener('click', function() {
-// //     var locationPop = document.querySelector('.pop-eco_credits');
-// //     locationPop.classList.remove('active');
-// //     document.getElementById('overlay').style.display = "none";
+function submit() {
+    var minCollect = document.getElementById('min_collect').value;
+    var noResponse = document.getElementById('no_response').value;
+    var cancelAssigned = document.getElementById('cancel_assigned').value;
 
-// // });
+    // Perform validation checks
+    if (minCollect.trim() === '' || noResponse.trim() === '' || cancelAssigned.trim() === '') {
+        alert('Please fill in all fields.');
+        return; // Prevent form submission if validation fails
+    }
 
+    // If validation passes, submit the form
+    document.getElementById('fine_pop').submit();
+}
 
 const customer_count = <?php echo $data['customer_count']?>;
 const cm_count = <?php echo $data['cm_count']?>;
@@ -412,6 +403,111 @@ function initMap() {
         });
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, config);
+
+    const chartContainer = document.getElementById('chart');
+    actions.forEach(action => {
+        const button = document.createElement('button');
+        button.textContent = action.name;
+        button.addEventListener('click', () => action.handler(myChart));
+        chartContainer.appendChild(button);
+    });
+
+    // Call the function to create or update the chart
+});
+
+function createOrUpdateChart(color, textColor) {
+    // Define the static data for the chart
+    const staticData = {
+        current_plastic: 100,
+        current_polythene: 80,
+        current_metal: 120,
+        current_glass: 90,
+        current_paper: 110,
+        current_electronic: 70
+    };
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Plastic', 'Polythene', 'Metal', 'Glass', 'Paper', 'Electronic'],
+            datasets: [{
+                label: 'Kilograms',
+                data: [staticData.current_plastic, staticData.current_polythene, staticData
+                    .current_metal, staticData.current_glass, staticData.current_paper, staticData
+                    .current_electronic
+                ],
+                backgroundColor: color,
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 14
+                        }
+                    },
+                    barPercentage: 0.5,
+                    categoryPercentage: 0.3
+                },
+                y: {
+                    beginAtZero: true,
+                    suggestedMax: Math.max(...Object.values(staticData)) + 1,
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Current Garbage Stock',
+                    color: textColor,
+                    font: {
+                        size: 18
+                    },
+                    padding: {
+                        bottom: 25
+                    }
+                }
+            },
+            elements: {
+                bar: {
+                    borderRadius: 10
+                }
+            },
+            animation: {
+                duration: 700,
+                easing: 'easeIn'
+            }
+        }
+    });
+}
+
+createOrUpdateChart(color, textColor);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const close_request_details = document.getElementById("fine_popup_form_close");
+
+    close_request_details.addEventListener("click", function() {
+        const request_details = document.getElementById("fine_popup");
+        request_details.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+    });
+
+});
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

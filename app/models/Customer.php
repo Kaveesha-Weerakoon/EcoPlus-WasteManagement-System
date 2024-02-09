@@ -8,11 +8,29 @@
 
      public function get_customer($id){
        $this->db->query('SELECT * FROM customers WHERE user_id = :id');
-      $this->db->bind(':id', $id);
-      $results = $this->db->single();
-      // print_r($results);
+       $this->db->bind(':id', $id);
+       $results = $this->db->single();
        return $results;
      }
+
+     public function get_fined_requests($id) {
+      try{
+        $query = 'SELECT * FROM request_main r
+        LEFT JOIN request_cancelled rc ON rc.req_id = r.req_id
+        WHERE r.customer_id = :id AND rc.fine_type != \'None\'';
+
+        $this->db->query($query);
+        $this->db->bind(':id', $id);
+
+        $results = $this->db->resultSet();
+        return $results;
+      }
+      catch (PDOException $e) {
+        return false;
+    }
+      
+  }
+  
 
      public function get_all(){
       $this->db->query('SELECT *,
@@ -24,6 +42,28 @@
            $results = $this->db->resultSet();
            return $results;
      }
+
+     public function block($id){
+      try {
+          $this->db->query('UPDATE customers SET blocked = :value WHERE user_id = :id');
+          $this->db->bind(':value', TRUE); // You need to provide a value for ":value"
+          $this->db->bind(':id', $id);
+          $this->db->execute();
+      } catch (PDOException $e) {
+          die($e->getMessage());
+      }
+  } 
+  
+  public function unblock($id){
+    try {
+        $this->db->query('UPDATE customers SET blocked = :value WHERE user_id = :id');
+        $this->db->bind(':value', FALSE); // You need to provide a value for ":value"
+        $this->db->bind(':id', $id);
+        $this->db->execute();
+    } catch (PDOException $e) {
+        die($e->getMessage());
+    }
+}
 
 
 

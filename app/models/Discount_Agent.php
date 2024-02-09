@@ -100,9 +100,10 @@
       }else {
        return false; 
       }
-       }
+    }
 
-  public function editprofile_withimg($data){
+    
+    public function editprofile_withimg($data){
 
         $this->db->query('UPDATE users SET name = :value WHERE id = :id');
         $this->db->bind(':value', $data['name']);
@@ -126,17 +127,25 @@
          }else {
            return false; 
         }
- }
+    }
 
 
-      public function addDiscount($customer_id, $customer_name, $discount_amount, $center) {
-        $this->db->query('INSERT INTO discounts (customer_id, customer_name, discount_amount, center) VALUES (:customer_id, :customer_name, :discount_amount, :center)');
-        $this->db->bind(':customer_id', $customer_id);
-        $this->db->bind(':customer_name', $customer_name);
-        $this->db->bind(':discount_amount', $discount_amount);
-        $this->db->bind(':center', $center);
-
-        return $this->db->execute();
+    public function addDiscount($customer_id, $customer_name, $discount_amount, $center,$agent_id) {
+        try{
+          $this->db->query('INSERT INTO discounts (customer_id, customer_name,agent_id, discount_amount, center) VALUES (:customer_id, :customer_name,:agent_id, :discount_amount, :center)');
+          $this->db->bind(':customer_id', $customer_id);
+          $this->db->bind(':customer_name', $customer_name);
+          $this->db->bind(':discount_amount', $discount_amount);        
+          $this->db->bind(':agent_id', $agent_id);
+          $this->db->bind(':center', $center);
+  
+          return $this->db->execute();
+        }
+        catch (PDOException $e) {
+          die($e);
+          return false;
+       }
+      
       }
 
 
@@ -146,6 +155,18 @@
         $results = $this->db->resultSet();
       
         return $results;
+    }
+
+    public function getDiscountByAgent($id){
+       try{
+      $this->db->query('SELECT * FROM discounts WHERE agent_id = :id ORDER BY created_at DESC');
+      $this->db->bind(':id', $id);
+      $results = $this->db->resultSet();
+      return $results;
+    } 
+    catch (PDOException $e) {
+        return false;
+     }
     }
   
           

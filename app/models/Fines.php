@@ -42,5 +42,17 @@
                 return false;
             }
         }
-    
+       public function getFineByName($type){
+        try{
+            $this->db->query('SELECT * FROM fines WHERE type=:type');
+            $this->db->bind(':type', $type);
+
+            $results = $this->db->single();
+            return $results;  
+
+
+        }catch(PDOException $e){
+            return false;
+        }
+       }
     }

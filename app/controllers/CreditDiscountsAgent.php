@@ -4,13 +4,18 @@
       $this->User_Model=$this->model('User');
       $this->discount_agentModel=$this->model('Discount_Agent');
       $this->customerModel=$this->model('Customer'); 
-      $this->Customer_Credit_Model=$this->model('Customer_Credit');
+      $this->Customer_Credit_Model=$this->model('Customer_Credit'); 
+      if(!isLoggedIn('agent_id')){
+        redirect('users/login');
+      }
     }
 
 
     public function index(){
+      $discounts=$this->discount_agentModel->getDiscountByAgent($_SESSION['agent_id']);
       $data = [
         'title' => 'TraversyMVC',
+        'discounts'=>$discounts
       ];
      
       $this->view('credit_discount_agents/index', $data);
@@ -341,7 +346,8 @@
                       $customer_id,
                       $customer_name,
                       $discount_amount,
-                      $data['center']
+                      $data['center'],
+                      $_SESSION['agent_id']
                   );
 
                   if ($insert_discount) {

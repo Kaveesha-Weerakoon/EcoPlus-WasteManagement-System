@@ -49,13 +49,7 @@
         
       $data = [
         'pop_eco_credits' => '',
-        'credit' => $credit,
-        'plastic_credit' =>$credit->plastic,
-        'polythene_credit'=>$credit->polythene,
-        'paper_credit'=>$credit->paper,
-        'glass_credit'=>$credit->glass,
-        'electronic_credit'=>$credit->electronic,
-        'metal_credit'=>$credit->metal,
+        'fines'=>$fine_details,
         'cm_count'=>count($center_managers),      
         'customer_count'=>count($customers),
         'collector_count'=>count( $collectors),
@@ -77,87 +71,87 @@
       $this->view('admin/index', $data);
     }
 
-    public function pop_eco_credit(){
+    // public function pop_eco_credit(){
 
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    //   if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    //     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-      $data = [
-        'pop_eco_credits' => 'True',
-        'plastic_credit' =>trim($_POST['plastic']),
-        'polythene_credit'=>trim($_POST['polythene']),
-        'paper_credit'=>trim($_POST['paper']),
-        'glass_credit'=>trim($_POST['glass']),
-        'electronic_credit'=>trim($_POST['electronic']),
-        'metal_credit'=>trim($_POST['metal']),
-        'plastic_credit_err'=>'',
-        'polythene_credit_err'=>'',
-        'paper_credit_err'=>'',
-        'electronic_credit_err'=>'',
-        'metal_credit_err'=>'',
-        'glass_credit_err'=>''
-      ];
+    //   $data = [
+    //     'pop_eco_credits' => 'True',
+    //     'plastic_credit' =>trim($_POST['plastic']),
+    //     'polythene_credit'=>trim($_POST['polythene']),
+    //     'paper_credit'=>trim($_POST['paper']),
+    //     'glass_credit'=>trim($_POST['glass']),
+    //     'electronic_credit'=>trim($_POST['electronic']),
+    //     'metal_credit'=>trim($_POST['metal']),
+    //     'plastic_credit_err'=>'',
+    //     'polythene_credit_err'=>'',
+    //     'paper_credit_err'=>'',
+    //     'electronic_credit_err'=>'',
+    //     'metal_credit_err'=>'',
+    //     'glass_credit_err'=>''
+    //   ];
 
-      if(empty($data['plastic_credit'])){
-        $data['plastic_credit_err'] = 'Please enter a value';  
+    //   if(empty($data['plastic_credit'])){
+    //     $data['plastic_credit_err'] = 'Please enter a value';  
        
-      }
+    //   }
 
-      if(empty($data['polythene_credit'])){
-        $data['polythene_credit_err'] = 'Please enter a value'; 
-      }
+    //   if(empty($data['polythene_credit'])){
+    //     $data['polythene_credit_err'] = 'Please enter a value'; 
+    //   }
 
-      if(empty($data['paper_credit'])){
-        $data['paper_credit_err'] = 'Please enter a value'; 
-      }
+    //   if(empty($data['paper_credit'])){
+    //     $data['paper_credit_err'] = 'Please enter a value'; 
+    //   }
 
-      // Validate Contact no
-      if(empty($data['electronic_credit'])){
-        $data['electronic_credit_err'] = 'Please enter a value';   
-      }
+    //   // Validate Contact no
+    //   if(empty($data['electronic_credit'])){
+    //     $data['electronic_credit_err'] = 'Please enter a value';   
+    //   }
 
-      if(empty($data['metal_credit'])){
-        $data['metal_credit_err'] = 'Please enter a value'; 
-      }
+    //   if(empty($data['metal_credit'])){
+    //     $data['metal_credit_err'] = 'Please enter a value'; 
+    //   }
 
-      if(empty($data['glass_credit_err'])){
-        $data['glass_credit_err'] = 'Please enter a value';  
-      }
+    //   if(empty($data['glass_credit_err'])){
+    //     $data['glass_credit_err'] = 'Please enter a value';  
+    //   }
 
-      if(!empty($data['metal_credit']) &&  !empty($data['plastic_credit']) &&  !empty($data['polythene_credit']) &&  !empty($data['glass_credit'])  &&  !empty($data['paper_credit'])  &&  !empty($data['electronic_credit']) ){
-        if($this->creditModel->update($data)){
-          /*$data['completed']='True';  */      
-          $this->view('admin/index',$data);
-        } else {
-          die('Something went wrong');
-        }
+    //   if(!empty($data['metal_credit']) &&  !empty($data['plastic_credit']) &&  !empty($data['polythene_credit']) &&  !empty($data['glass_credit'])  &&  !empty($data['paper_credit'])  &&  !empty($data['electronic_credit']) ){
+    //     if($this->creditModel->update($data)){
+    //       /*$data['completed']='True';  */      
+    //       $this->view('admin/index',$data);
+    //     } else {
+    //       die('Something went wrong');
+    //     }
 
-      }
-      else{
-        $this->view('admin/index', $data);
-      }
+    //   }
+    //   else{
+    //     $this->view('admin/index', $data);
+    //   }
     
-      $this->view('admin/index', $data);
+    //   $this->view('admin/index', $data);
 
-      }
-      else{
+    //   }
+    //   else{
 
-        $credit= $this->creditModel->get();
-        $data = [
-           'pop_eco_credits'=>'True',
-           'credit' => $credit,
-           'plastic_credit' =>$credit->plastic,
-           'polythene_credit'=>$credit->polythene,
-           'paper_credit'=>$credit->paper,
-           'glass_credit'=>$credit->glass,
-           'electronic_credit'=>$credit->electronic,
-           'metal_credit'=>$credit->metal
-        ];
+    //     $credit= $this->creditModel->get();
+    //     $data = [
+    //        'pop_eco_credits'=>'True',
+    //        'credit' => $credit,
+    //        'plastic_credit' =>$credit->plastic,
+    //        'polythene_credit'=>$credit->polythene,
+    //        'paper_credit'=>$credit->paper,
+    //        'glass_credit'=>$credit->glass,
+    //        'electronic_credit'=>$credit->electronic,
+    //        'metal_credit'=>$credit->metal
+    //     ];
        
-        $this->view('admin/index', $data);
+    //     $this->view('admin/index', $data);
 
-      }
-    }
+    //   }
+    // }
 
     public function complain_customers(){
     
@@ -824,6 +818,7 @@
       ];
       $this->view('admin/complain_collectors', $data);
     }
+    // header("Location: " . URLROOT . "/customers/.$url.");        
 
     public function center_main($center_id, $region){
       $center=$this->center_model->getCenterById($center_id);
@@ -832,7 +827,31 @@
       $no_of_collectors = $this->collector_model->get_no_of_Collectors($center_id);
       $no_of_workers = $this->center_workers_model->get_no_of_center_workers($center_id);
       $total_requests = $this->requests_model->get_total_requests_by_region($region);
-
+      
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){  
+        $data = [
+          'center' =>$center,
+          'not_assigned_cm'=>$na_center_managers,
+          'change_cm'=>'',
+          'no_of_collectors' =>$no_of_collectors,
+          'no_of_workers'=>$no_of_workers,
+          'center_manager' =>$center_manager,
+          'total_requests'=>$total_requests,
+          'lattitude'=>trim($_POST['latittude']),
+          'longitude'=>trim($_POST['longitude']),
+          'radius'=>trim($_POST['radius']),
+          'center_id'=>$center_id,
+          'region'=> $region
+      ];
+      if($this->center_model->changeCenterLocation($data,$center_id)){
+        header("Location: " . URLROOT . "/admin/center_main/".$center_id."/".$region);        
+      } else {
+        die('Something went wrong');
+      }
+      $this->view('admin/center_main', $data);        
+      }
+      else{
+        
       $data = [
         'center' =>$center,
         'not_assigned_cm'=>$na_center_managers,
@@ -840,9 +859,16 @@
         'no_of_collectors' =>$no_of_collectors,
         'no_of_workers'=>$no_of_workers,
         'center_manager' =>$center_manager,
-        'total_requests'=>$total_requests
+        'total_requests'=>$total_requests,
+        'lattitude'=>'',
+        'longitude'=>'',
+        'radius'=>'',
+        'center_id'=>$center_id,
+          'region'=> $region
       ];
-      $this->view('admin/center_main', $data);
+      
+      $this->view('admin/center_main', $data);        
+    }
     }
 
     public function center_main_change_cm($center_id){       
@@ -861,8 +887,8 @@
           'change_cm'=>'True',
           'center_manager'=>trim($_POST['centerManager']),
         ];
-        if($data['center_manager']=='default'){
-          $this->view('admin/center_main', $data);
+        if($data['center_manager']=='default'){  
+          header("Location: " . URLROOT . "/admin/center_main/".$center_id."/".$center->region);        
         }
         else{
 
@@ -1024,7 +1050,6 @@
       $this->view('admin/discount_agents', $data);
     }
   
-  
     public function discount_agent_add(){
        
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -1168,7 +1193,6 @@
     
     }
   
-
     public function discount_agent_delete_confirm($id){
       $discount_agent = $this->discount_agentModel->get_discount_agent();
       $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($id);
@@ -1360,11 +1384,8 @@
           'minimum_collect_err' => '',
           'no_response_err' => '',
           'cancelling_assigned_err' => ''
-
         ];
-
-        
-
+       
         foreach($fine_details as $fine ){
           
           if($fine){
@@ -1377,53 +1398,22 @@
             }elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data["{$fine_type}"]) || $data["{$fine_type}"] < 0) {
               $data["{$fine_type}_err"] = 'Please enter a positive value up to 2 decimal places';
             }
-            
           }
         }
 
-        // if(empty($data['minimum_collect'])){
-        //   $data['minimum_collect_err'] = 'Please enter selling price';
-        // }elseif(!(is_numeric($data['minimum_collect']))){
-        //   $data['minimum_collect_err'] = 'Please enter a numeric value';
-        // }elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['minimum_collect']) || $data['minimum_collect'] <= 0) {
-        //   $data['minimum_collect_err'] = 'Please enter a positive value up to 2 decimal places';
-        // }
-
-        // if(empty($data['no_response'])){
-        //   $data['no_response_err'] = 'Please enter selling price';
-        // }elseif(!(is_numeric($data['no_response']))){
-        //   $data['no_response_err'] = 'Please enter a numeric value';
-        // }elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['no_response']) || $data['no_response'] <= 0) {
-        //   $data['no_response_err'] = 'Please enter a positive value up to 2 decimal places';
-        // }
-
-        // if(empty($data['cancelling_assigned'])){
-        //   $data['cancelling_assigned_err'] = 'Please enter selling price';
-        // }elseif(!(is_numeric($data['cancelling_assigned']))){
-        //   $data['cancelling_assigned_err'] = 'Please enter a numeric value';
-        // }elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $data['cancelling_assigned']) || $data['cancelling_assigned'] <= 0) {
-        //   $data['cancelling_assigned_err'] = 'Please enter a positive value up to 2 decimal places';
-        // }
-
-        if(empty($data['minimum_collect_err']) && empty($data['no_response_err']) && empty($data['cancelling_assigned_err']) ){
-          
+        if(empty($data['minimum_collect_err']) && empty($data['no_response_err']) && empty($data['cancelling_assigned_err']) ){  
           if($this->fine_model->set_fine($data)){
-            // die('sucess model');
-         
             header("Location: " . URLROOT . "/admin/index");  
           }
-          else{
-            // die('unsucess model');
-            die('Something went wrong');
+          else{ 
+            header("Location: " . URLROOT . "/admin/index");  
           }
 
         }else{
-          $this->view('admin/index', $data);
+          header("Location: " . URLROOT . "/admin/index");  
+
         }
-
-        $this->view('admin/index', $data);
-
-        
+        $this->view('admin/index', $data); 
       }
       else{
 
@@ -1437,16 +1427,6 @@
             $data["{$fine_type}_err"] ='';
           }
         }
-
-        // $data =[
-        //   'minimum_collect'=> '',
-        //   'no_response' => '',
-        //   'cancelling_assigned' => '',
-        //   'minimum_collect_err' => '',
-        //   'no_response_err' => '',
-        //   'cancelling_assigned_err' => ''
-
-        // ];
 
         $this->view('admin/index', $data);
 

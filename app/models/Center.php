@@ -121,7 +121,31 @@
      }
      catch (PDOException $e) {
       return false;
-  }
+     }
+    }
+
+    public function changeCenterLocation($data,$centerid){
+      try{
+        $sql = 'UPDATE center SET lat = :lat, longi = :longi,radius = :radius WHERE id =:id';
+  
+        $this->db->query($sql);
+        $this->db->bind(':radius',$data['radius']);
+        $this->db->bind(':longi', $data['longitude']);
+        $this->db->bind(':lat', $data['lattitude']);
+        $this->db->bind(':id', $centerid);
+
+        $result= $this->db->execute();   
+        if($result){
+           return true;
+        }
+        else{
+          return false;
+        }
+       }
+       catch (PDOException $e) {
+        die($e);
+        return false;
+       }
     }
 
     public function delete_center($center_id){

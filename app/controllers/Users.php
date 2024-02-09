@@ -343,4 +343,12 @@
         return false;
       }
     }
+
+    public function resetpassword(){
+      $data = [
+        'title' => 'TraversyMVC',
+      ];
+     
+      $this->view('users/resetpassword', $data);
+    }
   }

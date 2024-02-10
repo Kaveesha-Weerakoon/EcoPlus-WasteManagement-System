@@ -15,25 +15,25 @@
               <h5 class="text-center">Forgot Password?</h5>
               <p>You can reset your password here.</p>
               <div class="panel-body">
-                <form id="register-form" role="form" autocomplete="off" class="form" method="post">
+                 <form id="register-form" role="form" autocomplete="off" class="form" method="post">
 
-                  <div class="form-group input-container">
-                    <i class="fas fa-envelope icon"></i>
-                    <div class="input-group">
-                      <input id="email" name="email" placeholder="Email address" class="form-control" type="email">
+                    <div class="form-group input-container">
+                      <i class="fas fa-envelope icon"></i>
+                      <div class="input-group">
+                        <input id="email" name="email" placeholder="Email address" class="form-control" type="email" value="<?php echo $data['email']; ?>">
+                      </div>
                     </div>
+
                     <div class="error-div" style="color:red">
-                      <!-- Your error message here -->
+                      <?php echo $data['email_err']?>
                     </div>
-                  </div>
 
-                  <div class="form-group">
-                    <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password"
-                      type="submit">
-                  </div>
+                    <div class="form-group">
+                      <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
+                    </div>
 
-                  <input type="hidden" class="hide" name="token" id="token" value="">
-                </form>
+                    <input type="hidden" class="hide" name="token" id="token" value="">
+                  </form>
               </div>
             </div>
           </div>

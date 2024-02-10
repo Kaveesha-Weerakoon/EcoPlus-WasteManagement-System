@@ -34,27 +34,13 @@
                                 <button onclick="redirect_garbage_types()">View</button>
                             </div>
                             <div class="right">
-                                <h1><span class="main-credit"> 200.23</span> </h1>
-                                <h3>TOTAL CREDITS</h3>
+                                <h1><span class="main-credit"> <?php echo $data['creditsGiven']?></span> </h1>
+                                <h3>Month's Total Credits</h3>
                             </div>
                         </div>
 
                         <div class="main-right-bottom-one-right">
-                            <div class="left">
-                                <!-- <h1>Set Fine</h1>
-                                <i class='bx bx-coin'></i>
-                                <button class="fine_button" onclick="open_fine_set()" >Set fine</button> -->
-                            </div>
-                            <div class="right">
-                                <!-- <h1>Garbage Types</h1>
-                                <i class='bx bx-dollar-circle'></i> 
-                                <button onclick="redirect_garbage_types()">
-                                    Change
-                                </button> -->
-                            </div>
-
-
-                            <!-- <canvas id="myChart" width="688" height="300"></canvas> -->
+                            <canvas id="myChart1" width="910" height="300"></canvas>
                         </div>
                     </div>
                     <div class="main-right-bottom-two">
@@ -111,7 +97,7 @@
                                 <button class="fine_button" onclick="open_fine_set()">Set fine</button>
                             </div>
                             <div class="main-right-bottom-three-right-right">
-                                <h1>Centers</h1>
+                                <h1>Regional Centers</h1>
                                 <div class="map" id="map"></div>
 
                             </div>
@@ -169,7 +155,6 @@
             <div class="overlay" id="overlay">
             </div>
         </div>
-        <!-- <script src="Admin_Dashboard.js"></script> -->
     </div>
 </div>
 
@@ -238,13 +223,11 @@ function submit() {
     var noResponse = document.getElementById('no_response').value;
     var cancelAssigned = document.getElementById('cancel_assigned').value;
 
-    // Perform validation checks
     if (minCollect.trim() === '' || noResponse.trim() === '' || cancelAssigned.trim() === '') {
         alert('Please fill in all fields.');
         return; // Prevent form submission if validation fails
     }
 
-    // If validation passes, submit the form
     document.getElementById('fine_pop').submit();
 }
 
@@ -473,7 +456,7 @@ function createOrUpdateChart(color, textColor) {
                 },
                 title: {
                     display: true,
-                    text: 'Current Garbage Stock',
+                    text: 'Total Waste Collected',
                     color: textColor,
                     font: {
                         size: 18
@@ -508,6 +491,115 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
+
+const completedRequests = <?php echo json_encode($data['completedRequests']); ?>;
+const totalRequests = <?php echo json_encode($data['totalRequests']); ?>;
+
+// Get the current month and year
+const currentDate = new Date();
+const currentMonth = currentDate.getMonth();
+const currentYear = currentDate.getFullYear();
+
+// Function to get the name of the month for a given month index
+function getMonthName(monthIndex) {
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+        'October', 'November', 'December'
+    ];
+    return monthNames[monthIndex];
+}
+
+// Generate labels for the last six months
+const labels = [];
+for (let i = 0; i < 6; i++) {
+    const month = (currentMonth - i + 12) % 12; // Ensure the month is within 0-11 range
+    const year = currentYear - (i === 0 && currentMonth === 0 ? 1 : 0); // Adjust the year if current month is January
+    labels.unshift(getMonthName(month) + ' ' + year); // Push to the front of the array
+}
+
+const completedRequestCounts = completedRequests.map(request => {
+    const date = new Date(request.date);
+    return {
+        month: date.getMonth(),
+        year: date.getFullYear(),
+    };
+});
+
+const totalRequestCounts = totalRequests.map(request => {
+    const date = new Date(request.date);
+    return {
+        month: date.getMonth(),
+        year: date.getFullYear(),
+    };
+});
+
+function countRequests(requests) {
+    const counts = Array(6).fill(0);
+    requests.forEach(request => {
+        const monthDiff = (currentMonth - request.month + 6) % 6;
+        counts[monthDiff]++;
+    });
+    return counts;
+}
+
+const completedData = countRequests(completedRequestCounts).reverse(); // Reverse the array
+const totalData = countRequests(totalRequestCounts).reverse(); // Reverse the array
+
+const data = {
+    labels: labels,
+    datasets: [{
+            label: 'Completed Requests',
+            data: completedData,
+            borderColor: 'red',
+            backgroundColor: 'rgba(255, 0, 0, 0.3)', // Light red background color
+            borderWidth: 2, // Set border width
+            pointStyle: 'circle', // Set point style to circle
+            pointBackgroundColor: 'red', // Set point background color
+            pointBorderColor: 'red', // Set point border color
+            pointRadius: 5, // Set point radius
+        },
+        {
+            label: 'Total Requests',
+            data: totalData,
+            borderColor: '#64d798',
+            backgroundColor: 'rgba(100, 215, 152, 0.3)',
+            borderWidth: 2, // Set border width
+            pointStyle: 'circle', // Set point style to circle
+            pointBackgroundColor: '#64d798', // Set point background color
+            pointBorderColor: '#64d798', // Set point border color
+            pointRadius: 5, // Set point radius
+        }
+    ]
+};
+
+
+const config = {
+    type: 'line',
+    data: data,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: '6-Month Request Trends',
+                font: {
+                    size: 18,
+                    family: 'Arial',
+                    weight: 'bold',
+                    color: '#333',
+                },
+                padding: 1,
+                align: 'center',
+            }
+        }
+    },
+};
+
+
+const ctx = document.getElementById('myChart1').getContext('2d');
+new Chart(ctx, config);
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

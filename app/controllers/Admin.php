@@ -19,6 +19,8 @@
       $this->collect_garbage_Model=$this->model('Collect_Garbage');
       $this->garbage_types_model = $this->model('Garbage_types');
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
+      $this->Report_Model=$this->model('Report');
+
 
       $this->fine_model = $this->model('Fines');
       
@@ -37,6 +39,7 @@
  }
 
     public function index(){
+      $creditMonth=$this->Collect_Garbage_Model->getTotalCreditsGivenInMonth();
       $credit= $this->creditModel->get();
       $center_managers = $this->center_managerModel->get_center_managers();
       $customers = $this->customerModel->get_all();
@@ -45,16 +48,18 @@
       $jsonData = json_encode($centers );
 
       $fine_details = $this->fine_model->get_fine_details();
-      
-        
+      $completedRequests=$this->Collect_Garbage_Model->getAllCompletedRequests();
+      $totalRrequests=$this->requests_model->getTotalRequests();
+     
       $data = [
-        'pop_eco_credits' => '',
+        'completedRequests'=> $completedRequests,
+        'totalRequests'=> $totalRrequests,
         'fines'=>$fine_details,
         'cm_count'=>count($center_managers),      
         'customer_count'=>count($customers),
         'collector_count'=>count( $collectors),
-        'centers'=>$jsonData
-
+        'centers'=>$jsonData,
+        'creditsGiven'=>$creditMonth->credit_amount 
       ];
 
       foreach($fine_details as $fine ){
@@ -65,93 +70,9 @@
         }
       }
 
-      //var_dump($data);
-
-     
       $this->view('admin/index', $data);
     }
 
-    // public function pop_eco_credit(){
-
-    //   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    //     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-    //   $data = [
-    //     'pop_eco_credits' => 'True',
-    //     'plastic_credit' =>trim($_POST['plastic']),
-    //     'polythene_credit'=>trim($_POST['polythene']),
-    //     'paper_credit'=>trim($_POST['paper']),
-    //     'glass_credit'=>trim($_POST['glass']),
-    //     'electronic_credit'=>trim($_POST['electronic']),
-    //     'metal_credit'=>trim($_POST['metal']),
-    //     'plastic_credit_err'=>'',
-    //     'polythene_credit_err'=>'',
-    //     'paper_credit_err'=>'',
-    //     'electronic_credit_err'=>'',
-    //     'metal_credit_err'=>'',
-    //     'glass_credit_err'=>''
-    //   ];
-
-    //   if(empty($data['plastic_credit'])){
-    //     $data['plastic_credit_err'] = 'Please enter a value';  
-       
-    //   }
-
-    //   if(empty($data['polythene_credit'])){
-    //     $data['polythene_credit_err'] = 'Please enter a value'; 
-    //   }
-
-    //   if(empty($data['paper_credit'])){
-    //     $data['paper_credit_err'] = 'Please enter a value'; 
-    //   }
-
-    //   // Validate Contact no
-    //   if(empty($data['electronic_credit'])){
-    //     $data['electronic_credit_err'] = 'Please enter a value';   
-    //   }
-
-    //   if(empty($data['metal_credit'])){
-    //     $data['metal_credit_err'] = 'Please enter a value'; 
-    //   }
-
-    //   if(empty($data['glass_credit_err'])){
-    //     $data['glass_credit_err'] = 'Please enter a value';  
-    //   }
-
-    //   if(!empty($data['metal_credit']) &&  !empty($data['plastic_credit']) &&  !empty($data['polythene_credit']) &&  !empty($data['glass_credit'])  &&  !empty($data['paper_credit'])  &&  !empty($data['electronic_credit']) ){
-    //     if($this->creditModel->update($data)){
-    //       /*$data['completed']='True';  */      
-    //       $this->view('admin/index',$data);
-    //     } else {
-    //       die('Something went wrong');
-    //     }
-
-    //   }
-    //   else{
-    //     $this->view('admin/index', $data);
-    //   }
-    
-    //   $this->view('admin/index', $data);
-
-    //   }
-    //   else{
-
-    //     $credit= $this->creditModel->get();
-    //     $data = [
-    //        'pop_eco_credits'=>'True',
-    //        'credit' => $credit,
-    //        'plastic_credit' =>$credit->plastic,
-    //        'polythene_credit'=>$credit->polythene,
-    //        'paper_credit'=>$credit->paper,
-    //        'glass_credit'=>$credit->glass,
-    //        'electronic_credit'=>$credit->electronic,
-    //        'metal_credit'=>$credit->metal
-    //     ];
-       
-    //     $this->view('admin/index', $data);
-
-    //   }
-    // }
 
     public function complain_customers(){
     
@@ -1434,6 +1355,69 @@
 
     }
     
+
+    public function reports(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){     
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $center=trim($_POST['center-dropdown']);       
+        $fromDate= trim($_POST['fromDate']);
+        $toDate= trim($_POST['toDate']);
+        
+        if($toDate==""){
+          $toDate="none";
+        } 
+
+        if($fromDate==""){
+          $fromDate="none";
+        }
+       
+        $completedRequests=$this->Report_Model->getCompletedRequests($fromDate,$toDate,$center);
+        $cancelledRequests=$this->Report_Model->getCancelledRequests($fromDate,$toDate,$center);
+        $ongoingRequests=$this->Report_Model->getonGoingRequests($fromDate,$toDate,$center);
+        $totalRequests=$this->Report_Model->getallRequests($fromDate,$toDate,$center);
+        $credits=$this->Report_Model->getCredits($fromDate,$toDate,$center);
+
+        $centers = $this->center_model->getallCenters();
+
+        $data=[
+          'completedRequests'=> count($completedRequests),
+          'cancelledRequests'=> count($cancelledRequests),
+          'ongoingRequests'=> count($ongoingRequests),
+          'totalRequests'=> count($totalRequests),
+          'centers'=> $centers,
+          'center'=>$center,
+          'to'=>$toDate,
+          'from'=>$fromDate,
+          'credits'=> $credits->total_credits
+        ];
+        $this->view('admin/report', $data);
+
+      }
+      else{
+        $completedRequests=$this->Report_Model->getCompletedRequests();
+        $cancelledRequests=$this->Report_Model->getCancelledRequests();
+        $ongoingRequests=$this->Report_Model->getonGoingRequests();
+        $totalRequests=$this->Report_Model->getallRequests();
+        $centers = $this->center_model->getallCenters();
+        $credits=$this->Report_Model->getCredits();
+
+        $data=[
+          'completedRequests'=> count($completedRequests),
+          'cancelledRequests'=> count($cancelledRequests),
+          'ongoingRequests'=> count($ongoingRequests),
+          'totalRequests'=> count($totalRequests),
+          'centers'=> $centers,
+          'center'=>'All',
+          'to'=>'none',
+          'from'=>'none',
+          'credits'=> $credits->total_credits
+        ];
+        
+        $this->view('admin/report', $data);
+
+      }
+    }
 
   
   }

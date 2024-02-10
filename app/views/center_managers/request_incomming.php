@@ -136,7 +136,7 @@
 
                         <div class="assigned-req-count-container">
                             <p>Number of Assigned requests for the requested date:</p>
-                            <span data-count="10"></span>
+                            <p id="request_count"></p>
                         </div>
 
                         <div class="assigned-map-container"></div>
@@ -190,15 +190,28 @@
                     closecancel();
                 }
             }
-            var selectedCollectorId = null;
-
+            var selectedCollectorId = 0;
+            var requestCount = document.getElementById('request_count');
+            requestCount.innerHTML = 0;
             var dropdownItems = document.querySelectorAll('.dropdown-item');
             dropdownItems.forEach(function(item) {
                 item.addEventListener('click', function() {
                     selectedCollectorId = this.getAttribute('data-id');
                     selected_collector_id.value = selectedCollectorId
+                    var request = <?php echo json_encode($data['assigned_requests']); ?>;
+                    var count = 0;
+                    for (let req_id in request) {
+                        if (request.hasOwnProperty(req_id)) {
+                            if (request[req_id].collector_id == selectedCollectorId) {
+                                count++;
+                            };
+                        }
+                    }
+                    requestCount.innerHTML = count;
+
                 });
             });
+
 
             function assing_complete() {
                 var assignForm = document.getElementById('assignForm');

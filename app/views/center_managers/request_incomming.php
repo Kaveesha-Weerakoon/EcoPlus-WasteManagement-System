@@ -35,19 +35,20 @@
                                     <td><?php  echo $request->name?></td>
                                     <td><?php  echo $request->date?></td>
                                     <td><?php  echo $request->time?></td>
-                                  
+
                                     <td>
                                         <i class='bx bx-info-circle' style="font-size: 29px"
                                             onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
                                     </td>
                                     <td>
-                                        <i class='bx bxs-user-check' style="font-size: 32px;" onclick="assign(<?php echo $request->req_id ?>)"></i>
-                                       
+                                        <i class='bx bxs-user-check' style="font-size: 32px;"
+                                            onclick="assign(<?php echo $request->req_id ?>)"></i>
+
                                     </td>
                                     <td>
                                         <i class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"
-                                        onclick="cancel(<?php echo $request->req_id ?>)"></i>
-                                        
+                                            onclick="cancel(<?php echo $request->req_id ?>)"></i>
+
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -99,78 +100,50 @@
                         <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-assing">
                         <h2>Assign a Collector</h2>
                         <hr class="assign-line">
-                        <!-- <img class="view_assing" src="<?php echo IMGROOT?>/selection.png" alt=""> -->
                         <div class="view_assing_middle">
                             <h3>Req ID: <b>R <div id="assign_req_id" style="display: inline;"></div></b></h3>
                         </div>
                         <input name="assign_req_id" type="text" id="assign_req_id" style="display: none;">
-                       
-
-                        <!-- <select id="dropdown" name="collectors">
-                            <?php
-                            $collectors = $data['collectors'];
-                            $assigned_requests_count = $data['assigned_requests_count'];
-                            if (!empty($collectors)) {
-                                foreach ($collectors as $collector) {
-                                    $request_count = isset($assigned_requests_count[$collector->id]) ? $assigned_requests_count[$collector->id] : 0;
-                                    //$request_count = $assigned_requests_count[$collector->id] ?? 12;
-                                    // $image_url = $collector->image; 
-
-                                    echo "<option value=\"$collector->id\">
-                                            <img src=\"" . IMGROOT . "/img_upload/collector/$collector->image\" alt=\"$collector->name\" style=\"width: 20px; height: 20px; margin-right: 5px;\"> 
-                                            C $collector->id $collector->name $collector->vehicle_type 
-                                        </option>";
-                                }
-                            } else {
-                                echo "<option value=\"default\">No Collectors Available</option>";
-                                }
-                            ?>
-
-                        </select> -->
 
                         <div class="dropdown">
                             <div class="dropdown-toggle" id="dropdownToggle" aria-haspopup="true" aria-expanded="false">
                                 Select a Collector
-                               <span class="arrow-down"></span>
+                                <span class="arrow-down"></span>
                             </div>
                             <ul class="dropdown-menu" aria-labelledby="dropdownToggle">
                                 <?php
-                                $collectors = $data['collectors'];
-                                $assigned_requests_count = $data['assigned_requests_count'];
-                                if (!empty($collectors)) {
-                                    foreach ($collectors as $collector) {
-                                        $request_count = isset($assigned_requests_count[$collector->id]) ? $assigned_requests_count[$collector->id] : 0;
-                                        //$request_count = $assigned_requests_count[$collector->id] ?? 12;
-                                        // $image_url = $collector->image; 
-                                        echo "<li class=\"dropdown-item\" data-id=\"$collector->id\">
-                                                <img src=\"" . IMGROOT . "/img_upload/collector/$collector->image\"  > 
-                                                <span class=\"collector-id\">C$collector->id</span>
+                                     $collectors = $data['collectors'];
+                                     $assigned_requests_count = $data['assigned_requests_count'];
+                                     if (!empty($collectors)) {
+                                     foreach ($collectors as $collector) {
+                                           $request_count = isset($assigned_requests_count[$collector->id]) ? $assigned_requests_count[$collector->id] : 0;
+                                               echo "<li class=\"dropdown-item\" data-id=\"$collector->id\">
+                                               <img src=\"" . IMGROOT . "/img_upload/collector/$collector->image\"  > 
+                                               <span class=\"collector-id\">C$collector->id</span>
                                                 <span class=\"collector-name\">$collector->name</span>
                                                 <span class=\"vehicle-type\">$collector->vehicle_type</span>
-                                                
-                                            </li>";
-                                    }
-                                } else {
-                                    echo "<li>No Collectors Available</li>";
-                                }
-                                ?>
+                                                </li>";
+                             }
+                         }else {
+                                 echo "<li>No Collectors Available</li>";
+                              }
+                          ?>
                             </ul>
                         </div>
 
+                        <!-- Hidden input field to store the selected collector's ID -->
+                        <input type="hidden" name="selected_collector_id" id="selected_collector_id">
 
-                    
-                            
                         <div class="assigned-req-count-container">
                             <p>Number of Assigned requests for the requested date:</p>
                             <span data-count="10"></span>
                         </div>
-                      
-                        <div class="assigned-map-container">
 
-                        </div>
+                        <div class="assigned-map-container"></div>
 
-                        <Button type="submit" onclick="assing_complete()">Assign</Button>
+                        <button type="button" onclick="assing_complete()">Assign</button>
                     </form>
+
                 </div>
 
                 <div class="request-details-pop" id="request-details-popup-box">
@@ -207,9 +180,6 @@
 
 
             <script>
-                
-             
-
             function validateCancelForm() {
                 var reasonInput = document.getElementsByName("reason")[0].value;
 
@@ -220,34 +190,42 @@
                     closecancel();
                 }
             }
+            var selectedCollectorId = null;
+
+            var dropdownItems = document.querySelectorAll('.dropdown-item');
+            dropdownItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    selectedCollectorId = this.getAttribute('data-id');
+                    selected_collector_id.value = selectedCollectorId
+                });
+            });
 
             function assing_complete() {
-                var dropdown = document.getElementById('dropdown');
                 var assignForm = document.getElementById('assignForm');
-                if (dropdown.value === 'default') {
+
+                if (selectedCollectorId == null) {
                     alert('Please select a collector before assigning.');
                 } else {
                     assignForm.submit();
                 }
             }
 
-            function assign($id) {
-                var inputElement = document.querySelector('input[name="id"]');
+            function assign(id) {
+                var inputElement = document.querySelector('input[name="assign_req_id"]');
 
-                var assign_reqid = document.getElementById('assign_req_id');
-
-                assign_reqid.value = $id;
+                inputElement.value = id;
 
                 inputElement.style.display = 'none';
 
-                assign_reqid.innerHTML = $id;
+                var assign_reqid = document.getElementById('assign_req_id');
+                assign_reqid.innerHTML = id;
 
-                // document.getElementById("View").style.display = "flex"
                 var assign_popup = document.getElementById('View');
                 assign_popup.classList.add('active');
 
                 document.getElementById('overlay').style.display = "flex";
             }
+
 
             function cancel($id) {
                 var inputElement = document.querySelector('input[name="id"]');
@@ -498,7 +476,8 @@
                 });
 
                 document.addEventListener('click', function(event) {
-                    if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event
+                            .target)) {
                         dropdownMenu.classList.remove('show');
                     }
                 });

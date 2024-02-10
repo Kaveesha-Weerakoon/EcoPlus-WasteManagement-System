@@ -1053,10 +1053,11 @@
         'pop_location'=>'',
         'map'=>'',
         'request_id'=>trim($_POST['assign_req_id']),
-        'collector_id'=>trim($_POST['collectors']),
+        'collector_id'=>trim($_POST['selected_collector_id']),
 
       ];
       if (empty($data['request_id']) || empty($data['collector_id']) ) {
+      
           $this->request_incomming();
       } 
       else {

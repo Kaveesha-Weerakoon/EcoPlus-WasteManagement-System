@@ -42,7 +42,7 @@
                                     </td>
                                     <td>
                                         <i class='bx bxs-user-check' style="font-size: 32px;"
-                                            onclick="assign(<?php echo $request->req_id ?>)"></i>
+                                            onclick="assign(<?php echo $request->req_id ?>, '<?php echo htmlspecialchars($request->date, ENT_QUOTES, 'UTF-8')?>')"></i>
 
                                     </td>
                                     <td>
@@ -136,7 +136,8 @@
 
                         <div class="assigned-req-count-container">
                             <p>Number of Assigned requests for the requested date:</p>
-                            <p id="request_count"></p>
+                            <span id="request_count"></span>
+                            <input name="requested_date" type="text" id="requested_date" >
                         </div>
 
                         <div class="assigned-map-container"></div>
@@ -190,19 +191,28 @@
                     closecancel();
                 }
             }
+
             var selectedCollectorId = 0;
             var requestCount = document.getElementById('request_count');
             requestCount.innerHTML = 0;
+            
+
+
             var dropdownItems = document.querySelectorAll('.dropdown-item');
             dropdownItems.forEach(function(item) {
                 item.addEventListener('click', function() {
                     selectedCollectorId = this.getAttribute('data-id');
-                    selected_collector_id.value = selectedCollectorId
+                    selected_collector_id.value = selectedCollectorId;
+
+                    var requestDate= document.getElementById('requested_date').value;
+                    console.log(requestDate);
                     var request = <?php echo json_encode($data['assigned_requests']); ?>;
                     var count = 0;
                     for (let req_id in request) {
                         if (request.hasOwnProperty(req_id)) {
-                            if (request[req_id].collector_id == selectedCollectorId) {
+                            //console.log(request[req_id].date);
+                            if (request[req_id].collector_id == selectedCollectorId && request[req_id].date == requestDate) {
+                                
                                 count++;
                             };
                         }
@@ -211,6 +221,8 @@
 
                 });
             });
+
+            
 
 
             function assing_complete() {
@@ -223,7 +235,7 @@
                 }
             }
 
-            function assign(id) {
+            function assign(id, requestedDate) {
                 var inputElement = document.querySelector('input[name="assign_req_id"]');
 
                 inputElement.value = id;
@@ -233,10 +245,18 @@
                 var assign_reqid = document.getElementById('assign_req_id');
                 assign_reqid.innerHTML = id;
 
+                var dateInput = document.querySelector('input[name="requested_date"]');
+                dateInput.value = requestedDate;
+                dateInput.style.display = 'none';
+
+                // var request_date = document.getElementById('requested_date');
+                // request_date.innerHTML = requestedDate;
+
                 var assign_popup = document.getElementById('View');
                 assign_popup.classList.add('active');
 
                 document.getElementById('overlay').style.display = "flex";
+
             }
 
 

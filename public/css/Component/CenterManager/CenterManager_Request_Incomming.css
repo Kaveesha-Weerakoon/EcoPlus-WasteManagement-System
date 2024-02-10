@@ -473,9 +473,9 @@
         transition: max-height 0.4s ease-in-out; 
     }
 
-    .dropdown-menu.open {
+    /* .dropdown-menu.open {
         max-height: 200px;
-    }
+    } */
     
 
     .dropdown-menu.show {
@@ -511,20 +511,20 @@
     
 
    
-    .assigned_count{
+    /* .assigned_count{
         position: absolute;
         right: 10px;
         top: 50%;      
-        width: 20px; /* Set the width */
-        height: 20px; /* Set the height */
-        border-radius: 50%; /* Create a circular border */
-        background-color: var(--green-color-one); /* Set the background color */
-        border: 2px solid #000; /* Set the border color and width */
-        color: #fff; /* Set the text color */       
+        width: 20px;
+        height: 20px; 
+        border-radius: 50%; 
+        background-color: var(--green-color-one); 
+        border: 2px solid #000; 
+        color: #fff;       
         display: flex;
         align-items: center;
         
-    }
+    } */
 
     .assign-line{
         width: 40px;
@@ -546,14 +546,15 @@
 
     }
 
-    .assigned-req-count-container span{
+    /* .assigned-req-count-container span{
         position: relative;
         margin: 10px;
-    }
+    } */
 
-    .assigned-req-count-container span::before{
-        content: attr(data-count); /* Use attr(data-count) to display the count */
-        position: absolute;
+    .assigned-req-count-container span{
+        
+        /* position: absolute;
+        display: inline-block;
         background: var(--green-color-one);
         width: 40px;
         height: 40px;
@@ -564,10 +565,20 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        top: -10px; /* Adjust the top position to center the circle */
-        left: 50%; /* Adjust the left position to center the circle */
-        transform: translateX(-50%);
-        
+        top: -10px; 
+        left: 50%; 
+        transform: translateX(-50%); */
+        position: relative;
+        display: inline-block; 
+        width: 40px; 
+        height: 40px;
+        line-height: 40px; 
+        border-radius: 50%; 
+        background-color: var(--green-color-one); 
+        color: white; 
+        font-weight: 500;
+        font-size: 18px;
+            
       
  
     }

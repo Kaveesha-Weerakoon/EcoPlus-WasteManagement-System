@@ -68,7 +68,7 @@
         color: var(--main-text-color);
     }
 
-    v .main-right-top-search input:focus {
+    .main-right-top-search input:focus {
         border: 1px solid #1ca557;
         outline: none;
     }

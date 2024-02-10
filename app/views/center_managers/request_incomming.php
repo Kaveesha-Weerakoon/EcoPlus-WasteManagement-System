@@ -98,31 +98,76 @@
                         action="<?php echo URLROOT?>/centermanagers/assing">
                         <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-assing">
                         <h2>Assign a Collector</h2>
-
-                        <img class="view_assing" src="<?php echo IMGROOT?>/selection.png" alt="">
+                        <hr class="assign-line">
+                        <!-- <img class="view_assing" src="<?php echo IMGROOT?>/selection.png" alt=""> -->
                         <div class="view_assing_middle">
-                            <h3>Req ID: <b>R <div id="assign_reqid" style="display: inline;"></div></b></h3>
+                            <h3>Req ID: <b>R <div id="assign_req_id" style="display: inline;"></div></b></h3>
                         </div>
                         <input name="assign_req_id" type="text" id="assign_req_id" style="display: none;">
                        
 
-                        <select id="dropdown" name="collectors">
+                        <!-- <select id="dropdown" name="collectors">
                             <?php
-                         $collectors = $data['collectors'];
-                         $assigned_requests_count = $data['assigned_requests_count'];
-                          if (!empty($collectors)) {
-                             foreach ($collectors as $collector) {
-                                $request_count = isset($assigned_requests_count[$collector->id]) ? $assigned_requests_count[$collector->id] : 0;
-                                //$request_count = $assigned_requests_count[$collector->id] ?? 12;
+                            $collectors = $data['collectors'];
+                            $assigned_requests_count = $data['assigned_requests_count'];
+                            if (!empty($collectors)) {
+                                foreach ($collectors as $collector) {
+                                    $request_count = isset($assigned_requests_count[$collector->id]) ? $assigned_requests_count[$collector->id] : 0;
+                                    //$request_count = $assigned_requests_count[$collector->id] ?? 12;
+                                    // $image_url = $collector->image; 
 
-                                 echo "<option value=\"$collector->id\">C $collector->id $collector->name $collector->vehicle_type <span class=\"assigned_count\">$request_count</span></option>";
-                            }
-                          } else {
-                               echo "<option value=\"default\">No Collectors Available</option>";
-                            }
-                         ?>
+                                    echo "<option value=\"$collector->id\">
+                                            <img src=\"" . IMGROOT . "/img_upload/collector/$collector->image\" alt=\"$collector->name\" style=\"width: 20px; height: 20px; margin-right: 5px;\"> 
+                                            C $collector->id $collector->name $collector->vehicle_type 
+                                        </option>";
+                                }
+                            } else {
+                                echo "<option value=\"default\">No Collectors Available</option>";
+                                }
+                            ?>
 
-                        </select>
+                        </select> -->
+
+                        <div class="dropdown">
+                            <div class="dropdown-toggle" id="dropdownToggle" aria-haspopup="true" aria-expanded="false">
+                                Select a Collector
+                               <span class="arrow-down"></span>
+                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownToggle">
+                                <?php
+                                $collectors = $data['collectors'];
+                                $assigned_requests_count = $data['assigned_requests_count'];
+                                if (!empty($collectors)) {
+                                    foreach ($collectors as $collector) {
+                                        $request_count = isset($assigned_requests_count[$collector->id]) ? $assigned_requests_count[$collector->id] : 0;
+                                        //$request_count = $assigned_requests_count[$collector->id] ?? 12;
+                                        // $image_url = $collector->image; 
+                                        echo "<li class=\"dropdown-item\" data-id=\"$collector->id\">
+                                                <img src=\"" . IMGROOT . "/img_upload/collector/$collector->image\"  > 
+                                                <span class=\"collector-id\">C$collector->id</span>
+                                                <span class=\"collector-name\">$collector->name</span>
+                                                <span class=\"vehicle-type\">$collector->vehicle_type</span>
+                                                
+                                            </li>";
+                                    }
+                                } else {
+                                    echo "<li>No Collectors Available</li>";
+                                }
+                                ?>
+                            </ul>
+                        </div>
+
+
+                    
+                            
+                        <div class="assigned-req-count-container">
+                            <p>Number of Assigned requests for the requested date:</p>
+                            <span data-count="10"></span>
+                        </div>
+                      
+                        <div class="assigned-map-container">
+
+                        </div>
 
                         <Button type="submit" onclick="assing_complete()">Assign</Button>
                     </form>
@@ -162,6 +207,9 @@
 
 
             <script>
+                
+             
+
             function validateCancelForm() {
                 var reasonInput = document.getElementsByName("reason")[0].value;
 
@@ -432,6 +480,31 @@
 
 
             });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const dropdownToggle = document.getElementById('dropdownToggle');
+                const dropdownMenu = document.querySelector('.dropdown-menu');
+                const dropdownItems = dropdownMenu.querySelectorAll('li');
+
+                dropdownToggle.addEventListener('click', function() {
+                    dropdownMenu.classList.toggle('show');
+                });
+
+                dropdownItems.forEach(function(item) {
+                    item.addEventListener('click', function() {
+                        dropdownToggle.textContent = this.textContent;
+                        dropdownMenu.classList.remove('show');
+                    });
+                });
+
+                document.addEventListener('click', function(event) {
+                    if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                        dropdownMenu.classList.remove('show');
+                    }
+                });
+            });
+
+
 
             document.getElementById('searchInput').addEventListener('input', searchTable);
             </script>

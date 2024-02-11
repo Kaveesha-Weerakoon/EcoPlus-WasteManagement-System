@@ -5,7 +5,21 @@
     public function __construct(){
       $this->db = new Database;
     }
+    
+  public function getTotalRequests(){
+    try {
+      $this->db->query('
+          SELECT * FROM request_main
+      ');
 
+      $results = $this->db->resultSet();
+      return $results;
+
+    } catch (PDOException $e) {
+      return false;
+    }
+  }
+   
     public function request_insert($data){
       try{
         $this->db->query('INSERT INTO request_main (region, customer_id, name,contact_no, date, time,instructions,lat,longi) VALUES (:region, :customer_id, :name,:contact_no, :date, :time,:instructions,:lat,:longi)');
@@ -265,11 +279,11 @@
       collectors.*,
       collectors.user_id as collector_id,
       users.name as collector_name
-  FROM request_main
-  LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
-  LEFT JOIN collectors ON request_assigned.collector_id = collectors.user_id
-  JOIN users ON users.id = collectors.user_id
-  WHERE request_main.region = :region AND request_main.type = :type;
+      FROM request_main
+      LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
+      LEFT JOIN collectors ON request_assigned.collector_id = collectors.user_id
+      JOIN users ON users.id = collectors.user_id
+      WHERE request_main.region = :region AND request_main.type = :type;
   
      ');
 

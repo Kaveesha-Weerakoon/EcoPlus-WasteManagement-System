@@ -953,7 +953,6 @@
       $this->view('admin/complain_centers', $data);
     }
 
-
     public function discount_agents(){
 
       $discount_agent = $this->discount_agentModel->get_discount_agent();
@@ -1355,7 +1354,6 @@
 
     }
     
-
     public function reports(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){     
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1377,9 +1375,9 @@
         $ongoingRequests=$this->Report_Model->getonGoingRequests($fromDate,$toDate,$center);
         $totalRequests=$this->Report_Model->getallRequests($fromDate,$toDate,$center);
         $credits=$this->Report_Model->getCredits($fromDate,$toDate,$center);
-
         $centers = $this->center_model->getallCenters();
-
+        $creditByMonth=$this->Report_Model->getCreditsMonths($center);
+        
         $data=[
           'completedRequests'=> count($completedRequests),
           'cancelledRequests'=> count($cancelledRequests),
@@ -1389,7 +1387,8 @@
           'center'=>$center,
           'to'=>$toDate,
           'from'=>$fromDate,
-          'credits'=> $credits->total_credits
+          'credits'=> $credits->total_credits,
+          'creditsByMonth1'=>  $creditByMonth
         ];
         $this->view('admin/report', $data);
 
@@ -1401,7 +1400,11 @@
         $totalRequests=$this->Report_Model->getallRequests();
         $centers = $this->center_model->getallCenters();
         $credits=$this->Report_Model->getCredits();
+        $creditByMonth=$this->Report_Model->getCreditsMonths();
+    
+        $creditByMonth=$this->Report_Model->getCreditsMonths();
 
+        
         $data=[
           'completedRequests'=> count($completedRequests),
           'cancelledRequests'=> count($cancelledRequests),
@@ -1410,8 +1413,10 @@
           'centers'=> $centers,
           'center'=>'All',
           'to'=>'none',
-          'from'=>'none',
-          'credits'=> $credits->total_credits
+          'from'=>'none',    
+          'credits'=> $credits->total_credits,
+          'creditsByMonth1'=>  $creditByMonth
+
         ];
         
         $this->view('admin/report', $data);

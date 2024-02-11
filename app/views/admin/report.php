@@ -26,10 +26,6 @@
 
                 <div class="main-right-bottom">
 
-
-
-
-
                     <form class="top-bar" method="post" action="<?php echo URLROOT;?>/admin/reports">
                         <div class="top-bar-left">
                             <h2>Analatics</h2>
@@ -73,6 +69,9 @@
 
                         <button>Filter</button>
                     </form>
+
+
+
                     <div class="request-section">
                         <div class="left">
                             <div class="left-cont">
@@ -144,33 +143,86 @@
 
 
 
-
-
-
 <script>
-// Your Chart.js configuration
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-const NUMBER_OF_DATA_POINTS = 7; // Number of data points in the dataset
+const currentDate = new Date();
+const currentMonth = currentDate.getMonth() + 1;
+// Add 1 to represent January as index 1
+const currentYear = currentDate.getFullYear();
+const completedRequests = <?php echo json_encode($data['creditsByMonth1']); ?>;
 
-// Generate random numbers for the dataset
-function generateRandomData(count, min, max) {
-    const data = [];
-    for (let i = 0; i < count; i++) {
-        data.push(Math.floor(Math.random() * (max - min + 1)) + min);
-    }
-    return data;
+function getMonthName(monthIndex) {
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+        'October', 'November', 'December'
+    ];
+
+    return monthNames[monthIndex - 1]; // Subtract 1 to correctly index monthNames array
+}
+const labels = [];
+for (let i = 0; i < 5; i++) {
+    const month = (currentMonth - i + 11) % 12; // No need to subtract 1
+    const year = currentYear - (i === 0 && currentMonth === 1 ? 1 : 0); // Adjust the condition to check for January
+    labels.unshift(getMonthName(month + 1) + ' ' + year);
 }
 
+const completedRequestCounts = completedRequests.map(request => {
+    const date = new Date(request.date);
+    return {
+        month: date.getMonth() + 1, // Add 1 to represent January as index 1
+        year: date.getFullYear(),
+        creditAmount: request.credit_amount,
+        req_id: request.req_id
+    };
+});
+
+function countRequests(requests) {
+    const sums = Array(12).fill(0); // Initialize an array to hold sums for each month
+
+    // Calculate sums for each month
+    requests.forEach(request => {
+        const monthIndex = request.month;
+        const creditAmount = parseFloat(request.creditAmount); // Parse creditAmount to float
+        // Check if creditAmount is NaN
+        if (!isNaN(creditAmount)) {
+            sums[monthIndex - 1] += creditAmount;
+            // No need to subtract 0
+        } else {
+            console.log("Invalid creditAmount for request with req_id:", request.req_id);
+            // Handle invalid creditAmount here if needed
+        }
+    });
+
+    return sums;
+}
+
+function printLastSixMonths(arr, startIndex) {
+    const length = arr.length;
+    const result = [];
+    // Calculate the start index for slicing the array
+    const startIdx = (startIndex - 1 + length) % length;
+
+    for (let i = 0; i <= 4; i++) {
+        // Calculate the index, ensuring it stays within bounds and handles negative indices
+        const j = (startIdx - i + length) % length;
+        // Add the element to the result array
+        result.push(arr[j]);
+    }
+
+    return result.reverse();
+}
+
+
+console.log(countRequests(completedRequestCounts));
+
+const completedData = printLastSixMonths(countRequests(completedRequestCounts), currentDate.getMonth() + 1);
+console.log(completedData)
 const data = {
     labels: labels,
     datasets: [{
-            label: 'Credits',
-            data: generateRandomData(NUMBER_OF_DATA_POINTS, -100, 100),
-            borderColor: '#64d798',
-            backgroundColor: '#64d798',
-        },
-
-    ]
+        label: 'Credits',
+        data: completedData,
+        borderColor: '#64d798',
+        backgroundColor: '#64d798',
+    }]
 };
 
 const config = {
@@ -181,61 +233,20 @@ const config = {
         plugins: {
             legend: {
                 position: 'top',
-                labels: {
-                    font: {
-                        size: 14,
-                        weight: 'bold'
-                    }
-                }
             },
             title: {
                 display: true,
-                text: 'Credits Given Chart',
-                font: {
-                    size: 18,
-                    weight: 'bold'
-                },
-                padding: 10
-            }
-        },
-        scales: {
-            x: {
-                title: {
-                    display: true,
-                    text: 'Months',
-                    font: {
-                        size: 16,
-                        weight: 'bold'
-                    }
-                },
-                ticks: {
-                    font: {
-                        size: 12
-                    }
-                }
-            },
-            y: {
-                title: {
-                    display: true,
-                    text: 'Credits',
-                    font: {
-                        size: 16,
-                        weight: 'bold'
-                    }
-                },
-                ticks: {
-                    font: {
-                        size: 12
-                    }
-                }
+                text: 'Credits Given Chart'
             }
         }
-    }
+    },
 };
 
-
-// Instantiate a new Chart object
 const ctx = document.getElementById('myChart').getContext('2d');
-new Chart(ctx, config);
+const myChart = new Chart(ctx, config);
 </script>
+
+
+
+
 <?php require APPROOT . '/views/inc/footer.php'; ?>

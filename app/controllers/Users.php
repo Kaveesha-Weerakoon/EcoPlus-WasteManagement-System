@@ -6,10 +6,15 @@
            $this->collectorModel=$this->model('Collector');
            $this->customerModel=$this->model('Customer');
            $this->discount_agentModel=$this->model('Discount_Agent');
+           $this->Center_Model=$this->model('Center');
+
           }
 
     public function register(){
       // Check for POST
+      $centers = $this->Center_Model->getallCenters();
+      $jsonData = json_encode($centers);
+
       if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id']) ){
         redirect('pages');
      }
@@ -28,6 +33,8 @@
             'password' => trim($_POST['password']),
             'confirm_password' => trim($_POST['confirm_password']),
             'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+            'centers'=>$jsonData,
+
             'name_err' => '',
             'email_err' => '',
             'contact_no_err' => '',
@@ -142,7 +149,8 @@
             'city'=>'',
             'password' => '',
             'confirm_password' => '',
-  
+            'centers'=>$jsonData,
+
             'name_err' => '',
             'email_err' => '',
             'contact_no_err' => '',

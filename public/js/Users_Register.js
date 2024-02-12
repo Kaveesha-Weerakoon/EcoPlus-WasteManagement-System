@@ -1,43 +1,17 @@
-let dropArea = document.querySelector(".form-drag-area");
-let dropText = document.querySelector(".description")
-const browseButton = document.querySelector(".form-upload");
-let inputPath = document.querySelector("#profile_image");
-
+const browseButton = document.querySelector(".profile_image"); // Should be profile_image_trigger
+const inputPath = document.querySelector("#profile_image");
 let file;
 
 browseButton.onclick = () => {
-
     inputPath.click();
 }
 
 inputPath.addEventListener("change", function () {
     file = this.files[0];
-    showimage();
+    showImage();
 })
 
-dropArea.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    dropArea.classList.add("active");
-    dropText.textContent = "Image Added"
-});
-
-dropArea.addEventListener("dragleave", () => {
-    dropArea.classList.remove("active");
-    dropText.textContext = "Drag & Drop to upload File";
-});
-
-dropArea.addEventListener("drop", (event) => {
-    event.preventDefault();
-    file = event.dataTransfer.files[0];
-    let list = new DataTransfer();
-    list.items.add(file);
-    inputPath.file - list.files;
-
-    showimage();
-    dropArea.classList.remove("active");
-});
-
-function showimage() {
+function showImage() {
     let fileType = file.type;
     let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
 
@@ -45,16 +19,12 @@ function showimage() {
         let fileReader = new FileReader();
         fileReader.onload = () => {
             let fileURL = fileReader.result;
-            document.querySelector("#profile_image_placeholder").setAttribute('src', fileURL);
+            document.querySelector(".profile_image_trigger").setAttribute('src', fileURL); // Changed the selector here
         }
 
         fileReader.readAsDataURL(file);
-
-        let validate = document.querySelector(".profile-image-validation");
-        validate.classList.add("active");
     }
     else {
-        alert("not an image file");
-        dropArea.classList.remove("active")
+        alert("Please select an image file (JPEG/JPG/PNG).");
     }
 }

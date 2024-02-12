@@ -11,7 +11,7 @@
             </div>
             <h3>Dashboard</h3>
         </div>
-        <div class="main-left-middle-content"  id=" reports">
+        <div class="main-left-middle-content" onclick="redirect_reports()" id="reports">
             <div class=" main-left-middle-content-icon">
                 <i class='bx bxs-report'></i>
             </div>
@@ -78,6 +78,12 @@ function redirect_centers() {
 
 function redirect_complains() {
     var linkUrl = "<?php echo URLROOT?>/admin/complain_customers"; // Replace with your desired URL
+    window.location.href = linkUrl;
+}
+
+
+function redirect_reports() {
+    var linkUrl = "<?php echo URLROOT?>/admin/reports"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
 

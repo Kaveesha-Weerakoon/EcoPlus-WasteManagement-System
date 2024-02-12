@@ -41,8 +41,8 @@
       return $results;
       }catch (PDOException $e) {
         return false;
+     }
     }
-  }
   
     public function get_complete_request($collector_id){
       $this->db->query('
@@ -59,10 +59,10 @@
       $results = $this->db->resultSet();
   
       return $results;
-  }
+    }
 
-  public function get_complete_request_cus($collector_id){
-    $this->db->query('
+    public function get_complete_request_cus($collector_id){
+      $this->db->query('
         SELECT request_main.*, request_completed.*,customers.*,customers.image  AS customer_image
         FROM request_main
         LEFT JOIN request_assigned ON request_main.req_id = request_assigned.req_id
@@ -70,14 +70,14 @@
         LEFT JOIN customers ON request_main.customer_id = customers.user_id
         WHERE request_assigned.collector_id = :collector_id 
         AND request_main.type = "completed"
-    ');
+     ');
 
-    $this->db->bind(':collector_id', $collector_id);
+      $this->db->bind(':collector_id', $collector_id);
 
-    $results = $this->db->resultSet();
+      $results = $this->db->resultSet();
 
-    return $results;
-}
+       return $results;
+    }
   
     public function insert($data){
       try{
@@ -94,7 +94,6 @@
       $this->db->bind(':note', $data['note']);
       $addedValue = isset($data['added']) ? $data['added'] : 'no';
       $this->db->bind(':added', $addedValue);
-
       $result = $this->db->execute();
       if ($result) {
         $this->db->query('UPDATE request_main SET type = :type WHERE req_id = :req_id');
@@ -137,7 +136,7 @@
         }
       }catch (PDOException $e) {
         return false;
-    } 
+     } 
     }
 
     public function get_completed_requests_bycenter($region){
@@ -169,7 +168,6 @@
 
     }
 
-    
     public function updateGarbageTotals($req_id) {
       try {
           $this->db->query('SELECT * FROM request_completed WHERE req_id = :req_id');
@@ -207,14 +205,13 @@
 
     }
 
-
     public function getGarbageDetailsForCustomer($customer_id) {
       $this->db->query('SELECT * FROM customer_total_garbage WHERE user_id = :customer_id');
       $this->db->bind(':customer_id', $customer_id);
       $result = $this->db->single();
 
       return $result;
-  }
+    }
 
     public function get_completed_request_byreqId($req_id){
       $this->db->query('SELECT * FROM request_completed WHERE req_id = :req_id');
@@ -245,7 +242,63 @@
       $result = $this->db->single();
   
       return $result;
-  }
+    }
+
+    public function getAllCompletedRequests(){
+      try {
+          $this->db->query('
+              SELECT * FROM request_main
+              WHERE type = :type
+          ');
+          $this->db->bind(':type', 'completed');
   
+          $results = $this->db->resultSet();
+  
+          return $results;
+      } catch (PDOException $e) {
+        
+          return false;
+      }
+  }  
+
+  public function getTotalCreditsGivenInMonth(){
+    try {
+        // Get the current month and year
+        $currentMonth = date('m');
+        $currentYear = date('Y');
+
+        // Prepare the SQL query
+        $this->db->query('
+        SELECT 
+        SUM(credit_amount) as credit_amount
+        FROM request_completed rc
+        WHERE 
+        rc.req_id IS NOT NULL 
+        AND MONTH(rc.completed_date) =:currentMonth
+        AND YEAR(rc.completed_date) =:currentYear
+
+        ');
+
+        // Bind the current month and year to the database query
+        $this->db->bind(':currentMonth',  $currentMonth);
+        $this->db->bind(':currentYear', $currentYear);
+
+        // Execute the query
+        $this->db->execute();
+        
+        // Fetch the result
+        $row = $this->db->single();
+        
+        // Return the total credits given in the current month
+        return $row;
+    } catch (PDOException $e) {
+        // Handle the exception (e.g., log the error)
+        error_log('Database error: ' . $e->getMessage());
+        return false;
+    }
+}
+
+
+
   
 }

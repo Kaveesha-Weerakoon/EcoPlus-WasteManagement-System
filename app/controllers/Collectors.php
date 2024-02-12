@@ -824,7 +824,8 @@
             'popup_confirm_collect'=>$pop_eco,
             'note_err'=>'',
             'creditData'=>'',
-            'types'=>$types
+            'types'=>$types,      
+            'credit_Amount'=> '',
         ];
 
 
@@ -958,7 +959,7 @@
           'popup' => 'True',
           'popup_confirm_collect'=>$pop_eco,
           'types'=>$types,
-
+          'credit_Amount'=> '',
           'note_err'=>'',
           'creditData'=>''
        ];
@@ -974,9 +975,7 @@
             $data["{$typeName}_quantity_err"] = '';
         }
       }
-      $fieldsToCheck = ['polythene', 'plastic', 'glass', 'paper', 'electronic', 'metals'];
      
-      
       foreach ($types as $type) {
         if ($type) {
             $typeName = strtolower($type->name);
@@ -1017,20 +1016,18 @@
       if(empty($_POST['note'])){
             $data['note_err'] = 'Please fill in the Note field';
       }    
-
+      $credit_Amount =0;
       if ($atLeastOneFilled && empty($data['note_err']) && $allFieldsValid) {
 
-            $credit_Amount =0;
-           
+       
           foreach ($types as $type) {
               if ($type) {
                   $typeName = strtolower($type->name);
-                  $credit_Amount=(floatval($data["{$type->name}_quantity"]) * $type->credits_per_waste_quantity);
+                  $credit_Amount+=(floatval($data["{$type->name}_quantity"]) * $type->credits_per_waste_quantity);
               }
             }
           $data['creditData']=$types ;
           $data['credit_Amount'] = $credit_Amount;
-
           $collector = $this->collectorModel->getCollectorById($_SESSION['collector_id']);
           $data['center_id'] = $collector->center_id;
           $data['region'] = $collector->center_name;

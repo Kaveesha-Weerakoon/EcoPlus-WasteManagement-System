@@ -1,13 +1,13 @@
-.Customer_History_Top {
+.Customer_GarbageTypes {
     * {
         color: var(--main-text-color);
     }
 
-    #history i {
+    #dashboard i {
         color: var(--green-color-one);
     }
 
-    #history h3 {
+    #dashboard h3 {
         color: var(--green-color-one);
     }
 
@@ -26,7 +26,7 @@
         flex-direction: column;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
-        background-color: var(--background-color-main);
+        background-color: var(--background-color-right);
 
     }
 
@@ -43,44 +43,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-    }
-
-    .main-right-bottom-two-content i {
-        font-size: 150px;
-        margin-bottom: 1%;
-        margin-top: 45px;
-    }
-
-    .main-right-bottom-two-content h1 {
-        font-size: 21px !important;
-        color: var(--main-text-color);
-        font-weight: 550;
-        margin-top: 2%;
-        letter-spacing: 0.05rem;
-
-    }
-
-    .main-right-bottom-two-content button {
-        height: 40px;
-        width: 220px;
-        outline: none;
-        color: white;
-        font-size: 19px;
-        font-weight: 500;
-        border-radius: 5px;
-        cursor: pointer;
-        border: none;
-        letter-spacing: 1px;
-        background: var(--green-color-one);
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-        margin-bottom: 20px;
-        margin-top: 10%;
-    }
-
-    .main-right-bottom-two-content p {
-        font-size: 18px;
-        margin-top: 7px;
-        color: var(--main-text-color);
     }
 
     .main-right-top-one {
@@ -145,7 +107,6 @@
         align-items: center;
         padding-left: 33px;
         background-color: var(--background-color-right);
-
     }
 
     .main-right-top-two h1 {
@@ -155,42 +116,18 @@
     }
 
     .main-right-top-three {
+        height: 50px;
         display: flex;
-        flex-direction: row;
-        padding-left: 38px;
-        padding-top: 9px;
-        padding-bottom: 11px;
-        background-color: var(--background-color-right);
-
-    }
-
-    .main-right-top-three-content {
-        display: flex;
-        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        margin-right: 15px;
-        cursor: pointer;
+        padding-left: 45px;
+        background-color: var(--background-color-right);
+        font-weight: 100 !important;
     }
 
-    .main-right-top-three-content p {
+    .main-right-top-three h4 {
+        font-weight: 100 !important;
         font-size: 15px;
-        padding-bottom: 5px;
-        color: var(--main-text-color);
         letter-spacing: 0.03rem;
-    }
-
-
-    .line {
-        width: 93px;
-        height: 3px !important;
-        background-color: var(--green-color-one);
-    }
-
-    .line1 {
-        width: 93px;
-        height: 3px !important;
-        background-color: none;
     }
 
     .main-right-bottom {
@@ -247,12 +184,25 @@
 
     .table {
         border-collapse: collapse;
-        text-align: center;
         padding-left: 3.5%;
         width: 96.5%;
         background-color: white;
     }
 
+    .table-header {
+        grid-template-columns: 20% 50% 30%
+    }
+
+    .table-row {
+        height: 45px;
+        grid-template-columns: 20% 50% 30%
+    }
+
+    .table td {
+        height: 40px;
+        font-size: 14px;
+        text-align: left !important;
+    }
 
     @media screen and (max-width: 1118px) {
         .table td {
@@ -272,6 +222,7 @@
             margin-left: 40px;
         }
     }
+
 
     @media screen and (max-width:862px) {
 

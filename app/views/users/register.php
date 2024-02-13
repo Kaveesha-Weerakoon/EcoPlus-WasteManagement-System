@@ -160,8 +160,22 @@
             </div>
             <div class="cont-region">
                 <p>Region</p>
-                <input type="text" placeholder="Enter your region" id="city" name="city">
+                <select id="city" name="city" class="city">
+                    <?php
+                       $centers = $data['centers2'];
+                       $regionFound = false;
+
+                       if (!empty($centers)) {
+                        foreach ($centers as $center) {
+                            echo "<option value=\"$center->region\" >$center->region</option>";
+                 }} else {
+                    echo "<option value=\"default\">No Centers Available</option>";
+                }
+                ?>
+                </select>
             </div>
+
+
 
             <div class="cont-main">
                 <div class="cont">

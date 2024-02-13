@@ -25,7 +25,7 @@
                         <p><?php echo $data['password_err']?></p>
                     </div>
                                 
-                    <div class="forgot"><a href="">Forgot your password?</a></div>
+                    <div class="forgot"><a href="<?php echo URLROOT?>/users/resetpassword">Forgot your password?</a></div>
                     <button class="login-button">Login</button>
                     <p>Don't have an account? <a href="<?php echo URLROOT?>/users/register"><b>Register</b></a></a></p>
                 </div>

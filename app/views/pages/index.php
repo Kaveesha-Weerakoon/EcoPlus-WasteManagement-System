@@ -1,77 +1,56 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Home-main">
-<div class=" main">
-            <div class="main-top">
-                <div class="main-top-left">
-                    <img width="170px" height="170px" src="<?php echo IMGROOT;?>/Logo_No_Background.png" alt="">
-                </div>
-                <div class="main-top-right">
-                    <p>Home</p>
-                    <p><a href="#goals">Our Goals</a></p>
-                    <p>About us</p>
-                    <p>Contact us</p>
-                    <a href="<?php echo URLROOT; ?>/users/login"><button>Sign In</button></a>
-                </div>
-            </div>
-            <div class="main-bottom">
-                <div class="main-bottom-left">
-                    <div class="main-bottom-left-h2">
-                        We Manage <br>
-                        Non-Biodegradable
-                        Waste Collection
-                    </div>
-
-                    <p>Welcome to Ecoplus, your portal to a world of garbage collection system ,
-                        that make you feel free to dispose garbage</p>
-
-                    <a href="<?php echo URLROOT;?>/users/register"><button>
-                            Join With Us
-                        </button></a>
-                </div>
-                <div class="main-bottom-right">
-                    <img src="<?php echo IMGROOT;?>/Home_Top_Image.png" alt="">
-                </div>
+    <div class="main">
+        <div class="main-top">
+            <img src="<?php echo IMGROOT;?>/HomeLogo.png" alt="">
+            <div class="set">
+                <p id="Home">Home</p>
+                <p>About Us</p>
+                <p>Contact Us</p>
+                <p>Policies</p>
+                <button onclick="redirectLogin()">Sign In</button>
             </div>
         </div>
-        <!-- <div class="middle" id="goals">
-            <div class="middle-right">
-                <img src="<?php echo IMGROOT;?>/Home_Middle-Image.png" alt="">
+        <div class="main-bottom">
+            <div class="main-bottom-left">
+                <h1>WASTE RECYCLE</h1>
+                <p>Recycle with us and earn Eco Credits Your ticket to eco-friendly rewards!</p>
+                <button onclick="redirectSignUp()">Join Now</button>
             </div>
-            <div class="middle-left">
-                <h1>Our Goals </h1>
-                <div class="middle-left-content">
-                    <div class="middle-left-content-top">
-                        <img src="<?php echo IMGROOT;?>/Home_Vector_One.png" alt="">
-                        <h3>Non-Biodegradable Waste Collection</h3>
-                    </div>
-                    <div class="middle-left-content-p">
-                        Manage non-biodegradable Waste collection
-                    </div>
+            <div class="main-bottom-right">
+                <img id="changingImage" src="<?php echo IMGROOT;?>/home1.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    <script>
+    var images = ['<?php echo IMGROOT;?>/home2.jpg', '<?php echo IMGROOT;?>/home3.jpg',
+        '<?php echo IMGROOT;?>/home1.jpg',
+    ];
+    var currentIndex = 0;
+    var changingImage = document.getElementById('changingImage');
 
-                </div>
-                <div class="middle-left-content">
-                    <div class="middle-left-content-top">
-                        <img src="./src/Home_Vector_Two.png" alt="">
-                        <h3>Reduce Environmental Pollution</h3>
-                    </div>
-                    <div class="middle-left-content-p">
-                        Reducing environmental pollution involves minimizing emissions, conserving resources, and
-                        fostering sustainable habits.
-                    </div>
+    function changeImage() {
+        changingImage.style.opacity = '0';
+        setTimeout(function() {
+            changingImage.src = images[currentIndex];
+            changingImage.style.opacity = '1';
+            currentIndex = (currentIndex + 1) % images.length;
+        }, 1100); // Wait for 1 second (opacity transition time) before changing the image
+    }
 
-                </div>
-                <div class="middle-left-content">
-                    <div class="middle-left-content-top">
-                        <img src="<?php echo IMGROOT;?>/Home_Vector_Three.png" alt="">
-                        <h3>Promote Sustainable Shopping</h3>
-                    </div>
-                    <div class="middle-left-content-p">
-                        Gives Users their Waste Values as Eco Credits which can be Claimed On Supermarkets
-                    </div>
+    setInterval(changeImage, 2900);
+    // Change the image every 3 seconds (3000 milliseconds)
 
-                </div>
-            </div> -->
-</div>
+    function redirectLogin() {
+        var linkUrl = "<?php echo URLROOT?>/users/login";
+        window.location.href = linkUrl;
+    }
+
+    function redirectSignUp() {
+        var linkUrl = "<?php echo URLROOT?>/users/register";
+        window.location.href = linkUrl;
+    }
+    </script>
 </div>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

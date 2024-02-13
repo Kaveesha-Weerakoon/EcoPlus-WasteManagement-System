@@ -82,7 +82,7 @@
                         <div class="main-right-bottom-container">
                             <div class="main-right-bottom-container-top">
                                 <div class="circle"></div>
-                                <h4>Complaints</h4>
+                                <h4>Discounts</h4>
                             </div>
                             <div class="main-right-bottom-container-container">
                                 <div class="main-right-bottom-top">
@@ -91,8 +91,8 @@
                                             <th>Discount ID</th>
                                             <th>Date</th>
                                             <th>Time</th>
-                                            <th>Discount</th>
-                                            <th>Center</th>
+                                            <th>Credit Amount</th>
+                                            <th>Branch</th>
                                         </tr>
                                     </table>
                                 </div>
@@ -100,13 +100,13 @@
                                     <table class="table">
                                         <?php foreach($data['discount'] as $post) : ?>
                                         <tr class="table-row">
-                                            <td>Com <?php echo $post->discount_id?></td>
+                                            <td><?php echo $post->name?></td>
                                             <?php
                                                 $date = date('Y-m-d', strtotime($post->created_at));
                                                 $time = date('H:i:s', strtotime($post->created_at));
                                                 ?>
-                                                <td><?php echo $date ?></td>
-                                                <td><?php echo $time ?></td>
+                                            <td><?php echo $date ?></td>
+                                            <td><?php echo $time ?></td>
                                             <td><?php echo $post->discount_amount?></td>
                                             <td><?php echo $post->center?></td>
                                         </tr>

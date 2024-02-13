@@ -14,7 +14,6 @@
     public function index(){
       $discounts=$this->discount_agentModel->getDiscountByAgent($_SESSION['agent_id']);
       $data = [
-        'title' => 'TraversyMVC',
         'discounts'=>$discounts
       ];
      
@@ -161,7 +160,8 @@
         $data['name']=$_SESSION['agent_name'];
         $data['contactno']=$agent_by_id->contact_no;
         $data['address']=$agent_by_id->address; 
-     
+        $data['email']=$_SESSION['agent_email']; 
+
   
         if (empty($data['current'])) {
           $data['current_err'] = 'Please Enter Current Password';
@@ -275,7 +275,6 @@
       }
     }
 
-    
     public function balance_validation() {     
 
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -377,6 +376,24 @@
           ];
   
           $this->view('credit_discount_agents/agent_discount', $data);
+      }
+    }
+
+    public function history(){
+      
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $data=[];
+
+        $this->view('credit_discount_agents/history', $data);
+
+      }
+      else{
+      $discounts=$this->discount_agentModel->getDiscountByAgent($_SESSION['agent_id']);
+
+      $data = [
+        'discounts'=>$discounts
+      ];
+        $this->view('credit_discount_agents/history', $data);
       }
     }
     

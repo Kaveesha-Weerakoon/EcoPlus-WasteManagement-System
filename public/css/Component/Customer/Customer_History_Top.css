@@ -273,19 +273,6 @@
         }
     }
 
-    @media screen and (max-width: 1108px) {
-        .notification_popup h1 {
-            font-size: 19px;
-            letter-spacing: 0.001rem;
-            margin-top: 5px;
-            margin-left: 8px;
-        }
-
-        .notification_popup {
-            width: 25%;
-        }
-    }
-
     @media screen and (max-width:862px) {
 
         .main-right-top-three-content p {
@@ -324,31 +311,5 @@
     }
 
 
-    @media screen and (max-width: 692px) {
-        .notification {
-            height: 41px !important;
-            margin-top: 6px;
-            font-size: 13px;
-        }
 
-        .notification_popup h1 {
-            font-size: 17px;
-        }
-
-        .main-right-top-search {
-            margin-left: 40px;
-        }
-
-        .main-right {
-            width: 140% !important;
-        }
-
-        .notification_popup {
-            top: 11%;
-            right: -1%;
-            width: 40%;
-        }
-
-
-    }
 }

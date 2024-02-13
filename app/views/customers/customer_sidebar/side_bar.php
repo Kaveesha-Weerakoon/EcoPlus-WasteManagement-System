@@ -17,6 +17,13 @@
             </div>
             <h3>Requests</h3>
         </div>
+        <div class="main-left-middle-content" onclick="redirect_analatics()" id="analatics">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bx-stats'></i>
+            </div>
+            <h3>Analatics</h3>
+        </div>
+
         <div class="main-left-middle-content" onclick="redirect_history()" id="history">
             <div class=" main-left-middle-content-icon">
                 <i class='bx bx-timer'></i>
@@ -29,13 +36,18 @@
             </div>
             <h3>Complaints</h3>
         </div>
+        <div class="main-left-middle-content" onclick="redirect_analatics()" id="annocements">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bxs-megaphone'></i>
+            </div>
+            <h3>Annoucements</h3>
+        </div>
         <div class="main-left-middle-content" onclick="redirect_edit_profile()" id="edit_profile">
             <div class="main-left-middle-content-icon">
                 <i class='bx bx-user-pin'></i>
             </div>
             <h3>Profile</h3>
         </div>
-
     </div>
     <div class="main-left-down">
         <h1>SETTINGS</h1>
@@ -74,6 +86,11 @@ function redirect_dashboard() {
 
 function redirect_request() {
     var linkUrl = "<?php echo URLROOT?>/customers/request_main"; // Replace with your desired URL
+    window.location.href = linkUrl;
+}
+
+function redirect_analatics() {
+    var linkUrl = "<?php echo URLROOT?>/customers/analatics"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
 

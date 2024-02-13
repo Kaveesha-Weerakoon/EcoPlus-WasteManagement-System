@@ -17,6 +17,8 @@
       $this->centermanagerModel=$this->model('Center_Manager');
       $this->discount_agentModel=$this->model('Discount_Agent');
       $this->fineModel=$this->model('Fines');
+      $this->garbage_types_model = $this->model('Garbage_types');
+      $this->Report_Model=$this->model('Customer_Report');
 
 
       if(!isLoggedIn('user_id')){
@@ -243,7 +245,7 @@
         'city_err'=>'',
         'profile_err'=>'',
         'success_message'=>'',
-        'centers' => $centers
+        'centers2' => $centers
        ];
 
        if (empty($data['name'])) {
@@ -589,7 +591,8 @@
         $data['longitude'] =trim($_POST['longitude']);
         $data['location_success'] =trim($_POST['location_success']);
         $data['region']=$user->city;
-        
+        $data['radius']=$center->radius;
+
 
         if (empty($data['name'])) {
            $data['name_err'] = 'Name is required';
@@ -651,7 +654,7 @@
           $this->view('customers/request_collect', $data);
          }        
       }
-          else {
+     else {
          $data = $this->getCommonData();
          $id=$_SESSION['user_id']; 
          
@@ -708,8 +711,6 @@
       $user=$this->customerModel->get_customer($id);
       $center=$this->Center_Model->findCenterbyRegion($user->city);
      
-
-
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         
        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -973,31 +974,104 @@
     }
 
     public function view_notification($url){
-      
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
        
         $Notifications1 = $this->customerModel->view_Notification($_SESSION['user_id']);
         $Notifications2 = $this->customerModel->get_Notification($_SESSION['user_id']);
         $data['notification']=  $Notifications2 ;
-        header("Location: " . URLROOT . "/customers/.$url.");        
+        header("Location: " . URLROOT . "/customers/$url");        
 
      }
     }
 
     public function discount_agents(){
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);    
 
       $discount_agent = $this->discount_agentModel->get_discount_agent();
       $data = [
         'discount_agents' => $discount_agent,
-        'confirm_delete' =>'',
-        'success'=>'',
-        'click_update' =>'',
-        'update_success'=>'',
-        'confirm_delete'=> '',
-        'personal_details_click'=>''
+        'notification'=> $Notifications,   
+
       ];
      
       $this->view('customers/discount_agents', $data);
+    }
+
+    public function garbage_types(){
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);    
+      $garbage_types = $this->garbage_types_model->get_all();
+
+      $data = [
+        'notification'=> $Notifications,   
+        'garbage_types'=>$garbage_types  
+
+      ];
+      $this->view('customers/garbage_types', $data);
+    }
+
+    public function analatics(){
+      $customerId= $_SESSION['user_id'];
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);    
+
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $fromDate= trim($_POST['fromDate']);
+        $toDate= trim($_POST['toDate']);
+        if($toDate==""){
+          $toDate="none";
+        } 
+
+        if($fromDate==""){
+          $fromDate="none";
+        }
+        $completedRequests=$this->Report_Model->getCompletedRequests($customerId,$fromDate,$toDate);
+        $cancelledRequests=$this->Report_Model->getCancelledRequests($customerId,$fromDate,$toDate);
+        $ongoingRequests=$this->Report_Model->getonGoingRequests($customerId,$fromDate,$toDate);
+        $totalRequests = $this->Report_Model->getallRequests($customerId,$fromDate,$toDate);
+        $credits=$this->Report_Model->getCredits($customerId,$fromDate,$toDate);
+        $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
+
+        $data=[
+          'ongoingRequests'=>count($ongoingRequests),
+          'cancelledRequests'=>count($cancelledRequests),
+           'completedRequests'=> count($completedRequests),
+          'totalRequests'=>count($totalRequests),
+          'credits'=> $credits->total_credits,
+          'to'=> $toDate,
+          'from'=>  $fromDate,      
+          'creditsByMonth1'=>  $creditByMonth,
+          'notification'=> $Notifications,   
+
+
+        ];
+        
+      $this->view('customers/analatics', $data);
+     }
+    
+     else{
+      
+      $completedRequests=$this->Report_Model->getCompletedRequests($customerId);
+      $cancelledRequests=$this->Report_Model->getCancelledRequests($customerId);
+      $ongoingRequests=$this->Report_Model->getonGoingRequests($customerId);
+      $totalRequests = $this->Report_Model->getallRequests($customerId);     
+      $credits=$this->Report_Model->getCredits($customerId);
+      $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
+
+      $data=[
+        'ongoingRequests'=>count($ongoingRequests),
+        'cancelledRequests'=>count($cancelledRequests),
+        'completedRequests'=> count($completedRequests),
+        'totalRequests'=>count($totalRequests),
+        'credits'=> $credits->total_credits,     
+        'creditsByMonth1'=> $creditByMonth,
+        'to'=>'none',
+        'from'=>'none',  
+        'notification'=> $Notifications,   
+
+     ];
+     
+       $this->view('customers/analatics', $data);
+     }
     }
 
 }

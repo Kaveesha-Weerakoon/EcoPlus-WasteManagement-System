@@ -146,11 +146,11 @@
           return false;
        }
       
-      }
+    }
 
 
-      public function get_discount($id) {
-        $this->db->query('SELECT * FROM discounts WHERE customer_id = :id ');
+    public function get_discount($id) {
+        $this->db->query('SELECT * FROM discounts d JOIN users da ON da.id=d.agent_id  WHERE customer_id = :id ');
         $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
       
@@ -163,8 +163,8 @@
       $this->db->bind(':id', $id);
       $results = $this->db->resultSet();
       return $results;
-    } 
-    catch (PDOException $e) {
+     } 
+     catch (PDOException $e) {
         return false;
      }
     }

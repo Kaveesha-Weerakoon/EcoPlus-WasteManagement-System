@@ -6,10 +6,15 @@
            $this->collectorModel=$this->model('Collector');
            $this->customerModel=$this->model('Customer');
            $this->discount_agentModel=$this->model('Discount_Agent');
+           $this->Center_Model=$this->model('Center');
+
           }
 
     public function register(){
       // Check for POST
+      $centers = $this->Center_Model->getallCenters();
+      $jsonData = json_encode($centers);
+
       if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id']) ){
         redirect('pages');
      }
@@ -18,7 +23,6 @@
           // Process form
   
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-  
           $data =[
             'name' => trim($_POST['name']),
             'email' => trim($_POST['email']),
@@ -28,6 +32,8 @@
             'password' => trim($_POST['password']),
             'confirm_password' => trim($_POST['confirm_password']),
             'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+            'centers'=>$jsonData,
+            'centers2'=>$centers ,
             'name_err' => '',
             'email_err' => '',
             'contact_no_err' => '',
@@ -37,8 +43,6 @@
             'confirm_password_err' => '',
             'profile_err'=>'',
             'profile_upload_error'=>''   
-
-
           ];
 
           if ($_FILES['profile_image']['error'] == 4) {
@@ -142,7 +146,9 @@
             'city'=>'',
             'password' => '',
             'confirm_password' => '',
-  
+            'centers'=>$jsonData,
+            'centers2'=>$centers ,
+
             'name_err' => '',
             'email_err' => '',
             'contact_no_err' => '',
@@ -349,4 +355,35 @@
         return false;
       }
     }
+
+    public function resetpassword(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+          // Init data
+          $data = [
+              'email' => trim($_POST['email']),
+              'email_err' => ''    
+          ];
+  
+          // Validate Email
+          if(empty($data['email'])){
+              $data['email_err'] = 'Please enter email';
+          } elseif(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+              $data['email_err'] = 'Invalid email format';
+          } elseif(!$this->userModel->findUserByEmail($data['email'])){
+              // User not found
+              $data['email_err'] = 'User not found';
+          }
+  
+          $this->view('users/resetpassword', $data);
+      } else {
+          // Init data
+          $data = [
+              'email' => '',
+              'email_err' => ''       
+          ];
+          $this->view('users/resetpassword', $data);
+      }
   }
+}

@@ -142,7 +142,7 @@
                             </div>
                         </div>
 
-                        <div class="main-right-bottom-two-cont A" id="credit_per_waste_quantity">
+                        <div class="main-right-bottom-two-cont A" onclick="redirect_garbageTypes()">
                             <div class="icon_container">
                                 <i class='bx bx-dollar-circle'></i>
                             </div>
@@ -192,45 +192,7 @@
                 </div>
 
             </div>
-            <div class="eco_credit_per_quantity" id="eco_credit_per_quantiy_pop">
-                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" id="close_eco_credit_per_quantiy_pop">
-                <h1>Eco Credits per Waste Qunatity</h1>
-                <div class="Eco_Credit_Per_Cont">
-                    <div class="Cont">
-                        <h3>Plastic</h3>
-                        <i class="icon fas fa-box"></i>
-                        <p><?php echo $data['eco_credit_per']->plastic?></p>
-                    </div>
-                    <div class="Cont">
-                        <h3>Polythene</h3>
-                        <i class="icon fas fa-trash"></i>
-                        <p><?php echo $data['eco_credit_per']->polythene?></p>
-                    </div>
-                    <div class="Cont">
-                        <h3>Metal</h3>
-                        <i class="icon fas fa-box"></i>
-                        <p><?php echo $data['eco_credit_per']->metal?></p>
-                    </div>
-                    <div class="Cont">
-                        <h3> Glass</h3>
-                        <i class="icon fas fa-glass-whiskey"></i>
-                        <p><?php echo $data['eco_credit_per']->glass?></p>
-                    </div>
 
-                    <div class="Cont">
-                        <h3>Paper</h3>
-                        <i class="icon fas fa-file-alt"></i>
-                        <p><?php echo $data['eco_credit_per']->paper?></p>
-                    </div>
-                    <div class="Cont">
-                        <h3>Electronic</h3>
-                        <i class="icon fas fa-laptop"></i>
-                        <p><?php echo $data['eco_credit_per']->electronic?></p>
-                    </div>
-                </div>
-                <h2>Per Kg</h2>
-
-            </div>
             <div class="overlay" id="overlay">
 
             </div>
@@ -256,7 +218,6 @@ var color = "#47b076";
 var textColor = "#414143"
 var checkbox = document.getElementById('toggle-checkbox');
 
-var credit_per_waste_quantity = document.getElementById("credit_per_waste_quantity");
 
 var notification = document.getElementById("notification");
 var notification_pop = document.getElementById("notification_popup");
@@ -306,6 +267,11 @@ function redirect_discountAgents() {
     window.location.href = linkUrl;
 }
 
+function redirect_garbageTypes() {
+    var linkUrl = "<?php echo URLROOT?>/customers/garbage_types"; // Replace with your desired URL
+    window.location.href = linkUrl;
+}
+
 notification.addEventListener("click", function() {
     var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
 
@@ -332,15 +298,6 @@ notification.addEventListener("click", function() {
     }
 });
 
-document.getElementById("credit_per_waste_quantity").addEventListener("click", function() {
-    document.getElementById("eco_credit_per_quantiy_pop").classList.add('active');
-    document.getElementById('overlay').style.display = "flex";
-});
-
-document.getElementById("close_eco_credit_per_quantiy_pop").addEventListener("click", function() {
-    document.getElementById("eco_credit_per_quantiy_pop").classList.remove('active');
-    document.getElementById('overlay').style.display = "none";
-});
 
 document.getElementById("centers_close").addEventListener("click", function() {
     document.getElementById("centers").classList.remove('active');

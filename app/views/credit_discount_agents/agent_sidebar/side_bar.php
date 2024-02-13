@@ -1,64 +1,64 @@
 <div class="main-left">
-        <div class="main-left-top">
-            <img id="top_logo" src="<?php echo IMGROOT?>/Logo.png" alt="logo">
-            <h3>ECO PLUS</h3>
+    <div class="main-left-top">
+        <img id="top_logo" src="<?php echo IMGROOT?>/Logo.png" alt="logo">
+        <h3>ECO PLUS</h3>
+    </div>
+    <div class="main-left-middle">
+        <h1>OVERVIEW</h1>
+        <div class="main-left-middle-content" onclick="redirect_dashboard()" id="dashboard">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bxs-dashboard'></i>
+            </div>
+            <h3>Dashboard</h3>
         </div>
-        <div class="main-left-middle">
-            <h1>OVERVIEW</h1>
-            <div class="main-left-middle-content" onclick="redirect_dashboard()" id="dashboard">
-                <div class=" main-left-middle-content-icon">
-                    <i class='bx bxs-dashboard'></i>
-                </div>
-                <h3>Dashboard</h3>
+        <div class="main-left-middle-content" onclick="redirect_API()" id="api">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bx-send'></i>
             </div>
-            <div class="main-left-middle-content" onclick="redirect_API()" id="api">
-                <div class=" main-left-middle-content-icon">
-                    <i class='bx bx-send'></i>
-                </div>
-                <h3>API</h3>
-            </div>
-            <div class="main-left-middle-content" onclick="redirect_history()" id="history">
-                <div class=" main-left-middle-content-icon">
-                    <i class='bx bx-timer'></i>
-                </div>
-                <h3>History</h3>
-            </div>
-            <div class="main-left-middle-content" onclick="redirect_edit_profile()" id="edit_profile">
-                <div class="main-left-middle-content-icon">
-                    <i class='bx bx-user-pin'></i>
-                </div>
-                <h3>Profile</h3>
-            </div>
-
+            <h3>API</h3>
         </div>
-        <div class="main-left-down">
-            <h1>SETTINGS</h1>
-            <a href="<?php echo URLROOT?>/CreditDiscountsAgent/logout">
+        <div class="main-left-middle-content" onclick="redirect_history()" id="history">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bx-timer'></i>
+            </div>
+            <h3>History</h3>
+        </div>
+        <div class="main-left-middle-content" onclick="redirect_edit_profile()" id="edit_profile">
+            <div class="main-left-middle-content-icon">
+                <i class='bx bx-user-pin'></i>
+            </div>
+            <h3>Profile</h3>
+        </div>
 
-                <div class="main-left-middle-content">
-                    <div class="main-left-middle-content-icon">
-                        <i style="color:#F13E3E" class='bx bx-log-out'></i>
-                    </div>
-                    <h3 style="color:#F13E3E">Logout</h3>
-                </div>
-            </a>
+    </div>
+    <div class="main-left-down">
+        <h1>SETTINGS</h1>
+        <a href="<?php echo URLROOT?>/CreditDiscountsAgent/logout">
 
             <div class="main-left-middle-content">
                 <div class="main-left-middle-content-icon">
-                    <i class='bx bx-moon'></i>
+                    <i style="color:#F13E3E" class='bx bx-log-out'></i>
                 </div>
-                <h3>Dark Mode</h3>
-                <div class="toggle-container">
-                    <input type="checkbox" id="toggle-checkbox">
-                    <label class="toggle-button" for="toggle-checkbox">
-                        <div class="toggle-indicator"></div>
-                    </label>
-                </div>
+                <h3 style="color:#F13E3E">Logout</h3>
+            </div>
+        </a>
+
+        <div class="main-left-middle-content">
+            <div class="main-left-middle-content-icon">
+                <i class='bx bx-moon'></i>
+            </div>
+            <h3>Dark Mode</h3>
+            <div class="toggle-container">
+                <input type="checkbox" id="toggle-checkbox">
+                <label class="toggle-button" for="toggle-checkbox">
+                    <div class="toggle-indicator"></div>
+                </label>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
+<script>
 let myChart;
 
 function redirect_dashboard() {
@@ -72,7 +72,7 @@ function redirect_API() {
 }
 
 function redirect_history() {
-    var linkUrl = "<?php echo URLROOT?>/customers/history"; // Replace with your desired URL
+    var linkUrl = "<?php echo URLROOT?>/CreditDiscountsAgent/history"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
 
@@ -122,4 +122,4 @@ checkbox.addEventListener("change", function() {
 
     localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
 });
-    </script>
+</script>

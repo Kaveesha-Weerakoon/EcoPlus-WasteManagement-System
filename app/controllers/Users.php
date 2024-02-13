@@ -23,7 +23,6 @@
           // Process form
   
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-  
           $data =[
             'name' => trim($_POST['name']),
             'email' => trim($_POST['email']),
@@ -34,7 +33,7 @@
             'confirm_password' => trim($_POST['confirm_password']),
             'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
             'centers'=>$jsonData,
-
+            'centers2'=>$centers ,
             'name_err' => '',
             'email_err' => '',
             'contact_no_err' => '',
@@ -44,8 +43,6 @@
             'confirm_password_err' => '',
             'profile_err'=>'',
             'profile_upload_error'=>''   
-
-
           ];
 
           if ($_FILES['profile_image']['error'] == 4) {
@@ -150,6 +147,7 @@
             'password' => '',
             'confirm_password' => '',
             'centers'=>$jsonData,
+            'centers2'=>$centers ,
 
             'name_err' => '',
             'email_err' => '',

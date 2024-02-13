@@ -206,13 +206,8 @@
         border-radius: 10px;
         background-color: var(--background-color-main);
         box-shadow: var(--box-shadow);
-        color: var(--main-text-color);
-        padding-bottom: 1%;
-        padding-top: 1%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 45% 55%;
     }
 
 
@@ -339,8 +334,12 @@
         border-radius: 10px;
         background-color: var(--background-color-main);
         box-shadow: var(--box-shadow);
-        display: grid;
-        grid-template-columns: 45% 55%;
+        color: var(--main-text-color);
+        padding-bottom: 1%;
+        padding-top: 1%;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
     }
 
     .main-right-bottom-three-right-left {
@@ -352,7 +351,7 @@
     }
 
     .main-right-bottom-three-right-left .fa-solid {
-        margin: 20px;
+        margin: 10px;
     }
 
     .main-right-bottom-three-right-left h1 {
@@ -366,7 +365,8 @@
 
     .main-right-bottom-three-right-left p {
         text-align: center;
-        font-size: 16px;
+        font-size: 14px;
+        width: 150px;
     }
 
     .main-right-bottom-three-right-cont {
@@ -374,34 +374,6 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-    }
-
-    .circular-progress {
-        position: relative;
-        height: 115px;
-        width: 115px;
-        border-radius: 50%;
-        background: conic-gradient(var(--green-color-two), 3.6deg, var(--background-color-two) 0deg);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .circular-progress::before {
-        content: "";
-        position: absolute;
-        height: 80px;
-        width: 80px;
-        border-radius: 50%;
-        background-color: var(--background-color-main);
-        flex: 2;
-    }
-
-    .progress-value {
-        position: relative;
-        font-size: 25px;
-        font-weight: 600;
-        color: var(--green-color-two);
     }
 
     .main-right-bottom-three-right-left button {
@@ -416,7 +388,7 @@
         letter-spacing: 0.03rem;
         font-weight: bolder;
         transition: background-color 0.6s ease-in;
-        margin-top: 7%;
+        margin-top: 2.5%;
     }
 
     .main-right-bottom-three-right-right {
@@ -433,9 +405,9 @@
     }
 
     .map {
-        width: 80%;
+        width: 75%;
         padding-top: 2%;
-        height: 65%;
+        height: 60%;
         border-radius: 10px;
         box-shadow: var(--box-shadow);
     }

@@ -30,7 +30,7 @@
                             <div class="left">
                                 <h1>Garbage Types</h1>
                                 <h3>6</h3>
-                                <p>Last update</p>
+                                <p>View Details</p>
                                 <button onclick="redirect_garbage_types()">View</button>
                             </div>
                             <div class="right">
@@ -40,7 +40,17 @@
                         </div>
 
                         <div class="main-right-bottom-one-right">
-                            <canvas id="myChart1" width="910" height="300"></canvas>
+                            <div class="main-right-bottom-three-right-left">
+                                <h1>Set Fines</h1>
+                                <i class="fa-solid fa-file-invoice-dollar" style="font-size: 45px;"></i>
+                                <p>Set fine for each offence by customer</p>
+                                <button class="fine_button" onclick="open_fine_set()">Set fine</button>
+                            </div>
+                            <div class="main-right-bottom-three-right-right">
+                                <h1>Regional Centers</h1>
+                                <div class="map" id="map"></div>
+
+                            </div>
                         </div>
                     </div>
                     <div class="main-right-bottom-two">
@@ -90,17 +100,8 @@
                             <canvas id="myChart" width="600" height="250"></canvas>
                         </div>
                         <div class="main-right-bottom-three-right">
-                            <div class="main-right-bottom-three-right-left">
-                                <h1>Set Fine</h1>
-                                <i class="fa-solid fa-file-invoice-dollar" style="font-size: 45px;"></i>
-                                <p>Set fine for each offence by customer</p>
-                                <button class="fine_button" onclick="open_fine_set()">Set fine</button>
-                            </div>
-                            <div class="main-right-bottom-three-right-right">
-                                <h1>Regional Centers</h1>
-                                <div class="map" id="map"></div>
+                            <canvas id="myChart1" width="680" height="300"></canvas>
 
-                            </div>
                         </div>
 
                     </div>
@@ -185,7 +186,6 @@ function validateAndSubmit() {
 
     document.getElementById('fine_pop').submit();
 }
-
 
 function redirect_customers() {
     var linkUrl = "<?php echo URLROOT?>/admin/customers";
@@ -274,7 +274,7 @@ function initMap() {
     };
     var map = new google.maps.Map(document.getElementById('map'), {
         center: center,
-        zoom: 5.8,
+        zoom: 5.3,
         styles: [{
                 featureType: 'all',
                 elementType: 'labels.text',
@@ -535,14 +535,22 @@ const totalRequestCounts = totalRequests.map(request => {
 function countRequests(requests) {
     const counts = Array(6).fill(0);
     requests.forEach(request => {
-        const monthDiff = (currentMonth - request.month + 6) % 6;
-        counts[monthDiff]++;
+        const date = new Date(request.year, request.month);
+        let monthDiff = currentMonth - date.getMonth();
+        if (monthDiff < 0) {
+            monthDiff += 12; // Adjust for negative differences
+        }
+        const index = (5 - monthDiff + 6) % 6; // Calculate the index in reverse order
+        counts[index]++;
     });
     return counts;
 }
 
-const completedData = countRequests(completedRequestCounts).reverse(); // Reverse the array
-const totalData = countRequests(totalRequestCounts).reverse(); // Reverse the array
+
+
+
+const completedData = countRequests(completedRequestCounts); // Reverse the array
+const totalData = countRequests(totalRequestCounts); // Reverse the array
 
 const data = {
     labels: labels,

@@ -259,8 +259,8 @@
     }
 
     .porfile-cont img {
-        width: 80px;
-        height: 80px;
+        width: 90px;
+        height: 90px;
         margin-bottom: 15px;
         border-radius: 12px;
         cursor: pointer;
@@ -277,10 +277,14 @@
         width: 100%;
         padding: 5px;
         border: 1px solid #ddd;
-        font-size: 16px;
         transition: border-color 0.3s ease;
-        border-radius: 5px;
         margin-bottom: 2px;
+        border-radius: 7px;
+        font-size: 14px;
+        background-color: var(--background-color-two);
+        padding-left: 15px;
+        box-sizing: border-box;
+
     }
 
     .err {
@@ -291,11 +295,11 @@
     }
 
     .cont-region {
-        margin-bottom: 15px;
+        margin-bottom: 17px;
     }
 
     .cont {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 
     .cont p {
@@ -306,7 +310,7 @@
 
     .cont-region p {
         margin: 0;
-        font-size: 17px;
+        font-size: 18px;
         margin-bottom: 5px;
         letter-spacing: 0.03rem;
     }
@@ -315,11 +319,32 @@
         width: 98%;
         padding: 5px;
         border: 1px solid #ddd;
+        transition: border-color 0.3s ease;
+        border-radius: 7px;
+        font-size: 14px;
+        letter-spacing: 0.03rem;
+        background-color: var(--background-color-two);
+        padding-left: 5px;
+        box-sizing: border-box;
+    }
+
+    .city {
+        width: 98%;
+        padding: 5px;
+        border: 1px solid #ddd;
         font-size: 16px;
         transition: border-color 0.3s ease;
         border-radius: 5px;
-        font-size: 16px !important;
         letter-spacing: 0.03rem;
+        background-color: var(--background-color-two);
+        padding-left: 5px;
+    }
+
+    .option {
+        font-size: 16px !important;
+        font-family: inter;
+        letter-spacing: 0.03rem;
+
     }
 
     /* Hover effect for input field */
@@ -341,7 +366,6 @@
         transition: border-color 0.3s ease;
         border-radius: 5px;
         font-size: 16px !important;
-
     }
 
     button {

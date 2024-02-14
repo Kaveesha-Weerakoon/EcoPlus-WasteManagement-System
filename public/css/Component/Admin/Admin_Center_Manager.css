@@ -1,20 +1,5 @@
 .Admin_Center_Manager {
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
 
-    * {
-        margin: 0px;
-        padding: 0px;
-        font-family: inter;
-    }
-
-    a {
-        text-decoration: none;
-        font-family: inter;
-        color: inherit;
-
-    }
-
-    
     #dashboard i {
         color: var(--green-color-one);
     }
@@ -29,7 +14,6 @@
         height: 100%;
         grid-template-rows: 23% 77%;
         background-color: var(--background-color-right);
-
     }
 
     .main-right-top {
@@ -91,102 +75,11 @@
         margin-left: 30%;
     }
 
-    .dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: #F13E3E;
-        margin-top: -14px;
-        margin-left: -12px;
-    }
-
-    .main-right-top-notification i {
-        font-size: 29px;
-        cursor: pointer;
-    }
-
-    .notification_popup {
-        height: 0;
-        position: absolute;
-        top: 9%;
-        right: 11%;
-        background-color: var(--background-color-main);
-        border-radius: 10px;
-        padding: 0;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: height 0.6s ease-in;
-        width: 18%;
-        visibility: hidden;
-        opacity: 0;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        overflow: scroll;
-        border: 1px solid #dcdde1;
-    }
-
-    .notification_popup h1 {
-        font-size: 19px;
-        letter-spacing: 0.001rem;
-        margin-bottom: 13px;
-        margin-top: 5px;
-        margin-left: 8px;
-    }
-
-    .notification_popup.active {
-        height: 200px;
-        padding: 10px;
-        visibility: visible;
-        opacity: 1;
-    }
-
-    .notification {
-        height: 43px !important;
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        padding-left: 10px;
-        font-size: 14px;
-        cursor: pointer;
-    }
-
-    .notification:hover {
-        background-color: var(--notification-hover);
-    }
-
-    .notification-green-dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: var(--green-color-one);
-        margin-right: 10px;
-    }
-
     .main-right-top-profile {
         display: flex;
         align-items: center;
         justify-content: center;
         margin-right: 40px;
-    }
-
-    .main-right-top-profile img {
-        width: 50px;
-        height: 50px;
-        margin-right: 15px;
-        border-radius: 10px;
-    }
-
-    .main-right-top-profile-cont {
-        margin-top: 7px;
-    }
-
-    .main-right-top-profile-cont h3 {
-        font-size: 18px;
-        letter-spacing: 0.03rem;
-    }
-
-    .main-right-top-profile-cont p {
-        font-size: 14px;
     }
 
     .main-right-top-two {
@@ -305,8 +198,9 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .delete_confirm .deletebtn:hover{
-        background: #c62323;;
+    .delete_confirm .deletebtn:hover {
+        background: #c62323;
+        ;
     }
 
     .delete_confirm .cancelbtn {
@@ -399,7 +293,7 @@
 
     }
 
-    .popup button:hover{
+    .popup button:hover {
         background: var(--button-hover-green);
     }
 
@@ -492,7 +386,7 @@
 
     }
 
-    .updatebtn:hover{
+    .updatebtn:hover {
         background: var(--button-hover-green);
     }
 
@@ -647,7 +541,7 @@
 
     }
 
-    .popup1 button:hover{
+    .popup1 button:hover {
         background: var(--button-hover-green);
     }
 

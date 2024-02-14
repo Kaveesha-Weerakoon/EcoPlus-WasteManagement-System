@@ -179,7 +179,7 @@
           redirect('centermanagers');
         }
 
-        if(isset($_SESSION['admin_id'])){
+        if(isset($_SESSION['admin_id'])||$_SESSION['super_admin_id']){
           redirect('admin');
         }
 
@@ -268,7 +268,7 @@
                 }
                 
               }
-              else if($loggedInUser->role=="admin"){
+              else if($loggedInUser->role=="admin" || $loggedInUser->role=="superadmin"){
                 $this->createAdminSession($loggedInUser);
               }
 
@@ -326,10 +326,18 @@
     }
 
     public function createAdminSession($user){
-      $_SESSION['admin_id'] = $user->id;
-      $_SESSION['admin_email'] = $user->email;
-      $_SESSION['admin_name'] = $user->name;
+      if($user->role=="superadmin"){
+        $_SESSION['superadmin_id'] = $user->id;
+        $_SESSION['admin_email'] = $user->email;
+        $_SESSION['admin_name'] = $user->name;
+      }
+      if($user->role=="admin"){
+        $_SESSION['admin_id'] = $user->id;
+        $_SESSION['admin_email'] = $user->email;
+        $_SESSION['admin_name'] = $user->name;
+      }
       redirect('admin');
+
     }
 
     public function createDiscountAgentSession($user){

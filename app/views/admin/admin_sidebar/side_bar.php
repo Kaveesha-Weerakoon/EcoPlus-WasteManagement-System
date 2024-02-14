@@ -29,6 +29,22 @@
             </div>
             <h3>Centers</h3>
         </div>
+        <div class="main-left-middle-content" onclick="redirect_announcement()" id="centers">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bxs-megaphone'></i>
+            </div>
+            <h3>Announcements</h3>
+        </div>
+        <?php if(isset($_SESSION['superadmin_id'])): ?>
+        <div class="main-left-middle-content" id="admins" onclick="redirect_admin()">
+            <div class="main-left-middle-content-icon">
+                <i class='bx bxs-user-detail'></i>
+            </div>
+            <h3>Admins</h3>
+        </div>
+        <?php endif; ?>
+
+
         <div class="main-left-middle-content" id="edit_profile">
             <div class="main-left-middle-content-icon">
                 <i class='bx bx-user-pin'></i>
@@ -73,6 +89,16 @@ function redirect_dashboard() {
 
 function redirect_centers() {
     var linkUrl = "<?php echo URLROOT?>/admin/center"; // Replace with your desired URL
+    window.location.href = linkUrl;
+}
+
+function redirect_admin() {
+    var linkUrl = "<?php echo URLROOT?>/admin/addadmins"; // Replace with your desired URL
+    window.location.href = linkUrl;
+}
+
+function redirect_announcement() {
+    var linkUrl = "<?php echo URLROOT?>/admin/index"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
 

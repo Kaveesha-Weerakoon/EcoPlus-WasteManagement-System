@@ -5,7 +5,6 @@
 @import url('Component/Home.css');
 @import url('Component/Login.css');
 @import url('Component/Register.css');
-@import url('Component/ResetPassword.css');
 
 /* Customer CSS */
 
@@ -102,6 +101,7 @@
 @import url('Component/Agent/Discount_Agent.css');
 @import url('Component/Agent/Discount_Agent_ValidateUser.css');
 @import url('Component/Agent/Discount_Agent_Discount.css');
+@import url('Component/Agent/Discount_Agent_History.css');
 
 
 /* Admin CSS */
@@ -147,6 +147,9 @@
 @import url('Component/Admin/Admin_Center_Main_Request_Cancelled.css');
 @import url('Component/Admin/Admin_Center_Main_Request_Completed.css');
 @import url('Component/Admin/Admin_Reports.css');
+@import url('Component/Admin/Admin_Admin.css');
+@import url('Component/Admin/Admin_Admin_Add.css');
+@import url('Component/Admin/Admin_Admin_View.css');
 
 @import url('Component/Admin/Admin_Garbage_Types_View.css');
 

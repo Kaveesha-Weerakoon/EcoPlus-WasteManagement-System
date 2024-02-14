@@ -1537,7 +1537,15 @@
       if($_SERVER['REQUEST_METHOD'] == 'POST'){     
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-        $center=trim($_POST['center-dropdown']);       
+        $center=trim($_POST['center-dropdown']);
+        if($center!="none"){
+          $center2=$this->center_model->findCenterbyRegion($center);
+           $center_id=$center2->id;
+        }
+        else{
+          $center_id="none";
+
+        }
         $fromDate= trim($_POST['fromDate']);
         $toDate= trim($_POST['toDate']);
         
@@ -1556,7 +1564,10 @@
         $credits=$this->Report_Model->getCredits($fromDate,$toDate,$center);
         $centers = $this->center_model->getallCenters();
         $creditByMonth=$this->Report_Model->getCreditsMonths($center);
-        
+        $collectedWasteByMonth=$this->Report_Model->getCollectedGarbage($fromDate,$toDate,$center);
+        $handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage($fromDate,$toDate,$center);
+        $selledWasteByMonth=$this->Report_Model->getSelledGarbage($fromDate,$toDate,$center_id);
+
         $data=[
           'completedRequests'=> count($completedRequests),
           'cancelledRequests'=> count($cancelledRequests),
@@ -1567,7 +1578,11 @@
           'to'=>$toDate,
           'from'=>$fromDate,
           'credits'=> $credits->total_credits,
-          'creditsByMonth1'=>  $creditByMonth
+          'creditsByMonth1'=>  $creditByMonth,
+          'collectedWasteByMonth'=>$collectedWasteByMonth,
+          'handoveredWasteByMonth'=>$handoveredWasteByMonth,
+          'selledWasteByMonth'=>$selledWasteByMonth
+
         ];
         $this->view('admin/report', $data);
 
@@ -1580,10 +1595,10 @@
         $centers = $this->center_model->getallCenters();
         $credits=$this->Report_Model->getCredits();
         $creditByMonth=$this->Report_Model->getCreditsMonths();
-    
-        $creditByMonth=$this->Report_Model->getCreditsMonths();
-
-        
+        $collectedWasteByMonth=$this->Report_Model->getCreditsMonths();
+        $collectedWasteByMonth=$this->Report_Model->getCollectedGarbage();
+        $handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage();
+        $selledWasteByMonth=$this->Report_Model->getSelledGarbage();
         $data=[
           'completedRequests'=> count($completedRequests),
           'cancelledRequests'=> count($cancelledRequests),
@@ -1594,7 +1609,10 @@
           'to'=>'none',
           'from'=>'none',    
           'credits'=> $credits->total_credits,
-          'creditsByMonth1'=>  $creditByMonth
+          'creditsByMonth1'=>  $creditByMonth,
+          'collectedWasteByMonth'=>$collectedWasteByMonth,
+          'handoveredWasteByMonth'=>$handoveredWasteByMonth,
+          'selledWasteByMonth'=>$selledWasteByMonth
 
         ];
         
@@ -1602,6 +1620,63 @@
 
       }
     }
+
+    public function admin_delete_confirm($id){
+      $admin = $this->adminModel->get_all();
+      $admin_by_id = $this->adminModel->getAdminByID($id);
+      if($admin_by_id){
+        $data = [
+          'admin' => $admin,
+          'confirm_delete' =>'True',
+          'admin_id'=>$id,
+          'personal_details_click'=>'',
+          'success'=>'' 
+        ];
+      }
+      else{
+        $data = [
+          'admin' => $admin,
+          'admin_id'=>$id,
+          'confirm_delete' =>'True',
+          'discount_agent_id'=>$id,
+          'success'=>''
+        ];
+      }
+    
+     
+      $this->view('admin/admins', $data);
+    }
+
+    public function admin_delete($id) {
+      $admin_by_id = $this->adminModel->getAdminByID($id);
+      $this->adminModel->admin_delete($id);
+      $admin = $this->adminModel->get_all();
+      deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\Admin\\" . $admin_by_id->image);
+      $data = [
+        'admin' => $admin,
+        'confirm_delete' =>'',
+        'success'=>'True',
+        'admin_id'=>$id,
+        'personal_details_click'=>''
+      ];
+    
+      $this->view('admin/admins', $data);
+    }
+
+    public function edit_profile(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){     
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $data=[];
+        $this->view('admin/editprofile', $data);
+
+      }
+      else{
+        $data=[];
+        $this->view('admin/editprofile', $data);
+
+      }
+    }
+
 
   
   }

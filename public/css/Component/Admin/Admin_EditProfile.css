@@ -1,0 +1,10 @@
+.Admin_EditProfile {
+
+    #edit_profile i {
+        color: var(--green-color-one);
+    }
+
+    #edit_profile h3 {
+        color: var(--green-color-one);
+    }
+}

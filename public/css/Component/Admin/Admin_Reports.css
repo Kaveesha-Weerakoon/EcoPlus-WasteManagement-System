@@ -97,7 +97,7 @@
     }
 
     .main-right-bottom {
-        height: 1001px;
+        height: 2000px;
     }
 
     .main-right-bottom {
@@ -126,8 +126,9 @@
             }
 
             .top-bar-left p {
-                margin-top: 10px;
+                margin-top: 2px;
                 font-size: 15px !important;
+                width: 250px;
             }
 
             .date-box {
@@ -230,6 +231,7 @@
                 transition: background-color 0.3s ease;
                 letter-spacing: 0.03rem;
                 margin-bottom: 15px;
+                margin-right: 25px;
             }
 
             button:hover {
@@ -238,13 +240,10 @@
 
             button:focus {
                 outline: none;
-                /* Remove focus outline */
             }
 
             button:active {
                 background-color: #0a653c;
-                /* Darker shade when clicked */
-
             }
         }
 
@@ -345,6 +344,117 @@
 
             }
 
+
+        }
+
+        .waste-section {
+            display: flex;
+            height: 400px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            flex-direction: column;
+            margin-bottom: 130px;
+        }
+
+        .waste-section {
+            .waste-section-cont {
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+                padding-left: 20px;
+                height: 50px;
+            }
+
+            .waste-section-cont-2 {
+                display: flex;
+                box-sizing: border-box;
+                padding-left: 20px;
+                height: 50px;
+                justify-content: space-between;
+            }
+
+            .waste-section-cont-right {
+                margin-right: 75px;
+                width: 600px;
+                display: flex;
+                flex-direction: column;
+                align-items: end;
+            }
+
+            .waste-section-cont-right p {
+                max-width: 400px;
+                overflow-x: scroll;
+            }
+
+            .waste-section-cont {
+                .waste-section-cont h2 {
+                    font-size: 21px !important;
+                }
+
+                .waste-section-cont p {
+                    margin-top: 10px;
+                    margin-left: 5px;
+                    font-size: 15px !important;
+                }
+
+            }
+
+            .waste-section-bottom {
+                width: 100%;
+                height: 100%;
+                display: grid;
+                grid-template-columns: 51% 49%;
+                box-sizing: border-box;
+                margin-top: 30px;
+            }
+
+            .waste-section-bottom {
+                .left {
+                    border-radius: 10px;
+                    box-shadow: var(--box-shadow2);
+                    padding: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                /* Style for table headers */
+                th {
+                    background-color: #f2f2f2;
+                    padding: 12px;
+                    text-align: left;
+                }
+
+                td {
+                    padding: 10px;
+                    text-align: left;
+                    border-bottom: 1px solid #ddd;
+                }
+
+                tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+            }
+
+            .right {
+                border-radius: 10px;
+                box-shadow: var(--box-shadow2);
+                box-sizing: border-box;
+                margin-right: 10px;
+                margin-left: 9px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 30px;
+                height: 425px;
+            }
 
         }
     }

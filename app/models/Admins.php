@@ -60,4 +60,33 @@
 
      return false;
   }
-}}
+
+
+  
+}
+
+public function getAdminByID($data){
+
+  $this->db->query('SELECT * FROM admin WHERE user_id = :adminId');
+  $this->db->bind(':adminId', $data);
+
+  $row = $this->db->single();
+
+  return $row;
+}
+
+
+public function admin_delete($id){
+  $this->db->query('DELETE FROM users WHERE id = :adminId');
+  $this->db->bind(':adminId', $id);
+
+  if($this->db->execute()){
+    return true;
+  }
+  else{
+    return false;
+  }
+
+}
+
+}

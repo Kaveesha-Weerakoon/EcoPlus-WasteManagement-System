@@ -1621,7 +1621,6 @@
       }
     }
 
-
     public function admin_delete_confirm($id){
       $admin = $this->adminModel->get_all();
       $admin_by_id = $this->adminModel->getAdminByID($id);
@@ -1662,6 +1661,20 @@
       ];
     
       $this->view('admin/admins', $data);
+    }
+
+    public function edit_profile(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){     
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $data=[];
+        $this->view('admin/editprofile', $data);
+
+      }
+      else{
+        $data=[];
+        $this->view('admin/editprofile', $data);
+
+      }
     }
 
 

@@ -45,7 +45,7 @@
         <?php endif; ?>
 
 
-        <div class="main-left-middle-content" id="edit_profile">
+        <div class="main-left-middle-content" id="edit_profile" onclick="redirect_editprofile()" id="edit_profile">
             <div class="main-left-middle-content-icon">
                 <i class='bx bx-user-pin'></i>
             </div>
@@ -104,6 +104,11 @@ function redirect_announcement() {
 
 function redirect_complains() {
     var linkUrl = "<?php echo URLROOT?>/admin/complain_customers"; // Replace with your desired URL
+    window.location.href = linkUrl;
+}
+
+function redirect_editprofile() {
+    var linkUrl = "<?php echo URLROOT?>/admin/edit_profile"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
 

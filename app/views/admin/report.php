@@ -29,7 +29,7 @@
                     <form class="top-bar" method="post" action="<?php echo URLROOT;?>/admin/reports">
                         <div class="top-bar-left">
                             <h2>Analatics</h2>
-                            <p>Here is overall Anatics</p>
+                            <p>Here is overall Analatics</p>
                         </div>
                         <div class="date-box">
                             <div class="date-box-cont">
@@ -128,8 +128,160 @@
                         </div>
                     </div>
 
+                    <div class="waste-section">
+                        <div class="waste-section-cont">
+                            <h2>Total Waste Collected</h2>
+                            <p>Here's an overview of total waste collected from customers</p>
+                        </div>
+                        <div class="waste-section-bottom">
+                            <div class="left">
+                                <table>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Weight(Kg)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Plastic</td>
+                                        <td><?php echo $data['collectedWasteByMonth']->plastic ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Polythene</td>
+                                        <td><?php echo $data['collectedWasteByMonth']->polythene?></td>
 
+                                    </tr>
+                                    <tr>
+                                        <td>Paper</td>
+                                        <td><?php echo $data['collectedWasteByMonth']->paperwaste?></td>
 
+                                    </tr>
+                                    <tr>
+                                        <td>Electronic</td>
+                                        <td><?php echo $data['collectedWasteByMonth']->electronicwaste?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Metals</td>
+                                        <td><?php echo $data['collectedWasteByMonth']->metals?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Glass</td>
+                                        <td><?php echo $data['collectedWasteByMonth']->glass?></td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="right">
+                                <canvas id="myPieChart" width="100" height="100"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="waste-section">
+                        <div class="waste-section-cont">
+                            <h2>Total Waste Handovered</h2>
+                            <p>Here's an overview of total waste received at the centers</p>
+                        </div>
+                        <div class="waste-section-bottom">
+                            <div class="left">
+                                <table>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Weight(Kg)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Plastic</td>
+                                        <td><?php echo $data['handoveredWasteByMonth']->plastic ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Polythene</td>
+                                        <td><?php echo $data['handoveredWasteByMonth']->polythene?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Paper</td>
+                                        <td><?php echo $data['handoveredWasteByMonth']->paperwaste?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Electronic</td>
+                                        <td><?php echo $data['handoveredWasteByMonth']->electronicwaste?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Metals</td>
+                                        <td><?php echo $data['handoveredWasteByMonth']->metals?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Glass</td>
+                                        <td><?php echo $data['handoveredWasteByMonth']->glass?></td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="right">
+                                <canvas id="myPieChart2" width="100" height="100"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="waste-section">
+                        <div class="waste-section-cont-2">
+                            <div class="waste-section-cont-left">
+                                <h2>Total Waste Selled</h2>
+                                <p>Here is overall Analatics about total waste selled by Center</p>
+                            </div>
+                            <div class="waste-section-cont-right">
+                                <h2>Rs <?php echo $data['selledWasteByMonth']->income ?></h2>
+                                <p>Total Earnings</p>
+                            </div>
+                        </div>
+                        <div class="waste-section-bottom">
+                            <div class="left">
+                                <table>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Weight(Kg)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Plastic</td>
+                                        <td><?php echo $data['selledWasteByMonth']->plastic ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Polythene</td>
+                                        <td><?php echo $data['selledWasteByMonth']->polythene?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Paper</td>
+                                        <td><?php echo $data['selledWasteByMonth']->paperwaste?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Electronic</td>
+                                        <td><?php echo $data['selledWasteByMonth']->electronicwaste?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Metals</td>
+                                        <td><?php echo $data['selledWasteByMonth']->metals?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Glass</td>
+                                        <td><?php echo $data['selledWasteByMonth']->glass?></td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="right">
+                                <canvas id="myPieChart3" width="100" height="100"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
 
 
 
@@ -144,6 +296,7 @@
 
 
 <script>
+/* TOP LINE CHART */
 const currentDate = new Date();
 const currentMonth = currentDate.getMonth() + 1;
 // Add 1 to represent January as index 1
@@ -211,10 +364,8 @@ function printLastSixMonths(arr, startIndex) {
 }
 
 
-console.log(countRequests(completedRequestCounts));
 
 const completedData = printLastSixMonths(countRequests(completedRequestCounts), currentDate.getMonth() + 1);
-console.log(completedData)
 const data = {
     labels: labels,
     datasets: [{
@@ -244,9 +395,140 @@ const config = {
 
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, config);
+/* TOP LINE CHART END*/
+
+
+/*Bottom CHART One*/
+
+const data1 = {
+    labels: ['Plastic', 'Polythene', 'Paper', 'Electronic', 'Metals', 'Glass'],
+    datasets: [{
+        data: [<?php echo $data['collectedWasteByMonth']->plastic ?>,
+            <?php echo $data['collectedWasteByMonth']->polythene ?>,
+            <?php echo $data['collectedWasteByMonth']->paperwaste ?>,
+            <?php echo $data['collectedWasteByMonth']->electronicwaste ?>,
+            <?php echo $data['collectedWasteByMonth']->metals ?>,
+            <?php echo $data['collectedWasteByMonth']->glass ?>
+        ], // Sample values for each waste type
+        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff',
+            '#ff9900'
+        ], // Sample colors
+        borderWidth: 2, // Set the border width to reduce the width of the colored segments
+    }]
+};
+
+
+
+const config1 = {
+    type: 'pie',
+    data: data1,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Waste Collected Pie Chart'
+            }
+        }
+    }
+};
+
+
+
+const ctx1 = document.getElementById('myPieChart').getContext('2d');
+const myPieChart = new Chart(ctx1, config1);
+/*Bottom CHART One*/
+
+/*Bottom CHART Two*/
+
+const data2 = {
+    labels: ['Plastic', 'Polythene', 'Paper', 'Electronic', 'Metals', 'Glass'],
+    datasets: [{
+        data: [<?php echo $data['handoveredWasteByMonth']->plastic ?>,
+            <?php echo $data['handoveredWasteByMonth']->polythene ?>,
+            <?php echo $data['handoveredWasteByMonth']->paperwaste ?>,
+            <?php echo $data['handoveredWasteByMonth']->electronicwaste ?>,
+            <?php echo $data['handoveredWasteByMonth']->metals ?>,
+            <?php echo $data['handoveredWasteByMonth']->glass ?>
+        ], // Sample values for each waste type
+        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff',
+            '#ff9900'
+        ], // Sample colors
+        borderWidth: 2, // Set the border width to reduce the width of the colored segments
+    }]
+};
+
+
+const config2 = {
+    type: 'pie',
+    data: data2,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Waste Collected Pie Chart'
+            }
+        }
+    }
+};
+
+
+
+const ctx2 = document.getElementById('myPieChart2').getContext('2d');
+const myPieChart2 = new Chart(ctx2, config2);
+/*Bottom CHART Two*/
+
+
+/*Bottom CHART Three*/
+
+const data3 = {
+    labels: ['Plastic', 'Polythene', 'Paper', 'Electronic', 'Metals', 'Glass'],
+    datasets: [{
+        data: [<?php echo $data['selledWasteByMonth']->plastic ?>,
+            <?php echo $data['selledWasteByMonth']->polythene ?>,
+            <?php echo $data['selledWasteByMonth']->paperwaste ?>,
+            <?php echo $data['selledWasteByMonth']->electronicwaste ?>,
+            <?php echo $data['selledWasteByMonth']->metals ?>,
+            <?php echo $data['selledWasteByMonth']->glass ?>
+        ], // Sample values for each waste type
+        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff',
+            '#ff9900'
+        ], // Sample colors
+        borderWidth: 2, // Set the border width to reduce the width of the colored segments
+    }]
+};
+
+
+const config3 = {
+    type: 'pie',
+    data: data3,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Waste Collected Pie Chart'
+            }
+        }
+    }
+};
+
+
+
+const ctx3 = document.getElementById('myPieChart3').getContext('2d');
+const myPieChart3 = new Chart(ctx3, config3);
+/*Bottom CHART Three*/
 </script>
-
-
 
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

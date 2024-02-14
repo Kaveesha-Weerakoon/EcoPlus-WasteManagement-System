@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="main-bottom-down">
-                        <form class="main-bottom-down-content" action="<?php echo URLROOT;?>/admin/addadmins2"
+                        <form class="main-bottom-down-content" action="<?php echo URLROOT;?>/admin/center_managers_add"
                             method="post" enctype="multipart/form-data">
                             <div class="main-bottom-down-content-top">
                                 <div class="main-bottom-down-content-top-content">

@@ -977,7 +977,9 @@
       'map'=>'',
       'collectors'=>$collectors,
       'assigned_requests_count' => $assigned_requests_count,
-      'assigned_requests'=> $assigned_requests
+      'assigned_requests'=> $assigned_requests,
+      'lattitude'=> $center->lat,
+      'longitude'=> $center->longi
     ];
     $this->view('center_managers/request_incomming', $data);
 

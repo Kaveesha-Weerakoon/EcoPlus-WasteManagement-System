@@ -537,13 +537,20 @@
         width: 80%;
         height: 250px;
         margin: 20px;
-        border: 1px solid red;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     }
 
     .assigned-req-count-container p{
         margin: 17px 0;
         font-size: 14px;
 
+    }
+
+    .assigned-map{
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
     }
 
     /* .assigned-req-count-container span{

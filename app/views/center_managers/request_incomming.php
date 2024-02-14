@@ -2,7 +2,12 @@
 <div class="CenterManager_Main">
     <div class="CenterManager_Request_Main">
         <div class="CenterManager_Request_Incomming">
-
+            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
+            async defer>
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMapAssigned"
+            async defer>
+            </script>
 
             <div class="main">
                 <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
@@ -140,7 +145,11 @@
                             <input name="requested_date" type="text" id="requested_date" >
                         </div>
 
-                        <div class="assigned-map-container"></div>
+                        <div class="assigned-map-container">
+                            <div class="assigned-map" id="assigned-map">
+
+                            </div>
+                        </div>
 
                         <button type="button" onclick="assing_complete()">Assign</button>
                     </form>
@@ -195,9 +204,22 @@
             var selectedCollectorId = 0;
             var requestCount = document.getElementById('request_count');
             requestCount.innerHTML = 0;
+            var map1;
+            var markers = [];
+
+            function initMapAssigned() {
+
+                var defaultLatLng = {
+                    lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
+                    lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
+                };
+
+                map1 = new google.maps.Map(document.getElementById('assigned-map'), {
+                    center: defaultLatLng,
+                    zoom: 9
+                });
+            }
             
-
-
             var dropdownItems = document.querySelectorAll('.dropdown-item');
             dropdownItems.forEach(function(item) {
                 item.addEventListener('click', function() {
@@ -205,24 +227,62 @@
                     selected_collector_id.value = selectedCollectorId;
 
                     var requestDate= document.getElementById('requested_date').value;
-                    console.log(requestDate);
-                    var request = <?php echo json_encode($data['assigned_requests']); ?>;
-                    var count = 0;
-                    for (let req_id in request) {
-                        if (request.hasOwnProperty(req_id)) {
-                            //console.log(request[req_id].date);
-                            if (request[req_id].collector_id == selectedCollectorId && request[req_id].date == requestDate) {
-                                
-                                count++;
-                            };
-                        }
-                    }
-                    requestCount.innerHTML = count;
+                    //console.log(requestDate);
+
+                    updateAssignedReqContent(selectedCollectorId, requestDate);
+
+                    
 
                 });
             });
 
-            
+            function updateAssignedReqContent(collectorId, requestDate){
+                var request = <?php echo json_encode($data['assigned_requests']); ?>;
+                var count = 0;
+
+                clearMarkers();
+
+                for (let req_id in request) {
+                    if (request.hasOwnProperty(req_id)) {
+                        
+                        if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate) {
+                            
+                            count++;
+                            console.log(request[req_id].lat, request[req_id].longi);
+                            // Create a marker for each record and add it to the map
+                            var marker = new google.maps.Marker({
+                                position: {lat: parseFloat(request[req_id].lat), lng: parseFloat(request[req_id].longi)},
+                                map: map1,
+                                title: 'Request ' + request[req_id].req_id
+                            });
+                            markers.push(marker);
+                            
+
+                            // Optionally, add info window to display additional information
+                            var infoWindow = new google.maps.InfoWindow({
+                                content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' + request[req_id].customer_name 
+                            });
+
+                            marker.addListener('click', function() {
+                                infoWindow.open(map1, marker);
+                            });
+
+                        };
+                    }
+                }
+                //console.log(markers);
+                requestCount.innerHTML = count;
+
+            }
+
+            function clearMarkers() {
+                // Loop through all markers on the map and remove them
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setMap(null); // Removes the marker from the map
+                }
+                // Clear the markers array
+                markers = [];
+            }
 
 
             function assing_complete() {

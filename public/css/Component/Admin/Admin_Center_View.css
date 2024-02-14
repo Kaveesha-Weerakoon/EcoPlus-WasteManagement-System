@@ -45,7 +45,7 @@
         height: 55px;
     }
 
-    .manager_img{
+    .manager_img {
         width: 35px !important;
         height: 35px !important;
         border-radius: 50%;
@@ -62,7 +62,7 @@
         cursor: pointer;
     }
 
-    
+
 
     /*Location Pop*/
     .location_pop {
@@ -284,7 +284,7 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .deletebtn:hover{
+    .deletebtn:hover {
         background: #c62323;
     }
 
@@ -302,8 +302,8 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .cancelbtn:hover{
-        background: #a7a1a1 ;
+    .cancelbtn:hover {
+        background: #a7a1a1;
     }
 
 }

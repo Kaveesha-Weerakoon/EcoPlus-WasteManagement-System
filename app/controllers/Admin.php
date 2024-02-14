@@ -20,18 +20,18 @@
       $this->garbage_types_model = $this->model('Garbage_types');
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
       $this->Report_Model=$this->model('Report');
-
-
       $this->fine_model = $this->model('Fines');
       
 
-      if(!isLoggedIn('admin_id')){
+      if(!isLoggedIn('admin_id')  && !isLoggedIn('superadmin_id')){
         redirect('users/login');
+     
       }
     }
 
     public function logout(){
       unset($_SESSION['admin_id']);
+      unset($_SESSION['superadmin_id']);
       unset($_SESSION['admin_email']);
       unset($_SESSION['admin_name']);
        session_destroy();
@@ -72,7 +72,6 @@
 
       $this->view('admin/index', $data);
     }
-
 
     public function complain_customers(){
     
@@ -1352,6 +1351,186 @@
 
       }
 
+    }
+
+    public function addadmins(){
+
+      if(isset($_SESSION['superadmin_id']) ){
+
+        $admins=$this->adminModel->get_all();
+        
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
+        $data=[
+          'admin'=>$admins
+        ];    
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $this->view('admin/admins', $data);
+      }       
+      else{   
+        $data=[
+          'admin'=>$admins
+        ];
+         $this->view('admin/admins', $data);
+        } 
+     }else{
+      header("Location: " . URLROOT . "/admin");        
+
+     }
+    }  
+    
+    public function addadmins2(){
+      if(isset($_SESSION['superadmin_id']) ){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data=[ 'name' => trim($_POST['name']),
+        'profile' => $_FILES['profile_image'],
+         'contact_no' => trim($_POST['contact_no']),
+        'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+        'nic' => trim($_POST['nic']),
+        'address' => trim($_POST['address']),
+        'dob' => trim($_POST['dob']),
+        'email' => trim($_POST['email']),
+        'password' => trim($_POST['password']),
+        'confirm_password' => trim($_POST['confirm_password']),
+        'name_err' => '',
+        'contact_no_err' => '',
+        'nic_err' => '',
+        'address_err' => '' ,
+        'dob_err' => '' ,
+        'email_err' => '' ,
+        'password_err' => '' ,
+        'complain_err' => '' ,
+        'profile_err'=>'',
+        'confirm_password_err'=>'' ,
+        'registered'=>'',
+         'profile_upload_error'=>''   ];    
+
+        if(empty($data['email'])){
+          $data['email_err'] = 'Please enter an email';
+        } else {
+          if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+            $data['email_err'] = 'Invalid email format';
+          } 
+          else{
+            if($this->userModel->findUserByEmail($data['email'])){
+              $data['email_err'] = 'Email is already taken';
+            }
+          }   
+        }
+
+        if(empty($data['name'])){
+          $data['name_err'] = 'Please enter name';
+        }
+        elseif (strlen($data['name']) > 255) {
+          $data['name_err'] = 'name is too long ';
+        }
+
+        if(empty($data['nic'])){
+          $data['nic_err'] = 'Please enter NIC';
+        }elseif(!(is_numeric($data['nic']) && (strlen($data['nic']) == 12)) && !preg_match('/^[0-9]{9}[vV]$/', $data['nic'])){
+          $data['nic_err'] = 'Please enter a valid NIC';
+        }
+        //validate DOB
+        if(empty($data['dob'])){
+          $data['dob_err'] = 'Please enter dob';
+        }
+
+        // Validate Contact no
+        if (empty($data['contact_no'])) {
+          $data['contact_no_err'] = 'Please enter a contact number';
+        } elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+            $data['contact_no_err'] = 'Please enter a valid contact number';
+        }
+      
+
+        // Validate Adress
+        if(empty($data['address'])){
+          $data['address_err'] = 'Please enter an address';
+        }
+        elseif (strlen($data['address']) > 255) {
+          $data['address_err'] = 'address is too long ';
+        }
+
+
+        // Validate Password
+        if(empty($data['password'])){
+          $data['password_err'] = 'Please enter password';
+        } elseif(strlen($data['password']) < 6){
+          $data['password_err'] = 'Password must be at least 6 characters';
+        }
+
+        // Validate Confirm Password
+        if(empty($data['confirm_password'])){
+          $data['confirm_password_err'] = 'Please confirm password';
+        } else {
+          if($data['password'] != $data['confirm_password']){
+            $data['confirm_password_err'] = 'Passwords do not match';
+          }
+        } 
+        if ($_FILES['profile_image']['error'] == 4) {
+          $data['profile_err'] = 'Upload a image';
+     
+        }
+
+        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err'])){
+          if ($_FILES['profile_image']['error'] == 4) {
+            $data['profile_err'] = 'Upload a image';
+        } else {
+            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/Admin/')) {
+              $data['profile_err'] = '';
+  
+            } else {
+                $data['profile_err'] = 'Error uploading the profile image';
+            }
+        }
+        }
+
+        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err']) && empty($data['profile_err'])){
+          // Validated
+          $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+          if($this->adminModel->register_admin($data)){
+            $data['registered']='True';        
+            $this->view('admin/admins_add', $data);
+          } else {
+            header("Location: " . URLROOT . "/admin");        
+          }
+        }
+        else{
+         
+          $this->view('admin/admins_add', $data);
+        }
+
+        $this->view('admin/admins_add', $data);
+        }       
+       else{
+        $data=[  'name' =>'',
+        'profile'=>'',
+        'contact_no' => '',
+        'nic' => '',
+        'address' => '',
+        'dob' => '',
+        'email' => '',
+        'password' => '',
+        'confirm_password' => '',
+        'name_err' => '',
+        'contact_no_err' => '',
+        'nic_err' => '',
+        'address_err' => '' ,
+        'dob_err' => '' ,
+        'email_err' => '' ,
+        'profile_err'=>'',
+        'password_err' => '' ,
+        'complain_err' => '' ,
+        'confirm_password_err'=>'',
+        'registered'=>'' ,         
+        'profile_upload_error'=>''   ]; 
+        $this->view('admin/admins_add', $data);
+      } 
+     }else{
+      header("Location: " . URLROOT . "/admin");        
+  
+     }
     }
     
     public function reports(){

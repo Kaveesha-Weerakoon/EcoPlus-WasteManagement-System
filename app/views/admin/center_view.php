@@ -20,27 +20,7 @@
                                 <i class='bx bx-bell'></i>
                                 <div class="dot"></div>
                             </div>
-                            <div id="notification_popup" class="notification_popup">
-                                <h1>Notifications</h1>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
 
-                                    </div>
-                                    Request 1232 Has been Cancelled
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
-
-                                    </div>
-                                    Request 1232 Has been Assigned
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
-
-                                    </div>
-                                    Request 1232 Has been Cancelled
-                                </div>
-                            </div>
                             <div class="main-right-top-profile">
                                 <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
                                 <div class="main-right-top-profile-cont">
@@ -55,7 +35,7 @@
                             <a href="<?php echo URLROOT?>/Admin/Center">
                                 <div class="main-right-top-three-content">
                                     <p><b style="color:#1ca557;">View</b></p>
-                                    <div class="line"  style="background-color: #1ca557;"></div>
+                                    <div class="line" style="background-color: #1ca557;"></div>
                                 </div>
                             </a>
                             <a href="<?php echo URLROOT?>/admin/center_add">
@@ -67,7 +47,7 @@
 
                         </div>
                     </div>
-                    
+
                     <div class="main-right-bottom">
                         <div class="main-right-bottom-top ">
                             <table class="table">
@@ -91,7 +71,8 @@
                                     <!-- <td><img onclick="viewLocation(<?php echo $centers->lat; ?>, <?php echo $centers->longi; ?>)"
                                             src="<?php echo IMGROOT?>/location.png" alt=""></td> -->
                                     <td><i class='bx bx-map' style="font-size: 29px;"
-                                             onclick="viewLocation(<?php echo $centers->lat; ?>, <?php echo $centers->longi; ?>)"></i></td>
+                                            onclick="viewLocation(<?php echo $centers->lat; ?>, <?php echo $centers->longi; ?>)"></i>
+                                    </td>
                                     <td><?php echo $centers->center_manager_id?></td>
                                     <td><?php echo $centers->center_manager_name?></td>
                                     <td><a
@@ -105,7 +86,7 @@
 
                         </div>
                     </div>
-                  
+
                 </div>
                 <div class="location_pop" id="location_pop">
                     <div class="location_pop_content">

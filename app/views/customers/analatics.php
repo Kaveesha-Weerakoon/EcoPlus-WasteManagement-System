@@ -81,6 +81,45 @@
 
 
                 <div class="main-right-bottom">
+                    <div class="credit-section">
+                        <div class="cont A">
+                            <i class="fa-solid fa-dollar-sign"></i>
+                            <div class="cont-cont">
+                                <p>Credit Balance</p>
+                                <h1>Eco
+                                    <?php echo !empty($data['credit_balance']) ? $data['credit_balance'] : '0.00'; ?>
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="cont B">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <div class="cont-cont">
+                                <p>Fined </p>
+                                <h1>Eco
+                                    <?php echo !empty($data['fine_balance']) ? -$data['fine_balance'] : '0.00'; ?>
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="cont C">
+                            <i class="fas fa-exchange-alt"></i>
+                            <div class="cont-cont">
+                                <p>Transactions</p>
+                                <h1>Eco
+                                    <?php echo !empty($data['transaction_balance']) ? $data['transaction_balance'] : '0.00'; ?>
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="cont D">
+                            <i class="fas fa-check-circle"></i>
+                            <div class="cont-cont">
+                                <p>Redeemed</p>
+                                <h1>Eco
+                                    <?php echo !empty($data['redeemed_balance']) ? $data['redeemed_balance'] : '0.00'; ?>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <div class="request-section">
                         <div class="left">
@@ -132,7 +171,7 @@
                                     </h1>
                                 </div>
                                 <div class="bottom">
-                                    <canvas id="myChart" width="600" height="400"></canvas>
+                                    <canvas id="myChart" width="600" height="350"></canvas>
                                 </div>
                             </div>
                         </div>

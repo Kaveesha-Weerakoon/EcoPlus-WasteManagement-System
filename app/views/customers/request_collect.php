@@ -248,6 +248,20 @@
                         </div>
                     </div>
                     <?php endif; ?>
+                    <?php if($data['radius_err']=='True') : ?>
+
+                    <div class="radius_error_pop">
+                        <div class="popup" id="popup1">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <h2>Apologies, Not Serving Your Location!</h2>
+                            <p>Check our centers section for coverage details.</p>
+                            <a href="<?php echo URLROOT?>/customers/request_collect"><button
+                                    type="button">OK</button></a>
+
+                        </div>
+                    </div>
+                    <?php endif; ?>
+
                 </form>
             </div>
             <div class="overlay" id="overlay">

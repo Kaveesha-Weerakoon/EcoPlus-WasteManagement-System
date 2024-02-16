@@ -1052,12 +1052,20 @@
         if($fromDate==""){
           $fromDate="none";
         }
+        
         $completedRequests=$this->Report_Model->getCompletedRequests($customerId,$fromDate,$toDate);
         $cancelledRequests=$this->Report_Model->getCancelledRequests($customerId,$fromDate,$toDate);
         $ongoingRequests=$this->Report_Model->getonGoingRequests($customerId,$fromDate,$toDate);
         $totalRequests = $this->Report_Model->getallRequests($customerId,$fromDate,$toDate);
         $credits=$this->Report_Model->getCredits($customerId,$fromDate,$toDate);
         $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
+
+        $fine=$this->Report_Model->getFineAmount($customerId,$fromDate,$toDate);
+        $finedAmount = is_numeric($fine->fine_amount) ? (float)$fine->fine_amount : 0;
+        $getDiscountsOnAgents=$this->Report_Model->getDiscountsOnAgents($customerId,$fromDate,$toDate);
+        $transactionBalance = $this->Report_Model->getTransactionAmount($customerId,$fromDate,$toDate); // Ensure $transactions is numeric
+        $creditsBalance = $credits->total_credits - $getDiscountsOnAgents->discount_credits +  $transactionBalance-$finedAmount;
+
 
         $data=[
           'ongoingRequests'=>count($ongoingRequests),
@@ -1069,8 +1077,10 @@
           'from'=>  $fromDate,      
           'creditsByMonth1'=>  $creditByMonth,
           'notification'=> $Notifications,   
-
-
+          'fine_balance'=> $finedAmount, 
+          'credit_balance'=> $creditsBalance, 
+          'transaction_balance'=> $transactionBalance, 
+          'redeemed_balance'=> $getDiscountsOnAgents->discount_credits
         ];
         
       $this->view('customers/analatics', $data);
@@ -1085,6 +1095,12 @@
       $credits=$this->Report_Model->getCredits($customerId);
       $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
 
+      $fine=$this->Report_Model->getFineAmount($customerId);
+      $finedAmount = is_numeric($fine->fine_amount) ? (float)$fine->fine_amount : 0;
+      $getDiscountsOnAgents=$this->Report_Model->getDiscountsOnAgents($customerId);
+      $transactionBalance = $this->Report_Model->getTransactionAmount($customerId); // Ensure $transactions is numeric
+      $creditsBalance = $credits->total_credits - $getDiscountsOnAgents->discount_credits +  $transactionBalance-$finedAmount;
+      
       $data=[
         'ongoingRequests'=>count($ongoingRequests),
         'cancelledRequests'=>count($cancelledRequests),
@@ -1094,9 +1110,13 @@
         'creditsByMonth1'=> $creditByMonth,
         'to'=>'none',
         'from'=>'none',  
-        'notification'=> $Notifications,   
+        'notification'=> $Notifications, 
+        'fine_balance'=> $finedAmount, 
+        'credit_balance'=> $creditsBalance, 
+        'transaction_balance'=> $transactionBalance, 
+        'redeemed_balance'=> $getDiscountsOnAgents->discount_credits
 
-     ];
+        ];
      
        $this->view('customers/analatics', $data);
      }

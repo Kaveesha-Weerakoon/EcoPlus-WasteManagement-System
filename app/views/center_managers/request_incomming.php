@@ -2,12 +2,15 @@
 <div class="CenterManager_Main">
     <div class="CenterManager_Request_Main">
         <div class="CenterManager_Request_Incomming">
-            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
+            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initializeMaps"
             async defer>
             </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMapAssigned"
+            <!-- <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMapAssigned"
             async defer>
             </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initLocationPop"
+            async defer>
+            </script> -->
 
             <div class="main">
                 <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
@@ -26,6 +29,7 @@
                                     <th>Customer</th>
                                     <th>Date</th>
                                     <th>Time</th>
+                                    <th>Location</th>
                                     <th>Request details</th>
                                     <th>Assign</th>
                                     <th>Cancel</th>
@@ -40,7 +44,11 @@
                                     <td><?php  echo $request->name?></td>
                                     <td><?php  echo $request->date?></td>
                                     <td><?php  echo $request->time?></td>
+                                    <td>
+                                        <i class='bx bx-map' style="font-size: 29px;"
+                                        onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
 
+                                    </td>
                                     <td>
                                         <i class='bx bx-info-circle' style="font-size: 29px"
                                             onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
@@ -156,6 +164,17 @@
 
                 </div>
 
+                <div class="location_pop" id="location_pop">
+                    <div class="location_pop_content">
+                        <div class="location_pop_map">
+
+                        </div>
+                        <div class="location_close">
+                            <button onclick="closemap()">Close</button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="request-details-pop" id="request-details-popup-box">
                     <div class="request-details-pop-form">
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
@@ -199,6 +218,12 @@
                     document.getElementById("cancel-form").submit();
                     closecancel();
                 }
+            }
+
+            function initializeMaps() {
+                initMap();
+                initMapAssigned();
+                initLocationPop();
             }
 
             var selectedCollectorId = 0;
@@ -284,6 +309,41 @@
                 markers = [];
             }
 
+            function initLocationPop(latitude = 7.4, longitude = 81.00000000) {
+                var mapCenter = {
+                    lat: latitude,
+                    lng: longitude
+                };
+
+                var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
+                    center: mapCenter,
+                    zoom: 14.5
+                });
+
+                var marker = new google.maps.Marker({
+                    position: {
+                        lat: parseFloat(latitude),
+                        lng: parseFloat(longitude)
+                    },
+                    map: map,
+                    title: 'Marked Location'
+                });
+            }
+
+            function viewLocation($lattitude, $longitude) {
+                initLocationPop($lattitude, $longitude);
+                var locationPop = document.getElementById('location_pop');
+                locationPop.classList.add('active');
+                document.getElementById('overlay').style.display = "flex";
+            }
+
+            function closemap() {
+                var locationPop = document.getElementById('location_pop');
+                locationPop.classList.remove('active');
+                document.getElementById('overlay').style.display = "none";
+
+            }
+
 
             function assing_complete() {
                 var assignForm = document.getElementById('assignForm');
@@ -311,6 +371,18 @@
 
                 // var request_date = document.getElementById('requested_date');
                 // request_date.innerHTML = requestedDate;
+
+                //Reset the dropdown menu to its default state
+                var dropdownToggle = document.getElementById('dropdownToggle');
+                dropdownToggle.innerText = 'Select a Collector';
+                dropdownToggle.setAttribute('data-id', '');
+
+                // Reset request count to 0
+                var requestCount = document.getElementById('request_count');
+                requestCount.innerHTML = 0;
+
+                // Clear markers from the map
+                clearMarkers();
 
                 var assign_popup = document.getElementById('View');
                 assign_popup.classList.add('active');

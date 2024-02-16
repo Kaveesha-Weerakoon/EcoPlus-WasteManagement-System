@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="CenterManager_Main">
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initMap" async defer>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initializeMaps" async defer>
     </script>
     <div class="CenterManager_Request_Main">
         <div class="CenterManager_Request_Assinged">
@@ -18,9 +18,9 @@
                             <table class="table">
                                 <tr class="table-header">
                                     <th>Req ID</th>
-                                    <!-- <th>Customer</th> -->
                                     <th>Date</th>
                                     <th>Time</th>
+                                    <th>Location</th>
                                     <th>Collector info</th>
                                     <th>Request Details</th>
                                     <th>Cancel</th>
@@ -33,10 +33,13 @@
 
                                 <tr class="table-row">
                                     <td>R <?php echo $request->req_id?></td>
-                                    <!-- <td><?php echo $request->name?></td> -->
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
-                                    <!-- <td><?php echo $request->collector_id?></td> -->
+                                    <td>
+                                        <i class='bx bx-map' style="font-size: 29px;"
+                                        onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
+
+                                    </td>
                                     <td class="cancel-open">
 
                                         <img class="collector_img"
@@ -73,6 +76,17 @@
                     </div>
                 </div>
                 <?php endif; ?>
+            </div>
+
+            <div class="location_pop" id="location_pop">
+                <div class="location_pop_content">
+                    <div class="location_pop_map">
+
+                    </div>
+                    <div class="location_close">
+                        <button onclick="closemap()">Close</button>
+                    </div>
+                </div>
             </div>
 
             <!-- cancel popup -->
@@ -241,6 +255,48 @@ function view_request_details(request) {
     document.getElementById('instructions').innerText = request.instructions;
 
 }
+
+function initializeMaps() {
+    initMap();
+    initLocationPop();
+}
+
+
+function initLocationPop(latitude = 7.4, longitude = 81.00000000) {
+    var mapCenter = {
+        lat: latitude,
+        lng: longitude
+    };
+
+    var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
+        center: mapCenter,
+        zoom: 14.5
+    });
+
+    var marker = new google.maps.Marker({
+        position: {
+            lat: parseFloat(latitude),
+            lng: parseFloat(longitude)
+        },
+        map: map,
+        title: 'Marked Location'
+    });
+}
+
+function viewLocation($lattitude, $longitude) {
+    initMap($lattitude, $longitude);
+    var locationPop = document.getElementById('location_pop');
+    locationPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+}
+
+function closemap() {
+    var locationPop = document.getElementById('location_pop');
+    locationPop.classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
+
+}
+
 
 
 function initMap() {

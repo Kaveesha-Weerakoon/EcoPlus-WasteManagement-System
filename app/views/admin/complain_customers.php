@@ -143,22 +143,41 @@
                         <div class="personal-details-right-labels">
                             <span>Complain Id</span><br>
                             <span>Customer Name</span><br>
-                            <span>Customer Contact No</span><br>
+                            <span>Contact No</span><br>
                             <span>Customer Region</span><br>
-                            <span>Subject</span><br>
-                            <span>Complain</span><br>
+                            
                         </div>
                         <div class="personal-details-right-values">
                             <span id="complain_id"></span><br>
                             <span id="user_name"></span><br>
                             <span id="user_contactno"></span><br>
                             <span id="user_region"></span><br>
-                            <span id="subject"></span><br>
-                            <span id="complain"></span><br>
+                            
 
                         </div>
                     </div>
-                </div>
+                    <div class="personal-details-bottom">
+                        <div class="personal-details-bottom-one">
+                                <h2>Subject</h2><br>
+                        <div>
+
+                        <div class="subject-complain-box">
+                            <div class="subject-complain"> 
+                                <span id="subject"></span><br>
+                            </div>
+
+                        </div>
+                            <div class="personal-details-bottom-two">
+                                <h2>Complain</h2><br>
+                        <div>
+
+                        <div class="subject-complain-box">
+                            <div class="subject-complain"> 
+                                <span id="complain"></span><br>
+                            </div>
+                        </div>
+
+                     </div>
             </div>
 
         </div>

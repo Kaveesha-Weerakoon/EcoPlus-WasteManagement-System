@@ -391,7 +391,7 @@
     
         .personal-details-popup {
             display: grid;
-            grid-template-columns: 40% 60%;
+            grid-template-columns: 30% 70%;
             width: 100%;
             border-radius: 4px;
             height: 100%;
@@ -401,8 +401,9 @@
         }
     
         .personal-details-right {
+            margin-left: 40px;
             display: grid;
-            grid-template-columns: 30% 70%;
+            grid-template-columns: 40% 60%;
     
         }
     
@@ -412,7 +413,6 @@
             justify-content: center;
             align-items: flex-start;
             padding-top: 40px;
-            padding-bottom: 50px;
             padding-left: 25px;
         }
     
@@ -430,13 +430,12 @@
             justify-content: center;
             align-items: flex-start;
             padding-top: 40px;
-            padding-bottom: 50px;
             padding-left: 32px;
     
         }
     
         .personal-details-right-values span {
-            margin-bottom: 15px;
+           margin-bottom: 15px;
             font-size: 15px;
             color: #767e95;
             font-weight: 550;
@@ -449,15 +448,15 @@
             justify-content: center;
             padding: 10px;
             flex-direction: column;
+            margin-left: 50px;
     
         }
     
         .personal-details-left img {
-            width: 150px;
-            height: 150px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             overflow: hidden;
-            margin-bottom: 8px;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
         }
     
@@ -505,6 +504,68 @@
     
         }
 
+        .personal-details-bottom {
+         padding: 4%;
+         flex: 1;
+        }
+
+        .personal-details-bottom-two{
+            margin-top: 10px;
+           
+        }
+
+        .personal-details-bottom-one h2{
+             font-size: 15px;
+            color: #767e95;
+            font-weight: 550;
+            margin-top: 1px;
+        }
+        
+        .personal-details-bottom-two h2{
+            font-size: 15px;
+           color: #767e95;
+           font-weight: 550;
+           margin-top: 1px;
+       }
+       
+        
+        .subject-complain-box {
+    
+            padding: 1px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-left: 60px;
+            width: 550px;
+            box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1); 
+            background-color: #fafafa;
+           
+        }
+        
+        .subject-complain {
+            text-align: left; 
+            margin-left: 30px;
+        }
+        
+        .personal-details-bottom span {
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #7c7c7d;
+       
+        }
+
+
+        .personal-details-bottom-one .subject-complain-box {
+            height: 20px;
+        }
+        
+        .personal-details-bottom-two .subject-complain-box {
+            height: 94px;
+            margin-bottom: 10px; 
+        }
+        
+        
+        
+        
         .overlay {
             position: fixed;
             top: 0;

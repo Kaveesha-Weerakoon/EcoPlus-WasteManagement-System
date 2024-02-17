@@ -129,7 +129,7 @@
                 <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
                 id="personal-details-popup-form-close">
                 <center>
-                    <div class="personal-details-topic">Personal Details</div>
+                    <div class="personal-details-topic">Complain Details</div>
                 </center>
 
                 <div class="personal-details-popup">
@@ -137,7 +137,7 @@
                         <!-- <img src="<?php echo IMGROOT?>/img_upload/Admin/<?php echo $data['image']?>" class="profile-pic"
                             alt=""> -->
                             <img src="" id="user_profile_pic" alt="">
-                        <p>Admin ID: <span id="user_id">C</span></p>
+                        <p>Customer ID: <span id="user_id">C</span></p>
                     </div>
                     <div class="personal-details-right">
                         <div class="personal-details-right-labels">

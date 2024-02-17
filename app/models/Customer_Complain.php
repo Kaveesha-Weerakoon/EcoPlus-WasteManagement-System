@@ -37,12 +37,22 @@
         return $results;
     }
   
+
     public function get_customer_complains(){
 
       $this->db->query('SELECT * FROM customer_complains  ORDER BY customer_complains.date DESC');
       $results = $this->db->resultSet();
       return $results;
   }
+
+  public function get_customer_complains_with_image(){
+    $this->db->query('SELECT customer_complains.*, customers.image 
+                      FROM customer_complains 
+                      INNER JOIN customers ON customer_complains.customer_id = customers.user_id
+                      ORDER BY customer_complains.date DESC');
+    $results = $this->db->resultSet();
+    return $results;
+}
 
 
  

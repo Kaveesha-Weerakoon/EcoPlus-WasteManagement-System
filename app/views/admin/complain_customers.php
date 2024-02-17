@@ -136,25 +136,25 @@
                     <div class="personal-details-left">
                         <!-- <img src="<?php echo IMGROOT?>/img_upload/Admin/<?php echo $data['image']?>" class="profile-pic"
                             alt=""> -->
-                            <img src="" id="admin_profile_pic" alt="">
-                        <p>Admin ID: <span id="admin_id">C</span></p>
+                            <img src="" id="user_profile_pic" alt="">
+                        <p>Admin ID: <span id="user_id">C</span></p>
                     </div>
                     <div class="personal-details-right">
                         <div class="personal-details-right-labels">
-                            <span>Name</span><br>
-                            <span>Email</span><br>
-                            <span>NIC</span><br>
-                            <span>Address</span><br>
-                            <span>Contact No</span><br>
-                            <span>DOB</span><br>
+                            <span>Complain Id</span><br>
+                            <span>Customer Name</span><br>
+                            <span>Customer Contact No</span><br>
+                            <span>Customer Region</span><br>
+                            <span>Subject</span><br>
+                            <span>Complain</span><br>
                         </div>
                         <div class="personal-details-right-values">
-                            <span id="admin_name"></span><br>
-                            <span id="admin_email"></span><br>
-                            <span id="admin_nic"></span><br>
-                            <span id="admin_address"></span><br>
-                            <span id="admin_contact_no"></span><br>
-                            <span id="admin_dob"></span><br>
+                            <span id="complain_id"></span><br>
+                            <span id="user_name"></span><br>
+                            <span id="user_contactno"></span><br>
+                            <span id="user_region"></span><br>
+                            <span id="subject"></span><br>
+                            <span id="complain"></span><br>
 
                         </div>
                     </div>
@@ -167,6 +167,37 @@
     </div> 
  </div>
     
+ 
+ <script>
+     function openpersonaldetails(user){
+        var personalPop = document.getElementById('personal-details-popup-box');
+        personalPop.classList.add('active');
+        document.getElementById('overlay').style.display = "flex";
+       
+        document.getElementById('user_id').textContent =user.customer_id;
+        document.getElementById('complain_id').textContent =user.id;
+        document.getElementById('user_profile_pic').src =  "<?php echo IMGROOT?>/img_upload/customer/" + user.image;
+        document.getElementById('user_name').textContent = user.name;
+        document.getElementById('user_contactno').textContent = user.contact_no;
+        document.getElementById('user_region').textContent = user.region;
+        document.getElementById('subject').textContent =user.subject;
+        document.getElementById('complain').textContent = user.complaint;
+        
+
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var close_personal_details = document.getElementById('personal-details-popup-form-close');
+        close_personal_details.addEventListener('click', function() {
+            const personal_details = document.getElementById("personal-details-popup-box");
+            personal_details.classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
+            
+        });
+    });
+
+
+</script>
 
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

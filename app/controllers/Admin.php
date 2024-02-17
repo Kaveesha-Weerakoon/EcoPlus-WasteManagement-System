@@ -75,7 +75,7 @@
 
     public function complain_customers(){
     
-      $complains = $this->customer_complain_Model->get_customer_complains();
+      $complains = $this->customer_complain_Model->get_customer_complains_with_image();
       $data = [
         'complains' => $complains
       ];

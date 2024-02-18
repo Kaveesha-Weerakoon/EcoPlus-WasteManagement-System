@@ -1747,6 +1747,14 @@
 
   }
 
+  public function reports(){
+    $data=[
+
+    ];
+
+    $this->view('center_managers/reports', $data);
+  }
+
 
 
   }

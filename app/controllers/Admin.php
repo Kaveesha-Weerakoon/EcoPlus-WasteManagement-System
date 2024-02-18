@@ -944,7 +944,7 @@
 
     public function complaint_centers(){
 
-      $center_complaints= $this->center_complaints_model->get_center_complaints();
+      $center_complaints= $this->center_complaints_model->get_center_complains_with_image();
 
       $data = [
         'complaints' => $center_complaints

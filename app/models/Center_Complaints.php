@@ -60,6 +60,15 @@
             }
         }
 
+        public function get_center_complains_with_image(){
+            $this->db->query('SELECT center_complaints.*, center_managers.image 
+                              FROM center_complaints 
+                              INNER JOIN center_managers ON center_complaints.center_manager_id = center_managers.user_id
+                              ORDER BY center_complaints.date_time DESC');
+            $results = $this->db->resultSet();
+            return $results;
+        }
+        
 
 
 

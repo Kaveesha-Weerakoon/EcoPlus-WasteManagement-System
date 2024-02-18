@@ -84,8 +84,6 @@
                                 <th>Collector ID</th>
                                 <th>Center</th>
                                 <th>Date</th>
-                                <!--<th>Contact No</th>
-                                <th>Collector Name</th>-->
                                 <th>Subject</th>
                                 <th>details</th>
                                
@@ -99,11 +97,7 @@
                                            <td>COM<?php echo $complaint->id?></td>
                                            <td>CO<?php echo $complaint->collector_id?></td>
                                            <td><?php echo $complaint->region?></td>
-                                           <td><?php echo date('Y-m-d', strtotime($complaint->date)); ?></td>
-                                           <!--<td><?php echo $complaint->contact_no?></td>
-                                           <td><?php echo $complaint->name?></td>
-                                           <td><?php echo $complaint->subject?></td>
-                                           <td><?php echo $complaint->complaint?></td>  -->           
+                                           <td><?php echo date('Y-m-d', strtotime($complaint->date)); ?></td>           
                                            <td><?php echo $complaint->subject?></td>
                                            <td><i onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode( $complaint), ENT_QUOTES, 'UTF-8') ?>))"
                                                  class='bx bxs-file' style="font-size: 29px;"></i></td>
@@ -116,7 +110,7 @@
              </div>
         </div>
 
-                <div class="overlay" id="overlay"></div>
+        <div class="overlay" id="overlay"></div>
 
 
         <div class="personal-details-popup-box" id="personal-details-popup-box">

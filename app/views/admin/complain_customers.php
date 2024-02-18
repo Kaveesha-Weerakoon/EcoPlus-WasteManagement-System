@@ -96,9 +96,9 @@
                         <table class="table">
                         <?php foreach($data['complains'] as $complaint) : ?>
                                        <tr class="table-row">
-                                           <td>Com <?php echo $complaint->id?></td>
+                                           <td>COM <?php echo $complaint->id?></td>
                                            <td>C<?php echo $complaint->customer_id?></td>
-                                           <td><?php echo $complaint->date?></td>
+                                           <td><?php echo date('Y-m-d', strtotime($complaint->date)); ?></td>
                                           <!--    <td><?php echo $complaint->contact_no?></td>
                                            <td><?php echo $complaint->name?></td>
                                            <td><?php echo $complaint->subject?></td>

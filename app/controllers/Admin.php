@@ -731,7 +731,7 @@
 
     public function complain_collectors(){
 
-      $collector_complains= $this->collector_complain_Model->get_complains();
+      $collector_complains= $this->collector_complain_Model->get_collector_complains_with_image();
 
       $data = [
         'complains' => $collector_complains

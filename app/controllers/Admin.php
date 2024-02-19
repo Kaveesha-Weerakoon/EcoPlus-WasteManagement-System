@@ -76,7 +76,7 @@
 
     public function complain_customers(){
     
-      $complains = $this->customer_complain_Model->get_customer_complains();
+      $complains = $this->customer_complain_Model->get_customer_complains_with_image();
       $data = [
         'complains' => $complains
       ];
@@ -732,7 +732,7 @@
 
     public function complain_collectors(){
 
-      $collector_complains= $this->collector_complain_Model->get_complains();
+      $collector_complains= $this->collector_complain_Model->get_collector_complains_with_image();
 
       $data = [
         'complains' => $collector_complains
@@ -945,7 +945,7 @@
 
     public function complaint_centers(){
 
-      $center_complaints= $this->center_complaints_model->get_center_complaints();
+      $center_complaints= $this->center_complaints_model->get_center_complains_with_image();
 
       $data = [
         'complaints' => $center_complaints

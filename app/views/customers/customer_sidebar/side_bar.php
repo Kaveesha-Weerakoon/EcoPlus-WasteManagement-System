@@ -36,7 +36,7 @@
             </div>
             <h3>Complaints</h3>
         </div>
-        <div class="main-left-middle-content" onclick="redirect_analatics()" id="annocements">
+        <div class="main-left-middle-content" onclick="redirect_annocements()" id="annocements">
             <div class=" main-left-middle-content-icon">
                 <i class='bx bxs-megaphone'></i>
             </div>
@@ -109,6 +109,10 @@ function redirect_complains() {
     window.location.href = linkUrl;
 }
 
+function redirect_annocements() {
+    var linkUrl = "<?php echo URLROOT?>/customers/announcements";
+    window.location.href = linkUrl;
+}
 var checkbox = document.getElementById('toggle-checkbox');
 
 function setDarkModeStyle(isDarkMode) {

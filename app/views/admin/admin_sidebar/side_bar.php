@@ -29,7 +29,7 @@
             </div>
             <h3>Centers</h3>
         </div>
-        <div class="main-left-middle-content" onclick="redirect_announcement()" id="centers">
+        <div class="main-left-middle-content" onclick="redirect_announcement()" id="announcements">
             <div class=" main-left-middle-content-icon">
                 <i class='bx bxs-megaphone'></i>
             </div>
@@ -98,7 +98,7 @@ function redirect_admin() {
 }
 
 function redirect_announcement() {
-    var linkUrl = "<?php echo URLROOT?>/admin/index"; // Replace with your desired URL
+    var linkUrl = "<?php echo URLROOT?>/admin/announcements"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
 

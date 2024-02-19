@@ -254,6 +254,14 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .main-right-bottom-two-cont.slide-in {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     .main-right-bottom-two-cont:hover {

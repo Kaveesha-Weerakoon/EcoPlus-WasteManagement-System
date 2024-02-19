@@ -87,6 +87,18 @@
             justify-content: center;
         }
 
+        .main-bottom-component {
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .main-bottom-component.slide-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
         .main-bottom-component-left {
             display: flex;
             justify-content: center;

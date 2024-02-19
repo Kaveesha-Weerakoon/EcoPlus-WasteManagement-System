@@ -38,6 +38,7 @@
 @import url('Component/Customer/Customer_Discount_Agent.css');
 @import url('Component/Customer/Customer_GarbageTypes.css');
 @import url('Component/Customer/Customer_Analatics.css');
+@import url('Component/Customer/Customer_Annoucement.css');
 
 /* Colletor CSS */
 
@@ -150,6 +151,7 @@
 @import url('Component/Admin/Admin_Admin.css');
 @import url('Component/Admin/Admin_Admin_Add.css');
 @import url('Component/Admin/Admin_Admin_View.css');
+@import url('Component/Admin/Admin_Announcements.css');
 
 @import url('Component/Admin/Admin_Garbage_Types_View.css');
 

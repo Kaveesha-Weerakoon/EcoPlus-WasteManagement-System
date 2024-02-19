@@ -315,6 +315,51 @@ const config = {
 
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart1 = new Chart(ctx, config);
+
+/*animations*/
+document.addEventListener("DOMContentLoaded", function() {
+    var contElements = document.querySelectorAll('.credit-section .cont');
+
+    function checkSlide() {
+        contElements.forEach(function(element) {
+            var slideInAt = window.scrollY + window.innerHeight - element.clientHeight / 2;
+            var elementTop = element.getBoundingClientRect().top;
+            var isHalfShown = elementTop < window.innerHeight;
+            var isNotScrolledPast = window.scrollY < elementTop + element.clientHeight;
+
+            if (isHalfShown && isNotScrolledPast) {
+                element.classList.add('fade-in');
+            } else {
+                element.classList.remove('fade-in');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', checkSlide);
+    checkSlide(); // Trigger once on page load
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    var leftContElements = document.querySelectorAll('.left-cont');
+
+    function checkSlide() {
+        leftContElements.forEach(function(element) {
+            var slideInAt = window.scrollY + window.innerHeight - element.clientHeight / 2;
+            var elementTop = element.getBoundingClientRect().top;
+            var isHalfShown = elementTop < window.innerHeight;
+            var isNotScrolledPast = window.scrollY < elementTop + element.clientHeight;
+
+            if (isHalfShown && isNotScrolledPast) {
+                element.classList.add('fade-in');
+            } else {
+                element.classList.remove('fade-in');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', checkSlide);
+    checkSlide(); // Trigger once on page load
+});
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

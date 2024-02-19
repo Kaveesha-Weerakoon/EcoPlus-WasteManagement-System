@@ -27,13 +27,15 @@
     }
 
     public function addCenter($data){
-        $this->db->query('INSERT INTO center (region,district,center_manager_id,center_manager_name,lat,longi) VALUES (:region,:district, :center_manager_id, :center_manager_name,:lat,:longi)');
+        $this->db->query('INSERT INTO center (region,district,center_manager_id,center_manager_name,lat,longi,radius) VALUES (:region,:district, :center_manager_id, :center_manager_name,:lat,:longi,:radius)');
        
         $centerManagers = $data['center_manager_data'];
         $this->db->bind(':region', $data['region']);
         $this->db->bind(':district', $data['district']);
         $this->db->bind(':lat', $data['lattitude']);
         $this->db->bind(':longi', $data['longitude']);
+        $this->db->bind(':radius', $data['radius']);
+
         $this->db->bind(':center_manager_id', $centerManagers->user_id);
         $this->db->bind(':center_manager_name', $data['center_manager_name']->name);   
         $result = $this->db->execute();
@@ -52,10 +54,25 @@
                 $this->db->bind(':center_manager_id', $centerManagers->user_id);
                 $result_2 = $this->db->execute();
 
+                // if ($result_2) {
+                //     return true;
+                // } else {
+                //     return false;
+                // }
                 if ($result_2) {
+                  $this->db->query('INSERT INTO center_garbage (center_id,region) VALUES (:center_id, :region)');
+                  $this->db->bind(':center_id', $id);
+                  $this->db->bind(':region', $data['region']);
+                  $result_3 = $this->db->execute();
+
+                  if ($result_3) {
                     return true;
-                } else {
+                  }else{
                     return false;
+                  }
+
+                } else{
+                  return false;
                 }
             }
             else {
@@ -82,8 +99,17 @@
       }
     }
 
-    public function changeCentermanager($centerid,$center_manager,$assigning_manager_name){
+    public function getCenterByRegion($region){
+      $this->db->query('SELECT * FROM center WHERE region = :region');
+      $this->db->bind(':region', $region);
+      
+      $result = $this->db->single();
+      return $result;
 
+    }
+
+    public function changeCentermanager($centerid,$center_manager,$assigning_manager_name){
+      try{
       $sql = 'UPDATE center SET center_manager_id = :newManagerId, center_manager_name = :newManagerName WHERE id = :centerId';
 
       $this->db->query($sql);
@@ -91,7 +117,35 @@
       $this->db->bind(':newManagerName', $assigning_manager_name->name);
       $this->db->bind(':centerId', $centerid);
  
-      $result= $this->db->execute();    
+      $result= $this->db->execute();   
+     }
+     catch (PDOException $e) {
+      return false;
+     }
+    }
+
+    public function changeCenterLocation($data,$centerid){
+      try{
+        $sql = 'UPDATE center SET lat = :lat, longi = :longi,radius = :radius WHERE id =:id';
+  
+        $this->db->query($sql);
+        $this->db->bind(':radius',$data['radius']);
+        $this->db->bind(':longi', $data['longitude']);
+        $this->db->bind(':lat', $data['lattitude']);
+        $this->db->bind(':id', $centerid);
+
+        $result= $this->db->execute();   
+        if($result){
+           return true;
+        }
+        else{
+          return false;
+        }
+       }
+       catch (PDOException $e) {
+        die($e);
+        return false;
+       }
     }
 
     public function delete_center($center_id){

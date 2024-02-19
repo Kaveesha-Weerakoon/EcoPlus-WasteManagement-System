@@ -46,7 +46,13 @@
         return true;
        
       }
-
+      public function get_collector($id){
+        $this->db->query('SELECT * FROM collectors WHERE user_id = :id');
+       $this->db->bind(':id', $id);
+       $results = $this->db->single();
+       // print_r($results);
+        return $results;
+      }
 
     public function get_collectors(){
         $this->db->query('SELECT *,
@@ -71,7 +77,25 @@
             $this->db->bind(':center_id', $center_id);
 
             $results = $this->db->resultSet();
+           
             return $results;
+    }
+
+    public function get_no_of_Collectors($center_id){
+        $this->db->query('SELECT *,
+                              collectors.id as cID,
+                              users.id as userId
+                              FROM collectors
+                              INNER JOIN users
+                              ON collectors.user_id = users.id
+                              WHERE collectors.center_id = :center_id');
+        $this->db->bind(':center_id', $center_id);
+
+        $rows = $this->db->resultSet();
+
+        $no_of_collectors = $this->db->rowCount();
+        return $no_of_collectors;
+
     }
 
     public function update_collectors($data){ 

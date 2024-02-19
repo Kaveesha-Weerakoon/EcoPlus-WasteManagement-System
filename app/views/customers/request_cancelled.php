@@ -1,92 +1,15 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Customer_Main">
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initMap" async defer>
-    </script>
+
 
     <div class="Customer_Request_Main">
         <div class="Customer_Request_Cancelled">
             <div class="main">
-                <div class="main-left">
-                    <div class="main-left-top">
-                        <img src="<?php echo IMGROOT ?>/Logo_No_Background.png" alt="">
-                        <h1>Eco Plus</h1>
-                    </div>
-                    <div class="main-left-middle">
-                        <a href="<?php echo URLROOT?>/customers">
-                            <div class="main-left-middle-content ">
-                                <div class="main-left-middle-content-line2"></div>
-                                <img src="<?php echo IMGROOT ?>/Customer_DashBoard_Icon.png" alt="">
-                                <h2>Dashboard</h2>
-                            </div>
-                        </a>
-                        <div class="main-left-middle-content current">
-                            <div class="main-left-middle-content-line"></div>
-                            <img src="<?php echo IMGROOT ?>/Customer_Request.png" alt="">
-                            <h2>Requests</h2>
-                        </div>
-                        <a href="<?php echo URLROOT?>/customers/history">
-                            <div class="main-left-middle-content">
-                                <div class="main-left-middle-content-line2"></div>
-                                <img src="<?php echo IMGROOT ?>/Customer_tracking _Icon.png" alt="">
-                                <h2>History</h2>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/customers/editprofile">
-                            <div class="main-left-middle-content">
-                                <div class="main-left-middle-content-line2"></div>
-                                <img src="<?php echo IMGROOT ?>/Customer_Edit_Pro_Icon.png" alt="">
-                                <h2>Edit Profile</h2>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="main-left-bottom">
+                <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
-                        <a href="<?php echo URLROOT?>/customers/logout">
-
-                            <div class="main-left-bottom-content">
-                                <img src="<?php echo IMGROOT ?>/Logout.png" alt="">
-                                <p>Log out</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
                 <div class="main-right">
-                    <div class="main-right-top">
-                        <div class="main-right-top-one">
-                            <div class="main-right-top-one-input">
-                                <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                                <input type="text" placeholder="Search" id="searchInput">
-                            </div>
-                            <div class="main-right-top-one-content">
-                                <p><?php echo $_SESSION['user_name']?></p>
-                                <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
-                                    alt="">
-                            </div>
-                        </div>
-                        <div class="main-right-top-two">
-                            <h1>Requests</h1>
-                        </div>
-                        <div class="main-right-top-three">
-                            <a href="<?php echo URLROOT?>/customers/request_main">
-                                <div class="main-right-top-three-content">
-                                    <p>Current</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/customers/request_completed">
-                                <div class="main-right-top-three-content">
-                                    <p>Completed</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-
-                            <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">Cancelled</b></p>
-                                <div class="line"></div>
-                            </div>
-
-                        </div>
-                    </div>
+                    <?php require APPROOT . '/views/customers/customer_request/customer_request_top.php'; ?>
+                    <?php if(!empty($data['cancelled_request'])) : ?>
 
                     <div class="main-right-bottom">
                         <div class="main-right-bottom-top">
@@ -96,10 +19,13 @@
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Center</th>
+                                    <th>Cancelled By</th>
+
+                                    <th>Reason</th>
+
                                     <th>Location</th>
                                     <th>Collector</th>
-                                    <th>Cancelled By</th>
-                                    <th>Reason</th>
+                                    <th>Fine</th>
                                 </tr>
                             </table>
                         </div>
@@ -108,26 +34,60 @@
                             <table class="table">
                                 <?php foreach($data['cancelled_request'] as $request) : ?>
                                 <tr class="table-row">
-                                    <td>R<?php echo $request->req_id?></td>
+                                    <td>R<?php echo $request->request_id?></td>
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
                                     <td><?php echo $request->region?></td>
-                                    <td><img src="<?php echo IMGROOT?>/location.png"
-                                            onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)">
-                                    </td>
-                                    <td><img src="<?php echo IMGROOT ?>/view.png"
-                                            <?php if ($request->assinged === 'Yes') { ?>onclick="view_collector('<?php echo $request->image; ?>', '<?php echo $request->user_id; ?>', '<?php echo $request->name; ?>', '<?php echo $request->contact_no; ?>', '<?php echo $request->vehicle_no; ?>', '<?php echo $request->vehicle_type; ?>')"
-                                            <?php } ?> alt=""></td>
-
                                     <td><?php echo $request->cancelled_by?></td>
+
                                     <td><?php echo ($request->reason ? $request->reason : 'None'); ?></td>
+
+                                    <td><i onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
+                                            class='bx bx-map' style="font-size: 29px"></i>
+                                    </td>
+
+
+                                    <td>
+                                        <?php
+                                             $typeContent = ($request->assinged === 'Yes') ? 
+                                            '<img class="collector_img" src="' . IMGROOT . '/img_upload/collector/' .$request->image . '" alt="collector image"
+                                             onclick="view_collector(\'' . $request->image . '\',
+                                             \'' . $request->user_id . '\', \'' . $request->name . '\',
+                                             \'' . $request->contact_no . '\', \'' . $request->vehicle_no . '\',
+                                             \'' . $request->vehicle_type . '\')">' :
+                                             '<i class="fa-solid fa-user-large"></i>';
+                                             echo $typeContent;
+                                             ?>
+
+                                    </td>
+                                    <td>
+                                        <?php 
+                                                if ($request->fine != 0) {
+                                                    echo '<b style="color:#F13E3E;"> Eco ' . $request->fine . ' ' . $request->fine_type . '</b>';     
+                                                }
+                                                else{
+                                                    echo "<b>None</b>" ;
+                                                }
+                                        ?>
+                                    </td>
+
                                 </tr>
                                 <?php endforeach; ?>
                             </table>
 
                         </div>
                     </div>
+                    <?php else: ?>
+                    <div class="main-right-bottom-two">
+                        <div class="main-right-bottom-two-content">
+                            <i class='bx bx-data' style="font-size: 150px"></i>
+                            <h1>You Have No Cancelled Requests</h1>
+                            <p>Request a Collect Now!</p>
+                            <a href="<?php echo URLROOT?>/customers/request_collect"><button>Request</button></a>
 
+                        </div>
+                    </div>
+                    <?php endif; ?>
                 </div>
                 <div class="location_pop">
                     <div class="location_pop_content">
@@ -172,13 +132,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="overlay" id="overlay"></div>
+
             </div>
         </div>
         <script>
         function view_collector(image, col_id, name, contact_no, type, vehno) {
-            document.getElementById('personal-details-popup-box').style.display = 'flex';
+            var locationPop = document.querySelector('.personal-details-popup-box');
+            locationPop.classList.add('active');
+            document.getElementById('overlay').style.display = "flex";
             document.getElementById('collector_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' +
-            image;
+                image;
             document.getElementById('collector_id').innerText = col_id;
             document.getElementById('collector_name').innerText = name;
             document.getElementById('collector_conno').innerText = contact_no;
@@ -200,7 +164,7 @@
 
                 if (center.includes(input) || id.includes(input) || status.includes(input) || date.includes(
                         input) || time.includes(input) || cancelled_By.includes(input) || reason.includes(
-                    input)) {
+                        input)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none'; // Hide the row
@@ -217,7 +181,7 @@
 
             var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
                 center: mapCenter,
-                zoom: 14.5
+                zoom: 12.5
             });
 
             var marker = new google.maps.Marker({
@@ -232,11 +196,15 @@
 
         function viewLocation($lattitude, $longitude) {
             initMap($lattitude, $longitude);
-            document.querySelector('.location_pop').style.display = 'flex';
+            var locationPop = document.querySelector('.location_pop');
+            document.getElementById('overlay').style.display = "flex";
+            locationPop.classList.add('active');
         }
 
         function closemap() {
-            document.querySelector('.location_pop').style.display = 'none';
+            var locationPop = document.querySelector('.location_pop');
+            locationPop.classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
         }
 
         document.getElementById('searchInput').addEventListener('input', searchTable);
@@ -245,7 +213,9 @@
             const collector_view = document.getElementById("personal-details-popup-box");
 
             close_collector.addEventListener("click", function() {
-                collector_view.style.display = "none"
+                document.getElementById('overlay').style.display = "none";
+                var locationPop = document.querySelector('.personal-details-popup-box');
+                locationPop.classList.remove('active');
             });
 
         });

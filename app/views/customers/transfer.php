@@ -1,62 +1,160 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<div class="Customer_Transfercredit">
+<div class="Customer_Main">
 
-    <div class="main">
-      <div class="main-top">
-      <a href="<?php echo URLROOT?>/customers">
-          <img class="back_button" src="<?php echo IMGROOT?>/Back.png" alt="" />
-        </a>
+    <div class="Customer_Transfercredit">
 
-        <div class="main-top-component">
-          <p><?php echo $_SESSION['user_name']?></p>
-          <img src="<?php echo IMGROOT?>/Requests Profile.png" alt="" />
-        </div>
-      </div>
-      <div class="main-bottom">
-        <div class="main-bottom-component" >
-          <form class="main-bottom-component-left" action="<?php echo URLROOT;?>/customers/transfer" method="post">
-            <div class="main-bottom-component-left-topic">
-              <h2>Transfer your Eco-credits</h2>
-              <div class="line"></div>
+        <div class="main">
+            <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
+
+            <div class="main-right">
+                <div class="main-top">
+                    <div class="main-right-top-search">
+                        <i class='bx bx-search-alt-2'></i>
+                        <input type="text" id="searchInput" placeholder="Search">
+                    </div>
+                    <div class="main-right-top-notification" id="notification">
+                        <i class='bx bx-bell'></i>
+                        <?php if (!empty($data['notification'])) : ?>
+                        <div class="dot"><?php echo count($data['notification'])?></div>
+                        <?php endif; ?>
+                    </div>
+                    <div id="notification_popup" class="notification_popup">
+                        <h1>Notifications</h1>
+                        <div class="notification_cont">
+                            <?php foreach($data['notification'] as $notification) : ?>
+
+                            <div class="notification">
+                                <div class="notification-green-dot">
+
+                                </div>
+                                <div class="notification_right">
+                                    <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
+                                    <?php echo $notification->notification ?>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+
+                        </div>
+                        <form class="mark_as_read" method="post"
+                            action="<?php echo URLROOT;?>/customers/view_notification/transfer">
+                            <i class="fa-solid fa-check"> </i>
+                            <button type="submit">Mark all as read</button>
+                        </form>
+
+                    </div>
+                    <div class="main-right-top-profile">
+                        <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
+                            alt="">
+                        <div class="main-right-top-profile-cont">
+                            <h3>Kaveesha</h3>
+                            <p>ID : C <?php echo $_SESSION['user_id']?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-bottom">
+                    <div class="main-bottom-component">
+                        <form id="myForm" class="main-bottom-component-left"
+                            action="<?php echo URLROOT;?>/customers/transfer" method="post">
+                            <div class="main-bottom-component-left-topic">
+                                <h2>Transfer your Eco-credits</h2>
+                                <div class="line"></div>
+                            </div>
+
+                            <div class="main-bottom-component-left-component">
+                                <p>Customer ID (for transfer):</p>
+                                <input value="<?php echo $data['customer_id']; ?>" type="text" name="customer_id">
+                                <div class="err"><?php echo $data['customer_id_err']; ?></div>
+                            </div>
+
+                            <div class="main-bottom-component-left-component">
+                                <p>Credit Amount:</p>
+                                <input value="<?php echo $data['credit_amount']; ?>" type="text" name="credit_amount">
+                                <div class="err"><?php echo $data['credit_amount_err']; ?></div>
+                            </div>
+
+                            <div class="main-bottom-component-left-button">
+                                <button type="submit">Transfer</button>
+                            </div>
+                        </form>
+
+                        <div class="main-bottom-component-right">
+                            <img src="<?php echo IMGROOT?>/moneyTransfer.jpg" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <?php if($data['completed']=='True') : ?>
+                <div class="credit_transfer_success">
+                    <div class="popup" id="popup">
+                        <img src="<?php echo IMGROOT?>/check.png" alt="">
+                        <h2>Success!!</h2>
+                        <p>Credit Transferd Successfully</p>
+                        <a href="<?php echo URLROOT?>/customers/transfer_history"><button type="button">OK</button></a>
+
+                    </div>
+                </div>
+
             </div>
-
-            <div class="main-bottom-component-left-component">
-                <p>Customer ID (for transfer):</p>
-                <input value="<?php echo $data['customer_id']; ?>" type="text" name="customer_id"  >
-                <div class="err"><?php echo $data['customer_id_err']; ?></div>
-            </div>
-
-            <div class="main-bottom-component-left-component">
-            <p>Credit Amount:</p>
-                <input value="<?php echo $data['credit_amount']; ?>" type="text" name="credit_amount">
-                <div class="err"><?php echo $data['credit_amount_err']; ?></div>
-            </div>
-
-            <div class="main-bottom-component-left-button">
-              <button type="submit">Transfer</button>
-            </div>
-          </form>
-
-          <div class="main-bottom-component-right">
-            <img src="<?php echo IMGROOT?>/moneyTransfer.jpg" alt="" />
-          </div>
-        </div>
-      </div>
-    </div>
- 
-    <?php if($data['completed']=='True') : ?>
-            <div class="credit_transfer_success">
+            <?php endif; ?>
+            <?php if($data['transfer_confirm']=='True') : ?>
+            <div class="delete_confirm" id="cancel_confirm">
                 <div class="popup" id="popup">
-                    <img src="<?php echo IMGROOT?>/check.png" alt="">
-                    <h2>Success!!</h2>
-                    <p>credit_transfer_successfully</p>
-                    <a href="<?php echo URLROOT?>/customers/transfer_history"><button type="button" >OK</button></a>
-
+                    <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
+                    <h2>Transfer Confirmation</h2>
+                    <p>This action will Transfer <?php echo $data['credit_amount']?> credit from your account</p>
+                    <div class="btns">
+                        <a id="cancelLink"><button type="button" class="deletebtn"
+                                onclick="submitForm()">Confirm</button></a>
+                        <a href="<?php echo URLROOT;?>/customers/transfer"><button type="button"
+                                class="cancelbtn">Cancel</button></a>
+                    </div>
                 </div>
             </div>
-        <?php endif; ?>
+            <?php endif; ?>
+
+
+        </div>
+    </div>
+
+    <script>
+    function submitForm() {
+        var form = document.getElementById('myForm');
+        form.action = "<?php echo URLROOT;?>/customers/transfer_complete";
+        form.method = 'post';
+        form.submit();
+    }
+    var notification = document.getElementById("notification");
+    var notification_pop = document.getElementById("notification_popup");
+    notification_pop.style.height = "0px";
+
+    notification.addEventListener("click", function() {
+        var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
+
+        if (!isNotificationEmpty) {
+            var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
+            if (notification_pop.style.height === "0px") {
+                if (notificationArraySize >= 3) {
+                    notification_pop.style.height = "210px";
+                }
+                if (notificationArraySize == 2) {
+                    notification_pop.style.height = "150px";
+                }
+                if (notificationArraySize == 1) {
+                    notification_pop.style.height = "105px";
+                }
+                notification_pop.style.visibility = "visible";
+                notification_pop.style.opacity = "1";
+                notification_pop.style.padding = "7px";
+            } else {
+                notification_pop.style.height = "0px";
+                notification_pop.style.visibility = "hidden";
+                notification_pop.style.opacity = "0";
+            }
+        }
+    });
+    </script>
+    <script src="<?php echo JSROOT?>/Customer.js"> </script>
 
 </div>
-  
+
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

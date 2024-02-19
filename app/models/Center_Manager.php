@@ -94,6 +94,14 @@
 
     }
 
+    public function getCenterManagerBy_centerId($center_id){
+      $this->db->query('SELECT * FROM center_managers WHERE assigned_center_id = :centerId');
+      $this->db->bind(':centerId', $center_id);
+
+      $row = $this->db->single();
+      return $row;
+    }
+
     public function get_Non_Assigned_CenterManger(){
       $this->db->query('SELECT *,
               center_managers.id as cmID,
@@ -121,6 +129,7 @@
     
 
     public function change_center_managers($new_manager, $old_manager, $center_id) {
+     try{
       $updateManagerQuery = 'UPDATE center_managers SET assinged = "True", assigned_center_id = :assigned_center_id WHERE user_id = :centerManagerId';
   
       $this->db->query($updateManagerQuery);
@@ -137,6 +146,9 @@
         $this->re->bind(':centerManagerId2', $old_manager->user_id);
          $this->re->execute();
       }
+    }catch (PDOException $e) {
+      return false;
+  }
   }
 
     public function Remove_Assign($center_manager_id){
@@ -237,5 +249,44 @@
          }else {
            return false; 
       }
+    }
+
+    public function mark_holidays($data){
+      try{
+        $this->db->query('INSERT INTO holidays (center_id, region, date) VALUES (:center_id, :region, :date)');
+        $this->db->bind(':center_id', $data['center_id']);
+        $this->db->bind(':region', $data['region']);
+        $this->db->bind(':date', $data['holiday']);
+        $result = $this->db->execute();
+
+        if($result){
+          return $result;
+
+        }else{
+          return false;
+        }
+
+
+      }catch(Exception $e){
+        //echo 'Error: ' . $e->getMessage();
+        return false;
+        
+
+      }
+
+    }
+
+    public function get_marked_holidays($region){
+      try{
+        $this->db->query('SELECT date FROM holidays WHERE region = :region');
+        $this->db->bind(':region', $region);
+        $results = $this->db->resultSet();
+
+        return $results;
+
+      }catch(Exception $e){
+        return false;
+      }
+
     }
 }

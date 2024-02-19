@@ -1,0 +1,192 @@
+.Customer_Discount_Agent {
+    * {
+        margin: 0px;
+        padding: 0px;
+        font-family: inter;
+    }
+
+    a {
+        text-decoration: none;
+        font-family: inter;
+        color: inherit;
+
+    }
+
+
+    #dashboard i {
+        color: var(--green-color-one);
+    }
+
+    #dashboard h3 {
+        color: var(--green-color-one);
+    }
+
+    .main-right {
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-rows: 23% 77%;
+        background-color: var(--background-color-right);
+    }
+
+    .main-right-top {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-right-top-one {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        border: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        height: 39%;
+        box-shadow: var(--box-shadow2);
+        background-color: var(--background-color-main);
+        z-index: 1;
+    }
+
+    .main-right-top-search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35%;
+        position: relative;
+    }
+
+    .main-right-top-search i {
+        position: absolute;
+        font-size: 25px;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .main-right-top-search input {
+        width: 100%;
+        height: 33px;
+        border-radius: 7px;
+        background-color: var(--background-color-two);
+        border: 1px solid #dcdde1;
+        font-size: 14px;
+        padding-left: 40px;
+        letter-spacing: 0.03rem;
+        color: var(--main-text-color);
+    }
+
+    .main-right-top-search input:focus {
+        border: 1px solid #1ca557;
+        outline: none;
+    }
+
+    .main-right-top-notification {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 30%;
+    }
+
+    .main-right-top-profile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 40px;
+    }
+
+    .main-right-top-two {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        padding-left: 33px;
+        background-color: var(--background-color-right);
+    }
+
+    .main-right-top-two h1 {
+        font-size: 19px;
+        margin-left: 1%;
+        letter-spacing: 0.03rem;
+        margin-top: 1%;
+    }
+
+    .main-right-top-three {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-left: 34px;
+        margin: 0.6%;
+        background-color: var(--background-color-right);
+    }
+
+    .main-right-top-three-content {
+        display: flex;
+        margin-right: 15px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .main-right-top-three-content p {
+        font-size: 15px;
+        padding-bottom: 5px;
+        color: var(--main-text-color);
+        letter-spacing: 0.03rem;
+        margin-left: 7px;
+    }
+
+
+
+
+
+
+    @media screen and (max-width: 1178px) {
+        .image2 {
+            display: none;
+        }
+
+        .main-bottom-content h4 {
+            font-size: 15px !important;
+        }
+
+        .main-bottom-content h6 {
+            font-size: 13px !important;
+        }
+    }
+
+    @media screen and (max-width: 914px) {
+        .main-bottom-bottom {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+
+
+    @media screen and(max-width: 946px) {
+
+        .updateData {
+            margin-left: 10px;
+
+        }
+
+        .cancelbtn1 {
+            width: 100px;
+        }
+
+        .updatebtn {
+            width: 100px;
+        }
+
+    }
+
+
+
+    @media screen and(max-width: 917px) {
+
+        .personal-details-popup {
+            display: flex;
+            flex-direction: column;
+        }
+
+    }
+}

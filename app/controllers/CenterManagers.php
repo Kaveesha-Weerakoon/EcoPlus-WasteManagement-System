@@ -9,6 +9,12 @@
       $this->centermanagerModel=$this->model('Center_Manager');
       $this->centerworkerModel=$this->model('Center_Worker');      
       $this->Request_Model=$this->model('Request');
+      $this->collect_garbage_Model=$this->model('Collect_Garbage');
+      $this->garbage_Model=$this->model('Garbage_Stock');
+      $this->center_complaints_model=$this->model('Center_Complaints');
+      $this->notification_Model=$this->model('Notifications');
+      $this->Customer_Model=$this->model('Customer');
+      $this->garbageTypeModel=$this->model('Garbage_Types');
 
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
@@ -18,13 +24,52 @@
     public function index(){
 
       $center=$this->center_model->getCenterById($_SESSION['center_id']);
+      $current_garbage_stock = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+      $json_Current_Garbage = json_encode($current_garbage_stock);
+      $Notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+      $center = $this->center_model->getCenterById($_SESSION['center_id']);
+      $incoming_requests_count = $this->Request_Model->get_incoming_requests_count($center->region);
+      $no_of_collectors = $this->collectorModel->get_no_of_Collectors($_SESSION['center_id']);
+      $no_of_workers = $this->centerworkerModel->get_no_of_center_workers($_SESSION['center_id']);
+      $completed_requests_count = $this->Request_Model->get_completed_requests_count($center->region);
+      $customers_count = $this->Customer_Model->get_customers_count($center->region);
+      $marked_holidays = $this->centermanagerModel->get_marked_holidays($center->region);
+      $completed_requests = count($this->collect_garbage_Model->get_completed_requests_bycenter($center->region));
+      $total_requests = $this->Request_Model->get_total_requests_by_region($center->region);
+
+      if ($total_requests > 0) {
+        $percentage_completed = json_encode(($completed_requests / $total_requests) * 100);
+      } else {
+        $percentage_completed =json_encode(0);
+      }    
+
 
       $data = [
         'center_id' => $center->id,
-        'center_name' => $center->region
+        'center_name' => $center->region,
+        'current_garbage'=> $json_Current_Garbage,
+        'notification'=> $Notifications,
+        'incoming_request_count'=> $incoming_requests_count,
+        'collectors_count'=> $no_of_collectors,
+        'center_workers_count'=> $no_of_workers,
+        'completed_request_count'=> $completed_requests_count,
+        'customers_count'=> $customers_count,
+        'holiday_success'=> '',
+        'marked_holidays'=> $marked_holidays,
+        'percentage'=> $percentage_completed
       ];
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $Notifications1 = $this->notification_Model->view_center_Notification($_SESSION['center_id']);
+        $Notifications2 = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+        $data['notification']=  $Notifications2 ;
+        $this->view('center_managers/index', $data);
+      }
+      else{
+        $this->view('center_managers/index', $data);
+      }
      
-      $this->view('center_managers/index', $data);
+      //$this->view('center_managers/index', $data);
     }
     
     public function logout(){
@@ -713,7 +758,7 @@
         $data=[
           'name'=>trim($_POST['name']),
          'userid'=>'',
-         'email'=>'',
+         'email'=>trim($_POST['email']),
          'profile_image_name' => $_SESSION['center_manager_email'].'_'.$_FILES['profile_image']['name'],
          'contactno'=>trim($_POST['contactno']),
          'address'=>trim($_POST['address']),
@@ -802,6 +847,7 @@
         $user=$this->centermanagerModel->getCenterManagerByID($id);
         $data['name']=$_SESSION['center_manager_name'];
         $data['contactno']=$user->contact_no;
+        $data['email']=$_SESSION['center_manager_email'];
         $data['address']=$user->address;
        
         $this->view('/center_managers/editprofile', $data);
@@ -916,12 +962,24 @@
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
     $jsonData = json_encode($incoming_requests);
+    $assigned_requests = $this->Request_Model->get_assigned_request_by_center($center->region);
+
+    $assigned_requests_count = [];
+    foreach ($collectors as $collector) {
+
+        $assigned_requests_count[$collector->id] = $this->Request_Model->get_assigned_requests_count_by_collector_for_day($collector->id);
+    }
+
     $data = [
       'incoming_requests' => $incoming_requests,
       'jsonData' => $jsonData,
       'pop_location'=>'',
       'map'=>'',
-      'collectors'=>$collectors
+      'collectors'=>$collectors,
+      'assigned_requests_count' => $assigned_requests_count,
+      'assigned_requests'=> $assigned_requests,
+      'lattitude'=> $center->lat,
+      'longitude'=> $center->longi
     ];
     $this->view('center_managers/request_incomming', $data);
 
@@ -953,7 +1011,8 @@
 
       } else {
         $this->Request_Model->cancel_request($data);
-        $this->request_incomming();
+      
+        header("Location: " . URLROOT . "/centermanagers/request_cancelled");        
     }
     
     }
@@ -996,10 +1055,11 @@
         'pop_location'=>'',
         'map'=>'',
         'request_id'=>trim($_POST['assign_req_id']),
-        'collector_id'=>trim($_POST['collectors']),
+        'collector_id'=>trim($_POST['selected_collector_id']),
 
       ];
       if (empty($data['request_id']) || empty($data['collector_id']) ) {
+      
           $this->request_incomming();
       } 
       else {
@@ -1083,10 +1143,623 @@
       ];
       $this->view('center_managers/request_assigned', $data);
     }
+  }
+
+  public function request_completed(){
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $completed_requests = $this->collect_garbage_Model->get_completed_requests_bycenter($center->region);
+    $data=[
+      'completed_requests'=>$completed_requests,
+      'confirm_popup'=> '',
+      'confirm_success'=> ''
+      
+    ];
+    $this->view('center_managers/request_completed', $data);
+
+  }
+
+  public function confirm_garbage_details($req_id){
+    $center = $this->center_model->getCenterById($_SESSION['center_id']);
+    $assigned_request = $this->Request_Model->get_assigned_request($req_id);
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $completed_requests = $this->collect_garbage_Model->get_completed_requests_bycenter($center->region);
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      
+      $data = [
+        'req_id'=>$req_id,
+        'center_id'=>$_SESSION['center_id'],
+        'region'=>$center->region,
+        'collector_id'=>$assigned_request->collector_id,
+        'completed_requests'=>$completed_requests,
+        'polythene_quantity' => trim($_POST['polythene_quantity']),
+        'plastic_quantity' => trim($_POST['plastic_quantity']),
+        'glass_quantity' => trim($_POST['glass_quantity']),
+        'paper_waste_quantity' => trim($_POST['paper_waste_quantity']),
+        'electronic_waste_quantity' => trim($_POST['electronic_waste_quantity']),
+        'metals_quantity' => trim($_POST['metals_quantity']),
+        'note' => trim($_POST['note']),
+        'confirm_popup' => 'True',
+        'confirm_success'=> '',
+        'polythene_quantity_err'=>'',
+        'plastic_quantity_err'=>'',
+        'glass_quantity_err'=>'',
+        'paper_waste_quantity_err'=>'',
+        'electronic_waste_quantity_err'=>'',
+        'metals_quantity_err'=>'',
+        'note_err'=>'',
+      
+
+      ];
+
+      $fieldsToCheck = ['polythene_quantity', 'plastic_quantity', 'glass_quantity', 'paper_waste_quantity', 'electronic_waste_quantity', 'metals_quantity'];
+      $atLeastOneFilled = false;
+      $allFieldsValid = true;
+
+      foreach ($fieldsToCheck as $field) {
+        if (!empty($_POST[$field])) {
+            if (!is_numeric($_POST[$field])) {
+                $data["{$field}_err"] = "Please enter a valid number";
+                $allFieldsValid = false;
+            } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST[$field]) !== 1) {
+                $data["{$field}_err"] = "Please enter up to two decimal places.";
+                $allFieldsValid = false;
+            } else {
+                $atLeastOneFilled = true;
+            }
+        }
+      }
+
+      if (!$atLeastOneFilled && $allFieldsValid) {
+        $data['polythene_quantity_err'] = 'Please fill polythene quantity';
+        $data['plastic_quantity_err'] = 'Please fill plastic quantity';
+        $data['glass_quantity_err'] = 'Please fill glass quantity';
+        $data['paper_waste_quantity_err'] = 'Please fill paper_waste quantity';
+        $data['electronic_waste_quantity_err'] = 'Please fill electronic_waste quantity';
+        $data['metals_quantity_err'] = 'Please fill metals quantity';
+        
+      }
+
+      if(empty($_POST['note'])){
+        $data['note_err'] = 'Please fill in the Note field';
+      }
+
+      if ($atLeastOneFilled && empty($data['note_err']) && $allFieldsValid) {
+        
+        if($this->garbage_Model->garbage_details_confirm($data)){ 
+          $data['confirm_success'] = 'True';
+          $this->view('center_managers/request_completed',$data);
+        } else {
+          die('Something went wrong');
+        }
+
+      }else{
+        $this->view('center_managers/request_completed', $data);
+      }
+
+
+    }else{
+      $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+      $completed_requests = $this->collect_garbage_Model->get_completed_requests_bycenter($center->region);
+      $completed_request = $this->collect_garbage_Model->get_completed_request_byreqId($req_id);
+
+      $data =[
+        'req_id'=>$req_id,
+        'completed_requests'=>$completed_requests,
+        'polythene_quantity'=>$completed_request->Polythene,
+        'plastic_quantity'=>$completed_request->Plastic,
+        'glass_quantity' => $completed_request->Glass,
+        'paper_waste_quantity' => $completed_request->Paper_Waste,
+        'electronic_waste_quantity' => $completed_request->Electronic_Waste,
+        'metals_quantity' => $completed_request->Metals,
+        'note'=> '',
+        'confirm_popup' => 'True',
+        'confirm_success'=> '',
+        'polythene_quantity_err'=>'',
+        'plastic_quantity_err'=>'',
+        'glass_quantity_err'=>'',
+        'paper_waste_quantity_err'=>'',
+        'electronic_waste_quantity_err'=>'',
+        'metals_quantity_err'=>'',
+        'note_err'=>''
+
+
+      ];
+
+
+      $this->view('center_managers/request_completed', $data);
+
+    }
+
+  }
+
+  public function waste_management(){
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $confirmed_requests = $this->garbage_Model->get_confirmed_requests_by_region($center->region);
+
+    $data =[
+      'confirmed_requests'=>$confirmed_requests,
+    ];
+    
+    $this->view('center_managers/waste_management', $data);
+
+  }
+
+  public function center_garbage_stock(){
+
+    $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+
+    $data =[
+      'current_polythene'=>$current_quantities->current_polythene,
+      'current_plastic'=>$current_quantities->current_plastic,
+      'current_glass'=>$current_quantities->current_glass,
+      'current_paper'=>$current_quantities->current_paper,
+      'current_electronic'=>$current_quantities->current_electronic,
+      'current_metals'=>$current_quantities->current_metal
+
+    ];
+
+    $this->view('center_managers/center_garbage_stock', $data);
+
+  }
+
+  public function release_stocks($complete="False",$pop="False"){
+    $types=$this->garbageTypeModel->get_all();
+
+    $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+   
+      $data = [
+
+        'center_id'=>$_SESSION['center_id'],
+        'current_polythene'=>$current_quantities->current_polythene,
+        'current_plastic'=>$current_quantities->current_plastic,
+        'current_glass'=>$current_quantities->current_glass,
+        'current_paper'=>$current_quantities->current_paper,
+        'current_electronic'=>$current_quantities->current_electronic,
+        'current_metals'=>$current_quantities->current_metal,
+        'released_person'=> trim($_POST['released_person']),
+        'release_note' => trim($_POST['release_note']),
+        'release_popup' => 'True',
+        'release_success'=> '',
+        'sell_price_pop'=>$pop,
+        'released_person_err'=> '',
+        'release_note_err'=>'',
+        'types'=>$types,
+        'total_selling_price'=>''
+      ];
+
+      foreach ($types as $type) {
+        if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}"] = trim($_POST["{$typeName}"]);
+        }
+     } 
+     
+     foreach ($types as $type) {
+      if ($type) {
+          $typeName = strtolower($type->name);
+          $data["{$typeName}_err"] = '';
+      }
+     }
+
+      $fieldsToCheck = ['polythene', 'plastic', 'glass', 'paper_waste', 'electronic_waste', 'metals'];
+      $atLeastOneFilled = false;
+      $allFieldsValid = true;
+
+      foreach ($types as $field) {
+        if (!empty($_POST["{$field->name}"])) {
+          if (!is_numeric($_POST["{$field->name}"])) {
+              $data["{$field}_quantity_err"] = "Please enter a valid number";
+              $allFieldsValid = false;
+            } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST["{$field->name}"]) !== 1) {
+                $data["{$field->name}_err"] = "Please enter up to two decimal places.";
+                $allFieldsValid = false;
+              }elseif ($_POST["{$field->name}"] > $data["current_{$field->name}"]) {
+                $data["{$field->name}_err"] = "Please enter a valid quantity within the available stock";
+                $allFieldsValid = false;
+            }else {
+                $atLeastOneFilled = true;
+            }
+        }
+      }
+      if (!$atLeastOneFilled && $allFieldsValid) {
+        foreach ($types as $type) {
+          if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}_err"] = "Please fill {$typeName} quantity";
+          }
+      }      
+    }
+
+    if(empty($_POST['note'])){
+      $data['note_err'] = 'Please fill in the Note field';
+     }  
+
+      if(empty($_POST['released_person'])){
+        $data['released_person_err'] = 'Please fill in the released person field';
+      }
+
+      if(empty($_POST['release_note'])){
+        $data['release_note_err'] = 'Please fill in the Note field';
+      }
+      
+      if ($atLeastOneFilled && empty($data['release_note_err']) && empty($data['released_person_err']) && $allFieldsValid) {
+        
+          $total_price=0;
+
+          foreach ($types as $type) {
+            if ($type) {
+                $total_price+= (floatval($data["$type->name"]) * $type->selling_price);
+            }
+         } 
+          $data['total_sell_price'] = $total_price;
+          $data['sell_price_pop'] = 'True';
+          if($complete=="True"){
+            $this->garbage_Model->release_garbage_stocks($data);
+
+            header("Location: " . URLROOT . "/centermanagers/center_garbage_stock");        
+          }
+          $this->view('center_managers/center_garbage_stock',$data);
+       
+
+       }else{
+        $this->view('center_managers/center_garbage_stock', $data);
+      }
+     } else {
+
+      $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+
+      $data = [
+        'center_id'=>$_SESSION['center_id'],
+        'current_polythene'=>$current_quantities->current_polythene,
+        'current_plastic'=>$current_quantities->current_plastic,
+        'current_glass'=>$current_quantities->current_glass,
+        'current_paper'=>$current_quantities->current_paper,
+        'current_electronic'=>$current_quantities->current_electronic,
+        'current_metals'=>$current_quantities->current_metal,
+        'released_person'=> '',
+        'release_note' => '',
+        'release_popup' => 'True',
+        'release_success'=> '',
+        'released_person_err'=> '',
+        'release_note_err'=>'',
+        'sell_price_pop'=>'',
+        'types'=>$types
+
+      ]; 
+      foreach ($types as $type) {
+        if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}_err"] = '';
+        }
+     } 
+     
+     foreach ($types as $type) {
+      if ($type) {
+          $typeName = strtolower($type->name);
+          $data["{$typeName}"] = '';
+      }
+     }
+
+      $this->view('center_managers/center_garbage_stock', $data);
+
+    }
+    
+  }
+
+  public function realease_stocks2(){
+    $types=$this->garbageTypeModel->get_all();
+
+    $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+
+        'center_id'=>$_SESSION['center_id'],
+        'current_polythene'=>$current_quantities->current_polythene,
+        'current_plastic'=>$current_quantities->current_plastic,
+        'current_glass'=>$current_quantities->current_glass,
+        'current_paper'=>$current_quantities->current_paper,
+        'current_electronic'=>$current_quantities->current_electronic,
+        'current_metals'=>$current_quantities->current_metal,
+        'released_person'=> trim($_POST['released_person']),
+        'release_note' => trim($_POST['release_note']),
+        'release_popup' => 'True',
+        'release_success'=> '',
+        'sell_price_pop'=>'',
+        'released_person_err'=> '',
+        'release_note_err'=>'',
+        'types'=>$types,
+        'total_selling_price'=>''
+      ];
+
+      foreach ($types as $type) {
+        if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}"] = trim($_POST["{$typeName}"]);
+        }
+     } 
+     
+     foreach ($types as $type) {
+      if ($type) {
+          $typeName = strtolower($type->name);
+          $data["{$typeName}_err"] = '';
+      }
    }
+
+      $fieldsToCheck = ['polythene', 'plastic', 'glass', 'paper_waste', 'electronic_waste', 'metals'];
+      $atLeastOneFilled = false;
+      $allFieldsValid = true;
+
+      foreach ($types as $field) {
+        if (!empty($_POST["{$field->name}"])) {
+          if (!is_numeric($_POST["{$field->name}"])) {
+              $data["{$field}_quantity_err"] = "Please enter a valid number";
+              $allFieldsValid = false;
+            } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST["{$field->name}"]) !== 1) {
+                $data["{$field->name}_err"] = "Please enter up to two decimal places.";
+                $allFieldsValid = false;
+              }elseif ($_POST["{$field->name}"] > $data["current_{$field->name}"]) {
+                $data["{$field->name}_err"] = "Please enter a valid quantity within the available stock";
+                $allFieldsValid = false;
+            }else {
+                $atLeastOneFilled = true;
+            }
+        }
+      }
+      if (!$atLeastOneFilled && $allFieldsValid) {
+        foreach ($types as $type) {
+          if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}_err"] = "Please fill {$typeName} quantity";
+          }
+      }      
+    }
+
+    if(empty($_POST['note'])){
+      $data['note_err'] = 'Please fill in the Note field';
+   }  
+
+      if(empty($_POST['released_person'])){
+        $data['released_person_err'] = 'Please fill in the released person field';
+      }
+
+      if(empty($_POST['release_note'])){
+        $data['release_note_err'] = 'Please fill in the Note field';
+      }
+
+      if ($atLeastOneFilled && empty($data['release_note_err']) && empty($data['released_person_err']) && $allFieldsValid) {
+        
+          $total_price=0;
+
+          foreach ($types as $type) {
+            if ($type) {
+                $total_price+= (floatval($data["$type->name"]) * $type->selling_price);
+            }
+         } 
+        
+          $data['total_sell_price'] = $total_price;
+          $data['garbage_prices'] = $priceData;
+          $data['sell_price_pop'] = 'True';
+          $this->view('center_managers/center_garbage_stock',$data);
+       
+
+      }else{
+        $this->view('center_managers/center_garbage_stock', $data);
+      }
+
+
+
+    } else {
+
+      $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+
+      $data = [
+        'center_id'=>$_SESSION['center_id'],
+        'current_polythene'=>$current_quantities->current_polythene,
+        'current_plastic'=>$current_quantities->current_plastic,
+        'current_glass'=>$current_quantities->current_glass,
+        'current_paper'=>$current_quantities->current_paper,
+        'current_electronic'=>$current_quantities->current_electronic,
+        'current_metals'=>$current_quantities->current_metal,
+        'released_person'=> '',
+        'release_note' => '',
+        'release_popup' => 'True',
+        'release_success'=> '',
+        'released_person_err'=> '',
+        'release_note_err'=>'',
+        'sell_price_pop'=>'',
+        'types'=>$types
+
+      ]; 
+      foreach ($types as $type) {
+        if ($type) {
+            $typeName = strtolower($type->name);
+            $data["{$typeName}_err"] = '';
+        }
+     } 
+     
+     foreach ($types as $type) {
+      if ($type) {
+          $typeName = strtolower($type->name);
+          $data["{$typeName}"] = '';
+      }
+   }
+
+      $this->view('center_managers/center_garbage_stock', $data);
+
+    }
+  }
+
+  public function stock_release_details(){
+    $release_details = $this->garbage_Model->get_release_details($_SESSION['center_id']);
+
+    $data = [
+      'release_details'=>$release_details
+    ];
+
+    $this->view('center_managers/stock_releases', $data);
+
+  }
+
+  public function complaints(){
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $data =[
+        'center_id'=> $_SESSION['center_id'],
+        'region'=> $center->region,
+        'cm_id' => $_SESSION['center_manager_id'],
+        'name' => trim($_POST['name']),
+        'contact_no' => trim($_POST['contact_no']),
+        'subject' => trim($_POST['subject']),
+        'complaint' => trim($_POST['complaint']),
+        'name_err' => '',
+        'contact_no_err' => '',
+        'subject_err' => '' ,
+        'complaint_err' => '' ,
+        'completed'=>''    
+      ];
+      
+      //validate name
+      if(empty($data['name'])){
+        $data['name_err'] = 'Please enter name';
+      }elseif (strlen($data['name']) > 255) {
+        $data['name_err'] = 'Name is too long';
+      }
+     
+      // Validate contact number
+      if(empty($data['contact_no'])){
+        $data['contact_no_err'] = 'Please enter contact no';
+      }elseif (!preg_match('/^[0-9]{10}$/', $data['contact_no'])) {
+        $data['contact_no_err'] = 'Please enter a valid contact number';
+      }
+
+      //validate subject
+      if(empty($data['subject'])){
+        $data['subject_err'] = 'Please enter subject';
+      }elseif (strlen($data['subject']) > 255) {
+        $data['subject_err'] = 'Subject is too long';
+      }
+      
+      //validate complaint
+      if(empty($data['complaint'])){
+        $data['complaint_err'] = 'Please enter the complaint';
+      }
+
+      if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
+        if($this->center_complaints_model->submit_complaint($data)){
+          $data['completed']="True";
+          $this->view('center_managers/complaints', $data);         
+         
+        } else {
+          die('Something went wrong');
+        }
+      }
+      else{     
+            $this->view('center_managers/complaints', $data);         
+      }
+    }
+    else{
+      $center_manager = $this->centermanagerModel->getCenterManagerByID($_SESSION['center_manager_id']);
+      
+      $data =[
+        'name' => $_SESSION['center_manager_name'],
+        'contact_no' => $center_manager->contact_no,
+        'subject' => '',
+        'complaint' => '',
+        'name_err' => '',
+        'contact_no_err' => '',
+        'subject_err' => '' ,
+        'complaint_err' => ''  ,
+        'completed'=>''      
+      ];
+
+      $this->view('center_managers/complaints', $data);
+     
+   } 
+
+  }
+
+  public function mark_holidays(){
+    $center=$this->center_model->getCenterById($_SESSION['center_id']);
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+        'holiday' => trim($_POST['holiday']),
+        'center_id'=> $_SESSION['center_id'],
+        'region'=> $center->region,
+        'holiday_success'=> ''
+        
+      ];
+
+      if (empty($data['holiday']) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $data['holiday'])) {
+        $this->view('center_managers/index', $data);
+
+      } else {
+        if($this->centermanagerModel->mark_holidays($data)){
+          $data['holiday_success']='True';      
+          $this->index();
+          //$this->view('center_managers/index',$data);
+          
+
+        } else {
+          die('Something went wrong');
+        }
+        
+        
+        
+        //$this->index();
+       
+        
+      }
+    
+    }
+    else{
+
+      $this->index();
+    }
+    
+    
+  }
+
+  public function complaints_history(){
+    $complaints_history = $this->center_complaints_model->get_center_complaints_history($_SESSION['center_id']);
+
+    $data=[
+      'complaints_history'=>$complaints_history,
+     
+      
+    ];
+
+    $this->view('center_managers/complaints_history', $data);
+
+
+  }
+
+  public function reports(){
+    $data=[
+
+    ];
+
+    $this->view('center_managers/reports', $data);
+  }
 
 
 
   }
+
+  
+
 
 ?>

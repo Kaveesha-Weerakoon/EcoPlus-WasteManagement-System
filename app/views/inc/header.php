@@ -9,6 +9,10 @@
         <title><?php echo SITENAME ?></title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script src="https://kit.fontawesome.com/6293c3d0e8.js" crossorigin="anonymous"></script>
     </head>
 
     <body>

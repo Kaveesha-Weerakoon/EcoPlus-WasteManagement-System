@@ -16,9 +16,9 @@
 
 /* Customer Reqeust Right hand side top of the ui css */
 @import url('Component/Customer/Customer_Request_Main.css');
-@import url('Component/Customer/Customer_Request_Cancelled.css');
-
+@import url('Component/Customer/Customer_Request_Completed.css');
 @import url('Component/Customer/Customer_Request_Ongoing.css');
+@import url('Component/Customer/Customer_Request_Cancelled.css');
 @import url('Component/Customer/Customer_Editprofile.css');
 @import url('Component/Customer/Customer_Complains.css');
 
@@ -34,6 +34,12 @@
 
 @import url('Component/Customer/Customer_Transfercredit.css');
 
+@import url('Component/Customer/Customer_Discount_Agent_View.css');
+@import url('Component/Customer/Customer_Discount_Agent.css');
+@import url('Component/Customer/Customer_GarbageTypes.css');
+@import url('Component/Customer/Customer_Analatics.css');
+@import url('Component/Customer/Customer_Annoucement.css');
+
 /* Colletor CSS */
 
 
@@ -48,12 +54,15 @@
 @import url('Component/Collector/Collector_assistant_add.css');
 
 @import url('Component/Collector/Collector_Complains.css');
+@import url('Component/Collector/Collector_Complain_History.css');
 
 @import url('Component/Collector/Collector_Request_Top.css');
 @import url('Component/Collector/Collector_Reuqest_Assigned.css');
 @import url('Component/Collector/Collector_Request_Cancelled.css');
+@import url('Component/Collector/Collector_Request_Completed.css');
 
 @import url('Component/Collector/Collector_Editprofile.css');
+
 /* Center Manager CSS */
 
 /* Center Manager Main left hand side CSS This is used in left hand side of all the Center Manager uis*/
@@ -75,13 +84,35 @@
 @import url('Component/CenterManager/CenterManager_Request_Incomming.css');
 @import url('Component/CenterManager/CenterManager_Request_Cancelled.css');
 @import url('Component/CenterManager/CenterManager_Request_Assinged.css');
+@import url('Component/CenterManager/CenterManager_Request_Completed.css');
 
 @import url('Component/CenterManager/CenterManager_EditProfile.css');
+@import url('Component/CenterManager/CenterManager_Complaints.css');
+@import url('Component/CenterManager/CenterManager_Complaints_History.css');
+
+@import url('Component/CenterManager/CenterManager_Waste_Management.css');
+@import url('Component/CenterManager/CenterManager_Center_Garbage_Stock.css');
+@import url('Component/CenterManager/CenterManager_Stock_Releases.css');
+
+@import url('Component/CenterManager/CenterManager_Reports.css');
+
+/* Agent CSS */
+@import url('Component/Agent/Agent_Dashboard.css');
+@import url('Component/Agent/Agent_Sidebar.css');
+@import url('Component/Agent/Agent_Main.css');
+@import url('Component/Agent/Agent_Editprofile.css');
+
+@import url('Component/Agent/Discount_Agent.css');
+@import url('Component/Agent/Discount_Agent_ValidateUser.css');
+@import url('Component/Agent/Discount_Agent_Discount.css');
+@import url('Component/Agent/Discount_Agent_History.css');
+
 
 /* Admin CSS */
 
 /*Admin Main left hand side CSS This is used in left hand side of all the Center Manager uis*/
 @import url('Component/Admin/Admin_Main.css');
+@import url('Component/Admin/Admin_Main_Left.css');
 
 @import url('Component/Admin/Admin_Dashboard.css');
 /* Admin Main Right hand side of the dashboard CSS */
@@ -90,10 +121,15 @@
 
 @import url('Component/Admin/Admin_Customer_Complains.css');
 @import url('Component/Admin/Admin_Collectors_Complains.css');
+@import url('Component/Admin/Admin_Centers_Complains.css');
 
 @import url('Component/Admin/Admin_Center_Manager_Add.css');
 @import url('Component/Admin/Admin_Center_Manager.css');
 @import url('Component/Admin/Admin_Center_Manager_View.css');
+
+@import url('Component/Admin/Admin_Discount_Agent_Add.css');
+@import url('Component/Admin/Admin_Discount_Agent_View.css');
+@import url('Component/Admin/Admin_Discount_Agent.css');
 
 @import url('Component/Admin/Admin_Collector.css');
 
@@ -108,8 +144,42 @@
 @import url('Component/Admin/Admin_Center_Main.css');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
 
+@import url('Component/Admin/Admin_Center_Main_Collectors.css');
+@import url('Component/Admin/Admin_Center_Main_Workers.css');
+@import url('Component/Admin/Admin_Center_Main_Request_Incoming.css');
+@import url('Component/Admin/Admin_Center_Main_Request_Assigned.css');
+@import url('Component/Admin/Admin_Center_Main_Request_Cancelled.css');
+@import url('Component/Admin/Admin_Center_Main_Request_Completed.css');
+@import url('Component/Admin/Admin_Reports.css');
+@import url('Component/Admin/Admin_Admin.css');
+@import url('Component/Admin/Admin_Admin_Add.css');
+@import url('Component/Admin/Admin_Admin_View.css');
+@import url('Component/Admin/Admin_Announcements.css');
+
+@import url('Component/Admin/Admin_Garbage_Types_View.css');
+
+@import url('Component/Admin/Admin_EditProfile.css');
+
+
 
 @import url('Component/Animation/main.css');
+
+:root {
+    --main-text-color: #414143;
+    --green-color-one: #1ca557;
+    --green-color-two: #47b076;
+    --button-hover-green: #19954e;
+    --background-color-one: #dcdde1;
+    --background-color-two: #f5f6fa;
+    --background-color-main: #ffff;
+    --background-color-right: #fbfbfb;
+    --notification-hover: #64d798;
+    --box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    --box-shadow2: 0 1px 10px rgba(0, 0, 0, 0.1);
+    --table-header: #e9f6ef;
+    --yellow-color: #f6e58d;
+    --red-color: #F13E3E;
+}
 
 a {
     text-decoration: none;
@@ -120,10 +190,79 @@ a {
 
 * {
     font-family: inter;
+
     margin: 0;
     padding: 0;
 }
 
 .body {
     height: 100vh;
+}
+
+@keyframes tableLoad {
+    from {
+        opacity: 0;
+        transform: translateX(-10%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+.table-header th {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0px;
+}
+
+.table-header {
+    background-color: var(--table-header);
+    font-size: 15px;
+    text-align: center;
+    height: 45px;
+    display: grid;
+    margin-bottom: 0px;
+}
+
+.table-header th {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0px;
+}
+
+.table td {
+    font-size: 14px;
+    text-align: center !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    overflow: auto;
+}
+
+.table-row:hover {
+    background-color: var(--table-header);
+    cursor: pointer;
+}
+
+.table-row {
+    margin-bottom: 2px;
+    text-align: center;
+    display: grid;
+    border-bottom: 1px solid var(--background-color-two);
+}
+
+.table {
+    border-collapse: collapse;
+    text-align: center;
+    padding-left: 3.5%;
+    width: 96.5%;
+    background-color: var(--background-color-main) !important;
+    color: var(--main-text-color);
+    animation: tableLoad 0.6s ease-out;
 }

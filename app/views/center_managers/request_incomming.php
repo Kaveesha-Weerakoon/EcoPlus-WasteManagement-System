@@ -2,132 +2,35 @@
 <div class="CenterManager_Main">
     <div class="CenterManager_Request_Main">
         <div class="CenterManager_Request_Incomming">
-            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&callback=initMap" async
-                defer></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initializeMaps"
+            async defer>
+            </script>
+            <!-- <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMapAssigned"
+            async defer>
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initLocationPop"
+            async defer>
+            </script> -->
 
             <div class="main">
+                <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
 
-                <div class="main-left">
-                    <div class="main-left-top">
-                        <img src="<?php echo IMGROOT?>/Logo_No_Background.png" alt="">
-                        <h1>Eco Plus</h1>
-                    </div>
-                    <div class="main-left-middle">
-                        <a href="<?php echo URLROOT?>/centermanagers">
-                            <div class="main-left-middle-content ">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/Home.png" alt="">
-                                <h2>Dashboard</h2>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="main-left-middle-content current">
-                                <div class="main-left-middle-content-line"></div>
-                                <img src="<?php echo IMGROOT?>/Request.png" alt="">
-                                <h2>Requests</h2>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="main-left-middle-content Collector ">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/Center.png" alt="">
-                                <h2>Center Waste Management</h2>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/centermanagers/editprofile">
-                            <div class="main-left-middle-content">
-                                <div class="main-left-middle-content-line1"></div>
-                                <img src="<?php echo IMGROOT?>/EditProfile.png" alt="">
-                                <h2>Edit Profile</h2>
-                            </div>
-                        </a>
-
-                    </div>
-                    <a href="<?php echo URLROOT?>/centermanagers/logout">
-                        <div class="main-left-bottom">
-                            <div class="main-left-bottom-content">
-                                <img src="<?php echo IMGROOT?>/logout.png" alt="">
-                                <p>Log out</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
                 <div class="main-right">
-                    <div class="main-right-top">
-                        <div class="main-right-top-one">
-                            <div class="main-right-top-one-search">
-                                <img src="<?php echo IMGROOT?>/Search.png" alt="">
-                                <input id="searchInput" type="text" placeholder="Search">
-                            </div>
 
-                            <div class="main-right-top-one-content">
-                                <p><?php echo $_SESSION['center_manager_name']?></p>
-                                <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
-                                    alt="">
-                            </div>
-                        </div>
-                        <div class="main-right-top-two">
-                            <h1>Requests</h1>
-                        </div>
-                        <div class="main-right-top-three">
-                            <a href="">
-                                <div class="main-right-top-three-content">
-                                    <p><b style="color: #1B6652;">Incoming</b></p>
-                                    <div class="line"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/centermanagers/request_assigned">
-                                <div class="main-right-top-three-content">
-                                    <p>Assigned</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                            <a href="">
-                                <div class="main-right-top-three-content">
-                                    <p>Completed</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/centermanagers/request_cancelled">
-                                <div class="main-right-top-three-content">
-                                    <p>Cancelled</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="main-right-top-four">
-                            <div class="main-right-top-four-left">
-                                <p>Date</p>
-                                <input type="date" id="selected-date">
-                                <button onclick="loadLocations()">Filter</button>
+                    <?php require APPROOT . '/views/center_managers/centermanager_requests/requests_top_bar.php'; ?>
 
-                            </div>
-                            <div class="main-right-top-four-right">
 
-                                <div class="main-right-top-four-component" style="background-color: #ecf0f1"
-                                    id="tables">
-                                    <img src="<?php echo IMGROOT?>/cells.png" alt="">
-                                    <p>Tables</p>
-                                </div>
-                                <div class="main-right-top-four-component" id="maps">
-                                    <img src="<?php echo IMGROOT?>/map.png" alt="">
-                                    <p>Maps</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <?php if(!empty($data['incoming_requests'])) : ?>
                     <div class="main-right-bottom" id="main-right-bottom">
                         <div class="main-right-bottom-top">
                             <table class="table">
                                 <tr class="table-header">
                                     <th>Req ID</th>
+                                    <th>Customer</th>
                                     <th>Date</th>
                                     <th>Time</th>
-                                    <th>Customer</th>
-                                    <th>C ID</th>
-                                    <th>Contact No</th>
-                                    <th>Instructions</th>
+                                    <th>Location</th>
+                                    <th>Request details</th>
                                     <th>Assign</th>
                                     <th>Cancel</th>
                                 </tr>
@@ -138,17 +41,27 @@
                                 <?php foreach($data['incoming_requests'] as $request) : ?>
                                 <tr class="table-row">
                                     <td>R<?php echo $request->req_id?></td>
+                                    <td><?php  echo $request->name?></td>
                                     <td><?php  echo $request->date?></td>
                                     <td><?php  echo $request->time?></td>
-                                    <td><?php  echo $request->name?></td>
-                                    <td><?php  echo $request->customer_id?></td>
-                                    <td><?php  echo $request->contact_no?></td>
-                                    <td><?php  echo $request->instructions?></td>
-                                    <td><img onclick="assign(<?php echo $request->req_id ?>)" class="add"
-                                            src="<?php echo IMGROOT?>/assign.png" alt=""></td>
                                     <td>
-                                        <img onclick="cancel(<?php echo $request->req_id ?>)" class="cancel"
-                                            src="<?php echo IMGROOT?>/close_popup.png" alt="">
+                                        <i class='bx bx-map' style="font-size: 29px;"
+                                        onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
+
+                                    </td>
+                                    <td>
+                                        <i class='bx bx-info-circle' style="font-size: 29px"
+                                            onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
+                                    </td>
+                                    <td>
+                                        <i class='bx bxs-user-check' style="font-size: 32px;"
+                                            onclick="assign(<?php echo $request->req_id ?>, '<?php echo htmlspecialchars($request->date, ENT_QUOTES, 'UTF-8')?>')"></i>
+
+                                    </td>
+                                    <td>
+                                        <i class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"
+                                            onclick="cancel(<?php echo $request->req_id ?>)"></i>
+
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -164,9 +77,9 @@
                     <?php else: ?>
                     <div class="main-right-bottom-three">
                         <div class="main-right-bottom-three-content">
-                            <img src="<?php echo IMGROOT?>/Center_Manager_Request_Incomming_Empty.jpg" alt="">
+                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
                             <h1>You Have No Incomming Requests</h1>
-
+                            <p>Incomming requests will be appeared as soon as customer requests</p>
                         </div>
                     </div>
                     <?php endif; ?>
@@ -176,43 +89,120 @@
                 <div class="cancel-confirm" id="cancel-confirm">
                     <form class="cancel-confirm-content" id="cancel-form" method="post"
                         action="<?php echo URLROOT?>/centermanagers/request_cancell">
-                        <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop">
+                        <!-- <img class="confirm-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-pop"> -->
                         <h1>Cancel the Request?</h1>
-                        <img class="cancel-confirm-content-warning" src="<?php echo IMGROOT?>/warning.png" alt="">
                         <input name="reason" type="text" placeholder="Input the Reason">
                         <input name="id" type="text">
-                        <button onclick="validateCancelForm()" id="cancel-pop"
-                            style="background-color: tomato;">OK</button>
+                        <div class="cancel-confirm-button-container">
+                            <button type="button" onclick="validateCancelForm()" id="cancel-pop"
+                                class="cancel-reason-submit-button">Submit</button>
+                            <button type="button" onclick="closecancel()" id="cancel-pop"
+                                class="cancel-reason-cancel-button">Cancel</button>
+                        </div>
+
                     </form>
 
                 </div>
+
+                <div class="overlay" id="overlay"></div>
+
                 <div class="View" id="View">
+
                     <form class="View-content" id="assignForm" method="post"
                         action="<?php echo URLROOT?>/centermanagers/assing">
                         <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-assing">
                         <h2>Assign a Collector</h2>
-
-                        <img class="view_assing" src="<?php echo IMGROOT?>/selection.png" alt="">
+                        <hr class="assign-line">
                         <div class="view_assing_middle">
-                            <h3>Req ID <b>R <div id="assign_reqid" style="display: inline;"></div></b></h3>
+                            <h3>Req ID: <b>R <div id="assign_req_id" style="display: inline;"></div></b></h3>
                         </div>
                         <input name="assign_req_id" type="text" id="assign_req_id" style="display: none;">
 
-                        <select id="dropdown" name="collectors">
-                            <?php
-                         $collectors = $data['collectors'];
-                          if (!empty($collectors)) {
-                             foreach ($collectors as $collector) {
-                                 echo "<option value=\"$collector->id\">C $collector->id $collector->name</option>";
-                            }
-                          } else {
-                               echo "<option value=\"default\">No Collectors Available</option>";
-                            }
-                         ?>
+                        <div class="dropdown">
+                            <div class="dropdown-toggle" id="dropdownToggle" aria-haspopup="true" aria-expanded="false">
+                                Select a Collector
+                                <span class="arrow-down"></span>
+                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownToggle">
+                                <?php
+                                     $collectors = $data['collectors'];
+                                     $assigned_requests_count = $data['assigned_requests_count'];
+                                     if (!empty($collectors)) {
+                                     foreach ($collectors as $collector) {
+                                           $request_count = isset($assigned_requests_count[$collector->id]) ? $assigned_requests_count[$collector->id] : 0;
+                                               echo "<li class=\"dropdown-item\" data-id=\"$collector->id\">
+                                               <img src=\"" . IMGROOT . "/img_upload/collector/$collector->image\"  > 
+                                               <span class=\"collector-id\">C$collector->id</span>
+                                                <span class=\"collector-name\">$collector->name</span>
+                                                <span class=\"vehicle-type\">$collector->vehicle_type</span>
+                                                </li>";
+                             }
+                         }else {
+                                 echo "<li>No Collectors Available</li>";
+                              }
+                          ?>
+                            </ul>
+                        </div>
 
-                        </select>
-                        <Button type="submit" onclick="assing_complete()">Assign</Button>
+                        <!-- Hidden input field to store the selected collector's ID -->
+                        <input type="hidden" name="selected_collector_id" id="selected_collector_id">
+
+                        <div class="assigned-req-count-container">
+                            <p>Number of Assigned requests for the requested date:</p>
+                            <span id="request_count"></span>
+                            <input name="requested_date" type="text" id="requested_date" >
+                        </div>
+
+                        <div class="assigned-map-container">
+                            <div class="assigned-map" id="assigned-map">
+
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="assing_complete()">Assign</button>
                     </form>
+
+                </div>
+
+                <div class="location_pop" id="location_pop">
+                    <div class="location_pop_content">
+                        <div class="location_pop_map">
+
+                        </div>
+                        <div class="location_close">
+                            <button onclick="closemap()">Close</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="request-details-pop" id="request-details-popup-box">
+                    <div class="request-details-pop-form">
+                        <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
+                            id="request-details-pop-form-close">
+                        <div class="request-details-pop-form-top">
+                            <div class="request-details-topic">Request ID: R <div id="req_id3"></div>
+                            </div>
+                        </div>
+
+                        <div class="request-details-pop-form-content">
+                            <div class="request-details-right-labels">
+                                <span>Customer Id</span><br>
+                                <span>Name</span><br>
+                                <span>Date</span><br>
+                                <span>Time</span><br>
+                                <span>Contact No</span><br>
+                                <span>Instructions</span><br>
+                            </div>
+                            <div class="request-details-right-values">
+                                <span id="req_id2">23</span><br>
+                                <span id="req_name">23</span><br>
+                                <span id="req_date"></span><br>
+                                <span id="req_time"></span><br>
+                                <span id="req_contactno"></span><br>
+                                <span id="instructions"></span><br>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -226,37 +216,191 @@
                     alert("Please enter a reason");
                 } else {
                     document.getElementById("cancel-form").submit();
+                    closecancel();
                 }
             }
 
+            function initializeMaps() {
+                initMap();
+                initMapAssigned();
+                initLocationPop();
+            }
+
+            var selectedCollectorId = 0;
+            var requestCount = document.getElementById('request_count');
+            requestCount.innerHTML = 0;
+            var map1;
+            var markers = [];
+
+            function initMapAssigned() {
+
+                var defaultLatLng = {
+                    lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
+                    lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
+                };
+
+                map1 = new google.maps.Map(document.getElementById('assigned-map'), {
+                    center: defaultLatLng,
+                    zoom: 9
+                });
+            }
+            
+            var dropdownItems = document.querySelectorAll('.dropdown-item');
+            dropdownItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    selectedCollectorId = this.getAttribute('data-id');
+                    selected_collector_id.value = selectedCollectorId;
+
+                    var requestDate= document.getElementById('requested_date').value;
+                    //console.log(requestDate);
+
+                    updateAssignedReqContent(selectedCollectorId, requestDate);
+
+                    
+
+                });
+            });
+
+            function updateAssignedReqContent(collectorId, requestDate){
+                var request = <?php echo json_encode($data['assigned_requests']); ?>;
+                var count = 0;
+
+                clearMarkers();
+
+                for (let req_id in request) {
+                    if (request.hasOwnProperty(req_id)) {
+                        
+                        if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate) {
+                            
+                            count++;
+                            console.log(request[req_id].lat, request[req_id].longi);
+                            // Create a marker for each record and add it to the map
+                            var marker = new google.maps.Marker({
+                                position: {lat: parseFloat(request[req_id].lat), lng: parseFloat(request[req_id].longi)},
+                                map: map1,
+                                title: 'Request ' + request[req_id].req_id
+                            });
+                            markers.push(marker);
+                            
+
+                            // Optionally, add info window to display additional information
+                            var infoWindow = new google.maps.InfoWindow({
+                                content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' + request[req_id].customer_name 
+                            });
+
+                            marker.addListener('click', function() {
+                                infoWindow.open(map1, marker);
+                            });
+
+                        };
+                    }
+                }
+                //console.log(markers);
+                requestCount.innerHTML = count;
+
+            }
+
+            function clearMarkers() {
+                // Loop through all markers on the map and remove them
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setMap(null); // Removes the marker from the map
+                }
+                // Clear the markers array
+                markers = [];
+            }
+
+            function initLocationPop(latitude = 7.4, longitude = 81.00000000) {
+                var mapCenter = {
+                    lat: latitude,
+                    lng: longitude
+                };
+
+                var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
+                    center: mapCenter,
+                    zoom: 14.5
+                });
+
+                var marker = new google.maps.Marker({
+                    position: {
+                        lat: parseFloat(latitude),
+                        lng: parseFloat(longitude)
+                    },
+                    map: map,
+                    title: 'Marked Location'
+                });
+            }
+
+            function viewLocation($lattitude, $longitude) {
+                initLocationPop($lattitude, $longitude);
+                var locationPop = document.getElementById('location_pop');
+                locationPop.classList.add('active');
+                document.getElementById('overlay').style.display = "flex";
+            }
+
+            function closemap() {
+                var locationPop = document.getElementById('location_pop');
+                locationPop.classList.remove('active');
+                document.getElementById('overlay').style.display = "none";
+
+            }
+
+
             function assing_complete() {
-                var dropdown = document.getElementById('dropdown');
                 var assignForm = document.getElementById('assignForm');
-                if (dropdown.value === 'default') {
+
+                if (selectedCollectorId == null) {
                     alert('Please select a collector before assigning.');
                 } else {
                     assignForm.submit();
                 }
             }
 
-            function assign($id) {
-                var inputElement = document.querySelector('input[name="id"]');
+            function assign(id, requestedDate) {
+                var inputElement = document.querySelector('input[name="assign_req_id"]');
 
-                var assign_reqid = document.getElementById('assign_req_id');
-
-                assign_reqid.value = $id;
+                inputElement.value = id;
 
                 inputElement.style.display = 'none';
 
-                assign_reqid.innerHTML = $id;
-                document.getElementById("View").style.display = "flex"
+                var assign_reqid = document.getElementById('assign_req_id');
+                assign_reqid.innerHTML = id;
+
+                var dateInput = document.querySelector('input[name="requested_date"]');
+                dateInput.value = requestedDate;
+                dateInput.style.display = 'none';
+
+                // var request_date = document.getElementById('requested_date');
+                // request_date.innerHTML = requestedDate;
+
+                //Reset the dropdown menu to its default state
+                var dropdownToggle = document.getElementById('dropdownToggle');
+                dropdownToggle.innerText = 'Select a Collector';
+                dropdownToggle.setAttribute('data-id', '');
+
+                // Reset request count to 0
+                var requestCount = document.getElementById('request_count');
+                requestCount.innerHTML = 0;
+
+                // Clear markers from the map
+                clearMarkers();
+
+                var assign_popup = document.getElementById('View');
+                assign_popup.classList.add('active');
+
+                document.getElementById('overlay').style.display = "flex";
+
             }
+
 
             function cancel($id) {
                 var inputElement = document.querySelector('input[name="id"]');
                 inputElement.style.display = 'none';
                 inputElement.value = $id;
-                document.getElementById("cancel-confirm").style.display = "flex"
+                // document.getElementById('cancel-confirm').style.display = "flex";
+                var cancel_popup = document.getElementById('cancel-confirm');
+                cancel_popup.classList.add('active');
+
+                document.getElementById('overlay').style.display = "flex";
             }
 
             function initMap() {
@@ -397,6 +541,30 @@
                 });
             }
 
+            function closecancel() {
+                const popup = document.getElementById("cancel-confirm");
+
+                popup.classList.remove('active');
+                document.getElementById('overlay').style.display = "none";
+            }
+
+            function view_request_details(request) {
+
+                var requestDetails_popup = document.getElementById('request-details-popup-box');
+                requestDetails_popup.classList.add('active');
+                document.getElementById('overlay').style.display = "flex";
+
+                // document.getElementById('request-details-popup-box').style.display = "flex";
+                document.getElementById('req_id3').innerText = request.req_id;
+                document.getElementById('req_id2').innerText = request.customer_id;
+                document.getElementById('req_name').innerText = request.name;
+                document.getElementById('req_date').innerText = request.date;
+                document.getElementById('req_time').innerText = request.time;
+                document.getElementById('req_contactno').innerText = request.contact_no;
+                document.getElementById('instructions').innerText = request.instructions;
+
+            }
+
             document.addEventListener("DOMContentLoaded", function() {
 
                 const closeButton = document.getElementById("cancel-pop");
@@ -409,6 +577,7 @@
                 const table = document.getElementById("tables");
                 const main_right_bottom = document.getElementById("main-right-bottom");
                 const main_right_bottom_two = document.getElementById("main-right-bottom-two");
+                const close_request_details = document.getElementById("request-details-pop-form-close");
 
 
                 maps.addEventListener("click", function() {
@@ -436,15 +605,50 @@
 
 
                 closeButton.addEventListener("click", function() {
-                    popup.style.display = "none";
+
+                    console.log('as');
                 });
 
                 closeassign.addEventListener("click", function() {
-                    assign.style.display = "none";
+                    assign.classList.remove('active');
+                    document.getElementById('overlay').style.display = "none";
+                    // assign.style.display = "none";
+                });
+
+                close_request_details.addEventListener("click", function() {
+                    var request_popup = document.getElementById("request-details-popup-box");
+                    request_popup.classList.remove('active');
+                    document.getElementById('overlay').style.display = "none";
                 });
 
 
             });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const dropdownToggle = document.getElementById('dropdownToggle');
+                const dropdownMenu = document.querySelector('.dropdown-menu');
+                const dropdownItems = dropdownMenu.querySelectorAll('li');
+
+                dropdownToggle.addEventListener('click', function() {
+                    dropdownMenu.classList.toggle('show');
+                });
+
+                dropdownItems.forEach(function(item) {
+                    item.addEventListener('click', function() {
+                        dropdownToggle.textContent = this.textContent;
+                        dropdownMenu.classList.remove('show');
+                    });
+                });
+
+                document.addEventListener('click', function(event) {
+                    if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event
+                            .target)) {
+                        dropdownMenu.classList.remove('show');
+                    }
+                });
+            });
+
+
 
             document.getElementById('searchInput').addEventListener('input', searchTable);
             </script>

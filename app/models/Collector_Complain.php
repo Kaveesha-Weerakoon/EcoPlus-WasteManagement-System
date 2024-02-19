@@ -34,7 +34,13 @@
         }
     }
   
-
+    public function get_complains_by_collector($id) {
+      $this->db->query('SELECT * FROM collector_complains WHERE collector_id = :id ORDER BY collector_complains.date DESC');
+      $this->db->bind(':id', $id);
+      $results = $this->db->resultSet();
+    
+      return $results;
+  }
     public function get_complains() {
      
         $this->db->query('SELECT * FROM collector_complains  ORDER BY collector_complains.date DESC');
@@ -50,6 +56,16 @@
         $results = $this->db->resultSet();
         return $results;
     }
+
+    public function get_collector_complains_with_image(){
+      $this->db->query('SELECT collector_complains.*, collectors.image 
+                        FROM collector_complains 
+                        INNER JOIN collectors ON collector_complains.collector_id =collectors.user_id
+                        ORDER BY collector_complains.date DESC');
+      $results = $this->db->resultSet();
+      return $results;
+  }
+  
   
 
 

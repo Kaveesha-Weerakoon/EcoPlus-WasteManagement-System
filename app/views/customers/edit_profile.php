@@ -231,6 +231,25 @@
         var locationPop = document.querySelector('.delete_confirm');
         locationPop.classList.remove('active');
     };
+    /*animation*/
+    document.addEventListener("DOMContentLoaded", function() {
+        var mainRightBottomContent = document.querySelector('.main-right-bottom-content');
+
+        function checkSlide() {
+            var elementTop = mainRightBottomContent.getBoundingClientRect().top;
+            var isHalfShown = elementTop < window.innerHeight;
+            var isNotScrolledPast = window.scrollY < elementTop + mainRightBottomContent.clientHeight;
+
+            if (isHalfShown && isNotScrolledPast) {
+                mainRightBottomContent.classList.add('slide-in');
+            } else {
+                mainRightBottomContent.classList.remove('slide-in');
+            }
+        }
+
+        window.addEventListener('scroll', checkSlide);
+        checkSlide(); // Trigger once on page load
+    });
     </script>
 
     <script src="<?php echo JSROOT?>/Customer_Edit_Profile.js"> </script>

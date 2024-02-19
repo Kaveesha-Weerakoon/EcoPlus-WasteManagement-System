@@ -77,39 +77,47 @@
                             <h1>Recent Transactions</h1>
 
                             <?php
-                                 $transaction_history = $data['transaction_history'];
-                                 $limited_transactions = array_slice($transaction_history, 0, 3);
+                             $transaction_history = $data['transaction_history'];
+                             $limited_transactions = array_slice($transaction_history, 0, 3);
+                             ?>
 
-                                 foreach ($limited_transactions as $transaction):
-                            ?>
-                            <div class="main-right-bottom-one-right-cont">
-                                <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
-                                <img class="td-pro_pic"
-                                    src="<?php echo (empty($transaction->receiver_img) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/' . $transaction->receiver_img) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->receiver_img; ?>"
-                                    alt="">
-                                <?php else: ?>
-                                <img class="td-pro_pic"
-                                    src="<?php echo (empty($transaction->sender_img) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/'. $transaction->sender_img) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->sender_img; ?>"
-                                    alt="">
-                                <?php endif; ?>
-                                <h3><?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
-                                    C <?php echo $transaction->receiver_id; ?>
+                            <?php if (empty($limited_transactions)): ?>
+                            <div class="empty-transaction">You Have No Transactions Yet</div>
+                            <?php else: ?>
+                            <div class="transaction-history">
+                                <?php foreach ($limited_transactions as $transaction): ?>
+                                <div class="main-right-bottom-one-right-cont">
+                                    <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
+                                    <img class="td-pro_pic"
+                                        src="<?php echo (empty($transaction->receiver_img) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/' . $transaction->receiver_img) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->receiver_img; ?>"
+                                        alt="">
                                     <?php else: ?>
-                                    C <?php echo $transaction->sender_id; ?>
+                                    <img class="td-pro_pic"
+                                        src="<?php echo (empty($transaction->sender_img) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/'. $transaction->sender_img) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->sender_img; ?>"
+                                        alt="">
                                     <?php endif; ?>
-                                </h3>
-                                <p>
-                                    <?php echo $transaction->date ?>
-                                </p>
-                                <h2
-                                    style="color: <?php echo ($transaction->sender_id == $_SESSION['user_id']) ? '#F13E3E' : '#1ca557'; ?>;">
-                                    <?php
-                                        echo ($transaction->sender_id == $_SESSION['user_id']) ? "-Eco " : "+Eco ";
-                                        echo $transaction->transfer_amount;
+                                    <h3>
+                                        <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
+                                        C <?php echo $transaction->receiver_id; ?>
+                                        <?php else: ?>
+                                        C <?php echo $transaction->sender_id; ?>
+                                        <?php endif; ?>
+                                    </h3>
+                                    <p>
+                                        <?php echo $transaction->date ?>
+                                    </p>
+                                    <h2
+                                        style="color: <?php echo ($transaction->sender_id == $_SESSION['user_id']) ? '#F13E3E' : '#1ca557'; ?>;">
+                                        <?php
+                                  echo ($transaction->sender_id == $_SESSION['user_id']) ? "-Eco " : "+Eco ";
+                                    echo $transaction->transfer_amount;
                                     ?>
-                                </h2>
+                                    </h2>
+                                </div>
+                                <?php endforeach; ?>
                             </div>
-                            <?php endforeach; ?>
+                            <?php endif; ?>
+
                         </div>
                     </div>
                     <div class="main-right-bottom-two">
@@ -185,7 +193,6 @@
 
                         <div class="main-right-bottom-three-right">
                             <canvas id="myChart" width="600" height="250"></canvas>
-
                         </div>
 
                     </div>
@@ -303,10 +310,11 @@ document.getElementById("centers_close").addEventListener("click", function() {
     document.getElementById("centers").classList.remove('active');
     document.getElementById('overlay').style.display = "none";
 });
+
 const no_of_centers = <?php echo $data['no_of_centers']?>;
 const completed_Request_count = <?php echo $data['completed_request_count']?>;
+const discountAgentCount = <?php echo $data['discount_agent']?>;
 const garbage_types = 6;
-
 const centerCountElement = document.getElementById('center_count');
 const requestsCountElement = document.getElementById('request_count');
 const discountAgents = document.getElementById('agent_count');
@@ -340,7 +348,7 @@ for (let i = 0; i <= maxCount; i++) {
             updateCount2(i);
         }
 
-        if (i <= 8) {
+        if (i <= discountAgentCount) {
             updateCount3(i);
         }
 
@@ -603,6 +611,16 @@ checkbox.addEventListener("change", function() {
 });
 
 createOrUpdateChart(color, textColor);
+
+/**/
+/*animation*/
+window.addEventListener('DOMContentLoaded', (event) => {
+    const contentContainers = document.querySelectorAll('.main-right-bottom-two-cont');
+
+    contentContainers.forEach(container => {
+        container.classList.add('slide-in');
+    });
+});
 </script>
 <script src="<?php echo JSROOT?>/Customer.js"> </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

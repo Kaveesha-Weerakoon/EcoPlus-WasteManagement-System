@@ -19,7 +19,7 @@
       $this->fineModel=$this->model('Fines');
       $this->garbage_types_model = $this->model('Garbage_types');
       $this->Report_Model=$this->model('Customer_Report');
-
+      $this->Annoucement_Model=$this->model('Announcement');
 
       if(!isLoggedIn('user_id')){
         redirect('users/login');
@@ -35,6 +35,8 @@
       $total_requests=count($this->Request_Model->get_total_requests_by_customer($_SESSION['user_id']));
       $total_garbage=$this->customerModel->getTotalGarbage($_SESSION['user_id']);
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $discount_agent = $this->discount_agentModel->get_discount_agent();
+
       if ($total_requests > 0) {
         $percentage_completed = json_encode(($completed_requests / $total_requests) * 100);
          } else {
@@ -54,9 +56,11 @@
         'total_garbage'=> $json_Total_Garbage,
         'notification'=> $Notifications,
         'completed_request_count'=>$completed_requests,
-        'no_of_centers'=>count($centers)
+        'no_of_centers'=>count($centers),
+        'discount_agent' => count($discount_agent)
         ];
 
+        
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $Notifications1 = $this->customerModel->view_Notification($_SESSION['user_id']);
@@ -339,6 +343,8 @@
 
     public function change_password(){
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $centers = $this->center_model->getallCenters();
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
       
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); $data=[
@@ -363,6 +369,7 @@
           'profile_err'=>'',
           'success_message'=>'',      
           'notification'=> $Notifications ,
+          'centers'=> $centers 
  
         ];
   
@@ -435,6 +442,8 @@
             'profile_err'=>'',
             'success_message'=>'',          
             'notification'=> $Notifications ,
+            'centers'=> $centers 
+
 
           ];
           $this->view('customers/editprofile', $data);
@@ -1035,6 +1044,19 @@
 
       ];
       $this->view('customers/garbage_types', $data);
+    }
+
+    public function announcements(){
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);    
+      $Announcements=$this->Annoucement_Model->getAllAnnouncements();
+      
+      $data = [
+        'notification'=> $Notifications,  
+        'annoucements'=> $Announcements
+
+      ];
+     
+      $this->view('customers/announcement', $data);
     }
 
     public function analatics(){

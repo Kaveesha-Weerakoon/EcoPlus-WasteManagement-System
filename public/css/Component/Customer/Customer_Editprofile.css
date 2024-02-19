@@ -99,7 +99,7 @@
         transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    .main-right-bottom-two-cont.slide-in {
+    .main-right-bottom-content.slide-in {
         opacity: 1;
         transform: translateY(0);
     }

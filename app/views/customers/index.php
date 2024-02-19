@@ -77,39 +77,47 @@
                             <h1>Recent Transactions</h1>
 
                             <?php
-                                 $transaction_history = $data['transaction_history'];
-                                 $limited_transactions = array_slice($transaction_history, 0, 3);
+                             $transaction_history = $data['transaction_history'];
+                             $limited_transactions = array_slice($transaction_history, 0, 3);
+                             ?>
 
-                                 foreach ($limited_transactions as $transaction):
-                            ?>
-                            <div class="main-right-bottom-one-right-cont">
-                                <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
-                                <img class="td-pro_pic"
-                                    src="<?php echo (empty($transaction->receiver_img) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/' . $transaction->receiver_img) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->receiver_img; ?>"
-                                    alt="">
-                                <?php else: ?>
-                                <img class="td-pro_pic"
-                                    src="<?php echo (empty($transaction->sender_img) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/'. $transaction->sender_img) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->sender_img; ?>"
-                                    alt="">
-                                <?php endif; ?>
-                                <h3><?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
-                                    C <?php echo $transaction->receiver_id; ?>
+                            <?php if (empty($limited_transactions)): ?>
+                            <div class="empty-transaction">You Have No Transactions Yet</div>
+                            <?php else: ?>
+                            <div class="transaction-history">
+                                <?php foreach ($limited_transactions as $transaction): ?>
+                                <div class="main-right-bottom-one-right-cont">
+                                    <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
+                                    <img class="td-pro_pic"
+                                        src="<?php echo (empty($transaction->receiver_img) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/' . $transaction->receiver_img) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->receiver_img; ?>"
+                                        alt="">
                                     <?php else: ?>
-                                    C <?php echo $transaction->sender_id; ?>
+                                    <img class="td-pro_pic"
+                                        src="<?php echo (empty($transaction->sender_img) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/'. $transaction->sender_img) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $transaction->sender_img; ?>"
+                                        alt="">
                                     <?php endif; ?>
-                                </h3>
-                                <p>
-                                    <?php echo $transaction->date ?>
-                                </p>
-                                <h2
-                                    style="color: <?php echo ($transaction->sender_id == $_SESSION['user_id']) ? '#F13E3E' : '#1ca557'; ?>;">
-                                    <?php
-                                        echo ($transaction->sender_id == $_SESSION['user_id']) ? "-Eco " : "+Eco ";
-                                        echo $transaction->transfer_amount;
+                                    <h3>
+                                        <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
+                                        C <?php echo $transaction->receiver_id; ?>
+                                        <?php else: ?>
+                                        C <?php echo $transaction->sender_id; ?>
+                                        <?php endif; ?>
+                                    </h3>
+                                    <p>
+                                        <?php echo $transaction->date ?>
+                                    </p>
+                                    <h2
+                                        style="color: <?php echo ($transaction->sender_id == $_SESSION['user_id']) ? '#F13E3E' : '#1ca557'; ?>;">
+                                        <?php
+                                  echo ($transaction->sender_id == $_SESSION['user_id']) ? "-Eco " : "+Eco ";
+                                    echo $transaction->transfer_amount;
                                     ?>
-                                </h2>
+                                    </h2>
+                                </div>
+                                <?php endforeach; ?>
                             </div>
-                            <?php endforeach; ?>
+                            <?php endif; ?>
+
                         </div>
                     </div>
                     <div class="main-right-bottom-two">
@@ -185,7 +193,6 @@
 
                         <div class="main-right-bottom-three-right">
                             <canvas id="myChart" width="600" height="250"></canvas>
-
                         </div>
 
                     </div>

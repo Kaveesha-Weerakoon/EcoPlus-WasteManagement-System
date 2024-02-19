@@ -343,6 +343,8 @@
 
     public function change_password(){
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $centers = $this->center_model->getallCenters();
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
       
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); $data=[
@@ -367,6 +369,7 @@
           'profile_err'=>'',
           'success_message'=>'',      
           'notification'=> $Notifications ,
+          'centers'=> $centers 
  
         ];
   
@@ -439,6 +442,8 @@
             'profile_err'=>'',
             'success_message'=>'',          
             'notification'=> $Notifications ,
+            'centers'=> $centers 
+
 
           ];
           $this->view('customers/editprofile', $data);

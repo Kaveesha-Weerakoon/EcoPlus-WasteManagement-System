@@ -560,6 +560,7 @@
           'customer_id'=>'',
           'region_success'=>'', 
           'radius'=>'',
+          'radius_err'=>'',
           'center_lat'=>$center->lat,
           'center_long'=>$center->longi,
           'notification'=> $Notifications]  ;
@@ -575,6 +576,7 @@
       $data['name'] =$_SESSION['user_name'];
       $data['region']=$user->city;     
       $center=$this->Center_Model->findCenterbyRegion($user->city);
+ 
       $data['radius']=$center->radius;
 
      if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -633,7 +635,33 @@
     
         if ($data['region_success']='True') {
            if ($data['location_success'] == 'Success') {
+            
+            $center_latitude =$center->lat; 
+            $center_longitude = $center->longi;
+            $point_latitude =$data['lattitude']; 
+            $point_longitude =$data['longitude'];
+            $radius_meters =$data['radius']; 
+
+            function haversine($lat1, $lon1, $lat2, $lon2) {
+              $R = 6371;
+              $dLat = deg2rad($lat2 - $lat1);
+              $dLon = deg2rad($lon2 - $lon1);
+              $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dLon/2) * sin($dLon/2);
+              $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+              $distance = $R * $c;
+              return $distance;
+          }
+          
+          function is_within_radius($center_lat, $center_lon, $point_lat, $point_lon, $radius_meters) {
+              $distance = haversine($center_lat, $center_lon, $point_lat, $point_lon) * 1000; // Convert km to meters
+              return $distance <= $radius_meters;
+          }
+                  
+          if (is_within_radius($center_latitude, $center_longitude, $point_latitude, $point_longitude, $radius_meters)) {
+          } else {            
+                $data['radius_err'] = 'True';  
                
+          }
             }
            else{ 
             $data['location_err'] = 'Location Error';     
@@ -646,7 +674,7 @@
            $data['instructions_err'] = 'Instructions cannot exceed 100 characters';
         }
     
-        if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['date_err']) && empty($data['time_err']) && empty($data['instructions_err'])&& empty($data['location_err']) ){     
+        if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['date_err']) && empty($data['time_err']) && empty($data['instructions_err'])&& empty($data['location_err']) && empty($data['radius_err'])){     
             $data['confirm_collect_pop']="True";        
             $this->view('customers/request_collect', $data);   
          }
@@ -1024,12 +1052,20 @@
         if($fromDate==""){
           $fromDate="none";
         }
+        
         $completedRequests=$this->Report_Model->getCompletedRequests($customerId,$fromDate,$toDate);
         $cancelledRequests=$this->Report_Model->getCancelledRequests($customerId,$fromDate,$toDate);
         $ongoingRequests=$this->Report_Model->getonGoingRequests($customerId,$fromDate,$toDate);
         $totalRequests = $this->Report_Model->getallRequests($customerId,$fromDate,$toDate);
         $credits=$this->Report_Model->getCredits($customerId,$fromDate,$toDate);
         $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
+
+        $fine=$this->Report_Model->getFineAmount($customerId,$fromDate,$toDate);
+        $finedAmount = is_numeric($fine->fine_amount) ? (float)$fine->fine_amount : 0;
+        $getDiscountsOnAgents=$this->Report_Model->getDiscountsOnAgents($customerId,$fromDate,$toDate);
+        $transactionBalance = $this->Report_Model->getTransactionAmount($customerId,$fromDate,$toDate); // Ensure $transactions is numeric
+        $creditsBalance = $credits->total_credits - $getDiscountsOnAgents->discount_credits +  $transactionBalance-$finedAmount;
+
 
         $data=[
           'ongoingRequests'=>count($ongoingRequests),
@@ -1041,8 +1077,10 @@
           'from'=>  $fromDate,      
           'creditsByMonth1'=>  $creditByMonth,
           'notification'=> $Notifications,   
-
-
+          'fine_balance'=> $finedAmount, 
+          'credit_balance'=> $creditsBalance, 
+          'transaction_balance'=> $transactionBalance, 
+          'redeemed_balance'=> $getDiscountsOnAgents->discount_credits
         ];
         
       $this->view('customers/analatics', $data);
@@ -1057,6 +1095,12 @@
       $credits=$this->Report_Model->getCredits($customerId);
       $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
 
+      $fine=$this->Report_Model->getFineAmount($customerId);
+      $finedAmount = is_numeric($fine->fine_amount) ? (float)$fine->fine_amount : 0;
+      $getDiscountsOnAgents=$this->Report_Model->getDiscountsOnAgents($customerId);
+      $transactionBalance = $this->Report_Model->getTransactionAmount($customerId); // Ensure $transactions is numeric
+      $creditsBalance = $credits->total_credits - $getDiscountsOnAgents->discount_credits +  $transactionBalance-$finedAmount;
+      
       $data=[
         'ongoingRequests'=>count($ongoingRequests),
         'cancelledRequests'=>count($cancelledRequests),
@@ -1066,9 +1110,13 @@
         'creditsByMonth1'=> $creditByMonth,
         'to'=>'none',
         'from'=>'none',  
-        'notification'=> $Notifications,   
+        'notification'=> $Notifications, 
+        'fine_balance'=> $finedAmount, 
+        'credit_balance'=> $creditsBalance, 
+        'transaction_balance'=> $transactionBalance, 
+        'redeemed_balance'=> $getDiscountsOnAgents->discount_credits
 
-     ];
+        ];
      
        $this->view('customers/analatics', $data);
      }

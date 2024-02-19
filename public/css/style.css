@@ -147,9 +147,13 @@
 @import url('Component/Admin/Admin_Center_Main_Request_Cancelled.css');
 @import url('Component/Admin/Admin_Center_Main_Request_Completed.css');
 @import url('Component/Admin/Admin_Reports.css');
+@import url('Component/Admin/Admin_Admin.css');
+@import url('Component/Admin/Admin_Admin_Add.css');
+@import url('Component/Admin/Admin_Admin_View.css');
 
 @import url('Component/Admin/Admin_Garbage_Types_View.css');
 
+@import url('Component/Admin/Admin_EditProfile.css');
 
 
 

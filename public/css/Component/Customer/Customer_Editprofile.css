@@ -94,6 +94,17 @@
     }
 
     .main-right-bottom-content {
+        opacity: 0;
+        transform: translateY(-30px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .main-right-bottom-two-cont.slide-in {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .main-right-bottom-content {
         display: grid;
         grid-template-rows: 5% 85% 10%;
         padding-top: 2%;
@@ -467,7 +478,7 @@
 
     }
 
-    .popup button:hover{
+    .popup button:hover {
         background: var(--button-hover-green);
     }
 

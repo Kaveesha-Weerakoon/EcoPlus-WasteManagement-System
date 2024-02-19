@@ -250,13 +250,13 @@
     }
 
     .table-header {
-        grid-template-columns: 10% 10% 10% 11% 12% 12% 15% 20%;
+        grid-template-columns: 20% 20% 20% 20% 20%;
     }
 
     .table-row {
         height: 52px;
         display: grid;
-        grid-template-columns: 10% 10% 10% 11% 12% 12% 15% 20%;
+        grid-template-columns: 20% 20% 20% 20% 20%;
     }
 
     .table td {
@@ -280,6 +280,255 @@
         height: 25px;
         cursor: pointer;
     }
+
+
+
+    
+     
+        /*personal details popup*/
+        .personal-details-popup-box {
+            display: flex;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 4;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+            box-shadow: var(--box-shadow);
+            border-radius: 10px;
+            background-color: var(--main-text-color);
+        }
+    
+        .personal-details-popup-box.active {
+            transform: translate(-50%, -50%) scale(1);
+    
+    
+        }
+    
+        .personal-details-popup-form {
+            box-sizing: border-box;
+            width: 700px;
+            background: var(--background-color-main);
+            border-radius: 6px;
+            top: 0;
+            position: relative;
+            text-align: center;
+            padding: 0 30px 30px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--box-shadow);
+            color: var(--main-text-color);
+    
+        }
+    
+        .personal-details-popup-form-close {
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+    
+        .personal-details-popup {
+            display: grid;
+            grid-template-columns: 30% 70%;
+            width: 100%;
+            border-radius: 4px;
+            height: 100%;
+            padding-top: 10px;
+            margin-top: 17px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    
+        .personal-details-right {
+            margin-left: 40px;
+            display: grid;
+            grid-template-columns: 50% 50%;
+    
+        }
+    
+        .personal-details-right-labels {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 2px;
+            padding-left: 25px;
+        }
+    
+        .personal-details-right-labels span {
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #7c7c7d;
+    
+        }
+    
+    
+        .personal-details-right-values {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 2px;
+            padding-left: 32px;
+    
+        }
+    
+        .personal-details-right-values span {
+           margin-bottom: 13px;
+            font-size: 15px;
+            color: #767e95;
+            font-weight: 550;
+    
+        }
+    
+        .personal-details-left {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            flex-direction: column;
+            margin-left: 50px;
+            margin-top: 15px;
+    
+        }
+    
+        .personal-details-left img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+    
+        .personal-details-left p {
+            margin-top: 5px;
+            font-size: 15px;
+            color: #7c7c7d;
+        }
+    
+        .personal-details-left span {
+            color: #767e95;
+            font-weight: 550;
+    
+        }
+    
+    
+        /* .profile-pic {
+            width: 70%;
+            height: auto;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    
+        } */
+    
+        .personal-details-topic {
+            font-size: 18px;
+            font-weight: 500;
+            position: relative;
+            margin-inline-end: auto;
+            margin-top: 15px;
+    
+        }
+    
+        .personal-details-topic::before {
+            content: '';
+            position: absolute;
+            margin-top: 23px;
+            margin-left: 45px;
+            margin-bottom: 15px;
+            height: 3px;
+            width: 45px;
+            background: var(--green-color-one);
+    
+        }
+
+        .personal-details-bottom {
+         padding: 4%;
+         flex: 1;
+        }
+
+        .personal-details-bottom-two{
+            margin-top: 10px;
+           
+        }
+
+        .personal-details-bottom-one h2{
+             font-size: 15px;
+            color: #767e95;
+            font-weight: 550;
+            margin-top: 1px;
+        }
+        
+        .personal-details-bottom-two h2{
+            font-size: 15px;
+           color: #767e95;
+           font-weight: 550;
+           margin-top: 1px;
+       }
+       
+        
+        .subject-complain-box {
+    
+            padding: 1px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-left: 60px;
+            width: 510px;
+            box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1); 
+            background-color: #fafafa;
+           
+        }
+        
+        .subject-complain {
+            text-align: left; 
+            margin-left: 30px;
+        }
+        
+        .personal-details-bottom span {
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #7c7c7d;
+            overflow: scroll;
+       
+        }
+
+
+        .personal-details-bottom-one .subject-complain-box {
+            height: 20px;
+        }
+        
+        .personal-details-bottom-two .subject-complain-box {
+            height: 94px;
+            margin-bottom: 15px; 
+        }
+        
+        
+        
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            display: none;
+        }
+    
+
+
 
     /* 
     .confirm-cancel {

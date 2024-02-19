@@ -3,7 +3,7 @@
 
 
   // App Root
-  define('APPROOT', dirname(dirname(__FILE__)));
+  define('APPROOT', dirname(dirname(__FILEasassasa__)));
   // URL Root
   define('URLROOT', 'http://localhost/ecoplus');
   define('IMGROOT', 'http://localhost/ecoplus/public/img');

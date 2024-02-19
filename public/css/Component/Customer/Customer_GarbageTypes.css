@@ -16,7 +16,7 @@
         width: 100%;
         height: 100%;
         grid-template-rows: 22% 78%;
-        overflow: hidden;
+        overflow: scroll;
         background-color: var(--background-color-right);
         box-sizing: border-box;
     }

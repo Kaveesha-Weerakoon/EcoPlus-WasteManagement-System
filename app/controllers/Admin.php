@@ -21,7 +21,8 @@
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
       $this->Report_Model=$this->model('Report');
       $this->fine_model = $this->model('Fines');
-      
+      $this->Annoucement_Model=$this->model('Announcement');
+
 
       if(!isLoggedIn('admin_id')  && !isLoggedIn('superadmin_id')){
         redirect('users/login');
@@ -75,7 +76,7 @@
 
     public function complain_customers(){
     
-      $complains = $this->customer_complain_Model->get_customer_complains();
+      $complains = $this->customer_complain_Model->get_customer_complains_with_image();
       $data = [
         'complains' => $complains
       ];
@@ -731,7 +732,7 @@
 
     public function complain_collectors(){
 
-      $collector_complains= $this->collector_complain_Model->get_complains();
+      $collector_complains= $this->collector_complain_Model->get_collector_complains_with_image();
 
       $data = [
         'complains' => $collector_complains
@@ -944,7 +945,7 @@
 
     public function complaint_centers(){
 
-      $center_complaints= $this->center_complaints_model->get_center_complaints();
+      $center_complaints= $this->center_complaints_model->get_center_complains_with_image();
 
       $data = [
         'complaints' => $center_complaints
@@ -1677,6 +1678,78 @@
       }
     }
 
+    public function announcements(){
+      $Announcements=$this->Annoucement_Model->getAllAnnouncements();
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){     
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+          
+          // Get the current date and time
+          $currentDateTime = new DateTime();
+          $formattedDateTime = $currentDateTime->format('Y-m-d_H-i-s');
+          $imageNameWithDateTime = $formattedDateTime . '_' . $_FILES['cameraupload']['name'];
+  
+          $data=[
+              'annoucements'=>$Announcements,
+              'text'=>$_POST['text'],
+              'header'=>$_POST['header'],
+              'image'=>$imageNameWithDateTime,
+               'header_err'=>'',
+               'text_err'=>'',
+               'image_err'=>''
+          ];
+
+          if (empty($data['text'])) {
+            $data['text_err'] = 'Please enter a text';
+           } elseif (strlen($data['text']) > 600 && strlen($data['text']) <20 ) {
+             $data['text_err'] = 'Text should be at most 300 characters';
+           }  
+           
+           if (empty($data['header'])) {
+            $data['header_err'] = 'Please enter a text';
+           } elseif (strlen($data['header']) > 55 && strlen($data['text']) <10 ) {
+             $data['header_err'] = 'Header should be at most 55 characters';
+           }  
+           
+           if (empty($data['image'])) {
+            $data['image_err'] = 'Please enter a text';
+           } 
+
+           if(empty($data['image_err']) && empty($data['header_err']) && empty($data['text_err']) ){
+            if (uploadImage($_FILES['cameraupload']['tmp_name'], $data['image'], '/img/img_upload/Annoucement/')) {
+              $Announcements=$this->Annoucement_Model->addAnnouncement($data);  
+              redirect('admin/announcements');
+
+            } 
+            else{
+              redirect('admin/announcements');
+
+            }
+
+           }
+  
+  
+          die($data['text']." ".$data['header']." ".$data['image']);
+  
+          $this->view('admin/announcement', $data);
+  
+      } else {
+          $data=[
+              'annoucements'=>$Announcements,
+              'text'=>'',
+              'header'=>'',
+              'image'=>''
+          ];
+  
+          // Load the view with the data
+          $this->view('admin/announcement', $data);
+      }
+    }
+
+    public function deleteAnnouncement($id){
+      $this->Annoucement_Model->deleteAnnouncement($id);   
+      redirect('admin/announcements');
+    }
+  
 
   
-  }
+}

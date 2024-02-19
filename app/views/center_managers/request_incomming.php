@@ -2,7 +2,15 @@
 <div class="CenterManager_Main">
     <div class="CenterManager_Request_Main">
         <div class="CenterManager_Request_Incomming">
-
+            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initializeMaps"
+            async defer>
+            </script>
+            <!-- <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMapAssigned"
+            async defer>
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initLocationPop"
+            async defer>
+            </script> -->
 
             <div class="main">
                 <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
@@ -21,6 +29,7 @@
                                     <th>Customer</th>
                                     <th>Date</th>
                                     <th>Time</th>
+                                    <th>Location</th>
                                     <th>Request details</th>
                                     <th>Assign</th>
                                     <th>Cancel</th>
@@ -35,19 +44,24 @@
                                     <td><?php  echo $request->name?></td>
                                     <td><?php  echo $request->date?></td>
                                     <td><?php  echo $request->time?></td>
-                                  
+                                    <td>
+                                        <i class='bx bx-map' style="font-size: 29px;"
+                                        onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
+
+                                    </td>
                                     <td>
                                         <i class='bx bx-info-circle' style="font-size: 29px"
                                             onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
                                     </td>
                                     <td>
-                                        <i class='bx bxs-user-check' style="font-size: 32px;" onclick="assign(<?php echo $request->req_id ?>)"></i>
-                                       
+                                        <i class='bx bxs-user-check' style="font-size: 32px;"
+                                            onclick="assign(<?php echo $request->req_id ?>, '<?php echo htmlspecialchars($request->date, ENT_QUOTES, 'UTF-8')?>')"></i>
+
                                     </td>
                                     <td>
                                         <i class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"
-                                        onclick="cancel(<?php echo $request->req_id ?>)"></i>
-                                        
+                                            onclick="cancel(<?php echo $request->req_id ?>)"></i>
+
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -98,34 +112,67 @@
                         action="<?php echo URLROOT?>/centermanagers/assing">
                         <img class="View-content-img" src="<?php echo IMGROOT?>/close_popup.png" id="cancel-assing">
                         <h2>Assign a Collector</h2>
-
-                        <img class="view_assing" src="<?php echo IMGROOT?>/selection.png" alt="">
+                        <hr class="assign-line">
                         <div class="view_assing_middle">
-                            <h3>Req ID: <b>R <div id="assign_reqid" style="display: inline;"></div></b></h3>
+                            <h3>Req ID: <b>R <div id="assign_req_id" style="display: inline;"></div></b></h3>
                         </div>
                         <input name="assign_req_id" type="text" id="assign_req_id" style="display: none;">
-                       
 
-                        <select id="dropdown" name="collectors">
-                            <?php
-                         $collectors = $data['collectors'];
-                         $assigned_requests_count = $data['assigned_requests_count'];
-                          if (!empty($collectors)) {
-                             foreach ($collectors as $collector) {
-                                $request_count = isset($assigned_requests_count[$collector->id]) ? $assigned_requests_count[$collector->id] : 0;
-                                //$request_count = $assigned_requests_count[$collector->id] ?? 12;
+                        <div class="dropdown">
+                            <div class="dropdown-toggle" id="dropdownToggle" aria-haspopup="true" aria-expanded="false">
+                                Select a Collector
+                                <span class="arrow-down"></span>
+                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownToggle">
+                                <?php
+                                     $collectors = $data['collectors'];
+                                     $assigned_requests_count = $data['assigned_requests_count'];
+                                     if (!empty($collectors)) {
+                                     foreach ($collectors as $collector) {
+                                           $request_count = isset($assigned_requests_count[$collector->id]) ? $assigned_requests_count[$collector->id] : 0;
+                                               echo "<li class=\"dropdown-item\" data-id=\"$collector->id\">
+                                               <img src=\"" . IMGROOT . "/img_upload/collector/$collector->image\"  > 
+                                               <span class=\"collector-id\">C$collector->id</span>
+                                                <span class=\"collector-name\">$collector->name</span>
+                                                <span class=\"vehicle-type\">$collector->vehicle_type</span>
+                                                </li>";
+                             }
+                         }else {
+                                 echo "<li>No Collectors Available</li>";
+                              }
+                          ?>
+                            </ul>
+                        </div>
 
-                                 echo "<option value=\"$collector->id\">C $collector->id $collector->name $collector->vehicle_type <span class=\"assigned_count\">$request_count</span></option>";
-                            }
-                          } else {
-                               echo "<option value=\"default\">No Collectors Available</option>";
-                            }
-                         ?>
+                        <!-- Hidden input field to store the selected collector's ID -->
+                        <input type="hidden" name="selected_collector_id" id="selected_collector_id">
 
-                        </select>
+                        <div class="assigned-req-count-container">
+                            <p>Number of Assigned requests for the requested date:</p>
+                            <span id="request_count"></span>
+                            <input name="requested_date" type="text" id="requested_date" >
+                        </div>
 
-                        <Button type="submit" onclick="assing_complete()">Assign</Button>
+                        <div class="assigned-map-container">
+                            <div class="assigned-map" id="assigned-map">
+
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="assing_complete()">Assign</button>
                     </form>
+
+                </div>
+
+                <div class="location_pop" id="location_pop">
+                    <div class="location_pop_content">
+                        <div class="location_pop_map">
+
+                        </div>
+                        <div class="location_close">
+                            <button onclick="closemap()">Close</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="request-details-pop" id="request-details-popup-box">
@@ -173,33 +220,177 @@
                 }
             }
 
+            function initializeMaps() {
+                initMap();
+                initMapAssigned();
+                initLocationPop();
+            }
+
+            var selectedCollectorId = 0;
+            var requestCount = document.getElementById('request_count');
+            requestCount.innerHTML = 0;
+            var map1;
+            var markers = [];
+
+            function initMapAssigned() {
+
+                var defaultLatLng = {
+                    lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
+                    lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
+                };
+
+                map1 = new google.maps.Map(document.getElementById('assigned-map'), {
+                    center: defaultLatLng,
+                    zoom: 9
+                });
+            }
+            
+            var dropdownItems = document.querySelectorAll('.dropdown-item');
+            dropdownItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    selectedCollectorId = this.getAttribute('data-id');
+                    selected_collector_id.value = selectedCollectorId;
+
+                    var requestDate= document.getElementById('requested_date').value;
+                    //console.log(requestDate);
+
+                    updateAssignedReqContent(selectedCollectorId, requestDate);
+
+                    
+
+                });
+            });
+
+            function updateAssignedReqContent(collectorId, requestDate){
+                var request = <?php echo json_encode($data['assigned_requests']); ?>;
+                var count = 0;
+
+                clearMarkers();
+
+                for (let req_id in request) {
+                    if (request.hasOwnProperty(req_id)) {
+                        
+                        if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate) {
+                            
+                            count++;
+                            console.log(request[req_id].lat, request[req_id].longi);
+                            // Create a marker for each record and add it to the map
+                            var marker = new google.maps.Marker({
+                                position: {lat: parseFloat(request[req_id].lat), lng: parseFloat(request[req_id].longi)},
+                                map: map1,
+                                title: 'Request ' + request[req_id].req_id
+                            });
+                            markers.push(marker);
+                            
+
+                            // Optionally, add info window to display additional information
+                            var infoWindow = new google.maps.InfoWindow({
+                                content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' + request[req_id].customer_name 
+                            });
+
+                            marker.addListener('click', function() {
+                                infoWindow.open(map1, marker);
+                            });
+
+                        };
+                    }
+                }
+                //console.log(markers);
+                requestCount.innerHTML = count;
+
+            }
+
+            function clearMarkers() {
+                // Loop through all markers on the map and remove them
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setMap(null); // Removes the marker from the map
+                }
+                // Clear the markers array
+                markers = [];
+            }
+
+            function initLocationPop(latitude = 7.4, longitude = 81.00000000) {
+                var mapCenter = {
+                    lat: latitude,
+                    lng: longitude
+                };
+
+                var map = new google.maps.Map(document.querySelector('.location_pop_map'), {
+                    center: mapCenter,
+                    zoom: 14.5
+                });
+
+                var marker = new google.maps.Marker({
+                    position: {
+                        lat: parseFloat(latitude),
+                        lng: parseFloat(longitude)
+                    },
+                    map: map,
+                    title: 'Marked Location'
+                });
+            }
+
+            function viewLocation($lattitude, $longitude) {
+                initLocationPop($lattitude, $longitude);
+                var locationPop = document.getElementById('location_pop');
+                locationPop.classList.add('active');
+                document.getElementById('overlay').style.display = "flex";
+            }
+
+            function closemap() {
+                var locationPop = document.getElementById('location_pop');
+                locationPop.classList.remove('active');
+                document.getElementById('overlay').style.display = "none";
+
+            }
+
+
             function assing_complete() {
-                var dropdown = document.getElementById('dropdown');
                 var assignForm = document.getElementById('assignForm');
-                if (dropdown.value === 'default') {
+
+                if (selectedCollectorId == null) {
                     alert('Please select a collector before assigning.');
                 } else {
                     assignForm.submit();
                 }
             }
 
-            function assign($id) {
-                var inputElement = document.querySelector('input[name="id"]');
+            function assign(id, requestedDate) {
+                var inputElement = document.querySelector('input[name="assign_req_id"]');
 
-                var assign_reqid = document.getElementById('assign_req_id');
-
-                assign_reqid.value = $id;
+                inputElement.value = id;
 
                 inputElement.style.display = 'none';
 
-                assign_reqid.innerHTML = $id;
+                var assign_reqid = document.getElementById('assign_req_id');
+                assign_reqid.innerHTML = id;
 
-                // document.getElementById("View").style.display = "flex"
+                var dateInput = document.querySelector('input[name="requested_date"]');
+                dateInput.value = requestedDate;
+                dateInput.style.display = 'none';
+
+                // var request_date = document.getElementById('requested_date');
+                // request_date.innerHTML = requestedDate;
+
+                //Reset the dropdown menu to its default state
+                var dropdownToggle = document.getElementById('dropdownToggle');
+                dropdownToggle.innerText = 'Select a Collector';
+                dropdownToggle.setAttribute('data-id', '');
+
+                // Reset request count to 0
+                var requestCount = document.getElementById('request_count');
+                requestCount.innerHTML = 0;
+
+                // Clear markers from the map
+                clearMarkers();
+
                 var assign_popup = document.getElementById('View');
                 assign_popup.classList.add('active');
 
                 document.getElementById('overlay').style.display = "flex";
+
             }
+
 
             function cancel($id) {
                 var inputElement = document.querySelector('input[name="id"]');
@@ -432,6 +623,32 @@
 
 
             });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const dropdownToggle = document.getElementById('dropdownToggle');
+                const dropdownMenu = document.querySelector('.dropdown-menu');
+                const dropdownItems = dropdownMenu.querySelectorAll('li');
+
+                dropdownToggle.addEventListener('click', function() {
+                    dropdownMenu.classList.toggle('show');
+                });
+
+                dropdownItems.forEach(function(item) {
+                    item.addEventListener('click', function() {
+                        dropdownToggle.textContent = this.textContent;
+                        dropdownMenu.classList.remove('show');
+                    });
+                });
+
+                document.addEventListener('click', function(event) {
+                    if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event
+                            .target)) {
+                        dropdownMenu.classList.remove('show');
+                    }
+                });
+            });
+
+
 
             document.getElementById('searchInput').addEventListener('input', searchTable);
             </script>

@@ -977,7 +977,9 @@
       'map'=>'',
       'collectors'=>$collectors,
       'assigned_requests_count' => $assigned_requests_count,
-      'assigned_requests'=> $assigned_requests
+      'assigned_requests'=> $assigned_requests,
+      'lattitude'=> $center->lat,
+      'longitude'=> $center->longi
     ];
     $this->view('center_managers/request_incomming', $data);
 
@@ -1053,10 +1055,11 @@
         'pop_location'=>'',
         'map'=>'',
         'request_id'=>trim($_POST['assign_req_id']),
-        'collector_id'=>trim($_POST['collectors']),
+        'collector_id'=>trim($_POST['selected_collector_id']),
 
       ];
       if (empty($data['request_id']) || empty($data['collector_id']) ) {
+      
           $this->request_incomming();
       } 
       else {
@@ -1742,6 +1745,14 @@
     $this->view('center_managers/complaints_history', $data);
 
 
+  }
+
+  public function reports(){
+    $data=[
+
+    ];
+
+    $this->view('center_managers/reports', $data);
   }
 
 

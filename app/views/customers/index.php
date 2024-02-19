@@ -303,10 +303,11 @@ document.getElementById("centers_close").addEventListener("click", function() {
     document.getElementById("centers").classList.remove('active');
     document.getElementById('overlay').style.display = "none";
 });
+
 const no_of_centers = <?php echo $data['no_of_centers']?>;
 const completed_Request_count = <?php echo $data['completed_request_count']?>;
+const discountAgentCount = <?php echo $data['discount_agent']?>;
 const garbage_types = 6;
-
 const centerCountElement = document.getElementById('center_count');
 const requestsCountElement = document.getElementById('request_count');
 const discountAgents = document.getElementById('agent_count');
@@ -340,7 +341,7 @@ for (let i = 0; i <= maxCount; i++) {
             updateCount2(i);
         }
 
-        if (i <= 8) {
+        if (i <= discountAgentCount) {
             updateCount3(i);
         }
 
@@ -603,6 +604,16 @@ checkbox.addEventListener("change", function() {
 });
 
 createOrUpdateChart(color, textColor);
+
+/**/
+/*animation*/
+window.addEventListener('DOMContentLoaded', (event) => {
+    const contentContainers = document.querySelectorAll('.main-right-bottom-two-cont');
+
+    contentContainers.forEach(container => {
+        container.classList.add('slide-in');
+    });
+});
 </script>
 <script src="<?php echo JSROOT?>/Customer.js"> </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

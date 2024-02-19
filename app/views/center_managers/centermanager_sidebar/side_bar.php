@@ -23,6 +23,12 @@
             </div>
             <h3>Center Waste Management</h3>
         </div>
+        <div class="main-left-middle-content" onclick="redirect_reports()" id="reports">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bxs-report'></i>
+            </div>
+            <h3>Reports</h3>
+        </div>
         <div class="main-left-middle-content" onclick="redirect_edit_profile()" id="edit_profile">
             <div class="main-left-middle-content-icon">
                 <i class='bx bx-user-pin'></i>
@@ -71,6 +77,11 @@ function redirect_request() {
 
 function redirect_waste_management() {
     var linkUrl = "<?php echo URLROOT?>/centermanagers/waste_management"; // Replace with your desired URL
+    window.location.href = linkUrl;
+}
+
+function redirect_reports(){
+    var linkUrl = "<?php echo URLROOT?>/centermanagers/reports";
     window.location.href = linkUrl;
 }
 

@@ -1108,6 +1108,18 @@
     $this->view('customer_total_garbage_view', $data);
   }
 
+  public function garbage_types(){
+    $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);    
+    $garbage_types = $this->garbageTypeModel->get_all();
+
+    $data = [
+      'notification'=> $Notifications,   
+      'garbage_types'=>$garbage_types  
+
+    ];
+    $this->view('collectors/garbage_types', $data);
+  }
+
 
   
 }

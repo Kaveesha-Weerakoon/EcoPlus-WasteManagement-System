@@ -49,6 +49,7 @@
 
 /* Colletor Main Right hand side of the dashboard CSS */
 @import url('Component/Collector/Collector_Dashboard.css');
+@import url('Component/Collector/Collector_GarbageTypes.css');
 
 @import url('Component/Collector/Collector_assistants-main.css');
 @import url('Component/Collector/Collector_assistant_add.css');

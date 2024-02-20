@@ -29,6 +29,12 @@
             </div>
             <h3>Profile</h3>
         </div>
+        <div class="main-left-middle-content" onclick="redirect_garbage_type()" id="edit_profile">
+            <div class="main-left-middle-content-icon">
+                <i class='bx bx-user-pin'></i>
+            </div>
+            <h3>Garbage Type</h3>
+        </div>
 
     </div>
     <div class="main-left-down">
@@ -61,6 +67,11 @@
 <script>
 function redirect_dashboard() {
     var linkUrl = "<?php echo URLROOT?>/collectors"; // Replace with your desired URL
+    window.location.href = linkUrl;
+}
+
+function redirect_garbage_type() {
+    var linkUrl = "<?php echo URLROOT?>/collectors/garbage_types"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
 

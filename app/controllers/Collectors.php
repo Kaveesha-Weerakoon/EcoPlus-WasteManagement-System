@@ -1044,7 +1044,7 @@
 
           // Update the customer credit balance in the database
           $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
-          $updatedGarbageTotals = $this->Collect_Garbage_Model->updateGarbageTotals($req_id);
+          //$updatedGarbageTotals = $this->Collect_Garbage_Model->updateGarbageTotals($req_id);
            
           if ($inserted && $update_result && $updatedGarbageTotals ) {
             header("Location: " . URLROOT . "/collectors/request_completed");        

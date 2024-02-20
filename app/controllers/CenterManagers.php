@@ -15,6 +15,9 @@
       $this->notification_Model=$this->model('Notifications');
       $this->Customer_Model=$this->model('Customer');
       $this->garbageTypeModel=$this->model('Garbage_Types');
+      $this->Center_Manager_Report_Model=$this->model('Center_Manager_Report');
+
+      $this->Report_Model=$this->model('Report');
 
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
@@ -1748,11 +1751,115 @@
   }
 
   public function reports(){
-    $data=[
 
-    ];
+    $center1 = $this->center_model->getCenterById($_SESSION['center_id']);
+    $region = $center1->region;
 
-    $this->view('center_managers/reports', $data);
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){     
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $collector =trim($_POST['collector-dropdown']);
+      //print($collector);
+      if($collector != "none"){
+        //$col=$this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+         $collector_id = $collector;
+      }
+      else{
+        $collector_id="none";
+
+      }
+      $fromDate= trim($_POST['fromDate']);
+      $toDate= trim($_POST['toDate']);
+      
+      if($toDate==""){
+        $toDate="none";
+      } 
+
+      if($fromDate==""){
+        $fromDate="none";
+      }
+     
+      $collectors=$this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+      $totalRequests = $this->Center_Manager_Report_Model->getallRequests_collector($fromDate,$toDate,$region,$collector_id);
+      $completedRequests=$this->Center_Manager_Report_Model->getCompletedRequests_collector($fromDate,$toDate,$region, $collector_id);
+      $cancelledRequests=$this->Center_Manager_Report_Model->getCancelledRequests_collector($fromDate,$toDate,$region, $collector_id);
+      $ongoingRequests=$this->Center_Manager_Report_Model->getonGoingRequests_collector($fromDate,$toDate,$region, $collector_id);
+    
+
+      //$completedRequests=$this->Report_Model->getCompletedRequests($fromDate,$toDate,$center);
+      //$cancelledRequests=$this->Report_Model->getCancelledRequests($fromDate,$toDate,$center);
+      //$ongoingRequests=$this->Report_Model->getonGoingRequests($fromDate,$toDate,$center);
+      //$totalRequests=$this->Report_Model->getallRequests($fromDate,$toDate,$center);
+      $credits=$this->Report_Model->getCredits($fromDate,$toDate,$center);
+      $centers = $this->center_model->getallCenters();
+      $creditByMonth=$this->Report_Model->getCreditsMonths($center);
+      $collectedWasteByMonth=$this->Report_Model->getCollectedGarbage($fromDate,$toDate,$center);
+      $handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage($fromDate,$toDate,$center);
+      $selledWasteByMonth=$this->Report_Model->getSelledGarbage($fromDate,$toDate,$center_id);
+
+      $data=[
+        'completedRequests'=> count($completedRequests),
+        'cancelledRequests'=> count($cancelledRequests),
+        'ongoingRequests'=> count($ongoingRequests),
+        'totalRequests'=> count($totalRequests),
+        // 'centers'=> $centers,
+        // 'center'=>$center,
+        'collectors'=> $collectors,
+        'collector' => $collector,
+
+        'to'=>$toDate,
+        'from'=>$fromDate,
+        'credits'=> $credits->total_credits,
+        'creditsByMonth1'=>  $creditByMonth,
+        'collectedWasteByMonth'=>$collectedWasteByMonth,
+        'handoveredWasteByMonth'=>$handoveredWasteByMonth,
+        'selledWasteByMonth'=>$selledWasteByMonth
+
+      ];
+      $this->view('center_managers/reports', $data);
+
+    }
+    else{
+      
+      $collectors=$this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+      $totalRequests = $this->Center_Manager_Report_Model->getallRequests_collector("none", "none", $region, "none");
+      $completedRequests=$this->Center_Manager_Report_Model->getCompletedRequests_collector("none", "none", $region, "none");
+      $cancelledRequests=$this->Center_Manager_Report_Model->getCancelledRequests_collector("none", "none", $region, "none");
+      $ongoingRequests=$this->Center_Manager_Report_Model->getonGoingRequests_collector("none", "none", $region, "none");
+
+      //$completedRequests=$this->Report_Model->getCompletedRequests();
+      //$cancelledRequests=$this->Report_Model->getCancelledRequests();
+      //$ongoingRequests=$this->Report_Model->getonGoingRequests();
+      //$totalRequests=$this->Report_Model->getallRequests();
+      $centers = $this->center_model->getallCenters();
+      $credits=$this->Report_Model->getCredits();
+      $creditByMonth=$this->Report_Model->getCreditsMonths();
+      $collectedWasteByMonth=$this->Report_Model->getCreditsMonths();
+      $collectedWasteByMonth=$this->Report_Model->getCollectedGarbage();
+      $handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage();
+      $selledWasteByMonth=$this->Report_Model->getSelledGarbage();
+      $data=[
+        'completedRequests'=> count($completedRequests),
+        'cancelledRequests'=> count($cancelledRequests),
+        'ongoingRequests'=> count($ongoingRequests),
+        'totalRequests'=> count($totalRequests),
+        // 'centers'=> $centers,
+        'collectors'=> $collectors,
+        'collector'=>'All',
+        'to'=>'none',
+        'from'=>'none',    
+        'credits'=> $credits->total_credits,
+        'creditsByMonth1'=>  $creditByMonth,
+        'collectedWasteByMonth'=>$collectedWasteByMonth,
+        'handoveredWasteByMonth'=>$handoveredWasteByMonth,
+        'selledWasteByMonth'=>$selledWasteByMonth
+
+      ];
+      
+      $this->view('center_managers/reports', $data);
+
+    }
+    
   }
 
 

@@ -45,28 +45,28 @@
                         </div>
 
                         <div class="center-box">
-                            <select id="center-dropdown" name="center-dropdown">
+                            <select id="collector-dropdown" name="collector-dropdown">
                                 <?php
-                                     $centers = $data['centers'];
-                                     $selectedRegion = $data['center'];
-                                     $regionFound = false;
+                                     $collectors = $data['collectors'];
+                                     $selectedCollector = $data['collector'];
+                                     $collectorFound = false;
 
                                      // Add the "All" option
-                                     echo "<option value=\"none\"" . ($selectedRegion == "none" ? " selected" : "") . ">All</option>";
+                                     echo "<option value=\"none\"" . ($selectedCollector == "none" ? " selected" : "") . ">All</option>";
 
-                                     if (!empty($centers)) {
-                                        foreach ($centers as $center) {
-                                            $selected = ($center->region == $selectedRegion) ? 'selected' : '';
+                                     if (!empty($collectors)) {
+                                        foreach ($collectors as $collector) {
+                                            $selected = ($collector->userId == $selectedCollector) ? 'selected' : '';
                                             if ($selected) {
-                                                $regionFound = true;
+                                                $collectorFound = true;
                                             }
-                                            echo "<option value=\"$center->region\" $selected>$center->region</option>";
+                                            echo "<option value=\"$collector->userId\" $selected>C$collector->userId $collector->name </option>";
                                         }
           
                                     } 
                                     ?>
                             </select>
-                            <p id="selected-option">Center</p>
+                            <p id="selected-option">Collector</p>
                         </div>
 
                         <button>Filter</button>

@@ -31,7 +31,7 @@
         </div>
         <div class="main-left-middle-content" onclick="redirect_garbage_type()" id="edit_profile">
             <div class="main-left-middle-content-icon">
-                <i class='bx bx-user-pin'></i>
+                <i class='bx bx-trash'></i>
             </div>
             <h3>Garbage Type</h3>
         </div>

@@ -15,6 +15,7 @@
       $this->centerModel=$this->model('Center');
       $this->garbageTypeModel=$this->model('Garbage_Types');
       $this->fineModel=$this->model('Fines');
+      $this->Report_Model=$this->model('Customer_Report');
 
       if(!isLoggedIn('collector_id')){
         redirect('users/login');
@@ -1044,7 +1045,7 @@
 
           // Update the customer credit balance in the database
           $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
-          $updatedGarbageTotals = $this->Collect_Garbage_Model->updateGarbageTotals($req_id);
+          //$updatedGarbageTotals = $this->Collect_Garbage_Model->updateGarbageTotals($req_id);
            
           if ($inserted && $update_result && $updatedGarbageTotals ) {
             header("Location: " . URLROOT . "/collectors/request_completed");        
@@ -1106,6 +1107,104 @@
     $customerGarbageData = $this->Collect_Garbage_Model->getCustomerTotalGarbage();
     $data['customerGarbageData'] = $customerGarbageData;
     $this->view('customer_total_garbage_view', $data);
+  }
+
+  public function garbage_types(){
+    $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);    
+    $garbage_types = $this->garbageTypeModel->get_all();
+
+    $data = [
+      'notification'=> $Notifications,   
+      'garbage_types'=>$garbage_types  
+
+    ];
+    $this->view('collectors/garbage_types', $data);
+  }
+
+
+  public function analatics(){
+    $customerId= $_SESSION['collector_id'];
+    $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);    
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $fromDate= trim($_POST['fromDate']);
+      $toDate= trim($_POST['toDate']);
+      if($toDate==""){
+        $toDate="none";
+      } 
+
+      if($fromDate==""){
+        $fromDate="none";
+      }
+      
+      $completedRequests=$this->Report_Model->getCompletedRequests($customerId,$fromDate,$toDate);
+      $cancelledRequests=$this->Report_Model->getCancelledRequests($customerId,$fromDate,$toDate);
+      $ongoingRequests=$this->Report_Model->getonGoingRequests($customerId,$fromDate,$toDate);
+      $totalRequests = $this->Report_Model->getallRequests($customerId,$fromDate,$toDate);
+      $credits=$this->Report_Model->getCredits($customerId,$fromDate,$toDate);
+      $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
+
+      $fine=$this->Report_Model->getFineAmount($customerId,$fromDate,$toDate);
+      $finedAmount = is_numeric($fine->fine_amount) ? (float)$fine->fine_amount : 0;
+      $getDiscountsOnAgents=$this->Report_Model->getDiscountsOnAgents($customerId,$fromDate,$toDate);
+      $transactionBalance = $this->Report_Model->getTransactionAmount($customerId,$fromDate,$toDate); // Ensure $transactions is numeric
+      $creditsBalance = $credits->total_credits - $getDiscountsOnAgents->discount_credits +  $transactionBalance-$finedAmount;
+
+
+      $data=[
+        'ongoingRequests'=>count($ongoingRequests),
+        'cancelledRequests'=>count($cancelledRequests),
+         'completedRequests'=> count($completedRequests),
+        'totalRequests'=>count($totalRequests),
+        'credits'=> $credits->total_credits,
+        'to'=> $toDate,
+        'from'=>  $fromDate,      
+        'creditsByMonth1'=>  $creditByMonth,
+        'notification'=> $Notifications,   
+        'fine_balance'=> $finedAmount, 
+        'credit_balance'=> $creditsBalance, 
+        'transaction_balance'=> $transactionBalance, 
+        'redeemed_balance'=> $getDiscountsOnAgents->discount_credits
+      ];
+      
+    $this->view('collectors/analatics', $data);
+   }
+  
+   else{
+    
+    $completedRequests=$this->Report_Model->getCompletedRequests($customerId);
+    $cancelledRequests=$this->Report_Model->getCancelledRequests($customerId);
+    $ongoingRequests=$this->Report_Model->getonGoingRequests($customerId);
+    $totalRequests = $this->Report_Model->getallRequests($customerId);     
+    $credits=$this->Report_Model->getCredits($customerId);
+    $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
+
+    $fine=$this->Report_Model->getFineAmount($customerId);
+    $finedAmount = is_numeric($fine->fine_amount) ? (float)$fine->fine_amount : 0;
+    $getDiscountsOnAgents=$this->Report_Model->getDiscountsOnAgents($customerId);
+    $transactionBalance = $this->Report_Model->getTransactionAmount($customerId); // Ensure $transactions is numeric
+    $creditsBalance = $credits->total_credits - $getDiscountsOnAgents->discount_credits +  $transactionBalance-$finedAmount;
+    
+    $data=[
+      'ongoingRequests'=>count($ongoingRequests),
+      'cancelledRequests'=>count($cancelledRequests),
+      'completedRequests'=> count($completedRequests),
+      'totalRequests'=>count($totalRequests),
+      'credits'=> $credits->total_credits,     
+      'creditsByMonth1'=> $creditByMonth,
+      'to'=>'none',
+      'from'=>'none',  
+      'notification'=> $Notifications, 
+      'fine_balance'=> $finedAmount, 
+      'credit_balance'=> $creditsBalance, 
+      'transaction_balance'=> $transactionBalance, 
+      'redeemed_balance'=> $getDiscountsOnAgents->discount_credits
+
+      ];
+   
+     $this->view('collectors/analatics', $data);
+   }
   }
 
 

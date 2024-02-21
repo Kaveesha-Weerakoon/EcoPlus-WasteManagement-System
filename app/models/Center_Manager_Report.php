@@ -296,6 +296,103 @@
             }
         } 
 
+        function getSelledGarbage( $from = "none", $to = "none",$centerId) {
+            try {
+                // Prepare the SQL query
+                $sql = 'SELECT 
+                            SUM(income) AS income, 
+                            SUM(Plastic) as plastic, 
+                            SUM(Polythene) as polythene, 
+                            SUM(Glass) as glass, 
+                            SUM(Paper_Waste) as paperwaste, 
+                            SUM(Electronic_Waste) as electronicwaste, 
+                            SUM(Metals) as metals 
+                        FROM released_stocks 
+                        WHERE center_id = :center_id 
+                        AND released_date_time >= :from 
+                        AND released_date_time <= :to';
+                
+                // Set default values for $from and $to if not provided
+                if ($from === "none") {
+                    $from = '1970-01-01';  
+                }
+                
+                if ($to === "none") {
+                    $to = date('Y-m-d', strtotime('+1 month'));
+                }
+        
+                // Bind parameters and execute the query
+                $this->db->query($sql);
+                $this->db->bind(':center_id', $centerId);
+                $this->db->bind(':from', $from);
+                $this->db->bind(':to', $to);
+                
+                // Fetch the aggregated values
+                $aggregatedValues = $this->db->single();
+                
+                return $aggregatedValues;
+            } catch (PDOException $e) {
+                // Handle the exception gracefully
+                die($e->getMessage());
+                // or log the error and return false
+                // error_log($e->getMessage());
+                // return false;
+            }
+        } 
+        
+        function getCredits($region, $from = "none", $to = "none", $collectorId = "none") {
+            try {
+                if ($collectorId == "none") {
+                    $sql = 'SELECT SUM(credit_amount) AS total_credits 
+                            FROM request_main 
+                            INNER JOIN request_completed ON request_completed.req_id = request_main.req_id 
+                            INNER JOIN request_assigned ON request_assigned.req_id = request_main.req_id 
+                            WHERE type = \'completed\' 
+                            AND region = :region 
+                            AND date >= :from 
+                            AND date <= :to';
+                } else {
+                    $sql = 'SELECT SUM(credit_amount) AS total_credits 
+                            FROM request_main 
+                            INNER JOIN request_completed ON request_completed.req_id = request_main.req_id 
+                            INNER JOIN request_assigned ON request_assigned.req_id = request_main.req_id 
+                            WHERE type = \'completed\' 
+                            AND region = :region 
+                            AND collector_id = :collector_id 
+                            AND date >= :from 
+                            AND date <= :to';
+                }
+        
+                // Adjusting binding based on $from and $to values
+                if ($from == "none") {
+                    $from = '1970-01-01';  // Adjusted default date
+                }
+        
+                if ($to == "none") {
+                    $to = date('Y-m-d', strtotime('+1 month')); // Adjusted to next month
+                }
+        
+                // Prepare and execute the query
+                $this->db->query($sql);
+                $this->db->bind(':region', $region);
+                $this->db->bind(':from', $from);
+                $this->db->bind(':to', $to);
+        
+                // Bind collector_id if provided
+                if ($collectorId != "none") {
+                    $this->db->bind(':collector_id', $collectorId);
+                }
+        
+                // Fetch the result
+                $result = $this->db->single();
+                return $result;
+            } catch (PDOException $e) {
+                die($e->getMessage());
+                return false;
+            }
+        }
+        
+        
 
     
   

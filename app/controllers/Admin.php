@@ -1596,7 +1596,6 @@
         $centers = $this->center_model->getallCenters();
         $credits=$this->Report_Model->getCredits();
         $creditByMonth=$this->Report_Model->getCreditsMonths();
-        $collectedWasteByMonth=$this->Report_Model->getCreditsMonths();
         $collectedWasteByMonth=$this->Report_Model->getCollectedGarbage();
         $handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage();
         $selledWasteByMonth=$this->Report_Model->getSelledGarbage();

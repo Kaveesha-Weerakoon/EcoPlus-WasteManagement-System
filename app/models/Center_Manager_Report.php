@@ -224,6 +224,7 @@
                 if ($collector_id != "none") {
                     $this->db->bind(':collectorId', $collector_id);
                 }
+                
                 $this->db->bind(':region', $region);
                 $this->db->bind(':from', $from);
                 $this->db->bind(':to', $to);
@@ -235,6 +236,61 @@
 
             } catch (PDOException $e) {
                
+                die($e->getMessage()); // Displaying the error message for now
+                return false;
+            }
+        } 
+
+        function getHandOveredGarbage_collector($from = "none", $to = "none", $region, $collector_id= "none") {
+            try {
+                if ($collector_id == "none") {
+                    $sql = 'SELECT SUM(plastic) as plastic, 
+                            SUM(polythene) as polythene, 
+                            SUM(glass) as glass, 
+                            SUM(paper_waste) as paperwaste, 
+                            SUM(electronic_waste) as electronicwaste, 
+                            SUM(metals) as metals FROM request_main 
+                            JOIN garbage_confirmed 
+                            ON garbage_confirmed.req_id = request_main.req_id 
+                            WHERE region = :region 
+                            AND date >= :from AND date <= :to';
+                } else {
+                    $sql = 'SELECT SUM(plastic) as plastic, 
+                            SUM(polythene) as polythene, 
+                            SUM(glass) as glass, 
+                            SUM(paper_waste) as paperwaste, 
+                            SUM(electronic_waste) as electronicwaste, 
+                            SUM(metals) as metals FROM request_main 
+                            JOIN garbage_confirmed 
+                            ON garbage_confirmed.req_id = request_main.req_id 
+                            WHERE region = :region 
+                            AND date >= :from AND date <= :to
+                            AND collector_id = :collectorId';
+                }
+        
+                if ($from == "none") {
+                    $from = '1970-01-01';  
+                }
+        
+                if ($to == "none") {
+                    $today = date('Y-m-d');
+                    $next_month = date('Y-m-d', strtotime('+1 month', strtotime($today)));
+                    $to = $next_month;
+                }
+        
+                if ($collector_id != "none") {
+                    $this->db->bind(':collectorId', $collector_id);
+                }
+                $this->db->bind(':region', $region);
+                $this->db->bind(':from', $from);
+                $this->db->bind(':to', $to);
+        
+                // Execute the query and fetch the aggregated values directly
+                $aggregatedValues = $this->db->single();
+        
+                return $aggregatedValues;
+            } catch (PDOException $e) {
+                // Handle the exception gracefully, log the error or display a user-friendly message
                 die($e->getMessage()); // Displaying the error message for now
                 return false;
             }

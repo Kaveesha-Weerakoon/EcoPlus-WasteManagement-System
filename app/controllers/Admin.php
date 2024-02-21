@@ -1600,6 +1600,7 @@
         $collectedWasteByMonth=$this->Report_Model->getCollectedGarbage();
         $handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage();
         $selledWasteByMonth=$this->Report_Model->getSelledGarbage();
+      
         $data=[
           'completedRequests'=> count($completedRequests),
           'cancelledRequests'=> count($cancelledRequests),

@@ -168,7 +168,7 @@
 
     }
 
-    public function updateGarbageTotals($req_id) {
+    /*public function updateGarbageTotals($req_id) {
       try {
           $this->db->query('SELECT * FROM request_completed WHERE req_id = :req_id');
           $this->db->bind(':req_id', $req_id);
@@ -203,15 +203,15 @@
           return false; 
       }
 
-    }
+    }*/
 
-    public function getGarbageDetailsForCustomer($customer_id) {
+   /* public function getGarbageDetailsForCustomer($customer_id) {
       $this->db->query('SELECT * FROM customer_total_garbage WHERE user_id = :customer_id');
       $this->db->bind(':customer_id', $customer_id);
       $result = $this->db->single();
 
       return $result;
-    }
+    }*/
 
     public function get_completed_request_byreqId($req_id){
       $this->db->query('SELECT * FROM request_completed WHERE req_id = :req_id');
@@ -244,6 +244,29 @@
       return $result;
     }
 
+
+    public function get_completed_garbage_totals_by_customer($customer_id){
+      $this->db->query('
+          SELECT 
+              SUM(rc.Polythene) AS total_polythene,
+              SUM(rc.Plastic) AS total_plastic,
+              SUM(rc.Glass) AS total_glass,
+              SUM(rc.Paper_Waste) AS total_paper_waste,
+              SUM(rc.Electronic_Waste) AS total_electronic_waste,
+              SUM(rc.Metals) AS total_metals
+          FROM request_completed rc
+          LEFT JOIN request_main rm ON rc.req_id = rm.req_id
+          WHERE rm.customer_id = :customer_id 
+          AND rc.req_id IS NOT NULL
+      ');
+  
+      $this->db->bind(':customer_id', $customer_id);
+  
+      $result = $this->db->single();
+  
+      return $result;
+  }
+  
     public function getAllCompletedRequests(){
       try {
           $this->db->query('

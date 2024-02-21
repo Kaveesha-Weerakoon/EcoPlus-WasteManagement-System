@@ -211,7 +211,7 @@
     
             // Execute the query and fetch the aggregated values directly
             $aggregatedValues = $this->db->single();
-    
+            
             return $aggregatedValues;
         } catch (PDOException $e) {
             // Handle the exception gracefully, log the error or display a user-friendly message
@@ -292,6 +292,9 @@
             return false;
         }
     }
+
+    
+
 
     
     

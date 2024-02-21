@@ -145,10 +145,12 @@
                                     <tr>
                                         <td>Plastic</td>
                                         <td><?php echo $data['collectedWasteByMonth']->plastic ?></td>
+                                        
                                     </tr>
                                     <tr>
                                         <td>Polythene</td>
                                         <td><?php echo $data['collectedWasteByMonth']->polythene?></td>
+                                        <!-- <td><?php echo $data['collectedWasteByMonth']['polythene']; ?></td> -->
 
                                     </tr>
                                     <tr>

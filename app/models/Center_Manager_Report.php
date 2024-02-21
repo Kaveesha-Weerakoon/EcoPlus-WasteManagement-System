@@ -182,6 +182,64 @@
             }
         }
 
+        function getCollectedGarbage_collector($from = "none", $to = "none", $region, $collector_id= "none") {
+            try {
+                if ($collector_id == "none") {
+                    $sql = 'SELECT SUM(Plastic) as plastic, 
+                            SUM(Polythene) as polythene, 
+                            SUM(Glass) as glass, 
+                            SUM(Paper_Waste) as paperwaste, 
+                            SUM(Electronic_Waste) as electronicwaste, 
+                            SUM(Metals) as metals FROM request_main 
+                            JOIN request_completed 
+                            ON request_completed.req_id = request_main.req_id 
+                            WHERE region = :region AND date >= :from AND date <= :to';
+                } else {
+                    $sql = 'SELECT SUM(Plastic) as plastic, 
+                            SUM(Polythene) as polythene, 
+                            SUM(Glass) as glass, 
+                            SUM(Paper_Waste) as paperwaste, 
+                            SUM(Electronic_Waste) as electronicwaste, 
+                            SUM(Metals) as metals FROM request_main 
+                            JOIN request_completed 
+                            ON request_completed.req_id = request_main.req_id 
+                            JOIN request_assigned
+                            ON request_assigned.req_id = request_main.req_id
+                            WHERE region = :region AND date >= :from AND date <= :to
+                            AND collector_id = :collectorId';
+                    
+                }
+        
+                if ($from == "none") {
+                    $from = '1970-01-01';  
+                }
+        
+                if ($to == "none") {
+                    $today = date('Y-m-d');
+                    $next_month = date('Y-m-d', strtotime('+1 month', strtotime($today)));
+                    $to = $next_month;
+                }
+        
+                $this->db->query($sql);
+                if ($collector_id != "none") {
+                    $this->db->bind(':collectorId', $collector_id);
+                }
+                $this->db->bind(':region', $region);
+                $this->db->bind(':from', $from);
+                $this->db->bind(':to', $to);
+        
+                // Execute the query and fetch the aggregated values directly
+                $result = $this->db->single();
+                //print_r($result);
+                return $result;
+
+            } catch (PDOException $e) {
+               
+                die($e->getMessage()); // Displaying the error message for now
+                return false;
+            }
+        } 
+
 
     
   

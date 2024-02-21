@@ -1784,6 +1784,7 @@
       $completedRequests=$this->Center_Manager_Report_Model->getCompletedRequests_collector($fromDate,$toDate,$region, $collector_id);
       $cancelledRequests=$this->Center_Manager_Report_Model->getCancelledRequests_collector($fromDate,$toDate,$region, $collector_id);
       $ongoingRequests=$this->Center_Manager_Report_Model->getonGoingRequests_collector($fromDate,$toDate,$region, $collector_id);
+      $collectedWasteByMonth=$this->Center_Manager_Report_Model->getCollectedGarbage_collector($fromDate,$toDate,$region, $collector_id);
     
 
       //$completedRequests=$this->Report_Model->getCompletedRequests($fromDate,$toDate,$center);
@@ -1793,7 +1794,7 @@
       $credits=$this->Report_Model->getCredits($fromDate,$toDate,$center);
       $centers = $this->center_model->getallCenters();
       $creditByMonth=$this->Report_Model->getCreditsMonths($center);
-      $collectedWasteByMonth=$this->Report_Model->getCollectedGarbage($fromDate,$toDate,$center);
+      //$collectedWasteByMonth=$this->Report_Model->getCollectedGarbage($fromDate,$toDate,$center);
       $handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage($fromDate,$toDate,$center);
       $selledWasteByMonth=$this->Report_Model->getSelledGarbage($fromDate,$toDate,$center_id);
 
@@ -1826,6 +1827,8 @@
       $completedRequests=$this->Center_Manager_Report_Model->getCompletedRequests_collector("none", "none", $region, "none");
       $cancelledRequests=$this->Center_Manager_Report_Model->getCancelledRequests_collector("none", "none", $region, "none");
       $ongoingRequests=$this->Center_Manager_Report_Model->getonGoingRequests_collector("none", "none", $region, "none");
+      $collectedWasteByMonth=$this->Center_Manager_Report_Model->getCollectedGarbage_collector("none", "none", $region, "none");
+      var_dump($collectedWasteByMonth);
 
       //$completedRequests=$this->Report_Model->getCompletedRequests();
       //$cancelledRequests=$this->Report_Model->getCancelledRequests();
@@ -1855,7 +1858,7 @@
         'selledWasteByMonth'=>$selledWasteByMonth
 
       ];
-      
+    
       $this->view('center_managers/reports', $data);
 
     }

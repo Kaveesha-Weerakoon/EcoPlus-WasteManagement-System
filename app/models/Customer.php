@@ -154,7 +154,7 @@ public function get_Cus_all_details($id){
      }
     }
 
-    public function getTotalGarbage($id){
+   /* public function getTotalGarbage($id){
       try{
         $this->db->query('SELECT * FROM customer_total_garbage WHERE user_id = :id');
         $this->db->bind(':id', $id);
@@ -164,7 +164,7 @@ public function get_Cus_all_details($id){
       catch (PDOException $e) {
         return false;
       }
-    }
+    }*/
 
     public function get_customers_count($region) {
       try {

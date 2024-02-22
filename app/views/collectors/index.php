@@ -399,7 +399,6 @@
             });
         }
         createOrUpdateChart(color, textColor);
-        console.log('as');
 
 
 

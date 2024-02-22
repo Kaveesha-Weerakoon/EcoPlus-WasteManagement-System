@@ -17,44 +17,8 @@
                         <i class='bx bx-search-alt-2'></i>
                         <input type="text" id="searchInput" placeholder="Search">
                     </div>
-                    <div class="main-right-top-notification" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <?php if (!empty($data['notification'])) : ?>
-                        <div class="dot"><?php echo count($data['notification'])?></div>
-                        <?php endif; ?>
-                    </div>
-                    <div id="notification_popup" class="notification_popup">
-                        <h1>Notifications</h1>
-                        <div class="notification_cont">
-                            <?php foreach($data['notification'] as $notification) : ?>
+                    <?php require APPROOT . '/views/customers/customer_notification/customer_notification.php'; ?>
 
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                <div class="notification_right">
-                                    <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
-                                    <?php echo $notification->notification ?>
-                                </div>
-                            </div>
-                            <?php endforeach; ?>
-
-                        </div>
-                        <form class="mark_as_read" method="post"
-                            action="<?php echo URLROOT;?>/customers/view_notification/request_collect">
-                            <i class="fa-solid fa-check"> </i>
-                            <button type="submit">Mark all as read</button>
-                        </form>
-
-                    </div>
-                    <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
-                            alt="">
-                        <div class="main-right-top-profile-cont">
-                            <h3><?php echo $_SESSION['user_name']?></h3>
-                            <p>ID : C <?php echo $_SESSION['user_id']?></p>
-                        </div>
-                    </div>
                 </div>
 
                 <form id="myForm" class="main-bottom" action="<?php echo URLROOT;?>/customers/request_collect"
@@ -370,35 +334,35 @@
         });
     });
 
-    var notification = document.getElementById("notification");
-    var notification_pop = document.getElementById("notification_popup");
-    notification_pop.style.height = "0px";
+    /* Notification View */
+    document.getElementById('submit-notification').onclick = function() {
+        var form = document.getElementById('mark_as_read');
+        var dynamicUrl = "<?php echo URLROOT;?>/customers/view_notification/request_collect";
+        form.action = dynamicUrl; // Set the action URL
+        form.submit(); // Submit the form
 
-    notification.addEventListener("click", function() {
-        var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
+    };
+    /* ----------------- */
+    /*animation*/
+    document.addEventListener("DOMContentLoaded", function() {
+        var mainRightBottomContent = document.querySelector('.main-bottom-component');
 
-        if (!isNotificationEmpty) {
-            var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
-            if (notification_pop.style.height === "0px") {
-                if (notificationArraySize >= 3) {
-                    notification_pop.style.height = "215px";
-                }
-                if (notificationArraySize == 2) {
-                    notification_pop.style.height = "150px";
-                }
-                if (notificationArraySize == 1) {
-                    notification_pop.style.height = "105px";
-                }
-                notification_pop.style.visibility = "visible";
-                notification_pop.style.opacity = "1";
-                notification_pop.style.padding = "7px";
+        function checkSlide() {
+            var elementTop = mainRightBottomContent.getBoundingClientRect().top;
+            var isHalfShown = elementTop < window.innerHeight;
+            var isNotScrolledPast = window.scrollY < elementTop + mainRightBottomContent.clientHeight;
+
+            if (isHalfShown && isNotScrolledPast) {
+                mainRightBottomContent.classList.add('slide-in');
             } else {
-                notification_pop.style.height = "0px";
-                notification_pop.style.visibility = "hidden";
-                notification_pop.style.opacity = "0";
+                mainRightBottomContent.classList.remove('slide-in');
             }
         }
+
+        window.addEventListener('scroll', checkSlide);
+        checkSlide(); // Trigger once on page load
     });
+    /* ----------------- */
     </script>
     <script src="<?php echo JSROOT?>/Customer.js"> </script>
 

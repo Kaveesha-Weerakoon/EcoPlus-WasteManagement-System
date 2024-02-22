@@ -33,10 +33,10 @@
       $centers = $this->Center_Model->getallCenters();
       $completed_requests=count($this->Collect_Garbage_Model->get_complete_request_relevent_customer($_SESSION['user_id']));
       $total_requests=count($this->Request_Model->get_total_requests_by_customer($_SESSION['user_id']));
-      $total_garbage=$this->customerModel->getTotalGarbage($_SESSION['user_id']);
+      //$total_garbage=$this->customerModel->getTotalGarbage($_SESSION['user_id']);
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
       $discount_agent = $this->discount_agentModel->get_discount_agent();
-
+      $total_garbage=$this->Collect_Garbage_Model->get_completed_garbage_totals_by_customer($_SESSION['user_id']);
       if ($total_requests > 0) {
         $percentage_completed = json_encode(($completed_requests / $total_requests) * 100);
          } else {
@@ -454,6 +454,8 @@
    
     public function complains(){
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $id=$_SESSION['user_id'];
+      $user=$this->customerModel->get_customer($id);
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -461,7 +463,6 @@
         $data =[
           'name' => trim($_POST['name']),
           'contact_no' => trim($_POST['contact_no']),
-          'region' => trim($_POST['region']),
           'subject' => trim($_POST['subject']),
           'complain' => trim($_POST['complain']),
           'name_err' => '',
@@ -472,7 +473,7 @@
           'completed'=>'',     
           'notification'=> $Notifications   
         ];
-        
+        $data['region']=$user->city;
         if($data['completed']=='True'){
           $data['completed']=='';
           $this->view('customers/complains', $data);
@@ -519,7 +520,7 @@
       $data =[
         'name' => '',
         'contact_no' => '',
-        'region' => '',
+        'region'=>$user->city,
         'subject' => '',
         'complain' => '',
         'name_err' => '',
@@ -859,7 +860,7 @@
               'customer_id' => '',
               'credit_amount' => '',
               'customer_id_err' => '',
-              'credit_amount_err' => '',
+              'credit_amount_err' => '','transfer_confirm'=>'',
               'completed' => '',     
               'notification'=> $Notifications   
           ];

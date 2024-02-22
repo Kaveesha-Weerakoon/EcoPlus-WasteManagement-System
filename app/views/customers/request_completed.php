@@ -285,6 +285,16 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
+
+/* Notification View */
+document.getElementById('submit-notification').onclick = function() {
+    var form = document.getElementById('mark_as_read');
+    var dynamicUrl = "<?php echo URLROOT;?>/customers/view_notification/request_completed";
+    form.action = dynamicUrl; // Set the action URL
+    form.submit(); // Submit the form
+
+};
+/* ----------------- */
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

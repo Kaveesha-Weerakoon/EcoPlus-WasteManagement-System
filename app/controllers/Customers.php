@@ -26,7 +26,7 @@
       }
     }
     
-    public function index(){ 
+    public function index($tutorial=""){ 
       $balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
       $credit= $this->creditModel->get();
       $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']); 
@@ -57,7 +57,8 @@
         'notification'=> $Notifications,
         'completed_request_count'=>$completed_requests,
         'no_of_centers'=>count($centers),
-        'discount_agent' => count($discount_agent)
+        'discount_agent' => count($discount_agent),
+        'tutorial'=>$tutorial
         ];
 
         
@@ -67,7 +68,6 @@
         $Notifications2 = $this->customerModel->get_Notification($_SESSION['user_id']);
         $data['notification']=  $Notifications2 ;
         header("Location: " . URLROOT . "/customers");        
-
 
       }
       else{

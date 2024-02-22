@@ -1794,14 +1794,6 @@
       $creditByMonth=$this->Center_Manager_Report_Model->getCreditsMonths_collector( $region , $collector_id);
 
 
-      //$completedRequests=$this->Report_Model->getCompletedRequests($fromDate,$toDate,$center);
-      //$cancelledRequests=$this->Report_Model->getCancelledRequests($fromDate,$toDate,$center);
-      //$ongoingRequests=$this->Report_Model->getonGoingRequests($fromDate,$toDate,$center);
-      //$totalRequests=$this->Report_Model->getallRequests($fromDate,$toDate,$center);
-      //$creditByMonth=$this->Report_Model->getCreditsMonths( $region );
-      //$collectedWasteByMonth=$this->Report_Model->getCollectedGarbage($fromDate,$toDate,$center);
-      //$handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage($fromDate,$toDate,$center);
-
       $data=[
         'completedRequests'=> count($completedRequests),
         'cancelledRequests'=> count($cancelledRequests),
@@ -1839,17 +1831,6 @@
       $credits=$this->Center_Manager_Report_Model->getCredits_collector("none", "none", $region, "none");
       $creditByMonth=$this->Center_Manager_Report_Model->getCreditsMonths_collector( $region , "none");
 
-      //var_dump($handoveredWasteByMonth);
-      //var_dump($collectedWasteByMonth);
-      //$creditByMonth=$this->Report_Model->getCreditsMonths();
-
-      //$completedRequests=$this->Report_Model->getCompletedRequests();
-      //$cancelledRequests=$this->Report_Model->getCancelledRequests();
-      //$ongoingRequests=$this->Report_Model->getonGoingRequests();
-      //$totalRequests=$this->Report_Model->getallRequests();
-      //$collectedWasteByMonth=$this->Report_Model->getCreditsMonths();
-      //$collectedWasteByMonth=$this->Report_Model->getCollectedGarbage();
-      //$handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage();
  
       $data=[
         'completedRequests'=> count($completedRequests),
@@ -1875,6 +1856,14 @@
 
     }
     
+  }
+
+  public function garbage_types(){
+    $data =[
+
+    ];
+
+    $this->view('center_managers/garbage_types', $data);
   }
 
 

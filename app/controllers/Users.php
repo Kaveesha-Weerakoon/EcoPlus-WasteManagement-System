@@ -122,14 +122,26 @@
   
           if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['city_err']) && empty($data['address_err'])&& empty($data['profile_err'])){
             // Validated
+            $pw=$data['password'];
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             
             // Register User
             if($this->userModel->register($data)){
-             
+              
+              $loggedInUser = $this->userModel->login($data['email'], $pw);
+              $customer=$this->customerModel->get_customer($loggedInUser->id);
+              if($customer->image==''){
+                $_SESSION['customer_profile'] = "Profile.png";
+              }
+              else{
+                $_SESSION['customer_profile'] = $customer->image;
+              }
+              $this->createnewUserSession($loggedInUser); 
+                
+            
+              }
+             else {
               redirect('users/login');
-            } else {
-              die('Something went wrong');
             }
           } else {
             // Load view with errors
@@ -242,7 +254,6 @@
                   else{
                     $_SESSION['customer_profile'] = $customer->image;
                   }
-                  echo $customer->image;
                   $this->createUserSession($loggedInUser); 
                 
                 } 
@@ -308,6 +319,13 @@
       $_SESSION['user_email'] = $user->email;
       $_SESSION['user_name'] = $user->name;
       redirect('customers');
+    } 
+    
+    public function createnewUserSession($user){
+      $_SESSION['user_id'] = $user->id;
+      $_SESSION['user_email'] = $user->email;
+      $_SESSION['user_name'] = $user->name;
+      redirect('customers/True');
     }
 
     public function createCollectorSession($user){

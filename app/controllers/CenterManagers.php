@@ -1859,7 +1859,11 @@
   }
 
   public function garbage_types(){
+
+    $garbage_types = $this->garbageTypeModel->get_all();
+
     $data =[
+      'garbage_types' => $garbage_types
 
     ];
 

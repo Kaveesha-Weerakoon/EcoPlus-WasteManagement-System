@@ -48,6 +48,12 @@
                         <h1>Center Waste Management</h1>
                     </div>
                     <div class="main-right-top-three">
+                        <a href="<?php echo URLROOT?>/centermanagers/garbage_types">
+                            <div class="main-right-top-three-content">
+                                <p>Garbage Types</p>
+                                <div class="line"></div>
+                            </div>
+                        </a>
                         <a href="<?php echo URLROOT?>/centermanagers/waste_management">
                             <div class="main-right-top-three-content">
                                 <p><b style="color:#1ca557;">Waste Handover</b></p>

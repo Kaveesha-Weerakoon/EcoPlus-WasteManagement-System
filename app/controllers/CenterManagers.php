@@ -1763,7 +1763,7 @@
       $collector =trim($_POST['collector-dropdown']);
       //print($collector);
       if($collector != "none"){
-        //$col=$this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        
          $collector_id = $collector;
       }
       else{
@@ -1790,14 +1790,15 @@
       $handoveredWasteByMonth=$this->Center_Manager_Report_Model->getHandOveredGarbage_collector($fromDate,$toDate,$region, $collector_id);
       $selledWasteByMonth=$this->Center_Manager_Report_Model->getSelledGarbage($fromDate,$toDate,$centerId);
       $centers = $this->center_model->getallCenters();
-      $credits=$this->Center_Manager_Report_Model->getCredits( $region ,"none",$fromDate,$toDate,$collector_id);
+      $credits=$this->Center_Manager_Report_Model->getCredits_collector($fromDate,$toDate,$region, $collector_id);
+      $creditByMonth=$this->Center_Manager_Report_Model->getCreditsMonths_collector( $region , $collector_id);
 
 
       //$completedRequests=$this->Report_Model->getCompletedRequests($fromDate,$toDate,$center);
       //$cancelledRequests=$this->Report_Model->getCancelledRequests($fromDate,$toDate,$center);
       //$ongoingRequests=$this->Report_Model->getonGoingRequests($fromDate,$toDate,$center);
       //$totalRequests=$this->Report_Model->getallRequests($fromDate,$toDate,$center);
-      $creditByMonth=$this->Report_Model->getCreditsMonths( $region );
+      //$creditByMonth=$this->Report_Model->getCreditsMonths( $region );
       //$collectedWasteByMonth=$this->Report_Model->getCollectedGarbage($fromDate,$toDate,$center);
       //$handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage($fromDate,$toDate,$center);
 
@@ -1835,11 +1836,12 @@
       $handoveredWasteByMonth=$this->Center_Manager_Report_Model->getHandOveredGarbage_collector("none", "none", $region, "none");
       $selledWasteByMonth=$this->Center_Manager_Report_Model->getSelledGarbage("none", "none",$centerId);
       $centers = $this->center_model->getallCenters();
-      $credits=$this->Center_Manager_Report_Model->getCredits($region,"none", "none","none");
+      $credits=$this->Center_Manager_Report_Model->getCredits_collector("none", "none", $region, "none");
+      $creditByMonth=$this->Center_Manager_Report_Model->getCreditsMonths_collector( $region , "none");
 
       //var_dump($handoveredWasteByMonth);
       //var_dump($collectedWasteByMonth);
-      $creditByMonth=$this->Report_Model->getCreditsMonths();
+      //$creditByMonth=$this->Report_Model->getCreditsMonths();
 
       //$completedRequests=$this->Report_Model->getCompletedRequests();
       //$cancelledRequests=$this->Report_Model->getCancelledRequests();

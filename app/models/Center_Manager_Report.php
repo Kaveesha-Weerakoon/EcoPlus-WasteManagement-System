@@ -340,9 +340,9 @@
             }
         } 
         
-        function getCredits($region, $from = "none", $to = "none", $collectorId = "none") {
+        function getCredits_collector($from = "none", $to = "none", $region, $collector_id= "none") {
             try {
-                if ($collectorId == "none") {
+                if ($collector_id == "none") {
                     $sql = 'SELECT SUM(credit_amount) AS total_credits 
                             FROM request_main 
                             INNER JOIN request_completed ON request_completed.req_id = request_main.req_id 
@@ -379,14 +379,44 @@
                 $this->db->bind(':to', $to);
         
                 // Bind collector_id if provided
-                if ($collectorId != "none") {
-                    $this->db->bind(':collector_id', $collectorId);
+                if ($collector_id != "none") {
+                    $this->db->bind(':collector_id', $collector_id);
                 }
         
                 // Fetch the result
                 $result = $this->db->single();
                 return $result;
             } catch (PDOException $e) {
+                die($e->getMessage());
+                return false;
+            }
+        }
+
+        function getCreditsMonths_collector($region, $collector_id){
+            try{
+                if ($collector_id == "none") {
+                    $this->db->query('SELECT *, MONTH(request_main.date) as month 
+                                      FROM request_main 
+                                      INNER JOIN request_completed 
+                                      ON request_completed.req_id = request_main.req_id 
+                                      WHERE type = \'completed\' AND region = :region');
+                    $this->db->bind(':region', $region);
+                } else {
+                    $this->db->query('SELECT *, MONTH(request_main.date) as month 
+                                      FROM request_main 
+                                      INNER JOIN request_completed 
+                                      ON request_completed.req_id = request_main.req_id
+                                      INNER JOIN request_assigned
+                                      ON request_assigned.req_id = request_main.req_id 
+                                      WHERE type = \'completed\' AND region = :region
+                                      AND collector_id= :collectorId');
+                    $this->db->bind(':collectorId', $collector_id);                  
+                    $this->db->bind(':region', $region);
+                }
+                $results = $this->db->resultSet();
+                return $results;
+
+            }catch(PDOException $e){
                 die($e->getMessage());
                 return false;
             }

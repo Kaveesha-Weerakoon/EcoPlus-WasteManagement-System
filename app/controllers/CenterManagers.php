@@ -16,7 +16,6 @@
       $this->Customer_Model=$this->model('Customer');
       $this->garbageTypeModel=$this->model('Garbage_Types');
       $this->Center_Manager_Report_Model=$this->model('Center_Manager_Report');
-
       $this->Report_Model=$this->model('Report');
 
       if(!isLoggedIn('center_manager_id')){
@@ -87,8 +86,10 @@
 
     public function collectors(){
       $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'collectors' => $collectors,
+        'notification' => $notifications,
         'click_update' =>'',
         'update_success'=>'',
         'confirm_delete' =>'',
@@ -101,8 +102,10 @@
 
     public function collectors_complains(){
       $collector_complains=$this->collector_complain_Model->get_complains_byCenterID($_SESSION['center_id']);
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'collectors_complains' => $collector_complains,
+        'notification' =>  $notifications
       ];
      
      
@@ -111,6 +114,7 @@
 
     public function collectors_add(){
 
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $data = [
@@ -127,6 +131,7 @@
           'password'=>trim($_POST['password']),
           'confirm_password'=>trim($_POST['confirm_password']),
           'center_name'=>'',
+          'notification'=> $notifications,
 
           'name_err' =>'',
           'nic_err' =>'',
@@ -266,6 +271,7 @@
       }
       else{
         $data = [
+          'notification'=> $notifications,
           'name' =>'',
           'nic' => '',
           'dob'=>'',
@@ -298,6 +304,8 @@
     }
 
     public function collectors_update($collectorId){
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
@@ -312,6 +320,7 @@
                 'vehicle_no'=>trim($_POST['vehicle_no']),
                 'vehicle_type'=>trim($_POST['vehicle_type']),
                 'click_update' =>'True',
+                'notification'=> $notifications,
                 'update_success'=>'',
                 'confirm_delete'=> '',
                 'delete_success'=> '',
@@ -408,6 +417,7 @@
           'vehicle_no'=> $collector->vehicle_no,
           'vehicle_type'=> $collector->vehicle_type,
           'click_update' =>'True',
+          'notification'=> $notifications,
           'update_success'=>'',
           'confirm_delete'=> '',
           'delete_success'=> '',
@@ -430,6 +440,7 @@
 
     public function collector_delete_confirm($collectorId){
         $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
         $data = [
           'collectors' => $collectors,
           'confirm_delete' => 'True',
@@ -438,7 +449,8 @@
           'update_success'=>'',
           'personal_details_click'=> '',
           'vehicle_details_click'=> '',
-          'collector_id' => $collectorId
+          'collector_id' => $collectorId,
+          'notification' => $notifications
         ];     
         $this->view('center_managers/collectors', $data);       
     }
@@ -446,8 +458,10 @@
     public function collector_delete($collectorId){
 
       $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'collectors' => $collectors,
+        'notification'=> $notifications,
         'click_update' =>'',
         'update_success'=>'',
         'confirm_delete'=> '',
@@ -476,6 +490,7 @@
     public function personal_details_view($collectorId){
         $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
         $collector = $this->collectorModel->getCollector_ByID_view($collectorId);
+        $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
         $data = [
           'collectors' => $collectors,
           'id'=> $collectorId,
@@ -486,6 +501,7 @@
           'contact_no'=> $collector->contact_no,
           'address' => $collector->address,
           'image'=>$collector->image,
+          'notification'=> $notifications,
           'personal_details_click'=> 'True',
           'vehicle_details_click'=> '',
           'confirm_delete' => '',
@@ -1868,6 +1884,17 @@
     ];
 
     $this->view('center_managers/garbage_types', $data);
+  }
+
+  public function view_notification($url){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+     
+      $Notifications1 = $this->notification_Model->view_center_Notification($_SESSION['center_id']);
+      $Notifications2 = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+      $data['notification']=  $Notifications2 ;
+      header("Location: " . URLROOT . "/centermanagers/$url");        
+
+   }
   }
 
 

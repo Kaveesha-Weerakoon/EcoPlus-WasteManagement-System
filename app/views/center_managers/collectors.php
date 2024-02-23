@@ -10,7 +10,8 @@
                             <i class='bx bx-search-alt-2'></i>
                             <input type="text" id="searchInput" placeholder="Search">
                         </div>
-                        <div class="main-right-top-notification" id="notification">
+                        <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
+                        <!-- <div class="main-right-top-notification" id="notification">
                             <i class='bx bx-bell'></i>
                             <div class="dot"></div>
                         </div>
@@ -34,15 +35,15 @@
                                 </div>
                                 Request 1232 Has been Cancelled
                             </div>
-                        </div>
-                        <div class="main-right-top-profile">
+                        </div> -->
+                        <!-- <div class="main-right-top-profile">
                             <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
                                 alt="">
                             <div class="main-right-top-profile-cont">
                                 <h3><?php echo $_SESSION['center_manager_name']?></h3>
                                 <p>ID : Col <?php echo $_SESSION['center_manager_id']?></p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="main-right-top-two">
                         <h1>Collectors</h1>
@@ -340,6 +341,16 @@
     </div>
 </div>
 <script>
+
+ /* Notification View */
+ document.getElementById('submit-notification').onclick = function() {
+    var form = document.getElementById('mark_as_read');
+    var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/collectors";
+    form.action = dynamicUrl; // Set the action URL
+    form.submit(); // Submit the form
+
+};
+    /* ----------------- */
     
 function searchTable() {
     var input = document.getElementById('searchInput').value.toLowerCase();

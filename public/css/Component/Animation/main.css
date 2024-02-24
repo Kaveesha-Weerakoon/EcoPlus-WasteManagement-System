@@ -116,3 +116,53 @@
         transform: scale(1);
     }
 }
+
+@keyframes arrowAnimation1 {
+    from {
+        left: calc(42.5% - 16px);
+        opacity: 1;
+    }
+
+    to {
+        left: calc(42.5% - 32px);
+        /* Adjust as needed */
+        opacity: 0;
+    }
+}
+
+@keyframes arrowAnimation2 {
+    from {
+        left: calc(43.2% - 16px);
+        opacity: 1;
+    }
+
+    to {
+        left: calc(43.2% - 32px);
+        /* Adjust as needed */
+        opacity: 0;
+    }
+}
+
+@keyframes arrowAnimation3 {
+    from {
+        top: calc(61% - 16px);
+        opacity: 1;
+    }
+
+    to {
+        top: calc(61% - 32px);
+        opacity: 0;
+    }
+}
+
+@keyframes arrowAnimation4 {
+    from {
+        top: calc(53% - 16px);
+        opacity: 1;
+    }
+
+    to {
+        top: calc(53% - 32px);
+        opacity: 0;
+    }
+}

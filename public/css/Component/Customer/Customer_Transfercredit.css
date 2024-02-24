@@ -92,6 +92,14 @@
         display: grid;
         grid-template-columns: 50% 50%;
         box-sizing: border-box;
+        opacity: 0;
+        transform: translateY(-30px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .main-bottom-component.slide-in {
+        opacity: 1;
+        transform: translateY(0);
     }
 
 

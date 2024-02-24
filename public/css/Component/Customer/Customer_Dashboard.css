@@ -28,29 +28,35 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 15%;
+        width: 12%;
         position: relative;
         margin-left: -1.5%;
+        cursor: pointer;
+
     }
 
     .main-right-top-search i {
         position: absolute;
-        font-size: 25px;
+        font-size: 21px;
         left: 20px;
         top: 50%;
         transform: translateY(-50%);
+        cursor: pointer;
+
     }
 
     .main-right-top-search input {
-        width: 100%;
+        width: 80%;
         height: 33px;
         border-radius: 7px;
         background-color: var(--background-color-two);
         border: 1px solid #dcdde1;
         font-size: 14px;
-        padding-left: 50px;
+        padding-left: 45px;
         letter-spacing: 0.03rem;
         color: var(--main-text-color);
+        cursor: pointer;
+
     }
 
     .main-right-top-search input:focus {
@@ -231,8 +237,8 @@
 
     .main-right-bottom-one-right-cont p {
         font-size: 13.5px;
-        width: 60px;
-        margin-right: 135px;
+        width: 100px;
+        margin-right: 115px;
     }
 
     .main-right-bottom-one-right-cont h2 {
@@ -608,6 +614,158 @@
         width: 90%;
         height: 81%;
         border-radius: 10px;
+    }
+
+    .tutorial {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .tutorial {
+        .cont {
+            display: flex;
+            width: 70%;
+            height: 80%;
+            background-color: var(--background-color-two);
+            box-sizing: border-box;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .step-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: #1ca557;
+            /* Change color of active dot */
+        }
+
+
+        .tutorial-step {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .tutorial-step h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 100;
+        }
+
+        .tutorial-step p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            letter-spacing: 0.03rem;
+        }
+
+        .tutorial-step:first-child {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .tutorial-step img {
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: var(--green-color-one);
+            color: white;
+            border: none;
+            padding: 10px 70px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+
+        button:hover {
+            background-color: var(--green-color-two);
+        }
+
+        .arrow1 {
+            position: absolute;
+            top: 73.5%;
+            transform: translateY(-50%);
+            height: 0;
+            border-top: 25px solid transparent;
+            border-bottom: 25px solid transparent;
+            border-right: 25px solid #1ca557;
+            z-index: 12;
+            animation: arrowAnimation1 1s infinite alternate;
+        }
+
+        .arrow2 {
+            position: absolute;
+            top: 42%;
+            transform: translateY(-50%) rotate(180deg);
+            height: 0;
+            border-top: 25px solid transparent;
+            border-bottom: 25px solid transparent;
+            border-right: 25px solid #1ca557;
+            z-index: 12;
+            animation: arrowAnimation2 1s infinite alternate;
+        }
+
+        .arrow3 {
+            position: absolute;
+            left: 65%;
+            transform: translateY(-50%) rotate(270deg);
+            height: 0;
+            border-top: 25px solid transparent;
+            border-bottom: 25px solid transparent;
+            border-right: 25px solid #1ca557;
+            z-index: 12;
+            animation: arrowAnimation3 1s infinite alternate;
+        }
+
+        .arrow4 {
+            position: absolute;
+            left: 36.7%;
+            transform: translateY(-50%) rotate(90deg);
+            height: 0;
+            border-top: 25px solid transparent;
+            border-bottom: 25px solid transparent;
+            border-right: 25px solid #1ca557;
+            z-index: 12;
+            animation: arrowAnimation4 1s infinite alternate;
+        }
+
     }
 
 

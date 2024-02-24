@@ -7,118 +7,73 @@
         <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
 
             <div class="main-right">
-                <div class="main-right-top">
-                    <div class="main-right-top-one">
-                        <div class="main-right-top-search" style="visibility:hidden">
-                            <i class='bx bx-search-alt-2'></i>
-                            <input type="text" placeholder="Search">
-                        </div>
-                        <div class="main-right-top-notification" id="notification">
-                            <i class='bx bx-bell'></i>
-                            <?php if (!empty($data['notification'])) : ?>
-                            <div class="dot"><?php echo count($data['notification'])?></div>
-                            <?php endif; ?>
-                        </div>
-                        <div id="notification_popup" class="notification_popup">
-                            <h1>Notifications</h1>
-                            <div class="notification_cont">
-                                <?php foreach($data['notification'] as $notification) : ?>
-
-                                <div class="notification">
-                                    <div class="notification-green-dot">
-
-                                    </div>
-                                    <div class="notification_right">
-                                        <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
-                                        <?php echo $notification->notification ?>
-                                    </div>
-                                </div>
-                                <?php endforeach; ?>
-
-                            </div>
-                            <form class="mark_as_read" method="post"
-                                action="<?php echo URLROOT;?>/customers/view_notification/analatics">
-                                <i class="fa-solid fa-check"> </i>
-                                <button type="submit">Mark all as read</button>
-                            </form>
-
-                        </div>
-                        <div class="main-right-top-profile">
-                            <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['collector_profile']?>"
-                                alt="">
-                            <div class="main-right-top-profile-cont">
-                              <h3><?php echo $_SESSION['collector_name']?></h3>
-                                <p>ID : Col <?php echo $_SESSION['collector_id']?></p>
-                            </div>
-                        </div>
+            <div class="main-right-top">
+                    <div class="main-right-top-search">
+                        <i class='bx bx-search-alt-2'></i>
+                        <input type="text" placeholder="Search">
                     </div>
-                    <div class="main-right-top-two">
-
-                        <form class="top-bar" method="post" action="<?php echo URLROOT;?>/customers/analatics">
-                            <div class="top-bar-left">
-                                <h2>Analatics</h2>
-                                <p>Here is your overall Anatics</p>
-                            </div>
-                            <div class="date-box">
-                                <div class="date-box-cont">
-                                    <input value="<?php echo $data['from']?>" name="fromDate" type="Date">
-                                    <p>From</p>
-                                </div>
-                                <div class="date-box-cont">
-                                    <input value="<?php echo $data['to']?>" name="toDate" type="Date">
-                                    <p>To</p>
-                                </div>
-                            </div>
-
-
-                            <button>Filter</button>
-                        </form>
+                    <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
+                        <i class='bx bx-bell'></i>
+                        <div class="dot"></div>
                     </div>
 
+                    <div class="main-right-top-profile">
+                        <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
+                        <div class="main-right-top-profile-cont">
+                            <h3>Admin</h3>
+                        </div>
+                    </div>
                 </div>
 
 
 
 
                 <div class="main-right-bottom">
-                    <div class="credit-section">
-                        <div class="cont A">
-                            <i class="fa-solid fa-dollar-sign"></i>
-                            <div class="cont-cont">
-                                <p>Credit Balance</p>
-                                <h1>Eco
-                                    <?php echo !empty($data['credit_balance']) ? $data['credit_balance'] : '0.00'; ?>
-                                </h1>
+
+                    <form class="top-bar" method="post" action="<?php echo URLROOT;?>/admin/reports">
+                        <div class="top-bar-left">
+                            <h2>Analatics</h2>
+                            <p>Here is overall Analatics</p>
+                        </div>
+                        <div class="date-box">
+                            <div class="date-box-cont">
+                                <input value="<?php echo $data['from']?>" name="fromDate" type="Date">
+                                <p>From</p>
+                            </div>
+                            <div class="date-box-cont">
+                                <input value="<?php echo $data['to']?>" name="toDate" type="Date">
+                                <p>To</p>
                             </div>
                         </div>
-                        <div class="cont B">
-                            <i class="fa-solid fa-circle-exclamation"></i>
-                            <div class="cont-cont">
-                                <p>Fined </p>
-                                <h1>Eco
-                                    <?php echo !empty($data['fine_balance']) ? -$data['fine_balance'] : '0.00'; ?>
-                                </h1>
-                            </div>
+
+                        <div class="center-box">
+                            <select id="center-dropdown" name="center-dropdown">
+                                <?php
+                                     $centers = $data['centers'];
+                                     $selectedRegion = $data['center'];
+                                     $regionFound = false;
+
+                                     // Add the "All" option
+                                     echo "<option value=\"none\"" . ($selectedRegion == "none" ? " selected" : "") . ">All</option>";
+
+                                     if (!empty($centers)) {
+                                        foreach ($centers as $center) {
+                                            $selected = ($center->region == $selectedRegion) ? 'selected' : '';
+                                            if ($selected) {
+                                                $regionFound = true;
+                                            }
+                                            echo "<option value=\"$center->region\" $selected>$center->region</option>";
+                                        }
+          
+                                    } 
+                                    ?>
+                            </select>
+                            <p id="selected-option">Center</p>
                         </div>
-                        <div class="cont C">
-                            <i class="fas fa-exchange-alt"></i>
-                            <div class="cont-cont">
-                                <p>Transactions</p>
-                                <h1>Eco
-                                    <?php echo !empty($data['transaction_balance']) ? $data['transaction_balance'] : '0.00'; ?>
-                                </h1>
-                            </div>
-                        </div>
-                        <div class="cont D">
-                            <i class="fas fa-check-circle"></i>
-                            <div class="cont-cont">
-                                <p>Redeemed</p>
-                                <h1>Eco
-                                    <?php echo !empty($data['redeemed_balance']) ? $data['redeemed_balance'] : '0.00'; ?>
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
+
+                        <button>Filter</button>
+                    </form>
+
 
 
                     <div class="request-section">
@@ -163,61 +118,189 @@
                         <div class="right">
                             <div class="right-cont">
                                 <div class="top">
-                                    <h3>Credits Earned</h3>
+                                    <h3>Credits Given</h3>
                                     <h1><?php
                                         $credits = isset($data['credits']) ? $data['credits'] : '00.00';
                                     ?>
-                                        <?php echo $credits; ?></h1>
+                                        <h1>Eco <?php echo $credits; ?></h1>
                                     </h1>
                                 </div>
                                 <div class="bottom">
-                                    <canvas id="myChart" width="600" height="350"></canvas>
+                                    <canvas id="myChart" width="688" height="550"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="waste-section">
+                        <div class="waste-section-cont">
+                            <h2>Total Waste Collected</h2>
+                            <p>Here's an overview of total waste collected from customers</p>
+                        </div>
+                        <div class="waste-section-bottom">
+                            <div class="left">
+                                <table>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Weight(Kg)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Plastic</td>
+                                        <td><?php echo $data['collectedWasteByMonth']->plastic ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Polythene</td>
+                                        <td><?php echo $data['collectedWasteByMonth']->polythene?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Paper</td>
+                                        <td><?php echo $data['collectedWasteByMonth']->paperwaste?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Electronic</td>
+                                        <td><?php echo $data['collectedWasteByMonth']->electronicwaste?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Metals</td>
+                                        <td><?php echo $data['collectedWasteByMonth']->metals?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Glass</td>
+                                        <td><?php echo $data['collectedWasteByMonth']->glass?></td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="right">
+                                <canvas id="myPieChart" width="100" height="100"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="waste-section">
+                        <div class="waste-section-cont">
+                            <h2>Total Waste Handovered</h2>
+                            <p>Here's an overview of total waste received at the centers</p>
+                        </div>
+                        <div class="waste-section-bottom">
+                            <div class="left">
+                                <table>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Weight(Kg)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Plastic</td>
+                                        <td><?php echo $data['handoveredWasteByMonth']->plastic ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Polythene</td>
+                                        <td><?php echo $data['handoveredWasteByMonth']->polythene?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Paper</td>
+                                        <td><?php echo $data['handoveredWasteByMonth']->paperwaste?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Electronic</td>
+                                        <td><?php echo $data['handoveredWasteByMonth']->electronicwaste?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Metals</td>
+                                        <td><?php echo $data['handoveredWasteByMonth']->metals?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Glass</td>
+                                        <td><?php echo $data['handoveredWasteByMonth']->glass?></td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="right">
+                                <canvas id="myPieChart2" width="100" height="100"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="waste-section">
+                        <div class="waste-section-cont-2">
+                            <div class="waste-section-cont-left">
+                                <h2>Total Waste Selled</h2>
+                                <p>Here is overall Analatics about total waste selled by Center</p>
+                            </div>
+                            <div class="waste-section-cont-right">
+                                <h2>Rs <?php echo $data['selledWasteByMonth']->income ?></h2>
+                                <p>Total Earnings</p>
+                            </div>
+                        </div>
+                        <div class="waste-section-bottom">
+                            <div class="left">
+                                <table>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Weight(Kg)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Plastic</td>
+                                        <td><?php echo $data['selledWasteByMonth']->plastic ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Polythene</td>
+                                        <td><?php echo $data['selledWasteByMonth']->polythene?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Paper</td>
+                                        <td><?php echo $data['selledWasteByMonth']->paperwaste?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Electronic</td>
+                                        <td><?php echo $data['selledWasteByMonth']->electronicwaste?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Metals</td>
+                                        <td><?php echo $data['selledWasteByMonth']->metals?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Glass</td>
+                                        <td><?php echo $data['selledWasteByMonth']->glass?></td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="right">
+                                <canvas id="myPieChart3" width="100" height="100"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
                 </div>
-
-
-
-
-
-
             </div>
         </div>
     </div>
 </div>
 
+
+
+
+
 <script>
-var notification = document.getElementById("notification");
-var notification_pop = document.getElementById("notification_popup");
-notification_pop.style.height = "0px";
-
-notification.addEventListener("click", function() {
-    var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
-
-    if (!isNotificationEmpty) {
-        var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
-        if (notification_pop.style.height === "0px") {
-            if (notificationArraySize >= 3) {
-                notification_pop.style.height = "210px";
-            }
-            if (notificationArraySize == 2) {
-                notification_pop.style.height = "150px";
-            }
-            if (notificationArraySize == 1) {
-                notification_pop.style.height = "105px";
-            }
-            notification_pop.style.visibility = "visible";
-            notification_pop.style.opacity = "1";
-            notification_pop.style.padding = "7px";
-        } else {
-            notification_pop.style.height = "0px";
-            notification_pop.style.visibility = "hidden";
-            notification_pop.style.opacity = "0";
-        }
-    }
-});
+/* TOP LINE CHART */
 const currentDate = new Date();
 const currentMonth = currentDate.getMonth() + 1;
 // Add 1 to represent January as index 1
@@ -284,8 +367,9 @@ function printLastSixMonths(arr, startIndex) {
     return result.reverse();
 }
 
-const completedData = printLastSixMonths(countRequests(completedRequestCounts), currentDate.getMonth() + 1);
 
+
+const completedData = printLastSixMonths(countRequests(completedRequestCounts), currentDate.getMonth() + 1);
 const data = {
     labels: labels,
     datasets: [{
@@ -314,52 +398,141 @@ const config = {
 };
 
 const ctx = document.getElementById('myChart').getContext('2d');
-const myChart1 = new Chart(ctx, config);
+const myChart = new Chart(ctx, config);
+/* TOP LINE CHART END*/
 
-/*animations*/
-document.addEventListener("DOMContentLoaded", function() {
-    var contElements = document.querySelectorAll('.credit-section .cont');
 
-    function checkSlide() {
-        contElements.forEach(function(element) {
-            var slideInAt = window.scrollY + window.innerHeight - element.clientHeight / 2;
-            var elementTop = element.getBoundingClientRect().top;
-            var isHalfShown = elementTop < window.innerHeight;
-            var isNotScrolledPast = window.scrollY < elementTop + element.clientHeight;
+/*Bottom CHART One*/
 
-            if (isHalfShown && isNotScrolledPast) {
-                element.classList.add('fade-in');
-            } else {
-                element.classList.remove('fade-in');
+const data1 = {
+    labels: ['Plastic', 'Polythene', 'Paper', 'Electronic', 'Metals', 'Glass'],
+    datasets: [{
+        data: [<?php echo $data['collectedWasteByMonth']->plastic ?>,
+            <?php echo $data['collectedWasteByMonth']->polythene ?>,
+            <?php echo $data['collectedWasteByMonth']->paperwaste ?>,
+            <?php echo $data['collectedWasteByMonth']->electronicwaste ?>,
+            <?php echo $data['collectedWasteByMonth']->metals ?>,
+            <?php echo $data['collectedWasteByMonth']->glass ?>
+        ], // Sample values for each waste type
+        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff',
+            '#ff9900'
+        ], // Sample colors
+        borderWidth: 2, // Set the border width to reduce the width of the colored segments
+    }]
+};
+
+
+
+const config1 = {
+    type: 'pie',
+    data: data1,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Waste Collected Pie Chart'
             }
-        });
+        }
     }
+};
 
-    window.addEventListener('scroll', checkSlide);
-    checkSlide(); // Trigger once on page load
-});
 
-document.addEventListener("DOMContentLoaded", function() {
-    var leftContElements = document.querySelectorAll('.left-cont');
 
-    function checkSlide() {
-        leftContElements.forEach(function(element) {
-            var slideInAt = window.scrollY + window.innerHeight - element.clientHeight / 2;
-            var elementTop = element.getBoundingClientRect().top;
-            var isHalfShown = elementTop < window.innerHeight;
-            var isNotScrolledPast = window.scrollY < elementTop + element.clientHeight;
+const ctx1 = document.getElementById('myPieChart').getContext('2d');
+const myPieChart = new Chart(ctx1, config1);
+/*Bottom CHART One*/
 
-            if (isHalfShown && isNotScrolledPast) {
-                element.classList.add('fade-in');
-            } else {
-                element.classList.remove('fade-in');
+/*Bottom CHART Two*/
+
+const data2 = {
+    labels: ['Plastic', 'Polythene', 'Paper', 'Electronic', 'Metals', 'Glass'],
+    datasets: [{
+        data: [<?php echo $data['handoveredWasteByMonth']->plastic ?>,
+            <?php echo $data['handoveredWasteByMonth']->polythene ?>,
+            <?php echo $data['handoveredWasteByMonth']->paperwaste ?>,
+            <?php echo $data['handoveredWasteByMonth']->electronicwaste ?>,
+            <?php echo $data['handoveredWasteByMonth']->metals ?>,
+            <?php echo $data['handoveredWasteByMonth']->glass ?>
+        ], // Sample values for each waste type
+        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff',
+            '#ff9900'
+        ], // Sample colors
+        borderWidth: 2, // Set the border width to reduce the width of the colored segments
+    }]
+};
+
+
+const config2 = {
+    type: 'pie',
+    data: data2,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Waste Collected Pie Chart'
             }
-        });
+        }
     }
+};
 
-    window.addEventListener('scroll', checkSlide);
-    checkSlide(); // Trigger once on page load
-});
+
+
+const ctx2 = document.getElementById('myPieChart2').getContext('2d');
+const myPieChart2 = new Chart(ctx2, config2);
+/*Bottom CHART Two*/
+
+
+/*Bottom CHART Three*/
+
+const data3 = {
+    labels: ['Plastic', 'Polythene', 'Paper', 'Electronic', 'Metals', 'Glass'],
+    datasets: [{
+        data: [<?php echo $data['selledWasteByMonth']->plastic ?>,
+            <?php echo $data['selledWasteByMonth']->polythene ?>,
+            <?php echo $data['selledWasteByMonth']->paperwaste ?>,
+            <?php echo $data['selledWasteByMonth']->electronicwaste ?>,
+            <?php echo $data['selledWasteByMonth']->metals ?>,
+            <?php echo $data['selledWasteByMonth']->glass ?>
+        ], // Sample values for each waste type
+        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff',
+            '#ff9900'
+        ], // Sample colors
+        borderWidth: 2, // Set the border width to reduce the width of the colored segments
+    }]
+};
+
+
+const config3 = {
+    type: 'pie',
+    data: data3,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Waste Collected Pie Chart'
+            }
+        }
+    }
+};
+
+
+
+const ctx3 = document.getElementById('myPieChart3').getContext('2d');
+const myPieChart3 = new Chart(ctx3, config3);
+/*Bottom CHART Three*/
 </script>
+
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

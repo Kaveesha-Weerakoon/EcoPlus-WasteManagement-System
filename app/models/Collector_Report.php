@@ -181,8 +181,15 @@
         function getCreditsMonths( $user_id) {
            try {
             
-             $this->db->query('SELECT *, MONTH(request_main.date) as month FROM request_main INNER JOIN request_completed ON request_completed.req_id = request_main.req_id WHERE type = \'completed\' AND customer_id=:customer_id ');
-             $this->db->bind(':customer_id', $user_id);
+            $this->db->query('SELECT *, MONTH(request_main.date) as month 
+                    FROM request_main 
+                    INNER JOIN request_completed 
+                    ON request_completed.req_id = request_main.req_id
+                    INNER JOIN request_assigned
+                    ON request_assigned.req_id = request_main.req_id 
+                    WHERE type = \'completed\' 
+                    AND collector_id= :collector_id');
+             $this->db->bind(':collector_id', $user_id);
              $results = $this->db->resultSet();
              return $results;
           } catch (PDOException $e) {

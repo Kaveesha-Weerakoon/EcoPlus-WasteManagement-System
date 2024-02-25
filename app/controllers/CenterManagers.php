@@ -779,7 +779,7 @@
     }
 
    public function editprofile(){
-
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $id=$_SESSION['center_manager_id']; 
@@ -794,6 +794,7 @@
          'profile_image_name' => $_SESSION['center_manager_email'].'_'.$_FILES['profile_image']['name'],
          'contactno'=>trim($_POST['contactno']),
          'address'=>trim($_POST['address']),
+         'notification'=> $notifications,
          'city'=>'',
          'current'=>'',
          'new_pw'=>'',
@@ -873,7 +874,9 @@
         'contactno_err' =>'',
         'city_err'=>'',
         'profile_err'=>'',
-        'success_message'=>''];
+        'success_message'=>'',
+        'notification'=> $notifications
+        ];
        
         $id=$_SESSION['center_manager_id']; 
         $user=$this->centermanagerModel->getCenterManagerByID($id);
@@ -889,6 +892,7 @@
    }
 
    public function change_password(){
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); $data=[
@@ -901,6 +905,7 @@
         'current'=>trim($_POST['current']),
         'new_pw'=>trim($_POST['new_pw']),
         're_enter_pw'=>trim($_POST['re_enter_pw']),
+        'notification'=> $notifications,
         'current_err'=>'',
         'new_pw_err'=>'',
         're_enter_pw_err'=>'',
@@ -979,7 +984,8 @@
           'contactno_err' =>'',
           'city_err'=>'',
           'profile_err'=>'',
-          'success_message'=>''
+          'success_message'=>'',
+          'notification'=> $notifications
 
 
         ];
@@ -1821,6 +1827,7 @@
     $center1 = $this->center_model->getCenterById($_SESSION['center_id']);
     $region = $center1->region;
     $centerId=$center1->id;
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
           
@@ -1870,7 +1877,7 @@
         // 'center'=>$center,
         'collectors'=> $collectors,
         'collector' => $collector,
-
+        'notification'=> $notifications,
         'to'=>$toDate,
         'from'=>$fromDate,
         'credits'=> $credits->total_credits,
@@ -1911,7 +1918,7 @@
         'from'=>'none',    
         'credits'=> $credits->total_credits,
         'creditsByMonth1'=>  $creditByMonth,
-        
+        'notification'=> $notifications,
         'handoveredWasteByMonth'=>$handoveredWasteByMonth,
         'selledWasteByMonth'=>$selledWasteByMonth
 

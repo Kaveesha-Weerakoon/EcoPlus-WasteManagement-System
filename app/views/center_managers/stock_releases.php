@@ -10,7 +10,8 @@
                             <i class='bx bx-search-alt-2'></i>
                             <input type="text" id="searchInput" placeholder="Search">
                         </div>
-                        <div class="main-right-top-notification" id="notification">
+                        <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
+                        <!-- <div class="main-right-top-notification" id="notification">
                             <i class='bx bx-bell'></i>
                             <div class="dot"></div>
                         </div>
@@ -42,7 +43,7 @@
                                 <h3><?php echo $_SESSION['center_manager_name']?></h3>
                                 <p>ID : Col <?php echo $_SESSION['center_manager_id']?></p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="main-right-top-two">
                         <h1>Center Waste Management</h1>
@@ -197,6 +198,16 @@
     });
 
     });
+
+     /* Notification View */
+     document.getElementById('submit-notification').onclick = function() {
+        var form = document.getElementById('mark_as_read');
+        var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/stock_release_details";
+        form.action = dynamicUrl; // Set the action URL
+        form.submit(); // Submit the form
+
+    };
+    /* ----------------- */
 
 
 

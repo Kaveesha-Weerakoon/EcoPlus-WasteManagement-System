@@ -1328,9 +1328,11 @@
   public function waste_management(){
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $confirmed_requests = $this->garbage_Model->get_confirmed_requests_by_region($center->region);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     $data =[
       'confirmed_requests'=>$confirmed_requests,
+      'notification'=> $notifications
     ];
     
     $this->view('center_managers/waste_management', $data);
@@ -1340,6 +1342,7 @@
   public function center_garbage_stock(){
 
     $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     $data =[
       'current_polythene'=>$current_quantities->current_polythene,
@@ -1347,7 +1350,8 @@
       'current_glass'=>$current_quantities->current_glass,
       'current_paper'=>$current_quantities->current_paper,
       'current_electronic'=>$current_quantities->current_electronic,
-      'current_metals'=>$current_quantities->current_metal
+      'current_metals'=>$current_quantities->current_metal,
+      'notification'=> $notifications
 
     ];
 
@@ -1359,6 +1363,7 @@
     $types=$this->garbageTypeModel->get_all();
 
     $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1375,6 +1380,7 @@
         'released_person'=> trim($_POST['released_person']),
         'release_note' => trim($_POST['release_note']),
         'release_popup' => 'True',
+        'notification'=> $notifications,
         'release_success'=> '',
         'sell_price_pop'=>$pop,
         'released_person_err'=> '',
@@ -1472,6 +1478,7 @@
         'current_paper'=>$current_quantities->current_paper,
         'current_electronic'=>$current_quantities->current_electronic,
         'current_metals'=>$current_quantities->current_metal,
+        'notification'=> $notifications,
         'released_person'=> '',
         'release_note' => '',
         'release_popup' => 'True',
@@ -1506,6 +1513,7 @@
     $types=$this->garbageTypeModel->get_all();
 
     $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1522,6 +1530,7 @@
         'released_person'=> trim($_POST['released_person']),
         'release_note' => trim($_POST['release_note']),
         'release_popup' => 'True',
+        'notification'=> $notifications,
         'release_success'=> '',
         'sell_price_pop'=>'',
         'released_person_err'=> '',
@@ -1620,6 +1629,7 @@
         'current_electronic'=>$current_quantities->current_electronic,
         'current_metals'=>$current_quantities->current_metal,
         'released_person'=> '',
+        'notification'=> $notifications,
         'release_note' => '',
         'release_popup' => 'True',
         'release_success'=> '',
@@ -1650,9 +1660,11 @@
 
   public function stock_release_details(){
     $release_details = $this->garbage_Model->get_release_details($_SESSION['center_id']);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     $data = [
-      'release_details'=>$release_details
+      'release_details'=>$release_details,
+      'notification'=> $notifications
     ];
 
     $this->view('center_managers/stock_releases', $data);
@@ -1915,9 +1927,11 @@
   public function garbage_types(){
 
     $garbage_types = $this->garbageTypeModel->get_all();
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     $data =[
-      'garbage_types' => $garbage_types
+      'garbage_types' => $garbage_types,
+      'notification'=> $notifications
 
     ];
 

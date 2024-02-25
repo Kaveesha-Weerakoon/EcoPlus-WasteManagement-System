@@ -10,7 +10,8 @@
                             <i class='bx bx-search-alt-2'></i>
                             <input type="text" id="searchInput" placeholder="Search">
                         </div>
-                        <div class="main-right-top-notification" id="notification">
+                        <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
+                        <!-- <div class="main-right-top-notification" id="notification">
                             <i class='bx bx-bell'></i>
                             <div class="dot"></div>
                         </div>
@@ -42,7 +43,7 @@
                                 <h3><?php echo $_SESSION['center_manager_name']?></h3>
                                 <p>ID : Col <?php echo $_SESSION['center_manager_id']?></p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="main-right-top-two">
                         <h1>Center Waste Management</h1>
@@ -84,12 +85,6 @@
                             <tr class="table-header">
                                 <th>Req id</th>
                                 <th>Collector id</th>
-                                <!-- <th>Plastic</th>
-                                <th>Polythene</th>
-                                <th>Metals</th>
-                                <th>Glass</th>
-                                <th>Paper waste</th>
-                                <th>Electronic waste</th> -->
                                 <th>Center Manager Note</th>
                                 <th>Collection details</th>
                             </tr>
@@ -101,12 +96,6 @@
                             <tr class="table-row">
                                 <td> <?php echo $request->req_id?></td>
                                 <td><?php echo $request->collector_id?></td>
-                                <!-- <td><?php echo $request->plastic?></td>
-                                <td> <?php echo $request->polythene?></td>
-                                <td> <?php echo $request->metals?></td>
-                                <td> <?php echo $request->glass?></td>
-                                <td> <?php echo $request->paper_waste?></td>
-                                <td> <?php echo $request->electronic_waste?></td> -->
                                 <td> <?php echo $request->note?></td>
                                 <td>
                                 <i class='bx bx-info-circle' style="font-size: 29px"
@@ -218,6 +207,16 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
+
+ /* Notification View */
+ document.getElementById('submit-notification').onclick = function() {
+        var form = document.getElementById('mark_as_read');
+        var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/waste_management";
+        form.action = dynamicUrl; // Set the action URL
+        form.submit(); // Submit the form
+
+    };
+    /* ----------------- */
 
 </script>
 

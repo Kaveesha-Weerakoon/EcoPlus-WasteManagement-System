@@ -177,6 +177,16 @@
     </div>
 </div>
 <script>
+/* Notification View */
+document.getElementById('submit-notification').onclick = function() {
+        var form = document.getElementById('mark_as_read');
+        var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/request_assigned";
+        form.action = dynamicUrl; // Set the action URL
+        form.submit(); // Submit the form
+
+    };
+    /* ----------------- */
+
 function cancel(id, collector_id) {
     var inputElement = document.querySelector('input[name="id"]');
     inputElement.style.display = 'none';

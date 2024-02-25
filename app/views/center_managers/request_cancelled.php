@@ -124,6 +124,16 @@
     </div>
 </div>
 <script>
+/* Notification View */
+document.getElementById('submit-notification').onclick = function() {
+        var form = document.getElementById('mark_as_read');
+        var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/request_cancelled";
+        form.action = dynamicUrl; // Set the action URL
+        form.submit(); // Submit the form
+
+};
+/* ----------------- */
+
 function view_request_details(request) {
 
     var requestDetails_popup = document.getElementById('request-details-popup-box');

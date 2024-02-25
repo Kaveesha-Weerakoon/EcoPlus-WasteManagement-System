@@ -4,10 +4,12 @@
             <i class='bx bx-search-alt-2'></i>
             <input type="text" id="searchInput" placeholder="Search">
         </div>
-        <div class="main-right-top-notification" id="notification">
+        <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
+        <!-- <div class="main-right-top-notification" id="notification">
             <i class='bx bx-bell'></i>
             <div class="dot"></div>
         </div>
+        
         <div id="notification_popup" class="notification_popup">
             <h1>Notifications</h1>
             <div class="notification">
@@ -37,7 +39,7 @@
                 <h3><?php echo $_SESSION['center_manager_name']?></h3>
                 <p>ID : C <?php echo $_SESSION['center_manager_id']?></p>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="main-right-top-two">
         <h1>Requests</h1>

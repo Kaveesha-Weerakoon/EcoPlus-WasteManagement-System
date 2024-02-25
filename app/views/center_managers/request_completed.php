@@ -345,6 +345,16 @@
     </div>
 </div>
 <script>
+/* Notification View */
+document.getElementById('submit-notification').onclick = function() {
+        var form = document.getElementById('mark_as_read');
+        var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/request_completed";
+        form.action = dynamicUrl; // Set the action URL
+        form.submit(); // Submit the form
+
+};
+/* ----------------- */
+
 function view_collector(image, col_id, name, contact_no, type, vehno) {
     var locationPop = document.getElementById('personal-details-popup-box');
     locationPop.classList.add('active');

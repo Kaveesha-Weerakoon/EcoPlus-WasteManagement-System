@@ -209,6 +209,16 @@
 
 
             <script>
+            /* Notification View */
+            document.getElementById('submit-notification').onclick = function() {
+                var form = document.getElementById('mark_as_read');
+                var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/request_incomming";
+                form.action = dynamicUrl; // Set the action URL
+                form.submit(); // Submit the form
+
+            };
+            /* ----------------- */
+
             function validateCancelForm() {
                 var reasonInput = document.getElementsByName("reason")[0].value;
 

@@ -23,7 +23,6 @@
             </div>
             <h3>Analatics</h3>
         </div>
-
         <div class="main-left-middle-content" onclick="redirect_history()" id="history">
             <div class=" main-left-middle-content-icon">
                 <i class='bx bx-timer'></i>

@@ -72,6 +72,28 @@
         form.submit(); // Submit the form
 
     };
+
+    function searchComplaints() {
+        var input = document.getElementById('complaintSearch').value.toLowerCase();
+        var rows = document.querySelectorAll('.table-row');
+
+        rows.forEach(function(row) {
+            var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+            var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+            var subject = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+            var complaint = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+            var branch = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+
+            if (id.includes(input) || date.includes(input) || subject.includes(input) || complaint
+                .includes(input) || branch.includes(input)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
+        });
+    }
+
+    document.getElementById('complaintSearch').addEventListener('input', searchComplaints);
     /* ----------------- */
     </script>
     <script src="<?php echo JSROOT?>/Customer.js"> </script>

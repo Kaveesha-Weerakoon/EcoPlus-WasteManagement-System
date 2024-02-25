@@ -5,9 +5,9 @@
         font-weight: 600;
     }
 
-    #transfer p {
+    #transfer .line1 {
         color: var(--green-color-one);
-        font-weight: 600;
+        background-color: var(--green-color-one);
     }
 
     .table-header {

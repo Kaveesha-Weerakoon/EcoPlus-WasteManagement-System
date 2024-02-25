@@ -107,8 +107,8 @@
                             </div>
                             <div class="left-cont">
                                 <i class="fa-solid fa-spinner"></i>
-                                <p>On going</p>
-                                <h1><?php echo $data['ongoingRequests']?></h1>
+                                <p>Assigned Request</p>
+                                <h1><?php echo $data['assignRequests']?></h1>
                                 <div class="cont" style="color:#1ca557">
                                     <i class="fa-solid fa-arrow-trend-up"></i>
                                     <p style="font-weight:bold">1212 From prev month</p>

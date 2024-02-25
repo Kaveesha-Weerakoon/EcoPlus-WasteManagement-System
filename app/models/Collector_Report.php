@@ -42,10 +42,15 @@
             }
         }
         
-      /*  public function getCancelledRequests($user_id,$from="none",$to="none"){
+        public function getCancelledRequests($user_id,$from="none",$to="none"){
             try {
               
-                $this->db->query('SELECT * FROM request_main WHERE type=\'cancelled\' AND collector_id=:collector_id  AND date >= :from AND date <= :to');
+                $this->db->query('SELECT * FROM request_main
+                                    INNER JOIN request_assigned
+                                    ON request_main.req_id = request_assigned.req_id
+                                    WHERE collector_id = :collector_id
+                                    AND date >= :from AND date <= :to
+                                    AND type = "cancelled" ');
                 $this->db->bind(':collector_id',$user_id);
           
     
@@ -73,9 +78,14 @@
                
         } 
         
-        public function getonGoingRequests($user_id,$from="none",$to="none"){
+        public function getAssignRequests($user_id,$from="none",$to="none"){
             try {
-                 $this->db->query("SELECT * FROM request_main WHERE (type='incoming' OR type='assigned') AND collector_id=:collector_id AND date >= :from AND date <= :to");
+                $this->db->query('SELECT * FROM request_main
+                INNER JOIN request_assigned
+                ON request_main.req_id = request_assigned.req_id
+                WHERE collector_id = :collector_id
+                AND date >= :from AND date <= :to
+                AND type = "assigned" ');
                  $this->db->bind(':collector_id',$user_id);
 
                 
@@ -103,10 +113,14 @@
         
         public function getallRequests($user_id, $from = "none", $to = "none") {
             try {
-                $sql = 'SELECT * FROM request_main WHERE customer_id=:customer_id AND date >= :from AND date <= :to';
+                $sql = 'SELECT * FROM request_main
+                INNER JOIN request_assigned
+                ON request_main.req_id = request_assigned.req_id
+                WHERE collector_id = :collector_id
+                AND date >= :from AND date <= :to';
                 $this->db->query($sql);
         
-                $this->db->bind(':customer_id', $user_id);
+                $this->db->bind(':collector_id', $user_id);
         
                 if ($from == "none") {
                     $from = '1970-01-01';  
@@ -130,7 +144,7 @@
             }
         }
         
-        function getCredits( $user_id,$from = "none", $to = "none") {
+       /* function getCredits( $user_id,$from = "none", $to = "none") {
          try {
           
             $this->db->query('SELECT SUM(credit_amount) AS total_credits FROM request_main INNER JOIN request_completed ON request_completed.req_id = request_main.req_id WHERE type = \'completed\' AND customer_id=:customer_id  AND date >= :from AND date <= :to');

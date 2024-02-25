@@ -1123,7 +1123,7 @@
 
 
   public function analatics(){
-    $customerId= $_SESSION['collector_id'];
+    $collectorId= $_SESSION['collector_id'];
     $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);    
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -1138,11 +1138,11 @@
         $fromDate="none";
       }
       
-      $completedRequests=$this->Report_Model->getCompletedRequests($customerId,$fromDate,$toDate);
-      /*$cancelledRequests=$this->Report_Model->getCancelledRequests($customerId,$fromDate,$toDate);
-      $ongoingRequests=$this->Report_Model->getonGoingRequests($customerId,$fromDate,$toDate);
-      $totalRequests = $this->Report_Model->getallRequests($customerId,$fromDate,$toDate);
-      $credits=$this->Report_Model->getCredits($customerId,$fromDate,$toDate);
+      $completedRequests=$this->Report_Model->getCompletedRequests($collectorId,$fromDate,$toDate);
+      $cancelledRequests=$this->Report_Model->getCancelledRequests($collectorId,$fromDate,$toDate);
+      $assignRequests=$this->Report_Model->getAssignRequests($collectorId,$fromDate,$toDate);
+      $totalRequests = $this->Report_Model->getallRequests($collectorId,$fromDate,$toDate);
+      /*$credits=$this->Report_Model->getCredits($customerId,$fromDate,$toDate);
       $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
 
       $fine=$this->Report_Model->getFineAmount($customerId,$fromDate,$toDate);
@@ -1153,11 +1153,11 @@
 
 
       $data=[
-        /*'ongoingRequests'=>count($ongoingRequests),
-        'cancelledRequests'=>count($cancelledRequests),*/
-         'completedRequests'=> count($completedRequests),
-        /*'totalRequests'=>count($totalRequests),
-        'credits'=> $credits->total_credits,*/
+        'assignRequests'=>count($assignRequests),
+        'cancelledRequests'=>count($cancelledRequests),
+        'completedRequests'=> count($completedRequests),
+        'totalRequests'=>count($totalRequests),
+        /*'credits'=> $credits->total_credits,*/
         'to'=> $toDate,
         'from'=>  $fromDate,      
         /*'creditsByMonth1'=>  $creditByMonth,
@@ -1173,11 +1173,11 @@
   
    else{
     
-    $completedRequests=$this->Report_Model->getCompletedRequests($customerId);
-    /*$cancelledRequests=$this->Report_Model->getCancelledRequests($customerId);
-    $ongoingRequests=$this->Report_Model->getonGoingRequests($customerId);
-    $totalRequests = $this->Report_Model->getallRequests($customerId);     
-    $credits=$this->Report_Model->getCredits($customerId);
+    $completedRequests=$this->Report_Model->getCompletedRequests($collectorId);
+    $cancelledRequests=$this->Report_Model->getCancelledRequests($collectorId);
+    $assignRequests=$this->Report_Model->getAssignRequests($collectorId);
+    $totalRequests = $this->Report_Model->getallRequests($collectorId);     
+    /*$credits=$this->Report_Model->getCredits($customerId);
     $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
 
     $fine=$this->Report_Model->getFineAmount($customerId);
@@ -1187,11 +1187,11 @@
     $creditsBalance = $credits->total_credits - $getDiscountsOnAgents->discount_credits +  $transactionBalance-$finedAmount;*/
     
     $data=[
-      /*'ongoingRequests'=>count($ongoingRequests),
-      'cancelledRequests'=>count($cancelledRequests),*/
+      'assignRequests'=>count($assignRequests),
+      'cancelledRequests'=>count($cancelledRequests),
       'completedRequests'=> count($completedRequests),
-      /*'totalRequests'=>count($totalRequests),
-      'credits'=> $credits->total_credits,     
+      'totalRequests'=>count($totalRequests),
+      /*'credits'=> $credits->total_credits,     
       'creditsByMonth1'=> $creditByMonth,*/
       'to'=>'none',
       'from'=>'none',  

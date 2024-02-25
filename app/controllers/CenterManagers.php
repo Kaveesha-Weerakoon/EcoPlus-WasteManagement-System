@@ -1661,6 +1661,7 @@
 
   public function complaints(){
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -1673,6 +1674,7 @@
         'contact_no' => trim($_POST['contact_no']),
         'subject' => trim($_POST['subject']),
         'complaint' => trim($_POST['complaint']),
+        'notification'=> $notifications,
         'name_err' => '',
         'contact_no_err' => '',
         'subject_err' => '' ,
@@ -1725,6 +1727,7 @@
       $data =[
         'name' => $_SESSION['center_manager_name'],
         'contact_no' => $center_manager->contact_no,
+        'notification'=> $notifications,
         'subject' => '',
         'complaint' => '',
         'name_err' => '',
@@ -1742,6 +1745,7 @@
 
   public function mark_holidays(){
     $center=$this->center_model->getCenterById($_SESSION['center_id']);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1750,7 +1754,8 @@
         'holiday' => trim($_POST['holiday']),
         'center_id'=> $_SESSION['center_id'],
         'region'=> $center->region,
-        'holiday_success'=> ''
+        'holiday_success'=> '',
+        'notification'=> $notifications
         
       ];
 
@@ -1786,9 +1791,10 @@
 
   public function complaints_history(){
     $complaints_history = $this->center_complaints_model->get_center_complaints_history($_SESSION['center_id']);
-
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
     $data=[
       'complaints_history'=>$complaints_history,
+      'notification'=> $notifications
      
       
     ];

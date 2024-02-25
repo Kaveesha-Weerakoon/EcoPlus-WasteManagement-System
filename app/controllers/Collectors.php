@@ -1142,8 +1142,8 @@
       $cancelledRequests=$this->Report_Model->getCancelledRequests($collectorId,$fromDate,$toDate);
       $assignRequests=$this->Report_Model->getAssignRequests($collectorId,$fromDate,$toDate);
       $totalRequests = $this->Report_Model->getallRequests($collectorId,$fromDate,$toDate);
-      /*$credits=$this->Report_Model->getCredits($customerId,$fromDate,$toDate);
-      $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
+      $credits=$this->Report_Model->getCredits($collectorId,$fromDate,$toDate);
+      /*$creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
 
       $fine=$this->Report_Model->getFineAmount($customerId,$fromDate,$toDate);
       $finedAmount = is_numeric($fine->fine_amount) ? (float)$fine->fine_amount : 0;
@@ -1157,7 +1157,7 @@
         'cancelledRequests'=>count($cancelledRequests),
         'completedRequests'=> count($completedRequests),
         'totalRequests'=>count($totalRequests),
-        /*'credits'=> $credits->total_credits,*/
+        'credits'=> $credits->total_credits,
         'to'=> $toDate,
         'from'=>  $fromDate,      
         /*'creditsByMonth1'=>  $creditByMonth,
@@ -1177,8 +1177,8 @@
     $cancelledRequests=$this->Report_Model->getCancelledRequests($collectorId);
     $assignRequests=$this->Report_Model->getAssignRequests($collectorId);
     $totalRequests = $this->Report_Model->getallRequests($collectorId);     
-    /*$credits=$this->Report_Model->getCredits($customerId);
-    $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
+    $credits=$this->Report_Model->getCredits($customerId);
+    /*$creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
 
     $fine=$this->Report_Model->getFineAmount($customerId);
     $finedAmount = is_numeric($fine->fine_amount) ? (float)$fine->fine_amount : 0;
@@ -1191,8 +1191,8 @@
       'cancelledRequests'=>count($cancelledRequests),
       'completedRequests'=> count($completedRequests),
       'totalRequests'=>count($totalRequests),
-      /*'credits'=> $credits->total_credits,     
-      'creditsByMonth1'=> $creditByMonth,*/
+      'credits'=> $credits->total_credits,     
+      /*'creditsByMonth1'=> $creditByMonth,*/
       'to'=>'none',
       'from'=>'none',  
       /*'notification'=> $Notifications, 

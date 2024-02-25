@@ -147,8 +147,15 @@
        function getCredits( $user_id,$from = "none", $to = "none") {
          try {
           
-            $this->db->query('SELECT SUM(credit_amount) AS total_credits FROM request_main INNER JOIN request_completed ON request_completed.req_id = request_main.req_id WHERE type = \'completed\' AND customer_id=:customer_id  AND date >= :from AND date <= :to');
-            $this->db->bind(':customer_id', $user_id);
+            $this->db->query('SELECT SUM(credit_amount) AS total_credits 
+            FROM request_main 
+            INNER JOIN request_completed ON request_completed.req_id = request_main.req_id 
+            INNER JOIN request_assigned ON request_assigned.req_id = request_main.req_id 
+            WHERE type = \'completed\'
+            AND collector_id = :collector_id 
+            AND date >= :from 
+            AND date <= :to');
+            $this->db->bind(':collector_id', $user_id);
 
     
             if ($from == "none") {
@@ -171,7 +178,7 @@
          }
         }
         
-       /* function getCreditsMonths( $user_id) {
+        function getCreditsMonths( $user_id) {
            try {
             
              $this->db->query('SELECT *, MONTH(request_main.date) as month FROM request_main INNER JOIN request_completed ON request_completed.req_id = request_main.req_id WHERE type = \'completed\' AND customer_id=:customer_id ');
@@ -184,7 +191,7 @@
           }
         }
 
-        function getDiscountsOnAgents($user_id,$from = "none", $to = "none"){
+       /* function getDiscountsOnAgents($user_id,$from = "none", $to = "none"){
            
             try {
           

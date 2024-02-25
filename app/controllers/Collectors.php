@@ -1143,9 +1143,9 @@
       $assignRequests=$this->Report_Model->getAssignRequests($collectorId,$fromDate,$toDate);
       $totalRequests = $this->Report_Model->getallRequests($collectorId,$fromDate,$toDate);
       $credits=$this->Report_Model->getCredits($collectorId,$fromDate,$toDate);
-      /*$creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
+      $creditByMonth=$this->Report_Model->getCreditsMonths($collectorId);
 
-      $fine=$this->Report_Model->getFineAmount($customerId,$fromDate,$toDate);
+      /*$fine=$this->Report_Model->getFineAmount($customerId,$fromDate,$toDate);
       $finedAmount = is_numeric($fine->fine_amount) ? (float)$fine->fine_amount : 0;
       $getDiscountsOnAgents=$this->Report_Model->getDiscountsOnAgents($customerId,$fromDate,$toDate);
       $transactionBalance = $this->Report_Model->getTransactionAmount($customerId,$fromDate,$toDate); // Ensure $transactions is numeric
@@ -1160,8 +1160,8 @@
         'credits'=> $credits->total_credits,
         'to'=> $toDate,
         'from'=>  $fromDate,      
-        /*'creditsByMonth1'=>  $creditByMonth,
-        'notification'=> $Notifications,   
+        'creditsByMonth1'=>  $creditByMonth,
+        /*'notification'=> $Notifications,   
         'fine_balance'=> $finedAmount, 
         'credit_balance'=> $creditsBalance, 
         'transaction_balance'=> $transactionBalance, 
@@ -1177,10 +1177,10 @@
     $cancelledRequests=$this->Report_Model->getCancelledRequests($collectorId);
     $assignRequests=$this->Report_Model->getAssignRequests($collectorId);
     $totalRequests = $this->Report_Model->getallRequests($collectorId);     
-    $credits=$this->Report_Model->getCredits($customerId);
-    /*$creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
+    $credits=$this->Report_Model->getCredits($collectorId);
+    $creditByMonth=$this->Report_Model->getCreditsMonths($collectorId);
 
-    $fine=$this->Report_Model->getFineAmount($customerId);
+    /*$fine=$this->Report_Model->getFineAmount($customerId);
     $finedAmount = is_numeric($fine->fine_amount) ? (float)$fine->fine_amount : 0;
     $getDiscountsOnAgents=$this->Report_Model->getDiscountsOnAgents($customerId);
     $transactionBalance = $this->Report_Model->getTransactionAmount($customerId); // Ensure $transactions is numeric
@@ -1192,7 +1192,7 @@
       'completedRequests'=> count($completedRequests),
       'totalRequests'=>count($totalRequests),
       'credits'=> $credits->total_credits,     
-      /*'creditsByMonth1'=> $creditByMonth,*/
+      'creditsByMonth1'=> $creditByMonth,
       'to'=>'none',
       'from'=>'none',  
       /*'notification'=> $Notifications, 

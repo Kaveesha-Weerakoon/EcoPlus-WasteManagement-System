@@ -297,8 +297,8 @@
         FROM request_completed rc
         WHERE 
         rc.req_id IS NOT NULL 
-        AND MONTH(rc.completed_date) =:currentMonth
-        AND YEAR(rc.completed_date) =:currentYear
+        AND MONTH(rc.completed_datetime) =:currentMonth
+        AND YEAR(rc.completed_datetime) =:currentYear
 
         ');
 
@@ -316,6 +316,7 @@
         return $row;
     } catch (PDOException $e) {
         // Handle the exception (e.g., log the error)
+        die($e);
         error_log('Database error: ' . $e->getMessage());
         return false;
     }

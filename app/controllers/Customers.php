@@ -28,7 +28,7 @@
     
     public function index($tutorial=""){ 
       $balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
-      $credit= $this->creditModel->get();
+      // $credit= $this->creditModel->get();
       $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']); 
       $centers = $this->Center_Model->getallCenters();
       $completed_requests=count($this->Collect_Garbage_Model->get_complete_request_relevent_customer($_SESSION['user_id']));
@@ -48,7 +48,6 @@
       $json_Total_Garbage = json_encode($total_garbage);
       $data = [
         'title' => 'TraversyMVC',
-        'eco_credit_per'=>$credit,
         'credit_balance'=>$balance ,
         'pop'=>'',
         'transaction_history' =>$transaction_history,

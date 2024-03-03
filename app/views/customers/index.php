@@ -158,7 +158,9 @@
 
                         <div class="main-right-bottom-three-right">
                             <canvas id="myChart" width="600" height="250"></canvas>
+                            <div id="chartMessage" class="message">No data available.</div>
                         </div>
+
 
                     </div>
                 </div>
@@ -183,7 +185,12 @@
         <div class="tutorial">
             <div class="cont">
                 <div class="tutorial-step" id="step1">
-                    <h2>Welcome to Eco Plus !</h2>
+                    <h2>Welcome to Eco Plus <?php
+                          $user_name = $_SESSION['user_name'];
+                          $name_parts = explode(' ', $user_name);
+                          $first_name = $name_parts[0];
+                          echo $first_name;
+                          ?> !</h2>
                     <p>Request a garbage collect by clicking the <b>Request Now </b> button</p>
                     <img src="<?php echo IMGROOT?>/two.png" alt="">
                     <div class="arrow1"></div>
@@ -502,80 +509,92 @@ document.addEventListener('DOMContentLoaded', function() {
 function createOrUpdateChart(color, textColor) {
     var Total_Garbage = <?php echo $data['total_garbage']?>;
     const ctx = document.getElementById('myChart').getContext('2d');
-    if (myChart) {
-        myChart.destroy();
-    }
-    myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Plastic', 'Polythene', 'Metal', 'Glass', 'Paper', 'Electronic'],
-            datasets: [{
-                label: 'Kilograms',
-                data: [Total_Garbage.total_plastic,
-                    Total_Garbage.total_polythene,
-                    Total_Garbage.total_metals,
-                    Total_Garbage.total_glass,
-                    Total_Garbage.total_paper_waste,
-                    Total_Garbage.total_electronic_waste
-                ],
-                backgroundColor: color,
-            }]
-        },
-        options: {
-            scales: {
-                x: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        font: {
-                            size: 14,
-                        }
-                    },
-                    barPercentage: 0.5, // Adjust to decrease the width of the bars
-                    categoryPercentage: 0.3 // Adjust to control the space between bars
-                },
-                y: {
-                    beginAtZero: true,
-                    suggestedMax: Math.max.apply(null, [Total_Garbage.total_plastic,
+    console.log(Total_Garbage.total_plastic);
+    if (Total_Garbage.total_plastic == null &&
+        Total_Garbage.total_polythene == null &&
+        Total_Garbage.total_metals == null &&
+        Total_Garbage.total_glass == null &&
+        Total_Garbage.total_paper_waste == null &&
+        Total_Garbage.total_electronic_waste == null) {
+        document.getElementById('myChart').style.display = "none";
+        document.getElementById('chartMessage').style.display = "flex";
+
+    } else {
+        if (myChart) {
+            myChart.destroy();
+        }
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Plastic', 'Polythene', 'Metal', 'Glass', 'Paper', 'Electronic'],
+                datasets: [{
+                    label: 'Kilograms',
+                    data: [Total_Garbage.total_plastic,
                         Total_Garbage.total_polythene,
                         Total_Garbage.total_metals,
                         Total_Garbage.total_glass,
                         Total_Garbage.total_paper_waste,
                         Total_Garbage.total_electronic_waste
-                    ]) + 1, // Add some padding to the maximum value
-                    grid: {
-                        display: false
-                    }
-                }
+                    ],
+                    backgroundColor: color,
+                }]
             },
-            plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: 'Overall Collection Total',
-                    color: textColor,
-                    font: {
-                        size: 18
+            options: {
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 14,
+                            }
+                        },
+                        barPercentage: 0.5, // Adjust to decrease the width of the bars
+                        categoryPercentage: 0.3 // Adjust to control the space between bars
                     },
-                    padding: {
-                        bottom: 25
+                    y: {
+                        beginAtZero: true,
+                        suggestedMax: Math.max.apply(null, [Total_Garbage.total_plastic,
+                            Total_Garbage.total_polythene,
+                            Total_Garbage.total_metals,
+                            Total_Garbage.total_glass,
+                            Total_Garbage.total_paper_waste,
+                            Total_Garbage.total_electronic_waste
+                        ]) + 1, // Add some padding to the maximum value
+                        grid: {
+                            display: false
+                        }
                     }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Overall Collection Total',
+                        color: textColor,
+                        font: {
+                            size: 18
+                        },
+                        padding: {
+                            bottom: 25
+                        }
+                    }
+                },
+                elements: {
+                    bar: {
+                        borderRadius: 10,
+                    }
+                },
+                animation: {
+                    duration: 700, // Set the duration of the animation in milliseconds
+                    easing: 'easeIn' // Set the easing function for the animation
                 }
-            },
-            elements: {
-                bar: {
-                    borderRadius: 10,
-                }
-            },
-            animation: {
-                duration: 700, // Set the duration of the animation in milliseconds
-                easing: 'easeIn' // Set the easing function for the animation
             }
-        }
-    });
+        });
+    }
 }
 createOrUpdateChart(color, textColor);
 

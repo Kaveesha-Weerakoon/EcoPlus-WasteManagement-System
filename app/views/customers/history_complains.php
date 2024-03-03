@@ -10,42 +10,8 @@
                 <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
                 <div class="main-right">
+                    <?php require APPROOT . '/views/customers/customer_historytop/customer_historytop.php'; ?>
 
-                    <div class="main-right-top">
-
-                        <div class="main-right-top-one">
-                            <div class="main-right-top-search">
-                                <i class='bx bx-search-alt-2'></i>
-                                <input id="complaintSearch" type="text" placeholder="Search">
-                            </div>
-                            <?php require APPROOT . '/views/customers/customer_notification/customer_notification.php'; ?>
-
-                        </div>
-                        <div class="main-right-top-two">
-                            <h1>History</h1>
-                        </div>
-                        <div class="main-right-top-three">
-                            <a href="<?php echo URLROOT?>/customers/history">
-                                <div class="main-right-top-three-content">
-                                    <p>Discounts</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-
-                            <a href="<?php echo URLROOT?>/customers/history_complains">
-                                <div class="main-right-top-three-content">
-                                    <p><b style="color: #1ca557;">Complaints</b></p>
-                                    <div class="line"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/customers/transfer_history">
-                                <div class="main-right-top-three-content">
-                                    <p>Transfer</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
                     <?php if(!empty($data['complains'])) : ?>
                     <div class="main-right-bottom">
                         <div class="main-right-bottom-container">

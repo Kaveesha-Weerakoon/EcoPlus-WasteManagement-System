@@ -41,7 +41,7 @@
 
     public function index(){
       $creditMonth=$this->Collect_Garbage_Model->getTotalCreditsGivenInMonth();
-      $credit= $this->creditModel->get();
+  
       $center_managers = $this->center_managerModel->get_center_managers();
       $customers = $this->customerModel->get_all();
       $collectors =$this->collector_model->get_collectors();

@@ -11,6 +11,8 @@
         width: 100%;
         height: 100vh;
         display: grid;
+        min-height: 400px;
+        overflow: scroll;
         grid-template-columns: 17% 83%;
         font-family: 'Inter', sans-serif;
         color: var(--main-text-color);
@@ -302,7 +304,7 @@
         font-size: 14px;
     }
 
-    @media screen and (max-width: 1207px) {
+    @media screen and (max-width: 1309px) {
         .main-left-top h3 {
             display: none;
         }
@@ -314,21 +316,42 @@
         }
 
         .main-left-middle-content h3 {
-            font-size: 16px;
+            font-size: 14px;
         }
 
         .toggle-container {
             margin-right: 7px;
         }
-    }
 
-    @media screen and (max-width: 927px) {
-        .main-left-middle-content h3 {
-            font-size: 14px !important;
+        .main-left-middle-content-icon {
+            margin-right: 4%;
         }
     }
 
-    @media screen and (max-width: 784px) {
+    @media screen and (max-width: 1100px) {
+        .notification_popup h1 {
+            font-size: 19px;
+            letter-spacing: 0.001rem;
+            margin-top: 5px;
+            margin-left: 8px;
+        }
+
+        .notification_popup {
+            width: 25%;
+        }
+
+        .main-left-middle-content-icon {
+            margin-right: 2%;
+        }
+
+        .main-left-middle-content h3 {
+            font-size: 13px;
+        }
+    }
+
+
+
+    @media screen and (max-width: 970px) {
         .main-left-middle-content h3 {
             display: none;
         }
@@ -365,6 +388,22 @@
             align-items: center;
             margin-top: 100%;
         }
+
+        .toggle-button {
+            width: 32px;
+            height: 21px;
+        }
+
+        .toggle-indicator {
+            top: 3px;
+            left: 4px;
+            width: 14px;
+            height: 14px;
+        }
+
+        .toggle-container input[type="checkbox"]:checked+.toggle-button .toggle-indicator {
+            transform: translateX(11px);
+        }
     }
 
     @media screen and (max-width: 692px) {
@@ -394,16 +433,5 @@
     }
 
 
-    @media screen and (max-width: 1108px) {
-        .notification_popup h1 {
-            font-size: 19px;
-            letter-spacing: 0.001rem;
-            margin-top: 5px;
-            margin-left: 8px;
-        }
 
-        .notification_popup {
-            width: 25%;
-        }
-    }
 }

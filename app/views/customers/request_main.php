@@ -121,17 +121,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="location_pop">
-                    <div class="location_pop_content">
-                        <div class="location_pop_map">
 
-                        </div>
-                        <div class="location_close">
-                            <button onclick="closemap()">Close</button>
-                        </div>
-                    </div>
-
-                </div>
                 <div class="personal-details-popup-box" id="personal-details-popup-box">
                     <div class="personal-details-popup-form" id="popup">
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"

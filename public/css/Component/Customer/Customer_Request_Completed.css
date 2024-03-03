@@ -16,12 +16,12 @@
     }
 
     .table-header {
-        grid-template-columns: 10% 12% 17% 10% 15% 10% 15% 10%;
+        grid-template-columns: 10% 12% 17% 9% 10% 10% 13% 9% 9%;
     }
 
     .table-row {
         height: 52px;
-        grid-template-columns: 10% 12% 17% 10% 15% 10% 15% 10%;
+        grid-template-columns: 10% 12% 17% 9% 10% 10% 13% 9% 9%;
     }
 
     .table td {

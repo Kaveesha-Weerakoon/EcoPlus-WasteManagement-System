@@ -156,6 +156,8 @@
 @import url('Component/Admin/Admin_Center_Main_Request_Assigned.css');
 @import url('Component/Admin/Admin_Center_Main_Request_Cancelled.css');
 @import url('Component/Admin/Admin_Center_Main_Request_Completed.css');
+@import url('Component/Admin/Admin_Center_Main_Waste_Handover.css');
+
 @import url('Component/Admin/Admin_Reports.css');
 @import url('Component/Admin/Admin_Admin.css');
 @import url('Component/Admin/Admin_Admin_Add.css');

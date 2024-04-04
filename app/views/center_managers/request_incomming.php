@@ -136,11 +136,11 @@
                                                 <span class=\"collector-name\">$collector->name</span>
                                                 <span class=\"vehicle-type\">$collector->vehicle_type</span>
                                                 </li>";
-                             }
-                         }else {
-                                 echo "<li>No Collectors Available</li>";
-                              }
-                          ?>
+                                        }
+                                    }else {
+                                            echo "<li>No Collectors Available</li>";
+                                        }
+                                    ?>
                             </ul>
                         </div>
 

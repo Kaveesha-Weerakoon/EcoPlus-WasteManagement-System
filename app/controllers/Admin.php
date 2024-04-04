@@ -22,6 +22,7 @@
       $this->Report_Model=$this->model('Report');
       $this->fine_model = $this->model('Fines');
       $this->Annoucement_Model=$this->model('Announcement');
+      $this->garbage_Model=$this->model('Garbage_Stock');
 
 
       if(!isLoggedIn('admin_id')  && !isLoggedIn('superadmin_id')){
@@ -1750,6 +1751,17 @@
       redirect('admin/announcements');
     }
   
+    public function waste_handover($region){
+      $center=$this->center_model->getCenterByRegion($region);
+      $confirmed_requests = $this->garbage_Model->get_confirmed_requests_by_region($region);
+      $data =[
+        'confirmed_requests'=>$confirmed_requests,
+        'center_region'=> $region,
+        'center'=> $center
+      ];
+
+      $this->view('admin/center_main_waste_handover', $data);
+    }
 
   
 }

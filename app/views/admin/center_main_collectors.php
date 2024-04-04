@@ -103,8 +103,8 @@
                                 <td><i onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
                                     class='bx bxs-truck' style="font-size: 29px;"></i></td>
                                 
-                                <td><a href="" id="collector_assistants_pop"><i onclick="opencolAssistantsdetails(<?php echo $collector->id ?>)"
-                                    class='bx bxs-group' style="font-size: 29px;"></i></a></td>
+                                <td><i onclick="openColAssistantsDetails(<?php echo $collector->id ?>)"
+                                    class='bx bxs-group' style="font-size: 29px;"></i></td>
                             </tr>   
                             <?php endforeach; ?>  
                         </table>            
@@ -214,16 +214,16 @@
                             </div>
                             <div class="collector-assis-table-down">
                                 <table class="popup-table">
-                                <?php foreach($data['collector_assistants'] as $collector_assistant) : ?>
+
                                     <tr class="popup-table-row">
-                                        <td><?php echo $collector_assistant->name ?></td>
-                                        <td><?php echo $collector_assistant->nic ?></td>
-                                        <td><?php echo $collector_assistant->address ?></td>
-                                        <td><?php echo $collector_assistant->contact_no ?></td>
-                                        <td><?php echo $collector_assistant->dob ?></td>
+                                        <td>Dinithi</td>
+                                        <td>200167819111</td>
+                                        <td>kelaniya</td>
+                                        <td>07771111222</td>
+                                        <td>2001/03/26</td>
                                             
                                     </tr> 
-                                <?php endforeach; ?>   
+                                  
                                 </table>
                             </div>
                         </div>
@@ -291,29 +291,28 @@
         });
     });
 
-    function opencolAssistantsdetails(collector_id){
-
-        // var url = "<?php echo URLROOT?>/admin/get_collector_assistants/" + collector_id;
-        // document.getElementById('collector_assistants_pop').href = url;
-
+    function openColAssistantsDetails(collector_id){
        
+        console.log(collector_id);
         var assistantPop = document.getElementById('collector-assis-details-popup-box');
         assistantPop.classList.add('active');
         document.getElementById('overlay').style.display = "flex";
+     
     }
 
 
     document.addEventListener('DOMContentLoaded', function() {
-    var closeButtons = document.querySelectorAll('.collector-assis-details-popup-table-close');
+        var closeButtons = document.querySelectorAll('.collector-assis-details-popup-table-close');
 
-    closeButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            const assisDetails = document.getElementById('collector-assis-details-popup-box');
-            assisDetails.classList.remove('active');
-            document.getElementById('overlay').style.display = "none";
+        closeButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const assisDetails = document.getElementById('collector-assis-details-popup-box');
+                assisDetails.classList.remove('active');
+                document.getElementById('overlay').style.display = "none";
+            });
         });
+    
     });
-});
 
 
 </script>

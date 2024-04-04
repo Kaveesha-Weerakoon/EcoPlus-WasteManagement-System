@@ -69,18 +69,6 @@
                                 </div>
                             </a>
 
-                            <!-- <a href="<?php echo URLROOT?>/Admin/completed_requests/<?php echo $data['center_region']?>" id="completed">
-                                <div class="main-right-top-three-content">
-                                    <p>Completed</p>
-                                    <div class="line"></div>
-                                </div>
-                            </a> -->
-                            <!-- <a href="<?php echo URLROOT?>/Admin/cancelled_requests/<?php echo $data['center_region']?>" id="cancelled">
-                                <div class="main-right-top-three-content">
-                                    <p>Cancelled</p>
-                                    <div class="line"></div>
-                                </div>
-                            </a> -->
                         </div>
                     </div>
 

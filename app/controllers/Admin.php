@@ -1765,9 +1765,10 @@
 
     public function stock_releases($region){
       $center=$this->center_model->getCenterByRegion($region);
+      $release_details = $this->garbage_Model->get_release_details($center->id);
       
       $data =[
-        
+        'release_details'=>$release_details,
         'center_region'=> $region,
         'center'=> $center
       ];

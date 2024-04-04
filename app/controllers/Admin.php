@@ -1763,5 +1763,18 @@
       $this->view('admin/center_main_waste_handover', $data);
     }
 
+    public function stock_releases($region){
+      $center=$this->center_model->getCenterByRegion($region);
+      
+      $data =[
+        
+        'center_region'=> $region,
+        'center'=> $center
+      ];
+
+      $this->view('admin/center_main_stock_releases', $data);
+
+    }
+
   
 }

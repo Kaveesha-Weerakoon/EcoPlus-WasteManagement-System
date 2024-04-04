@@ -2,7 +2,7 @@
 <div class="Admin_Main">
     <div class="Admin_Center_Top">
     
-        <div class="Admin_Center_Main_Waste_Handover">
+        <div class="Admin_Center_Main_Stock_Releases">
             <div class="main">
                 <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
                 
@@ -118,8 +118,8 @@
                     <div class="main-right-bottom-two">
                         <div class="main-right-bottom-two-content">
                             <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
-                            <h1>There are no handovered garbage yet</h1>
-                            <p>All the handovered garbage details will appear here</p>
+                            <h1>There are no stock releases yet</h1>
+                            <p>All the released garbage details will appear here</p>
                             
 
                         </div>

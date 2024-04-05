@@ -6,40 +6,8 @@
                 <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
                 <div class="main-right">
-                    <div class="main-right-top">
-                        <div class="main-right-top-one">
-                            <div class="main-right-top-search">
-                                <i class='bx bx-search-alt-2'></i>
-                                <input type="text" placeholder="Search">
-                            </div>
-                            <?php require APPROOT . '/views/customers/customer_notification/customer_notification.php'; ?>
+                    <?php require APPROOT . '/views/customers/customer_historytop/customer_historytop.php'; ?>
 
-                        </div>
-                        <div class="main-right-top-two">
-                            <h1>History</h1>
-                        </div>
-                        <div class="main-right-top-three">
-                            <a href="<?php echo URLROOT?>/customers/history">
-                                <div class="main-right-top-three-content">
-                                    <p><b style="color: #1ca557;">Discounts</b></p>
-                                    <div class="line"></div>
-                                </div>
-                            </a>
-
-                            <a href="<?php echo URLROOT?>/customers/history_complains">
-                                <div class="main-right-top-three-content">
-                                    <p>Complaints</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                            <a href="<?php echo URLROOT?>/customers/transfer_history">
-                                <div class="main-right-top-three-content">
-                                    <p>Transfer</p>
-                                    <div class="line1"></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
 
                     <?php if(!empty($data['discount'])) : ?>
                     <div class="main-right-bottom">
@@ -84,7 +52,7 @@
                     <div class="main-right-bottom-two">
                         <div class="main-right-bottom-two-content">
                             <i class='bx bx-data' style="font-size: 150px"></i>
-                            <h1>You Have No Active Complains</h1>
+                            <h1>You Have No Credit Redemptions</h1>
                             <p></p>
 
                         </div>
@@ -104,6 +72,28 @@
         form.submit(); // Submit the form
 
     };
+
+    function searchComplaints() {
+        var input = document.getElementById('complaintSearch').value.toLowerCase();
+        var rows = document.querySelectorAll('.table-row');
+
+        rows.forEach(function(row) {
+            var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+            var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+            var subject = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+            var complaint = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+            var branch = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+
+            if (id.includes(input) || date.includes(input) || subject.includes(input) || complaint
+                .includes(input) || branch.includes(input)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
+        });
+    }
+
+    document.getElementById('complaintSearch').addEventListener('input', searchComplaints);
     /* ----------------- */
     </script>
     <script src="<?php echo JSROOT?>/Customer.js"> </script>

@@ -20,9 +20,7 @@
                                     <th>Time</th>
                                     <th>Center</th>
                                     <th>Cancelled By</th>
-
                                     <th>Reason</th>
-
                                     <th>Location</th>
                                     <th>Collector</th>
                                     <th>Fine</th>
@@ -46,7 +44,6 @@
                                             class='bx bx-map' style="font-size: 29px"></i>
                                     </td>
 
-
                                     <td>
                                         <?php
                                              $typeContent = ($request->assinged === 'Yes') ? 
@@ -58,7 +55,6 @@
                                              '<i class="fa-solid fa-user-large"></i>';
                                              echo $typeContent;
                                              ?>
-
                                     </td>
                                     <td>
                                         <?php 
@@ -89,17 +85,7 @@
                     </div>
                     <?php endif; ?>
                 </div>
-                <div class="location_pop">
-                    <div class="location_pop_content">
-                        <div class="location_pop_map">
 
-                        </div>
-                        <div class="location_close">
-                            <button onclick="closemap()">Close</button>
-                        </div>
-                    </div>
-
-                </div>
                 <div class="personal-details-popup-box" id="personal-details-popup-box">
                     <div class="personal-details-popup-form" id="popup">
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
@@ -150,29 +136,6 @@
             document.getElementById('collector_vehicle_type').innerText = type;
         }
 
-        function searchTable() {
-            var input = document.getElementById('searchInput').value.toLowerCase();
-            var rows = document.querySelectorAll('.table-row');
-
-            rows.forEach(function(row) {
-                var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
-                var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
-                var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-                var center = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
-                var cancelled_By = row.querySelector('td:nth-child(7)').innerText.toLowerCase();
-                var reason = row.querySelector('td:nth-child(8)').innerText.toLowerCase();
-
-                if (center.includes(input) || id.includes(input) || status.includes(input) || date.includes(
-                        input) || time.includes(input) || cancelled_By.includes(input) || reason.includes(
-                        input)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none'; // Hide the row
-                }
-            });
-
-        }
-
         function initMap(latitude, longitude) {
             var mapCenter = {
                 lat: latitude,
@@ -207,7 +170,30 @@
             document.getElementById('overlay').style.display = "none";
         }
 
+        function searchTable() {
+            var input = document.getElementById('searchInput').value.toLowerCase();
+            var rows = document.querySelectorAll('.table-row');
+            rows.forEach(function(row) {
+                var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+                var status = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+                var date = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+                var time = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+                var center = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+                var reason = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
+                var fine = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
+
+                if (center.includes(input) || id.includes(input) || status.includes(input) || date.includes(
+                        input) || time.includes(input) || reason.includes(input) || fine.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none'; // Hide the row
+                }
+            });
+        }
+
         document.getElementById('searchInput').addEventListener('input', searchTable);
+
+
         document.addEventListener("DOMContentLoaded", function() {
             const close_collector = document.getElementById("personal-details-popup-form-close");
             const collector_view = document.getElementById("personal-details-popup-box");

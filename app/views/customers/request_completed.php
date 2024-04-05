@@ -21,6 +21,7 @@
                                     <th>Location</th>
                                     <th>Earned Credits</th>
                                     <th>Details</th>
+                                    <th>Rate</th>
                                 </tr>
                             </table>
                         </div>
@@ -61,6 +62,9 @@
                                         <i onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
                                             class="fa-regular fa-eye"></i>
                                     </td>
+                                    <td>
+                                        <i class="fa-regular fa-star"></i>
+                                    </td>
                                 </tr>
                                 <?php endforeach; ?>
                             </table>
@@ -79,17 +83,7 @@
                     </div>
                     <?php endif; ?>
                 </div>
-                <div class="location_pop">
-                    <div class="location_pop_content">
-                        <div class="location_pop_map">
 
-                        </div>
-                        <div class="location_close">
-                            <button onclick="closemap()">Close</button>
-                        </div>
-                    </div>
-
-                </div>
 
                 <div class="collect-details-pop" id="collect-details-popup-box">
                     <div class="collect-details-pop-form">
@@ -254,7 +248,7 @@ function searchTable() {
         var status = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
         var date = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
         var time = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
-        var center = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+        var center = row.querySelector('td:nth-child(7)').innerText.toLowerCase();
 
         if (center.includes(input) || id.includes(input) || status.includes(input) || date.includes(
                 input) || time.includes(input)) {

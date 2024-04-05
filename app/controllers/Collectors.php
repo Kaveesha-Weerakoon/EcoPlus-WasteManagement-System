@@ -32,7 +32,7 @@
       $cancel_Requests_count=count($this->Request_Model->get_cancelled_request_by_collector( $_SESSION['collector_id'] ));
       $completed_requests=count($this->Collect_Garbage_Model->get_complete_request($_SESSION['collector_id']));
       $total_garbage=$this->Collect_Garbage_Model->get_completed_garbage_totals_by_collector($_SESSION['collector_id']);
-      $credit= $this->creditModel->get();
+      // $credit= $this->creditModel->get();
       $req_completed_history = $this->Collect_Garbage_Model->get_complete_request_cus($_SESSION['collector_id']); 
       $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
       $assistant_count=count( $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']));
@@ -48,7 +48,7 @@
         'collector' =>$collector,
         'assinged_Requests_count' => $assinged_Requests_count,
         'assigned_requests' => $jsonData,
-        'eco_credit_per'=>$credit,
+        // 'eco_credit_per'=>$credit,
         'req_completed_history' =>$req_completed_history,
         'percentage'=> $percentage_completed,
         'total_garbage'=> $json_Total_Garbage,

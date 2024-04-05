@@ -28,12 +28,11 @@
     
     public function index($tutorial=""){ 
       $balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
-      $credit= $this->creditModel->get();
+      // $credit= $this->creditModel->get();
       $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']); 
       $centers = $this->Center_Model->getallCenters();
       $completed_requests=count($this->Collect_Garbage_Model->get_complete_request_relevent_customer($_SESSION['user_id']));
       $total_requests=count($this->Request_Model->get_total_requests_by_customer($_SESSION['user_id']));
-      //$total_garbage=$this->customerModel->getTotalGarbage($_SESSION['user_id']);
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
       $discount_agent = $this->discount_agentModel->get_discount_agent();
       $total_garbage=$this->Collect_Garbage_Model->get_completed_garbage_totals_by_customer($_SESSION['user_id']);
@@ -42,12 +41,13 @@
          } else {
           $percentage_completed =json_encode(0);
       }    
+   
+      
 
       $jsonData = json_encode($centers);
       $json_Total_Garbage = json_encode($total_garbage);
       $data = [
         'title' => 'TraversyMVC',
-        'eco_credit_per'=>$credit,
         'credit_balance'=>$balance ,
         'pop'=>'',
         'transaction_history' =>$transaction_history,

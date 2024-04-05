@@ -35,6 +35,16 @@
             </div>
         </a>
     </div>
+    <div class="location_pop">
+        <div class="location_pop_content">
+            <div class="location_pop_map">
 
+            </div>
+            <div class="location_close">
+                <button onclick="closemap()">Close</button>
+            </div>
+        </div>
+
+    </div>
     <script src="<?php echo JSROOT?>/Customer.js"> </script>
 </div>

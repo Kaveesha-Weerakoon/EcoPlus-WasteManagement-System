@@ -1168,15 +1168,15 @@
         'redeemed_balance'=> $getDiscountsOnAgents->discount_credits*/
       ];
       
-    $this->view('collectors/analatics', $data);
+      $this->view('collectors/analatics', $data);
    }
   
    else{
     
-    $completedRequests=$this->Report_Model->getCompletedRequests($collectorId);
-    $cancelledRequests=$this->Report_Model->getCancelledRequests($collectorId);
-    $assignRequests=$this->Report_Model->getAssignRequests($collectorId);
-    $totalRequests = $this->Report_Model->getallRequests($collectorId);     
+    $completedRequests=$this->Report_Model->getCompletedRequests($collectorId,"none", "none");
+    $cancelledRequests=$this->Report_Model->getCancelledRequests($collectorId,"none", "none");
+    $assignRequests=$this->Report_Model->getAssignRequests($collectorId,"none", "none");
+    $totalRequests = $this->Report_Model->getallRequests($collectorId,"none", "none");     
     $credits=$this->Report_Model->getCredits($collectorId);
     $creditByMonth=$this->Report_Model->getCreditsMonths($collectorId);
 

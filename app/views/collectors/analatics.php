@@ -30,7 +30,7 @@
 
                 <div class="main-right-bottom">
 
-                    <form class="top-bar" method="post" action="<?php echo URLROOT;?>/admin/reports">
+                    <form class="top-bar" method="post" action="<?php echo URLROOT;?>/collectors/analatics">
                         <div class="top-bar-left">
                             <h2>Analatics</h2>
                             <p>Here is overall Analatics</p>
@@ -46,7 +46,7 @@
                             </div>
                         </div>
 
-                        <div class="center-box">
+                        <!--<div class="center-box">
                             <select id="center-dropdown" name="center-dropdown">
                                 <?php
                                      $centers = $data['centers'];
@@ -69,7 +69,7 @@
                                     ?>
                             </select>
                             <p id="selected-option">Center</p>
-                        </div>
+                        </div>-->
 
                         <button>Filter</button>
                     </form>
@@ -400,7 +400,6 @@ const config = {
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, config);
 /* TOP LINE CHART END*/
-
 
 </script>
 

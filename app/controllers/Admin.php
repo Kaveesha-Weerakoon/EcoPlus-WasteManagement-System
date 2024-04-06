@@ -860,15 +860,16 @@
     public function center_main_collectors($center_id){
       $collectors_in_center = $this->collector_model->get_collectors_bycenterid($center_id);
       $center=$this->center_model->getCenterById($center_id);
-      // $collector_assistants = $this->collector_assistants_Model->get_collector_assistants_bycolid($collectorId);
+      $collector_assistants = $this->collector_assistants_Model->get_collector_assistants_by_centerId($center_id);
       
       $data =[
         'collectors_in_center' =>$collectors_in_center,
+        'collector_assitants' => $collector_assistants,
         'center_id'=> $center_id,
         'center'=>$center
         
       ];
-
+      //var_dump($data['collector_assitants']);
       $this->view('admin/center_main_collectors', $data);
 
     }
@@ -1766,7 +1767,7 @@
     public function stock_releases($region){
       $center=$this->center_model->getCenterByRegion($region);
       $release_details = $this->garbage_Model->get_release_details($center->id);
-      
+
       $data =[
         'release_details'=>$release_details,
         'center_region'=> $region,

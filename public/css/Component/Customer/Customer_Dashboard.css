@@ -32,7 +32,6 @@
         position: relative;
         margin-left: -1.5%;
         cursor: pointer;
-
     }
 
     .main-right-top-search i {
@@ -703,24 +702,15 @@
 
     }
 
+    @media screen and (max-width: 1307px) {
 
-
-
-    @media screen and (max-width: 1320px) {
-        .eco_credit_per_quantity {
-            width: 80%;
-            height: 40%;
-            overflow: scroll;
-
-        }
-
-        .Eco_Credit_Per_Cont .Cont {
-            margin-left: 35px;
-            margin-right: 35px;
+        .main-right-top-search {
+            margin-left: 0%;
+            width: 15%;
         }
     }
 
-    @media screen and (max-width: 1108px) {
+    @media screen and (max-width: 1300px) {
 
         .main-right {
             background-color: var(--background-color-right);
@@ -742,12 +732,13 @@
         }
 
         .main-right-top-search {
-            display: none;
+            margin-left: 3%;
+            width: 150px !important;
         }
 
         .notification_popup {
             top: 11%;
-            right: 19%;
+            right: 7%;
             width: 25%;
         }
 
@@ -777,6 +768,7 @@
 
         .main-right-bottom-one-left .left h1 {
             margin-bottom: 5%;
+
         }
 
         .main-right-bottom-one-left .left h3 {
@@ -802,18 +794,21 @@
         .main-right-bottom-three {
             flex-direction: column;
             width: 100%;
-            height: auto;
+            height: 105%;
         }
 
         .main-right-bottom-three-left {
             flex-direction: column;
             height: auto;
             width: 90%;
+            height: 114%;
         }
 
         .main-right-bottom-three-right {
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
             height: auto;
             width: 90%;
         }
@@ -843,6 +838,24 @@
         }
     }
 
+    @media screen and (max-width: 1000px) {
+        .main-right-top-notification {
+            margin-left: 5%;
+        }
+
+        .notification_popup {
+            top: 11%;
+            right: 27%;
+            width: 25%;
+        }
+
+        .main-right-bottom-one-left .right .main-credit {
+            font-size: 24px;
+            font-weight: bolder;
+        }
+    }
+
+
     @media screen and (max-width: 844px) {
         .main-right-top-notification {
             margin-left: 5%;
@@ -850,8 +863,8 @@
 
         .notification_popup {
             top: 11%;
-            right: 46%;
-            width: 31%;
+            right: 22%;
+            width: 37%;
         }
 
         .notification_popup h1 {
@@ -889,28 +902,9 @@
             width: 250px;
             margin-left: 0%;
         }
-
-        .Eco_Credit_Per_Cont {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .eco_credit_per_quantity {
-            width: 65%;
-            height: 50%;
-        }
-
-        .Eco_Credit_Per_Cont .Cont {
-            margin: 15px;
-        }
-
-        .eco_credit_per_quantity h2 {
-            margin-bottom: 10px !important;
-        }
-
     }
 
-    @media screen and (max-width: 683px) {
+    @media screen and (max-width: 724px) {
         .notification {
             height: 41px !important;
             margin-top: 6px;
@@ -922,5 +916,17 @@
             font-size: 17px;
         }
 
+        .notification_popup {
+            top: 11%;
+            right: 5%;
+            width: 37%;
+        }
+
+        .main-right {
+            width: 140% !important;
+        }
+
     }
+
+
 }

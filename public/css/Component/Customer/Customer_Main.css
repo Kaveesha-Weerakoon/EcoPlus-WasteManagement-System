@@ -180,7 +180,7 @@
 
     .notification_popup {
         height: 0;
-        position: absolute;
+        position: fixed !important;
         top: 9%;
         right: 11%;
         background-color: var(--background-color-main);
@@ -212,6 +212,7 @@
         padding: 10px;
         visibility: visible;
         opacity: 1;
+
     }
 
     .notification {
@@ -349,8 +350,6 @@
         }
     }
 
-
-
     @media screen and (max-width: 970px) {
         .main-left-middle-content h3 {
             display: none;
@@ -406,7 +405,7 @@
         }
     }
 
-    @media screen and (max-width: 692px) {
+    @media screen and (max-width: 724px) {
         .notification {
             height: 41px !important;
             margin-top: 6px;
@@ -421,16 +420,36 @@
             margin-left: 40px;
         }
 
-        .main-right {
-            width: 140% !important;
-        }
+
 
         .notification_popup {
             top: 11%;
             right: -1%;
             width: 40%;
         }
+
+        .main-left-middle {
+            padding-left: 0px;
+        }
+
+        .main-left-down {
+            padding-left: 0px;
+
+        }
     }
+
+    @media screen and (max-width: 692px) {
+        .main-left-middle h1 {
+            visibility: hidden;
+            margin-bottom: 13%;
+        }
+
+        .main-left-down h1 {
+            font-size: 13px;
+        }
+
+    }
+
 
 
 

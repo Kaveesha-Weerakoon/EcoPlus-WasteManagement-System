@@ -1144,8 +1144,8 @@
       $totalRequests = $this->Report_Model->getallRequests($collectorId,$fromDate,$toDate);
       $credits=$this->Report_Model->getCredits($collectorId,$fromDate,$toDate);
       $creditByMonth=$this->Report_Model->getCreditsMonths($collectorId);
-      $collectedWasteByMonth=$this->Report_Model->getCollectedGarbage_collector($collector_id,$fromDate,$toDate);
-      $handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage_collector($collector_id,$fromDate,$toDate);
+      $collectedWasteByMonth=$this->Report_Model->getCollectedGarbage_collector($collectorId,$fromDate,$toDate);
+      $handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage_collector($collectorId,$fromDate,$toDate);
 
       /*$fine=$this->Report_Model->getFineAmount($customerId,$fromDate,$toDate);
       $finedAmount = is_numeric($fine->fine_amount) ? (float)$fine->fine_amount : 0;
@@ -1163,6 +1163,7 @@
         'to'=> $toDate,
         'from'=>  $fromDate,      
         'creditsByMonth1'=>  $creditByMonth,
+        'handoveredWasteByMonth'=>$handoveredWasteByMonth,
         'collectedWasteByMonth'=>$collectedWasteByMonth,
         /*'notification'=> $Notifications,   
         'fine_balance'=> $finedAmount, 

@@ -211,6 +211,181 @@
     
     }
 
+     /* services container */
+    .services-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 42px;
+        padding: 42px 24px;
+        position: relative;
+        background-color: #fff;
+    }
+
+    .services-section .text-wrapper{
+        position: relative;
+        width: fit-content;
+        margin-top: 50px;
+        font-family:"Inter";
+        font-weight: 600;
+        color: var(--main-text-color);
+        font-size: 32px;
+        text-align: center;
+        letter-spacing: 0px;
+        line-height:  42px;
+        white-space: nowrap;
+        font-style: normal;
+
+    }
+    
+    .services-section .cards-section {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 24px 24px;
+        position: relative;
+        align-self: stretch;
+        width: 100%;
+        flex: 0 0 auto;
+    }
+    
+    .services-section .services-card {
+        display: flex;
+        flex-direction: column;
+        /* min-width: 320px; */
+        align-items: center;
+        justify-content: center;
+        gap: 42px;
+        padding: 64px 42px;
+        position: relative;
+        flex: 1;
+        flex-grow: 1;
+        background-color: #ffffff;
+    }
+    
+    .services-section .services-card-icon {
+        position: relative;
+        width: 124px;
+        height: 124px;
+    }
+    
+    .services-section .title-description {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        position: relative;
+        align-self: stretch;
+        width: 100%;
+        flex: 0 0 auto;
+    }
+    
+    .services-section .title {
+        position: relative;
+        align-self: stretch;
+        height: 42px;
+        margin-top: -1px;
+        font-family:"Inter";
+        font-weight: 600;
+        color: var(--main-text-color);
+        font-size: 27px;
+        text-align: center;
+        letter-spacing:  0px;
+        line-height: 42px;
+        white-space: nowrap;
+        font-style: normal;
+
+    }
+    
+    .services-section .text-wrapper-2 {
+        position: relative;
+        align-self: stretch;
+        font-family: "Inter";
+        font-weight: 400;
+        color: var(--main-text-color);
+        font-size:  17px;
+        text-align: center;
+        letter-spacing: 0px;
+        line-height: 27px;
+        font-style: normal;
+        margin-top: 50px;
+    
+    }
+
+    /* About us section */
+    .about-us-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .about-us-content .title{
+        position: relative;
+        align-self: stretch;
+        height: 42px;
+        margin-top: -1px;
+        font-family:"Inter";
+        font-weight:  600;
+        color: var(--main-text-color);
+        font-size:  27px;
+        letter-spacing: 0px;
+        line-height:  42px;
+        white-space: nowrap;
+        font-style: normal;
+        margin-bottom: 25px;
+
+    }
+
+    .about-us-content-list li{
+        font-family:  "Inter";
+        line-height: 27px;
+        font-size: 17px;
+        letter-spacing: 0px;
+        font-weight:400;
+        font-style: normal;
+        color: var(--main-text-color);
+        margin-bottom: 20px;
+        list-style-type: square;
+        /* list-style-type: '◈'; */
+
+    }
+
+    .about-us-image img{
+        width: 675px;
+        height: 500px;
+        padding-left: 20px;
+
+    }
+
+    .about-us-section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 42px;
+        padding: 42px 24px;
+        position: relative;
+        background-color: #fff;
+    }
+
+    .about-us-section .text-wrapper{
+        position: relative;
+        width: fit-content;
+        margin-top: 50px;
+        font-family: "Inter";
+        font-weight: 600;
+        color: var(--main-text-color);
+        font-size:  32px;
+        text-align: center;
+        letter-spacing: 0px;
+        line-height: 42px;
+        white-space: nowrap;
+        font-style:  normal;
+
+
+    }
+
+
       /* responsiveness */
 
     /* navbar  */

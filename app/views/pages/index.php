@@ -2,44 +2,112 @@
 <div class="Home-main">
     <div class="main">
         <header class="header">
-        <nav class="nav">
-            <a href="/" class="logo"><img src="<?php echo IMGROOT;?>/Logo_No_Background.png" alt=""></a>
+            <nav class="nav">
+                <a href="/" class="logo"><img src="<?php echo IMGROOT;?>/Logo_No_Background.png" alt=""></a>
 
-            <div class="hamburger">
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line"></span>
-            </div>
+                <div class="hamburger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+                </div>
 
-            <div class="nav__link hide">
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#aboutUs">About Us</a>
-            <a href="#announcements">Announcements</a>
-            <a href="#contact">Contact</a>
-            <button class="signin-button">Sign In</button>
-            </div>
-        </nav>
+                <div class="nav__link hide">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#aboutUs">About Us</a>
+                <a href="#announcements">Announcements</a>
+                <a href="#contact">Contact</a>
+                <button class="signin-button">Sign In</button>
+                </div>
+            </nav>
         </header>
 
         <!-- hero banner  section -->
         <section class="header-section" id="home">
-        <div class="header-content">
-            <div class="title-subtitle">
-            <div class="text-wrapper">Dispose | Recycle | Eco-Rewards</div>
-            <div class="div">Recycle Responsibly, Reap Rewards!</div>
-            <p class="this-is-a-template">
-                Dispose responsibly, recycle efficiently, and earn Eco-rewards with <br> 
-                <b>Eco Plus</b> your sustainable waste management solution.
-            </p>
+            <div class="header-content">
+                <div class="title-subtitle">
+                <div class="text-wrapper">Dispose | Recycle | Eco-Rewards</div>
+                <div class="div">Recycle Responsibly, Reap Rewards!</div>
+                <p class="this-is-a-template">
+                    Dispose responsibly, recycle efficiently, and earn Eco-rewards with <br> 
+                    <b>Eco Plus</b> your sustainable waste management solution.
+                </p>
+                </div>
+                <a href="#" target="_blank" rel="noopener noreferrer"
+                ><div class="button">
+                    <div class="text-wrapper-2">Join Now</div>
+                </div></a
+                >
             </div>
-            <a href="#" target="_blank" rel="noopener noreferrer"
-            ><div class="button">
-                <div class="text-wrapper-2">Join Now</div>
-            </div></a
-            >
-        </div>
-        <img class="headerimage" src="<?php echo IMGROOT;?>/home1.jpg" alt="" />
+            <img class="headerimage" src="<?php echo IMGROOT;?>/home1.jpg" alt="" />
+        </section>
+
+        <!-- services section -->
+        <section class="services-section" id="services">
+            <div class="text-wrapper">Our Services</div>
+            <div class="cards-section">
+                <div class="services-card">
+                    <img
+                        class="services-card-icon"
+                        src="<?php echo IMGROOT;?>/bin.png"
+                        alt=""
+                    />
+                    <div class="title-description">
+                        <div class="title">Garbage Collection</div>
+                        <p class="text-wrapper-2">
+                        Conveniently request non-biodegradable waste collection. We'll pick up your trash hassle-free
+                        </p>
+                    </div>
+                </div>
+                <div class="services-card">
+                    <img 
+                        class="services-card-icon" 
+                        src="<?php echo IMGROOT;?>/recycling.png" 
+                        alt="" 
+                    />
+                    <div class="title-description">
+                        <div class="title">Recycling Solutions</div>
+                        <p class="text-wrapper-2">
+                        Release waste to recycling parties and companies, Transforming waste into valuable resources
+                        </p>
+                    </div>
+                </div>
+                <div class="services-card">
+                    <img
+                        class="services-card-icon"
+                        src="<?php echo IMGROOT;?>/award.png"
+                        alt=""
+                    />
+                    <div class="title-description">
+                        <div class="title">Earn Eco-Rewards</div>
+                        <p class="text-wrapper-2">
+                        Earn eco-credits for your waste contributions and enjoy discounts on bills and purchases
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About us Section -->
+        <section class="about-us-section" id="aboutUs">
+            <div class="text-wrapper">About Us</div>
+            <div class="about-us-container">
+                <div class="about-us-content">
+                <div class="title">Why you should choose us?</div>
+                <ul class="about-us-content-list">
+                    <li>Eco Plus offers region-based collection and recycling services for non-biodegradable garbage</li>
+                    <li>Our system rewards customers with eco-credits, empowering them to save on bills and contribute to a cleaner environment</li>
+                    <li>At Eco Plus, We partner with recycling parties to ensure that collected garbage is reused responsibly</li>
+                    <li>Our team is promoting eco-friendly habits and making a positive impact on the planet through innovative waste solutions</li>
+                    <li>Join us in our mission to create a greener future by choosing Eco Plus for your waste management needs</li>
+                </ul>
+
+                </div>
+                <div class="about-us-image">
+                    <img src="<?php echo IMGROOT?>/home2.jpg" alt="">
+                </div>
+            </div>
+        
         </section>
 
     </div>

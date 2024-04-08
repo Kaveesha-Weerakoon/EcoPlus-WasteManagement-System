@@ -1,6 +1,52 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Home-main">
     <div class="main">
+        <header class="header">
+        <nav class="nav">
+            <a href="/" class="logo"><img src="<?php echo IMGROOT;?>/Logo_No_Background.png" alt=""></a>
+
+            <div class="hamburger">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            </div>
+
+            <div class="nav__link hide">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#aboutUs">About Us</a>
+            <a href="#announcements">Announcements</a>
+            <a href="#contact">Contact</a>
+            <button class="signin-button">Sign In</button>
+            </div>
+        </nav>
+        </header>
+
+        <!-- hero banner  section -->
+        <section class="header-section" id="home">
+        <div class="header-content">
+            <div class="title-subtitle">
+            <div class="text-wrapper">Dispose | Recycle | Eco-Rewards</div>
+            <div class="div">Recycle Responsibly, Reap Rewards!</div>
+            <p class="this-is-a-template">
+                Dispose responsibly, recycle efficiently, and earn Eco-rewards with <br> 
+                <b>Eco Plus</b> your sustainable waste management solution.
+            </p>
+            </div>
+            <a href="#" target="_blank" rel="noopener noreferrer"
+            ><div class="button">
+                <div class="text-wrapper-2">Join Now</div>
+            </div></a
+            >
+        </div>
+        <img class="headerimage" src="<?php echo IMGROOT;?>/home1.jpg" alt="" />
+        </section>
+
+    </div>
+   
+</div>
+<!-- <div class="Home-main">
+    <div class="main">
         <div class="main-top">
             <img src="<?php echo IMGROOT;?>/HomeLogo.png" alt="">
             <div class="set">
@@ -51,6 +97,6 @@
         window.location.href = linkUrl;
     }
     </script>
-</div>
+</div> -->
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

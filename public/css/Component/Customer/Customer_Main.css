@@ -10,8 +10,8 @@
     .main {
         width: 100%;
         height: 100vh;
+        min-height: 500px !important;
         display: grid;
-        min-height: 400px;
         overflow: scroll;
         grid-template-columns: 17% 83%;
         font-family: 'Inter', sans-serif;

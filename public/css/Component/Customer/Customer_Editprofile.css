@@ -83,10 +83,11 @@
 
     .main-right-bottom-content {
         width: 70%;
-        height: 115%;
+        height: 110%;
         box-shadow: var(--box-shadow2);
         border-radius: 10px;
-        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
         padding: 10px;
         margin-top: 16%;
         overflow: hidden !important;
@@ -132,6 +133,11 @@
         grid-template-columns: 50% 50%;
     }
 
+    .top-profile {
+        display: flex;
+        flex-direction: column;
+    }
+
     .main-right-bottom-content-bottom-left {
         display: flex;
         flex-direction: column;
@@ -141,7 +147,6 @@
     .edit-profile-content-profile {
         display: flex;
         justify-content: center;
-        margin-left: 100%;
         margin-bottom: 29.7px;
     }
 
@@ -166,7 +171,7 @@
     }
 
     .edit-profile-content {
-        margin-bottom: 12px;
+        margin-bottom: 9px;
     }
 
     .edit-profile-content-profile-container input[type=file] {
@@ -189,7 +194,7 @@
 
     .edit-profile-content input {
         height: 28.5px;
-        width: 325px;
+        width: 90%;
         border-radius: 5px;
         border: 1px solid #ccc;
         padding-left: 10px;
@@ -263,7 +268,6 @@
     .main-right-bottom-content-bottom-right {
         display: flex;
         flex-direction: column;
-        padding-top: 169px;
         padding-left: 25px;
     }
 
@@ -285,6 +289,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-top: 2%;
     }
 
     .main-right-bottom-content-delete-account-cont {
@@ -367,8 +372,6 @@
         border-radius: 50%;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
-
-
 
     .btns {
         display: flex;
@@ -482,61 +485,99 @@
         background: var(--button-hover-green);
     }
 
-    @media screen and (max-width: 1416px) {
-        .main-right-bottom {
-            width: 100%;
-        }
-
+    @media screen and (max-width: 1200px) {
         .main-right-bottom-content {
-            width: 90%;
-        }
-
-        .main-right-top {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding-left: 70%;
+            overflow-y: scroll;
+            margin-top:100%;
         }
     }
 
+    @media screen and (max-width: 1030px) {
 
-    @media screen and (max-width: 968px) {
-
-        .main-left {
-            overflow: hidden;
+        .main-right-bottom-content-bottom {
+            display: flex;
+            flex-direction: column;
         }
 
         .main-right-bottom-content {
-            width: 90%;
-            display: flex;
-            flex-direction: column;
+            overflow-y: scroll;
         }
 
-        .main-right-bottom-content-bottom {
-            width: 90%;
-            display: flex;
-            flex-direction: column;
+        .main-right-bottom-content {
+            overflow-y: scroll;
+            height: 150%;
+            margin-top: 85%;
         }
 
         .main-right-bottom-content-bottom-right {
-            padding-left: 0;
+            margin-top: 3%;
+            padding-left: 45px;
+            margin-bottom: 2%;
+        }
+
+        .main-right-bottom-content-bottom-left {
+            margin-top: 3%;
+            padding-left: 45px;
+            margin-bottom: 2%;
+        }
+
+        .main-right-bottom-content-top {
+            padding-left: 45px;
+        }
+
+    }
+
+    @media screen and (max-width: 866px) {
+        .main-right-bottom-content {
+            margin-top: 100%;
+        }
+    }
+
+    @media screen and (max-width: 700px) {
+        .main-right-bottom-content {
+            overflow-y: scroll;
+            height: 150%;
+            margin-top: 125%;
+        }
+
+        .edit-profile-main-image {
+            height: 103px;
+            width: 103px;
+            border-radius: 50%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-profile-second-image {
+            height: 25px;
+            width: 25px;
+            margin-top: -28px;
+            margin-left: 70px;
+            flex: 1;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .edit-profile-content-profile {
+            margin-top: 15px;
+        }
+
+        .main-right-bottom-content {
+            overflow-y: scroll;
+            height: 150%;
+            margin-top: 150%;
         }
 
         .main-right-bottom-content-bottom-left button {
-            width: 200px;
-            font-size: 18px;
+            width: 75%;
         }
 
         .main-right-bottom-content-bottom-right button {
-            width: 200px;
-            font-size: 18xpx;
+            width: 75%;
         }
 
-        .main-right-top {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding-left: 5%;
+        .err1 {
+            font-size: 11px !important;
+            margin-bottom: 5px;
         }
     }
 }

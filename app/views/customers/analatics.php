@@ -9,10 +9,7 @@
             <div class="main-right">
                 <div class="main-right-top">
                     <div class="main-right-top-one">
-                        <div class="main-right-top-search" style="visibility:hidden">
-                            <i class='bx bx-search-alt-2'></i>
-                            <input type="text" placeholder="Search">
-                        </div>
+
                         <?php require APPROOT . '/views/customers/customer_notification/customer_notification.php'; ?>
 
                     </div>
@@ -40,9 +37,6 @@
                     </div>
 
                 </div>
-
-
-
 
                 <div class="main-right-bottom">
                     <div class="credit-section">
@@ -92,8 +86,8 @@
                                 <p>Total Requests</p>
                                 <h1><?php echo $data['totalRequests']?></h1>
                                 <div class="cont" style="color:#1ca557">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <p style="font-weight:bold">1212 From prev month</p>
+                                    <!-- <i class="fa-solid fa-arrow-trend-up"></i> -->
+                                    <!-- <p style="font-weight:bold">1212 From prev month</p> -->
                                 </div>
                             </div>
                             <div class="left-cont">
@@ -101,8 +95,8 @@
                                 <p>Completed Requests</p>
                                 <h1><?php echo $data['completedRequests']?></h1>
                                 <div class="cont" style="color:#1ca557">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <p style="font-weight:bold">1212 From prev month</p>
+                                    <!-- <i class="fa-solid fa-arrow-trend-up"></i> -->
+                                    <!-- <p style="font-weight:bold">1212 From prev month</p> -->
                                 </div>
                             </div>
                             <div class="left-cont">
@@ -110,8 +104,8 @@
                                 <p>Cancelled Requests</p>
                                 <h1><?php echo $data['cancelledRequests']?></h1>
                                 <div class="cont" style="color:#1ca557">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <p style="font-weight:bold">1212 From prev month</p>
+                                    <!-- <i class="fa-solid fa-arrow-trend-up"></i>
+                                    <p style="font-weight:bold">1212 From prev month</p> -->
                                 </div>
                             </div>
                             <div class="left-cont">
@@ -119,20 +113,24 @@
                                 <p>On going</p>
                                 <h1><?php echo $data['ongoingRequests']?></h1>
                                 <div class="cont" style="color:#1ca557">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <p style="font-weight:bold">1212 From prev month</p>
+                                    <!-- <i class="fa-solid fa-arrow-trend-up"></i> -->
+                                    <!-- <p style="font-weight:bold">1212 From prev month</p> -->
                                 </div>
                             </div>
                         </div>
                         <div class="right">
                             <div class="right-cont">
                                 <div class="top">
-                                    <h3>Credits Earned</h3>
-                                    <h1><?php
-                                        $credits = isset($data['credits']) ? $data['credits'] : '00.00';
-                                    ?>
-                                        <?php echo $credits; ?></h1>
-                                    </h1>
+                                    <i class="fa-solid fa-circle-chevron-down"></i>
+                                    <div class="top-right">
+                                        <h3>Earned From Collects</h3>
+                                        <h1><?php
+$credits = isset($data['credits']) ? 'Eco ' . $data['credits'] : 'Eco 00.00';
+?>
+                                            <?php echo $credits; ?></h1>
+                                        </h1>
+                                    </div>
+
                                 </div>
                                 <div class="bottom">
                                     <canvas id="myChart" width="600" height="350"></canvas>

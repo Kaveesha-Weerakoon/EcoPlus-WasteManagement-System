@@ -3,7 +3,7 @@
     <div class="main">
         <header class="header">
             <nav class="nav">
-                <a href="/" class="logo"><img src="<?php echo IMGROOT;?>/Logo_No_Background.png" alt=""></a>
+                <a href="#" class="logo"><img src="<?php echo IMGROOT;?>/Logo_No_Background.png" alt=""></a>
 
                 <div class="hamburger">
                 <span class="line"></span>
@@ -17,7 +17,7 @@
                 <a href="#aboutUs">About Us</a>
                 <a href="#announcements">Announcements</a>
                 <a href="#contact">Contact</a>
-                <button class="signin-button">Sign In</button>
+                <button class="signin-button" onclick="redirectLogin()">Sign In</button>
                 </div>
             </nav>
         </header>
@@ -33,11 +33,11 @@
                     <b>Eco Plus</b> your sustainable waste management solution.
                 </p>
                 </div>
-                <a href="#" target="_blank" rel="noopener noreferrer"
-                ><div class="button">
-                    <div class="text-wrapper-2">Join Now</div>
-                </div></a
-                >
+                
+                <div class="button">
+                    <div class="text-wrapper-2" onclick="redirectSignUp()" >Join Now</div>
+                </div>
+                
             </div>
             <img class="headerimage" src="<?php echo IMGROOT;?>/home1.jpg" alt="" />
         </section>
@@ -110,7 +110,114 @@
         
         </section>
 
+        <!-- announcement section -->
+        <section class="announcement-section" id="announcements">
+            <div class="text-wrapper">Announcements</div>
+            <div class="cards-section">
+                <div class="Announcement-cont">
+                <div class="left slide-top">
+                    <h2>We are now in Kaluthara</h2>
+                    <p>2024-03-26</p>
+                    <img src="<?php echo IMGROOT;?>/img_upload/Annoucement/Colombo.jpg"
+                        alt="logo">
+                </div>
+                <div class="right ">
+                    <div class="cont slide-top">
+                        <p>
+                            We're thrilled to announce the grand opening of a brand new region right here in Kalutara!
+                            Prepare to embark on a journey of discovery as we unveil this exciting addition to our town. 
+                            Featuring stunning landscapes, vibrant communities, and endless opportunities, this new region
+                            promises to captivate your senses and ignite your adventurous spirit. Join us in celebrating 
+                            this momentous occasion and be among the first to explore the wonders of Kalutara's newest gem!
+                            Get ready to write the next chapter of Kalutara's extraordinary story!
+                        </p>
+                    </div>
+                </div>
+                </div>
+                <div class="Announcement-cont">
+                <div class="left slide-top">
+                    <h2>We are now in Kaluthara</h2>
+                    <p>2024-03-26</p>
+                    <img src="<?php echo IMGROOT;?>/img_upload/Annoucement/Colombo.jpg"
+                        alt="logo">
+                </div>
+                <div class="right ">
+                    <div class="cont slide-top">
+                        <p>
+                            We're thrilled to announce the grand opening of a brand new region right here in Kalutara!
+                            Prepare to embark on a journey of discovery as we unveil this exciting addition to our town. 
+                            Featuring stunning landscapes, vibrant communities, and endless opportunities, this new region
+                            promises to captivate your senses and ignite your adventurous spirit. Join us in celebrating 
+                            this momentous occasion and be among the first to explore the wonders of Kalutara's newest gem!
+                            Get ready to write the next chapter of Kalutara's extraordinary story!
+                        </p>
+                    </div>
+                </div>
+                </div>
+                
+            </div>
+            <div class="view-more-button">
+                <button>View More -></button>
+            </div>
+        </section>
+
+        <!-- contact section -->
+        <section class="contact-section" id="contact">
+            <h2 class="text-wrapper">Lets work together</h2>
+            <div class="div">
+                <!-- contact info -->
+                <div class="contact-info">
+                <div class="text-description">
+                    <p class="p">
+                    For any inquiries or assistance, feel free to reach out to us. 
+                    Our team is ready to help you with your waste management needs and 
+                    eco-friendly initiatives. Contact us today for a cleaner, greener tomorrow!
+                    </p>
+                </div>
+
+                <!-- social links -->
+                <div class="social-links">
+                    <a href="#" title="whatsapp">
+                    <img class="img" src="<?php echo IMGROOT;?>/whatsapp.png" alt="" />
+                    </a>
+                    <a href="#" title="facebook">
+                    <img class="img" src="<?php echo IMGROOT;?>/facebook.png" alt="" />
+                    </a>
+                    <a href="#" title="instagram">
+                    <img class="img" src="<?php echo IMGROOT;?>/instagram.png" alt="" />
+                    </a>
+                </div>
+                </div>
+                <!-- contact form -->
+                <div class="contact-form">
+                <div class="input-fields">
+                    <input type="text" class="input-field" title="input" placeholder="Name"/>
+                    <input type="text" class="input-field" title="input" placeholder="Email"/>
+                </div>
+                <button class="button"><span class="contact">Submit</span></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- footer -->
+        <footer class="footer">
+            <hr />
+            <p>@copyright 2025 | All right preserved by Eco Plus</p>
+        </footer>
+
     </div>
+    <script>
+         function redirectLogin() {
+            var linkUrl = "<?php echo URLROOT?>/users/login";
+            window.location.href = linkUrl;
+        }
+
+        function redirectSignUp() {
+            var linkUrl = "<?php echo URLROOT?>/users/register";
+            window.location.href = linkUrl;
+        }
+
+    </script>
    
 </div>
 <!-- <div class="Home-main">

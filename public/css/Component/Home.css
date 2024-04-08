@@ -186,6 +186,7 @@
         position: relative;
         flex: 0 0 auto;
         background-color:#1ca557 ;
+        cursor: pointer;
     }
     
     .header-section .text-wrapper-2 {
@@ -200,6 +201,7 @@
         letter-spacing: 0;
         line-height: 30px;
         white-space: nowrap;
+        cursor: pointer;
     }
     
     .header-section .headerimage {
@@ -385,8 +387,286 @@
 
     }
 
+     /* announcements section */
+    .Announcement-cont{
+        padding: 30px;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 55% 45%;
+        overflow: hidden;
+        height: 525px;
+        width: 100%;
+        margin-bottom: 30px;
+        box-shadow: var(--box-shadow2);
+        border-radius: 10px;
 
-      /* responsiveness */
+    }
+
+    .Announcement-cont h2 {
+        font-size: 21px;
+        letter-spacing: 0.01rem;
+
+    }
+
+    .Announcement-cont p {
+        font-size: 15px;
+        margin: 10px 15px;
+        letter-spacing: 0.03rem;
+
+    }
+
+    .Announcement-cont img {
+        border-radius: 10px;
+        height: 375px;
+        width: 94%;
+    }
+
+    .right {
+        display: flex;
+        align-items: center;
+        text-align: left;
+    }
+
+    .right .cont {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        box-shadow: var(--box-shadow2);
+        height: 375px;
+        width: 100%;
+        margin-top: 62px;
+        line-height: 1.3rem;
+        padding: 14px;
+
+    }
+
+    .view-more-button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .view-more-button button{
+        border: 2px solid #1ca557;
+        color: var(--green-color-one);
+        padding: 10px 25px;
+        font-size: 17px;
+        font-weight: 550;
+        background-color: #fff;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .view-more-button button:hover{
+        color: #fff;
+        font-weight: 550;
+        background-color: var(--green-color-one);
+        transition: background-color 0.7s;
+    }
+
+    .announcement-section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 42px;
+        padding: 42px 24px;
+        position: relative;
+        background-color: #fff;
+    }
+
+    .announcement-section .text-wrapper{
+        position: relative;
+        width: fit-content;
+        margin-top: 50px;
+        font-family: "Inter";
+        font-weight:600;
+        color: var(--main-text-color);
+        font-size:  32px;
+        text-align: center;
+        letter-spacing:  0px;
+        line-height: 42px;
+        white-space: nowrap;
+        font-style: normal;
+
+    }
+
+     /* contact section */
+    .contact-section{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+        padding: 42px 24px;
+        position: relative;
+        background-color: var(--white);
+    }
+
+    .contact-section .text-wrapper{
+        position: relative;
+        /* width: 626px; */
+        margin-top: 50px;
+        font-family: "Inter";
+        font-weight: 600;
+        color: var(--main-text-color);
+        font-size: 32px;
+        letter-spacing:  0px;
+        line-height: 42px;
+        font-style: normal;
+
+    }
+
+    .contact-section .div{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 142px 42px;
+        position: relative;
+        align-self: stretch;
+        width: 100%;
+        flex: 0 0 auto;
+    }
+
+    .contact-section .contact-info{
+        gap: 42px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        /* min-width: 300px; */
+        position: relative;
+        flex: 1;
+        flex-grow: 1;
+    }
+
+    .contact-section .text-description{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 42px;
+        position: relative;
+        align-self: stretch;
+        width: 100%;
+        flex: 0 0 auto;
+    }
+
+    .contact-section .p{
+        position: relative;
+        align-self: stretch;
+        margin-top: -1px;
+        font-family:  "Inter";
+        font-weight:  400;
+        color: var(--main-text-color);
+        font-size: 17px;
+        letter-spacing:  0px;
+        line-height:  27px;
+        font-style:  normal;
+
+    }
+
+    .contact-section .social-links{
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        position: relative;
+        align-self: stretch;
+        width: 100%;
+        flex: 0 0 auto;
+    }
+
+    .contact-section .img{
+        position: relative;
+        width: 36px;
+        height: 36px;
+    }
+
+    .contact-section .contact-form{
+        max-width: 520px;
+        gap: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        /* min-width: 300px; */
+        position: relative;
+        flex: 1;
+        flex-grow: 1;
+    }
+
+    .contact-section .input-fields{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        position: relative;
+        align-self: stretch;
+        width: 100%;
+        flex: 0 0 auto;
+    }
+
+    .contact-section .input-field{
+        /* min-width: 300px; */
+        max-width: 520px;
+        padding: 16px 24px;
+        background-color: #f3f3f3;
+        position: relative;
+        align-self: stretch;
+        /* width: 100%; */
+        border: 0;
+        flex: 1;
+        flex-grow: 1;
+        margin-top: -1px;
+        font-family: "Inter";
+        font-weight:  400;
+        color: var(--main-text-color);
+        font-size:  17px;
+        letter-spacing: 0px;
+        line-height: 27px;
+        font-style: normal;
+        border-radius: 8px;
+
+       
+    }
+
+    .contact-section .button {
+        all: unset;
+        box-sizing: border-box;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px 64px;
+        position: relative;
+        flex: 0 0 auto;
+        background-color: #1ca557;
+        border-radius: 8px;
+    }
+
+    .contact-section .contact{
+        position: relative;
+        width: fit-content;
+        margin-top: -1px;
+        font-family: "Inter";
+        font-weight: 600;
+        color: #fff;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: 0;
+    }
+
+    footer{
+        color: #b8b8c3;
+    }
+
+    footer p{
+        padding: 24px;
+        text-align: center;
+    }
+
+    .hidden{
+        display: none;
+    }
+
+
+
+    /* responsiveness */
 
     /* navbar  */
     @media screen and (min-width: 576px) {

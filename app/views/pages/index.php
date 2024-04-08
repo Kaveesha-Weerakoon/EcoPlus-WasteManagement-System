@@ -207,7 +207,21 @@
 
     </div>
     <script>
-         function redirectLogin() {
+        const hamburger = document.querySelector(".hamburger");
+        const navLink = document.querySelector(".nav__link");
+
+        hamburger.addEventListener("click", () => {
+        //console.log("Btn clicked");
+        navLink.classList.toggle("hide");
+        });
+
+
+        navLink.addEventListener("click", () => {
+            
+            navLink.classList.add("hide");
+        })
+
+        function redirectLogin() {
             var linkUrl = "<?php echo URLROOT?>/users/login";
             window.location.href = linkUrl;
         }

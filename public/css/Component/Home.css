@@ -437,6 +437,8 @@
         margin-top: 62px;
         line-height: 1.3rem;
         padding: 14px;
+        border-radius: 8px;
+        overflow: scroll;
 
     }
 
@@ -669,7 +671,7 @@
     /* responsiveness */
 
     /* navbar  */
-    @media screen and (min-width: 576px) {
+    @media screen and (min-width: 945px) {
         .nav__link {
 
             display: block;
@@ -690,7 +692,7 @@
     }
     
     /* body */
-    @media screen and (max-width: 576px) {
+    @media screen and (max-width: 945px) {
         .header-section .header-content{
             padding: 24px;
         }
@@ -707,6 +709,15 @@
         .contact-section .button{
             padding: 16px 32px;
         }
+    }
+
+    @media screen and (max-width: 1120px) {
+
+        .about-us-container{
+            display: flex;
+            flex-direction: column;
+        }
+
     }
 
 }

@@ -18,9 +18,11 @@
                     </div>
 
                     <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
+                        <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
+                            alt="">
                         <div class="main-right-top-profile-cont">
-                            <h3>Admin</h3>
+                            <h3><?php echo $_SESSION['collector_name']?></h3>
+                            <p>ID : C <?php echo $_SESSION['collector_id']?></p>
                         </div>
                     </div>
                 </div>

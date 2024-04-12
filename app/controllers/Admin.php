@@ -1667,6 +1667,15 @@
     }
 
     public function edit_profile(){
+
+      if(isset($_SESSION['admin_id'])){
+        $admin_id =  $_SESSION['admin_id']; 
+      } else if(isset($_SESSION['superadmin_id'])){
+          $admin_id =  $_SESSION['superadmin_id']; 
+      }
+
+      
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){     
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $data=[];
@@ -1676,6 +1685,7 @@
       else{
         $data=[];
         $this->view('admin/editprofile', $data);
+
 
       }
     }

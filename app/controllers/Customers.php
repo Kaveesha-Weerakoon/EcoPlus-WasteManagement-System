@@ -781,7 +781,7 @@
       redirect('users/login');
     }
 
-    public function transfer() {        
+    public function transfer($true="") {        
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
 
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -793,7 +793,7 @@
               'transfer_confirm'=>'False',
               'customer_id_err' => '',
               'credit_amount_err' => '',
-              'completed' => '',     
+              'completed' =>$true,     
               'notification'=> $Notifications   
           ];
   
@@ -861,7 +861,7 @@
               'credit_amount' => '',
               'customer_id_err' => '',
               'credit_amount_err' => '','transfer_confirm'=>'',
-              'completed' => '',     
+              'completed' =>$true,     
               'notification'=> $Notifications   
           ];
   
@@ -941,6 +941,8 @@
         
                 if ($sender_update && $receiver_update && $result) {
                     $data['completed'] = 'True';
+                    header("Location: " . URLROOT . "/customers/transfer/true");        
+
                     $this->view('customers/transfer', $data);
                 } else {
                   die('Something went wrong');

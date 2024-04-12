@@ -65,6 +65,7 @@
         justify-content: center;
         width: 35%;
         position: relative;
+        visibility: hidden;
     }
 
     .main-right-top-search i {
@@ -259,8 +260,29 @@
         .main-right-top-search {
             margin-left: 1px;
         }
+
+        .main-right-top-two {
+            padding-left: 15px;
+        }
+
+        .main-right-top-three {
+            padding-left: 20px;
+        }
     }
 
+    @media screen and (max-width: 600px) {
+        .main-right-top-two h1 {
+            font-size: 15px;
+        }
+
+        .main-right-top-three h4 {
+            font-size: 15px;
+        }
+
+        .table-header th {
+            font-size: 13px;
+        }
+    }
 
 
 }

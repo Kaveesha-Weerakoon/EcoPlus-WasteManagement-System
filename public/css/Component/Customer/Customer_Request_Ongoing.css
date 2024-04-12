@@ -15,12 +15,12 @@
     }
 
     .table-header {
-        grid-template-columns: 10% 12% 17% 10% 15% 10% 15% 10%;
+        grid-template-columns: 10% 12% 18% 10% 15% 10% 15% 10%;
     }
 
     .table-row {
         height: 55px;
-        grid-template-columns: 10% 12% 17% 10% 15% 10% 15% 10%;
+        grid-template-columns: 10% 12% 18% 10% 15% 10% 15% 10%;
     }
 
     .table td {
@@ -51,7 +51,6 @@
 
     .fa-user-large {
         font-size: 22px !important;
-
     }
 
     .bold1 {
@@ -173,6 +172,38 @@
 
 
     /*---------------*/
+    @media screen and (max-width:950px) {
+        .table-header {
+            grid-template-columns: 10% 12% 10% 9% 10% 10% 13% 9%
+        }
+
+        .table-row {
+            grid-template-columns: 10% 12% 10% 9% 10% 10% 13% 9%
+        }
+    }
+
+    @media screen and (max-width:580px) {
+        .table-header {
+            grid-template-columns: 10% 10% 10% 9% 7% 10% 8% 9%
+        }
+
+        .table-row {
+            grid-template-columns: 10% 10% 10% 9% 7% 10% 8% 9%
+        }
+
+        .main-right-bottom {
+            width: 170%;
+            overflow-x: scroll;
+        }
+
+        .main-right-bottom-top {
+            width: 170%;
+        }
+
+        .main-right-bottom-down {
+            width: 170%;
+        }
+    }
 
 
 }

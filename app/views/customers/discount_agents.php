@@ -13,8 +13,6 @@
                                 <input type="text" id="searchInput" placeholder="Search">
                             </div>
                             <?php require APPROOT . '/views/customers/customer_notification/customer_notification.php'; ?>
-
-
                         </div>
 
                         <div class="main-right-top-two">
@@ -24,10 +22,7 @@
                         <div class="main-right-top-three">
                             <div class="main-right-top-three-content">
                                 <p style="color:#000000;">Redeem your Eco credits through the listed agents.</p>
-
                             </div>
-
-
                         </div>
 
                     </div>
@@ -35,13 +30,12 @@
                         <div class="main-right-bottom-top ">
                             <table class="table">
                                 <tr class="table-header">
-                                    <th>Center Manager ID</th>
+                                    <th>Agent ID</th>
                                     <th>Profile</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Contact_No</th>
                                     <th>Address</th>
-
                                 </tr>
                             </table>
                         </div>

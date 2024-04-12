@@ -91,11 +91,13 @@ public function admin_delete($id){
 
 public function editprofile($data){
   try{
-    $this->db->query('UPDATE users SET name = :name WHERE user_id = :admin_id');
+    $this->db->query('UPDATE users SET name = :name WHERE id = :admin_id');
     $this->db->bind(':name', $data['name']);
     $this->db->bind(':admin_id', $data['id']);
 
-    if($this->db->execute()){
+    $result = $this->db->execute();
+
+    if($result){
       $this->db->query('UPDATE admin SET address = :address, contact_no = :contactno WHERE user_id = :admin_id');
       $this->db->bind(':address', $data['address']);
       $this->db->bind(':contactno', $data['contactno']);
@@ -113,13 +115,14 @@ public function editprofile($data){
 
 
   }catch(PDOException $e){
+    echo 'An error occurred: ' . $e->getMessage();
     return false;
   }
 }
 
 public function editprofile_withimg($data){
   try{
-    $this->db->query('UPDATE users SET name = :name WHERE user_id = :admin_id');
+    $this->db->query('UPDATE users SET name = :name WHERE id = :admin_id');
     $this->db->bind(':name', $data['name']);
     $this->db->bind(':admin_id', $data['id']);
 
@@ -141,6 +144,7 @@ public function editprofile_withimg($data){
     }
 
   }catch(PDOException $e){
+    echo 'An error occurred: ' . $e->getMessage();
     return false;
   }
 }

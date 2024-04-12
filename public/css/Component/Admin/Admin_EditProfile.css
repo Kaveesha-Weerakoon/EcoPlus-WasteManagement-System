@@ -375,6 +375,7 @@
         letter-spacing: 0.03rem;
         font-weight: bolder;
         transition: background-color 0.6s ease-in;
+        margin-top: 15px;
     }
 
     .main-right-bottom-content {

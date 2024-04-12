@@ -1669,89 +1669,131 @@
     public function edit_profile(){
 
       if(isset($_SESSION['admin_id'])){
-        $admin_id =  $_SESSION['admin_id']; 
+        $admin_id =  $_SESSION['admin_id'];
+        $admin = $this->adminModel->getAdminByID($admin_id);
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
+            
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+          $data = [
+            'id' => $admin_id,
+            'name' => trim($_POST['name']),
+            'email' => trim($_POST['email']),
+            'profile_image_name' => $_SESSION['admin_email'].'_'.$_FILES['profile_image']['name'],
+            'address' => trim($_POST['address']),
+            'contactno' => trim($_POST['contactno']),
+            'current'=>'',
+            'new_pw'=>'',
+            're_enter_pw'=>'',
+            'current_err'=>'',
+            'new_pw_err'=>'',
+            're_enter_pw_err'=>'',
+            'change_pw_success'=>'',
+            'name_err'=>'',
+            'address_err'=>'',
+            'contactno_err' =>'',
+            'city_err'=>'',
+            'profile_err'=>'',
+            'success_message'=>''
+          ];
+
+          if (empty($data['name'])) {
+            $data['name_err'] = 'Please Enter a Name';
+          } elseif (strlen($data['name']) > 200) {
+            $data['name_err'] = 'Name should be at most 200 characters';
+          }
+    
+          if (empty($data['contactno'])) {
+            $data['contactno_err'] = 'Please Enter a Contact No';
+          } elseif (!preg_match('/^\d{10}$/', $data['contactno'])) {
+            $data['contactno_err'] = 'Contact No should be 10 digits ';
+          }
+
+          if (empty($data['address'])) {
+            $data['address_err'] = 'Please Enter an Address';
+          } elseif (strlen($data['address']) > 200) {
+            $data['address_err'] = 'Address should be at most 200 characters';
+          }
+
+          if(empty($data['name_err']) && empty($data['contactno_err'])  && empty($data['address_err'])){
+      
+            if ($_FILES['profile_image']['error'] == 4) {
+              
+                if($this->adminModel->editprofile($data)){
+                  $data['success_message']="Profile Details Updated Successfully";
+                  $data['change_pw_success']='True';
+                  $data['profile_err'] = '';
+
+                }else{
+                  die('Something went wrong');
+                }
+                
+            } else {
+              $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/Admin/' . $admin->image;    
+              if (updateImage($old_image_path, $_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/Admin/')) {
+
+                if($this->adminModel->editprofile_withimg($data)){
+                  $data['success_message']="Profile Details Updated Successfully";
+                  $data['change_pw_success']='True';
+                  $data['profile_err'] = '';
+
+                }else{
+                  die('Something went wrong 2');
+                }
+              
+              
+            
+              } else {
+                  $data['profile_err'] = 'Error uploading the profile image';
+                  $this->view('admin/editprofile', $data); 
+              }
+
+              //$this->view('admin/editprofile', $data);
+            
+            }
+          }
+
+          $this->view('admin/editprofile', $data);
+
+        }
+        else{
+          
+          $data=[
+            'id' => $admin_id,
+            'name' => $_SESSION['admin_name'],
+            'email' => $_SESSION['admin_email'],
+            'address' => $admin->address,
+            'contactno' => $admin->contact_no,
+            'current'=>'',
+            'new_pw'=>'',
+            're_enter_pw'=>'',
+            'current_err'=>'',
+            'new_pw_err'=>'',
+            're_enter_pw_err'=>'',
+            'change_pw_success'=>'',
+            'name_err'=>'',
+            'address_err'=>'',
+            'contactno_err' =>'',
+            'city_err'=>'',
+            'profile_err'=>'',
+            'success_message'=>''
+
+
+          ];
+
+          $this->view('admin/editprofile', $data);
+
+
+        }
+
       } else if(isset($_SESSION['superadmin_id'])){
-          $admin_id =  $_SESSION['superadmin_id']; 
-      }
 
-      $admin = $this->adminModel->getAdminByID($admin_id);
 
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){     
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-        $data = [
-          'id' => $admin_id,
-          'name' => trim($_POST['name']),
-          'email' => trim($_POST['email']),
-          'profile_image_name' => $_SESSION['admin_email'].'_'.$_FILES['profile_image']['name'],
-          'address' => trim($_POST['address']),
-          'contactno' => trim($_POST['contactno']),
-          'current'=>'',
-          'new_pw'=>'',
-          're_enter_pw'=>'',
-          'current_err'=>'',
-          'new_pw_err'=>'',
-          're_enter_pw_err'=>'',
-          'change_pw_success'=>'',
-          'name_err'=>'',
-          'address_err'=>'',
-          'contactno_err' =>'',
-          'city_err'=>'',
-          'profile_err'=>'',
-          'success_message'=>''
-        ];
-
-        if (empty($data['name'])) {
-          $data['name_err'] = 'Please Enter a Name';
-        } elseif (strlen($data['name']) > 200) {
-          $data['name_err'] = 'Name should be at most 200 characters';
-        }
-  
-        if (empty($data['contactno'])) {
-          $data['contactno_err'] = 'Please Enter a Contact No';
-        } elseif (!preg_match('/^\d{10}$/', $data['contactno'])) {
-          $data['contactno_err'] = 'Contact No should be 10 digits ';
-        }
-
-        if (empty($data['address'])) {
-          $data['address_err'] = 'Please Enter an Address';
-        } elseif (strlen($data['address']) > 200) {
-          $data['address_err'] = 'Address should be at most 200 characters';
-        }
-
-        if(empty($data['name_err']) && empty($data['contactno_err'])  && empty($data['address_err'])){
-       
-          if ($_FILES['profile_image']['error'] == 4) {
-               $this->adminModel->editprofile($data);
-               $data['success_message']="Profile Details Updated Successfully";
-               $data['change_pw_success']='True';
-               $data['profile_err'] = '';
-          } else {
-            $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/Admin/' . $admin->image;    
-           if (updateImage($old_image_path, $_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/Admin/')) {
-             $this->adminModel->editprofile_withimg($data);
-             $data['success_message']="Profile Details Updated Successfully";
-             $data['change_pw_success']='True';
-             $data['profile_err'] = '';
-           
-           } else {
-               $data['profile_err'] = 'Error uploading the profile image';
-               $this->view('admin/editprofile', $data); 
-           }
-           
-         }
-       }
-
-        $this->view('admin/editprofile', $data);
-
-      }
-      else{
         $data=[
-          'id' => $admin_id,
+          'id' => $_SESSION['superadmin_id'],
           'name' => $_SESSION['admin_name'],
           'email' => $_SESSION['admin_email'],
-          'address' => $admin->address,
-          'contactno' => $admin->contact_no,
           'current'=>'',
           'new_pw'=>'',
           're_enter_pw'=>'',
@@ -1759,20 +1801,259 @@
           'new_pw_err'=>'',
           're_enter_pw_err'=>'',
           'change_pw_success'=>'',
-          'name_err'=>'',
-          'address_err'=>'',
-          'contactno_err' =>'',
-          'city_err'=>'',
-          'profile_err'=>'',
           'success_message'=>''
 
-
         ];
-        $this->view('admin/editprofile', $data);
 
+        $this->view('admin/editprofile', $data);
+      }
+
+      
+    }
+
+    public function change_password(){
+
+      if(isset($_SESSION['admin_id'])){
+
+        $admin_id =  $_SESSION['admin_id'];
+        $admin = $this->adminModel->getAdminByID($admin_id);
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
+          $data=[
+            
+            'id'=> $admin_id,
+            'name'=> $_SESSION['admin_name'],
+            'email' => $_SESSION['admin_email'],
+            'address' => $admin->address,
+            'contactno' => $admin->contact_no,         
+            'current'=>trim($_POST['current']),
+            'new_pw'=>trim($_POST['new_pw']),
+            're_enter_pw'=>trim($_POST['re_enter_pw']),
+            'current_err'=>'',
+            'new_pw_err'=>'',
+            're_enter_pw_err'=>'',
+            'change_pw_success'=>'',
+            'name_err'=>'',
+            'address_err'=>'',
+            'contactno_err' =>'',
+            'profile_err'=>'',
+            'success_message'=>'',      
+   
+          ];
+    
+  
+          if (empty($data['current'])) {
+            $data['current_err'] = 'Please enter current password';
+          }
+        
+
+          if (empty($data['new_pw'])) {
+            $data['new_pw_err'] = 'Please Enter New Password';
+          } elseif (strlen($data['new_pw']) < 8 || strlen($data['new_pw']) > 30) {
+              $data['new_pw_err'] = 'New password must be between 8 and 30 characters';
+
+          } elseif (!preg_match('/[^\w\s]/', $data['new_pw'])) {
+              $data['new_pw_err'] = 'New password must include at least one symbol';
+
+          } elseif (!preg_match('/[A-Z]/', $data['new_pw'])) {
+              $data['new_pw_err'] = 'New password must include at least one uppercase letter';
+
+          } elseif (!preg_match('/[a-z]/', $data['new_pw'])) {
+              $data['new_pw_err'] = 'New password must include at least one lowercase letter';
+
+          } elseif (!preg_match('/[0-9]/', $data['new_pw'])) {
+            $data['new_pw_err'] = 'New password must include at least one number';
+          }
+
+
+          if (empty($data['re_enter_pw'])) {
+            $data['re_enter_pw_err'] = 'Please confirm new password';
+          } elseif (strlen($data['re_enter_pw']) < 8 || strlen($data['re_enter_pw']) > 30) {
+              $data['re_enter_pw_err'] = 'Confirmed password must be between 8 and 30 characters';
+
+          } elseif (!preg_match('/[^\w\s]/', $data['re_enter_pw'])) {
+              $data['re_enter_pw_err'] = 'Confirmed password must include at least one symbol';
+
+          } elseif (!preg_match('/[A-Z]/', $data['re_enter_pw'])) {
+              $data['re_enter_pw_err'] = 'Confirmed password must include at least one uppercase letter';
+
+          } elseif (!preg_match('/[a-z]/', $data['re_enter_pw'])) {
+              $data['re_enter_pw_err'] = 'Confirmed password must include at least one lowercase letter';
+
+          } elseif (!preg_match('/[0-9]/', $data['re_enter_pw'])) {
+            $data['re_enter_pw_err'] = 'Confirmed password must include at least one number';
+          }
+        
+    
+          if(empty($data['new_pw_err']) && empty($data['current_err']) && empty($data['re_enter_pw_err'])) {
+              
+                  if($this->userModel->pw_check($_SESSION['admin_id'],$data['current'])){
+                    if($data['new_pw'] != $data['re_enter_pw']){
+                      $data['new_pw_err'] = 'Passwords does not match';
+                    }
+                    else{
+                      if($this->userModel->change_pw($_SESSION['admin_id'],$data['re_enter_pw'])){
+                        $data['success_message']="Password changed successfully";
+                        $data['change_pw_success']='True';
+                        $this->view('admin/editprofile', $data);
+                      }
+                    }
+                  }
+                  else{
+                    $data['current_err'] = 'Invalid password';
+                  }
+                      
+            }
+      
+            $this->view('admin/editprofile', $data);
+        }
+        else{
+          $data = [
+            'name'=>'',
+            'userid'=>'',
+            'email'=>'',
+            'contactno'=>'',
+            'address'=>'',
+            'current'=>'',
+            'new_pw'=>'',
+            're_enter_pw'=>'',
+            'current_err'=>'',
+            'new_pw_err'=>'',
+            're_enter_pw_err'=>'',
+            'change_pw_success'=>'',
+            'name_err'=>'',
+            'address_err'=>'',
+            'contactno_err' =>'',
+            'profile_err'=>'',
+            'success_message'=>'',          
+          
+
+          ];
+          $this->view('admin/editprofile', $data);
+  
+        }
+
+
+      }elseif(isset($_SESSION['superadmin_id'])){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); 
+          $data=[
+            
+            'id'=> $_SESSION['superadmin_id'],
+            'name'=> $_SESSION['admin_name'],
+            'email' => $_SESSION['admin_email'],      
+            'current'=>trim($_POST['current']),
+            'new_pw'=>trim($_POST['new_pw']),
+            're_enter_pw'=>trim($_POST['re_enter_pw']),
+            'current_err'=>'',
+            'new_pw_err'=>'',
+            're_enter_pw_err'=>'',
+            'change_pw_success'=>'',
+            'name_err'=>'',
+            'profile_err'=>'',
+            'success_message'=>'',      
+   
+          ];
+    
+  
+          if (empty($data['current'])) {
+            $data['current_err'] = 'Please enter current password';
+          }
+        
+
+          if (empty($data['new_pw'])) {
+            $data['new_pw_err'] = 'Please Enter New Password';
+          } elseif (strlen($data['new_pw']) < 8 || strlen($data['new_pw']) > 30) {
+              $data['new_pw_err'] = 'New password must be between 8 and 30 characters';
+
+          } elseif (!preg_match('/[^\w\s]/', $data['new_pw'])) {
+              $data['new_pw_err'] = 'New password must include at least one symbol';
+
+          } elseif (!preg_match('/[A-Z]/', $data['new_pw'])) {
+              $data['new_pw_err'] = 'New password must include at least one uppercase letter';
+
+          } elseif (!preg_match('/[a-z]/', $data['new_pw'])) {
+              $data['new_pw_err'] = 'New password must include at least one lowercase letter';
+
+          }elseif (!preg_match('/[0-9]/', $data['new_pw'])) {
+            $data['new_pw_err'] = 'New password must include at least one number';
+          }
+
+
+          if (empty($data['re_enter_pw'])) {
+            $data['re_enter_pw_err'] = 'Please confirm new password';
+          } elseif (strlen($data['re_enter_pw']) < 8 || strlen($data['re_enter_pw']) > 30) {
+              $data['re_enter_pw_err'] = 'Confirmed password must be between 8 and 30 characters';
+
+          } elseif (!preg_match('/[^\w\s]/', $data['re_enter_pw'])) {
+              $data['re_enter_pw_err'] = 'Confirmed password must include at least one symbol';
+
+          } elseif (!preg_match('/[A-Z]/', $data['re_enter_pw'])) {
+              $data['re_enter_pw_err'] = 'Confirmed password must include at least one uppercase letter';
+
+          } elseif (!preg_match('/[a-z]/', $data['re_enter_pw'])) {
+              $data['re_enter_pw_err'] = 'Confirmed password must include at least one lowercase letter';
+
+          } elseif (!preg_match('/[0-9]/', $data['re_enter_pw'])) {
+            $data['re_enter_pw_err'] = 'Confirmed password must include at least one number';
+          }
+        
+    
+          if(empty($data['new_pw_err']) && empty($data['current_err']) && empty($data['re_enter_pw_err'])) {
+              
+                  if($this->userModel->pw_check($_SESSION['superadmin_id'],$data['current'])){
+                    if($data['new_pw'] != $data['re_enter_pw']){
+                      $data['new_pw_err'] = 'Passwords does not match';
+                    }
+                    else{
+                      if($this->userModel->change_pw($_SESSION['superadmin_id'],$data['re_enter_pw'])){
+                        $data['success_message']="Password changed successfully";
+                        $data['change_pw_success']='True';
+                        $this->view('admin/editprofile', $data);
+                      }
+                    }
+                  }
+                  else{
+                    $data['current_err'] = 'Invalid password';
+                  }
+                      
+            }
+      
+            $this->view('admin/editprofile', $data);
+        }
+        else{
+          $data = [
+            'name'=>'',
+            'userid'=>'',
+            'email'=>'',
+            'current'=>'',
+            'new_pw'=>'',
+            're_enter_pw'=>'',
+            'current_err'=>'',
+            'new_pw_err'=>'',
+            're_enter_pw_err'=>'',
+            'change_pw_success'=>'',
+            'name_err'=>'',
+            'profile_err'=>'',
+            'success_message'=>'',          
+          
+
+          ];
+          $this->view('admin/editprofile', $data);
+  
+        }
 
       }
+
+
+
     }
+
+
 
     public function announcements(){
       $Announcements=$this->Annoucement_Model->getAllAnnouncements();

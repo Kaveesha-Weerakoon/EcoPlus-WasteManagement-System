@@ -1674,16 +1674,100 @@
           $admin_id =  $_SESSION['superadmin_id']; 
       }
 
-      
+      $admin = $this->adminModel->getAdminByID($admin_id);
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){     
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        $data=[];
+
+        $data = [
+          'id' => $admin_id,
+          'name' => trim($_POST['name']),
+          'email' => trim($_POST['email']),
+          'profile_image_name' => $_SESSION['admin_email'].'_'.$_FILES['profile_image']['name'],
+          'address' => trim($_POST['address']),
+          'contactno' => trim($_POST['contactno']),
+          'current'=>'',
+          'new_pw'=>'',
+          're_enter_pw'=>'',
+          'current_err'=>'',
+          'new_pw_err'=>'',
+          're_enter_pw_err'=>'',
+          'change_pw_success'=>'',
+          'name_err'=>'',
+          'address_err'=>'',
+          'contactno_err' =>'',
+          'city_err'=>'',
+          'profile_err'=>'',
+          'success_message'=>''
+        ];
+
+        if (empty($data['name'])) {
+          $data['name_err'] = 'Please Enter a Name';
+        } elseif (strlen($data['name']) > 200) {
+          $data['name_err'] = 'Name should be at most 200 characters';
+        }
+  
+        if (empty($data['contactno'])) {
+          $data['contactno_err'] = 'Please Enter a Contact No';
+        } elseif (!preg_match('/^\d{10}$/', $data['contactno'])) {
+          $data['contactno_err'] = 'Contact No should be 10 digits ';
+        }
+
+        if (empty($data['address'])) {
+          $data['address_err'] = 'Please Enter an Address';
+        } elseif (strlen($data['address']) > 200) {
+          $data['address_err'] = 'Address should be at most 200 characters';
+        }
+
+        if(empty($data['name_err']) && empty($data['contactno_err'])  && empty($data['address_err'])){
+       
+          if ($_FILES['profile_image']['error'] == 4) {
+               $this->adminModel->editprofile($data);
+               $data['success_message']="Profile Details Updated Successfully";
+               $data['change_pw_success']='True';
+               $data['profile_err'] = '';
+          } else {
+            $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/Admin/' . $admin->image;    
+           if (updateImage($old_image_path, $_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/Admin/')) {
+             $this->adminModel->editprofile_withimg($data);
+             $data['success_message']="Profile Details Updated Successfully";
+             $data['change_pw_success']='True';
+             $data['profile_err'] = '';
+           
+           } else {
+               $data['profile_err'] = 'Error uploading the profile image';
+               $this->view('admin/editprofile', $data); 
+           }
+           
+         }
+       }
+
         $this->view('admin/editprofile', $data);
 
       }
       else{
-        $data=[];
+        $data=[
+          'id' => $admin_id,
+          'name' => $_SESSION['admin_name'],
+          'email' => $_SESSION['admin_email'],
+          'address' => $admin->address,
+          'contactno' => $admin->contact_no,
+          'current'=>'',
+          'new_pw'=>'',
+          're_enter_pw'=>'',
+          'current_err'=>'',
+          'new_pw_err'=>'',
+          're_enter_pw_err'=>'',
+          'change_pw_success'=>'',
+          'name_err'=>'',
+          'address_err'=>'',
+          'contactno_err' =>'',
+          'city_err'=>'',
+          'profile_err'=>'',
+          'success_message'=>''
+
+
+        ];
         $this->view('admin/editprofile', $data);
 
 

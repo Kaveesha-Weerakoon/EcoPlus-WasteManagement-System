@@ -7,7 +7,7 @@ browseButton.onclick = () => {
 }
 
 inputPath.addEventListener("change", function () {
-    file = this.files[0];
+    file = this.files[0];  //Take the first selected file
     showimage();
 })
 

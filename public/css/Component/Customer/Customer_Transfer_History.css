@@ -52,4 +52,11 @@
         margin-right: 8%;
         width: 25px;
     }
+
+    @media screen and (max-width:700px) {
+        .notification_popup {
+            right: 20%;
+            width: 40%;
+        }
+    }
 }

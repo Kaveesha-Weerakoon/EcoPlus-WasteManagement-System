@@ -91,7 +91,6 @@
         font-size: 14px;
     }
 
-
     /*main right bottom*/
     .main-right-bottom {
         display: flex;
@@ -135,7 +134,6 @@
     .main-right-bottom-one-left .left h3 {
         font-size: 18px;
         margin-bottom: 1%;
-        color: var(--green-color-one);
     }
 
     .main-right-bottom-one-left .left p {
@@ -183,11 +181,17 @@
     .main-right-bottom-one-left .right h1 {
         font-size: 18px;
         color: var(--background-color-two);
+    }
 
+    .main-right-bottom-one-left .right h5 {
+        font-size: 18px;
+        color: var(--background-color-two);
     }
 
     .main-right-bottom-one-left .right i {
         font-size: 40px;
+        color: var(--background-color-two);
+
     }
 
     .main-right-bottom-one-left .right h3 {

@@ -240,7 +240,6 @@ var color = "#47b076";
 var textColor = "#414143"
 var checkbox = document.getElementById('toggle-checkbox');
 
-
 let circularProgress = document.querySelector(".circular-progress");
 let progressValue = document.querySelector(".progress-value");
 let progressStartValue = -1;
@@ -249,6 +248,8 @@ let speed = 30;
 
 function getDarkModeSetting() {
     const storedValue = localStorage.getItem("darkMode");
+    console.log("as");
+
     return storedValue ? JSON.parse(storedValue) : true;
 }
 

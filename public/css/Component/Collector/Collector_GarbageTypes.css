@@ -1,27 +1,27 @@
 .Collector_GarbageTypes {
-  * {
-      color: var(--main-text-color);
-  }
-
-  #dashboard i {
-      color: var(--green-color-one);
-  }
-
-  #dashboard h3 {
-      color: var(--green-color-one);
-  }
-
-   .main-right {
-    display: grid;
-    width: 100%;
-    height: 100%;
-    grid-template-rows: 22% 78%;
-    overflow: scroll;
-    background-color: var(--background-color-right);
-    box-sizing: border-box;
+    * {
+        color: var(--main-text-color);
     }
 
-    
+    #garbage_type i {
+        color: var(--green-color-one);
+    }
+
+    #garbage_type h3 {
+        color: var(--green-color-one);
+    }
+
+    .main-right {
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-rows: 22% 78%;
+        overflow: scroll;
+        background-color: var(--background-color-right);
+        box-sizing: border-box;
+    }
+
+
 
     .main-right-top {
         display: flex;
@@ -29,15 +29,15 @@
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         background-color: var(--background-color-right);
-  
+
     }
-  
+
     .main-right-bottom-two {
         display: flex;
         align-items: center;
         justify-content: center;
     }
-  
+
     .main-right-bottom-two-content {
         width: 55%;
         height: 100%;
@@ -46,7 +46,7 @@
         align-items: center;
         justify-content: center;
     }
-  
+
     .main-right-top-one {
         display: flex;
         flex-direction: row;
@@ -234,7 +234,7 @@
 
     .table-row {
         height: 55px;
-        grid-template-columns: 33% 33% 33%;
+        grid-template-columns: 20% 30% 30% 20%;
     }
 
     .table td {
@@ -242,7 +242,7 @@
     }
 
     .table-header {
-        grid-template-columns: 33% 33% 33%;
+        grid-template-columns: 20% 30% 30% 20%;
     }
 
 

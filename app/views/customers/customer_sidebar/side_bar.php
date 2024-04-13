@@ -141,7 +141,7 @@ function setDarkModeStyle(isDarkMode) {
 }
 
 function getDarkModeSetting() {
-    const storedValue = localStorage.getItem("darkMode");
+    const storedValue = localStorage.getItem("darkMode_Collector");
     return storedValue ? JSON.parse(storedValue) : true;
 }
 
@@ -152,8 +152,16 @@ setDarkModeStyle(initialDarkModeSetting);
 checkbox.addEventListener("change", function() {
     const isDarkMode = checkbox.checked;
     setDarkModeStyle(isDarkMode);
-    console.log("as");
 
-    localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
+    localStorage.setItem("darkMode_Collector", JSON.stringify(isDarkMode));
 });
+
+
+isDarkMode = getDarkModeSetting();
+if (getDarkModeSetting()) {
+    color = "white"
+    textColor = " white";
+    circularProgress.style.background =
+        `conic-gradient(${color}, ${progressStartValue * 3.6}deg, ${isDarkMode ? "#001f3f" : "#ededed"} 0deg)`;
+}
 </script>

@@ -2,7 +2,8 @@
 <div class="Collector_Main">
     <div class="Collector_Request_Top">
         <div class="Collector_Request_Completed">
-
+            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&callback=initMap" async
+                defer></script>
             <div class="main">
                 <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
                 <div class="main-right">
@@ -12,43 +13,7 @@
                                 <i class='bx bx-search-alt-2'></i>
                                 <input type="text" id="searchInput" placeholder="Search">
                             </div>
-                            <div class="main-right-top-notification" id="notification">
-                                <i class='bx bx-bell'></i>
-                                <?php if (!empty($data['notification'])) : ?>
-                                <div class="dot"><?php echo count($data['notification'])?></div>
-                                <?php endif; ?>
-                            </div>
-                            <div id="notification_popup" class="notification_popup">
-                                <h1>Notifications</h1>
-                                <div class="notification_cont">
-                                    <?php foreach($data['notification'] as $notification) : ?>
-
-                                    <div class="notification">
-                                        <div class="notification-green-dot">
-
-                                        </div>
-                                        <div class="notification_right">
-                                            <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
-                                            <?php echo $notification->notification ?>
-                                        </div>
-                                    </div>
-                                    <?php endforeach; ?>
-
-                                </div>
-                                <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/collectors/">
-                                    <i class="fa-solid fa-check"> </i>
-                                    <button type="submit">Mark all as read</button>
-                                </form>
-
-                            </div>
-                            <div class="main-right-top-profile">
-                                <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
-                                    alt="">
-                                <div class="main-right-top-profile-cont">
-                                    <h3><?php echo $_SESSION['collector_name']?></h3>
-                                    <p>ID : Col <?php echo $_SESSION['collector_id']?></p>
-                                </div>
-                            </div>
+                            <?php require APPROOT . '/views/collectors/collector_notification/collector_notification.php'; ?>
                         </div>
                         <div class="main-right-top-two">
                             <h1>Requests</h1>
@@ -255,10 +220,6 @@
 </div>
 
 
-
-
-
-
 <script>
 function initMap(latitude = 7.4, longitude = 81.00000000) {
     var mapCenter = {
@@ -309,7 +270,6 @@ function loadLocations() {
     });
 }
 
-
 function view_collect_details(request) {
     var locationPop = document.getElementById('collect-details-popup-box');
     locationPop.classList.add('active');
@@ -351,18 +311,14 @@ function close_request_details() {
 function searchTable() {
     var input = document.getElementById('searchInput').value.toLowerCase();
     var rows = document.querySelectorAll('.table-row');
-
+    console.log("hello");
     rows.forEach(function(row) {
         var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
         var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
         var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-        var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
-        var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
-        var conctact_no = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
-        var instructions = row.querySelector('td:nth-child(7)').innerText.toLowerCase();
 
-        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(input) ||
-            cid.includes(input) || conctact_no.includes(input) || instructions.includes(input)) {
+
+        if (time.includes(input) || id.includes(input) || date.includes(input)) {
             row.style.display = '';
         } else {
             row.style.display = 'none'; // Hide the row
@@ -371,6 +327,7 @@ function searchTable() {
 
 
 }
+
 document.getElementById('searchInput').addEventListener('input', searchTable);
 document.addEventListener("DOMContentLoaded", function() {
 

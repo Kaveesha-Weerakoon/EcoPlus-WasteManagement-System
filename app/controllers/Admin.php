@@ -1969,7 +1969,7 @@
           if (empty($data['new_pw'])) {
             $data['new_pw_err'] = 'Please Enter New Password';
           } elseif (strlen($data['new_pw']) < 8 || strlen($data['new_pw']) > 30) {
-              $data['new_pw_err'] = 'New password must be between 8 and 30 characters';
+              $data['new_pw_err'] = 'New password must be 8-30 characters long';
 
           } elseif (!preg_match('/[^\w\s]/', $data['new_pw'])) {
               $data['new_pw_err'] = 'New password must include at least one symbol';
@@ -1988,7 +1988,7 @@
           if (empty($data['re_enter_pw'])) {
             $data['re_enter_pw_err'] = 'Please confirm new password';
           } elseif (strlen($data['re_enter_pw']) < 8 || strlen($data['re_enter_pw']) > 30) {
-              $data['re_enter_pw_err'] = 'Confirmed password must be between 8 and 30 characters';
+              $data['re_enter_pw_err'] = 'Confirmed password must be 8-30 characters long';
 
           } elseif (!preg_match('/[^\w\s]/', $data['re_enter_pw'])) {
               $data['re_enter_pw_err'] = 'Confirmed password must include at least one symbol';

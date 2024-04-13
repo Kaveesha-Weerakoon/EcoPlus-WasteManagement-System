@@ -157,8 +157,6 @@
                         </div>
                         <div class="main-right-top-profile">
                             <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                            <!-- <img src="<?php echo IMGROOT?>/img_upload/Admin/<?php echo $_SESSION['admin_profile']?>"
-                                alt=""> -->
                             <div class="main-right-top-profile-cont">
                                 <h3> <?php echo $_SESSION['admin_name']?>  </h3> 
                                 <p>ID : A<?php echo $_SESSION['superadmin_id']; ?>  </p>
@@ -169,12 +167,12 @@
 
                     </div>
                     <div class="main-right-bottom">
-                        <div class="main-right-bottom-content" >
-                            <div class="main-right-bottom-content-top">
+                        <div class="main-right-bottom-content-sup" >
+                            <div class="main-right-bottom-content-top B">
                                 <h1>Edit Profile</h1>
-                                <div class="Edit-Profile-line"></div>
+                                <div class="Edit-Profile-line D"></div>
                             </div>
-                            <div class="main-right-bottom-content-bottom" >
+                            <div class="main-right-bottom-content-bottom E" >
                                 <!-- <form class="main-right-bottom-content-bottom-left" action="<?php echo URLROOT;?>/admin/edit_profile" method="post" enctype="multipart/form-data">
                                     <div class="edit-profile-content-profile">
                                         <div class="edit-profile-content-profile-container">
@@ -208,27 +206,27 @@
                                     <button type="submit">Save</button>                                                     
                                 </form> -->
 
-                                <form class="main-right-bottom-content-bottom-right" action="<?php echo URLROOT;?>/admin/change_password" method="post">
-                                    <div class="edit-profile-content">
+                                <form class="main-right-bottom-content-bottom-right A" action="<?php echo URLROOT;?>/admin/change_password" method="post">
+                                    <div class="edit-profile-content sup">
                                         <h3>Current Password :</h3>
                                       
                                         <input type="password" name="current" value="<?php echo $data['current']?>">
                                         <div class="err"><?php echo $data['current_err']?></div>
                                     </div>
-                                    <div class="edit-profile-content">
+                                    <div class="edit-profile-content sup">
                                         <h3>New Password :</h3>
                                          
                                         <input type="password" name="new_pw" value="<?php echo $data['new_pw']?>"> 
                                         <div class="err"><?php echo $data['new_pw_err']?></div>
 
                                     </div>
-                                    <div class="edit-profile-content">
+                                    <div class="edit-profile-content sup">
                                         <h3> Re-enter Password :</h3>
                                         
                                         <input type="password" name="re_enter_pw" value="<?php echo $data['re_enter_pw']?>">
                                         <div class="err"><?php echo $data['re_enter_pw_err']?></div>
 
-                                    </div> <button type=submit>Change Password</button>
+                                    </div> <button class="change-pw-button" type=submit>Change Password</button>
                                 </form>
                             </div>
 

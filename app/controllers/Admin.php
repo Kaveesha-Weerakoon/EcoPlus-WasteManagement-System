@@ -1673,7 +1673,7 @@
         $admin = $this->adminModel->getAdminByID($admin_id);
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
-            
+          
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
           $data = [
@@ -1717,13 +1717,14 @@
           }
 
           if(empty($data['name_err']) && empty($data['contactno_err'])  && empty($data['address_err'])){
-      
+            
             if ($_FILES['profile_image']['error'] == 4) {
-              
+            
                 if($this->adminModel->editprofile($data)){
                   $data['success_message']="Profile Details Updated Successfully";
                   $data['change_pw_success']='True';
                   $data['profile_err'] = '';
+                
 
                 }else{
                   die('Something went wrong');
@@ -1732,14 +1733,14 @@
             } else {
               $old_image_path = 'C:/xampp/htdocs/ecoplus/public/img/img_upload/Admin/' . $admin->image;    
               if (updateImage($old_image_path, $_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/Admin/')) {
-
+            
                 if($this->adminModel->editprofile_withimg($data)){
                   $data['success_message']="Profile Details Updated Successfully";
                   $data['change_pw_success']='True';
                   $data['profile_err'] = '';
 
                 }else{
-                  die('Something went wrong 2');
+                  die('Something went wrong');
                 }
               
               

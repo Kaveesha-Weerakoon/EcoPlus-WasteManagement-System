@@ -94,7 +94,7 @@ public function editprofile($data){
     $this->db->query('UPDATE users SET name = :name WHERE id = :admin_id');
     $this->db->bind(':name', $data['name']);
     $this->db->bind(':admin_id', $data['id']);
-
+    $_SESSION['admin_name'] = $data['name'];
     $result = $this->db->execute();
 
     if($result){
@@ -125,6 +125,10 @@ public function editprofile_withimg($data){
     $this->db->query('UPDATE users SET name = :name WHERE id = :admin_id');
     $this->db->bind(':name', $data['name']);
     $this->db->bind(':admin_id', $data['id']);
+
+    $_SESSION['admin_name'] = $data['name'];
+    $_SESSION['admin_profile'] = $data['profile_image_name'];
+
 
     if($this->db->execute()){
       $this->db->query('UPDATE admin SET address = :address, contact_no = :contactno, image = :image WHERE user_id = :admin_id');

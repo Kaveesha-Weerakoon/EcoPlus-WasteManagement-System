@@ -144,7 +144,7 @@
             }
         }
         
-       function getCredits( $user_id,$from = "none", $to = "none") {
+        function getCredits( $user_id,$from = "none", $to = "none") {
          try {
           
             $this->db->query('SELECT SUM(credit_amount) AS total_credits 
@@ -178,7 +178,7 @@
          }
         }
         
-        function getCreditsMonths( $user_id) {
+        function getCreditsMonths($user_id) {
            try {
             
             $this->db->query('SELECT *, MONTH(request_main.date) as month 
@@ -193,7 +193,6 @@
              $results = $this->db->resultSet();
              return $results;
           } catch (PDOException $e) {
-            die($e->getMessage());
             return false;
           }
         }

@@ -122,7 +122,7 @@
                                     </h1>
                                 </div>
                                 <div class="bottom">
-                                    <!-- <canvas id="myChart" width="688" height="550"></canvas> -->
+                                    <canvas id="myChart" width="688" height="550"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -241,7 +241,103 @@
 
 
 <script>
-/*Bottom CHART One*/
+const currentDate = new Date();
+const currentMonth = currentDate.getMonth() + 1;
+// Add 1 to represent January as index 1
+const currentYear = currentDate.getFullYear();
+const completedRequests = <?php echo json_encode($data['creditsByMonth1']); ?>;
+
+function getMonthName(monthIndex) {
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+        'October', 'November', 'December'
+    ];
+
+    return monthNames[monthIndex - 1]; // Subtract 1 to correctly index monthNames array
+}
+const labels = [];
+for (let i = 0; i < 5; i++) {
+    const month = (currentMonth - i + 11) % 12; // No need to subtract 1
+    const year = currentYear - (i === 0 && currentMonth === 1 ? 1 : 0); // Adjust the condition to check for January
+    labels.unshift(getMonthName(month + 1) + ' ' + year);
+}
+
+const completedRequestCounts = completedRequests.map(request => {
+    const date = new Date(request.date);
+    return {
+        month: date.getMonth() + 1, // Add 1 to represent January as index 1
+        year: date.getFullYear(),
+        creditAmount: request.credit_amount,
+        req_id: request.req_id
+    };
+});
+
+function countRequests(requests) {
+    const sums = Array(12).fill(0); // Initialize an array to hold sums for each month
+
+    // Calculate sums for each month
+    requests.forEach(request => {
+        const monthIndex = request.month;
+        const creditAmount = parseFloat(request.creditAmount); // Parse creditAmount to float
+        // Check if creditAmount is NaN
+        if (!isNaN(creditAmount)) {
+            sums[monthIndex - 1] += creditAmount;
+            // No need to subtract 0
+        } else {
+            console.log("Invalid creditAmount for request with req_id:", request.req_id);
+            // Handle invalid creditAmount here if needed
+        }
+    });
+
+    return sums;
+}
+
+function printLastSixMonths(arr, startIndex) {
+    const length = arr.length;
+    const result = [];
+    // Calculate the start index for slicing the array
+    const startIdx = (startIndex - 1 + length) % length;
+
+    for (let i = 0; i <= 4; i++) {
+        // Calculate the index, ensuring it stays within bounds and handles negative indices
+        const j = (startIdx - i + length) % length;
+        // Add the element to the result array
+        result.push(arr[j]);
+    }
+
+    return result.reverse();
+}
+
+const completedData = printLastSixMonths(countRequests(completedRequestCounts), currentDate.getMonth() + 1);
+
+const data = {
+    labels: labels,
+    datasets: [{
+        label: 'Credits',
+        data: completedData,
+        borderColor: '#64d798',
+        backgroundColor: '#64d798',
+    }]
+};
+
+const config = {
+    type: 'line',
+    data: data,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Credits Given Chart'
+            }
+        }
+    },
+};
+
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart1 = new Chart(ctx, config); /*Bottom CHART One*/
 
 const data1 = {
     labels: ['Plastic', 'Polythene', 'Paper', 'Electronic', 'Metals', 'Glass'],

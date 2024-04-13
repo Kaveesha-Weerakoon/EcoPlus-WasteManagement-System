@@ -443,7 +443,6 @@
       $this->view('collectors/complains_history', $data);
     }
 
-  
     public function editprofile(){
       $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
 
@@ -939,7 +938,6 @@
 
   }
 
-
   public function Eco_Credit_Insert($req_id,$pop_eco="False") {
     $types=$this->garbageTypeModel->get_all();
    
@@ -1121,7 +1119,6 @@
     $this->view('collectors/garbage_types', $data);
   }
 
-
   public function analatics(){
     $collectorId= $_SESSION['collector_id'];
     $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);    
@@ -1141,35 +1138,24 @@
       $completedRequests=$this->Report_Model->getCompletedRequests($collectorId,$fromDate,$toDate);
       $cancelledRequests=$this->Report_Model->getCancelledRequests($collectorId,$fromDate,$toDate);
       $assignRequests=$this->Report_Model->getAssignRequests($collectorId,$fromDate,$toDate);
-      $totalRequests = $this->Report_Model->getallRequests($collectorId,$fromDate,$toDate);
+      $totalRequests = count($assignRequests)+ count($cancelledRequests)+ count($completedRequests);
       $credits=$this->Report_Model->getCredits($collectorId,$fromDate,$toDate);
       $creditByMonth=$this->Report_Model->getCreditsMonths($collectorId);
       $collectedWasteByMonth=$this->Report_Model->getCollectedGarbage_collector($collectorId,$fromDate,$toDate);
       $handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage_collector($collectorId,$fromDate,$toDate);
-
-      /*$fine=$this->Report_Model->getFineAmount($customerId,$fromDate,$toDate);
-      $finedAmount = is_numeric($fine->fine_amount) ? (float)$fine->fine_amount : 0;
-      $getDiscountsOnAgents=$this->Report_Model->getDiscountsOnAgents($customerId,$fromDate,$toDate);
-      $transactionBalance = $this->Report_Model->getTransactionAmount($customerId,$fromDate,$toDate); // Ensure $transactions is numeric
-      $creditsBalance = $credits->total_credits - $getDiscountsOnAgents->discount_credits +  $transactionBalance-$finedAmount;*/
 
 
       $data=[
         'assignRequests'=>count($assignRequests),
         'cancelledRequests'=>count($cancelledRequests),
         'completedRequests'=> count($completedRequests),
-        'totalRequests'=>count($totalRequests),
+        'totalRequests'=>$totalRequests,
         'credits'=> $credits->total_credits,
         'to'=> $toDate,
         'from'=>  $fromDate,      
         'creditsByMonth1'=>  $creditByMonth,
         'handoveredWasteByMonth'=>$handoveredWasteByMonth,
         'collectedWasteByMonth'=>$collectedWasteByMonth,
-        /*'notification'=> $Notifications,   
-        'fine_balance'=> $finedAmount, 
-        'credit_balance'=> $creditsBalance, 
-        'transaction_balance'=> $transactionBalance, 
-        'redeemed_balance'=> $getDiscountsOnAgents->discount_credits*/
       ];
       
       $this->view('collectors/analatics', $data);
@@ -1180,23 +1166,17 @@
     $completedRequests=$this->Report_Model->getCompletedRequests($collectorId,"none", "none");
     $cancelledRequests=$this->Report_Model->getCancelledRequests($collectorId,"none", "none");
     $assignRequests=$this->Report_Model->getAssignRequests($collectorId,"none", "none");
-    $totalRequests = $this->Report_Model->getallRequests($collectorId,"none", "none");     
+    $totalRequests = count($assignRequests) + count($cancelledRequests) + count($completedRequests);
     $credits=$this->Report_Model->getCredits($collectorId,"none", "none");
     $creditByMonth=$this->Report_Model->getCreditsMonths($collectorId);
     $collectedWasteByMonth=$this->Report_Model->getCollectedGarbage_collector($collectorId,"none", "none");
     $handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage_collector($collectorId,"none", "none");
-
-    /*$fine=$this->Report_Model->getFineAmount($customerId);
-    $finedAmount = is_numeric($fine->fine_amount) ? (float)$fine->fine_amount : 0;
-    $getDiscountsOnAgents=$this->Report_Model->getDiscountsOnAgents($customerId);
-    $transactionBalance = $this->Report_Model->getTransactionAmount($customerId); // Ensure $transactions is numeric
-    $creditsBalance = $credits->total_credits - $getDiscountsOnAgents->discount_credits +  $transactionBalance-$finedAmount;*/
-    
+   
     $data=[
       'assignRequests'=>count($assignRequests),
       'cancelledRequests'=>count($cancelledRequests),
       'completedRequests'=> count($completedRequests),
-      'totalRequests'=>count($totalRequests),
+      'totalRequests'=>$totalRequests,
       'credits'=> $credits->total_credits,     
       'creditsByMonth1'=> $creditByMonth,
       'collectedWasteByMonth'=>$collectedWasteByMonth,

@@ -190,13 +190,23 @@
                 </div>
                 </div>
                 <!-- contact form -->
-                <div class="contact-form">
-                <div class="input-fields">
-                    <input type="text" class="input-field" title="input" placeholder="Name"/>
-                    <input type="text" class="input-field" title="input" placeholder="Email"/>
+             
+                <div class="contact-form"> 
+                <form action="<?php echo URLROOT?>/pages/mail_subscriptions#contact" method="post">
+                    <div class="input-fields">
+                        <input type="text" class="input-field" name="name" placeholder="Name" value="<?php echo $data['name']?>"/>
+                        <div class="err" ><?php echo $data['name_err']?></div>
+                        <input type="text" class="input-field" name="email" placeholder="Email" value="<?php echo $data['email']?>"/>
+                        <div class="err" ><?php echo $data['email_err']?></div>
+                    </div>
+                    <button class="button" type="submit"><span class="contact">Submit</span></button>
+
+                </form>
+                    
+              
                 </div>
-                <button class="button"><span class="contact">Submit</span></button>
-                </div>
+                
+                
             </div>
         </section>
 
@@ -205,6 +215,20 @@
             <hr />
             <p>@copyright 2025 | All right preserved by Eco Plus</p>
         </footer>
+
+        <?php if($data['success']=='True') : ?>
+            <div class="success">
+                <div class="popup" id="popup">
+                <img src="<?php echo IMGROOT?>/check.png" alt="">
+                <h2>Success!!</h2>
+                <p>Mail Subscription recorded successfully</p>
+                <a href="<?php echo URLROOT?>/pages/index"><button type="button" >OK</button></a>
+
+                </div>
+            </div>
+        <?php endif; ?>
+
+
 
     </div>
     <script>

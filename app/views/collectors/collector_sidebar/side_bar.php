@@ -23,24 +23,25 @@
             </div>
             <h3>Complaints</h3>
         </div>
-        <div class="main-left-middle-content" onclick="redirect_edit_profile()" id="edit_profile">
-            <div class="main-left-middle-content-icon">
-                <i class='bx bx-user-pin'></i>
-            </div>
-            <h3>Profile</h3>
-        </div>
-        <div class="main-left-middle-content" onclick="redirect_garbage_type()" id="edit_profile">
+
+        <div class="main-left-middle-content" onclick="redirect_garbage_type()" id="garbage_type">
             <div class="main-left-middle-content-icon">
                 <i class='bx bx-trash'></i>
             </div>
             <h3>Garbage Type</h3>
         </div>
 
-        <div class="main-left-middle-content" onclick="redirect_analatics()" id="edit_profile">
+        <div class="main-left-middle-content" onclick="redirect_analatics()" id="analatics">
             <div class="main-left-middle-content-icon">
                 <i class='bx bx-stats'></i>
             </div>
             <h3>Analatics</h3>
+        </div>
+        <div class="main-left-middle-content" onclick="redirect_edit_profile()" id="edit_profile">
+            <div class="main-left-middle-content-icon">
+                <i class='bx bx-user-pin'></i>
+            </div>
+            <h3>Profile</h3>
         </div>
 
     </div>
@@ -73,7 +74,7 @@
 
 <script>
 function redirect_dashboard() {
-    var linkUrl = "<?php echo URLROOT?>/collectors"; 
+    var linkUrl = "<?php echo URLROOT?>/collectors";
     window.location.href = linkUrl;
 }
 
@@ -83,7 +84,7 @@ function redirect_garbage_type() {
 }
 
 function redirect_request() {
-    var linkUrl = "<?php echo URLROOT?>/collectors/request_assinged"; 
+    var linkUrl = "<?php echo URLROOT?>/collectors/request_assinged";
     window.location.href = linkUrl;
 }
 
@@ -93,12 +94,12 @@ function redirect_complains() {
 }
 
 function redirect_edit_profile() {
-    var linkUrl = "<?php echo URLROOT?>/collectors/editprofile"; 
+    var linkUrl = "<?php echo URLROOT?>/collectors/editprofile";
     window.location.href = linkUrl;
 }
 
 function redirect_analatics() {
-    var linkUrl = "<?php echo URLROOT?>/collectors/analatics"; 
+    var linkUrl = "<?php echo URLROOT?>/collectors/analatics";
     window.location.href = linkUrl;
 }
 

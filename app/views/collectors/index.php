@@ -1,8 +1,9 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
 <div class="Collector_Main">
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&callback=initMap" async defer>
     </script>
+
     <div class="Collector_Dashboard">
 
         <div class="main">
@@ -70,8 +71,8 @@
                                 <h2 id="request_count"><?php echo $data['completed_request_count']?></h2>
                             </div>
                         </div>
-                        <div class="main-right-bottom-two-cont A" id="credit_per_waste_quantity">
-                            <div class="icon_container">
+                        <div class="main-right-bottom-two-cont A" onclick="redirect_garbagetypes()">
+                            <div class=" icon_container">
                                 <i class='bx bx-dollar-circle'></i>
                             </div>
                             <div class="content_container">
@@ -150,53 +151,13 @@
 
             </div>
 
-            <div class="eco_credit_per_quantity" id="eco_credit_per_quantiy_pop">
-                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" id="close_eco_credit_per_quantiy_pop">
-                <h1>Eco Credits per Waste Qunatity</h1>
-                <div class="Eco_Credit_Per_Cont">
-                    <div class="Cont">
-                        <h3>Plastic</h3>
-                        <i class="icon fas fa-box"></i>
-                        <p><?php echo $data['eco_credit_per']->plastic?></p>
-                    </div>
-                    <div class="Cont">
-                        <h3>Polythene</h3>
-                        <i class="icon fas fa-trash"></i>
-                        <p><?php echo $data['eco_credit_per']->polythene?></p>
-                    </div>
-                    <div class="Cont">
-                        <h3>Metal</h3>
-                        <i class="icon fas fa-box"></i>
-                        <p><?php echo $data['eco_credit_per']->metal?></p>
-                    </div>
-                    <div class="Cont">
-                        <h3> Glass</h3>
-                        <i class="icon fas fa-glass-whiskey"></i>
-                        <p><?php echo $data['eco_credit_per']->glass?></p>
-                    </div>
 
-                    <div class="Cont">
-                        <h3>Paper</h3>
-                        <i class="icon fas fa-file-alt"></i>
-                        <p><?php echo $data['eco_credit_per']->paper?></p>
-                    </div>
-                    <div class="Cont">
-                        <h3>Electronic</h3>
-                        <i class="icon fas fa-laptop"></i>
-                        <p><?php echo $data['eco_credit_per']->electronic?></p>
-                    </div>
-                </div>
-                <h2>Per Kg</h2>
-
-            </div>
 
             <div class="overlay" id="overlay"></div>
 
         </div>
 
-        <script>          
-
-
+        <script>
         var color = "#47b076";
         var textColor = "#414143"
         let circularProgress = document.querySelector(".circular-progress");
@@ -205,20 +166,7 @@
         let progressEndValue = <?php echo intval($data['percentage']); ?>;
         let speed = 30;
 
-        var credit_per_waste_quantity = document.getElementById("credit_per_waste_quantity");
-
-        document.getElementById("credit_per_waste_quantity").addEventListener("click", function() {
-            document.getElementById("eco_credit_per_quantiy_pop").classList.add('active');
-            document.getElementById('overlay').style.display = "flex";
-        });
-
-        document.getElementById("close_eco_credit_per_quantiy_pop").addEventListener("click", function() {
-            document.getElementById("eco_credit_per_quantiy_pop").classList.remove('active');
-            document.getElementById('overlay').style.display = "none";
-        });
-
         function redirectToAssignedRequests() {
-            console.log('as');
             var linkUrl = "<?php echo URLROOT?>/collectors/request_assinged"; // Replace with your desired URL
             window.location.href = linkUrl;
         }
@@ -235,6 +183,11 @@
 
         function redirect_history() {
             var linkUrl = "<?php echo URLROOT?>/collectors/collector_assistants"; // Replace with your desired URL
+            window.location.href = linkUrl;
+        }
+
+        function redirect_garbagetypes() {
+            var linkUrl = "<?php echo URLROOT?>/collectors/garbage_types"; // Replace with your desired URL
             window.location.href = linkUrl;
         }
 
@@ -255,7 +208,7 @@
                 updateCount(i);
             }, i * 50); // Change 1000 to control the speed of counting (milliseconds)
         }
-    
+
 
         function createOrUpdateChart(color, textColor) {
             var Total_Garbage = <?php echo $data['total_garbage']?>;
@@ -337,8 +290,6 @@
         }
         createOrUpdateChart(color, textColor);
 
-
-
         function initMap() {
             var defaultLatLng = {
                 lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
@@ -346,7 +297,7 @@
             };
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: defaultLatLng,
-                zoom: 11,
+                zoom: 9,
 
 
                 styles: [{
@@ -429,7 +380,7 @@
                 });
             });
         }
- 
+
         let progress = setInterval(() => {
             if (progressStartValue == progressEndValue) {
                 clearInterval(progress);
@@ -447,7 +398,7 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             const ctx = document.getElementById('myChart').getContext('2d');
-            const myChart = new Chart(ctx, config); 
+            const myChart = new Chart(ctx, config);
 
             const chartContainer = document.getElementById('chart');
             actions.forEach(action => {

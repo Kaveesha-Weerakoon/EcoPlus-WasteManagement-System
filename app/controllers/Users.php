@@ -7,6 +7,7 @@
            $this->customerModel=$this->model('Customer');
            $this->discount_agentModel=$this->model('Discount_Agent');
            $this->Center_Model=$this->model('Center');
+           $this->Admin_Model=$this->model('Admins');
 
           }
 
@@ -280,7 +281,11 @@
                 
               }
               else if($loggedInUser->role=="admin" || $loggedInUser->role=="superadmin"){
+                $admin = $this->Admin_Model->getAdminByID($loggedInUser->id);
+                $_SESSION['admin_profile'] = $admin->image;
+
                 $this->createAdminSession($loggedInUser);
+                
               }
 
              else if($loggedInUser->role=="discountagent"){

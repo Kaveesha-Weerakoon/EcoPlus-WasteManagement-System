@@ -95,6 +95,7 @@
 @import url('Component/CenterManager/CenterManager_Complaints.css');
 @import url('Component/CenterManager/CenterManager_Complaints_History.css');
 
+@import url('Component/CenterManager/CenterManager_Garbage_Types.css');
 @import url('Component/CenterManager/CenterManager_Waste_Management.css');
 @import url('Component/CenterManager/CenterManager_Center_Garbage_Stock.css');
 @import url('Component/CenterManager/CenterManager_Stock_Releases.css');
@@ -155,6 +156,9 @@
 @import url('Component/Admin/Admin_Center_Main_Request_Assigned.css');
 @import url('Component/Admin/Admin_Center_Main_Request_Cancelled.css');
 @import url('Component/Admin/Admin_Center_Main_Request_Completed.css');
+@import url('Component/Admin/Admin_Center_Main_Waste_Handover.css');
+@import url('Component/Admin/Admin_Center_Main_Stock_Releases.css');
+
 @import url('Component/Admin/Admin_Reports.css');
 @import url('Component/Admin/Admin_Admin.css');
 @import url('Component/Admin/Admin_Admin_Add.css');

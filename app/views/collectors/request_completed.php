@@ -2,7 +2,8 @@
 <div class="Collector_Main">
     <div class="Collector_Request_Top">
         <div class="Collector_Request_Completed">
-
+            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&callback=initMap" async
+                defer></script>
             <div class="main">
                 <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
                 <div class="main-right">
@@ -219,10 +220,6 @@
 </div>
 
 
-
-
-
-
 <script>
 function initMap(latitude = 7.4, longitude = 81.00000000) {
     var mapCenter = {
@@ -273,7 +270,6 @@ function loadLocations() {
     });
 }
 
-
 function view_collect_details(request) {
     var locationPop = document.getElementById('collect-details-popup-box');
     locationPop.classList.add('active');
@@ -315,18 +311,14 @@ function close_request_details() {
 function searchTable() {
     var input = document.getElementById('searchInput').value.toLowerCase();
     var rows = document.querySelectorAll('.table-row');
-
+    console.log("hello");
     rows.forEach(function(row) {
         var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
         var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
         var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-        var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
-        var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
-        var conctact_no = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
-        var instructions = row.querySelector('td:nth-child(7)').innerText.toLowerCase();
 
-        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(input) ||
-            cid.includes(input) || conctact_no.includes(input) || instructions.includes(input)) {
+
+        if (time.includes(input) || id.includes(input) || date.includes(input)) {
             row.style.display = '';
         } else {
             row.style.display = 'none'; // Hide the row
@@ -335,6 +327,7 @@ function searchTable() {
 
 
 }
+
 document.getElementById('searchInput').addEventListener('input', searchTable);
 document.addEventListener("DOMContentLoaded", function() {
 

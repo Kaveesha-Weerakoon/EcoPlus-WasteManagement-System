@@ -234,7 +234,7 @@
 
     .table-row {
         height: 55px;
-        grid-template-columns: 33% 33% 33%;
+        grid-template-columns: 20% 30% 30% 20%;
     }
 
     .table td {
@@ -242,7 +242,7 @@
     }
 
     .table-header {
-        grid-template-columns: 33% 33% 33%;
+        grid-template-columns: 20% 30% 30% 20%;
     }
 
 

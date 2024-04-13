@@ -150,16 +150,14 @@
                 </div>
 
             </div>
-
-
-
             <div class="overlay" id="overlay"></div>
-
         </div>
 
         <script>
         var color = "#47b076";
         var textColor = "#414143"
+        var checkbox = document.getElementById('toggle-checkbox');
+
         let circularProgress = document.querySelector(".circular-progress");
         let progressValue = document.querySelector(".progress-value");
         let progressStartValue = 0;
@@ -208,7 +206,6 @@
                 updateCount(i);
             }, i * 50); // Change 1000 to control the speed of counting (milliseconds)
         }
-
 
         function createOrUpdateChart(color, textColor) {
             var Total_Garbage = <?php echo $data['total_garbage']?>;
@@ -288,6 +285,7 @@
                 }
             });
         }
+
         createOrUpdateChart(color, textColor);
 
         function initMap() {
@@ -399,6 +397,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             const ctx = document.getElementById('myChart').getContext('2d');
             const myChart = new Chart(ctx, config);
+            var config = null;
+
 
             const chartContainer = document.getElementById('chart');
             actions.forEach(action => {
@@ -411,6 +411,8 @@
 
         function getDarkModeSetting() {
             const storedValue = localStorage.getItem("darkMode");
+            console.log("as");
+
             return storedValue ? JSON.parse(storedValue) : true;
         }
 
@@ -422,7 +424,6 @@
             circularProgress.style.background =
                 `conic-gradient(${color}, ${progressStartValue * 3.6}deg, ${isDarkMode ? "#001f3f" : "#ededed"} 0deg)`;
         }
-
         checkbox.addEventListener("change", function() {
 
             if (getDarkModeSetting()) {
@@ -441,7 +442,6 @@
             }
             createOrUpdateChart(color, textColor);
         });
-
         createOrUpdateChart(color, textColor);
         </script>
 

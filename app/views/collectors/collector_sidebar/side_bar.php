@@ -108,49 +108,46 @@ var checkbox = document.getElementById("toggle-checkbox");
 var root = document.documentElement;
 var logo = document.getElementById("top_logo");
 
+function setDarkModeStyle(isDarkMode) {
+    const root = document.documentElement;
+    const logo = document.getElementById('top_logo');
+    const textColor = isDarkMode ? "#fff" : "#414143";
+    const color = isDarkMode ? "#fff" : "#47b076";
+    const progressStartValue = 0;
+
+    root.style.setProperty("--background-color-main", isDarkMode ? "#001f3f" : "#fff");
+    root.style.setProperty("--background-color-right", isDarkMode ? "#001f3f" : "#fbfbfb");
+    root.style.setProperty("--main-text-color", isDarkMode ? "#fff" : "#414143");
+    root.style.setProperty("--green-color-one", isDarkMode ? "#fff" : "#1ca557");
+    root.style.setProperty("--green-color-two", isDarkMode ? "#fff" : "#47b076");
+    root.style.setProperty("--notification-hover", isDarkMode ? "#1ca557" : "#64d798");
+    root.style.setProperty("--background-color-two", isDarkMode ? "#001f3f" : "#f5f6fa");
+    root.style.setProperty("--yellow-color", isDarkMode ? "#fff" : "#f6e58d");
+
+    root.style.setProperty("--box-shadow2", isDarkMode ? "0.1px 0.1px 1px 1px rgba(255, 255, 255, 0.5)" :
+        "0 1px 1px 0px rgba(0, 0, 0, 0.1)");
+
+    root.style.setProperty("--box-shadow", isDarkMode ? "0.5px 0.5px 1px 0.5px rgba(255, 255, 255, 1)" :
+        "0 1px 1px 0px rgba(0, 0, 0, 0.1)");
+    root.style.setProperty("--table-header", isDarkMode ? "#001f3f" : "#e9f6ef");
+    logo.style.display = isDarkMode ? "none" : "flex";
+
+}
+
+function getDarkModeSetting() {
+    const storedValue = localStorage.getItem("darkMode");
+    return storedValue ? JSON.parse(storedValue) : true;
+}
+
+const initialDarkModeSetting = getDarkModeSetting();
+checkbox.checked = initialDarkModeSetting;
+
+setDarkModeStyle(initialDarkModeSetting);
 checkbox.addEventListener("change", function() {
-    if (checkbox.checked) {
-        root.style.setProperty("--background-color-main", "#001f3f");
-        root.style.setProperty("--background-color-right", "#001f3f");
-        root.style.setProperty("--main-text-color", "#fff");
-        root.style.setProperty("--green-color-one", "#fff");
-        root.style.setProperty("--green-color-two", "#fff");
-        root.style.setProperty("--background-color-two", "#001f3f");
-        root.style.setProperty("--table-header", "#001f3f");
-        root.style.setProperty("--notification-hover", "#1ca557");
-        root.style.setProperty("--box-shadow", "0.5px 0.5px 1px 0.5px rgba(255, 255, 255, 1)");
-        logo.style.display = "none";
-        textColor = "#ffff";
-        color = "#ffff";
-        circularProgress.style.background =
-            `conic-gradient(${color}, ${progressStartValue * 3.6}deg, #001f3f 0deg)`;
+    const isDarkMode = checkbox.checked;
+    setDarkModeStyle(isDarkMode);
+    console.log("as");
 
-        logo.style.display = "none";
-        if (myChart) {
-            myChart.destroy();
-        }
-        createOrUpdateChart(color, textColor);
-
-    } else {
-        root.style.setProperty("--background-color-main", "#fff");
-        root.style.setProperty("--background-color-right", "#fbfbfb");
-        root.style.setProperty("--main-text-color", "#414143");
-        root.style.setProperty("--green-color-one", "#1ca557");
-        root.style.setProperty("--green-color-two", "#47b076");
-        root.style.setProperty("--notification-hover", "#64d798");
-        root.style.setProperty("--background-color-two", "#f5f6fa");
-        root.style.setProperty("--box-shadow", "0 1px 1px 0px rgba(0, 0, 0, 0.1)");
-        root.style.setProperty("--table-header", "#e9f6ef");
-        logo.style.display = "flex";
-        color = "#47b076";
-        textColor = "#414143";
-        if (myChart) {
-            myChart.destroy();
-        }
-        createOrUpdateChart(color, textColor);
-        circularProgress.style.background =
-            `conic-gradient(${color}, ${progressStartValue * 3.6}deg, #ededed 0deg)`;
-
-    }
+    localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
 });
 </script>

@@ -4,10 +4,10 @@
 
 
         <div class="main">
-        <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
+            <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
 
             <div class="main-right">
-            <div class="main-right-top">
+                <div class="main-right-top">
                     <div class="main-right-top-search">
                         <i class='bx bx-search-alt-2'></i>
                         <input type="text" placeholder="Search">
@@ -26,9 +26,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
 
                 <div class="main-right-bottom">
 
@@ -75,9 +72,6 @@
 
                         <button>Filter</button>
                     </form>
-
-
-
                     <div class="request-section">
                         <div class="left">
                             <div class="left-cont">
@@ -128,7 +122,7 @@
                                     </h1>
                                 </div>
                                 <div class="bottom">
-                                    <canvas id="myChart" width="688" height="550"></canvas>
+                                    <!-- <canvas id="myChart" width="688" height="550"></canvas> -->
                                 </div>
                             </div>
                         </div>
@@ -247,9 +241,6 @@
 
 
 <script>
-
-
-
 /*Bottom CHART One*/
 
 const data1 = {
@@ -336,7 +327,6 @@ const config2 = {
 const ctx2 = document.getElementById('myPieChart2').getContext('2d');
 const myPieChart2 = new Chart(ctx2, config2);
 /*Bottom CHART Two*/
-
 </script>
 
 

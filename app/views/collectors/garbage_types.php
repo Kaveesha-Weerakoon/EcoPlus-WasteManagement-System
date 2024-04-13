@@ -2,7 +2,7 @@
 <div class="Collector_Main">
     <div class="Collector_GarbageTypes">
         <div class="main">
-        <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
+            <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
 
             <div class="main-right">
                 <div class="main-right-top">
@@ -17,7 +17,7 @@
                         <h1>Garbage Types</h1>
                     </div>
                     <div class="main-right-top-three">
-                        <h4>Meet minimum amounts(Per Kg) in a request to avoid fines</h4>
+                        <h4>Meet minimum amounts when collecting from customers</h4>
                     </div>
                 </div>
 
@@ -27,7 +27,8 @@
                             <table class="table">
                                 <tr class="table-header">
                                     <th>Type</th>
-                                    <th>Minimum Quantity (in kg) We Are Collecting</th>
+                                    <th>Approximate Value Shown to the User</th>
+                                    <th>Minimum Quantity We Are Collecting</th>
                                     <th>Credits per 1 Kilogram</th>
                                 </tr>
                             </table>
@@ -38,6 +39,8 @@
                                 <tr class="table-row">
                                     <td style="text-align: left;"><?php echo $garbage_type->name?></td>
                                     <td><?php echo $garbage_type->approximate_amount?></td>
+                                    <td><?php echo $garbage_type->minimum_amount?></td>
+
                                     <td><?php echo $garbage_type->credits_per_waste_quantity?>
                                     </td>
                                 </tr>
@@ -52,6 +55,6 @@
             </div>
         </div>
     </div>
-   
+
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

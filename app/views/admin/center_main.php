@@ -92,7 +92,7 @@
                                 </div>
                             </a>
 
-                            <a href="">
+                            <a href="<?php echo URLROOT?>/Admin/waste_handover/<?php echo $data['center']->region?>">
                                 <div class="analytic fourth-analytic">
                                     <div class="analytic-icon">
                                         <!-- <img src="<?php echo IMGROOT?>/brown_bin.png" class="icon-image" alt="" /> -->

@@ -89,4 +89,70 @@ public function admin_delete($id){
 
 }
 
+public function editprofile($data){
+  try{
+    $this->db->query('UPDATE users SET name = :name WHERE id = :admin_id');
+    $this->db->bind(':name', $data['name']);
+    $this->db->bind(':admin_id', $data['id']);
+    $_SESSION['admin_name'] = $data['name'];
+    $result = $this->db->execute();
+
+    if($result){
+      $this->db->query('UPDATE admin SET address = :address, contact_no = :contactno WHERE user_id = :admin_id');
+      $this->db->bind(':address', $data['address']);
+      $this->db->bind(':contactno', $data['contactno']);
+      $this->db->bind(':admin_id', $data['id']);
+
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
+
+    }else{
+      return false;
+    }
+
+
+  }catch(PDOException $e){
+    echo 'An error occurred: ' . $e->getMessage();
+    return false;
+  }
+}
+
+public function editprofile_withimg($data){
+  try{
+    $this->db->query('UPDATE users SET name = :name WHERE id = :admin_id');
+    $this->db->bind(':name', $data['name']);
+    $this->db->bind(':admin_id', $data['id']);
+
+    $_SESSION['admin_name'] = $data['name'];
+    $_SESSION['admin_profile'] = $data['profile_image_name'];
+
+
+    if($this->db->execute()){
+      $this->db->query('UPDATE admin SET address = :address, contact_no = :contactno, image = :image WHERE user_id = :admin_id');
+      $this->db->bind(':address', $data['address']);
+      $this->db->bind(':contactno', $data['contactno']);
+      $this->db->bind(':admin_id', $data['id']);
+      $this->db->bind(':image', $data['profile_image_name']);
+
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
+
+    }else{
+      return false;
+    }
+
+  }catch(PDOException $e){
+    echo 'An error occurred: ' . $e->getMessage();
+    return false;
+  }
+}
+
+
+
 }

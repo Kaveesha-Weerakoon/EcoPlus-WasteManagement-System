@@ -78,12 +78,18 @@
     }
 
     .dot {
-        width: 11px;
-        height: 11px;
+        width: 15.5px;
+        height: 15.5px;
         border-radius: 50%;
         background-color: #F13E3E;
-        margin-top: -14px;
-        margin-left: -12px;
+        margin-top: -11px;
+        margin-left: -15px;
+        color: var(--background-color-main);
+        font-size: 11px;
+        font-weight: 501;
+        box-sizing: border-box;
+        padding-left: 4.6px;
+        padding-top: 1.8px;
     }
 
     .main-right-top-notification i {
@@ -114,7 +120,6 @@
     .notification_popup h1 {
         font-size: 19px;
         letter-spacing: 0.001rem;
-        margin-bottom: 13px;
         margin-top: 5px;
         margin-left: 8px;
     }
@@ -148,6 +153,44 @@
         margin-right: 10px;
     }
 
+    .notification_right p {
+        font-size: 13px;
+    }
+
+    .mark_as_read {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .notification_cont {
+        overflow: scroll;
+        max-height: 150px;
+    }
+
+    .mark_as_read button {
+        margin-top: 2px;
+        font-size: 13px;
+        text-align: center;
+        margin-top: 4px;
+        font-weight: 700;
+        border: none;
+        background-color: none !important;
+        background: none;
+        cursor: pointer !important;
+        color: var(--main-text-color);
+        margin-left: 5px;
+    }
+
+    .mark_as_read button:hover{
+        color: var(--button-hover-green);
+    }
+
+    .mark_as_read .bx {
+        font-size: 26px;
+    }
+
     .main-right-top-profile {
         display: flex;
         margin-right: 40px;
@@ -172,7 +215,6 @@
     .main-right-top-profile-cont p {
         font-size: 14px;
     }
-
     .main-right-top-two {
         height: 50px;
         display: flex;
@@ -659,331 +701,3 @@
     }
 }
 
-/* .CenterManager_Request_Main {
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
-
-
-    * {
-        margin: 0;
-        padding: 0;
-        font-family: inter;
-    }
-
-    .main-right a {
-        text-decoration: none;
-        margin-right: 5%
-    }
-
-    .main-right {
-        display: grid;
-        width: 100%;
-        height: 100%;
-        grid-template-rows: 28% 72%;
-    }
-
-    .main-right-top {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .main-right-top-one {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        height: 65px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .main-right-top-one-search {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .main-right-top-one img {
-        margin-left: 30px;
-        margin-right: 14px;
-        width: 22px;
-        height: 22px;
-    }
-
-    .main-right-top-one input {
-        width: 375px;
-        height: 24px;
-        border-radius: 3px;
-        border: 1px solid #7f8c8d;
-        padding-left: 10px;
-    }
-
-    .main-right-top-one-content {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .main-right-top-one-content p {
-        font-family: inter;
-        font-size: 17px;
-    }
-
-
-    .main-right-top-one-content img {
-        width: 50px;
-        height: 50px;
-        margin-left: 15px;
-        border-radius: 50%;
-    }
-
-    .main-right-top-two {
-        height: 50px;
-        display: flex;
-        align-items: center;
-
-    }
-
-    .main-right-top-two button {
-        width: 206px;
-        height: 43px;
-        background: #8CF889;
-        font-size: 20px;
-        font-weight: 700;
-        line-height: 24px;
-        letter-spacing: 0em;
-        text-align: center;
-        border-radius: 5px;
-        border: none;
-        margin-right: 5%;
-        cursor: pointer;
-    }
-
-    .main-right-top-two h1 {
-        font-size: 22px;
-        margin-left: 28px;
-    }
-
-    .main-right-top-three {
-        display: flex;
-        flex-direction: row;
-        padding-left: 38px;
-        padding-top: 6px;
-
-    }
-
-    .main-right-top-three-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-right: 30px;
-        cursor: pointer;
-    }
-
-    .main-right-top-three-content p {
-        font-size: 17px;
-        padding-bottom: 5px;
-    }
-
-    .main-right-top-four {
-        display: flex;
-        align-items: center;
-        height: 54px;
-        padding-right: 19px;
-        justify-content: space-between;
-    }
-
-    .main-right-top-four-left {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #ddd;
-        padding-left: 10px;
-        margin-left: 30px;
-        border-radius: 10px;
-        height: 34px;
-    }
-
-    .main-right-top-four-left input {
-        height: 70;
-        margin-left: 15px;
-        width: 150px;
-        text-align: center;
-        font-size: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        margin-right: 7px;
-    }
-
-    .main-right-top-four-left p {
-        font-size: 15px;
-    }
-
-    .main-right-top-four-left button {
-        margin-right: 5px;
-        font-weight: bold;
-        background-color: #f6e58d;
-        height: 26px;
-        border-radius: 10px;
-        border: none;
-        width: 100px;
-        cursor: pointer;
-        font-size: 15px;
-        transition: 1s;
-        letter-spacing: 0.05rem;
-    }
-
-    .main-right-top-four-left button:hover {
-        background-color: #f0932b;
-    }
-
-    .main-right-top-four-right {
-        display: flex;
-
-    }
-
-    .main-right-top-four img {
-        width: 25px;
-        height: 25px;
-        margin-right: 4px;
-    }
-
-    .main-right-top-four-component {
-        border-radius: 8px;
-        border: 1px solid #ddd;
-        padding: 10px;
-        margin: 5px;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        width: 80px;
-        height: 17px;
-        cursor: pointer;
-    }
-
-
-    .line {
-        width: 93px;
-        height: 3px;
-        background-color: #1B6652;
-    }
-
-    .line1 {
-        width: 93px;
-        height: 3px;
-        background-color: none;
-    }
-
-
-
-    .main-right-bottom {
-        display: none;
-    }
-
-    .main-right-bottom-top {
-        padding-left: 1%;
-        width: 99%;
-    }
-
-    .main-right-bottom-down {
-        width: 99%;
-        height: 500px;
-
-        padding-left: 1%;
-    }
-
-    .table {
-        padding-left: 1%;
-        width: 99%;
-        border-collapse: collapse;
-        text-align: center;
-        padding-left: 1%;
-    }
-
-
-    .table-header th {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .table td {
-        height: 50px;
-        font-size: 16px;
-        vertical-align: middle;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .table-row img {
-        width: 25px;
-        height: 25px;
-        cursor: pointer;
-    }
-
-    @media screen and (max-width: 1118px) {
-        .main-right-top-one-content {
-            width: 250px;
-            margin-left: 1%;
-
-        }
-
-        .table td {
-
-            font-size: 12px;
-
-        }
-
-        .table-header {
-            font-size: 14px !important;
-        }
-
-        .table-row img {
-            width: 20px;
-            height: 20px;
-
-        }
-
-
-    }
-
-    @media screen and (max-width:862px) {
-        .main-right-top-one-content {
-            width: 250px;
-            margin-left: 0;
-            padding-left: 5%;
-        }
-
-        .main-right-top-one input {
-            width: 20%;
-
-        }
-
-        .main-right-top-three-content p {
-            font-size: 14px;
-        }
-
-        .main-right-bottom-top {
-            width: 130%;
-        }
-
-        .main-right-bottom-down {
-            width: 130%;
-        }
-
-    }
-
-    @media screen and (max-width: 762px) {
-        .main-right-top-two button {
-            width: 125px;
-            font-size: 15px;
-        }
-
-        .main-right-top-three-content p {
-            font-size: 14px;
-            padding-bottom: 5px;
-        }
-    }
-} */

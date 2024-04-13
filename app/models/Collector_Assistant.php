@@ -104,5 +104,25 @@
         return $rows;
 
       }
+
+      public function get_collector_assistants_by_centerId($center_id){
+        try{
+          $this->db->query('SELECT * FROM collector_assistants
+                            LEFT JOIN collectors
+                            ON collector_assistants.collector_id = collectors.user_id
+                            WHERE center_id = :center_id');
+          $this->db->bind(':center_id', $center_id);
+
+          $result = $this->db->resultSet();
+
+          return $result;
+
+
+        }catch (PDOException $e) {
+        
+          die($e->getMessage()); 
+          return false;
+        }
+      }
   
 }

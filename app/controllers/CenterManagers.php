@@ -16,7 +16,6 @@
       $this->Customer_Model=$this->model('Customer');
       $this->garbageTypeModel=$this->model('Garbage_Types');
       $this->Center_Manager_Report_Model=$this->model('Center_Manager_Report');
-
       $this->Report_Model=$this->model('Report');
 
       if(!isLoggedIn('center_manager_id')){
@@ -87,8 +86,10 @@
 
     public function collectors(){
       $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'collectors' => $collectors,
+        'notification' => $notifications,
         'click_update' =>'',
         'update_success'=>'',
         'confirm_delete' =>'',
@@ -101,8 +102,10 @@
 
     public function collectors_complains(){
       $collector_complains=$this->collector_complain_Model->get_complains_byCenterID($_SESSION['center_id']);
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'collectors_complains' => $collector_complains,
+        'notification' =>  $notifications
       ];
      
      
@@ -111,6 +114,7 @@
 
     public function collectors_add(){
 
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $data = [
@@ -127,6 +131,7 @@
           'password'=>trim($_POST['password']),
           'confirm_password'=>trim($_POST['confirm_password']),
           'center_name'=>'',
+          'notification'=> $notifications,
 
           'name_err' =>'',
           'nic_err' =>'',
@@ -266,6 +271,7 @@
       }
       else{
         $data = [
+          'notification'=> $notifications,
           'name' =>'',
           'nic' => '',
           'dob'=>'',
@@ -298,6 +304,8 @@
     }
 
     public function collectors_update($collectorId){
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
@@ -312,6 +320,7 @@
                 'vehicle_no'=>trim($_POST['vehicle_no']),
                 'vehicle_type'=>trim($_POST['vehicle_type']),
                 'click_update' =>'True',
+                'notification'=> $notifications,
                 'update_success'=>'',
                 'confirm_delete'=> '',
                 'delete_success'=> '',
@@ -408,6 +417,7 @@
           'vehicle_no'=> $collector->vehicle_no,
           'vehicle_type'=> $collector->vehicle_type,
           'click_update' =>'True',
+          'notification'=> $notifications,
           'update_success'=>'',
           'confirm_delete'=> '',
           'delete_success'=> '',
@@ -430,6 +440,7 @@
 
     public function collector_delete_confirm($collectorId){
         $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
         $data = [
           'collectors' => $collectors,
           'confirm_delete' => 'True',
@@ -438,7 +449,8 @@
           'update_success'=>'',
           'personal_details_click'=> '',
           'vehicle_details_click'=> '',
-          'collector_id' => $collectorId
+          'collector_id' => $collectorId,
+          'notification' => $notifications
         ];     
         $this->view('center_managers/collectors', $data);       
     }
@@ -446,8 +458,10 @@
     public function collector_delete($collectorId){
 
       $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'collectors' => $collectors,
+        'notification'=> $notifications,
         'click_update' =>'',
         'update_success'=>'',
         'confirm_delete'=> '',
@@ -476,6 +490,7 @@
     public function personal_details_view($collectorId){
         $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
         $collector = $this->collectorModel->getCollector_ByID_view($collectorId);
+        $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
         $data = [
           'collectors' => $collectors,
           'id'=> $collectorId,
@@ -486,6 +501,7 @@
           'contact_no'=> $collector->contact_no,
           'address' => $collector->address,
           'image'=>$collector->image,
+          'notification'=> $notifications,
           'personal_details_click'=> 'True',
           'vehicle_details_click'=> '',
           'confirm_delete' => '',
@@ -501,8 +517,10 @@
 
     public function center_workers(){
       $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'center_workers' => $center_workers,
+        'notification' =>  $notifications,
         'center_worker_id'=>'',
         'click_update' =>'',
         'update_success'=>'',
@@ -515,6 +533,7 @@
 
     public function center_workers_add(){
      
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
@@ -524,6 +543,7 @@
                'contact_no'=>trim($_POST['contact_no']),
                'address' =>trim($_POST['address']),
                'registered'=>'',
+               'notification'=> $notifications,
                
                'name_err' => '',
                'nic_err' => '',
@@ -582,6 +602,7 @@
       }
       else{
         $data = [
+          'notification'=> $notifications,
           'name' => '',
           'nic' => '',
           'dob'=>'',
@@ -603,6 +624,8 @@
     }
 
     public function center_workers_update($workerId){
+
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
@@ -615,6 +638,7 @@
                 'contact_no'=>trim($_POST['contact_no']),
                 'address' =>trim($_POST['address']),
                 'click_update' =>'True',
+                'notification'=> $notifications,
                 'update_success'=>'',
                 'confirm_delete'=> '',          
                 'name_err' => '',
@@ -690,6 +714,7 @@
           'contact_no'=> $center_worker->contact_no,
           'address' => $center_worker->address,
           'click_update' =>'True',
+          'notification'=> $notifications,
           'update_success'=>'',
           'confirm_delete'=> '',
 
@@ -712,13 +737,15 @@
 
     public function center_workers_delete_confirm($workerId){
       $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'center_workers' => $center_workers,
         'confirm_delete' =>'True',
         'delete_success' =>'',
         'click_update' =>'',
         'update_success'=>'',
-        'center_worker_id'=>$workerId
+        'center_worker_id'=>$workerId,
+        'notification' => $notifications
 
       ];
 
@@ -728,8 +755,10 @@
     public function center_workers_delete($workerId){
 
       $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
-        'center_workers' => $center_workers
+        'center_workers' => $center_workers,
+        'notification' => $notifications
 
       ];
       $center_worker = $this->centerworkerModel->getCenterWorkerById($workerId);
@@ -750,7 +779,7 @@
     }
 
    public function editprofile(){
-
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $id=$_SESSION['center_manager_id']; 
@@ -765,6 +794,7 @@
          'profile_image_name' => $_SESSION['center_manager_email'].'_'.$_FILES['profile_image']['name'],
          'contactno'=>trim($_POST['contactno']),
          'address'=>trim($_POST['address']),
+         'notification'=> $notifications,
          'city'=>'',
          'current'=>'',
          'new_pw'=>'',
@@ -844,7 +874,9 @@
         'contactno_err' =>'',
         'city_err'=>'',
         'profile_err'=>'',
-        'success_message'=>''];
+        'success_message'=>'',
+        'notification'=> $notifications
+        ];
        
         $id=$_SESSION['center_manager_id']; 
         $user=$this->centermanagerModel->getCenterManagerByID($id);
@@ -860,6 +892,7 @@
    }
 
    public function change_password(){
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); $data=[
@@ -872,6 +905,7 @@
         'current'=>trim($_POST['current']),
         'new_pw'=>trim($_POST['new_pw']),
         're_enter_pw'=>trim($_POST['re_enter_pw']),
+        'notification'=> $notifications,
         'current_err'=>'',
         'new_pw_err'=>'',
         're_enter_pw_err'=>'',
@@ -950,7 +984,8 @@
           'contactno_err' =>'',
           'city_err'=>'',
           'profile_err'=>'',
-          'success_message'=>''
+          'success_message'=>'',
+          'notification'=> $notifications
 
 
         ];
@@ -966,6 +1001,7 @@
     $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
     $jsonData = json_encode($incoming_requests);
     $assigned_requests = $this->Request_Model->get_assigned_request_by_center($center->region);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     $assigned_requests_count = [];
     foreach ($collectors as $collector) {
@@ -982,7 +1018,8 @@
       'assigned_requests_count' => $assigned_requests_count,
       'assigned_requests'=> $assigned_requests,
       'lattitude'=> $center->lat,
-      'longitude'=> $center->longi
+      'longitude'=> $center->longi,
+      'notification' => $notifications
     ];
     $this->view('center_managers/request_incomming', $data);
 
@@ -991,6 +1028,7 @@
   public function request_cancell(){
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
     $jsonData = json_encode($incoming_requests);
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
@@ -1005,7 +1043,8 @@
         'reason'=>trim($_POST['reason']),
         'cancelled_by'=>"Center",
         'assinged'=>'No',
-        'collector_id'=>''
+        'collector_id'=>'',
+        'notification'=> $notifications
 
       ];
 
@@ -1028,6 +1067,7 @@
         'jsonData' => $jsonData,
         'pop_location'=>'',
         'map'=>'',
+        'notification'=> $notifications
 
       ];
       $this->view('center_managers/request_incomming', $data);
@@ -1037,8 +1077,10 @@
   public function request_cancelled(){
        $center=$this->center_model->getCenterById($_SESSION['center_id']); 
        $cancelled_request = $this->Request_Model->get_cancelled_request_bycenter($center->region);
+       $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
        $data=[
-         'cancelled_request'=>$cancelled_request
+         'cancelled_request'=>$cancelled_request,
+         'notification'=> $notifications
        ];
        $this->view('center_managers/request_cancelled', $data);
 
@@ -1048,6 +1090,7 @@
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
     $jsonData = json_encode($incoming_requests);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
      
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1059,6 +1102,7 @@
         'map'=>'',
         'request_id'=>trim($_POST['assign_req_id']),
         'collector_id'=>trim($_POST['selected_collector_id']),
+        'notification'=> $notifications
 
       ];
       if (empty($data['request_id']) || empty($data['collector_id']) ) {
@@ -1085,6 +1129,7 @@
         'jsonData' => $jsonData,
         'pop_location'=>'',
         'map'=>'',
+        'notification'=> $notifications
 
       ];
       $this->view('center_managers/request_assinged', $data);
@@ -1096,10 +1141,11 @@
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $assined_requests=$this->Request_Model->get_assigned_request_by_center($center->region);
     $jsonData = json_encode($assined_requests);
-   
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
     $data=[
       'assined_requests'=>$assined_requests,
-      'jsonData'=>$jsonData 
+      'jsonData'=>$jsonData,
+      'notification'=> $notifications
     ];
     
     $this->view('center_managers/request_assinged', $data);
@@ -1110,6 +1156,7 @@
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $assined_requests=$this->Request_Model->get_assigned_request_by_center($center->region);
     $jsonData = json_encode($assined_requests);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1123,7 +1170,8 @@
         'reason'=>trim($_POST['reason']),
         'cancelled_by'=>"Center",
         'assinged'=>'Yes',
-        'collector_id'=> trim($_POST['collector_id'])
+        'collector_id'=> trim($_POST['collector_id']),
+        'notification'=> $notifications
       ];
 
       if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
@@ -1142,6 +1190,7 @@
         'jsonData' => $jsonData,
         'pop_location'=>'',
         'map'=>'',
+        'notification'=> $notifications
 
       ];
       $this->view('center_managers/request_assigned', $data);
@@ -1151,10 +1200,12 @@
   public function request_completed(){
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $completed_requests = $this->collect_garbage_Model->get_completed_requests_bycenter($center->region);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
     $data=[
       'completed_requests'=>$completed_requests,
       'confirm_popup'=> '',
-      'confirm_success'=> ''
+      'confirm_success'=> '',
+      'notification'=> $notifications
       
     ];
     $this->view('center_managers/request_completed', $data);
@@ -1166,6 +1217,7 @@
     $assigned_request = $this->Request_Model->get_assigned_request($req_id);
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $completed_requests = $this->collect_garbage_Model->get_completed_requests_bycenter($center->region);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1184,6 +1236,7 @@
         'metals_quantity' => trim($_POST['metals_quantity']),
         'note' => trim($_POST['note']),
         'confirm_popup' => 'True',
+        'notification'=> $notifications,
         'confirm_success'=> '',
         'polythene_quantity_err'=>'',
         'plastic_quantity_err'=>'',
@@ -1258,6 +1311,7 @@
         'metals_quantity' => $completed_request->Metals,
         'note'=> '',
         'confirm_popup' => 'True',
+        'notification'=> $notifications,
         'confirm_success'=> '',
         'polythene_quantity_err'=>'',
         'plastic_quantity_err'=>'',
@@ -1280,9 +1334,11 @@
   public function waste_management(){
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $confirmed_requests = $this->garbage_Model->get_confirmed_requests_by_region($center->region);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     $data =[
       'confirmed_requests'=>$confirmed_requests,
+      'notification'=> $notifications
     ];
     
     $this->view('center_managers/waste_management', $data);
@@ -1292,6 +1348,7 @@
   public function center_garbage_stock(){
 
     $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     $data =[
       'current_polythene'=>$current_quantities->current_polythene,
@@ -1299,7 +1356,8 @@
       'current_glass'=>$current_quantities->current_glass,
       'current_paper'=>$current_quantities->current_paper,
       'current_electronic'=>$current_quantities->current_electronic,
-      'current_metals'=>$current_quantities->current_metal
+      'current_metals'=>$current_quantities->current_metal,
+      'notification'=> $notifications
 
     ];
 
@@ -1311,6 +1369,7 @@
     $types=$this->garbageTypeModel->get_all();
 
     $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1327,6 +1386,7 @@
         'released_person'=> trim($_POST['released_person']),
         'release_note' => trim($_POST['release_note']),
         'release_popup' => 'True',
+        'notification'=> $notifications,
         'release_success'=> '',
         'sell_price_pop'=>$pop,
         'released_person_err'=> '',
@@ -1424,6 +1484,7 @@
         'current_paper'=>$current_quantities->current_paper,
         'current_electronic'=>$current_quantities->current_electronic,
         'current_metals'=>$current_quantities->current_metal,
+        'notification'=> $notifications,
         'released_person'=> '',
         'release_note' => '',
         'release_popup' => 'True',
@@ -1458,6 +1519,7 @@
     $types=$this->garbageTypeModel->get_all();
 
     $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1474,6 +1536,7 @@
         'released_person'=> trim($_POST['released_person']),
         'release_note' => trim($_POST['release_note']),
         'release_popup' => 'True',
+        'notification'=> $notifications,
         'release_success'=> '',
         'sell_price_pop'=>'',
         'released_person_err'=> '',
@@ -1572,6 +1635,7 @@
         'current_electronic'=>$current_quantities->current_electronic,
         'current_metals'=>$current_quantities->current_metal,
         'released_person'=> '',
+        'notification'=> $notifications,
         'release_note' => '',
         'release_popup' => 'True',
         'release_success'=> '',
@@ -1602,9 +1666,11 @@
 
   public function stock_release_details(){
     $release_details = $this->garbage_Model->get_release_details($_SESSION['center_id']);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     $data = [
-      'release_details'=>$release_details
+      'release_details'=>$release_details,
+      'notification'=> $notifications
     ];
 
     $this->view('center_managers/stock_releases', $data);
@@ -1613,6 +1679,7 @@
 
   public function complaints(){
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -1625,6 +1692,7 @@
         'contact_no' => trim($_POST['contact_no']),
         'subject' => trim($_POST['subject']),
         'complaint' => trim($_POST['complaint']),
+        'notification'=> $notifications,
         'name_err' => '',
         'contact_no_err' => '',
         'subject_err' => '' ,
@@ -1677,6 +1745,7 @@
       $data =[
         'name' => $_SESSION['center_manager_name'],
         'contact_no' => $center_manager->contact_no,
+        'notification'=> $notifications,
         'subject' => '',
         'complaint' => '',
         'name_err' => '',
@@ -1694,6 +1763,7 @@
 
   public function mark_holidays(){
     $center=$this->center_model->getCenterById($_SESSION['center_id']);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1702,7 +1772,8 @@
         'holiday' => trim($_POST['holiday']),
         'center_id'=> $_SESSION['center_id'],
         'region'=> $center->region,
-        'holiday_success'=> ''
+        'holiday_success'=> '',
+        'notification'=> $notifications
         
       ];
 
@@ -1738,9 +1809,10 @@
 
   public function complaints_history(){
     $complaints_history = $this->center_complaints_model->get_center_complaints_history($_SESSION['center_id']);
-
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
     $data=[
       'complaints_history'=>$complaints_history,
+      'notification'=> $notifications
      
       
     ];
@@ -1754,6 +1826,8 @@
 
     $center1 = $this->center_model->getCenterById($_SESSION['center_id']);
     $region = $center1->region;
+    $centerId=$center1->id;
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
           
@@ -1762,7 +1836,7 @@
       $collector =trim($_POST['collector-dropdown']);
       //print($collector);
       if($collector != "none"){
-        //$col=$this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        
          $collector_id = $collector;
       }
       else{
@@ -1787,18 +1861,11 @@
       $ongoingRequests=$this->Center_Manager_Report_Model->getonGoingRequests_collector($fromDate,$toDate,$region, $collector_id);
       $collectedWasteByMonth=$this->Center_Manager_Report_Model->getCollectedGarbage_collector($fromDate,$toDate,$region, $collector_id);
       $handoveredWasteByMonth=$this->Center_Manager_Report_Model->getHandOveredGarbage_collector($fromDate,$toDate,$region, $collector_id);
-    
-
-      //$completedRequests=$this->Report_Model->getCompletedRequests($fromDate,$toDate,$center);
-      //$cancelledRequests=$this->Report_Model->getCancelledRequests($fromDate,$toDate,$center);
-      //$ongoingRequests=$this->Report_Model->getonGoingRequests($fromDate,$toDate,$center);
-      //$totalRequests=$this->Report_Model->getallRequests($fromDate,$toDate,$center);
-      $credits=$this->Report_Model->getCredits($fromDate,$toDate,$center);
+      $selledWasteByMonth=$this->Center_Manager_Report_Model->getSelledGarbage($fromDate,$toDate,$centerId);
       $centers = $this->center_model->getallCenters();
-      $creditByMonth=$this->Report_Model->getCreditsMonths($center);
-      //$collectedWasteByMonth=$this->Report_Model->getCollectedGarbage($fromDate,$toDate,$center);
-      //$handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage($fromDate,$toDate,$center);
-      $selledWasteByMonth=$this->Report_Model->getSelledGarbage($fromDate,$toDate,$center_id);
+      $credits=$this->Center_Manager_Report_Model->getCredits_collector($fromDate,$toDate,$region, $collector_id);
+      $creditByMonth=$this->Center_Manager_Report_Model->getCreditsMonths_collector( $region , $collector_id);
+
 
       $data=[
         'completedRequests'=> count($completedRequests),
@@ -1810,7 +1877,7 @@
         // 'center'=>$center,
         'collectors'=> $collectors,
         'collector' => $collector,
-
+        'notification'=> $notifications,
         'to'=>$toDate,
         'from'=>$fromDate,
         'credits'=> $credits->total_credits,
@@ -1832,20 +1899,12 @@
       $ongoingRequests=$this->Center_Manager_Report_Model->getonGoingRequests_collector("none", "none", $region, "none");
       $collectedWasteByMonth=$this->Center_Manager_Report_Model->getCollectedGarbage_collector("none", "none", $region, "none");
       $handoveredWasteByMonth=$this->Center_Manager_Report_Model->getHandOveredGarbage_collector("none", "none", $region, "none");
-      //var_dump($handoveredWasteByMonth);
-      //var_dump($collectedWasteByMonth);
-
-      //$completedRequests=$this->Report_Model->getCompletedRequests();
-      //$cancelledRequests=$this->Report_Model->getCancelledRequests();
-      //$ongoingRequests=$this->Report_Model->getonGoingRequests();
-      //$totalRequests=$this->Report_Model->getallRequests();
+      $selledWasteByMonth=$this->Center_Manager_Report_Model->getSelledGarbage("none", "none",$centerId);
       $centers = $this->center_model->getallCenters();
-      $credits=$this->Report_Model->getCredits();
-      $creditByMonth=$this->Report_Model->getCreditsMonths();
-      //$collectedWasteByMonth=$this->Report_Model->getCreditsMonths();
-      //$collectedWasteByMonth=$this->Report_Model->getCollectedGarbage();
-      //$handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage();
-      $selledWasteByMonth=$this->Report_Model->getSelledGarbage();
+      $credits=$this->Center_Manager_Report_Model->getCredits_collector("none", "none", $region, "none");
+      $creditByMonth=$this->Center_Manager_Report_Model->getCreditsMonths_collector( $region , "none");
+
+ 
       $data=[
         'completedRequests'=> count($completedRequests),
         'cancelledRequests'=> count($cancelledRequests),
@@ -1859,18 +1918,42 @@
         'from'=>'none',    
         'credits'=> $credits->total_credits,
         'creditsByMonth1'=>  $creditByMonth,
-        
+        'notification'=> $notifications,
         'handoveredWasteByMonth'=>$handoveredWasteByMonth,
         'selledWasteByMonth'=>$selledWasteByMonth
 
       ];
 
-      var_dump($data['collectedWasteByMonth']);
     
       $this->view('center_managers/reports', $data);
 
     }
     
+  }
+
+  public function garbage_types(){
+
+    $garbage_types = $this->garbageTypeModel->get_all();
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+
+    $data =[
+      'garbage_types' => $garbage_types,
+      'notification'=> $notifications
+
+    ];
+
+    $this->view('center_managers/garbage_types', $data);
+  }
+
+  public function view_notification($url){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+     
+      $Notifications1 = $this->notification_Model->view_center_Notification($_SESSION['center_id']);
+      $Notifications2 = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+      $data['notification']=  $Notifications2 ;
+      header("Location: " . URLROOT . "/centermanagers/$url");        
+
+   }
   }
 
 

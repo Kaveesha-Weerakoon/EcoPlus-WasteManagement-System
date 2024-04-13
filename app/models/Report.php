@@ -39,7 +39,6 @@
         }
     }
     
-    
     public function getCancelledRequests($from="none",$to="none",$region="none"){
         try {
             if ($region == "none") {
@@ -138,7 +137,6 @@
         }
     }
     
-
     function getCredits( $from = "none", $to = "none",$region = "none") {
         try {
             if ($region == "none") {

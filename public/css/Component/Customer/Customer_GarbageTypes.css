@@ -191,7 +191,7 @@
     }
 
     .table-header {
-        grid-template-columns: 20% 50% 30%
+        grid-template-columns: 20% 25% 25% 30%
     }
 
     .table-row {

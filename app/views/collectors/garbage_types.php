@@ -2,7 +2,7 @@
 <div class="Collector_Main">
     <div class="Collector_GarbageTypes">
         <div class="main">
-        <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
+            <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
 
             <div class="main-right">
                 <div class="main-right-top">
@@ -11,50 +11,13 @@
                             <i class='bx bx-search-alt-2'></i>
                             <input type="text" placeholder="Search">
                         </div>
-                        <div class="main-right-top-notification" id="notification">
-                            <i class='bx bx-bell'></i>
-                            <?php if (!empty($data['notification'])) : ?>
-                            <div class="dot"><?php echo count($data['notification'])?></div>
-                            <?php endif; ?>
-                        </div>
-                        <div id="notification_popup" class="notification_popup">
-                            <h1>Notifications</h1>
-                            <div class="notification_cont">
-                                <?php foreach($data['notification'] as $notification) : ?>
-
-                                <div class="notification">
-                                    <div class="notification-green-dot">
-
-                                    </div>
-                                    <div class="notification_right">
-                                        <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
-                                        <?php echo $notification->notification ?>
-                                    </div>
-                                </div>
-                                <?php endforeach; ?>
-
-                            </div>
-                            <form class="mark_as_read" method="post"
-                                action="<?php echo URLROOT;?>/customers/view_notification/garbage_types">
-                                <i class="fa-solid fa-check"> </i>
-                                <button type="submit">Mark all as read</button>
-                            </form>
-
-                        </div>
-                        <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
-                                alt="">
-                            <div class="main-right-top-profile-cont">
-                            <h3><?php echo $_SESSION['collector_name']?></h3>
-                            <p>ID : C <?php echo $_SESSION['collector_id']?></p>
-                            </div>
-                        </div>
+                        <?php require APPROOT . '/views/collectors/collector_notification/collector_notification.php'; ?>
                     </div>
                     <div class="main-right-top-two">
                         <h1>Garbage Types</h1>
                     </div>
                     <div class="main-right-top-three">
-                        <h4>Meet minimum amounts(Per Kg) in a request to avoid fines</h4>
+                        <h4>Meet minimum amounts when collecting from customers</h4>
                     </div>
                 </div>
 
@@ -64,7 +27,8 @@
                             <table class="table">
                                 <tr class="table-header">
                                     <th>Type</th>
-                                    <th>Minimum Quantity (in kg) We Are Collecting</th>
+                                    <th>Approximate Value Shown to the User</th>
+                                    <th>Minimum Quantity We Are Collecting</th>
                                     <th>Credits per 1 Kilogram</th>
                                 </tr>
                             </table>
@@ -75,6 +39,8 @@
                                 <tr class="table-row">
                                     <td style="text-align: left;"><?php echo $garbage_type->name?></td>
                                     <td><?php echo $garbage_type->approximate_amount?></td>
+                                    <td><?php echo $garbage_type->minimum_amount?></td>
+
                                     <td><?php echo $garbage_type->credits_per_waste_quantity?>
                                     </td>
                                 </tr>
@@ -89,36 +55,6 @@
             </div>
         </div>
     </div>
-    <script>
-    var notification = document.getElementById("notification");
-    var notification_pop = document.getElementById("notification_popup");
-    notification_pop.style.height = "0px";
 
-    notification.addEventListener("click", function() {
-        var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
-
-        if (!isNotificationEmpty) {
-            var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
-            if (notification_pop.style.height === "0px") {
-                if (notificationArraySize >= 3) {
-                    notification_pop.style.height = "210px";
-                }
-                if (notificationArraySize == 2) {
-                    notification_pop.style.height = "150px";
-                }
-                if (notificationArraySize == 1) {
-                    notification_pop.style.height = "105px";
-                }
-                notification_pop.style.visibility = "visible";
-                notification_pop.style.opacity = "1";
-                notification_pop.style.padding = "7px";
-            } else {
-                notification_pop.style.height = "0px";
-                notification_pop.style.visibility = "hidden";
-                notification_pop.style.opacity = "0";
-            }
-        }
-    });
-    </script>
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

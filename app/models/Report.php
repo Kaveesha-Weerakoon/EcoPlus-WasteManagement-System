@@ -9,11 +9,12 @@
     public function getCompletedRequests($from = "none", $to = "none", $region = "none") {
         try {
             if ($region == "none") {
-                $this->db->query('SELECT * FROM request_main WHERE type=\'completed\' AND date >= :from AND date <= :to');
+                $this->db->query('SELECT * FROM request_main rm JOIN request_completed rq ON rm.req_id=rq.req_id WHERE rm.type=\'completed\' AND rq.completed_datetime >= :from AND rq.completed_datetime <= :to');
             } else {
-                $this->db->query('SELECT * FROM request_main WHERE type=\'completed\' AND region=:region AND date >= :from AND date <= :to');
+                $this->db->query('SELECT * FROM request_main rm JOIN request_completed rq ON rm.req_id=rq.req_id WHERE rm.type=\'completed\' AND rm.region=:region AND rq.completed_datetime >= :from AND rq.completed_datetime <= :to');
                 $this->db->bind(':region', $region);
             }
+            
     
             // Adjusting binding based on $from and $to values
             if ($from == "none") {
@@ -42,9 +43,9 @@
     public function getCancelledRequests($from="none",$to="none",$region="none"){
         try {
             if ($region == "none") {
-                $this->db->query('SELECT * FROM request_main WHERE type=\'cancelled\' AND date >= :from AND date <= :to');
+                $this->db->query('SELECT * FROM request_main rm join request_cancelled rc on rm.req_id=rc.req_id WHERE type=\'cancelled\' AND rc.cancelled_time >= :from AND rc.cancelled_time <= :to');
             } else {
-                $this->db->query('SELECT * FROM request_main WHERE type=\'cancelled\' AND region=:region AND date >= :from AND date <= :to');
+                $this->db->query('SELECT * FROM request_main rm join request_cancelled rc on rm.req_id=rc.req_id WHERE type=\'cancelled\' AND region=:region AND rc.cancelled_time >= :from AND rc.cancelled_time <= :to');
                 $this->db->bind(':region', $region);
             }
 
@@ -140,9 +141,9 @@
     function getCredits( $from = "none", $to = "none",$region = "none") {
         try {
             if ($region == "none") {
-                $this->db->query('SELECT SUM(credit_amount)  AS total_credits FROM request_main INNER JOIN request_completed ON request_completed.req_id = request_main.req_id WHERE type = \'completed\' AND date >= :from AND date <= :to');
+                $this->db->query('SELECT SUM(credit_amount)  AS total_credits FROM request_main INNER JOIN request_completed ON request_completed.req_id = request_main.req_id WHERE type = \'completed\' AND request_completed.completed_datetime>= :from AND request_completed.completed_datetime <= :to');
             } else {
-                $this->db->query('SELECT SUM(credit_amount) AS total_credits FROM request_main INNER JOIN request_completed ON request_completed.req_id = request_main.req_id WHERE type = \'completed\' AND region = :region AND date >= :from AND date <= :to');
+                $this->db->query('SELECT SUM(credit_amount) AS total_credits FROM request_main INNER JOIN request_completed ON request_completed.req_id = request_main.req_id WHERE type = \'completed\' AND region = :region AND request_completed.completed_datetime >= :from AND request_completed.completed_datetime <= :to');
                 $this->db->bind(':region', $region);
             }
     
@@ -178,7 +179,6 @@
             $results = $this->db->resultSet();
             return $results;
         } catch (PDOException $e) {
-            die($e->getMessage());
             return false;
         }
     }

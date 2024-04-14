@@ -35,6 +35,12 @@
             </div>
             <h3>Announcements</h3>
         </div>
+        <div class="main-left-middle-content" onclick="redirect_subscriptions()" id="mail_subscriptions">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bx-envelope'></i>
+            </div>
+            <h3>Subscriptions</h3>
+        </div>
         <?php if(isset($_SESSION['superadmin_id'])): ?>
         <div class="main-left-middle-content" id="admins" onclick="redirect_admin()">
             <div class="main-left-middle-content-icon">
@@ -104,6 +110,11 @@ function redirect_announcement() {
 
 function redirect_complains() {
     var linkUrl = "<?php echo URLROOT?>/admin/complain_customers"; // Replace with your desired URL
+    window.location.href = linkUrl;
+}
+
+function redirect_subscriptions() {
+    var linkUrl = "<?php echo URLROOT?>/admin/mail_subscriptions"; // Replace with your desired URL
     window.location.href = linkUrl;
 }
 

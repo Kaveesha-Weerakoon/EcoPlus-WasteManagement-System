@@ -23,6 +23,7 @@
       $this->fine_model = $this->model('Fines');
       $this->Annoucement_Model=$this->model('Announcement');
       $this->garbage_Model=$this->model('Garbage_Stock');
+      $this->MailSubscriptionModel = $this->model('Mail_Subscriptions');
 
 
       if(!isLoggedIn('admin_id')  && !isLoggedIn('superadmin_id')){
@@ -2151,6 +2152,18 @@
       ];
 
       $this->view('admin/center_main_stock_releases', $data);
+
+    }
+
+    public function mail_subscriptions(){
+
+      $subscriptions = $this->MailSubscriptionModel->get_mail_subscriptions();
+
+      $data= [
+        'subscriptions' => $subscriptions
+      ];
+
+      $this->view('admin/mail_subscriptions', $data);
 
     }
 

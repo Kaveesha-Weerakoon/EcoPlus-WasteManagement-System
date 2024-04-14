@@ -32,5 +32,18 @@
 
         }
 
+        public function get_mail_subscriptions(){
+            try{
+                $this->db->query('SELECT * FROM mail_subscriptions');
+                $result = $this->db->resultSet();
+
+                return $result;
+
+
+            }catch (PDOException $e){
+                return false;
+            }
+        }
+
 
     }

@@ -124,6 +124,7 @@
 /* Admin Main Right hand side of the dashboard CSS */
 
 
+@import url('Component/Admin/Admin_Complain_main.css');
 
 @import url('Component/Admin/Admin_Customer_Complains.css');
 @import url('Component/Admin/Admin_Collectors_Complains.css');

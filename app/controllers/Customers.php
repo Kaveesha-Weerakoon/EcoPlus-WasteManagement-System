@@ -1081,7 +1081,7 @@
         $completedRequests=$this->Report_Model->getCompletedRequests($customerId,$fromDate,$toDate);
         $cancelledRequests=$this->Report_Model->getCancelledRequests($customerId,$fromDate,$toDate);
         $ongoingRequests=$this->Report_Model->getonGoingRequests($customerId,$fromDate,$toDate);
-        $totalRequests = $this->Report_Model->getallRequests($customerId,$fromDate,$toDate);
+        $totalRequests = count($ongoingRequests)+count( $cancelledRequests)+count($completedRequests);
         $credits=$this->Report_Model->getCredits($customerId,$fromDate,$toDate);
         $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
 
@@ -1096,7 +1096,7 @@
           'ongoingRequests'=>count($ongoingRequests),
           'cancelledRequests'=>count($cancelledRequests),
            'completedRequests'=> count($completedRequests),
-          'totalRequests'=>count($totalRequests),
+          'totalRequests'=>$totalRequests,
           'credits'=> $credits->total_credits,
           'to'=> $toDate,
           'from'=>  $fromDate,      
@@ -1116,7 +1116,7 @@
       $completedRequests=$this->Report_Model->getCompletedRequests($customerId);
       $cancelledRequests=$this->Report_Model->getCancelledRequests($customerId);
       $ongoingRequests=$this->Report_Model->getonGoingRequests($customerId);
-      $totalRequests = $this->Report_Model->getallRequests($customerId);     
+      $totalRequests = count($ongoingRequests)+count( $cancelledRequests)+count($completedRequests);
       $credits=$this->Report_Model->getCredits($customerId);
       $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
 
@@ -1130,7 +1130,7 @@
         'ongoingRequests'=>count($ongoingRequests),
         'cancelledRequests'=>count($cancelledRequests),
         'completedRequests'=> count($completedRequests),
-        'totalRequests'=>count($totalRequests),
+        'totalRequests'=>$totalRequests,
         'credits'=> $credits->total_credits,     
         'creditsByMonth1'=> $creditByMonth,
         'to'=>'none',

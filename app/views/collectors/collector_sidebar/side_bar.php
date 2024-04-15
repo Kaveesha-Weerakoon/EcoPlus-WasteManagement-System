@@ -135,7 +135,7 @@ function setDarkModeStyle(isDarkMode) {
 }
 
 function getDarkModeSetting() {
-    const storedValue = localStorage.getItem("darkMode");
+    const storedValue = localStorage.getItem("darkMode_Collector");
     return storedValue ? JSON.parse(storedValue) : true;
 }
 
@@ -146,8 +146,7 @@ setDarkModeStyle(initialDarkModeSetting);
 checkbox.addEventListener("change", function() {
     const isDarkMode = checkbox.checked;
     setDarkModeStyle(isDarkMode);
-    console.log("as");
 
-    localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
+    localStorage.setItem("darkMode_Collectore", JSON.stringify(isDarkMode));
 });
 </script>

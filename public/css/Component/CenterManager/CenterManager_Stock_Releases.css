@@ -294,13 +294,13 @@
     }
 
     .table-header {
-        grid-template-columns: 25% 25% 30% 20% ;
+        grid-template-columns: 20% 20% 20% 20% 20% ;
     }
 
     .table-row {
         height: 52px;
         display: grid;
-        grid-template-columns: 25% 25% 30% 20% ;
+        grid-template-columns: 20% 20% 20% 20% 20% ;
     }
 
     .table td {

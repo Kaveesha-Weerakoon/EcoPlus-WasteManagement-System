@@ -65,7 +65,7 @@
                             <table class="table">
                                 <?php foreach($data['complains'] as $complaint) : ?>
                                 <tr class="table-row">
-                                    <td>COM <?php echo $complaint->id?></td>
+                                    <td>Com <?php echo $complaint->id?></td>
                                     <td>C<?php echo $complaint->customer_id?></td>
                                     <td><?php echo date('Y-m-d', strtotime($complaint->date)); ?></td>
                                     <!--    <td><?php echo $complaint->contact_no?></td>
@@ -103,10 +103,8 @@
 
                     <div class="personal-details-popup">
                         <div class="personal-details-left">
-                            <!-- <img src="<?php echo IMGROOT?>/img_upload/Admin/<?php echo $data['image']?>" class="profile-pic"
-                            alt=""> -->
                             <img src="" id="user_profile_pic" alt="">
-                            <p>Customer ID: <span id="user_id">C</span></p>
+                            <p>Customer ID <span id="user_id">C</span></p>
                         </div>
                         <div class="personal-details-right">
                             <div class="personal-details-right-labels">

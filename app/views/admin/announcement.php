@@ -8,21 +8,8 @@
             <div class="main-right">
                 <div class="main-right-top">
                     <div class="main-right-top-one">
-                        <div class="main-right-top-search">
-                            <i class='bx bx-search-alt-2'></i>
-                            <input type="text" id="searchInput" placeholder="Search">
-                        </div>
-                        <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                            <i class='bx bx-bell'></i>
-                            <div class="dot"></div>
-                        </div>
+                        <?php require APPROOT . '/views/admin/admin_profile/adminprofile.php'; ?>
 
-                        <div class="main-right-top-profile">
-                            <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                            <div class="main-right-top-profile-cont">
-                                <h3>Admin</h3>
-                            </div>
-                        </div>
                     </div>
                     <div class="main-right-top-two">
                         <h1>Annoucements</h1>

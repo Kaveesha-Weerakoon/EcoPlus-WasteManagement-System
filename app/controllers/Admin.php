@@ -531,7 +531,7 @@
        $this->view('admin/center_view', $data);
     }
 
-    public function center_add(){
+    public function center_add($success="False"){
       
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -546,7 +546,7 @@
             'center_manager_err'=>'',
             'center_manager_data'=>'',
             'center_manager_name'=>'',
-            'center_add_success'=>'',
+            'center_add_success'=>$success,
             'lattitude'=>trim($_POST['latittude']),
             'longitude'=>trim($_POST['longitude']),
             'radius'=>trim($_POST['radius']),
@@ -587,10 +587,10 @@
             $data['center_manager_name']=$this->userModel->findUserById($data['center_manager']);
 
             if($this->center_model->addcenter($data)){
-              $data['center_add_success']='True';
-              $this->view('admin/center_add', $data);
+             header("Location: " . URLROOT . "/admin/center_add/True");        
+
             } else {
-              die('Something went wrong');
+              $this->view('admin/center_add', $data);
             }
         }
         else{
@@ -609,7 +609,7 @@
           'district_err' =>'',
           'region_err' =>'',
           'center_manager_err'=>'',
-          'center_add_success'=>'',
+          'center_add_success'=>$success,
           'lattitude'=>'',
           'longitude'=>'',
           'longitude_err'=>'',

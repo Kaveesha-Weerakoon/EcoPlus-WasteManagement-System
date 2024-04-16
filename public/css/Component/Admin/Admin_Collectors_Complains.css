@@ -35,6 +35,7 @@
 
 
     /*personal details popup*/
+    /*personal details popup*/
     .personal-details-popup-box {
         display: flex;
         position: fixed;
@@ -54,8 +55,6 @@
 
     .personal-details-popup-box.active {
         transform: translate(-50%, -50%) scale(1);
-
-
     }
 
     .personal-details-popup-form {
@@ -84,6 +83,8 @@
         right: 10px;
         width: 20px;
         height: 20px;
+        cursor: pointer;
+
     }
 
     .personal-details-popup {
@@ -94,14 +95,14 @@
         height: 100%;
         padding-top: 10px;
         margin-top: 17px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--box-shadow);
+        border-radius: 6px;
     }
 
     .personal-details-right {
         margin-left: 40px;
         display: grid;
         grid-template-columns: 40% 60%;
-
     }
 
     .personal-details-right-labels {
@@ -115,11 +116,9 @@
 
     .personal-details-right-labels span {
         margin-bottom: 15px;
-        font-size: 15px;
+        font-size: 14px;
         color: #7c7c7d;
-
     }
-
 
     .personal-details-right-values {
         display: flex;
@@ -128,15 +127,13 @@
         align-items: flex-start;
         padding-top: 2px;
         padding-left: 32px;
-
     }
 
     .personal-details-right-values span {
         margin-bottom: 15px;
-        font-size: 15px;
+        font-size: 14px;
         color: #767e95;
         font-weight: 550;
-
     }
 
     .personal-details-left {
@@ -160,7 +157,7 @@
 
     .personal-details-left p {
         margin-top: 5px;
-        font-size: 15px;
+        font-size: 14px;
         color: #7c7c7d;
     }
 
@@ -171,15 +168,6 @@
     }
 
 
-    /* .profile-pic {
-            width: 70%;
-            height: auto;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-bottom: 8px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-    
-        } */
 
     .personal-details-topic {
         font-size: 18px;
@@ -213,14 +201,13 @@
     }
 
     .personal-details-bottom-one h2 {
-        font-size: 15px;
+        font-size: 14px;
         color: #767e95;
         font-weight: 550;
-        margin-top: 1px;
     }
 
     .personal-details-bottom-two h2 {
-        font-size: 15px;
+        font-size: 14px;
         color: #767e95;
         font-weight: 550;
         margin-top: 1px;
@@ -232,21 +219,21 @@
         padding: 1px;
         border: 1px solid #ccc;
         border-radius: 5px;
-        margin-left: 60px;
-        width: 510px;
-        box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1);
-        background-color: #fafafa;
+        margin-left: 62px;
+        width: 535px;
+        box-shadow: var(--box-shadow);
+        background-color: var(--background-color-main);
 
     }
 
     .subject-complain {
         text-align: left;
-        margin-left: 30px;
+        margin-left: 5px;
     }
 
     .personal-details-bottom span {
         margin-bottom: 15px;
-        font-size: 15px;
+        font-size: 14px;
         color: #7c7c7d;
         overflow: scroll;
 
@@ -263,8 +250,6 @@
     }
 
 
-
-
     .overlay {
         position: fixed;
         top: 0;
@@ -275,6 +260,7 @@
         z-index: 2;
         display: none;
     }
+
 
     @media screen and (max-width: 878px) {
         .main-right-bottom {
@@ -307,9 +293,82 @@
         }
 
 
+        .personal-details-popup-form {
+            width: 450px;
+        }
+
+        .subject-complain-box {
+            margin-left: 30px;
+            width: 325px;
+        }
+
+        .personal-details-right-labels span {
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .personal-details-right-values span {
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .personal-details-bottom-one h2 {
+            font-size: 12px;
+        }
+
+        .personal-details-bottom-two h2 {
+            font-size: 12px;
+        }
+
+        .personal-details-bottom span {
+            font-size: 12px;
+        }
+
 
     }
 
+    @media screen and (max-width: 452px) {
+        .personal-details-popup-form {
+            width: 375px;
+        }
+
+        .personal-details-left img {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .subject-complain-box {
+            margin-left: 30px;
+            width: 275px;
+        }
+
+        .personal-details-right-labels span {
+            font-size: 11px;
+            text-align: left;
+        }
+
+        .personal-details-right-values span {
+            font-size: 11px;
+            text-align: left;
+        }
+
+        .personal-details-bottom-one h2 {
+            font-size: 11px;
+        }
+
+        .personal-details-bottom-two h2 {
+            font-size: 11px;
+        }
+
+        .personal-details-bottom span {
+            font-size: 11px;
+        }
+
+
+    }
 
 
 

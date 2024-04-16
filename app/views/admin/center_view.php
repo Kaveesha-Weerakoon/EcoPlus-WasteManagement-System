@@ -16,17 +16,8 @@
                                 <i class='bx bx-search-alt-2'></i>
                                 <input type="text" id="searchInput" placeholder="Search">
                             </div>
-                            <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                                <i class='bx bx-bell'></i>
-                                <div class="dot"></div>
-                            </div>
+                            <?php require APPROOT . '/views/admin/admin_profile/adminprofile.php'; ?>
 
-                            <div class="main-right-top-profile">
-                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                                <div class="main-right-top-profile-cont">
-                                    <h3>Admin</h3>
-                                </div>
-                            </div>
                         </div>
                         <div class="main-right-top-two">
                             <h1>Centers</h1>
@@ -54,10 +45,9 @@
                                 <tr class="table-header">
                                     <th>Center ID</th>
                                     <th>Region</th>
-                                    <th>Location</th>
+                                    <!-- <th>Location</th> -->
                                     <th>Center Manger ID</th>
                                     <th>Center Manager Name</th>
-                                    <th>View Center</th>
                                     <th>Delete</th>
                                 </tr>
                             </table>
@@ -65,19 +55,17 @@
                         <div class="main-right-bottom-down">
                             <table class="table">
                                 <?php foreach($data['centers'] as $centers) : ?>
-                                <tr class="table-row">
+                                <tr class="table-row"
+                                    onclick="locate('<?php echo $centers->id?>/<?php echo $centers->region?>')">
+
                                     <td>C<?php echo $centers->id?></td>
                                     <td><?php echo $centers->region?></td>
-                                    <!-- <td><img onclick="viewLocation(<?php echo $centers->lat; ?>, <?php echo $centers->longi; ?>)"
-                                            src="<?php echo IMGROOT?>/location.png" alt=""></td> -->
-                                    <td><i class='bx bx-map' style="font-size: 29px;"
+                                    <!-- <td><i class='bx bx-map' style="font-size: 29px;"
                                             onclick="viewLocation(<?php echo $centers->lat; ?>, <?php echo $centers->longi; ?>)"></i>
-                                    </td>
+                                    </td> -->
                                     <td><?php echo $centers->center_manager_id?></td>
                                     <td><?php echo $centers->center_manager_name?></td>
-                                    <td><a
-                                            href="<?php echo URLROOT?>/admin/center_main/<?php echo $centers->id?>/<?php echo $centers->region?>">
-                                            <i class='bx bxs-school' style="font-size: 29px;"></i></a></td>
+
                                     <td class="delete"> <a
                                             href="<?php echo URLROOT?>/admin/center_delete/<?php echo $centers->id?>">
                                             <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
@@ -122,6 +110,13 @@
     </div>
 </div>
 <script>
+function locate(url) {
+    console.log(url)
+    window.location.href = "<?php echo URLROOT?>/admin/center_main/" + url;
+}
+
+
+
 function initMap(latitude, longitude) {
     var mapCenter = {
         lat: latitude,
@@ -144,15 +139,6 @@ function initMap(latitude, longitude) {
 }
 
 
-// function viewLocation($lattitude, $longitude) {
-//     initMap($lattitude, $longitude);
-//     document.querySelector('.location_pop').style.display = 'flex';
-// }
-
-// function closemap() {
-//     document.querySelector('.location_pop').style.display = 'none';
-// }
-
 function viewLocation($lattitude, $longitude) {
     initMap($lattitude, $longitude);
     var locationPop = document.getElementById('location_pop');
@@ -165,5 +151,28 @@ function closemap() {
     locationPop.classList.remove('active');
     document.getElementById('overlay').style.display = "none";
 }
+
+function searchTable() {
+    var input = document.getElementById('searchInput').value.toLowerCase();
+    var rows = document.querySelectorAll('.table-row');
+    rows.forEach(function(row) {
+        var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+        var status = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+        var date = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+        var time = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+
+        if (id.includes(input) || status.includes(input) || date
+            .includes(
+                input) || time.includes(input)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+
+}
+
+document.getElementById('searchInput').addEventListener('input', searchTable);
+</script>
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Admin_Main">
     <div class="Admin_Complain_main">
-        <div class="Admin_Collectors_Complains">
+        <div class="Admin_Collectors_Complains ">
             <div class="main">
                 <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
 
@@ -62,7 +62,7 @@
                             <table class="table">
                                 <?php foreach($data['complains'] as $complaint) : ?>
                                 <tr class="table-row">
-                                    <td>COM<?php echo $complaint->id?></td>
+                                    <td>Com<?php echo $complaint->id?></td>
                                     <td>CO<?php echo $complaint->collector_id?></td>
                                     <td><?php echo $complaint->region?></td>
                                     <td><?php echo date('Y-m-d', strtotime($complaint->date)); ?></td>
@@ -77,127 +77,126 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="overlay" id="overlay"></div>
+            <div class="personal-details-popup-box" id="personal-details-popup-box">
+                <div class="personal-details-popup-form">
+                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
+                        id="personal-details-popup-form-close">
+                    <center>
+                        <div class="personal-details-topic">Complain Details</div>
+                    </center>
 
-
-        <div class="personal-details-popup-box" id="personal-details-popup-box">
-            <div class="personal-details-popup-form">
-                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
-                    id="personal-details-popup-form-close">
-                <center>
-                    <div class="personal-details-topic">Complain Details</div>
-                </center>
-
-                <div class="personal-details-popup">
-                    <div class="personal-details-left">
-                        <!-- <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $data['image']?>" class="profile-pic"
-                            alt=""> -->
-                        <img src="" id="user_profile_pic" alt="">
-                        <p>Collector ID: <span id="user_id">C</span></p>
-                    </div>
-                    <div class="personal-details-right">
-                        <div class="personal-details-right-labels">
-                            <span>Complain Id</span><br>
-                            <span>Collector Name</span><br>
-                            <span>Contact No</span><br>
-                            <span>Center</span><br>
-
+                    <div class="personal-details-popup">
+                        <div class="personal-details-left">
+                            <img src="" id="user_profile_pic" alt="">
+                            <p>Customer ID <span id="user_id">C</span></p>
                         </div>
-                        <div class="personal-details-right-values">
-                            <span id="complain_id"></span><br>
-                            <span id="user_name"></span><br>
-                            <span id="user_contactno"></span><br>
-                            <span id="user_region"></span><br>
+                        <div class="personal-details-right">
+                            <div class="personal-details-right-labels">
+                                <span>Complain Id</span><br>
+                                <span>Customer Name</span><br>
+                                <span>Contact No</span><br>
+                                <span>Customer Region</span><br>
+
+                            </div>
+                            <div class="personal-details-right-values">
+                                <span id="complain_id"></span><br>
+                                <span id="user_name"></span><br>
+                                <span id="user_contactno"></span><br>
+                                <span id="user_region"></span><br>
 
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="personal-details-bottom">
-                        <div class="personal-details-bottom-one">
-                            <h2>Subject</h2><br>
-                            <div>
+                        <div class="personal-details-bottom">
+                            <div class="personal-details-bottom-one">
+                                <h2>Subject</h2><br>
+                                <div>
 
-                                <div class="subject-complain-box">
-                                    <div class="subject-complain">
-                                        <span id="subject"></span><br>
-                                    </div>
-
-                                </div>
-                                <div class="personal-details-bottom-two">
-                                    <h2>Complain</h2><br>
-                                    <div>
-
-                                        <div class="subject-complain-box">
-                                            <div class="subject-complain">
-                                                <span id="complain"></span><br>
-                                            </div>
+                                    <div class="subject-complain-box">
+                                        <div class="subject-complain">
+                                            <span id="subject"></span><br>
                                         </div>
 
                                     </div>
+                                    <div class="personal-details-bottom-two">
+                                        <h2>Complain</h2><br>
+                                        <div>
+
+                                            <div class="subject-complain-box">
+                                                <div class="subject-complain">
+                                                    <span id="complain"></span><br>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
                                 </div>
 
+
                             </div>
-
-
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="overlay" id="overlay"></div>
 
 
-                    <script>
-                    function openpersonaldetails(user) {
-                        var personalPop = document.getElementById('personal-details-popup-box');
-                        personalPop.classList.add('active');
-                        document.getElementById('overlay').style.display = "flex";
 
-                        document.getElementById('user_id').textContent = user.collector_id;
-                        document.getElementById('complain_id').textContent = user.id;
-                        document.getElementById('user_profile_pic').src =
-                            "<?php echo IMGROOT?>/img_upload/collector/" +
-                            user.image;
-                        document.getElementById('user_name').textContent = user.name;
-                        document.getElementById('user_contactno').textContent = user.contact_no;
-                        document.getElementById('user_region').textContent = user.region;
-                        document.getElementById('subject').textContent = user.subject;
-                        document.getElementById('complain').textContent = user.complaint;
+            <script>
+            function openpersonaldetails(user) {
+                var personalPop = document.getElementById('personal-details-popup-box');
+                personalPop.classList.add('active');
+                document.getElementById('overlay').style.display = "flex";
+
+                document.getElementById('user_id').textContent = user.customer_id;
+                document.getElementById('complain_id').textContent = user.id;
+                document.getElementById('user_profile_pic').src =
+                    "<?php echo IMGROOT?>/img_upload/customer/" +
+                    user.image;
+                document.getElementById('user_name').textContent = user.name;
+                document.getElementById('user_contactno').textContent = user.contact_no;
+                document.getElementById('user_region').textContent = user.region;
+                document.getElementById('subject').textContent = user.subject;
+                document.getElementById('complain').textContent = user.complaint;
 
 
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var close_personal_details = document.getElementById(
+                    'personal-details-popup-form-close');
+                close_personal_details.addEventListener('click', function() {
+                    const personal_details = document.getElementById(
+                        "personal-details-popup-box");
+                    personal_details.classList.remove('active');
+                    document.getElementById('overlay').style.display = "none";
+
+                });
+            });
+
+            function searchTable() {
+                var input = document.getElementById('searchInput').value.toLowerCase();
+                var rows = document.querySelectorAll('.table-row');
+                rows.forEach(function(row) {
+                    var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+                    var status = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+                    var date = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+                    var time = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+                    var center = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+
+                    if (center.includes(input) || id.includes(input) || status.includes(input) || date
+                        .includes(
+                            input) || time.includes(input)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none'; // Hide the row
                     }
+                });
 
-                    document.addEventListener('DOMContentLoaded', function() {
-                        var close_personal_details = document.getElementById(
-                            'personal-details-popup-form-close');
-                        close_personal_details.addEventListener('click', function() {
-                            const personal_details = document.getElementById(
-                                "personal-details-popup-box");
-                            personal_details.classList.remove('active');
-                            document.getElementById('overlay').style.display = "none";
+            }
 
-                        });
-                    });
+            document.getElementById('searchInput').addEventListener('input', searchTable);
+            </script>
 
-                    function searchTable() {
-                        var input = document.getElementById('searchInput').value.toLowerCase();
-                        var rows = document.querySelectorAll('.table-row');
-                        rows.forEach(function(row) {
-                            var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
-                            var status = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
-                            var date = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-                            var time = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
-                            var center = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
-
-                            if (center.includes(input) || id.includes(input) || status.includes(input) || date
-                                .includes(
-                                    input) || time.includes(input)) {
-                                row.style.display = '';
-                            } else {
-                                row.style.display = 'none'; // Hide the row
-                            }
-                        });
-
-                    }
-
-                    document.getElementById('searchInput').addEventListener('input', searchTable);
-                    </script>
-
-                    <?php require APPROOT . '/views/inc/footer.php'; ?>
+            <?php require APPROOT . '/views/inc/footer.php'; ?>

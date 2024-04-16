@@ -1564,7 +1564,7 @@
         $completedRequests=$this->Report_Model->getCompletedRequests($fromDate,$toDate,$center);
         $cancelledRequests=$this->Report_Model->getCancelledRequests($fromDate,$toDate,$center);
         $ongoingRequests=$this->Report_Model->getonGoingRequests($fromDate,$toDate,$center);
-        $totalRequests=$this->Report_Model->getallRequests($fromDate,$toDate,$center);
+        $totalRequests=count($completedRequests)+count($cancelledRequests)+count($ongoingRequests);
         $credits=$this->Report_Model->getCredits($fromDate,$toDate,$center);
         $centers = $this->center_model->getallCenters();
         $creditByMonth=$this->Report_Model->getCreditsMonths($center);
@@ -1576,7 +1576,7 @@
           'completedRequests'=> count($completedRequests),
           'cancelledRequests'=> count($cancelledRequests),
           'ongoingRequests'=> count($ongoingRequests),
-          'totalRequests'=> count($totalRequests),
+          'totalRequests'=>  $totalRequests,
           'centers'=> $centers,
           'center'=>$center,
           'to'=>$toDate,
@@ -1595,7 +1595,7 @@
         $completedRequests=$this->Report_Model->getCompletedRequests();
         $cancelledRequests=$this->Report_Model->getCancelledRequests();
         $ongoingRequests=$this->Report_Model->getonGoingRequests();
-        $totalRequests=$this->Report_Model->getallRequests();
+        $totalRequests=count($completedRequests)+count($cancelledRequests)+count($ongoingRequests);
         $centers = $this->center_model->getallCenters();
         $credits=$this->Report_Model->getCredits();
         $creditByMonth=$this->Report_Model->getCreditsMonths();
@@ -1607,7 +1607,7 @@
           'completedRequests'=> count($completedRequests),
           'cancelledRequests'=> count($cancelledRequests),
           'ongoingRequests'=> count($ongoingRequests),
-          'totalRequests'=> count($totalRequests),
+          'totalRequests'=>  $totalRequests,
           'centers'=> $centers,
           'center'=>'All',
           'to'=>'none',

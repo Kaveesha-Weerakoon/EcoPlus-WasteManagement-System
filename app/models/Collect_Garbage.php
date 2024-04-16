@@ -289,7 +289,6 @@
         // Get the current month and year
         $currentMonth = date('m');
         $currentYear = date('Y');
-
         // Prepare the SQL query
         $this->db->query('
         SELECT 

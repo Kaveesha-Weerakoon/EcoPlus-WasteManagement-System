@@ -146,7 +146,7 @@
             }
           } else {
             // Load view with errors
-            $this->view('users/register', $data);
+            $this->view('users/login', $data);
           }
   
         } else {
@@ -174,13 +174,16 @@
           ];
   
           // Load view
-          $this->view('users/register', $data);
+          $this->view('users/login', $data);
         }
       }
       
     }
 
     public function login(){
+       // Check for POST
+       $centers = $this->Center_Model->getallCenters();
+       $jsonData = json_encode($centers);
       if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id'])  || isset($_SESSION['admin_id']) || isset($_SESSION['agent_id']) ){
         if(isset($_SESSION['user_id'])){
           redirect('customers');
@@ -310,7 +313,24 @@
             'email' => '',
             'password' => '',
             'email_err' => '',
-            'password_err' => '',        
+            'password_err' => '', 
+
+            'name' => '',
+            'contact_no' => '',
+            'address' => '',
+            'city'=>'',
+            'password' => '',
+            'confirm_password' => '',
+            'centers'=>$jsonData,
+            'centers2'=>$centers ,
+
+            'name_err' => '',
+            'contact_no_err' => '',
+            'address_err' => '',
+            'city_err'=>'',
+            'confirm_password_err' => '',  
+            'profile_err'=>'',
+            'profile_upload_error'=>''
           ];
           $this->view('users/login', $data);
         }

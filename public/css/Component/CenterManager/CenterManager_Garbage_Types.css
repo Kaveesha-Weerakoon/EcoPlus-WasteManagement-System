@@ -512,14 +512,15 @@
             margin-left: 40px;
         }
 
-        .location_pop_content {
-            width: 550px;
-        }
 
         .main-right-top-profile img{
             width: 40px;
             height: 40px;
             margin-top: 3px;
+        }
+
+        .main-right{
+            overflow-x: hidden;
         }
     }
 
@@ -568,14 +569,6 @@
         .line {
             width: 86px;
             height: 2px;
-        }
-
-        .location_pop_content {
-            width: 375px;
-        }
-
-        .personal-details-popup-form {
-            width: 550px;
         }
 
         .notification_popup {
@@ -641,6 +634,10 @@
 
         .main-right-top-profile-cont h3{
             font-size: 16px;
+        }
+
+        .line{
+            margin-left: -10px !important;
         }
 
        
@@ -711,6 +708,14 @@
         .main-right-top-search input {
             height: 28px;
             margin-left: 10px;
+        }
+
+        .main-right-top-three{
+            margin-bottom: 2%;
+        }
+
+        .line{
+            margin-left: -20px;
         }
     }
 

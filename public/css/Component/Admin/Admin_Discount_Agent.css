@@ -9,7 +9,17 @@
         text-decoration: none;
         font-family: inter;
         color: inherit;
+    }
 
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        display: none;
     }
 
 
@@ -27,6 +37,7 @@
         height: 100%;
         grid-template-rows: 23% 77%;
         background-color: var(--background-color-right);
+        overflow-x: hidden;
 
     }
 
@@ -55,6 +66,7 @@
         justify-content: center;
         width: 35%;
         position: relative;
+        margin-left: 3.5%;
     }
 
     .main-right-top-search i {
@@ -80,98 +92,6 @@
     .main-right-top-search input:focus {
         border: 1px solid #1ca557;
         outline: none;
-    }
-
-    .main-right-top-notification {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 30%;
-    }
-
-    .dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: #F13E3E;
-        margin-top: -14px;
-        margin-left: -12px;
-    }
-
-    .main-right-top-notification i {
-        font-size: 29px;
-        cursor: pointer;
-    }
-
-    .notification_popup {
-        height: 0;
-        position: absolute;
-        top: 9%;
-        right: 11%;
-        background-color: var(--background-color-main);
-        border-radius: 10px;
-        padding: 0;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: height 0.6s ease-in;
-        width: 18%;
-        visibility: hidden;
-        opacity: 0;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        overflow: scroll;
-        border: 1px solid #dcdde1;
-    }
-
-    .notification_popup h1 {
-        font-size: 19px;
-        letter-spacing: 0.001rem;
-        margin-bottom: 13px;
-        margin-top: 5px;
-        margin-left: 8px;
-    }
-
-    .notification_popup.active {
-        height: 200px;
-        padding: 10px;
-        visibility: visible;
-        opacity: 1;
-    }
-
-    .notification {
-        height: 43px !important;
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        padding-left: 10px;
-        font-size: 14px;
-        cursor: pointer;
-    }
-
-    .notification:hover {
-        background-color: var(--notification-hover);
-    }
-
-    .notification-green-dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: var(--green-color-one);
-        margin-right: 10px;
-    }
-
-    .main-right-top-profile {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 40px;
-    }
-
-    .main-right-top-profile img {
-        width: 50px;
-        height: 50px;
-        margin-right: 15px;
-        border-radius: 10px;
     }
 
     .main-right-top-profile-cont {
@@ -233,20 +153,26 @@
 
     /*Delete confirm popup*/
     .delete_confirm {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.1);
-        z-index: 2;
         display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 4;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 100%;
-
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        background-color: var(--main-text-color);
     }
+
+    .delete_confirm.active {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
 
     .delete_confirm .popup {
         width: 400px;
@@ -402,26 +328,7 @@
         background: var(--button-hover-green);
     }
 
-    @media screen and (max-width: 1178px) {
-        .image2 {
-            display: none;
-        }
 
-        .main-bottom-content h4 {
-            font-size: 15px !important;
-        }
-
-        .main-bottom-content h6 {
-            font-size: 13px !important;
-        }
-    }
-
-    @media screen and (max-width: 914px) {
-        .main-bottom-bottom {
-            display: flex;
-            flex-direction: column;
-        }
-    }
 
     /*Update popup*/
     .update_click {
@@ -568,22 +475,7 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    @media screen and(max-width: 946px) {
 
-        .updateData {
-            margin-left: 10px;
-
-        }
-
-        .cancelbtn1 {
-            width: 100px;
-        }
-
-        .updatebtn {
-            width: 100px;
-        }
-
-    }
 
     /*Update success*/
     .center_manager_update_success {
@@ -650,165 +542,147 @@
         background: var(--button-hover-green);
     }
 
-    /*personal details popup*/
-    .personal-details-popup-box {
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.1);
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-    }
-
-    .personal-details-popup-form {
-        width: 45%;
-        background: white;
-        border-radius: 6px;
-        top: 0;
-        position: relative;
-        text-align: center;
-        padding: 0 30px 30px;
-        color: var(--main-text-color);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.4s, top 0.4s;
-    }
-
-    .personal-details-popup-form-close {
-        width: 25px;
-        height: 25px;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 20px;
-        height: 20px;
-    }
-
-    .personal-details-popup {
-        display: grid;
-        grid-template-columns: 40% 60%;
-        width: 100%;
-        border-radius: 4px;
-        height: 100%;
-        padding-top: 10px;
-        margin-top: 17px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .personal-details-right {
-        display: grid;
-        grid-template-columns: 30% 70%;
-
-    }
-
-    .personal-details-right-labels {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        padding-top: 40px;
-        padding-bottom: 50px;
-        padding-left: 25px;
-    }
-
-    .personal-details-right-labels span {
-        margin-bottom: 15px;
-        font-size: 15px;
-        color: #7c7c7d;
-
-    }
-
-
-    .personal-details-right-values {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        padding-top: 40px;
-        padding-bottom: 50px;
-        padding-left: 32px;
-
-    }
-
-    .personal-details-right-values span {
-        margin-bottom: 15px;
-        font-size: 15px;
-        color: #767e95;
-        font-weight: 550;
-
-    }
-
-    .personal-details-left {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        flex-direction: column;
-
-    }
-
-    .personal-details-left img {
-        width: 150px;
-        height: 150px;
-    }
-
-    .personal-details-left p {
-        margin-top: 5px;
-        font-size: 15px;
-        color: #7c7c7d;
-    }
-
-    .personal-details-left span {
-        color: #767e95;
-        font-weight: 550;
-
-    }
-
-
-    .profile-pic {
-        width: 70%;
-        height: auto;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-bottom: 8px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-
-    }
-
-    .personal-details-topic {
-        font-size: 18px;
-        font-weight: 500;
-        position: relative;
-        margin-inline-end: auto;
-        margin-top: 15px;
-
-    }
-
-    .personal-details-topic::before {
-        content: '';
-        position: absolute;
-        margin-top: 23px;
-        margin-left: 45px;
-        margin-bottom: 15px;
-        height: 3px;
-        width: 45px;
-        background: var(--green-color-one);
-
-    }
 
 
     @media screen and(max-width: 917px) {
-
         .personal-details-popup {
             display: flex;
             flex-direction: column;
         }
+
+        .table td {
+            font-size: 12px !important;
+        }
+
+        .table-header {
+            font-size: 14px !important;
+        }
+    }
+
+    @media screen and(max-width: 946px) {
+
+        .updateData {
+            margin-left: 10px;
+        }
+
+        .cancelbtn1 {
+            width: 100px;
+        }
+
+        .updatebtn {
+            width: 100px;
+        }
+
+    }
+
+    @media screen and (max-width: 1178px) {
+        .image2 {
+            display: none;
+        }
+
+        .main-bottom-content h4 {
+            font-size: 15px !important;
+        }
+
+        .main-bottom-content h6 {
+            font-size: 13px !important;
+        }
+    }
+
+    @media screen and (max-width: 914px) {
+        .main-bottom-bottom {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    @media screen and (max-width:862px) {
+
+
+        .main-right-top-two h1 {
+            font-size: 15px !important;
+        }
+
+        .main-right-top-three p {
+            font-size: 13px !important;
+        }
+
+        .line {
+            width: 50px;
+        }
+    }
+
+    @media screen and (max-width: 612px) {
+        .main-right-top-one-content {
+            width: 250px;
+            margin-left: 1%;
+        }
+
+        .table td {
+            font-size: 8.5px;
+        }
+
+        .table-header {
+            font-size: 11px !important;
+        }
+
+        .table-row img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .vehicle-details-popup-form {
+            width: 375px;
+        }
+
+        .vehicle-details-labels span {
+            font-size: 12px;
+        }
+
+        .vehicle-details-values span {
+            font-size: 12px;
+        }
+
+        .vehicle-details-topic {
+            font-size: 15px;
+        }
+
+        .vehicle-details-topic::before {
+            content: '';
+            position: absolute;
+            margin-top: 23px;
+            margin-left: 30px;
+            margin-bottom: 15px;
+            height: 3px;
+            width: 45px;
+            background: var(--green-color-one);
+        }
+
+        .personal-details-popup-form {
+            width: 500px;
+        }
+
+        .personal-details-right-labels span {
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .personal-details-right-values span {
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .personal-details-left p {
+            font-size: 12px;
+        }
+
+        .personal-details-left img {
+            width: 120px;
+            height: 150px;
+            box-shadow: var(--box-shadow);
+        }
+
+
 
     }
 }

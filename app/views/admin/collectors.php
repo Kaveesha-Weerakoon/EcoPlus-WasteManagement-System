@@ -8,45 +8,16 @@
                 <div class="main-right-top">
                     <div class="main-right-top-search">
                         <i class='bx bx-search-alt-2'></i>
-                        <input type="text" placeholder="Search">
-                    </div>
-                    <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <div class="dot"></div>
-                    </div>
-                    <div id="notification_popup" class="notification_popup">
-                        <h1>Notifications</h1>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Assigned
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-
-
-                    </div>
-                    <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                        <div class="main-right-top-profile-cont">
-                            <h3>Admin</h3>
-                        </div>
+                        <input type="text" placeholder="Search" id="searchInput">
                     </div>
 
-                    
+
+                    <?php require APPROOT . '/views/admin/admin_profile/adminprofile.php'; ?>
+
+
+
                 </div>
-               
+
                 <div class="main-right-bottom">
                     <div class="main-right-top-two">
                         <h1>Collectors</h1>
@@ -55,40 +26,41 @@
                         <table class="table">
                             <tr class="table-header">
                                 <th>Collector_Id</th>
-                                <th>Pro Pic</th>
+                                <th>Profile</th>
                                 <th>Center</th>
                                 <th>Name</th>
-                                <!-- <th>NIC</th>
-                                <th>Email</th>
-                                <th>Contact No</th>
-                                <th>Address</th>  -->
-                                <th>Personal Details</th>
                                 <th>Vehicle Details</th>
                                 <th>Delete</th>
                             </tr>
                         </table>
                     </div>
                     <div class="main-right-bottom-down">
-                    <table class="table">
-                                <?php foreach($data['collectors'] as $collector) : ?>
-                                        <tr class="table-row">
-                                            <td>C <?php echo $collector->user_id?></td>
-                                            <td><img class="collector_img" src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $collector->image?>" alt=""></td>
-                                            <td><?php echo $collector->center_name?></td>
-                                            <td><?php echo $collector->name?></td>
-                                            <td><i onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                                 class='bx bxs-user' style="font-size: 29px;"></i></td>
-                                            <!-- <td><img onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                                class="location" src="<?php echo IMGROOT?>/view.png" alt=""></td> -->
-                                            <td><a href="<?php echo URLROOT?>/admin/vehicle_details_view/<?php echo $collector->user_id ?>"><i class='bx bxs-truck' style="font-size: 29px;"></i></a></td>
-                                            <td><a href="<?php echo URLROOT?>/admin/collectorsdelete_confirm/<?php echo $collector->user_id ?>"><i class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
+                        <table class="table">
+                            <?php foreach($data['collectors'] as $collector) : ?>
+                            <tr class="table-row">
+                                <td>C <?php echo $collector->user_id?></td>
+                                <td><img onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                        class="collector_img"
+                                        src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $collector->image?>"
+                                        alt=""></td>
+                                <td><?php echo $collector->center_name?></td>
+                                <td><?php echo $collector->name?></td>
+
+                                <td>
+                                    <i onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                        class='bx bxs-truck' style=" font-size: 29px;"></i>
+                                </td>
+                                <td>
+                                    <i onclick="opendelete(<?php echo $collector->user_id?>)" class='bx bxs-trash'
+                                        style=" font-size: 29px;"></i>
+                                </td>
                                 <?php endforeach; ?>
-                    </table>
-                    
-                    
+                        </table>
+
+
                     </div>
                 </div>
-        
+
             </div>
 
             <div class="overlay" id="overlay"></div>
@@ -96,7 +68,7 @@
             <div class="personal-details-popup-box" id="personal-details-popup-box">
                 <div class="personal-details-popup-form">
                     <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
-                     id="personal-details-popup-form-close">
+                        id="personal-details-popup-form-close">
                     <center>
                         <div class="personal-details-topic">Personal Details</div>
                     </center>
@@ -105,7 +77,7 @@
                         <div class="personal-details-left">
                             <!-- <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $data['image']?>" class="profile-pic"
                                 alt=""> -->
-                                <img src="" id="collector_profile_pic" alt="">
+                            <img src="" id="collector_profile_pic" alt="">
                             <p>Collector ID: <span id="collector_id">C</span></p>
                         </div>
                         <div class="personal-details-right">
@@ -133,79 +105,149 @@
             </div>
 
         </div>
-        <?php if($data['vehicle_details_click']=='True') : ?>
-            <div class="vehicle-details-popup-box">
-                <div class="vehicle-details-popup-form" id="popup">
-                    <a href="<?php echo URLROOT?>/admin/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close"></a>
-                    <center><div class="vehicle-details-topic">Vehicle Details</div></center>
-                    
-                    <div class="vehicle-details-popup" >
-                        <div class="vehicle-details-labels">
-                            <span>Collector ID</span><br>
-                            <span>Name</span><br>
-                            <span>Vehicle Plate No</span><br>
-                            <span>Vehicle Type</span><br>
-                        </div>
-                        <div class="vehicle-details-values">
-                            <span>C<?php echo $data['id']?></span><br>
-                            <span><?php echo $data['name']?></span><br>
-                            <span><?php echo $data['vehicle_no']?></span><br>
-                            <span><?php echo $data['vehicle_type']?></span><br>
-                        </div>
+        <div class="vehicle-details-popup-box" id="vehicle-details-pop">
+            <div class="vehicle-details-popup-form" id="popup">
+                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close"
+                    id="vehicle_details-popup-form-close">
+                <center>
+                    <div class="vehicle-details-topic">Vehicle Details</div>
+                </center>
+
+                <div class="vehicle-details-popup">
+                    <div class="vehicle-details-labels">
+                        <span>Collector ID</span><br>
+                        <span>Name</span><br>
+                        <span>Vehicle Plate No</span><br>
+                        <span>Vehicle Type</span><br>
+                    </div>
+                    <div class="vehicle-details-values">
+                        <span id="collector_vid"></span><br>
+                        <span id="collector_vname"></span><br>
+                        <span id="collector_vehno"></span><br>
+                        <span id="collector_vehtype"></span><br>
                     </div>
                 </div>
             </div>
-        
-        <?php endif; ?>
-        <?php if($data['delete_confirm']=='True') : ?>
-        <div class="delete_confirm">
-                <div class="popup" id="popup">
-                    <img src="<?php echo IMGROOT?>/trash.png" alt="">
-                    <?php
+        </div>
+
+        <div class="delete_confirm" id="delete_confirm">
+            <div class="popup" id="popup">
+                <img src="<?php echo IMGROOT?>/trash.png" alt="">
+                <?php
                         echo "<h2>Delete this Customer?</h2>";
                         echo "<p>This action will permanently delete this center manager</p>";          
                     ?>
-                    <div class="btns">
-                        
-                        <a href="<?php echo URLROOT?>/Admin/collectordelete/<?php echo $data['id']?>"><button type="button" class="deletebtn">Delete</button></a>
-                                        
-                        <a href="<?php echo URLROOT?>/Admin/collectors"><button type="button" class="cancelbtn" >Cancel</button></a>
-                    </div>
+                <div class="btns">
+
+                    <button type="button" class="deletebtn">Delete</button>
+
+                    <button type="button" id="delete-close" class="cancelbtn">Cancel</button>
                 </div>
+            </div>
+        </div>
+
+        <?php if($data['collector_success']=='True') : ?>
+        <div class="center_add_success">
+            <div class="popup" id="popup">
+                <img src="<?php echo IMGROOT?>/check.png" alt="">
+                <h2>Success!!</h2>
+                <p>Collector Deleted successfully </p>
+                <a href="<?php echo URLROOT?>/admin/collectors"><button type="button">OK</button></a>
+            </div>
         </div>
         <?php endif; ?>
-
     </div>
 </div>
 <script>
-     function openpersonaldetails(collector){
-        var personalPop = document.getElementById('personal-details-popup-box');
-        personalPop.classList.add('active');
-        document.getElementById('overlay').style.display = "flex";
-       
-        document.getElementById('collector_id').textContent =collector.user_id;
-        document.getElementById('collector_profile_pic').src =  "<?php echo IMGROOT?>/img_upload/collector/" + collector.image;
-        document.getElementById('collector_name').textContent = collector.name;
-        document.getElementById('collector_email').textContent = collector.email;
-        document.getElementById('collector_nic').textContent = collector.nic;
-        document.getElementById('collector_address').textContent = collector.address;
-        document.getElementById('collector_contact_no').textContent = collector.contact_no;
-        document.getElementById('collector_dob').textContent = collector.dob;
-        
+function openpersonaldetails(collector) {
+    var personalPop = document.getElementById('personal-details-popup-box');
+    personalPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
 
-    }
+    document.getElementById('collector_id').textContent = collector.user_id;
+    document.getElementById('collector_profile_pic').src = "<?php echo IMGROOT?>/img_upload/collector/" + collector
+        .image;
+    document.getElementById('collector_name').textContent = collector.name;
+    document.getElementById('collector_email').textContent = collector.email;
+    document.getElementById('collector_nic').textContent = collector.nic;
+    document.getElementById('collector_address').textContent = collector.address;
+    document.getElementById('collector_contact_no').textContent = collector.contact_no;
+    document.getElementById('collector_dob').textContent = collector.dob;
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var close_personal_details = document.getElementById('personal-details-popup-form-close');
-        close_personal_details.addEventListener('click', function() {
-            const personal_details = document.getElementById("personal-details-popup-box");
-            personal_details.classList.remove('active');
-            document.getElementById('overlay').style.display = "none";
-            
-        });
+
+}
+
+function openvehicledetails(collector) {
+    var vehiclePop = document.getElementById('vehicle-details-pop');
+    vehiclePop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    document.getElementById('collector_vid').textContent = collector.user_id;
+    document.getElementById('collector_vname').textContent = collector.name;;
+    document.getElementById('collector_vehno').textContent = collector.vehicle_no;
+    document.getElementById('collector_vehtype').textContent = collector.vehicle_type;
+
+}
+
+function opendelete(id) {
+    var baseURL = '<?php echo URLROOT; ?>/admin/collectordelete/';
+
+    var deleteURL = baseURL + id;
+
+    var deletePop = document.getElementById('delete_confirm');
+    deletePop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    var deleteButton = document.querySelector('.deletebtn');
+    deleteButton.onclick = function() {
+        window.location.href = deleteURL;
+    };
+
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var close_personal_details = document.getElementById('personal-details-popup-form-close');
+    var close_vehicle_details = document.getElementById('vehicle_details-popup-form-close');
+    var close_delete = document.getElementById('delete-close');
+
+    close_personal_details.addEventListener('click', function() {
+        const personal_details = document.getElementById("personal-details-popup-box");
+        personal_details.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
+    });
+    close_vehicle_details.addEventListener('click', function() {
+        const personal_details = document.getElementById("vehicle-details-pop");
+        personal_details.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+    });
+    close_delete.addEventListener('click', function() {
+        var deletePop = document.getElementById('delete_confirm');
+        deletePop.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
+    });
+});
+
+function searchTable() {
+    var input = document.getElementById('searchInput').value.toLowerCase();
+    var rows = document.querySelectorAll('.table-row');
+    rows.forEach(function(row) {
+        var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+        var status = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+        var status1 = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+
+        if (id.includes(input) || status.includes(input) || status1.includes(input)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
     });
 
+}
 
+document.getElementById('searchInput').addEventListener('input', searchTable);
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

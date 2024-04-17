@@ -8,46 +8,15 @@
                 <div class="main-right-top">
                     <div class="main-right-top-search">
                         <i class='bx bx-search-alt-2'></i>
-                        <input type="text" placeholder="Search">
+                        <input type="text" placeholder="Search" id="searchInput">
                     </div>
-                    <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <div class="dot"></div>
-                    </div>
-                    <div id="notification_popup" class="notification_popup">
-                        <h1>Notifications</h1>
-                        <div class="notification">
-                            <div class="notification-green-dot">
 
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Assigned
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-
-
-                    </div>
-                    <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                        <div class="main-right-top-profile-cont">
-                            <h3>Admin</h3>
-                        </div>
-                    </div>
+                    <?php require APPROOT . '/views/admin/admin_profile/adminprofile.php'; ?>
 
 
                 </div>
 
-                <div class="main-right-bottom">
+                <div class=" main-right-bottom">
                     <div class="main-right-top-two">
                         <h1>Customers</h1>
                     </div>
@@ -59,7 +28,7 @@
                                 <th>Profile</th>
                                 <th>Request Details</th>
                                 <th>Block</th>
-                                <th>Delete</th>
+                                <!-- <th>Delete</th> -->
                             </tr>
                         </table>
                     </div>
@@ -88,9 +57,9 @@
                                     <?php endif; ?>
                                 </td>
 
-                                <td><a
+                                <!-- <td><a
                                         href="<?php echo URLROOT?>/Admin/customerdelete_confirm/<?php echo $customer->user_id?>"><i
-                                            class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
+                                            class='bx bxs-trash' style="font-size: 29px;"></i></a></td> -->
                                 <?php endforeach; ?>
                         </table>
 
@@ -285,6 +254,25 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
+
+function searchTable() {
+    var input = document.getElementById('searchInput').value.toLowerCase();
+    var rows = document.querySelectorAll('.table-row');
+    rows.forEach(function(row) {
+        var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+        var status = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+
+
+        if (id.includes(input) || status.includes(input)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+
+}
+
+document.getElementById('searchInput').addEventListener('input', searchTable);
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

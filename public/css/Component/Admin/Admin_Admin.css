@@ -1,18 +1,4 @@
 .Admin_Admin {
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
-
-    * {
-        margin: 0px;
-        padding: 0px;
-        font-family: inter;
-    }
-
-    a {
-        text-decoration: none;
-        font-family: inter;
-        color: inherit;
-    }
-
 
     #admins i {
         color: var(--green-color-one);
@@ -28,6 +14,7 @@
         height: 100%;
         grid-template-rows: 23% 77%;
         background-color: var(--background-color-right);
+        overflow-x: hidden !important;
     }
 
     .main-right-top {
@@ -55,6 +42,7 @@
         justify-content: center;
         width: 35%;
         position: relative;
+        margin-left: 4%;
     }
 
     .main-right-top-search i {
@@ -82,12 +70,6 @@
         outline: none;
     }
 
-    .main-right-top-notification {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 30%;
-    }
 
     .main-right-top-profile {
         display: flex;

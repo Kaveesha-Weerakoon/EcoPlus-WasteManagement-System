@@ -168,21 +168,22 @@
 const sign_in_btn = document.querySelector("#sign-in-btn");
 const sign_up_btn = document.querySelector("#sign-up-btn");
 const container = document.querySelector(".container");
+if (<?php echo json_encode($data['reg'] === "True"); ?>) {
+    container.classList.add("sign-up-mode");
+} else {
+    container.classList.remove("sign-up-mode");
+}
 
 sign_up_btn.addEventListener('click', (e) => {
     e.preventDefault(); // Prevent default anchor behavior
     container.classList.add("sign-up-mode");
-    setTimeout(() => {
-        window.location.href = "<?php echo URLROOT ?>/Users/register";
-    }, 3000000); // Adjust timing to match your animation duration
+    setTimeout(() => {}, 10000); // Adjust timing to match your animation duration
 });
 
 sign_in_btn.addEventListener('click', (e) => {
     e.preventDefault(); // Prevent default anchor behavior
     container.classList.remove("sign-up-mode");
-    setTimeout(() => {
-        window.location.href = "<?php echo URLROOT ?>/Users/login";
-    }, 3000000); // Adjust timing to match your animation duration
+    setTimeout(() => {}, 3000); // Adjust timing to match your animation duration
 });
 </script>
 

@@ -44,7 +44,7 @@
             'confirm_password_err' => '',
             'profile_err'=>'',
             'profile_upload_error'=>'' ,
-            
+            'reg'=>'True',
             'email'=>'',
             'email_err'=>'' ,
             'password'=>'',
@@ -162,11 +162,12 @@
             'contact_no' => '',
             'address' => '',
             'city'=>'',
-            'password' => '',
+            'password_reg' => '',
             'confirm_password' => '',
             'centers'=>$jsonData,
             'centers2'=>$centers ,
-
+             'password'=>'',
+             'email'=>'',
             'name_err' => '',
             'email_err' => '',
             'contact_no_err' => '',
@@ -176,7 +177,8 @@
             'confirm_password_err' => '',  
             'profile_err'=>'',
             'profile_upload_error'=>'',
-            'email_reg'=>''
+            'email_reg'=>'',
+            'reg'=>'True',
           ];
   
           // Load view
@@ -236,7 +238,8 @@
             'city_err'=>'',
             'confirm_password_err' => '',  
             'profile_err'=>'',
-            'profile_upload_error'=>''  
+            'profile_upload_error'=>'' ,
+            'reg'=>'False'
           ];
           // Validate Email
           if(empty($data['email'])){ 
@@ -352,7 +355,8 @@
             'city_err'=>'',
             'confirm_password_err' => '',  
             'profile_err'=>'',
-            'profile_upload_error'=>''
+            'profile_upload_error'=>'',
+            'reg'=>'False'
           ];
           $this->view('users/login', $data);
         }

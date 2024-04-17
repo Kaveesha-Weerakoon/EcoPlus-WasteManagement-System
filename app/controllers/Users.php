@@ -26,13 +26,13 @@
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           $data =[
             'name' => trim($_POST['name']),
-            'email' => trim($_POST['email']),
+            'email_reg' => trim($_POST['email_regmail']),
             'contact_no' => trim($_POST['contact_no']),
             'address' => trim($_POST['address']),
             'city'=>trim($_POST['city']),
-            'password' => trim($_POST['password']),
+            'password_reg' => trim($_POST['password_reg']),
             'confirm_password' => trim($_POST['confirm_password']),
-            'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+            'profile_image_name' => trim($_POST['email_regmail']).'_'.$_FILES['profile_image']['name'],
             'centers'=>$jsonData,
             'centers2'=>$centers ,
             'name_err' => '',
@@ -43,7 +43,12 @@
             'password_err' => '',
             'confirm_password_err' => '',
             'profile_err'=>'',
-            'profile_upload_error'=>''   
+            'profile_upload_error'=>'' ,
+            
+            'email'=>'',
+            'email_err'=>'' ,
+            'password'=>'',
+             'password_err'=>'' 
           ];
 
           if ($_FILES['profile_image']['error'] == 4) {
@@ -60,19 +65,19 @@
   
            // Validate Email
            if(empty($data['email'])){
-            $data['email_err'] = 'Please enter an email';
+            $data['regemail_err'] = 'Please enter an email';
         } else {
             // Check email format
             if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
-                $data['email_err'] = 'Invalid email format';
+                $data['regemail_err'] = 'Invalid email format';
             } else {
                 // Check email length
                 if(strlen($data['email']) > 255) { // You can adjust the maximum length as needed
-                    $data['email_err'] = 'Email is too long';
+                    $data['regemail_err'] = 'Email is too long';
                 } else {
                     // Check email availability
                     if($this->userModel->findUserByEmail($data['email'])){
-                        $data['email_err'] = 'Email is already taken';
+                        $data['regemail_err'] = 'Email is already taken';
                     }
                 }
             }
@@ -107,9 +112,9 @@
         
           // Validate Password
           if(empty($data['password'])){
-            $data['password_err'] = 'Pleae enter password';
+            $data['password_regerr'] = 'Pleae enter password';
           } elseif(strlen($data['password']) < 6){
-            $data['password_err'] = 'Password must be at least 6 characters';
+            $data['password_reger'] = 'Password must be at least 6 characters';
           }
   
           // Validate Confirm Password
@@ -170,7 +175,8 @@
             'password_err' => '',
             'confirm_password_err' => '',  
             'profile_err'=>'',
-            'profile_upload_error'=>''
+            'profile_upload_error'=>'',
+            'email_reg'=>''
           ];
   
           // Load view
@@ -207,17 +213,33 @@
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
         
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-          
+         
           // Init data
           $data =[
             'email' => trim($_POST['email']),
             'password' => trim($_POST['password']),
             'email_err' => '',
-            'password_err' => '',      
+            'password_err' => '',  
+            'name' => '',
+            'contact_no' => '',
+            'address' => '',
+            'city'=>'',
+            'confirm_password' => '',
+            'centers'=>$jsonData,
+            'centers2'=>$centers ,
+            'email_reg'=>'',
+            'password_reg'=>'',
+            'confirm_password_reg'=>'',
+            'name_err' => '',
+            'contact_no_err' => '',
+            'address_err' => '',
+            'city_err'=>'',
+            'confirm_password_err' => '',  
+            'profile_err'=>'',
+            'profile_upload_error'=>''  
           ];
-  
           // Validate Email
-          if(empty($data['email'])){
+          if(empty($data['email'])){ 
             $data['email_err'] = 'Please enter email';
           }
           else {
@@ -233,13 +255,11 @@
             }
           }
           }
-         
           // Validate Password
           if(empty($data['password'])){
             $data['password_err'] = 'Please enter the password';
           }
 
-         
           // Make sure errors are empty
           if(empty($data['email_err']) && empty($data['password_err'])){
             // Validated
@@ -323,7 +343,9 @@
             'confirm_password' => '',
             'centers'=>$jsonData,
             'centers2'=>$centers ,
-
+            'email_reg'=>'',
+            'password_reg'=>'',
+            'confirm_password_reg'=>'',
             'name_err' => '',
             'contact_no_err' => '',
             'address_err' => '',

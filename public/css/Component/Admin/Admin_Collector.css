@@ -1,5 +1,82 @@
 .Admin_Collector {
+    * {
+        margin: 0px;
+        padding: 0px;
+        font-family: inter;
+    }
 
+    a {
+        text-decoration: none;
+        font-family: inter;
+        color: inherit;
+    }
+
+    #dashboard i {
+        color: var(--green-color-one);
+    }
+
+    #dashboard h3 {
+        color: var(--green-color-one);
+    }
+
+    .main-right {
+        background-color: var(--background-color-right);
+        display: grid;
+        grid-template-rows: 9% 91%;
+        overflow-x: hidden;
+    }
+
+    .main-right-top {
+        background-color: var(--background-color-main);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--box-shadow2);
+        border: 10px;
+        z-index: 1;
+    }
+
+    .main-right-top-profile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 40px;
+    }
+
+
+    .main-right-top-search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35%;
+        margin-left: 3.5%;
+    }
+
+    .main-right-top-search i {
+        position: absolute;
+        font-size: 25px;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .main-right-top-search input {
+        width: 100%;
+        height: 33px;
+        border-radius: 7px;
+        background-color: var(--background-color-two);
+        border: 1px solid #dcdde1;
+        font-size: 14px;
+        padding-left: 40px;
+        letter-spacing: 0.03rem;
+        color: var(--main-text-color);
+    }
+
+    .main-right-top-search input:focus {
+        border: 1px solid #1ca557;
+        outline: none;
+    }
 
     .main-right-top-two {
         height: 50px;
@@ -33,13 +110,13 @@
     }
 
     .table-header {
-        grid-template-columns: 15% 15% 10% 24% 12% 12% 12%;
+        grid-template-columns: 15% 15% 16% 24%  15% 15%;
     }
 
     .table-row {
         height: 52px;
         display: grid;
-        grid-template-columns: 15% 15% 10% 24% 12% 12% 12%;
+        grid-template-columns: 15% 15% 16% 24%  15% 15%;
     }
 
     .table td {
@@ -325,8 +402,6 @@
 
     .personal-details-popup-box.active {
         transform: translate(-50%, -50%) scale(1);
-
-
     }
 
     .personal-details-popup-form {
@@ -355,6 +430,7 @@
         right: 10px;
         width: 20px;
         height: 20px;
+        cursor: pointer;
     }
 
     .personal-details-popup {
@@ -388,9 +464,7 @@
         margin-bottom: 15px;
         font-size: 15px;
         color: #7c7c7d;
-
     }
-
 
     .personal-details-right-values {
         display: flex;
@@ -400,7 +474,6 @@
         padding-top: 40px;
         padding-bottom: 50px;
         padding-left: 32px;
-
     }
 
     .personal-details-right-values span {
@@ -417,7 +490,6 @@
         justify-content: center;
         padding: 10px;
         flex-direction: column;
-
     }
 
     .personal-details-left img {
@@ -440,17 +512,6 @@
         font-weight: 550;
 
     }
-
-
-    /* .profile-pic {
-        width: 70%;
-        height: auto;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-bottom: 8px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-
-    } */
 
     .personal-details-topic {
         font-size: 18px;
@@ -594,5 +655,66 @@
         .vehicle-details-values {
             padding-left: 40px;
         }
+    }
+
+    @media screen and (max-width:862px) {
+        .main-right-top-one-content {
+            width: 250px;
+            margin-left: 0;
+            padding-left: 5%;
+        }
+
+        .main-right-top-one input {
+            width: 20%;
+
+        }
+
+        .main-right-top-three-content p {
+            font-size: 14px;
+        }
+
+        .main-right-bottom {
+            width: 140%;
+            overflow-x: scroll !important;
+        }
+
+        .main-right-bottom-top {
+            width: 140%;
+        }
+
+        .main-right-bottom-down {
+            width: 140%;
+        }
+
+        .table-header {
+            grid-template-columns: 13% 14% 12% 20% 12% 12% ;
+        }
+
+        .table-row {
+            grid-template-columns: 13% 14% 12% 20% 12% 12% ;
+        }
+
+        .bx {
+            font-size: 25px !important;
+        }
+
+        .personal-details-popup-form {
+            width: 500px;
+        }
+
+        .personal-details-right-labels span {
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .personal-details-right-values span {
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .personal-details-left p {
+            font-size: 14px;
+        }
+
     }
 }

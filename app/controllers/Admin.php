@@ -47,6 +47,8 @@
       $customers = $this->customerModel->get_all();
       $collectors =$this->collector_model->get_collectors();
       $centers = $this->center_model->getallCenters();
+      $agents  = $this->discount_agentModel->get_discount_agent();
+
       $jsonData = json_encode($centers );
 
       $fine_details = $this->fine_model->get_fine_details();
@@ -60,6 +62,7 @@
         'cm_count'=>count($center_managers),      
         'customer_count'=>count($customers),
         'collector_count'=>count( $collectors),
+        'agent_count'=>count($agents),
         'centers'=>$jsonData,
         'creditsGiven'=>$creditMonth->credit_amount 
       ];
@@ -1356,7 +1359,7 @@
 
     }
 
-    public function addadmins(){
+    public function addadmins($success="False"){
 
       if(isset($_SESSION['superadmin_id']) ){
 
@@ -1364,14 +1367,19 @@
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
         $data=[
-          'admin'=>$admins
+          'admin'=>$admins,
+          'success'=>$success,
+          'confirm_delete'=>''
+          
         ];    
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $this->view('admin/admins', $data);
       }       
       else{   
         $data=[
-          'admin'=>$admins
+          'admin'=>$admins,
+          'success'=>$success,
+          'confirm_delete'=>''
         ];
          $this->view('admin/admins', $data);
         } 
@@ -1493,8 +1501,8 @@
           // Validated
           $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
           if($this->adminModel->register_admin($data)){
-            $data['registered']='True';        
-            $this->view('admin/admins_add', $data);
+            header("Location: " . URLROOT . "/admin/addadmins");        
+
           } else {
             header("Location: " . URLROOT . "/admin");        
           }
@@ -1662,7 +1670,8 @@
         'admin_id'=>$id,
         'personal_details_click'=>''
       ];
-    
+      header("Location: " . URLROOT . "/admin/addadmins/True");        
+
       $this->view('admin/admins', $data);
     }
 

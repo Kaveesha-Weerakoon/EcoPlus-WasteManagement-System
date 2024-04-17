@@ -65,7 +65,7 @@
                             </div>
                             <div class="content_container">
                                 <h3>Discount Agents</h3>
-                                <h2 style="font-weight:bold">12</h2>
+                                <h2 style="font-weight:bold" id="agent_count"></h2>
                             </div>
 
                         </div>
@@ -220,10 +220,12 @@ function submit() {
 const customer_count = <?php echo $data['customer_count']?>;
 const cm_count = <?php echo $data['cm_count']?>;
 const collector_count = <?php echo $data['collector_count']?>;
+const agent_count = <?php echo $data['agent_count']?>;
 
 const customerCountElement = document.getElementById('customer_count');
 const collectorCountElement = document.getElementById('collector_count');
 const cmCountElement = document.getElementById('cm_count');
+const agentCountElement = document.getElementById('agent_count');
 
 function updateCount(currentValue) {
     customerCountElement.textContent = currentValue;
@@ -235,6 +237,10 @@ function updateCount2(currentValue) {
 
 function updateCount3(currentValue) {
     cmCountElement.textContent = currentValue;
+}
+
+function updateCount4(currentValue) {
+    agentCountElement.textContent = currentValue;
 }
 
 for (let i = 0; i <= customer_count; i++) {
@@ -250,6 +256,11 @@ for (let i = 0; i <= collector_count; i++) {
 for (let i = 0; i <= cm_count; i++) {
     setTimeout(() => {
         updateCount3(i);
+    }, i * 80); // Change 1000 to control the speed of counting (milliseconds)
+}
+for (let i = 0; i <= agent_count; i++) {
+    setTimeout(() => {
+        updateCount4(i);
     }, i * 80); // Change 1000 to control the speed of counting (milliseconds)
 }
 

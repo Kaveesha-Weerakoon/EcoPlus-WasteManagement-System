@@ -431,33 +431,6 @@
       }
     }
 
-    public function cm_personal_details_view($managerId){
-      $center_managers = $this->center_managerModel->get_center_managers();
-      $center_manager = $this->center_managerModel->getCenterManager_ByID_view($managerId);
-      $data = [
-        'center_managers' => $center_managers,
-        'id'=> $managerId,
-        'name' => $center_manager->name,
-        'email'=> $center_manager->email,
-        'nic' => $center_manager->nic,
-        'dob'=> $center_manager->dob,
-        'contact_no'=> $center_manager->contact_no,
-        'address' => $center_manager->address,
-        'image'=>$center_manager->image,
-        'personal_details_click'=> 'True',
-        'confirm_delete' => '',
-        'success' =>'',
-        'click_update' =>'',
-        'update_success'=>'',
-        
-
-      ];
-    
-    
-      $this->view('admin/center_managers', $data);
-
-    }
-
     public function get_customer_fined_requests($customer_id){
       
       $fined_requests= $this->customerModel->get_fined_requests($customer_id);
@@ -500,28 +473,28 @@
       $this->view('admin/customer_main', $data);
     }
 
-    public function customerdelete_confirm($id){
-      $customers = $this->customerModel->get_all();
-      $data = [
-        'customers' =>$customers,
-        'delete_confirm'=>'True',
-        'id'=>$id
-      ];
+    // public function customerdelete_confirm($id){
+    //   $customers = $this->customerModel->get_all();
+    //   $data = [
+    //     'customers' =>$customers,
+    //     'delete_confirm'=>'True',
+    //     'id'=>$id
+    //   ];
      
-      $this->view('admin/customer_main', $data);
-    }
+    //   $this->view('admin/customer_main', $data);
+    // }
 
-    public function customerdelete($id){   
-      $this->customerModel->deletecustomer($id);
-      $customers = $this->customerModel->get_all();
-      $data = [
-        'customers' =>$customers,
-        'delete_confirm'=>'',
+    // public function customerdelete($id){   
+    //   $this->customerModel->deletecustomer($id);
+    //   $customers = $this->customerModel->get_all();
+    //   $data = [
+    //     'customers' =>$customers,
+    //     'delete_confirm'=>'',
 
-      ];
+    //   ];
      
-      $this->view('admin/customer_main', $data);
-    }
+    //   $this->view('admin/customer_main', $data);
+    // }
     
     public function center(){
 
@@ -684,25 +657,16 @@
        $this->center();
     }
 
-    public function collectors(){
+    public function collectors($collector_sucesss="False"){
       $collectors =$this->collector_model->get_collectors();
       $data = [
         'collectors' =>$collectors,
         'delete_confirm'=>'',
-        'vehicle_details_click'=> ''
+        'vehicle_details_click'=> '',
+        'collector_success'=>$collector_sucesss
       ];
      
       $this->view('admin/collectors', $data);
-    }
-
-    public function collectorsdelete_confirm($id){
-      $collectors =$this->collector_model->get_collectors();
-         $data=[
-          'collectors' =>$collectors,
-           'delete_confirm'=>'True',
-           'id'=>$id
-         ];
-         $this->view('admin/collectors', $data);
     }
 
     public function collectordelete($id){   
@@ -714,28 +678,10 @@
 
       ];
      
-      $this->view('admin/collectors', $data);
-    }
-
-    public function vehicle_details_view($collectorId){
-        $collectors =$this->collector_model->get_collectors();
-        $collector = $this->collector_model->getCollector_ByID_view($collectorId);
-        $data = [
-          'collectors' => $collectors,
-          'id'=> $collectorId,
-          'name' => $collector->name,
-          'vehicle_no'=> $collector->vehicle_no,
-          'vehicle_type'=> $collector->vehicle_type,
-          'vehicle_details_click'=> 'True',
-        ];
-      
-      
-        $this->view('admin/collectors', $data);
-  
+      header("Location: " . URLROOT . "/admin/collectors/True");        
     }
 
     public function complain_collectors(){
-
       $collector_complains= $this->collector_complain_Model->get_collector_complains_with_image();
 
       $data = [
@@ -958,14 +904,14 @@
       $this->view('admin/complain_centers', $data);
     }
 
-    public function discount_agents(){
+    public function discount_agents($sucess="False"){
 
       $discount_agent = $this->discount_agentModel->get_discount_agent();
       $data = [
         'discount_agents' => $discount_agent,
         'confirm_delete' =>'',
         'assigned'=>'',
-        'success'=>'',
+        'success'=>$sucess,
         'click_update' =>'',
         'update_success'=>'',
         'confirm_delete'=> '',
@@ -1118,30 +1064,7 @@
     
     }
   
-    public function discount_agent_delete_confirm($id){
-      $discount_agent = $this->discount_agentModel->get_discount_agent();
-      $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($id);
-      if($agent_by_id){
-        $data = [
-          'discount_agents' => $discount_agent,
-          'confirm_delete' =>'True',
-          'discount_agent_id'=>$id,
-          'personal_details_click'=>'',
-          'success'=>'' 
-        ];
-      }
-      else{
-        $data = [
-          'discount_agents' => $discount_agent,
-          'confirm_delete' =>'True',
-          'discount_agent_id'=>$id,
-          'success'=>''
-        ];
-      }
-    
-     
-      $this->view('admin/discount_agents', $data);
-    }
+   
 
     public function discount_agent_delete($id) {
       $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($id);
@@ -1155,7 +1078,7 @@
         'personal_details_click'=>''
       ];
     
-      $this->view('admin/discount_agents', $data);
+      header("Location: " . URLROOT . "/admin/discount_agents/True");        
     }
 
     public function get_collector_assistants($collector_id){

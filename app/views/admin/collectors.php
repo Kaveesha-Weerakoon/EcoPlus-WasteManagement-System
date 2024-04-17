@@ -46,12 +46,14 @@
                                 <td><?php echo $collector->center_name?></td>
                                 <td><?php echo $collector->name?></td>
 
-                                <td><a
-                                        href="<?php echo URLROOT?>/admin/vehicle_details_view/<?php echo $collector->user_id ?>"><i
-                                            class='bx bxs-truck' style="font-size: 29px;"></i></a></td>
-                                <td><a
-                                        href="<?php echo URLROOT?>/admin/collectorsdelete_confirm/<?php echo $collector->user_id ?>"><i
-                                            class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
+                                <td>
+                                    <i onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
+                                        class='bx bxs-truck' style=" font-size: 29px;"></i>
+                                </td>
+                                <td>
+                                    <i onclick="opendelete(<?php echo $collector->user_id?>)" class='bx bxs-trash'
+                                        style=" font-size: 29px;"></i>
+                                </td>
                                 <?php endforeach; ?>
                         </table>
 
@@ -103,11 +105,10 @@
             </div>
 
         </div>
-        <?php if($data['vehicle_details_click']=='True') : ?>
-        <div class="vehicle-details-popup-box">
+        <div class="vehicle-details-popup-box" id="vehicle-details-pop">
             <div class="vehicle-details-popup-form" id="popup">
-                <a href="<?php echo URLROOT?>/admin/collectors"><img src="<?php echo IMGROOT?>/close_popup.png" alt=""
-                        class="vehicle-details-popup-form-close"></a>
+                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="vehicle-details-popup-form-close"
+                    id="vehicle_details-popup-form-close">
                 <center>
                     <div class="vehicle-details-topic">Vehicle Details</div>
                 </center>
@@ -120,18 +121,16 @@
                         <span>Vehicle Type</span><br>
                     </div>
                     <div class="vehicle-details-values">
-                        <span>C<?php echo $data['id']?></span><br>
-                        <span><?php echo $data['name']?></span><br>
-                        <span><?php echo $data['vehicle_no']?></span><br>
-                        <span><?php echo $data['vehicle_type']?></span><br>
+                        <span id="collector_vid"></span><br>
+                        <span id="collector_vname"></span><br>
+                        <span id="collector_vehno"></span><br>
+                        <span id="collector_vehtype"></span><br>
                     </div>
                 </div>
             </div>
         </div>
 
-        <?php endif; ?>
-        <?php if($data['delete_confirm']=='True') : ?>
-        <div class="delete_confirm">
+        <div class="delete_confirm" id="delete_confirm">
             <div class="popup" id="popup">
                 <img src="<?php echo IMGROOT?>/trash.png" alt="">
                 <?php
@@ -140,16 +139,23 @@
                     ?>
                 <div class="btns">
 
-                    <a href="<?php echo URLROOT?>/Admin/collectordelete/<?php echo $data['id']?>"><button type="button"
-                            class="deletebtn">Delete</button></a>
+                    <button type="button" class="deletebtn">Delete</button>
 
-                    <a href="<?php echo URLROOT?>/Admin/collectors"><button type="button"
-                            class="cancelbtn">Cancel</button></a>
+                    <button type="button" id="delete-close" class="cancelbtn">Cancel</button>
                 </div>
             </div>
         </div>
-        <?php endif; ?>
 
+        <?php if($data['collector_success']=='True') : ?>
+        <div class="center_add_success">
+            <div class="popup" id="popup">
+                <img src="<?php echo IMGROOT?>/check.png" alt="">
+                <h2>Success!!</h2>
+                <p>Collector Deleted successfully </p>
+                <a href="<?php echo URLROOT?>/admin/collectors"><button type="button">OK</button></a>
+            </div>
+        </div>
+        <?php endif; ?>
     </div>
 </div>
 <script>
@@ -171,11 +177,54 @@ function openpersonaldetails(collector) {
 
 }
 
+function openvehicledetails(collector) {
+    var vehiclePop = document.getElementById('vehicle-details-pop');
+    vehiclePop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    document.getElementById('collector_vid').textContent = collector.user_id;
+    document.getElementById('collector_vname').textContent = collector.name;;
+    document.getElementById('collector_vehno').textContent = collector.vehicle_no;
+    document.getElementById('collector_vehtype').textContent = collector.vehicle_type;
+
+}
+
+function opendelete(id) {
+    var baseURL = '<?php echo URLROOT; ?>/admin/collectordelete/';
+
+    var deleteURL = baseURL + id;
+
+    var deletePop = document.getElementById('delete_confirm');
+    deletePop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    var deleteButton = document.querySelector('.deletebtn');
+    deleteButton.onclick = function() {
+        window.location.href = deleteURL;
+    };
+
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
     var close_personal_details = document.getElementById('personal-details-popup-form-close');
+    var close_vehicle_details = document.getElementById('vehicle_details-popup-form-close');
+    var close_delete = document.getElementById('delete-close');
+
     close_personal_details.addEventListener('click', function() {
         const personal_details = document.getElementById("personal-details-popup-box");
         personal_details.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
+    });
+    close_vehicle_details.addEventListener('click', function() {
+        const personal_details = document.getElementById("vehicle-details-pop");
+        personal_details.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+    });
+    close_delete.addEventListener('click', function() {
+        var deletePop = document.getElementById('delete_confirm');
+        deletePop.classList.remove('active');
         document.getElementById('overlay').style.display = "none";
 
     });

@@ -12,17 +12,10 @@
                                 <i class='bx bx-search-alt-2'></i>
                                 <input type="text" id="searchInput" placeholder="Search">
                             </div>
-                            <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                                <i class='bx bx-bell'></i>
-                                <div class="dot"></div>
-                            </div>
 
-                            <div class="main-right-top-profile">
-                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                                <div class="main-right-top-profile-cont">
-                                    <h3>Admin</h3>
-                                </div>
-                            </div>
+
+                            <?php require APPROOT . '/views/admin/admin_profile/adminprofile.php'; ?>
+
                         </div>
                         <div class="main-right-top-two">
                             <h1>Center Managers</h1>
@@ -55,7 +48,6 @@
                                     <th>Email</th>
                                     <th>Assigned</th>
                                     <th>Assigned Center ID</th>
-                                    <th>Personal Details</th>
                                     <th>Update</th>
                                     <th>Delete</th>
                                 </tr>
@@ -66,15 +58,14 @@
                                 <?php foreach($data['center_managers'] as $center_manager) : ?>
                                 <tr class="table-row">
                                     <td>CM <?php echo $center_manager->user_id?></td>
-                                    <td><img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $center_manager->image?>"
+                                    <td><img onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($center_manager), ENT_QUOTES, 'UTF-8') ?>))"
+                                            src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $center_manager->image?>"
                                             alt="" class="manager_img"></td>
                                     <td><?php echo $center_manager->name?></td>
                                     <td><?php echo $center_manager->email?></td>
                                     <td> <?php echo $center_manager->assinged?></td>
                                     <td> <?php echo $center_manager->assigned_center_id?></td>
-                                    <td class="cancel-open"><a
-                                            href="<?php echo URLROOT?>/admin/cm_personal_details_view/<?php echo $center_manager->user_id ?>"><i
-                                                class='bx bxs-user' style="font-size: 29px;"></i></a></td>
+
                                     <td class="cancel-open"><a
                                             href="<?php echo URLROOT?>/admin/center_managers_update/<?php echo $center_manager->user_id ?>"><i
                                                 class='bx bx-refresh'
@@ -100,7 +91,7 @@
                 <img src="<?php echo IMGROOT?>/trash.png" alt="">
                 <?php
                         if ($data['assigned']=='No') {
-                        echo "<h2>Delete this collector assistant?</h2>";
+                        echo "<h2>Delete this center manager?</h2>";
                         echo "<p>This action will permanently delete this center manager</p>";
                         }
                         else{
@@ -129,7 +120,7 @@
                 <a href="<?php echo URLROOT?>/admin/center_managers"><button type="button">OK</button></a>
             </div>
         </div>
-        d<?php endif; ?>
+        <?php endif; ?>
 
         <?php if($data['click_update']=='True') : ?>
         <div class="update_click">
@@ -206,20 +197,22 @@
         </div>
         <?php endif; ?>
 
-        <?php if($data['personal_details_click']=='True') : ?>
-        <div class="personal-details-popup-box">
-            <div class="personal-details-popup-form" id="popup">
-                <a href="<?php echo URLROOT?>/admin/center_managers"><img src="<?php echo IMGROOT?>/close_popup.png"
-                        alt="" class="personal-details-popup-form-close"></a>
+        <div class="overlay" id="overlay"></div>
+
+        <div class="personal-details-popup-box" id="personal-details-popup-box">
+            <div class="personal-details-popup-form">
+                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
+                    id="personal-details-popup-form-close">
                 <center>
                     <div class="personal-details-topic">Personal Details</div>
                 </center>
 
                 <div class="personal-details-popup">
                     <div class="personal-details-left">
-                        <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $data['image']?>"
-                            class="profile-pic" alt="">
-                        <p>Center Manager ID: <span>C<?php echo $data['id']?></span></p>
+                        <!-- <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $data['image']?>" class="profile-pic"
+                    alt=""> -->
+                        <img src="" id="collector_profile_pic" alt="">
+                        <p>Collector ID: <span id="collector_id">C</span></p>
                     </div>
                     <div class="personal-details-right">
                         <div class="personal-details-right-labels">
@@ -231,12 +224,12 @@
                             <span>DOB</span><br>
                         </div>
                         <div class="personal-details-right-values">
-                            <span><?php echo $data['name']?></span><br>
-                            <span><?php echo $data['email']?></span><br>
-                            <span><?php echo $data['nic']?></span><br>
-                            <span><?php echo $data['address']?></span><br>
-                            <span><?php echo $data['contact_no']?></span><br>
-                            <span><?php echo $data['dob']?></span><br>
+                            <span id="collector_name"></span><br>
+                            <span id="collector_email"></span><br>
+                            <span id="collector_nic"></span><br>
+                            <span id="collector_address"></span><br>
+                            <span id="collector_contact_no"></span><br>
+                            <span id="collector_dob"></span><br>
 
                         </div>
                     </div>
@@ -244,8 +237,57 @@
             </div>
 
         </div>
-
-        <?php endif; ?>
     </div>
 </div>
+<script>
+function openpersonaldetails(collector) {
+    var personalPop = document.getElementById('personal-details-popup-box');
+    personalPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    document.getElementById('collector_id').textContent = collector.user_id;
+    document.getElementById('collector_profile_pic').src = "<?php echo IMGROOT?>/img_upload/center_manager/" + collector
+        .image;
+    document.getElementById('collector_name').textContent = collector.name;
+    document.getElementById('collector_email').textContent = collector.email;
+    document.getElementById('collector_nic').textContent = collector.nic;
+    document.getElementById('collector_address').textContent = collector.address;
+    document.getElementById('collector_contact_no').textContent = collector.contact_no;
+    document.getElementById('collector_dob').textContent = collector.dob;
+
+
+}
+document.addEventListener('DOMContentLoaded', function() {
+    var close_personal_details = document.getElementById('personal-details-popup-form-close');
+    close_personal_details.addEventListener('click', function() {
+        const personal_details = document.getElementById("personal-details-popup-box");
+        personal_details.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
+    });
+});
+
+function searchTable() {
+    var input = document.getElementById('searchInput').value.toLowerCase();
+    var rows = document.querySelectorAll('.table-row');
+    rows.forEach(function(row) {
+        var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+        var status = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+        var date = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+        var time = row.querySelector('td:nth-child(5').innerText.toLowerCase();
+        var center = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
+
+        if (center.includes(input) || id.includes(input) || status.includes(input) || date
+            .includes(
+                input) || time.includes(input)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+
+}
+
+document.getElementById('searchInput').addEventListener('input', searchTable);
+</script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

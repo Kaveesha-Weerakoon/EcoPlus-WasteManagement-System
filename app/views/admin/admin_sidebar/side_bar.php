@@ -66,7 +66,7 @@
         </a>
 
         <div class="main-left-middle-content">
-            <div class="main-left-middle-content-icon">
+            <!-- <div class="main-left-middle-content-icon">
                 <i class='bx bx-moon'></i>
             </div>
             <h3>Dark Mode</h3>
@@ -75,7 +75,7 @@
                 <label class="toggle-button" for="toggle-checkbox">
                     <div class="toggle-indicator"></div>
                 </label>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

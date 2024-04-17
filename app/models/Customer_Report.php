@@ -9,7 +9,7 @@
     
         public function getCompletedRequests($user_id,$from = "none", $to = "none") {
             try {
-                $this->db->query('SELECT * FROM request_main WHERE type=\'completed\' AND customer_id=:customer_id AND date >= :from AND date <= :to');
+                $this->db->query('SELECT * FROM request_main INNER JOIN request_completed ON request_completed.req_id = request_main.req_id WHERE type=\'completed\' AND customer_id=:customer_id AND request_completed.completed_datetime >= :from AND request_completed.completed_datetime <= :to');
 
                 $this->db->bind(':customer_id',$user_id);
 
@@ -40,7 +40,7 @@
         public function getCancelledRequests($user_id,$from="none",$to="none"){
             try {
               
-                $this->db->query('SELECT * FROM request_main WHERE type=\'cancelled\' AND customer_id=:customer_id  AND date >= :from AND date <= :to');
+                $this->db->query('SELECT * FROM request_main rm JOIN request_cancelled rc ON rc.req_id=rm.req_id WHERE rm.type=\'cancelled\' AND rm.customer_id=:customer_id AND rc.cancelled_time >= :from AND rc.cancelled_time <= :to');
                 $this->db->bind(':customer_id',$user_id);
           
     
@@ -128,7 +128,7 @@
         function getCredits( $user_id,$from = "none", $to = "none") {
          try {
           
-            $this->db->query('SELECT SUM(credit_amount) AS total_credits FROM request_main INNER JOIN request_completed ON request_completed.req_id = request_main.req_id WHERE type = \'completed\' AND customer_id=:customer_id  AND date >= :from AND date <= :to');
+            $this->db->query('SELECT SUM(credit_amount) AS total_credits FROM request_main INNER JOIN request_completed ON request_completed.req_id = request_main.req_id WHERE type = \'completed\' AND customer_id=:customer_id  AND request_completed.completed_datetime >= :from AND request_completed.completed_datetime <= :to');
             $this->db->bind(':customer_id', $user_id);
 
     

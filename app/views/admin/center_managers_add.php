@@ -7,41 +7,7 @@
                 <div class="main-right">
                     <div class="main-right-top">
                         <div class="main-right-top-one">
-                            <div class="main-right-top-search">
-                                <i class='bx bx-search-alt-2'></i>
-                                <input type="text" id="searchInput" placeholder="Search">
-                            </div>
-                            <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                                <i class='bx bx-bell'></i>
-                                <div class="dot"></div>
-                            </div>
-                            <div id="notification_popup" class="notification_popup">
-                                <h1>Notifications</h1>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
-
-                                    </div>
-                                    Request 1232 Has been Cancelled
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
-
-                                    </div>
-                                    Request 1232 Has been Assigned
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
-
-                                    </div>
-                                    Request 1232 Has been Cancelled
-                                </div>
-                            </div>
-                            <div class="main-right-top-profile">
-                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                                <div class="main-right-top-profile-cont">
-                                    <h3>Admin</h3>
-                                </div>
-                            </div>
+                            <?php require APPROOT . '/views/admin/admin_profile/adminprofile.php'; ?>
                         </div>
                         <div class="main-right-top-two">
                             <h1>Center Managers</h1>
@@ -149,7 +115,8 @@
                                     <div class="main-bottom-down-content-bottom-one-right">
                                         <div class="form-fields">
                                             <h2>Email</h2>
-                                            <input type="text" name="email" value="<?php echo $data['email']; ?>">
+                                            <input type="text" name="email" value="<?php echo $data['email']; ?>"
+                                                placeholder="Email">
                                             <div class="err"><?php echo $data['email_err']?></div>
                                         </div>
                                     </div>
@@ -157,15 +124,17 @@
                                         <div class="form-fields">
                                             <h2>Password</h2>
                                             <input type="password" name="password"
-                                                value="<?php echo $data['password']; ?>">
-                                            <div class="err"><?php echo $data['password_err']?></div>
+                                                value="<?php echo $data['password']; ?>" placeholder="Password">
+                                            <div class=" err"><?php echo $data['password_err']?>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="main-bottom-down-content-bottom-one-right">
                                         <div class="form-fields">
-                                            <h2>Re-enter Password</h2>
+                                            <h2>Confirm Password</h2>
                                             <input type="password" name="confirm_password"
-                                                value="<?php echo $data['confirm_password']; ?>">
+                                                value="<?php echo $data['confirm_password']; ?>"
+                                                placeholder="Confirm password">
                                             <div class="err"><?php echo $data['confirm_password_err']?></div>
                                         </div>
                                     </div>

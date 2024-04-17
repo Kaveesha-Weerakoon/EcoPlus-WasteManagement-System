@@ -54,13 +54,15 @@
         return $results;
       }
 
-    public function get_collectors(){
+    
+      public function get_collectors(){
         $this->db->query('SELECT *,
               collectors.id as cID,
               users.id as userId
               FROM collectors
               INNER JOIN users
-              ON collectors.user_id = users.id');
+              ON collectors.user_id = users.id
+              ');
         $results = $this->db->resultSet();
         return $results;
 
@@ -191,7 +193,7 @@
           return false;
         }
 
-      }
+    }
 
       
 
@@ -203,7 +205,7 @@
 
         return $row;
 
-      }
+    }
 
     public function getCollectorByNIC($NIC){
         $this->db->query('SELECT * FROM collectors WHERE nic = :nic');
@@ -213,7 +215,7 @@
 
         return $row;
 
-      }
+    }
 
     public function getCollectorByVehicleNo($vehicleNo){
         $this->db->query('SELECT * FROM collectors WHERE vehicle_no = :vehicleNo');
@@ -223,7 +225,8 @@
 
         return $row;
 
-      }
+    }
+    
     public function editprofile($data){
 
         $this->db->query('UPDATE users SET name = :value WHERE id = :id');
@@ -244,7 +247,7 @@
         }else {
          return false; 
         }
-         }
+    }
 
     public function editprofile_withimg($data){
 
@@ -269,7 +272,7 @@
            }          
            }else {
              return false; 
-  }
+    }
    }
    
 

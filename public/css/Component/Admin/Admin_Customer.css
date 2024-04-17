@@ -676,6 +676,18 @@
             grid-template-columns: 14% 21% 20% 12% 12%;
         }
 
+        .main-right-top-two h1 {
+            font-size: 15px !important;
+        }
+
+        .main-right-top-three p {
+            font-size: 13px !important;
+        }
+
+        .line {
+            width: 50px;
+        }
+
     }
 
     @media screen and (max-width: 762px) {

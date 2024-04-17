@@ -1,4 +1,9 @@
 .Admin_Center_Manager {
+    a {
+        text-decoration: none;
+        font-family: inter;
+        color: inherit;
+    }
 
     #dashboard i {
         color: var(--green-color-one);
@@ -14,6 +19,8 @@
         height: 100%;
         grid-template-rows: 23% 77%;
         background-color: var(--background-color-right);
+        overflow-x: hidden;
+
     }
 
     .main-right-top {
@@ -33,53 +40,6 @@
         box-shadow: var(--box-shadow2);
         background-color: var(--background-color-main);
         z-index: 1;
-    }
-
-    .main-right-top-search {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 35%;
-        position: relative;
-    }
-
-    .main-right-top-search i {
-        position: absolute;
-        font-size: 25px;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .main-right-top-search input {
-        width: 100%;
-        height: 33px;
-        border-radius: 7px;
-        background-color: var(--background-color-two);
-        border: 1px solid #dcdde1;
-        font-size: 14px;
-        padding-left: 40px;
-        letter-spacing: 0.03rem;
-        color: var(--main-text-color);
-    }
-
-    .main-right-top-search input:focus {
-        border: 1px solid #1ca557;
-        outline: none;
-    }
-
-    .main-right-top-notification {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 30%;
-    }
-
-    .main-right-top-profile {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 40px;
     }
 
     .main-right-top-two {
@@ -297,26 +257,6 @@
         background: var(--button-hover-green);
     }
 
-    @media screen and (max-width: 1178px) {
-        .image2 {
-            display: none;
-        }
-
-        .main-bottom-content h4 {
-            font-size: 15px !important;
-        }
-
-        .main-bottom-content h6 {
-            font-size: 13px !important;
-        }
-    }
-
-    @media screen and (max-width: 914px) {
-        .main-bottom-bottom {
-            display: flex;
-            flex-direction: column;
-        }
-    }
 
     /*Update popup*/
     .update_click {
@@ -433,7 +373,6 @@
         height: 4px;
         background-color: var(--green-color-one);
         margin-bottom: 15px;
-
     }
 
     .updateData input {
@@ -445,8 +384,6 @@
         background-color: #fff;
         border: 1px solid #ced4da;
         border-radius: 4px;
-
-
     }
 
     .updateData label {
@@ -463,22 +400,7 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    @media screen and(max-width: 946px) {
 
-        .updateData {
-            margin-left: 10px;
-
-        }
-
-        .cancelbtn1 {
-            width: 100px;
-        }
-
-        .updatebtn {
-            width: 100px;
-        }
-
-    }
 
     /*Update success*/
     .center_manager_update_success {
@@ -547,32 +469,42 @@
 
     /*personal details popup*/
     .personal-details-popup-box {
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.1);
-        z-index: 2;
         display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 4;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 100%;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        background-color: var(--main-text-color);
+    }
+
+    .personal-details-popup-box.active {
+        transform: translate(-50%, -50%) scale(1);
     }
 
     .personal-details-popup-form {
-        width: 45%;
-        background: white;
+        box-sizing: border-box;
+        width: 700px;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         position: relative;
         text-align: center;
-        padding: 0 30px 30px;
-        color: var(--main-text-color);
+        padding: 0 30px 30px 30px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
+        color: var(--main-text-color);
+
     }
 
     .personal-details-popup-form-close {
@@ -583,6 +515,7 @@
         right: 10px;
         width: 20px;
         height: 20px;
+        cursor: pointer;
     }
 
     .personal-details-popup {
@@ -616,9 +549,7 @@
         margin-bottom: 15px;
         font-size: 15px;
         color: #7c7c7d;
-
     }
-
 
     .personal-details-right-values {
         display: flex;
@@ -628,7 +559,6 @@
         padding-top: 40px;
         padding-bottom: 50px;
         padding-left: 32px;
-
     }
 
     .personal-details-right-values span {
@@ -645,12 +575,15 @@
         justify-content: center;
         padding: 10px;
         flex-direction: column;
-
     }
 
     .personal-details-left img {
         width: 150px;
         height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-bottom: 8px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     }
 
     .personal-details-left p {
@@ -662,18 +595,6 @@
     .personal-details-left span {
         color: #767e95;
         font-weight: 550;
-
-    }
-
-
-    .profile-pic {
-        width: 70%;
-        height: auto;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-bottom: 8px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-
     }
 
     .personal-details-topic {
@@ -697,15 +618,109 @@
 
     }
 
+    @media screen and (max-width:862px) {
 
-    @media screen and(max-width: 917px) {
+        .main-right-top-three-content p {
+            font-size: 14px !important;
+        }
 
-        .personal-details-popup {
-            display: flex;
-            flex-direction: column;
+        .main-right-bottom {
+            width: 160%;
+            overflow-x: scroll !important;
+        }
+
+        .main-right-bottom-top {
+            width: 160%;
+            overflow-x: scroll !important;
+        }
+
+        .main-right-bottom-down {
+            width: 160%;
+            overflow-x: scroll !important;
+        }
+
+        .personal-details-popup-form {
+            width: 500px;
+        }
+
+        .personal-details-right-labels span {
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .personal-details-right-values span {
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .personal-details-left p {
+            font-size: 12px;
+        }
+
+        .personal-details-left img {
+            width: 120px;
+            height: 150px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .main-right-top-two h1 {
+            font-size: 15px !important;
+        }
+
+        .main-right-top-three p {
+            font-size: 13px !important;
+        }
+
+        .line {
+            width: 50px;
         }
 
     }
 
+    @media screen and(max-width: 917px) {
+        .personal-details-popup {
+            display: flex;
+            flex-direction: column;
+        }
+    }
 
+    @media screen and (max-width: 612px) {
+
+        .table td {
+            font-size:10px;
+        }
+
+        .table-header {
+            font-size: 11px !important;
+        }
+
+        .table-row img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .personal-details-popup-form {
+            width: 500px;
+        }
+
+        .personal-details-right-labels span {
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .personal-details-right-values span {
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .personal-details-left p {
+            font-size: 12px;
+        }
+
+        .personal-details-left img {
+            width: 120px;
+            height: 150px;
+            box-shadow: var(--box-shadow);
+        }
+    }
 }

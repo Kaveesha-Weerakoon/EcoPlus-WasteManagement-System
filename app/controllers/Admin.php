@@ -1064,7 +1064,6 @@
     
     }
   
-   
 
     public function discount_agent_delete($id) {
       $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($id);
@@ -1092,7 +1091,6 @@
     }
 
     public function garbage_types($success="False"){
-
       $garbage_types = $this->garbage_types_model->get_all();
 
       $data=[
@@ -1985,8 +1983,6 @@
 
 
     }
-
-
 
     public function announcements(){
       $Announcements=$this->Annoucement_Model->getAllAnnouncements();

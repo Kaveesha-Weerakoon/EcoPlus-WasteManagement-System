@@ -276,9 +276,9 @@ input[type=file] {
 
 
 
-.input-field3 {
+.city {
 
-  width: 600px;
+  width: 610px;
   height: 40px;
   background-color: #f5f6fa;
   margin: 10px 0;
@@ -289,7 +289,7 @@ input[type=file] {
 
 }
 
-.input-field3 i {
+.city i {
   text-align: center;
   line-height: 55px;
   color: #acacac;
@@ -297,7 +297,7 @@ input[type=file] {
 
 }
 
-.input-field3 input {
+.city select {
   background: none;
   outline: none;
   border: none;
@@ -309,7 +309,7 @@ input[type=file] {
   padding-left: 10px;
 }
 
-.input-field3 input::placeholder {
+.city select::placeholder {
   color: #8d8d8d;
   font-weight: 500;
   padding-top: 7px;
@@ -333,6 +333,14 @@ input[type=file] {
 }
 
 .err {
+  color: var(--red-color);
+  font-size: 14px;
+  height: 14px;
+  letter-spacing: 0.03rem;
+  margin-top: 15px;
+}
+
+.errlog {
   color: var(--red-color);
   font-size: 14px;
   height: 14px;
@@ -484,4 +492,94 @@ input[type=file] {
 .container.sign-up-mode form.sign-up-form {
   z-index: 2;
   opacity: 1;
+}
+
+
+.cont p {
+  position: relative;
+}
+
+.cont p i {
+ margin-left: 10px;
+ font-size: 25px;
+  color: #888; 
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.bounce {
+  animation: bounce 1s ease-in-out; /* Adjust animation duration and timing function as needed */
+}
+
+    /*Location Pop*/
+
+    .location_pop {
+      display: flex;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background-color: rgba(0, 0, 0, 0);
+      z-index: 99;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+      margin-right: 50px;
+  }
+
+  .location_pop.active {
+      transform: translate(-50%, -50%) scale(1);
+  }
+
+  .location_pop_content {
+      width: 700px;
+      padding: 10px;
+      background-color: #e6e1e1db;
+      border-radius: 10px;
+      padding: 20px;
+      padding-bottom: 40px;
+      height: 350px;
+      overflow: hidden;
+  }
+
+  .location_pop_map {
+      width: 100;
+      height: 100%;
+      border-radius: 10px;
+  }
+
+  .location_close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 6px;
+  }
+
+  .location_close button {
+      background-color: #ff4757;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      width: 85px;
+      height: 28px;
+  }
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 98;
+  display: none;
 }

@@ -36,11 +36,11 @@
             'centers'=>$jsonData,
             'centers2'=>$centers ,
             'name_err' => '',
-            'email_err' => '',
+            'email_reg_err' => '',
             'contact_no_err' => '',
             'address_err' => '',
             'city_err'=>'',
-            'password_err' => '',
+            'password_reg_err' => '',
             'confirm_password_err' => '',
             'profile_err'=>'',
             'profile_upload_error'=>'' ,
@@ -64,20 +64,20 @@
         }
   
            // Validate Email
-           if(empty($data['email'])){
-            $data['regemail_err'] = 'Please enter an email';
+           if(empty($data['email_reg'])){
+            $data['email_reg_err'] = 'Please enter an email';
         } else {
             // Check email format
-            if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
-                $data['regemail_err'] = 'Invalid email format';
+            if(!filter_var($data['email_reg'], FILTER_VALIDATE_EMAIL)){
+                $data['email_reg_err'] = 'Invalid email format';
             } else {
                 // Check email length
-                if(strlen($data['email']) > 255) { // You can adjust the maximum length as needed
-                    $data['regemail_err'] = 'Email is too long';
+                if(strlen($data['email_reg']) > 255) { // You can adjust the maximum length as needed
+                    $data['email_reg_err'] = 'Email is too long';
                 } else {
                     // Check email availability
                     if($this->userModel->findUserByEmail($data['email'])){
-                        $data['regemail_err'] = 'Email is already taken';
+                        $data['email_reg_err'] = 'Email is already taken';
                     }
                 }
             }
@@ -111,10 +111,10 @@
         }
         
           // Validate Password
-          if(empty($data['password'])){
-            $data['password_regerr'] = 'Pleae enter password';
-          } elseif(strlen($data['password']) < 6){
-            $data['password_reger'] = 'Password must be at least 6 characters';
+          if(empty($data['password_reg'])){
+            $data['password_reg_err'] = 'Pleae enter password';
+          } elseif(strlen($data['password_reg']) < 6){
+            $data['password_reg_err'] = 'Password must be at least 6 characters';
           }
   
           // Validate Confirm Password
@@ -126,15 +126,15 @@
             }
           }
   
-          if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['city_err']) && empty($data['address_err'])&& empty($data['profile_err'])){
+          if(empty($data['email_reg_err']) && empty($data['name_err']) && empty($data['password_reg_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['city_err']) && empty($data['address_err'])&& empty($data['profile_err'])){
             // Validated
-            $pw=$data['password'];
-            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            $pw=$data['password_reg'];
+            $data['password_reg'] = password_hash($data['password_reg'], PASSWORD_DEFAULT);
             
             // Register User
             if($this->userModel->register($data)){
               
-              $loggedInUser = $this->userModel->login($data['email'], $pw);
+              $loggedInUser = $this->userModel->login($data['email_reg'], $pw);
               $customer=$this->customerModel->get_customer($loggedInUser->id);
               if($customer->image==''){
                 $_SESSION['customer_profile'] = "Profile.png";
@@ -158,7 +158,7 @@
           // Init data
           $data =[
             'name' => '',
-            'email' => '',
+            'email_reg' => '',
             'contact_no' => '',
             'address' => '',
             'city'=>'',
@@ -166,19 +166,20 @@
             'confirm_password' => '',
             'centers'=>$jsonData,
             'centers2'=>$centers ,
-             'password'=>'',
-             'email'=>'',
             'name_err' => '',
-            'email_err' => '',
+            'email_reg_err' => '',
             'contact_no_err' => '',
             'address_err' => '',
             'city_err'=>'',
-            'password_err' => '',
-            'confirm_password_err' => '',  
+            'confirm_password_err' => '',
+            'password_reg_err'=>'',  
             'profile_err'=>'',
             'profile_upload_error'=>'',
-            'email_reg'=>'',
             'reg'=>'True',
+            'password'=>'',
+            'email'=>'',
+            'password'=>'',
+            'password_err'=>'' 
           ];
   
           // Load view
@@ -233,10 +234,12 @@
             'password_reg'=>'',
             'confirm_password_reg'=>'',
             'name_err' => '',
+            'email_reg_err'=>'',
             'contact_no_err' => '',
             'address_err' => '',
             'city_err'=>'',
-            'confirm_password_err' => '',  
+            'confirm_password_err' => '',
+            'password_reg_err'=>'',   
             'profile_err'=>'',
             'profile_upload_error'=>'' ,
             'reg'=>'False'
@@ -350,10 +353,12 @@
             'password_reg'=>'',
             'confirm_password_reg'=>'',
             'name_err' => '',
+            'email_reg_err'=>'',
             'contact_no_err' => '',
             'address_err' => '',
             'city_err'=>'',
-            'confirm_password_err' => '',  
+            'confirm_password_err' => '',
+            'password_reg_err'=>'',  
             'profile_err'=>'',
             'profile_upload_error'=>'',
             'reg'=>'False'

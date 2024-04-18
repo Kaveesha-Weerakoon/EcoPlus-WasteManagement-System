@@ -644,20 +644,23 @@
 
   .pop_up_confirm_collect_cont {
     width: 35%;
-    height: 75%;
+    /* height: 75%; */
+    height: 550px;
     background-color: white;
     border-radius: 10px;
     display: flex;
     align-items: center;
     flex-direction: column;
+   
 
   }
 
   .pop_up_confirm_collect_cont h1 {
-    font-size: 25px;
+    font-size: 20px;
     letter-spacing: 0.03;
     margin-bottom: 20px;
     margin-top: 20px;
+    color: var(--main-text-color);
   }
 
   .pop_up_confirm_collect_cont .cont {
@@ -672,6 +675,7 @@
     width: 150px;
     margin-right: 10px;
     font-weight: 100;
+    color: var(--main-text-color);
 
   }
 
@@ -681,22 +685,24 @@
     margin-right: 10px;
     font-weight: 100;
     text-align: center;
+    color: var(--main-text-color);
   }
 
   .pop_up_confirm_collect_cont h4 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 100;
     margin-top: 15px;
     margin-bottom: 20px;
     font-weight: 600;
+    color: var(--main-text-color);
   }
 
 
   .pop_up_confirm_collect_cont .buttons .complete-btn {
     width: 200px;
-    height: 50px;
+    height: 35px;
     font-size: 19px;
-    background-color: #1B6652;
+    background-color: var(--green-color-one);
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -707,13 +713,13 @@
 
   .pop_up_confirm_collect_cont .buttons .complete-btn:hover {
 
-    background-color: #269074;
+    background-color: var(--button-hover-green);
   }
 
 
   .pop_up_confirm_collect_cont .buttons .cancel-btn {
     width: 200px;
-    height: 50px;
+    height: 35px;
     font-size: 19px;
     background-color: #b8b8b8;
     color: #ffffff;
@@ -729,6 +735,12 @@
   .pop_up_confirm_collect_cont .buttons .cancel-btn:hover {
 
     background-color: #979494;
+  }
+
+  .garbage-calculation-content{
+    width: 425px;
+    margin: 15px;
+
   }
 
    /* @media screen and (max-width: 1178px) {
@@ -789,6 +801,98 @@
 
   } */
 
+  @media screen and (max-width: 1460px) {
+
+    .garbage-release-popup-box {
+        
+        .main-right-bottom-content-content input{
+            width: 85%;
+        }
+
+        .wide-note input{
+            width: 595px;
+        }
+
+    }
+ 
+    
+}
+
+@media screen and (max-width: 1346px) {
+
+  .garbage-release-popup-box {
+        
+    .main-right-bottom-content-content input{
+        width: 70%;
+        margin-left: -50px;
+    }
+
+    .wide-note input {
+      width: 530px;
+      margin-left: 0;
+    }
+
+    .form-button button[type="submit"]{
+      width: 40%;
+      margin-left: -40px;
+    
+    }
+
+    .cancel-button{
+      width: 40%;
+    }
+
+   
+
+  }
+
+  .pop_up_confirm_collect_cont .cont{
+    overflow-x: scroll !important;
+  }
+
+  .garbage-calculation-content{
+    width: 425px;
+    overflow-x: scroll !important;
+   
+
+  }
+
+ 
+
+  
+}
+
+@media screen and (max-width:1200px) {
+
+  .garbage-release-popup-box {
+        
+    .main-right-bottom-content-content input{
+        width: 60%;
+        margin-left: -80px;
+    }
+
+    .wide-note input {
+      width: 500px;
+      margin-left: 0;
+    }
+
+    .form-button button[type="submit"]{
+      width: 30%;
+      margin-left: -80px;
+    
+    }
+
+    .cancel-button{
+      width: 30%;
+    }
+
+   
+
+  }
+
+  
+}
+
   @media screen and (max-width: 1118px) {
     .table td {
         font-size: 12px;
@@ -817,6 +921,32 @@
     .main-right{
         overflow-x: hidden;
     }
+
+    .garbage-release-popup-box {
+        
+      .main-right-bottom-content-content input{
+          width: 50%;
+          margin-left: -120px;
+      }
+  
+      .wide-note input {
+        width: 450px;
+        margin-left: 0;
+      }
+  
+      .form-button button[type="submit"]{
+        width: 30%;
+        margin-left: -120px;
+      
+      }
+  
+      .cancel-button{
+        width: 30%;
+      }
+  
+     
+  
+    }
 }
 
 @media screen and (max-width: 1108px) {
@@ -830,6 +960,48 @@
     .notification_popup {
         width: 26%;
     }
+
+    .garbage-release-popup-box {
+      .user-details{
+        height: 450px;
+        overflow-y: scroll;
+      }
+  
+      .user-details .cont{
+        display: flex !important;
+        flex-direction: column;
+        flex-wrap: nowrap;
+      }
+  
+      .main-right-bottom-content-content input{
+        width: 100% ;
+        margin-left: 2px ;
+        padding-left: 150px ;
+      }
+  
+      input::placeholder {
+        text-align: left ;
+      }
+  
+      .wide-note input {
+        width: 88% ;
+        margin-left: 0 ;
+      }
+  
+      .form-button button[type="submit"]{
+        width: 40%;
+        margin-left: 0px ;
+      
+      }
+  
+      .cancel-button{
+        width: 40%;
+      }
+
+
+    }
+
+   
 }
 
 @media screen and (max-width: 996px) {
@@ -918,6 +1090,14 @@
       margin-top: 60px;
     }
 
+    .garbage-release-popup-box {
+      .user-details{
+        height: 450px;
+        width: 250px;
+        overflow-y: scroll;
+      }
+    }
+
   
 }
 
@@ -963,6 +1143,18 @@
 
     .line{
         margin-left: -10px !important;
+    }
+
+    .garbage-release-popup-box {
+      .user-details{
+        height: 450px;
+        width: 200px;
+        overflow-y: scroll;
+      }
+
+      .cancel-button{
+        margin-left: 30px;
+      }
     }
 
    
@@ -1066,6 +1258,16 @@
       padding: 8px;
       font-size: 16px;
     }
+
+    .garbage-release-popup-box {
+
+      .main-right-bottom-content-content input{
+        padding-left: 30px !important;
+      }
+
+    }
+
+   
 }
 
 

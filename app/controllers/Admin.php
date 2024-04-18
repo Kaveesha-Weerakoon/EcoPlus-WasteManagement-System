@@ -64,8 +64,7 @@
         'collector_count'=>count( $collectors),
         'agent_count'=>count($agents),
         'centers'=>$jsonData,
-        'creditsGiven'=>$creditMonth->credit_amount 
-      ];
+        'creditsGiven' => ($creditMonth->credit_amount !== null) ? $creditMonth->credit_amount : 0      ];
 
       foreach($fine_details as $fine ){
         if($fine){
@@ -88,19 +87,7 @@
       $this->view('admin/complain_customers', $data);
     }
 
-    public function complain_delete($id){
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){     
 
-        if($this->customerModel->deletecomplain($id)){
-          redirect('./');
-        } else {
-          die('Something went wrong');
-        }
-      } else {
-        redirect('$url');
-      }
-    }
-    
     public function center_managers(){
 
       $center_managers = $this->center_managerModel->get_center_managers();
@@ -689,7 +676,6 @@
       ];
       $this->view('admin/complain_collectors', $data);
     }
-    // header("Location: " . URLROOT . "/customers/.$url.");        
 
     public function center_main($center_id, $region){
       $center=$this->center_model->getCenterById($center_id);
@@ -1063,8 +1049,40 @@
       }
     
     }
-  
 
+    public function discount_agent_view($id){      
+        
+      $agent=$this->discount_agentModel->getDiscountAgentByID2($id);
+      $discouts=$this->discount_agentModel->getDiscountByAgent($id);
+      $credit_log=$this->discount_agentModel->getCreditlog($id);
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){        
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+          $data=[
+            'agent'=>$agent,
+            'discounts'=>$discouts,
+            'new_balance'=>'',
+            'credit'=>trim($_POST['credit_value']),
+            'credit_log'=>$credit_log,
+          ];
+
+        $center_managers = $this->center_managerModel->get_center_managers();
+        $data['new_balance'] = (float)($agent->credits + $data['credit']);
+        $agent=$this->discount_agentModel->addcredits($data);
+
+        header("Location: " . URLROOT . "/admin/discount_agent_view/$id");        
+      }else{
+        $data=[
+          'agent'=>$agent,
+          'discounts'=>$discouts,
+          'credit_log'=>$credit_log,
+        ];
+  
+        $this->view('admin/discountagentmain', $data);
+      }
+    }
+  
     public function discount_agent_delete($id) {
       $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($id);
       $this->discount_agentModel->discount_agent_delete($id);

@@ -12,23 +12,24 @@
                 </div>
                 <div class="slogan"> Sign into your account</div>
 
-                <div class="input-fieldlog">
-                    <i class="fas fa-user"></i>
-                    <input type="text" class="text" placeholder="Email" name="email"
-                        class="<?php echo (!empty($data['email_err'])) ? 'alert_empty' : ''; ?>"
-                        value="<?php echo $data['email']; ?>">
+                <div class="input-field-container">
+                    <div class="input-fieldlog">
+                        <i class="fas fa-user"></i>
+                        <input type="text" class="text" placeholder="Email" name="email"
+                            class="text" value="<?php echo $data['email']; ?>">
+                    </div>
+                    <div class="errlog"><?php echo $data['email_err']?></div>
                 </div>
-                <div class="errlog"><?php echo $data['email_err']?></div>
 
-
-                <div class="input-fieldlog">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" class="text" placeholder="Password" name="password"
-                        class="<?php echo (!empty($data['password_err'])) ? 'alert_empty' : ''; ?>"
-                        value="<?php echo $data['password']; ?>">
-                        
+                <div class="input-field-container">
+                    <div class="input-fieldlog">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" class="text" placeholder="Password" name="password"
+                            class="text" value="<?php echo $data['password']; ?>">
+                            
+                    </div>
+                    <div class="errlog"><?php echo $data['password_err']?></div>
                 </div>
-                <div class="errlog"><?php echo $data['password_err']?></div>
                 <div class="forgot"><a href="<?php echo URLROOT?>/users/resetpassword">Forgot your password?</a></div>
 
                 <input type="submit" value="Login" class="btn solid">
@@ -42,14 +43,17 @@
                     <h1>Sign Up</h1>
                 </div>
 
-                <div class="porfile-cont">
-                    <input type="file" name="profile_image" class="profile_image" id="profile_image"
-                        placeholder="select a profile image">
-                    <img src="<?php echo IMGROOT?>./anonymous.png" alt="" class="profile_image_trigger"
-                        id="profile_image_trigger">
-                    <p>Add a Profile Picture</p>
-                    <div class="err"><?php echo $data['profile_err']?></div>
-                </div>
+                
+                <div class="edit-profile-content-profile">
+                                    <div class="edit-profile-content-profile-container">
+                                        <img class="edit-profile-main-image" id="profile_image_placeholder"
+                                            src="<?php echo IMGROOT?>./anonymous.png"
+                                            alt="">
+                                        <img class="edit-profile-second-image" src="<?php echo IMGROOT?>/edit-icon.png"
+                                            alt="">
+                                        <input name='profile_image' type="file" id="profile_image">
+                                    </div>
+                                </div>
 
                 <div class="cont-main">
                     <div class="cont">
@@ -179,7 +183,7 @@
 </div>
 </div>
 
-
+<script src="<?php echo JSROOT?>/Customer_Edit_Profile.js"> </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHC8CdWrCw593DZUii78rtRV-whzvwKwE&callback=initMap" async defer></script>
 
 
@@ -353,7 +357,7 @@ function initMap() {
         });
     });
 }
-document.getElementById("profile_image_trigger").addEventListener("click", function() {
+document.getElementById("edit-profile-main-image").addEventListener("click", function() {
     document.getElementById("profile_image").click();
 });
 

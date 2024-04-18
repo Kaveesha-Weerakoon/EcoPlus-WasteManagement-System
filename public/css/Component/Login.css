@@ -124,7 +124,7 @@ form.sign-up-form {
   align-items: center;
   flex-direction: column;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
   font-size: 15px !important;
   font-weight: 400;
 
@@ -317,7 +317,7 @@ input[type=file] {
 
 .cont-main {
 
-  margin-bottom: 3px;
+  margin-bottom: 7px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -337,7 +337,7 @@ input[type=file] {
   font-size: 14px;
   height: 14px;
   letter-spacing: 0.03rem;
-  margin-top: 15px;
+  margin-top: 13px;
 }
 
 .errlog {
@@ -345,10 +345,12 @@ input[type=file] {
   font-size: 14px;
   height: 14px;
   letter-spacing: 0.03rem;
+  margin-top:2px ;
 }
 
 .cont-region {
-  margin-bottom: 17px;
+  margin-top: 10px;
+  margin-bottom: 4px;
 }
 
 .cont {

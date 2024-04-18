@@ -26,13 +26,13 @@
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           $data =[
             'name' => trim($_POST['name']),
-            'email_reg' => trim($_POST['email_regmail']),
+            'email_reg' => trim($_POST['email_reg']),
             'contact_no' => trim($_POST['contact_no']),
             'address' => trim($_POST['address']),
             'city'=>trim($_POST['city']),
             'password_reg' => trim($_POST['password_reg']),
             'confirm_password' => trim($_POST['confirm_password']),
-            'profile_image_name' => trim($_POST['email_regmail']).'_'.$_FILES['profile_image']['name'],
+            'profile_image_name' => trim($_POST['email_reg']).'_'.$_FILES['profile_image']['name'],
             'centers'=>$jsonData,
             'centers2'=>$centers ,
             'name_err' => '',
@@ -76,7 +76,7 @@
                     $data['email_reg_err'] = 'Email is too long';
                 } else {
                     // Check email availability
-                    if($this->userModel->findUserByEmail($data['email'])){
+                    if($this->userModel->findUserByEmail($data['email_reg'])){
                         $data['email_reg_err'] = 'Email is already taken';
                     }
                 }
@@ -121,7 +121,7 @@
           if(empty($data['confirm_password'])){
             $data['confirm_password_err'] = 'Please confirm password';
           } else {
-            if($data['password'] != $data['confirm_password']){
+            if($data['password_reg'] != $data['confirm_password']){
               $data['confirm_password_err'] = 'Passwords do not match';
             }
           }
@@ -147,6 +147,7 @@
             
               }
              else {
+              flash('register_error');
               redirect('users/login');
             }
           } else {

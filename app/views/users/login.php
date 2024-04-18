@@ -65,7 +65,7 @@
                         <p>Email</p>
                         <div class="input-field2">
                             <input type="text" class="text" placeholder="Email"
-                                value="<?php echo $data['email_reg']; ?>" name="email_regmail" id="email_regmail">
+                                value="<?php echo $data['email_reg']; ?>" name="email_reg" id="email_reg">
                                 <div class="err"><?php echo $data['email_reg_err']?></div>
                         </div>
                     </div>

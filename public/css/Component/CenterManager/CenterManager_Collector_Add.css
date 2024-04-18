@@ -27,6 +27,7 @@
         height: 100%;
         grid-template-rows: 23% 77%;
         background-color: var(--background-color-right);
+        overflow: hidden;
     }
 
     .main-right-top {
@@ -195,7 +196,7 @@
         margin-left: 5px;
     }
 
-    .mark_as_read button:hover{
+    .mark_as_read button:hover {
         color: var(--button-hover-green);
     }
 
@@ -298,13 +299,15 @@
     .main-right-bottom-down {
         padding-left: 3.5%;
         width: 96.5%;
-        height: 450px;
+        height: 100%;
         overflow: scroll;
+        padding-top: 4%;
+
     }
 
     .main-bottom-down {
         display: flex;
-        justify-content: center;   
+        justify-content: center;
     }
 
     .main-bottom-down-content {
@@ -315,6 +318,8 @@
         display: flex;
         flex-direction: column;
         padding: 20px;
+        margin-bottom: 8%;
+
 
     }
 
@@ -460,7 +465,7 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .main-bottom-down-content-button button:hover{
+    .main-bottom-down-content-button button:hover {
         background: #19954e;
     }
 
@@ -527,7 +532,7 @@
 
     }
 
-    .popup button:hover{
+    .popup button:hover {
         background: var(--button-hover-green);
     }
 

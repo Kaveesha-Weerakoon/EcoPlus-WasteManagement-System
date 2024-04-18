@@ -61,9 +61,8 @@
                                     <td><?php echo $admin->email?></td>
                                     <td><i onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode( $admin), ENT_QUOTES, 'UTF-8') ?>))"
                                             class='bx bxs-user' style="font-size: 29px;"></i></td>
-                                    <td class="cancel-open"><a
-                                            href="<?php echo URLROOT?>/admin/admin_delete_confirm/<?php echo $admin->user_id?>"><i
-                                                class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
+                                    <td><i onclick="opendelete(<?php echo $admin->user_id?>)" class='bx bxs-trash'
+                                            style=" font-size: 29px;"></i></td>
 
 
 
@@ -122,8 +121,7 @@
 
 
 
-            <?php if($data['confirm_delete']=='True') : ?>
-            <div class="delete_confirm">
+            <div class="delete_confirm" id="delete_confirm">
                 <div class="popup" id="popup">
                     <img src="<?php echo IMGROOT?>/trash.png" alt="">
                     <?php
@@ -132,16 +130,14 @@
                                 
                                 ?>
                     <div class="btns">
-                        <?php
-                                            echo '<a href="' . URLROOT . '/Admin/admin_delete/' . $data['admin_id'] . '"><button type="button" class="deletebtn">Delete</button></a>';
-                                    
-                                    ?>
-                        <a href="<?php echo URLROOT?>/admin/addadmins"><button type="button"
-                                class="cancelbtn">Cancel</button></a>
+
+                        <button type="button" class="deletebtn">Delete</button>
+
+                        <button type="button" id="delete-close" class="cancelbtn">Cancel</button>
                     </div>
                 </div>
             </div>
-            <?php endif; ?>
+
             <?php if($data['success']=='True') : ?>
             <div class="center_manager_success">
                 <div class="popup" id="popup">
@@ -151,7 +147,7 @@
                     <a href="<?php echo URLROOT?>/admin/addadmins"><button type="button">OK</button></a>
                 </div>
             </div>
-            d<?php endif; ?>
+            <?php endif; ?>
 
         </div>
     </div>
@@ -178,6 +174,21 @@ function openpersonaldetails(Admin) {
 
 }
 
+function opendelete(id) {
+    var baseURL = '<?php echo URLROOT; ?>/admin/admin_delete/';
+
+    var deleteURL = baseURL + id;
+
+    var deletePop = document.getElementById('delete_confirm');
+    deletePop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    var deleteButton = document.querySelector('.deletebtn');
+    deleteButton.onclick = function() {
+        window.location.href = deleteURL;
+    };
+
+}
 document.addEventListener('DOMContentLoaded', function() {
     var close_personal_details = document.getElementById('personal-details-popup-form-close');
     close_personal_details.addEventListener('click', function() {
@@ -207,6 +218,18 @@ function searchTable() {
     });
 
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    var close_delete = document.getElementById('delete-close');
+
+    close_delete.addEventListener('click', function() {
+        var deletePop = document.getElementById('delete_confirm');
+        deletePop.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
+    });
+});
 
 document.getElementById('searchInput').addEventListener('input', searchTable);
 </script>

@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
 
-
+<div class="Login-main">
 <div class="container">
     <div class="forms-container">
         <div class="signin-signup">
@@ -176,6 +176,7 @@
             <button id="closeMapPopup" onclick="closemap()">Close</button>
         </div>
     </div>
+</div>
 </div>
 
 

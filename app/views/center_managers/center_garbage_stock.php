@@ -11,39 +11,7 @@
                             <input type="text" id="searchInput" placeholder="Search">
                         </div>
                         <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
-                        <!-- <div class="main-right-top-notification" id="notification">
-                            <i class='bx bx-bell'></i>
-                            <div class="dot"></div>
-                        </div>
-                        <div id="notification_popup" class="notification_popup">
-                            <h1>Notifications</h1>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Cancelled
-                            </div>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Assigned
-                            </div>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Cancelled
-                            </div>
-                        </div>
-                        <div class="main-right-top-profile">
-                            <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
-                                alt="">
-                            <div class="main-right-top-profile-cont">
-                                <h3><?php echo $_SESSION['center_manager_name']?></h3>
-                                <p>ID : Col <?php echo $_SESSION['center_manager_id']?></p>
-                            </div>
-                        </div> -->
+                 
                     </div>
                     <div class="main-right-top-two">
                         <h1>Center Waste Management</h1>
@@ -135,8 +103,8 @@
                         method="post" id="myForm">
                         <div class="user-details">
                             <div class="cont">
-                                <?php foreach($data['types'] as $type) : ?> <div
-                                    class="main-right-bottom-content-content">
+                                <?php foreach($data['types'] as $type) : ?> 
+                                <div class="main-right-bottom-content-content">
                                     <span class="details"><?php echo ucfirst($type->name);?></span>
                                     <div class="input-container">
                                         <i class="<?php echo $type->icon?>"></i>
@@ -190,36 +158,40 @@
         <div class="pop_up_confirm_collect">
             <div class="pop_up_confirm_collect_cont">
                 <h1>Sell Price Calculation</h1>
-                <div class="cont">
-                    <h5></h5>
-                    <h6>Kg</h6>
-                    <h6></h6>
-                    <h6>
-                        Price
-                    </h6>
-                    <h6></h6>
-                    <h6>
-                    </h6>
+                <div class="garbage-calculation-content">
+                    <div class="cont">
+                        <h5></h5>
+                        <h6>Kg</h6>
+                        <h6></h6>
+                        <h6>
+                            Price(Rs)
+                        </h6>
+                        <h6></h6>
+                        <h6>
+                        </h6>
+
+                    </div>
+                    <?php foreach($data['types'] as $type) : ?>
+                    <div class="cont">
+                        <h5><?php echo ucfirst($type->name); ?></h5>
+                        <h6><?php echo empty($data["{$type->name}"]) ? 0 : $data["{$type->name}"] ?>
+                        </h6>
+                        <h6>*</h6>
+                        <h6>
+                            <?php echo $type->selling_price?>
+                        </h6>
+                        <h6>=</h6>
+                        <h6><?php echo floatval($data["{$type->name}"]) * ($type->selling_price) ?>
+                        </h6>
+
+                    </div>
+                    <?php endforeach; ?>
+
+
+                    <h4>Total Price(Rs) = <?php echo $data['total_sell_price']?></h4>
 
                 </div>
-                <?php foreach($data['types'] as $type) : ?>
-                <div class="cont">
-                    <h5><?php echo ucfirst($type->name); ?></h5>
-                    <h6><?php echo empty($data["{$type->name}"]) ? 0 : $data["{$type->name}"] ?>
-                    </h6>
-                    <h6>*</h6>
-                    <h6>
-                        <?php echo $type->selling_price?>
-                    </h6>
-                    <h6>=</h6>
-                    <h6><?php echo floatval($data["{$type->name}"]) * ($type->selling_price) ?>
-                    </h6>
-
-                </div>
-                <?php endforeach; ?>
-
-
-                <h4>Total Price= <?php echo $data['total_sell_price']?></h4>
+              
                 <div class="buttons">
                     <button onclick="submitForm()" class="complete-btn" id="complete-btn">OK</button>
                     <button onclick="cancelForm()" class="cancel-btn" type="button">Cancel</button>

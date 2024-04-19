@@ -114,7 +114,28 @@
         <section class="announcement-section" id="announcements">
             <div class="text-wrapper">Announcements</div>
             <div class="cards-section">
+                <?php $count = 0;
+                foreach ($data['announcements'] as $announcement):
+                  if($count == 2) break;?>
                 <div class="Announcement-cont">
+                <div class="left slide-top">
+                    <h2> <?php echo $announcement->header ?></h2>
+                    <p><?php echo $announcement->date ?></p>
+                    <img src="<?php echo IMGROOT . '/img_upload/Annoucement/' . $announcement->img; ?>"
+                                alt="logo">
+                </div>
+                <div class="right ">
+                    <div class="cont slide-top">
+                        <p>
+                            <?php echo $announcement->text ?>
+                        </p>
+                    </div>
+                </div>
+                </div>
+                <?php
+                  $count++;
+                  endforeach?>
+                <!-- <div class="Announcement-cont">
                 <div class="left slide-top">
                     <h2>We are now in Kaluthara</h2>
                     <p>2024-03-26</p>
@@ -133,31 +154,11 @@
                         </p>
                     </div>
                 </div>
-                </div>
-                <div class="Announcement-cont">
-                <div class="left slide-top">
-                    <h2>We are now in Kaluthara</h2>
-                    <p>2024-03-26</p>
-                    <img src="<?php echo IMGROOT;?>/img_upload/Annoucement/Colombo.jpg"
-                        alt="logo">
-                </div>
-                <div class="right ">
-                    <div class="cont slide-top">
-                        <p>
-                            We're thrilled to announce the grand opening of a brand new region right here in Kalutara!
-                            Prepare to embark on a journey of discovery as we unveil this exciting addition to our town. 
-                            Featuring stunning landscapes, vibrant communities, and endless opportunities, this new region
-                            promises to captivate your senses and ignite your adventurous spirit. Join us in celebrating 
-                            this momentous occasion and be among the first to explore the wonders of Kalutara's newest gem!
-                            Get ready to write the next chapter of Kalutara's extraordinary story!
-                        </p>
-                    </div>
-                </div>
-                </div>
+                </div> -->
                 
             </div>
             <div class="view-more-button">
-                <button>View More -></button>
+                <button onclick= "redirectAnnouncements()" >View More -></button>
             </div>
         </section>
 
@@ -189,13 +190,23 @@
                 </div>
                 </div>
                 <!-- contact form -->
-                <div class="contact-form">
-                <div class="input-fields">
-                    <input type="text" class="input-field" title="input" placeholder="Name"/>
-                    <input type="text" class="input-field" title="input" placeholder="Email"/>
+             
+                <div class="contact-form"> 
+                <form action="<?php echo URLROOT?>/pages/mail_subscriptions#contact" method="post">
+                    <div class="input-fields">
+                        <input type="text" class="input-field" name="name" placeholder="Name" value="<?php echo $data['name']?>"/>
+                        <div class="err" ><?php echo $data['name_err']?></div>
+                        <input type="text" class="input-field" name="email" placeholder="Email" value="<?php echo $data['email']?>"/>
+                        <div class="err" ><?php echo $data['email_err']?></div>
+                    </div>
+                    <button class="button" type="submit"><span class="contact">Submit</span></button>
+
+                </form>
+                    
+              
                 </div>
-                <button class="button"><span class="contact">Submit</span></button>
-                </div>
+                
+                
             </div>
         </section>
 
@@ -205,8 +216,23 @@
             <p>@copyright 2025 | All right preserved by Eco Plus</p>
         </footer>
 
+        <?php if($data['success']=='True') : ?>
+            <div class="success">
+                <div class="popup" id="popup">
+                <img src="<?php echo IMGROOT?>/check.png" alt="">
+                <h2>Success!!</h2>
+                <p>Mail Subscription recorded successfully</p>
+                <a href="<?php echo URLROOT?>/pages/index"><button type="button" >OK</button></a>
+
+                </div>
+            </div>
+        <?php endif; ?>
+
+
+
     </div>
     <script>
+        
         const hamburger = document.querySelector(".hamburger");
         const navLink = document.querySelector(".nav__link");
 
@@ -228,6 +254,16 @@
 
         function redirectSignUp() {
             var linkUrl = "<?php echo URLROOT?>/users/register";
+            window.location.href = linkUrl;
+        }
+
+        function redirectSignUp() {
+            var linkUrl = "<?php echo URLROOT?>/users/register";
+            window.location.href = linkUrl;
+        }
+
+        function redirectAnnouncements(){
+            var linkUrl = "<?php echo URLROOT?>/pages/announcement_view";
             window.location.href = linkUrl;
         }
 

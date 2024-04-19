@@ -7,6 +7,8 @@
 @import url('Component/Register.css');
 @import url('Component/ResetPassword.css');
 
+@import url('Component/Announcement_view.css');
+
 /* Customer CSS */
 
 /* Customer Main left hand side CSS This is used in left hand side of all the customer uis*/
@@ -138,6 +140,8 @@
 @import url('Component/Admin/Admin_Discount_Agent_Add.css');
 @import url('Component/Admin/Admin_Discount_Agent_View.css');
 @import url('Component/Admin/Admin_Discount_Agent.css');
+@import url('Component/Admin/Admin_DicountAgent_Main.css');
+
 
 @import url('Component/Admin/Admin_Collector.css');
 
@@ -162,6 +166,9 @@
 @import url('Component/Admin/Admin_Center_Main_Stock_Releases.css');
 
 @import url('Component/Admin/Admin_Reports.css');
+@import url('Component/Admin/Admin_ReportMain.css');
+@import url('Component/Admin/Admin_UserReport.css');
+
 @import url('Component/Admin/Admin_Admin.css');
 @import url('Component/Admin/Admin_Admin_Add.css');
 @import url('Component/Admin/Admin_Admin_View.css');
@@ -170,6 +177,7 @@
 @import url('Component/Admin/Admin_Garbage_Types_View.css');
 
 @import url('Component/Admin/Admin_EditProfile.css');
+@import url('Component/Admin/Admin_Mail_Subscriptions.css');
 
 
 

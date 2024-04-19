@@ -1,0 +1,95 @@
+.Admin_ReportMain {
+    #reports i {
+        color: var(--green-color-one);
+    }
+
+    #reports h3 {
+        color: var(--green-color-one);
+    }
+
+    .main-right {
+        background-color: var(--background-color-right);
+        display: grid;
+        grid-template-rows: 9% 91%;
+        height: 100vh;
+        overflow-x: auto !important;
+        overflow-y: hidden;
+    }
+
+    .main-right-top {
+        background-color: var(--background-color-main);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: var(--box-shadow2);
+        border: 10px;
+        z-index: 1;
+    }
+
+    .main-right-top-profile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 40px;
+    }
+
+    .main-right-top-left {
+        display: flex;
+        margin-left: 1.5%;
+        width: auto;
+        justify-content: space-around;
+        width: 300px;
+    }
+
+    .main-right-top-left button {
+        padding: 5px 12px;
+        border: 0.5px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 13px;
+        cursor: pointer;
+        width: 135px;
+        background-color: var(--background-color-right);
+    }
+
+    .main-right-top-left button:hover {
+        background-color: var(--green-color-one);
+        color: var(--background-color-main);
+    }
+
+    @media screen and (max-width: 1040px) {
+        .main-right-top-left button {
+            padding: 4px 12px;
+            font-size: 12px;
+            width: 90px;
+        }
+
+        .main-right-top-left {
+            width: 270px;
+        }
+
+    }
+
+    @media screen and (max-width: 582px) {
+        .main-right-top-left button {
+            padding: 1px 10px;
+            font-size: 11px;
+            width: 90px;
+        }
+
+    }
+
+    @media screen and (max-width: 494px) {
+        .main-right-top-left button {
+            padding: 1px 10px;
+            font-size: 11px;
+            width: 100px;
+        }
+
+        .main-right-top-left {
+            width: 210px;
+        }
+
+    }
+}

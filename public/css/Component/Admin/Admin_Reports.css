@@ -1,42 +1,14 @@
 .Admin_Reports {
-    #reports i {
-        color: var(--green-color-one);
-    }
-
-    #reports h3 {
-        color: var(--green-color-one);
-    }
-
-    .main-right {
-        background-color: var(--background-color-right);
-        display: grid;
-        grid-template-rows: 9% 91%;
-        height: 100vh;
-        overflow-x: auto !important;
-    }
-
-    .main-right-top {
-        background-color: var(--background-color-main);
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: end;
-        box-shadow: var(--box-shadow2);
-        border: 10px;
-        z-index: 1;
-    }
-
-    .main-right-top-profile {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 40px;
-    }
 
     .main-right-bottom {
-
         overflow-x: scroll !important;
         overflow-y: scroll;
+    }
+
+    #requestbtn {
+        background-color: var(--green-color-one);
+        color: var(--background-color-main);
+
     }
 
     .main-right-bottom {
@@ -48,6 +20,8 @@
             display: flex;
             align-items: center;
         }
+
+
 
         .top-bar {
 
@@ -84,6 +58,11 @@
                 box-sizing: border-box;
                 font-size: 14px;
                 cursor: pointer;
+            }
+
+            .top-bar-details .cont:hover {
+                background-color: var(--green-color-one);
+                color: var(--background-color-main);
             }
 
             .date-box {
@@ -212,7 +191,7 @@
         .request-section {
             display: grid;
             grid-template-columns: 50% 50%;
-            height: 590px;
+            height: 100%;
             margin-top: 5px;
             box-sizing: border-box;
             padding: 10px;
@@ -232,7 +211,7 @@
                 box-sizing: border-box !important;
                 display: flex;
                 flex-direction: column;
-                height: 270px;
+                height: 98%;
                 padding: 30px;
             }
 
@@ -476,10 +455,6 @@
             padding: 6px 15px !important;
 
         }
-
-
-
-
     }
 
     @media screen and (max-width: 950px) {
@@ -602,17 +577,8 @@
 
             td {
                 font-size: 14px !important;
-
             }
-
         }
-
-
-
-
-
-
-
     }
 
 

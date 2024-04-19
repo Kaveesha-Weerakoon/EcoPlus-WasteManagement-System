@@ -54,6 +54,7 @@
                                 <th>Date & Time</th>
                                 <th>Released Person</th>
                                 <th>Release Note</th>
+                                <th>Income</th>
                                 <th>Release Details</th>
                             </tr>
                         </table>
@@ -65,6 +66,7 @@
                                 <td> <?php echo $release->released_date_time?></td>
                                 <td><?php echo $release->released_person?></td>
                                 <td> <?php echo $release->release_note?></td>
+                                <td> <?php echo $release->income?></td>
                                 <td class="cancel-open">
                                     <img onclick="view_release_details(<?php echo htmlspecialchars(json_encode($release), ENT_QUOTES, 'UTF-8') ?>)"
                                             src="<?php echo IMGROOT?>/info.png" alt="">

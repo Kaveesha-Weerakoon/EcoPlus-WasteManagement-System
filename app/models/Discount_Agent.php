@@ -63,9 +63,58 @@
       $row = $this->db->single();
 
       return $row;
+    }   
+    
+    public function getDiscountAgentByID2($data){
+      try{
+      $this->db->query('SELECT * FROM users INNER JOIN discount_agents ON users.id=discount_agents.user_id WHERE user_id = :agentId');
+      $this->db->bind(':agentId', $data);
+
+      $row = $this->db->single();
+
+      return $row; 
+     }
+      catch (PDOException $e) {
+        return false;
+     }
     }
 
-
+    
+    public function addcredits($data){
+      try {
+          // Update the credits for the discount agent
+          $this->db->query('UPDATE discount_agents SET credits = :new_balance WHERE user_id = :user_id1');
+          $this->db->bind(':new_balance', $data['new_balance']);
+          $this->db->bind(':user_id1', $data['agent']->user_id); // corrected access to user_id property
+          $result = $this->db->execute();
+          if ($result) {
+              // Insert a new entry into the discountagent_credit table
+              $this->db->query('INSERT INTO discountagent_credit (agent_id, credited_amount) VALUES (:agent_id, :credits)');
+              $this->db->bind(':agent_id', $data['agent']->user_id);
+              $this->db->bind(':credits', $data['credit']); // corrected variable name
+              $insertResult = $this->db->execute();
+              return $insertResult;
+          }
+      } catch (PDOException $e) {
+          // Handle exceptions
+          die($e->getMessage()); // corrected access to getMessage method
+          return false;
+      }
+    }
+    
+    public function getCreditlog($id){
+      try{
+        $this->db->query('SELECT * FROM discountagent_credit WHERE agent_id = :id ORDER BY credited_date DESC');
+        $this->db->bind(':id', $id);
+        $results = $this->db->resultSet();
+        return $results;
+       } 
+       catch (PDOException $e) {
+        die($e);
+          return false;
+       }
+    }
+  
     public function discount_agent_delete($id){
       $this->db->query('DELETE FROM users WHERE id = :discountAgentId');
       $this->db->bind(':discountAgentId', $id);
@@ -142,7 +191,6 @@
           return $this->db->execute();
         }
         catch (PDOException $e) {
-          die($e);
           return false;
        }
       
@@ -168,6 +216,8 @@
         return false;
      }
     }
+    
+  
 
           
 

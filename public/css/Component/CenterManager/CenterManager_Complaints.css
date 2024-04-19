@@ -453,6 +453,31 @@
             .main-bottom-component-left {
                 width: 100%;
             }
+
+            .main-bottom-component-left-component input{
+                width: 90%;
+            }
+
+            .main-bottom-component-left button{
+                width: 93%;
+            }
         }
+
+        @media screen and (max-width: 844px) {
+            .main-right-top-profile-cont p{
+                font-size: 12px;
+            }
+
+            .main-bottom-component-left-component input{
+                width: 90%;
+            }
+
+            .main-bottom-component-right img{
+                display: none;
+            }
+               
+        }
+
+
     }
 }

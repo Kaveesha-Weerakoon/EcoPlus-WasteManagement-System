@@ -12,41 +12,9 @@
 
                     <div class="main-right-top">
                         <div class="main-right-top-one">
-                            <div class="main-right-top-search">
-                                <i class='bx bx-search-alt-2'></i>
-                                <input type="text" id="searchInput" placeholder="Search">
-                            </div>
-                            <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                                <i class='bx bx-bell'></i>
-                                <div class="dot"></div>
-                            </div>
-                            <div id="notification_popup" class="notification_popup">
-                                <h1>Notifications</h1>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
 
-                                    </div>
-                                    Request 1232 Has been Cancelled
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
+                            <?php require APPROOT . '/views/admin/admin_profile/adminprofile.php'; ?>
 
-                                    </div>
-                                    Request 1232 Has been Assigned
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
-
-                                    </div>
-                                    Request 1232 Has been Cancelled
-                                </div>
-                            </div>
-                            <div class="main-right-top-profile">
-                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                                <div class="main-right-top-profile-cont">
-                                    <h3>Admin</h3>
-                                </div>
-                            </div>
                         </div>
                         <div class="main-right-top-two">
                             <h1>Garbage Types</h1>
@@ -58,12 +26,7 @@
                                     <div class="line" style="background-color: #1ca557;"></div>
                                 </div>
                             </a>
-                            <a href="">
-                                <div class="main-right-top-three-content">
-                                    <p>Add</p>
-                                    <div class="line"></div>
-                                </div>
-                            </a>
+
 
                         </div>
                     </div>
@@ -123,7 +86,7 @@
                             id="update_form">
                             <div class="updateData A">
                                 <label>Garbage Type</label><br>
-                                <input type="text" name="garbage_type" placeholder="Enter garbage type"
+                                <input readonly type="text" name="garbage_type" placeholder="Enter garbage type"
                                     value="<?php echo $data['garbage_type']; ?>"><br>
                                 <div class="error-div" style="color:red">
                                     <?php echo $data['garbage_type_err']?>

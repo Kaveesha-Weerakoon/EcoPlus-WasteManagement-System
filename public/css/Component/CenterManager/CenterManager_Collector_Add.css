@@ -274,26 +274,7 @@
         height: 3px;
     }
 
-    @media screen and (max-width: 1178px) {
-        .image2 {
-            display: none;
-        }
-
-        .main-bottom-content h4 {
-            font-size: 15px !important;
-        }
-
-        .main-bottom-content h6 {
-            font-size: 13px !important;
-        }
-    }
-
-    @media screen and (max-width: 914px) {
-        .main-bottom-bottom {
-            display: flex;
-            flex-direction: column;
-        }
-    }
+  
 
     /*Form*/
     .main-right-bottom-down {
@@ -301,7 +282,7 @@
         width: 96.5%;
         height: 100%;
         overflow: scroll;
-        padding-top: 4%;
+        padding-top: 2%;
 
     }
 
@@ -311,31 +292,58 @@
     }
 
     .main-bottom-down-content {
-        width: 75%;
-        height: 870px;
+        width: 50%;
+        height: 850px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         border-radius: 10px;
         display: flex;
         flex-direction: column;
-        padding: 20px;
+        padding: 40px;
         margin-bottom: 8%;
 
 
     }
 
+    .main-bottom-down-content-header{
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .main-bottom-down-content-header h1 {
+        font-size: 19px;
+        margin-bottom: 5px;
+    }
+
+    .lineHeader {
+        background-color: var(--green-color-one);
+        width: 60px;
+        height: 4px;
+    }
+
     .main-bottom-down-content-one {
         margin-bottom: 12px;
-        padding-left: 60px;
+        /* padding-left: 60px; */
     }
 
     .main-bottom-down-content-one h2 {
         margin-bottom: 6px;
+        font-size: 18px;
+        font-weight: 550px;
     }
 
     .line3 {
         background-color: var(--green-color-one);
         width: 50px;
         height: 4px;
+    }
+
+    .main-bottom-down-content-img-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
 
@@ -355,7 +363,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
     }
 
 
@@ -393,13 +401,25 @@
 
 
     .right-content .description {
-        font-size: 16px;
+        font-size: 14px;
         margin-bottom: 8px;
     }
 
     .right-content .form-upload {
-        font-size: 16px;
+        font-size: 14px;
         margin-bottom: 8px;
+        background-color: var(--green-color-one);
+        color: #fff;
+        padding: 9px;
+        border-radius:5px ;
+        width: 50%;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .form-upload:hover{
+        background-color: var(--button-hover-green);
+       
     }
 
     .profile-image-validation img {
@@ -414,12 +434,12 @@
     .main-bottom-down-content-two-right label {
         font-weight: 500;
         margin-bottom: 5px;
-        font-size: 17px;
+        font-size: 15px;
         margin-bottom: 7px;
     }
 
     .main-bottom-down-content-two-right input {
-        height: 38px;
+        /* height: 38px;
         width: 78%;
         outline: none;
         border-radius: 5px;
@@ -428,7 +448,16 @@
         font-size: 16px;
         border-bottom-width: 2px;
         transition: all 0.3s ease;
-        margin-bottom: 5px;
+        margin-bottom: 5px; */
+        height: 35px;
+        width: 85%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding-left: 10px;
+        font-size: 14px;
+        letter-spacing: 0.03rem;
+        background-color: var(--background-color-two);
+        color: var(--main-text-color);
     }
 
     .main-bottom-down-content-two-right input:focus {
@@ -446,16 +475,16 @@
     .main-bottom-down-content-button {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         margin-top: 10px;
     }
 
     .main-bottom-down-content-button button {
         height: 41px;
-        width: 90%;
+        width: 95%;
         outline: none;
         color: white;
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 500;
         border-radius: 5px;
         cursor: pointer;
@@ -536,6 +565,255 @@
         background: var(--button-hover-green);
     }
 
+    @media screen and (max-width: 1118px) {
+        /* .table td {
+            font-size: 12px;
+        }
+
+        .table-header {
+            font-size: 14px;
+        }
+
+        .table-row img {
+            width: 20px;
+            height: 20px;
+        } */
+
+        .main-right-top-search {
+            margin-left: 40px;
+        }
+
+
+        .main-right-top-profile img{
+            width: 40px;
+            height: 40px;
+            margin-top: 3px;
+        }
+
+        .main-right{
+            overflow-x: hidden;
+        }
+    }
+
+    @media screen and (max-width: 1108px) {
+        .notification_popup h1 {
+            font-size: 19px;
+            letter-spacing: 0.001rem;
+            margin-top: 5px;
+            margin-left: 8px;
+        }
+
+        .notification_popup {
+            width: 26%;
+        }
+    }
+
+    @media screen and (max-width:950px) {
+        /* .main-right-bottom {
+            width: 140%;
+            overflow-x: scroll;
+        }
+
+        .main-right-bottom-top {
+            width: 140%;
+        }
+
+        .main-right-bottom-down {
+            width: 140%;
+        } */
+
+        .notification_popup {
+            width: 28%;
+        }
+
+        .main-right-top-profile-cont p{
+            font-size: 12px;
+        }
+    }
+
+    @media screen and (max-width:862px) {
+
+        .main-right-top-three-content p {
+            font-size: 14px;
+        }
+
+        .line {
+            width: 86px;
+            height: 2px;
+        }
+
+        .notification_popup {
+            top: 11%;
+            right: 10%;
+            width: 35%;
+        }
+    }
+
+    @media screen and (max-width:660px) {
+        .notification_popup {
+            width: 35%;
+            right: 10%;
+        }
+
+        .main-right-top-four-component p{
+            display: none;
+
+        }
+
+        .main-right-top-four-component{
+            width: auto;
+        }
+
+      
+    }
+
+    @media screen and (max-width:540px) {
+        /* .main-right-bottom {
+            width: 160%;
+            overflow-x: scroll;
+        }
+
+        .main-right-bottom-top {
+            width: 160%;
+        }
+
+        .main-right-bottom-down {
+            width: 160%;
+        } */
+
+        .notification_popup {
+            width: 46%;
+            left: 15%;
+        }
+
+        .main-right-top-four-left{
+            margin-left: 35px;
+            padding-left: 0;
+        }
+
+        .main-right-top-four-left button{
+            width: 60px;
+        }
+
+        .main-right-top-four-left p{
+            display: none;
+        }
+
+        .main-right-top-four-right{
+            margin-right: 40%;
+        }
+
+        .main-right-top-profile-cont h3{
+            font-size: 16px;
+        }
+
+        .line{
+            margin-left: -10px !important;
+        }
+
+       
+
+      
+    }
+
+    @media screen and (max-width: 475px) {
+        .main-right-top-profile-cont h3{
+            display: none;
+        }
+
+        .main-right-top-profile-cont p{
+            display: none;
+        }
+
+        .main-right-top-profile img{
+            margin-right: 5px;
+        }
+
+        .main-right-top-three-content{
+            margin-right: 0;
+
+        }
+
+        .main-right-top-three-content p{
+            font-size: 12px;
+        }
+
+    }
+
+    @media screen and (max-width: 844px) {
+        .main-right-top-notification {
+            margin-left: 5%;
+        }
+        .main-right-top-search {
+            margin-left: 1px;
+        }
+
+        .main-right-bottom-container {
+            width: 140%;
+            overflow-x: scroll;
+        }
+
+        .main-right-bottom-container-top {
+            width: 140%;
+            overflow-x: scroll;
+        }
+
+        .main-right-bottom-container-container {
+            width: 140%;
+            overflow-x: scroll;
+        }
+
+    }
+
+    @media screen and (max-width:700px) {
+    
+        .main-right-top-search {
+            width: 35%;
+        }
+
+        .main-right-top-search i {
+            left: 10px;
+            margin-left: 10px;
+        }
+
+        .main-right-top-search input {
+            height: 28px;
+            margin-left: 10px;
+        }
+
+        .main-right-top-three{
+            margin-bottom: 2%;
+        }
+
+        .line{
+            margin-left: -20px;
+        }
+    }
+
+
+
+
+    @media screen and (max-width: 1178px) {
+        .image2 {
+            display: none;
+        }
+
+        .main-bottom-content h4 {
+            font-size: 15px !important;
+        }
+
+        .main-bottom-content h6 {
+            font-size: 13px !important;
+        }
+    }
+
+    @media screen and (max-width: 914px) {
+        .main-bottom-bottom {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
     @media screen and (max-width: 860px) {
         .main-bottom-main {
             display: flex;
@@ -545,8 +823,74 @@
 
         .main-bottom-down button {
             width: 40%;
-            font-size: 20px !important;
+            font-size: 18px !important;
         }
 
+        .main-right-top-profile-cont p{
+            font-size: 12px;
+        }
+
+    }
+
+    @media screen and (max-width:700px) {
+
+        .main-bottom-down-content-two-left{
+            padding-left: 0px;
+        }
+
+        .main-bottom-down-content-two {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        .main-bottom-down-content{
+            height: 100%;
+        }
+        
+    }
+
+    @media screen and (max-width: 604px) {
+        .right-content .description{
+            font-size: 12px;
+
+        }
+
+        .right-content .form-upload{
+            font-size: 12px;
+        }
+
+        .popup{
+            width: 300px;
+        }
+        
+        
+    }
+
+    @media screen and (max-width: 540px) {
+        .right-content .description{
+            font-size: 10px;
+
+        }
+
+        .right-content .form-upload{
+            font-size: 10px;
+        }
+
+        .main-bottom-down button{
+            font-size: 16px !important;
+
+        }
+        
+    }
+
+    @media screen and (max-width: 470px) {
+    
+        .main-bottom-down button{
+            font-size: 14px !important;
+
+        }
+
+      
     }
 }

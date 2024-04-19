@@ -7,7 +7,7 @@
 
                 <div class="main-right-top">
                     <div class="main-right-top-one">
-                        <div class="main-right-top-search">
+                        <div class="main-right-top-search" style = "visibility: hidden;">
                             <i class='bx bx-search-alt-2'></i>
                             <input type="text" id="searchInput" placeholder="Search">
                         </div>
@@ -44,11 +44,15 @@
                     <form class="main-bottom-down" method="post"
                         action="<?php echo URLROOT;?>/centermanagers/collectors_add" enctype="multipart/form-data">
                         <div class="main-bottom-down-content">
+                            <div class="main-bottom-down-content-header">
+                                <h1>Registration Form</h1>
+                                <div class="lineHeader"></div>
+                            </div>
                             <div class="main-bottom-down-content-one">
                                 <h2>Personal Details</h2>
                                 <div class="line3"></div>
                             </div>
-                            <div class="main-bottom-down-content-two">
+                            <div class="main-bottom-down-content-img-container">
                                 <div class="main-bottom-down-content-two-left">
                                     <div class="form-drag-area">
                                         <div class="icon">
@@ -62,53 +66,57 @@
                                             </div>
                                             <div class="form-upload">
                                                 <input type="file" name="profile_image" id="profile_image"
-                                                    placeholder="select a profile image">
+                                                    placeholder="select a profile image" style="display: none;">
+                                                Browse File
                                             </div>
                                             <div class="form-validation">
                                                 <div class="profile-image-validation">
                                                     <img src="<?php echo IMGROOT?>/checked.png" alt="green_tik"
                                                         width="20px" height="20px">
-                                                    <p style="color: #e74c3c;"><?php echo $data['profile_err'] ?></p>
+                                                    <p class="err" style="color: #e74c3c;"><?php echo $data['profile_err'] ?></p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                
+                            </div>
+                            <div class="main-bottom-down-content-two">
                                 <div class="main-bottom-down-content-two-right">
                                     <label>Name</label>
                                     <input type="text" name="name" value="<?php echo $data['name']?>"
                                         placeholder="Name">
                                     <div class="err"><?php echo $data['name_err']?></div>
                                 </div>
-                            </div>
-                            <div class="main-bottom-down-content-two">
                                 <div class="main-bottom-down-content-two-right">
                                     <label>Email</label>
                                     <input type="text" name="email" value="<?php echo $data['email']?>"
                                         placeholder="Email">
                                     <div class="err"><?php echo $data['email_err']?></div>
                                 </div>
+                                
+                            </div>
+                            <div class="main-bottom-down-content-two">
                                 <div class="main-bottom-down-content-two-right">
                                     <label>Address</label>
                                     <input type="text" name="address" value="<?php echo $data['address']?>"
                                         placeholder="Address">
                                     <div class="err"> <?php echo $data['address_err']?></div>
                                 </div>
-                            </div>
-                            <div class="main-bottom-down-content-two">
                                 <div class="main-bottom-down-content-two-right">
                                     <label>Contact No</label>
                                     <input type="text" name="contact_no" placeholder="Contact No"
                                         value="<?php echo $data['contact_no']?>">
                                     <div class="err"><?php echo $data['contactNo_err']?></div>
                                 </div>
+                                
+                            </div>
+                            <div class="main-bottom-down-content-two">
                                 <div class="main-bottom-down-content-two-right">
                                     <label>DOB</label>
                                     <input type="date" name="dob" value="<?php echo $data['dob']?>">
                                     <div class="err"> <?php echo $data['dob_err']?></div>
                                 </div>
-                            </div>
-                            <div class="main-bottom-down-content-two">
                                 <div class="main-bottom-down-content-two-right">
                                     <label>NIC</label>
                                     <input type="text" name="nic" value="<?php echo $data['nic']?>" placeholder="NIC">

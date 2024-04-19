@@ -886,7 +886,7 @@
         }
     } */
 
-       @media screen and (max-width: 1118px) {
+       /* @media screen and (max-width: 1118px) {
         .table td {
             font-size: 12px;
         }
@@ -974,8 +974,8 @@
         }
 
       
-    }
-
+    } */
+/* 
     @media screen and (max-width:540px) {
         .main-right-bottom {
             width: 160%;
@@ -996,7 +996,7 @@
         }
 
       
-    }
+    } */
 
     @media screen and (max-width:475px) {
 
@@ -1007,7 +1007,7 @@
     }
 
     @media screen and (max-width: 844px) {
-        .main-right-top-notification {
+        /* .main-right-top-notification {
             margin-left: 5%;
         }
         .main-right-top-search {
@@ -1027,7 +1027,7 @@
         .main-right-bottom-container-container {
             width: 140%;
             overflow-x: scroll;
-        }
+        } */
 
         .request-details-pop-form{
             width: 450px;
@@ -1045,7 +1045,7 @@
 
     @media screen and (max-width:700px) {
     
-        .main-right-top-search {
+        /* .main-right-top-search {
             width: 35%;
         }
 
@@ -1057,7 +1057,7 @@
         .main-right-top-search input {
             height: 28px;
             margin-left: 10px;
-        }
+        } */
 
         .request-details-pop-form{
             width: 400px;

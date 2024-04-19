@@ -10,7 +10,7 @@
             <form action="<?php echo URLROOT; ?>/users/login" class="sign-in-form" method="POST">
 
                 <div class="top"> <img src="<?php echo IMGROOT;?>/Logo.png" alt="">
-                    <h1>Sign In</h1>
+                    <h2>Fogot Your Password ?</h2>
                 </div>
                 <div class="slogan">Reset Your Password</div>
 

@@ -11,13 +11,13 @@
       $this->db->query('INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, "customer")');
       // Bind values
       $this->db->bind(':name', $data['name']);
-      $this->db->bind(':email', $data['email']);
-      $this->db->bind(':password', $data['password']);
+      $this->db->bind(':email', $data['email_reg']);
+      $this->db->bind(':password', $data['password_reg']);
       $result = $this->db->execute();
       
       if ($result) {
           $this->db->query('SELECT * FROM users WHERE email = :email');
-          $this->db->bind(':email', $data['email']);
+          $this->db->bind(':email', $data['email_reg']);
           $row = $this->db->single();
       
           if ($row) {
@@ -36,19 +36,7 @@
                 $this->db->bind(':user_id', $user_id);
                 $result_credit_insert = $this->db->execute();
     
-                if ($result_credit_insert) {
-                    $this->db->query('INSERT INTO customer_total_garbage (user_id, total_Polythene, total_Plastic, total_Metals, total_Glass, total_Paper_Waste, total_Electronic_Waste) VALUES (:user_id, 0, 0, 0, 0, 0, 0)');
-                    $this->db->bind(':user_id', $user_id);
-                    $result_garbage_insert = $this->db->execute();
-    
-                    if ($result_garbage_insert) {
-                        return true; // Registration and default values inserted successfully
-                    } else {
-                        return false; // Failed to insert default garbage values
-                    }
-                } else {
-                    return false; // Failed to insert credit amount
-                }
+                
             } else {
                 return false; // Failed to insert customer data
             }

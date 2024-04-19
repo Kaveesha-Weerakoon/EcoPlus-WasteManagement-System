@@ -43,7 +43,6 @@
                     <h1>Sign Up</h1>
                 </div>
 
-                
                 <div class="edit-profile-content-profile">
                                     <div class="edit-profile-content-profile-container">
                                         <img class="edit-profile-main-image" id="profile_image_placeholder"
@@ -52,6 +51,8 @@
                                         <img class="edit-profile-second-image" src="<?php echo IMGROOT?>/edit-icon.png"
                                             alt="">
                                         <input name='profile_image' type="file" id="profile_image">
+                                        <p>Add a Profile Picture</p>
+                                        <div class="err"><?php echo $data['profile_err']?></div>
                                     </div>
                                 </div>
 

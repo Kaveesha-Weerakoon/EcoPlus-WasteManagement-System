@@ -10,7 +10,9 @@
            $this->Admin_Model=$this->model('Admins');
 
           }
-
+          public function index(){
+            header("Location: " . URLROOT);      
+          }
     public function register(){
       // Check for POST
       $centers = $this->Center_Model->getallCenters();
@@ -26,24 +28,29 @@
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           $data =[
             'name' => trim($_POST['name']),
-            'email' => trim($_POST['email']),
+            'email_reg' => trim($_POST['email_reg']),
             'contact_no' => trim($_POST['contact_no']),
             'address' => trim($_POST['address']),
             'city'=>trim($_POST['city']),
-            'password' => trim($_POST['password']),
+            'password_reg' => trim($_POST['password_reg']),
             'confirm_password' => trim($_POST['confirm_password']),
-            'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+            'profile_image_name' => trim($_POST['email_reg']).'_'.$_FILES['profile_image']['name'],
             'centers'=>$jsonData,
             'centers2'=>$centers ,
             'name_err' => '',
-            'email_err' => '',
+            'email_reg_err' => '',
             'contact_no_err' => '',
             'address_err' => '',
             'city_err'=>'',
-            'password_err' => '',
+            'password_reg_err' => '',
             'confirm_password_err' => '',
             'profile_err'=>'',
-            'profile_upload_error'=>''   
+            'profile_upload_error'=>'' ,
+            'reg'=>'True',
+            'email'=>'',
+            'email_err'=>'' ,
+            'password'=>'',
+             'password_err'=>'' 
           ];
 
           if ($_FILES['profile_image']['error'] == 4) {
@@ -59,20 +66,20 @@
         }
   
            // Validate Email
-           if(empty($data['email'])){
-            $data['email_err'] = 'Please enter an email';
+           if(empty($data['email_reg'])){
+            $data['email_reg_err'] = 'Please enter an email';
         } else {
             // Check email format
-            if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
-                $data['email_err'] = 'Invalid email format';
+            if(!filter_var($data['email_reg'], FILTER_VALIDATE_EMAIL)){
+                $data['email_reg_err'] = 'Invalid email format';
             } else {
                 // Check email length
-                if(strlen($data['email']) > 255) { // You can adjust the maximum length as needed
-                    $data['email_err'] = 'Email is too long';
+                if(strlen($data['email_reg']) > 255) { // You can adjust the maximum length as needed
+                    $data['email_reg_err'] = 'Email is too long';
                 } else {
                     // Check email availability
-                    if($this->userModel->findUserByEmail($data['email'])){
-                        $data['email_err'] = 'Email is already taken';
+                    if($this->userModel->findUserByEmail($data['email_reg'])){
+                        $data['email_reg_err'] = 'Email is already taken';
                     }
                 }
             }
@@ -105,31 +112,45 @@
              $data['city_err'] = 'City name is too long';
         }
         
-          // Validate Password
-          if(empty($data['password'])){
-            $data['password_err'] = 'Pleae enter password';
-          } elseif(strlen($data['password']) < 6){
-            $data['password_err'] = 'Password must be at least 6 characters';
+
+
+          if (empty($data['password_reg'])) {
+            $data['password_reg_err'] = 'Pleae enter password';
+          } elseif (strlen($data['password_reg']) < 8 || strlen($data['password_reg']) > 30) {
+              $data['password_reg_err'] = 'password must be between 8 and 30 characters';
+
+          } elseif (!preg_match('/[^\w\s]/', $data['password_reg'])) {
+              $data['password_reg_err'] = 'password must include at least one symbol';
+
+          } elseif (!preg_match('/[A-Z]/', $data['password_reg'])) {
+              $data['password_reg_err'] = 'password must include at least one uppercase letter';
+
+          } elseif (!preg_match('/[a-z]/', $data['password_reg'])) {
+              $data['password_reg_err'] = 'password must include at least one lowercase letter';
+
+          } elseif (!preg_match('/[0-9]/', $data['password_reg'])) {
+            $data['password_reg_err'] = 'password must include at least one number';
           }
+
   
           // Validate Confirm Password
           if(empty($data['confirm_password'])){
             $data['confirm_password_err'] = 'Please confirm password';
           } else {
-            if($data['password'] != $data['confirm_password']){
+            if($data['password_reg'] != $data['confirm_password']){
               $data['confirm_password_err'] = 'Passwords do not match';
             }
           }
   
-          if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['city_err']) && empty($data['address_err'])&& empty($data['profile_err'])){
+          if(empty($data['email_reg_err']) && empty($data['name_err']) && empty($data['password_reg_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['city_err']) && empty($data['address_err'])&& empty($data['profile_err'])){
             // Validated
-            $pw=$data['password'];
-            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            $pw=$data['password_reg'];
+            $data['password_reg'] = password_hash($data['password_reg'], PASSWORD_DEFAULT);
             
             // Register User
             if($this->userModel->register($data)){
               
-              $loggedInUser = $this->userModel->login($data['email'], $pw);
+              $loggedInUser = $this->userModel->login($data['email_reg'], $pw);
               $customer=$this->customerModel->get_customer($loggedInUser->id);
               if($customer->image==''){
                 $_SESSION['customer_profile'] = "Profile.png";
@@ -142,45 +163,53 @@
             
               }
              else {
+              flash('register_error');
               redirect('users/login');
             }
           } else {
             // Load view with errors
-            $this->view('users/register', $data);
+            $this->view('users/login', $data);
           }
   
         } else {
           // Init data
           $data =[
             'name' => '',
-            'email' => '',
+            'email_reg' => '',
             'contact_no' => '',
             'address' => '',
             'city'=>'',
-            'password' => '',
+            'password_reg' => '',
             'confirm_password' => '',
             'centers'=>$jsonData,
             'centers2'=>$centers ,
-
             'name_err' => '',
-            'email_err' => '',
+            'email_reg_err' => '',
             'contact_no_err' => '',
             'address_err' => '',
             'city_err'=>'',
-            'password_err' => '',
-            'confirm_password_err' => '',  
+            'confirm_password_err' => '',
+            'password_reg_err'=>'',  
             'profile_err'=>'',
-            'profile_upload_error'=>''
+            'profile_upload_error'=>'',
+            'reg'=>'True',
+            'password'=>'',
+            'email'=>'',
+            'password'=>'',
+            'password_err'=>'' 
           ];
   
           // Load view
-          $this->view('users/register', $data);
+          $this->view('users/login', $data);
         }
       }
       
     }
 
     public function login(){
+       // Check for POST
+       $centers = $this->Center_Model->getallCenters();
+       $jsonData = json_encode($centers);
       if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id'])  || isset($_SESSION['admin_id']) || isset($_SESSION['agent_id']) ){
         if(isset($_SESSION['user_id'])){
           redirect('customers');
@@ -204,17 +233,36 @@
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
         
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-          
+         
           // Init data
           $data =[
             'email' => trim($_POST['email']),
             'password' => trim($_POST['password']),
             'email_err' => '',
-            'password_err' => '',      
+            'password_err' => '',  
+            'name' => '',
+            'contact_no' => '',
+            'address' => '',
+            'city'=>'',
+            'confirm_password' => '',
+            'centers'=>$jsonData,
+            'centers2'=>$centers ,
+            'email_reg'=>'',
+            'password_reg'=>'',
+            'confirm_password_reg'=>'',
+            'name_err' => '',
+            'email_reg_err'=>'',
+            'contact_no_err' => '',
+            'address_err' => '',
+            'city_err'=>'',
+            'confirm_password_err' => '',
+            'password_reg_err'=>'',   
+            'profile_err'=>'',
+            'profile_upload_error'=>'' ,
+            'reg'=>'False'
           ];
-  
           // Validate Email
-          if(empty($data['email'])){
+          if(empty($data['email'])){ 
             $data['email_err'] = 'Please enter email';
           }
           else {
@@ -230,13 +278,11 @@
             }
           }
           }
-         
           // Validate Password
           if(empty($data['password'])){
             $data['password_err'] = 'Please enter the password';
           }
 
-         
           // Make sure errors are empty
           if(empty($data['email_err']) && empty($data['password_err'])){
             // Validated
@@ -310,13 +356,37 @@
             'email' => '',
             'password' => '',
             'email_err' => '',
-            'password_err' => '',        
+            'password_err' => '', 
+
+            'name' => '',
+            'contact_no' => '',
+            'address' => '',
+            'city'=>'',
+            'password' => '',
+            'confirm_password' => '',
+            'centers'=>$jsonData,
+            'centers2'=>$centers ,
+            'email_reg'=>'',
+            'password_reg'=>'',
+            'confirm_password_reg'=>'',
+            'name_err' => '',
+            'email_reg_err'=>'',
+            'contact_no_err' => '',
+            'address_err' => '',
+            'city_err'=>'',
+            'confirm_password_err' => '',
+            'password_reg_err'=>'',  
+            'profile_err'=>'',
+            'profile_upload_error'=>'',
+            'reg'=>'False'
           ];
           $this->view('users/login', $data);
         }
       }
      
     }
+
+ 
 
 
     public function createUserSession($user){

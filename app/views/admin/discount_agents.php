@@ -12,17 +12,11 @@
                                 <i class='bx bx-search-alt-2'></i>
                                 <input type="text" id="searchInput" placeholder="Search">
                             </div>
-
-
                             <?php require APPROOT . '/views/admin/admin_profile/adminprofile.php'; ?>
-
-
                         </div>
-
                         <div class="main-right-top-two">
                             <h1>Credit Discount Agent</h1>
                         </div>
-
                         <div class="main-right-top-three">
                             <a href="<?php echo URLROOT?>/admin/discount_agents">
                                 <div class="main-right-top-three-content">
@@ -39,6 +33,9 @@
                         </div>
 
                     </div>
+
+
+
                     <div class="main-right-bottom">
                         <div class="main-right-bottom-top ">
                             <table class="table">
@@ -57,7 +54,8 @@
                                 <?php foreach($data['discount_agents'] as $discount_agent) : ?>
                                 <tr class="table-row">
                                     <td>CM <?php echo $discount_agent->user_id?></td>
-                                    <td><img src="<?php echo IMGROOT?>/img_upload/credit_discount_agent/<?php echo $discount_agent->image?>"
+                                    <td onclick="locate('<?php echo $discount_agent->user_id?>')"><img
+                                            src="<?php echo IMGROOT?>/img_upload/credit_discount_agent/<?php echo $discount_agent->image?>"
                                             alt="" class="manager_img"></td>
                                     <td><?php echo $discount_agent->name?></td>
                                     <td><?php echo $discount_agent->email?></td>
@@ -109,6 +107,11 @@
     </div>
 </div>
 <script>
+function locate(url) {
+    console.log(url)
+    window.location.href = "<?php echo URLROOT?>/admin/discount_agent_view/" + url;
+}
+
 function opendelete(id) {
     var baseURL = '<?php echo URLROOT; ?>/admin/discount_agent_delete/';
 

@@ -1,9 +1,40 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
 <div class="ResetPassword-main">
-<?php require APPROOT . '/views/inc/header.php'; ?>
 
-<div class="ResetPassword-main">
+<div class="container">
+<img src="<?php echo IMGROOT;?>/undraw_secure_files_re_6vdh.svg" class="image" alt="">
+
+    <div class="forms-container">
+        <div class="signin-signup">
+            <form action="<?php echo URLROOT; ?>/users/login" class="sign-in-form" method="POST">
+
+                <div class="top"> <img src="<?php echo IMGROOT;?>/Logo.png" alt="">
+                    <h1>Sign In</h1>
+                </div>
+                <div class="slogan">Reset Your Password</div>
+
+                <div class="input-field-container">
+                    <div class="input-fieldlog">
+                    <i class="fas fa-envelope icon"></i>
+                        <input id="email" name="email" placeholder="Email address" class="form-control" type="email" value="<?php echo $data['email']; ?>">
+                    </div>
+                    <div class="errlog" style="color:red">
+                      <?php echo $data['email_err']?>
+                    </div>
+                </div>
+                <input name="recover-submit" class="btn solid" value="Reset Password" type="submit">
+
+            </form>
+
+           
+
+        </div>
+    </div>
+</div>
+</div>
+
+<!--<div class="ResetPassword-main">
   <div class="form-gap"></div>
   <div class="container">
     <div class="row">
@@ -43,9 +74,8 @@
   </div>
 </div>
 
-<?php require APPROOT . '/views/inc/footer.php'; ?>
 
-</div>
+</div>-->
 
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

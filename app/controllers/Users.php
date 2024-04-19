@@ -110,12 +110,26 @@
              $data['city_err'] = 'City name is too long';
         }
         
-          // Validate Password
-          if(empty($data['password_reg'])){
+
+
+          if (empty($data['password_reg'])) {
             $data['password_reg_err'] = 'Pleae enter password';
-          } elseif(strlen($data['password_reg']) < 6){
-            $data['password_reg_err'] = 'Password must be at least 6 characters';
+          } elseif (strlen($data['password_reg']) < 8 || strlen($data['password_reg']) > 30) {
+              $data['password_reg_err'] = 'password must be between 8 and 30 characters';
+
+          } elseif (!preg_match('/[^\w\s]/', $data['password_reg'])) {
+              $data['password_reg_err'] = 'password must include at least one symbol';
+
+          } elseif (!preg_match('/[A-Z]/', $data['password_reg'])) {
+              $data['password_reg_err'] = 'password must include at least one uppercase letter';
+
+          } elseif (!preg_match('/[a-z]/', $data['password_reg'])) {
+              $data['password_reg_err'] = 'password must include at least one lowercase letter';
+
+          } elseif (!preg_match('/[0-9]/', $data['password_reg'])) {
+            $data['password_reg_err'] = 'password must include at least one number';
           }
+
   
           // Validate Confirm Password
           if(empty($data['confirm_password'])){

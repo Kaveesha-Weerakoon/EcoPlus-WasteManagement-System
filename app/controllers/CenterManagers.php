@@ -1357,7 +1357,10 @@
       'current_paper'=>$current_quantities->current_paper,
       'current_electronic'=>$current_quantities->current_electronic,
       'current_metals'=>$current_quantities->current_metal,
-      'notification'=> $notifications
+      'notification'=> $notifications,
+      'release_popup' => '',
+      'sell_price_pop' => '',
+      'release_success' => ''
 
     ];
 

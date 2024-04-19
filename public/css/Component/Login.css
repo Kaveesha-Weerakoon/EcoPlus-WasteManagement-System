@@ -1,11 +1,12 @@
-* {
+.Login-main {
+  * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
 a {
-  color: #333;
+  color: #13601b;
 }
 
 body,
@@ -87,10 +88,10 @@ form.sign-in-form {
 }
 
 .forgot {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   text-decoration: none;
-  margin-right: 225px;
-  margin-top: 20px;
+  margin-right: 257px;
+  margin-top: 13px;
   font-size: 13px;
   color: black;
 }
@@ -124,14 +125,14 @@ form.sign-up-form {
   align-items: center;
   flex-direction: column;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
   font-size: 15px !important;
   font-weight: 400;
 
 }
 
-.porfile-cont p {
-  margin-right: 30px;
+.edit-profile-content-profile-container p {
+  font-size: 15px; /* Adjust the font size as needed */
 }
 
 input[type=file] {
@@ -146,10 +147,39 @@ input[type=file] {
 .porfile-cont img {
   width: 70px;
   height: 70px;
-  margin-bottom: 15px;
+  margin-bottom: 1px;
   border-radius: 12px;
   cursor: pointer;
   margin-right: 30px;
+}
+
+.edit-profile-content-profile {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-top: 30px;
+}
+
+.edit-profile-content-profile-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-profile-main-image {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
+}
+
+.edit-profile-second-image {
+  height: 23px;
+  width: 23px;
+  margin-top: -28px;
+  margin-left: 75px;
+  flex: 1;
 }
 
 .title {
@@ -158,15 +188,24 @@ input[type=file] {
   margin-bottom: 10px;
 }
 
+.input-field-container {
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 3px;
+}
+
+
+
 .input-fieldlog {
-  max-width: 380px;
-  width: 100%;
-  height: 40px;
+  width: 400px;
+  height: 45px;
   background-color: #f5f6fa;
-  margin: 10px 0;
+  margin: 5px 0;
   border-radius: 10px;
   display: grid;
-  grid-template-columns: 5% 95%;
+  grid-template-columns: 10% 90%;
   padding: 0 .9rem;
   border: 1px solid #b8b7b7;
   align-items: center;
@@ -203,11 +242,11 @@ input[type=file] {
   width: 285px;
   height: 40px;
   background-color: #f5f6fa;
-  margin: 10px 0;
+  margin-bottom: 1px;
   border-radius: 10px;
   padding: 0 .4rem;
   border: 1px solid #cdcdcd;
-
+  margin-right: 20px;
 }
 
 .input-field i {
@@ -241,7 +280,7 @@ input[type=file] {
   width: 285px;
   height: 40px;
   background-color: #f5f6fa;
-  margin: 10px 0;
+  margin-bottom: 1px;
   border-radius: 10px;
   padding: 0 .4rem;
   border: 1px solid #cdcdcd;
@@ -276,9 +315,9 @@ input[type=file] {
 
 
 
-.input-field3 {
+.city {
 
-  width: 600px;
+  width: 610px;
   height: 40px;
   background-color: #f5f6fa;
   margin: 10px 0;
@@ -289,7 +328,7 @@ input[type=file] {
 
 }
 
-.input-field3 i {
+.city i {
   text-align: center;
   line-height: 55px;
   color: #acacac;
@@ -297,7 +336,7 @@ input[type=file] {
 
 }
 
-.input-field3 input {
+.city select {
   background: none;
   outline: none;
   border: none;
@@ -309,7 +348,7 @@ input[type=file] {
   padding-left: 10px;
 }
 
-.input-field3 input::placeholder {
+.city select::placeholder {
   color: #8d8d8d;
   font-weight: 500;
   padding-top: 7px;
@@ -317,7 +356,7 @@ input[type=file] {
 
 .cont-main {
 
-  margin-bottom: 3px;
+  margin-bottom: 1px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -325,11 +364,15 @@ input[type=file] {
 
 }
 
-.cont-main p {
+.cont p {
+  text-align: left;
 
-  margin: 0;
   font-size: 17px;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
+  margin-left: 30px;
+}
+.cont input {
+  text-align: left;
 }
 
 .err {
@@ -337,10 +380,20 @@ input[type=file] {
   font-size: 14px;
   height: 14px;
   letter-spacing: 0.03rem;
+  margin-top: 0px;
+}
+
+.errlog {
+  color: var(--red-color);
+  font-size: 14px;
+  height: 14px;
+  letter-spacing: 0.03rem;
+  margin-top:1px ;
 }
 
 .cont-region {
-  margin-bottom: 17px;
+  margin-top: 3px;
+  margin-bottom: 4px;
 }
 
 .cont {
@@ -484,4 +537,95 @@ input[type=file] {
 .container.sign-up-mode form.sign-up-form {
   z-index: 2;
   opacity: 1;
+}
+
+
+.cont p {
+  position: relative;
+}
+
+.cont p i {
+ margin-left: 10px;
+ font-size: 25px;
+  color: #888; 
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.bounce {
+  animation: bounce 1s ease-in-out; /* Adjust animation duration and timing function as needed */
+}
+
+    /*Location Pop*/
+
+    .location_pop {
+      display: flex;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background-color: rgba(0, 0, 0, 0);
+      z-index: 99;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+      margin-right: 50px;
+  }
+
+  .location_pop.active {
+      transform: translate(-50%, -50%) scale(1);
+  }
+
+  .location_pop_content {
+      width: 1000px;
+      padding: 10px;
+      background-color: #e6e1e1db;
+      border-radius: 10px;
+      padding: 20px;
+      padding-bottom: 40px;
+      height: 500px;
+      overflow: hidden;
+  }
+
+  .location_pop_map {
+      width: 100;
+      height: 100%;
+      border-radius: 10px;
+  }
+
+  .location_close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 6px;
+  }
+
+  .location_close button {
+      background-color: #ff4757;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      width: 85px;
+      height: 28px;
+  }
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 98;
+  display: none;
+  }
 }

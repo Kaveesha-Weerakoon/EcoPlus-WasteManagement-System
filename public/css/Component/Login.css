@@ -131,8 +131,8 @@ form.sign-up-form {
 
 }
 
-.porfile-cont p {
-  margin-right: 50px;
+.edit-profile-content-profile-container p {
+  font-size: 15px; /* Adjust the font size as needed */
 }
 
 input[type=file] {
@@ -147,7 +147,7 @@ input[type=file] {
 .porfile-cont img {
   width: 70px;
   height: 70px;
-  margin-bottom: 15px;
+  margin-bottom: 1px;
   border-radius: 12px;
   cursor: pointer;
   margin-right: 30px;
@@ -156,7 +156,9 @@ input[type=file] {
 .edit-profile-content-profile {
   display: flex;
   justify-content: center;
-  margin-bottom: 29.7px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-top: 30px;
 }
 
 .edit-profile-content-profile-container {
@@ -244,7 +246,7 @@ input[type=file] {
   border-radius: 10px;
   padding: 0 .4rem;
   border: 1px solid #cdcdcd;
-
+  margin-right: 20px;
 }
 
 .input-field i {
@@ -354,7 +356,7 @@ input[type=file] {
 
 .cont-main {
 
-  margin-bottom: 7px;
+  margin-bottom: 1px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -362,11 +364,15 @@ input[type=file] {
 
 }
 
-.cont-main p {
+.cont p {
+  text-align: left;
 
-  margin: 0;
   font-size: 17px;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
+  margin-left: 30px;
+}
+.cont input {
+  text-align: left;
 }
 
 .err {
@@ -374,7 +380,7 @@ input[type=file] {
   font-size: 14px;
   height: 14px;
   letter-spacing: 0.03rem;
-  margin-top: 13px;
+  margin-top: 0px;
 }
 
 .errlog {
@@ -386,7 +392,7 @@ input[type=file] {
 }
 
 .cont-region {
-  margin-top: 10px;
+  margin-top: 3px;
   margin-bottom: 4px;
 }
 

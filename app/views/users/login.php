@@ -62,17 +62,18 @@
                         <div class="input-field">
                             <input type="text" class="text" placeholder="name" value="<?php echo $data['name']; ?>"
                                 name="name" id="name">
-                                <div class="err"><?php echo $data['name_err']?></div>
+                               
                         </div>
-                        
+                        <div class="err"><?php echo $data['name_err']?></div>
                     </div>
                     <div class="cont">
                         <p>Email</p>
                         <div class="input-field2">
                             <input type="text" class="text" placeholder="Email"
                                 value="<?php echo $data['email_reg']; ?>" name="email_reg" id="email_reg">
-                                <div class="err"><?php echo $data['email_reg_err']?></div>
+                                
                         </div>
+                        <div class="err"><?php echo $data['email_reg_err']?></div>
                     </div>
 
                 </div>
@@ -83,8 +84,9 @@
                         <div class="input-field">
                             <input type="text" class="text" placeholder="contact no"
                                 value="<?php echo $data['contact_no']; ?>" name="contact_no" id="contact_no">
-                                <div class="err"><?php echo $data['contact_no_err']?></div>
+                                
                         </div>
+                        <div class="err"><?php echo $data['contact_no_err']?></div>
                     </div>
 
                     <div class="cont">
@@ -92,8 +94,9 @@
                         <div class="input-field2">
                             <input type="text" class="text" placeholder="address"
                                 value="<?php echo $data['address']; ?>" name="address" id="address">
-                                <div class="err"><?php echo $data['address_err']?></div>
+                                
                         </div>
+                        <div class="err"><?php echo $data['address_err']?></div>
                     </div>
                 </div>
 
@@ -123,8 +126,9 @@
                         <div class="input-field">
                             <input type="password" class="text" placeholder="Password" id="password_reg" name="password_reg"
                                 value="<?php echo $data['password_reg']; ?>">
-                                <div class="err"><?php echo $data['password_reg_err']?></div>
+                                
                         </div>
+                        <div class="err"><?php echo $data['password_reg_err']?></div>
                     </div>
 
                     <div class="cont">
@@ -132,8 +136,9 @@
                         <div class="input-field2">
                             <input type="password" class="text" placeholder="confirm Password" id="confirm_password"
                                 name="confirm_password" value=" <?php echo $data['confirm_password']; ?>">
-                                <div class="err"><?php echo $data['confirm_password_err']?></div>
+                                
                         </div>
+                        <div class="err"><?php echo $data['confirm_password_err']?></div>
                     </div>
 
                 </div>

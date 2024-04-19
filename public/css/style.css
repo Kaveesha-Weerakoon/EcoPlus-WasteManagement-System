@@ -163,6 +163,9 @@
 @import url('Component/Admin/Admin_Center_Main_Stock_Releases.css');
 
 @import url('Component/Admin/Admin_Reports.css');
+@import url('Component/Admin/Admin_ReportMain.css');
+@import url('Component/Admin/Admin_UserReport.css');
+
 @import url('Component/Admin/Admin_Admin.css');
 @import url('Component/Admin/Admin_Admin_Add.css');
 @import url('Component/Admin/Admin_Admin_View.css');

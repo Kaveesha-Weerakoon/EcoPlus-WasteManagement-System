@@ -134,8 +134,8 @@
             <div class="popup" id="popup">
                 <img src="<?php echo IMGROOT?>/trash.png" alt="">
                 <?php
-                        echo "<h2>Delete this Customer?</h2>";
-                        echo "<p>This action will permanently delete this center manager</p>";          
+                        echo "<h2>Delete this Collector?</h2>";
+                        echo "<p>This action will permanently delete this collector</p>";          
                     ?>
                 <div class="btns">
 

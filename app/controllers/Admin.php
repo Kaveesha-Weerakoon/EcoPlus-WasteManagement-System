@@ -20,6 +20,7 @@
       $this->garbage_types_model = $this->model('Garbage_types');
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
       $this->Report_Model=$this->model('Report');
+      $this->Report_User_Model=$this->model('Report_User');
       $this->fine_model = $this->model('Fines');
       $this->Annoucement_Model=$this->model('Announcement');
       $this->garbage_Model=$this->model('Garbage_Stock');
@@ -86,7 +87,6 @@
       
       $this->view('admin/complain_customers', $data);
     }
-
 
     public function center_managers(){
 
@@ -447,7 +447,7 @@
       header("Location: " . URLROOT . "/admin/customers");        
     }
 
-    public function customers(){
+    public function customers(){ 
       
       $customers = $this->customerModel->get_all();
       $data = [
@@ -725,7 +725,7 @@
       ];
       
       $this->view('admin/center_main', $data);        
-    }
+     }
     }
 
     public function center_main_change_cm($center_id){       
@@ -1482,6 +1482,77 @@
   
      }
     }
+
+    public function reportusers(){
+      $centers = $this->center_model->getallCenters();
+      $allcustomers = $this->customerModel->get_all();
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){  
+
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $center=trim($_POST['center-dropdown']);
+        if($center!="none"){
+          $center2=$this->center_model->findCenterbyRegion($center);
+           $center_id=$center2->id;
+        }
+        else{
+          $center_id="none";
+        }
+        
+        $fromDate= trim($_POST['fromDate']);
+        $toDate= trim($_POST['toDate']);
+        
+        if($toDate==""){
+          $toDate="none";
+        } 
+
+        if($fromDate==""){
+          $fromDate="none";
+        }
+        $collectors= $this->Report_User_Model->getCollectors($fromDate,$toDate,$center);
+        $customers= $this->Report_User_Model->getCustomers($fromDate,$toDate,$center);
+        $collectorassistants= $this->Report_User_Model->getCollectorassistants($fromDate,$toDate,$center);
+        $centerworkers= $this->Report_User_Model->getCenterworkers($fromDate,$toDate,$center);
+        $allcustomers=
+           $data = [     
+            'to'=>$toDate,
+            'from'=>$fromDate,     
+            'centers'=> $centers,
+            'center'=>$center, 
+            'collectors'=>count($collectors),
+            'customers'=>count($customers),
+            'centerworkers'=>count($centerworkers),
+            'collectorassistants'=>count($collectorassistants),
+            'allcustomers'=>  $allcustomers
+          ];     
+            $this->view('admin/reportusers', $data);
+
+      
+      }
+      else{
+
+        $collectors= $this->Report_User_Model->getCollectors();
+        $customers= $this->Report_User_Model->getCustomers();
+        $collectorassistants= $this->Report_User_Model->getCollectorassistants();
+        $centerworkers= $this->Report_User_Model->getCenterworkers();
+    
+        $data = [          
+          'to'=>'none',
+          'from'=>'none',
+          'centers'=> $centers,          
+          'center'=>'All',
+          'collectors'=>count($collectors),
+          'customers'=>count($customers),
+          'centerworkers'=>1,
+          'collectorassistants'=>count($centerworkers),
+          'allcustomers'=>  $allcustomers
+      ];
+          $this->view('admin/reportusers', $data);
+
+      }
+
+    }
     
     public function reports(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){     
@@ -1569,32 +1640,6 @@
         $this->view('admin/report', $data);
 
       }
-    }
-
-    public function admin_delete_confirm($id){
-      $admin = $this->adminModel->get_all();
-      $admin_by_id = $this->adminModel->getAdminByID($id);
-      if($admin_by_id){
-        $data = [
-          'admin' => $admin,
-          'confirm_delete' =>'True',
-          'admin_id'=>$id,
-          'personal_details_click'=>'',
-          'success'=>'' 
-        ];
-      }
-      else{
-        $data = [
-          'admin' => $admin,
-          'admin_id'=>$id,
-          'confirm_delete' =>'True',
-          'discount_agent_id'=>$id,
-          'success'=>''
-        ];
-      }
-    
-     
-      $this->view('admin/admins', $data);
     }
 
     public function admin_delete($id) {

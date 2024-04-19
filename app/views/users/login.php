@@ -46,7 +46,7 @@
                 <div class="edit-profile-content-profile">
                                     <div class="edit-profile-content-profile-container">
                                         <img class="edit-profile-main-image" id="profile_image_placeholder"
-                                            src="<?php echo IMGROOT?>./anonymous.png"
+                                            src="<?php echo IMGROOT?>./preview2.png"
                                             alt="">
                                         <img class="edit-profile-second-image" src="<?php echo IMGROOT?>/edit-icon.png"
                                             alt="">
@@ -160,7 +160,7 @@
         <div class="panel left-panel">
             <div class="content">
                 <h3>New here ?</h3>
-                <p>Lorem ipsum dolor sit aemt consectruren adipisicing elit.Minus impedit quidem quibundam?</p>
+                <p>"Welcome back! Log in now to access your account and start earning rewards for your eco-friendly efforts. Join us in making a positive impact on the environment!"</p>
                 <button class="btn transparent" id="sign-up-btn">Sign Up</button>
             </div>
             <img src="<?php echo IMGROOT;?>/undraw_the_world_is_mine_re_j5cr.svg" class="image" alt="">
@@ -169,7 +169,7 @@
         <div class="panel right-panel">
             <div class="content">
                 <h3>One of Us ?</h3>
-                <p>Lorem ipsum dolor sit aemt consectruren adipisicing elit.Minus impedit quidem quibundam?</p>
+                <p>"Be part of the change! Join us today to transform waste into rewards. Together, let's make a difference."</p>
                 <button class="btn transparent" id="sign-in-btn">Sign In</button>
             </div>
             <img src="<?php echo IMGROOT;?>/undraw_dev_focus_re_6iwt.svg" class="image" alt="">

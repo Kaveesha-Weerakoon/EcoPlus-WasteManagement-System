@@ -1142,7 +1142,18 @@
         }
     } */
 
+    
+
+
     @media screen and (max-width: 1310px) {
+
+        .main-right{
+            overflow-x: hidden;
+        }
+        .main-right-bottom{
+            overflow: scroll;
+        }
+
         .main-right-bottom-three {
             flex-direction: column;
             width: 100%;
@@ -1160,8 +1171,21 @@
             width: 97%;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-evenly;
         }
+
+        .main-right-bottom-three-right-left{
+            margin-bottom: 20px;
+        }
+
+        .complaints-container{
+            height: 250px;
+        }
+
+        .main-right-bottom-one-right .left{
+            padding-top: 3%;
+        }
+
     }
 
     @media screen and (max-width: 1198px) {
@@ -1230,6 +1254,44 @@
             width: 97%;
             height: 65px;
         }
+
+        .main-right-bottom-three-right-right{
+            width: 50%;
+
+        }
+    }
+
+    @media screen and (max-width: 682px) {
+        .main-right-top-profile-cont p{
+            font-size: 12px;
+        }
+        
+    }
+
+    @media screen and (max-width: 640px) {
+        .main-right-top-profile-cont p{
+            font-size: 10px;
+        }
+
+        .legend-container{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: unset;
+        }
+
+        .LL {
+            margin-right: 0px;
+            margin-bottom: 7px;
+        }
+
+        .LR {
+            margin-left: 0px;
+        }
+
+
+
+        
     }
 
     @media screen and (max-width: 560px) {
@@ -1268,6 +1330,20 @@
         .main-right-bottom-three-right-right h1 {
             font-size: 18px;
 
+        }
+
+        .complaints-container button{
+            font-size: 12px;
+        }
+
+        .circular-progress {
+            width: 120px;
+            height: 120px;
+        }
+
+        .circular-progress::before {
+            width: 90px;
+            height: 90px;
         }
     }
 
@@ -1320,7 +1396,24 @@
             height: 150%;
         }
 
+        .main-right-bottom-one-right .left h3{
+            font-size: 16px;
+        }
+
+        .main-right-bottom-one-right .left p{
+            font-size: 12px;
+        }
+
+        .main-right-bottom-one-right .left button{
+            height: 18%;
+        }
+
+        .calendar li{
+            font-size: 8px;
+        }
+
     }
+
 
 
    

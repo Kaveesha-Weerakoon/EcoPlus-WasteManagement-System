@@ -784,7 +784,7 @@
     }
 
 
-    @media screen and (max-width:862px) {
+    /* @media screen and (max-width:862px) {
         .cancel-confirm {
             display: none;
             position: fixed;
@@ -837,7 +837,6 @@
             justify-content: center;
             border: none;
             margin: 10px;
-            background-color: #74b9ff;
             cursor: pointer;
         }
     }
@@ -885,5 +884,227 @@
             background-color: #74b9ff;
             cursor: pointer;
         }
+    } */
+
+       /* @media screen and (max-width: 1118px) {
+        .table td {
+            font-size: 12px;
+        }
+
+        .table-header {
+            font-size: 14px;
+        }
+
+        .table-row img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .main-right-top-search {
+            margin-left: 40px;
+        }
+
+        .location_pop_content {
+            width: 550px;
+        }
+    }
+
+    @media screen and (max-width: 1108px) {
+        .notification_popup h1 {
+            font-size: 19px;
+            letter-spacing: 0.001rem;
+            margin-top: 5px;
+            margin-left: 8px;
+        }
+
+        .notification_popup {
+            width: 26%;
+        }
+    }
+
+    @media screen and (max-width:950px) {
+        .main-right-bottom {
+            width: 140%;
+            overflow-x: scroll;
+        }
+
+        .main-right-bottom-top {
+            width: 140%;
+        }
+
+        .main-right-bottom-down {
+            width: 140%;
+        }
+
+        .notification_popup {
+            width: 28%;
+        }
+    }
+
+    @media screen and (max-width:862px) {
+
+        .main-right-top-three-content p {
+            font-size: 14px;
+        }
+
+        .line {
+            width: 86px;
+            height: 2px;
+        }
+
+        .location_pop_content {
+            width: 375px;
+        }
+
+        .personal-details-popup-form {
+            width: 550px;
+        }
+
+        .notification_popup {
+            top: 11%;
+            right: 10%;
+            width: 35%;
+        }
+    }
+
+    @media screen and (max-width:660px) {
+        .notification_popup {
+            width: 35%;
+            right: 10%;
+        }
+
+      
+    } */
+/* 
+    @media screen and (max-width:540px) {
+        .main-right-bottom {
+            width: 160%;
+            overflow-x: scroll;
+        }
+
+        .main-right-bottom-top {
+            width: 160%;
+        }
+
+        .main-right-bottom-down {
+            width: 160%;
+        }
+
+        .notification_popup {
+            width: 46%;
+            left: 15%;
+        }
+
+      
+    } */
+
+    @media screen and (max-width:475px) {
+
+        .location_pop_content {
+            width: 275px;
+        }
+
+    }
+
+    @media screen and (max-width: 844px) {
+        /* .main-right-top-notification {
+            margin-left: 5%;
+        }
+        .main-right-top-search {
+            margin-left: 1px;
+        }
+
+        .main-right-bottom-container {
+            width: 140%;
+            overflow-x: scroll;
+        }
+
+        .main-right-bottom-container-top {
+            width: 140%;
+            overflow-x: scroll;
+        }
+
+        .main-right-bottom-container-container {
+            width: 140%;
+            overflow-x: scroll;
+        } */
+
+        .request-details-pop-form{
+            width: 450px;
+        }
+
+        .View-content{
+            width: 400px;
+        }
+
+        .dropdown-menu{
+            width: 92.5%;
+        }
+
+    }
+
+    @media screen and (max-width:700px) {
+    
+        /* .main-right-top-search {
+            width: 35%;
+        }
+
+        .main-right-top-search i {
+            left: 10px;
+            margin-left: 10px;
+        }
+
+        .main-right-top-search input {
+            height: 28px;
+            margin-left: 10px;
+        } */
+
+        .request-details-pop-form{
+            width: 400px;
+        }
+
+        .request-details-right-labels span{
+            font-size: 12px;
+        }
+
+        .request-details-right-values span{
+            font-size: 12px;
+        }
+
+        .View-content{
+            width: 300px;
+        }
+
+        .dropdown-menu{
+            margin-left: 0;
+            width: 96%;
+        }
+
+        .dropdown-toggle{
+            margin-left: 0;
+        }
+
+        .cancel-confirm-content{
+            width: 400px;
+        }
+    }
+
+    @media screen and (max-width:500px) {
+        .request-details-right-labels{
+            padding-left: 16px;
+        }
+
+        .request-details-right-values{
+            padding-left: 70px;
+        }
+
+        .request-details-pop-form{
+            width: 300px;
+        }
+
+        .cancel-confirm-content{
+            width: 300px;
+        }
+
     }
 }

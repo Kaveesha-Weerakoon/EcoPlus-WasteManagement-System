@@ -8,7 +8,7 @@
             <div class="main-right">
 
                 <div class="main-right-top">
-                    <div class="main-right-top-search">
+                    <div class="main-right-top-search" style ="visibility: hidden;">
                         <i class='bx bx-search-alt-2'></i>
                         <input type="text" placeholder="Search">
                     </div>

@@ -5,6 +5,7 @@
 @import url('Component/Home.css');
 @import url('Component/Login.css');
 @import url('Component/Register.css');
+@import url('Component/Announcement_view.css');
 
 /* Customer CSS */
 
@@ -174,6 +175,7 @@
 @import url('Component/Admin/Admin_Garbage_Types_View.css');
 
 @import url('Component/Admin/Admin_EditProfile.css');
+@import url('Component/Admin/Admin_Mail_Subscriptions.css');
 
 
 

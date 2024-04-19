@@ -1,0 +1,206 @@
+.Announcements_View{
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-decoration: none;
+        font-family: "Inter";
+      }
+    
+    .main{
+        max-width: 1280px;
+        margin: 0 auto;
+        scroll-behavior: smooth;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+        font-size: 17px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    .signin-button{
+        font-size: 17px;
+        background-color: #1ca557;
+        color: white;
+        padding: 8px 25px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-left: 25px;
+    }
+
+    header{
+        position: fixed;
+        z-index: 10010;
+        top: 0;
+        left: 0;
+        right: 0;
+        max-width: 1280px;
+        margin: 0 auto;
+        background-color: white;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 20px;
+        font-family: Inter ;
+        z-index: 10001;
+    }
+    
+    .logo img {
+        width: 64px;
+        height: 64px;
+    }
+    
+    .hamburger {
+        padding-right: 20px;
+        cursor: pointer;
+    }
+    
+    .hamburger .line {
+        display: block;
+        width: 30px;
+        height: 2px;
+        margin-bottom: 10px;
+        background-color: black;
+    }
+    
+    .nav__link {
+        position: absolute;
+        width: 94%;
+        z-index: 10001;
+        top: 66px;
+        left: 10px;
+        background-color: lightblue;
+    }
+    
+    .nav__link a {
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+    }
+    
+    .nav__link a:hover {
+        background-color: #d8fcde;
+        border-radius: 10px;
+    }
+    
+    .hide {
+        display: none;
+    }
+
+    /* announcements section */
+    .Announcement-cont{
+        padding: 30px;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 55% 45%;
+        overflow: hidden;
+        height: 525px;
+        width: 100%;
+        margin-bottom: 30px;
+        box-shadow: var(--box-shadow2);
+        border-radius: 10px;
+
+    }
+
+    .Announcement-cont h2 {
+        font-size: 21px;
+        letter-spacing: 0.01rem;
+
+    }
+
+    .Announcement-cont p {
+        font-size: 15px;
+        margin: 10px 15px;
+        letter-spacing: 0.03rem;
+
+    }
+
+    .Announcement-cont img {
+        border-radius: 10px;
+        height: 375px;
+        width: 94%;
+    }
+
+    .right {
+        display: flex;
+        align-items: center;
+        text-align: left;
+    }
+
+    .right .cont {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        box-shadow: var(--box-shadow2);
+        height: 375px;
+        width: 100%;
+        margin-top: 62px;
+        line-height: 1.3rem;
+        padding: 14px;
+        border-radius: 8px;
+        overflow: scroll;
+
+    }
+
+    .announcement-section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 42px;
+        padding: 42px 24px;
+        position: relative;
+        background-color: #fff;
+    }
+
+    .announcement-section .text-wrapper{
+        position: relative;
+        width: fit-content;
+        margin-top: 50px;
+        font-family: "Inter";
+        font-weight:600;
+        color: var(--main-text-color);
+        font-size:  32px;
+        text-align: center;
+        letter-spacing:  0px;
+        line-height: 42px;
+        white-space: nowrap;
+        font-style: normal;
+
+    }
+
+
+    /* responsiveness */
+
+    /* navbar  */
+    @media screen and (min-width: 945px) {
+        .nav__link {
+
+            display: block;
+            position: static;
+            width: auto;
+            margin-right: 20px;
+            background: none;
+        }
+
+        .nav__link a {
+            display: inline-block;
+            padding: 15px 20px;
+        }
+
+        .hamburger {
+            display: none;
+        }
+    }
+    
+
+    
+}

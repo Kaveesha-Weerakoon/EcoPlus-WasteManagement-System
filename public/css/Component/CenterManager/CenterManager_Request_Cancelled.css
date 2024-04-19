@@ -251,8 +251,79 @@
         font-weight: 550;
     }
 
+    #maps{
+        cursor: not-allowed;
+    }
+
 
     /* ------------*/
+    @media screen and (max-width: 1108px ){
+        .location_pop_content{
+            width: 600px;
+        }
+        
+    }
+
+    @media screen and (max-width: 950px ){
+        .location_pop_content{
+            width: 500px;
+        }
+
+      
+        
+    }
+
+    @media screen and (max-width: 862px ){
+        .location_pop_content{
+            width: 400px;
+        }
+
+
+        .request-details-pop-form{
+            width: 450px;
+        }
+
+    
+    }
+
+    @media screen and (max-width: 700px ){
+        .location_pop_content{
+            width: 300px;
+        }
+
+        .request-details-pop-form{
+            width: 400px;
+        }
+
+        .request-details-right-labels span{
+            font-size: 12px;
+        }
+
+        .request-details-right-values span{
+            font-size: 12px;
+        }
+        
+     
+    }
+
+    
+    @media screen and (max-width:500px) {
+        .request-details-right-labels{
+            padding-left: 16px;
+        }
+
+        .request-details-right-values{
+            padding-left: 70px;
+        }
+
+        .request-details-pop-form{
+            width: 300px;
+        }
+
+    
+
+    }
+
 
 
 }

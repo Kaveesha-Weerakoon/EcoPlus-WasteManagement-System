@@ -350,71 +350,7 @@
     }
 
 
-    /* @media screen and (max-width: 800px) {
-        .main-bottom-bottom {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .table-header {
-            background-color: #B9FFB7;
-            font-size: 16px;
-            font-family: Montserrat;
-            text-align: center;
-            height: 55px;
-            display: grid;
-            margin-bottom: 0px;
-            grid-template-columns: 15% 15% 15% 15% 40%;
-        }
-
-        .table td {
-            font-size: 15px !important;
-        }
-    }
-
-    @media screen and (max-width: 688px) {
-        .main-bottom-bottom {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .table-header {
-            background-color: #B9FFB7;
-            font-size: 14.5px;
-            font-family: Montserrat;
-            text-align: center;
-            height: 55px;
-            display: grid;
-            margin-bottom: 0px;
-            grid-template-columns: 15% 15% 15% 15% 40%;
-        }
-
-        .table td {
-            font-size: 12px !important;
-        }
-    }
-
-
-    @media screen and (max-width: 1178px) {
-        .image2 {
-            display: none;
-        }
-
-        .main-bottom-content h4 {
-            font-size: 15px !important;
-        }
-
-        .main-bottom-content h6 {
-            font-size: 13px !important;
-        }
-    }
-
-    @media screen and (max-width: 914px) {
-        .main-bottom-bottom {
-            display: flex;
-            flex-direction: column;
-        }
-    } */
+  
 
     @media screen and (max-width: 1118px) {
         .table td {

@@ -13,8 +13,10 @@
                     <h2>Fogot Your Password ?</h2>
                 </div>
                 <div class="slogan">Reset Your Password</div>
+                <div class="line"></div>
 
                 <div class="input-field-container">
+                <p>Password : </p>
                     <div class="input-fieldlog">
                     <i class="fas fa-envelope icon"></i>
                         <input id="email" name="email" placeholder="Email address" class="form-control" type="email" value="<?php echo $data['email']; ?>">

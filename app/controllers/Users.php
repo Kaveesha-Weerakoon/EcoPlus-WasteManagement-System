@@ -10,7 +10,9 @@
            $this->Admin_Model=$this->model('Admins');
 
           }
-
+          public function index(){
+            header("Location: " . URLROOT);      
+          }
     public function register(){
       // Check for POST
       $centers = $this->Center_Model->getallCenters();
@@ -317,6 +319,8 @@
       }
      
     }
+
+ 
 
 
     public function createUserSession($user){

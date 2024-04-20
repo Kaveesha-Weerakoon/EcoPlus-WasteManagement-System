@@ -39,7 +39,7 @@
 
             <form action="<?php echo URLROOT;?>/users/register" class="sign-up-form" method="POST"
                 enctype="multipart/form-data">
-                <div class="top"> <img src="<?php echo IMGROOT?>/Logo.png" alt="">
+                <div class="top1"> <img src="<?php echo IMGROOT?>/Logo.png" alt="">
                     <h1>Sign Up</h1>
                 </div>
 

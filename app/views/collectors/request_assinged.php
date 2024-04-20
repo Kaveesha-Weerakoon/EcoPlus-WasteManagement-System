@@ -219,6 +219,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input style="visibility:hidden" id="verification" name="verification">
+
                                 <div class="form-button">
                                     <button type="submit" onclick="handleFormSubmission()">Calculate Eco
                                         Credits</button>
@@ -273,6 +275,11 @@
                         </div>
 
                         <h4>Total = <?php echo $data['credit_Amount']?></h4>
+                        <input type="text" id="visibleinput" placeholder="Enter the Verfication Code">
+                        <div class="err">
+                            <p><?php echo $data['verification_err']?></p>
+                        </div>
+
                         <div class="buttons">
                             <button class="complete-btn"
                                 onclick="submitForm(<?php echo $data['req_id']?>)">Complete</button>
@@ -754,6 +761,9 @@ function updateMapForDate(selectedDate) {
 }
 
 function submitForm($id) {
+    var inputValue = document.getElementById("visibleinput").value;
+    document.getElementById("verification").value = inputValue;
+
     var form = document.getElementById('myForm');
     form.action = "<?php echo URLROOT;?>/collectors/Eco_Credit_Insert/" + $id;
     form.method = 'post';

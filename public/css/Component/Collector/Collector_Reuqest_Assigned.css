@@ -652,7 +652,7 @@
 
   .pop_up_confirm_collect_cont {
     width: 35%;
-    height: 78%;
+    height: 79.5%;
     background-color: white;
     border-radius: 10px;
     display: flex;
@@ -662,10 +662,10 @@
   }
 
   .pop_up_confirm_collect_cont h1 {
-    font-size: 25px;
+    font-size: 21px;
     letter-spacing: 0.03;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin-bottom: 24px;
+    margin-top: 24px;
   }
 
   .pop_up_confirm_collect_cont .cont {
@@ -677,11 +677,11 @@
 
   .pop_up_confirm_collect .details {
     overflow: scroll;
-    height: 300px;
+    height: 290px;
   }
 
   .pop_up_confirm_collect_cont .cont h5 {
-    font-size: 16px;
+    font-size: 15px;
     width: 150px;
     margin-right: 10px;
     font-weight: 100;
@@ -697,24 +697,60 @@
   }
 
   .pop_up_confirm_collect_cont h4 {
-    font-size: 24px;
+    font-size: 21px;
     font-weight: 100;
-    margin-top: 15px;
-    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     font-weight: 600;
   }
 
+  .pop_up_confirm_collect_cont input {
+    height: 30px;
+    width: 40%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    letter-spacing: 0.03rem;
+    background-color: var(--background-color-two);
+    color: var(--main-text-color);
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .pop_up_confirm_collect_cont input:focus {
+    outline: none;
+    border-color: var(--green-color-one);
+  }
+
+  .pop_up_confirm_collect_cont .err {
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: var(--red-color);
+    width: 45%;
+    text-align: center;
+  }
+
+
+
   .pop_up_confirm_collect_cont .buttons .complete-btn {
-    width: 200px;
-    height: 50px;
-    font-size: 19px;
-    background-color: #1B6652;
-    color: #ffffff;
-    border: none;
+
+    height: 40px;
+    outline: none;
+    width: 180px;
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 20px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    border: none;
+    letter-spacing: 1px;
+    background: var(--green-color-one);
+    padding: 0 20px;
+
   }
 
   .pop_up_confirm_collect_cont .buttons .complete-btn:hover {
@@ -723,22 +759,25 @@
 
 
   .pop_up_confirm_collect_cont .buttons .cancel-btn {
-    width: 200px;
-    height: 50px;
-    font-size: 19px;
-    background-color: #b8b8b8;
-    color: #ffffff;
-    border: none;
+
+    /* Reset margin for the last button */
+    width: 180px;
+    height: 40px;
+    outline: none;
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
     border-radius: 5px;
     cursor: pointer;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-    margin-right: 0;
-    /* Reset margin for the last button */
+    border: none;
+    letter-spacing: 1px;
+    background: #bab3b3;
+    padding: 0 15px;
+    margin-left: 45px;
 
   }
 
   .pop_up_confirm_collect_cont .buttons .cancel-btn:hover {
-
     background-color: #979494;
   }
 

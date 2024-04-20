@@ -5,6 +5,8 @@
     * {
         padding: 0;
         margin: 0;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+
     }
 
     .main {
@@ -17,6 +19,8 @@
         font-family: 'Inter', sans-serif;
         color: var(--main-text-color);
         background-color: var(--background-color-main);
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+
     }
 
     .main-left {
@@ -26,6 +30,8 @@
         color: var(--main-text-color);
         box-shadow: var(--box-shadow2) !important;
         z-index: 2;
+        /* //transition: transform 0.4s ease-in, background-color 0.4s ease-in; */
+
     }
 
     .main-left-top {
@@ -162,7 +168,7 @@
         width: 15.5px;
         height: 15.5px;
         border-radius: 50%;
-        background-color: #F13E3E;
+        background-color: var(--red-color);
         margin-top: -11px;
         margin-left: -15px;
         color: var(--background-color-main);
@@ -420,11 +426,9 @@
             margin-left: 40px;
         }
 
-
-
         .notification_popup {
             top: 11%;
-            right: -1%;
+            left: 40%;
             width: 40%;
         }
 
@@ -434,7 +438,6 @@
 
         .main-left-down {
             padding-left: 0px;
-
         }
     }
 
@@ -448,6 +451,106 @@
             font-size: 13px;
         }
 
+        .main-left-top img {
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    @media screen and (max-width: 610px) {
+        .notification_right p {
+            font-size: 13px;
+        }
+
+        .main-right-top-profile img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .main-right-top-profile-cont h3 {
+            font-size: 15px;
+            letter-spacing: 0.03rem;
+        }
+
+        .main-right-top-profile-cont p {
+            font-size: 12px;
+        }
+
+        .main-right-top-notification i {
+            font-size: 26px;
+        }
+
+        .notification_popup {
+            width: 40% !important;
+        }
+
+        .notification_popup h1 {
+            font-size: 15px;
+        }
+
+        .notification {
+            font-size: 12px;
+        }
+
+        .notification-green-dot {
+            width: 9px;
+            height: 9px;
+        }
+
+        .notification_right p {
+            font-size: 13px;
+        }
+
+    }
+
+    @media screen and (max-width: 544px) {
+
+        .notification_popup {
+            width: 46% !important;
+        }
+
+        .notification_popup {
+            top: 11%;
+            left: 40%;
+            width: 40%;
+        }
+
+    }
+
+    @media screen and (max-width: 458px) {
+
+        .main-left-down h1 {
+            font-size: 11px;
+        }
+
+        .main-left-middle i {
+            font-size: 25px;
+        }
+
+        .main-left-down i {
+            font-size: 25px;
+        }
+
+        .toggle-button {
+            width: 29px;
+            height: 20px;
+        }
+
+        .toggle-indicator {
+            top: 3px;
+            left: 4px;
+            width: 12px;
+            height: 13px;
+        }
+
+        .toggle-container input[type="checkbox"]:checked+.toggle-button .toggle-indicator {
+            transform: translateX(11px);
+        }
+
+        .main-right-top-profile {
+            display: flex;
+            margin-right: 15px;
+        }
     }
 
 

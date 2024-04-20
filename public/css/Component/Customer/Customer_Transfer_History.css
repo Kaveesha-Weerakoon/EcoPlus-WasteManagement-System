@@ -59,4 +59,32 @@
             width: 40%;
         }
     }
+
+    @media screen and (max-width:700px) {
+        .main-right-bottom {
+            width: 170%;
+        }
+
+        .table-header {
+            grid-template-columns: 10% 17% 12% 17% 18% 12%;
+        }
+
+        .table-row {
+            grid-template-columns: 10% 17% 12% 17% 18% 12%;
+        }
+    }
+
+    @media screen and (max-width:450px) {
+        .main-right-bottom {
+            width: 270%;
+        }
+
+        .table-header {
+            grid-template-columns: 7% 11% 11% 14% 14% 9%;
+        }
+
+        .table-row {
+            grid-template-columns: 7% 11% 11% 14% 14% 9%;
+        }
+    }
 }

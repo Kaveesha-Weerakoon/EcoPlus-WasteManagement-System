@@ -39,13 +39,27 @@
         text-align: center !important;
     }
 
-    @media screen and (max-width:700px) {
+    @media screen and (max-width:846px) {
         .table-header {
             grid-template-columns: 15% 20% 15% 20% 15% 15%;
         }
 
         .table-row {
             grid-template-columns: 15% 20% 15% 20% 15% 15%;
+        }
+    }
+
+    @media screen and (max-width:440px) {
+        .main-right-bottom {
+            width: 150%;
+        }
+
+        .table-header {
+            grid-template-columns: 9% 15% 12% 14% 12% 12%;
+        }
+
+        .table-row {
+            grid-template-columns: 9% 15% 12% 14% 12% 12%;
         }
     }
 

@@ -54,8 +54,9 @@
                                             onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
                                     </td>
                                     <td>
-                                        <i class='bx bxs-user-check' style="font-size: 32px;"
-                                            onclick="assign(<?php echo $request->req_id ?>, '<?php echo htmlspecialchars($request->date, ENT_QUOTES, 'UTF-8')?>')"></i>
+                                        <i class='bx bxs-user-check assign-button' style="font-size: 32px;" 
+                                            onclick="assign(<?php echo $request->req_id ?>, '<?php echo htmlspecialchars($request->date, ENT_QUOTES, 'UTF-8')?>', '<?php echo $request->time ?>',
+                                        <?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
 
                                     </td>
                                     <td>
@@ -136,16 +137,31 @@
                                                 <span class=\"collector-name\">$collector->name</span>
                                                 <span class=\"vehicle-type\">$collector->vehicle_type</span>
                                                 </li>";
-                                        }
+                                    }
                                     }else {
                                             echo "<li>No Collectors Available</li>";
                                         }
                                     ?>
                             </ul>
                         </div>
+                        
+                        <span name="requestTime" id="requestTime"></span>
+
+                        <div class="time-slot-dropdown-container">
+                            <select name="time-slot-dropdown" id="time-slot-dropdown">
+                                <option value="8 am - 10 am">8 am - 10 am</option>
+                                <option value="10 am - 12 noon">10 am - 12 noon</option>
+                                <option value="12 noon -2 pm">12 noon -2 pm</option>
+                                <option value="2 pm - 4 pm">2 pm - 4 pm</option>
+                                <option value="all">All</option>
+                            </select>
+                        </div>
 
                         <!-- Hidden input field to store the selected collector's ID -->
                         <input type="hidden" name="selected_collector_id" id="selected_collector_id">
+                        <input type="text" name="request_lat" id="request_lat">
+                        <input type="text" name="request_longi" id="request_longi">
+
 
                         <div class="assigned-req-count-container">
                             <p>Number of Assigned requests for the requested date:</p>
@@ -236,11 +252,7 @@
                 initLocationPop();
             }
 
-            var selectedCollectorId = 0;
-            var requestCount = document.getElementById('request_count');
-            requestCount.innerHTML = 0;
-            var map1;
-            var markers = [];
+          
 
             function initMapAssigned() {
 
@@ -255,58 +267,133 @@
                 });
             }
             
-            var dropdownItems = document.querySelectorAll('.dropdown-item');
-            dropdownItems.forEach(function(item) {
-                item.addEventListener('click', function() {
-                    selectedCollectorId = this.getAttribute('data-id');
-                    selected_collector_id.value = selectedCollectorId;
+            // var timeSlot = document.getElementById('time-slot-dropdown');
+            // var selectedTimeSlot = timeSlot.value;
+            // console.log(selectedTimeSlot);
+          
+          
 
-                    var requestDate= document.getElementById('requested_date').value;
-                    //console.log(requestDate);
+           // console.log('Selected value:', selectedTimeSlot);
+            var selectedCollectorId = 0;
+            var requestCount = document.getElementById('request_count');
+            requestCount.innerHTML = 0;
+            var map1;
+            var markers = [];
+            
 
-                    updateAssignedReqContent(selectedCollectorId, requestDate);
-
-                    
-
-                });
-            });
-
-            function updateAssignedReqContent(collectorId, requestDate){
+            function updateAssignedReqContent(collectorId, requestDate, requestTime, requestLat, requestLongi){
                 var request = <?php echo json_encode($data['assigned_requests']); ?>;
                 var count = 0;
 
+                console.log('request time in the function', requestTime, requestLat, requestLongi);
+                
+
                 clearMarkers();
 
-                for (let req_id in request) {
-                    if (request.hasOwnProperty(req_id)) {
-                        
-                        if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate) {
+                // var greenmarker = new google.maps.Marker({
+                //                     position: {lat: parseFloat(requestLat), lng: parseFloat(requestLongi)},
+                //                     map: map1,
+                //                     icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                //                     title: 'Request ' + request[req_id].req_id
+                //                 });
+                // markers.push(greenmarker);
+
+                if(requestTime == 'all'){
+                    for (let req_id in request) {
+                        if (request.hasOwnProperty(req_id)) {
                             
-                            count++;
-                            console.log(request[req_id].lat, request[req_id].longi);
-                            // Create a marker for each record and add it to the map
-                            var marker = new google.maps.Marker({
-                                position: {lat: parseFloat(request[req_id].lat), lng: parseFloat(request[req_id].longi)},
-                                map: map1,
-                                title: 'Request ' + request[req_id].req_id
-                            });
-                            markers.push(marker);
-                            
+                            if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate) {
+                                
+                                count++;
+                                console.log(request[req_id].lat, request[req_id].longi);
+                                // Create a marker for each record and add it to the map
+                                var marker = new google.maps.Marker({
+                                    position: {lat: parseFloat(request[req_id].lat), lng: parseFloat(request[req_id].longi)},
+                                    map: map1,
+                                    title: 'Request ' + request[req_id].req_id
+                                });
+                                markers.push(marker);
+                                
 
-                            // Optionally, add info window to display additional information
-                            var infoWindow = new google.maps.InfoWindow({
-                                content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' + request[req_id].customer_name 
-                            });
+                                // Optionally, add info window to display additional information
+                                var infoWindow = new google.maps.InfoWindow({
+                                    content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' + request[req_id].customer_name 
+                                });
 
-                            marker.addListener('click', function() {
-                                infoWindow.open(map1, marker);
-                            });
+                                marker.addListener('click', function() {
+                                    infoWindow.open(map1, marker);
+                                });
 
-                        };
+                            };
+                        }
                     }
+                    //console.log(markers);
+                    requestCount.innerHTML = count;
+
+                }else{
+                    for (let req_id in request) {
+                        if (request.hasOwnProperty(req_id)) {
+                            
+                            if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate && request[req_id].time == requestTime) {
+                                
+                                count++;
+                                console.log(request[req_id].lat, request[req_id].longi);
+                                // Create a marker for each record and add it to the map
+                                var marker = new google.maps.Marker({
+                                    position: {lat: parseFloat(request[req_id].lat), lng: parseFloat(request[req_id].longi)},
+                                    map: map1,
+                                    title: 'Request ' + request[req_id].req_id
+                                });
+                                markers.push(marker);
+                                
+
+                                // Optionally, add info window to display additional information
+                                var infoWindow = new google.maps.InfoWindow({
+                                    content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' + request[req_id].customer_name 
+                                });
+
+                                marker.addListener('click', function() {
+                                    infoWindow.open(map1, marker);
+                                });
+
+                            };
+                        }
+                    }
+                    //console.log(markers);
+                    requestCount.innerHTML = count;
+
                 }
-                //console.log(markers);
-                requestCount.innerHTML = count;
+
+                // for (let req_id in request) {
+                //     if (request.hasOwnProperty(req_id)) {
+                        
+                //         if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate) {
+                            
+                //             count++;
+                //             console.log(request[req_id].lat, request[req_id].longi);
+                //             // Create a marker for each record and add it to the map
+                //             var marker = new google.maps.Marker({
+                //                 position: {lat: parseFloat(request[req_id].lat), lng: parseFloat(request[req_id].longi)},
+                //                 map: map1,
+                //                 title: 'Request ' + request[req_id].req_id
+                //             });
+                //             markers.push(marker);
+                            
+
+                //             // Optionally, add info window to display additional information
+                //             var infoWindow = new google.maps.InfoWindow({
+                //                 content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' + request[req_id].customer_name 
+                //             });
+
+                //             marker.addListener('click', function() {
+                //                 infoWindow.open(map1, marker);
+                //             });
+
+                //         };
+                //     }
+                // }
+                // //console.log(markers);
+                // requestCount.innerHTML = count;
 
             }
 
@@ -365,7 +452,10 @@
                 }
             }
 
-            function assign(id, requestedDate) {
+            function assign(id, requestedDate, requestTime, requestLat, requestLongi) {
+
+                console.log(requestLat, requestLongi);
+
                 var inputElement = document.querySelector('input[name="assign_req_id"]');
 
                 inputElement.value = id;
@@ -378,6 +468,16 @@
                 var dateInput = document.querySelector('input[name="requested_date"]');
                 dateInput.value = requestedDate;
                 dateInput.style.display = 'none';
+
+                var requestTimeSlot = document.getElementById('requestTime');
+                requestTimeSlot.textContent = requestTime;
+
+
+                var requestLatitude = document.querySelector('input[name="request_lat"]');
+                requestLatitude.value = requestLat;
+
+                var requestLongitude = document.querySelector('input[name="request_longi"]');
+                requestLongitude.value = requestLongi;
 
                 // var request_date = document.getElementById('requested_date');
                 // request_date.innerHTML = requestedDate;
@@ -400,6 +500,74 @@
                 document.getElementById('overlay').style.display = "flex";
 
             }
+
+            document.addEventListener('DOMContentLoaded', function() {
+
+                var selectedTimeSlot = '';
+                const assignButtons = document.querySelectorAll('.assign-button');
+              
+
+
+                assignButtons.forEach(function(button) {
+                    button.addEventListener('click', function() {
+
+                        const dropdown = document.getElementById('time-slot-dropdown');
+                        const span = document.getElementById('requestTime');
+
+                        // Set the default selected option based on the value in the span
+                        const spanValue = span.textContent;
+                        //console.log(spanValue);
+                        const option = dropdown.querySelector(`option[value="${spanValue}"]`);
+                        //console.log(option);
+
+                        if (option) {
+                            option.selected = true;
+                            selectedTimeSlot = spanValue;
+                            console.log('selected time slot', selectedTimeSlot);
+                        }
+
+                        
+                    });
+                });
+
+                var dropdownItems = document.querySelectorAll('.dropdown-item');
+                dropdownItems.forEach(function(item) {
+                    item.addEventListener('click', function() {
+                        selectedCollectorId = this.getAttribute('data-id');
+                        selected_collector_id.value = selectedCollectorId;
+
+                        var requestDate= document.getElementById('requested_date').value;
+                        var requestLat = document.getElementById('request_lat').value;
+                        var requestLongi = document.getElementById('request_longi').value;
+
+                        updateAssignedReqContent(selectedCollectorId, requestDate, selectedTimeSlot, requestLat, requestLongi);
+                        //updateAssignedReqContent(selectedCollectorId, requestDate, requestTime);
+                        
+
+                    });
+                });
+
+                const timeDropdown = document.getElementById('time-slot-dropdown');
+
+                timeDropdown.addEventListener('change', (event) => {
+                    selectedTimeSlot = event.target.value;
+                    console.log('Selected value:', selectedTimeSlot);
+
+                    var selectedCollectorId = document.getElementById('selected_collector_id').value;
+                    console.log("selected collector:", selectedCollectorId);
+                    var requestDate = document.getElementById('requested_date').value;
+                    var requestLat = document.getElementById('request_lat').value;
+                    var requestLongi = document.getElementById('request_longi').value;
+
+                    updateAssignedReqContent(selectedCollectorId, requestDate, selectedTimeSlot, requestLat, requestLongi);
+                
+                });
+
+                
+
+
+            });
+
 
 
             function cancel($id) {
@@ -574,6 +742,9 @@
                 document.getElementById('instructions').innerText = request.instructions;
 
             }
+
+           
+
 
             document.addEventListener("DOMContentLoaded", function() {
 

@@ -48,7 +48,7 @@
     .on-the-way {
         font-size: 25px !important;
         animation: moveRightToLeft2 1.5s ease-in-out infinite alternate;
-        margin-right: 1px !important;
+        margin-right: 10px !important;
     }
 
     .fa-user-large {
@@ -67,6 +67,8 @@
         background-color: var(--green-color-one);
         padding: 6px;
         border-radius: 10px;
+        font-size: 13px !important;
+        width: 70px;
         color: var(--background-color-main);
     }
 
@@ -75,8 +77,10 @@
         background-color: var(--green-color-one);
         padding: 6px;
         border-radius: 10px;
-        font-size: 12px !important;
+        font-size: 13px !important;
         color: var(--background-color-main);
+        width: 73px;
+
     }
 
     .collector_img {

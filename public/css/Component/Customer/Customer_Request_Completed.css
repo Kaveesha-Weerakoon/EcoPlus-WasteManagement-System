@@ -178,11 +178,11 @@
 
     @media screen and (max-width:950px) {
         .table-header {
-            grid-template-columns: 8% 10% 11% 9% 10% 10% 11% 6% 9% 16%;
+            grid-template-columns: 8% 10% 11% 9% 10% 10% 11% 10% 14% 8%;
         }
 
         .table-row {
-            grid-template-columns: 8% 10% 11% 9% 10% 10% 11% 6% 9% 16%;
+            grid-template-columns: 8% 10% 11% 9% 10% 10% 11% 10% 14% 8%;
         }
     }
 
@@ -216,18 +216,18 @@
         }
 
         .table-header {
-            grid-template-columns: 8% 10% 11% 9% 8% 10% 9% 6% 6% 16%;
+            grid-template-columns: 8% 10% 11% 11% 11% 12% 15% 11%;
         }
 
         .table-row {
-            grid-template-columns: 8% 10% 11% 9% 8% 10% 9% 6% 6% 16%;
+            grid-template-columns: 8% 10% 11% 11% 11% 12% 15% 11%;
         }
     }
 
     @media screen and (max-width:555px) {
 
         .collect-details-pop-form {
-            width: 430px;
+            width: 380px;
         }
 
         .collect-details-pop-form-content {
@@ -251,11 +251,43 @@
         }
 
         .table-header {
-            grid-template-columns: 8% 10% 11% 9% 8% 6% 9% 6% 6% 16%;
+            grid-template-columns: 8% 10% 9% 10% 11% 12% 9% 9%;
         }
 
         .table-row {
-            grid-template-columns: 8% 10% 11% 9% 8% 6% 9% 6% 6% 16%;
+            grid-template-columns: 8% 10% 9% 10% 11% 12% 9% 9%;
+        }
+
+        .collect-details-pop-form-top {
+            font-size: 15px;
+        }
+
+        .collect-details-pop-form-close {
+            width: 20px;
+            height: 20px;
+        }
+
+        .collect-details-pop-form-content span {
+            width: 180px;
+        }
+
+        .collect-details-pop-form-content-labels h3 {
+            font-size: 12px !important;
+            width: 180px;
+        }
+
+        .collect-details-pop-form-content-right-values-cont h3 {
+            width: 80px;
+            font-size: 12px;
+        }
+        .collect-details-pop-form-content-right-values h3 {
+            font-size: 12px;
+        }
+
+        .note {
+            max-width: 500px;
+            height: 65px;
+            overflow-y: scroll;
         }
     }
 

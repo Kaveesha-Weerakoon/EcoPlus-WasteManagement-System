@@ -173,7 +173,7 @@
             <div class="Centers_pop" id="centers">
                 <div class="centers_top">
                     <h2>Regional Centers</h2>
-                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="centers_close" id="centers_close">
+                    <i class="fa-regular fa-circle-xmark" id="centers_close"></i>
                 </div>
 
                 <div id="map" class="centers">

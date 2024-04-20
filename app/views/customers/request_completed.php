@@ -21,7 +21,6 @@
                                     <th>Location</th>
                                     <th>Earned Credits</th>
                                     <th>Details</th>
-                                    <th>Rate</th>
                                 </tr>
                             </table>
                         </div>
@@ -62,9 +61,7 @@
                                         <i onclick="view_collect_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
                                             class="fa-regular fa-eye"></i>
                                     </td>
-                                    <td>
-                                        <i class="fa-regular fa-star"></i>
-                                    </td>
+
                                 </tr>
                                 <?php endforeach; ?>
                             </table>

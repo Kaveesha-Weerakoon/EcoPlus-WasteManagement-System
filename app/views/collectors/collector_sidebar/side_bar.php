@@ -147,6 +147,13 @@ checkbox.addEventListener("change", function() {
     const isDarkMode = checkbox.checked;
     setDarkModeStyle(isDarkMode);
 
-    localStorage.setItem("darkMode_Collectore", JSON.stringify(isDarkMode));
+    localStorage.setItem("darkMode_Collector", JSON.stringify(isDarkMode));
 });
+isDarkMode = getDarkModeSetting();
+if (getDarkModeSetting()) {
+    color = "white"
+    textColor = " white";
+    circularProgress.style.background =
+        `conic-gradient(${color}, ${progressStartValue * 3.6}deg, ${isDarkMode ? "#001f3f" : "#ededed"} 0deg)`;
+}
 </script>

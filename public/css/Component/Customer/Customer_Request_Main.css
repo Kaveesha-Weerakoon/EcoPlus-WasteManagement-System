@@ -495,7 +495,7 @@
             right: 10%;
         }
 
-      
+
     }
 
     @media screen and (max-width:540px) {
@@ -517,13 +517,14 @@
             left: 15%;
         }
 
-      
+
     }
 
     @media screen and (max-width: 844px) {
         .main-right-top-notification {
             margin-left: 5%;
         }
+
         .main-right-top-search {
             margin-left: 1px;
         }
@@ -546,7 +547,7 @@
     }
 
     @media screen and (max-width:700px) {
-    
+
         .main-right-top-search {
             width: 35%;
         }

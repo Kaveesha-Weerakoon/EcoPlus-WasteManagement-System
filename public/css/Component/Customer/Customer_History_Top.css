@@ -244,12 +244,6 @@
         width: 96.5%;
     }
 
-    .main-right-bottom-down {
-        padding-left: 3.5%;
-        width: 96.5%;
-        height: 450px;
-        overflow: scroll;
-    }
 
     .table {
         border-collapse: collapse;

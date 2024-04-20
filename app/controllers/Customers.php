@@ -152,8 +152,12 @@
       else{
         $data['assinged']='No';
       }
+  if($Request->code!=0){
+    header("Location: " . URLROOT . "/customers/request_main");        
 
-      $this->Request_Model->cancel_request($data);       
+  }else{
+    $this->Request_Model->cancel_request($data);       
+  }
        header("Location: " . URLROOT . "/customers/request_cancelled");        
     }
 

@@ -272,6 +272,7 @@ a {
     margin-bottom: 2px;
     text-align: center;
     display: grid;
+    width: 100%;
     border-bottom: 1px solid var(--background-color-two);
 }
 

@@ -23,6 +23,7 @@
                                     <th>Center</th>
                                     <th>Collector</th>
                                     <th>Location</th>
+                                    <th>Verify</th>
                                     <th>Cancel</th>
                                 </tr>
                             </table>
@@ -34,12 +35,16 @@
                                     <td>R<?php echo $request->request_id?></td>
                                     <td>
                                         <?php
-                                        $typeContent = ($request->type === 'incoming') ? 
-                                        '<i class="fa-solid fa-spinner processing"></i><p class="bold1">Pending</p>':
-                                        '<i class="fa-solid fa-truck-arrow-right assinged"></i><p class="bold2">Assigned</p>';
+                                          $typeContent = ($request->type === 'incoming') ? 
+                                         '<i class="fa-solid fa-spinner processing"></i><p class="bold1">Pending</p>' :
+                                         ($request->status === 'ontheway' ?
+                                            '<i class="fa-solid fa-truck-arrow-right on-the-way"></i><p class="bold3">On the way</p>' :
+                                            '<i class="fa-solid fa-truck-arrow-right assigned"></i><p class="bold2">Assigned</p>');
  
-                                        echo $typeContent
-                                 ?>
+                                        echo $typeContent;
+                                    ?>
+                                    </td>
+
                                     </td>
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
@@ -63,9 +68,18 @@
                                         <i onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
                                             class='bx bx-map' style="font-size: 29px"></i>
                                     </td>
-                                    </td>
 
-                                    <td class="cancel-open">
+                                    <td>
+
+                                        <?php
+                                            $typeContent = ($request->code === 0 || $request->code === null) ?
+                                            '<i class="fa-solid fa-ban" style="font-size: 21px;"></i>' :
+                                            '<i class="fa-regular fa-circle-check" style="font-size: 21px;" onclick="verify(' . htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') . ')"></i>';
+                                            echo $typeContent;
+                                        ?>
+
+                                    </td>
+                                    <td class=" cancel-open">
                                         <?php
                                                 if ($request->type === 'incoming') {
                                                     echo '   <i class="bx bx-x-circle" style="font-size: 29px; color:#DC2727;" onclick="cancel_request(\'' . $request->request_id . '\')"></i>';
@@ -121,8 +135,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="verify" id="verify">
+                    <div class="popup" id="popup">
+                        <h2>Verification Code</h2>
+                        <i class="fa-solid fa-circle-check"></i>
+                        <h3 id="verify_code">36253431</h3>
+                        <p>Please review all the details entered by the collector and provide the verification code</p>
+                        <p>If any errors occurred, please refresh the page and try again to provide the verification
+                            code.</p>
 
-                <div class="personal-details-popup-box" id="personal-details-popup-box">
+                        <div class="btns">
+                            <button type="button" id="close_verify" class="cancelbtn">Okay</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" personal-details-popup-box" id="personal-details-popup-box">
                     <div class="personal-details-popup-form" id="popup">
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
                             id="personal-details-popup-form-close">
@@ -161,6 +189,13 @@
         </div>
     </div>
     <script>
+    function verify($request) {
+        var verifyPop = document.querySelector('.verify');
+        verifyPop.classList.add('active');
+        document.getElementById('verify_code').textContent = $request.code;
+        document.getElementById('overlay').style.display = "flex";
+    }
+
     function view_collector(image, col_id, name, contact_no, type, vehno) {
         var locationPop = document.querySelector('.personal-details-popup-box');
         locationPop.classList.add('active');
@@ -252,6 +287,7 @@
         const collector_view = document.getElementById("personal-details-popup-box");
         const close_cancel = document.getElementById("close_cancel");
         const close_cancel2 = document.getElementById("close_cancel2");
+        const close_verify = document.getElementById("close_verify");
 
         close_collector.addEventListener("click", function() {
             collector_view.classList.remove('active');
@@ -265,6 +301,11 @@
 
         close_cancel2.addEventListener("click", function() {
             document.getElementById('cancel_confirm2').classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
+        });
+
+        close_verify.addEventListener("click", function() {
+            document.getElementById('verify').classList.remove('active');
             document.getElementById('overlay').style.display = "none";
         });
 

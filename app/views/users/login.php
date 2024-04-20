@@ -147,7 +147,7 @@
 
 
 
-                <input type="submit" value="sign Up" class="btn solid">
+                <input type="submit" value="sign Up" class="btn1 solid">
 
 
 

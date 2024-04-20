@@ -11,41 +11,7 @@
                         <input type="text" id="searchInput" placeholder="Search">
                     </div>
                     <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
-                    <!-- <div class="main-right-top-notification" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <div class="dot"></div>
-                    </div>
-                    <div id="notification_popup" class="notification_popup">
-                        <h1>Notifications</h1>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Assigned
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-
-
-                    </div>
-                    <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
-                            alt="">
-                        <div class="main-right-top-profile-cont">
-                            <h3><?php echo $_SESSION['center_manager_name']?></h3>
-                            <p>ID : C <?php echo $_SESSION['center_manager_id']?></p>
-                        </div>
-                    </div> -->
+                    
 
                 </div>
                 <div class="main-right-bottom">
@@ -54,8 +20,8 @@
                             <h1>Edit Profile</h1>
                             <div class="Edit-Profile-line"></div>
                         </div>
-                        <div class="main-right-bottom-content-bottom" >
-                            <form class="main-right-bottom-content-bottom-left" action="<?php echo URLROOT;?>/centermanagers/editprofile" method="post" enctype="multipart/form-data">
+                        <div class="top-profile" >
+                            <form action="<?php echo URLROOT;?>/centermanagers/editprofile" method="post" enctype="multipart/form-data">
                                 <div class="edit-profile-content-profile">
                                     <div class="edit-profile-content-profile-container">
                                         <img class="edit-profile-main-image" id="profile_image_placeholder" src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>" alt="">
@@ -63,29 +29,35 @@
                                         <input name='profile_image' type="file" id="profile_image">
                                     </div>
                                 </div>
-                                <div class="edit-profile-content">
-                                    <h3>Name :</h3>
-                                    <input name="name" type="text" value="<?php echo $data['name']?>">
-                                    <div class="err"><?php echo $data['name_err']?></div>
-                                </div>
-                                <div class="edit-profile-content">
-                                    <h3>Email </h3>
-                                    <input name="email" type="text" value="<?php echo $data['email']?>" readonly>
-                                    <div class="err"></div>
+                                <div class="main-right-bottom-content-bottom">
+                                    <div class="main-right-bottom-content-bottom-left">
+                                        <div class="edit-profile-content">
+                                            <h3>Name :</h3>
+                                            <input name="name" type="text" value="<?php echo $data['name']?>">
+                                            <div class="err"><?php echo $data['name_err']?></div>
+                                        </div>
+                                        <div class="edit-profile-content">
+                                            <h3>Email </h3>
+                                            <input name="email" type="text" value="<?php echo $data['email']?>" readonly>
+                                            <div class="err"></div>
 
-                                </div>
-                                <div class="edit-profile-content">
-                                    <h3>Address :</h3>
-                                    <input name="address"  type="text" value="<?php echo $data['address']?>">
-                                    <div class="err"><?php echo $data['address_err']?></div>
-                                </div>
-                                <div class="edit-profile-content">
-                                    <h3>Contact Number :</h3>
-                                    <input name="contactno" type="text" value="<?php echo $data['contactno']?>">
-                                    <div class="err"><?php echo $data['contactno_err']?></div>
-                                </div>
-                                                          
-                                   <button type="submit">Save</button>                                                     
+                                        </div>
+                                        <div class="edit-profile-content">
+                                            <h3>Address :</h3>
+                                            <input name="address"  type="text" value="<?php echo $data['address']?>">
+                                            <div class="err"><?php echo $data['address_err']?></div>
+                                        </div>
+                                        <div class="edit-profile-content">
+                                            <h3>Contact Number :</h3>
+                                            <input name="contactno" type="text" value="<?php echo $data['contactno']?>">
+                                            <div class="err"><?php echo $data['contactno_err']?></div>
+                                        </div>
+                                                                
+                                        <button type="submit">Save</button> 
+
+                                    </div>
+                               
+                                                                                   
                             </form>
 
                             <form class="main-right-bottom-content-bottom-right" action="<?php echo URLROOT;?>/centermanagers/change_password" method="post">
@@ -128,15 +100,36 @@
 
 </div>
 <script>
-    /* Notification View */
-    document.getElementById('submit-notification').onclick = function() {
-        var form = document.getElementById('mark_as_read');
-        var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/editprofile";
-        form.action = dynamicUrl; // Set the action URL
-        form.submit(); // Submit the form
 
-    };
-    /* ----------------- */
+/*animation*/
+document.addEventListener("DOMContentLoaded", function() {
+    var mainRightBottomContent = document.querySelector('.main-right-bottom-content');
+
+    function checkSlide() {
+        var elementTop = mainRightBottomContent.getBoundingClientRect().top;
+        var isHalfShown = elementTop < window.innerHeight;
+        var isNotScrolledPast = window.scrollY < elementTop + mainRightBottomContent.clientHeight;
+
+        if (isHalfShown && isNotScrolledPast) {
+            mainRightBottomContent.classList.add('slide-in');
+        } else {
+            mainRightBottomContent.classList.remove('slide-in');
+        }
+    }
+
+    window.addEventListener('scroll', checkSlide);
+    checkSlide(); // Trigger once on page load
+});
+
+/* Notification View */
+document.getElementById('submit-notification').onclick = function() {
+    var form = document.getElementById('mark_as_read');
+    var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/editprofile";
+    form.action = dynamicUrl; // Set the action URL
+    form.submit(); // Submit the form
+
+};
+/* ----------------- */
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

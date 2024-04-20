@@ -20,9 +20,11 @@
       $this->garbage_types_model = $this->model('Garbage_types');
       $this->Collect_Garbage_Model=$this->model('Collect_Garbage');
       $this->Report_Model=$this->model('Report');
+      $this->Report_User_Model=$this->model('Report_User');
       $this->fine_model = $this->model('Fines');
       $this->Annoucement_Model=$this->model('Announcement');
       $this->garbage_Model=$this->model('Garbage_Stock');
+      $this->MailSubscriptionModel = $this->model('Mail_Subscriptions');
 
 
       if(!isLoggedIn('admin_id')  && !isLoggedIn('superadmin_id')){
@@ -64,8 +66,7 @@
         'collector_count'=>count( $collectors),
         'agent_count'=>count($agents),
         'centers'=>$jsonData,
-        'creditsGiven'=>$creditMonth->credit_amount 
-      ];
+        'creditsGiven' => ($creditMonth->credit_amount !== null) ? $creditMonth->credit_amount : 0      ];
 
       foreach($fine_details as $fine ){
         if($fine){
@@ -88,19 +89,6 @@
       $this->view('admin/complain_customers', $data);
     }
 
-    public function complain_delete($id){
-      if($_SERVER['REQUEST_METHOD'] == 'POST'){     
-
-        if($this->customerModel->deletecomplain($id)){
-          redirect('./');
-        } else {
-          die('Something went wrong');
-        }
-      } else {
-        redirect('$url');
-      }
-    }
-    
     public function center_managers(){
 
       $center_managers = $this->center_managerModel->get_center_managers();
@@ -460,7 +448,7 @@
       header("Location: " . URLROOT . "/admin/customers");        
     }
 
-    public function customers(){
+    public function customers(){ 
       
       $customers = $this->customerModel->get_all();
       $data = [
@@ -689,7 +677,6 @@
       ];
       $this->view('admin/complain_collectors', $data);
     }
-    // header("Location: " . URLROOT . "/customers/.$url.");        
 
     public function center_main($center_id, $region){
       $center=$this->center_model->getCenterById($center_id);
@@ -739,7 +726,7 @@
       ];
       
       $this->view('admin/center_main', $data);        
-    }
+     }
     }
 
     public function center_main_change_cm($center_id){       
@@ -1063,9 +1050,40 @@
       }
     
     }
-  
-   
 
+    public function discount_agent_view($id){      
+        
+      $agent=$this->discount_agentModel->getDiscountAgentByID2($id);
+      $discouts=$this->discount_agentModel->getDiscountByAgent($id);
+      $credit_log=$this->discount_agentModel->getCreditlog($id);
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){        
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+          $data=[
+            'agent'=>$agent,
+            'discounts'=>$discouts,
+            'new_balance'=>'',
+            'credit'=>trim($_POST['credit_value']),
+            'credit_log'=>$credit_log,
+          ];
+
+        $center_managers = $this->center_managerModel->get_center_managers();
+        $data['new_balance'] = (float)($agent->credits + $data['credit']);
+        $agent=$this->discount_agentModel->addcredits($data);
+
+        header("Location: " . URLROOT . "/admin/discount_agent_view/$id");        
+      }else{
+        $data=[
+          'agent'=>$agent,
+          'discounts'=>$discouts,
+          'credit_log'=>$credit_log,
+        ];
+  
+        $this->view('admin/discountagentmain', $data);
+      }
+    }
+  
     public function discount_agent_delete($id) {
       $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($id);
       $this->discount_agentModel->discount_agent_delete($id);
@@ -1092,7 +1110,6 @@
     }
 
     public function garbage_types($success="False"){
-
       $garbage_types = $this->garbage_types_model->get_all();
 
       $data=[
@@ -1466,6 +1483,77 @@
   
      }
     }
+
+    public function reportusers(){
+      $centers = $this->center_model->getallCenters();
+      $allcustomers = $this->customerModel->get_all();
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){  
+
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $center=trim($_POST['center-dropdown']);
+        if($center!="none"){
+          $center2=$this->center_model->findCenterbyRegion($center);
+           $center_id=$center2->id;
+        }
+        else{
+          $center_id="none";
+        }
+        
+        $fromDate= trim($_POST['fromDate']);
+        $toDate= trim($_POST['toDate']);
+        
+        if($toDate==""){
+          $toDate="none";
+        } 
+
+        if($fromDate==""){
+          $fromDate="none";
+        }
+        $collectors= $this->Report_User_Model->getCollectors($fromDate,$toDate,$center);
+        $customers= $this->Report_User_Model->getCustomers($fromDate,$toDate,$center);
+        $collectorassistants= $this->Report_User_Model->getCollectorassistants($fromDate,$toDate,$center);
+        $centerworkers= $this->Report_User_Model->getCenterworkers($fromDate,$toDate,$center);
+        $allcustomers=
+           $data = [     
+            'to'=>$toDate,
+            'from'=>$fromDate,     
+            'centers'=> $centers,
+            'center'=>$center, 
+            'collectors'=>count($collectors),
+            'customers'=>count($customers),
+            'centerworkers'=>count($centerworkers),
+            'collectorassistants'=>count($collectorassistants),
+            'allcustomers'=>  $allcustomers
+          ];     
+            $this->view('admin/reportusers', $data);
+
+      
+      }
+      else{
+
+        $collectors= $this->Report_User_Model->getCollectors();
+        $customers= $this->Report_User_Model->getCustomers();
+        $collectorassistants= $this->Report_User_Model->getCollectorassistants();
+        $centerworkers= $this->Report_User_Model->getCenterworkers();
+    
+        $data = [          
+          'to'=>'none',
+          'from'=>'none',
+          'centers'=> $centers,          
+          'center'=>'All',
+          'collectors'=>count($collectors),
+          'customers'=>count($customers),
+          'centerworkers'=>1,
+          'collectorassistants'=>count($centerworkers),
+          'allcustomers'=>  $allcustomers
+      ];
+          $this->view('admin/reportusers', $data);
+
+      }
+
+    }
     
     public function reports(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){     
@@ -1553,32 +1641,6 @@
         $this->view('admin/report', $data);
 
       }
-    }
-
-    public function admin_delete_confirm($id){
-      $admin = $this->adminModel->get_all();
-      $admin_by_id = $this->adminModel->getAdminByID($id);
-      if($admin_by_id){
-        $data = [
-          'admin' => $admin,
-          'confirm_delete' =>'True',
-          'admin_id'=>$id,
-          'personal_details_click'=>'',
-          'success'=>'' 
-        ];
-      }
-      else{
-        $data = [
-          'admin' => $admin,
-          'admin_id'=>$id,
-          'confirm_delete' =>'True',
-          'discount_agent_id'=>$id,
-          'success'=>''
-        ];
-      }
-    
-     
-      $this->view('admin/admins', $data);
     }
 
     public function admin_delete($id) {
@@ -1901,7 +1963,7 @@
           if (empty($data['new_pw'])) {
             $data['new_pw_err'] = 'Please Enter New Password';
           } elseif (strlen($data['new_pw']) < 8 || strlen($data['new_pw']) > 30) {
-              $data['new_pw_err'] = 'New password must be between 8 and 30 characters';
+              $data['new_pw_err'] = 'New password must be 8-30 characters long';
 
           } elseif (!preg_match('/[^\w\s]/', $data['new_pw'])) {
               $data['new_pw_err'] = 'New password must include at least one symbol';
@@ -1920,7 +1982,7 @@
           if (empty($data['re_enter_pw'])) {
             $data['re_enter_pw_err'] = 'Please confirm new password';
           } elseif (strlen($data['re_enter_pw']) < 8 || strlen($data['re_enter_pw']) > 30) {
-              $data['re_enter_pw_err'] = 'Confirmed password must be between 8 and 30 characters';
+              $data['re_enter_pw_err'] = 'Confirmed password must be 8-30 characters long';
 
           } elseif (!preg_match('/[^\w\s]/', $data['re_enter_pw'])) {
               $data['re_enter_pw_err'] = 'Confirmed password must include at least one symbol';
@@ -1985,8 +2047,6 @@
 
 
     }
-
-
 
     public function announcements(){
       $Announcements=$this->Annoucement_Model->getAllAnnouncements();
@@ -2083,6 +2143,18 @@
       ];
 
       $this->view('admin/center_main_stock_releases', $data);
+
+    }
+
+    public function mail_subscriptions(){
+
+      $subscriptions = $this->MailSubscriptionModel->get_mail_subscriptions();
+
+      $data= [
+        'subscriptions' => $subscriptions
+      ];
+
+      $this->view('admin/mail_subscriptions', $data);
 
     }
 

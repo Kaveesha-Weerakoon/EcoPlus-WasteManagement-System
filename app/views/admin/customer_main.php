@@ -27,6 +27,7 @@
                                 <th>Name</th>
                                 <th>Profile</th>
                                 <th>Request Details</th>
+                                <th>Credit Balance</th>
                                 <th>Block</th>
                                 <!-- <th>Delete</th> -->
                             </tr>
@@ -47,6 +48,7 @@
                                 <td><a
                                         href="<?php echo URLROOT?>/Admin/get_customer_fined_requests/<?php echo $customer->user_id?>"><i
                                             class='bx bx-info-circle' style="font-size: 29px"></i></a></td>
+                                <td><?php echo $customer->credit_amount?></td>
                                 <td>
                                     <?php if ($customer->blocked ==FALSE) : ?>
                                     <i class="fa-solid fa-user-lock" style="font-size: 20px;"
@@ -104,6 +106,8 @@
                         <span>Contact No</span><br>
                         <span>Address</span><br>
                         <span>Region</span><br>
+                        <span>Joined date</span><br>
+
                     </div>
                     <div class="request-details-right-values">
                         <span id="customer_id"></span><br>
@@ -112,6 +116,8 @@
                         <span id="customer_mobno"></span><br>
                         <span id="customer_address"></span><br>
                         <span id="customer_region"></span><br>
+                        <span id="customer_joineddate"></span><br>
+
                     </div>
                 </div>
             </div>
@@ -213,6 +219,8 @@ function view_customer_details(customer) {
     document.getElementById('customer_address').innerText = customer.address
     document.getElementById('customer_region').innerText = customer.city;
     document.getElementById('customer_mobno').innerText = customer.mobile_number;
+    document.getElementById('customer_joineddate').innerText = customer.joined_date;
+
 }
 
 function close_request_details() {

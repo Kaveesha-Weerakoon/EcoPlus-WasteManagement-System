@@ -83,6 +83,31 @@
             return $results;
     }
 
+    public function get_collectors_bycenterid_with_assigned($center_id){
+        try{
+          $this->db->query('SELECT *,
+                              collectors.id as cID,
+                              users.id as userId
+                              FROM collectors
+                              INNER JOIN users
+                              ON collectors.user_id = users.id
+                              LEFT JOIN request_assigned
+                              ON collectors.user_id = request_assigned.collector_id
+                              WHERE collectors.center_id = :center_id
+                              GROUP BY collectors.user_id');
+              $this->db->bind(':center_id', $center_id);
+
+              $results = $this->db->resultSet();
+            
+              return $results;
+
+        }catch (PDOException $e){
+            return false;
+        }
+      
+
+    }
+
     public function get_no_of_Collectors($center_id){
         $this->db->query('SELECT *,
                               collectors.id as cID,

@@ -387,18 +387,28 @@
 
     /*delete confirm popup*/
     .delete_confirm {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.1);
-        z-index: 2;
+        
         display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 5;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 100%;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        background-color: var(--main-text-color);
+
+
+    }
+
+    .delete_confirm .active{
+        transform: translate(-50%, -50%) scale(1);
+        background-color: rgba(0, 0, 0, 0);     
 
     }
 
@@ -410,6 +420,8 @@
         text-align: center;
         padding: 0 30px 30px;
         transition: transform 0.4s, top 0.4s;
+
+        
     }
 
     .popup a {
@@ -476,6 +488,30 @@
 
     .cancelbtn:hover{
         background: #a7a1a1 ;
+    }
+
+    .delete_prohibitted{
+        display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 4;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        background-color: var(--main-text-color);
+
+    }
+
+    .delete_prohibitted .active{
+        transform: translate(-50%, -50%) scale(1);
+        background-color: rgba(0, 0, 0, 0);
+
     }
 
     /*Update popup*/
@@ -903,7 +939,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(0);
-        z-index: 4;
+        z-index: 5;
         align-items: center;
         justify-content: center;
         flex-direction: column;
@@ -932,7 +968,7 @@
         top: 0;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         transition: transform 0.4s, top 0.4s;
         display: flex;
         flex-direction: column;

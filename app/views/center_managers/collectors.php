@@ -11,39 +11,7 @@
                             <input type="text" id="searchInput" placeholder="Search">
                         </div>
                         <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
-                        <!-- <div class="main-right-top-notification" id="notification">
-                            <i class='bx bx-bell'></i>
-                            <div class="dot"></div>
-                        </div>
-                        <div id="notification_popup" class="notification_popup">
-                            <h1>Notifications</h1>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Cancelled
-                            </div>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Assigned
-                            </div>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Cancelled
-                            </div>
-                        </div> -->
-                        <!-- <div class="main-right-top-profile">
-                            <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
-                                alt="">
-                            <div class="main-right-top-profile-cont">
-                                <h3><?php echo $_SESSION['center_manager_name']?></h3>
-                                <p>ID : Col <?php echo $_SESSION['center_manager_id']?></p>
-                            </div>
-                        </div> -->
+                        
                     </div>
                     <div class="main-right-top-two">
                         <h1>Collectors</h1>
@@ -108,9 +76,19 @@
                                 <td><a
                                         href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><i class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"></i>
                                         </a></td>
-                                <td class="delete"><a
+                                <!-- <td class="delete"><a
                                         href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>">
-                                        <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
+                                        <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td> -->
+                                <td class=" cancel-open">
+                                    <?php
+                                        if ($collector->status === 'assinged') {
+                                            echo '<i class="fa-solid fa-triangle-exclamation" style="font-size: 24px; color:#DC2727;" onclick="delete_assigned_collector(\'' . $collector->user_id . '\')"></i>';
+                                        } else {
+                                            echo '<i class="bx bxs-trash" style="font-size: 29px; " onclick="delete_collector(\'' . $collector->user_id . '\')"></i>';
+
+                                        }
+                                    ?>
+                                </td>
 
                             </tr>
                             <?php endforeach; ?>
@@ -131,6 +109,8 @@
 
               
             </div>
+
+            <div class="overlay" id="overlay"></div>
 
             <?php if($data['click_update']=='True') : ?>
             <div class="update_click">
@@ -223,21 +203,34 @@
             <?php endif; ?>
 
                 
-            <?php if($data['confirm_delete']== 'True') : ?>
-            <div class="delete_confirm">
-                <div class="popup" id="popup">
+            
+            <div class="delete_confirm" id="delete-confirm-popup">
+                <div class="popup" >
                     <img src="<?php echo IMGROOT?>/trash.png" alt="">
                     <h2>Delete this collector?</h2>
                     <p>This action will permanently delete this collector</p>
                     <div class="btns">
-                        <a href="<?php echo URLROOT?>/centermanagers/collector_delete/<?php echo $data['collector_id'] ?>"><button
-                                type="button" class="deletebtn">Delete</button></a>
-                        <a href="<?php echo URLROOT?>/centermanagers/collectors ?>"><button type="button"
-                                class="cancelbtn">Cancel</button></a>
+                        
+                        <button type="button" class="deletebtn" >Delete</button>
+                
+                        <button type="button" class="cancelbtn">Cancel</button>
+
                     </div>
                 </div>
             </div>
-            <?php endif; ?>
+
+            <div class="delete_prohibitted" id="delete-prohibitted-popup">
+                <div class="popup" >
+                    <img src="<?php echo IMGROOT?>/trash.png" alt="">
+                    <h2>This action is prohibitted</h2>
+                    <p>Collector <span class="Collector" id="collector_assigned"></span> has already assigned for requests</p>
+                    <div class="btns">
+                       <button>OK</button>
+
+                    </div>
+                </div>
+            </div>
+      
 
             
             <?php if($data['update_success']=='True') : ?>
@@ -267,7 +260,7 @@
 
         </div>
 
-        <div class="overlay" id="overlay"></div>
+        
         
         <?php if($data['personal_details_click']=='True') : ?>
         <div class="personal-details-popup-box">
@@ -384,6 +377,23 @@ function openvehicledetails(collector) {
     document.getElementById('vehicle_collector_name').textContent = collector.name;
     document.getElementById('vehicle_collector_no').textContent = collector.vehicle_no;
     document.getElementById('vehicle_type').textContent = collector.vehicle_type;
+}
+
+function delete_assigned_collector(collector_id){
+
+    var delProhibittedPopup = document.getElementById('delete-prohibitted-popup');
+    delProhibittedPopup.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+
+}
+
+function delete_collector(collector_id){
+   
+    var delConfirmPopup = document.getElementById('delete-confirm-popup');
+    delConfirmPopup.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
 }
 
 document.addEventListener('DOMContentLoaded', function() {

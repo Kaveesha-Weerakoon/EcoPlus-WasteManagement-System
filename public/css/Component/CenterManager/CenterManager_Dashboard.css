@@ -1161,6 +1161,10 @@
         .main-right-top-profile-cont p{
             font-size: 12px;
         }
+
+        .confirm-hoildays-form{
+            width: 400px;
+        }
         
     }
 
@@ -1240,6 +1244,10 @@
         .circular-progress::before {
             width: 90px;
             height: 90px;
+        }
+
+        .confirm-hoildays-form{
+            width: 300px;
         }
     }
 

@@ -85,7 +85,7 @@
     }
 
     public function collectors(){
-      $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+      $collectors = $this->collectorModel->get_collectors_bycenterid_with_assigned($_SESSION['center_id']);
       $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'collectors' => $collectors,

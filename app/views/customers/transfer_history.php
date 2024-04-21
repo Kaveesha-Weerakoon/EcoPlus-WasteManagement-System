@@ -75,7 +75,7 @@
                     <div class="main-right-bottom-two">
                         <div class="main-right-bottom-two-content">
                             <i class='bx bx-data' style="font-size: 150px"></i>
-                            <h1>No credit Transfers Yet</h1>
+                            <h1>No Credit Transfers Yet</h1>
                             <a href="<?php echo URLROOT?>/customers/transfer"><button>Transfer
                                     Now</button></a>
                         </div>

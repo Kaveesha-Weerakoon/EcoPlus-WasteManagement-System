@@ -20,6 +20,7 @@
       $this->garbage_types_model = $this->model('Garbage_types');
       $this->Report_Model=$this->model('Customer_Report');
       $this->Annoucement_Model=$this->model('Announcement');
+      $this->fine_model = $this->model('Fines');
 
       if(!isLoggedIn('user_id')){
         redirect('users/login');
@@ -152,12 +153,12 @@
       else{
         $data['assinged']='No';
       }
-  if($Request->code!=0){
-    header("Location: " . URLROOT . "/customers/request_main");        
+      if($Request->code!=0){
+       header("Location: " . URLROOT . "/customers/request_main");        
 
-  }else{
-    $this->Request_Model->cancel_request($data);       
-  }
+      }else{
+     $this->Request_Model->cancel_request($data);       
+       }
        header("Location: " . URLROOT . "/customers/request_cancelled");        
     }
 
@@ -258,7 +259,7 @@
 
        if (empty($data['name'])) {
         $data['name_err'] = 'Please enter a name';
-       } elseif (strlen($data['name']) > 200) {
+       } elseif (strlen($data['name']) >  255) {
          $data['name_err'] = 'Name should be at most 200 characters';
        }
 
@@ -276,8 +277,8 @@
 
        if (empty($data['address'])) {
         $data['address_err'] = 'Please enter an address';
-       } elseif (strlen($data['address']) > 200) {
-        $data['address_err'] = 'Address should be at most 200 characters';
+       } elseif (strlen($data['address']) > 500) {
+        $data['address_err'] = 'Address should be at most 500 characters';
        }
 
        if(empty($data['name_err']) && empty($data['contactno_err']) && empty($data['city_err']) && empty($data['address_err'])){
@@ -348,7 +349,7 @@
     public function change_password(){
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
       $centers = $this->center_model->getallCenters();
-
+ 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
       
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); $data=[
@@ -391,10 +392,20 @@
       }
       
       if (empty($data['new_pw'])) {
-          $data['new_pw_err'] = 'Please Enter New Password';
-      } elseif (strlen($data['new_pw']) < 6) {
-          $data['new_pw_err'] = 'New password must be at least 6 characters';
-      }
+        $data['new_pw_err'] = 'Please Enter New Password';
+      } elseif (strlen($data['new_pw']) < 8 || strlen($data['new_pw']) > 30) {
+        $data['new_pw_err'] = 'Password must be between 8 and 30 characters';
+     } elseif (!preg_match('/[^\w\s]/', $data['new_pw'])) {
+        $data['new_pw_err'] = 'Password must include at least one symbol';
+      } elseif (!preg_match('/[A-Z]/', $data['new_pw'])) {
+        $data['new_pw_err'] = 'Password must include at least one uppercase letter';
+      } elseif (!preg_match('/[a-z]/', $data['new_pw'])) {
+        $data['new_pw_err'] = 'Password must include at least one lowercase letter';
+      } elseif (!preg_match('/[0-9]/', $data['new_pw'])) {
+        $data['new_pw_err'] = 'Password must include at least one number';
+     }
+    
+
       
       if (empty($data['re_enter_pw'])) {
           $data['re_enter_pw_err'] = 'Please confirm new password';
@@ -485,7 +496,9 @@
 
         if(empty($data['name'])){
           $data['name_err'] = 'Please enter name';
-        }
+        } elseif (strlen($data['name']) > 255) {
+          $data['name_err'] = 'Name is too long';
+      }
        
         // Validate contact number
         if(empty($data['contact_no'])){
@@ -500,11 +513,15 @@
         
         if(empty($data['subject'])){
           $data['subject_err'] = 'Please enter subject';
-        }
+        } elseif (strlen($data['subject']) > 255) {
+          $data['subject_err'] = 'Subject is too long';
+      }
         
         if(empty($data['complain'])){
           $data['complain_err'] = 'Please enter the complain';
-        }
+        }elseif (strlen($data['complain']) > 500) {
+          $data['complain_err'] = 'Complain is too long';
+      }
 
         if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
           if($this->customer_complain_Model->complains($data)){
@@ -550,7 +567,9 @@
       $id=$_SESSION['user_id']; 
       $user=$this->customerModel->get_customer($id);    
       $center=$this->Center_Model->findCenterbyRegion($user->city);
-
+      $garbage_types = $this->garbage_types_model->get_all();
+      $fine_details = $this->fine_model->get_fine_details();
+    
       return [
           'centers' => $centers,
           'name' => '',
@@ -575,13 +594,15 @@
           'region_success'=>'', 
           'radius'=>'',
           'radius_err'=>'',
+          'garbage_types'=> $garbage_types,
           'center_lat'=>$center->lat,
           'center_long'=>$center->longi,
-          'notification'=> $Notifications]  ;
+          'notification'=> $Notifications,
+          'fine'=>$fine_details[0]->fine_amount   ];
         
     }
 
-    public function request_collect(){
+    public function request_collect($sucess="False"){
       $id=$_SESSION['user_id']; 
       $user=$this->customerModel->get_customer($id);
       $Notifications = $this->customerModel->get_Notification($id);
@@ -609,17 +630,21 @@
         $data['region']=$user->city;
         $data['radius']=$center->radius;
 
-
+        $requests=$this->Request_Model->get_total_requests_by_customer($id);
+        if($data['time']=="Select a slot"){
+           $data['time_err']="Choose a time slot";
+        }
+        
         if (empty($data['name'])) {
            $data['name_err'] = 'Name is required';
-         }elseif (strlen($data['name']) > 30) {
-          $data['name_err'] = 'Name cannot exceed 30 characters';
+         }elseif (strlen($data['name']) >  255) {
+          $data['name_err'] = 'Name cannot exceed 255 characters';
         }
       
         if (empty($data['contact_no'])) {
-           $data['contact_no_err'] = 'Contact No is required';
+           $data['contact_no_err'] = 'Contact no is required';
          } elseif (!preg_match('/^\d{10}$/', $data['contact_no'])) {
-          $data['contact_no_err'] = 'Invalid Contact No';
+          $data['contact_no_err'] = 'Invalid contact no';
         }
 
         if (empty($data['date'])) {
@@ -644,9 +669,26 @@
               if ($selectedTimestamp < $currentTimestamp) {
                 $data['date_err'] = 'Select a date from tomorrow onwards';
               }
+              else{       
+                 $dateFound = false;
+
+                foreach ($requests as $request) {
+                  if ($request->date == $data['date']) {
+                      $dateFound = true;
+                      break; 
+                  }
+              }
+              if ($dateFound) {
+                $data['date_err'] = 'You can only make one request per day.';
+              }
+          
+              }
+              
             }
         }
-    
+        
+
+     
         if ($data['region_success']='True') {
            if ($data['location_success'] == 'Success') {
             
@@ -678,7 +720,8 @@
           }
             }
            else{ 
-            $data['location_err'] = 'Location Error';     
+         
+            $data['location_err'] = 'Location error';     
           }
         }
 
@@ -693,23 +736,22 @@
             $this->view('customers/request_collect', $data);   
          }
          else{
+
           $this->view('customers/request_collect', $data);
          }        
       }
      else {
          $data = $this->getCommonData();
          $id=$_SESSION['user_id']; 
-         
+         $data['success']=$sucess;
          $user=$this->customerModel->get_customer($id);
          if($user && $center){
              $data['lattitude']=$center->lat;
              $data['longitude']=$center->longi;
              $data['region']=$user->city;
              $data['radius']=$center->radius;
-
              $data['contact_no']=$user->mobile_number;
              $data['name'] =$_SESSION['user_name'];
-          
              $this->view('customers/request_collect', $data);
         }
 
@@ -732,7 +774,6 @@
       $data['instructions'] = trim($_POST['instructions']);
       $data['lattitude'] =trim($_POST['latitude']);
       $data['longitude'] =trim($_POST['longitude']);
-      $data['success']='True';
       $data['customer_id']=$_SESSION['user_id'];
       $data['region']=$user->city;
       $data['center_id'] =$center->id;
@@ -740,7 +781,7 @@
 
       $this->Request_Model->request_insert($data);
 
-      $this->view('customers/request_collect', $data);
+      header("Location: " . URLROOT . "/customers/request_collect/True");        
       }
       else{
         $data=$this->getCommonData();

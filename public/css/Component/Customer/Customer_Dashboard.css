@@ -563,7 +563,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.1);
         z-index: 2;
         display: flex;
         align-items: center;
@@ -574,8 +574,8 @@
     .tutorial {
         .cont {
             display: flex;
-            width: 70%;
-            height: 80%;
+            width: 940px;
+            height: 620px;
             background-color: var(--background-color-two);
             box-sizing: border-box;
             padding: 10px;
@@ -583,8 +583,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border-radius: 10px;
+            border-radius: 17px;
             padding: 25px;
+            max-height: 670px !important;
+            box-shadow: var(--box-shadow);
         }
 
         .step-indicators {
@@ -619,12 +621,15 @@
             font-size: 28px;
             margin-bottom: 15px;
             font-weight: 100;
+            color: var(--main-text-color);
+
         }
 
         .tutorial-step p {
             font-size: 18px;
             margin-bottom: 30px;
             letter-spacing: 0.03rem;
+            color: var(--main-text-color);
         }
 
         .tutorial-step:first-child {
@@ -635,14 +640,14 @@
         }
 
         .tutorial-step img {
-            width: 80%;
+            width: 790px;
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         button {
             background-color: var(--green-color-one);
-            color: white;
+            color: var(--background-color-main);
             border: none;
             padding: 10px 70px;
             text-align: center;
@@ -670,6 +675,7 @@
             z-index: 12;
             animation: arrowAnimation1 1s infinite alternate;
         }
+
 
         .arrow2 {
             position: absolute;
@@ -909,6 +915,64 @@
         }
     }
 
+    @media screen and (max-width: 970px) {
+        .tutorial {
+            .cont {
+                width: 600px;
+                height: 500px;
+            }
+
+            .tutorial-step h2 {
+                font-size: 21px;
+            }
+
+            .tutorial-step p {
+                font-size: 15px;
+            }
+
+            .tutorial-step img {
+                width: 550px;
+                height: 280px;
+            }
+
+            button {
+                padding: 7px 50px;
+            }
+
+            .arrow1 {
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-right: 15px solid #1ca557;
+                margin-top: -55px;
+                margin-left: -180px;
+                margin-bottom: 40px;
+            }
+
+            .arrow2 {
+                top: 44%;
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-right: 15px solid #1ca557;
+            }
+
+            .arrow3 {
+                left: 73%;
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-right: 15px solid #1ca557;
+            }
+
+            .arrow4 {
+                left: 29.5%;
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-right: 15px solid #1ca557;
+
+            }
+
+        }
+    }
+
     @media screen and (max-width: 724px) {
         .Centers_pop h2 {
             margin-right: 18%;
@@ -916,7 +980,7 @@
         }
 
         .Centers_pop {
-            height: 39%;
+            height: 39;
         }
 
         .notification {
@@ -1107,6 +1171,65 @@
         }
     }
 
+    @media screen and (max-width: 636px) {
+        .tutorial {
+            .cont {
+                width: 385px;
+                height: 400px;
+            }
+
+            .tutorial-step h2 {
+                font-size: 18px;
+            }
+
+            .tutorial-step p {
+                font-size: 13px;
+                text-align: center;
+            }
+
+            .tutorial-step img {
+                width: 360px;
+                height: 180px;
+            }
+
+            button {
+                padding: 7px 50px;
+            }
+
+            .arrow1 {
+                border-top: 12px solid transparent;
+                border-bottom: 12px solid transparent;
+                border-right: 12px solid #1ca557;
+                margin-top: -40px;
+                margin-left: -116px;
+                margin-bottom: 40px;
+            }
+
+            .arrow2 {
+                top: 47%;
+                border-top: 12px solid transparent;
+                border-bottom: 12px solid transparent;
+                border-right: 12px solid #1ca557;
+            }
+
+            .arrow3 {
+                left: 66%;
+                border-top: 12px solid transparent;
+                border-bottom: 12px solid transparent;
+                border-right: 12px solid #1ca557;
+            }
+
+            .arrow4 {
+                left: 34.7%;
+                border-top: 12px solid transparent;
+                border-bottom: 12px solid transparent;
+                border-right: 12px solid #1ca557;
+
+            }
+
+        }
+    }
+
     @media screen and (max-width: 600px) {
 
         .main-right-bottom-one-left .left h1 {
@@ -1150,7 +1273,8 @@
         }
 
         .Centers_pop h2 {
-            margin-right: 8%;
+
+            margin-right: 5%;
         }
 
     }

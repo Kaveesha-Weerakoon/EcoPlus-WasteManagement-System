@@ -281,6 +281,12 @@
         padding-left: 2.5%;
     }
 
+    .main-right-bottom-two-content button {
+
+        color: var(--background-color-main);
+    }
+
+    .main-right-bottom-two button {}
 
     @media screen and (max-width: 1118px) {
         .table td {
@@ -350,6 +356,12 @@
             overflow-x: scroll;
         }
 
+        .main-right-bottom-two-content h1 {
+            font-size: 21px !important;
+            text-align: center;
+        }
+
+
     }
 
     @media screen and (max-width:700px) {
@@ -403,6 +415,29 @@
 
         .line1 {
             width: 80px;
+        }
+    }
+
+    @media screen and (max-width:700px) {
+        .main-right-bottom-two-content h1 {
+            font-size: 18px !important;
+            text-align: center;
+        }
+
+        .main-right-bottom-two-content i {
+            font-size: 80px !important;
+
+        }
+
+
+        .main-right-bottom-two-content p {
+            font-size: 15px !important;
+        }
+
+        .main-right-bottom-two-content button {
+            height: 30px;
+            width: 145px;
+            font-size: 15px;
         }
     }
 

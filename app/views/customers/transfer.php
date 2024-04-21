@@ -8,10 +8,7 @@
 
             <div class="main-right">
                 <div class="main-top">
-                    <div class="main-right-top-search">
-                        <i class='bx bx-search-alt-2'></i>
-                        <input type="text" id="searchInput" placeholder="Search">
-                    </div>
+
                     <?php require APPROOT . '/views/customers/customer_notification/customer_notification.php'; ?>
 
                 </div>

@@ -4,10 +4,7 @@
         async defer>
     </script>
     <div class="Customer_Request_collect">
-        <script
-            src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMap"
-            async defer>
-        </script>
+
         <div class="main">
             <?php require APPROOT . '/views/customers/Customer_SideBar/side_bar.php'; ?>
 
@@ -54,28 +51,23 @@
                             <div class="Content-Content">
                                 <h2>Time Slot</h2>
                                 <select class="Time" name="time">
+                                    <option value="Select a slot"
+                                        <?php echo ($data['time'] === 'Select a slot') ? 'selected' : ''; ?>>Choose a
+                                        Time Slot</option>
                                     <option value="8 am - 10 am"
-                                        <?php echo ($data['time'] === '8 am -10 am') ? 'selected' : ''; ?>>8 am -10
-                                        am
+                                        <?php echo ($data['time'] === '8 am - 10 am') ? 'selected' : ''; ?>>8 am - 10 am
                                     </option>
                                     <option value="10 am - 12 noon"
-                                        <?php echo ($data['time'] === '10 am - 12 noon') ? 'selected' : ''; ?>>10 am
-                                        -
-                                        12
-                                        noon
-                                    </option>
-                                    <option value="12 noon -2 pm"
-                                        <?php echo ($data['time'] === '12 noon -2 pm') ? 'selected' : '12 noon -2 pm'; ?>>
-                                        12
-                                        noon - 2 pm
-
-                                    </option>
+                                        <?php echo ($data['time'] === '10 am - 12 noon') ? 'selected' : ''; ?>>10 am -
+                                        12 noon</option>
+                                    <option value="12 noon - 2 pm"
+                                        <?php echo ($data['time'] === '12 noon - 2 pm') ? 'selected' : ''; ?>>12 noon -
+                                        2 pm</option>
                                     <option value="2 pm - 4 pm"
-                                        <?php echo ($data['time'] === '2 pm - 4 pm') ? 'selected' : ''; ?>>2 pm - 4
-                                        pm
-
+                                        <?php echo ($data['time'] === '2 pm - 4 pm') ? 'selected' : ''; ?>>2 pm - 4 pm
                                     </option>
                                 </select>
+
                                 <div class="err"><?php echo $data['time_err']?></div>
                             </div>
                         </div>
@@ -85,9 +77,9 @@
                                 <input value="<?php echo $data['region']?>" type="text" readonly>
                             </div>
                             <div class="Content-Content">
-                                <h2>Pick Up Instructions</h2>
+                                <h2>Pick Up Instructions/Details</h2>
                                 <input value="<?php echo $data['instructions']?>" name="instructions" type="Text"
-                                    placeholder="Pick Up Instructions">
+                                    placeholder="Ex : about 2kg of metals">
                                 <div class="err"><?php echo $data['instructions_err']?></div>
                             </div>
                         </div>
@@ -98,56 +90,34 @@
                             <?php if ($data['region_success'] == 'True')  ?>
                             <div class="main-bottom-maps" onclick="initMap()">
                                 <h4>Maps</h4>
-                                <img src="<?php echo IMGROOT; ?>/location2.png" alt="">
+                                <i class="fa-solid fa-location-dot"></i>
                             </div>
 
                             <?php if ($data['location_success'] == 'Success') : ?>
                             <div class="main-bottom-map-success">
                                 <img src="<?php echo IMGROOT; ?>/check.png" alt="">
-                                <p>Location Fetched Successfully</p>
+                                <p>Location fetched successfully</p>
 
                             </div>
                             <?php endif; ?>
-
-                            <?php if ($data['location_err'] == 'Location Error') : ?>
+                            <?php if ($data['location_err'] == 'Location error') : ?>
                             <div class="main-bottom-map-success">
                                 <img src="<?php echo IMGROOT; ?>/warning.png" alt="">
-                                <p>Pick up location Required</p>
+                                <p>Pick up location required</p>
                             </div>
                             <?php endif; ?>
                         </div>
                         <div class="Waste_Amounts">
-                            <div class="Cont">
-                                <h3>Plastic</h3>
-                                <i class="icon fas fa-box"></i>
-                                <p>1 Kg</p>
-                            </div>
-                            <div class="Cont">
-                                <h3>Polythene</h3>
-                                <i class="icon fas fa-trash"></i>
-                                <p>1 Kg</p>
-                            </div>
-                            <div class="Cont">
-                                <h3>Metal</h3>
-                                <i class="icon fas fa-box"></i>
-                                <p>1 Kg</p>
-                            </div>
-                            <div class="Cont">
-                                <h3> Glass</h3>
-                                <i class="icon fas fa-glass-whiskey"></i>
-                                <p>1 Kg</p>
-                            </div>
 
+                            <?php foreach($data['garbage_types'] as $type) : ?>
                             <div class="Cont">
-                                <h3>Paper</h3>
-                                <i class="icon fas fa-file-alt"></i>
-                                <p>1 Kg</p>
+                                <h3><?php echo $type->name; ?></h3>
+                                <i class="<?php echo $type->icon; ?>"></i>
+                                <p><?php echo $type->approximate_amount; ?> Kg</p>
                             </div>
-                            <div class="Cont">
-                                <h3>Electronic</h3>
-                                <i class="icon fas fa-laptop"></i>
-                                <p>1 Kg</p>
-                            </div>
+                            <?php endforeach; ?>
+
+
                         </div>
                         <div class="Warning_Message">
                             <i class="fa-solid fa-triangle-exclamation"></i>
@@ -155,7 +125,7 @@
                             of waste for the collection.otherwise,<br>
                             your request
                             will be
-                            cancelled with a 50 Eco fine
+                            cancelled with a <?php echo $data['fine']?> Eco fine
                         </div>
                         <div class="Submit-botton">
                             <Button type="submit">Request Now</Button>
@@ -174,7 +144,8 @@
                             <div id="map"></div>
                             <p>* Green Radius : Indicates the operational area of your default center</p>
                             <div class="buttons-container" id="submitForm">
-                                <button type="button" id="markLocationBtn" onclick="submitForm()">Mark Location</button>
+                                <button type="button" id="markLocationBtn" onclick="submitForm()">Mark
+                                    Location</button>
                                 <button type="button" id="cancelBtn">Cancel</button>
                                 <input type="hidden" id="latitudeInput" value="<?php echo $data['lattitude']?>"
                                     name="latitude">

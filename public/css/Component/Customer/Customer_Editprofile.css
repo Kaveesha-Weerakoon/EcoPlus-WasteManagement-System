@@ -11,7 +11,7 @@
     .main-right {
         display: grid;
         grid-template-rows: 9% 91%;
-        overflow: hidden;
+        overflow: hidden !important;
         height: auto;
     }
 
@@ -479,9 +479,9 @@
     }
 
     @media screen and (max-width: 1200px) {
-        .main-right-bottom-content {
+        .main-right-bottom {
             overflow-y: scroll;
-            margin-top: 20%;
+
         }
     }
 

@@ -170,7 +170,7 @@
         height: 40px;
         width: 175px;
         outline: none;
-        color: white;
+        color: var(--background-color-main);
         font-size: 19px;
         font-weight: 500;
         border-radius: 5px;
@@ -502,6 +502,25 @@
             width: 140%;
             overflow-x: scroll;
         }
+
+
+
+
+        .main-right-bottom-two-content h1 {
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .main-right-bottom-two-content p {
+            font-size: 15px;
+        }
+
+        .main-right-bottom-two-content button {
+            height: 30px;
+            width: 145px;
+            font-size: 15px;
+        }
+
 
     }
 

@@ -315,12 +315,23 @@
         font-weight: 500;
     }
 
-    select {
+    .time-slot-dropdown-container select{
+        width: 100%;
+        font-size: 15px;
+        padding: 8px;
+        margin-top: 20px;
+        border-radius: 5px;
+        background-color: #fff;
+        color: var(--main-text-color);
+
+    }
+
+    /* select {
         padding: 5px;
         font-size: 16px;
         border: 1px solid #ccc;
         border-radius: 5px;
-    }
+    } */
 
     .View-content-img {
         /* width: 27px;

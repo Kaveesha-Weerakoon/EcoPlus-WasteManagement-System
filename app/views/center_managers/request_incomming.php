@@ -145,10 +145,10 @@
                             </ul>
                         </div>
                         
-                        <span name="requestTime" id="requestTime"></span>
+                        <span name="requestTime" id="requestTime" style= "display:none;"></span>
 
                         <div class="time-slot-dropdown-container">
-                            <select name="time-slot-dropdown" id="time-slot-dropdown">
+                            <select name="time-slot-dropdown" id="time-slot-dropdown" >
                                 <option value="8 am - 10 am">8 am - 10 am</option>
                                 <option value="10 am - 12 noon">10 am - 12 noon</option>
                                 <option value="12 noon -2 pm">12 noon -2 pm</option>
@@ -159,8 +159,8 @@
 
                         <!-- Hidden input field to store the selected collector's ID -->
                         <input type="hidden" name="selected_collector_id" id="selected_collector_id">
-                        <input type="text" name="request_lat" id="request_lat">
-                        <input type="text" name="request_longi" id="request_longi">
+                        <input type="hidden" name="request_lat" id="request_lat">
+                        <input type="hidden" name="request_longi" id="request_longi">
 
 
                         <div class="assigned-req-count-container">
@@ -286,17 +286,17 @@
                 var count = 0;
 
                 console.log('request time in the function', requestTime, requestLat, requestLongi);
-                
+                requestId = document.getElementById('assign_req_id').textContent;
 
                 clearMarkers();
 
-                // var greenmarker = new google.maps.Marker({
-                //                     position: {lat: parseFloat(requestLat), lng: parseFloat(requestLongi)},
-                //                     map: map1,
-                //                     icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-                //                     title: 'Request ' + request[req_id].req_id
-                //                 });
-                // markers.push(greenmarker);
+                var greenmarker = new google.maps.Marker({
+                                    position: {lat: parseFloat(requestLat), lng: parseFloat(requestLongi)},
+                                    map: map1,
+                                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                                    title: 'Request ' + requestId
+                                });
+                markers.push(greenmarker);
 
                 if(requestTime == 'all'){
                     for (let req_id in request) {
@@ -310,6 +310,7 @@
                                 var marker = new google.maps.Marker({
                                     position: {lat: parseFloat(request[req_id].lat), lng: parseFloat(request[req_id].longi)},
                                     map: map1,
+                                    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
                                     title: 'Request ' + request[req_id].req_id
                                 });
                                 markers.push(marker);
@@ -342,6 +343,7 @@
                                 var marker = new google.maps.Marker({
                                     position: {lat: parseFloat(request[req_id].lat), lng: parseFloat(request[req_id].longi)},
                                     map: map1,
+                                    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
                                     title: 'Request ' + request[req_id].req_id
                                 });
                                 markers.push(marker);
@@ -361,6 +363,7 @@
                     }
                     //console.log(markers);
                     requestCount.innerHTML = count;
+                    
 
                 }
 
@@ -493,6 +496,14 @@
 
                 // Clear markers from the map
                 clearMarkers();
+
+                var greenmarker = new google.maps.Marker({
+                                    position: {lat: parseFloat(requestLat), lng: parseFloat(requestLongi)},
+                                    map: map1,
+                                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                                    title: 'Request ' +  id
+                                });
+                markers.push(greenmarker);
 
                 var assign_popup = document.getElementById('View');
                 assign_popup.classList.add('active');

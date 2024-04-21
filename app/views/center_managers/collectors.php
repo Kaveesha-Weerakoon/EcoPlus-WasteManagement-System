@@ -213,7 +213,7 @@
                         
                         <button type="button" class="deletebtn" >Delete</button>
                 
-                        <button type="button" class="cancelbtn">Cancel</button>
+                        <button type="button" class="cancelbtn" id="close-delete-confirm">Cancel</button>
 
                     </div>
                 </div>
@@ -225,7 +225,7 @@
                     <h2>This action is prohibitted</h2>
                     <p>Collector <span class="Collector" id="collector_assigned"></span> has already assigned for requests</p>
                     <div class="btns">
-                       <button>OK</button>
+                       <button id="delete_prohibitted-ok-button">OK</button>
 
                     </div>
                 </div>
@@ -381,9 +381,14 @@ function openvehicledetails(collector) {
 
 function delete_assigned_collector(collector_id){
 
+    var collector_assigned = document.getElementById('collector_assigned');
+    collector_assigned.textContent = collector_id;
+
     var delProhibittedPopup = document.getElementById('delete-prohibitted-popup');
     delProhibittedPopup.classList.add('active');
     document.getElementById('overlay').style.display = "flex";
+
+   
 
 
 }
@@ -398,6 +403,7 @@ function delete_collector(collector_id){
 
 document.addEventListener('DOMContentLoaded', function() {
     var close_vehicledetail = document.getElementById('vehicle-details-popup-form-close');
+    var close_delete_confirm = document.getElementById('close-delete-confirm');
 
     close_vehicledetail.addEventListener('click', function() {
         var vehicle_pop = document.getElementById('vehicle-details-popup-box');
@@ -405,6 +411,15 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('overlay').style.display = "none";
         // document.getElementById('vehicle-details-popup-box').style.display = "none";
     });
+
+    close_delete_confirm.addEventListener('click', function(){
+        var delConfirmPopup = document.getElementById('delete-confirm-popup');
+        delConfirmPopup.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
+    });
+
+
 });
 
 

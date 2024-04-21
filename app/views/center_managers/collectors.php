@@ -11,7 +11,7 @@
                             <input type="text" id="searchInput" placeholder="Search">
                         </div>
                         <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
-                        
+
                     </div>
                     <div class="main-right-top-two">
                         <h1>Collectors</h1>
@@ -60,22 +60,23 @@
                             <?php foreach($data['collectors'] as $collector) : ?>
                             <tr class="table-row">
                                 <td><?php echo $collector->user_id?></td>
-                                <td><img
-                                        src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>"
+                                <td><img src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>"
                                         alt="" class="collector_img"></td>
                                 <td><?php echo $collector->name?></td>
                                 <td><?php echo $collector->email?></td>
                                 <td><a
-                                        href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><i class='bx bxs-user' style="font-size: 29px;"></i>
+                                        href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><i
+                                            class='bx bxs-user' style="font-size: 29px;"></i>
                                     </a></td>
                                 <td>
                                     <i class='bx bxs-truck' style="font-size: 29px;"
-                                    onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"></i>
+                                        onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"></i>
 
                                 </td>
                                 <td><a
-                                        href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><i class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"></i>
-                                        </a></td>
+                                        href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><i
+                                            class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"></i>
+                                    </a></td>
                                 <!-- <td class="delete"><a
                                         href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>">
                                         <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td> -->
@@ -107,7 +108,7 @@
                 </div>
                 <?php endif; ?>
 
-              
+
             </div>
 
             <div class="overlay" id="overlay"></div>
@@ -115,14 +116,15 @@
             <?php if($data['click_update']=='True') : ?>
             <div class="update_click">
                 <div class="popup-form" id="popup">
-                    <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png"
-                            class="update-popup-img" alt=""></a>
+                    <a href="<?php echo URLROOT?>/centermanagers/collectors"><img
+                            src="<?php echo IMGROOT?>/close_popup.png" class="update-popup-img" alt=""></a>
                     <h2>Update Details</h2>
                     <center>
                         <div class="update-topic-line"></div>
                     </center>
                     <form class="updatePopupform"
-                        action="<?php echo URLROOT;?>/centermanagers/collectors_update/<?php echo $data['id'];?>" method="post">
+                        action="<?php echo URLROOT;?>/centermanagers/collectors_update/<?php echo $data['id'];?>"
+                        method="post">
                         <div class="updatePopupform-div">
                             <div class="personal-details">Personal Details</div>
                             <div class="top-personal-details">
@@ -202,17 +204,17 @@
             </div>
             <?php endif; ?>
 
-                
-            
+
+
             <div class="delete_confirm" id="delete-confirm-popup">
-                <div class="popup" >
+                <div class="popup">
                     <img src="<?php echo IMGROOT?>/trash.png" alt="">
                     <h2>Delete this collector?</h2>
                     <p>This action will permanently delete this collector</p>
                     <div class="btns">
-                        
-                        <button type="button" class="deletebtn" >Delete</button>
-                
+
+                        <button type="button" class="deletebtn">Delete</button>
+
                         <button type="button" class="cancelbtn">Cancel</button>
 
                     </div>
@@ -220,19 +222,20 @@
             </div>
 
             <div class="delete_prohibitted" id="delete-prohibitted-popup">
-                <div class="popup" >
+                <div class="popup">
                     <img src="<?php echo IMGROOT?>/trash.png" alt="">
                     <h2>This action is prohibitted</h2>
-                    <p>Collector <span class="Collector" id="collector_assigned"></span> has already assigned for requests</p>
+                    <p>Collector <span class="Collector" id="collector_assigned"></span> has already assigned for
+                        requests</p>
                     <div class="btns">
-                       <button>OK</button>
+                        <button>OK</button>
 
                     </div>
                 </div>
             </div>
-      
 
-            
+
+
             <?php if($data['update_success']=='True') : ?>
             <div class="success_popup_box">
                 <div class="popup1" id="popup1">
@@ -245,7 +248,7 @@
             </div>
             <?php endif; ?>
 
-                
+
             <?php if($data['delete_success']=='True') : ?>
             <div class="success_popup_box">
                 <div class="popup1" id="popup1">
@@ -260,8 +263,8 @@
 
         </div>
 
-        
-        
+
+
         <?php if($data['personal_details_click']=='True') : ?>
         <div class="personal-details-popup-box">
             <div class="personal-details-popup-form" id="popup">
@@ -273,8 +276,8 @@
 
                 <div class="personal-details-popup">
                     <div class="personal-details-left">
-                        <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $data['image']?>" class="profile-pic"
-                            alt="">
+                        <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $data['image']?>"
+                            class="profile-pic" alt="">
                         <p>Collector ID: <span>C<?php echo $data['id']?></span></p>
                     </div>
                     <div class="personal-details-right">
@@ -334,17 +337,16 @@
     </div>
 </div>
 <script>
-
- /* Notification View */
- document.getElementById('submit-notification').onclick = function() {
+/* Notification View */
+document.getElementById('submit-notification').onclick = function() {
     var form = document.getElementById('mark_as_read');
     var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/collectors";
     form.action = dynamicUrl; // Set the action URL
     form.submit(); // Submit the form
 
 };
-    /* ----------------- */
-    
+/* ----------------- */
+
 function searchTable() {
     var input = document.getElementById('searchInput').value.toLowerCase();
     var rows = document.querySelectorAll('.table-row');
@@ -379,7 +381,8 @@ function openvehicledetails(collector) {
     document.getElementById('vehicle_type').textContent = collector.vehicle_type;
 }
 
-function delete_assigned_collector(collector_id){
+function delete_assigned_collector(collector_id) {
+    console.log("2");
 
     var delProhibittedPopup = document.getElementById('delete-prohibitted-popup');
     delProhibittedPopup.classList.add('active');
@@ -388,8 +391,8 @@ function delete_assigned_collector(collector_id){
 
 }
 
-function delete_collector(collector_id){
-   
+function delete_collector(collector_id) {
+    console.log("1");
     var delConfirmPopup = document.getElementById('delete-confirm-popup');
     delConfirmPopup.classList.add('active');
     document.getElementById('overlay').style.display = "flex";
@@ -406,7 +409,5 @@ document.addEventListener('DOMContentLoaded', function() {
         // document.getElementById('vehicle-details-popup-box').style.display = "none";
     });
 });
-
-
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

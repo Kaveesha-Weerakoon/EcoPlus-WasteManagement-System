@@ -5,7 +5,7 @@
         font-family: inter;
     }
 
-    
+
     #dashboard i {
         color: var(--green-color-one);
     }
@@ -20,7 +20,7 @@
         color: inherit;
     }
 
-    
+
     .main-right {
         display: grid;
         width: 100%;
@@ -197,7 +197,7 @@
         margin-left: 5px;
     }
 
-    .mark_as_read button:hover{
+    .mark_as_read button:hover {
         color: var(--button-hover-green);
     }
 
@@ -275,7 +275,7 @@
     }
 
 
-  
+
 
     /*Table*/
     .main-right-bottom-down {
@@ -325,7 +325,7 @@
     }
 
 
-  
+
 
     /*Empty table UI*/
     .main-right-bottom-two {
@@ -387,7 +387,7 @@
 
     /*delete confirm popup*/
     .delete_confirm {
-        
+
         display: flex;
         position: fixed;
         top: 50%;
@@ -406,9 +406,9 @@
 
     }
 
-    .delete_confirm .active{
+    .delete_confirm.active {
         transform: translate(-50%, -50%) scale(1);
-        background-color: rgba(0, 0, 0, 0);     
+        background-color: rgba(0, 0, 0, 0);
 
     }
 
@@ -421,7 +421,7 @@
         padding: 0 30px 30px;
         transition: transform 0.4s, top 0.4s;
 
-        
+
     }
 
     .popup a {
@@ -468,7 +468,7 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .deletebtn:hover{
+    .deletebtn:hover {
         background: #c62323;
     }
 
@@ -486,11 +486,11 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .cancelbtn:hover{
-        background: #a7a1a1 ;
+    .cancelbtn:hover {
+        background: #a7a1a1;
     }
 
-    .delete_prohibitted{
+    .delete_prohibitted {
         display: flex;
         position: fixed;
         top: 50%;
@@ -508,7 +508,7 @@
 
     }
 
-    .delete_prohibitted .active{
+    .delete_prohibitted.active {
         transform: translate(-50%, -50%) scale(1);
         background-color: rgba(0, 0, 0, 0);
 
@@ -580,8 +580,8 @@
 
     }
 
-    .updatebtn:hover{
-        background:var(--button-hover-green) ;
+    .updatebtn:hover {
+        background: var(--button-hover-green);
     }
 
     .cancelbtn1 {
@@ -597,8 +597,8 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .cancelbtn1:hover{
-        background: #a7a1a1 ;
+    .cancelbtn1:hover {
+        background: #a7a1a1;
     }
 
     .updateData {
@@ -687,7 +687,7 @@
 
     }
 
-  
+
 
     /*Update success*/
     .success_popup_box {
@@ -701,8 +701,6 @@
         justify-content: center;
         width: 100%;
         height: 100%;
-
-
     }
 
     .popup1 {
@@ -749,7 +747,7 @@
 
     }
 
-    .popup1 button:hover{
+    .popup1 button:hover {
         background: #19954e;
     }
 
@@ -908,7 +906,7 @@
     }
 
 
-   
+
 
     .overlay {
         position: fixed;
@@ -1078,13 +1076,13 @@
         }
 
 
-        .main-right-top-profile img{
+        .main-right-top-profile img {
             width: 40px;
             height: 40px;
             margin-top: 3px;
         }
 
-        .main-right{
+        .main-right {
             overflow-x: hidden;
         }
     }
@@ -1120,11 +1118,11 @@
             width: 28%;
         }
 
-        .main-right-top-profile-cont p{
+        .main-right-top-profile-cont p {
             font-size: 12px;
         }
 
-        .personal-details-popup-form{
+        .personal-details-popup-form {
             width: 600px;
         }
     }
@@ -1146,11 +1144,11 @@
             width: 35%;
         }
 
-        .personal-details-popup-form{
+        .personal-details-popup-form {
             width: 500px;
         }
 
-        .updateData input{
+        .updateData input {
             width: 75%;
         }
     }
@@ -1161,54 +1159,56 @@
             right: 10%;
         }
 
-        .main-right-top-four-component p{
+        .main-right-top-four-component p {
             display: none;
 
         }
 
-        .main-right-top-four-component{
+        .main-right-top-four-component {
             width: auto;
         }
 
-        .personal-details-popup-form{
+        .personal-details-popup-form {
             width: 400px;
         }
 
-        .personal-details-left img{
+        .personal-details-left img {
             width: 100px;
             height: 100px;
         }
 
-        .personal-details-right-labels span, .personal-details-right-values span, .personal-details-left p{
+        .personal-details-right-labels span,
+        .personal-details-right-values span,
+        .personal-details-left p {
             font-size: 12px;
         }
 
-        .vehicle-details-popup-form{
+        .vehicle-details-popup-form {
             width: 400px;
         }
 
-        .vehicle-details-labels{
+        .vehicle-details-labels {
             padding-left: 40px;
         }
 
-        .vehicle-details-values{
+        .vehicle-details-values {
             padding-left: 70px;
         }
 
-        .updateData input{
+        .updateData input {
             width: 70%;
         }
 
-        .popup{
+        .popup {
             width: 300px;
         }
 
-        .popup1{
+        .popup1 {
             width: 300px;
         }
 
 
-      
+
     }
 
     @media screen and (max-width:540px) {
@@ -1230,67 +1230,67 @@
             left: 15%;
         }
 
-        .main-right-top-four-left{
+        .main-right-top-four-left {
             margin-left: 35px;
             padding-left: 0;
         }
 
-        .main-right-top-four-left button{
+        .main-right-top-four-left button {
             width: 60px;
         }
 
-        .main-right-top-four-left p{
+        .main-right-top-four-left p {
             display: none;
         }
 
-        .main-right-top-four-right{
+        .main-right-top-four-right {
             margin-right: 40%;
         }
 
-        .main-right-top-profile-cont h3{
+        .main-right-top-profile-cont h3 {
             font-size: 16px;
         }
 
-        .line{
+        .line {
             margin-left: -10px !important;
         }
 
-        .vehicle-details-popup-form{
+        .vehicle-details-popup-form {
             width: 300px;
         }
 
-        .vehicle-details-labels span{
+        .vehicle-details-labels span {
             font-size: 12px;
         }
 
-        .vehicle-details-values span{
+        .vehicle-details-values span {
             font-size: 12px;
         }
 
-       
 
-      
+
+
     }
 
     @media screen and (max-width: 475px) {
-        .main-right-top-profile-cont h3{
+        .main-right-top-profile-cont h3 {
             display: none;
         }
 
-        .main-right-top-profile-cont p{
+        .main-right-top-profile-cont p {
             display: none;
         }
 
-        .main-right-top-profile img{
+        .main-right-top-profile img {
             margin-right: 5px;
         }
 
-        .main-right-top-three-content{
+        .main-right-top-three-content {
             margin-right: 0;
 
         }
 
-        .main-right-top-three-content p{
+        .main-right-top-three-content p {
             font-size: 12px;
         }
 
@@ -1300,6 +1300,7 @@
         .main-right-top-notification {
             margin-left: 5%;
         }
+
         .main-right-top-search {
             margin-left: 1px;
         }
@@ -1322,7 +1323,7 @@
     }
 
     @media screen and (max-width:700px) {
-    
+
         .main-right-top-search {
             width: 35%;
         }
@@ -1337,11 +1338,11 @@
             margin-left: 10px;
         }
 
-        .main-right-top-three{
+        .main-right-top-three {
             margin-bottom: 2%;
         }
 
-        .line{
+        .line {
             margin-left: -20px;
         }
     }

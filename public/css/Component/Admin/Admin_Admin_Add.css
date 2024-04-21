@@ -1,9 +1,12 @@
 .Admin_Admin_Add {
+    .main-right-top-one {
+        justify-content: end !important;
+    }
+
     .main-bottom-down {
         display: flex;
         align-items: center;
         justify-content: center;
-
     }
 
     .main-right-bottom {
@@ -12,13 +15,12 @@
         justify-content: center;
     }
 
-
     .main-bottom-down-content {
         width: 60%;
-        height: 502px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        border-radius: 5px;
-        padding: 10px 30px;
+        height: auto;
+        box-shadow: var(--box-shadow2);
+        padding: 25px;
+        border-radius: 10px;
         display: grid;
         grid-template-rows: 9% 91%;
     }
@@ -26,15 +28,17 @@
     .main-bottom-down-content-top {
         display: flex;
         align-items: center;
+
     }
 
     .main-bottom-down-content-top-content {
         display: flex;
         flex-direction: column;
+        padding-left: 20px;
     }
 
     .main-bottom-down-content-top-content h3 {
-        font-size: 25px;
+        font-size: 19px;
         font-weight: 500;
     }
 
@@ -95,12 +99,12 @@
     }
 
     .right-content .description {
-        font-size: 16px;
+        font-size: 14px;
         margin-bottom: 8px;
     }
 
     .right-content .form-upload {
-        font-size: 16px;
+        font-size: 14px;
         margin-bottom: 8px;
     }
 
@@ -121,7 +125,7 @@
     .form-fields h2 {
         font-weight: 500;
         margin-bottom: 5px;
-        font-size: 17px;
+        font-size: 14px;
         margin-bottom: 7px;
     }
 
@@ -132,7 +136,7 @@
         border-radius: 5px;
         border: 1px solid #ccc;
         padding-left: 15px;
-        font-size: 16px;
+        font-size: 14px;
         border-bottom-width: 2px;
         transition: all 0.3s ease;
         margin-bottom: 5px;
@@ -150,7 +154,7 @@
 
     .form-fields .err {
         height: 10px;
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 500;
         margin-bottom: 5px;
         color: #e74c3c;
@@ -165,20 +169,21 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: 5px;
+        margin-top: 15px;
+
     }
 
     .main-bottom-down-content-bottom-button button {
         height: 35px;
-        width: 25%;
+        width: 95%;
         outline: none;
-        color: white;
+        color: var(--background-color-main);
         font-size: 18px;
         font-weight: 500;
         border-radius: 5px;
         cursor: pointer;
         border: none;
-        letter-spacing: 1px;
+        letter-spacing: 0.03rem;
         background: var(--green-color-one);
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
@@ -282,6 +287,10 @@
         .main-bottom-down-content-bottom-content-three {
             display: flex;
             flex-direction: column;
+        }
+
+        .main-bottom-down-content {
+          margin-top: 35%;
         }
     }
 }

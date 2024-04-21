@@ -14,53 +14,18 @@
             <div class="main-right">
                 <div class="main-right-top">
                     <div class="main-right-top-search">
-                        <i class='bx bxl-sketch'></i> <input type="text" placeholder="Welcome Back !" id="searchInput"
-                            readonly oninput="highlightMatchingText()">
+                        <i class='bx bx-help-circle'></i>
+                        <input type="text" id="userGuid" placeholder="User Guide" readonly>
                     </div>
-                    <div class="main-right-top-notification" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <?php if (!empty($data['notification'])) : ?>
-                        <div class="dot"><?php echo count($data['notification'])?></div>
-                        <?php endif; ?>
-                    </div>
-                    <div id="notification_popup" class="notification_popup">
-                        <h1>Notifications</h1>
-                        <div class="notification_cont">
-                            <?php foreach($data['notification'] as $notification) : ?>
+                    <?php require APPROOT . '/views/customers/customer_notification/customer_notification.php'; ?>
 
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                <div class="notification_right">
-                                    <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
-                                    <?php echo $notification->notification ?>
-                                </div>
-                            </div>
-                            <?php endforeach; ?>
-
-                        </div>
-                        <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/customers/">
-                            <i class="fa-solid fa-check"> </i>
-                            <button type="submit">Mark all as read</button>
-                        </form>
-
-                    </div>
-                    <div class="main-right-top-profile" id="profile">
-                        <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
-                            alt="">
-                        <div class="main-right-top-profile-cont">
-                            <h3><?php echo $_SESSION['user_name']?></h3>
-                            <p>ID : C <?php echo $_SESSION['user_id']?></p>
-                        </div>
-                    </div>
                 </div>
                 <div class="main-right-bottom">
                     <div class="main-right-bottom-one">
                         <div class="main-right-bottom-one-left">
                             <div class="left">
                                 <h1>Total Balance</h1>
-                                <h3>+Eco 26.23 </h3>
+                                <?php echo $data['latest_update']?>
                                 <p>Last Update</p>
                                 <button onclick="redirect_transfercredit()">
                                     Transfer Credit
@@ -104,7 +69,10 @@
                                         <?php endif; ?>
                                     </h3>
                                     <p>
-                                        <?php echo $transaction->date ?>
+                                        <?php
+                                                $date = date('Y-m-d', strtotime($transaction->date));
+                                                echo $date 
+                                                ?>
                                     </p>
                                     <h2
                                         style="color: <?php echo ($transaction->sender_id == $_SESSION['user_id']) ? '#F13E3E' : '#1ca557'; ?>;">
@@ -193,7 +161,9 @@
 
                         <div class="main-right-bottom-three-right">
                             <canvas id="myChart" width="600" height="250"></canvas>
+                            <div id="chartMessage" class="message">No data available.</div>
                         </div>
+
 
                     </div>
                 </div>
@@ -206,7 +176,7 @@
             <div class="Centers_pop" id="centers">
                 <div class="centers_top">
                     <h2>Regional Centers</h2>
-                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="centers_close" id="centers_close">
+                    <i class="fa-regular fa-circle-xmark" id="centers_close"></i>
                 </div>
 
                 <div id="map" class="centers">
@@ -214,6 +184,50 @@
                 </div>
             </div>
         </div>
+        <?php if ($data['tutorial'] == 'True'): ?>
+        <div class="tutorial">
+            <div class="cont">
+                <div class="tutorial-step" id="step1">
+                    <h2>Welcome to Eco Plus <?php
+                          $user_name = $_SESSION['user_name'];
+                          $name_parts = explode(' ', $user_name);
+                          $first_name = $name_parts[0];
+                          echo $first_name;
+                          ?> !</h2>
+                    <p>Request a garbage collect by clicking the <b>Request Now </b> button</p>
+                    <img src="<?php echo IMGROOT?>/two.png" alt="">
+                </div>
+                <div class="tutorial-step" id="step2">
+                    <h2>View Wallet Amount !</h2>
+                    <p>Wallet Amount Shows Current <b>Eco Credit</b> Balance </p>
+                    <img src="<?php echo IMGROOT?>/two.png" alt="">
+                </div>
+                <div class="tutorial-step" id="step3">
+                    <h2>Overall Collection Total </h2>
+                    <p>Overall Collection Total shows Overall garbage you handoverd in the collections</p>
+                    <img src="<?php echo IMGROOT?>/two.png" alt="">
+                </div>
+                <div class="tutorial-step" id="step4">
+                    <h2>Transfer your Eco Credits!</h2>
+                    <p>You can view all the Transaction from history</p>
+                    <img src="<?php echo IMGROOT?>/two.png" alt="">
+                </div>
+                <div class="tutorial-step" id="step5">
+                    <h2>You Have Caught all !</h2>
+                    <p>Dive into our service now !</p>
+                    <a href="<?php echo URLROOT?>/customers"><button>Dashboard</button></a>
+                </div>
+                <div class="step-indicators">
+                    <span class="step-dot active" onclick="goToStep(1)"></span>
+                    <span class="step-dot" onclick="goToStep(2)"></span>
+                    <span class="step-dot" onclick="goToStep(3)"></span>
+                    <span class="step-dot" onclick="goToStep(4)"></span>
+                    <span class="step-dot" onclick="goToStep(5)"></span>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
 
     </div>
 
@@ -225,10 +239,6 @@ var color = "#47b076";
 var textColor = "#414143"
 var checkbox = document.getElementById('toggle-checkbox');
 
-
-var notification = document.getElementById("notification");
-var notification_pop = document.getElementById("notification_popup");
-notification_pop.style.height = "0px";
 let circularProgress = document.querySelector(".circular-progress");
 let progressValue = document.querySelector(".progress-value");
 let progressStartValue = -1;
@@ -237,6 +247,8 @@ let speed = 30;
 
 function getDarkModeSetting() {
     const storedValue = localStorage.getItem("darkMode");
+    console.log("as");
+
     return storedValue ? JSON.parse(storedValue) : true;
 }
 
@@ -279,32 +291,14 @@ function redirect_garbageTypes() {
     window.location.href = linkUrl;
 }
 
-notification.addEventListener("click", function() {
-    var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
-
-    if (!isNotificationEmpty) {
-        var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
-        if (notification_pop.style.height === "0px") {
-            if (notificationArraySize >= 3) {
-                notification_pop.style.height = "210px";
-            }
-            if (notificationArraySize == 2) {
-                notification_pop.style.height = "150px";
-            }
-            if (notificationArraySize == 1) {
-                notification_pop.style.height = "105px";
-            }
-            notification_pop.style.visibility = "visible";
-            notification_pop.style.opacity = "1";
-            notification_pop.style.padding = "7px";
-        } else {
-            notification_pop.style.height = "0px";
-            notification_pop.style.visibility = "hidden";
-            notification_pop.style.opacity = "0";
-        }
-    }
-});
-
+/* Notification View */
+document.getElementById('submit-notification').onclick = function() {
+    var form = document.getElementById('mark_as_read');
+    var dynamicUrl = "<?php echo URLROOT;?>/customers/view_notification/index";
+    form.action = dynamicUrl; // Set the action URL
+    form.submit(); // Submit the form
+};
+/* ----------------- */
 
 document.getElementById("centers_close").addEventListener("click", function() {
     document.getElementById("centers").classList.remove('active');
@@ -515,81 +509,94 @@ document.addEventListener('DOMContentLoaded', function() {
 function createOrUpdateChart(color, textColor) {
     var Total_Garbage = <?php echo $data['total_garbage']?>;
     const ctx = document.getElementById('myChart').getContext('2d');
-    if (myChart) {
-        myChart.destroy();
-    }
-    myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Plastic', 'Polythene', 'Metal', 'Glass', 'Paper', 'Electronic'],
-            datasets: [{
-                label: 'Kilograms',
-                data: [Total_Garbage.total_Plastic,
-                    Total_Garbage.total_Polythene,
-                    Total_Garbage.total_Metals,
-                    Total_Garbage.total_Glass,
-                    Total_Garbage.total_Paper_Waste,
-                    Total_Garbage.total_Electronic_Waste
-                ],
-                backgroundColor: color,
-            }]
-        },
-        options: {
-            scales: {
-                x: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        font: {
-                            size: 14,
-                        }
-                    },
-                    barPercentage: 0.5, // Adjust to decrease the width of the bars
-                    categoryPercentage: 0.3 // Adjust to control the space between bars
-                },
-                y: {
-                    beginAtZero: true,
-                    suggestedMax: Math.max.apply(null, [Total_Garbage.total_Plastic,
-                        Total_Garbage.total_Polythene,
-                        Total_Garbage.total_Metals,
-                        Total_Garbage.total_Glass,
-                        Total_Garbage.total_Paper_Waste,
-                        Total_Garbage.total_Electronic_Waste
-                    ]) + 1, // Add some padding to the maximum value
-                    grid: {
-                        display: false
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: 'Overall Collection Total',
-                    color: textColor,
-                    font: {
-                        size: 18
-                    },
-                    padding: {
-                        bottom: 25
-                    }
-                }
-            },
-            elements: {
-                bar: {
-                    borderRadius: 10,
-                }
-            },
-            animation: {
-                duration: 700, // Set the duration of the animation in milliseconds
-                easing: 'easeIn' // Set the easing function for the animation
-            }
+    console.log(Total_Garbage.total_plastic);
+    if (Total_Garbage.total_plastic == null &&
+        Total_Garbage.total_polythene == null &&
+        Total_Garbage.total_metals == null &&
+        Total_Garbage.total_glass == null &&
+        Total_Garbage.total_paper_waste == null &&
+        Total_Garbage.total_electronic_waste == null) {
+        document.getElementById('myChart').style.display = "none";
+        document.getElementById('chartMessage').style.display = "flex";
+
+    } else {
+        if (myChart) {
+            myChart.destroy();
         }
-    });
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Plastic', 'Polythene', 'Metal', 'Glass', 'Paper', 'Electronic'],
+                datasets: [{
+                    label: 'Kilograms',
+                    data: [Total_Garbage.total_plastic,
+                        Total_Garbage.total_polythene,
+                        Total_Garbage.total_metals,
+                        Total_Garbage.total_glass,
+                        Total_Garbage.total_paper_waste,
+                        Total_Garbage.total_electronic_waste
+                    ],
+                    backgroundColor: color,
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 14,
+                            }
+                        },
+                        barPercentage: 0.5, // Adjust to decrease the width of the bars
+                        categoryPercentage: 0.3 // Adjust to control the space between bars
+                    },
+                    y: {
+                        beginAtZero: true,
+                        suggestedMax: Math.max.apply(null, [Total_Garbage.total_plastic,
+                            Total_Garbage.total_polythene,
+                            Total_Garbage.total_metals,
+                            Total_Garbage.total_glass,
+                            Total_Garbage.total_paper_waste,
+                            Total_Garbage.total_electronic_waste
+                        ]) + 1, // Add some padding to the maximum value
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Overall Collection Total',
+                        color: textColor,
+                        font: {
+                            size: 18
+                        },
+                        padding: {
+                            bottom: 25
+                        }
+                    }
+                },
+                elements: {
+                    bar: {
+                        borderRadius: 10,
+                    }
+                },
+                animation: {
+                    duration: 700, // Set the duration of the animation in milliseconds
+                    easing: 'easeIn' // Set the easing function for the animation
+                }
+            }
+        });
+    }
 }
+createOrUpdateChart(color, textColor);
 
 checkbox.addEventListener("change", function() {
 
@@ -610,17 +617,75 @@ checkbox.addEventListener("change", function() {
     createOrUpdateChart(color, textColor);
 });
 
-createOrUpdateChart(color, textColor);
 
 /**/
 /*animation*/
 window.addEventListener('DOMContentLoaded', (event) => {
     const contentContainers = document.querySelectorAll('.main-right-bottom-two-cont');
-
     contentContainers.forEach(container => {
         container.classList.add('slide-in');
     });
 });
+
+/* Tutotorial */
+let currentStep = 1;
+
+function nextStep() {
+    const currentStepElement = document.getElementById('step' + currentStep);
+    currentStepElement.style.display = 'none';
+    deactivateStepIndicator(currentStep);
+    currentStep++;
+    const nextStepElement = document.getElementById('step' + currentStep);
+    if (nextStepElement) {
+        nextStepElement.style.display = 'flex';
+        activateStepIndicator(currentStep);
+    } else {
+        currentStep--;
+    }
+}
+
+function prevStep() {
+    const currentStepElement = document.getElementById('step' + currentStep);
+    currentStepElement.style.display = 'none';
+    deactivateStepIndicator(currentStep);
+    currentStep--;
+    const prevStepElement = document.getElementById('step' + currentStep);
+    if (prevStepElement) {
+        prevStepElement.style.display = 'flex';
+        activateStepIndicator(currentStep);
+    } else {
+        currentStep++;
+    }
+}
+
+function activateStepIndicator(step) {
+    const stepDot = document.querySelectorAll('.step-dot')[step - 1];
+    stepDot.classList.add('active');
+}
+
+function deactivateStepIndicator(step) {
+    const stepDot = document.querySelectorAll('.step-dot')[step - 1];
+    stepDot.classList.remove('active');
+}
+
+function goToStep(step) {
+    const currentStepElement = document.getElementById('step' + currentStep);
+    currentStepElement.style.display = 'none';
+    deactivateStepIndicator(currentStep);
+    currentStep = step;
+    const nextStepElement = document.getElementById('step' + currentStep);
+    if (nextStepElement) {
+        nextStepElement.style.display = 'flex';
+        activateStepIndicator(currentStep);
+    }
+}
+
+
+document.getElementById("userGuid").addEventListener("click", function() {
+    console.log('hello');
+    window.location.href = '<?php echo URLROOT?>/customers/True';
+});
+/* ---------------- */
 </script>
 <script src="<?php echo JSROOT?>/Customer.js"> </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

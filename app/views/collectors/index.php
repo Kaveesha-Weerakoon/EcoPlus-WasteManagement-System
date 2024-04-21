@@ -1,8 +1,9 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
 <div class="Collector_Main">
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&callback=initMap" async defer>
     </script>
+
     <div class="Collector_Dashboard">
 
         <div class="main">
@@ -14,44 +15,7 @@
                         <i class='bx bxl-sketch'></i> <input type="text" placeholder="Welcome Back !" id="searchInput"
                             readonly oninput="highlightMatchingText()">
                     </div>
-
-                    <div class="main-right-top-notification" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <?php if (!empty($data['notification'])) : ?>
-                        <div class="dot"><?php echo count($data['notification'])?></div>
-                        <?php endif; ?>
-                    </div>
-                    <div id="notification_popup" class="notification_popup">
-                        <h1>Notifications</h1>
-                        <div class="notification_cont">
-                            <?php foreach($data['notification'] as $notification) : ?>
-
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                <div class="notification_right">
-                                    <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
-                                    <?php echo $notification->notification ?>
-                                </div>
-                            </div>
-                            <?php endforeach; ?>
-
-                        </div>
-                        <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/collectors/">
-                            <i class="fa-solid fa-check"> </i>
-                            <button type="submit">Mark all as read</button>
-                        </form>
-
-                    </div>
-                    <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
-                            alt="">
-                        <div class="main-right-top-profile-cont">
-                            <h3><?php echo $_SESSION['collector_name']?></h3>
-                            <p>ID : C <?php echo $_SESSION['collector_id']?></p>
-                        </div>
-                    </div>
+                    <?php require APPROOT . '/views/collectors/collector_notification/collector_notification.php'; ?>
                 </div>
                 <div class="main-right-bottom">
                     <div class="main-right-bottom-one">
@@ -107,8 +71,8 @@
                                 <h2 id="request_count"><?php echo $data['completed_request_count']?></h2>
                             </div>
                         </div>
-                        <div class="main-right-bottom-two-cont A" id="credit_per_waste_quantity">
-                            <div class="icon_container">
+                        <div class="main-right-bottom-two-cont A" onclick="redirect_garbagetypes()">
+                            <div class=" icon_container">
                                 <i class='bx bx-dollar-circle'></i>
                             </div>
                             <div class="content_container">
@@ -186,78 +150,21 @@
                 </div>
 
             </div>
-
-            <div class="eco_credit_per_quantity" id="eco_credit_per_quantiy_pop">
-                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" id="close_eco_credit_per_quantiy_pop">
-                <h1>Eco Credits per Waste Qunatity</h1>
-                <div class="Eco_Credit_Per_Cont">
-                    <div class="Cont">
-                        <h3>Plastic</h3>
-                        <i class="icon fas fa-box"></i>
-                        <p><?php echo $data['eco_credit_per']->plastic?></p>
-                    </div>
-                    <div class="Cont">
-                        <h3>Polythene</h3>
-                        <i class="icon fas fa-trash"></i>
-                        <p><?php echo $data['eco_credit_per']->polythene?></p>
-                    </div>
-                    <div class="Cont">
-                        <h3>Metal</h3>
-                        <i class="icon fas fa-box"></i>
-                        <p><?php echo $data['eco_credit_per']->metal?></p>
-                    </div>
-                    <div class="Cont">
-                        <h3> Glass</h3>
-                        <i class="icon fas fa-glass-whiskey"></i>
-                        <p><?php echo $data['eco_credit_per']->glass?></p>
-                    </div>
-
-                    <div class="Cont">
-                        <h3>Paper</h3>
-                        <i class="icon fas fa-file-alt"></i>
-                        <p><?php echo $data['eco_credit_per']->paper?></p>
-                    </div>
-                    <div class="Cont">
-                        <h3>Electronic</h3>
-                        <i class="icon fas fa-laptop"></i>
-                        <p><?php echo $data['eco_credit_per']->electronic?></p>
-                    </div>
-                </div>
-                <h2>Per Kg</h2>
-
-            </div>
-
             <div class="overlay" id="overlay"></div>
-
         </div>
 
         <script>
-        var notification = document.getElementById("notification");
-        var notification_pop = document.getElementById("notification_popup");
-        notification_pop.style.height = "0px";
-
         var color = "#47b076";
         var textColor = "#414143"
+        var checkbox = document.getElementById('toggle-checkbox');
+
         let circularProgress = document.querySelector(".circular-progress");
         let progressValue = document.querySelector(".progress-value");
         let progressStartValue = 0;
         let progressEndValue = <?php echo intval($data['percentage']); ?>;
         let speed = 30;
 
-        var credit_per_waste_quantity = document.getElementById("credit_per_waste_quantity");
-
-        document.getElementById("credit_per_waste_quantity").addEventListener("click", function() {
-            document.getElementById("eco_credit_per_quantiy_pop").classList.add('active');
-            document.getElementById('overlay').style.display = "flex";
-        });
-
-        document.getElementById("close_eco_credit_per_quantiy_pop").addEventListener("click", function() {
-            document.getElementById("eco_credit_per_quantiy_pop").classList.remove('active');
-            document.getElementById('overlay').style.display = "none";
-        });
-
         function redirectToAssignedRequests() {
-            console.log('as');
             var linkUrl = "<?php echo URLROOT?>/collectors/request_assinged"; // Replace with your desired URL
             window.location.href = linkUrl;
         }
@@ -274,6 +181,11 @@
 
         function redirect_history() {
             var linkUrl = "<?php echo URLROOT?>/collectors/collector_assistants"; // Replace with your desired URL
+            window.location.href = linkUrl;
+        }
+
+        function redirect_garbagetypes() {
+            var linkUrl = "<?php echo URLROOT?>/collectors/garbage_types"; // Replace with your desired URL
             window.location.href = linkUrl;
         }
 
@@ -294,31 +206,6 @@
                 updateCount(i);
             }, i * 50); // Change 1000 to control the speed of counting (milliseconds)
         }
-        notification.addEventListener("click", function() {
-            var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
-
-            if (!isNotificationEmpty) {
-                var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
-                if (notification_pop.style.height === "0px") {
-                    if (notificationArraySize >= 3) {
-                        notification_pop.style.height = "205px";
-                    }
-                    if (notificationArraySize == 2) {
-                        notification_pop.style.height = "150px";
-                    }
-                    if (notificationArraySize == 1) {
-                        notification_pop.style.height = "105px";
-                    }
-                    notification_pop.style.visibility = "visible";
-                    notification_pop.style.opacity = "1";
-                    notification_pop.style.padding = "7px";
-                } else {
-                    notification_pop.style.height = "0px";
-                    notification_pop.style.visibility = "hidden";
-                    notification_pop.style.opacity = "0";
-                }
-            }
-        });
 
         function createOrUpdateChart(color, textColor) {
             var Total_Garbage = <?php echo $data['total_garbage']?>;
@@ -398,10 +285,8 @@
                 }
             });
         }
+
         createOrUpdateChart(color, textColor);
-        console.log('as');
-
-
 
         function initMap() {
             var defaultLatLng = {
@@ -410,7 +295,7 @@
             };
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: defaultLatLng,
-                zoom: 11,
+                zoom: 9,
 
 
                 styles: [{
@@ -512,6 +397,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             const ctx = document.getElementById('myChart').getContext('2d');
             const myChart = new Chart(ctx, config);
+            var config = null;
+
 
             const chartContainer = document.getElementById('chart');
             actions.forEach(action => {
@@ -524,6 +411,8 @@
 
         function getDarkModeSetting() {
             const storedValue = localStorage.getItem("darkMode");
+            console.log("as");
+
             return storedValue ? JSON.parse(storedValue) : true;
         }
 
@@ -535,7 +424,6 @@
             circularProgress.style.background =
                 `conic-gradient(${color}, ${progressStartValue * 3.6}deg, ${isDarkMode ? "#001f3f" : "#ededed"} 0deg)`;
         }
-
         checkbox.addEventListener("change", function() {
 
             if (getDarkModeSetting()) {
@@ -554,7 +442,6 @@
             }
             createOrUpdateChart(color, textColor);
         });
-
         createOrUpdateChart(color, textColor);
         </script>
 

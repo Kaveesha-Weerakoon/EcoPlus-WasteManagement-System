@@ -1,50 +1,50 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="Admin_Main">
-    <div class="Admin_Reports">
-        <div class="main">
-            <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
+    <div class="Admin_ReportMain">
+        <div class="Admin_Reports">
+            <div class="main">
+                <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
 
-            <div class="main-right">
-                <div class="main-right-top">
-                    <div class="main-right-top-search">
-                        <i class='bx bx-search-alt-2'></i>
-                        <input type="text" placeholder="Search">
-                    </div>
-                    <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <div class="dot"></div>
-                    </div>
+                <div class="main-right">
+                    <div class="main-right-top">
+                        <div class="main-right-top-left">
+                            <button id="requestbtn">Requests & Sales</button>
+                            <button id="Users">Users</button>
 
-                    <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                        <div class="main-right-top-profile-cont">
-                            <h3>Admin</h3>
                         </div>
+                        <?php require APPROOT . '/views/admin/admin_profile/adminprofile.php'; ?>
+
                     </div>
-                </div>
 
 
-                <div class="main-right-bottom">
+                    <div class="main-right-bottom">
 
-                    <form class="top-bar" method="post" action="<?php echo URLROOT;?>/admin/reports">
-                        <div class="top-bar-left">
-                            <h2>Analatics</h2>
-                            <p>Here is overall Analatics</p>
-                        </div>
-                        <div class="date-box">
-                            <div class="date-box-cont">
-                                <input value="<?php echo $data['from']?>" name="fromDate" type="Date">
-                                <p>From</p>
+                        <form class="top-bar" method="post" action="<?php echo URLROOT;?>/admin/reports">
+                            <div class="top-bar-left">
+                                <h2>Analatics</h2>
+                                <p>Requests & Sales </p>
                             </div>
-                            <div class="date-box-cont">
-                                <input value="<?php echo $data['to']?>" name="toDate" type="Date">
-                                <p>To</p>
-                            </div>
-                        </div>
+                            <div class="top-bar-details">
+                                <div class="cont" onclick="scrollToElement('Requests')">Requests</div>
+                                <div class="cont" onclick="scrollToElement('Collected')">Collected</div>
+                                <div class="cont" onclick="scrollToElement('Handoverd')">Handovered</div>
+                                <div class="cont" onclick="scrollToElement('Selled')">Selled</div>
 
-                        <div class="center-box">
-                            <select id="center-dropdown" name="center-dropdown">
-                                <?php
+                            </div>
+                            <div class="date-box">
+                                <div class="date-box-cont">
+                                    <input value="<?php echo $data['from']?>" name="fromDate" type="Date">
+                                    <p>From</p>
+                                </div>
+                                <div class="date-box-cont">
+                                    <input value="<?php echo $data['to']?>" name="toDate" type="Date">
+                                    <p>To</p>
+                                </div>
+                            </div>
+
+                            <div class="center-box">
+                                <select id="center-dropdown" name="center-dropdown">
+                                    <?php
                                      $centers = $data['centers'];
                                      $selectedRegion = $data['center'];
                                      $regionFound = false;
@@ -63,239 +63,245 @@
           
                                     } 
                                     ?>
-                            </select>
-                            <p id="selected-option">Center</p>
-                        </div>
-
-                        <button>Filter</button>
-                    </form>
-
-
-
-                    <div class="request-section">
-                        <div class="left">
-                            <div class="left-cont">
-                                <i class="fa-solid fa-chart-simple"></i>
-                                <p>Total Requests</p>
-                                <h1><?php echo $data['totalRequests']?></h1>
-                                <div class="cont" style="color:#1ca557">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <p style="font-weight:bold">1212 From prev month</p>
-                                </div>
+                                </select>
+                                <p id="selected-option">Center</p>
                             </div>
-                            <div class="left-cont">
-                                <i class="fa-regular fa-square-check"></i>
-                                <p>Completed Requests</p>
-                                <h1><?php echo $data['completedRequests']?></h1>
-                                <div class="cont" style="color:#1ca557">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <p style="font-weight:bold">1212 From prev month</p>
+
+                            <button>Filter</button>
+                        </form>
+
+                        <div class="slide">
+                            <div class="request-section" id="Requests">
+                                <div class="left">
+                                    <div class="left-cont">
+                                        <i class="fa-solid fa-chart-simple"></i>
+                                        <p>Total Requests</p>
+                                        <h1><?php echo $data['totalRequests']?></h1>
+
+
+                                    </div>
+                                    <div class="left-cont">
+                                        <i class="fa-regular fa-square-check"></i>
+                                        <p>Completed Requests</p>
+                                        <h1><?php echo $data['completedRequests']?></h1>
+
+                                    </div>
+                                    <div class="left-cont">
+                                        <i class="fa-regular fa-rectangle-xmark"></i>
+                                        <p>Cancelled Requests</p>
+                                        <h1><?php echo $data['cancelledRequests']?></h1>
+
+                                    </div>
+                                    <div class="left-cont">
+                                        <i class="fa-solid fa-spinner"></i>
+                                        <p>On going</p>
+                                        <h1><?php echo $data['ongoingRequests']?></h1>
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="left-cont">
-                                <i class="fa-regular fa-rectangle-xmark"></i>
-                                <p>Cancelled Requests</p>
-                                <h1><?php echo $data['cancelledRequests']?></h1>
-                                <div class="cont" style="color:#1ca557">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <p style="font-weight:bold">1212 From prev month</p>
-                                </div>
-                            </div>
-                            <div class="left-cont">
-                                <i class="fa-solid fa-spinner"></i>
-                                <p>On going</p>
-                                <h1><?php echo $data['ongoingRequests']?></h1>
-                                <div class="cont" style="color:#1ca557">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <p style="font-weight:bold">1212 From prev month</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <div class="right-cont">
-                                <div class="top">
-                                    <h3>Credits Given</h3>
-                                    <h1><?php
+                                <div class="right">
+                                    <div class="right-cont">
+                                        <div class="top">
+                                            <h3>Credits Given</h3>
+                                            <h1><?php
                                         $credits = isset($data['credits']) ? $data['credits'] : '00.00';
                                     ?>
-                                        <h1>Eco <?php echo $credits; ?></h1>
-                                    </h1>
+                                                <h1>Eco <?php echo $credits; ?></h1>
+                                            </h1>
+                                        </div>
+                                        <div class="bottom">
+                                            <canvas id="myChart" width="688" height="550"></canvas>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="bottom">
-                                    <canvas id="myChart" width="688" height="550"></canvas>
+                            </div>
+
+                            <div class="waste-section" id="Collected">
+                                <div class="waste-section-cont">
+                                    <h2>Total Waste Collected</h2>
+                                    <p>Here's an overview of total waste collected from customers</p>
+                                </div>
+                                <div class="waste-section-bottom">
+                                    <div class="left">
+                                        <table>
+                                            <tr>
+                                                <th>Type</th>
+                                                <th>Weight(Kg)</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Plastic</td>
+                                                <td><?php echo $data['collectedWasteByMonth']->plastic ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Polythene</td>
+                                                <td><?php echo $data['collectedWasteByMonth']->polythene?></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Paper</td>
+                                                <td><?php echo $data['collectedWasteByMonth']->paperwaste?></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Electronic</td>
+                                                <td><?php echo $data['collectedWasteByMonth']->electronicwaste?></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Metals</td>
+                                                <td><?php echo $data['collectedWasteByMonth']->metals?></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Glass</td>
+                                                <td><?php echo $data['collectedWasteByMonth']->glass?></td>
+
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="right">
+                                        <canvas id="myPieChart" width="100" height="100"></canvas>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="waste-section" id="Handoverd">
+                                <div class="waste-section-cont">
+                                    <h2>Total Waste Handovered</h2>
+                                    <p>Here's an overview of total waste received at the centers</p>
+                                </div>
+                                <div class="waste-section-bottom">
+                                    <div class="left">
+                                        <table>
+                                            <tr>
+                                                <th>Type</th>
+                                                <th>Weight(Kg)</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Plastic</td>
+                                                <td><?php echo $data['handoveredWasteByMonth']->plastic ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Polythene</td>
+                                                <td><?php echo $data['handoveredWasteByMonth']->polythene?></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Paper</td>
+                                                <td><?php echo $data['handoveredWasteByMonth']->paperwaste?></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Electronic</td>
+                                                <td><?php echo $data['handoveredWasteByMonth']->electronicwaste?></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Metals</td>
+                                                <td><?php echo $data['handoveredWasteByMonth']->metals?></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Glass</td>
+                                                <td><?php echo $data['handoveredWasteByMonth']->glass?></td>
+
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="right">
+                                        <canvas id="myPieChart2" width="100" height="100"></canvas>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="waste-section" id="Selled">
+                                <div class="waste-section-cont-2">
+                                    <div class="waste-section-cont-left">
+                                        <h2>Total Waste Selled</h2>
+                                        <p>Here is overall Analatics about total waste selled by Center</p>
+                                    </div>
+                                    <div class="waste-section-cont-right">
+                                        <h2>Rs <?php echo $data['selledWasteByMonth']->income ?></h2>
+                                        <p>Total Earnings</p>
+                                    </div>
+                                </div>
+                                <div class="waste-section-bottom">
+                                    <div class="left">
+                                        <table>
+                                            <tr>
+                                                <th>Type</th>
+                                                <th>Weight(Kg)</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Plastic</td>
+                                                <td><?php echo $data['selledWasteByMonth']->plastic ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Polythene</td>
+                                                <td><?php echo $data['selledWasteByMonth']->polythene?></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Paper</td>
+                                                <td><?php echo $data['selledWasteByMonth']->paperwaste?></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Electronic</td>
+                                                <td><?php echo $data['selledWasteByMonth']->electronicwaste?></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Metals</td>
+                                                <td><?php echo $data['selledWasteByMonth']->metals?></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Glass</td>
+                                                <td><?php echo $data['selledWasteByMonth']->glass?></td>
+
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="right">
+                                        <canvas id="myPieChart3" width="100" height="100"></canvas>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
                     </div>
-
-                    <div class="waste-section">
-                        <div class="waste-section-cont">
-                            <h2>Total Waste Collected</h2>
-                            <p>Here's an overview of total waste collected from customers</p>
-                        </div>
-                        <div class="waste-section-bottom">
-                            <div class="left">
-                                <table>
-                                    <tr>
-                                        <th>Type</th>
-                                        <th>Weight(Kg)</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Plastic</td>
-                                        <td><?php echo $data['collectedWasteByMonth']->plastic ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Polythene</td>
-                                        <td><?php echo $data['collectedWasteByMonth']->polythene?></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Paper</td>
-                                        <td><?php echo $data['collectedWasteByMonth']->paperwaste?></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Electronic</td>
-                                        <td><?php echo $data['collectedWasteByMonth']->electronicwaste?></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Metals</td>
-                                        <td><?php echo $data['collectedWasteByMonth']->metals?></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Glass</td>
-                                        <td><?php echo $data['collectedWasteByMonth']->glass?></td>
-
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="right">
-                                <canvas id="myPieChart" width="100" height="100"></canvas>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="waste-section">
-                        <div class="waste-section-cont">
-                            <h2>Total Waste Handovered</h2>
-                            <p>Here's an overview of total waste received at the centers</p>
-                        </div>
-                        <div class="waste-section-bottom">
-                            <div class="left">
-                                <table>
-                                    <tr>
-                                        <th>Type</th>
-                                        <th>Weight(Kg)</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Plastic</td>
-                                        <td><?php echo $data['handoveredWasteByMonth']->plastic ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Polythene</td>
-                                        <td><?php echo $data['handoveredWasteByMonth']->polythene?></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Paper</td>
-                                        <td><?php echo $data['handoveredWasteByMonth']->paperwaste?></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Electronic</td>
-                                        <td><?php echo $data['handoveredWasteByMonth']->electronicwaste?></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Metals</td>
-                                        <td><?php echo $data['handoveredWasteByMonth']->metals?></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Glass</td>
-                                        <td><?php echo $data['handoveredWasteByMonth']->glass?></td>
-
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="right">
-                                <canvas id="myPieChart2" width="100" height="100"></canvas>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="waste-section">
-                        <div class="waste-section-cont-2">
-                            <div class="waste-section-cont-left">
-                                <h2>Total Waste Selled</h2>
-                                <p>Here is overall Analatics about total waste selled by Center</p>
-                            </div>
-                            <div class="waste-section-cont-right">
-                                <h2>Rs <?php echo $data['selledWasteByMonth']->income ?></h2>
-                                <p>Total Earnings</p>
-                            </div>
-                        </div>
-                        <div class="waste-section-bottom">
-                            <div class="left">
-                                <table>
-                                    <tr>
-                                        <th>Type</th>
-                                        <th>Weight(Kg)</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Plastic</td>
-                                        <td><?php echo $data['selledWasteByMonth']->plastic ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Polythene</td>
-                                        <td><?php echo $data['selledWasteByMonth']->polythene?></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Paper</td>
-                                        <td><?php echo $data['selledWasteByMonth']->paperwaste?></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Electronic</td>
-                                        <td><?php echo $data['selledWasteByMonth']->electronicwaste?></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Metals</td>
-                                        <td><?php echo $data['selledWasteByMonth']->metals?></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>Glass</td>
-                                        <td><?php echo $data['selledWasteByMonth']->glass?></td>
-
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="right">
-                                <canvas id="myPieChart3" width="100" height="100"></canvas>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
 
 
-
-
 <script>
+document.getElementById("Users").addEventListener("click", function() {
+    window.location.href =
+        "<?php echo URLROOT?> /admin/reportusers"; // Replace "your_page_url_here" with the URL of the page you want to navigate to
+});
+
+function scrollToElement(elementId) {
+    var element = document.getElementById(elementId);
+    if (element) {
+        element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest"
+        });
+    }
+}
 /* TOP LINE CHART */
 const currentDate = new Date();
 const currentMonth = currentDate.getMonth() + 1;
@@ -304,7 +310,8 @@ const currentYear = currentDate.getFullYear();
 const completedRequests = <?php echo json_encode($data['creditsByMonth1']); ?>;
 
 function getMonthName(monthIndex) {
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+        'September',
         'October', 'November', 'December'
     ];
 
@@ -313,7 +320,8 @@ function getMonthName(monthIndex) {
 const labels = [];
 for (let i = 0; i < 5; i++) {
     const month = (currentMonth - i + 11) % 12; // No need to subtract 1
-    const year = currentYear - (i === 0 && currentMonth === 1 ? 1 : 0); // Adjust the condition to check for January
+    const year = currentYear - (i === 0 && currentMonth === 1 ? 1 :
+        0); // Adjust the condition to check for January
     labels.unshift(getMonthName(month + 1) + ' ' + year);
 }
 
@@ -362,8 +370,6 @@ function printLastSixMonths(arr, startIndex) {
 
     return result.reverse();
 }
-
-
 
 const completedData = printLastSixMonths(countRequests(completedRequestCounts), currentDate.getMonth() + 1);
 const data = {
@@ -416,7 +422,6 @@ const data1 = {
         borderWidth: 2, // Set the border width to reduce the width of the colored segments
     }]
 };
-
 
 
 const config1 = {

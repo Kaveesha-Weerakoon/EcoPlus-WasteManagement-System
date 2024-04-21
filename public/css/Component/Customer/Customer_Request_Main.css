@@ -15,6 +15,7 @@
         grid-template-rows: 23% 79%;
         overflow: hidden;
         background-color: var(--background-color-right);
+
     }
 
     .main-right-top {
@@ -169,7 +170,7 @@
         height: 40px;
         width: 175px;
         outline: none;
-        color: white;
+        color: var(--background-color-main);
         font-size: 19px;
         font-weight: 500;
         border-radius: 5px;
@@ -196,6 +197,9 @@
         justify-content: center;
         flex-direction: column;
         overflow: hidden;
+        box-shadow: var(--box-shadow2);
+        border-radius: 10px;
+
         transition: transform 0.4s ease-in, background-color 0.4s ease-in;
     }
 
@@ -206,7 +210,7 @@
     .location_pop_content {
         width: 700px;
         padding: 10px;
-        background-color: #f1f2f6;
+        background-color: var(--background-color-main);
         border-radius: 10px;
         padding: 20px;
         padding-bottom: 40px;
@@ -228,8 +232,8 @@
     }
 
     .location_close button {
-        background-color: #ff4757;
-        color: #fff;
+        background-color: var(--red-color);
+        color: var(--background-color-main);
         cursor: pointer;
         border: none;
         font-size: 16px;
@@ -431,17 +435,22 @@
         }
     }
 
-    @media screen and (max-width: 1108px) {
-        .notification_popup h1 {
-            font-size: 19px;
-            letter-spacing: 0.001rem;
-            margin-top: 5px;
-            margin-left: 8px;
+
+    @media screen and (max-width:950px) {
+        .main-right-bottom {
+            width: 140%;
+            overflow-x: scroll;
         }
 
-        .notification_popup {
-            width: 25%;
+        .main-right-bottom-top {
+            width: 140%;
         }
+
+        .main-right-bottom-down {
+            width: 140%;
+        }
+
+
     }
 
     @media screen and (max-width:862px) {
@@ -463,60 +472,144 @@
             width: 550px;
         }
 
-
-    }
-
-    @media screen and (max-width:950px) {
-        .main-right-top-notification {
-            margin-left: 5%;
-        }
-
         .notification_popup {
             top: 11%;
-            width: 31%;
-            right: -22%;
+            right: 10%;
+            width: 35%;
         }
+    }
 
-        .notification_popup h1 {
-            font-size: 19px;
-            letter-spacing: 0.001rem;
-            margin-top: 5px;
-            margin-left: 8px;
+    @media screen and (max-width: 844px) {
+        .main-right-top-notification {
+            margin-left: 5%;
         }
 
         .main-right-top-search {
             margin-left: 1px;
         }
 
-        .notification {
-            height: 41px !important;
-            margin-top: 6px;
-            font-size: 13px;
+        .main-right-bottom-container {
+            width: 140%;
+            overflow-x: scroll;
         }
 
-        .notification_popup h1 {
-            font-size: 17px;
+        .main-right-bottom-container-top {
+            width: 140%;
+            overflow-x: scroll;
         }
 
-        .main-right-top-search {
-            margin-left: 40px;
+        .main-right-bottom-container-container {
+            width: 140%;
+            overflow-x: scroll;
         }
 
-        .main-right {
-            width: 170% !important;
+
+
+
+        .main-right-bottom-two-content h1 {
+            font-size: 15px;
+            text-align: center;
         }
+
+        .main-right-bottom-two-content p {
+            font-size: 15px;
+        }
+
+        .main-right-bottom-two-content button {
+            height: 30px;
+            width: 145px;
+            font-size: 15px;
+        }
+
 
     }
 
-    @media screen and (max-width:600px) {
-        .notification_popup {
-            top: 11%;
-            width: 36%;
-            right: -17%;
+    @media screen and (max-width:700px) {
+
+        .main-right-top-search {
+            width: 35%;
+        }
+
+        .main-right-top-search i {
+            left: 10px;
+            margin-left: 10px;
+        }
+
+        .main-right-top-search input {
+            height: 28px;
+            margin-left: 10px;
+        }
+
+        .personal-details-topic {
+            font-size: 15px;
         }
 
         .personal-details-popup-form {
-            width: 550px;
+            width: 418px;
+        }
+
+        .personal-details-right-labels span {
+            font-size: 12px;
+        }
+
+        .personal-details-right-values span {
+            font-size: 12px;
+        }
+
+        .personal-details-left img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .personal-details-left p {
+            font-size: 12px;
+        }
+
+        .personal-details-topic {
+            font-size: 15px;
         }
     }
+
+    @media screen and (max-width:540px) {
+        .main-right-bottom {
+            width: 160%;
+            overflow-x: scroll;
+        }
+
+        .main-right-bottom-top {
+            width: 160%;
+        }
+
+        .main-right-bottom-down {
+            width: 160%;
+        }
+    }
+
+    @media screen and (max-width:452px) {
+        .location_pop_content {
+            width: 300px;
+        }
+
+        .location_pop_content {
+            height: 300px;
+        }
+
+        .personal-details-topic {
+            font-size: 15px;
+        }
+
+        .personal-details-popup-form {
+            width: 360px;
+        }
+
+        .personal-details-left img {
+            width: 75px;
+            height: 75px;
+        }
+
+        .personal-details-topic {
+            font-size: 14px;
+        }
+    }
+
 }

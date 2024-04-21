@@ -250,12 +250,12 @@
     }
 
     input[type=file] {
-        width: 1px;
-        height: 1px;
+        width: 11111111px;
+        height: 1111111px;
         opacity: 2;
         flex: 3;
         cursor: pointer !important;
-        display: none;
+        display: flex;
     }
 
     .porfile-cont img {

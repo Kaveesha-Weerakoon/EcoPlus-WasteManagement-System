@@ -172,6 +172,8 @@
   
 
     public function get_cancelled_request($customer_id){    
+      try{
+        
       $query = '
       SELECT
         rm.req_id AS request_id,
@@ -201,8 +203,11 @@
      $this->db->bind(':type', 'cancelled'); // Assuming 'cancelled' is a string value
        $results = $this->db->resultSet();
 
-      return $results;
-
+      return $results;}catch (PDOException $e) {
+      
+        return false;
+     
+    }
     }
 
     public function get_incoming_request($region){
@@ -443,5 +448,36 @@
       }
 
     }
+    
+    public function verification($id) {
+      try {
+        
+        $code = rand(1, 1000000);
+
+        $this->db->query('UPDATE request_assigned SET code = :code WHERE req_id = :req_id');
+        $this->db->bind(':code', $code);
+        $this->db->bind(':req_id', $id);
+        $this->db->execute();
+  
+          return true; // Return true if the query is executed successfully
+      } catch (PDOException $e) {
+          return false; // Return false if there's any error
+      }
+    }  
+    
+    public function getverification($id) {
+      try {
+        
+        $this->db->query('SELECT code FROM request_assigned WHERE req_id = :req_id');  
+        $this->db->bind(':req_id', $id);
+        $row = $this->db->single();
+        return $row;  
+
+      }catch (PDOException $e) {
+      
+        return false;
+      }
+    }
+  
 
 }

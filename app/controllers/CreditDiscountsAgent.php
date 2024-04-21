@@ -276,6 +276,7 @@
     }
 
     public function balance_validation() {     
+      $agent=$this->discount_agentModel->getDiscountAgentByID2($_SESSION['agent_id']);
 
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -325,6 +326,10 @@
            
             if ($data['discount_amount'] > $user_balance) {
                 $data['discount_amount_err'] = 'discount can not exceed your credit balance';
+            }
+            if($data['discount_amount']> $agent->credits){
+              $data['discount_amount_err'] = 'Insuffients Credit balance to give discounts';
+
             }
         }
   

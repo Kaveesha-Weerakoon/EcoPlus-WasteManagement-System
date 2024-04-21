@@ -5,16 +5,23 @@
     * {
         padding: 0;
         margin: 0;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+
     }
 
     .main {
         width: 100%;
         height: 100vh;
+        min-height: 500px !important;
+        max-height: 1400px !important;
         display: grid;
+        overflow: scroll;
         grid-template-columns: 17% 83%;
         font-family: 'Inter', sans-serif;
         color: var(--main-text-color);
         background-color: var(--background-color-main);
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+
     }
 
     .main-left {
@@ -24,6 +31,8 @@
         color: var(--main-text-color);
         box-shadow: var(--box-shadow2) !important;
         z-index: 2;
+        /* //transition: transform 0.4s ease-in, background-color 0.4s ease-in; */
+
     }
 
     .main-left-top {
@@ -160,7 +169,7 @@
         width: 15.5px;
         height: 15.5px;
         border-radius: 50%;
-        background-color: #F13E3E;
+        background-color: var(--red-color);
         margin-top: -11px;
         margin-left: -15px;
         color: var(--background-color-main);
@@ -178,7 +187,7 @@
 
     .notification_popup {
         height: 0;
-        position: absolute;
+        position: fixed !important;
         top: 9%;
         right: 11%;
         background-color: var(--background-color-main);
@@ -194,6 +203,8 @@
         flex-direction: column;
         overflow: scroll;
         border: 1px solid #dcdde1;
+        flex: 4;
+        z-index: 4;
     }
 
     .notification_popup h1 {
@@ -208,6 +219,7 @@
         padding: 10px;
         visibility: visible;
         opacity: 1;
+
     }
 
     .notification {
@@ -300,7 +312,7 @@
         font-size: 14px;
     }
 
-    @media screen and (max-width: 1207px) {
+    @media screen and (max-width: 1309px) {
         .main-left-top h3 {
             display: none;
         }
@@ -312,21 +324,40 @@
         }
 
         .main-left-middle-content h3 {
-            font-size: 16px;
+            font-size: 14px;
         }
 
         .toggle-container {
             margin-right: 7px;
         }
-    }
 
-    @media screen and (max-width: 927px) {
-        .main-left-middle-content h3 {
-            font-size: 14px !important;
+        .main-left-middle-content-icon {
+            margin-right: 4%;
         }
     }
 
-    @media screen and (max-width: 784px) {
+    @media screen and (max-width: 1100px) {
+        .notification_popup h1 {
+            font-size: 19px;
+            letter-spacing: 0.001rem;
+            margin-top: 5px;
+            margin-left: 8px;
+        }
+
+        .notification_popup {
+            width: 25%;
+        }
+
+        .main-left-middle-content-icon {
+            margin-right: 2%;
+        }
+
+        .main-left-middle-content h3 {
+            font-size: 13px;
+        }
+    }
+
+    @media screen and (max-width: 970px) {
         .main-left-middle-content h3 {
             display: none;
         }
@@ -363,9 +394,25 @@
             align-items: center;
             margin-top: 100%;
         }
+
+        .toggle-button {
+            width: 32px;
+            height: 21px;
+        }
+
+        .toggle-indicator {
+            top: 3px;
+            left: 4px;
+            width: 14px;
+            height: 14px;
+        }
+
+        .toggle-container input[type="checkbox"]:checked+.toggle-button .toggle-indicator {
+            transform: translateX(11px);
+        }
     }
 
-    @media screen and (max-width: 692px) {
+    @media screen and (max-width: 724px) {
         .notification {
             height: 41px !important;
             margin-top: 6px;
@@ -380,28 +427,134 @@
             margin-left: 40px;
         }
 
-        .main-right {
-            width: 140% !important;
+        .notification_popup {
+            top: 11%;
+            left: 40%;
+            width: 40%;
+        }
+
+        .main-left-middle {
+            padding-left: 0px;
+        }
+
+        .main-left-down {
+            padding-left: 0px;
+        }
+    }
+
+    @media screen and (max-width: 692px) {
+        .main-left-middle h1 {
+            visibility: hidden;
+            margin-bottom: 13%;
+        }
+
+        .main-left-down h1 {
+            font-size: 13px;
+        }
+
+        .main-left-top img {
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    @media screen and (max-width: 610px) {
+        .notification_right p {
+            font-size: 13px;
+        }
+
+        .main-right-top-profile img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .main-right-top-profile-cont h3 {
+            font-size: 15px;
+            letter-spacing: 0.03rem;
+        }
+
+        .main-right-top-profile-cont p {
+            font-size: 12px;
+        }
+
+        .main-right-top-notification i {
+            font-size: 26px;
+        }
+
+        .notification_popup {
+            width: 40% !important;
+        }
+
+        .notification_popup h1 {
+            font-size: 15px;
+        }
+
+        .notification {
+            font-size: 12px;
+        }
+
+        .notification-green-dot {
+            width: 9px;
+            height: 9px;
+        }
+
+        .notification_right p {
+            font-size: 13px;
+        }
+
+    }
+
+    @media screen and (max-width: 544px) {
+
+        .notification_popup {
+            width: 46% !important;
         }
 
         .notification_popup {
             top: 11%;
-            right: -1%;
+            left: 40%;
             width: 40%;
         }
+
+    }
+
+    @media screen and (max-width: 458px) {
+
+        .main-left-down h1 {
+            font-size: 11px;
+        }
+
+        .main-left-middle i {
+            font-size: 25px;
+        }
+
+        .main-left-down i {
+            font-size: 25px;
+        }
+
+        .toggle-button {
+            width: 29px;
+            height: 20px;
+        }
+
+        .toggle-indicator {
+            top: 3px;
+            left: 4px;
+            width: 12px;
+            height: 13px;
+        }
+
+        .toggle-container input[type="checkbox"]:checked+.toggle-button .toggle-indicator {
+            transform: translateX(11px);
+        }
+
+        .main-right-top-profile {
+            display: flex;
+            margin-right: 15px;
+        }
     }
 
 
-    @media screen and (max-width: 1108px) {
-        .notification_popup h1 {
-            font-size: 19px;
-            letter-spacing: 0.001rem;
-            margin-top: 5px;
-            margin-left: 8px;
-        }
 
-        .notification_popup {
-            width: 25%;
-        }
-    }
+
 }

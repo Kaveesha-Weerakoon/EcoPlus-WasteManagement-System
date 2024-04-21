@@ -12,41 +12,9 @@
                 <div class="main-right">
                     <div class="main-right-top">
                         <div class="main-right-top-one">
-                            <div class="main-right-top-search" style="visibility: hidden;">
-                                <i class='bx bx-search-alt-2'></i>
-                                <input type="text" id="searchInput" placeholder="Search">
-                            </div>
-                            <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                                <i class='bx bx-bell'></i>
-                                <div class="dot"></div>
-                            </div>
-                            <div id="notification_popup" class="notification_popup">
-                                <h1>Notifications</h1>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
 
-                                    </div>
-                                    Request 1232 Has been Cancelled
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
+                            <?php require APPROOT . '/views/admin/admin_profile/adminprofile.php'; ?>
 
-                                    </div>
-                                    Request 1232 Has been Assigned
-                                </div>
-                                <div class="notification">
-                                    <div class="notification-green-dot">
-
-                                    </div>
-                                    Request 1232 Has been Cancelled
-                                </div>
-                            </div>
-                            <div class="main-right-top-profile">
-                                <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                                <div class="main-right-top-profile-cont">
-                                    <h3>Admin</h3>
-                                </div>
-                            </div>
                         </div>
                         <div class="main-right-top-two">
                             <h1>Centers</h1>
@@ -140,21 +108,26 @@
                                 </button>
                             </div>
                             <div class="map_pop" id="mapPopup">
-                                <div id="map">
+                                <div class="map-container">
+                                    <div id="map">
+
+                                    </div>
+                                    <div class="buttons-container" id="submitForm">
+                                        <button type="submit"
+                                            formaction="<?php echo URLROOT; ?>/admin/center_add_confirm" method="post"
+                                            id="markLocationBtn" onclick="getLocation()">Mark
+                                            Location</button>
+                                        <button type="button" id="cancelBtn">Cancel</button>
+
+                                    </div>
+                                    <input type="hidden" id="latittude" value=" <?php echo $data['lattitude']?>"
+                                        name="latittude">
+                                    <input type="hidden" id="longitude" value=" <?php echo $data['longitude']?>"
+                                        name="longitude"> <input type="hidden" id="longitude">
+                                    <input type="hidden" id="radius" value=" <?php echo $data['radius']?>"
+                                        name="radius">
 
                                 </div>
-                                <div class="buttons-container" id="submitForm">
-                                    <button type="submit" formaction="<?php echo URLROOT; ?>/admin/center_add_confirm"
-                                        method="post" id="markLocationBtn" onclick="getLocation()">Mark
-                                        Location</button>
-                                    <button type="button" id="cancelBtn">Cancel</button>
-
-                                </div>
-                                <input type="hidden" id="latittude" value=" <?php echo $data['lattitude']?>"
-                                    name="latittude">
-                                <input type="hidden" id="longitude" value=" <?php echo $data['longitude']?>"
-                                    name="longitude"> <input type="hidden" id="longitude">
-                                <input type="hidden" id="radius" value=" <?php echo $data['radius']?>" name="radius">
 
                             </div>
                         </form>

@@ -4,40 +4,8 @@
             <i class='bx bx-search-alt-2'></i>
             <input type="text" id="searchInput" placeholder="Search">
         </div>
-        <div class="main-right-top-notification" id="notification">
-            <i class='bx bx-bell'></i>
-            <div class="dot"></div>
-        </div>
-        <div id="notification_popup" class="notification_popup">
-            <h1>Notifications</h1>
-            <div class="notification">
-                <div class="notification-green-dot">
-
-                </div>
-                Request 1232 Has been Cancelled
-            </div>
-            <div class="notification">
-                <div class="notification-green-dot">
-
-                </div>
-                Request 1232 Has been Assigned
-            </div>
-            <div class="notification">
-                <div class="notification-green-dot">
-
-                </div>
-                Request 1232 Has been Cancelled
-            </div>
-
-
-        </div>
-        <div class="main-right-top-profile">
-            <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>" alt="">
-            <div class="main-right-top-profile-cont">
-                <h3><?php echo $_SESSION['center_manager_name']?></h3>
-                <p>ID : C <?php echo $_SESSION['center_manager_id']?></p>
-            </div>
-        </div>
+        <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
+        
     </div>
     <div class="main-right-top-two">
         <h1>Requests</h1>

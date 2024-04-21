@@ -1,21 +1,18 @@
 .Customer_Complain_History {
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap');
-
-    * {
-        margin: 0;
-        padding: 0;
-        font-family: inter;
+    #complain p {
+        color: var(--green-color-one);
+        font-weight: 600;
     }
 
-    a {
-        text-decoration: none;
-        color: inherit;
+    #complain .line1 {
+        color: var(--green-color-one);
+        background-color: var(--green-color-one);
     }
-
 
     .table-header {
         grid-template-columns: 20% 20% 20% 40%;
     }
+
 
 
     .table-row {
@@ -30,6 +27,14 @@
         text-align: center !important;
     }
 
-    .main-right-bottom-two {}
+    @media screen and (max-width:700px) {
+        .table-header {
+            grid-template-columns: 15% 20% 20% 30%;
+        }
+
+        .table-row {
+            grid-template-columns: 15% 20% 20% 30%;
+        }
+    }
 
 }

@@ -14,5 +14,11 @@
 
         <script src="https://kit.fontawesome.com/6293c3d0e8.js" crossorigin="anonymous"></script>
     </head>
+    <script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+    </script>
+
 
     <body>

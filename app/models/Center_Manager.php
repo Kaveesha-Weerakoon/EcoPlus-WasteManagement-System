@@ -209,6 +209,7 @@
       $this->db->bind(':value', $data['name']);
       $this->db->bind(':id', $_SESSION['center_manager_id']);
       $_SESSION['center_manager_name']=$data['name'];
+      
       if ($this->db->execute()) {
         $this->db->query('UPDATE center_managers SET address = :address, contact_no = :contact_number WHERE user_id = :customer_id');
         $this->db->bind(':address',  $data['address']);

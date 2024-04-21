@@ -20,34 +20,257 @@
       $this->garbage_types_model = $this->model('Garbage_types');
       $this->Report_Model=$this->model('Customer_Report');
       $this->Annoucement_Model=$this->model('Announcement');
-
+      $this->fine_model = $this->model('Fines');
+      $this->LatestUpdate= $this->model('LatestUpdate');
+      
       if(!isLoggedIn('user_id')){
         redirect('users/login');
       }
     }
+
+   
     
-    public function index(){ 
+    public function index($tutorial=""){ 
       $balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
-      $credit= $this->creditModel->get();
+      // $credit= $this->creditModel->get();
       $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']); 
       $centers = $this->Center_Model->getallCenters();
+      
       $completed_requests=count($this->Collect_Garbage_Model->get_complete_request_relevent_customer($_SESSION['user_id']));
       $total_requests=count($this->Request_Model->get_total_requests_by_customer($_SESSION['user_id']));
-      $total_garbage=$this->customerModel->getTotalGarbage($_SESSION['user_id']);
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
       $discount_agent = $this->discount_agentModel->get_discount_agent();
+      $total_garbage=$this->Collect_Garbage_Model->get_completed_garbage_totals_by_customer($_SESSION['user_id']);
+
+      $latestcompleted=   $this->LatestUpdate->getLatestCompleted($_SESSION['user_id']);
+      $latesttransfered=   $this->LatestUpdate->getLatestTransferd($_SESSION['user_id']);
+      $latestdiscount=   $this->LatestUpdate->getLatestDiscount($_SESSION['user_id']);
+      $latestcancelled=   $this->LatestUpdate->getLatestCancelled($_SESSION['user_id']);
+      $latestupdate = '<h3>+Eco 0</h3>';
+      $latestupdate = 'Eco 0';
+
+      if (empty($latestcompleted) &&  empty($latesttransfered) &&  empty($latestdiscount) &&  empty($latestcancelled)) {
+  
+      } 
+      else {
+          if (!empty($latestcompleted) &&  empty($latesttransfered) && empty($latestdiscount) && empty($latestcancelled)) {
+              $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+          }
+          elseif (empty($latestcompleted) && !empty($latesttransfered) &&  empty($latestdiscount) && empty($latestcancelled)) {
+            if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }else {
+              $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }
+          }
+          elseif (empty($latestcompleted) &&  empty($latesttransfered) && !empty($latestdiscount) &&  empty($latestcancelled)) { 
+             $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+          } 
+          elseif (empty($latestcompleted) &&  empty($latesttransfered) && empty($latestdiscount) && !empty($latestcancelled)) {
+             $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+          }
+          elseif (!empty($latestcompleted) && !empty($latesttransfered) && empty($latestdiscount) && empty($latestcancelled)) {
+            if($latestcompleted->completed_datetime > $latesttransfered->date){
+              $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+
+            } else{
+              if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }else {
+              $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }
+          }
+        }
+          elseif (!empty($latestcompleted) &&  empty($latesttransfered) && !empty($latestdiscount) && empty($latestcancelled)) {
+            if($latestcompleted->completed_datetime > $latestdiscount->created_at){
+              $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+
+            }else{
+              $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+
+            }
+          }
+          elseif (!empty($latestcompleted) &&  empty($latesttransfered) && empty($latestdiscount) && !empty($latestcancelled)) {
+            if($latestcompleted->completed_datetime > $latestcancelled->cancelled_time){
+              $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+
+            }else{
+              $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+
+          }
+          }
+          elseif (empty($latestcompleted) && !empty($latesttransfered) && !empty($latestdiscount) && empty($latestcancelled)) {
+            if($latesttransfered->date > $latestdiscount->created_at){
+              if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }else {
+              $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }
+            }else{
+              $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+
+          }
+          }
+          elseif (empty($latestcompleted) && !empty($latesttransfered) && empty($latestdiscount) && !empty($latestcancelled)) {
+            if($latesttransfered->date>$latestcancelled->cancelled_time ){
+            if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }else {
+              $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }}
+            else{
+              $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+
+            }
+          }
+          elseif (empty($latestcompleted) && empty($latesttransfered) && !empty($latestdiscount) && !empty($latestcancelled)) {
+            if($latestcancelled->cancelled_time > $latestdiscount->created_at){
+              $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+
+            }else{
+              $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+
+          }}
+          elseif (!empty($latestcompleted) && !empty($latesttransfered) && !empty($latestdiscount) && empty($latestcancelled)) {
+            if($latestcompleted->completed_datetime > $latesttransfered->date){
+                if($latestcompleted->completed_datetime>$latestdiscount->created_at){
+                  $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+                }
+                else{
+                  $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+              }
+            } 
+            else{
+              if($latestdiscount->created_at>$latesttransfered->date){
+                $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+            }
+            else{
+              if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }else {
+              $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }}
+          }
+            
+          }
+          elseif (!empty($latestcompleted) && !empty($latesttransfered) && empty($latestdiscount) && !empty($latestcancelled)) {
+            if($latestcompleted->completed_datetime > $latesttransfered->date){
+              if($latestcompleted->completed_datetime>$latestcancelled->cancelled_time){
+                $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+              }
+              else{
+                $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+              }
+            } 
+            else{
+               if($latestcancelled->cancelled_time>$latesttransfered->date){
+                 $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+               }
+              else{
+                 if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                   $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+                }else {
+                   $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+                 }
+                }          
+            }
+          }
+          elseif (!empty($latestcompleted) && empty($latesttransfered) && !empty($latestdiscount) && !empty($latestcancelled)) {
+            $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+            if($latestcompleted->completed_datetime >$latestdiscount->created_at){
+              if($latestcompleted->completed_datetime>$latestcancelled->cancelled_time){
+                $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+
+              }else{
+                $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+              }
+            }
+            else{
+              if($latestcancelled->cancelled_time>$latestdiscount->created_at){
+                $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+
+              }
+              else{
+                $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+
+              }
+            }
+          }
+          elseif (empty($latestcompleted) && !empty($latesttransfered) && !empty($latestdiscount) && !empty($latestcancelled)) {
+           if($latesttransfered->date>$latestcancelled->cancelled_time){
+            if($latesttransfered->date>$latestdiscount->created_at){
+               if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                  $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+               }else {
+                   $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+               }}
+            else{
+               $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+          }
+           }
+           else{
+                if($latestcancelled->cancelled_time>$latestdiscount->created_at){
+                  $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+
+                }
+                else{
+                  $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+
+                }
+           }
+           
+          }
+          elseif (!empty($latestcompleted) && !empty($latesttransfered) && !empty($latestdiscount) && !empty($latestcancelled)) {
+            if ($latestcompleted->completed_datetime > $latesttransfered->date) {
+                if ($latestcompleted->completed_datetime > $latestdiscount->created_at) {
+                    if ($latestcompleted->completed_datetime > $latestcancelled->cancelled_time) {
+                        $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+                    } else {
+                        $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+                    }
+                } else {
+                    if ($latestdiscount->created_at > $latestcancelled->cancelled_time) {
+                        $latestupdate = '-Eco ' . $latestdiscount->discount_amount;
+                    } else {
+                        $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+                    }
+                }
+            } else {
+                if ($latesttransfered->date > $latestdiscount->created_at) {
+                    if ($latesttransfered->date > $latestcancelled->cancelled_time) {
+                        if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                            $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+                        } else {
+                            $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+                        }
+                    } else {
+                        $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+                    }
+                } else {
+                    if ($latestdiscount->created_at > $latestcancelled->cancelled_time) {
+                        $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+                    } else {
+                        $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+                    }
+                }
+            }
+        }
+    }
+
+     
 
       if ($total_requests > 0) {
         $percentage_completed = json_encode(($completed_requests / $total_requests) * 100);
          } else {
           $percentage_completed =json_encode(0);
       }    
+   
+      
 
       $jsonData = json_encode($centers);
       $json_Total_Garbage = json_encode($total_garbage);
       $data = [
         'title' => 'TraversyMVC',
-        'eco_credit_per'=>$credit,
         'credit_balance'=>$balance ,
         'pop'=>'',
         'transaction_history' =>$transaction_history,
@@ -57,7 +280,9 @@
         'notification'=> $Notifications,
         'completed_request_count'=>$completed_requests,
         'no_of_centers'=>count($centers),
-        'discount_agent' => count($discount_agent)
+        'discount_agent' => count($discount_agent),
+        'tutorial'=>$tutorial,
+        'latest_update'=> $latestupdate
         ];
 
         
@@ -67,7 +292,6 @@
         $Notifications2 = $this->customerModel->get_Notification($_SESSION['user_id']);
         $data['notification']=  $Notifications2 ;
         header("Location: " . URLROOT . "/customers");        
-
 
       }
       else{
@@ -152,8 +376,12 @@
       else{
         $data['assinged']='No';
       }
+      if($Request->code!=0){
+       header("Location: " . URLROOT . "/customers/request_main");        
 
-      $this->Request_Model->cancel_request($data);       
+      }else{
+     $this->Request_Model->cancel_request($data);       
+       }
        header("Location: " . URLROOT . "/customers/request_cancelled");        
     }
 
@@ -254,7 +482,7 @@
 
        if (empty($data['name'])) {
         $data['name_err'] = 'Please enter a name';
-       } elseif (strlen($data['name']) > 200) {
+       } elseif (strlen($data['name']) >  255) {
          $data['name_err'] = 'Name should be at most 200 characters';
        }
 
@@ -272,8 +500,8 @@
 
        if (empty($data['address'])) {
         $data['address_err'] = 'Please enter an address';
-       } elseif (strlen($data['address']) > 200) {
-        $data['address_err'] = 'Address should be at most 200 characters';
+       } elseif (strlen($data['address']) > 500) {
+        $data['address_err'] = 'Address should be at most 500 characters';
        }
 
        if(empty($data['name_err']) && empty($data['contactno_err']) && empty($data['city_err']) && empty($data['address_err'])){
@@ -344,7 +572,7 @@
     public function change_password(){
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
       $centers = $this->center_model->getallCenters();
-
+ 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
       
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); $data=[
@@ -386,11 +614,21 @@
           $data['current_err'] = 'Please enter current password';
       }
       
-      if (empty($data['new_pw'])) {
-          $data['new_pw_err'] = 'Please Enter New Password';
-      } elseif (strlen($data['new_pw']) < 6) {
-          $data['new_pw_err'] = 'New password must be at least 6 characters';
+       if (empty($data['new_pw'])) {
+        $data['new_pw_err'] = 'Please Enter New Password';
+        } elseif (strlen($data['new_pw']) < 8 || strlen($data['new_pw']) > 30) {
+        $data['new_pw_err'] = 'Password must be between 8 and 30 characters';
+         } elseif (!preg_match('/[^\w\s]/', $data['new_pw'])) {
+        $data['new_pw_err'] = 'Password must include at least one symbol';
+        } elseif (!preg_match('/[A-Z]/', $data['new_pw'])) {
+          $data['new_pw_err'] = 'Password must include at least one uppercase letter';
+        } elseif (!preg_match('/[a-z]/', $data['new_pw'])) {
+          $data['new_pw_err'] = 'Password must include at least one lowercase letter';
+         } elseif (!preg_match('/[0-9]/', $data['new_pw'])) {
+           $data['new_pw_err'] = 'Password must include at least one number';
       }
+    
+
       
       if (empty($data['re_enter_pw'])) {
           $data['re_enter_pw_err'] = 'Please confirm new password';
@@ -420,6 +658,7 @@
   
         $this->view('customers/edit_profile', $data);
         }
+       
         else{
           $data = [
             'name'=>'',
@@ -445,7 +684,7 @@
             'centers'=> $centers 
 
 
-          ];
+          ]; 
           $this->view('customers/editprofile', $data);
   
         }
@@ -454,6 +693,8 @@
    
     public function complains(){
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $id=$_SESSION['user_id'];
+      $user=$this->customerModel->get_customer($id);
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -461,7 +702,6 @@
         $data =[
           'name' => trim($_POST['name']),
           'contact_no' => trim($_POST['contact_no']),
-          'region' => trim($_POST['region']),
           'subject' => trim($_POST['subject']),
           'complain' => trim($_POST['complain']),
           'name_err' => '',
@@ -472,7 +712,7 @@
           'completed'=>'',     
           'notification'=> $Notifications   
         ];
-        
+        $data['region']=$user->city;
         if($data['completed']=='True'){
           $data['completed']=='';
           $this->view('customers/complains', $data);
@@ -480,7 +720,9 @@
 
         if(empty($data['name'])){
           $data['name_err'] = 'Please enter name';
-        }
+        } elseif (strlen($data['name']) > 255) {
+          $data['name_err'] = 'Name is too long';
+      }
        
         // Validate contact number
         if(empty($data['contact_no'])){
@@ -495,11 +737,15 @@
         
         if(empty($data['subject'])){
           $data['subject_err'] = 'Please enter subject';
-        }
+        } elseif (strlen($data['subject']) > 255) {
+          $data['subject_err'] = 'Subject is too long';
+      }
         
         if(empty($data['complain'])){
           $data['complain_err'] = 'Please enter the complain';
-        }
+        }elseif (strlen($data['complain']) > 500) {
+          $data['complain_err'] = 'Complain is too long';
+      }
 
         if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
           if($this->customer_complain_Model->complains($data)){
@@ -519,7 +765,7 @@
       $data =[
         'name' => '',
         'contact_no' => '',
-        'region' => '',
+        'region'=>$user->city,
         'subject' => '',
         'complain' => '',
         'name_err' => '',
@@ -545,7 +791,9 @@
       $id=$_SESSION['user_id']; 
       $user=$this->customerModel->get_customer($id);    
       $center=$this->Center_Model->findCenterbyRegion($user->city);
-
+      $garbage_types = $this->garbage_types_model->get_all();
+      $fine_details = $this->fine_model->get_fine_details();
+    
       return [
           'centers' => $centers,
           'name' => '',
@@ -570,13 +818,15 @@
           'region_success'=>'', 
           'radius'=>'',
           'radius_err'=>'',
+          'garbage_types'=> $garbage_types,
           'center_lat'=>$center->lat,
           'center_long'=>$center->longi,
-          'notification'=> $Notifications]  ;
+          'notification'=> $Notifications,
+          'fine'=>$fine_details[0]->fine_amount   ];
         
     }
 
-    public function request_collect(){
+    public function request_collect($sucess="False"){
       $id=$_SESSION['user_id']; 
       $user=$this->customerModel->get_customer($id);
       $Notifications = $this->customerModel->get_Notification($id);
@@ -604,17 +854,21 @@
         $data['region']=$user->city;
         $data['radius']=$center->radius;
 
-
+        $requests=$this->Request_Model->get_total_requests_by_customer($id);
+        if($data['time']=="Select a slot"){
+           $data['time_err']="Choose a time slot";
+        }
+        
         if (empty($data['name'])) {
            $data['name_err'] = 'Name is required';
-         }elseif (strlen($data['name']) > 30) {
-          $data['name_err'] = 'Name cannot exceed 30 characters';
+         }elseif (strlen($data['name']) >  255) {
+          $data['name_err'] = 'Name cannot exceed 255 characters';
         }
       
         if (empty($data['contact_no'])) {
-           $data['contact_no_err'] = 'Contact No is required';
+           $data['contact_no_err'] = 'Contact no is required';
          } elseif (!preg_match('/^\d{10}$/', $data['contact_no'])) {
-          $data['contact_no_err'] = 'Invalid Contact No';
+          $data['contact_no_err'] = 'Invalid contact no';
         }
 
         if (empty($data['date'])) {
@@ -639,9 +893,26 @@
               if ($selectedTimestamp < $currentTimestamp) {
                 $data['date_err'] = 'Select a date from tomorrow onwards';
               }
+              else{       
+                 $dateFound = false;
+
+                foreach ($requests as $request) {
+                  if ($request->date == $data['date']) {
+                      $dateFound = true;
+                      break; 
+                  }
+              }
+              if ($dateFound) {
+                $data['date_err'] = 'You can only make one request per day.';
+              }
+          
+              }
+              
             }
         }
-    
+        
+
+     
         if ($data['region_success']='True') {
            if ($data['location_success'] == 'Success') {
             
@@ -673,7 +944,8 @@
           }
             }
            else{ 
-            $data['location_err'] = 'Location Error';     
+         
+            $data['location_err'] = 'Location error';     
           }
         }
 
@@ -688,23 +960,22 @@
             $this->view('customers/request_collect', $data);   
          }
          else{
+
           $this->view('customers/request_collect', $data);
          }        
       }
      else {
          $data = $this->getCommonData();
          $id=$_SESSION['user_id']; 
-         
+         $data['success']=$sucess;
          $user=$this->customerModel->get_customer($id);
          if($user && $center){
              $data['lattitude']=$center->lat;
              $data['longitude']=$center->longi;
              $data['region']=$user->city;
              $data['radius']=$center->radius;
-
              $data['contact_no']=$user->mobile_number;
              $data['name'] =$_SESSION['user_name'];
-          
              $this->view('customers/request_collect', $data);
         }
 
@@ -727,7 +998,6 @@
       $data['instructions'] = trim($_POST['instructions']);
       $data['lattitude'] =trim($_POST['latitude']);
       $data['longitude'] =trim($_POST['longitude']);
-      $data['success']='True';
       $data['customer_id']=$_SESSION['user_id'];
       $data['region']=$user->city;
       $data['center_id'] =$center->id;
@@ -735,7 +1005,7 @@
 
       $this->Request_Model->request_insert($data);
 
-      $this->view('customers/request_collect', $data);
+      header("Location: " . URLROOT . "/customers/request_collect/True");        
       }
       else{
         $data=$this->getCommonData();
@@ -780,7 +1050,7 @@
       redirect('users/login');
     }
 
-    public function transfer() {        
+    public function transfer($true="") {        
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
 
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -792,7 +1062,7 @@
               'transfer_confirm'=>'False',
               'customer_id_err' => '',
               'credit_amount_err' => '',
-              'completed' => '',     
+              'completed' =>$true,     
               'notification'=> $Notifications   
           ];
   
@@ -859,8 +1129,8 @@
               'customer_id' => '',
               'credit_amount' => '',
               'customer_id_err' => '',
-              'credit_amount_err' => '',
-              'completed' => '',     
+              'credit_amount_err' => '','transfer_confirm'=>'',
+              'completed' =>$true,     
               'notification'=> $Notifications   
           ];
   
@@ -940,6 +1210,8 @@
         
                 if ($sender_update && $receiver_update && $result) {
                     $data['completed'] = 'True';
+                    header("Location: " . URLROOT . "/customers/transfer/true");        
+
                     $this->view('customers/transfer', $data);
                 } else {
                   die('Something went wrong');
@@ -1078,7 +1350,7 @@
         $completedRequests=$this->Report_Model->getCompletedRequests($customerId,$fromDate,$toDate);
         $cancelledRequests=$this->Report_Model->getCancelledRequests($customerId,$fromDate,$toDate);
         $ongoingRequests=$this->Report_Model->getonGoingRequests($customerId,$fromDate,$toDate);
-        $totalRequests = $this->Report_Model->getallRequests($customerId,$fromDate,$toDate);
+        $totalRequests = count($ongoingRequests)+count( $cancelledRequests)+count($completedRequests);
         $credits=$this->Report_Model->getCredits($customerId,$fromDate,$toDate);
         $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
 
@@ -1093,7 +1365,7 @@
           'ongoingRequests'=>count($ongoingRequests),
           'cancelledRequests'=>count($cancelledRequests),
            'completedRequests'=> count($completedRequests),
-          'totalRequests'=>count($totalRequests),
+          'totalRequests'=>$totalRequests,
           'credits'=> $credits->total_credits,
           'to'=> $toDate,
           'from'=>  $fromDate,      
@@ -1113,7 +1385,7 @@
       $completedRequests=$this->Report_Model->getCompletedRequests($customerId);
       $cancelledRequests=$this->Report_Model->getCancelledRequests($customerId);
       $ongoingRequests=$this->Report_Model->getonGoingRequests($customerId);
-      $totalRequests = $this->Report_Model->getallRequests($customerId);     
+      $totalRequests = count($ongoingRequests)+count( $cancelledRequests)+count($completedRequests);
       $credits=$this->Report_Model->getCredits($customerId);
       $creditByMonth=$this->Report_Model->getCreditsMonths($customerId);
 
@@ -1127,7 +1399,7 @@
         'ongoingRequests'=>count($ongoingRequests),
         'cancelledRequests'=>count($cancelledRequests),
         'completedRequests'=> count($completedRequests),
-        'totalRequests'=>count($totalRequests),
+        'totalRequests'=>$totalRequests,
         'credits'=> $credits->total_credits,     
         'creditsByMonth1'=> $creditByMonth,
         'to'=>'none',

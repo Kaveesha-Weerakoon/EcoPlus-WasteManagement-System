@@ -784,106 +784,83 @@
     }
 
 
-    @media screen and (max-width:862px) {
-        .cancel-confirm {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1;
-            align-items: center;
-            justify-content: center;
+  
+ 
+
+    @media screen and (max-width:475px) {
+
+        .location_pop_content {
+            width: 275px;
         }
 
-        .cancel-confirm-content {
-            background-color: #ecf0f1;
-            width: 40%;
-            height: 40%;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+    }
+
+    @media screen and (max-width: 844px) {
+      
+
+        .request-details-pop-form{
+            width: 450px;
         }
 
-        .cancel-confirm-content input {
-            width: 70%;
-            height: 50px;
-
+        .View-content{
+            width: 400px;
         }
 
-        .confim-cancell-content h1 {
-            margin-bottom: 20px;
-            font-size: 14px;
+        .dropdown-menu{
+            width: 92.5%;
         }
 
-        .confim-cancell-content-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: row;
+    }
+
+    @media screen and (max-width:700px) {
+    
+
+        .request-details-pop-form{
+            width: 400px;
         }
 
-        .confim-cancell-content-box button {
-            width: 90px;
-            height: 35px;
-            font-size: 15px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-            margin: 10px;
-            background-color: #74b9ff;
-            cursor: pointer;
+        .request-details-right-labels span{
+            font-size: 12px;
+        }
+
+        .request-details-right-values span{
+            font-size: 12px;
+        }
+
+        .View-content{
+            width: 300px;
+        }
+
+        .dropdown-menu{
+            margin-left: 0;
+            width: 96%;
+        }
+
+        .dropdown-toggle{
+            margin-left: 0;
+        }
+
+        .cancel-confirm-content{
+            width: 400px;
         }
     }
 
-    @media screen and (max-width: 692px) {
-        .cancel-confirm-content {
-            background-color: #ecf0f1;
-            width: 40%;
-            height: 60%;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+    @media screen and (max-width:500px) {
+        .request-details-right-labels{
+            padding-left: 16px;
         }
 
-        .cancel-confirm-content input {
-            width: 70%;
-            height: 80px;
-
+        .request-details-right-values{
+            padding-left: 70px;
         }
 
-        .cancel-confirm-content h1 {
-            margin-bottom: 12px;
-            font-size: 17px !important;
+        .request-details-pop-form{
+            width: 300px;
         }
 
-        .confim-cancell-content-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: row;
+        .cancel-confirm-content{
+            width: 300px;
         }
 
-        .confim-cancell-content-box button {
-            width: 75px;
-            height: 35px;
-            font-size: 12px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-            margin: 10px;
-            background-color: #74b9ff;
-            cursor: pointer;
-        }
     }
 }

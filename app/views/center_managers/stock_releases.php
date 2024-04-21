@@ -10,44 +10,19 @@
                             <i class='bx bx-search-alt-2'></i>
                             <input type="text" id="searchInput" placeholder="Search">
                         </div>
-                        <div class="main-right-top-notification" id="notification">
-                            <i class='bx bx-bell'></i>
-                            <div class="dot"></div>
-                        </div>
-                        <div id="notification_popup" class="notification_popup">
-                            <h1>Notifications</h1>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Cancelled
-                            </div>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Assigned
-                            </div>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Cancelled
-                            </div>
-                        </div>
-                        <div class="main-right-top-profile">
-                            <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
-                                alt="">
-                            <div class="main-right-top-profile-cont">
-                                <h3><?php echo $_SESSION['center_manager_name']?></h3>
-                                <p>ID : Col <?php echo $_SESSION['center_manager_id']?></p>
-                            </div>
-                        </div>
+                        <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
+                        
                     </div>
                     <div class="main-right-top-two">
                         <h1>Center Waste Management</h1>
                     </div>
                     <div class="main-right-top-three">
+                        <a href="<?php echo URLROOT?>/centermanagers/garbage_types">
+                            <div class="main-right-top-three-content">
+                                <p>Garbage Types</p>
+                                <div class="line"></div>
+                            </div>
+                        </a>
                         <a href="<?php echo URLROOT?>/centermanagers/waste_management">
                             <div class="main-right-top-three-content">
                                 <p>Waste Handover</p>
@@ -79,6 +54,7 @@
                                 <th>Date & Time</th>
                                 <th>Released Person</th>
                                 <th>Release Note</th>
+                                <th>Income</th>
                                 <th>Release Details</th>
                             </tr>
                         </table>
@@ -90,6 +66,7 @@
                                 <td> <?php echo $release->released_date_time?></td>
                                 <td><?php echo $release->released_person?></td>
                                 <td> <?php echo $release->release_note?></td>
+                                <td> <?php echo $release->income?></td>
                                 <td class="cancel-open">
                                     <img onclick="view_release_details(<?php echo htmlspecialchars(json_encode($release), ENT_QUOTES, 'UTF-8') ?>)"
                                             src="<?php echo IMGROOT?>/info.png" alt="">
@@ -191,6 +168,16 @@
     });
 
     });
+
+     /* Notification View */
+     document.getElementById('submit-notification').onclick = function() {
+        var form = document.getElementById('mark_as_read');
+        var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/stock_release_details";
+        form.action = dynamicUrl; // Set the action URL
+        form.submit(); // Submit the form
+
+    };
+    /* ----------------- */
 
 
 

@@ -10,39 +10,8 @@
                             <i class='bx bx-search-alt-2'></i>
                             <input type="text" id="searchInput" placeholder="Search">
                         </div>
-                        <div class="main-right-top-notification" id="notification">
-                            <i class='bx bx-bell'></i>
-                            <div class="dot"></div>
-                        </div>
-                        <div id="notification_popup" class="notification_popup">
-                            <h1>Notifications</h1>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Cancelled
-                            </div>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Assigned
-                            </div>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Cancelled
-                            </div>
-                        </div>
-                        <div class="main-right-top-profile">
-                            <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
-                                alt="">
-                            <div class="main-right-top-profile-cont">
-                                <h3><?php echo $_SESSION['center_manager_name']?></h3>
-                                <p>ID : Col <?php echo $_SESSION['center_manager_id']?></p>
-                            </div>
-                        </div>
+                        <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
+                        
                     </div>
                     <div class="main-right-top-two">
                         <h1>Collectors</h1>
@@ -70,43 +39,6 @@
                     </div>
                 </div>
 
-
-                <!-- <div class="main-top">
-                    <a href="<?php echo URLROOT?>/centermanagers">
-                        <img class="back-button" src="<?php echo IMGROOT?>/Back.png" alt="">
-                    </a>
-
-                    <div class="main-top-component">
-                        <p><?php echo $_SESSION['center_manager_name']?></p>
-                        <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>" alt="">
-                    </div>
-                </div>
-               
-                <div class="main-bottom-top">
-                    <div class="main-right-top-two">
-                        <h1>Collectors</h1>
-                    </div>
-                    <div class="main-right-top-three">
-                        <a href="<?php echo URLROOT?>/centermanagers/collectors">
-                            <div class="main-right-top-three-content">
-                                <p>View</p>
-                                <div class="line1"></div>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/centermanagers/collectors_add">
-                            <div class="main-right-top-three-content">
-                                <p>Register</p>
-                                <div class="line1"></div>
-                            </div>
-                        </a>
-                        <a href="">
-                            <div class="main-right-top-three-content">
-                                <p><b style="color: #1B6652;">Complaints</b></p>
-                                <div class="line"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div> -->
                 <?php if(!empty($data['collectors_complains'])) : ?>
                 <div class="main-right-bottom">
                     <div class="main-right-bottom-top">
@@ -151,4 +83,15 @@
         </div>
     </div>
 </div>
+<script>
+     /* Notification View */
+    document.getElementById('submit-notification').onclick = function() {
+        var form = document.getElementById('mark_as_read');
+        var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/collectors_complains";
+        form.action = dynamicUrl; 
+        form.submit(); 
+
+    };
+    /* ----------------- */
+</script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

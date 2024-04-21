@@ -1,17 +1,12 @@
 .Customer_Transfercredit {
-    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Leckerli+One&family=Open+Sans&family=Phudu&family=Poppins&family=Roboto:ital@0;1&family=Rubik:wght@500&family=Shrikhand&display=swap");
 
-    * {
-        margin: 0;
-        padding: 0;
-        font-family: Inter;
-    }
 
     .main-right {
         width: 100%;
         height: 731px;
         display: grid;
-        grid-template-rows: 9% 91%;
+        grid-template-rows: 11% 89%;
+        overflow: hidden;
     }
 
     #dashboard i {
@@ -26,48 +21,13 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-around;
+        justify-content: end;
         border: 10px;
         width: 100%;
         box-sizing: border-box;
         box-shadow: var(--box-shadow2);
     }
 
-    .main-right-top-search {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 35%;
-        position: relative;
-        visibility: hidden;
-    }
-
-    .main-right-top-search i {
-        position: absolute;
-        font-size: 25px;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        visibility: hidden;
-    }
-
-    .main-right-top-search input {
-        width: 100%;
-        height: 33px;
-        border-radius: 7px;
-        background-color: var(--background-color-two);
-        border: 1px solid #dcdde1;
-        font-size: 14px;
-        padding-left: 40px;
-        letter-spacing: 0.03rem;
-        color: var(--main-text-color);
-        visibility: hidden;
-    }
-
-    .main-right-top-search input:focus {
-        border: 1px solid #1ca557;
-        outline: none;
-    }
 
     .main-right-top-notification {
         display: flex;
@@ -76,7 +36,6 @@
         margin-left: 35%;
         margin-right: 2.5%;
     }
-
 
     .main-bottom {
         display: flex;
@@ -92,6 +51,14 @@
         display: grid;
         grid-template-columns: 50% 50%;
         box-sizing: border-box;
+        opacity: 0;
+        transform: translateY(-30px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .main-bottom-component.slide-in {
+        opacity: 1;
+        transform: translateY(0);
     }
 
 
@@ -115,7 +82,6 @@
         margin: auto;
     }
 
-
     .main-bottom-component-left-topic {
         margin-bottom: 50px;
         margin-top: -50px;
@@ -134,11 +100,7 @@
         letter-spacing: 0.01rem;
     }
 
-    .main-bottom-component-left-component {
-        width: 400px;
-        display: flex;
-        flex-direction: column;
-    }
+
 
     .main-bottom-component-left-component {
         width: 350px;
@@ -174,6 +136,7 @@
         letter-spacing: 0.03rem;
         background-color: var(--background-color-two);
         color: var(--main-text-color);
+        padding-left: 10px;
     }
 
     .main-bottom-component-left-component input:focus {
@@ -378,21 +341,7 @@
         }
     }
 
-    @media screen and (max-width:1289px) {
-        .notification_popup {
-            top: 11%;
-            width: 24%;
-            right: 8%;
-        }
-    }
 
-    @media screen and (max-width:967px) {
-        .notification_popup {
-            top: 11%;
-            width: 30%;
-            right: 8%;
-        }
-    }
 
     @media screen and (max-width:675px) {
         .main-bottom-component-right {
@@ -437,13 +386,15 @@
 
     @media screen and (max-width:581px) {
         .main-bottom-component-left-component input {
-            width: 220px;
+            width: 200px;
         }
 
         .main-bottom-component-left button {
-            width: 220px;
+            width: 200px;
 
         }
+
+        .main-bottom-component-left-component {}
 
         .main-bottom-component-left-component {
             align-items: center !important;
@@ -460,7 +411,54 @@
             display: flex;
             align-items: center;
             flex-direction: column;
-            font-size: 17px;
+            font-size: 14px;
+        }
+    }
+
+    @media screen and (max-width:581px) {
+        .main-bottom-component-left-component {
+            width: 200px;
+        }
+
+        .main-bottom-component-left-component input {
+            width: 150px;
+        }
+
+        .main-bottom-component-left button {
+            width: 150px;
+
+        }
+
+        .main-bottom-component-left-topic h2 {
+            font-size: 16px;
+        }
+
+        .main-bottom-component-left-component {
+            align-items: center !important;
+            padding-left: 0% !important;
+        }
+
+        .err {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .main-bottom-component-left-topic {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            font-size: 14px;
+        }
+
+        .main-bottom-component-left-topic {
+            width: 100%;
+        }
+
+        .err {
+            width: 150px !important;
+
         }
     }
 }

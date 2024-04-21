@@ -9,48 +9,9 @@
             <div class="main-right">
                 <div class="main-right-top">
                     <div class="main-right-top-one">
-                        <div class="main-right-top-search" style="visibility:hidden">
-                            <i class='bx bx-search-alt-2'></i>
-                            <input type="text" placeholder="Search">
-                        </div>
-                        <div class="main-right-top-notification" id="notification">
-                            <i class='bx bx-bell'></i>
-                            <?php if (!empty($data['notification'])) : ?>
-                            <div class="dot"><?php echo count($data['notification'])?></div>
-                            <?php endif; ?>
-                        </div>
-                        <div id="notification_popup" class="notification_popup">
-                            <h1>Notifications</h1>
-                            <div class="notification_cont">
-                                <?php foreach($data['notification'] as $notification) : ?>
 
-                                <div class="notification">
-                                    <div class="notification-green-dot">
+                        <?php require APPROOT . '/views/customers/customer_notification/customer_notification.php'; ?>
 
-                                    </div>
-                                    <div class="notification_right">
-                                        <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
-                                        <?php echo $notification->notification ?>
-                                    </div>
-                                </div>
-                                <?php endforeach; ?>
-
-                            </div>
-                            <form class="mark_as_read" method="post"
-                                action="<?php echo URLROOT;?>/customers/view_notification/analatics">
-                                <i class="fa-solid fa-check"> </i>
-                                <button type="submit">Mark all as read</button>
-                            </form>
-
-                        </div>
-                        <div class="main-right-top-profile">
-                            <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
-                                alt="">
-                            <div class="main-right-top-profile-cont">
-                                <h3>Kaveesha</h3>
-                                <p>ID : C <?php echo $_SESSION['user_id']?></p>
-                            </div>
-                        </div>
                     </div>
                     <div class="main-right-top-two">
 
@@ -76,9 +37,6 @@
                     </div>
 
                 </div>
-
-
-
 
                 <div class="main-right-bottom">
                     <div class="credit-section">
@@ -128,8 +86,8 @@
                                 <p>Total Requests</p>
                                 <h1><?php echo $data['totalRequests']?></h1>
                                 <div class="cont" style="color:#1ca557">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <p style="font-weight:bold">1212 From prev month</p>
+                                    <!-- <i class="fa-solid fa-arrow-trend-up"></i> -->
+                                    <!-- <p style="font-weight:bold">1212 From prev month</p> -->
                                 </div>
                             </div>
                             <div class="left-cont">
@@ -137,8 +95,8 @@
                                 <p>Completed Requests</p>
                                 <h1><?php echo $data['completedRequests']?></h1>
                                 <div class="cont" style="color:#1ca557">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <p style="font-weight:bold">1212 From prev month</p>
+                                    <!-- <i class="fa-solid fa-arrow-trend-up"></i> -->
+                                    <!-- <p style="font-weight:bold">1212 From prev month</p> -->
                                 </div>
                             </div>
                             <div class="left-cont">
@@ -146,8 +104,8 @@
                                 <p>Cancelled Requests</p>
                                 <h1><?php echo $data['cancelledRequests']?></h1>
                                 <div class="cont" style="color:#1ca557">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <p style="font-weight:bold">1212 From prev month</p>
+                                    <!-- <i class="fa-solid fa-arrow-trend-up"></i>
+                                    <p style="font-weight:bold">1212 From prev month</p> -->
                                 </div>
                             </div>
                             <div class="left-cont">
@@ -155,20 +113,24 @@
                                 <p>On going</p>
                                 <h1><?php echo $data['ongoingRequests']?></h1>
                                 <div class="cont" style="color:#1ca557">
-                                    <i class="fa-solid fa-arrow-trend-up"></i>
-                                    <p style="font-weight:bold">1212 From prev month</p>
+                                    <!-- <i class="fa-solid fa-arrow-trend-up"></i> -->
+                                    <!-- <p style="font-weight:bold">1212 From prev month</p> -->
                                 </div>
                             </div>
                         </div>
                         <div class="right">
                             <div class="right-cont">
                                 <div class="top">
-                                    <h3>Credits Earned</h3>
-                                    <h1><?php
-                                        $credits = isset($data['credits']) ? $data['credits'] : '00.00';
-                                    ?>
-                                        <?php echo $credits; ?></h1>
-                                    </h1>
+                                    <i class="fa-solid fa-circle-chevron-down"></i>
+                                    <div class="top-right">
+                                        <h3>Earned From Collects</h3>
+                                        <h1><?php
+$credits = isset($data['credits']) ? 'Eco ' . $data['credits'] : 'Eco 00.00';
+?>
+                                            <?php echo $credits; ?></h1>
+                                        </h1>
+                                    </div>
+
                                 </div>
                                 <div class="bottom">
                                     <canvas id="myChart" width="600" height="350"></canvas>
@@ -189,35 +151,15 @@
 </div>
 
 <script>
-var notification = document.getElementById("notification");
-var notification_pop = document.getElementById("notification_popup");
-notification_pop.style.height = "0px";
+/* Notification View */
+document.getElementById('submit-notification').onclick = function() {
+    var form = document.getElementById('mark_as_read');
+    var dynamicUrl = "<?php echo URLROOT;?>/customers/view_notification/analatics";
+    form.action = dynamicUrl; // Set the action URL
+    form.submit(); // Submit the form
 
-notification.addEventListener("click", function() {
-    var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
-
-    if (!isNotificationEmpty) {
-        var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
-        if (notification_pop.style.height === "0px") {
-            if (notificationArraySize >= 3) {
-                notification_pop.style.height = "210px";
-            }
-            if (notificationArraySize == 2) {
-                notification_pop.style.height = "150px";
-            }
-            if (notificationArraySize == 1) {
-                notification_pop.style.height = "105px";
-            }
-            notification_pop.style.visibility = "visible";
-            notification_pop.style.opacity = "1";
-            notification_pop.style.padding = "7px";
-        } else {
-            notification_pop.style.height = "0px";
-            notification_pop.style.visibility = "hidden";
-            notification_pop.style.opacity = "0";
-        }
-    }
-});
+};
+/* ----------------- */
 const currentDate = new Date();
 const currentMonth = currentDate.getMonth() + 1;
 // Add 1 to represent January as index 1

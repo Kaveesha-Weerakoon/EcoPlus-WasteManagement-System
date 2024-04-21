@@ -36,9 +36,11 @@
       $this->db->query('SELECT *,
       customers.id as cID,
       users.id as userId
+      
       FROM customers
       INNER JOIN users
-      ON customers.user_id = users.id');
+      ON customers.user_id = users.id
+      INNER JOIN customer_credits cc ON cc.user_id=users.id');
            $results = $this->db->resultSet();
            return $results;
      }
@@ -154,7 +156,7 @@ public function get_Cus_all_details($id){
      }
     }
 
-    public function getTotalGarbage($id){
+   /* public function getTotalGarbage($id){
       try{
         $this->db->query('SELECT * FROM customer_total_garbage WHERE user_id = :id');
         $this->db->bind(':id', $id);
@@ -164,7 +166,7 @@ public function get_Cus_all_details($id){
       catch (PDOException $e) {
         return false;
       }
-    }
+    }*/
 
     public function get_customers_count($region) {
       try {

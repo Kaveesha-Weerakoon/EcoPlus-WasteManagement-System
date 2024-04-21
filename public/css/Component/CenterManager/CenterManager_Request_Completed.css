@@ -840,107 +840,279 @@
 
     }
 
-
-
-    @media screen and (max-width: 1250px) {
-        .main-left-middle-content h2 {
-            display: none;
-        }
-
-        .main-left-middle-content-line {
-            display: none;
-        }
-
-        .main-left-middle-content img {
-            margin-left: 0;
-        }
-
-        .main-left-bottom-content p {
-            display: none;
-        }
-
-        .main-left-bottom-content {
-            padding-right: 0px;
-        }
-
-        .main-left-top h1 {
-            display: none;
-        }
-
-        .main-left-top img {
-            width: 100%;
-            height: 100%;
-        }
+    #maps{
+        cursor: not-allowed;
     }
 
-    @media screen and (max-width: 1118px) {
-        .main-right-top-one-content {
-            width: 250px;
-            margin-left: 1%;
+
+
+
+    @media screen and (max-width: 1332px) {
+       
+
+        .confirm-garbage-popup-box {
+
+            .wide-note {
+                justify-content: normal;
+                margin-bottom: 0;
+            }
+
+            .wide-note input{
+                width: 91%;
+                margin-left: -12px;
+            }
+
+            .main-right-bottom-content-content input{
+                width: 160%;
+            }
+
+            .A input{
+                width: 91%;
+                margin-left: -12px;
+            }
+
+            .confirm-garbage-popup-form{
+                padding: 20px 40px;
+            }
+        }
+        
+    }
+
+    @media screen and (max-width: 1108px ){
+        .location_pop_content{
+            width: 600px;
         }
 
-        .table td {
+        .confirm-garbage-popup-box {
+
+            .main-right-bottom-content-content input{
+                width: 140%;
+            }
+
+            .A input{
+                width: 91%;
+                margin-left: -12px;
+            }
+
+          
+        }
+
+       
+
+        
+    }
+
+    @media screen and (max-width: 950px ){
+        .location_pop_content{
+            width: 500px;
+        }
+
+        .personal-details-popup-form{
+            width: 600px;
+        }
+
+        .confirm-garbage-popup-box {
+            
+            .main-right-bottom-content-content input{
+                width: 120%;
+            }
+
+            .A input{
+                width: 91%;
+                margin-left: -12px;
+            }
+
+            .cancel-button{
+                margin-left: 20px;
+            }
+
+            .form-button{
+                width: 75%;
+            }
+
+          
+
+        }
+
+      
+        
+        
+    }
+
+    @media screen and (max-width: 862px ){
+        .location_pop_content{
+            width: 400px;
+        }
+
+        .personal-details-popup-form{
+            width: 500px;
+        }
+
+        .request-details-pop-form{
+            width: 450px;
+        }
+
+        .confirm-garbage-popup-box {
+            
+            .main-right-bottom-content-content input{
+                width: 100%;
+            }
+
+            .A input{
+                width: 91%;
+                margin-left: -12px;
+            }
+
+          
+
+        }
+
+    
+    }
+
+    @media screen and (max-width: 700px ){
+        .location_pop_content{
+            width: 300px;
+        }
+
+        .request-details-pop-form{
+            width: 400px;
+        }
+
+        .request-details-right-labels span{
             font-size: 12px;
         }
 
-        .table-header {
-            font-size: 14px;
+        .request-details-right-values span{
+            font-size: 12px;
+        }
+        
+        .cancel-confirm-content{
+            width: 400px;
         }
 
-        .table-row img {
-            width: 20px;
-            height: 20px
+        .confirm-garbage-popup-box {
+            
+            .main-right-bottom-content-content input{
+                width: 100%;
+            }
+
+            .A input{
+                width: 91%;
+                margin-left: -12px;
+            }
+
+          
+
         }
 
+        .popup{
+            width: 300px;
+        }
     }
 
-    @media screen and (max-width:862px) {
-        .main-right-top-one-content {
-            width: 250px;
-            margin-left: 0;
-            padding-left: 5%;
+    @media screen and (max-width:660px) {
+        .personal-details-popup-form{
+            width: 400px;
         }
 
-        .main-right-top-one input {
-            width: 20%;
+        .personal-details-left img{
+            width: 100px;
+            height: 100px;
         }
 
-        .main-right-top-three-content p {
-            font-size: 14px;
-        }
-
-        .line {
-            width: 86px;
-            height: 2px;
-        }
-
-        .table td {
-            font-size: 10px;
-        }
-
-        .table-header {
+        .personal-details-right-labels span, .personal-details-right-values span, .personal-details-left p{
             font-size: 12px;
         }
 
-        .table-row img {
-            width: 17px;
-            height: 17px;
+        .collect-details-pop-form{
+            width: 450px;
         }
+
+        .confirm-garbage-popup-box {
+            
+            .main-right-bottom-content-content input{
+                width: 80%;
+                margin-left: -12px;
+            }
+
+            .A input{
+                width: 85%;
+                margin-left: -3px;
+            }
+
+          
+
+        }
+      
     }
 
-    @media screen and (max-width: 692px) {
-        .table td {
-            font-size: 9px;
+    @media screen and (max-width:588px) {
+        .confirm-garbage-popup-box {
+            
+            .main-right-bottom-content-content input{
+                width: 60%;
+                margin-left: -80px;
+            }
+
+            .A input{
+                width: 60%;
+                
+            }
+
+          
+
         }
 
-        .table-header {
-            font-size: 10px;
+    }
+
+    
+    @media screen and (max-width:500px) {
+        .request-details-right-labels{
+            padding-left: 16px;
         }
 
-        .table-row img {
-            width: 15px;
-            height: 15px;
+        .request-details-right-values{
+            padding-left: 70px;
         }
+
+        .request-details-pop-form{
+            width: 300px;
+        }
+
+        .collect-details-pop-form{
+            width: 400px;
+        }
+
+        .collect-details-pop-form-content-labels h3{
+            font-size: 12px;
+            margin-left: 40%;
+        }
+
+        .collect-details-pop-form-content-right-values h3{
+            font-size: 12px;
+        }
+
+        .confirm-garbage-popup-box {
+            
+            .main-right-bottom-content-content input{
+                width: 60%;
+                margin-left: -80px;
+            }
+
+            .A input{
+                width: 60%;
+                
+            }
+
+          
+
+        }
+
+        .popup{
+            width: 300px;
+        }
+
     }
 
 

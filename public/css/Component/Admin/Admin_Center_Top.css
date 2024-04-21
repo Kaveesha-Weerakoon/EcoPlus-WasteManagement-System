@@ -19,6 +19,7 @@
         height: 100%;
         grid-template-rows: 23% 77%;
         background-color: var(--background-color-right);
+        overflow: hidden !important;
 
     }
 

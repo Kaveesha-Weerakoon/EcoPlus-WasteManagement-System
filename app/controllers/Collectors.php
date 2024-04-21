@@ -15,6 +15,7 @@
       $this->centerModel=$this->model('Center');
       $this->garbageTypeModel=$this->model('Garbage_Types');
       $this->fineModel=$this->model('Fines');
+      $this->Report_Model=$this->model('Collector_Report');
 
       if(!isLoggedIn('collector_id')){
         redirect('users/login');
@@ -31,7 +32,7 @@
       $cancel_Requests_count=count($this->Request_Model->get_cancelled_request_by_collector( $_SESSION['collector_id'] ));
       $completed_requests=count($this->Collect_Garbage_Model->get_complete_request($_SESSION['collector_id']));
       $total_garbage=$this->Collect_Garbage_Model->get_completed_garbage_totals_by_collector($_SESSION['collector_id']);
-      $credit= $this->creditModel->get();
+      // $credit= $this->creditModel->get();
       $req_completed_history = $this->Collect_Garbage_Model->get_complete_request_cus($_SESSION['collector_id']); 
       $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
       $assistant_count=count( $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']));
@@ -47,7 +48,7 @@
         'collector' =>$collector,
         'assinged_Requests_count' => $assinged_Requests_count,
         'assigned_requests' => $jsonData,
-        'eco_credit_per'=>$credit,
+        // 'eco_credit_per'=>$credit,
         'req_completed_history' =>$req_completed_history,
         'percentage'=> $percentage_completed,
         'total_garbage'=> $json_Total_Garbage,
@@ -442,7 +443,6 @@
       $this->view('collectors/complains_history', $data);
     }
 
-  
     public function editprofile(){
       $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
 
@@ -804,16 +804,17 @@
   }
 
   public function enterWaste_And_GenerateEcoCredits($req_id,$pop_eco="False") {
-    $types=$this->garbageTypeModel->get_all();
+     $types=$this->garbageTypeModel->get_all();
     
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
-        $jsonData = json_encode($assinged_Requests);
-        $collector_id = $_SESSION['collector_id'];
-        $atLeastOneFilled = false;
-        $allFieldsValid = true;
+         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         
+         $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
+         $jsonData = json_encode($assinged_Requests);
+         $collector_id = $_SESSION['collector_id'];
+         $atLeastOneFilled = false;
+         $allFieldsValid = true;
+       
         $data = [
             'assigned_requests' => $assinged_Requests,
             'jsonData' => $jsonData,
@@ -825,23 +826,25 @@
             'note_err'=>'',
             'creditData'=>'',
             'types'=>$types,      
-            'credit_Amount'=> '',
-        ];
+            'credit_Amount'=> '',        
+              'verification_err'=>''
 
+        ];
 
         foreach ($types as $type) {
           if ($type) {
               $typeName = strtolower($type->name);
               $data["{$typeName}_quantity"] = trim($_POST["{$typeName}_quantity"]);
           }
-       }
+        }
 
         foreach ($types as $type) {
           if ($type) {
               $typeName = strtolower($type->name);
               $data["{$typeName}_quantity_err"] = '';
           }
-       }
+        }
+       
         foreach ($types as $type) {
           if ($type) {
               $typeName = strtolower($type->name);
@@ -851,24 +854,25 @@
 
         foreach ($types as $field) {
           if (!empty($_POST["{$field->name}_quantity"])) {
-            if (!is_numeric($_POST["{$field->name}_quantity"])) {
-                $data["{$field}_quantity_err"] = "Please enter a valid number";
-                $allFieldsValid = false;
+              if (!is_numeric($_POST["{$field->name}_quantity"])) {
+                  $data["{$field}_quantity_err"] = "Please enter a valid number";
+                  $allFieldsValid = false;
               } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST["{$field->name}_quantity"]) !== 1) {
                   $data["{$field->name}_quantity_err"] = "Please enter up to two decimal places.";
                   $allFieldsValid = false;
-                } elseif ($_POST["{$field->name}_quantity"] <= ${$field->name . '_min'}) {
-                  $name="{$field->name}_min";
+              } elseif ($_POST["{$field->name}_quantity"] > 1000) { // Check if quantity exceeds 1000 kg
+                  $data["{$field->name}_quantity_err"] = "Maximum allowed weight is 1000 kg.";
+                  $allFieldsValid = false;
+              } elseif ($_POST["{$field->name}_quantity"] <= ${$field->name . '_min'}) {
+                  $name = "{$field->name}_min";
                   $data["{$field->name}_quantity_err"] = "Minimum required amount is {$$name}";
                   $allFieldsValid = false;
-
-                }
-              else{
-                $atLeastOneFilled = true;
-
+              } else {
+                  $atLeastOneFilled = true;
               }
           }
-        }
+      }
+      
 
         if (!$atLeastOneFilled && $allFieldsValid) {
                 foreach ($types as $type) {
@@ -896,6 +900,7 @@
             $data['creditData']=$types ;
             $data['credit_Amount'] = $credit_Amount;
             $data['popup_confirm_collect'] ="True";
+            $this->Request_Model->verification($req_id);
             $this->view('collectors/request_assinged', $data);
 
             } else {
@@ -919,7 +924,9 @@
           'types'=>$types,
 
           'note_err'=>'',
-          'creditData'=>''
+          'creditData'=>'',
+          'verification_err'=>''
+
           ]; 
           foreach ($types as $type) {
             if ($type) {
@@ -937,7 +944,6 @@
         } 
 
   }
-
 
   public function Eco_Credit_Insert($req_id,$pop_eco="False") {
     $types=$this->garbageTypeModel->get_all();
@@ -961,7 +967,10 @@
           'types'=>$types,
           'credit_Amount'=> '',
           'note_err'=>'',
-          'creditData'=>''
+          'creditData'=>'',
+          'verification'=>trim($_POST['verification']),
+          'verification_err'=>''
+
        ];
       foreach ($types as $type) {
         if ($type) {
@@ -985,21 +994,21 @@
 
       foreach ($types as $field) {
         if (!empty($_POST["{$field->name}_quantity"])) {
-          if (!is_numeric($_POST["{$field->name}_quantity"])) {
-              $data["{$field}_quantity_err"] = "Please enter a valid number";
-              $allFieldsValid = false;
+            if (!is_numeric($_POST["{$field->name}_quantity"])) {
+                $data["{$field}_quantity_err"] = "Please enter a valid number";
+                $allFieldsValid = false;
             } elseif (preg_match('/^\d+(\.\d{1,2})?$/', $_POST["{$field->name}_quantity"]) !== 1) {
                 $data["{$field->name}_quantity_err"] = "Please enter up to two decimal places.";
                 $allFieldsValid = false;
-              } elseif ($_POST["{$field->name}_quantity"] <= ${$field->name . '_min'}) {
-                $name="{$field->name}_min";
+            } elseif ($_POST["{$field->name}_quantity"] > 1000) { // Check if quantity exceeds 1000 kg
+                $data["{$field->name}_quantity_err"] = "Maximum allowed weight is 1000 kg.";
+                $allFieldsValid = false;
+            } elseif ($_POST["{$field->name}_quantity"] <= ${$field->name . '_min'}) {
+                $name = "{$field->name}_min";
                 $data["{$field->name}_quantity_err"] = "Minimum required amount is {$$name}";
                 $allFieldsValid = false;
-
-              }
-            else{
-              $atLeastOneFilled = true;
-
+            } else {
+                $atLeastOneFilled = true;
             }
         }
       }
@@ -1010,13 +1019,15 @@
             $typeName = strtolower($type->name);
             $data["{$typeName}_quantity_err"] = "Please fill {$typeName} quantity";
           }
-      }      
+       }      
       }
 
       if(empty($_POST['note'])){
             $data['note_err'] = 'Please fill in the Note field';
       }    
+      
       $credit_Amount =0;
+      
       if ($atLeastOneFilled && empty($data['note_err']) && $allFieldsValid) {
 
        
@@ -1025,34 +1036,39 @@
                   $typeName = strtolower($type->name);
                   $credit_Amount+=(floatval($data["{$type->name}_quantity"]) * $type->credits_per_waste_quantity);
               }
-            }
+          }
           $data['creditData']=$types ;
           $data['credit_Amount'] = $credit_Amount;
           $collector = $this->collectorModel->getCollectorById($_SESSION['collector_id']);
           $data['center_id'] = $collector->center_id;
           $data['region'] = $collector->center_name;
+          $code= $this->Request_Model->getverification($req_id);
 
-
-          $inserted = $this->Collect_Garbage_Model->insert($data);
-          
-          
-          $requst = $this->Request_Model->get_request_by_id($req_id);// Assuming you have the customer ID
-          $customer_id= $requst->customer_id;
-          $current_credit = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
-
-          $new_credit_balance = $current_credit + $credit_Amount; // Calculate new credit balance
-
-          // Update the customer credit balance in the database
-          $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
-          $updatedGarbageTotals = $this->Collect_Garbage_Model->updateGarbageTotals($req_id);
+         
+          $code = $this->Request_Model->getverification($req_id);
+          if($code->code==$data['verification']){ 
+         
+            $inserted = $this->Collect_Garbage_Model->insert($data);
+            $requst = $this->Request_Model->get_request_by_id($req_id);// Assuming you have the customer ID
+            $customer_id= $requst->customer_id;
            
-          if ($inserted && $update_result && $updatedGarbageTotals ) {
-            header("Location: " . URLROOT . "/collectors/request_completed");        
-    
+            $current_credit = $this->Customer_Credit_Model->get_customer_credit_balance($customer_id);
+            $new_credit_balance = $current_credit + $credit_Amount; // Calculate new credit balance
+            $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
+           
+            if ($inserted && $update_result && $updatedGarbageTotals ) {
+               header("Location: " . URLROOT . "/collectors/request_completed");        
+            } else {
+              
 
-          } else {
             header("Location: " . URLROOT . "/collectors/request_assinged"); 
+            }
+           }else{
+            $data['popup_confirm_collect']='True';
+            $data['verification_err']="Wrong Code";
+            $this->view('collectors/request_assinged', $data);
           }
+          
        } else {
             $this->view('collectors/request_assinged', $data);
           }
@@ -1074,8 +1090,9 @@
         'popup_confirm_collect'=>'',
         'note_err'=>'',         
        'types'=>$types,
-
-        'creditData'=>''
+       'verification'=>'',
+        'creditData'=>'',
+        'verification_err'=>''
         ]; 
         foreach ($types as $type) {
           if ($type) {
@@ -1106,6 +1123,94 @@
     $customerGarbageData = $this->Collect_Garbage_Model->getCustomerTotalGarbage();
     $data['customerGarbageData'] = $customerGarbageData;
     $this->view('customer_total_garbage_view', $data);
+  }
+
+  public function garbage_types(){
+    $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);    
+    $garbage_types = $this->garbageTypeModel->get_all();
+
+    $data = [
+      'notification'=> $Notifications,   
+      'garbage_types'=>$garbage_types  
+
+    ];
+    $this->view('collectors/garbage_types', $data);
+  }
+
+  public function analatics(){
+    $collectorId= $_SESSION['collector_id'];
+    $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);    
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $fromDate= trim($_POST['fromDate']);
+      $toDate= trim($_POST['toDate']);
+      if($toDate==""){
+        $toDate="none";
+      } 
+
+      if($fromDate==""){
+        $fromDate="none";
+      }
+      
+      $completedRequests=$this->Report_Model->getCompletedRequests($collectorId,$fromDate,$toDate);
+      $cancelledRequests=$this->Report_Model->getCancelledRequests($collectorId,$fromDate,$toDate);
+      $assignRequests=$this->Report_Model->getAssignRequests($collectorId,$fromDate,$toDate);
+      $totalRequests = count($assignRequests)+ count($cancelledRequests)+ count($completedRequests);
+      $credits=$this->Report_Model->getCredits($collectorId,$fromDate,$toDate);
+      $creditByMonth=$this->Report_Model->getCreditsMonths($collectorId);
+      $collectedWasteByMonth=$this->Report_Model->getCollectedGarbage_collector($collectorId,$fromDate,$toDate);
+      $handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage_collector($collectorId,$fromDate,$toDate);
+
+
+      $data=[
+        'assignRequests'=>count($assignRequests),
+        'cancelledRequests'=>count($cancelledRequests),
+        'completedRequests'=> count($completedRequests),
+        'totalRequests'=>$totalRequests,
+        'credits'=> $credits->total_credits,
+        'to'=> $toDate,
+        'from'=>  $fromDate,      
+        'creditsByMonth1'=>  $creditByMonth,
+        'handoveredWasteByMonth'=>$handoveredWasteByMonth,
+        'collectedWasteByMonth'=>$collectedWasteByMonth,
+      ];
+      
+      $this->view('collectors/analatics', $data);
+   }
+  
+   else{
+    
+    $completedRequests=$this->Report_Model->getCompletedRequests($collectorId,"none", "none");
+    $cancelledRequests=$this->Report_Model->getCancelledRequests($collectorId,"none", "none");
+    $assignRequests=$this->Report_Model->getAssignRequests($collectorId,"none", "none");
+    $totalRequests = count($assignRequests) + count($cancelledRequests) + count($completedRequests);
+    $credits=$this->Report_Model->getCredits($collectorId,"none", "none");
+    $creditByMonth=$this->Report_Model->getCreditsMonths($collectorId);
+    $collectedWasteByMonth=$this->Report_Model->getCollectedGarbage_collector($collectorId,"none", "none");
+    $handoveredWasteByMonth=$this->Report_Model->getHandOveredGarbage_collector($collectorId,"none", "none");
+   
+    $data=[
+      'assignRequests'=>count($assignRequests),
+      'cancelledRequests'=>count($cancelledRequests),
+      'completedRequests'=> count($completedRequests),
+      'totalRequests'=>$totalRequests,
+      'credits'=> $credits->total_credits,     
+      'creditsByMonth1'=> $creditByMonth,
+      'collectedWasteByMonth'=>$collectedWasteByMonth,
+      'handoveredWasteByMonth'=>$handoveredWasteByMonth,
+      'to'=>'none',
+      'from'=>'none',  
+      /*'notification'=> $Notifications, 
+      'fine_balance'=> $finedAmount, 
+      'credit_balance'=> $creditsBalance, 
+      'transaction_balance'=> $transactionBalance, 
+      'redeemed_balance'=> $getDiscountsOnAgents->discount_credits*/
+
+      ];
+   
+     $this->view('collectors/analatics', $data);
+   }
   }
 
 

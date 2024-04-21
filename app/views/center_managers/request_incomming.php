@@ -136,11 +136,11 @@
                                                 <span class=\"collector-name\">$collector->name</span>
                                                 <span class=\"vehicle-type\">$collector->vehicle_type</span>
                                                 </li>";
-                             }
-                         }else {
-                                 echo "<li>No Collectors Available</li>";
-                              }
-                          ?>
+                                        }
+                                    }else {
+                                            echo "<li>No Collectors Available</li>";
+                                        }
+                                    ?>
                             </ul>
                         </div>
 
@@ -209,6 +209,16 @@
 
 
             <script>
+            /* Notification View */
+            document.getElementById('submit-notification').onclick = function() {
+                var form = document.getElementById('mark_as_read');
+                var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/request_incomming";
+                form.action = dynamicUrl; // Set the action URL
+                form.submit(); // Submit the form
+
+            };
+            /* ----------------- */
+
             function validateCancelForm() {
                 var reasonInput = document.getElementsByName("reason")[0].value;
 

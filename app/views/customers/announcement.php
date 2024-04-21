@@ -13,44 +13,8 @@
                             <i class='bx bx-search-alt-2'></i>
                             <input type="text" placeholder="Search">
                         </div>
-                        <div class="main-right-top-notification" id="notification">
-                            <i class='bx bx-bell'></i>
-                            <?php if (!empty($data['notification'])) : ?>
-                            <div class="dot"><?php echo count($data['notification'])?></div>
-                            <?php endif; ?>
-                        </div>
-                        <div id="notification_popup" class="notification_popup">
-                            <h1>Notifications</h1>
-                            <div class="notification_cont">
-                                <?php foreach($data['notification'] as $notification) : ?>
+                        <?php require APPROOT . '/views/customers/customer_notification/customer_notification.php'; ?>
 
-                                <div class="notification">
-                                    <div class="notification-green-dot">
-
-                                    </div>
-                                    <div class="notification_right">
-                                        <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
-                                        <?php echo $notification->notification ?>
-                                    </div>
-                                </div>
-                                <?php endforeach; ?>
-
-                            </div>
-                            <form class="mark_as_read" method="post"
-                                action="<?php echo URLROOT;?>/customers/view_notification/garbage_types">
-                                <i class="fa-solid fa-check"> </i>
-                                <button type="submit">Mark all as read</button>
-                            </form>
-
-                        </div>
-                        <div class="main-right-top-profile">
-                            <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>"
-                                alt="">
-                            <div class="main-right-top-profile-cont">
-                                <h3>Kaveesha</h3>
-                                <p>ID : C <?php echo $_SESSION['user_id']?></p>
-                            </div>
-                        </div>
                     </div>
                     <div class="main-right-top-two">
                         <h1>Announcements</h1>
@@ -118,7 +82,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Trigger checkSlide once after DOM content has loaded
     checkSlide();
-});
+}); /* Notification View */
+document.getElementById('submit-notification').onclick = function() {
+    var form = document.getElementById('mark_as_read');
+    var dynamicUrl = "<?php echo URLROOT;?>/customers/view_notification/announcements";
+    form.action = dynamicUrl; // Set the action URL
+    form.submit(); // Submit the form
+
+};
+/* ----------------- */
 </script>
 
 

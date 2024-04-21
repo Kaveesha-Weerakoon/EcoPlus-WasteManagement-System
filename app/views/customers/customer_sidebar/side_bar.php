@@ -23,7 +23,6 @@
             </div>
             <h3>Analatics</h3>
         </div>
-
         <div class="main-left-middle-content" onclick="redirect_history()" id="history">
             <div class=" main-left-middle-content-icon">
                 <i class='bx bx-timer'></i>
@@ -129,7 +128,11 @@ function setDarkModeStyle(isDarkMode) {
     root.style.setProperty("--green-color-two", isDarkMode ? "#fff" : "#47b076");
     root.style.setProperty("--notification-hover", isDarkMode ? "#1ca557" : "#64d798");
     root.style.setProperty("--background-color-two", isDarkMode ? "#001f3f" : "#f5f6fa");
-    root.style.setProperty("--yellow-color", isDarkMode ? "#fff" : "#f6e58d");
+    root.style.setProperty("--yellow-color", isDarkMode ? "#414143" : "#f6e58d");
+    root.style.setProperty("--red-color", isDarkMode ? "#fff" : "#F13E3E");
+
+    root.style.setProperty("--box-shadow2", isDarkMode ? "0.1px 0.1px 1px 1px rgba(255, 255, 255, 0.5)" :
+        "0 1px 1px 0px rgba(0, 0, 0, 0.1)");
 
     root.style.setProperty("--box-shadow", isDarkMode ? "0.5px 0.5px 1px 0.5px rgba(255, 255, 255, 1)" :
         "0 1px 1px 0px rgba(0, 0, 0, 0.1)");
@@ -150,8 +153,16 @@ setDarkModeStyle(initialDarkModeSetting);
 checkbox.addEventListener("change", function() {
     const isDarkMode = checkbox.checked;
     setDarkModeStyle(isDarkMode);
-    console.log("as");
 
     localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
 });
+
+
+isDarkMode = getDarkModeSetting();
+if (getDarkModeSetting()) {
+    color = "white"
+    textColor = " white";
+    circularProgress.style.background =
+        `conic-gradient(${color}, ${progressStartValue * 3.6}deg, ${isDarkMode ? "#001f3f" : "#ededed"} 0deg)`;
+}
 </script>

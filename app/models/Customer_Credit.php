@@ -37,11 +37,10 @@
 
     public function record_credit_transfer($sender_id,$sender_image, $receiver_id, $receiver_image, $date, $time, $transfer_amount) {
         try{
-        $this->db->query('INSERT INTO credits_transfer (sender_id, receiver_id,  date, time, transfer_amount) VALUES (:sender_id, :receiver_id,  :date, :time, :transfer_amount)');
+        $this->db->query('INSERT INTO credits_transfer (sender_id, receiver_id, transfer_amount) VALUES (:sender_id, :receiver_id, :transfer_amount)');
         $this->db->bind(':sender_id', $sender_id);
         $this->db->bind(':receiver_id', $receiver_id);
-        $this->db->bind(':date', $date);
-        $this->db->bind(':time', $time);
+
         $this->db->bind(':transfer_amount', $transfer_amount);
 
         return $this->db->execute();

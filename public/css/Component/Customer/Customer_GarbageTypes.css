@@ -19,6 +19,7 @@
         overflow: scroll;
         background-color: var(--background-color-right);
         box-sizing: border-box;
+        overflow-x: hidden;
     }
 
     .main-right-top {
@@ -49,7 +50,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-around;
+        justify-content: end;
         border: 10px;
         width: 100%;
         box-sizing: border-box;
@@ -58,41 +59,7 @@
         z-index: 3;
     }
 
-    .main-right-top-search {
-        display: flex;
-        visibility: none;
-        align-items: center;
-        justify-content: center;
-        width: 35%;
-        position: relative;
-        visibility: hidden;
-    }
 
-    .main-right-top-search i {
-        position: absolute;
-        font-size: 25px;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .main-right-top-search input {
-        width: 100%;
-        height: 33px;
-        border-radius: 7px;
-        background-color: var(--background-color-two);
-        border: 1px solid #dcdde1;
-        font-size: 14px;
-        padding-left: 40px;
-        letter-spacing: 0.03rem;
-        color: var(--main-text-color);
-
-    }
-
-    .main-right-top-search input:focus {
-        border: 1px solid #1ca557;
-        outline: none;
-    }
 
     .main-right-top-notification {
         display: flex;
@@ -138,6 +105,7 @@
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
         background-color: var(--background-color-right);
+        overflow-x: scroll !important;
     }
 
     .main-right-bottom-container {
@@ -154,6 +122,8 @@
         margin-bottom: 20px;
         margin-left: 20px;
         font-size: 15px;
+        overflow-x: scroll !important;
+
     }
 
     .circle {
@@ -169,6 +139,7 @@
     .main-right-bottom-container-container {
         width: 100%;
         height: 100%;
+        overflow-x: scroll;
     }
 
     .main-right-bottom-top {
@@ -181,6 +152,8 @@
         width: 96.5%;
         height: 450px;
         overflow: scroll;
+        overflow-x: scroll !important;
+
     }
 
     .table {
@@ -191,7 +164,7 @@
     }
 
     .table-header {
-        grid-template-columns: 20% 25% 25% 30%
+        grid-template-columns: 20% 50% 30%
     }
 
     .table-row {
@@ -268,6 +241,10 @@
         .main-right-top-three {
             padding-left: 20px;
         }
+
+        .main-right-bottom {
+            width: 100%;
+        }
     }
 
     @media screen and (max-width: 600px) {
@@ -276,11 +253,11 @@
         }
 
         .main-right-top-three h4 {
-            font-size: 15px;
+            font-size: 12px !important;
         }
 
         .table-header th {
-            font-size: 13px;
+            font-size: 12px;
         }
     }
 

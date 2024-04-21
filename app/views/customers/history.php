@@ -20,7 +20,7 @@
                                 <div class="main-right-bottom-top">
                                     <table class="table">
                                         <tr class="table-header">
-                                            <th>Discount ID</th>
+                                            <th>Discount Agent</th>
                                             <th>Date</th>
                                             <th>Time</th>
                                             <th>Credit Amount</th>

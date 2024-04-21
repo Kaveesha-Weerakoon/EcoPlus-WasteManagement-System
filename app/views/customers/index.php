@@ -173,7 +173,7 @@
             <div class="Centers_pop" id="centers">
                 <div class="centers_top">
                     <h2>Regional Centers</h2>
-                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="centers_close" id="centers_close">
+                    <i class="fa-regular fa-circle-xmark" id="centers_close"></i>
                 </div>
 
                 <div id="map" class="centers">
@@ -193,25 +193,21 @@
                           ?> !</h2>
                     <p>Request a garbage collect by clicking the <b>Request Now </b> button</p>
                     <img src="<?php echo IMGROOT?>/two.png" alt="">
-                    <div class="arrow1"></div>
                 </div>
                 <div class="tutorial-step" id="step2">
                     <h2>View Wallet Amount !</h2>
                     <p>Wallet Amount Shows Current <b>Eco Credit</b> Balance </p>
                     <img src="<?php echo IMGROOT?>/two.png" alt="">
-                    <div class="arrow2"></div>
                 </div>
                 <div class="tutorial-step" id="step3">
                     <h2>Overall Collection Total </h2>
-                    <p>This Graph shows Overall garbage you handoverd in the collections</p>
+                    <p>Overall Collection Total shows Overall garbage you handoverd in the collections</p>
                     <img src="<?php echo IMGROOT?>/two.png" alt="">
-                    <div class="arrow3"></div>
                 </div>
                 <div class="tutorial-step" id="step4">
                     <h2>Transfer your Eco Credits!</h2>
                     <p>You can view all the Transaction from history</p>
                     <img src="<?php echo IMGROOT?>/two.png" alt="">
-                    <div class="arrow4"></div>
                 </div>
                 <div class="tutorial-step" id="step5">
                     <h2>You Have Caught all !</h2>

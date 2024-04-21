@@ -147,6 +147,6 @@ checkbox.addEventListener("change", function() {
     const isDarkMode = checkbox.checked;
     setDarkModeStyle(isDarkMode);
 
-    localStorage.setItem("darkMode_Collectore", JSON.stringify(isDarkMode));
+    localStorage.setItem("darkMode_Collector", JSON.stringify(isDarkMode));
 });
 </script>

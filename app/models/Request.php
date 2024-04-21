@@ -172,6 +172,8 @@
   
 
     public function get_cancelled_request($customer_id){    
+      try{
+        
       $query = '
       SELECT
         rm.req_id AS request_id,
@@ -201,8 +203,11 @@
      $this->db->bind(':type', 'cancelled'); // Assuming 'cancelled' is a string value
        $results = $this->db->resultSet();
 
-      return $results;
-
+      return $results;}catch (PDOException $e) {
+      
+        return false;
+     
+    }
     }
 
     public function get_incoming_request($region){

@@ -34,7 +34,7 @@
                                     <table class="table">
                                         <?php foreach($data['complains'] as $post) : ?>
                                         <tr class="table-row">
-                                            <td>Com <?php echo $post->id?></td>
+                                            <td><?php echo $post->id?></td>
                                             <td><?php echo $post->date?></td>
                                             <td><?php echo $post->subject?></td>
                                             <td><?php echo $post->complaint?></td>

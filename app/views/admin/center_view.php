@@ -58,7 +58,7 @@
                                 <tr class="table-row"
                                     onclick="locate('<?php echo $centers->id?>/<?php echo $centers->region?>')">
 
-                                    <td>C<?php echo $centers->id?></td>
+                                    <td><?php echo $centers->id?></td>
                                     <td><?php echo $centers->region?></td>
                                     <!-- <td><i class='bx bx-map' style="font-size: 29px;"
                                             onclick="viewLocation(<?php echo $centers->lat; ?>, <?php echo $centers->longi; ?>)"></i>
@@ -111,11 +111,8 @@
 </div>
 <script>
 function locate(url) {
-    console.log(url)
     window.location.href = "<?php echo URLROOT?>/admin/center_main/" + url;
 }
-
-
 
 function initMap(latitude, longitude) {
     var mapCenter = {

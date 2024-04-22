@@ -33,7 +33,7 @@
 
                                         <?php foreach ($data['transaction_history'] as $transaction): ?>
                                         <tr class="table-row">
-                                            <td>T <?php echo $transaction->id ?></td>
+                                            <td> <?php echo $transaction->id ?></td>
                                             <td>
                                                 <?php
                                                 $date = date('Y-m-d', strtotime($transaction->date));

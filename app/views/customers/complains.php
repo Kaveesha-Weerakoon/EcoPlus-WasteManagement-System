@@ -45,9 +45,9 @@
                             </div>
 
                             <div class="main-bottom-component-left-component">
-                                <h2>Subject</h2>
+                                <h2>Req ID</h2>
                                 <input value="<?php echo $data['subject']; ?>" name="subject" type="text"
-                                    placeholder="Subject">
+                                    placeholder="None / Req Id">
                                 <div class="err"><?php echo $data['subject_err']; ?></div>
                             </div>
 

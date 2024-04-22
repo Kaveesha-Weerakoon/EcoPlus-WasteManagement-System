@@ -377,12 +377,13 @@
         $data['assinged']='No';
       }
       if($Request->code!=0){
-       header("Location: " . URLROOT . "/customers/request_main");        
+       header("Location: " . URLROOT . "/customers/request_completed");        
 
       }else{
-     $this->Request_Model->cancel_request($data);       
+        $this->Request_Model->cancel_request($data);     
+        header("Location: " . URLROOT . "/customers/request_cancelled");        
+  
        }
-       header("Location: " . URLROOT . "/customers/request_cancelled");        
     }
 
     public function request_completed(){
@@ -736,9 +737,9 @@
         } 
         
         if(empty($data['subject'])){
-          $data['subject_err'] = 'Please enter subject';
+          $data['subject_err'] = 'Please enter reqId';
         } elseif (strlen($data['subject']) > 255) {
-          $data['subject_err'] = 'Subject is too long';
+          $data['subject_err'] = 'reqId is too long';
       }
         
         if(empty($data['complain'])){
@@ -873,43 +874,42 @@
 
         if (empty($data['date'])) {
           $data['date_err'] = 'Date is required';
-        } 
-        else {
-            $isHoliday = false;
-
-            foreach ($marked_holidays as $holiday) {
-                if ($holiday->date === $data['date']) {
-                    $isHoliday = true;
-                    break;
-                }
-            } 
-
-            if ($isHoliday) {
-                $data['date_err'] = 'Sorry, the center is not available on this day';
-            }
-            else{
+      } else {
+          $isHoliday = false;
+      
+          foreach ($marked_holidays as $holiday) {
+              if ($holiday->date === $data['date']) {
+                  $isHoliday = true;
+                  break;
+              }
+          }
+      
+          if ($isHoliday) {
+              $data['date_err'] = 'Sorry, the center is not available on this day';
+          } else {
               $selectedTimestamp = strtotime($data['date']);
               $currentTimestamp = strtotime('tomorrow');
-              if ($selectedTimestamp < $currentTimestamp) {
-                $data['date_err'] = 'Select a date from tomorrow onwards';
-              }
-              else{       
-                 $dateFound = false;
-
-                foreach ($requests as $request) {
-                  if ($request->date == $data['date']) {
-                      $dateFound = true;
-                      break; 
+              $sevenDaysLater = strtotime('+7 days', $currentTimestamp);
+      
+              if ($selectedTimestamp < $currentTimestamp || $selectedTimestamp > $sevenDaysLater) {
+                  $data['date_err'] = 'Select a date within the next seven days';
+              } else {
+                  $dateFound = false;
+      
+                  foreach ($requests as $request) {
+                      if ($request->date == $data['date']) {
+                          $dateFound = true;
+                          break;
+                      }
+                  }
+      
+                  if ($dateFound) {
+                      $data['date_err'] = 'You can only make one request per day.';
                   }
               }
-              if ($dateFound) {
-                $data['date_err'] = 'You can only make one request per day.';
-              }
-          
-              }
-              
-            }
-        }
+          }
+      }
+      
         
 
      

@@ -87,12 +87,19 @@
         try{
           $this->db->query('SELECT *,
                               collectors.id as cID,
-                              users.id as userId
+                              users.id as userId,
+                              users.name as collector_name,
+                              request_main.name as customer_name,
+                              collectors.contact_no as collector_contact,
+                              request_main.contact_no as customer_contact,
+                              GROUP_CONCAT( DISTINCT request_main.type) AS request_type
                               FROM collectors
                               INNER JOIN users
                               ON collectors.user_id = users.id
                               LEFT JOIN request_assigned
                               ON collectors.user_id = request_assigned.collector_id
+                              LEFT JOIN request_main
+                              ON request_assigned.req_id = request_main.req_id
                               WHERE collectors.center_id = :center_id
                               GROUP BY collectors.user_id');
               $this->db->bind(':center_id', $center_id);

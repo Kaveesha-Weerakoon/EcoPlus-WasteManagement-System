@@ -490,6 +490,7 @@
         background: #a7a1a1;
     }
 
+    /* delete prohibitted popup */
     .delete_prohibitted {
         display: flex;
         position: fixed;
@@ -513,6 +514,27 @@
         background-color: rgba(0, 0, 0, 0);
 
     }
+
+    .delete_prohibitted-ok-button{
+        width: 90%;
+        margin-top: 25px;
+        padding: 8px;
+        background: rgb(220, 39, 39);
+        color: white;
+        border: 0;
+        outline: none;
+        font-size: 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+
+    }
+
+    .delete_prohibitted-ok-button:hover{
+        background: #c62323;
+    }
+
+
 
     /*Update popup*/
     .update_click {
@@ -753,7 +775,7 @@
 
     /*personal details popup*/
     .personal-details-popup-box {
-        position: fixed;
+        /* position: fixed;
         top: 0;
         left: 0;
         background-color: rgba(0, 0, 0, 0.1);
@@ -762,11 +784,31 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        height: 100%;
+        height: 100%; */
+        display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 4;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        background-color: var(--main-text-color);
+    }
+
+    .personal-details-popup-box.active {
+        transform: translate(-50%, -50%) scale(1);
+        background-color: rgba(0, 0, 0, 0);
+
     }
 
     .personal-details-popup-form {
-        width: 45%;
+        width: 600px;
         background: white;
         border-radius: 6px;
         top: 0;

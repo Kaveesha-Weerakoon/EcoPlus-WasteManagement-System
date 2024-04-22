@@ -62,12 +62,17 @@
                                 <td><?php echo $collector->user_id?></td>
                                 <td><img src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>"
                                         alt="" class="collector_img"></td>
-                                <td><?php echo $collector->name?></td>
+                                <td><?php echo $collector->collector_name?></td>
                                 <td><?php echo $collector->email?></td>
-                                <td><a
+                                <!-- <td><a
                                         href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><i
                                             class='bx bxs-user' style="font-size: 29px;"></i>
                                     </a></td>
+                                <td> -->
+                                <td>
+                                    <i class='bx bxs-user' style="font-size: 29px;"
+                                        onclick="openPersonalDetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"></i>
+                                </td>
                                 <td>
                                     <i class='bx bxs-truck' style="font-size: 29px;"
                                         onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"></i>
@@ -80,16 +85,19 @@
                                 <!-- <td class="delete"><a
                                         href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>">
                                         <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td> -->
-                                <td class=" cancel-open">
+                                <td>
                                     <?php
-                                        if ($collector->status === 'assinged') {
+                                        if(str_contains($collector->request_type, 'assigned')){
                                             echo '<i class="fa-solid fa-triangle-exclamation" style="font-size: 24px; color:#DC2727;" onclick="delete_assigned_collector(\'' . $collector->user_id . '\')"></i>';
-                                        } else {
-                                            echo '<i class="bx bxs-trash" style="font-size: 29px; " onclick="delete_collector(\'' . $collector->user_id . '\')"></i>';
 
+                                        }else{
+                                            echo '<i class="bx bxs-trash" style="font-size: 29px; " onclick="delete_collector(\'' . $collector->user_id . '\')"></i>';
                                         }
+                                    
+                                    
                                     ?>
                                 </td>
+                                
 
                             </tr>
                             <?php endforeach; ?>
@@ -209,13 +217,14 @@
             <div class="delete_confirm" id="delete-confirm-popup">
                 <div class="popup">
                     <img src="<?php echo IMGROOT?>/trash.png" alt="">
+                    <span class="Collector" id="collector_assigned2"></span>
                     <h2>Delete this collector?</h2>
                     <p>This action will permanently delete this collector</p>
                     <div class="btns">
 
-                        <button type="button" class="deletebtn">Delete</button>
+                        <button type="button" class="deletebtn" onclick="delete_collector_confirm()">Delete</button>
 
-                        <button type="button" class="cancelbtn">Cancel</button>
+                        <button type="button" class="cancelbtn" id="close-delete-confirm">Cancel</button>
 
                     </div>
                 </div>
@@ -223,15 +232,15 @@
 
             <div class="delete_prohibitted" id="delete-prohibitted-popup">
                 <div class="popup">
-                    <img src="<?php echo IMGROOT?>/trash.png" alt="">
+                    <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
                     <h2>This action is prohibitted</h2>
                     <p>Collector <span class="Collector" id="collector_assigned"></span> has already assigned for
                         requests</p>
-                    <div class="btns">
-                       <button id="delete_prohibitted-ok-button">OK</button>
-                        <button>OK</button>
+                    
+                    <button class="delete_prohibitted-ok-button" id="delete_prohibitted-ok-button">OK</button>
+                        
 
-                    </div>
+                   
                 </div>
             </div>
 
@@ -266,20 +275,18 @@
 
 
 
-        <?php if($data['personal_details_click']=='True') : ?>
-        <div class="personal-details-popup-box">
-            <div class="personal-details-popup-form" id="popup">
-                <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png"
-                        alt="" class="personal-details-popup-form-close"></a>
+       
+        <div class="personal-details-popup-box" id="personal-details-popup">
+            <div class="personal-details-popup-form">
+                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close" id="personal-details-popup-form-close">
                 <center>
                     <div class="personal-details-topic">Personal Details</div>
                 </center>
 
                 <div class="personal-details-popup">
                     <div class="personal-details-left">
-                        <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $data['image']?>"
-                            class="profile-pic" alt="">
-                        <p>Collector ID: <span>C<?php echo $data['id']?></span></p>
+                        <img src="" class="profile-pic" alt="" id="col_profile_img">
+                        <p>Collector ID: <span id="col_id">C</span></p>
                     </div>
                     <div class="personal-details-right">
                         <div class="personal-details-right-labels">
@@ -291,12 +298,12 @@
                             <span>DOB</span><br>
                         </div>
                         <div class="personal-details-right-values">
-                            <span><?php echo $data['name']?></span><br>
-                            <span><?php echo $data['email']?></span><br>
-                            <span><?php echo $data['nic']?></span><br>
-                            <span><?php echo $data['address']?></span><br>
-                            <span><?php echo $data['contact_no']?></span><br>
-                            <span><?php echo $data['dob']?></span><br>
+                            <span id="col_name"></span><br>
+                            <span id="col_email"></span><br>
+                            <span id="col_nic"></span><br>
+                            <span id="col_address"></span><br>
+                            <span id="col_contact"></span><br>
+                            <span id="col_dob"></span><br>
 
                         </div>
                     </div>
@@ -305,7 +312,7 @@
 
         </div>
 
-        <?php endif; ?>
+       
 
 
         <div class="vehicle-details-popup-box" id="vehicle-details-popup-box">
@@ -377,13 +384,30 @@ function openvehicledetails(collector) {
 
     // document.getElementById('vehicle-details-popup-box').style.display = "flex";
     document.getElementById('vehicle_collector_id').textContent = collector.user_id;
-    document.getElementById('vehicle_collector_name').textContent = collector.name;
+    document.getElementById('vehicle_collector_name').textContent = collector.collector_name;
     document.getElementById('vehicle_collector_no').textContent = collector.vehicle_no;
     document.getElementById('vehicle_type').textContent = collector.vehicle_type;
 }
 
+function openPersonalDetails(collector) {
+    
+    var personalPop = document.getElementById('personal-details-popup');
+    personalPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    // document.getElementById('vehicle-details-popup-box').style.display = "flex";
+    document.getElementById('col_id').textContent = collector.user_id;
+    document.getElementById('col_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + collector.image;
+    document.getElementById('col_name').textContent = collector.collector_name;
+    document.getElementById('col_email').textContent = collector.email;
+    document.getElementById('col_nic').textContent = collector.nic;
+    document.getElementById('col_address').textContent = collector.address;
+    document.getElementById('col_contact').textContent = collector.collector_contact;
+    document.getElementById('col_dob').textContent = collector.dob;
+}
+
 function delete_assigned_collector(collector_id) {
-    console.log("2");
+    
 
     var collector_assigned = document.getElementById('collector_assigned');
     collector_assigned.textContent = collector_id;
@@ -398,16 +422,33 @@ function delete_assigned_collector(collector_id) {
 }
 
 function delete_collector(collector_id) {
-    console.log("1");
+
+    var collector_assigned = document.getElementById('collector_assigned2');
+    collector_assigned.textContent = collector_id;
+    collector_assigned.style.display = "none";
+    
     var delConfirmPopup = document.getElementById('delete-confirm-popup');
     delConfirmPopup.classList.add('active');
     document.getElementById('overlay').style.display = "flex";
 
 }
 
+function delete_collector_confirm(){
+   
+    var collector_to_be_deleted = document.getElementById('collector_assigned2').textContent;
+    console.log('del', collector_to_be_deleted);
+
+    var linkUrl = "<?php echo URLROOT?>/centermanagers/collector_delete/"+ collector_to_be_deleted; // Replace with your desired URL
+    window.location.href = linkUrl;
+
+
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     var close_vehicledetail = document.getElementById('vehicle-details-popup-form-close');
     var close_delete_confirm = document.getElementById('close-delete-confirm');
+    var close_delete_prohibitted = document.getElementById('delete_prohibitted-ok-button');
+    var close_personaldetails = document.getElementById('personal-details-popup-form-close');
 
     close_vehicledetail.addEventListener('click', function() {
         var vehicle_pop = document.getElementById('vehicle-details-popup-box');
@@ -415,6 +456,27 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('overlay').style.display = "none";
         // document.getElementById('vehicle-details-popup-box').style.display = "none";
     });
+
+    close_delete_confirm.addEventListener('click', function(){
+        var delConfirmPopup = document.getElementById('delete-confirm-popup');
+        delConfirmPopup.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
+    });
+
+    close_delete_prohibitted.addEventListener('click', function(){
+        var delProhibittedPopup = document.getElementById('delete-prohibitted-popup');
+        delProhibittedPopup.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
+    });
+
+    close_personaldetails.addEventListener('click', function(){
+        var personalPop = document.getElementById('personal-details-popup');
+        personalPop.classList.remove('active');
+        document.getElementById('overlay').style.display = "none"; 
+    });
+
 });
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

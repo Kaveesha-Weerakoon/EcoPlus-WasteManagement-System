@@ -1019,6 +1019,7 @@
       'assigned_requests'=> $assigned_requests,
       'lattitude'=> $center->lat,
       'longitude'=> $center->longi,
+      'radius' => $center->radius,
       'notification' => $notifications
     ];
     $this->view('center_managers/request_incomming', $data);
@@ -1147,7 +1148,8 @@
       'jsonData'=>$jsonData,
       'notification'=> $notifications,
       'lattitude'=> $center->lat,
-      'longitude'=> $center->longi
+      'longitude'=> $center->longi,
+      'radius' => $center->radius
     ];
     
     $this->view('center_managers/request_assinged', $data);

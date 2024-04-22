@@ -332,6 +332,23 @@ function initMap() {
                 .contact_no, coordinate.vehicle_no, coordinate.vehicle_type, coordinate.req_id);
         });
     });
+
+    var defaultLatLng = {
+        lat: <?php echo $data['lattitude'] ?>,
+        lng: <?php echo $data['longitude'] ?>
+    };
+
+        // Add a circle to the first map
+    var circle2 = new google.maps.Circle({
+        map: map,
+        center: defaultLatLng,
+        radius: <?php echo $data['radius']?>,
+        fillColor: '#47b076',
+        fillOpacity: 0.3,
+        strokeColor: '#47b076',
+        strokeOpacity: 1,
+        strokeWeight: 2
+    });
 }
 
 function loadLocations() {

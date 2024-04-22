@@ -1145,57 +1145,59 @@
     $data=[
       'assined_requests'=>$assined_requests,
       'jsonData'=>$jsonData,
-      'notification'=> $notifications
+      'notification'=> $notifications,
+      'lattitude'=> $center->lat,
+      'longitude'=> $center->longi
     ];
     
     $this->view('center_managers/request_assinged', $data);
 
   }
   
-  public function assinged_request_cancell(){
-    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
-    $assined_requests=$this->Request_Model->get_assigned_request_by_center($center->region);
-    $jsonData = json_encode($assined_requests);
-    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  // public function assinged_request_cancell(){
+  //   $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+  //   $assined_requests=$this->Request_Model->get_assigned_request_by_center($center->region);
+  //   $jsonData = json_encode($assined_requests);
+  //   $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+  //   if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
-      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  //     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-      $data = [
-        'incoming_requests' => $assined_requests,
-        'jsonData' => $jsonData,
-        'pop_location'=>'',
-        'map'=>'',
-        'request_id'=>trim($_POST['id']),
-        'reason'=>trim($_POST['reason']),
-        'cancelled_by'=>"Center",
-        'assinged'=>'Yes',
-        'collector_id'=> trim($_POST['collector_id']),
-        'notification'=> $notifications
-      ];
+  //     $data = [
+  //       'incoming_requests' => $assined_requests,
+  //       'jsonData' => $jsonData,
+  //       'pop_location'=>'',
+  //       'map'=>'',
+  //       'request_id'=>trim($_POST['id']),
+  //       'reason'=>trim($_POST['reason']),
+  //       'cancelled_by'=>"Center",
+  //       'assinged'=>'Yes',
+  //       'collector_id'=> trim($_POST['collector_id']),
+  //       'notification'=> $notifications
+  //     ];
 
-      if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
-        $this->view('center_managers/request_assigned', $data);
+  //     if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
+  //       $this->view('center_managers/request_assigned', $data);
 
-      } else {
-        $this->Request_Model->cancel_request($data);
-        $this->request_cancelled();
-    }
+  //     } else {
+  //       $this->Request_Model->cancel_request($data);
+  //       $this->request_cancelled();
+  //   }
     
-    }
-    else{
+  //   }
+  //   else{
 
-      $data = [
-        'incoming_requests' => $assined_requests,
-        'jsonData' => $jsonData,
-        'pop_location'=>'',
-        'map'=>'',
-        'notification'=> $notifications
+  //     $data = [
+  //       'incoming_requests' => $assined_requests,
+  //       'jsonData' => $jsonData,
+  //       'pop_location'=>'',
+  //       'map'=>'',
+  //       'notification'=> $notifications
 
-      ];
-      $this->view('center_managers/request_assigned', $data);
-    }
-  }
+  //     ];
+  //     $this->view('center_managers/request_assigned', $data);
+  //   }
+  // }
 
   public function request_completed(){
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 

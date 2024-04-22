@@ -595,10 +595,10 @@
             function initMap() {
                 var map = new google.maps.Map(document.getElementById('map-loaction'), {
                     center: {
-                        lat: 7.8731,
-                        lng: 80.7718
+                        lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
+                        lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
                     },
-                    zoom: 7.2
+                    zoom: 9
                 });
 
                 var incomingRequests = <?php echo $data['jsonData']; ?>;

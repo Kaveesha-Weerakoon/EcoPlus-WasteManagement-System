@@ -17,8 +17,8 @@
 
                         <form class="top-bar" method="post" action="<?php echo URLROOT;?>/customers/analatics">
                             <div class="top-bar-left">
-                                <h2>Analatics</h2>
-                                <p>Here is your overall Anatics</p>
+                                <h2>Analytics</h2>
+                                <p>Here is your overall analyticsanalytics</p>
                             </div>
                             <div class="date-box">
                                 <div class="date-box-cont">

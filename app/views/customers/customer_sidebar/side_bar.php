@@ -21,7 +21,7 @@
             <div class=" main-left-middle-content-icon">
                 <i class='bx bx-stats'></i>
             </div>
-            <h3>Analatics</h3>
+            <h3>Analytics</h3>
         </div>
         <div class="main-left-middle-content" onclick="redirect_history()" id="history">
             <div class=" main-left-middle-content-icon">
@@ -39,7 +39,7 @@
             <div class=" main-left-middle-content-icon">
                 <i class='bx bxs-megaphone'></i>
             </div>
-            <h3>Annoucements</h3>
+            <h3>Announcements</h3>
         </div>
         <div class="main-left-middle-content" onclick="redirect_edit_profile()" id="edit_profile">
             <div class="main-left-middle-content-icon">

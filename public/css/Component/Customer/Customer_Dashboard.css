@@ -7,6 +7,10 @@
         color: var(--green-color-one);
     }
 
+    .red {
+        color: var(--red-color) !important;
+    }
+
     .main-right {
         background-color: var(--background-color-right);
         display: grid;
@@ -242,13 +246,13 @@
     .main-right-bottom-one-right-cont p {
         font-size: 13.5px;
         width: 100px;
-        margin-right: 115px;
+        margin-right: 95px;
     }
 
     .main-right-bottom-one-right-cont h2 {
         font-size: 15px;
         color: var(--green-color-one);
-        width: 20%;
+        width: 23%;
     }
 
     /* Main Right Bottom Two */

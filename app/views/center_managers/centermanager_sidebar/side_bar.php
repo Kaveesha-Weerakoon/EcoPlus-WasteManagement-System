@@ -161,6 +161,7 @@ function setDarkModeStyle(isDarkMode) {
     root.style.setProperty("--calander-hover-color", isDarkMode ? "#4d6279" : "#f2f2f2");
     root.style.setProperty("--button-hover-green", isDarkMode ? "#fff" : "#19954e");
     root.style.setProperty("--request-top-color", isDarkMode ? "#4d6279" : "#ecf0f1");
+    root.style.setProperty("--report-table-color", isDarkMode ? "#1a3552" : "#f9f9f9");
 
     root.style.setProperty("--box-shadow2", isDarkMode ? "0.1px 0.1px 1px 1px rgba(255, 255, 255, 0.5)" :
         "0 1px 1px 0px rgba(0, 0, 0, 0.1)");

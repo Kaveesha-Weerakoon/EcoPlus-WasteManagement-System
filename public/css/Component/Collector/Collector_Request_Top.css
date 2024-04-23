@@ -205,6 +205,7 @@
     .main-right-top-four-right {
         display: flex;
         padding-right: 20px;
+        margin-left: 1050px;
     }
 
     .main-right-top-four img {

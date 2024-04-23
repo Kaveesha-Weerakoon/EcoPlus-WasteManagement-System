@@ -419,17 +419,17 @@
   .personal-details-popup-box {
     .personal-details-popup-form {
       width: 45%;
-      background: white;
+      background-color: var(--background-color-main);
       border-radius: 6px;
       position: relative;
       text-align: center;
       padding: 40px;
-      color: #333;
+      color: var(--main-text-color);
       display: flex;
       flex-direction: column;
       align-items: center;
       transition: transform 0.4s, top 0.4s;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: var(--box-shadow);
     }
 
     .form-title {
@@ -487,18 +487,29 @@
     .input-container {
       position: relative;
       margin-bottom: 20px;
+      
     }
+
+    .input-container input {
+      background-color: var(--background-color-main);
+    }
+
+    .input-container input::placeholder {
+      color: var(--main-text-color);
+    }
+     
+    
 
     .icon {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       left: 20px;
-      color: #555;
+      color: var(--main-text-color);
     }
 
     .error-div {
-      color: red;
+      color:var(--red-color);
       font-size: 0.8em;
       margin-top: 4px;
       margin-bottom: 4px;
@@ -564,7 +575,7 @@
       height: 40px;
       outline: none;
       width: 300px;
-      color: white;
+      color:  var(--background-color-right);
       font-size: 17px;
       font-weight: 500;
       border-radius: 5px;

@@ -40,11 +40,7 @@
                             </a>
                         </div>
                         <div class="main-right-top-four">
-                            <div class="main-right-top-four-left">
-                                <p>Date</p>
-                                <input type="date" id="selected-date">
-                                <button onclick="loadLocations()">Filter</button>
-                            </div>
+                            
                             <div class="main-right-top-four-right">
                                 <div class="main-right-top-four-component" id="tables"
                                     style="background-color: #ecf0f1">

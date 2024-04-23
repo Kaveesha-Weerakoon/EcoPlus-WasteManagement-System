@@ -796,7 +796,7 @@
                     if (main_right_bottom_two !== null) {
                         main_right_bottom_two.style.display = "flex";
                     }
-                    maps.style.backgroundColor = "#ecf0f1";
+                    maps.style.backgroundColor = "var(--request-top-color)";
                     table.style.backgroundColor = "";
                 });
 
@@ -807,7 +807,7 @@
                     if (main_right_bottom_two !== null) {
                         main_right_bottom_two.style.display = "none";
                     }
-                    table.style.backgroundColor = "#ecf0f1";
+                    table.style.backgroundColor = "var(--request-top-color)";
                     maps.style.backgroundColor = "";
 
                 });

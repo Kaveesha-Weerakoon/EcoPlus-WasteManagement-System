@@ -60,6 +60,7 @@
     justify-content: center;
     flex-direction: column;
     overflow: hidden;
+    box-shadow: var(--box-shadow2);
     transition: transform 0.4s ease-in, background-color 0.4s ease-in;
   }
 
@@ -70,7 +71,7 @@
   .location_pop_content {
     width: 700px;
     padding: 10px;
-    background-color: #f1f2f6;
+    background-color: var(--background-color-main);
     border-radius: 10px;
     padding: 20px;
     padding-bottom: 40px;
@@ -92,8 +93,8 @@
   }
 
   .location_close button {
-    background-color: #ff4757;
-    color: #fff;
+    background-color: var(--red-color);
+    color: var(--background-color-main);
     cursor: pointer;
     border: none;
     font-size: 16px;
@@ -171,6 +172,9 @@
     border-radius: 10px;
     background-color: #333;
   }
+  #mark-on-the-way {
+    color: var(--background-color-right);
+}
 
   .on_the_way.active {
     transform: translate(-50%, -50%) scale(1);
@@ -182,7 +186,7 @@
     align-items: center;
     justify-content: center;
     width: 270px;
-    background: white;
+    background: var(--background-color-main);
     padding: 30px;
     flex-direction: column;
   }
@@ -263,7 +267,7 @@
 
   .cancel-confirm-content {
     width: 500px;
-    background: white;
+    background-color: var(--background-color-main);
     font-family: 'poppins', sans-serif;
     border-radius: 6px;
     padding: 30px;
@@ -359,13 +363,14 @@
     justify-content: center;
     border: none;
     margin-top: 10px;
-    background-color: rgb(220, 39, 39);
+    background: var(--red-color);
+    color: var(--background-color-main);
     cursor: pointer;
-    color: white;
+    box-shadow: var(--box-shadow);
   }
 
   .cancel-reason-submit-button:hover {
-    background: #c62323;
+    background: var(--red-color);
   }
 
   .cancel-reason-cancel-button {
@@ -780,6 +785,9 @@
   .pop_up_confirm_collect_cont .buttons .cancel-btn:hover {
     background-color: #979494;
   }
+
+
+  
 
 
   /* ------------*/

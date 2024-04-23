@@ -65,8 +65,124 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 30%;
+            margin-left: 35%;
+            margin-right: 2.5%;
         }
+    
+        .dot {
+            width: 15.5px;
+            height: 15.5px;
+            border-radius: 50%;
+            background-color: #F13E3E;
+            margin-top: -11px;
+            margin-left: -15px;
+            color: var(--background-color-main);
+            font-size: 11px;
+            font-weight: 501;
+            box-sizing: border-box;
+            padding-left: 4.6px;
+            padding-top: 1.8px;
+        }
+    
+        .main-right-top-notification i {
+            font-size: 29px;
+            cursor: pointer;
+        }
+    
+        .notification_popup {
+            height: 0;
+            position: absolute;
+            top: 9%;
+            right: 11%;
+            background-color: var(--background-color-main);
+            border-radius: 10px;
+            padding: 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: height 0.6s ease-in;
+            width: 18%;
+            visibility: hidden;
+            opacity: 0;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: scroll;
+            border: 1px solid #dcdde1;
+        }
+    
+        .notification_popup h1 {
+            font-size: 19px;
+            letter-spacing: 0.001rem;
+            margin-top: 5px;
+            margin-left: 8px;
+        }
+    
+        .notification_popup.active {
+            height: 200px;
+            padding: 10px;
+            visibility: visible;
+            opacity: 1;
+        }
+    
+        .notification {
+            height: 43px !important;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    
+        .notification:hover {
+            background-color: var(--notification-hover);
+        }
+    
+        .notification-green-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: var(--green-color-one);
+            margin-right: 10px;
+        }
+    
+        .notification_right p {
+            font-size: 13px;
+        }
+    
+        .mark_as_read {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    
+        .notification_cont {
+            overflow: scroll;
+            max-height: 150px;
+        }
+    
+        .mark_as_read button {
+            margin-top: 2px;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 4px;
+            font-weight: 700;
+            border: none;
+            background-color: none !important;
+            background: none;
+            cursor: pointer !important;
+            color: var(--main-text-color);
+            margin-left: 5px;
+        }
+    
+        .mark_as_read button:hover{
+            color: var(--button-hover-green);
+        }
+    
+        .mark_as_read .bx {
+            font-size: 26px;
+        }
+    
 
         .main-right-top-profile {
             display: flex;

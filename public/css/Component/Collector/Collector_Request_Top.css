@@ -291,13 +291,13 @@
 
     .request-details-pop-form {
         width: 500px;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         position: relative;
         text-align: center;
         padding: 20px;
-        color: #333;
+        color: var(--main-text-color);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -333,8 +333,8 @@
         display: grid;
         grid-template-columns: 30% 70%;
         width: 95%;
-        background-color: white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color:  var(--background-color-main);
+        box-shadow:var(--box-shadow);
         border-radius: 6px;
         margin-bottom: 10px;
 
@@ -400,6 +400,7 @@
         justify-content: center;
         flex-direction: column;
         overflow: hidden;
+        box-shadow: var(--box-shadow2);
         transition: transform 0.4s ease-in, background-color 0.4s ease-in;
     }
 
@@ -410,7 +411,7 @@
     .location_pop_content {
         width: 700px;
         padding: 10px;
-        background-color: #f1f2f6;
+        background-color: var(--background-color-main);
         border-radius: 10px;
         padding: 20px;
         padding-bottom: 40px;
@@ -432,8 +433,8 @@
     }
 
     .location_close button {
-        background-color: #ff4757;
-        color: #fff;
+        background-color: var(--red-color);
+        color: var(--background-color-main);
         cursor: pointer;
         border: none;
         font-size: 16px;

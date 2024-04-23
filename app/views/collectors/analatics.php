@@ -24,7 +24,9 @@
                             <h3><?php echo $_SESSION['collector_name']?></h3>
                             <p>ID : C <?php echo $_SESSION['collector_id']?></p>
                         </div>
+                        
                     </div>
+                    
                 </div>
 
                 <div class="main-right-bottom">

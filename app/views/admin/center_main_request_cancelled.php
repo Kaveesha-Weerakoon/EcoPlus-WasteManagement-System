@@ -72,10 +72,8 @@
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Customer ID</th>
-                                    <th>Cancelled By</th>
                                     <th>Location</th>
                                     <th>Request details</th>
-                                    <th>Reason</th>
                                     <th>Refund</th>
                                 </tr>
                             </table>
@@ -89,13 +87,12 @@
                                     <td><?php echo $cancelled_requests->time?></td>
                                     <td><?php echo $cancelled_requests->customer_id?></td>
 
-                                    <td><?php echo $cancelled_requests->cancelled_by?></td>
+
                                     <td><i onclick="viewLocation(<?php echo $cancelled_requests->lat; ?>, <?php echo $cancelled_requests->longi; ?>)"
                                             class='bx bx-map' style="font-size: 29px;"></i></td>
                                     <td><i onclick="view_request_details(<?php echo htmlspecialchars(json_encode($cancelled_requests), ENT_QUOTES, 'UTF-8') ?>)"
                                             class='bx bx-info-circle' style="font-size: 29px"></i>
                                     </td>
-                                    <td><?php echo $cancelled_requests->reason?></td>
                                     <td>
                                         <?php
                                             if ($cancelled_requests->fine == 0) {
@@ -148,6 +145,11 @@
                             <span>Time</span><br>
                             <span>Contact No</span><br>
                             <span>Instructions</span><br>
+                            <span>Cancelled By</span><br>
+                            <span>Cancelled Time</span><br>
+                            <span>Reason</span><br>
+
+
                         </div>
                         <div class="request-details-right-values">
                             <span id="req_id2"></span><br>
@@ -156,6 +158,10 @@
                             <span id="req_time"></span><br>
                             <span id="req_contactno"></span><br>
                             <span id="instructions"></span><br>
+                            <span id="cancelled_by"></span><br>
+                            <span id="cancelled_time"></span><br>
+                            <span id="reason"></span><br>
+
                         </div>
                     </div>
                 </div>
@@ -163,8 +169,8 @@
             <div class="delete_confirm" id="cancel_confirm">
                 <div class="popup" id="popup">
                     <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
-                    <h2>Cancel the Request?</h2>
-                    <p>This action will cancel the request </p>
+                    <h2>Refund the Fine?</h2>
+                    <p>This action refund the fine</p>
                     <div class="btns">
                         <a id="cancelLink"><button type="button" class="deletebtn">Confirm</button></a>
                         <a id="close_cancel"><button type="button" class="cancelbtn">Cancel</button></a>
@@ -240,6 +246,10 @@ function view_request_details(request) {
     document.getElementById('req_time').innerText = request.time;
     document.getElementById('req_contactno').innerText = request.contact_no;
     document.getElementById('instructions').innerText = request.instructions;
+    document.getElementById('cancelled_by').innerText = request.cancelled_by;
+    document.getElementById('cancelled_time').innerText = request.cancelled_time;
+
+    document.getElementById('reason').innerText = request.reason;
 
 }
 

@@ -3,54 +3,26 @@
     <div class="Admin_Center_Main_Collectors">
         <div class="main">
             <?php require APPROOT . '/views/admin/admin_sidebar/side_bar.php'; ?>
-           
+
 
             <div class="main-right">
                 <div class="main-right-top">
-                    <a href="<?php echo URLROOT?>/admin/center_main/<?php echo $data['center']->id?>/<?php echo $data['center']->region?>">
-                    <div class="main-right-top-back-button">
-                        <i class='bx bxs-chevrons-left'></i>
-                    </div>
+                    <a
+                        href="<?php echo URLROOT?>/admin/center_main/<?php echo $data['center']->id?>/<?php echo $data['center']->region?>">
+                        <div class="main-right-top-back-button">
+                            <i class='bx bxs-chevrons-left'></i>
+                        </div>
                     </a>
                     <div class="main-right-top-search">
                         <i class='bx bx-search-alt-2'></i>
-                        <input type="text" placeholder="Search">
-                    </div>
-                    <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <div class="dot"></div>
-                    </div>
-                    <div id="notification_popup" class="notification_popup">
-                        <h1>Notifications</h1>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Assigned
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-
-
-                    </div>
-                    <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
-                        <div class="main-right-top-profile-cont">
-                            <h3>Admin</h3>
-                        </div>
+                        <input type="text" placeholder="Search" id="searchInput">
                     </div>
 
-                    
+
+                    <?php require APPROOT . '/views/admin/admin_profile/adminprofile.php'; ?>
+
+
+
                 </div>
 
                 <!-- <div class="main-top">
@@ -90,45 +62,45 @@
                     </div>
                     <div class="main-right-bottom-down">
                         <table class="table">
-                        <?php foreach($data['collectors_in_center'] as $collector) : ?>
+                            <?php foreach($data['collectors_in_center'] as $collector) : ?>
                             <tr class="table-row">
                                 <td>C<?php echo $collector->id?></td>
-                                <td><img
-                                    src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>" alt="" class="collector_img"></td>
+                                <td><img src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>"
+                                        alt="" class="collector_img"></td>
                                 <td><?php echo $collector->name?></td>
                                 <td><?php echo $collector->email?></td>
                                 <td><i onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                     class='bx bxs-user' style="font-size: 29px;"></i></td>
-            
+                                        class='bx bxs-user' style="font-size: 29px;"></i></td>
+
                                 <td><i onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
-                                    class='bx bxs-truck' style="font-size: 29px;"></i></td>
-                                
+                                        class='bx bxs-truck' style="font-size: 29px;"></i></td>
+
                                 <td><i onclick="openColAssistantsDetails(<?php echo $collector->id ?>)"
-                                    class='bx bxs-group' style="font-size: 29px;"></i></td>
-                            </tr>   
-                            <?php endforeach; ?>  
-                        </table>            
+                                        class='bx bxs-group' style="font-size: 29px;"></i></td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </table>
                     </div>
 
                 </div>
                 <?php else: ?>
-                    <div class="main-right-bottom-two">
-                        <div class="main-right-bottom-two-content">
-                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
-                            <h1>There are no collectors in the center</h1>
-                            <p>All the collectors will appear here</p>
-                        </div>
+                <div class="main-right-bottom-two">
+                    <div class="main-right-bottom-two-content">
+                        <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                        <h1>There are no collectors in the center</h1>
+                        <p>All the collectors will appear here</p>
                     </div>
+                </div>
                 <?php endif; ?>
 
-            
+
 
             </div>
 
             <div class="personal-details-popup-box" id="personal-details-popup-box">
                 <div class="personal-details-popup-form">
                     <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
-                     id="personal-details-popup-form-close">
+                        id="personal-details-popup-form-close">
                     <center>
                         <div class="personal-details-topic">Personal Details</div>
                     </center>
@@ -137,7 +109,7 @@
                         <div class="personal-details-left">
                             <!-- <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $data['image']?>" class="profile-pic"
                                 alt=""> -->
-                                <img src="" id="collector_profile_pic" alt="">
+                            <img src="" id="collector_profile_pic" alt="">
                             <p>Collector ID: <span id="collector_id">C</span></p>
                         </div>
                         <div class="personal-details-right">
@@ -193,9 +165,10 @@
 
             <div class="collector-assis-details-popup-box" id="collector-assis-details-popup-box">
                 <div class="collector-assis-details-popup-table">
-                    <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="collector-assis-details-popup-table-close">
-                       
-                    
+                    <img src="<?php echo IMGROOT?>/close_popup.png" alt=""
+                        class="collector-assis-details-popup-table-close">
+
+
                     <div class="popup-table-container">
                         <div class="popup-table-caption">
                             <h2>Collector Assistants</h2>
@@ -221,21 +194,21 @@
                                         <td>kelaniya</td>
                                         <td>07771111222</td>
                                         <td>2001/03/26</td>
-                                            
-                                    </tr> 
-                                  
+
+                                    </tr>
+
                                 </table>
                             </div>
                         </div>
                         <div class="popup-table-container-bottom">
-                            <button type="button" class="collector-assis-details-popup-table-close" >Close</button>
+                            <button type="button" class="collector-assis-details-popup-table-close">Close</button>
                         </div>
                     </div>
-                    
+
                 </div>
 
             </div>
-            
+
         </div>
     </div>
 
@@ -243,77 +216,95 @@
 </div>
 
 <script>
-    function openvehicledetails(collector) {
-        var vehiclePop = document.getElementById('vehicle-details-popup-box');
-        vehiclePop.classList.add('active');
-        document.getElementById('overlay').style.display = "flex";
-       
-        document.getElementById('vehicle_collector_id').textContent = collector.user_id;
-        document.getElementById('vehicle_collector_name').textContent = collector.name;
-        document.getElementById('vehicle_collector_no').textContent = collector.vehicle_no;
-        document.getElementById('vehicle_type').textContent = collector.vehicle_type;
-    }
+function openvehicledetails(collector) {
+    var vehiclePop = document.getElementById('vehicle-details-popup-box');
+    vehiclePop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var close_vehicledetail = document.getElementById('vehicle-details-popup-form-close');
-        close_vehicledetail.addEventListener('click', function() {
-            const vehicle_details = document.getElementById("vehicle-details-popup-box");
-            vehicle_details.classList.remove('active');
+    document.getElementById('vehicle_collector_id').textContent = collector.user_id;
+    document.getElementById('vehicle_collector_name').textContent = collector.name;
+    document.getElementById('vehicle_collector_no').textContent = collector.vehicle_no;
+    document.getElementById('vehicle_type').textContent = collector.vehicle_type;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var close_vehicledetail = document.getElementById('vehicle-details-popup-form-close');
+    close_vehicledetail.addEventListener('click', function() {
+        const vehicle_details = document.getElementById("vehicle-details-popup-box");
+        vehicle_details.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
+    });
+});
+
+function openpersonaldetails(collector) {
+    var personalPop = document.getElementById('personal-details-popup-box');
+    personalPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    document.getElementById('collector_id').textContent = collector.user_id;
+    document.getElementById('collector_profile_pic').src = "<?php echo IMGROOT?>/img_upload/collector/" + collector
+        .image;
+    document.getElementById('collector_name').textContent = collector.name;
+    document.getElementById('collector_email').textContent = collector.email;
+    document.getElementById('collector_nic').textContent = collector.nic;
+    document.getElementById('collector_address').textContent = collector.address;
+    document.getElementById('collector_contact_no').textContent = collector.contact_no;
+    document.getElementById('collector_dob').textContent = collector.dob;
+
+
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var close_personal_details = document.getElementById('personal-details-popup-form-close');
+    close_personal_details.addEventListener('click', function() {
+        const personal_details = document.getElementById("personal-details-popup-box");
+        personal_details.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
+    });
+});
+
+function openColAssistantsDetails(collector_id) {
+
+    console.log(collector_id);
+    var assistantPop = document.getElementById('collector-assis-details-popup-box');
+    assistantPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var closeButtons = document.querySelectorAll('.collector-assis-details-popup-table-close');
+
+    closeButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            const assisDetails = document.getElementById('collector-assis-details-popup-box');
+            assisDetails.classList.remove('active');
             document.getElementById('overlay').style.display = "none";
-            
         });
     });
 
-    function openpersonaldetails(collector){
-        var personalPop = document.getElementById('personal-details-popup-box');
-        personalPop.classList.add('active');
-        document.getElementById('overlay').style.display = "flex";
-       
-        document.getElementById('collector_id').textContent =collector.user_id;
-        document.getElementById('collector_profile_pic').src =  "<?php echo IMGROOT?>/img_upload/collector/" + collector.image;
-        document.getElementById('collector_name').textContent = collector.name;
-        document.getElementById('collector_email').textContent = collector.email;
-        document.getElementById('collector_nic').textContent = collector.nic;
-        document.getElementById('collector_address').textContent = collector.address;
-        document.getElementById('collector_contact_no').textContent = collector.contact_no;
-        document.getElementById('collector_dob').textContent = collector.dob;
-        
+});
 
-    }
+function searchTable() {
+    var input = document.getElementById('searchInput').value.toLowerCase();
+    var rows = document.querySelectorAll('.table-row');
+    rows.forEach(function(row) {
+        var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+        var status = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+        var status1 = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var close_personal_details = document.getElementById('personal-details-popup-form-close');
-        close_personal_details.addEventListener('click', function() {
-            const personal_details = document.getElementById("personal-details-popup-box");
-            personal_details.classList.remove('active');
-            document.getElementById('overlay').style.display = "none";
-            
-        });
+        if (id.includes(input) || status.includes(input) || status1.includes(input)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
     });
 
-    function openColAssistantsDetails(collector_id){
-       
-        console.log(collector_id);
-        var assistantPop = document.getElementById('collector-assis-details-popup-box');
-        assistantPop.classList.add('active');
-        document.getElementById('overlay').style.display = "flex";
-     
-    }
+}
 
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var closeButtons = document.querySelectorAll('.collector-assis-details-popup-table-close');
-
-        closeButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                const assisDetails = document.getElementById('collector-assis-details-popup-box');
-                assisDetails.classList.remove('active');
-                document.getElementById('overlay').style.display = "none";
-            });
-        });
-    
-    });
-
-
+document.getElementById('searchInput').addEventListener('input', searchTable);
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

@@ -9,8 +9,8 @@
 
     #centers i {
         color: var(--green-color-one);
-      }
-    
+    }
+
     #centers h3 {
         color: var(--green-color-one);
     }
@@ -75,20 +75,8 @@
         display: none;
     }
 
+
     /*Location Pop*/
-    /* .location_pop {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-    } */
 
     .location_pop {
         display: flex;
@@ -102,6 +90,9 @@
         justify-content: center;
         flex-direction: column;
         overflow: hidden;
+        box-shadow: var(--box-shadow2);
+        border-radius: 10px;
+
         transition: transform 0.4s ease-in, background-color 0.4s ease-in;
     }
 
@@ -111,12 +102,13 @@
 
     .location_pop_content {
         width: 700px;
-        height: 350px;
         padding: 10px;
-        background-color: #f1f2f6;
+        background-color: var(--background-color-main);
         border-radius: 10px;
         padding: 20px;
         padding-bottom: 40px;
+        height: 350px;
+        overflow: hidden;
     }
 
     .location_pop_map {
@@ -133,14 +125,14 @@
     }
 
     .location_close button {
-        background-color: #ff4757;
-        height: 28px;
-        color: #fff;
+        background-color: var(--red-color);
+        color: var(--background-color-main);
         cursor: pointer;
         border: none;
         font-size: 16px;
         border-radius: 5px;
         width: 85px;
+        height: 28px;
     }
 
     /* ------ */
@@ -150,21 +142,12 @@
             margin-left: 1%;
         }
 
-        .table td {
-            font-size: 12px;
-        }
-
-        .table-header {
-            font-size: 14px;
-        }
-
-        .table-row img {
-            width: 20px;
-            height: 20px;
+        .location_pop_content {
+            width: 550px;
         }
     }
 
-    @media screen and (max-width:862px) {
+    @media screen and (max-width:800px) {
         .main-right-top-one-content {
             width: 250px;
             margin-left: 0;
@@ -172,7 +155,7 @@
         }
 
         .main-right-top-one input {
-            width: 20%;
+            width: 40%;
 
         }
 
@@ -181,50 +164,87 @@
 
         }
 
-
         .line {
             width: 86px;
             height: 2px;
-
-        }
-
-        .table td {
-
-            font-size: 10px;
-
-        }
-
-        .table-header {
-            font-size: 12px;
-        }
-
-        .table-row img {
-            width: 17px;
-            height: 17px;
-
-        }
-
-
-    }
-
-    @media screen and (max-width: 692px) {
-        .table td {
-            font-size: 9px;
-        }
-
-        .table-header {
-            font-size: 10px;
-        }
-
-        .table-row img {
-            width: 15px;
-            height: 15px;
         }
 
         .main-right-bottom {
             width: 140%;
+            overflow-x: scroll;
+        }
+
+        .main-right-bottom-top {
+            width: 140%;
+        }
+
+        .main-right-bottom-down {
+            width: 140%;
+        }
+
+        .table-header {
+            grid-template-columns: 7% 7% 9% 11% 11% 11% 11% 14%;
+        }
+
+        .table-row {
+            grid-template-columns: 7% 7% 9% 11% 11% 11% 11% 14%;
         }
     }
 
-    
+    @media screen and (max-width: 600px) {
+        .main-right-bottom {
+            width: 160%;
+            overflow-x: scroll;
+        }
+
+        .main-right-bottom-top {
+            width: 160%;
+        }
+
+        .main-right-bottom-down {
+            width: 160%;
+        }
+
+    }
+
+    @media screen and (max-width: 550px) {
+        .main-right-bottom {
+            width: 170%;
+            overflow-x: scroll;
+        }
+
+        .main-right-bottom-top {
+            width: 170%;
+        }
+
+        .main-right-bottom-down {
+            width: 170%;
+        }
+
+        .location_pop_content {
+            width: 300px;
+        }
+
+        .location_pop_content {
+            height: 300px;
+        }
+
+        .table-header {
+            grid-template-columns: 6% 6% 8% 10% 10% 10% 10% 13%;
+        }
+
+        .table-row {
+            grid-template-columns: 6% 6% 8% 10% 10% 10% 10% 13%;
+        }
+
+        .main-right-top-one input {
+            width: 30%;
+            margin-left: -10%;
+        }
+
+        .main-right-top-search {
+            width: 200px;
+        }
+
+    }
 }

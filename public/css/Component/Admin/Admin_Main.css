@@ -311,4 +311,32 @@
             margin-bottom: 7%;
         }
     }
+
+    @media screen and (max-width: 610px) {
+        .notification_right p {
+            font-size: 13px;
+        }
+
+        .main-right-top-profile img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .main-right-top-profile-cont h3 {
+            font-size: 15px;
+            letter-spacing: 0.03rem;
+        }
+
+        .main-right-top-profile-cont p {
+            font-size: 12px;
+        }
+    }
+
+    @media screen and (max-width: 458px) {
+        .main-right-top-profile {
+            display: flex;
+            margin-right: 15px;
+        }
+    }
+
 }

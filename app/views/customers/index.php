@@ -247,8 +247,6 @@ let speed = 30;
 
 function getDarkModeSetting() {
     const storedValue = localStorage.getItem("darkMode");
-    console.log("as");
-
     return storedValue ? JSON.parse(storedValue) : true;
 }
 

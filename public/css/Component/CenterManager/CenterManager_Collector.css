@@ -95,7 +95,7 @@
         width: 15.5px;
         height: 15.5px;
         border-radius: 50%;
-        background-color: #F13E3E;
+        background-color: var(--red-color);
         margin-top: -11px;
         margin-left: -15px;
         color: var(--background-color-main);
@@ -414,12 +414,13 @@
 
     .popup {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         text-align: center;
         padding: 0 30px 30px;
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
 
 
     }
@@ -553,13 +554,14 @@
 
     .popup-form {
         width: 50%;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         position: relative;
         text-align: center;
         padding: 0 30px 30px;
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
 
     .popup-form h2 {
@@ -592,7 +594,7 @@
         margin-right: 20px;
         padding: 10px 0;
         background: var(--green-color-one);
-        color: white;
+        color: var(--background-color-main);
         border: 0;
         outline: none;
         font-size: 18px;
@@ -641,9 +643,10 @@
         font-size: 16px;
         font-weight: 400;
         line-height: 1.5;
-        background-color: #fff;
+        background-color: var(--background-color-main);
         border: 1px solid #ced4da;
         border-radius: 4px;
+        color: var(--main-text-color);
     }
 
 
@@ -662,7 +665,7 @@
         border-radius: 4px;
         height: 100%;
         padding-top: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--form-box-shadow);
     }
 
     .top-personal-details {
@@ -727,12 +730,13 @@
 
     .popup1 {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         font-family: 'inter';
         border-radius: 6px;
         text-align: center;
         padding: 0 30px 30px;
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
 
     .open-popup1 {
@@ -759,7 +763,7 @@
         margin-top: 30px;
         padding: 10px 0;
         background: var(--green-color-one);
-        color: white;
+        color: var(--background-color-main);
         border: 0;
         outline: none;
         font-size: 18px;
@@ -770,7 +774,7 @@
     }
 
     .popup1 button:hover {
-        background: #19954e;
+        background: var(--button-hover-green);
     }
 
     /*personal details popup*/
@@ -809,7 +813,7 @@
 
     .personal-details-popup-form {
         width: 600px;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         position: relative;
@@ -842,7 +846,7 @@
         height: 100%;
         padding-top: 10px;
         margin-top: 17px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--form-box-shadow);
     }
 
     .personal-details-right {
@@ -1002,7 +1006,7 @@
 
     .vehicle-details-popup-form {
         width: 450px;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         position: relative;
         top: 0;
@@ -1035,7 +1039,7 @@
         height: 100%;
         padding-top: 10px;
         margin-top: 17px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--form-box-shadow);
     }
 
     .vehicle-details-labels {

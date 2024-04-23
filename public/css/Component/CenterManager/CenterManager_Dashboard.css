@@ -858,7 +858,7 @@
 
     .confirm-hoildays-form {
         width: 500px;
-        background: white;
+        background: var(--background-color-main);
         font-family: 'poppins', sans-serif;
         border-radius: 6px;
         padding:30px;
@@ -950,7 +950,7 @@
         margin-top: 10px;
         background-color: var(--green-color-one);
         cursor: pointer;
-        color: white;
+        color: var(--background-color-main);
     }
 
     

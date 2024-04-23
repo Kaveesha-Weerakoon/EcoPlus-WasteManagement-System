@@ -157,13 +157,17 @@ function setDarkModeStyle(isDarkMode) {
     root.style.setProperty("--background-color-two", isDarkMode ? "#001f3f" : "#f5f6fa");
     root.style.setProperty("--yellow-color", isDarkMode ? "#414143" : "#f6e58d");
     root.style.setProperty("--red-color", isDarkMode ? "#fff" : "#F13E3E");
+    root.style.setProperty("--calander-hover-color", isDarkMode ? "#4d6279" : "#f2f2f2");
+    root.style.setProperty("--button-hover-green", isDarkMode ? "#fff" : "#19954e");
 
     root.style.setProperty("--box-shadow2", isDarkMode ? "0.1px 0.1px 1px 1px rgba(255, 255, 255, 0.5)" :
         "0 1px 1px 0px rgba(0, 0, 0, 0.1)");
 
     root.style.setProperty("--box-shadow", isDarkMode ? "0.5px 0.5px 1px 0.5px rgba(255, 255, 255, 1)" :
         "0 1px 1px 0px rgba(0, 0, 0, 0.1)");
-    root.style.setProperty("--table-header", isDarkMode ? "#001f3f" : "#e9f6ef");
+    root.style.setProperty("--form-box-shadow", isDarkMode ? "0.5px 0.5px 1px 0.5px rgba(255, 255, 255, 1)" :
+        "0 4px 8px rgba(0, 0, 0, 0.2)");
+    root.style.setProperty("--table-header", isDarkMode ? "#4d6279" : "#e9f6ef");
     //logo.style.display = isDarkMode ? "none" : "flex";
 
     if (isDarkMode) {

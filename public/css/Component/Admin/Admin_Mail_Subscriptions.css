@@ -25,6 +25,7 @@
         background-color: var(--background-color-right);
         display: grid;
         grid-template-rows: 9% 91%;
+        overflow-x: hidden;
     }
 
     .main-right-top {
@@ -32,7 +33,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
         box-shadow: var(--box-shadow2);
         border: 10px;
         z-index: 1;
@@ -44,6 +45,7 @@
         justify-content: center;
         width: 35%;
         position: relative;
+        margin-left: 4%;
     }
 
     .main-right-top-search i {
@@ -163,18 +165,7 @@
             margin-left: 1%;
         }
 
-        .table td {
-            font-size: 12px;
-        }
 
-        .table-header {
-            font-size: 14px !important;
-        }
-
-        .table-row img {
-            width: 20px;
-            height: 20px;
-        }
     }
 
     @media screen and (max-width:862px) {
@@ -193,6 +184,11 @@
             font-size: 14px;
         }
 
+        .main-right-bottom {
+            width: 130%;
+            overflow-x: scroll;
+        }
+
         .main-right-bottom-top {
             width: 130%;
         }
@@ -201,6 +197,13 @@
             width: 130%;
         }
 
+        .table-header {
+            grid-template-columns: 19% 19% 21% 21%;
+        }
+
+        .table-row {
+            grid-template-columns: 19% 19% 21% 21%;
+        }
     }
 
     @media screen and (max-width: 762px) {
@@ -222,20 +225,17 @@
 
         }
 
-        .table td {
-
-            font-size: 10px;
-
+        .main-right-bottom {
+            width: 160%;
+            overflow-x: scroll;
         }
 
-        .table-header {
-            font-size: 12px !important;
+        .main-right-bottom-top {
+            width: 160%;
         }
 
-        .table-row img {
-            width: 20px;
-            height: 20px;
-
+        .main-right-bottom-down {
+            width: 160%;
         }
 
 
@@ -247,23 +247,5 @@
             margin-left: 1%;
 
         }
-
-        .table td {
-
-            font-size: 8.5px;
-
-        }
-
-        .table-header {
-            font-size: 11px !important;
-        }
-
-        .table-row img {
-            width: 20px;
-            height: 20px;
-
-        }
-
-
     }
 }

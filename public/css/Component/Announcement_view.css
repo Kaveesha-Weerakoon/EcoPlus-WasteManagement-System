@@ -1,14 +1,14 @@
-.Announcements_View{
-    *{
+.Announcements_View {
+    * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
         list-style: none;
         text-decoration: none;
         font-family: "Inter";
-      }
-    
-    .main{
+    }
+
+    .main {
         max-width: 1280px;
         margin: 0 auto;
         scroll-behavior: smooth;
@@ -22,7 +22,7 @@
         text-transform: uppercase;
     }
 
-    .signin-button{
+    .signin-button {
         font-size: 17px;
         background-color: #1ca557;
         color: white;
@@ -34,7 +34,7 @@
         margin-left: 25px;
     }
 
-    header{
+    header {
         position: fixed;
         z-index: 10010;
         top: 0;
@@ -50,20 +50,20 @@
         justify-content: space-between;
         align-items: center;
         padding-top: 20px;
-        font-family: Inter ;
+        font-family: Inter;
         z-index: 10001;
     }
-    
+
     .logo img {
         width: 64px;
         height: 64px;
     }
-    
+
     .hamburger {
         padding-right: 20px;
         cursor: pointer;
     }
-    
+
     .hamburger .line {
         display: block;
         width: 30px;
@@ -71,7 +71,7 @@
         margin-bottom: 10px;
         background-color: black;
     }
-    
+
     .nav__link {
         position: absolute;
         width: 94%;
@@ -80,24 +80,24 @@
         left: 10px;
         background-color: lightblue;
     }
-    
+
     .nav__link a {
         display: block;
         text-align: center;
         padding: 10px 0;
     }
-    
+
     .nav__link a:hover {
         background-color: #d8fcde;
         border-radius: 10px;
     }
-    
+
     .hide {
         display: none;
     }
 
     /* announcements section */
-    .Announcement-cont{
+    .Announcement-cont {
         padding: 30px;
         box-sizing: border-box;
         display: grid;
@@ -151,7 +151,7 @@
 
     }
 
-    .announcement-section{
+    .announcement-section {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -161,16 +161,16 @@
         background-color: #fff;
     }
 
-    .announcement-section .text-wrapper{
+    .announcement-section .text-wrapper {
         position: relative;
         width: fit-content;
         margin-top: 50px;
         font-family: "Inter";
-        font-weight:600;
+        font-weight: 600;
         color: var(--main-text-color);
-        font-size:  32px;
+        font-size: 32px;
         text-align: center;
-        letter-spacing:  0px;
+        letter-spacing: 0px;
         line-height: 42px;
         white-space: nowrap;
         font-style: normal;
@@ -199,8 +199,38 @@
         .hamburger {
             display: none;
         }
-    }
-    
 
-    
+
+    }
+
+    /* navbar  */
+    @media screen and (max-width: 945px) {
+        .Announcement-cont {
+            display: flex !important;
+            flex-direction: column;
+            height: 100%;
+
+        }
+
+        .slide-top p {
+            margin-top: 80px !important;
+        }
+
+
+    }
+
+    @media screen and (max-width: 456px) {
+
+
+        .slide-top p {
+            margin-top: 150px !important;
+        }
+
+
+    }
+
+
+
+
+
 }

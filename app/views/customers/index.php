@@ -25,7 +25,7 @@
                         <div class="main-right-bottom-one-left">
                             <div class="left">
                                 <h1>Total Balance</h1>
-                                <h3>+Eco 26.23 </h3>
+                                <?php echo $data['latest_update']?>
                                 <p>Last Update</p>
                                 <button onclick="redirect_transfercredit()">
                                     Transfer Credit
@@ -69,7 +69,10 @@
                                         <?php endif; ?>
                                     </h3>
                                     <p>
-                                        <?php echo $transaction->date ?>
+                                        <?php
+                                                $date = date('Y-m-d', strtotime($transaction->date));
+                                                echo $date 
+                                                ?>
                                     </p>
                                     <h2
                                         style="color: <?php echo ($transaction->sender_id == $_SESSION['user_id']) ? '#F13E3E' : '#1ca557'; ?>;">

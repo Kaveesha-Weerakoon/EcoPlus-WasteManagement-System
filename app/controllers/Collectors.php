@@ -900,7 +900,8 @@
             $data['creditData']=$types ;
             $data['credit_Amount'] = $credit_Amount;
             $data['popup_confirm_collect'] ="True";
-            $this->Request_Model->verification($req_id);
+            $req_main= $this->Request_Model->get_request_by_id($req_id);
+            $this->Request_Model->verification($req_id,$req_main->customer_id);
             $this->view('collectors/request_assinged', $data);
 
             } else {

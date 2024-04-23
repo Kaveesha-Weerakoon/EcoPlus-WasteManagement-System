@@ -168,10 +168,52 @@
       } catch (PDOException $e) {
           return false;
       }
-  }
+    }
+
+    public function get_cancelled_request_by_id($req_id){
+      try{
+        $this->db->query('SELECT * FROM request_main rm JOIN request_cancelled rc on rc.req_id=rm.req_id WHERE rm.req_id = :workerId');
+        $this->db->bind(':workerId', $req_id);
+        $row = $this->db->single();
+        return $row;
+      }catch (PDOException $e) {
+     
+        return false;
+     
+    }}
+
+    public function refund($req_id,$balance){
+     try{
+      $this->db->query('UPDATE customer_credits SET credit_amount = :new_balance WHERE user_id = :user_id');
+      $this->db->bind(':new_balance', $balance); 
+      $this->db->bind(':user_id', $req_id->customer_id);
+      $result=$this->db->execute();
+      if($result){
+        $this->db->query('UPDATE request_cancelled SET fine = :fine, fine_type = :fine_type WHERE req_id = :req_id');
+        $this->db->bind(':fine', 0);
+        $this->db->bind(':fine_type', "None");
+        $this->db->bind(':req_id', $req_id->req_id);
+        $result1 = $this->db->execute();
+        if($result1){
+          $notificationText = "Req ID . $req_id->req_id. fine has been refunded";
+          $this->db->query("INSERT INTO user_notification (user_id,  notification) VALUES (:user_id, :notification)");
+          $this->db->bind('user_id', $req_id->customer_id);
+          $this->db->bind(':notification', $notificationText);
+          $result2 = $this->db->execute();
+        }
+    }
+     
+    }catch (PDOException $e) {
+      die($e);
+      return false;
+   
+  }}
+
   
 
     public function get_cancelled_request($customer_id){    
+      try{
+        
       $query = '
       SELECT
         rm.req_id AS request_id,
@@ -201,8 +243,11 @@
      $this->db->bind(':type', 'cancelled'); // Assuming 'cancelled' is a string value
        $results = $this->db->resultSet();
 
-      return $results;
-
+      return $results;}catch (PDOException $e) {
+      
+        return false;
+     
+    }
     }
 
     public function get_incoming_request($region){
@@ -444,7 +489,7 @@
 
     }
     
-    public function verification($id) {
+    public function verification($id,$user_id) {
       try {
         
         $code = rand(1, 1000000);
@@ -453,7 +498,9 @@
         $this->db->bind(':code', $code);
         $this->db->bind(':req_id', $id);
         $this->db->execute();
-  
+        $notificationText= "Req ID $id Verify code updated";
+        $this->insert_notification($user_id, $notificationText);
+
           return true; // Return true if the query is executed successfully
       } catch (PDOException $e) {
           return false; // Return false if there's any error

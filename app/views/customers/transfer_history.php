@@ -33,8 +33,13 @@
 
                                         <?php foreach ($data['transaction_history'] as $transaction): ?>
                                         <tr class="table-row">
-                                            <td>T <?php echo $transaction->id ?></td>
-                                            <td><?php echo $transaction->date . ' ' . $transaction->time; ?></td>
+                                            <td> <?php echo $transaction->id ?></td>
+                                            <td>
+                                                <?php
+                                                $date = date('Y-m-d', strtotime($transaction->date));
+                                                $time = date('H:i:s', strtotime($transaction->date));
+                                                echo $date . ' ' . $time;
+                                                ?>
                                             <td>
                                                 <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
                                                 <i class='bx bxs-send'></i>

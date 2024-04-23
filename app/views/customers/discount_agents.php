@@ -44,7 +44,7 @@
                             <table class="table">
                                 <?php foreach($data['discount_agents'] as $discount_agent) : ?>
                                 <tr class="table-row">
-                                    <td>CM <?php echo $discount_agent->user_id?></td>
+                                    <td> <?php echo $discount_agent->user_id?></td>
                                     <td><img src="<?php echo IMGROOT?>/img_upload/credit_discount_agent/<?php echo $discount_agent->image?>"
                                             alt="" class="manager_img"></td>
                                     <td><?php echo $discount_agent->name?></td>

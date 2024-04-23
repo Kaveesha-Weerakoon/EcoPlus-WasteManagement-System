@@ -21,22 +21,244 @@
       $this->Report_Model=$this->model('Customer_Report');
       $this->Annoucement_Model=$this->model('Announcement');
       $this->fine_model = $this->model('Fines');
-
+      $this->LatestUpdate= $this->model('LatestUpdate');
+      
       if(!isLoggedIn('user_id')){
         redirect('users/login');
       }
     }
+
+   
     
     public function index($tutorial=""){ 
       $balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
       // $credit= $this->creditModel->get();
       $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']); 
       $centers = $this->Center_Model->getallCenters();
+      
       $completed_requests=count($this->Collect_Garbage_Model->get_complete_request_relevent_customer($_SESSION['user_id']));
       $total_requests=count($this->Request_Model->get_total_requests_by_customer($_SESSION['user_id']));
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
       $discount_agent = $this->discount_agentModel->get_discount_agent();
       $total_garbage=$this->Collect_Garbage_Model->get_completed_garbage_totals_by_customer($_SESSION['user_id']);
+
+      $latestcompleted=   $this->LatestUpdate->getLatestCompleted($_SESSION['user_id']);
+      $latesttransfered=   $this->LatestUpdate->getLatestTransferd($_SESSION['user_id']);
+      $latestdiscount=   $this->LatestUpdate->getLatestDiscount($_SESSION['user_id']);
+      $latestcancelled=   $this->LatestUpdate->getLatestCancelled($_SESSION['user_id']);
+      $latestupdate = '<h3>+Eco 0</h3>';
+      $latestupdate = 'Eco 0';
+
+      if (empty($latestcompleted) &&  empty($latesttransfered) &&  empty($latestdiscount) &&  empty($latestcancelled)) {
+  
+      } 
+      else {
+          if (!empty($latestcompleted) &&  empty($latesttransfered) && empty($latestdiscount) && empty($latestcancelled)) {
+              $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+          }
+          elseif (empty($latestcompleted) && !empty($latesttransfered) &&  empty($latestdiscount) && empty($latestcancelled)) {
+            if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }else {
+              $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }
+          }
+          elseif (empty($latestcompleted) &&  empty($latesttransfered) && !empty($latestdiscount) &&  empty($latestcancelled)) { 
+             $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+          } 
+          elseif (empty($latestcompleted) &&  empty($latesttransfered) && empty($latestdiscount) && !empty($latestcancelled)) {
+             $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+          }
+          elseif (!empty($latestcompleted) && !empty($latesttransfered) && empty($latestdiscount) && empty($latestcancelled)) {
+            if($latestcompleted->completed_datetime > $latesttransfered->date){
+              $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+
+            } else{
+              if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }else {
+              $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }
+          }
+        }
+          elseif (!empty($latestcompleted) &&  empty($latesttransfered) && !empty($latestdiscount) && empty($latestcancelled)) {
+            if($latestcompleted->completed_datetime > $latestdiscount->created_at){
+              $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+
+            }else{
+              $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+
+            }
+          }
+          elseif (!empty($latestcompleted) &&  empty($latesttransfered) && empty($latestdiscount) && !empty($latestcancelled)) {
+            if($latestcompleted->completed_datetime > $latestcancelled->cancelled_time){
+              $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+
+            }else{
+              $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+
+          }
+          }
+          elseif (empty($latestcompleted) && !empty($latesttransfered) && !empty($latestdiscount) && empty($latestcancelled)) {
+            if($latesttransfered->date > $latestdiscount->created_at){
+              if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }else {
+              $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }
+            }else{
+              $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+
+          }
+          }
+          elseif (empty($latestcompleted) && !empty($latesttransfered) && empty($latestdiscount) && !empty($latestcancelled)) {
+            if($latesttransfered->date>$latestcancelled->cancelled_time ){
+            if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }else {
+              $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }}
+            else{
+              $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+
+            }
+          }
+          elseif (empty($latestcompleted) && empty($latesttransfered) && !empty($latestdiscount) && !empty($latestcancelled)) {
+            if($latestcancelled->cancelled_time > $latestdiscount->created_at){
+              $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+
+            }else{
+              $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+
+          }}
+          elseif (!empty($latestcompleted) && !empty($latesttransfered) && !empty($latestdiscount) && empty($latestcancelled)) {
+            if($latestcompleted->completed_datetime > $latesttransfered->date){
+                if($latestcompleted->completed_datetime>$latestdiscount->created_at){
+                  $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+                }
+                else{
+                  $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+              }
+            } 
+            else{
+              if($latestdiscount->created_at>$latesttransfered->date){
+                $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+            }
+            else{
+              if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }else {
+              $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+            }}
+          }
+            
+          }
+          elseif (!empty($latestcompleted) && !empty($latesttransfered) && empty($latestdiscount) && !empty($latestcancelled)) {
+            if($latestcompleted->completed_datetime > $latesttransfered->date){
+              if($latestcompleted->completed_datetime>$latestcancelled->cancelled_time){
+                $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+              }
+              else{
+                $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+              }
+            } 
+            else{
+               if($latestcancelled->cancelled_time>$latesttransfered->date){
+                 $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+               }
+              else{
+                 if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                   $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+                }else {
+                   $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+                 }
+                }          
+            }
+          }
+          elseif (!empty($latestcompleted) && empty($latesttransfered) && !empty($latestdiscount) && !empty($latestcancelled)) {
+            $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+            if($latestcompleted->completed_datetime >$latestdiscount->created_at){
+              if($latestcompleted->completed_datetime>$latestcancelled->cancelled_time){
+                $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+
+              }else{
+                $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+              }
+            }
+            else{
+              if($latestcancelled->cancelled_time>$latestdiscount->created_at){
+                $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+
+              }
+              else{
+                $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+
+              }
+            }
+          }
+          elseif (empty($latestcompleted) && !empty($latesttransfered) && !empty($latestdiscount) && !empty($latestcancelled)) {
+           if($latesttransfered->date>$latestcancelled->cancelled_time){
+            if($latesttransfered->date>$latestdiscount->created_at){
+               if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                  $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+               }else {
+                   $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+               }}
+            else{
+               $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+          }
+           }
+           else{
+                if($latestcancelled->cancelled_time>$latestdiscount->created_at){
+                  $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+
+                }
+                else{
+                  $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+
+                }
+           }
+           
+          }
+          elseif (!empty($latestcompleted) && !empty($latesttransfered) && !empty($latestdiscount) && !empty($latestcancelled)) {
+            if ($latestcompleted->completed_datetime > $latesttransfered->date) {
+                if ($latestcompleted->completed_datetime > $latestdiscount->created_at) {
+                    if ($latestcompleted->completed_datetime > $latestcancelled->cancelled_time) {
+                        $latestupdate = '<h3>+Eco ' . $latestcompleted->credit_amount.'</h3>';
+                    } else {
+                        $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+                    }
+                } else {
+                    if ($latestdiscount->created_at > $latestcancelled->cancelled_time) {
+                        $latestupdate = '-Eco ' . $latestdiscount->discount_amount;
+                    } else {
+                        $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+                    }
+                }
+            } else {
+                if ($latesttransfered->date > $latestdiscount->created_at) {
+                    if ($latesttransfered->date > $latestcancelled->cancelled_time) {
+                        if ($latesttransfered->sender_id == $_SESSION['user_id']) {
+                            $latestupdate = '<h3 class="red">-Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+                        } else {
+                            $latestupdate = '<h3>+Eco ' .  $latesttransfered->transfer_amount.'</h3>';
+                        }
+                    } else {
+                        $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+                    }
+                } else {
+                    if ($latestdiscount->created_at > $latestcancelled->cancelled_time) {
+                        $latestupdate = '<h3 class="red">-Eco ' . $latestdiscount->discount_amount.'</h3>';
+                    } else {
+                        $latestupdate = '<h3 class="red">-Eco ' . $latestcancelled->fine.'</h3>';
+                    }
+                }
+            }
+        }
+    }
+
+     
+
       if ($total_requests > 0) {
         $percentage_completed = json_encode(($completed_requests / $total_requests) * 100);
          } else {
@@ -59,7 +281,8 @@
         'completed_request_count'=>$completed_requests,
         'no_of_centers'=>count($centers),
         'discount_agent' => count($discount_agent),
-        'tutorial'=>$tutorial
+        'tutorial'=>$tutorial,
+        'latest_update'=> $latestupdate
         ];
 
         
@@ -154,12 +377,13 @@
         $data['assinged']='No';
       }
       if($Request->code!=0){
-       header("Location: " . URLROOT . "/customers/request_main");        
+       header("Location: " . URLROOT . "/customers/request_completed");        
 
       }else{
-     $this->Request_Model->cancel_request($data);       
+        $this->Request_Model->cancel_request($data);     
+        header("Location: " . URLROOT . "/customers/request_cancelled");        
+  
        }
-       header("Location: " . URLROOT . "/customers/request_cancelled");        
     }
 
     public function request_completed(){
@@ -391,19 +615,19 @@
           $data['current_err'] = 'Please enter current password';
       }
       
-      if (empty($data['new_pw'])) {
+       if (empty($data['new_pw'])) {
         $data['new_pw_err'] = 'Please Enter New Password';
-      } elseif (strlen($data['new_pw']) < 8 || strlen($data['new_pw']) > 30) {
+        } elseif (strlen($data['new_pw']) < 8 || strlen($data['new_pw']) > 30) {
         $data['new_pw_err'] = 'Password must be between 8 and 30 characters';
-     } elseif (!preg_match('/[^\w\s]/', $data['new_pw'])) {
+         } elseif (!preg_match('/[^\w\s]/', $data['new_pw'])) {
         $data['new_pw_err'] = 'Password must include at least one symbol';
-      } elseif (!preg_match('/[A-Z]/', $data['new_pw'])) {
-        $data['new_pw_err'] = 'Password must include at least one uppercase letter';
-      } elseif (!preg_match('/[a-z]/', $data['new_pw'])) {
-        $data['new_pw_err'] = 'Password must include at least one lowercase letter';
-      } elseif (!preg_match('/[0-9]/', $data['new_pw'])) {
-        $data['new_pw_err'] = 'Password must include at least one number';
-     }
+        } elseif (!preg_match('/[A-Z]/', $data['new_pw'])) {
+          $data['new_pw_err'] = 'Password must include at least one uppercase letter';
+        } elseif (!preg_match('/[a-z]/', $data['new_pw'])) {
+          $data['new_pw_err'] = 'Password must include at least one lowercase letter';
+         } elseif (!preg_match('/[0-9]/', $data['new_pw'])) {
+           $data['new_pw_err'] = 'Password must include at least one number';
+      }
     
 
       
@@ -435,6 +659,7 @@
   
         $this->view('customers/edit_profile', $data);
         }
+       
         else{
           $data = [
             'name'=>'',
@@ -460,7 +685,7 @@
             'centers'=> $centers 
 
 
-          ];
+          ]; 
           $this->view('customers/editprofile', $data);
   
         }
@@ -512,9 +737,9 @@
         } 
         
         if(empty($data['subject'])){
-          $data['subject_err'] = 'Please enter subject';
+          $data['subject_err'] = 'Please enter reqId';
         } elseif (strlen($data['subject']) > 255) {
-          $data['subject_err'] = 'Subject is too long';
+          $data['subject_err'] = 'reqId is too long';
       }
         
         if(empty($data['complain'])){
@@ -649,43 +874,42 @@
 
         if (empty($data['date'])) {
           $data['date_err'] = 'Date is required';
-        } 
-        else {
-            $isHoliday = false;
-
-            foreach ($marked_holidays as $holiday) {
-                if ($holiday->date === $data['date']) {
-                    $isHoliday = true;
-                    break;
-                }
-            } 
-
-            if ($isHoliday) {
-                $data['date_err'] = 'Sorry, the center is not available on this day';
-            }
-            else{
+      } else {
+          $isHoliday = false;
+      
+          foreach ($marked_holidays as $holiday) {
+              if ($holiday->date === $data['date']) {
+                  $isHoliday = true;
+                  break;
+              }
+          }
+      
+          if ($isHoliday) {
+              $data['date_err'] = 'Sorry, the center is not available on this day';
+          } else {
               $selectedTimestamp = strtotime($data['date']);
               $currentTimestamp = strtotime('tomorrow');
-              if ($selectedTimestamp < $currentTimestamp) {
-                $data['date_err'] = 'Select a date from tomorrow onwards';
-              }
-              else{       
-                 $dateFound = false;
-
-                foreach ($requests as $request) {
-                  if ($request->date == $data['date']) {
-                      $dateFound = true;
-                      break; 
+              $sevenDaysLater = strtotime('+7 days', $currentTimestamp);
+      
+              if ($selectedTimestamp < $currentTimestamp || $selectedTimestamp > $sevenDaysLater) {
+                  $data['date_err'] = 'Select a date within the next seven days';
+              } else {
+                  $dateFound = false;
+      
+                  foreach ($requests as $request) {
+                      if ($request->date == $data['date']) {
+                          $dateFound = true;
+                          break;
+                      }
+                  }
+      
+                  if ($dateFound) {
+                      $data['date_err'] = 'You can only make one request per day.';
                   }
               }
-              if ($dateFound) {
-                $data['date_err'] = 'You can only make one request per day.';
-              }
-          
-              }
-              
-            }
-        }
+          }
+      }
+      
         
 
      

@@ -198,11 +198,14 @@
 
 
     public function get_discount($id) {
-        $this->db->query('SELECT * FROM discounts d JOIN users da ON da.id=d.agent_id  WHERE customer_id = :id ');
+      try{ $this->db->query('SELECT * FROM discounts d JOIN users da ON da.id=d.agent_id  WHERE customer_id = :id ');
         $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
       
-        return $results;
+        return $results; } 
+        catch (PDOException $e) {
+           return false;
+        }
     }
 
     public function getDiscountByAgent($id){

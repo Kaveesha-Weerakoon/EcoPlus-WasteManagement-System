@@ -25,6 +25,7 @@
       $this->Annoucement_Model=$this->model('Announcement');
       $this->garbage_Model=$this->model('Garbage_Stock');
       $this->MailSubscriptionModel = $this->model('Mail_Subscriptions');
+      $this->Customer_Credit_Model = $this->model('Customer_Credit');
 
 
       if(!isLoggedIn('admin_id')  && !isLoggedIn('superadmin_id')){
@@ -77,6 +78,14 @@
       }
 
       $this->view('admin/index', $data);
+    }
+
+    public function refund($id){
+      $req=$this->requests_model->get_cancelled_request_by_id($id);
+      $balance=$this->Customer_Credit_Model->get_customer_credit_balance($req->customer_id);
+      $newbalance=$balance+$req->fine;
+      $this->requests_model->refund( $req,$newbalance);
+      header("Location: " . URLROOT . "/Admin"); 
     }
 
     public function complain_customers(){

@@ -106,6 +106,15 @@
     color: black;
   }
 
+
+.forgot {
+  margin-bottom: 15px;
+  text-decoration: none;
+  margin-right: 209px;
+  margin-top: 13px;
+  font-size: 13px;
+  color: black;
+
   .login-btn {
     /* // width: 66%; */
     width: 200px;
@@ -121,6 +130,7 @@
     margin: 10px 0;
     transition: .5s;
   }
+
 }
 
 form.sign-up-form {
@@ -129,6 +139,51 @@ form.sign-up-form {
 }
 
 
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 90px;
+
+
+}
+
+.top img {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+
+.top h1 {
+  margin-right: 30px;
+}
+
+
+.top1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 90px;
+
+
+}
+
+.top1 img {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+
+
+
+.top1 h1 {
+  margin-right: 30px;
+}
+#profile_image {
+  display: none;
+}
 .porfile-cont {
   display: flex;
   align-items: center;
@@ -141,6 +196,9 @@ form.sign-up-form {
 
 .edit-profile-content-profile-container p {
   font-size: 15px;
+
+  margin-top: 10px;
+
 }
 
 input[type=file] {
@@ -165,7 +223,7 @@ input[type=file] {
   display: flex;
   justify-content: center;
   margin-bottom: 5px;
-  margin-left: 10px;
+  margin-left: 80px;
   margin-top: 30px;
 }
 
@@ -203,45 +261,59 @@ input[type=file] {
   flex-direction: column;
 }
 
+
+
+
 .input-fieldlog {
-  width: 400px;
-  height: 41px;
-  background-color: var(--background-color-two);
-  margin: 5px 0;
-  border-radius: 10px;
-  display: grid;
-  grid-template-columns: 10% 90%;
-  border: 1px solid #b8b7b7;
-  align-items: center;
+width: 350px;
+height: 40px;
+background-color: #f5f6fa;
+margin-bottom: 2px;
+border-radius: 10px;
+display: grid;
+display: flex; 
+align-items: center;
+grid-template-columns: 10% 90%;
+padding: 0 .9rem;
+border: 1px solid #b8b7b7;
+align-items: center;
+margin-top: 1px;
+
 }
 
 .input-fieldlog i {
-  text-align: center;
-  color: #acacac;
-  font-size: 1.1rem;
+text-align: center;
+line-height: 55px;
+color: #acacac;
+font-size: 1.1rem;
+margin-right: 20px;
+
 }
 
 .input-fieldlog input {
-  background: none;
-  outline: none;
-  border: none;
-  line-height: 1;
-  font-weight: 200;
-  font-size: 1rem;
-  color: #333;
-  font-size: 15px;
+background: none;
+outline: none;
+border: none;
+line-height: 1;
+font-weight: 200;
+font-size: 1rem;
+color: #333;
+margin-top: 6px;
+
+
 }
 
 .input-fieldlog input::placeholder {
-  color: #8d8d8d;
-  font-weight: 500;
-  padding-left: 20px;
-  align-self: center;
+color: #8d8d8d;
+font-weight: 500;
+padding-left: 20px;
+align-self: center;
 }
 
+
 .input-field {
-  width: 285px;
-  height: 40px;
+  width: 325px;
+  height: 38px;
   background-color: #f5f6fa;
   margin-bottom: 1px;
   border-radius: 10px;
@@ -277,8 +349,8 @@ input[type=file] {
 }
 
 .input-field2 {
-  width: 285px;
-  height: 40px;
+  width: 325px;
+  height: 38px;
   background-color: #f5f6fa;
   margin-bottom: 1px;
   border-radius: 10px;
@@ -312,13 +384,18 @@ input[type=file] {
 }
 
 .city {
-  width: 610px;
-  height: 40px;
+
+
+  width: 101%;
+  height: 38px;
+
   background-color: #f5f6fa;
   margin: 10px 0;
   border-radius: 10px;
   padding: 0 .4rem;
   border: 1px solid #cdcdcd;
+  margin-right: 650px;
+
 }
 
 .city i {
@@ -385,6 +462,7 @@ input[type=file] {
 .cont-region {
   margin-top: 3px;
   margin-bottom: 4px;
+  margin-left: 59px;
 }
 
 .cont {
@@ -418,9 +496,32 @@ input[type=file] {
   font-weight: 600;
   margin: 10px 0;
   transition: .5s;
+  font-size: 17px;
 }
 
 .btn:hover {
+  background-color: #34cc78;
+}
+
+
+.btn1 {
+  width: 200px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 7px;
+  cursor: pointer;
+  background-color: #19954e;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-left: 70px;
+  transition: .5s;
+  font-size: 17px;
+  margin-top: 20px;
+}
+
+.btn1:hover {
   background-color: #34cc78;
 }
 
@@ -627,5 +728,147 @@ input[type=file] {
   background: rgba(0, 0, 0, 0.4);
   z-index: 98;
   display: none;
+
+  }
+
+  @media (max-width:870px) {
+    .container{
+      min-height: 800px;
+      height: 100vh;
+    }
+    .container:before{
+      width: 1500px;
+      height: 1500px;
+      left: 30%;
+      bottom: 68%;
+      transform: translateX(-50%);
+      right: initial;
+      top: initial;
+      transition: 2s ease-in-out;
+    }
+    .signin-signup{
+      width: 100%;
+      left: 50%;
+      top: 95%;
+      transform: translate(-50%, -100%);
+      transition: 1s 0.8s ease-in-out;
+    }
+
+  .panels-container{
+    grid-template-columns: 1fr;
+    grid-template-rows:1fr 2fr 1fr ;
+  }
+  .panel .content{
+    padding-right: 15%;
+    
+    transition: 0.9s 0.8s ease-in-out;
+  }
+
+  .panel h3{
+    font-size: 1.2rem;
+  }
+  .panel p{
+    font-size: 0.7rem;
+    padding: 0.5rem 0;
+  }
+  .btn.transparent{
+    width: 110px;
+    height: 35px;
+    font-size: 0.7rem;
+  }
+
+  .right-panel .content,.right-panel .image {
+  transform: translateY(300px);
+  }
+
+
+  .panel{
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2.5rem 8%;
+  }
+  .image{
+    width: 200px;
+  }
+
+  .left-panel{
+    grid-row: 1/2;
+  }
+
+  .right-panel{
+    grid-row: 3/4;
+  }
+
+  .container.sign-up-mode:before{
+    transform: translate(-50%,100%);
+    bottom: 32%;
+    right: initial;
+  }
+  .image{
+    width: 200px;
+    transition: 0.9s 0.6s ease-in-out;
+  }
+
+  .container.container.sign-up-mode .left-panel .image,
+  .container.container.sign-up-mode .left-panel .content{
+    transform: translateY(-300px);
+  }
+
+  .container.sign-up-mode .signin-signup{
+    top: 5%;
+    transform: translate(-50%,0);
+    left:50%;
+  }
+
+  
+    .cont-region select.city {
+     width: 650px;
+     margin-left: 650px;
+  }
+
+  .top1{
+    display: none;
+  }
+
+
+  .sign-up-form {
+    margin-top: -70px;
+    margin-right: 100px;
+  }
+
+  }
+
+  @media(max-width:570px){
+    form{
+      padding: 0 1.5rem;
+    }
+
+    .image{
+      display: none;
+    }
+
+    .panels.content{
+      padding:0.5rem 1rem
+    }
+
+    .container:before{
+      bottom: 72%;
+      left: 50%;
+    }
+
+    .container.sign-up-mode:before{
+      bottom: 28%;
+      left: 50%;
+    }
+
+    .input-field,
+    .input-field2,
+    .cont-region select.city {
+      width: calc(100% - 20px); /* Adjust the width as needed */
+    }
+  }
+
 }
+
 }

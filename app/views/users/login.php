@@ -38,11 +38,12 @@
 
                 </form>
 
-                <form action="<?php echo URLROOT;?>/users/register" class="sign-up-form" method="POST"
-                    enctype="multipart/form-data">
-                    <div class="top"> <img src="<?php echo IMGROOT?>/Logo.png" alt="">
-                        <h1>Sign Up</h1>
-                    </div>
+            <form action="<?php echo URLROOT;?>/users/register" class="sign-up-form" method="POST"
+                enctype="multipart/form-data">
+                <div class="top1"> <img src="<?php echo IMGROOT?>/Logo.png" alt="">
+                    <h1>Sign Up</h1>
+                </div>
+
 
                     <div class="edit-profile-content-profile">
                         <div class="edit-profile-content-profile-container">
@@ -144,6 +145,8 @@
 
 
 
+
+                <input type="submit" value="sign Up" class="btn1 solid">
 
 
                     <input type="submit" value="sign Up" class="btn solid">

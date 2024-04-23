@@ -38,11 +38,11 @@
 
                 </form>
 
-            <form action="<?php echo URLROOT;?>/users/register" class="sign-up-form" method="POST"
-                enctype="multipart/form-data">
-                <div class="top1"> <img src="<?php echo IMGROOT?>/Logo.png" alt="">
-                    <h1>Sign Up</h1>
-                </div>
+                <form action="<?php echo URLROOT;?>/users/register" class="sign-up-form" method="POST"
+                    enctype="multipart/form-data">
+                    <div class="top1"> <img src="<?php echo IMGROOT?>/Logo.png" alt="">
+                        <h1>Sign Up</h1>
+                    </div>
 
 
                     <div class="edit-profile-content-profile">
@@ -51,8 +51,7 @@
                                 src="<?php echo IMGROOT?>./preview2.png" alt="">
                             <img class="edit-profile-second-image" src="<?php echo IMGROOT?>/edit-icon.png" alt="">
                             <input name='profile_image' type="file" id="profile_image">
-                            <p>Add a Profile Picture</p>
-                            <div class="err"><?php echo $data['profile_err']?></div>
+                            <p>Upload a profile pic</p>
                         </div>
                     </div>
 
@@ -69,7 +68,7 @@
                         <div class="cont">
                             <p>Email</p>
                             <div class="input-field2">
-                                <input type="text" class="text" placeholder="Email"
+                                <input type="text" class="text" placeholder="email"
                                     value="<?php echo $data['email_reg']; ?>" name="email_reg" id="email_reg">
 
                             </div>
@@ -102,21 +101,29 @@
 
                     <div class="cont-region">
                         <div class="cont">
-                            <p>Region <i id="mapIcon" class="fas fa-map-marker-alt" onclick="viewLocation()"></i></p>
+                            <p>Region <i id="mapIcon" class="fas fa-map-marker-alt" onclick="viewLocation()"></i>
+                                <span>View regions from here </span>
+                            </p>
 
                             <select id="city" name="city" class="city" onclick="animateMapIcon()">
                                 <?php
-                       $centers = $data['centers2'];
-                       $regionFound = false;
+                                     $centers = $data['centers2'];
+                                        $regionFound = false;
 
-                       if (!empty($centers)) {
-                        foreach ($centers as $center) {
-                            echo "<option value=\"$center->region\" >$center->region</option>";
-                 }} else {
-                    echo "<option value=\"default\">No Centers Available</option>";
-                }
-                ?>
+                                    if (!empty($centers)) {
+                                        echo "<option value=\"default\">Select a Region</option>";
+                                        foreach ($centers as $center) {
+                                        $selected = ($data['city'] == $center->region) ? "selected" : "";
+                                        echo "<option value=\"$center->region\" $selected>$center->region</option>";
+                                    }
+                                    } else {
+                                        echo "<option value=\"default\">No Centers Available</option>";
+                                    }
+                                ?>
                             </select>
+
+                            <div class="err"><?php echo $data['center_err']?></div>
+
                         </div>
                     </div>
 
@@ -124,7 +131,7 @@
                         <div class="cont">
                             <p>Password</p>
                             <div class="input-field">
-                                <input type="password" class="text" placeholder="Password" id="password_reg"
+                                <input type="password" class="text" placeholder="password" id="password_reg"
                                     name="password_reg" value="<?php echo $data['password_reg']; ?>">
 
                             </div>
@@ -132,10 +139,10 @@
                         </div>
 
                         <div class="cont">
-                            <p>Confirm Password</p>
+                            <p>Confirm password</p>
                             <div class="input-field2">
-                                <input type="password" class="text" placeholder="confirm Password" id="confirm_password"
-                                    name="confirm_password" value=" <?php echo $data['confirm_password']; ?>">
+                                <input type="password" class="text" placeholder="confirm password" id="confirm_password"
+                                    name="confirm_password" value="<?php echo $data['confirm_password']; ?>">
 
                             </div>
                             <div class="err"><?php echo $data['confirm_password_err']?></div>
@@ -146,10 +153,9 @@
 
 
 
-                <input type="submit" value="sign Up" class="btn1 solid">
+                    <input type="submit" value="sign Up" class="btn1 solid">
 
 
-                    <input type="submit" value="sign Up" class="btn solid">
 
 
 
@@ -167,6 +173,9 @@
                     <button class="btn transparent" id="sign-up-btn">Sign Up</button>
                 </div>
                 <img src="<?php echo IMGROOT;?>/undraw_the_world_is_mine_re_j5cr.svg" class="image" alt="">
+                <p class="p" id="pleft" onclick="goToHome()">
+                    <i class="fa-solid fa-house"></i> <span>Home</span>
+                </p>
             </div>
 
             <div class="panel right-panel">
@@ -177,6 +186,9 @@
                     <button class="btn transparent" id="sign-in-btn">Sign In</button>
                 </div>
                 <img src="<?php echo IMGROOT;?>/undraw_dev_focus_re_6iwt.svg" class="image" alt="">
+                <p class="p" id="pright" onclick="goToHome()">
+                    <i class="fa-solid fa-house"></i> <span>Home</span>
+                </p>
             </div>
 
         </div>
@@ -186,6 +198,7 @@
         <div id="location_pop" class="location_pop">
             <div class="location_pop_content">
                 <div id="map" class="location_pop_map"></div>
+                <p>please click on the markers to view the regions.</p>
                 <div class="location_close">
                     <button id="closeMapPopup" onclick="closemap()">Close</button>
                 </div>
@@ -200,7 +213,6 @@
 
     <script>
     function viewLocation() {
-        console.log("Function called")
         initMap();
         var locationPop = document.querySelector('.location_pop');
         document.getElementById('overlay').style.display = "flex";
@@ -211,6 +223,10 @@
         var locationPop = document.querySelector('.location_pop');
         locationPop.classList.remove('active');
         document.getElementById('overlay').style.display = "none";
+    }
+
+    function goToHome() {
+        window.location.href = "your_home_page_url_here";
     }
     // Event listener for map icon click
     document.getElementById('mapIcon').addEventListener('click', function(event) {
@@ -256,7 +272,7 @@
         };
         var map = new google.maps.Map(document.getElementById('map'), {
             center: center,
-            zoom: 7.3,
+            zoom: 7,
             styles: [{
                     featureType: 'all',
                     elementType: 'labels.text',
@@ -367,9 +383,26 @@
             });
         });
     }
-    document.getElementById("edit-profile-main-image").addEventListener("click", function() {
-        document.getElementById("profile_image").click();
-    });
+
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var mainRightBottomContent = document.querySelector('.sign-in-form');
+
+    //     function checkSlide() {
+    //         var elementTop = mainRightBottomContent.getBoundingClientRect().top;
+    //         var isHalfShown = elementTop < window.innerHeight;
+    //         var isNotScrolledPast = window.scrollY < elementTop + mainRightBottomContent.clientHeight;
+    //         if (isHalfShown && isNotScrolledPast) {
+    //             mainRightBottomContent.classList.add('slide-in');
+
+    //         } else {
+    //             // mainRightBottomContent.classList.remove('slide-in');
+    //             // mainRightBottomContent2.classList.remove('slide-in');
+    //         }
+    //     }
+
+    //     window.addEventListener('scroll', checkSlide);
+    //     checkSlide(); // Trigger once on page load
+    // });
     </script>
 
 

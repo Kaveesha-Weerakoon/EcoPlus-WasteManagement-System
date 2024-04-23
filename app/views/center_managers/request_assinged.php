@@ -328,8 +328,9 @@ function initMap() {
             map: map,
         });
         marker.addListener('click', function() {
-            view_collector(coordinate.image, coordinate.collector_id, coordinate.name, coordinate
-                .contact_no, coordinate.vehicle_no, coordinate.vehicle_type, coordinate.req_id);
+            // view_collector(coordinate.image, coordinate.collector_id, coordinate.name, coordinate
+            //     .contact_no, coordinate.vehicle_no, coordinate.vehicle_type, coordinate.req_id);
+            view_collector(coordinate);
         });
     });
 
@@ -459,7 +460,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (main_right_bottom_two !== null) {
             main_right_bottom_two.style.display = "flex";
         }
-        maps.style.backgroundColor = "#ecf0f1";
+        maps.style.backgroundColor = "var(--request-top-color)";
         table.style.backgroundColor = "";
     });
 
@@ -470,7 +471,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (main_right_bottom_two !== null) {
             main_right_bottom_two.style.display = "none";
         }
-        table.style.backgroundColor = "#ecf0f1";
+        table.style.backgroundColor = "var(--request-top-color)";
         maps.style.backgroundColor = "";
 
     });

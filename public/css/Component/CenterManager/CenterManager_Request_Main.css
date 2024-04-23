@@ -526,7 +526,7 @@
         height: 3px;
         width: 70px;
         margin-left: 25%;
-        background: #1B6652;
+        background: var(--green-color-one);
     }
 
     .personal-details-popup-form-close {
@@ -569,7 +569,7 @@
     .personal-details-right-labels span {
         margin-bottom: 15px;
         font-size: 15px;
-        color: #7c7c7d;
+        color: var(--main-text-color);
     }
 
     .personal-details-right-values {

@@ -255,8 +255,10 @@
                             SUM(metals) as metals FROM request_main 
                             JOIN garbage_confirmed 
                             ON garbage_confirmed.req_id = request_main.req_id 
+                            JOIN request_assigned
+                            ON request_assigned.req_id = request_main.req_id
                             WHERE date >= :from AND date <= :to
-                            AND collector_id = :collectorId';
+                            AND request_assigned.collector_id = :collectorId';
                
         
                 if ($from == "none") {
@@ -268,7 +270,7 @@
                     $next_month = date('Y-m-d', strtotime('+1 month', strtotime($today)));
                     $to = $next_month;
                 }
-        
+                $this->db->query($sql);
                 if ($collector_id != "none") {
                     $this->db->bind(':collectorId', $collector_id);
                 }
@@ -289,90 +291,5 @@
         
  
 
-       /* function getDiscountsOnAgents($user_id,$from = "none", $to = "none"){
-           
-            try {
-          
-                $this->db->query('SELECT SUM(discount_amount) AS discount_credits FROM discounts WHERE customer_id=:customer_id  AND created_at >= :from AND created_at <= :to');
-                $this->db->bind(':customer_id', $user_id);
-    
-        
-                if ($from == "none") {
-                    $from = '1970-01-01';  
-                }
-        
-                if ($to == "none") {
-                    $to = date('Y-m-d', strtotime('+1 month')); 
-                }
-        
-                $this->db->bind(':from', $from);
-                $this->db->bind(':to', $to);
-        
-                // Execute the query
-                $result = $this->db->single();
-                return $result;
-             } catch (PDOException $e) {
-                die($e);
-                return false;
-             }
-         }
-
-        function getTransactionAmount($user_id, $from = "none", $to = "none") {
-         try {
-            $this->db->query('SELECT SUM(transfer_amount) AS send_amount FROM credits_transfer WHERE SENDER_id=:customer_id  AND date >= :from AND date <= :to');
-            $this->db->bind(':customer_id', $user_id);
-            $this->db->bind(':from', $from == "none" ? '1970-01-01' : $from);
-            $this->db->bind(':to', $to == "none" ? date('Y-m-d', strtotime('+1 month')) : $to);
-            $result1 = $this->db->single();
-          
-            $sendAmount = floatval($result1->send_amount ?? 0);
-            // Initialize with sent amount
-            if ($result1) {
-                $this->db->query('SELECT SUM(transfer_amount) AS receive_amount FROM credits_transfer WHERE RECEIVER_id=:customer_id  AND date >= :from AND date <= :to');
-                $this->db->bind(':customer_id', $user_id);
-                $this->db->bind(':from', $from == "none" ? '1970-01-01' : $from);
-                $this->db->bind(':to', $to == "none" ? date('Y-m-d', strtotime('+1 month')) : $to);
-                $result2 = $this->db->single();
-               
-                $receiveAmount = floatval($result2->receive_amount ?? 0); // Initialize with received amount
-                $netTransactionAmount = $receiveAmount-$sendAmount ;
-                // Subtract received amount
-            } else {
-                $netTransactionAmount = 0; // Set to 0 if no result
-            }
-            
-            return $netTransactionAmount;
-          } catch (PDOException $e) {
-            // Log or handle the error gracefully
-            return false;
-          }
-        }
-
-        function getFineAmount($user_id,$from = "none", $to = "none"){
-            try {
-          
-                $this->db->query('SELECT SUM(fine) AS fine_amount FROM request_main INNER JOIN request_cancelled ON request_cancelled.req_id = request_main.req_id WHERE type = \'cancelled\' AND fine_type!="None" AND customer_id=:customer_id  AND date >= :from AND date <= :to');
-                $this->db->bind(':customer_id', $user_id);
-    
-        
-                if ($from == "none") {
-                    $from = '1970-01-01';  
-                }
-        
-                if ($to == "none") {
-                    $to = date('Y-m-d', strtotime('+1 month')); 
-                }
-        
-                $this->db->bind(':from', $from);
-                $this->db->bind(':to', $to);
-        
-                // Execute the query
-                $result = $this->db->single();
-                return $result;
-             } catch (PDOException $e) {
-                die($e);
-                return false;
-             }
-        
-    } */
+  
 }

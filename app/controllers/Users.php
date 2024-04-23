@@ -13,6 +13,7 @@
           public function index(){
             header("Location: " . URLROOT);      
           }
+          
     public function register(){
       // Check for POST
       $centers = $this->Center_Model->getallCenters();
@@ -50,7 +51,9 @@
             'email'=>'',
             'email_err'=>'' ,
             'password'=>'',
-             'password_err'=>'' 
+             'password_err'=>'',
+             'email_err' => '',  'center_err'=>''
+
           ];
 
           if ($_FILES['profile_image']['error'] == 4) {
@@ -115,7 +118,7 @@
 
 
           if (empty($data['password_reg'])) {
-            $data['password_reg_err'] = 'Pleae enter password';
+            $data['password_reg_err'] = 'Please enter password';
           } elseif (strlen($data['password_reg']) < 8 || strlen($data['password_reg']) > 30) {
               $data['password_reg_err'] = 'password must be between 8 and 30 characters';
 
@@ -141,8 +144,12 @@
               $data['confirm_password_err'] = 'Passwords do not match';
             }
           }
+
+          if($data['city']=="default"){
+            $data['center_err']="Select a region";
+          }
   
-          if(empty($data['email_reg_err']) && empty($data['name_err']) && empty($data['password_reg_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['city_err']) && empty($data['address_err'])&& empty($data['profile_err'])){
+          if(empty($data['center_err']) && empty($data['email_reg_err']) && empty($data['name_err']) && empty($data['password_reg_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['city_err']) && empty($data['address_err'])&& empty($data['profile_err'])){
             // Validated
             $pw=$data['password_reg'];
             $data['password_reg'] = password_hash($data['password_reg'], PASSWORD_DEFAULT);
@@ -172,7 +179,7 @@
           }
   
         } else {
-          // Init data
+        
           $data =[
             'name' => '',
             'email_reg' => '',
@@ -196,7 +203,10 @@
             'password'=>'',
             'email'=>'',
             'password'=>'',
-            'password_err'=>'' 
+            'password_err'=>'',
+            'email_err' => '',
+            'center_err'=>''
+ 
           ];
   
           // Load view
@@ -259,7 +269,8 @@
             'password_reg_err'=>'',   
             'profile_err'=>'',
             'profile_upload_error'=>'' ,
-            'reg'=>'False'
+            'reg'=>'False',
+            'center_err'=>''
           ];
           // Validate Email
           if(empty($data['email'])){ 
@@ -378,7 +389,8 @@
             'password_reg_err'=>'',  
             'profile_err'=>'',
             'profile_upload_error'=>'',
-            'reg'=>'False'
+            'reg'=>'False',
+            'center_err'=>''
           ];
           $this->view('users/login', $data);
         }
@@ -387,7 +399,6 @@
     }
 
  
-
 
     public function createUserSession($user){
       $_SESSION['user_id'] = $user->id;

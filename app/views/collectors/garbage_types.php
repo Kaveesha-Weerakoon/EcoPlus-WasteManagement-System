@@ -16,9 +16,7 @@
                     <div class="main-right-top-two">
                         <h1>Garbage Types</h1>
                     </div>
-                    <div class="main-right-top-three">
-                        <h4>Meet minimum amounts when collecting from customers</h4>
-                    </div>
+                    
                 </div>
 
                 <div class="main-right-bottom">

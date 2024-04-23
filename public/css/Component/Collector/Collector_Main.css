@@ -275,8 +275,7 @@
     .notification_right p {
         font-size: 13px;
     }
-
-    @media screen and (max-width: 1266px) {
+    @media screen and (max-width: 1309px) {
         .main-left-top h3 {
             display: none;
         }
@@ -286,23 +285,42 @@
             width: 75px;
             height: 75px;
         }
-    }
 
-    @media screen and (max-width: 1266px) {
-        .main-left-middle-content h3 {
-            font-size: 16px;
-        }
-
-
-    }
-
-    @media screen and (max-width: 1266px) {
         .main-left-middle-content h3 {
             font-size: 14px;
         }
+
+        .toggle-container {
+            margin-right: 7px;
+        }
+
+        .main-left-middle-content-icon {
+            margin-right: 4%;
+        }
     }
 
-    @media screen and (max-width: 784px) {
+    @media screen and (max-width: 1100px) {
+        .notification_popup h1 {
+            font-size: 19px;
+            letter-spacing: 0.001rem;
+            margin-top: 5px;
+            margin-left: 8px;
+        }
+
+        .notification_popup {
+            width: 25%;
+        }
+
+        .main-left-middle-content-icon {
+            margin-right: 2%;
+        }
+
+        .main-left-middle-content h3 {
+            font-size: 13px;
+        }
+    }
+
+    @media screen and (max-width: 970px) {
         .main-left-middle-content h3 {
             display: none;
         }
@@ -317,7 +335,6 @@
             align-items: center;
             padding-top: 15%;
             margin-top: 35%;
-
         }
 
         .main-left-middle h1 {
@@ -340,5 +357,164 @@
             align-items: center;
             margin-top: 100%;
         }
+
+        .toggle-button {
+            width: 32px;
+            height: 21px;
+        }
+
+        .toggle-indicator {
+            top: 3px;
+            left: 4px;
+            width: 14px;
+            height: 14px;
+        }
+
+        .toggle-container input[type="checkbox"]:checked+.toggle-button .toggle-indicator {
+            transform: translateX(11px);
+        }
     }
+
+    @media screen and (max-width: 724px) {
+        .notification {
+            height: 41px !important;
+            margin-top: 6px;
+            font-size: 13px;
+        }
+
+        .notification_popup h1 {
+            font-size: 17px;
+        }
+
+        .main-right-top-search {
+            margin-left: 40px;
+        }
+
+        .notification_popup {
+            top: 11%;
+            left: 40%;
+            width: 40%;
+        }
+
+        .main-left-middle {
+            padding-left: 0px;
+        }
+
+        .main-left-down {
+            padding-left: 0px;
+        }
+    }
+
+    @media screen and (max-width: 692px) {
+        .main-left-middle h1 {
+            visibility: hidden;
+            margin-bottom: 13%;
+        }
+
+        .main-left-down h1 {
+            font-size: 13px;
+        }
+
+        .main-left-top img {
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    @media screen and (max-width: 610px) {
+        .notification_right p {
+            font-size: 13px;
+        }
+
+        .main-right-top-profile img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .main-right-top-profile-cont h3 {
+            font-size: 15px;
+            letter-spacing: 0.03rem;
+        }
+
+        .main-right-top-profile-cont p {
+            font-size: 12px;
+        }
+
+        .main-right-top-notification i {
+            font-size: 26px;
+        }
+
+        .notification_popup {
+            width: 40% !important;
+        }
+
+        .notification_popup h1 {
+            font-size: 15px;
+        }
+
+        .notification {
+            font-size: 12px;
+        }
+
+        .notification-green-dot {
+            width: 9px;
+            height: 9px;
+        }
+
+        .notification_right p {
+            font-size: 13px;
+        }
+
+    }
+
+    @media screen and (max-width: 544px) {
+
+        .notification_popup {
+            width: 46% !important;
+        }
+
+        .notification_popup {
+            top: 11%;
+            left: 40%;
+            width: 40%;
+        }
+
+    }
+
+    @media screen and (max-width: 458px) {
+
+        .main-left-down h1 {
+            font-size: 11px;
+        }
+
+        .main-left-middle i {
+            font-size: 25px;
+        }
+
+        .main-left-down i {
+            font-size: 25px;
+        }
+
+        .toggle-button {
+            width: 29px;
+            height: 20px;
+        }
+
+        .toggle-indicator {
+            top: 3px;
+            left: 4px;
+            width: 12px;
+            height: 13px;
+        }
+
+        .toggle-container input[type="checkbox"]:checked+.toggle-button .toggle-indicator {
+            transform: translateX(11px);
+        }
+
+        .main-right-top-profile {
+            display: flex;
+            margin-right: 15px;
+        }
+    }
+
 }

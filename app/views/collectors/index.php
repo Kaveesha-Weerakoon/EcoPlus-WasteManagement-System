@@ -37,8 +37,40 @@
                             </div>
                         </div>
                         <div class="main-right-bottom-one-right">
+                                <h1>Recently Completed Request</h1>
 
-                            <canvas id="myChart" width="600" height="250"></canvas>
+                                <?php
+                                        $req_completed_history = $data['req_completed_history'];
+
+                                        // Sort the completed history by completion date (assuming completion_datetime property)
+                                        usort($req_completed_history, function ($a, $b) {
+                                            $dateA = strtotime($a->completed_datetime);
+                                            $dateB = strtotime($b->completed_datetime);
+
+                                            return $dateB - $dateA; // Sort in descending order (most recent first)
+                                        });
+
+                                        // Extract the first three elements after sorting
+                                        $limited_completed_history = array_slice($req_completed_history, 0, 3);
+
+                                        foreach ($limited_completed_history as $completion):
+                                            ?>
+                                <div class="main-right-bottom-one-right-cont">
+                                    <img class="td-pro_pic"
+                                        src="<?php echo (empty($completion->customer_image) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/'. $completion->customer_image) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $completion->customer_image; ?>"
+                                        alt="">
+                                    <h3>
+                                        C <?php echo $completion->customer_id; ?>
+                                    </h3>
+                                    <h3>
+                                        R <?php echo $completion->req_id; ?>
+                                    </h3>
+                                    <h2>
+                                        Eco <?php echo $completion->credit_amount;?>
+                                    </h2>
+                                </div>
+                                <?php endforeach; ?>
+          
                         </div>
                     </div>
                     <div class="main-right-bottom-two">
@@ -84,39 +116,7 @@
                     </div>
                     <div class="main-right-bottom-three">
                         <div class="main-right-bottom-three-left">
-                            <h1>Recently Completed Request</h1>
-
-                            <?php
-                                    $req_completed_history = $data['req_completed_history'];
-                            
-                                    // Sort the completed history by completion date (assuming completion_datetime property)
-                                    usort($req_completed_history, function ($a, $b) {
-                                        $dateA = strtotime($a->completed_datetime);
-                                        $dateB = strtotime($b->completed_datetime);
-                            
-                                        return $dateB - $dateA; // Sort in descending order (most recent first)
-                                    });
-                            
-                                    // Extract the first three elements after sorting
-                                    $limited_completed_history = array_slice($req_completed_history, 0, 3);
-
-                                    foreach ($limited_completed_history as $completion):
-                                        ?>
-                            <div class="main-right-bottom-three-left-cont">
-                                <img class="td-pro_pic"
-                                    src="<?php echo (empty($completion->customer_image) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/'. $completion->customer_image) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $completion->customer_image; ?>"
-                                    alt="">
-                                <h3>
-                                    C <?php echo $completion->customer_id; ?>
-                                </h3>
-                                <h3>
-                                    R <?php echo $completion->req_id; ?>
-                                </h3>
-                                <h2>
-                                    Eco <?php echo $completion->credit_amount;?>
-                                </h2>
-                            </div>
-                            <?php endforeach; ?>
+                        <canvas id="myChart" width="600" height="250"></canvas>
                             <!-- <div class="map" id="map"></div> -->
                         </div>
                         <div class="main-right-bottom-three-right">

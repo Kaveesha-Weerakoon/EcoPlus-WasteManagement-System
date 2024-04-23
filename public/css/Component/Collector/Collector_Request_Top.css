@@ -6,6 +6,7 @@
         height: 100%;
         grid-template-rows: 28% 72%;
         background-color: var(--background-color-right);
+        overflow: hidden;
     }
 
     .main-right-top {
@@ -229,6 +230,7 @@
 
     .main-right-bottom {
         box-sizing: border-box;
+        
     }
 
     .main-right-bottom-down {

@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="main-right-bottom">
-
+                    <?php if(!empty($data['complains'])) : ?>
                         <div class="main-right-bottom-top">
                             <table class="table">
                                 <tr class="table-header">
@@ -53,6 +53,14 @@
                                 <?php endforeach; ?>
                             </table>
                         </div>
+                        <?php else: ?>
+                        <div class="main-right-bottom-three">
+                            <div class="main-right-bottom-three-content">
+                                <img src="<?php echo IMGROOT?>/undraw_questions_re_1fy7.svg" alt="">
+                                <h1>You have No complaint</h1>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                     </div>
 
 

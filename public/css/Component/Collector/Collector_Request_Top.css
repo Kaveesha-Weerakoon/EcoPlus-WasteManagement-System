@@ -228,6 +228,10 @@
         cursor: pointer;
     }
 
+    .main-right-top-four-component p{
+        color:var(--background-color-right) ;
+    }
+
     .main-right-bottom {
         box-sizing: border-box;
         

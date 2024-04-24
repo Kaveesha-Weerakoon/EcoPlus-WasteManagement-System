@@ -47,7 +47,6 @@
       $latestdiscount=   $this->LatestUpdate->getLatestDiscount($_SESSION['user_id']);
       $latestcancelled=   $this->LatestUpdate->getLatestCancelled($_SESSION['user_id']);
       $latestupdate = '<h3>+Eco 0</h3>';
-      $latestupdate = 'Eco 0';
 
       if (empty($latestcompleted) &&  empty($latesttransfered) &&  empty($latestdiscount) &&  empty($latestcancelled)) {
   

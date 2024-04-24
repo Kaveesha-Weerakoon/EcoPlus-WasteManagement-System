@@ -7,41 +7,15 @@
                 <div class="main-right-top">
                     <div class="main-right-top-search">
                         <i class='bx bx-search-alt-2'></i>
-                        <input type="text" placeholder="Search">
+                        <input type="text" id="searchInput" placeholder="Search">
                     </div>
-                    <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <div class="dot"></div>
-                    </div>
+                    <?php require APPROOT . '/views/credit_discount_agents/agent_profile/agent_profile.php'; ?>
 
-                    <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/img_upload/credit_discount_agent/<?php echo $_SESSION['agent_profile']?>"
-                            alt="">
-                        <div class="main-right-top-profile-cont">
-                            <h3><?php echo $_SESSION['agent_name']?></h3>
-                            <p>ID : D <?php echo $_SESSION['agent_id']?></p>
-                        </div>
-                    </div>
                 </div>
                 <div class="main-right-bottom">
                     <div class="main-bottom-top">
                         <h2>Discounts History</h2>
-                        <div class="main-bottom-top-bottom">
-                            <div class="date-cont">
-                                <input type="date">
-                                <p>From</p>
-                            </div>
-                            <div class="date-cont">
-                                <input type="date">
-                                <p>To</p>
-                            </div>
-                            <div class="button-cont">
-                                <Button>
-                                    Filter
-                                </Button>
-                            </div>
-                            <h3>Credits Given Eco 123.1221</h3>
-                        </div>
+
                     </div>
                     <div class="main-right-bottom-bottom">
                         <div class="main-right-bottom-top">
@@ -76,5 +50,30 @@
             </div>
         </div>
     </div>
+    <script>
+    function searchTable() {
+        var input = document.getElementById('searchInput').value.toLowerCase();
+        var rows = document.querySelectorAll('.table-row');
 
+        rows.forEach(function(row) {
+            var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+            var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+            var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+            var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+            var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+            var conctact_no = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
+
+            if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(
+                    input) ||
+                cid.includes(input) || conctact_no.includes(input)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
+        });
+
+
+    }
+    document.getElementById('searchInput').addEventListener('input', searchTable);
+    </script>
     <?php require APPROOT . '/views/inc/footer.php'; ?>

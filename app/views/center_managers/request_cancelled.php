@@ -105,7 +105,9 @@
                                 <span>Date</span><br>
                                 <span>Time</span><br>
                                 <span>Contact No</span><br>
+                                <span>Cancelled Time</span><br>
                                 <span>Instructions</span><br>
+                                
                             </div>
                             <div class="request-details-right-values">
                                 <span id="req_id2"></span><br>
@@ -113,6 +115,7 @@
                                 <span id="req_date"></span><br>
                                 <span id="req_time"></span><br>
                                 <span id="req_contactno"></span><br>
+                                <span id="cancelled_time"></span><br>
                                 <span id="instructions"></span><br>
                             </div>
                         </div>
@@ -147,6 +150,7 @@ function view_request_details(request) {
     document.getElementById('req_date').innerText = request.date;
     document.getElementById('req_time').innerText = request.time;
     document.getElementById('req_contactno').innerText = request.contact_no;
+    document.getElementById('cancelled_time').innerText = request.cancelled_time;
     document.getElementById('instructions').innerText = request.instructions;
 
 }

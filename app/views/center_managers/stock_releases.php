@@ -37,8 +37,8 @@
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/stock_release_details">
                             <div class="main-right-top-three-content">
-                                <p><b style="color:#1ca557;">Stock Releases</b></p>
-                                <div class="line"  style="background-color: #1ca557;"></div>
+                                <p><b style="color: var(--green-color-one);">Stock Releases</b></p>
+                                <div class="line"  style="background-color: var(--green-color-one);"></div>
                             </div>
                         </a>
 
@@ -68,8 +68,11 @@
                                 <td> <?php echo $release->release_note?></td>
                                 <td> <?php echo $release->income?></td>
                                 <td class="cancel-open">
-                                    <img onclick="view_release_details(<?php echo htmlspecialchars(json_encode($release), ENT_QUOTES, 'UTF-8') ?>)"
-                                            src="<?php echo IMGROOT?>/info.png" alt="">
+                                    <!-- <img onclick="view_release_details(<?php echo htmlspecialchars(json_encode($release), ENT_QUOTES, 'UTF-8') ?>)"
+                                            src="<?php echo IMGROOT?>/info.png" alt=""> -->
+                                    <i class='bx bx-info-circle' style="font-size: 29px"
+                                    onclick="view_release_details(<?php echo htmlspecialchars(json_encode($release), ENT_QUOTES, 'UTF-8') ?>)"
+                                    ></i>
                                 </td>
                                 
                                 

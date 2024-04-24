@@ -556,9 +556,13 @@ document.getElementById('setButton').addEventListener('click', function() {
 });
 
 function validateHolidayForm() {
-    var holidayInput = document.getElementById("holiday").value;
     
-    console.log(markedHolidays);
+    var holidayInput = document.getElementById("holiday").value;
+    var currentDate = new Date();
+    var futureDate = new Date();
+    futureDate.setDate(currentDate.getDate() + 7);
+    
+    //console.log(markedHolidays);
 
 
     if (holidayInput.trim() === "") {
@@ -569,11 +573,13 @@ function validateHolidayForm() {
 
         // Convert the input date string to a Date object
         var selectedDate = new Date(holidayInput.trim());
-        var currentDate = new Date();
+       
 
         if (selectedDate < currentDate) {
             alert("You cannot mark a past date as a holiday");
-        } else {
+        } else if(selectedDate < futureDate){
+            alert("You can only mark a holiday at least 7 days in the future");
+        }else {
             var isDateAlreadyMarked = markedHolidays.some(function(holiday) {
                 return holiday.date === holidayInput.trim();
             });

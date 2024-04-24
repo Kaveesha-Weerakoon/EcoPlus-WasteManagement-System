@@ -103,12 +103,13 @@
     .location_pop_content {
         width: 700px;
         padding: 10px;
-        background-color: #f1f2f6;
+        background-color: var(--background-color-main);
         border-radius: 10px;
         padding: 20px;
         padding-bottom: 40px;
         height: 350px;
         overflow: hidden;
+        border: 1px solid var(--main-text-color);
     }
 
     .location_pop_map {
@@ -125,8 +126,8 @@
     }
 
     .location_close button {
-        background-color: #ff4757;
-        color: #fff;
+        background-color: var(--red-color);
+        color: var(--background-color-main);
         cursor: pointer;
         border: none;
         font-size: 16px;
@@ -207,13 +208,13 @@
 
     .collect-details-pop-form-content {
         display: grid;
-        grid-template-columns: 70% 30%;
+        grid-template-columns: 60% 40%;
         width: 80%;
         background: var(--background-color-main);
-        box-shadow: var(--box-shadow);
+        box-shadow: var(--form-box-shadow);
         border-radius: 10px;
         padding: 10px 40px;
-        height: 300px;
+        height: 350px;
     }
 
     .collect-details-pop-form-content span {
@@ -230,11 +231,11 @@
     .collect-details-pop-form-content-labels h3 {
         font-weight: 300;
         font-size: 14px;
-        margin-bottom: 5%;
+        margin-bottom: 7%;
         width: 300px;
         text-align: left;
         margin-left: 20%;
-        color: #7c7c7d;
+        color: var(--main-text-color);
     }
 
     .collect-details-pop-form-content-right-values {
@@ -258,6 +259,7 @@
         font-size: 14px;
         color: #767e95;
         font-weight: 550;
+        overflow: auto;
         
     }
 
@@ -308,7 +310,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        box-shadow: var(--box-shadow);
+        box-shadow: var(--form-box-shadow);
         color: var(--main-text-color);
     }
 
@@ -344,7 +346,7 @@
         height: 100%;
         padding-top: 10px;
         margin-top: 17px;
-        box-shadow: var(--box-shadow);
+        box-shadow: var(--form-box-shadow);
     }
 
     .personal-details-right {
@@ -365,7 +367,7 @@
     .personal-details-right-labels span {
         margin-bottom: 15px;
         font-size: 15px;
-        color: #7c7c7d;
+        color: var(--main-text-color);
     }
 
     .personal-details-right-values {
@@ -401,7 +403,7 @@
     .personal-details-left p {
         margin-top: 5px;
         font-size: 15px;
-        color: #7c7c7d;
+        color: var(--main-text-color);
     }
 
     .personal-details-left span {
@@ -428,7 +430,8 @@
 
     .confirm_button {
         padding: 7px;
-        background-color: #f6e58d;
+        /* background-color: #f6e58d; */
+        background-color: var(--yellow-color);
         color: var(--main-text-color);
         border-radius: 5px;
         box-shadow: var(--box-shadow);
@@ -439,13 +442,13 @@
     }
 
     .confirm_button:hover {
-        background-color: #ddce7f;
+        background-color: var(--yellow-color-hover);
     }
 
     .confirmed_button {
         padding: 7px;
         background-color: var(--green-color-one);
-        color: white;
+        color: var(--background-color-main);
         border-radius: 5px;
         box-shadow: var(--box-shadow);
         outline: none;
@@ -455,7 +458,7 @@
     }
 
     .confirmed_button:hover {
-        background-color: #19954e;
+        background-color: var(--button-hover-green);
     }
 
     /*request details*/
@@ -485,18 +488,19 @@
 
     .request-details-pop-form {
         width: 500px;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         position: relative;
         text-align: center;
         padding: 20px;
-        color: #333;
+        color: var(--main-text-color);
         display: flex;
         align-items: center;
         justify-content: center;
         transition: transform 0.4s, top 0.4s;
         flex-direction: column;
+        box-shadow: var(--box-shadow);
 
     }
 
@@ -527,10 +531,11 @@
         display: grid;
         grid-template-columns: 30% 70%;
         width: 95%;
-        background-color: white;
+        background-color: var(--background-color-main);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         border-radius: 6px;
         margin-bottom: 10px;
+        box-shadow: var(--form-box-shadow);
 
     }
 
@@ -560,7 +565,7 @@
     .request-details-right-labels span {
         margin-bottom: 15px;
         font-size: 15px;
-        color: #7c7c7d;
+        color: var(--main-text-color);
     }
 
     .request-details-right-values {
@@ -603,17 +608,17 @@
     .confirm-garbage-popup-box {
         .confirm-garbage-popup-form {
           width: 45%;
-          background: white;
+          background: var(--background-color-main);
           border-radius: 6px;
           position: relative;
           text-align: center;
           padding: 40px;
-          color: #333;
+          color: var(--main-text-color);
           display: flex;
           flex-direction: column;
           align-items: center;
           transition: transform 0.4s, top 0.4s;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          box-shadow: var(--form-box-shadow);
         }
     
         .form-title {
@@ -714,6 +719,8 @@
           padding-left: 35px;
           font-size: 14px;
           transition: all 0.3s ease;
+          background-color: var(--background-color-main);
+          color: var(--main-text-color);
         }
     
         .main-right-bottom-content-content input:focus {
@@ -740,7 +747,7 @@
           height: 40px;
           outline: none;
           width: 50%;
-          color: white;
+          color: var(--background-color-main);
           font-size: 17px;
           font-weight: 500;
           border-radius: 5px;
@@ -752,7 +759,7 @@
         }
     
         .form-button button[type="submit"]:hover {
-          background: #19954e;
+          background: var(--button-hover-green);
         }
     
         .cancel-button {
@@ -800,8 +807,9 @@
         border-radius: 6px;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
 
     .open-popup {
@@ -823,6 +831,7 @@
         font-size: 38px;
         font-weight: 500;
         margin: 10px 0 10px;
+        color: var(--main-text-color);
     }
 
     .request_success .popup button {
@@ -830,7 +839,7 @@
         margin-top: 30px;
         padding: 10px 0;
         background: var(--green-color-one);
-        color: white;
+        color: var(--background-color-main);
         border: 0;
         outline: none;
         font-size: 18px;

@@ -622,7 +622,7 @@
                 border-radius: 6px;
                 text-align: center;
                 padding: 0 30px 30px;
-                color: #333;
+                color: var(--main-text-color);
                 transition: transform 0.4s, top 0.4s;
             }
 
@@ -645,7 +645,7 @@
                 margin-bottom: 5px;
                 padding: 10px 0;
                 background: var(--green-color-one);
-                color: white;
+                color: var(--background-color-main);
                 border: 0;
                 outline: none;
                 font-size: 18px;

@@ -255,7 +255,7 @@
                 }
             }
         }
-    }
+     }
 
      
 
@@ -1066,25 +1066,24 @@
               'notification'=> $Notifications   
           ];
   
-  
-           $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
-           $customer_id = (int)$numeric_part;
-
-  
+          $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
+          $customer_id = (int) $numeric_part;
+          
           if (empty($data['customer_id'])) {
               $data['customer_id_err'] = 'Please enter customer id';
           } else {
-                if(!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
-                    $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
-                } elseif($customer_id === $_SESSION['user_id']) {
-                    $data['customer_id_err'] = 'You cannot transfer credits to yourself';
-                } else {
-              // Check if the user input matches the required format
-                    if (!$this->customerModel->get_customer($customer_id)) {
-                          $data['customer_id_err'] = 'Customer ID does not exist';
-                    }
-                }
+              if(!preg_match('/^\d{1,10}$/', $data['customer_id'])) {
+                  $data['customer_id_err'] = "Use only Maximum 10 digits";
+              } elseif($customer_id === $_SESSION['user_id']) {
+                  $data['customer_id_err'] = 'You cannot transfer credits to yourself';
+              } else {
+                  // Check if the user input matches the required format
+                  if (!$this->customerModel->get_customer($customer_id)) {
+                      $data['customer_id_err'] = 'Customer ID does not exist';
+                  }
+              }
           }
+          
       
         
           if (empty($data['credit_amount']) || $data['credit_amount'] <= 0) {

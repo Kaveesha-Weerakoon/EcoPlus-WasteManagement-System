@@ -77,11 +77,12 @@
                             </a>
                         </div>
                         <div class="main-right-top-four">
-                            <div class="main-right-top-four-left">
+                        <div class="main-right-top-four-left">
                                 <p>Date</p>
                                 <input type="date" id="selected-date">
                                 <button onclick="loadLocations()">Filter</button>
                             </div>
+                            
                             <div class="main-right-top-four-right">
 
                                 <div class="main-right-top-four-component" style="background-color: #ecf0f1"
@@ -143,7 +144,7 @@
                                             } else {
                                             echo '<a
                                                 href="' . URLROOT . '/Collectors/enterWaste_And_GenerateEcoCredits/' . $request->req_id . '">
-                                                <img class="complete_image" src="' . IMGROOT . '/assign.png" alt="">
+                                                <i  class="fa-solid fa-check-circle"></i>
                                             </a>';
                                             }
                                             ?>

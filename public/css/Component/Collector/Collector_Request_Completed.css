@@ -543,6 +543,7 @@
     justify-content: center;
     flex-direction: column;
     overflow: hidden;
+    box-shadow: var(--box-shadow2);
     transition: transform 0.4s ease-in, background-color 0.4s ease-in;
   }
 
@@ -553,7 +554,7 @@
   .location_pop_content {
     width: 700px;
     padding: 10px;
-    background-color: #f1f2f6;
+    background-color: var(--background-color-main);
     border-radius: 10px;
     padding: 20px;
     padding-bottom: 40px;
@@ -575,8 +576,8 @@
   }
 
   .location_close button {
-    background-color: #ff4757;
-    color: #fff;
+    background-color: var(--red-color);
+    color: var(--background-color-main);
     cursor: pointer;
     border: none;
     font-size: 16px;

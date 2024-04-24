@@ -114,6 +114,7 @@
     .main-right-bottom-content {
         width: 70%;
         height: 110%;
+
         box-shadow: var(--box-shadow2);
         border-radius: 10px;
         display: flex;

@@ -73,7 +73,7 @@
                     <div class="main-right-bottom-two-content">
                         <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
                         <h1>There are no customer complaints at the moment</h1>
-                        <p></p>
+                        <p>Hope you will continue customer satisfaction</p>
                         
 
                     </div>

@@ -102,7 +102,8 @@
     }
 
     public function collectors_complains(){
-      $collector_complains=$this->collector_complain_Model->get_complains_byCenterID($_SESSION['center_id']);
+      $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+      $collector_complains=$this->collector_complain_Model->get_collector_complaints_by_region($center->region);
       $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'collectors_complains' => $collector_complains,

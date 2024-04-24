@@ -104,6 +104,7 @@
 @import url('Component/CenterManager/CenterManager_Stock_Releases.css');
 
 @import url('Component/CenterManager/CenterManager_Reports.css');
+@import url('Component/CenterManager/CenterManager_View_Customer_Complaints.css');
 
 /* Agent CSS */
 @import url('Component/Agent/Agent_Dashboard.css');

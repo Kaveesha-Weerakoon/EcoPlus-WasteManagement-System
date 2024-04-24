@@ -29,6 +29,12 @@
             </div>
             <h3>Reports</h3>
         </div>
+        <div class="main-left-middle-content" onclick="redirect_view_customer_complaints()" id="customer_complaints">
+            <div class=" main-left-middle-content-icon">
+                <i class='bx bx-message-error'></i>
+            </div>
+            <h3>Complaints</h3>
+        </div>
         <div class="main-left-middle-content" onclick="redirect_edit_profile()" id="edit_profile">
             <div class="main-left-middle-content-icon">
                 <i class='bx bx-user-pin'></i>
@@ -82,6 +88,12 @@ function redirect_waste_management() {
 
 function redirect_reports(){
     var linkUrl = "<?php echo URLROOT?>/centermanagers/reports";
+    window.location.href = linkUrl;
+}
+
+
+function redirect_view_customer_complaints(){
+    var linkUrl = "<?php echo URLROOT?>/centermanagers/view_customer_complaints";
     window.location.href = linkUrl;
 }
 

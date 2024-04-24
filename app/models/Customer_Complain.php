@@ -52,7 +52,24 @@
                       ORDER BY customer_complains.date DESC');
     $results = $this->db->resultSet();
     return $results;
-}
+  }
+
+  public function get_customer_complaints_by_region($region){
+    try{
+      $this->db->query('SELECT * FROM customer_complains WHERE region = :region');
+      $this->db->bind(':region', $region);
+      $results = $this->db->resultSet();
+      return $results;
+
+
+    }catch (PDOException $e){
+      return false;
+    }
+    
+
+
+
+  }
 
 
  

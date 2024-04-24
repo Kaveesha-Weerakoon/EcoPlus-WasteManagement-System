@@ -17,6 +17,7 @@
       $this->garbageTypeModel=$this->model('Garbage_Types');
       $this->Center_Manager_Report_Model=$this->model('Center_Manager_Report');
       $this->Report_Model=$this->model('Report');
+      $this->customer_complaints_model = $this->model('Customer_Complain');
 
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
@@ -1961,6 +1962,21 @@
       header("Location: " . URLROOT . "/centermanagers/$url");        
 
    }
+  }
+
+  public function view_customer_complaints(){
+ 
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $customer_complaints = $this->customer_complaints_model->get_customer_complaints_by_region($center->region);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+
+    $data =[
+      'customer_complaints' => $customer_complaints,
+      'notification'=> $notifications
+
+    ];
+
+    $this->view('center_managers/view_customer_complaints', $data);
   }
 
 

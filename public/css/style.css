@@ -224,6 +224,7 @@ a {
 
 .body {
     height: 100vh;
+    scrollbar-width: none;
 }
 
 @keyframes tableLoad {

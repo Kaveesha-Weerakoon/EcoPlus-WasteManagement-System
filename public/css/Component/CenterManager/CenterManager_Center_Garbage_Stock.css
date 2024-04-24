@@ -97,7 +97,7 @@
     width: 15.5px;
     height: 15.5px;
     border-radius: 50%;
-    background-color: #F13E3E;
+    background-color: var(--red-color);
     margin-top: -11px;
     margin-left: -15px;
     color: var(--background-color-main);
@@ -302,8 +302,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: white;
-    box-shadow: var(--box-shadow);
+    background-color: var(--background-color-main);
+    box-shadow: var(--form-box-shadow);
     border-radius: 7px;
     width: 150px;
     height: 150px;
@@ -312,7 +312,7 @@
   }
 
   .box-content:hover {
-    background-color: #e6e6e6;
+    background-color: var(--request-top-color);
   }
 
   .box-content i {
@@ -344,7 +344,7 @@
 
     width: 200px;
     outline: none;
-    color: white;
+    color: var(--background-color-main);
     font-size: 18px;
     font-weight: 500;
     border-radius: 5px;
@@ -359,7 +359,7 @@
   }
 
   .release-button:hover {
-    background: #19954e;
+    background: var(--button-hover-green);
   }
 
  
@@ -386,7 +386,7 @@
   .garbage-release-popup-box {
     .garbage-release-popup-form {
       width: 45%;
-      background: white;
+      background: var(--background-color-main);
       border-radius: 6px;
       position: relative;
       text-align: center;
@@ -397,6 +397,7 @@
       align-items: center;
       transition: transform 0.4s, top 0.4s;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: var(--form-box-shadow);
     }
 
     .form-title {
@@ -461,7 +462,7 @@
       top: 50%;
       transform: translateY(-50%);
       left: 10px;
-      color: #555;
+      color: var(--main-text-color);
     }
 
     .error-div {
@@ -484,6 +485,8 @@
       padding-left: 35px;
       font-size: 14px;
       transition: all 0.3s ease;
+      color: var(--main-text-color);
+      background-color: var(--background-color-main);
     }
 
     .main-right-bottom-content-content input:focus {
@@ -527,7 +530,7 @@
       height: 40px;
       outline: none;
       width: 50%;
-      color: white;
+      color: var(--background-color-main);
       font-size: 17px;
       font-weight: 500;
       border-radius: 5px;
@@ -539,7 +542,7 @@
     }
 
     .form-button button[type="submit"]:hover {
-      background: #19954e;
+      background: var(--button-hover-green);
     }
 
     .cancel-button {
@@ -588,7 +591,7 @@
     border-radius: 6px;
     text-align: center;
     padding: 0 30px 30px;
-    color: #333;
+    color: var(--main-text-color);
     transition: transform 0.4s, top 0.4s;
   }
 
@@ -646,11 +649,12 @@
     width: 35%;
     /* height: 75%; */
     height: 550px;
-    background-color: white;
+    background-color: var(--background-color-main);
     border-radius: 10px;
     display: flex;
     align-items: center;
     flex-direction: column;
+    box-shadow: var(--form-box-shadow);
    
 
   }
@@ -703,7 +707,7 @@
     height: 35px;
     font-size: 19px;
     background-color: var(--green-color-one);
-    color: #ffffff;
+    color: var(--background-color-main);
     border: none;
     border-radius: 5px;
     cursor: pointer;

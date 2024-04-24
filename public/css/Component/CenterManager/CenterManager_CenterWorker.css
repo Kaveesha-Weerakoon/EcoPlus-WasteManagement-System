@@ -97,7 +97,7 @@
         width: 15.5px;
         height: 15.5px;
         border-radius: 50%;
-        background-color: #F13E3E;
+        background-color: var(--red-color);
         margin-top: -11px;
         margin-left: -15px;
         color: var(--background-color-main);
@@ -344,21 +344,22 @@
 
     .main-right-bottom-two-content h1 {
         font-size: 23px;
-        color: #333;
+        color: var(--main-text-color);
         font-weight: 550;
     }
 
     .main-right-bottom-two-content p {
         font-size: 18px;
         margin-top: 7px;
-        color: #7c7c7d;
+        /* color: #7c7c7d; */
+        color: var(--main-text-color);
     }
 
     .main-right-bottom-two-content button {
         height: 42px;
         width: 200px;
         outline: none;
-        color: white;
+        color: var(--background-color-main);
         font-size: 19px;
         font-weight: 500;
         border-radius: 5px;
@@ -398,12 +399,13 @@
 
     .popup {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         text-align: center;
         padding: 0 30px 30px;
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
 
     .popup a {
@@ -489,13 +491,14 @@
 
     .popup-form {
         width: 50%;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         position: relative;
         text-align: center;
         padding: 0 30px 30px;
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
 
     .popup-form h2 {
@@ -530,7 +533,7 @@
         margin-left: 5px;
         padding: 10px 0;
         background: var(--green-color-one);
-        color: white;
+        color: var(--background-color-main);
         border: 0;
         outline: none;
         font-size: 18px;
@@ -596,7 +599,8 @@
         font-size: 16px;
         font-weight: 400;
         line-height: 1.5;
-        background-color: #fff;
+        background-color: var(--background-color-main);
+        color: var(--main-text-color);
         border: 1px solid #ced4da;
         border-radius: 4px;
 
@@ -614,7 +618,7 @@
         width: 100%;
         border-radius: 4px;
         height: 100%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--form-box-shadow);
     }
 
    
@@ -637,12 +641,13 @@
 
     .popup1 {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         font-family: 'poppins', sans-serif;
         border-radius: 6px;
         text-align: center;
         padding: 0 30px 30px;
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
 
     .open-popup1 {
@@ -669,7 +674,7 @@
         margin-top: 30px;
         padding: 10px 0;
         background: var(--green-color-one);
-        color: white;
+        color: var(--background-color-main);
         border: 0;
         outline: none;
         font-size: 18px;

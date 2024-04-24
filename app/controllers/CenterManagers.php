@@ -85,7 +85,7 @@
     }
 
     public function collectors(){
-      $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+      $collectors = $this->collectorModel->get_collectors_bycenterid_with_assigned($_SESSION['center_id']);
       $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'collectors' => $collectors,
@@ -308,7 +308,7 @@
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        $collectors = $this->collectorModel->get_collectors_bycenterid_with_assigned($_SESSION['center_id']);
             $data = [
                 'collectors' => $collectors,
                 'id'=> $collectorId,
@@ -403,7 +403,7 @@
       }
       else{
 
-        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        $collectors = $this->collectorModel->get_collectors_bycenterid_with_assigned($_SESSION['center_id']);
         $collector = $this->collectorModel->getCollector_ByID_view($collectorId);
         $data = [
 
@@ -438,26 +438,26 @@
       }
     }
 
-    public function collector_delete_confirm($collectorId){
-        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
-        $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
-        $data = [
-          'collectors' => $collectors,
-          'confirm_delete' => 'True',
-          'delete_success' =>'',
-          'click_update' =>'',
-          'update_success'=>'',
-          'personal_details_click'=> '',
-          'vehicle_details_click'=> '',
-          'collector_id' => $collectorId,
-          'notification' => $notifications
-        ];     
-        $this->view('center_managers/collectors', $data);       
-    }
+    // public function collector_delete_confirm($collectorId){
+    //     $collectors = $this->collectorModel->get_collectors_bycenterid_with_assigned($_SESSION['center_id']);
+    //     $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+    //     $data = [
+    //       'collectors' => $collectors,
+    //       'confirm_delete' => 'True',
+    //       'delete_success' =>'',
+    //       'click_update' =>'',
+    //       'update_success'=>'',
+    //       'personal_details_click'=> '',
+    //       'vehicle_details_click'=> '',
+    //       'collector_id' => $collectorId,
+    //       'notification' => $notifications
+    //     ];     
+    //     $this->view('center_managers/collectors', $data);       
+    // }
 
     public function collector_delete($collectorId){
 
-      $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+      $collectors = $this->collectorModel->get_collectors_bycenterid_with_assigned($_SESSION['center_id']);
       $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'collectors' => $collectors,
@@ -487,33 +487,33 @@
 
     }
 
-    public function personal_details_view($collectorId){
-        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
-        $collector = $this->collectorModel->getCollector_ByID_view($collectorId);
-        $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
-        $data = [
-          'collectors' => $collectors,
-          'id'=> $collectorId,
-          'name' => $collector->name,
-          'email'=> $collector->email,
-          'nic' => $collector->nic,
-          'dob'=> $collector->dob,
-          'contact_no'=> $collector->contact_no,
-          'address' => $collector->address,
-          'image'=>$collector->image,
-          'notification'=> $notifications,
-          'personal_details_click'=> 'True',
-          'vehicle_details_click'=> '',
-          'confirm_delete' => '',
-          'delete_success' =>'',
-          'click_update' =>'',
-          'update_success'=>'',
+    // public function personal_details_view($collectorId){
+    //     $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+    //     $collector = $this->collectorModel->getCollector_ByID_view($collectorId);
+    //     $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+    //     $data = [
+    //       'collectors' => $collectors,
+    //       'id'=> $collectorId,
+    //       'name' => $collector->name,
+    //       'email'=> $collector->email,
+    //       'nic' => $collector->nic,
+    //       'dob'=> $collector->dob,
+    //       'contact_no'=> $collector->contact_no,
+    //       'address' => $collector->address,
+    //       'image'=>$collector->image,
+    //       'notification'=> $notifications,
+    //       'personal_details_click'=> 'True',
+    //       'vehicle_details_click'=> '',
+    //       'confirm_delete' => '',
+    //       'delete_success' =>'',
+    //       'click_update' =>'',
+    //       'update_success'=>'',
           
 
-        ];
+    //     ];
       
-        $this->view('center_managers/collectors', $data);
-    }
+    //     $this->view('center_managers/collectors', $data);
+    // }
 
     public function center_workers(){
       $center_workers = $this->centerworkerModel->get_center_workers($_SESSION['center_id']);
@@ -1019,6 +1019,7 @@
       'assigned_requests'=> $assigned_requests,
       'lattitude'=> $center->lat,
       'longitude'=> $center->longi,
+      'radius' => $center->radius,
       'notification' => $notifications
     ];
     $this->view('center_managers/request_incomming', $data);
@@ -1145,57 +1146,60 @@
     $data=[
       'assined_requests'=>$assined_requests,
       'jsonData'=>$jsonData,
-      'notification'=> $notifications
+      'notification'=> $notifications,
+      'lattitude'=> $center->lat,
+      'longitude'=> $center->longi,
+      'radius' => $center->radius
     ];
     
     $this->view('center_managers/request_assinged', $data);
 
   }
   
-  public function assinged_request_cancell(){
-    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
-    $assined_requests=$this->Request_Model->get_assigned_request_by_center($center->region);
-    $jsonData = json_encode($assined_requests);
-    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  // public function assinged_request_cancell(){
+  //   $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+  //   $assined_requests=$this->Request_Model->get_assigned_request_by_center($center->region);
+  //   $jsonData = json_encode($assined_requests);
+  //   $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+  //   if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
-      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  //     $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-      $data = [
-        'incoming_requests' => $assined_requests,
-        'jsonData' => $jsonData,
-        'pop_location'=>'',
-        'map'=>'',
-        'request_id'=>trim($_POST['id']),
-        'reason'=>trim($_POST['reason']),
-        'cancelled_by'=>"Center",
-        'assinged'=>'Yes',
-        'collector_id'=> trim($_POST['collector_id']),
-        'notification'=> $notifications
-      ];
+  //     $data = [
+  //       'incoming_requests' => $assined_requests,
+  //       'jsonData' => $jsonData,
+  //       'pop_location'=>'',
+  //       'map'=>'',
+  //       'request_id'=>trim($_POST['id']),
+  //       'reason'=>trim($_POST['reason']),
+  //       'cancelled_by'=>"Center",
+  //       'assinged'=>'Yes',
+  //       'collector_id'=> trim($_POST['collector_id']),
+  //       'notification'=> $notifications
+  //     ];
 
-      if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
-        $this->view('center_managers/request_assigned', $data);
+  //     if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
+  //       $this->view('center_managers/request_assigned', $data);
 
-      } else {
-        $this->Request_Model->cancel_request($data);
-        $this->request_cancelled();
-    }
+  //     } else {
+  //       $this->Request_Model->cancel_request($data);
+  //       $this->request_cancelled();
+  //   }
     
-    }
-    else{
+  //   }
+  //   else{
 
-      $data = [
-        'incoming_requests' => $assined_requests,
-        'jsonData' => $jsonData,
-        'pop_location'=>'',
-        'map'=>'',
-        'notification'=> $notifications
+  //     $data = [
+  //       'incoming_requests' => $assined_requests,
+  //       'jsonData' => $jsonData,
+  //       'pop_location'=>'',
+  //       'map'=>'',
+  //       'notification'=> $notifications
 
-      ];
-      $this->view('center_managers/request_assigned', $data);
-    }
-  }
+  //     ];
+  //     $this->view('center_managers/request_assigned', $data);
+  //   }
+  // }
 
   public function request_completed(){
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 

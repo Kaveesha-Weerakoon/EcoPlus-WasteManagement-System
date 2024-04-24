@@ -127,18 +127,7 @@
 
     /*cancel confirm popup*/
     .cancel-confirm {
-        /* display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        transform: translate(-50%, -50%) scale(0);
-        background-color: rgba(0, 0, 0, 0.1);
-        z-index: 2;
-        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
-        align-items: center;
-        justify-content: center; */
+      
         display: flex;
         position: fixed;
         top: 50%;
@@ -162,7 +151,7 @@
 
     .cancel-confirm-content {
         width: 500px;
-        background: white;
+        background: var(--background-color-main);
         font-family: 'poppins', sans-serif;
         border-radius: 6px;
         padding:30px;
@@ -172,6 +161,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        box-shadow: var(--box-shadow);
     }
 
     .confirm-content-img{
@@ -288,7 +278,7 @@
 
     .View-content {
         width: 600px;
-        background: white;
+        background:var(--background-color-main);
         font-family: 'poppins', sans-serif;
         border-radius: 6px;
         text-align: center;
@@ -315,12 +305,23 @@
         font-weight: 500;
     }
 
-    select {
+    .time-slot-dropdown-container select{
+        width: 100%;
+        font-size: 15px;
+        padding: 8px;
+        margin-top: 20px;
+        border-radius: 5px;
+        background-color: var(--background-color-main);
+        color: var(--main-text-color);
+
+    }
+
+    /* select {
         padding: 5px;
         font-size: 16px;
         border: 1px solid #ccc;
         border-radius: 5px;
-    }
+    } */
 
     .View-content-img {
         /* width: 27px;
@@ -361,7 +362,7 @@
         height: 35px;
         width: 55%;
         outline: none;
-        color: white;
+        color: var(--background-color-main);
         font-size: 17px;
         font-weight: 500;
         border-radius: 5px;
@@ -447,7 +448,7 @@
         cursor: pointer;
         width: 80%;
         text-align: left;
-        background-color: #fff;
+        background-color: var(--background-color-main);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -461,7 +462,7 @@
         left: 0;
         width: 88.5%;
         z-index: 1;
-        background-color: #fff;
+        background-color: var(--background-color-main);
         border: 1px solid #ccc;
         border-radius: 4px;
         padding: 0;
@@ -507,7 +508,8 @@
     }
     
     .dropdown-menu li:hover {
-        background-color: #f0f0f0;
+        /* background-color: #f0f0f0; */
+        background-color: var(--request-top-color);
     }
     
 
@@ -583,7 +585,7 @@
         line-height: 40px; 
         border-radius: 50%; 
         background-color: var(--green-color-one); 
-        color: white; 
+        color: var(--background-color-main); 
         font-weight: 500;
         font-size: 18px;
             
@@ -627,12 +629,15 @@
     .location_pop_content {
         width: 700px;
         padding: 10px;
-        background-color: #f1f2f6;
+        /* background-color: #f1f2f6; */
+        background-color: var(--background-color-main);
         border-radius: 10px;
         padding: 20px;
         padding-bottom: 40px;
         height: 350px;
         overflow: hidden;
+        box-shadow: var(--box-shadow);
+        border: 1px solid;
     }
 
     .location_pop_map {
@@ -649,8 +654,8 @@
     }
 
     .location_close button {
-        background-color: #ff4757;
-        color: #fff;
+        background-color: var(--red-color);
+        color: var(--background-color-main);
         cursor: pointer;
         border: none;
         font-size: 16px;
@@ -687,13 +692,13 @@
 
     .request-details-pop-form {
         width: 500px;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         position: relative;
         text-align: center;
         padding: 20px;
-        color: #333;
+        color: var(--main-text-color);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -729,10 +734,10 @@
         display: grid;
         grid-template-columns: 30% 70%;
         width: 95%;
-        background-color: white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: var(--background-color-main);
         border-radius: 6px;
         margin-bottom: 10px;
+        box-shadow: var(--form-box-shadow);
 
     }
 
@@ -762,7 +767,8 @@
     .request-details-right-labels span {
         margin-bottom: 15px;
         font-size: 15px;
-        color: #7c7c7d;
+        /* color: #7c7c7d; */
+        color: var(--main-text-color);
     }
 
     .request-details-right-values {

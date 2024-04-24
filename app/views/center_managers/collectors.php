@@ -11,39 +11,7 @@
                             <input type="text" id="searchInput" placeholder="Search">
                         </div>
                         <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
-                        <!-- <div class="main-right-top-notification" id="notification">
-                            <i class='bx bx-bell'></i>
-                            <div class="dot"></div>
-                        </div>
-                        <div id="notification_popup" class="notification_popup">
-                            <h1>Notifications</h1>
-                            <div class="notification">
-                                <div class="notification-green-dot">
 
-                                </div>
-                                Request 1232 Has been Cancelled
-                            </div>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Assigned
-                            </div>
-                            <div class="notification">
-                                <div class="notification-green-dot">
-
-                                </div>
-                                Request 1232 Has been Cancelled
-                            </div>
-                        </div> -->
-                        <!-- <div class="main-right-top-profile">
-                            <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
-                                alt="">
-                            <div class="main-right-top-profile-cont">
-                                <h3><?php echo $_SESSION['center_manager_name']?></h3>
-                                <p>ID : Col <?php echo $_SESSION['center_manager_id']?></p>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="main-right-top-two">
                         <h1>Collectors</h1>
@@ -51,8 +19,8 @@
                     <div class="main-right-top-three">
                         <a href="">
                             <div class="main-right-top-three-content">
-                                <p><b style="color:#1ca557;">View</b></p>
-                                <div class="line" style="background-color: #1ca557;"></div>
+                                <p><b style="color: var(--green-color-one);">View</b></p>
+                                <div class="line" style="background-color: var(--green-color-one);"></div>
                             </div>
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/collectors_add">
@@ -92,25 +60,44 @@
                             <?php foreach($data['collectors'] as $collector) : ?>
                             <tr class="table-row">
                                 <td><?php echo $collector->user_id?></td>
-                                <td><img
-                                        src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>"
+                                <td><img src="<?php echo IMGROOT ?>/img_upload/collector/<?php echo $collector->image?>"
                                         alt="" class="collector_img"></td>
-                                <td><?php echo $collector->name?></td>
+                                <td><?php echo $collector->collector_name?></td>
                                 <td><?php echo $collector->email?></td>
-                                <td><a
-                                        href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><i class='bx bxs-user' style="font-size: 29px;"></i>
+                                <!-- <td><a
+                                        href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><i
+                                            class='bx bxs-user' style="font-size: 29px;"></i>
                                     </a></td>
+                                <td> -->
+                                <td>
+                                    <i class='bx bxs-user' style="font-size: 29px;"
+                                        onclick="openPersonalDetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"></i>
+                                </td>
                                 <td>
                                     <i class='bx bxs-truck' style="font-size: 29px;"
-                                    onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"></i>
+                                        onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"></i>
 
                                 </td>
                                 <td><a
-                                        href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><i class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"></i>
-                                        </a></td>
-                                <td class="delete"><a
+                                        href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><i
+                                            class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"></i>
+                                    </a></td>
+                                <!-- <td class="delete"><a
                                         href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>">
-                                        <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
+                                        <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td> -->
+                                <td>
+                                    <?php
+                                        if(str_contains($collector->request_type, 'assigned')){
+                                            echo '<i class="fa-solid fa-triangle-exclamation" style="font-size: 24px; color:#DC2727;" onclick="delete_assigned_collector(\'' . $collector->user_id . '\')"></i>';
+
+                                        }else{
+                                            echo '<i class="bx bxs-trash" style="font-size: 29px; " onclick="delete_collector(\'' . $collector->user_id . '\')"></i>';
+                                        }
+                                    
+                                    
+                                    ?>
+                                </td>
+                                
 
                             </tr>
                             <?php endforeach; ?>
@@ -129,20 +116,23 @@
                 </div>
                 <?php endif; ?>
 
-              
+
             </div>
+
+            <div class="overlay" id="overlay"></div>
 
             <?php if($data['click_update']=='True') : ?>
             <div class="update_click">
                 <div class="popup-form" id="popup">
-                    <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png"
-                            class="update-popup-img" alt=""></a>
+                    <a href="<?php echo URLROOT?>/centermanagers/collectors"><img
+                            src="<?php echo IMGROOT?>/close_popup.png" class="update-popup-img" alt=""></a>
                     <h2>Update Details</h2>
                     <center>
                         <div class="update-topic-line"></div>
                     </center>
                     <form class="updatePopupform"
-                        action="<?php echo URLROOT;?>/centermanagers/collectors_update/<?php echo $data['id'];?>" method="post">
+                        action="<?php echo URLROOT;?>/centermanagers/collectors_update/<?php echo $data['id'];?>"
+                        method="post">
                         <div class="updatePopupform-div">
                             <div class="personal-details">Personal Details</div>
                             <div class="top-personal-details">
@@ -222,24 +212,40 @@
             </div>
             <?php endif; ?>
 
-                
-            <?php if($data['confirm_delete']== 'True') : ?>
-            <div class="delete_confirm">
-                <div class="popup" id="popup">
+
+
+            <div class="delete_confirm" id="delete-confirm-popup">
+                <div class="popup">
                     <img src="<?php echo IMGROOT?>/trash.png" alt="">
+                    <span class="Collector" id="collector_assigned2"></span>
                     <h2>Delete this collector?</h2>
                     <p>This action will permanently delete this collector</p>
                     <div class="btns">
-                        <a href="<?php echo URLROOT?>/centermanagers/collector_delete/<?php echo $data['collector_id'] ?>"><button
-                                type="button" class="deletebtn">Delete</button></a>
-                        <a href="<?php echo URLROOT?>/centermanagers/collectors ?>"><button type="button"
-                                class="cancelbtn">Cancel</button></a>
+
+                        <button type="button" class="deletebtn" onclick="delete_collector_confirm()">Delete</button>
+
+                        <button type="button" class="cancelbtn" id="close-delete-confirm">Cancel</button>
+
                     </div>
                 </div>
             </div>
-            <?php endif; ?>
 
-            
+            <div class="delete_prohibitted" id="delete-prohibitted-popup">
+                <div class="popup">
+                    <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
+                    <h2>This action is prohibitted</h2>
+                    <p>Collector <span class="Collector" id="collector_assigned"></span> has already assigned for
+                        requests</p>
+                    
+                    <button class="delete_prohibitted-ok-button" id="delete_prohibitted-ok-button">OK</button>
+                        
+
+                   
+                </div>
+            </div>
+
+
+
             <?php if($data['update_success']=='True') : ?>
             <div class="success_popup_box">
                 <div class="popup1" id="popup1">
@@ -252,7 +258,7 @@
             </div>
             <?php endif; ?>
 
-                
+
             <?php if($data['delete_success']=='True') : ?>
             <div class="success_popup_box">
                 <div class="popup1" id="popup1">
@@ -267,22 +273,20 @@
 
         </div>
 
-        <div class="overlay" id="overlay"></div>
-        
-        <?php if($data['personal_details_click']=='True') : ?>
-        <div class="personal-details-popup-box">
-            <div class="personal-details-popup-form" id="popup">
-                <a href="<?php echo URLROOT?>/centermanagers/collectors"><img src="<?php echo IMGROOT?>/close_popup.png"
-                        alt="" class="personal-details-popup-form-close"></a>
+
+
+       
+        <div class="personal-details-popup-box" id="personal-details-popup">
+            <div class="personal-details-popup-form">
+                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close" id="personal-details-popup-form-close">
                 <center>
                     <div class="personal-details-topic">Personal Details</div>
                 </center>
 
                 <div class="personal-details-popup">
                     <div class="personal-details-left">
-                        <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $data['image']?>" class="profile-pic"
-                            alt="">
-                        <p>Collector ID: <span>C<?php echo $data['id']?></span></p>
+                        <img src="" class="profile-pic" alt="" id="col_profile_img">
+                        <p>Collector ID: <span id="col_id">C</span></p>
                     </div>
                     <div class="personal-details-right">
                         <div class="personal-details-right-labels">
@@ -294,12 +298,12 @@
                             <span>DOB</span><br>
                         </div>
                         <div class="personal-details-right-values">
-                            <span><?php echo $data['name']?></span><br>
-                            <span><?php echo $data['email']?></span><br>
-                            <span><?php echo $data['nic']?></span><br>
-                            <span><?php echo $data['address']?></span><br>
-                            <span><?php echo $data['contact_no']?></span><br>
-                            <span><?php echo $data['dob']?></span><br>
+                            <span id="col_name"></span><br>
+                            <span id="col_email"></span><br>
+                            <span id="col_nic"></span><br>
+                            <span id="col_address"></span><br>
+                            <span id="col_contact"></span><br>
+                            <span id="col_dob"></span><br>
 
                         </div>
                     </div>
@@ -308,7 +312,7 @@
 
         </div>
 
-        <?php endif; ?>
+       
 
 
         <div class="vehicle-details-popup-box" id="vehicle-details-popup-box">
@@ -341,17 +345,16 @@
     </div>
 </div>
 <script>
-
- /* Notification View */
- document.getElementById('submit-notification').onclick = function() {
+/* Notification View */
+document.getElementById('submit-notification').onclick = function() {
     var form = document.getElementById('mark_as_read');
     var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/collectors";
     form.action = dynamicUrl; // Set the action URL
     form.submit(); // Submit the form
 
 };
-    /* ----------------- */
-    
+/* ----------------- */
+
 function searchTable() {
     var input = document.getElementById('searchInput').value.toLowerCase();
     var rows = document.querySelectorAll('.table-row');
@@ -381,13 +384,71 @@ function openvehicledetails(collector) {
 
     // document.getElementById('vehicle-details-popup-box').style.display = "flex";
     document.getElementById('vehicle_collector_id').textContent = collector.user_id;
-    document.getElementById('vehicle_collector_name').textContent = collector.name;
+    document.getElementById('vehicle_collector_name').textContent = collector.collector_name;
     document.getElementById('vehicle_collector_no').textContent = collector.vehicle_no;
     document.getElementById('vehicle_type').textContent = collector.vehicle_type;
 }
 
+function openPersonalDetails(collector) {
+    
+    var personalPop = document.getElementById('personal-details-popup');
+    personalPop.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+    // document.getElementById('vehicle-details-popup-box').style.display = "flex";
+    document.getElementById('col_id').textContent = collector.user_id;
+    document.getElementById('col_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + collector.image;
+    document.getElementById('col_name').textContent = collector.collector_name;
+    document.getElementById('col_email').textContent = collector.email;
+    document.getElementById('col_nic').textContent = collector.nic;
+    document.getElementById('col_address').textContent = collector.address;
+    document.getElementById('col_contact').textContent = collector.collector_contact;
+    document.getElementById('col_dob').textContent = collector.dob;
+}
+
+function delete_assigned_collector(collector_id) {
+    
+
+    var collector_assigned = document.getElementById('collector_assigned');
+    collector_assigned.textContent = collector_id;
+
+    var delProhibittedPopup = document.getElementById('delete-prohibitted-popup');
+    delProhibittedPopup.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+   
+
+
+}
+
+function delete_collector(collector_id) {
+
+    var collector_assigned = document.getElementById('collector_assigned2');
+    collector_assigned.textContent = collector_id;
+    collector_assigned.style.display = "none";
+    
+    var delConfirmPopup = document.getElementById('delete-confirm-popup');
+    delConfirmPopup.classList.add('active');
+    document.getElementById('overlay').style.display = "flex";
+
+}
+
+function delete_collector_confirm(){
+   
+    var collector_to_be_deleted = document.getElementById('collector_assigned2').textContent;
+    console.log('del', collector_to_be_deleted);
+
+    var linkUrl = "<?php echo URLROOT?>/centermanagers/collector_delete/"+ collector_to_be_deleted; // Replace with your desired URL
+    window.location.href = linkUrl;
+
+
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     var close_vehicledetail = document.getElementById('vehicle-details-popup-form-close');
+    var close_delete_confirm = document.getElementById('close-delete-confirm');
+    var close_delete_prohibitted = document.getElementById('delete_prohibitted-ok-button');
+    var close_personaldetails = document.getElementById('personal-details-popup-form-close');
 
     close_vehicledetail.addEventListener('click', function() {
         var vehicle_pop = document.getElementById('vehicle-details-popup-box');
@@ -395,8 +456,27 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('overlay').style.display = "none";
         // document.getElementById('vehicle-details-popup-box').style.display = "none";
     });
+
+    close_delete_confirm.addEventListener('click', function(){
+        var delConfirmPopup = document.getElementById('delete-confirm-popup');
+        delConfirmPopup.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
+    });
+
+    close_delete_prohibitted.addEventListener('click', function(){
+        var delProhibittedPopup = document.getElementById('delete-prohibitted-popup');
+        delProhibittedPopup.classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+
+    });
+
+    close_personaldetails.addEventListener('click', function(){
+        var personalPop = document.getElementById('personal-details-popup');
+        personalPop.classList.remove('active');
+        document.getElementById('overlay').style.display = "none"; 
+    });
+
 });
-
-
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

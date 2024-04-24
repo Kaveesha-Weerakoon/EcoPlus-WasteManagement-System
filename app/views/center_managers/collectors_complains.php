@@ -31,8 +31,8 @@
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/collectors_complains">
                             <div class="main-right-top-three-content">
-                                <p><b style="color:#1ca557;">Complaints</b></p>
-                                <div class="line" style="background-color: #1ca557;"></div>
+                                <p><b style="color: var(--green-color-one);">Complaints</b></p>
+                                <div class="line" style="background-color: var(--green-color-one);"></div>
                             </div>
                         </a>
 

@@ -95,7 +95,7 @@
         width: 15.5px;
         height: 15.5px;
         border-radius: 50%;
-        background-color: #F13E3E;
+        background-color: var(--red-color);
         margin-top: -11px;
         margin-left: -15px;
         color: var(--background-color-main);
@@ -290,7 +290,7 @@
         width: 100%;
         height: max-content;
         height: 405px;
-        background: white;
+        background: var(--background-color-main);
         padding: 30px;
         border-radius: 10px;
         box-shadow: var(--box-shadow2);
@@ -383,7 +383,7 @@
     }
 
     .form-button button:hover {
-        background: #19954e;
+        background: var(--button-hover-green);
     }
 
 
@@ -404,12 +404,13 @@
 
     .popup {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         font-family: 'poppins', sans-serif;
         border-radius: 6px;
         text-align: center;
         padding: 0 30px 30px;
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
 
     .open-popup {
@@ -436,7 +437,7 @@
         margin-top: 30px;
         padding: 10px 0;
         background: var(--green-color-one);
-        color: white;
+        color: var(--background-color-main);
         border: 0;
         outline: none;
         font-size: 18px;

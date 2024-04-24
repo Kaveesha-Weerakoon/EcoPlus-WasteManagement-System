@@ -31,8 +31,8 @@
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/center_garbage_stock">
                             <div class="main-right-top-three-content">
-                                <p><b style="color:#1ca557;">Garbage Stock</b></p>
-                                <div class="line" style="background-color: #1ca557;"></div>
+                                <p><b style="color: var(--green-color-one);">Garbage Stock</b></p>
+                                <div class="line" style="background-color: var(--green-color-one);"></div>
                             </div>
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/stock_release_details">

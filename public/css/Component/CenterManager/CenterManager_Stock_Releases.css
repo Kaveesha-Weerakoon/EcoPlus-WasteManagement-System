@@ -97,7 +97,7 @@
         width: 15.5px;
         height: 15.5px;
         border-radius: 50%;
-        background-color: #F13E3E;
+        background-color: var(--red-color);
         margin-top: -11px;
         margin-left: -15px;
         color: var(--background-color-main);
@@ -343,14 +343,14 @@
 
     .main-right-bottom-two-content h1 {
         font-size: 23px;
-        color: #333;
+        color: var(--main-text-color);
         font-weight: 550;
     }
 
     .main-right-bottom-two-content p {
         font-size: 18px;
         margin-top: 7px;
-        color: #7c7c7d;
+        color: var(--main-text-color);
     }
 
     .main-right-bottom-two-content button {
@@ -457,7 +457,8 @@
     .Eco_Credit_Per_Cont .Cont .fas {
         font-size: 29px;
         margin-bottom: 15px;
-        color: #7c7c7d;
+        /* color: #7c7c7d; */
+        color: var(--main-text-color);
      
 
     }

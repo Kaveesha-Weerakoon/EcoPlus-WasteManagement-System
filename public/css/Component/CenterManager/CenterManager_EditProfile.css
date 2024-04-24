@@ -75,7 +75,7 @@
         width: 15.5px;
         height: 15.5px;
         border-radius: 50%;
-        background-color: #F13E3E;
+        background-color: var(--red-color);
         margin-top: -11px;
         margin-left: -15px;
         color: var(--background-color-main);
@@ -493,12 +493,12 @@
 
     .popup {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 10px;
         top: 0;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         box-shadow: var(--box-shadow);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
@@ -526,7 +526,7 @@
         justify-content: center;
     }
 
-    .delete_confirm {
+    /* .delete_confirm {
         .popup h2 {
             font-size: 23px;
             font-weight: 600;
@@ -561,7 +561,7 @@
             cursor: pointer;
             box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
         }
-    }
+    } */
 
     .main-right-bottom-content {
         overflow: scroll;
@@ -584,13 +584,14 @@
 
     .popup {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         font-family: 'poppins', sans-serif;
         border-radius: 6px;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
 
     .open-popup {
@@ -617,7 +618,7 @@
         margin-top: 30px;
         padding: 10px 0;
         background: var(--green-color-one);
-        color: white;
+        color: var(--background-color-main);
         border: 0;
         outline: none;
         font-size: 18px;

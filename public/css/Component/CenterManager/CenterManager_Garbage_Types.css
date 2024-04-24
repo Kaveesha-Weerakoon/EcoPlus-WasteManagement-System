@@ -97,7 +97,7 @@
         width: 15.5px;
         height: 15.5px;
         border-radius: 50%;
-        background-color: #F13E3E;
+        background-color: var(--red-color);
         margin-top: -11px;
         margin-left: -15px;
         color: var(--background-color-main);

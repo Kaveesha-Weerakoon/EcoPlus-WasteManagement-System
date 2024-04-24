@@ -46,14 +46,16 @@
         </div>
         <div class="main-right-top-four-right">
 
-            <div class="main-right-top-four-component" style="background-color: #ecf0f1" id="tables">
-                <img src="<?php echo IMGROOT?>/cells.png" alt="">
+            <div class="main-right-top-four-component" style="background-color: var(--request-top-color);" id="tables">
+                <!-- <img src="<?php echo IMGROOT?>/cells.png" alt=""> -->
+                <i class='bx bx-table'  style="color:var(--main-text-color); font-size: 23px;"></i>
                 <p>Tables</p>
             </div>
 
 
             <div class="main-right-top-four-component" id="maps">
-                <img src="<?php echo IMGROOT?>/map.png" alt="">
+                <!-- <img src="<?php echo IMGROOT?>/map.png" alt=""> -->
+                <i class='bx bx-map' style="color:var(--main-text-color); font-size: 23px;"></i>
                 <p>Maps</p>
             </div>
 

@@ -198,6 +198,11 @@
     --table-header: #e9f6ef;
     --yellow-color: #f6e58d;
     --red-color: #F13E3E;
+    --calander-hover-color: #f2f2f2;
+    --form-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --request-top-color: #ecf0f1;
+    --yellow-color-hover: #ddce7f;
+    --report-table-color: #f9f9f9;
 }
 
 

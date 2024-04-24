@@ -81,7 +81,7 @@
         width: 15.5px;
         height: 15.5px;
         border-radius: 50%;
-        background-color: #F13E3E;
+        background-color: var(--red-color);
         margin-top: -11px;
         margin-left: -15px;
         color: var(--background-color-main);
@@ -286,6 +286,8 @@
         justify-content: center;
         border: none;
         margin-right: 9px;
+        background: var(--background-color-main);
+        color: var(--main-text-color);
     }
 
     .main-right-top-four-left p {
@@ -524,7 +526,7 @@
         height: 3px;
         width: 70px;
         margin-left: 25%;
-        background: #1B6652;
+        background: var(--green-color-one);
     }
 
     .personal-details-popup-form-close {
@@ -567,7 +569,7 @@
     .personal-details-right-labels span {
         margin-bottom: 15px;
         font-size: 15px;
-        color: #7c7c7d;
+        color: var(--main-text-color);
     }
 
     .personal-details-right-values {

@@ -113,7 +113,7 @@
                                 <h3>Paper Waste Quantity</h3>
                                 <h3>Electronic Waste Quantity </h3>
                                 <h3>Metals Quantity</h3>
-                                <h3>Note</h3>
+                                <h3 class="note">Note</h3>
                                 <h3>Completed Time</h3>
                                 <h3>Earned Credits</h3>
                             </div>
@@ -143,7 +143,7 @@
                                     <h3>&nbsp Kg</h3>
                                 </div>
                                 <div class="collect-details-pop-form-content-right-values-cont">
-                                    <h3 id="Note"></h3>
+                                    <h3 id="Note" class="note"></h3>
                                 </div>
                                 <div class="collect-details-pop-form-content-right-values-cont">
                                     <h3 id="completed_time"></h3>
@@ -351,10 +351,10 @@
 <script>
 /* Notification View */
 document.getElementById('submit-notification').onclick = function() {
-        var form = document.getElementById('mark_as_read');
-        var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/request_completed";
-        form.action = dynamicUrl; // Set the action URL
-        form.submit(); // Submit the form
+    var form = document.getElementById('mark_as_read');
+    var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/request_completed";
+    form.action = dynamicUrl; // Set the action URL
+    form.submit(); // Submit the form
 
 };
 /* ----------------- */

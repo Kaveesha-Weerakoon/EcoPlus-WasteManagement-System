@@ -66,15 +66,15 @@
                                                }
         
                                             echo "<option value=\"$center->region\" $selected>$center->region</option>";
-                                          }
+                                         }
 
-                                          if (!$regionFound) {
-                                              echo "<option value=\"default\" selected>$selectedRegion</option>";
-                                           }
-                                        } else {
+                                         if (!$regionFound) {
+                                            echo "<option value=\"default\" selected>$selectedRegion</option>";
+                                          }
+                                          } else {
                                              echo "<option value=\"default\">No Centers Available</option>";
                                          }
-                                          ?>
+                                           ?>
                                             </select>
                                             <div class="err1">Choose the closest center for your location! </div>
 

@@ -113,12 +113,16 @@
 
     .main-right-bottom-content {
         width: 70%;
-        height: 97%;
+        height: 110%;
+
         box-shadow: var(--box-shadow2);
         border-radius: 10px;
-        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
         padding: 10px;
+        margin-top: 16%;
         overflow: hidden !important;
+        margin-bottom: 4%;
     }
 
     .main-right-bottom-content {
@@ -158,7 +162,6 @@
     .edit-profile-content-profile {
         display: flex;
         justify-content: center;
-        margin-left: 100%;
         margin-bottom: 29.7px;
     }
 
@@ -206,7 +209,7 @@
 
     .edit-profile-content input {
         height: 28.5px;
-        width: 325px;
+        width: 90%;
         border-radius: 5px;
         border: 1px solid #ccc;
         padding-left: 10px;
@@ -245,7 +248,6 @@
     .main-right-bottom-content-bottom-right {
         display: flex;
         flex-direction: column;
-        padding-top: 169px;
         padding-left: 25px;
     }
 
@@ -332,7 +334,7 @@
             /* margin-top:100%; */
         }
 
-        
+
     }
 
     @media screen and (max-width: 1380px) {
@@ -341,7 +343,7 @@
             margin-right: 50px;
         }
 
-        
+
     }
 
     @media screen and (max-width: 1030px) {
@@ -377,7 +379,7 @@
             padding-left: 45px;
         }
 
-       
+
     }
 
     @media screen and (max-width: 866px) {
@@ -385,7 +387,7 @@
             margin-top: 65%;
         }
 
-        .main-right-top-profile-cont p{
+        .main-right-top-profile-cont p {
             font-size: 12px;
         }
     }
@@ -438,5 +440,202 @@
         }
     }
 
+    @media screen and (max-width: 1200px) {
+        .main-right-bottom {
+            overflow-y: scroll;
+
+        }
+    }
+
+    @media screen and (max-width: 1030px) {
+
+        .main-right-bottom-content-bottom {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-right-bottom-content {
+            overflow-y: scroll;
+        }
+
+        .main-right-bottom-content {
+            overflow-y: scroll;
+            height: 150%;
+            margin-top: 85%;
+        }
+
+        .main-right-bottom-content-bottom-right {
+            margin-top: 3%;
+            padding-left: 45px;
+            margin-bottom: 2%;
+        }
+
+        .main-right-bottom-content-bottom-left {
+            margin-top: 3%;
+            padding-left: 45px;
+            margin-bottom: 2%;
+        }
+
+        .main-right-bottom-content-top {
+            padding-left: 45px;
+        }
+
+    }
+
+    @media screen and (max-width: 866px) {
+        .main-right-bottom-content {
+            margin-top: 100%;
+        }
+    }
+
+    @media screen and (max-width: 700px) {
+        .main-right-bottom-content {
+            overflow-y: scroll;
+            height: 150%;
+            margin-top: 125%;
+        }
+
+        .edit-profile-main-image {
+            height: 103px;
+            width: 103px;
+            border-radius: 50%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-profile-second-image {
+            height: 25px;
+            width: 25px;
+            margin-top: -28px;
+            margin-left: 70px;
+            flex: 1;
+        }
+
+        .main-right-bottom-content-delete-account {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10%;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .edit-profile-content-profile {
+            margin-top: 15px;
+        }
+
+        .main-right-bottom-content {
+            overflow-y: scroll;
+            height: 150%;
+            margin-top: 150%;
+        }
+
+        .main-right-bottom-content-bottom-left button {
+            width: 75%;
+        }
+
+        .main-right-bottom-content-bottom-right button {
+            width: 75%;
+        }
+
+        .err1 {
+            font-size: 11px !important;
+            margin-bottom: 5px;
+        }
+
+        .main-right-bottom-content-top h1 {
+            font-size: 18px;
+        }
+
+        .main-right-bottom-content-delete-account-cont {
+            padding: 6px;
+        }
+
+        .main-right-bottom-content-delete-account .fa-trash-can {
+            font-size: 21px;
+
+        }
+
+        .main-right-bottom-content-delete-account p {
+            font-size: 13px;
+        }
+
+        .main-right-bottom-content-bottom-left button {
+            width: 55%;
+            height: 32px;
+            font-size: 13px;
+        }
+
+        .main-right-bottom-content-bottom-right button {
+            width: 55%;
+            height: 32px;
+            font-size: 13px;
+        }
+
+    }
+
+    @media screen and (max-width:802px) {
+
+
+        .popup {
+            width: 350px;
+        }
+
+
+        .popup img {
+            width: 70px;
+        }
+
+        .popup h2 {
+            font-size: 18px;
+        }
+
+        .popup p {
+            font-size: 15px;
+        }
+
+
+        .deletebtn {
+            width: 100px;
+            font-size: 15px;
+        }
+
+        .cancelbtn {
+            width: 100px;
+            font-size: 15px;
+        }
+
+    }
+
+    @media screen and (max-width:466px) {
+
+
+        .popup {
+            width: 320px;
+        }
+
+
+        .popup img {
+            width: 65px;
+        }
+
+        .popup h2 {
+            font-size: 15px;
+        }
+
+        .popup p {
+            font-size: 12px;
+        }
+
+        .deletebtn {
+            width: 100px;
+            font-size: 12px;
+        }
+
+        .cancelbtn {
+            width: 100px;
+            font-size: 15px;
+        }
+
+    }
 
 }

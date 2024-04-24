@@ -17,21 +17,15 @@
                         <h1>Collectors</h1>
                     </div>
                     <div class="main-right-top-three">
-                        <a href="<?php echo URLROOT?>/centermanagers/collectors">
+                        <a href="<?php echo URLROOT?>/centermanagers/view_customer_complaints">
                             <div class="main-right-top-three-content">
-                                <p>View</p>
-                                <div class="line"></div>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/centermanagers/collectors_add">
-                            <div class="main-right-top-three-content">
-                                <p>Register</p>
-                                <div class="line"></div>
+                                <p>Customers</p>
+                                <div class="line" ></div>
                             </div>
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/collectors_complains">
                             <div class="main-right-top-three-content">
-                                <p><b style="color: var(--green-color-one);">Complaints</b></p>
+                                <p><b style="color: var(--green-color-one);">Collectors</b></p>
                                 <div class="line" style="background-color: var(--green-color-one);"></div>
                             </div>
                         </a>

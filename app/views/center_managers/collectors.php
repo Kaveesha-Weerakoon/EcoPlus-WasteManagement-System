@@ -29,12 +29,12 @@
                                 <div class="line"></div>
                             </div>
                         </a>
-                        <a href="<?php echo URLROOT?>/centermanagers/collectors_complains">
+                        <!-- <a href="<?php echo URLROOT?>/centermanagers/collectors_complains">
                             <div class="main-right-top-three-content">
                                 <p>Complaints</p>
                                 <div class="line"></div>
                             </div>
-                        </a>
+                        </a> -->
 
                     </div>
                 </div>

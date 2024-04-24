@@ -13,8 +13,12 @@
 
     public function index(){
       $discounts=$this->discount_agentModel->getDiscountByAgent($_SESSION['agent_id']);
+      $id=$_SESSION['agent_id']; 
+      $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($id);
+      
       $data = [
-        'discounts'=>$discounts
+        'discounts'=>$discounts,
+        'balance'=>$agent_by_id->credits
       ];
      
       $this->view('credit_discount_agents/index', $data);
@@ -226,12 +230,12 @@
   
         }
   
-     }
+    }
 
 
 
   
-     public function validateUser() {   
+    public function validateUser() {   
 
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -242,22 +246,23 @@
           ];
   
   
-           $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
-           $customer_id = (int)$numeric_part;
-
-  
-          if (empty($data['customer_id'])) {
+          $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
+          $customer_id = (int) $numeric_part;
+          
+          
+          if (empty($numeric_part)) {
               $data['customer_id_err'] = 'Please enter customer id';
           } else {
-                if(!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
-                    $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
-                }else {
-              // Check if the user input matches the required format
-                    if (!$this->customerModel->get_customer($customer_id)) {
-                          $data['customer_id_err'] = 'Customer ID does not exist';
-                    }
-                }
+            if(!preg_match('/^\d{1,10}$/', $data['customer_id'])) {
+              $data['customer_id_err'] = "Use only Maximum 10 digits";
+            }  else {
+                  // Check if the user input matches the required format
+                  if (!$this->customerModel->get_customer($customer_id)) {
+                      $data['customer_id_err'] = 'Customer ID does not exist';
+                  }
+              }
           }
+          
     
   
   
@@ -293,25 +298,27 @@
 
 
           if (empty($data['center'])) {
-            $data['center_err'] = 'Please enter center name';
+            $data['center_err'] = 'Please enter branch name';
           }
   
-           $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
-           $customer_id = (int)$numeric_part;
-
-  
-          if (empty($data['customer_id'])) {
+          $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
+          $customer_id = (int) $numeric_part;
+          
+          
+          if (empty($numeric_part)) {
               $data['customer_id_err'] = 'Please enter customer id';
           } else {
-                if(!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
-                    $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
-                } else {
-              // Check if the user input matches the required format
-                    if (!$this->customerModel->get_customer($customer_id)) {
-                          $data['customer_id_err'] = 'Customer ID does not exist';
-                    }
-                }
+            if(!preg_match('/^\d{1,10}$/', $data['customer_id'])) {
+              $data['customer_id_err'] = "Use only Maximum 10 digits";
+            }  else {
+                  // Check if the user input matches the required format
+                  if (!$this->customerModel->get_customer($customer_id)) {
+                      $data['customer_id_err'] = 'Customer ID does not exist';
+                  }
+              }
           }
+          
+          
       
         
           if (empty($data['discount_amount']) || $data['discount_amount'] <= 0) {
@@ -343,7 +350,8 @@
               $balance_update = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_balance);
               $customer = $this->customerModel->get_Cus_all_details($customer_id);
               $customer_name = $customer->name;
-              
+              $dicount_agent_balance=$agent->credits-$data['discount_amount'];
+            
 
               if ($balance_update) {
                   $insert_discount = $this->discount_agentModel->addDiscount(
@@ -351,7 +359,8 @@
                       $customer_name,
                       $discount_amount,
                       $data['center'],
-                      $_SESSION['agent_id']
+                      $_SESSION['agent_id'],
+                      $dicount_agent_balance
                   );
 
                   if ($insert_discount) {

@@ -19,9 +19,8 @@
                             <h1>Edit Profile</h1>
                             <div class="Edit-Profile-line"></div>
                         </div>
-                        <div class="main-right-bottom-content-bottom">
-                            <form class="main-right-bottom-content-bottom-left"
-                                action="<?php echo URLROOT;?>/collectors/editprofile" method="post"
+                        <div class="top-profile">
+                            <form action="<?php echo URLROOT;?>/collectors/editprofile" method="post"
                                 enctype="multipart/form-data">
                                 <div class="edit-profile-content-profile">
                                     <div class="edit-profile-content-profile-container">
@@ -33,31 +32,35 @@
                                         <input name='profile_image' type="file" id="profile_image">
                                     </div>
                                 </div>
-                                <div class="edit-profile-content">
-                                    <h3>Name :</h3>
-                                    <input name="name" type="text" value="<?php echo $data['name']?>">
-                                    <div class="err"><?php echo $data['name_err']?></div>
+                                <div class="main-right-bottom-content-bottom">
+                                    <div class="main-right-bottom-content-bottom-left">
+                                        <div class="edit-profile-content">
+                                            <h3>Name :</h3>
+                                            <input name="name" type="text" value="<?php echo $data['name']?>">
+                                            <div class="err"><?php echo $data['name_err']?></div>
 
-                                </div>
-                                <div class="edit-profile-content">
-                                    <h3>Email </h3>
-                                    <input name="email" type="text" value="<?php echo $data['email']?>" readonly>
-                                    <div class="err"></div>
+                                        </div>
+                                        <div class="edit-profile-content">
+                                            <h3>Email </h3>
+                                            <input name="email" type="text" value="<?php echo $data['email']?>"
+                                                readonly>
+                                            <div class="err"></div>
 
-                                </div>
-                                <div class="edit-profile-content">
-                                    <h3>Address :</h3>
-                                    <input name="address" type="text" value="<?php echo $data['address']?>">
-                                    <div class="err"><?php echo $data['address_err']?></div>
+                                        </div>
+                                        <div class="edit-profile-content">
+                                            <h3>Address :</h3>
+                                            <input name="address" type="text" value="<?php echo $data['address']?>">
+                                            <div class="err"><?php echo $data['address_err']?></div>
 
-                                </div>
-                                <div class="edit-profile-content">
-                                    <h3>Contact Number :</h3>
-                                    <input name="contactno" type="text" value="<?php echo $data['contactno']?>">
-                                    <div class="err"><?php echo $data['contactno_err']?></div>
-                                </div>
+                                        </div>
+                                        <div class="edit-profile-content">
+                                            <h3>Contact Number :</h3>
+                                            <input name="contactno" type="text" value="<?php echo $data['contactno']?>">
+                                            <div class="err"><?php echo $data['contactno_err']?></div>
+                                        </div>
 
-                                <button type="submit">Save</button>
+                                        <button type="submit">Save</button>
+                                    </div>
                             </form>
 
                             <form class="main-right-bottom-content-bottom-right"

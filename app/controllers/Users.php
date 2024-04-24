@@ -153,10 +153,10 @@
             // Validated
             $pw=$data['password_reg'];
             $data['password_reg'] = password_hash($data['password_reg'], PASSWORD_DEFAULT);
-            
+         
             // Register User
             if($this->userModel->register($data)){
-              
+             
               $loggedInUser = $this->userModel->login($data['email_reg'], $pw);
               $customer=$this->customerModel->get_customer($loggedInUser->id);
               if($customer->image==''){
@@ -170,7 +170,6 @@
             
               }
              else {
-              flash('register_error');
               redirect('users/login');
             }
           } else {

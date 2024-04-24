@@ -21,6 +21,7 @@
         background-color: var(--background-color-right);
     }
 
+
     .main-right-top {
         display: flex;
         flex-direction: column;
@@ -30,7 +31,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-around;
+        justify-content: end;
         border: 10px;
         width: 100%;
         box-sizing: border-box;
@@ -40,72 +41,8 @@
         z-index: 1;
     }
 
-    .main-right-top-search {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 35%;
-        position: relative;
-    }
 
-    .main-right-top-search i {
-        position: absolute;
-        font-size: 25px;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
 
-    .main-right-top-search input {
-        width: 100%;
-        height: 33px;
-        border-radius: 7px;
-        background-color: var(--background-color-two);
-        border: 1px solid #dcdde1;
-        font-size: 14px;
-        padding-left: 40px;
-        letter-spacing: 0.03rem;
-        color: var(--main-text-color);
-    }
-
-    .main-right-top-search input:focus {
-        border: 1px solid #1ca557;
-        outline: none;
-    }
-
-    .main-right-top-notification {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 30%;
-    }
-
-    .main-right-top-profile {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 40px;
-    }
-
-    .main-right-top-profile img {
-        width: 50px;
-        height: 50px;
-        margin-right: 15px;
-        border-radius: 10px;
-    }
-
-    .main-right-top-profile-cont {
-        margin-top: 7px;
-    }
-
-    .main-right-top-profile-cont h3 {
-        font-size: 18px;
-        letter-spacing: 0.03rem;
-    }
-
-    .main-right-top-profile-cont p {
-        font-size: 14px;
-    }
 
     .main-right-top-two {
         height: 50px;
@@ -117,7 +54,6 @@
 
     .main-right-top-two h1 {
         font-size: 19px;
-        margin-right: 885px;
         letter-spacing: 0.03rem;
         margin-top: 1%;
     }
@@ -128,7 +64,6 @@
         padding-left: 34px;
         margin: 0.6%;
         background-color: var(--background-color-right);
-        margin-right: 900px;
     }
 
     .main-right-top-three-content {
@@ -156,6 +91,12 @@
         width: 80px;
         height: 3px;
         background-color: var(--green-color-one);
+    }
+
+    .main-bottom-down {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     @media screen and (max-width: 1178px) {
@@ -187,4 +128,25 @@
         }
 
     }
+
+    @media screen and(max-width: 474px) {
+
+        .form {
+            width: 110px !important;
+        }
+
+        .form h1 {
+
+            font-size: 14px;
+        }
+
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+    }
+
+
 }

@@ -37,7 +37,7 @@ $first_name = $name_parts[0];
 echo $first_name;
 ?>
         </h3>
-        <p>ID : C <?php echo $_SESSION['user_id']?></p>
+        <p>ID : <?php echo $_SESSION['user_id']?></p>
     </div>
 </div>
 

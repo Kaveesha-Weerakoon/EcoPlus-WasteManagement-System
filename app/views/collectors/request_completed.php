@@ -39,12 +39,12 @@
                             </a>
                         </div>
                         <div class="main-right-top-four">
-                        <div class="main-right-top-four-left">
-                            <p>Date</p>
-                            <input type="date" id="selected-date">
-                            <button onclick="loadLocations()">Filter</button>
-                        </div>
-                            
+                            <div class="main-right-top-four-left">
+                                <p>Date</p>
+                                <input type="date" id="selected-date">
+                                <button onclick="loadLocations()">Filter</button>
+                            </div>
+
                             <div class="main-right-top-four-right">
                                 <div class="main-right-top-four-component" style="background-color: #ecf0f1"
                                     id="tables">
@@ -133,7 +133,7 @@
                                     <h3>Paper Waste Quantity</h3>
                                     <h3>Electronic Waste Quantity </h3>
                                     <h3>Metals Quantity</h3>
-                                    <h3>Note</h3>
+                                    <h3 class="note">Note</h3>
                                     <h3>Earned Credits</h3>
                                 </div>
                                 <div class="collect-details-pop-form-content-right-values">
@@ -162,7 +162,7 @@
                                         <h3>&nbsp Kg</h3>
                                     </div>
                                     <div class="collect-details-pop-form-content-right-values-cont">
-                                        <h3 id="Note"></h3>
+                                        <h3 id="Note" class="note"></h3>
                                     </div>
                                     <div class="collect-details-pop-form-content-right-values-cont">
                                         <h3 id="Earned_Credits"></h3>

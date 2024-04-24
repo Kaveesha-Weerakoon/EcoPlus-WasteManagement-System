@@ -179,7 +179,7 @@
     }
 
 
-    public function addDiscount($customer_id, $customer_name, $discount_amount, $center,$agent_id) {
+    public function addDiscount($customer_id, $customer_name, $discount_amount, $center,$agent_id,$dicount_agent_balance) {
         try{
           $this->db->query('INSERT INTO discounts (customer_id, customer_name,agent_id, discount_amount, center) VALUES (:customer_id, :customer_name,:agent_id, :discount_amount, :center)');
           $this->db->bind(':customer_id', $customer_id);
@@ -188,7 +188,13 @@
           $this->db->bind(':agent_id', $agent_id);
           $this->db->bind(':center', $center);
   
-          return $this->db->execute();
+          $result= $this->db->execute();
+          if($result){
+            $this->db->query('UPDATE discount_agents SET credits = :new_balance WHERE user_id = :user_id1');
+            $this->db->bind(':new_balance',  $dicount_agent_balance);
+            $this->db->bind(':user_id1',  $agent_id); // corrected access to user_id property
+            $result = $this->db->execute();
+          }
         }
         catch (PDOException $e) {
           return false;

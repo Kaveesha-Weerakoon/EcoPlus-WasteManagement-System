@@ -11,13 +11,14 @@
         background-color: var(--background-color-right);
         display: grid;
         grid-template-rows: 9% 91%;
+        overflow: hidden !important;
     }
 
     .main-right-top {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
         border: 10px;
         width: 100%;
         box-sizing: border-box;
@@ -31,6 +32,7 @@
         justify-content: center;
         width: 35%;
         position: relative;
+        margin-left: 3%;
     }
 
     .main-right-top-search i {
@@ -58,42 +60,11 @@
         outline: none;
     }
 
-    .main-right-top-notification {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 35%;
-        margin-right: 2.5%;
-    }
-
-    .main-right-top-profile {
-        display: flex;
-        margin-right: 40px;
-    }
-
-    .main-right-top-profile img {
-        width: 50px;
-        height: 50px;
-        margin-right: 15px;
-        border-radius: 10px;
-    }
-
-    .main-right-top-profile-cont {
-        margin-top: 7px;
-    }
-
-    .main-right-top-profile-cont h3 {
-        font-size: 18px;
-        letter-spacing: 0.03rem;
-    }
-
-    .main-right-top-profile-cont p {
-        font-size: 14px;
-    }
 
     .main-right-bottom {
         display: grid;
-        grid-template-rows: 16% 84%;
+        grid-template-rows: 10% 90%;
+        overflow: hidden;
     }
 
     .main-bottom-top {
@@ -208,15 +179,15 @@
     }
 
     .main-right-bottom-down {
-        width: 97%;
-        padding-left: 1%;
+        padding-left: 3.5%;
+        width: 96.5%;
         height: 500px;
-        overflow: scroll;
+        overflow: scroll
     }
 
     .main-right-bottom-top {
-        width: 97%;
-        padding-left: 1% !important;
+        padding-left: 3.5%;
+        width: 96.5%;
     }
 
     .table {
@@ -240,22 +211,7 @@
     }
 
 
-    @media screen and (max-width: 950px) {
-        .main-bottom-component {
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
 
 
-        .main-bottom-component-right {
-            display: none;
 
-        }
-
-        .main-bottom-component-left {
-            width: 100%;
-        }
-    }
 }

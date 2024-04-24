@@ -7,23 +7,8 @@
                 <div class="main-right">
                     <div class="main-right-top">
                         <div class="main-right-top-one">
-                            <div class="main-right-top-search" style="visibility:hidden">
-                                <i class='bx bx-search-alt-2'></i>
-                                <input type="text" id="searchInput" placeholder="Search">
-                            </div>
-                            <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                                <i class='bx bx-bell'></i>
-                                <div class="dot"></div>
-                            </div>
+                            <?php require APPROOT . '/views/credit_discount_agents/agent_profile/agent_profile.php'; ?>
 
-                            <div class="main-right-top-profile">
-                                <img src="<?php echo IMGROOT?>/img_upload/credit_discount_agent/<?php echo $_SESSION['agent_profile']?>"
-                                    alt="">
-                                <div class="main-right-top-profile-cont">
-                                    <h3><?php echo $_SESSION['agent_name']?></h3>
-                                    <p>ID : D <?php echo $_SESSION['agent_id']?></p>
-                                </div>
-                            </div>
                         </div>
                         <div class="main-right-top-two">
                             <h1>Credit Discount Agent</h1>

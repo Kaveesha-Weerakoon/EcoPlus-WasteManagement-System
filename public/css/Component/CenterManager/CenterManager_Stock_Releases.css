@@ -14,7 +14,7 @@
 
     }
 
-    
+
     #waste_management i {
         color: var(--green-color-one);
     }
@@ -199,7 +199,7 @@
         margin-left: 5px;
     }
 
-    .mark_as_read button:hover{
+    .mark_as_read button:hover {
         color: var(--button-hover-green);
     }
 
@@ -294,13 +294,13 @@
     }
 
     .table-header {
-        grid-template-columns: 20% 20% 20% 20% 20% ;
+        grid-template-columns: 20% 20% 20% 20% 20%;
     }
 
     .table-row {
         height: 52px;
         display: grid;
-        grid-template-columns: 20% 20% 20% 20% 20% ;
+        grid-template-columns: 20% 20% 20% 20% 20%;
     }
 
     .table td {
@@ -376,7 +376,7 @@
     }
 
     /*Release garbage details popup*/
-     .release_garbage_details_popup {
+    .release_garbage_details_popup {
         display: flex;
         position: fixed;
         top: 50%;
@@ -429,7 +429,7 @@
         font-size: 14px;
         margin-top: 5px;
         font-weight: 500;
-        
+
 
     }
 
@@ -459,7 +459,7 @@
         margin-bottom: 15px;
         /* color: #7c7c7d; */
         color: var(--main-text-color);
-     
+
 
     }
 
@@ -477,12 +477,9 @@
     }
 
 
-   
-
-
 
     @media screen and (max-width: 1358px) {
-        .Eco_Credit_Per_Cont .Cont{
+        .Eco_Credit_Per_Cont .Cont {
             margin: 20px;
         }
 
@@ -508,17 +505,17 @@
         }
 
 
-        .main-right-top-profile img{
+        .main-right-top-profile img {
             width: 40px;
             height: 40px;
             margin-top: 3px;
         }
 
-        .main-right{
+        .main-right {
             overflow-x: hidden;
         }
 
-        .Eco_Credit_Per_Cont .Cont{
+        .Eco_Credit_Per_Cont .Cont {
             margin: 15px;
         }
     }
@@ -535,23 +532,23 @@
             width: 26%;
         }
 
-        .Eco_Credit_Per_Cont{
+        .Eco_Credit_Per_Cont {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
         }
 
-        .Eco_Credit_Per_Cont .Cont{
+        .Eco_Credit_Per_Cont .Cont {
             width: calc(25% - 3px);
         }
 
-        .release_garbage_details_popup{
+        .release_garbage_details_popup {
             height: 370px;
         }
     }
 
-  
+
 
     @media screen and (max-width:950px) {
         .main-right-bottom {
@@ -571,7 +568,7 @@
             width: 28%;
         }
 
-        .main-right-top-profile-cont p{
+        .main-right-top-profile-cont p {
             font-size: 12px;
         }
     }
@@ -593,7 +590,7 @@
             width: 35%;
         }
 
-        .release_garbage_details_popup img{
+        .release_garbage_details_popup img {
             margin-left: 93%;
         }
     }
@@ -604,20 +601,18 @@
             right: 10%;
         }
 
-        .main-right-top-four-component p{
+        .main-right-top-four-component p {
             display: none;
 
         }
 
-        .main-right-top-four-component{
+        .main-right-top-four-component {
             width: auto;
         }
 
-        .release_garbage_details_popup{
+        .release_garbage_details_popup {
             width: 330px;
         }
-
-      
     }
 
     @media screen and (max-width:540px) {
@@ -639,55 +634,51 @@
             left: 15%;
         }
 
-        .main-right-top-four-left{
+        .main-right-top-four-left {
             margin-left: 35px;
             padding-left: 0;
         }
 
-        .main-right-top-four-left button{
+        .main-right-top-four-left button {
             width: 60px;
         }
 
-        .main-right-top-four-left p{
+        .main-right-top-four-left p {
             display: none;
         }
 
-        .main-right-top-four-right{
+        .main-right-top-four-right {
             margin-right: 40%;
         }
 
-        .main-right-top-profile-cont h3{
+        .main-right-top-profile-cont h3 {
             font-size: 16px;
         }
 
-        .line{
+        .line {
             margin-left: -10px !important;
         }
-
-       
-
-      
     }
 
     @media screen and (max-width: 475px) {
-        .main-right-top-profile-cont h3{
+        .main-right-top-profile-cont h3 {
             display: none;
         }
 
-        .main-right-top-profile-cont p{
+        .main-right-top-profile-cont p {
             display: none;
         }
 
-        .main-right-top-profile img{
+        .main-right-top-profile img {
             margin-right: 5px;
         }
 
-        .main-right-top-three-content{
+        .main-right-top-three-content {
             margin-right: 0;
 
         }
 
-        .main-right-top-three-content p{
+        .main-right-top-three-content p {
             font-size: 12px;
         }
 
@@ -697,6 +688,7 @@
         .main-right-top-notification {
             margin-left: 5%;
         }
+
         .main-right-top-search {
             margin-left: 1px;
         }
@@ -719,7 +711,7 @@
     }
 
     @media screen and (max-width:700px) {
-    
+
         .main-right-top-search {
             width: 35%;
         }
@@ -734,23 +726,23 @@
             margin-left: 10px;
         }
 
-        .main-right-top-three{
+        .main-right-top-three {
             margin-bottom: 2%;
         }
 
-        .line{
+        .line {
             margin-left: -20px;
         }
 
-        .Eco_Credit_Per_Cont .Cont{
+        .Eco_Credit_Per_Cont .Cont {
             width: calc(37% - 3px);
         }
 
-        .release_garbage_details_popup h1{
+        .release_garbage_details_popup h1 {
             font-size: 20px;
         }
 
-        .release_garbage_details_popup{
+        .release_garbage_details_popup {
             height: 500px;
         }
     }

@@ -53,8 +53,13 @@
                                         // Extract the first three elements after sorting
                                         $limited_completed_history = array_slice($req_completed_history, 0, 3);
 
-                                        foreach ($limited_completed_history as $completion):
-                                            ?>
+                                    ?>    
+                                <?php if (empty($limited_transactions)): ?>
+                                    <div class="empty-transaction">You Have No Transactions Yet</div>
+                                <?php else: ?>
+                                <?php foreach ($limited_completed_history as $completion):
+                                                ?>
+                                
                                 <div class="main-right-bottom-one-right-cont">
                                     <img class="td-pro_pic"
                                         src="<?php echo (empty($completion->customer_image) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/'. $completion->customer_image) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $completion->customer_image; ?>"
@@ -70,7 +75,7 @@
                                     </h2>
                                 </div>
                                 <?php endforeach; ?>
-          
+                                <?php endif; ?>
                         </div>
                     </div>
                     <div class="main-right-bottom-two">
@@ -117,8 +122,8 @@
                     <div class="main-right-bottom-three">
                         <div class="main-right-bottom-three-left">
                         <canvas id="myChart" width="600" height="250"></canvas>
-                            <!-- <div class="map" id="map"></div> -->
-                        </div>
+                        <div id="chartMessage" class="message">No data available.</div>
+                    </div>
                         <div class="main-right-bottom-three-right">
                             <div class="main-right-bottom-three-right-left">
                                 <h1>Requests Completed</h1>
@@ -210,6 +215,17 @@
         function createOrUpdateChart(color, textColor) {
             var Total_Garbage = <?php echo $data['total_garbage']?>;
             const ctx = document.getElementById('myChart').getContext('2d');
+            if (Total_Garbage.total_plastic == null &&
+                Total_Garbage.total_polythene == null &&
+                Total_Garbage.total_metals == null &&
+                Total_Garbage.total_glass == null &&
+                Total_Garbage.total_paper_waste == null &&
+                Total_Garbage.total_electronic_waste == null) {
+                document.getElementById('myChart').style.display = "none";
+                document.getElementById('chartMessage').style.display = "flex";
+
+             } else {
+            
             if (myChart) {
                 myChart.destroy();
             }
@@ -285,6 +301,7 @@
                 }
             });
         }
+    }
 
         createOrUpdateChart(color, textColor);
 

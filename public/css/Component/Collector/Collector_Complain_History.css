@@ -91,6 +91,31 @@
         font-size: 14px;
     }
 
+
+    .main-right-bottom-three {
+        display: flex;
+        justify-content: center;
+        height: 500px;
+      }
+    
+      .main-right-bottom-three-content {
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .main-right-bottom-three-content img {
+        width: 450px;
+        height: 450px;
+      }
+    
+      .main-right-bottom-three-content h1 {
+        font-size: 25px;
+        font-weight: 500;
+        margin-top: 20px;
+      }
+
     .main-bottom {
         display: grid;
         grid-template-rows: 16% 84%;

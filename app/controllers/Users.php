@@ -57,7 +57,7 @@
           ];
 
           if ($_FILES['profile_image']['error'] == 4) {
-            $data['profile_image_name'] ='profile.png';
+            $data['profile_image_name'] ='Profile.png';
 
         } else {
             if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/customer/')) {

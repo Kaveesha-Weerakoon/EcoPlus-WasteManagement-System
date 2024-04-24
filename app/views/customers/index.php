@@ -63,9 +63,9 @@
                                     <?php endif; ?>
                                     <h3>
                                         <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
-                                        C <?php echo $transaction->receiver_id; ?>
+                                        <?php echo $transaction->receiver_id; ?>
                                         <?php else: ?>
-                                        C <?php echo $transaction->sender_id; ?>
+                                        <?php echo $transaction->sender_id; ?>
                                         <?php endif; ?>
                                     </h3>
                                     <p>

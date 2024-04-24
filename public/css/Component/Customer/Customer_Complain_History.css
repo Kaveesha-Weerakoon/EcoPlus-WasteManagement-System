@@ -14,7 +14,6 @@
     }
 
 
-
     .table-row {
         height: 45px;
         grid-template-columns: 20% 20% 20% 40%;
@@ -25,6 +24,8 @@
         height: 40px;
         font-size: 14px;
         text-align: center !important;
+        overflow-x: none !important;
+        overflow-y: scroll !important;
     }
 
     @media screen and (max-width:700px) {

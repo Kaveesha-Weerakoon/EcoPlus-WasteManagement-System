@@ -245,7 +245,6 @@
         grid-template-columns: 20% 30% 30% 20%;
     }
 
-
     @media screen and (max-width: 1118px) {
         .table td {
             font-size: 12px;
@@ -269,15 +268,10 @@
             width: 40px;
             height: 40px;
             margin-top: 3px;
-            margin-left: 40px;
         }
 
         .main-right{
             overflow-x: hidden;
-        }
-
-         .main-right-top-search {
-            width: 400px;
         }
     }
 
@@ -292,8 +286,6 @@
         .notification_popup {
             width: 26%;
         }
-
-
     }
 
     @media screen and (max-width:950px) {
@@ -317,8 +309,6 @@
         .main-right-top-profile-cont p{
             font-size: 12px;
         }
-
-        
     }
 
     @media screen and (max-width:862px) {
@@ -337,26 +327,6 @@
             right: 10%;
             width: 35%;
         }
-
-        .main-right-bottom {
-            width: 100%;
-            overflow-x: scroll;
-        }
-
-        .main-right-top-search {
-            width: 35%;
-        }
-
-        .main-right-top-search i {
-            left: 10px;
-            margin-left: 10px;
-        }
-
-
-        .main-right-top-search {
-            margin-left: 1px;
-        }
-
     }
 
     @media screen and (max-width:660px) {
@@ -379,16 +349,16 @@
 
     @media screen and (max-width:540px) {
         .main-right-bottom {
-            width: 160%;
+            width: 100%;
             overflow-x: scroll;
         }
 
         .main-right-bottom-top {
-            width: 160%;
+            width: 100%;
         }
 
         .main-right-bottom-down {
-            width: 160%;
+            width: 100%;
         }
 
         .notification_popup {
@@ -499,7 +469,6 @@
             margin-left: -20px;
         }
     }
-
 
 
 

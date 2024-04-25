@@ -125,14 +125,15 @@
                                     <div class="top-right">
                                         <h3>Earned From Collects</h3>
                                         <h1><?php
-$credits = isset($data['credits']) ? 'Eco ' . $data['credits'] : 'Eco 00.00';
-?>
+                                           $credits = isset($data['credits']) ? 'Eco ' . $data['credits'] : 'Eco 00.00';
+                                          ?>
                                             <?php echo $credits; ?></h1>
                                         </h1>
                                     </div>
 
                                 </div>
                                 <div class="bottom">
+                                    <p>Credits Given Chart</p>
                                     <canvas id="myChart" width="600" height="350"></canvas>
                                 </div>
                             </div>
@@ -173,8 +174,9 @@ function getMonthName(monthIndex) {
 
     return monthNames[monthIndex - 1]; // Subtract 1 to correctly index monthNames array
 }
+
 const labels = [];
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 4; i++) { // Changed loop condition to iterate only 4 times
     const month = (currentMonth - i + 11) % 12; // No need to subtract 1
     const year = currentYear - (i === 0 && currentMonth === 1 ? 1 : 0); // Adjust the condition to check for January
     labels.unshift(getMonthName(month + 1) + ' ' + year);
@@ -210,13 +212,13 @@ function countRequests(requests) {
     return sums;
 }
 
-function printLastSixMonths(arr, startIndex) {
+function printLastFourMonths(arr, startIndex) { // Changed function name to reflect the new behavior
     const length = arr.length;
     const result = [];
     // Calculate the start index for slicing the array
     const startIdx = (startIndex - 1 + length) % length;
 
-    for (let i = 0; i <= 4; i++) {
+    for (let i = 0; i < 4; i++) { // Changed loop condition to iterate only 4 times
         // Calculate the index, ensuring it stays within bounds and handles negative indices
         const j = (startIdx - i + length) % length;
         // Add the element to the result array
@@ -226,7 +228,7 @@ function printLastSixMonths(arr, startIndex) {
     return result.reverse();
 }
 
-const completedData = printLastSixMonths(countRequests(completedRequestCounts), currentDate.getMonth() + 1);
+const completedData = printLastFourMonths(countRequests(completedRequestCounts), currentDate.getMonth() + 1);
 
 const data = {
     labels: labels,
@@ -249,7 +251,10 @@ const config = {
             },
             title: {
                 display: true,
-                text: 'Credits Given Chart'
+                // text: 'Credits Given Chart',
+                // titleFont: {
+                //     size: 40 // Adjust the font size as per your preference
+                // }
             }
         }
     },
@@ -257,6 +262,7 @@ const config = {
 
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart1 = new Chart(ctx, config);
+
 
 /*animations*/
 document.addEventListener("DOMContentLoaded", function() {

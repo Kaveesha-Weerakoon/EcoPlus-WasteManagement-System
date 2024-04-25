@@ -180,7 +180,30 @@
         form.submit(); // Submit the form
 
     };
-    /* ----------------- */
+    
+
+    function searchTable() {
+        var input = document.getElementById('searchInput').value.toLowerCase();
+        var rows = document.querySelectorAll('.table-row');
+
+        rows.forEach(function(row) {
+            var date_time = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+            var released_person = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+            var released_note = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+            var income = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+            
+
+            if (date_time.includes(input) || released_person.includes(input) || released_note.includes(input) || income.includes(input) ) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
+        });
+
+    }
+
+
+    document.getElementById('searchInput').addEventListener('input', searchTable);
 
 
 

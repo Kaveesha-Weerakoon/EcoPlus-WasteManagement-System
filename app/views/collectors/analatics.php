@@ -8,25 +8,10 @@
 
             <div class="main-right">
                 <div class="main-right-top">
-                    <div class="main-right-top-search">
-                        <i class='bx bx-search-alt-2'></i>
-                        <input type="text" placeholder="Search">
-                    </div>
-                    <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <div class="dot"></div>
-                    </div>
 
-                    <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
-                            alt="">
-                        <div class="main-right-top-profile-cont">
-                            <h3><?php echo $_SESSION['collector_name']?></h3>
-                            <p>ID : C <?php echo $_SESSION['collector_id']?></p>
-                        </div>
-                        
-                    </div>
-                    
+                    <?php require APPROOT . '/views/collectors/collector_notification/collector_notification.php'; ?>
+
+
                 </div>
 
                 <div class="main-right-bottom">
@@ -87,25 +72,25 @@
                                 <i class="fa-solid fa-chart-simple"></i>
                                 <p>Total Requests</p>
                                 <h1><?php echo $data['totalRequests']?></h1>
-                                
+
                             </div>
                             <div class="left-cont">
                                 <i class="fa-regular fa-square-check"></i>
                                 <p>Completed Requests</p>
                                 <h1><?php echo $data['completedRequests']?></h1>
-                                
+
                             </div>
                             <div class="left-cont">
                                 <i class="fa-regular fa-rectangle-xmark"></i>
                                 <p>Cancelled Requests</p>
                                 <h1><?php echo $data['cancelledRequests']?></h1>
-                                
+
                             </div>
                             <div class="left-cont">
                                 <i class="fa-solid fa-spinner"></i>
                                 <p>Assigned Request</p>
                                 <h1><?php echo $data['assignRequests']?></h1>
-                                
+
                             </div>
                         </div>
                         <div class="right">
@@ -238,8 +223,7 @@
 
 
 <script>
-
-    function scrollToElement(elementId) {
+function scrollToElement(elementId) {
     var element = document.getElementById(elementId);
     if (element) {
         element.scrollIntoView({
@@ -346,7 +330,7 @@ const config = {
 
 const ctx = document.getElementById('myLineChart').getContext('2d');
 const myLineChart = new Chart(ctx, config);
- /*Bottom CHART One*/
+/*Bottom CHART One*/
 
 const data1 = {
     labels: ['Plastic', 'Polythene', 'Paper', 'Electronic', 'Metals', 'Glass'],

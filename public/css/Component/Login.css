@@ -16,7 +16,7 @@
     background-color: #fff;
     overflow: hidden;
     height: 100vh;
-    min-height: 770px !important;
+    min-height: 700px !important;
   }
 
   .container:before {
@@ -291,6 +291,7 @@
     font-size: 1rem;
     color: #333;
     margin-top: 6px;
+    width: 100%;
 
 
   }
@@ -817,6 +818,11 @@
   }
 
   @media (max-width:870px) {
+    .container {
+
+      min-height: 1150px !important;
+    }
+
     .container {
       min-height: 800px;
       height: 100vh;

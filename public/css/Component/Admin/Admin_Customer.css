@@ -335,6 +335,7 @@
             padding-left: 90px;
             padding-bottom: 50px;
 
+
         }
 
         .request-details-right-values span {
@@ -342,6 +343,9 @@
             font-size: 15px;
             color: #767e95;
             font-weight: 550;
+            width: 230px;
+            overflow-x: scroll;
+
         }
     }
 
@@ -731,7 +735,7 @@
         }
 
         .main-right-bottom {
-            width: 140%;
+            width: 130%;
             overflow-x: scroll !important;
         }
 
@@ -744,11 +748,11 @@
         }
 
         .table-header {
-            grid-template-columns: 14% 21% 20% 12% 12%;
+            grid-template-columns: 14% 17% 13% 13% 17% 9%;
         }
 
         .table-row {
-            grid-template-columns: 14% 21% 20% 12% 12%;
+            grid-template-columns: 14% 17% 13% 13% 17% 9%;
         }
 
         .main-right-top-two h1 {

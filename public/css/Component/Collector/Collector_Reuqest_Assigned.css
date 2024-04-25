@@ -1224,7 +1224,16 @@
         width: 300px;
       }
 
-    }
+
+  .table-row {
+      grid-template-columns: 11% 12% 14% 11% 11% 11% 14%;
+  }
+  .main-right-top-profile{
+    margin-right: 100px;
+  }
+
+
+}
 
     @media screen and (max-width:650px) {
 
@@ -1253,4 +1262,28 @@
 
 
   }
+
+
+
+  
+
+.main-right-top-four-left{
+  margin-left: 35px;
+  padding-left: 0;
+}
+
+.main-right-top-four-left button{
+  width: 60px;
+}
+
+.main-right-top-four-left p{
+  display: none;
+}
+
+.main-right-top-four-right{
+  margin-right: 40%;
+}
+
+
+}
 }

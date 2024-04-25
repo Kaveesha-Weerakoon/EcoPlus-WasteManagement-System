@@ -8,44 +8,10 @@
                 <div class="main-right-top">
                     <div class="main-right-top-search">
                         <i class='bx bx-search-alt-2'></i>
-                        <input type="text" placeholder="Search">
+                        <input type="text" id="searchInput"  placeholder="Search">
                     </div>
                     <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
-                    <!-- <div class="main-right-top-notification" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <div class="dot"></div>
-                    </div>
-                    <div id="notification_popup" class="notification_popup">
-                        <h1>Notifications</h1>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Assigned
-                        </div>
-                        <div class="notification">
-                            <div class="notification-green-dot">
-
-                            </div>
-                            Request 1232 Has been Cancelled
-                        </div>
-
-
-                    </div>
-                    <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
-                        alt="">
-                        <div class="main-right-top-profile-cont">
-                            <h3><?php echo $_SESSION['center_manager_name']?></h3>
-                            <p>ID : Col <?php echo $_SESSION['center_manager_id']?></p>
-                        </div>
-                    </div> -->
+                 
 
                     
                 </div>
@@ -68,7 +34,7 @@
                     <table class="table">
                                 <?php foreach($data['complaints_history'] as $complaint) : ?>
                                         <tr class="table-row">
-                                            <td>Com<?php echo $complaint->complaint_id?></td>
+                                            <td><?php echo $complaint->complaint_id?></td>
                                             <td><?php echo $complaint->subject?></td>
                                             <td><?php echo $complaint->complaint?></td>
                                             <td><?php echo $complaint->date_time?></td>
@@ -94,7 +60,28 @@
         form.submit(); // Submit the form
 
     };
-    /* ----------------- */
+    
+    function searchTable() {
+        var input = document.getElementById('searchInput').value.toLowerCase();
+        var rows = document.querySelectorAll('.table-row');
+
+        rows.forEach(function(row) {
+            var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+            var subject = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+            var complaint = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+            var date_time = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+        
+
+            if (id.includes(input) || subject.includes(input) || complaint.includes(input) || date_time.includes(input)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
+        });
+
+    }
+
+    document.getElementById('searchInput').addEventListener('input', searchTable);
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

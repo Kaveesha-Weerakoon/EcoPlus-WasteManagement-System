@@ -177,11 +177,15 @@
         justify-content: center;
         border: none;
         margin-right: 9px;
+        background-color: var(--background-color-main);
+        color:#001f3f;
+
     }
 
     .main-right-top-four-left p {
         font-size: 14px;
         letter-spacing: 0.03rem;
+    
     }
 
     .main-right-top-four-left button {
@@ -229,7 +233,8 @@
     }
 
     .main-right-top-four-component p{
-        color:var(--background-color-right) ;
+        
+        color: #001f3f;
     }
 
     .main-right-bottom {

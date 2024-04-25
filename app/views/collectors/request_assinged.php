@@ -49,7 +49,7 @@
                                     alt="">
                                 <div class="main-right-top-profile-cont">
                                     <h3><?php echo $_SESSION['collector_name']?></h3>
-                                    <p>ID : Col <?php echo $_SESSION['collector_id']?></p>
+                                    <p>ID :  <?php echo $_SESSION['collector_id']?></p>
                                 </div>
                             </div>
                         </div>

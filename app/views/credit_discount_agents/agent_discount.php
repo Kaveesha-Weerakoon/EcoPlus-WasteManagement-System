@@ -54,6 +54,18 @@
 
                 <script src="<?php echo JSROOT?>/Admin_Center_Manager.js"> </script>
             </div>
+            <?php if($data['success']=='True') : ?>
+            <div class="request_success">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/check.png" alt="">
+                    <h2>Success!!</h2>
+                    <p>Discount Given</p>
+                    <a href="<?php echo URLROOT?>/CreditDiscountsAgent/balance_validation"><button
+                            type="button">OK</button></a>
+                </div>
+            </div>
+            <?php echo $data['success'];?>
+            <?php endif; ?>
         </div>
 
 

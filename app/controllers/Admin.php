@@ -460,15 +460,40 @@
     public function customers(){ 
       
       $customers = $this->customerModel->get_all();
-      $data = [
-        'customers' =>$customers,
-        'delete_confirm'=>'',
-        'fine'=>''
+      $centers = $this->center_model->getallCenters();
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $center=trim($_POST['center-dropdown']);
+        if($center!="none"){
+           $customers = $this->customerModel->get_customer_by_region($center);
 
-      ];
+        }
+        else{
+          $center_id="none";
+          $customers = $this->customerModel->get_all();
+
+        }
+         $data = [
+            'customers' =>$customers,
+            'delete_confirm'=>'',
+            'fine'=>'',
+            'centers'=> $centers
+            ] ;
+           
+        $this->view('admin/customer_main', $data);
+
+      }else{
+        
+        $data = [
+            'customers' =>$customers,
+            'delete_confirm'=>'',
+            'fine'=>'',
+            'centers'=> $centers];
+        
+        $this->view('admin/customer_main', $data);
+
+      }}
+    
      
-      $this->view('admin/customer_main', $data);
-    }
 
     // public function customerdelete_confirm($id){
     //   $customers = $this->customerModel->get_all();
@@ -1534,7 +1559,7 @@
             'customers'=>count($customers),
             'centerworkers'=>count($centerworkers),
             'collectorassistants'=>count($collectorassistants),
-            'allcustomers'=>  $allcustomers
+            'allcustomers'=>  $customers
           ];     
             $this->view('admin/reportusers', $data);
 
@@ -1556,8 +1581,9 @@
           'customers'=>count($customers),
           'centerworkers'=>1,
           'collectorassistants'=>count($centerworkers),
-          'allcustomers'=>  $allcustomers
-      ];
+          'allcustomers'=>  $allcustomers,
+          'allcustomers'=>  $customers
+        ];
           $this->view('admin/reportusers', $data);
 
       }

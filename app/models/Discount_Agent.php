@@ -88,6 +88,7 @@
           $this->db->bind(':user_id1', $data['agent']->user_id); // corrected access to user_id property
           $result = $this->db->execute();
           if ($result) {
+            
               // Insert a new entry into the discountagent_credit table
               $this->db->query('INSERT INTO discountagent_credit (agent_id, credited_amount) VALUES (:agent_id, :credits)');
               $this->db->bind(':agent_id', $data['agent']->user_id);
@@ -97,7 +98,6 @@
           }
       } catch (PDOException $e) {
           // Handle exceptions
-          die($e->getMessage()); // corrected access to getMessage method
           return false;
       }
     }
@@ -110,7 +110,7 @@
         return $results;
        } 
        catch (PDOException $e) {
-        die($e);
+      
           return false;
        }
     }
@@ -187,16 +187,19 @@
           $this->db->bind(':discount_amount', $discount_amount);        
           $this->db->bind(':agent_id', $agent_id);
           $this->db->bind(':center', $center);
-  
+        
           $result= $this->db->execute();
           if($result){
-            $this->db->query('UPDATE discount_agents SET credits = :new_balance WHERE user_id = :user_id1');
+            $this->db->query('UPDATE discount_agents SET credits =:new_balance WHERE user_id =:user_id1');
             $this->db->bind(':new_balance',  $dicount_agent_balance);
             $this->db->bind(':user_id1',  $agent_id); // corrected access to user_id property
             $result = $this->db->execute();
           }
         }
         catch (PDOException $e) {
+  die();
+
+
           return false;
        }
       

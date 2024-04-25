@@ -24,13 +24,7 @@
                                 <h2>Analatics</h2>
                                 <p>Users</p>
                             </div>
-                            <!-- <div class="top-bar-details">
-                                <div class="cont" onclick="scrollToElement('Requests')">Requests</div>
-                                <div class="cont" onclick="scrollToElement('Collected')">Collected</div>
-                                <div class="cont" onclick="scrollToElement('Handoverd')">Handovered</div>
-                                <div class="cont" onclick="scrollToElement('Selled')">Selled</div>
 
-                            </div> -->
                             <div class="date-box">
 
                                 <div class="date-box-cont">
@@ -175,8 +169,6 @@ const customersCounts = customers.map(request => {
         year: date.getFullYear(),
     };
 });
-
-
 
 function countRequests(requests) {
     const counts = Array(6).fill(0);

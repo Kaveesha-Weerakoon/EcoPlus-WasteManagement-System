@@ -233,8 +233,6 @@
     }
 
 
-
-  
     public function validateUser() {   
 
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -351,7 +349,6 @@
               $customer = $this->customerModel->get_Cus_all_details($customer_id);
               $customer_name = $customer->name;
               $dicount_agent_balance=$agent->credits-$data['discount_amount'];
-            
 
               if ($balance_update) {
                   $insert_discount = $this->discount_agentModel->addDiscount(
@@ -362,15 +359,16 @@
                       $_SESSION['agent_id'],
                       $dicount_agent_balance
                   );
-
+                  
                   if ($insert_discount) {
+                   
                       $this->view('credit_discount_agents/agent_discount', $data);
                   } else {
-                      die('Failed to insert discount details');
+                    $this->view('credit_discount_agents/agent_discount', $data);
                   }
               } else {
-                  die('Something went wrong');
-              }
+                  $this->view('credit_discount_agents/agent_discount', $data);
+                }
           } else {
               $data['credit_amount_err'] = 'Transfer amount exceeds available credit balance';
               $this->view('credit_discount_agents/agent_discount', $data);

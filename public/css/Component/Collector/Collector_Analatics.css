@@ -20,7 +20,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-around;
+        justify-content: end;
         box-shadow: var(--box-shadow2);
         border: 10px;
         z-index: 1;
@@ -68,7 +68,7 @@
             margin-left: 35%;
             margin-right: 2.5%;
         }
-    
+
         .dot {
             width: 15.5px;
             height: 15.5px;
@@ -83,12 +83,12 @@
             padding-left: 4.6px;
             padding-top: 1.8px;
         }
-    
+
         .main-right-top-notification i {
             font-size: 29px;
             cursor: pointer;
         }
-    
+
         .notification_popup {
             height: 0;
             position: absolute;
@@ -108,21 +108,21 @@
             overflow: scroll;
             border: 1px solid #dcdde1;
         }
-    
+
         .notification_popup h1 {
             font-size: 19px;
             letter-spacing: 0.001rem;
             margin-top: 5px;
             margin-left: 8px;
         }
-    
+
         .notification_popup.active {
             height: 200px;
             padding: 10px;
             visibility: visible;
             opacity: 1;
         }
-    
+
         .notification {
             height: 43px !important;
             margin-top: 10px;
@@ -132,11 +132,11 @@
             font-size: 14px;
             cursor: pointer;
         }
-    
+
         .notification:hover {
             background-color: var(--notification-hover);
         }
-    
+
         .notification-green-dot {
             width: 11px;
             height: 11px;
@@ -144,23 +144,23 @@
             background-color: var(--green-color-one);
             margin-right: 10px;
         }
-    
+
         .notification_right p {
             font-size: 13px;
         }
-    
+
         .mark_as_read {
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
         }
-    
+
         .notification_cont {
             overflow: scroll;
             max-height: 150px;
         }
-    
+
         .mark_as_read button {
             margin-top: 2px;
             font-size: 13px;
@@ -174,15 +174,15 @@
             color: var(--main-text-color);
             margin-left: 5px;
         }
-    
-        .mark_as_read button:hover{
+
+        .mark_as_read button:hover {
             color: var(--button-hover-green);
         }
-    
+
         .mark_as_read .bx {
             font-size: 26px;
         }
-    
+
 
         .main-right-top-profile {
             display: flex;
@@ -231,6 +231,7 @@
                 box-sizing: border-box;
                 padding-left: 30px;
             }
+
             .top-bar-details {
                 display: flex;
                 flex-direction: row;
@@ -247,6 +248,7 @@
                 font-size: 14px;
                 cursor: pointer;
             }
+
             .top-bar-left h2 {
                 font-size: 21px !important;
             }
@@ -607,7 +609,7 @@
             margin-right: 0.1%;
         }
 
-        
+
 
 
 
@@ -691,7 +693,7 @@
             }
         }
 
-        #Handovered{
+        #Handovered {
             margin-top: 480px;
         }
 
@@ -740,25 +742,26 @@
 
         .main-right-top {
 
-            .main-right-top-profile-cont h3{
+            .main-right-top-profile-cont h3 {
                 font-size: 16px;
             }
+
             .main-right-top-profile-cont p {
-              font-size: 12px;
+                font-size: 12px;
             }
         }
-        
+
     }
 
     @media screen and (max-width: 864px) {
-        
+
         .main-right-top {
 
             .main-right-top-profile-cont p {
-              font-size: 11px;
+                font-size: 11px;
             }
         }
-        
+
     }
 
     @media screen and (max-width: 600px) {

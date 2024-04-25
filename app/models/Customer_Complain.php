@@ -52,7 +52,30 @@
                       ORDER BY customer_complains.date DESC');
     $results = $this->db->resultSet();
     return $results;
-}
+  }
+
+
+  public function get_customer_complaints_by_region($region){
+    try{
+      $this->db->query('SELECT customer_complains.* , customers.image
+                        FROM customer_complains 
+                        INNER JOIN customers 
+                        ON customer_complains.customer_id = customers.user_id
+                        WHERE customer_complains.region = :region
+                        ORDER BY customer_complains.date DESC');
+      $this->db->bind(':region', $region);
+      $results = $this->db->resultSet();
+      return $results;
+
+
+    }catch (PDOException $e){
+      return false;
+    }
+    
+
+
+
+  }
 
 
  

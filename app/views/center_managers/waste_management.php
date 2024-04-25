@@ -184,7 +184,27 @@ document.addEventListener("DOMContentLoaded", function() {
         form.submit(); // Submit the form
 
     };
-    /* ----------------- */
+
+function searchTable() {
+    var input = document.getElementById('searchInput').value.toLowerCase();
+    var rows = document.querySelectorAll('.table-row');
+
+    rows.forEach(function(row) {
+        var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+        var collector_id = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+        var cm_note = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+   
+
+        if (id.includes(input) || collector_id.includes(input) || cm_note.includes(input) ) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+
+}
+
+document.getElementById('searchInput').addEventListener('input', searchTable);
 
 </script>
 

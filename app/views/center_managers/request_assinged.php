@@ -212,11 +212,8 @@ function searchTable() {
         var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
         var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
         var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-        var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
-        var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
-
-        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(input) ||
-            cid.includes(input)) {
+       
+        if (time.includes(input) || id.includes(input) || date.includes(input) ) {
             row.style.display = '';
         } else {
             row.style.display = 'none'; // Hide the row
@@ -377,15 +374,15 @@ function loadLocations() {
 
         var map = new google.maps.Map(document.getElementById('map-loaction'), {
             center: {
-                lat: 7.8731,
-                lng: 80.7718
+                lat:  <?php echo $data['lattitude'] ?>,
+                lng: <?php echo $data['longitude'] ?>
             },
-            zoom: 7.2
+            zoom: 10
         });
 
-        var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
+        var assignedRequestsForDate = <?php echo $data['jsonData']; ?>;
 
-        incomingRequestsForDate.forEach(function(coordinate) {
+        assignedRequestsForDate.forEach(function(coordinate) {
             var marker = new google.maps.Marker({
                 position: {
                     lat: parseFloat(coordinate.lat),
@@ -399,20 +396,37 @@ function loadLocations() {
                 handleMarkerClick(marker);
             });
         });
+
+        var defaultLatLng = {
+            lat: <?php echo $data['lattitude'] ?>,
+            lng: <?php echo $data['longitude'] ?>
+        };
+
+            // Add a circle to the first map
+        var circle2 = new google.maps.Circle({
+            map: map,
+            center: defaultLatLng,
+            radius: <?php echo $data['radius']?>,
+            fillColor: '#47b076',
+            fillOpacity: 0.3,
+            strokeColor: '#47b076',
+            strokeOpacity: 1,
+            strokeWeight: 2
+        });
     }
 }
 
 function updateMapForDate(selectedDate) {
     var map = new google.maps.Map(document.getElementById('map-loaction'), {
         center: {
-            lat: 7.8731,
-            lng: 80.7718
+            lat: <?php echo $data['lattitude'] ?>,
+            lng: <?php echo $data['longitude'] ?>
         },
-        zoom: 7.2
+        zoom: 10
     });
 
-    var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
-    var filteredRequests = incomingRequestsForDate.filter(function(coordinate) {
+    var assignedRequestsForDate = <?php echo $data['jsonData']; ?>;
+    var filteredRequests = assignedRequestsForDate.filter(function(coordinate) {
         return coordinate.date === selectedDate;
     });
 
@@ -429,6 +443,23 @@ function updateMapForDate(selectedDate) {
         marker.addListener('click', function() {
             handleMarkerClick(marker);
         });
+    });
+
+    var defaultLatLng = {
+        lat: <?php echo $data['lattitude'] ?>,
+        lng: <?php echo $data['longitude'] ?>
+    };
+
+        // Add a circle to the first map
+    var circle2 = new google.maps.Circle({
+        map: map,
+        center: defaultLatLng,
+        radius: <?php echo $data['radius']?>,
+        fillColor: '#47b076',
+        fillOpacity: 0.3,
+        strokeColor: '#47b076',
+        strokeOpacity: 1,
+        strokeWeight: 2
     });
 }
 

@@ -152,7 +152,7 @@
                 document.getElementById('user_id').textContent = user.customer_id;
                 document.getElementById('complain_id').textContent = user.id;
                 document.getElementById('user_profile_pic').src =
-                    "<?php echo IMGROOT?>/img_upload/customer/" +
+                    "<?php echo IMGROOT?>/img_upload/collector/" +
                     user.image;
                 document.getElementById('user_name').textContent = user.name;
                 document.getElementById('user_contactno').textContent = user.contact_no;

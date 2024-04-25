@@ -17,9 +17,36 @@
                 </div>
 
                 <div class=" main-right-bottom">
-                    <div class="main-right-top-two">
+                    <form method="post" class="main-right-top-two" action="<?php echo URLROOT;?>/admin/customers">
                         <h1>Customers</h1>
-                    </div>
+                        <div class="center-box">
+
+                            <p id="selected-option">Center</p>
+                            <select id="center-dropdown" name="center-dropdown">
+                                <?php
+                                     $centers = $data['centers'];
+                                     $selectedRegion = $data['center'];
+                                     $regionFound = false;
+
+                                     // Add the "All" option
+                                     echo "<option value=\"none\"" . ($selectedRegion == "none" ? " selected" : "") . ">All</option>";
+
+                                     if (!empty($centers)) {
+                                        foreach ($centers as $center) {
+                                            $selected = ($center->region == $selectedRegion) ? 'selected' : '';
+                                            if ($selected) {
+                                                $regionFound = true;
+                                            }
+                                            echo "<option value=\"$center->region\" $selected>$center->region</option>";
+                                        }
+          
+                                    } 
+                                    ?>
+                            </select>
+                        </div>
+
+                        <button>Filter</button>
+                    </form>
                     <div class="main-right-bottom-top">
                         <table class="table">
                             <tr class="table-header">

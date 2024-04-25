@@ -743,9 +743,7 @@
         width: 145px;
         font-size: 15px;
     }
-    .request-details-pop-form{
-      width: 450px;
-  }
+   
 
 
 }
@@ -785,9 +783,7 @@
       width: 35%;
     }
 
-    .request-details-pop-form {
-      width: 450px;
-    }
+
 
   }
 
@@ -812,6 +808,12 @@
     .table-row {
         grid-template-columns: 14% 14% 14% 14% 14% 14% ;
     }
+
+    .main-right-top-profile{
+      margin-right: 100px;
+    }
+  
+  
 }
 
 @media screen and (max-width:555px) {
@@ -880,7 +882,44 @@
         height: 65px;
         overflow-y: scroll;
     }
+
+  
+
+  .main-right-top-four-left{
+    margin-left: 35px;
+    padding-left: 0;
 }
+
+.main-right-top-four-left button{
+    width: 60px;
+}
+
+.main-right-top-four-left p{
+    display: none;
+}
+
+.main-right-top-four-right{
+    margin-right: 40%;
+}
+
+
+.request-details-right-labels{
+  padding-left: 16px;
+}
+
+.request-details-right-values{
+  padding-left: 70px;
+}
+
+.request-details-pop-form{
+  width: 300px;
+}
+
+
+
+}
+
+
 
 /*View Collector Pop*/
 }

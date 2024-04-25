@@ -353,7 +353,7 @@ document.getElementById('submit-notification').onclick = function() {
     form.submit(); // Submit the form
 
 };
-/* ----------------- */
+
 
 function searchTable() {
     var input = document.getElementById('searchInput').value.toLowerCase();
@@ -361,13 +361,11 @@ function searchTable() {
 
     rows.forEach(function(row) {
         var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
-        var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
-        var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-        var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
-        var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+        var name = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+        var email = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+       
 
-        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(input) ||
-            cid.includes(input)) {
+        if (id.includes(input) || name.includes(input) || email.includes(input)) {
             row.style.display = '';
         } else {
             row.style.display = 'none'; // Hide the row
@@ -375,6 +373,8 @@ function searchTable() {
     });
 
 }
+
+document.getElementById('searchInput').addEventListener('input', searchTable);
 
 function openvehicledetails(collector) {
 

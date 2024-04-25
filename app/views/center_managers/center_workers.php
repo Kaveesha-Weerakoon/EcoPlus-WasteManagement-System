@@ -202,7 +202,30 @@
         form.submit(); // Submit the form
 
     };
-    /* ----------------- */
+
+    function searchTable() {
+        var input = document.getElementById('searchInput').value.toLowerCase();
+        var rows = document.querySelectorAll('.table-row');
+
+        rows.forEach(function(row) {
+            var name = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+            var nic = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+            var address = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+            var contact_no = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+            var dob = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+           
+
+            if (nic.includes(input) || name.includes(input) || address.includes(input) || contact_no.includes(input) || dob.includes(input)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
+        });
+
+    }
+
+    document.getElementById('searchInput').addEventListener('input', searchTable);  
+   
 </script>
 
 

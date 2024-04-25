@@ -54,7 +54,7 @@
                                         $limited_completed_history = array_slice($req_completed_history, 0, 3);
 
                                     ?>    
-                                <?php if (empty($limited_transactions)): ?>
+                                <?php if (empty($limited_completed_history)): ?>
                                     <div class="empty-transaction">You Have No Transactions Yet</div>
                                 <?php else: ?>
                                 <?php foreach ($limited_completed_history as $completion):

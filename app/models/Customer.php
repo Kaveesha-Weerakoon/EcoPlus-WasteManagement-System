@@ -183,6 +183,27 @@ public function get_Cus_all_details($id){
       }
     }
 
+    public function get_customer_by_region($region){
+      try {
+        $this->db->query('SELECT *,
+        customers.id as cID,
+        users.id as userId
+        
+        FROM customers
+        INNER JOIN users
+        ON customers.user_id = users.id
+        INNER JOIN customer_credits cc ON cc.user_id=users.id WHERE city= :region');
+        $this->db->bind(':region', $region);
+
+        $rows = $this->db->resultSet();
+    
+        return $rows ; 
+
+      }catch (PDOException $e) {
+        return false;
+      }
+    }
+
     public function get_Notification($id) {
       try {
         $this->db->query('SELECT * FROM user_notification WHERE user_id = :id AND mark_as_read = "False" ORDER BY datetime DESC');          $this->db->bind(':id', $id);          

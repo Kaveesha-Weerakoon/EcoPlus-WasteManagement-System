@@ -216,13 +216,11 @@ function searchTable() {
         var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
         var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
         var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-        var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
-        var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
-        var conctact_no = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
-        var instructions = row.querySelector('td:nth-child(7)').innerText.toLowerCase();
+        var cancelled_by = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+        var reason = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
+       
 
-        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(input) ||
-            cid.includes(input) || conctact_no.includes(input) || instructions.includes(input)) {
+        if (time.includes(input) || id.includes(input) || date.includes(input) || cancelled_by.includes(input) || reason.includes(input)) {
             row.style.display = '';
         } else {
             row.style.display = 'none'; // Hide the row

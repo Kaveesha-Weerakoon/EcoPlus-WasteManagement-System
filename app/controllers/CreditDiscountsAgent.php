@@ -278,7 +278,7 @@
       }
     }
 
-    public function balance_validation() {     
+    public function balance_validation($success="") {     
       $agent=$this->discount_agentModel->getDiscountAgentByID2($_SESSION['agent_id']);
 
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -290,10 +290,11 @@
               'center' => trim($_POST['center']),
               'customer_id_err' => '',
               'center_err' => '',
-              'discount_amount_err' => ''
-
+              'discount_amount_err' => '',
+              'success'=>$success
           ];
-
+          
+          die($data['success']);
 
           if (empty($data['center'])) {
             $data['center_err'] = 'Please enter branch name';
@@ -315,10 +316,7 @@
                   }
               }
           }
-          
-          
-      
-        
+              
           if (empty($data['discount_amount']) || $data['discount_amount'] <= 0) {
             $data['discount_amount_err'] = 'Please enter a discount amount greater than 0';
         } elseif (!filter_var($data['discount_amount'], FILTER_VALIDATE_FLOAT)) {
@@ -361,8 +359,7 @@
                   );
                   
                   if ($insert_discount) {
-                   
-                      $this->view('credit_discount_agents/agent_discount', $data);
+                      $this->view('credit_discount_agents/agent_discount/True', $data);
                   } else {
                     $this->view('credit_discount_agents/agent_discount', $data);
                   }
@@ -384,9 +381,11 @@
               'center' => '',
               'customer_id_err' => '',
               'discount_amount_err' => '',
-              'center_err' => ''   
+              'center_err' => '',
+              'success'=>$success
           ];
-  
+          
+
           $this->view('credit_discount_agents/agent_discount', $data);
       }
     }

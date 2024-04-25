@@ -1175,6 +1175,8 @@
         'creditsByMonth1'=>  $creditByMonth,
         'handoveredWasteByMonth'=>$handoveredWasteByMonth,
         'collectedWasteByMonth'=>$collectedWasteByMonth,
+        'notification'=> $Notifications,
+
       ];
       
       $this->view('collectors/analatics', $data);
@@ -1201,7 +1203,9 @@
       'collectedWasteByMonth'=>$collectedWasteByMonth,
       'handoveredWasteByMonth'=>$handoveredWasteByMonth,
       'to'=>'none',
-      'from'=>'none',  
+      'from'=>'none', 
+      'notification'=> $Notifications,
+ 
       /*'notification'=> $Notifications, 
       'fine_balance'=> $finedAmount, 
       'credit_balance'=> $creditsBalance, 

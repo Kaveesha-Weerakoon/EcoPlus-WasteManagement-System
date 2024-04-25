@@ -2,15 +2,11 @@
 <div class="CenterManager_Main">
     <div class="CenterManager_Request_Main">
         <div class="CenterManager_Request_Incomming">
-            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initializeMaps"
-            async defer>
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initializeMaps"
+                async defer>
             </script>
-            <!-- <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMapAssigned"
-            async defer>
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initLocationPop"
-            async defer>
-            </script> -->
+
 
             <div class="main">
                 <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
@@ -46,7 +42,7 @@
                                     <td><?php  echo $request->time?></td>
                                     <td>
                                         <i class='bx bx-map' style="font-size: 29px;"
-                                        onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
+                                            onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
 
                                     </td>
                                     <td>
@@ -54,8 +50,7 @@
                                             onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
                                     </td>
                                     <td>
-                                        <i class='bx bxs-user-check assign-button' style="font-size: 32px;" 
-                                            onclick="assign(<?php echo $request->req_id ?>, '<?php echo htmlspecialchars($request->date, ENT_QUOTES, 'UTF-8')?>', '<?php echo $request->time ?>',
+                                        <i class='bx bxs-user-check assign-button' style="font-size: 32px;" onclick="assign(<?php echo $request->req_id ?>, '<?php echo htmlspecialchars($request->date, ENT_QUOTES, 'UTF-8')?>', '<?php echo $request->time ?>',
                                         <?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
 
                                     </td>
@@ -144,11 +139,11 @@
                                     ?>
                             </ul>
                         </div>
-                        
-                        <span name="requestTime" id="requestTime" style= "display:none;"></span>
+
+                        <span name="requestTime" id="requestTime" style="display:none;"></span>
 
                         <div class="time-slot-dropdown-container">
-                            <select name="time-slot-dropdown" id="time-slot-dropdown" >
+                            <select name="time-slot-dropdown" id="time-slot-dropdown">
                                 <option value="8 am - 10 am">8 am - 10 am</option>
                                 <option value="10 am - 12 noon">10 am - 12 noon</option>
                                 <option value="12 noon -2 pm">12 noon -2 pm</option>
@@ -166,7 +161,7 @@
                         <div class="assigned-req-count-container">
                             <p>Number of Assigned requests for the requested date:</p>
                             <span id="request_count"></span>
-                            <input name="requested_date" type="text" id="requested_date" >
+                            <input name="requested_date" type="text" id="requested_date">
                         </div>
 
                         <div class="assigned-map-container">
@@ -252,7 +247,7 @@
                 initLocationPop();
             }
 
-          
+
 
             function initMapAssigned() {
 
@@ -266,22 +261,22 @@
                     zoom: 9
                 });
             }
-            
+
             // var timeSlot = document.getElementById('time-slot-dropdown');
             // var selectedTimeSlot = timeSlot.value;
             // console.log(selectedTimeSlot);
-          
-          
 
-           // console.log('Selected value:', selectedTimeSlot);
+
+
+            // console.log('Selected value:', selectedTimeSlot);
             var selectedCollectorId = 0;
             var requestCount = document.getElementById('request_count');
             requestCount.innerHTML = 0;
             var map1;
             var markers = [];
-            
 
-            function updateAssignedReqContent(collectorId, requestDate, requestTime, requestLat, requestLongi){
+
+            function updateAssignedReqContent(collectorId, requestDate, requestTime, requestLat, requestLongi) {
                 var request = <?php echo json_encode($data['assigned_requests']); ?>;
                 var count = 0;
 
@@ -291,34 +286,41 @@
                 clearMarkers();
 
                 var greenmarker = new google.maps.Marker({
-                                    position: {lat: parseFloat(requestLat), lng: parseFloat(requestLongi)},
-                                    map: map1,
-                                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-                                    title: 'Request ' + requestId
-                                });
+                    position: {
+                        lat: parseFloat(requestLat),
+                        lng: parseFloat(requestLongi)
+                    },
+                    map: map1,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                    title: 'Request ' + requestId
+                });
                 markers.push(greenmarker);
 
-                if(requestTime == 'all'){
+                if (requestTime == 'all') {
                     for (let req_id in request) {
                         if (request.hasOwnProperty(req_id)) {
-                            
+
                             if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate) {
-                                
+
                                 count++;
                                 console.log(request[req_id].lat, request[req_id].longi);
                                 // Create a marker for each record and add it to the map
                                 var marker = new google.maps.Marker({
-                                    position: {lat: parseFloat(request[req_id].lat), lng: parseFloat(request[req_id].longi)},
+                                    position: {
+                                        lat: parseFloat(request[req_id].lat),
+                                        lng: parseFloat(request[req_id].longi)
+                                    },
                                     map: map1,
                                     icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
                                     title: 'Request ' + request[req_id].req_id
                                 });
                                 markers.push(marker);
-                                
+
 
                                 // Optionally, add info window to display additional information
                                 var infoWindow = new google.maps.InfoWindow({
-                                    content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' + request[req_id].customer_name 
+                                    content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' +
+                                        request[req_id].customer_name
                                 });
 
                                 marker.addListener('click', function() {
@@ -331,27 +333,32 @@
                     //console.log(markers);
                     requestCount.innerHTML = count;
 
-                }else{
+                } else {
                     for (let req_id in request) {
                         if (request.hasOwnProperty(req_id)) {
-                            
-                            if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate && request[req_id].time == requestTime) {
-                                
+
+                            if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate &&
+                                request[req_id].time == requestTime) {
+
                                 count++;
                                 console.log(request[req_id].lat, request[req_id].longi);
                                 // Create a marker for each record and add it to the map
                                 var marker = new google.maps.Marker({
-                                    position: {lat: parseFloat(request[req_id].lat), lng: parseFloat(request[req_id].longi)},
+                                    position: {
+                                        lat: parseFloat(request[req_id].lat),
+                                        lng: parseFloat(request[req_id].longi)
+                                    },
                                     map: map1,
                                     icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
                                     title: 'Request ' + request[req_id].req_id
                                 });
                                 markers.push(marker);
-                                
+
 
                                 // Optionally, add info window to display additional information
                                 var infoWindow = new google.maps.InfoWindow({
-                                    content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' + request[req_id].customer_name 
+                                    content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' +
+                                        request[req_id].customer_name
                                 });
 
                                 marker.addListener('click', function() {
@@ -363,15 +370,15 @@
                     }
                     //console.log(markers);
                     requestCount.innerHTML = count;
-                    
+
 
                 }
 
                 // for (let req_id in request) {
                 //     if (request.hasOwnProperty(req_id)) {
-                        
+
                 //         if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate) {
-                            
+
                 //             count++;
                 //             console.log(request[req_id].lat, request[req_id].longi);
                 //             // Create a marker for each record and add it to the map
@@ -381,7 +388,7 @@
                 //                 title: 'Request ' + request[req_id].req_id
                 //             });
                 //             markers.push(marker);
-                            
+
 
                 //             // Optionally, add info window to display additional information
                 //             var infoWindow = new google.maps.InfoWindow({
@@ -498,11 +505,14 @@
                 clearMarkers();
 
                 var greenmarker = new google.maps.Marker({
-                                    position: {lat: parseFloat(requestLat), lng: parseFloat(requestLongi)},
-                                    map: map1,
-                                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-                                    title: 'Request ' +  id
-                                });
+                    position: {
+                        lat: parseFloat(requestLat),
+                        lng: parseFloat(requestLongi)
+                    },
+                    map: map1,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                    title: 'Request ' + id
+                });
                 markers.push(greenmarker);
 
                 var assign_popup = document.getElementById('View');
@@ -516,8 +526,6 @@
 
                 var selectedTimeSlot = '';
                 const assignButtons = document.querySelectorAll('.assign-button');
-              
-
 
                 assignButtons.forEach(function(button) {
                     button.addEventListener('click', function() {
@@ -537,7 +545,7 @@
                             console.log('selected time slot', selectedTimeSlot);
                         }
 
-                        
+
                     });
                 });
 
@@ -547,13 +555,14 @@
                         selectedCollectorId = this.getAttribute('data-id');
                         selected_collector_id.value = selectedCollectorId;
 
-                        var requestDate= document.getElementById('requested_date').value;
+                        var requestDate = document.getElementById('requested_date').value;
                         var requestLat = document.getElementById('request_lat').value;
                         var requestLongi = document.getElementById('request_longi').value;
 
-                        updateAssignedReqContent(selectedCollectorId, requestDate, selectedTimeSlot, requestLat, requestLongi);
+                        updateAssignedReqContent(selectedCollectorId, requestDate,
+                            selectedTimeSlot, requestLat, requestLongi);
                         //updateAssignedReqContent(selectedCollectorId, requestDate, requestTime);
-                        
+
 
                     });
                 });
@@ -570,11 +579,12 @@
                     var requestLat = document.getElementById('request_lat').value;
                     var requestLongi = document.getElementById('request_longi').value;
 
-                    updateAssignedReqContent(selectedCollectorId, requestDate, selectedTimeSlot, requestLat, requestLongi);
-                
+                    updateAssignedReqContent(selectedCollectorId, requestDate, selectedTimeSlot,
+                        requestLat, requestLongi);
+
                 });
 
-                
+
 
 
             });
@@ -623,7 +633,7 @@
                     lng: <?php echo $data['longitude'] ?>
                 };
 
-                 // Add a circle to the first map
+                // Add a circle to the first map
                 var circle2 = new google.maps.Circle({
                     map: map,
                     center: defaultLatLng,
@@ -801,8 +811,6 @@
 
             }
 
-           
-
 
             document.addEventListener("DOMContentLoaded", function() {
 
@@ -886,10 +894,6 @@
                     }
                 });
             });
-
-
-
-            document.getElementById('searchInput').addEventListener('input', searchTable);
             </script>
 
         </div>

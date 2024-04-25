@@ -57,7 +57,8 @@
         align-items: center;
         justify-content: center;
         width: 35%;
-        position: relative;
+        position: relative;        visibility: hidden;
+
     }
 
     .main-right-top-search i {

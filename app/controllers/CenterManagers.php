@@ -971,14 +971,14 @@
   public function request_incomming(){
     $collectors1 = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
     $collectors = $this->collectorModel->get_collectors_by_center_id_no_assign($_SESSION['center_id']);
-
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
     $jsonData = json_encode($incoming_requests);
     $assigned_requests = $this->Request_Model->get_assigned_request_by_center($center->region);
     $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
-
     $assigned_requests_count = [];
+    $result=$this->Request_Model->cancelling_auto();
+
     foreach ($collectors as $collector) {
 
         $assigned_requests_count[$collector->id] = $this->Request_Model->get_assigned_requests_count_by_collector_for_day($collector->id);
@@ -1113,7 +1113,8 @@
   }
 
   public function request_assigned(){
-    
+    $result=$this->Request_Model->cancelling_auto();
+
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $assined_requests=$this->Request_Model->get_assigned_request_by_center($center->region);
     $jsonData = json_encode($assined_requests);

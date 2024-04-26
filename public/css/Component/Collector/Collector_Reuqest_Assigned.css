@@ -20,6 +20,7 @@
   }
 
   .table-header {
+    background-color: var(--table-header);
     grid-template-columns: 13% 14% 14% 20% 13% 13% 13%;
   }
 
@@ -816,6 +817,7 @@
       }
 
     }
+  }
 
     @media screen and (max-width: 1118px) {
       .table td {
@@ -1225,15 +1227,15 @@
       }
 
 
-  .table-row {
-      grid-template-columns: 11% 12% 14% 11% 11% 11% 14%;
-  }
-  .main-right-top-profile{
-    margin-right: 100px;
-  }
+      .table-row {
+          grid-template-columns: 11% 12% 14% 11% 11% 11% 14%;
+      }
+      .main-right-top-profile{
+        margin-right: 100px;
+      }
 
 
-}
+    }
 
     @media screen and (max-width:650px) {
 
@@ -1260,8 +1262,6 @@
 
 
 
-
-  }
 
 
 

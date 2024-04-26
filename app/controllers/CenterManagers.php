@@ -124,7 +124,7 @@
           'nic' => trim($_POST['nic']),
           'dob'=>trim($_POST['dob']),
           'contact_no'=>trim($_POST['contact_no']),
-          'profile_name'=>trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+          'profile_name'=>'profile.png',
           'address' =>trim($_POST['address']),
           'email'=>trim($_POST['email']),
           'vehicle_no'=>trim($_POST['vehicle_no']),
@@ -170,7 +170,14 @@
         //validate DOB
         if(empty($data['dob'])){
           $data['dob_err'] = 'Please enter dob';
-        }
+      } else {
+          $min_birthdate = date('Y-m-d', strtotime('-18 years'));
+      
+          if($data['dob'] > $min_birthdate) {
+              $data['dob_err'] = 'You must be at least 18 years old.';
+          }
+      }
+      
 
         //validate contact number
         if(empty($data['contact_no'])){
@@ -238,22 +245,8 @@
           }
         }
 
-        if(empty($data['name_err']) && empty($data['nic_err']) && empty($data['dob_err']) && empty($data['contactNo_err'])&& empty($data['address_err']) && empty($data['email_err']) && empty($data['vehicleNo_err']) && empty($data['vehicleType_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
-          if ($_FILES['profile_image']['error'] == 4) {
-            $data['profile_err'] = 'Upload a image';
-        } else {
-            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_name'], '/img/img_upload/collector/')) {
-              $data['profile_err'] = '';
-  
-            } else {
-              
-                $data['profile_err'] = 'Error uploading the profile image';
-            }
-        }
-        }
 
-
-        if(empty($data['name_err']) && empty($data['nic_err']) && empty($data['dob_err']) && empty($data['contactNo_err'])&& empty($data['address_err']) && empty($data['email_err']) && empty($data['vehicleNo_err']) && empty($data['vehicleType_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['profile_err'])){
+        if(empty($data['name_err']) && empty($data['nic_err']) && empty($data['dob_err']) && empty($data['contactNo_err'])&& empty($data['address_err']) && empty($data['email_err']) && empty($data['vehicleNo_err']) && empty($data['vehicleType_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) ){
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             $center=$this->center_model->getCenterById($_SESSION['center_id']);
             $data['center_name']=$center->region;
@@ -570,10 +563,21 @@
           $data['nic_err'] = 'NIC already exists';
         }
 
-        //validate DOB
-        if(empty($data['dob'])){
-          $data['dob_err'] = 'Please enter dob';
-        }
+          // Validate date of birth
+        if(empty($data['dob'])) {
+          $data['dob_err'] = 'Please enter your date of birth.';
+        } else {
+          // Calculate age
+            $dob = new DateTime($data['dob']);
+            $now = new DateTime();
+            $age = $now->diff($dob)->y;
+
+            // Check if age is less than 18
+            if($age < 18) {
+              $data['dob_err'] = 'You must be at least 18 years old.';
+             }
+}
+
 
         // Validate Contact no
         if(empty($data['contact_no'])){

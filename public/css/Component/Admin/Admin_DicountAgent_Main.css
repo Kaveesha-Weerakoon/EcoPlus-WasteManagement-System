@@ -395,6 +395,7 @@
         display: none;
     }
 
+
     @media screen and (max-width: 918px) {
         .main-right-bottom {
             overflow-y: scroll;

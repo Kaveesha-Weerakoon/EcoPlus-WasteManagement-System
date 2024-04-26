@@ -294,7 +294,6 @@
               'success'=>$success
           ];
           
-          die($data['success']);
 
           if (empty($data['center'])) {
             $data['center_err'] = 'Please enter branch name';

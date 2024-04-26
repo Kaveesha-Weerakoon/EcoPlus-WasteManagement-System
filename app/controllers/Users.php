@@ -35,7 +35,7 @@
             'city'=>trim($_POST['city']),
             'password_reg' => trim($_POST['password_reg']),
             'confirm_password' => trim($_POST['confirm_password']),
-            'profile_image_name' => trim($_POST['email_reg']).'_'.$_FILES['profile_image']['name'],
+            'profile_image_name' => 'Profile.png',
             'centers'=>$jsonData,
             'centers2'=>$centers ,
             'name_err' => '',
@@ -56,17 +56,6 @@
 
           ];
 
-          if ($_FILES['profile_image']['error'] == 4) {
-            $data['profile_image_name'] ='Profile.png';
-
-        } else {
-            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/customer/')) {
-              $data['profile_err'] = '';
-  
-            } else {
-                $data['profile_err'] = 'Error uploading the profile image';
-            }
-        }
   
            // Validate Email
            if(empty($data['email_reg'])){
@@ -345,10 +334,15 @@
               }
 
              else if($loggedInUser->role=="discountagent"){
-                $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($loggedInUser->id);
-
-                $this->createDiscountAgentSession($loggedInUser);
-                $_SESSION['agent_profile'] = $agent_by_id->image;
+                $agent_by_id = $this->discount_agentModel->getDiscountAgentByID2($loggedInUser->id);
+                if($agent_by_id->disable==True){
+                  $data['email_err'] = 'You are Blocked';
+                  $this->view('users/login', $data);
+                }
+                else{
+                  $this->createDiscountAgentSession($loggedInUser);
+                  $_SESSION['agent_profile'] = $agent_by_id->image;
+                }
               }
               
             } else {

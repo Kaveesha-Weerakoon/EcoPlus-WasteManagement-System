@@ -306,7 +306,7 @@
                 }
                 else{
                   if($customer->image==''){
-                    $_SESSION['customer_profile'] = "Profile.png";
+                    $_SESSION['customer_profile'] = "profile.png";
                   }
                   else{
                     $_SESSION['customer_profile'] = $customer->image;

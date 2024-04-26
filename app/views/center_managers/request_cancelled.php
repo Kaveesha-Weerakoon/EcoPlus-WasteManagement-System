@@ -17,12 +17,12 @@
                                 <tr class="table-header">
                                     <th>Req ID</th>
                                     <th>Date</th>
-                                    <th>Time</th>    
+                                    <th>Time</th>
                                     <th>Cancelled By</th>
                                     <th>Reason</th>
                                     <th>Location</th>
                                     <th>Request Details</th>
-                                    
+
                                 </tr>
                             </table>
                         </div>
@@ -32,31 +32,35 @@
                                 <tr class="table-row" id="table-row">
                                     <td>R<?php echo $request->req_id?></td>
                                     <td><?php  echo $request->date?></td>
-                                    <td><?php  echo $request->time?></td>               
-                                    <td><?php  if ($request->cancelled_by === 'Me') {
-                                  echo 'Customer';
-                                } else {
-                                  if (empty($request->collector_id)){
-                                    echo $request->cancelled_by;
-                                  }
-                                  else{
-                                    echo 'Collector '.$request->collector_id;
-                                  }
-                                }?>
-                                    </td>
+                                    <td><?php  echo $request->time?></td>
+                                    <td><?php  
+                                             if ($request->cancelled_by === 'Me') {
+                                                    echo 'Customer';
+                                                } else {
+                                             if ($request->cancelled_by === 'System') {
+                                                    echo 'System';
+                                            } else {
+                                            if (empty($request->collector_id)){
+                                                     echo $request->cancelled_by;
+                                                    } else {
+                                            echo 'Collector '.$request->collector_id;
+                                             }
+                                              }
+                                             }
+                                    ?></td>
+
                                     <td><?php  echo $request->reason?></td>
                                     <td>
                                         <i class='bx bx-map' style="font-size: 29px;"
-                                        onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
+                                            onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
 
                                     </td>
                                     <td>
                                         <i class='bx bx-info-circle' style="font-size: 29px"
-                                        onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"
-                                        ></i>
+                                            onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
 
                                     </td>
-                                    
+
 
                                 </tr>
                                 <?php endforeach; ?>
@@ -107,7 +111,7 @@
                                 <span>Contact No</span><br>
                                 <span>Cancelled Time</span><br>
                                 <span>Instructions</span><br>
-                                
+
                             </div>
                             <div class="request-details-right-values">
                                 <span id="req_id2"></span><br>
@@ -129,10 +133,10 @@
 <script>
 /* Notification View */
 document.getElementById('submit-notification').onclick = function() {
-        var form = document.getElementById('mark_as_read');
-        var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/request_cancelled";
-        form.action = dynamicUrl; // Set the action URL
-        form.submit(); // Submit the form
+    var form = document.getElementById('mark_as_read');
+    var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/request_cancelled";
+    form.action = dynamicUrl; // Set the action URL
+    form.submit(); // Submit the form
 
 };
 /* ----------------- */
@@ -218,9 +222,10 @@ function searchTable() {
         var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
         var cancelled_by = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
         var reason = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
-       
 
-        if (time.includes(input) || id.includes(input) || date.includes(input) || cancelled_by.includes(input) || reason.includes(input)) {
+
+        if (time.includes(input) || id.includes(input) || date.includes(input) || cancelled_by.includes(
+                input) || reason.includes(input)) {
             row.style.display = '';
         } else {
             row.style.display = 'none'; // Hide the row

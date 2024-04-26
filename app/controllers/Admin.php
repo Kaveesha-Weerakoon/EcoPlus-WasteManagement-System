@@ -165,9 +165,8 @@
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $data =[
           'name' => trim($_POST['name']),
-          'profile' => $_FILES['profile_image'],
            'contact_no' => trim($_POST['contact_no']),
-          'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+          'profile_image_name' => 'Profile.png',
           'nic' => trim($_POST['nic']),
           'address' => trim($_POST['address']),
           'dob' => trim($_POST['dob']),
@@ -222,9 +221,21 @@
         }
 
         //validate DOB
-        if(empty($data['dob'])){
+       // Check if date of birth is empty
+       if(empty($data['dob'])){
           $data['dob_err'] = 'Please enter dob';
+        } else {
+         // Calculate the age from date of birth
+           $dob = new DateTime($data['dob']);
+           $now = new DateTime();
+           $age = $now->diff($dob)->y;
+
+          // Check if age is less than 18
+           if($age < 18) {
+            $data['dob_err'] = 'You must be at least 18 years old.';
+          }
         }
+
 
         // Validate Contact no
         if (empty($data['contact_no'])) {
@@ -258,25 +269,11 @@
             $data['confirm_password_err'] = 'Passwords do not match';
           }
         } 
-        if ($_FILES['profile_image']['error'] == 4) {
-          $data['profile_err'] = 'Upload a image';
-     
-        }
+       
+
+        
 
         if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err'])){
-          if ($_FILES['profile_image']['error'] == 4) {
-            $data['profile_err'] = 'Upload a image';
-        } else {
-            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/center_manager/')) {
-              $data['profile_err'] = '';
-  
-            } else {
-                $data['profile_err'] = 'Error uploading the profile image';
-            }
-        }
-        }
-
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err']) && empty($data['profile_err'])){
           // Validated
           $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
           if($this->center_managerModel->register_center_manager($data)){
@@ -491,7 +488,7 @@
         
         $this->view('admin/customer_main', $data);
 
-      }}
+    }}
     
      
 
@@ -948,9 +945,8 @@
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $data =[
           'name' => trim($_POST['name']),
-          'profile' => $_FILES['profile_image'],
           'contact_no' => trim($_POST['contact_no']),
-          'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+          'profile_image_name' => 'profile.png',
           'address' => trim($_POST['address']),
           'email' => trim($_POST['email']),
           'password' => trim($_POST['password']),
@@ -1024,25 +1020,9 @@
             $data['confirm_password_err'] = 'Passwords do not match';
           }
         } 
-        if ($_FILES['profile_image']['error'] == 4) {
-          $data['profile_err'] = 'Upload a image';
-     
-        }
+      
   
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['address_err'])){
-          if ($_FILES['profile_image']['error'] == 4) {
-            $data['profile_err'] = 'Upload a image';
-        } else {
-            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/credit_discount_agent/')) {
-              $data['profile_err'] = '';
-  
-            } else {
-                $data['profile_err'] = 'Error uploading the profile image';
-            }
-        }
-        }
-  
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['address_err']) && empty($data['profile_err'])){
+        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['address_err']) ){
           // Validated
           $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
           if($this->discount_agentModel->register_discount_agent($data)){
@@ -1131,6 +1111,17 @@
       ];
     
       header("Location: " . URLROOT . "/admin/discount_agents/True");        
+    }   
+    
+    public function discount_agent_block($id){
+      $this->discount_agentModel->block($id);
+      header("Location: " . URLROOT . "/admin/discount_agents");        
+    }
+    
+    public function discount_agent_unblockuser($id){
+
+      $this->discount_agentModel->unblock($id);
+      header("Location: " . URLROOT . "/admin/discount_agents");        
     }
 
     public function get_collector_assistants($collector_id){

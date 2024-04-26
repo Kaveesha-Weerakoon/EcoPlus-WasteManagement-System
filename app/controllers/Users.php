@@ -35,7 +35,7 @@
             'city'=>trim($_POST['city']),
             'password_reg' => trim($_POST['password_reg']),
             'confirm_password' => trim($_POST['confirm_password']),
-            'profile_image_name' => trim($_POST['email_reg']).'_'.$_FILES['profile_image']['name'],
+            'profile_image_name' => 'Profile.png',
             'centers'=>$jsonData,
             'centers2'=>$centers ,
             'name_err' => '',
@@ -56,17 +56,6 @@
 
           ];
 
-          if ($_FILES['profile_image']['error'] == 4) {
-            $data['profile_image_name'] ='Profile.png';
-
-        } else {
-            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/customer/')) {
-              $data['profile_err'] = '';
-  
-            } else {
-                $data['profile_err'] = 'Error uploading the profile image';
-            }
-        }
   
            // Validate Email
            if(empty($data['email_reg'])){
@@ -306,7 +295,7 @@
                 }
                 else{
                   if($customer->image==''){
-                    $_SESSION['customer_profile'] = "Profile.png";
+                    $_SESSION['customer_profile'] = "profile.png";
                   }
                   else{
                     $_SESSION['customer_profile'] = $customer->image;
@@ -318,10 +307,17 @@
               
               else if($loggedInUser->role=="collector"){
                 $collector = $this->collectorModel->getCollectorById($loggedInUser->id);
-                $_SESSION['center_id'] = $collector->center_id;
-                $_SESSION['center'] = $collector->center_name;
-                $_SESSION['collector_profile'] = $collector->image;
-                $this->createCollectorSession($loggedInUser);
+
+                if($collector->disable==TRUE){
+                  $data['email_err'] = 'Your Account has been Blocked ';
+                  $this->view('users/login', $data);
+                }else{
+                  $_SESSION['center_id'] = $collector->center_id;
+                  $_SESSION['center'] = $collector->center_name;
+                  $_SESSION['collector_profile'] = $collector->image;
+                  $this->createCollectorSession($loggedInUser);
+                }
+             
               }
               else if($loggedInUser->role=="centermanager"){
                 $center_manager = $this->center_managerModel->getCenterManagerByID($loggedInUser->id);
@@ -345,10 +341,15 @@
               }
 
              else if($loggedInUser->role=="discountagent"){
-                $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($loggedInUser->id);
-
-                $this->createDiscountAgentSession($loggedInUser);
-                $_SESSION['agent_profile'] = $agent_by_id->image;
+                $agent_by_id = $this->discount_agentModel->getDiscountAgentByID2($loggedInUser->id);
+                if($agent_by_id->disable==True){
+                  $data['email_err'] = 'You are Blocked';
+                  $this->view('users/login', $data);
+                }
+                else{
+                  $this->createDiscountAgentSession($loggedInUser);
+                  $_SESSION['agent_profile'] = $agent_by_id->image;
+                }
               }
               
             } else {

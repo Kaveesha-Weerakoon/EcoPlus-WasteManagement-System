@@ -357,7 +357,7 @@ function initMap() {
     };
     var map = new google.maps.Map(document.getElementById('map'), {
         center: center,
-        zoom: 6.5,
+        zoom: 6.2,
         styles: [{
                 featureType: 'all',
                 elementType: 'labels.text',

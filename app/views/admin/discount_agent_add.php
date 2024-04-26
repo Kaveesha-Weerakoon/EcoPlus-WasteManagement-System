@@ -42,34 +42,8 @@
                             </div>
                             <div class="main-bottom-down-content-bottom">
                                 <div class="main-bottom-down-content-bottom-one">
-                                    <div class="main-bottom-down-content-bottom-one-left">
-                                        <div class="form-drag-area">
-                                            <div class="icon">
-                                                <img src="<?php echo IMGROOT;?>/img_upload/placeholder.png"
-                                                    alt="PLACEHOLDER" width="90px" heigh="90px"
-                                                    id="profile_image_placeholder">
-                                            </div>
-                                            <div class="right-content">
-                                                <div class="description">
-                                                    Drap & Drop to Upload File
-                                                </div>
-                                                <div class="form-upload">
-                                                    <input type="file" name="profile_image" id="profile_image"
-                                                        placeholder="select a profile image">
-                                                </div>
-                                                <div class="form-validation">
-                                                    <div class="profile-image-validation">
-                                                        <img src="<?php echo IMGROOT?>/checked.png" alt="green_tik"
-                                                            width="20px" height="20px">
-                                                        <p style="color: #e74c3c;"><?php 
-                                                                echo $data['profile_err'];                                                                                          
-                                                        ?></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="main-bottom-down-content-bottom-one-right">
+
+                                    <div class="main-bottom-down-content-bottom-one-right name">
                                         <div class="form-fields">
                                             <h2>Name</h2>
                                             <input type="text" placeholder="Enter Name" name="name"

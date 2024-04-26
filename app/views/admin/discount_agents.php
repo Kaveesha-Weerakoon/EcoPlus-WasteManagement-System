@@ -44,7 +44,7 @@
                                     <th>Profile</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Delete</th>
+                                    <th>Action</th>
                                 </tr>
                             </table>
                         </div>
@@ -59,8 +59,14 @@
                                             alt="" class="manager_img"></td>
                                     <td><?php echo $discount_agent->name?></td>
                                     <td><?php echo $discount_agent->email?></td>
-                                    <td onclick=" opendelete(<?php echo $discount_agent->user_id?>)"
-                                        class="cancel-open"><img src="<?php echo IMGROOT?>/delete.png" alt=""></td>
+                                    <td>
+                                        <?php if ($discount_agent->disable) : ?>
+                                        <i class="fa-solid fa-unlock" style="font-size: 20px;"
+                                            onclick="un_block_user('<?php echo $discount_agent->user_id; ?>')"></i>
+                                        <?php else : ?>
+                                        <i class="fa-solid fa-user-lock" style="font-size: 20px;"
+                                            onclick="block_user('<?php echo $discount_agent->user_id; ?>')"></i>
+                                        <?php endif; ?>
                                 </tr>
                                 <?php endforeach; ?>
                             </table>
@@ -70,93 +76,95 @@
                 </div>
             </div>
         </div>
-
-        <div class="overlay" id="overlay">
-
-        </div>
-        <div class="delete_confirm" id="delete_confirm">
+        <div class="delete_confirm2" id="cancel_confirm">
             <div class="popup" id="popup">
-                <img src="<?php echo IMGROOT?>/trash.png" alt="">
-                <?php
-                                echo "<h2>Delete this Credit Discount Agent?</h2>";
-                                echo "<p>This action will permanently delete this Discount Agent</p>";
-                               
-                            ?>
+                <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
+                <h2>Block the User?</h2>
+                <p>This action will Block the user </p>
                 <div class="btns">
-                    <button type="button" class="deletebtn" id="deletebtn">Delete</button>
-                    <button type="button" class="cancelbtn" id="delete-close">Cancel</button>
+                    <a id="cancelLink"><button type="button" class="deletebtn">Block</button></a>
+                    <a id="close_cancel"><button type="button" class="cancelbtn">Cancel</button></a>
                 </div>
             </div>
         </div>
-        <?php if($data['success']=='True') : ?>
-        <div class="center_manager_success">
+        <div class="delete_confirm2" id="cancel_confirm2">
             <div class="popup" id="popup">
-                <img src="<?php echo IMGROOT?>/check.png" alt="">
-                <h2>Success!!</h2>
-                <p>Discount Agents has been deleted successfully</p>
-                <a href="<?php echo URLROOT?>/admin/discount_agents"><button type="button">OK</button></a>
+                <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
+                <h2>UnBlock the User?</h2>
+                <p>This action will UnBlock the user </p>
+                <div class="btns">
+                    <a id="unblockLink"><button type="button" class="deletebtn">UnBlock</button></a>
+                    <a id="close_unblock"><button type="button" class="cancelbtn">Cancel</button></a>
+                </div>
             </div>
         </div>
-        <?php endif; ?>
+        <div class="overlay" id="overlay">
 
-
-
-
-
-
+        </div>
+        >
     </div>
-</div>
-<script>
-function locate(url) {
-    console.log(url)
-    window.location.href = "<?php echo URLROOT?>/admin/discount_agent_view/" + url;
-}
+    <script>
+    console.log('hello');
 
-function opendelete(id) {
-    var baseURL = '<?php echo URLROOT; ?>/admin/discount_agent_delete/';
+    function locate(url) {
+        console.log(url)
+        window.location.href = "<?php echo URLROOT?>/admin/discount_agent_view/" + url;
+    }
 
-    var deleteURL = baseURL + id;
 
-    var deletePop = document.getElementById('delete_confirm');
-    deletePop.classList.add('active');
-    document.getElementById('overlay').style.display = "flex";
 
-    var deleteButton = document.getElementById('deletebtn');
-    deleteButton.onclick = function() {
-        window.location.href = deleteURL;
-    };
+    function searchTable() {
+        var input = document.getElementById('searchInput').value.toLowerCase();
+        var rows = document.querySelectorAll('.table-row');
+        rows.forEach(function(row) {
+            var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+            var status = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+            var status1 = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
 
-}
+            if (id.includes(input) || status.includes(input) || status1.includes(input)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
+        });
 
-function searchTable() {
-    var input = document.getElementById('searchInput').value.toLowerCase();
-    var rows = document.querySelectorAll('.table-row');
-    rows.forEach(function(row) {
-        var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
-        var status = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-        var status1 = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+    }
 
-        if (id.includes(input) || status.includes(input) || status1.includes(input)) {
-            row.style.display = '';
-        } else {
-            row.style.display = 'none'; // Hide the row
-        }
+    document.getElementById('searchInput').addEventListener('input', searchTable);
+
+    function block_user(id) {
+        var userId = id;
+        var newURL = "<?php echo URLROOT?>/admin/discount_agent_block/" + userId;
+        document.getElementById('cancelLink').href = newURL;
+        document.getElementById('overlay').style.display = "flex";
+        document.getElementById('cancel_confirm').classList.add('active');
+    }
+
+    function un_block_user(id) {
+
+        var userId = id;
+        var newURL = "<?php echo URLROOT?>/admin/discount_agent_unblockuser/" + userId;
+        document.getElementById('unblockLink').href = newURL;
+        document.getElementById('overlay').style.display = "flex";
+        document.getElementById('cancel_confirm2').classList.add('active');
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+        const close_cancel = document.getElementById("close_cancel");
+        const close_unblock = document.getElementById("close_unblock");
+
+        close_cancel.addEventListener("click", function() {
+            document.getElementById('cancel_confirm').classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
+        });
+
+
+        close_unblock.addEventListener("click", function() {
+            document.getElementById('cancel_confirm2').classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
+        });
+
     });
-
-}
-
-document.getElementById('searchInput').addEventListener('input', searchTable);
-
-document.addEventListener('DOMContentLoaded', function() {
-
-    var close_delete = document.getElementById('delete-close');
-
-    close_delete.addEventListener('click', function() {
-        var deletePop = document.getElementById('delete_confirm');
-        deletePop.classList.remove('active');
-        document.getElementById('overlay').style.display = "none";
-
-    });
-});
-</script>
-<?php require APPROOT . '/views/inc/footer.php'; ?>
+    </script>
+    <?php require APPROOT . '/views/inc/footer.php'; ?>

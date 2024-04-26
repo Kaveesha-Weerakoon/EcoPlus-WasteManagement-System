@@ -530,7 +530,8 @@
     
        $this->view('customers/edit_profile', $data);
        }
-     else{
+    
+       else{
       $data = [
         'name'=>'',
         'userid'=>'',

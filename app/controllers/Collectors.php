@@ -317,6 +317,7 @@
     }
     
     public function collector_assistants_delete($assisId){
+      $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
       $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
       $data = [
         'collector_assistants' => $collector_assistants,

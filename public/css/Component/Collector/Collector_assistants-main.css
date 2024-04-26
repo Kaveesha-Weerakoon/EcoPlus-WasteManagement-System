@@ -254,8 +254,11 @@
         font-size: 23px;
         font-weight: 600;
         margin: 10px 0 10px;
+        color:var(--main-text-color)
     }
-
+    .popup p {
+        color:var(--main-text-color)
+    }
     .btns {
         display: flex;
         flex-direction: row;
@@ -353,7 +356,7 @@
 
     .popup {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         text-align: center;
@@ -854,7 +857,9 @@
             margin-left: 20px;
         }
 
-        
+        .popup1 {
+            width: 300px;
+        }
 
       
     }
@@ -911,7 +916,7 @@
             width: 110px;
         }
 
-        .popup{
+        .popup1{
             width: 300px;
         }
        

@@ -307,10 +307,17 @@
               
               else if($loggedInUser->role=="collector"){
                 $collector = $this->collectorModel->getCollectorById($loggedInUser->id);
-                $_SESSION['center_id'] = $collector->center_id;
-                $_SESSION['center'] = $collector->center_name;
-                $_SESSION['collector_profile'] = $collector->image;
-                $this->createCollectorSession($loggedInUser);
+
+                if($collector->disable==TRUE){
+                  $data['email_err'] = 'Your Account has been Blocked ';
+                  $this->view('users/login', $data);
+                }else{
+                  $_SESSION['center_id'] = $collector->center_id;
+                  $_SESSION['center'] = $collector->center_name;
+                  $_SESSION['collector_profile'] = $collector->image;
+                  $this->createCollectorSession($loggedInUser);
+                }
+             
               }
               else if($loggedInUser->role=="centermanager"){
                 $center_manager = $this->center_managerModel->getCenterManagerByID($loggedInUser->id);

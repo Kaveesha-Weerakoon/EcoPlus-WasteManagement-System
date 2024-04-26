@@ -1111,6 +1111,17 @@
       ];
     
       header("Location: " . URLROOT . "/admin/discount_agents/True");        
+    }   
+    
+    public function discount_agent_block($id){
+      $this->discount_agentModel->block($id);
+      header("Location: " . URLROOT . "/admin/discount_agents");        
+    }
+    
+    public function discount_agent_unblockuser($id){
+
+      $this->discount_agentModel->unblock($id);
+      header("Location: " . URLROOT . "/admin/discount_agents");        
     }
 
     public function get_collector_assistants($collector_id){

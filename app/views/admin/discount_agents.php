@@ -133,9 +133,9 @@
     document.getElementById('searchInput').addEventListener('input', searchTable);
 
     function block_user(id) {
-        // var userId = id;
-        // var newURL = "<?php echo URLROOT?>/admin/blockuser/" + userId;
-        // document.getElementById('cancelLink').href = newURL;
+        var userId = id;
+        var newURL = "<?php echo URLROOT?>/admin/discount_agent_block/" + userId;
+        document.getElementById('cancelLink').href = newURL;
         document.getElementById('overlay').style.display = "flex";
         document.getElementById('cancel_confirm').classList.add('active');
     }
@@ -143,7 +143,7 @@
     function un_block_user(id) {
 
         var userId = id;
-        var newURL = "<?php echo URLROOT?>/admin/unblockuser/" + userId;
+        var newURL = "<?php echo URLROOT?>/admin/discount_agent_unblockuser/" + userId;
         document.getElementById('unblockLink').href = newURL;
         document.getElementById('overlay').style.display = "flex";
         document.getElementById('cancel_confirm2').classList.add('active');

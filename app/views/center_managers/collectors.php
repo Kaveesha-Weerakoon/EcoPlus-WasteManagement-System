@@ -51,7 +51,7 @@
                                 <th>Personal Details</th>
                                 <th>Vehicle Details</th>
                                 <th>Update</th>
-                                <th>Delete</th>
+                                <th>Action</th>
                             </tr>
                         </table>
                     </div>
@@ -64,11 +64,6 @@
                                         alt="" class="collector_img"></td>
                                 <td><?php echo $collector->collector_name?></td>
                                 <td><?php echo $collector->email?></td>
-                                <!-- <td><a
-                                        href="<?php echo URLROOT?>/centermanagers/personal_details_view/<?php echo $collector->user_id ?>"><i
-                                            class='bx bxs-user' style="font-size: 29px;"></i>
-                                    </a></td>
-                                <td> -->
                                 <td>
                                     <i class='bx bxs-user' style="font-size: 29px;"
                                         onclick="openPersonalDetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"></i>
@@ -82,22 +77,21 @@
                                         href="<?php echo URLROOT?>/centermanagers/collectors_update/<?php echo $collector->user_id ?>"><i
                                             class='bx bx-refresh' style="font-size: 30px; font-weight:1000px;"></i>
                                     </a></td>
-                                <!-- <td class="delete"><a
-                                        href="<?php echo URLROOT?>/centermanagers/collector_delete_confirm/<?php echo $collector->user_id ?>">
-                                        <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td> -->
                                 <td>
                                     <?php
-                                        if(str_contains($collector->request_type, 'assigned')){
-                                            echo '<i class="fa-solid fa-triangle-exclamation" style="font-size: 24px; color:#DC2727;" onclick="delete_assigned_collector(\'' . $collector->user_id . '\')"></i>';
-
-                                        }else{
-                                            echo '<i class="bx bxs-trash" style="font-size: 29px; " onclick="delete_collector(\'' . $collector->user_id . '\')"></i>';
-                                        }
-                                    
-                                    
+                                                if(str_contains($collector->request_type, 'assigned')) {
+                                                    echo '<i class="fa-solid fa-triangle-exclamation" style="font-size: 24px; color:#DC2727;" onclick="delete_assigned_collector(\'' . $collector->user_id . '\')"></i>';
+                                                } else {
+                                                if ($collector->disable) {
+                                                     echo '<i class="fa-solid fa-unlock" style="font-size: 20px;" onclick="un_block_user(\'' . $collector->user_id . '\')"></i>';
+                                                } else {
+                                                     echo '<i class="fa-solid fa-user-lock" style="font-size: 20px;" onclick="block_user(\'' . $collector->user_id . '\')"></i>';
+                                                  }
+                                            }
                                     ?>
+
                                 </td>
-                                
+
 
                             </tr>
                             <?php endforeach; ?>
@@ -214,18 +208,25 @@
 
 
 
-            <div class="delete_confirm" id="delete-confirm-popup">
-                <div class="popup">
-                    <img src="<?php echo IMGROOT?>/trash.png" alt="">
-                    <span class="Collector" id="collector_assigned2"></span>
-                    <h2>Delete this collector?</h2>
-                    <p>This action will permanently delete this collector</p>
+            <div class="delete_confirm2" id="cancel_confirm">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
+                    <h2>Block the User?</h2>
+                    <p>This action will Block the user </p>
                     <div class="btns">
-
-                        <button type="button" class="deletebtn" onclick="delete_collector_confirm()">Delete</button>
-
-                        <button type="button" class="cancelbtn" id="close-delete-confirm">Cancel</button>
-
+                        <a id="cancelLink"><button type="button" class="deletebtn">Block</button></a>
+                        <a id="close_cancel"><button type="button" class="cancelbtn">Cancel</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="delete_confirm2" id="cancel_confirm2">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
+                    <h2>UnBlock the User?</h2>
+                    <p>This action will UnBlock the user </p>
+                    <div class="btns">
+                        <a id="unblockLink"><button type="button" class="deletebtn">UnBlock</button></a>
+                        <a id="close_unblock"><button type="button" class="cancelbtn">Cancel</button></a>
                     </div>
                 </div>
             </div>
@@ -236,11 +237,11 @@
                     <h2>This action is prohibitted</h2>
                     <p>Collector <span class="Collector" id="collector_assigned"></span> has already assigned for
                         requests</p>
-                    
-                    <button class="delete_prohibitted-ok-button" id="delete_prohibitted-ok-button">OK</button>
-                        
 
-                   
+                    <button class="delete_prohibitted-ok-button" id="delete_prohibitted-ok-button">OK</button>
+
+
+
                 </div>
             </div>
 
@@ -275,10 +276,11 @@
 
 
 
-       
+
         <div class="personal-details-popup-box" id="personal-details-popup">
             <div class="personal-details-popup-form">
-                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close" id="personal-details-popup-form-close">
+                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
+                    id="personal-details-popup-form-close">
                 <center>
                     <div class="personal-details-topic">Personal Details</div>
                 </center>
@@ -312,7 +314,7 @@
 
         </div>
 
-       
+
 
 
         <div class="vehicle-details-popup-box" id="vehicle-details-popup-box">
@@ -354,7 +356,6 @@ document.getElementById('submit-notification').onclick = function() {
 
 };
 
-
 function searchTable() {
     var input = document.getElementById('searchInput').value.toLowerCase();
     var rows = document.querySelectorAll('.table-row');
@@ -363,7 +364,6 @@ function searchTable() {
         var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
         var name = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
         var email = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
-       
 
         if (id.includes(input) || name.includes(input) || email.includes(input)) {
             row.style.display = '';
@@ -371,18 +371,15 @@ function searchTable() {
             row.style.display = 'none'; // Hide the row
         }
     });
-
 }
 
 document.getElementById('searchInput').addEventListener('input', searchTable);
 
 function openvehicledetails(collector) {
-
     var locationPop = document.getElementById('vehicle-details-popup-box');
     locationPop.classList.add('active');
     document.getElementById('overlay').style.display = "flex";
 
-    // document.getElementById('vehicle-details-popup-box').style.display = "flex";
     document.getElementById('vehicle_collector_id').textContent = collector.user_id;
     document.getElementById('vehicle_collector_name').textContent = collector.collector_name;
     document.getElementById('vehicle_collector_no').textContent = collector.vehicle_no;
@@ -390,12 +387,10 @@ function openvehicledetails(collector) {
 }
 
 function openPersonalDetails(collector) {
-    
     var personalPop = document.getElementById('personal-details-popup');
     personalPop.classList.add('active');
     document.getElementById('overlay').style.display = "flex";
 
-    // document.getElementById('vehicle-details-popup-box').style.display = "flex";
     document.getElementById('col_id').textContent = collector.user_id;
     document.getElementById('col_profile_img').src = '<?php echo IMGROOT ?>/img_upload/collector/' + collector.image;
     document.getElementById('col_name').textContent = collector.collector_name;
@@ -407,46 +402,32 @@ function openPersonalDetails(collector) {
 }
 
 function delete_assigned_collector(collector_id) {
-    
-
     var collector_assigned = document.getElementById('collector_assigned');
     collector_assigned.textContent = collector_id;
 
     var delProhibittedPopup = document.getElementById('delete-prohibitted-popup');
     delProhibittedPopup.classList.add('active');
     document.getElementById('overlay').style.display = "flex";
-
-   
-
-
 }
 
-function delete_collector(collector_id) {
-
-    var collector_assigned = document.getElementById('collector_assigned2');
-    collector_assigned.textContent = collector_id;
-    collector_assigned.style.display = "none";
-    
-    var delConfirmPopup = document.getElementById('delete-confirm-popup');
-    delConfirmPopup.classList.add('active');
+function block_user(id) {
+    var userId = id;
+    var newURL = "<?php echo URLROOT?>/centermanagers/collector_block/" + userId;
+    document.getElementById('cancelLink').href = newURL;
     document.getElementById('overlay').style.display = "flex";
-
+    document.getElementById('cancel_confirm').classList.add('active');
 }
 
-function delete_collector_confirm(){
-   
-    var collector_to_be_deleted = document.getElementById('collector_assigned2').textContent;
-    console.log('del', collector_to_be_deleted);
-
-    var linkUrl = "<?php echo URLROOT?>/centermanagers/collector_delete/"+ collector_to_be_deleted; // Replace with your desired URL
-    window.location.href = linkUrl;
-
-
+function un_block_user(id) {
+    var userId = id;
+    var newURL = "<?php echo URLROOT?>/centermanagers/collector_unblock/" + userId;
+    document.getElementById('unblockLink').href = newURL;
+    document.getElementById('overlay').style.display = "flex";
+    document.getElementById('cancel_confirm2').classList.add('active');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     var close_vehicledetail = document.getElementById('vehicle-details-popup-form-close');
-    var close_delete_confirm = document.getElementById('close-delete-confirm');
     var close_delete_prohibitted = document.getElementById('delete_prohibitted-ok-button');
     var close_personaldetails = document.getElementById('personal-details-popup-form-close');
 
@@ -454,29 +435,33 @@ document.addEventListener('DOMContentLoaded', function() {
         var vehicle_pop = document.getElementById('vehicle-details-popup-box');
         vehicle_pop.classList.remove('active');
         document.getElementById('overlay').style.display = "none";
-        // document.getElementById('vehicle-details-popup-box').style.display = "none";
     });
 
-    close_delete_confirm.addEventListener('click', function(){
-        var delConfirmPopup = document.getElementById('delete-confirm-popup');
-        delConfirmPopup.classList.remove('active');
-        document.getElementById('overlay').style.display = "none";
-
-    });
-
-    close_delete_prohibitted.addEventListener('click', function(){
+    close_delete_prohibitted.addEventListener('click', function() {
         var delProhibittedPopup = document.getElementById('delete-prohibitted-popup');
         delProhibittedPopup.classList.remove('active');
         document.getElementById('overlay').style.display = "none";
-
     });
 
-    close_personaldetails.addEventListener('click', function(){
+    close_personaldetails.addEventListener('click', function() {
         var personalPop = document.getElementById('personal-details-popup');
         personalPop.classList.remove('active');
-        document.getElementById('overlay').style.display = "none"; 
+        document.getElementById('overlay').style.display = "none";
     });
 
+    const close_cancel = document.getElementById("close_cancel");
+    const close_unblock = document.getElementById("close_unblock");
+
+    close_cancel.addEventListener("click", function() {
+        document.getElementById('cancel_confirm').classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+    });
+
+    close_unblock.addEventListener("click", function() {
+        document.getElementById('cancel_confirm2').classList.remove('active');
+        document.getElementById('overlay').style.display = "none";
+    });
 });
 </script>
+
 <?php require APPROOT . '/views/inc/footer.php'; ?>

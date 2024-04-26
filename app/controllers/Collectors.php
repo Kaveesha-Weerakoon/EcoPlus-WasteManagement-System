@@ -140,9 +140,21 @@
         }
 
         //validate DOB
-        if(empty($data['dob'])){
-          $data['dob_err'] = 'Please enter dob';
-        }
+       // Validate date of birth
+        if(empty($data['dob'])) {
+             $data['dob_err'] = 'Please enter your date of birth.';
+        } else {
+           // Calculate age
+           $dob = new DateTime($data['dob']);
+           $now = new DateTime();
+            $age = $now->diff($dob)->y;
+
+      // Check if age is less than 18
+      if($age < 18) {
+      $data['dob_err'] = 'You must be at least 18 years old.';
+      }
+      }
+
 
         // Validate Contact no
         if(empty($data['contact_no'])){
@@ -662,6 +674,7 @@
     $types=$this->garbageTypeModel->get_all();
     $collector=$this->collectorModel->get_collector( $_SESSION['collector_id'] );
     $center=$this->centerModel->getCenterById($collector->center_id);
+    $result=$this->Request_Model->cancelling_auto();
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );

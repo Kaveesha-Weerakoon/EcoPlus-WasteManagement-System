@@ -67,6 +67,33 @@
         return $results;
 
     }
+    
+    public function block($id){
+      try {
+          $this->db->query('UPDATE collectors SET disable = :value WHERE user_id = :id');
+          $this->db->bind(':value', TRUE); // You need to provide a value for ":value"
+          $this->db->bind(':id', $id);
+          $result= $this->db->execute();
+       
+          return $result;
+      } catch (PDOException $e) {
+         die($e);
+         return FALSE;
+      }
+    }  
+  
+    public function unblock($id){
+     try {
+        $this->db->query('UPDATE collectors SET disable = :value WHERE user_id = :id');
+        $this->db->bind(':value', FALSE); // You need to provide a value for ":value"
+        $this->db->bind(':id', $id);
+        $result=$this->db->execute();
+        return $result;
+     } catch (PDOException $e) {
+        return FALSE;
+     }
+    }
+
 
     public function get_collectors_bycenterid($center_id){
            $this->db->query('SELECT *,
@@ -82,6 +109,22 @@
            
             return $results;
     }
+
+    public function get_collectors_by_center_id_no_assign($center_id){
+      $this->db->query('SELECT *,
+                       collectors.id as cID,
+                       users.id as userId
+                       FROM collectors
+                       INNER JOIN users
+                       ON collectors.user_id = users.id
+                       WHERE collectors.center_id = :center_id AND collectors.disable="FALSE"');
+      $this->db->bind(':center_id', $center_id);
+  
+      $results = $this->db->resultSet();
+     
+      return $results;
+    }
+  
 
     public function get_collectors_bycenterid_with_assigned($center_id){
         try{

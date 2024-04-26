@@ -275,31 +275,31 @@ function redirect_complaints_history() {
 }
 
 
-notification.addEventListener("click", function() {
-    var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
+// notification.addEventListener("click", function() {
+//     var isNotificationEmpty = <?php echo json_encode(empty($data['notification'])); ?>;
 
-    if (!isNotificationEmpty) {
-        var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
-        if (notification_pop.style.height === "0px") {
-            if (notificationArraySize >= 3) {
-                notification_pop.style.height = "205px";
-            }
-            if (notificationArraySize == 2) {
-                notification_pop.style.height = "150px";
-            }
-            if (notificationArraySize == 1) {
-                notification_pop.style.height = "105px";
-            }
-            notification_pop.style.visibility = "visible";
-            notification_pop.style.opacity = "1";
-            notification_pop.style.padding = "7px";
-        } else {
-            notification_pop.style.height = "0px";
-            notification_pop.style.visibility = "hidden";
-            notification_pop.style.opacity = "0";
-        }
-    }
-});
+//     if (!isNotificationEmpty) {
+//         var notificationArraySize = <?php echo json_encode(count($data['notification'])); ?>;
+//         if (notification_pop.style.height === "0px") {
+//             if (notificationArraySize >= 3) {
+//                 notification_pop.style.height = "205px";
+//             }
+//             if (notificationArraySize == 2) {
+//                 notification_pop.style.height = "150px";
+//             }
+//             if (notificationArraySize == 1) {
+//                 notification_pop.style.height = "105px";
+//             }
+//             notification_pop.style.visibility = "visible";
+//             notification_pop.style.opacity = "1";
+//             notification_pop.style.padding = "7px";
+//         } else {
+//             notification_pop.style.height = "0px";
+//             notification_pop.style.visibility = "hidden";
+//             notification_pop.style.opacity = "0";
+//         }
+//     }
+// });
 
 document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('myChart').getContext('2d');

@@ -27,7 +27,7 @@
     </form>
 
 </div>
-<div class="main-right-top-profile">
+<div class="main-right-top-profile" onclick="navigateToLocation()">
     <img src="<?php echo IMGROOT?>/img_upload/customer/<?php echo $_SESSION['customer_profile']?>" alt="">
     <div class="main-right-top-profile-cont">
         <h3><?php
@@ -70,4 +70,8 @@ notification.addEventListener("click", function() {
         }
     }
 });
+
+function navigateToLocation() {
+    window.location.href = '<?php echo URLROOT?>/customers/editprofile';
+}
 </script>

@@ -174,27 +174,34 @@
       try {
           $today = date('Y-m-d'); 
           
-          $this->db->query('SELECT * FROM request_main rm LEFT JOIN request_cancelled rc ON rc.req_id=rm.req_id WHERE rm.date < :today AND (rm.type="incomming" OR rm.type="assigned")');
+          $this->db->query('SELECT rm.*,ra.*, rm.req_id AS req_id 
+          FROM request_main rm 
+          LEFT JOIN request_assigned ra ON rm.req_id = ra.req_id 
+          WHERE rm.date < :today AND (rm.type = "incoming" OR rm.type = "assigned")          
+          ');
+        
           $this->db->bind(':today', $today);
           $results = $this->db->resultSet();
        
           foreach ($results as $request) {   
-              
-              $this->db->query('UPDATE request_main SET type = :new_state WHERE req_id = :request_id');
+              $this->db->query('UPDATE request_main SET type =:new_state WHERE req_id =:request_id');
               $this->db->bind(':new_state', 'cancelled'); 
               $this->db->bind(':request_id', $request->req_id);
-              $result2 = $this->db->execute();
               
+              $result2 = $this->db->execute();
+             
               if ($result2) {
                   $this->db->query('INSERT INTO request_cancelled (req_id, cancelled_by, reason, assinged, collector_id, fine, fine_type) VALUES (:req_id, :cancelled_by, :reason, :assigned, :collector_id, :fine, :fine_type)');
-  
+                  
                   $this->db->bind(':req_id', $request->req_id);
                   $this->db->bind(':cancelled_by', "System");
                   $this->db->bind(':reason', "None");
-                  $this->db->bind(':assigned', $request->assinged);
-                  $this->db->bind(':collector_id', $request->collector_id);
+                 
+                  $this->db->bind(':assigned', isset($request->status) ? $request->status : ''); // If $request->status is null, bind an empty string
+                  $this->db->bind(':collector_id', isset($request->collector_id) ? $request->collector_id : 0); // If $request->collector_id is null, bind 0                  
                   $this->db->bind(':fine', '0');
                   $this->db->bind(':fine_type', "None");
+             
                   $insertResult = $this->db->execute(); 
                
               }
@@ -203,8 +210,7 @@
           return $results; 
   
       } catch (PDOException $e) {
-      
-          return false;
+         return false;
       }
   }
   

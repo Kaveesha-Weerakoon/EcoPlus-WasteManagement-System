@@ -58,7 +58,7 @@
 
     $hashed_password = $row->password;
     if(password_verify($password, $hashed_password)){
-      return $row;die();
+      return $row;
     } else {
       return false;
     }
@@ -129,4 +129,47 @@
       $this->db->bind(':id', $id);
       $result = $this->db->execute();
     }
+
+    public function findUserByEmailOrUsername($email, $username){
+      try{
+        $this->db->query('SELECT * FROM users WHERE name = :username OR email = :email');
+        $this->db->bind(':username', $username);
+        $this->db->bind(':email', $email);
+  
+        $row = $this->db->single();
+  
+        //Check row
+        if($this->db->rowCount() > 0){
+            return $row;
+        }else{
+            return false;
+        }
+
+
+      }catch(PDOException $e){
+        return false;
+      }
+     
+    }
+
+    public function resetPassword($newPwdHash, $tokenEmail){
+      try{
+        $this->db->query('UPDATE users SET password=:pwd WHERE email=:email');
+        $this->db->bind(':pwd', $newPwdHash);
+        $this->db->bind(':email', $tokenEmail);
+  
+        //Execute
+        if($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+
+      }catch(PDOException $e){
+        return false;
+      }
+     
+    }
+
+
   }

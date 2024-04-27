@@ -30,7 +30,7 @@
                         </div>
                         <div class="errlog"><?php echo $data['password_err']?></div>
                     </div>
-                    <div class="forgot"><a href="<?php echo URLROOT?>/users/resetpassword">Forgot your password?</a>
+                    <div class="forgot"><a href="<?php echo URLROOT?>/ResetPassword/goto_resetpassword">Forgot your password?</a>
                     </div>
 
                     <input type="submit" value="Login" class="login-btn">

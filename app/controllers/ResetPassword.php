@@ -238,10 +238,7 @@ class ResetPassword extends Controller {
 
             }
 
-            if(empty($data['pwd_err']) && empty($data['pwd_repeat_err']) && empty($data['selector']) && empty($data['validator']) ){
-
-
-            }else{
+            if(empty($data['pwd_err']) && empty($data['pwd_repeat_err']) && !empty($data['selector']) && !empty($data['validator']) ){
 
                 $url = 'app/views/users/confirm_new_password.php?selector='.$data['selector'].'&validator='.$data['validator'];
 
@@ -252,7 +249,6 @@ class ResetPassword extends Controller {
                     $data['otp_err'] = "Sorry. The link is no longer valid";
                     $this->view('users/confirm_new_password/.$url.', $data);
                   
-
 
                 }
     
@@ -288,6 +284,24 @@ class ResetPassword extends Controller {
                 $data['otp_err'] = "Password Updated";
                 redirect($url);
                 $this->view('users/confirm_new_password', $data);
+
+
+            }else{
+
+                $queryData = http_build_query([
+                    'selector' => $data['selector'],
+                    'validator' => $data['validator'],
+                   
+                ]);
+            
+                // Append the query string to the URL
+                $url = 'http://localhost/ecoplus/ResetPassword/resetPassword?' . $queryData;
+            
+                // Redirect to the updated URL
+                redirect($url);
+
+                //$this->view('users/confirm_new_password', $data);
+               
             }
 
 

@@ -443,6 +443,7 @@
 
     }
 
+    
     public function blockuser($id){
       $this->customerModel->block($id);
       header("Location: " . URLROOT . "/admin/customers");        
@@ -491,36 +492,15 @@
     }}
     
      
-
-    // public function customerdelete_confirm($id){
-    //   $customers = $this->customerModel->get_all();
-    //   $data = [
-    //     'customers' =>$customers,
-    //     'delete_confirm'=>'True',
-    //     'id'=>$id
-    //   ];
-     
-    //   $this->view('admin/customer_main', $data);
-    // }
-
-    // public function customerdelete($id){   
-    //   $this->customerModel->deletecustomer($id);
-    //   $customers = $this->customerModel->get_all();
-    //   $data = [
-    //     'customers' =>$customers,
-    //     'delete_confirm'=>'',
-
-    //   ];
-     
-    //   $this->view('admin/customer_main', $data);
-    // }
-    
-    public function center(){
+    public function center($success=""){
 
       $centers = $this->center_model->getallCenters();
       $data = [
         'centers' =>$centers,
-        'delete_center'=>''
+        'delete_center'=>'',
+        'center_block'=>'',
+        'Error'=>'',
+        'Success'=>$success
       ];
        $this->view('admin/center_view', $data);
     }
@@ -545,7 +525,8 @@
             'longitude'=>trim($_POST['longitude']),
             'radius'=>trim($_POST['radius']),
             'location_err'=>'',
-            'location_success'=>''
+            'location_success'=>'',
+            
 
         ];
 
@@ -616,6 +597,55 @@
       }
       
     }
+
+    public function center_block($id){
+  
+      $center=$this->center_model->getCenterById($id);
+     
+      $requests=$this->requests_model->get_ongoing_request_by_center($center->region);
+      if(empty($requests)){
+        
+        $requests2=$this->requests_model->get_nothandovered_request_by_center($center->region);
+        
+        if(empty($requests2)){
+             $garbage_stock=$this->garbage_Model->get_current_gabage_stockbyid($id);
+            
+             if (
+              $garbage_stock[0]->current_electronic == 0 &&
+              $garbage_stock[0]->current_plastic == 0 &&
+              $garbage_stock[0]->current_polythene == 0 &&
+              $garbage_stock[0]->current_metal == 0 &&
+              $garbage_stock[0]->current_glass == 0 &&
+              $garbage_stock[0]->current_paper == 0) {
+                var_dump($center->center_manager_id);
+                $result= $this->center_managerModel->update_cm_to_na($center->center_manager_id);
+                
+                if($result){
+                  $this->center_model->disable_center($id);
+              
+                  header("Location: " . URLROOT . "/admin/center/True"); 
+                }else{
+                  header("Location: " . URLROOT . "/admin/center/False"); 
+                }
+               
+
+         }
+             else{
+              header("Location: " . URLROOT . "/admin/center/False"); 
+             }
+        }
+        else{
+          header("Location: " . URLROOT . "/admin/center/False");    
+        }
+      }else{
+        header("Location: " . URLROOT . "/admin/center/False"); 
+
+      
+    }
+      
+    }
+
+  
 
     public function center_add_confirm(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -769,7 +799,7 @@
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
        
         $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
-  
+ 
         $data = [
           'center' =>$center,
           'not_assigned_cm'=>$na_center_managers,
@@ -800,7 +830,9 @@
             'no_of_workers'=>$no_of_workers,
             'total_requests'=>$total_requests
           ];
-          $this->center_main($center_id, $center->region);
+        
+          header("Location: " . URLROOT . "/admin/center_main/$center_id/$center->region");        
+
         }
         
       }else{

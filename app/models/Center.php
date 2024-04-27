@@ -25,6 +25,12 @@
       $results = $this->db->resultSet();
       return $results;
     }
+    
+    public function getallCenters2(){
+      $this->db->query('SELECT * FROM center WHERE disable="False"');
+      $results = $this->db->resultSet();
+      return $results;
+    }
 
     public function addCenter($data){
         $this->db->query('INSERT INTO center (region,district,center_manager_id,center_manager_name,lat,longi,radius) VALUES (:region,:district, :center_manager_id, :center_manager_name,:lat,:longi,:radius)');
@@ -110,16 +116,18 @@
 
     public function changeCentermanager($centerid,$center_manager,$assigning_manager_name){
       try{
-      $sql = 'UPDATE center SET center_manager_id = :newManagerId, center_manager_name = :newManagerName WHERE id = :centerId';
+      $sql = 'UPDATE center SET center_manager_id = :newManagerId, center_manager_name = :newManagerName, disable=:disable WHERE id = :centerId';
 
       $this->db->query($sql);
       $this->db->bind(':newManagerId',$center_manager->user_id);
       $this->db->bind(':newManagerName', $assigning_manager_name->name);
       $this->db->bind(':centerId', $centerid);
- 
+      $this->db->bind(':disable',FALSE);
+     
       $result= $this->db->execute();   
      }
      catch (PDOException $e) {
+    
       return false;
      }
     }
@@ -143,7 +151,6 @@
         }
        }
        catch (PDOException $e) {
-        die($e);
         return false;
        }
     }
@@ -158,6 +165,29 @@
       } else {
         return false; 
       }
+    }
+
+    public function disable_center($center_id){
+      try{
+        $sql = 'UPDATE center SET disable = :disable, center_manager_id = :center_manager_id,center_manager_name= :center_manager_name WHERE id =:id';
+  
+        $this->db->query($sql);
+        $this->db->bind(':disable',True);
+        $this->db->bind(':center_manager_id',0);
+        $this->db->bind(':center_manager_name', "");
+        $this->db->bind(':id', $center_id);
+
+        $result= $this->db->execute();   
+        if($result){
+           return true;
+        }
+        else{
+          return false;
+        }
+       }
+       catch (PDOException $e) {
+        return false;
+       }
     }
 
 

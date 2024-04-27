@@ -11,7 +11,8 @@
 
           }
           public function index(){
-            header("Location: " . URLROOT);      
+            header("Location: " . URLROOT);       
+  
           }
           
     public function register(){
@@ -206,7 +207,7 @@
 
     public function login(){
        // Check for POST
-       $centers = $this->Center_Model->getallCenters();
+       $centers = $this->Center_Model->getallCenters2();
        $jsonData = json_encode($centers);
       if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id'])  || isset($_SESSION['admin_id']) || isset($_SESSION['agent_id']) ){
         if(isset($_SESSION['user_id'])){
@@ -312,10 +313,17 @@
                   $data['email_err'] = 'Your Account has been Blocked ';
                   $this->view('users/login', $data);
                 }else{
-                  $_SESSION['center_id'] = $collector->center_id;
-                  $_SESSION['center'] = $collector->center_name;
-                  $_SESSION['collector_profile'] = $collector->image;
-                  $this->createCollectorSession($loggedInUser);
+                  $center=$this->Center_Model->getCenterById($collector->center_id);
+                  if($center->disable==True){
+                    $data['email_err'] = 'Your Center Has Been Disabled';
+                    $this->view('users/login', $data);
+                  }else{
+                    $_SESSION['center_id'] = $collector->center_id;
+                    $_SESSION['center'] = $collector->center_name;
+                    $_SESSION['collector_profile'] = $collector->image;
+                    $this->createCollectorSession($loggedInUser);
+                  }
+              
                 }
              
               }
@@ -361,7 +369,7 @@
             // Load view with errors
             $this->view('users/login', $data);
           }
-        } else {
+         } else {
           // Init data
           $data =[    
             'email' => '',

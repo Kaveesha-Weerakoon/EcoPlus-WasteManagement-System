@@ -30,7 +30,7 @@
                                 <th>Center</th>
                                 <th>Name</th>
                                 <th>Vehicle Details</th>
-                                <th>Delete</th>
+                                <!-- <th>Delete</th> -->
                             </tr>
                         </table>
                     </div>
@@ -50,10 +50,10 @@
                                     <i onclick="openvehicledetails((<?php echo htmlspecialchars(json_encode($collector), ENT_QUOTES, 'UTF-8') ?>))"
                                         class='bx bxs-truck' style=" font-size: 29px;"></i>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <i onclick="opendelete(<?php echo $collector->user_id?>)" class='bx bxs-trash'
                                         style=" font-size: 29px;"></i>
-                                </td>
+                                </td> -->
                                 <?php endforeach; ?>
                         </table>
 

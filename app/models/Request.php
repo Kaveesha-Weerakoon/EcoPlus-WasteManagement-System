@@ -210,6 +210,7 @@
           return $results; 
   
       } catch (PDOException $e) {
+         die($e);
          return false;
       }
   }
@@ -565,6 +566,39 @@
         return false;
       }
     }
+
+    public function get_ongoing_request_by_center($center) {
+      try {
+        $this->db->query('SELECT * FROM request_main WHERE region = :region AND type IN ("incoming", "assigned")');
+        $this->db->bind(':region', $center);
+          
+          $results = $this->db->resultSet();
+          
+          return $results;
+      } catch (PDOException $e) {
+          // Handle the exception if needed
+          return false;
+      }
+    }
+    
+    public function get_nothandovered_request_by_center($center) {
+      try {
+          $this->db->query('SELECT * FROM request_main rm 
+                            LEFT JOIN request_completed rc 
+                            ON rm.req_id = rc.req_id 
+                            WHERE rm.region = :region AND rc.added="no"');
+          $this->db->bind(':region', $center);
+         
+          $results = $this->db->resultSet();
+       
+          return $results;
+      } catch (PDOException $e) {
+          // Handle the exception if needed
+          die($e);
+          return false;
+      }
+  }
+  
   
 
 }

@@ -30,7 +30,8 @@
                         </div>
                         <div class="errlog"><?php echo $data['password_err']?></div>
                     </div>
-                    <div class="forgot"><a href="<?php echo URLROOT?>/ResetPassword/goto_resetpassword">Forgot your password?</a>
+                    <div class="forgot"><a href="<?php echo URLROOT?>/ResetPassword/goto_resetpassword">Forgot your
+                            password?</a>
                     </div>
 
                     <input type="submit" value="Login" class="login-btn">
@@ -193,6 +194,21 @@
                 </div>
             </div>
         </div>
+        <?php if($data['success']=='True') : ?>
+        <div class="complain_success">
+            <div class="popup" id="popup">
+                <img src="<?php echo IMGROOT?>/check.png" alt="">
+                <h2>Success!!</h2>
+                <p>Mail Sent Successfully</p>
+                <p>Verify your account</p>
+
+                <a href="<?php echo URLROOT?>/users/register"><button type="button">OK</button></a>
+
+
+            </div>
+        </div>
+        <?php endif; ?>
+
     </div>
 
     <script src="<?php echo JSROOT?>/Customer_Edit_Profile.js"> </script>

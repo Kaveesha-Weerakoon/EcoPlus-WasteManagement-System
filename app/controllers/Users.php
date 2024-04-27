@@ -1,5 +1,11 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
   class Users extends Controller {
+    private $mail;
+    
     public function __construct(){
            $this->userModel=$this->model('User');
            $this->center_managerModel=$this->model('Center_Manager');
@@ -8,14 +14,24 @@
            $this->discount_agentModel=$this->model('Discount_Agent');
            $this->Center_Model=$this->model('Center');
            $this->Admin_Model=$this->model('Admins');
-
+           $this->resetPasswordModel=$this->model('Reset_Password');
+           
+           $this->mail = new PHPMailer();
+           $this->mail->isSMTP();
+           $this->mail->Host = 'smtp.gmail.com';
+           $this->mail->Port = 587;
+           $this->mail->Username = 'ecoplusgroupproject@gmail.com';
+           $this->mail->Password = 'zzruvawrzshhafbk';
+           $this->mail->SMTPSecure = 'tls';
+           $this->mail->SMTPAuth = true;
+           
           }
           public function index(){
             header("Location: " . URLROOT);       
   
-          }
+    }
           
-    public function register(){
+    public function register($success=""){
       // Check for POST
       $centers = $this->Center_Model->getallCenters();
       $jsonData = json_encode($centers);
@@ -53,7 +69,8 @@
             'email_err'=>'' ,
             'password'=>'',
              'password_err'=>'',
-             'email_err' => '',  'center_err'=>''
+             'email_err' => '',  'center_err'=>'',
+             'success'=>$success
 
           ];
 
@@ -143,20 +160,63 @@
             // Validated
             $pw=$data['password_reg'];
             $data['password_reg'] = password_hash($data['password_reg'], PASSWORD_DEFAULT);
-         
+            $selector = bin2hex(random_bytes(8));
+            //Will be used for confirmation once the database entry has been matched
+            $token = random_bytes(32);
+           
+            //URL will vary depending on where the website is being hosted from
+            $url = 'http://localhost/ecoplus/users/register_success?selector='.$selector.'&validator='.bin2hex($token).'&email='.urlencode($data['email_reg']);            
+            //Expiration date will last for half an hour
+            $expires = date("U") + 1800;
+            if(!$this->userModel->deleteEmail($data['email_reg'])){
+              header("Location: " . URLROOT . "");        
+
+          }
+            // if(!$this->resetPasswordModel->deleteEmail($usersEmail)){
+            //     die("There was an error");
+            // }
+            
+            $hashedToken = password_hash($token, PASSWORD_DEFAULT);
+            $data['selector']=$selector;
+            $data['hashedToken']=$hashedToken;
+            $data['expires']=$expires;
             // Register User
-            if($this->userModel->register($data)){
-             
-              $loggedInUser = $this->userModel->login($data['email_reg'], $pw);
-              $customer=$this->customerModel->get_customer($loggedInUser->id);
-              if($customer->image==''){
-                $_SESSION['customer_profile'] = "Profile.png";
+            if($this->userModel->register_confirm($data)){
+              
+              $usersEmail = $data['email_reg'];
+
+              // $loggedInUser = $this->userModel->login($data['email_reg'], $pw);
+              // $customer=$this->customerModel->get_customer($loggedInUser->id);
+              // if($customer->image==''){
+              //   $_SESSION['customer_profile'] = "Profile.png";
+              // }
+              // else{
+              //   $_SESSION['customer_profile'] = $customer->image;
+              // }
+              // $this->createnewUserSession($loggedInUser); 
+                      
+              // if(!$this->userModel->insertToken($usersEmail, $selector, $hashedToken, $expires)){
+              //     die("There was an error");
+              // }
+              //Can Send Email Now
+              $subject = "Login to your account";
+              $message = "<p>We recieved a login request.</p>";
+              $message .= "<p>Here is your login link: </p>";
+              $message .= "<a href='".$url."'>".$url."</a>";
+  
+              $this->mail->setFrom('ecoplusgroupproject@gmail.com');
+              $this->mail->isHTML(true);
+              $this->mail->Subject = $subject;
+              $this->mail->Body = $message;
+              $this->mail->addAddress( $usersEmail);
+  
+              
+              if (!$this->mail->send()) {
+                header("Location: " . URLROOT . "");        
+              } else {
+                header("Location: " . URLROOT . "/users/register/True");        
               }
-              else{
-                $_SESSION['customer_profile'] = $customer->image;
-              }
-              $this->createnewUserSession($loggedInUser); 
-                
+
             
               }
              else {
@@ -194,7 +254,8 @@
             'password'=>'',
             'password_err'=>'',
             'email_err' => '',
-            'center_err'=>''
+            'center_err'=>'',
+            'success'=>$success
  
           ];
   
@@ -207,6 +268,7 @@
 
     public function login(){
        // Check for POST
+       
        $centers = $this->Center_Model->getallCenters2();
        $jsonData = json_encode($centers);
       if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id'])  || isset($_SESSION['admin_id']) || isset($_SESSION['agent_id']) ){
@@ -259,7 +321,8 @@
             'profile_err'=>'',
             'profile_upload_error'=>'' ,
             'reg'=>'False',
-            'center_err'=>''
+            'center_err'=>'',
+            'success'=>''
           ];
           // Validate Email
           if(empty($data['email'])){ 
@@ -398,7 +461,8 @@
             'profile_err'=>'',
             'profile_upload_error'=>'',
             'reg'=>'False',
-            'center_err'=>''
+            'center_err'=>'',
+            'success'=>''
           ];
           $this->view('users/login', $data);
         }
@@ -406,9 +470,82 @@
      
     }
 
+    public function register_success() {
+      $url_components = parse_url($_SERVER['REQUEST_URI']);
+  
+      if (isset($url_components['query'])) {
+          parse_str($url_components['query'], $query_params);
+  
+          if (isset($query_params['selector']) && isset($query_params['validator']) && isset($query_params['email'])) {
+              $selector = $query_params['selector'];
+              $validator = $query_params['validator'];
+              $email = urldecode($query_params['email']); 
+  
+               $currentDate = date("U");
+               $user= $this->userModel->get_pending_user($email);
+             
+               if($user){
+                
+                $expires = $user->expires;
+                $timeDifference = $currentDate - $expires;
+             
+                if ($timeDifference > (1.5 * 3600)) {  die(); 
+                  header("Location: " . URLROOT . "");      
+                
+              } else {
+              
+                  // Expiry time is within 1.5 hours
+                  $tokenBin = hex2bin($validator);
+                  $tokenCheck = password_verify($tokenBin, $user->hashedToken);
+                  if(!$tokenCheck){
+                      //flash("newReset", "You need to re-Submit your reset request");
+                      header("Location: " . URLROOT . "");        
+                  
+                  }
+                
+                
+                  if(!$this->userModel->deleteEmail($email)){
+                      //flash("newReset", "There was an error");
+                      header("Location: " . URLROOT . "");        
+                     
+                  }
+                 
+                  if($this->userModel->register($user)){
+                
+                    $loggedInUser = $this->userModel->findUserByEmail2( $email );
+                    $customer=$this->customerModel->get_customer($loggedInUser->id);
+                    if($customer->image==''){
+                      $_SESSION['customer_profile'] = "Profile.png";
+                    }
+                    else{
+                      $_SESSION['customer_profile'] = $customer->image;
+                    }
+                    $this->createnewUserSession($loggedInUser); 
+                      
+                  
+                    }
+                   else {
+                    redirect('users/login');
+                  }
+              }
+                
+               }else{
+                header("Location: " . URLROOT . "");        
+               }
+          } 
+          else {
+            header("Location: " . URLROOT . "");        
+          }
+      } else {
+        header("Location: " . URLROOT . "");        
+      }
+  }
+  
+
  
 
     public function createUserSession($user){
+    
       $_SESSION['user_id'] = $user->id;
       $_SESSION['user_email'] = $user->email;
       $_SESSION['user_name'] = $user->name;
@@ -416,6 +553,7 @@
     } 
     
     public function createnewUserSession($user){
+    
       $_SESSION['user_id'] = $user->id;
       $_SESSION['user_email'] = $user->email;
       $_SESSION['user_name'] = $user->name;

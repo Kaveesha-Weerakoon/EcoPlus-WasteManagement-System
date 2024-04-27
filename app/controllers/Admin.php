@@ -2202,6 +2202,28 @@
 
     }
 
+    public function center_main_garbage_stock($region){
+      $center=$this->center_model->getCenterByRegion($region);
+      $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($center->id);
+      
+
+      $data =[
+        'current_polythene'=>$current_quantities->current_polythene,
+        'current_plastic'=>$current_quantities->current_plastic,
+        'current_glass'=>$current_quantities->current_glass,
+        'current_paper'=>$current_quantities->current_paper,
+        'current_electronic'=>$current_quantities->current_electronic,
+        'current_metals'=>$current_quantities->current_metal,
+        'center_region'=> $region,
+        'center'=> $center
+       
+
+      ];
+
+      $this->view('admin/center_main_garbage_stock', $data);
+
+    }
+
     public function mail_subscriptions(){
 
       $subscriptions = $this->MailSubscriptionModel->get_mail_subscriptions();

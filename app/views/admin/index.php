@@ -220,9 +220,6 @@ function submit() {
 }
 
 
-
-
-
 function initMap() {
     var center = {
         lat: 7.7,
@@ -451,6 +448,7 @@ document.addEventListener("DOMContentLoaded", function() {
 const completedRequests = <?php echo json_encode($data['completedRequests']); ?>;
 const totalRequests = <?php echo json_encode($data['totalRequests']); ?>;
 
+// JavaScript code to create the chart
 // Get the current month and year
 const currentDate = new Date();
 const currentMonth = currentDate.getMonth();
@@ -464,9 +462,9 @@ function getMonthName(monthIndex) {
     return monthNames[monthIndex];
 }
 
-// Generate labels for the last six months
+// Generate labels for the last four months
 const labels = [];
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < 4; i++) {
     const month = (currentMonth - i + 12) % 12; // Ensure the month is within 0-11 range
     const year = currentYear - (i === 0 && currentMonth === 0 ? 1 : 0); // Adjust the year if current month is January
     labels.unshift(getMonthName(month) + ' ' + year); // Push to the front of the array
@@ -489,21 +487,18 @@ const totalRequestCounts = totalRequests.map(request => {
 });
 
 function countRequests(requests) {
-    const counts = Array(6).fill(0);
+    const counts = Array(4).fill(0);
     requests.forEach(request => {
         const date = new Date(request.year, request.month);
         let monthDiff = currentMonth - date.getMonth();
         if (monthDiff < 0) {
             monthDiff += 12; // Adjust for negative differences
         }
-        const index = (5 - monthDiff + 6) % 6; // Calculate the index in reverse order
+        const index = (3 - monthDiff + 4) % 4; // Calculate the index in reverse order
         counts[index]++;
     });
     return counts;
 }
-
-
-
 
 const completedData = countRequests(completedRequestCounts); // Reverse the array
 const totalData = countRequests(totalRequestCounts); // Reverse the array
@@ -535,7 +530,6 @@ const data = {
     ]
 };
 
-
 const config = {
     type: 'line',
     data: data,
@@ -547,7 +541,7 @@ const config = {
             },
             title: {
                 display: true,
-                text: '6-Month Request Trends',
+                text: '4-Month Request Trends',
                 font: {
                     size: 18,
                     family: 'Arial',
@@ -560,7 +554,6 @@ const config = {
         }
     },
 };
-
 
 const ctx = document.getElementById('myChart1').getContext('2d');
 new Chart(ctx, config);

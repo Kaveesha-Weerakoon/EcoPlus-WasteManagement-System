@@ -58,15 +58,15 @@
         credits_transfer.*, 
         c.image AS sender_img, 
         c2.image AS receiver_img
-     FROM 
+    FROM 
         credits_transfer
-     JOIN 
+    LEFT JOIN 
         customers c ON c.user_id = credits_transfer.sender_id 
-     JOIN 
+    LEFT JOIN 
         customers c2 ON c2.user_id = credits_transfer.receiver_id
-     WHERE 
+    WHERE 
         credits_transfer.sender_id = :user_id OR credits_transfer.receiver_id = :user_id 
-     ORDER BY 
+    ORDER BY 
         CONCAT(credits_transfer.date, " ", credits_transfer.time) DESC;
     
        ');

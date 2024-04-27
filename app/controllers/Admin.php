@@ -51,13 +51,15 @@
       $collectors =$this->collector_model->get_collectors();
       $centers = $this->center_model->getallCenters();
       $agents  = $this->discount_agentModel->get_discount_agent();
-
+      
+      $total_garbage=$this->Collect_Garbage_Model->getTotalGarbage();
       $jsonData = json_encode($centers );
 
       $fine_details = $this->fine_model->get_fine_details();
       $completedRequests=$this->Collect_Garbage_Model->getAllCompletedRequests();
       $totalRrequests=$this->requests_model->getTotalRequests();
-     
+      $json_Total_Garbage = json_encode($total_garbage);
+      
       $data = [
         'completedRequests'=> $completedRequests,
         'totalRequests'=> $totalRrequests,
@@ -67,6 +69,8 @@
         'collector_count'=>count( $collectors),
         'agent_count'=>count($agents),
         'centers'=>$jsonData,
+        'total_garbage'=> $json_Total_Garbage,
+
         'creditsGiven' => ($creditMonth->credit_amount !== null) ? $creditMonth->credit_amount : 0      ];
 
       foreach($fine_details as $fine ){
@@ -144,10 +148,14 @@
     }
 
     public function center_managers_delete($id) {
+      
       $cm_id = $this->center_managerModel->getCenterManagerByID($id);
+     
       $this->center_managerModel->delete_centermanager($id);
       $center_managers = $this->center_managerModel->get_center_managers();
-      deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\center_manager\\" . $cm_id->image);
+      if( $cm_id->image!='Profile.png'){
+        deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\center_manager\\" . $cm_id->image);
+      }
       $data = [
         'center_managers' => $center_managers,
         'confirm_delete' =>'',
@@ -644,9 +652,7 @@
     }
       
     }
-
-  
-
+    
     public function center_add_confirm(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1392,9 +1398,9 @@
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $data=[ 'name' => trim($_POST['name']),
-        'profile' => $_FILES['profile_image'],
+        'profile' => 'profile.png',
          'contact_no' => trim($_POST['contact_no']),
-        'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+        'profile_image_name' => 'profile.png',
         'nic' => trim($_POST['nic']),
         'address' => trim($_POST['address']),
         'dob' => trim($_POST['dob']),
@@ -1476,23 +1482,6 @@
             $data['confirm_password_err'] = 'Passwords do not match';
           }
         } 
-        if ($_FILES['profile_image']['error'] == 4) {
-          $data['profile_err'] = 'Upload a image';
-     
-        }
-
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err'])){
-          if ($_FILES['profile_image']['error'] == 4) {
-            $data['profile_err'] = 'Upload a image';
-        } else {
-            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/Admin/')) {
-              $data['profile_err'] = '';
-  
-            } else {
-                $data['profile_err'] = 'Error uploading the profile image';
-            }
-        }
-        }
 
         if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err']) && empty($data['profile_err'])){
           // Validated
@@ -1705,7 +1694,9 @@
       $admin_by_id = $this->adminModel->getAdminByID($id);
       $this->adminModel->admin_delete($id);
       $admin = $this->adminModel->get_all();
-      deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\Admin\\" . $admin_by_id->image);
+      if( $admin_by_id->image!='Profile.png'){
+        deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\center_manager\\" . $cm_id->image);
+      }
       $data = [
         'admin' => $admin,
         'confirm_delete' =>'',

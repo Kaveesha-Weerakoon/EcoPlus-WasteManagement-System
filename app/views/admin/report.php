@@ -21,7 +21,7 @@
 
                         <form class="top-bar" method="post" action="<?php echo URLROOT;?>/admin/reports">
                             <div class="top-bar-left">
-                                <h2>Analatics</h2>
+                                <h2>Reports</h2>
                                 <p>Requests & Sales </p>
                             </div>
                             <div class="top-bar-details">
@@ -303,9 +303,9 @@ function scrollToElement(elementId) {
     }
 }
 /* TOP LINE CHART */
+/* TOP LINE CHART */
 const currentDate = new Date();
-const currentMonth = currentDate.getMonth() + 1;
-// Add 1 to represent January as index 1
+const currentMonth = currentDate.getMonth() + 1; // Add 1 to represent January as index 1
 const currentYear = currentDate.getFullYear();
 const completedRequests = <?php echo json_encode($data['creditsByMonth1']); ?>;
 
@@ -317,11 +317,11 @@ function getMonthName(monthIndex) {
 
     return monthNames[monthIndex - 1]; // Subtract 1 to correctly index monthNames array
 }
+
 const labels = [];
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 4; i++) { // Change loop to iterate only 4 times
     const month = (currentMonth - i + 11) % 12; // No need to subtract 1
-    const year = currentYear - (i === 0 && currentMonth === 1 ? 1 :
-        0); // Adjust the condition to check for January
+    const year = currentYear - (i === 0 && currentMonth === 1 ? 1 : 0); // Adjust the condition to check for January
     labels.unshift(getMonthName(month + 1) + ' ' + year);
 }
 
@@ -355,13 +355,13 @@ function countRequests(requests) {
     return sums;
 }
 
-function printLastSixMonths(arr, startIndex) {
+function printLastFourMonths(arr, startIndex) { // Change function name to reflect 4 months
     const length = arr.length;
     const result = [];
     // Calculate the start index for slicing the array
     const startIdx = (startIndex - 1 + length) % length;
 
-    for (let i = 0; i <= 4; i++) {
+    for (let i = 0; i <= 3; i++) { // Change loop to iterate only 4 times
         // Calculate the index, ensuring it stays within bounds and handles negative indices
         const j = (startIdx - i + length) % length;
         // Add the element to the result array
@@ -371,7 +371,7 @@ function printLastSixMonths(arr, startIndex) {
     return result.reverse();
 }
 
-const completedData = printLastSixMonths(countRequests(completedRequestCounts), currentDate.getMonth() + 1);
+const completedData = printLastFourMonths(countRequests(completedRequestCounts), currentMonth);
 const data = {
     labels: labels,
     datasets: [{
@@ -401,6 +401,7 @@ const config = {
 
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, config);
+
 /* TOP LINE CHART END*/
 
 

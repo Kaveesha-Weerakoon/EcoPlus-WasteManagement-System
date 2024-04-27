@@ -44,6 +44,7 @@
      } 
    
      $json_Total_Garbage = json_encode($total_garbage);
+    
       $data = [
         'collector' =>$collector,
         'assinged_Requests_count' => $assinged_Requests_count,

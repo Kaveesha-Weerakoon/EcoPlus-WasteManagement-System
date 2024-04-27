@@ -21,7 +21,7 @@
 
                         <form class="top-bar" method="post" action="<?php echo URLROOT;?>/admin/reportusers">
                             <div class="top-bar-left">
-                                <h2>Analatics</h2>
+                                <h2>Reports</h2>
                                 <p>Users</p>
                             </div>
 
@@ -154,11 +154,11 @@ function getPrevMonthUserCount(requests) {
     return prevMonthCount;
 }
 
-// Generate labels for the last six months
+// Generate labels for the last four months
 const labels = [];
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < 4; i++) {
     const month = (currentMonth - i + 12) % 12; // Ensure the month is within 0-11 range
-    const year = currentYear - (i === 0 && currentMonth === 0 ? 1 : 0); // Adjust the year if current month is January
+    const year = currentYear - (i === 0 && currentMonth < 3 ? 1 : 0); // Adjust the year if necessary
     labels.unshift(getMonthName(month) + ' ' + year); // Push to the front of the array
 }
 
@@ -171,27 +171,25 @@ const customersCounts = customers.map(request => {
 });
 
 function countRequests(requests) {
-    const counts = Array(6).fill(0);
+    const counts = Array(4).fill(0);
     requests.forEach(request => {
         const date = new Date(request.year, request.month);
         let monthDiff = currentMonth - date.getMonth();
         if (monthDiff < 0) {
             monthDiff += 12; // Adjust for negative differences
         }
-        const index = (5 - monthDiff + 6) % 6; // Calculate the index in reverse order
+        const index = (3 - monthDiff + 4) % 4; // Calculate the index in reverse order
         counts[index]++;
     });
     return counts;
 }
-
-
-
 
 const completedData = countRequests(customersCounts); // Reverse the array
 const prevMonthUserCount = getPrevMonthUserCount(customersCounts);
 
 const h1Element = document.getElementById('prevmonth_customercount');
 h1Element.textContent = prevMonthUserCount.toString();
+
 const data = {
     labels: labels,
     datasets: [{
@@ -210,12 +208,11 @@ const config = {
         plugins: {
             title: {
                 display: true,
-                text: '6-Month User Join Trend'
+                text: '4-Month User Join Trend'
             }
         }
     }
 };
-
 
 const myChart = new Chart(
     document.getElementById('lineChart'),

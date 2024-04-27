@@ -7,23 +7,8 @@
                 <div class="main-right">
                     <div class="main-right-top">
                         <div class="main-right-top-one">
-                            <div class="main-right-top-search" style="visibility:hidden">
-                                <i class='bx bx-search-alt-2'></i>
-                                <input type="text" id="searchInput" placeholder="Search">
-                            </div>
-                            <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                                <i class='bx bx-bell'></i>
-                                <div class="dot"></div>
-                            </div>
+                            <?php require APPROOT . '/views/credit_discount_agents/agent_profile/agent_profile.php'; ?>
 
-                            <div class="main-right-top-profile">
-                                <img src="<?php echo IMGROOT?>/img_upload/credit_discount_agent/<?php echo $_SESSION['agent_profile']?>"
-                                    alt="">
-                                <div class="main-right-top-profile-cont">
-                                    <h3><?php echo $_SESSION['agent_name']?></h3>
-                                    <p>ID : D <?php echo $_SESSION['agent_id']?></p>
-                                </div>
-                            </div>
                         </div>
                         <div class="main-right-top-two">
                             <h1>Credit Discount Agent</h1>
@@ -57,7 +42,7 @@
                             <input value="<?php echo $data['discount_amount']; ?>" type="text" name="discount_amount">
                             <div class="err"><?php echo $data['discount_amount_err']; ?></div>
 
-                            <label for="customer_id">Center:</label>
+                            <label for="customer_id">Branch:</label>
                             <input value="<?php echo $data['center']; ?>" type="text" name="center">
                             <div class="err"><?php echo $data['center_err']; ?></div>
 
@@ -69,6 +54,18 @@
 
                 <script src="<?php echo JSROOT?>/Admin_Center_Manager.js"> </script>
             </div>
+            <?php if($data['success']=='True') : ?>
+            <div class="request_success">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/check.png" alt="">
+                    <h2>Success!!</h2>
+                    <p>Discount Given</p>
+                    <a href="<?php echo URLROOT?>/CreditDiscountsAgent/balance_validation"><button
+                            type="button">OK</button></a>
+                </div>
+            </div>
+            <?php echo $data['success'];?>
+            <?php endif; ?>
         </div>
 
 

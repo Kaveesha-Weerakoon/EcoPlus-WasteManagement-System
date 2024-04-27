@@ -113,7 +113,8 @@
                                 <h3>Paper Waste Quantity</h3>
                                 <h3>Electronic Waste Quantity </h3>
                                 <h3>Metals Quantity</h3>
-                                <h3>Note</h3>
+                                <h3 class="note">Note</h3>
+                                <h3>Completed Time</h3>
                                 <h3>Earned Credits</h3>
                             </div>
                             <div class="collect-details-pop-form-content-right-values">
@@ -142,7 +143,10 @@
                                     <h3>&nbsp Kg</h3>
                                 </div>
                                 <div class="collect-details-pop-form-content-right-values-cont">
-                                    <h3 id="Note"></h3>
+                                    <h3 id="Note" class="note"></h3>
+                                </div>
+                                <div class="collect-details-pop-form-content-right-values-cont">
+                                    <h3 id="completed_time"></h3>
                                 </div>
                                 <div class="collect-details-pop-form-content-right-values-cont">
                                     <h3 id="Earned_Credits"></h3>
@@ -347,10 +351,10 @@
 <script>
 /* Notification View */
 document.getElementById('submit-notification').onclick = function() {
-        var form = document.getElementById('mark_as_read');
-        var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/request_completed";
-        form.action = dynamicUrl; // Set the action URL
-        form.submit(); // Submit the form
+    var form = document.getElementById('mark_as_read');
+    var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/request_completed";
+    form.action = dynamicUrl; // Set the action URL
+    form.submit(); // Submit the form
 
 };
 /* ----------------- */
@@ -396,6 +400,7 @@ function view_collect_details(request) {
     document.getElementById('Electronic_Waste_Quantity').innerText = request.Electronic_Waste;
     document.getElementById('Metals_Quantity').innerText = request.Metals;
     document.getElementById('Note').innerText = request.note;
+    document.getElementById('completed_time').innerText = request.completed_datetime;
     document.getElementById('Earned_Credits').innerText = request.credit_amount;
 }
 
@@ -461,14 +466,9 @@ function searchTable() {
         var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
         var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
         var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-        var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
-        var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
-        var conctact_no = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
-        var instructions = row.querySelector('td:nth-child(7)').innerText.toLowerCase();
+   
 
-        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(
-                input) ||
-            cid.includes(input) || conctact_no.includes(input) || instructions.includes(input)) {
+        if (time.includes(input) || id.includes(input) || date.includes(input) ) {
             row.style.display = '';
         } else {
             row.style.display = 'none'; // Hide the row

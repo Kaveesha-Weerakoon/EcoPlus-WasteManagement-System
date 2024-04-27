@@ -104,6 +104,7 @@
 @import url('Component/CenterManager/CenterManager_Stock_Releases.css');
 
 @import url('Component/CenterManager/CenterManager_Reports.css');
+@import url('Component/CenterManager/CenterManager_View_Customer_Complaints.css');
 
 /* Agent CSS */
 @import url('Component/Agent/Agent_Dashboard.css');
@@ -164,6 +165,7 @@
 @import url('Component/Admin/Admin_Center_Main_Request_Completed.css');
 @import url('Component/Admin/Admin_Center_Main_Waste_Handover.css');
 @import url('Component/Admin/Admin_Center_Main_Stock_Releases.css');
+@import url('Component/Admin/Admin_Center_Main_Garbage_Stock.css');
 
 @import url('Component/Admin/Admin_Reports.css');
 @import url('Component/Admin/Admin_ReportMain.css');
@@ -198,13 +200,18 @@
     --table-header: #e9f6ef;
     --yellow-color: #f6e58d;
     --red-color: #F13E3E;
+    --calander-hover-color: #f2f2f2;
+    --form-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --request-top-color: #ecf0f1;
+    --yellow-color-hover: #ddce7f;
+    --report-table-color: #f9f9f9;
 }
 
 
 a {
     text-decoration: none;
     padding: 0;
-    margin: 0;
+    color: var(--main-text-color);
 
 }
 
@@ -218,6 +225,7 @@ a {
 
 .body {
     height: 100vh;
+    scrollbar-width: none;
 }
 
 @keyframes tableLoad {

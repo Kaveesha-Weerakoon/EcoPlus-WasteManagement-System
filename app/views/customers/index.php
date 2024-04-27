@@ -63,9 +63,9 @@
                                     <?php endif; ?>
                                     <h3>
                                         <?php if ($transaction->sender_id == $_SESSION['user_id']): ?>
-                                        C <?php echo $transaction->receiver_id; ?>
+                                        <?php echo $transaction->receiver_id; ?>
                                         <?php else: ?>
-                                        C <?php echo $transaction->sender_id; ?>
+                                        <?php echo $transaction->sender_id; ?>
                                         <?php endif; ?>
                                     </h3>
                                     <p>
@@ -247,8 +247,6 @@ let speed = 30;
 
 function getDarkModeSetting() {
     const storedValue = localStorage.getItem("darkMode");
-    console.log("as");
-
     return storedValue ? JSON.parse(storedValue) : true;
 }
 
@@ -359,7 +357,7 @@ function initMap() {
     };
     var map = new google.maps.Map(document.getElementById('map'), {
         center: center,
-        zoom: 6.5,
+        zoom: 6.2,
         styles: [{
                 featureType: 'all',
                 elementType: 'labels.text',

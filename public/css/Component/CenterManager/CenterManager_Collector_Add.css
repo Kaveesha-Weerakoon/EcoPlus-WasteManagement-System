@@ -274,7 +274,7 @@
         height: 3px;
     }
 
-  
+
 
     /*Form*/
     .main-right-bottom-down {
@@ -293,8 +293,8 @@
 
     .main-bottom-down-content {
         width: 50%;
-        height: 850px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        height:680px;
+        box-shadow: var(--form-box-shadow);
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -304,7 +304,7 @@
 
     }
 
-    .main-bottom-down-content-header{
+    .main-bottom-down-content-header {
         margin-bottom: 12px;
         display: flex;
         align-items: center;
@@ -340,7 +340,7 @@
         height: 4px;
     }
 
-    .main-bottom-down-content-img-container{
+    .main-bottom-down-content-img-container {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -409,17 +409,17 @@
         font-size: 14px;
         margin-bottom: 8px;
         background-color: var(--green-color-one);
-        color: #fff;
+        color: var(--background-color-main);
         padding: 9px;
-        border-radius:5px ;
+        border-radius: 5px;
         width: 50%;
         cursor: pointer;
         text-align: center;
     }
 
-    .form-upload:hover{
+    .form-upload:hover {
         background-color: var(--button-hover-green);
-       
+
     }
 
     .profile-image-validation img {
@@ -483,7 +483,7 @@
         height: 41px;
         width: 95%;
         outline: none;
-        color: white;
+        color: var(--background-color-main);
         font-size: 18px;
         font-weight: 500;
         border-radius: 5px;
@@ -495,7 +495,7 @@
     }
 
     .main-bottom-down-content-button button:hover {
-        background: #19954e;
+        background: var(--button-hover-green);
     }
 
     /*Success popup*/
@@ -518,13 +518,14 @@
 
     .popup {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         font-family: 'poppins', sans-serif;
         border-radius: 6px;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
 
     .open-popup {
@@ -551,7 +552,7 @@
         margin-top: 30px;
         padding: 10px 0;
         background: var(--green-color-one);
-        color: white;
+        color: var(--background-color-main);
         border: 0;
         outline: none;
         font-size: 18px;
@@ -584,13 +585,13 @@
         }
 
 
-        .main-right-top-profile img{
+        .main-right-top-profile img {
             width: 40px;
             height: 40px;
             margin-top: 3px;
         }
 
-        .main-right{
+        .main-right {
             overflow-x: hidden;
         }
     }
@@ -626,7 +627,7 @@
             width: 28%;
         }
 
-        .main-right-top-profile-cont p{
+        .main-right-top-profile-cont p {
             font-size: 12px;
         }
     }
@@ -655,16 +656,16 @@
             right: 10%;
         }
 
-        .main-right-top-four-component p{
+        .main-right-top-four-component p {
             display: none;
 
         }
 
-        .main-right-top-four-component{
+        .main-right-top-four-component {
             width: auto;
         }
 
-      
+
     }
 
     @media screen and (max-width:540px) {
@@ -686,55 +687,55 @@
             left: 15%;
         }
 
-        .main-right-top-four-left{
+        .main-right-top-four-left {
             margin-left: 35px;
             padding-left: 0;
         }
 
-        .main-right-top-four-left button{
+        .main-right-top-four-left button {
             width: 60px;
         }
 
-        .main-right-top-four-left p{
+        .main-right-top-four-left p {
             display: none;
         }
 
-        .main-right-top-four-right{
+        .main-right-top-four-right {
             margin-right: 40%;
         }
 
-        .main-right-top-profile-cont h3{
+        .main-right-top-profile-cont h3 {
             font-size: 16px;
         }
 
-        .line{
+        .line {
             margin-left: -10px !important;
         }
 
-       
 
-      
+
+
     }
 
     @media screen and (max-width: 475px) {
-        .main-right-top-profile-cont h3{
+        .main-right-top-profile-cont h3 {
             display: none;
         }
 
-        .main-right-top-profile-cont p{
+        .main-right-top-profile-cont p {
             display: none;
         }
 
-        .main-right-top-profile img{
+        .main-right-top-profile img {
             margin-right: 5px;
         }
 
-        .main-right-top-three-content{
+        .main-right-top-three-content {
             margin-right: 0;
 
         }
 
-        .main-right-top-three-content p{
+        .main-right-top-three-content p {
             font-size: 12px;
         }
 
@@ -744,6 +745,7 @@
         .main-right-top-notification {
             margin-left: 5%;
         }
+
         .main-right-top-search {
             margin-left: 1px;
         }
@@ -766,7 +768,7 @@
     }
 
     @media screen and (max-width:700px) {
-    
+
         .main-right-top-search {
             width: 35%;
         }
@@ -781,11 +783,11 @@
             margin-left: 10px;
         }
 
-        .main-right-top-three{
+        .main-right-top-three {
             margin-bottom: 2%;
         }
 
-        .line{
+        .line {
             margin-left: -20px;
         }
     }
@@ -826,7 +828,7 @@
             font-size: 18px !important;
         }
 
-        .main-right-top-profile-cont p{
+        .main-right-top-profile-cont p {
             font-size: 12px;
         }
 
@@ -834,7 +836,7 @@
 
     @media screen and (max-width:700px) {
 
-        .main-bottom-down-content-two-left{
+        .main-bottom-down-content-two-left {
             padding-left: 0px;
         }
 
@@ -844,53 +846,53 @@
             margin-bottom: 15px;
         }
 
-        .main-bottom-down-content{
+        .main-bottom-down-content {
             height: 100%;
         }
-        
+
     }
 
     @media screen and (max-width: 604px) {
-        .right-content .description{
+        .right-content .description {
             font-size: 12px;
 
         }
 
-        .right-content .form-upload{
+        .right-content .form-upload {
             font-size: 12px;
         }
 
-        .popup{
+        .popup {
             width: 300px;
         }
-        
-        
+
+
     }
 
     @media screen and (max-width: 540px) {
-        .right-content .description{
+        .right-content .description {
             font-size: 10px;
 
         }
 
-        .right-content .form-upload{
+        .right-content .form-upload {
             font-size: 10px;
         }
 
-        .main-bottom-down button{
+        .main-bottom-down button {
             font-size: 16px !important;
 
         }
-        
+
     }
 
     @media screen and (max-width: 470px) {
-    
-        .main-bottom-down button{
+
+        .main-bottom-down button {
             font-size: 14px !important;
 
         }
 
-      
+
     }
 }

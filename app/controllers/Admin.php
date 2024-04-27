@@ -25,6 +25,7 @@
       $this->Annoucement_Model=$this->model('Announcement');
       $this->garbage_Model=$this->model('Garbage_Stock');
       $this->MailSubscriptionModel = $this->model('Mail_Subscriptions');
+      $this->Customer_Credit_Model = $this->model('Customer_Credit');
 
 
       if(!isLoggedIn('admin_id')  && !isLoggedIn('superadmin_id')){
@@ -77,6 +78,14 @@
       }
 
       $this->view('admin/index', $data);
+    }
+
+    public function refund($id){
+      $req=$this->requests_model->get_cancelled_request_by_id($id);
+      $balance=$this->Customer_Credit_Model->get_customer_credit_balance($req->customer_id);
+      $newbalance=$balance+$req->fine;
+      $this->requests_model->refund( $req,$newbalance);
+      header("Location: " . URLROOT . "/Admin"); 
     }
 
     public function complain_customers(){
@@ -156,9 +165,8 @@
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $data =[
           'name' => trim($_POST['name']),
-          'profile' => $_FILES['profile_image'],
            'contact_no' => trim($_POST['contact_no']),
-          'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+          'profile_image_name' => 'Profile.png',
           'nic' => trim($_POST['nic']),
           'address' => trim($_POST['address']),
           'dob' => trim($_POST['dob']),
@@ -213,9 +221,21 @@
         }
 
         //validate DOB
-        if(empty($data['dob'])){
+       // Check if date of birth is empty
+       if(empty($data['dob'])){
           $data['dob_err'] = 'Please enter dob';
+        } else {
+         // Calculate the age from date of birth
+           $dob = new DateTime($data['dob']);
+           $now = new DateTime();
+           $age = $now->diff($dob)->y;
+
+          // Check if age is less than 18
+           if($age < 18) {
+            $data['dob_err'] = 'You must be at least 18 years old.';
+          }
         }
+
 
         // Validate Contact no
         if (empty($data['contact_no'])) {
@@ -249,25 +269,11 @@
             $data['confirm_password_err'] = 'Passwords do not match';
           }
         } 
-        if ($_FILES['profile_image']['error'] == 4) {
-          $data['profile_err'] = 'Upload a image';
-     
-        }
+       
+
+        
 
         if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err'])){
-          if ($_FILES['profile_image']['error'] == 4) {
-            $data['profile_err'] = 'Upload a image';
-        } else {
-            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/center_manager/')) {
-              $data['profile_err'] = '';
-  
-            } else {
-                $data['profile_err'] = 'Error uploading the profile image';
-            }
-        }
-        }
-
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err']) && empty($data['profile_err'])){
           // Validated
           $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
           if($this->center_managerModel->register_center_manager($data)){
@@ -437,6 +443,7 @@
 
     }
 
+    
     public function blockuser($id){
       $this->customerModel->block($id);
       header("Location: " . URLROOT . "/admin/customers");        
@@ -451,45 +458,49 @@
     public function customers(){ 
       
       $customers = $this->customerModel->get_all();
-      $data = [
-        'customers' =>$customers,
-        'delete_confirm'=>'',
-        'fine'=>''
+      $centers = $this->center_model->getallCenters();
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $center=trim($_POST['center-dropdown']);
+        if($center!="none"){
+           $customers = $this->customerModel->get_customer_by_region($center);
 
-      ];
-     
-      $this->view('admin/customer_main', $data);
-    }
+        }
+        else{
+          $center_id="none";
+          $customers = $this->customerModel->get_all();
 
-    // public function customerdelete_confirm($id){
-    //   $customers = $this->customerModel->get_all();
-    //   $data = [
-    //     'customers' =>$customers,
-    //     'delete_confirm'=>'True',
-    //     'id'=>$id
-    //   ];
-     
-    //   $this->view('admin/customer_main', $data);
-    // }
+        }
+         $data = [
+            'customers' =>$customers,
+            'delete_confirm'=>'',
+            'fine'=>'',
+            'centers'=> $centers
+            ] ;
+           
+        $this->view('admin/customer_main', $data);
 
-    // public function customerdelete($id){   
-    //   $this->customerModel->deletecustomer($id);
-    //   $customers = $this->customerModel->get_all();
-    //   $data = [
-    //     'customers' =>$customers,
-    //     'delete_confirm'=>'',
+      }else{
+        
+        $data = [
+            'customers' =>$customers,
+            'delete_confirm'=>'',
+            'fine'=>'',
+            'centers'=> $centers];
+        
+        $this->view('admin/customer_main', $data);
 
-    //   ];
-     
-    //   $this->view('admin/customer_main', $data);
-    // }
+    }}
     
-    public function center(){
+     
+    public function center($success=""){
 
       $centers = $this->center_model->getallCenters();
       $data = [
         'centers' =>$centers,
-        'delete_center'=>''
+        'delete_center'=>'',
+        'center_block'=>'',
+        'Error'=>'',
+        'Success'=>$success
       ];
        $this->view('admin/center_view', $data);
     }
@@ -514,7 +525,8 @@
             'longitude'=>trim($_POST['longitude']),
             'radius'=>trim($_POST['radius']),
             'location_err'=>'',
-            'location_success'=>''
+            'location_success'=>'',
+            
 
         ];
 
@@ -585,6 +597,55 @@
       }
       
     }
+
+    public function center_block($id){
+  
+      $center=$this->center_model->getCenterById($id);
+     
+      $requests=$this->requests_model->get_ongoing_request_by_center($center->region);
+      if(empty($requests)){
+        
+        $requests2=$this->requests_model->get_nothandovered_request_by_center($center->region);
+        
+        if(empty($requests2)){
+             $garbage_stock=$this->garbage_Model->get_current_gabage_stockbyid($id);
+            
+             if (
+              $garbage_stock[0]->current_electronic == 0 &&
+              $garbage_stock[0]->current_plastic == 0 &&
+              $garbage_stock[0]->current_polythene == 0 &&
+              $garbage_stock[0]->current_metal == 0 &&
+              $garbage_stock[0]->current_glass == 0 &&
+              $garbage_stock[0]->current_paper == 0) {
+                var_dump($center->center_manager_id);
+                $result= $this->center_managerModel->update_cm_to_na($center->center_manager_id);
+                
+                if($result){
+                  $this->center_model->disable_center($id);
+              
+                  header("Location: " . URLROOT . "/admin/center/True"); 
+                }else{
+                  header("Location: " . URLROOT . "/admin/center/False"); 
+                }
+               
+
+         }
+             else{
+              header("Location: " . URLROOT . "/admin/center/False"); 
+             }
+        }
+        else{
+          header("Location: " . URLROOT . "/admin/center/False");    
+        }
+      }else{
+        header("Location: " . URLROOT . "/admin/center/False"); 
+
+      
+    }
+      
+    }
+
+  
 
     public function center_add_confirm(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -738,7 +799,7 @@
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
        
         $na_center_managers = $this->center_managerModel->get_Non_Assigned_CenterManger();
-  
+ 
         $data = [
           'center' =>$center,
           'not_assigned_cm'=>$na_center_managers,
@@ -769,7 +830,9 @@
             'no_of_workers'=>$no_of_workers,
             'total_requests'=>$total_requests
           ];
-          $this->center_main($center_id, $center->region);
+        
+          header("Location: " . URLROOT . "/admin/center_main/$center_id/$center->region");        
+
         }
         
       }else{
@@ -914,9 +977,8 @@
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $data =[
           'name' => trim($_POST['name']),
-          'profile' => $_FILES['profile_image'],
           'contact_no' => trim($_POST['contact_no']),
-          'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+          'profile_image_name' => 'profile.png',
           'address' => trim($_POST['address']),
           'email' => trim($_POST['email']),
           'password' => trim($_POST['password']),
@@ -990,25 +1052,9 @@
             $data['confirm_password_err'] = 'Passwords do not match';
           }
         } 
-        if ($_FILES['profile_image']['error'] == 4) {
-          $data['profile_err'] = 'Upload a image';
-     
-        }
+      
   
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['address_err'])){
-          if ($_FILES['profile_image']['error'] == 4) {
-            $data['profile_err'] = 'Upload a image';
-        } else {
-            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/credit_discount_agent/')) {
-              $data['profile_err'] = '';
-  
-            } else {
-                $data['profile_err'] = 'Error uploading the profile image';
-            }
-        }
-        }
-  
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['address_err']) && empty($data['profile_err'])){
+        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['address_err']) ){
           // Validated
           $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
           if($this->discount_agentModel->register_discount_agent($data)){
@@ -1097,6 +1143,17 @@
       ];
     
       header("Location: " . URLROOT . "/admin/discount_agents/True");        
+    }   
+    
+    public function discount_agent_block($id){
+      $this->discount_agentModel->block($id);
+      header("Location: " . URLROOT . "/admin/discount_agents");        
+    }
+    
+    public function discount_agent_unblockuser($id){
+
+      $this->discount_agentModel->unblock($id);
+      header("Location: " . URLROOT . "/admin/discount_agents");        
     }
 
     public function get_collector_assistants($collector_id){
@@ -1525,7 +1582,7 @@
             'customers'=>count($customers),
             'centerworkers'=>count($centerworkers),
             'collectorassistants'=>count($collectorassistants),
-            'allcustomers'=>  $allcustomers
+            'allcustomers'=>  $customers
           ];     
             $this->view('admin/reportusers', $data);
 
@@ -1547,8 +1604,9 @@
           'customers'=>count($customers),
           'centerworkers'=>1,
           'collectorassistants'=>count($centerworkers),
-          'allcustomers'=>  $allcustomers
-      ];
+          'allcustomers'=>  $allcustomers,
+          'allcustomers'=>  $customers
+        ];
           $this->view('admin/reportusers', $data);
 
       }
@@ -2143,6 +2201,28 @@
       ];
 
       $this->view('admin/center_main_stock_releases', $data);
+
+    }
+
+    public function center_main_garbage_stock($region){
+      $center=$this->center_model->getCenterByRegion($region);
+      $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($center->id);
+      
+
+      $data =[
+        'current_polythene'=>$current_quantities->current_polythene,
+        'current_plastic'=>$current_quantities->current_plastic,
+        'current_glass'=>$current_quantities->current_glass,
+        'current_paper'=>$current_quantities->current_paper,
+        'current_electronic'=>$current_quantities->current_electronic,
+        'current_metals'=>$current_quantities->current_metal,
+        'center_region'=> $region,
+        'center'=> $center
+       
+
+      ];
+
+      $this->view('admin/center_main_garbage_stock', $data);
 
     }
 

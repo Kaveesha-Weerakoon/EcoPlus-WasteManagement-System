@@ -17,6 +17,7 @@
       $this->garbageTypeModel=$this->model('Garbage_Types');
       $this->Center_Manager_Report_Model=$this->model('Center_Manager_Report');
       $this->Report_Model=$this->model('Report');
+      $this->customer_complaints_model = $this->model('Customer_Complain');
 
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
@@ -85,7 +86,7 @@
     }
 
     public function collectors(){
-      $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+      $collectors = $this->collectorModel->get_collectors_bycenterid_with_assigned($_SESSION['center_id']);
       $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'collectors' => $collectors,
@@ -101,7 +102,8 @@
     }
 
     public function collectors_complains(){
-      $collector_complains=$this->collector_complain_Model->get_complains_byCenterID($_SESSION['center_id']);
+      $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+      $collector_complains=$this->collector_complain_Model->get_collector_complaints_by_region($center->region);
       $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'collectors_complains' => $collector_complains,
@@ -122,7 +124,7 @@
           'nic' => trim($_POST['nic']),
           'dob'=>trim($_POST['dob']),
           'contact_no'=>trim($_POST['contact_no']),
-          'profile_name'=>trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+          'profile_name'=>'profile.png',
           'address' =>trim($_POST['address']),
           'email'=>trim($_POST['email']),
           'vehicle_no'=>trim($_POST['vehicle_no']),
@@ -168,7 +170,14 @@
         //validate DOB
         if(empty($data['dob'])){
           $data['dob_err'] = 'Please enter dob';
-        }
+      } else {
+          $min_birthdate = date('Y-m-d', strtotime('-18 years'));
+      
+          if($data['dob'] > $min_birthdate) {
+              $data['dob_err'] = 'You must be at least 18 years old.';
+          }
+      }
+      
 
         //validate contact number
         if(empty($data['contact_no'])){
@@ -236,22 +245,8 @@
           }
         }
 
-        if(empty($data['name_err']) && empty($data['nic_err']) && empty($data['dob_err']) && empty($data['contactNo_err'])&& empty($data['address_err']) && empty($data['email_err']) && empty($data['vehicleNo_err']) && empty($data['vehicleType_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
-          if ($_FILES['profile_image']['error'] == 4) {
-            $data['profile_err'] = 'Upload a image';
-        } else {
-            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_name'], '/img/img_upload/collector/')) {
-              $data['profile_err'] = '';
-  
-            } else {
-              
-                $data['profile_err'] = 'Error uploading the profile image';
-            }
-        }
-        }
 
-
-        if(empty($data['name_err']) && empty($data['nic_err']) && empty($data['dob_err']) && empty($data['contactNo_err'])&& empty($data['address_err']) && empty($data['email_err']) && empty($data['vehicleNo_err']) && empty($data['vehicleType_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['profile_err'])){
+        if(empty($data['name_err']) && empty($data['nic_err']) && empty($data['dob_err']) && empty($data['contactNo_err'])&& empty($data['address_err']) && empty($data['email_err']) && empty($data['vehicleNo_err']) && empty($data['vehicleType_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) ){
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             $center=$this->center_model->getCenterById($_SESSION['center_id']);
             $data['center_name']=$center->region;
@@ -301,6 +296,17 @@
       }
      
      
+    }  
+    
+    public function collector_block($id){
+      $this->collectorModel->block($id);
+      header("Location: " . URLROOT . "/centermanagers/collectors");        
+    }
+    
+    public function collector_unblock($id){
+
+      $this->collectorModel->unblock($id);
+      header("Location: " . URLROOT . "/centermanagers/collectors");        
     }
 
     public function collectors_update($collectorId){
@@ -308,7 +314,7 @@
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        $collectors = $this->collectorModel->get_collectors_bycenterid_with_assigned($_SESSION['center_id']);
             $data = [
                 'collectors' => $collectors,
                 'id'=> $collectorId,
@@ -403,7 +409,7 @@
       }
       else{
 
-        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+        $collectors = $this->collectorModel->get_collectors_bycenterid_with_assigned($_SESSION['center_id']);
         $collector = $this->collectorModel->getCollector_ByID_view($collectorId);
         $data = [
 
@@ -438,26 +444,10 @@
       }
     }
 
-    public function collector_delete_confirm($collectorId){
-        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
-        $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
-        $data = [
-          'collectors' => $collectors,
-          'confirm_delete' => 'True',
-          'delete_success' =>'',
-          'click_update' =>'',
-          'update_success'=>'',
-          'personal_details_click'=> '',
-          'vehicle_details_click'=> '',
-          'collector_id' => $collectorId,
-          'notification' => $notifications
-        ];     
-        $this->view('center_managers/collectors', $data);       
-    }
 
     public function collector_delete($collectorId){
 
-      $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+      $collectors = $this->collectorModel->get_collectors_bycenterid_with_assigned($_SESSION['center_id']);
       $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data = [
         'collectors' => $collectors,
@@ -485,34 +475,6 @@
 
       }
 
-    }
-
-    public function personal_details_view($collectorId){
-        $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
-        $collector = $this->collectorModel->getCollector_ByID_view($collectorId);
-        $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
-        $data = [
-          'collectors' => $collectors,
-          'id'=> $collectorId,
-          'name' => $collector->name,
-          'email'=> $collector->email,
-          'nic' => $collector->nic,
-          'dob'=> $collector->dob,
-          'contact_no'=> $collector->contact_no,
-          'address' => $collector->address,
-          'image'=>$collector->image,
-          'notification'=> $notifications,
-          'personal_details_click'=> 'True',
-          'vehicle_details_click'=> '',
-          'confirm_delete' => '',
-          'delete_success' =>'',
-          'click_update' =>'',
-          'update_success'=>'',
-          
-
-        ];
-      
-        $this->view('center_managers/collectors', $data);
     }
 
     public function center_workers(){
@@ -568,10 +530,21 @@
           $data['nic_err'] = 'NIC already exists';
         }
 
-        //validate DOB
-        if(empty($data['dob'])){
-          $data['dob_err'] = 'Please enter dob';
+          // Validate date of birth
+        if(empty($data['dob'])) {
+          $data['dob_err'] = 'Please enter your date of birth.';
+        } else {
+          // Calculate age
+            $dob = new DateTime($data['dob']);
+            $now = new DateTime();
+            $age = $now->diff($dob)->y;
+
+            // Check if age is less than 18
+            if($age < 18) {
+              $data['dob_err'] = 'You must be at least 18 years old.';
+             }
         }
+
 
         // Validate Contact no
         if(empty($data['contact_no'])){
@@ -996,14 +969,16 @@
   } 
 
   public function request_incomming(){
-    $collectors = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+    $collectors1 = $this->collectorModel->get_collectors_bycenterid($_SESSION['center_id']);
+    $collectors = $this->collectorModel->get_collectors_by_center_id_no_assign($_SESSION['center_id']);
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $incoming_requests = $this->Request_Model-> get_incoming_request($center->region);
     $jsonData = json_encode($incoming_requests);
     $assigned_requests = $this->Request_Model->get_assigned_request_by_center($center->region);
     $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
-
     $assigned_requests_count = [];
+    $result=$this->Request_Model->cancelling_auto();
+
     foreach ($collectors as $collector) {
 
         $assigned_requests_count[$collector->id] = $this->Request_Model->get_assigned_requests_count_by_collector_for_day($collector->id);
@@ -1019,6 +994,7 @@
       'assigned_requests'=> $assigned_requests,
       'lattitude'=> $center->lat,
       'longitude'=> $center->longi,
+      'radius' => $center->radius,
       'notification' => $notifications
     ];
     $this->view('center_managers/request_incomming', $data);
@@ -1137,7 +1113,8 @@
   }
 
   public function request_assigned(){
-    
+    $result=$this->Request_Model->cancelling_auto();
+
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
     $assined_requests=$this->Request_Model->get_assigned_request_by_center($center->region);
     $jsonData = json_encode($assined_requests);
@@ -1145,57 +1122,16 @@
     $data=[
       'assined_requests'=>$assined_requests,
       'jsonData'=>$jsonData,
-      'notification'=> $notifications
+      'notification'=> $notifications,
+      'lattitude'=> $center->lat,
+      'longitude'=> $center->longi,
+      'radius' => $center->radius
     ];
     
     $this->view('center_managers/request_assinged', $data);
 
   }
-  
-  public function assinged_request_cancell(){
-    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
-    $assined_requests=$this->Request_Model->get_assigned_request_by_center($center->region);
-    $jsonData = json_encode($assined_requests);
-    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    
-      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-      $data = [
-        'incoming_requests' => $assined_requests,
-        'jsonData' => $jsonData,
-        'pop_location'=>'',
-        'map'=>'',
-        'request_id'=>trim($_POST['id']),
-        'reason'=>trim($_POST['reason']),
-        'cancelled_by'=>"Center",
-        'assinged'=>'Yes',
-        'collector_id'=> trim($_POST['collector_id']),
-        'notification'=> $notifications
-      ];
-
-      if (empty($data['reason']) || str_word_count($data['reason']) > 200) {
-        $this->view('center_managers/request_assigned', $data);
-
-      } else {
-        $this->Request_Model->cancel_request($data);
-        $this->request_cancelled();
-    }
-    
-    }
-    else{
-
-      $data = [
-        'incoming_requests' => $assined_requests,
-        'jsonData' => $jsonData,
-        'pop_location'=>'',
-        'map'=>'',
-        'notification'=> $notifications
-
-      ];
-      $this->view('center_managers/request_assigned', $data);
-    }
-  }
 
   public function request_completed(){
     $center=$this->center_model->getCenterById($_SESSION['center_id']); 
@@ -1957,6 +1893,21 @@
       header("Location: " . URLROOT . "/centermanagers/$url");        
 
    }
+  }
+
+  public function view_customer_complaints(){
+ 
+    $center=$this->center_model->getCenterById($_SESSION['center_id']); 
+    $customer_complaints = $this->customer_complaints_model->get_customer_complaints_by_region($center->region);
+    $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+
+    $data =[
+      'customer_complaints' => $customer_complaints,
+      'notification'=> $notifications
+
+    ];
+
+    $this->view('center_managers/view_customer_complaints', $data);
   }
 
 

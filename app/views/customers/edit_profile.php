@@ -53,32 +53,32 @@
                                             <h3>Region</h3>
                                             <select name="region" id="centerDropdown">
                                                 <?php
-                                              $centers = $data['centers'];
-                                              $selectedRegion = $data['city'];
-                                              $regionFound = false;
+        $centers = $data['centers'] ?? [];
+        $selectedRegion = $data['city'] ?? '';
+        $regionFound = false;
 
-                                        if (!empty($centers)) {
-                                           foreach ($centers as $center) {
-                                               $selected = ($center->region == $selectedRegion) ? 'selected' : '';
+        if (!empty($centers)) {
+            foreach ($centers as $center) {
+                $selected = ($center->region == $selectedRegion) ? 'selected' : '';
 
-                                               if ($selected) {
-                                                  $regionFound = true;
-                                               }
-        
-                                            echo "<option value=\"$center->region\" $selected>$center->region</option>";
-                                        }
+                echo "<option value=\"$center->region\" $selected>$center->region</option>";
 
-                                        if (!$regionFound) {
-                                            echo "<option value=\"default\" selected>$selectedRegion</option>";
-                                         }
-                                        } else {
-                                             echo "<option value=\"default\">No Centers Available</option>";
-                                         }
-                                          ?>
+                if ($selected) {
+                    $regionFound = true;
+                }
+            }
+
+            if (!$regionFound) {
+                echo "<option value=\"$selectedRegion\" selected>$selectedRegion</option>";
+            }
+        } else {
+            echo "<option value=\"default\">No Centers Available</option>";
+        }
+        ?>
                                             </select>
                                             <div class="err1">Choose the closest center for your location! </div>
-
                                         </div>
+
                                         <div class="edit-profile-content">
                                             <h3>Address </h3>
                                             <input name="address" type="text" value="<?php echo $data['address']?>">

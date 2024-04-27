@@ -23,7 +23,7 @@
                                     <th>Location</th>
                                     <th>Collector info</th>
                                     <th>Request Details</th>
-                                    <th>Cancel</th>
+                                    <!-- <th>Cancel</th> -->
                                 </tr>
                             </table>
                         </div>
@@ -51,11 +51,11 @@
                                             onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
 
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <i class='bx bx-x-circle' style="font-size: 29px; color:#DC2727;"
                                             onclick="cancel(<?php echo $request->req_id ?>,<?php echo  $request->collector_id ?>)"></i>
 
-                                    </td>
+                                    </td> -->
                                 </tr>
                                 <?php endforeach; ?>
                             </table>
@@ -90,7 +90,7 @@
             </div>
 
             <!-- cancel popup -->
-            <div class="cancel-confirm" id="cancel-confirm">
+            <!-- <div class="cancel-confirm" id="cancel-confirm">
                 <form class="cancel-confirm-content" id="cancel-form" method="post"
                     action="<?php echo URLROOT?>/centermanagers/assinged_request_cancell">
 
@@ -107,7 +107,7 @@
 
                 </form>
 
-            </div>
+            </div> -->
 
             <div class="overlay" id="overlay"></div>
 
@@ -187,22 +187,22 @@ document.getElementById('submit-notification').onclick = function() {
     };
     /* ----------------- */
 
-function cancel(id, collector_id) {
-    var inputElement = document.querySelector('input[name="id"]');
-    inputElement.style.display = 'none';
-    var collector_id = document.getElementById('collector_id');
-    collector_id.style.display = 'none';
+// function cancel(id, collector_id) {
+//     var inputElement = document.querySelector('input[name="id"]');
+//     inputElement.style.display = 'none';
+//     var collector_id = document.getElementById('collector_id');
+//     collector_id.style.display = 'none';
 
-    inputElement.value = id;
-    collector_id.value = collector_id;
+//     inputElement.value = id;
+//     collector_id.value = collector_id;
 
-    // document.getElementById("cancel-confirm").style.display = "flex"
-    var cancel_popup = document.getElementById('cancel-confirm');
-    cancel_popup.classList.add('active');
+//     // document.getElementById("cancel-confirm").style.display = "flex"
+//     var cancel_popup = document.getElementById('cancel-confirm');
+//     cancel_popup.classList.add('active');
 
-    document.getElementById('overlay').style.display = "flex";
+//     document.getElementById('overlay').style.display = "flex";
 
-}
+// }
 
 function searchTable() {
     var input = document.getElementById('searchInput').value.toLowerCase();
@@ -212,11 +212,8 @@ function searchTable() {
         var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
         var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
         var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-        var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
-        var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
-
-        if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(input) ||
-            cid.includes(input)) {
+       
+        if (time.includes(input) || id.includes(input) || date.includes(input) ) {
             row.style.display = '';
         } else {
             row.style.display = 'none'; // Hide the row
@@ -225,17 +222,17 @@ function searchTable() {
 
 }
 
-function validateCancelForm() {
-    var reasonInput = document.getElementsByName("reason")[0].value;
+// function validateCancelForm() {
+//     var reasonInput = document.getElementsByName("reason")[0].value;
 
-    if (reasonInput.trim() === "" || reasonInput.split(/\s+/).length > 200) {
-        alert("Please enter a reason");
-    } else {
-        document.getElementById("cancel-form").submit();
-    }
-    document.getElementById('overlay').style.display = "none";
+//     if (reasonInput.trim() === "" || reasonInput.split(/\s+/).length > 200) {
+//         alert("Please enter a reason");
+//     } else {
+//         document.getElementById("cancel-form").submit();
+//     }
+//     document.getElementById('overlay').style.display = "none";
 
-}
+// }
 
 function view_collector(request) {
     var Pop = document.getElementById('personal-details-popup-box');
@@ -294,7 +291,7 @@ function initLocationPop(latitude = 7.4, longitude = 81.00000000) {
 }
 
 function viewLocation($lattitude, $longitude) {
-    initMap($lattitude, $longitude);
+    initLocationPop($lattitude, $longitude);
     var locationPop = document.getElementById('location_pop');
     locationPop.classList.add('active');
     document.getElementById('overlay').style.display = "flex";
@@ -315,7 +312,7 @@ function initMap() {
             lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
             lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
         },
-        zoom: 14.5
+        zoom: 9
     });
 
     var incomingRequests = <?php echo $data['jsonData']; ?>;
@@ -328,9 +325,27 @@ function initMap() {
             map: map,
         });
         marker.addListener('click', function() {
-            view_collector(coordinate.image, coordinate.collector_id, coordinate.name, coordinate
-                .contact_no, coordinate.vehicle_no, coordinate.vehicle_type, coordinate.req_id);
+            // view_collector(coordinate.image, coordinate.collector_id, coordinate.name, coordinate
+            //     .contact_no, coordinate.vehicle_no, coordinate.vehicle_type, coordinate.req_id);
+            view_collector(coordinate);
         });
+    });
+
+    var defaultLatLng = {
+        lat: <?php echo $data['lattitude'] ?>,
+        lng: <?php echo $data['longitude'] ?>
+    };
+
+        // Add a circle to the first map
+    var circle2 = new google.maps.Circle({
+        map: map,
+        center: defaultLatLng,
+        radius: <?php echo $data['radius']?>,
+        fillColor: '#47b076',
+        fillOpacity: 0.3,
+        strokeColor: '#47b076',
+        strokeOpacity: 1,
+        strokeWeight: 2
     });
 }
 
@@ -359,15 +374,15 @@ function loadLocations() {
 
         var map = new google.maps.Map(document.getElementById('map-loaction'), {
             center: {
-                lat: 7.8731,
-                lng: 80.7718
+                lat:  <?php echo $data['lattitude'] ?>,
+                lng: <?php echo $data['longitude'] ?>
             },
-            zoom: 7.2
+            zoom: 10
         });
 
-        var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
+        var assignedRequestsForDate = <?php echo $data['jsonData']; ?>;
 
-        incomingRequestsForDate.forEach(function(coordinate) {
+        assignedRequestsForDate.forEach(function(coordinate) {
             var marker = new google.maps.Marker({
                 position: {
                     lat: parseFloat(coordinate.lat),
@@ -381,20 +396,37 @@ function loadLocations() {
                 handleMarkerClick(marker);
             });
         });
+
+        var defaultLatLng = {
+            lat: <?php echo $data['lattitude'] ?>,
+            lng: <?php echo $data['longitude'] ?>
+        };
+
+            // Add a circle to the first map
+        var circle2 = new google.maps.Circle({
+            map: map,
+            center: defaultLatLng,
+            radius: <?php echo $data['radius']?>,
+            fillColor: '#47b076',
+            fillOpacity: 0.3,
+            strokeColor: '#47b076',
+            strokeOpacity: 1,
+            strokeWeight: 2
+        });
     }
 }
 
 function updateMapForDate(selectedDate) {
     var map = new google.maps.Map(document.getElementById('map-loaction'), {
         center: {
-            lat: 7.8731,
-            lng: 80.7718
+            lat: <?php echo $data['lattitude'] ?>,
+            lng: <?php echo $data['longitude'] ?>
         },
-        zoom: 7.2
+        zoom: 10
     });
 
-    var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
-    var filteredRequests = incomingRequestsForDate.filter(function(coordinate) {
+    var assignedRequestsForDate = <?php echo $data['jsonData']; ?>;
+    var filteredRequests = assignedRequestsForDate.filter(function(coordinate) {
         return coordinate.date === selectedDate;
     });
 
@@ -412,19 +444,36 @@ function updateMapForDate(selectedDate) {
             handleMarkerClick(marker);
         });
     });
+
+    var defaultLatLng = {
+        lat: <?php echo $data['lattitude'] ?>,
+        lng: <?php echo $data['longitude'] ?>
+    };
+
+        // Add a circle to the first map
+    var circle2 = new google.maps.Circle({
+        map: map,
+        center: defaultLatLng,
+        radius: <?php echo $data['radius']?>,
+        fillColor: '#47b076',
+        fillOpacity: 0.3,
+        strokeColor: '#47b076',
+        strokeOpacity: 1,
+        strokeWeight: 2
+    });
 }
 
-function closecancel() {
-    const popup = document.getElementById("cancel-confirm");
+// function closecancel() {
+//     const popup = document.getElementById("cancel-confirm");
 
-    popup.classList.remove('active');
-    document.getElementById('overlay').style.display = "none";
-}
+//     popup.classList.remove('active');
+//     document.getElementById('overlay').style.display = "none";
+// }
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    const closeButton = document.getElementById("cancel-pop");
-    const popup = document.getElementById("cancel-confirm");
+    // const closeButton = document.getElementById("cancel-pop");
+    // const popup = document.getElementById("cancel-confirm");
     const close_collector_pop = document.getElementById("personal-details-popup-form-close");
     const closeassign = document.getElementById("cancel-assing");
     const assign = document.getElementById("View");
@@ -442,7 +491,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (main_right_bottom_two !== null) {
             main_right_bottom_two.style.display = "flex";
         }
-        maps.style.backgroundColor = "#ecf0f1";
+        maps.style.backgroundColor = "var(--request-top-color)";
         table.style.backgroundColor = "";
     });
 
@@ -453,7 +502,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (main_right_bottom_two !== null) {
             main_right_bottom_two.style.display = "none";
         }
-        table.style.backgroundColor = "#ecf0f1";
+        table.style.backgroundColor = "var(--request-top-color)";
         maps.style.backgroundColor = "";
 
     });
@@ -464,11 +513,12 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('overlay').style.display = "none";
     });
 
-    closeButton.addEventListener("click", function() {
-        popup.style.display = "none";
-    });
+    // closeButton.addEventListener("click", function() {
+    //     popup.style.display = "none";
+    // });
 
     close_request_details.addEventListener("click", function() {
+       
         var request_popup = document.getElementById("request-details-popup-box");
         request_popup.classList.remove('active');
         document.getElementById('overlay').style.display = "none";

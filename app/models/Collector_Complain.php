@@ -64,7 +64,29 @@
                         ORDER BY collector_complains.date DESC');
       $results = $this->db->resultSet();
       return $results;
-  }
+    }
+
+    public function get_collector_complaints_by_region($region){
+      try{
+        $this->db->query('SELECT collector_complains.* , collectors.image
+                          FROM collector_complains 
+                          INNER JOIN collectors 
+                          ON collector_complains.collector_id = collectors.user_id
+                          WHERE collector_complains.region = :region
+                          ORDER BY collector_complains.date DESC');
+        $this->db->bind(':region', $region);
+        $results = $this->db->resultSet();
+        return $results;
+  
+  
+      }catch (PDOException $e){
+        return false;
+      }
+      
+  
+  
+  
+    }
   
   
 

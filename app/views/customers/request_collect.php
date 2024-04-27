@@ -18,6 +18,7 @@
 
                 </div>
 
+                <?php if ($data['center_block'] == '0'): ?>
                 <form id="myForm" class="main-bottom" action="<?php echo URLROOT;?>/customers/request_collect"
                     method="post">
 
@@ -142,7 +143,7 @@
                                 <h3>Drag the marker to set the pick up location</h3>
                             </div>
                             <div id="map"></div>
-                            <p>* Green Radius : Indicates the operational area of your default center</p>
+                            <p>*Green Radius : Indicates the operational area of your default center</p>
                             <div class="buttons-container" id="submitForm">
                                 <button type="button" id="markLocationBtn" onclick="submitForm()">Mark
                                     Location</button>
@@ -198,6 +199,17 @@
                     <?php endif; ?>
 
                 </form>
+                <?php else: ?>
+                <div class="main-bottom-empty">
+                    <div class="cont">
+                        <h1>Sorry Your default center has been disabled</h1>
+                        <i class="fa-regular fa-face-frown"></i>
+                    </div>
+
+
+                </div>
+                <?php endif; ?>
+
             </div>
             <div class="overlay" id="overlay">
 

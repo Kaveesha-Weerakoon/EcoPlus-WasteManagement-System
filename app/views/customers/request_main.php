@@ -32,7 +32,7 @@
                             <table class="table" id="dataTable">
                                 <?php foreach($data['request'] as $request) : ?>
                                 <tr class="table-row">
-                                    <td>R<?php echo $request->request_id?></td>
+                                    <td><?php echo $request->request_id?></td>
                                     <td>
                                         <?php
                                           $typeContent = ($request->type === 'incoming') ? 

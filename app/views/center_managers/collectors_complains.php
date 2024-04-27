@@ -17,22 +17,16 @@
                         <h1>Collectors</h1>
                     </div>
                     <div class="main-right-top-three">
-                        <a href="<?php echo URLROOT?>/centermanagers/collectors">
+                        <a href="<?php echo URLROOT?>/centermanagers/view_customer_complaints">
                             <div class="main-right-top-three-content">
-                                <p>View</p>
-                                <div class="line"></div>
-                            </div>
-                        </a>
-                        <a href="<?php echo URLROOT?>/centermanagers/collectors_add">
-                            <div class="main-right-top-three-content">
-                                <p>Register</p>
-                                <div class="line"></div>
+                                <p>Customers</p>
+                                <div class="line" ></div>
                             </div>
                         </a>
                         <a href="<?php echo URLROOT?>/centermanagers/collectors_complains">
                             <div class="main-right-top-three-content">
-                                <p><b style="color:#1ca557;">Complaints</b></p>
-                                <div class="line" style="background-color: #1ca557;"></div>
+                                <p><b style="color: var(--green-color-one);">Collectors</b></p>
+                                <div class="line" style="background-color: var(--green-color-one);"></div>
                             </div>
                         </a>
 
@@ -48,20 +42,24 @@
                                 <th>Collector ID</th>
                                 <th>Date & Time</th>
                                 <th>Subject</th>
-                                <th>Complaint</th>
+                                <th>Details</th>
                             </tr>
                         </table>
                     </div>
                     <div class="main-right-bottom-down">
                         <table class="table">
 
-                            <?php foreach($data['collectors_complains'] as $post) : ?>
+                            <?php foreach($data['collectors_complains'] as $complaint) : ?>
                             <tr class="table-row">
-                                <td>CoC <?php echo $post->id?></td>
-                                <td>Co <?php echo $post->collector_id?></td>
-                                <td><?php echo $post->date?></td>
-                                <td><?php echo $post->subject?></td>
-                                <td><?php echo $post->complaint?></td>
+                                <td><?php echo $complaint->id?></td>
+                                <td><?php echo $complaint->collector_id?></td>
+                                <td><?php echo $complaint->date?></td>
+                                <td><?php echo $complaint->subject?></td>
+                                <td>
+                                    <i class='bx bx-info-circle' style="font-size: 29px"
+                                    onclick="view_complaint_details(<?php echo htmlspecialchars(json_encode($complaint), ENT_QUOTES, 'UTF-8') ?>)"></i>
+                                </td>
+                              
                             </tr>
                             <?php endforeach; ?>
                         </table>
@@ -81,6 +79,72 @@
 
             </div>
         </div>
+
+        
+        <div class="overlay" id="overlay"></div>
+
+        <div class="personal-details-popup-box" id="personal-details-popup-box">
+            <div class="personal-details-popup-form">
+                <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="personal-details-popup-form-close"
+                    id="personal-details-popup-form-close">
+                <center>
+                    <div class="personal-details-topic">Complaint Details</div>
+                </center>
+
+                <div class="personal-details-popup">
+                    <div class="personal-details-left">
+                        <img src="" id="user_profile_pic" alt="">
+                        <p>Collector ID: <span id="user_id">C</span></p>
+                    </div>
+                    <div class="personal-details-right">
+                        <div class="personal-details-right-labels">
+                            <span>Complaint ID</span><br>
+                            <span>Collector Name</span><br>
+                            <span>Contact No</span><br>
+                            
+
+                        </div>
+                        <div class="personal-details-right-values">
+                            <span id="complain_id"></span><br>
+                            <span id="user_name"></span><br>
+                            <span id="user_contactno"></span><br>
+                           
+
+
+                        </div>
+                    </div>
+                    <div class="personal-details-bottom">
+                        <div class="personal-details-bottom-one">
+                            <h2>Subject</h2><br>
+                            <div>
+
+                                <div class="subject-complain-box">
+                                    <div class="subject-complain">
+                                        <span id="subject"></span><br>
+                                    </div>
+
+                                </div>
+                                <div class="personal-details-bottom-two">
+                                    <h2>Complaint</h2><br>
+                                    <div>
+
+                                        <div class="subject-complain-box">
+                                            <div class="subject-complain">
+                                                <span id="complain"></span><br>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script>
@@ -92,6 +156,57 @@
         form.submit(); 
 
     };
-    /* ----------------- */
+
+    
+    function view_complaint_details(complaint) {
+        var personalPop = document.getElementById('personal-details-popup-box');
+        personalPop.classList.add('active');
+        document.getElementById('overlay').style.display = "flex";
+
+        document.getElementById('user_id').textContent = complaint.collector_id;
+        document.getElementById('complain_id').textContent = complaint.id;
+        document.getElementById('user_profile_pic').src = "<?php echo IMGROOT?>/img_upload/collector/" + complaint.image;
+        document.getElementById('user_name').textContent = complaint.name;
+        document.getElementById('user_contactno').textContent = complaint.contact_no;
+        document.getElementById('subject').textContent = complaint.subject;
+        document.getElementById('complain').textContent = complaint.complaint;
+
+
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var close_personal_details = document.getElementById('personal-details-popup-form-close');
+        close_personal_details.addEventListener('click', function() {
+            const personal_details = document.getElementById("personal-details-popup-box");
+            personal_details.classList.remove('active');
+            document.getElementById('overlay').style.display = "none";
+
+        });
+    });
+
+    function searchTable() {
+        var input = document.getElementById('searchInput').value.toLowerCase();
+        var rows = document.querySelectorAll('.table-row');
+        rows.forEach(function(row) {
+            var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+            var collector_id = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+            var date_time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+            var subject = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+            
+
+            if (id.includes(input) || collector_id.includes(input) || date_time.includes(input) || subject.includes(input)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none'; // Hide the row
+            }
+        });
+
+    }
+
+    document.getElementById('searchInput').addEventListener('input', searchTable);
+    
+
+
+    
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

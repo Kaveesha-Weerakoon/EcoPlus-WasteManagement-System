@@ -2,15 +2,11 @@
 <div class="CenterManager_Main">
     <div class="CenterManager_Request_Main">
         <div class="CenterManager_Request_Incomming">
-            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initializeMaps"
-            async defer>
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initializeMaps"
+                async defer>
             </script>
-            <!-- <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initMapAssigned"
-            async defer>
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API?>&libraries=places&callback=initLocationPop"
-            async defer>
-            </script> -->
+
 
             <div class="main">
                 <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
@@ -46,7 +42,7 @@
                                     <td><?php  echo $request->time?></td>
                                     <td>
                                         <i class='bx bx-map' style="font-size: 29px;"
-                                        onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
+                                            onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
 
                                     </td>
                                     <td>
@@ -54,8 +50,8 @@
                                             onclick="view_request_details(<?php echo htmlspecialchars(json_encode($request), ENT_QUOTES, 'UTF-8') ?>)"></i>
                                     </td>
                                     <td>
-                                        <i class='bx bxs-user-check' style="font-size: 32px;"
-                                            onclick="assign(<?php echo $request->req_id ?>, '<?php echo htmlspecialchars($request->date, ENT_QUOTES, 'UTF-8')?>')"></i>
+                                        <i class='bx bxs-user-check assign-button' style="font-size: 32px;" onclick="assign(<?php echo $request->req_id ?>, '<?php echo htmlspecialchars($request->date, ENT_QUOTES, 'UTF-8')?>', '<?php echo $request->time ?>',
+                                        <?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
 
                                     </td>
                                     <td>
@@ -136,7 +132,7 @@
                                                 <span class=\"collector-name\">$collector->name</span>
                                                 <span class=\"vehicle-type\">$collector->vehicle_type</span>
                                                 </li>";
-                                        }
+                                    }
                                     }else {
                                             echo "<li>No Collectors Available</li>";
                                         }
@@ -144,13 +140,28 @@
                             </ul>
                         </div>
 
+                        <span name="requestTime" id="requestTime" style="display:none;"></span>
+
+                        <div class="time-slot-dropdown-container">
+                            <select name="time-slot-dropdown" id="time-slot-dropdown">
+                                <option value="8 am - 10 am">8 am - 10 am</option>
+                                <option value="10 am - 12 noon">10 am - 12 noon</option>
+                                <option value="12 noon -2 pm">12 noon -2 pm</option>
+                                <option value="2 pm - 4 pm">2 pm - 4 pm</option>
+                                <option value="all">All</option>
+                            </select>
+                        </div>
+
                         <!-- Hidden input field to store the selected collector's ID -->
                         <input type="hidden" name="selected_collector_id" id="selected_collector_id">
+                        <input type="hidden" name="request_lat" id="request_lat">
+                        <input type="hidden" name="request_longi" id="request_longi">
+
 
                         <div class="assigned-req-count-container">
                             <p>Number of Assigned requests for the requested date:</p>
                             <span id="request_count"></span>
-                            <input name="requested_date" type="text" id="requested_date" >
+                            <input name="requested_date" type="text" id="requested_date">
                         </div>
 
                         <div class="assigned-map-container">
@@ -236,11 +247,7 @@
                 initLocationPop();
             }
 
-            var selectedCollectorId = 0;
-            var requestCount = document.getElementById('request_count');
-            requestCount.innerHTML = 0;
-            var map1;
-            var markers = [];
+
 
             function initMapAssigned() {
 
@@ -254,59 +261,149 @@
                     zoom: 9
                 });
             }
-            
-            var dropdownItems = document.querySelectorAll('.dropdown-item');
-            dropdownItems.forEach(function(item) {
-                item.addEventListener('click', function() {
-                    selectedCollectorId = this.getAttribute('data-id');
-                    selected_collector_id.value = selectedCollectorId;
 
-                    var requestDate= document.getElementById('requested_date').value;
-                    //console.log(requestDate);
+            // var timeSlot = document.getElementById('time-slot-dropdown');
+            // var selectedTimeSlot = timeSlot.value;
+            // console.log(selectedTimeSlot);
 
-                    updateAssignedReqContent(selectedCollectorId, requestDate);
 
-                    
 
-                });
-            });
+            // console.log('Selected value:', selectedTimeSlot);
+            var selectedCollectorId = 0;
+            var requestCount = document.getElementById('request_count');
+            requestCount.innerHTML = 0;
+            var map1;
+            var markers = [];
 
-            function updateAssignedReqContent(collectorId, requestDate){
+
+            function updateAssignedReqContent(collectorId, requestDate, requestTime, requestLat, requestLongi) {
                 var request = <?php echo json_encode($data['assigned_requests']); ?>;
                 var count = 0;
 
+                console.log('request time in the function', requestTime, requestLat, requestLongi);
+                requestId = document.getElementById('assign_req_id').textContent;
+
                 clearMarkers();
 
-                for (let req_id in request) {
-                    if (request.hasOwnProperty(req_id)) {
-                        
-                        if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate) {
-                            
-                            count++;
-                            console.log(request[req_id].lat, request[req_id].longi);
-                            // Create a marker for each record and add it to the map
-                            var marker = new google.maps.Marker({
-                                position: {lat: parseFloat(request[req_id].lat), lng: parseFloat(request[req_id].longi)},
-                                map: map1,
-                                title: 'Request ' + request[req_id].req_id
-                            });
-                            markers.push(marker);
-                            
+                var greenmarker = new google.maps.Marker({
+                    position: {
+                        lat: parseFloat(requestLat),
+                        lng: parseFloat(requestLongi)
+                    },
+                    map: map1,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                    title: 'Request ' + requestId
+                });
+                markers.push(greenmarker);
 
-                            // Optionally, add info window to display additional information
-                            var infoWindow = new google.maps.InfoWindow({
-                                content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' + request[req_id].customer_name 
-                            });
+                if (requestTime == 'all') {
+                    for (let req_id in request) {
+                        if (request.hasOwnProperty(req_id)) {
 
-                            marker.addListener('click', function() {
-                                infoWindow.open(map1, marker);
-                            });
+                            if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate) {
 
-                        };
+                                count++;
+                                console.log(request[req_id].lat, request[req_id].longi);
+                                // Create a marker for each record and add it to the map
+                                var marker = new google.maps.Marker({
+                                    position: {
+                                        lat: parseFloat(request[req_id].lat),
+                                        lng: parseFloat(request[req_id].longi)
+                                    },
+                                    map: map1,
+                                    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                                    title: 'Request ' + request[req_id].req_id
+                                });
+                                markers.push(marker);
+
+
+                                // Optionally, add info window to display additional information
+                                var infoWindow = new google.maps.InfoWindow({
+                                    content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' +
+                                        request[req_id].customer_name
+                                });
+
+                                marker.addListener('click', function() {
+                                    infoWindow.open(map1, marker);
+                                });
+
+                            };
+                        }
                     }
+                    //console.log(markers);
+                    requestCount.innerHTML = count;
+
+                } else {
+                    for (let req_id in request) {
+                        if (request.hasOwnProperty(req_id)) {
+
+                            if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate &&
+                                request[req_id].time == requestTime) {
+
+                                count++;
+                                console.log(request[req_id].lat, request[req_id].longi);
+                                // Create a marker for each record and add it to the map
+                                var marker = new google.maps.Marker({
+                                    position: {
+                                        lat: parseFloat(request[req_id].lat),
+                                        lng: parseFloat(request[req_id].longi)
+                                    },
+                                    map: map1,
+                                    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                                    title: 'Request ' + request[req_id].req_id
+                                });
+                                markers.push(marker);
+
+
+                                // Optionally, add info window to display additional information
+                                var infoWindow = new google.maps.InfoWindow({
+                                    content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' +
+                                        request[req_id].customer_name
+                                });
+
+                                marker.addListener('click', function() {
+                                    infoWindow.open(map1, marker);
+                                });
+
+                            };
+                        }
+                    }
+                    //console.log(markers);
+                    requestCount.innerHTML = count;
+
+
                 }
-                //console.log(markers);
-                requestCount.innerHTML = count;
+
+                // for (let req_id in request) {
+                //     if (request.hasOwnProperty(req_id)) {
+
+                //         if (request[req_id].collector_id == collectorId && request[req_id].date == requestDate) {
+
+                //             count++;
+                //             console.log(request[req_id].lat, request[req_id].longi);
+                //             // Create a marker for each record and add it to the map
+                //             var marker = new google.maps.Marker({
+                //                 position: {lat: parseFloat(request[req_id].lat), lng: parseFloat(request[req_id].longi)},
+                //                 map: map1,
+                //                 title: 'Request ' + request[req_id].req_id
+                //             });
+                //             markers.push(marker);
+
+
+                //             // Optionally, add info window to display additional information
+                //             var infoWindow = new google.maps.InfoWindow({
+                //                 content: 'Request ID: ' + request[req_id].req_id + '<br>' + 'Customer: ' + request[req_id].customer_name 
+                //             });
+
+                //             marker.addListener('click', function() {
+                //                 infoWindow.open(map1, marker);
+                //             });
+
+                //         };
+                //     }
+                // }
+                // //console.log(markers);
+                // requestCount.innerHTML = count;
 
             }
 
@@ -365,7 +462,10 @@
                 }
             }
 
-            function assign(id, requestedDate) {
+            function assign(id, requestedDate, requestTime, requestLat, requestLongi) {
+
+                console.log(requestLat, requestLongi);
+
                 var inputElement = document.querySelector('input[name="assign_req_id"]');
 
                 inputElement.value = id;
@@ -378,6 +478,16 @@
                 var dateInput = document.querySelector('input[name="requested_date"]');
                 dateInput.value = requestedDate;
                 dateInput.style.display = 'none';
+
+                var requestTimeSlot = document.getElementById('requestTime');
+                requestTimeSlot.textContent = requestTime;
+
+
+                var requestLatitude = document.querySelector('input[name="request_lat"]');
+                requestLatitude.value = requestLat;
+
+                var requestLongitude = document.querySelector('input[name="request_longi"]');
+                requestLongitude.value = requestLongi;
 
                 // var request_date = document.getElementById('requested_date');
                 // request_date.innerHTML = requestedDate;
@@ -394,12 +504,91 @@
                 // Clear markers from the map
                 clearMarkers();
 
+                var greenmarker = new google.maps.Marker({
+                    position: {
+                        lat: parseFloat(requestLat),
+                        lng: parseFloat(requestLongi)
+                    },
+                    map: map1,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                    title: 'Request ' + id
+                });
+                markers.push(greenmarker);
+
                 var assign_popup = document.getElementById('View');
                 assign_popup.classList.add('active');
 
                 document.getElementById('overlay').style.display = "flex";
 
             }
+
+            document.addEventListener('DOMContentLoaded', function() {
+
+                var selectedTimeSlot = '';
+                const assignButtons = document.querySelectorAll('.assign-button');
+
+                assignButtons.forEach(function(button) {
+                    button.addEventListener('click', function() {
+
+                        const dropdown = document.getElementById('time-slot-dropdown');
+                        const span = document.getElementById('requestTime');
+
+                        // Set the default selected option based on the value in the span
+                        const spanValue = span.textContent;
+                        //console.log(spanValue);
+                        const option = dropdown.querySelector(`option[value="${spanValue}"]`);
+                        //console.log(option);
+
+                        if (option) {
+                            option.selected = true;
+                            selectedTimeSlot = spanValue;
+                            console.log('selected time slot', selectedTimeSlot);
+                        }
+
+
+                    });
+                });
+
+                var dropdownItems = document.querySelectorAll('.dropdown-item');
+                dropdownItems.forEach(function(item) {
+                    item.addEventListener('click', function() {
+                        selectedCollectorId = this.getAttribute('data-id');
+                        selected_collector_id.value = selectedCollectorId;
+
+                        var requestDate = document.getElementById('requested_date').value;
+                        var requestLat = document.getElementById('request_lat').value;
+                        var requestLongi = document.getElementById('request_longi').value;
+
+                        updateAssignedReqContent(selectedCollectorId, requestDate,
+                            selectedTimeSlot, requestLat, requestLongi);
+                        //updateAssignedReqContent(selectedCollectorId, requestDate, requestTime);
+
+
+                    });
+                });
+
+                const timeDropdown = document.getElementById('time-slot-dropdown');
+
+                timeDropdown.addEventListener('change', (event) => {
+                    selectedTimeSlot = event.target.value;
+                    console.log('Selected value:', selectedTimeSlot);
+
+                    var selectedCollectorId = document.getElementById('selected_collector_id').value;
+                    console.log("selected collector:", selectedCollectorId);
+                    var requestDate = document.getElementById('requested_date').value;
+                    var requestLat = document.getElementById('request_lat').value;
+                    var requestLongi = document.getElementById('request_longi').value;
+
+                    updateAssignedReqContent(selectedCollectorId, requestDate, selectedTimeSlot,
+                        requestLat, requestLongi);
+
+                });
+
+
+
+
+            });
+
 
 
             function cancel($id) {
@@ -416,10 +605,10 @@
             function initMap() {
                 var map = new google.maps.Map(document.getElementById('map-loaction'), {
                     center: {
-                        lat: 7.8731,
-                        lng: 80.7718
+                        lat: <?= !empty($data['lattitude']) ? $data['lattitude'] : 6 ?>,
+                        lng: <?= !empty($data['longitude']) ? $data['longitude'] : 81.00 ?>
                     },
-                    zoom: 7.2
+                    zoom: 9
                 });
 
                 var incomingRequests = <?php echo $data['jsonData']; ?>;
@@ -438,6 +627,23 @@
                         handleMarkerClick(marker, coordinate);
                     });
                 });
+
+                var defaultLatLng = {
+                    lat: <?php echo $data['lattitude'] ?>,
+                    lng: <?php echo $data['longitude'] ?>
+                };
+
+                // Add a circle to the first map
+                var circle2 = new google.maps.Circle({
+                    map: map,
+                    center: defaultLatLng,
+                    radius: <?php echo $data['radius']?>,
+                    fillColor: '#47b076',
+                    fillOpacity: 0.3,
+                    strokeColor: '#47b076',
+                    strokeOpacity: 1,
+                    strokeWeight: 2
+                });
             }
 
             function handleMarkerClick(marker, coordinate) {
@@ -453,16 +659,12 @@
 
                 rows.forEach(function(row) {
                     var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
-                    var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
-                    var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-                    var customer = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
-                    var cid = row.querySelector('td:nth-child(5)').innerText.toLowerCase();
-                    var conctact_no = row.querySelector('td:nth-child(6)').innerText.toLowerCase();
-                    var instructions = row.querySelector('td:nth-child(7)').innerText.toLowerCase();
+                    var customer = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+                    var date = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+                    var time = row.querySelector('td:nth-child(4)').innerText.toLowerCase();
+                    
 
-                    if (time.includes(input) || id.includes(input) || date.includes(input) || customer.includes(
-                            input) || cid.includes(input) || conctact_no.includes(input) || instructions
-                        .includes(input)) {
+                    if (id.includes(input) || customer.includes(input) || date.includes(input) || time.includes(input) ) {
                         row.style.display = '';
                     } else {
                         row.style.display = 'none'; // Hide the row
@@ -479,7 +681,7 @@
                     var rows = document.querySelectorAll('.table-row');
                     rows.forEach(function(row) {
                         console.log('d');
-                        var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+                        var date = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
                         if (date.includes(selectedDate)) {
                             row.style.display = '';
                         } else {
@@ -496,10 +698,10 @@
 
                     var map = new google.maps.Map(document.getElementById('map-loaction'), {
                         center: {
-                            lat: 7.8731,
-                            lng: 80.7718
+                            lat: <?php echo $data['lattitude'] ?>,
+                            lng: <?php echo $data['longitude'] ?>
                         },
-                        zoom: 7.2
+                        zoom: 10
                     });
 
                     var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
@@ -518,16 +720,33 @@
                             handleMarkerClick(marker);
                         });
                     });
+
+                    var defaultLatLng = {
+                        lat: <?php echo $data['lattitude'] ?>,
+                        lng: <?php echo $data['longitude'] ?>
+                    };
+
+                     // Add a circle to the first map
+                    var circle2 = new google.maps.Circle({
+                        map: map,
+                        center: defaultLatLng,
+                        radius: <?php echo $data['radius']?>,
+                        fillColor: '#47b076',
+                        fillOpacity: 0.3,
+                        strokeColor: '#47b076',
+                        strokeOpacity: 1,
+                        strokeWeight: 2
+                    });
                 }
             }
 
             function updateMapForDate(selectedDate) {
                 var map = new google.maps.Map(document.getElementById('map-loaction'), {
                     center: {
-                        lat: 7.8731,
-                        lng: 80.7718
+                        lat: <?php echo $data['lattitude'] ?>,
+                        lng: <?php echo $data['longitude'] ?>
                     },
-                    zoom: 7.2
+                    zoom: 10
                 });
 
                 var incomingRequestsForDate = <?php echo $data['jsonData']; ?>;
@@ -548,6 +767,23 @@
                     marker.addListener('click', function() {
                         handleMarkerClick(marker);
                     });
+                });
+
+                var defaultLatLng = {
+                    lat: <?php echo $data['lattitude'] ?>,
+                    lng: <?php echo $data['longitude'] ?>
+                };
+
+                 // Add a circle to the first map
+                 var circle2 = new google.maps.Circle({
+                    map: map,
+                    center: defaultLatLng,
+                    radius: <?php echo $data['radius']?>,
+                    fillColor: '#47b076',
+                    fillOpacity: 0.3,
+                    strokeColor: '#47b076',
+                    strokeOpacity: 1,
+                    strokeWeight: 2
                 });
             }
 
@@ -575,6 +811,7 @@
 
             }
 
+
             document.addEventListener("DOMContentLoaded", function() {
 
                 const closeButton = document.getElementById("cancel-pop");
@@ -597,7 +834,7 @@
                     if (main_right_bottom_two !== null) {
                         main_right_bottom_two.style.display = "flex";
                     }
-                    maps.style.backgroundColor = "#ecf0f1";
+                    maps.style.backgroundColor = "var(--request-top-color)";
                     table.style.backgroundColor = "";
                 });
 
@@ -608,7 +845,7 @@
                     if (main_right_bottom_two !== null) {
                         main_right_bottom_two.style.display = "none";
                     }
-                    table.style.backgroundColor = "#ecf0f1";
+                    table.style.backgroundColor = "var(--request-top-color)";
                     maps.style.backgroundColor = "";
 
                 });
@@ -657,10 +894,6 @@
                     }
                 });
             });
-
-
-
-            document.getElementById('searchInput').addEventListener('input', searchTable);
             </script>
 
         </div>

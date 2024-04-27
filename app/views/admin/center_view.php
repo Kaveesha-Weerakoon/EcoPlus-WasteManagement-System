@@ -48,27 +48,32 @@
                                     <!-- <th>Location</th> -->
                                     <th>Center Manger ID</th>
                                     <th>Center Manager Name</th>
-                                    <th>Delete</th>
+                                    <th>View</th>
+                                    <th>Action</th>
                                 </tr>
                             </table>
                         </div>
                         <div class="main-right-bottom-down">
                             <table class="table">
                                 <?php foreach($data['centers'] as $centers) : ?>
-                                <tr class="table-row"
-                                    onclick="locate('<?php echo $centers->id?>/<?php echo $centers->region?>')">
+                                <tr class="table-row">
 
-                                    <td>C<?php echo $centers->id?></td>
+                                    <td><?php echo $centers->id?></td>
                                     <td><?php echo $centers->region?></td>
-                                    <!-- <td><i class='bx bx-map' style="font-size: 29px;"
-                                            onclick="viewLocation(<?php echo $centers->lat; ?>, <?php echo $centers->longi; ?>)"></i>
-                                    </td> -->
+
                                     <td><?php echo $centers->center_manager_id?></td>
                                     <td><?php echo $centers->center_manager_name?></td>
-
-                                    <td class="delete"> <a
-                                            href="<?php echo URLROOT?>/admin/center_delete/<?php echo $centers->id?>">
-                                            <i class='bx bxs-trash' style="font-size: 29px;"></i></a></td>
+                                    <td><i class="fa-solid fa-eye" style="font-size: 20px;"
+                                            onclick="locate('<?php echo $centers->id?>/<?php echo $centers->region?>')"></i>
+                                    </td>
+                                    <td>
+                                        <?php if ($centers->disable) : ?>
+                                        <i class="fa-solid fa-unlock" style="font-size: 20px;"></i>
+                                        <?php else : ?>
+                                        <i class="fa-solid fa-user-lock" style="font-size: 20px;"
+                                            onclick="block_user('<?php echo $centers->id; ?>')"></i>
+                                        <?php endif; ?>
+                                    </td>
                                 </tr>
                                 <?php endforeach; ?>
 
@@ -89,33 +94,54 @@
 
                 <div class="overlay" id="overlay"></div>
 
-                <?php if($data['delete_center']=='True') : ?>
-                <div class="center_delete">
+                <div class="delete_confirm2" id="cancel_confirm">
                     <div class="popup" id="popup">
-                        <img src="<?php echo IMGROOT?>/trash.png" alt="">
-                        <h2>Delete this Center?</h2>
-                        <p>This action will permanently delete this Center</p>
+                        <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
+                        <h2>Disable the Center?</h2>
+                        <p>This action disable the Center </p>
                         <div class="btns">
-                            <a href="<?php echo URLROOT?>/admin/center_delete_confirm/<?php echo $data['center_id']?>"><button
-                                    type="button" class="deletebtn">Delete</button></a>
-                            <a href="<?php echo URLROOT?>/admin/center"><button type="button"
-                                    class="cancelbtn">Cancel</button></a>
+                            <a id="cancelLink"><button type="button" class="deletebtn">Block</button></a>
+                            <a id="close_cancel"><button type="button" class="cancelbtn">Cancel</button></a>
                         </div>
                     </div>
                 </div>
-                <?php endif; ?>
             </div>
+            <?php if($data['Success']=='True') : ?>
+            <div class="complain_success" style="">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/check.png" alt="">
+                    <h2>Success!!</h2>
+                    <p>Center has been Disabled Successfully</p>
+                    <a href="<?php echo URLROOT?>/admin/center"><button type="button">OK</button></a>
+
+
+                </div>
+            </div>
+            <?php endif; ?>
+            <?php if($data['Success']=='False') : ?>
+            <div class="delete_confirm">
+                <div class="popup" id="popup">
+                    <img src="<?php echo IMGROOT?>/trash.png" alt="">
+
+
+                    <h2>This Action is prohibited</h2>
+                    <p>Center has ongoing requests,Center garbage stock is assisgned to a center</p>
+
+                    <div class="btns">
+                        <a href="<?php echo URLROOT?>/admin/center"><button type="button"
+                                class="cancelbtn">Cancel</button></a>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
         </div>
 
     </div>
 </div>
 <script>
 function locate(url) {
-    console.log(url)
     window.location.href = "<?php echo URLROOT?>/admin/center_main/" + url;
 }
-
-
 
 function initMap(latitude, longitude) {
     var mapCenter = {
@@ -171,6 +197,20 @@ function searchTable() {
     });
 
 }
+
+function block_user(id) {
+    var userId = id;
+    var newURL = "<?php echo URLROOT?>/admin/center_block/" + userId;
+    document.getElementById('cancelLink').href = newURL;
+    document.getElementById('overlay').style.display = "flex";
+    document.getElementById('cancel_confirm').classList.add('active');
+}
+const close_cancel = document.getElementById("close_cancel");
+
+close_cancel.addEventListener("click", function() {
+    document.getElementById('cancel_confirm').classList.remove('active');
+    document.getElementById('overlay').style.display = "none";
+});
 
 document.getElementById('searchInput').addEventListener('input', searchTable);
 </script>

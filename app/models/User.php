@@ -35,7 +35,7 @@
                 $this->db->query('INSERT INTO customer_credits (user_id, credit_amount) VALUES (:user_id, 0)');
                 $this->db->bind(':user_id', $user_id);
                 $result_credit_insert = $this->db->execute();
-    
+                return $result_credit_insert ;
                 
             } else {
                 return false; // Failed to insert customer data

@@ -49,7 +49,7 @@
                                     alt="">
                                 <div class="main-right-top-profile-cont">
                                     <h3><?php echo $_SESSION['collector_name']?></h3>
-                                    <p>ID : Col <?php echo $_SESSION['collector_id']?></p>
+                                    <p>ID :  <?php echo $_SESSION['collector_id']?></p>
                                 </div>
                             </div>
                         </div>
@@ -77,22 +77,24 @@
                             </a>
                         </div>
                         <div class="main-right-top-four">
-                            <div class="main-right-top-four-left">
+                        <div class="main-right-top-four-left">
                                 <p>Date</p>
                                 <input type="date" id="selected-date">
                                 <button onclick="loadLocations()">Filter</button>
                             </div>
+                            
                             <div class="main-right-top-four-right">
 
-                                <div class="main-right-top-four-component" style="background-color: #ecf0f1"
-                                    id="tables">
-                                    <img src="<?php echo IMGROOT?>/cells.png" alt="">
+                                <div class="main-right-top-four-component" style="background-color: var(--request-top-color);" id="tables">
+                                    <!-- <img src="<?php echo IMGROOT?>/cells.png" alt=""> -->
+                                    <i class='bx bx-table'  style="color:var(--main-text-color); font-size: 23px;"></i>
                                     <p>Tables</p>
                                 </div>
 
 
                                 <div class="main-right-top-four-component" id="maps">
-                                    <img src="<?php echo IMGROOT?>/map.png" alt="">
+                                    <!-- <img src="<?php echo IMGROOT?>/map.png" alt=""> -->
+                                    <i class='bx bx-map' style="color:var(--main-text-color); font-size: 23px;"></i>
                                     <p>Maps</p>
                                 </div>
 
@@ -143,7 +145,7 @@
                                             } else {
                                             echo '<a
                                                 href="' . URLROOT . '/Collectors/enterWaste_And_GenerateEcoCredits/' . $request->req_id . '">
-                                                <img class="complete_image" src="' . IMGROOT . '/assign.png" alt="">
+                                                <i  class="fa-solid fa-check-circle"></i>
                                             </a>';
                                             }
                                             ?>
@@ -169,12 +171,12 @@
                         </div>
                     </div>
                     <?php else: ?>
-                    <div class="main-right-bottom-three">
-                        <div class="main-right-bottom-three-content">
-                            <img src="<?php echo IMGROOT?>/Center_Manager_Request_Assign_Empty.jpg" alt="">
-                            <h1>You have No Assinged Requests</h1>
+                        <div class="main-right-bottom-three">
+                            <div class="main-right-bottom-three-content">
+                                <img src="<?php echo IMGROOT?>/undraw_questions_re_1fy7.svg" alt="">
+                                <h1>You have No cancel Requests</h1>
+                            </div>
                         </div>
-                    </div>
                     <?php endif; ?>
                 </div>
 

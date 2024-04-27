@@ -50,9 +50,10 @@
           $this->db->query('UPDATE customers SET blocked = :value WHERE user_id = :id');
           $this->db->bind(':value', TRUE); // You need to provide a value for ":value"
           $this->db->bind(':id', $id);
-          $this->db->execute();
+          $result=$this->db->execute();
+          return $result;
       } catch (PDOException $e) {
-          die($e->getMessage());
+          return False;
       }
   } 
   
@@ -61,9 +62,10 @@
         $this->db->query('UPDATE customers SET blocked = :value WHERE user_id = :id');
         $this->db->bind(':value', FALSE); // You need to provide a value for ":value"
         $this->db->bind(':id', $id);
-        $this->db->execute();
+        $result=$this->db->execute();
+        return $result;
     } catch (PDOException $e) {
-        die($e->getMessage());
+        return false;
     }
 }
 
@@ -177,6 +179,27 @@ public function get_Cus_all_details($id){
     
         $customer_count = $this->db->rowCount();
         return $customer_count; 
+
+      }catch (PDOException $e) {
+        return false;
+      }
+    }
+
+    public function get_customer_by_region($region){
+      try {
+        $this->db->query('SELECT *,
+        customers.id as cID,
+        users.id as userId
+        
+        FROM customers
+        INNER JOIN users
+        ON customers.user_id = users.id
+        INNER JOIN customer_credits cc ON cc.user_id=users.id WHERE city= :region');
+        $this->db->bind(':region', $region);
+
+        $rows = $this->db->resultSet();
+    
+        return $rows ; 
 
       }catch (PDOException $e) {
         return false;

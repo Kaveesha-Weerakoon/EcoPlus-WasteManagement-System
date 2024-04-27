@@ -11,8 +11,10 @@
 
           }
           public function index(){
-            header("Location: " . URLROOT);      
+            header("Location: " . URLROOT);       
+  
           }
+          
     public function register(){
       // Check for POST
       $centers = $this->Center_Model->getallCenters();
@@ -34,7 +36,7 @@
             'city'=>trim($_POST['city']),
             'password_reg' => trim($_POST['password_reg']),
             'confirm_password' => trim($_POST['confirm_password']),
-            'profile_image_name' => trim($_POST['email_reg']).'_'.$_FILES['profile_image']['name'],
+            'profile_image_name' => 'Profile.png',
             'centers'=>$jsonData,
             'centers2'=>$centers ,
             'name_err' => '',
@@ -50,20 +52,11 @@
             'email'=>'',
             'email_err'=>'' ,
             'password'=>'',
-             'password_err'=>'' 
+             'password_err'=>'',
+             'email_err' => '',  'center_err'=>''
+
           ];
 
-          if ($_FILES['profile_image']['error'] == 4) {
-            $data['profile_image_name'] ='';
-
-        } else {
-            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/customer/')) {
-              $data['profile_err'] = '';
-  
-            } else {
-                $data['profile_err'] = 'Error uploading the profile image';
-            }
-        }
   
            // Validate Email
            if(empty($data['email_reg'])){
@@ -115,7 +108,7 @@
 
 
           if (empty($data['password_reg'])) {
-            $data['password_reg_err'] = 'Pleae enter password';
+            $data['password_reg_err'] = 'Please enter password';
           } elseif (strlen($data['password_reg']) < 8 || strlen($data['password_reg']) > 30) {
               $data['password_reg_err'] = 'password must be between 8 and 30 characters';
 
@@ -141,15 +134,19 @@
               $data['confirm_password_err'] = 'Passwords do not match';
             }
           }
+
+          if($data['city']=="default"){
+            $data['center_err']="Select a region";
+          }
   
-          if(empty($data['email_reg_err']) && empty($data['name_err']) && empty($data['password_reg_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['city_err']) && empty($data['address_err'])&& empty($data['profile_err'])){
+          if(empty($data['center_err']) && empty($data['email_reg_err']) && empty($data['name_err']) && empty($data['password_reg_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['city_err']) && empty($data['address_err'])&& empty($data['profile_err'])){
             // Validated
             $pw=$data['password_reg'];
             $data['password_reg'] = password_hash($data['password_reg'], PASSWORD_DEFAULT);
-            
+         
             // Register User
             if($this->userModel->register($data)){
-              
+             
               $loggedInUser = $this->userModel->login($data['email_reg'], $pw);
               $customer=$this->customerModel->get_customer($loggedInUser->id);
               if($customer->image==''){
@@ -163,7 +160,6 @@
             
               }
              else {
-              flash('register_error');
               redirect('users/login');
             }
           } else {
@@ -172,7 +168,7 @@
           }
   
         } else {
-          // Init data
+        
           $data =[
             'name' => '',
             'email_reg' => '',
@@ -196,7 +192,10 @@
             'password'=>'',
             'email'=>'',
             'password'=>'',
-            'password_err'=>'' 
+            'password_err'=>'',
+            'email_err' => '',
+            'center_err'=>''
+ 
           ];
   
           // Load view
@@ -208,7 +207,7 @@
 
     public function login(){
        // Check for POST
-       $centers = $this->Center_Model->getallCenters();
+       $centers = $this->Center_Model->getallCenters2();
        $jsonData = json_encode($centers);
       if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id'])  || isset($_SESSION['admin_id']) || isset($_SESSION['agent_id']) ){
         if(isset($_SESSION['user_id'])){
@@ -259,7 +258,8 @@
             'password_reg_err'=>'',   
             'profile_err'=>'',
             'profile_upload_error'=>'' ,
-            'reg'=>'False'
+            'reg'=>'False',
+            'center_err'=>''
           ];
           // Validate Email
           if(empty($data['email'])){ 
@@ -296,7 +296,7 @@
                 }
                 else{
                   if($customer->image==''){
-                    $_SESSION['customer_profile'] = "Profile.png";
+                    $_SESSION['customer_profile'] = "profile.png";
                   }
                   else{
                     $_SESSION['customer_profile'] = $customer->image;
@@ -308,10 +308,24 @@
               
               else if($loggedInUser->role=="collector"){
                 $collector = $this->collectorModel->getCollectorById($loggedInUser->id);
-                $_SESSION['center_id'] = $collector->center_id;
-                $_SESSION['center'] = $collector->center_name;
-                $_SESSION['collector_profile'] = $collector->image;
-                $this->createCollectorSession($loggedInUser);
+
+                if($collector->disable==TRUE){
+                  $data['email_err'] = 'Your Account has been Blocked ';
+                  $this->view('users/login', $data);
+                }else{
+                  $center=$this->Center_Model->getCenterById($collector->center_id);
+                  if($center->disable==True){
+                    $data['email_err'] = 'Your Center Has Been Disabled';
+                    $this->view('users/login', $data);
+                  }else{
+                    $_SESSION['center_id'] = $collector->center_id;
+                    $_SESSION['center'] = $collector->center_name;
+                    $_SESSION['collector_profile'] = $collector->image;
+                    $this->createCollectorSession($loggedInUser);
+                  }
+              
+                }
+             
               }
               else if($loggedInUser->role=="centermanager"){
                 $center_manager = $this->center_managerModel->getCenterManagerByID($loggedInUser->id);
@@ -335,10 +349,15 @@
               }
 
              else if($loggedInUser->role=="discountagent"){
-                $agent_by_id = $this->discount_agentModel->getDiscountAgentByID($loggedInUser->id);
-
-                $this->createDiscountAgentSession($loggedInUser);
-                $_SESSION['agent_profile'] = $agent_by_id->image;
+                $agent_by_id = $this->discount_agentModel->getDiscountAgentByID2($loggedInUser->id);
+                if($agent_by_id->disable==True){
+                  $data['email_err'] = 'You are Blocked';
+                  $this->view('users/login', $data);
+                }
+                else{
+                  $this->createDiscountAgentSession($loggedInUser);
+                  $_SESSION['agent_profile'] = $agent_by_id->image;
+                }
               }
               
             } else {
@@ -350,7 +369,7 @@
             // Load view with errors
             $this->view('users/login', $data);
           }
-        } else {
+         } else {
           // Init data
           $data =[    
             'email' => '',
@@ -378,7 +397,8 @@
             'password_reg_err'=>'',  
             'profile_err'=>'',
             'profile_upload_error'=>'',
-            'reg'=>'False'
+            'reg'=>'False',
+            'center_err'=>''
           ];
           $this->view('users/login', $data);
         }
@@ -387,7 +407,6 @@
     }
 
  
-
 
     public function createUserSession($user){
       $_SESSION['user_id'] = $user->id;

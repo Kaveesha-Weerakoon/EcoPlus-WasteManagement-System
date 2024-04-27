@@ -140,9 +140,21 @@
         }
 
         //validate DOB
-        if(empty($data['dob'])){
-          $data['dob_err'] = 'Please enter dob';
-        }
+       // Validate date of birth
+        if(empty($data['dob'])) {
+             $data['dob_err'] = 'Please enter your date of birth.';
+        } else {
+           // Calculate age
+           $dob = new DateTime($data['dob']);
+           $now = new DateTime();
+            $age = $now->diff($dob)->y;
+
+      // Check if age is less than 18
+      if($age < 18) {
+      $data['dob_err'] = 'You must be at least 18 years old.';
+      }
+      }
+
 
         // Validate Contact no
         if(empty($data['contact_no'])){
@@ -662,6 +674,7 @@
     $types=$this->garbageTypeModel->get_all();
     $collector=$this->collectorModel->get_collector( $_SESSION['collector_id'] );
     $center=$this->centerModel->getCenterById($collector->center_id);
+    $result=$this->Request_Model->cancelling_auto();
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
@@ -900,7 +913,8 @@
             $data['creditData']=$types ;
             $data['credit_Amount'] = $credit_Amount;
             $data['popup_confirm_collect'] ="True";
-            $this->Request_Model->verification($req_id);
+            $req_main= $this->Request_Model->get_request_by_id($req_id);
+            $this->Request_Model->verification($req_id,$req_main->customer_id);
             $this->view('collectors/request_assinged', $data);
 
             } else {
@@ -1174,6 +1188,8 @@
         'creditsByMonth1'=>  $creditByMonth,
         'handoveredWasteByMonth'=>$handoveredWasteByMonth,
         'collectedWasteByMonth'=>$collectedWasteByMonth,
+        'notification'=> $Notifications,
+
       ];
       
       $this->view('collectors/analatics', $data);
@@ -1200,7 +1216,9 @@
       'collectedWasteByMonth'=>$collectedWasteByMonth,
       'handoveredWasteByMonth'=>$handoveredWasteByMonth,
       'to'=>'none',
-      'from'=>'none',  
+      'from'=>'none', 
+      'notification'=> $Notifications,
+ 
       /*'notification'=> $Notifications, 
       'fine_balance'=> $finedAmount, 
       'credit_balance'=> $creditsBalance, 

@@ -168,7 +168,93 @@
       } catch (PDOException $e) {
           return false;
       }
+    }
+    
+    public function cancelling_auto(){
+      try {
+          $today = date('Y-m-d'); 
+          
+          $this->db->query('SELECT rm.*,ra.*, rm.req_id AS req_id 
+          FROM request_main rm 
+          LEFT JOIN request_assigned ra ON rm.req_id = ra.req_id 
+          WHERE rm.date < :today AND (rm.type = "incoming" OR rm.type = "assigned")          
+          ');
+        
+          $this->db->bind(':today', $today);
+          $results = $this->db->resultSet();
+       
+          foreach ($results as $request) {   
+              $this->db->query('UPDATE request_main SET type =:new_state WHERE req_id =:request_id');
+              $this->db->bind(':new_state', 'cancelled'); 
+              $this->db->bind(':request_id', $request->req_id);
+              
+              $result2 = $this->db->execute();
+             
+              if ($result2) {
+                  $this->db->query('INSERT INTO request_cancelled (req_id, cancelled_by, reason, assinged, collector_id, fine, fine_type) VALUES (:req_id, :cancelled_by, :reason, :assigned, :collector_id, :fine, :fine_type)');
+                  
+                  $this->db->bind(':req_id', $request->req_id);
+                  $this->db->bind(':cancelled_by', "System");
+                  $this->db->bind(':reason', "None");
+                 
+                  $this->db->bind(':assigned', isset($request->status) ? $request->status : ''); // If $request->status is null, bind an empty string
+                  $this->db->bind(':collector_id', isset($request->collector_id) ? $request->collector_id : 0); // If $request->collector_id is null, bind 0                  
+                  $this->db->bind(':fine', '0');
+                  $this->db->bind(':fine_type', "None");
+             
+                  $insertResult = $this->db->execute(); 
+               
+              }
+          }
+          
+          return $results; 
+  
+      } catch (PDOException $e) {
+         die($e);
+         return false;
+      }
   }
+  
+
+    public function get_cancelled_request_by_id($req_id){
+      try{
+        $this->db->query('SELECT * FROM request_main rm JOIN request_cancelled rc on rc.req_id=rm.req_id WHERE rm.req_id = :workerId');
+        $this->db->bind(':workerId', $req_id);
+        $row = $this->db->single();
+        return $row;
+      }catch (PDOException $e) {
+     
+        return false;
+     
+    }}
+
+    public function refund($req_id,$balance){
+     try{
+      $this->db->query('UPDATE customer_credits SET credit_amount = :new_balance WHERE user_id = :user_id');
+      $this->db->bind(':new_balance', $balance); 
+      $this->db->bind(':user_id', $req_id->customer_id);
+      $result=$this->db->execute();
+      if($result){
+        $this->db->query('UPDATE request_cancelled SET fine = :fine, fine_type = :fine_type WHERE req_id = :req_id');
+        $this->db->bind(':fine', 0);
+        $this->db->bind(':fine_type', "None");
+        $this->db->bind(':req_id', $req_id->req_id);
+        $result1 = $this->db->execute();
+        if($result1){
+          $notificationText = "Req ID . $req_id->req_id. fine has been refunded";
+          $this->db->query("INSERT INTO user_notification (user_id,  notification) VALUES (:user_id, :notification)");
+          $this->db->bind('user_id', $req_id->customer_id);
+          $this->db->bind(':notification', $notificationText);
+          $result2 = $this->db->execute();
+        }
+      }
+     
+      }catch (PDOException $e) {
+      die($e);
+      return false;
+   
+    }}
+
   
 
     public function get_cancelled_request($customer_id){    
@@ -207,7 +293,7 @@
       
         return false;
      
-    }
+      }
     }
 
     public function get_incoming_request($region){
@@ -449,7 +535,7 @@
 
     }
     
-    public function verification($id) {
+    public function verification($id,$user_id) {
       try {
         
         $code = rand(1, 1000000);
@@ -458,7 +544,9 @@
         $this->db->bind(':code', $code);
         $this->db->bind(':req_id', $id);
         $this->db->execute();
-  
+        $notificationText= "Req ID $id Verify code updated";
+        $this->insert_notification($user_id, $notificationText);
+
           return true; // Return true if the query is executed successfully
       } catch (PDOException $e) {
           return false; // Return false if there's any error
@@ -478,6 +566,39 @@
         return false;
       }
     }
+
+    public function get_ongoing_request_by_center($center) {
+      try {
+        $this->db->query('SELECT * FROM request_main WHERE region = :region AND type IN ("incoming", "assigned")');
+        $this->db->bind(':region', $center);
+          
+          $results = $this->db->resultSet();
+          
+          return $results;
+      } catch (PDOException $e) {
+          // Handle the exception if needed
+          return false;
+      }
+    }
+    
+    public function get_nothandovered_request_by_center($center) {
+      try {
+          $this->db->query('SELECT * FROM request_main rm 
+                            LEFT JOIN request_completed rc 
+                            ON rm.req_id = rc.req_id 
+                            WHERE rm.region = :region AND rc.added="no"');
+          $this->db->bind(':region', $center);
+         
+          $results = $this->db->resultSet();
+       
+          return $results;
+      } catch (PDOException $e) {
+          // Handle the exception if needed
+          die($e);
+          return false;
+      }
+  }
+  
   
 
 }

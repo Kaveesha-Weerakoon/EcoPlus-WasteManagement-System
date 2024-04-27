@@ -5,7 +5,7 @@
         font-family: inter;
     }
 
-    
+
     #dashboard i {
         color: var(--green-color-one);
     }
@@ -20,7 +20,7 @@
         color: inherit;
     }
 
-    
+
     .main-right {
         display: grid;
         width: 100%;
@@ -95,7 +95,7 @@
         width: 15.5px;
         height: 15.5px;
         border-radius: 50%;
-        background-color: #F13E3E;
+        background-color: var(--red-color);
         margin-top: -11px;
         margin-left: -15px;
         color: var(--background-color-main);
@@ -197,7 +197,7 @@
         margin-left: 5px;
     }
 
-    .mark_as_read button:hover{
+    .mark_as_read button:hover {
         color: var(--button-hover-green);
     }
 
@@ -275,7 +275,7 @@
     }
 
 
-  
+
 
     /*Table*/
     .main-right-bottom-down {
@@ -325,7 +325,7 @@
     }
 
 
-  
+
 
     /*Empty table UI*/
     .main-right-bottom-two {
@@ -387,29 +387,42 @@
 
     /*delete confirm popup*/
     .delete_confirm {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.1);
-        z-index: 2;
+
         display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 5;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 100%;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        background-color: var(--main-text-color);
+
+
+    }
+
+    .delete_confirm.active {
+        transform: translate(-50%, -50%) scale(1);
+        background-color: rgba(0, 0, 0, 0);
 
     }
 
     .popup {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         text-align: center;
         padding: 0 30px 30px;
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
+
+
     }
 
     .popup a {
@@ -456,7 +469,7 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .deletebtn:hover{
+    .deletebtn:hover {
         background: #c62323;
     }
 
@@ -474,9 +487,55 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .cancelbtn:hover{
-        background: #a7a1a1 ;
+    .cancelbtn:hover {
+        background: #a7a1a1;
     }
+
+    /* delete prohibitted popup */
+    .delete_prohibitted {
+        display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 4;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        background-color: var(--main-text-color);
+
+    }
+
+    .delete_prohibitted.active {
+        transform: translate(-50%, -50%) scale(1);
+        background-color: rgba(0, 0, 0, 0);
+
+    }
+
+    .delete_prohibitted-ok-button {
+        width: 90%;
+        margin-top: 25px;
+        padding: 8px;
+        background: rgb(220, 39, 39);
+        color: white;
+        border: 0;
+        outline: none;
+        font-size: 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+
+    }
+
+    .delete_prohibitted-ok-button:hover {
+        background: #c62323;
+    }
+
+
 
     /*Update popup*/
     .update_click {
@@ -495,13 +554,14 @@
 
     .popup-form {
         width: 50%;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         position: relative;
         text-align: center;
         padding: 0 30px 30px;
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
 
     .popup-form h2 {
@@ -534,7 +594,7 @@
         margin-right: 20px;
         padding: 10px 0;
         background: var(--green-color-one);
-        color: white;
+        color: var(--background-color-main);
         border: 0;
         outline: none;
         font-size: 18px;
@@ -544,8 +604,8 @@
 
     }
 
-    .updatebtn:hover{
-        background:var(--button-hover-green) ;
+    .updatebtn:hover {
+        background: var(--button-hover-green);
     }
 
     .cancelbtn1 {
@@ -561,8 +621,8 @@
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .cancelbtn1:hover{
-        background: #a7a1a1 ;
+    .cancelbtn1:hover {
+        background: #a7a1a1;
     }
 
     .updateData {
@@ -583,9 +643,10 @@
         font-size: 16px;
         font-weight: 400;
         line-height: 1.5;
-        background-color: #fff;
+        background-color: var(--background-color-main);
         border: 1px solid #ced4da;
         border-radius: 4px;
+        color: var(--main-text-color);
     }
 
 
@@ -604,7 +665,7 @@
         border-radius: 4px;
         height: 100%;
         padding-top: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--form-box-shadow);
     }
 
     .top-personal-details {
@@ -651,7 +712,7 @@
 
     }
 
-  
+
 
     /*Update success*/
     .success_popup_box {
@@ -665,18 +726,17 @@
         justify-content: center;
         width: 100%;
         height: 100%;
-
-
     }
 
     .popup1 {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         font-family: 'inter';
         border-radius: 6px;
         text-align: center;
         padding: 0 30px 30px;
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
 
     .open-popup1 {
@@ -703,7 +763,7 @@
         margin-top: 30px;
         padding: 10px 0;
         background: var(--green-color-one);
-        color: white;
+        color: var(--background-color-main);
         border: 0;
         outline: none;
         font-size: 18px;
@@ -713,13 +773,13 @@
 
     }
 
-    .popup1 button:hover{
-        background: #19954e;
+    .popup1 button:hover {
+        background: var(--button-hover-green);
     }
 
     /*personal details popup*/
     .personal-details-popup-box {
-        position: fixed;
+        /* position: fixed;
         top: 0;
         left: 0;
         background-color: rgba(0, 0, 0, 0.1);
@@ -728,12 +788,32 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        height: 100%;
+        height: 100%; */
+        display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        z-index: 4;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+        box-shadow: var(--box-shadow);
+        border-radius: 10px;
+        background-color: var(--main-text-color);
+    }
+
+    .personal-details-popup-box.active {
+        transform: translate(-50%, -50%) scale(1);
+        background-color: rgba(0, 0, 0, 0);
+
     }
 
     .personal-details-popup-form {
-        width: 45%;
-        background: white;
+        width: 600px;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         position: relative;
@@ -766,7 +846,7 @@
         height: 100%;
         padding-top: 10px;
         margin-top: 17px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--form-box-shadow);
     }
 
     .personal-details-right {
@@ -872,7 +952,7 @@
     }
 
 
-   
+
 
     .overlay {
         position: fixed;
@@ -903,7 +983,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(0);
-        z-index: 4;
+        z-index: 5;
         align-items: center;
         justify-content: center;
         flex-direction: column;
@@ -926,13 +1006,13 @@
 
     .vehicle-details-popup-form {
         width: 450px;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         position: relative;
         top: 0;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         transition: transform 0.4s, top 0.4s;
         display: flex;
         flex-direction: column;
@@ -959,7 +1039,7 @@
         height: 100%;
         padding-top: 10px;
         margin-top: 17px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--form-box-shadow);
     }
 
     .vehicle-details-labels {
@@ -1022,6 +1102,99 @@
 
     }
 
+    /*Cancel confirm popup*/
+    .delete_confirm2 {
+        display: flex;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background-color: rgba(0, 0, 0, 0);
+        z-index: 4;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+    }
+
+    .delete_confirm2.active {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .delete_confirm2 {
+
+        .popup {
+            width: 400px;
+            background: white;
+            border-radius: 10px;
+            top: 0;
+            text-align: center;
+            padding: 0 30px 30px;
+            color: #333;
+            box-shadow: var(--box-shadow);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup a {
+            width: auto;
+        }
+
+        .open-popup {
+            visibility: visible;
+            top: 50%;
+        }
+
+        .popup img {
+            width: 100px;
+            margin-top: 35px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup h2 {
+            font-size: 23px;
+            font-weight: 600;
+            margin: 10px 0 10px;
+        }
+
+        .btns {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .deletebtn {
+            width: 150px;
+            margin-top: 30px;
+            margin-right: 20px;
+            padding: 10px 0;
+            background: rgb(220, 39, 39);
+            color: white;
+            border: 0;
+            outline: none;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .cancelbtn {
+            width: 150px;
+            margin-top: 30px;
+            padding: 10px 0;
+            background: #bab3b3;
+            color: white;
+            border: 0;
+            outline: none;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        }
+    }
+
 
     @media screen and (max-width: 1118px) {
         .table td {
@@ -1042,13 +1215,13 @@
         }
 
 
-        .main-right-top-profile img{
+        .main-right-top-profile img {
             width: 40px;
             height: 40px;
             margin-top: 3px;
         }
 
-        .main-right{
+        .main-right {
             overflow-x: hidden;
         }
     }
@@ -1084,11 +1257,11 @@
             width: 28%;
         }
 
-        .main-right-top-profile-cont p{
+        .main-right-top-profile-cont p {
             font-size: 12px;
         }
 
-        .personal-details-popup-form{
+        .personal-details-popup-form {
             width: 600px;
         }
     }
@@ -1110,11 +1283,11 @@
             width: 35%;
         }
 
-        .personal-details-popup-form{
+        .personal-details-popup-form {
             width: 500px;
         }
 
-        .updateData input{
+        .updateData input {
             width: 75%;
         }
     }
@@ -1125,54 +1298,56 @@
             right: 10%;
         }
 
-        .main-right-top-four-component p{
+        .main-right-top-four-component p {
             display: none;
 
         }
 
-        .main-right-top-four-component{
+        .main-right-top-four-component {
             width: auto;
         }
 
-        .personal-details-popup-form{
+        .personal-details-popup-form {
             width: 400px;
         }
 
-        .personal-details-left img{
+        .personal-details-left img {
             width: 100px;
             height: 100px;
         }
 
-        .personal-details-right-labels span, .personal-details-right-values span, .personal-details-left p{
+        .personal-details-right-labels span,
+        .personal-details-right-values span,
+        .personal-details-left p {
             font-size: 12px;
         }
 
-        .vehicle-details-popup-form{
+        .vehicle-details-popup-form {
             width: 400px;
         }
 
-        .vehicle-details-labels{
+        .vehicle-details-labels {
             padding-left: 40px;
         }
 
-        .vehicle-details-values{
+        .vehicle-details-values {
             padding-left: 70px;
         }
 
-        .updateData input{
+        .updateData input {
             width: 70%;
         }
 
-        .popup{
+        .popup {
             width: 300px;
         }
 
-        .popup1{
+        .popup1 {
             width: 300px;
         }
 
 
-      
+
     }
 
     @media screen and (max-width:540px) {
@@ -1194,67 +1369,67 @@
             left: 15%;
         }
 
-        .main-right-top-four-left{
+        .main-right-top-four-left {
             margin-left: 35px;
             padding-left: 0;
         }
 
-        .main-right-top-four-left button{
+        .main-right-top-four-left button {
             width: 60px;
         }
 
-        .main-right-top-four-left p{
+        .main-right-top-four-left p {
             display: none;
         }
 
-        .main-right-top-four-right{
+        .main-right-top-four-right {
             margin-right: 40%;
         }
 
-        .main-right-top-profile-cont h3{
+        .main-right-top-profile-cont h3 {
             font-size: 16px;
         }
 
-        .line{
+        .line {
             margin-left: -10px !important;
         }
 
-        .vehicle-details-popup-form{
+        .vehicle-details-popup-form {
             width: 300px;
         }
 
-        .vehicle-details-labels span{
+        .vehicle-details-labels span {
             font-size: 12px;
         }
 
-        .vehicle-details-values span{
+        .vehicle-details-values span {
             font-size: 12px;
         }
 
-       
 
-      
+
+
     }
 
     @media screen and (max-width: 475px) {
-        .main-right-top-profile-cont h3{
+        .main-right-top-profile-cont h3 {
             display: none;
         }
 
-        .main-right-top-profile-cont p{
+        .main-right-top-profile-cont p {
             display: none;
         }
 
-        .main-right-top-profile img{
+        .main-right-top-profile img {
             margin-right: 5px;
         }
 
-        .main-right-top-three-content{
+        .main-right-top-three-content {
             margin-right: 0;
 
         }
 
-        .main-right-top-three-content p{
+        .main-right-top-three-content p {
             font-size: 12px;
         }
 
@@ -1264,6 +1439,7 @@
         .main-right-top-notification {
             margin-left: 5%;
         }
+
         .main-right-top-search {
             margin-left: 1px;
         }
@@ -1286,7 +1462,7 @@
     }
 
     @media screen and (max-width:700px) {
-    
+
         .main-right-top-search {
             width: 35%;
         }
@@ -1301,11 +1477,11 @@
             margin-left: 10px;
         }
 
-        .main-right-top-three{
+        .main-right-top-three {
             margin-bottom: 2%;
         }
 
-        .line{
+        .line {
             margin-left: -20px;
         }
     }

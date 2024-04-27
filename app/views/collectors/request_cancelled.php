@@ -40,11 +40,12 @@
                             </a>
                         </div>
                         <div class="main-right-top-four">
-                            <div class="main-right-top-four-left">
+                        <div class="main-right-top-four-left">
                                 <p>Date</p>
                                 <input type="date" id="selected-date">
                                 <button onclick="loadLocations()">Filter</button>
                             </div>
+                            
                             <div class="main-right-top-four-right">
                                 <div class="main-right-top-four-component" id="tables"
                                     style="background-color: #ecf0f1">
@@ -60,6 +61,7 @@
                             </div>
                         </div>
                     </div>
+                    <?php if(!empty($data['cancelled_requests'])) : ?>
                     <div class="main-right-bottom">
                         <div class="main-right-bottom-top">
                             <table class="table">
@@ -98,6 +100,14 @@
 
                         </div>
                     </div>
+                    <?php else: ?>
+                        <div class="main-right-bottom-three">
+                            <div class="main-right-bottom-three-content">
+                                <img src="<?php echo IMGROOT?>/undraw_questions_re_1fy7.svg" alt="">
+                                <h1>You have No cancel Requests</h1>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="location_pop" id="location_pop">
                     <div class="location_pop_content">

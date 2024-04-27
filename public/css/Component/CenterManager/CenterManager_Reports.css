@@ -73,7 +73,7 @@
             width: 15.5px;
             height: 15.5px;
             border-radius: 50%;
-            background-color: #F13E3E;
+            background-color: var(--red-color);
             margin-top: -11px;
             margin-left: -15px;
             color: var(--background-color-main);
@@ -283,6 +283,8 @@
                     border: 1px solid #ccc;
                     border-radius: 4px;
                     box-sizing: border-box;
+                    background-color: var(--background-color-main);
+                    color: var(--main-text-color);
 
                 }
 
@@ -322,7 +324,8 @@
                     border: 1px solid #ccc;
                     border-radius: 4px;
                     box-sizing: border-box;
-                    background-color: #fff;
+                    background-color: var(--background-color-main);
+                    color: var(--main-text-color);
                 }
 
                 select:hover {
@@ -340,8 +343,8 @@
 
                 option {
                     padding: 10px;
-                    background-color: #f9f9f9;
-                    color: #333;
+                    background-color: var(--report-table-color);
+                    color: var(--main-text-color);
                     font-size: 13px;
                     font-family: inter;
                 }
@@ -566,7 +569,7 @@
 
                 /* Style for table headers */
                 th {
-                    background-color: #f2f2f2;
+                    background-color: var(--calander-hover-color);
                     padding: 12px;
                     text-align: left;
                 }
@@ -577,8 +580,9 @@
                     border-bottom: 1px solid #ddd;
                 }
 
-                tr:nth-child(even) {
-                    background-color: #f9f9f9;
+                tr:nth-child(odd) {
+                    /* background-color: #f9f9f9; */
+                    background-color: var(--report-table-color);
                 }
             }
 

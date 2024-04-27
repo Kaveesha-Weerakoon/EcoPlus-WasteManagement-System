@@ -22,7 +22,8 @@
       $this->Annoucement_Model=$this->model('Announcement');
       $this->fine_model = $this->model('Fines');
       $this->LatestUpdate= $this->model('LatestUpdate');
-      
+      $this->Request_Model=$this->model('Request');
+
       if(!isLoggedIn('user_id')){
         redirect('users/login');
       }
@@ -34,7 +35,7 @@
       $balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
       // $credit= $this->creditModel->get();
       $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']); 
-      $centers = $this->Center_Model->getallCenters();
+      $centers = $this->Center_Model->getallCenters2();
       
       $completed_requests=count($this->Collect_Garbage_Model->get_complete_request_relevent_customer($_SESSION['user_id']));
       $total_requests=count($this->Request_Model->get_total_requests_by_customer($_SESSION['user_id']));
@@ -47,7 +48,6 @@
       $latestdiscount=   $this->LatestUpdate->getLatestDiscount($_SESSION['user_id']);
       $latestcancelled=   $this->LatestUpdate->getLatestCancelled($_SESSION['user_id']);
       $latestupdate = '<h3>+Eco 0</h3>';
-      $latestupdate = 'Eco 0';
 
       if (empty($latestcompleted) &&  empty($latesttransfered) &&  empty($latestdiscount) &&  empty($latestcancelled)) {
   
@@ -255,7 +255,7 @@
                 }
             }
         }
-    }
+     }
 
      
 
@@ -327,6 +327,7 @@
 
       $current_request=$this->Request_Model->get_request_current($_SESSION['user_id']);
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $result=$this->Request_Model->cancelling_auto();
 
       $data = [
         'request' => $current_request,
@@ -377,12 +378,13 @@
         $data['assinged']='No';
       }
       if($Request->code!=0){
-       header("Location: " . URLROOT . "/customers/request_main");        
+       header("Location: " . URLROOT . "/customers/request_completed");        
 
       }else{
-     $this->Request_Model->cancel_request($data);       
+        $this->Request_Model->cancel_request($data);     
+        header("Location: " . URLROOT . "/customers/request_cancelled");        
+  
        }
-       header("Location: " . URLROOT . "/customers/request_cancelled");        
     }
 
     public function request_completed(){
@@ -448,9 +450,12 @@
 
     public function editprofile(){
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
-      $centers = $this->center_model->getallCenters();
-
-     if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $centers = $this->center_model->getallCenters2();
+      $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+      $data['region']=$user->city;   
+     
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $id=$_SESSION['user_id']; 
         $user=$this->customerModel->get_customer($id);
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -530,7 +535,8 @@
     
        $this->view('customers/edit_profile', $data);
        }
-     else{
+    
+       else{
       $data = [
         'name'=>'',
         'userid'=>'',
@@ -736,9 +742,9 @@
         } 
         
         if(empty($data['subject'])){
-          $data['subject_err'] = 'Please enter subject';
+          $data['subject_err'] = 'Please enter reqId';
         } elseif (strlen($data['subject']) > 255) {
-          $data['subject_err'] = 'Subject is too long';
+          $data['subject_err'] = 'reqId is too long';
       }
         
         if(empty($data['complain'])){
@@ -793,7 +799,8 @@
       $center=$this->Center_Model->findCenterbyRegion($user->city);
       $garbage_types = $this->garbage_types_model->get_all();
       $fine_details = $this->fine_model->get_fine_details();
-    
+      $user=$this->customerModel->get_customer($id);
+      $center=$this->Center_Model->findCenterbyRegion($user->city);
       return [
           'centers' => $centers,
           'name' => '',
@@ -818,6 +825,7 @@
           'region_success'=>'', 
           'radius'=>'',
           'radius_err'=>'',
+          'center_block'=>$center->disable,
           'garbage_types'=> $garbage_types,
           'center_lat'=>$center->lat,
           'center_long'=>$center->longi,
@@ -835,9 +843,8 @@
       $data['name'] =$_SESSION['user_name'];
       $data['region']=$user->city;     
       $center=$this->Center_Model->findCenterbyRegion($user->city);
- 
-      $data['radius']=$center->radius;
-
+      $data['radius']=$center->radius; 
+     
      if($_SERVER['REQUEST_METHOD'] == 'POST'){
        
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -853,6 +860,7 @@
         $data['location_success'] =trim($_POST['location_success']);
         $data['region']=$user->city;
         $data['radius']=$center->radius;
+        $data['center_block']=$center->disable;
 
         $requests=$this->Request_Model->get_total_requests_by_customer($id);
         if($data['time']=="Select a slot"){
@@ -873,43 +881,42 @@
 
         if (empty($data['date'])) {
           $data['date_err'] = 'Date is required';
-        } 
-        else {
-            $isHoliday = false;
-
-            foreach ($marked_holidays as $holiday) {
-                if ($holiday->date === $data['date']) {
-                    $isHoliday = true;
-                    break;
-                }
-            } 
-
-            if ($isHoliday) {
-                $data['date_err'] = 'Sorry, the center is not available on this day';
-            }
-            else{
+      } else {
+          $isHoliday = false;
+      
+          foreach ($marked_holidays as $holiday) {
+              if ($holiday->date === $data['date']) {
+                  $isHoliday = true;
+                  break;
+              }
+          }
+      
+          if ($isHoliday) {
+              $data['date_err'] = 'Sorry, the center is not available on this day';
+          } else {
               $selectedTimestamp = strtotime($data['date']);
               $currentTimestamp = strtotime('tomorrow');
-              if ($selectedTimestamp < $currentTimestamp) {
-                $data['date_err'] = 'Select a date from tomorrow onwards';
-              }
-              else{       
-                 $dateFound = false;
-
-                foreach ($requests as $request) {
-                  if ($request->date == $data['date']) {
-                      $dateFound = true;
-                      break; 
+              $sevenDaysLater = strtotime('+7 days', $currentTimestamp);
+      
+              if ($selectedTimestamp < $currentTimestamp || $selectedTimestamp > $sevenDaysLater) {
+                  $data['date_err'] = 'Select a date within the next seven days';
+              } else {
+                  $dateFound = false;
+      
+                  foreach ($requests as $request) {
+                      if ($request->date == $data['date']) {
+                          $dateFound = true;
+                          break;
+                      }
+                  }
+      
+                  if ($dateFound) {
+                      $data['date_err'] = 'You can only make one request per day.';
                   }
               }
-              if ($dateFound) {
-                $data['date_err'] = 'You can only make one request per day.';
-              }
-          
-              }
-              
-            }
-        }
+          }
+      }
+      
         
 
      
@@ -976,6 +983,8 @@
              $data['radius']=$center->radius;
              $data['contact_no']=$user->mobile_number;
              $data['name'] =$_SESSION['user_name'];
+             $data['center_block']=$center->disable;
+
              $this->view('customers/request_collect', $data);
         }
 
@@ -1066,25 +1075,24 @@
               'notification'=> $Notifications   
           ];
   
-  
-           $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
-           $customer_id = (int)$numeric_part;
-
-  
+          $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
+          $customer_id = (int) $numeric_part;
+          
           if (empty($data['customer_id'])) {
               $data['customer_id_err'] = 'Please enter customer id';
           } else {
-                if(!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
-                    $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
-                } elseif($customer_id === $_SESSION['user_id']) {
-                    $data['customer_id_err'] = 'You cannot transfer credits to yourself';
-                } else {
-              // Check if the user input matches the required format
-                    if (!$this->customerModel->get_customer($customer_id)) {
-                          $data['customer_id_err'] = 'Customer ID does not exist';
-                    }
-                }
+              if(!preg_match('/^\d{1,10}$/', $data['customer_id'])) {
+                  $data['customer_id_err'] = "Use only Maximum 10 digits";
+              } elseif($customer_id === $_SESSION['user_id']) {
+                  $data['customer_id_err'] = 'You cannot transfer credits to yourself';
+              } else {
+                  // Check if the user input matches the required format
+                  if (!$this->customerModel->get_customer($customer_id)) {
+                      $data['customer_id_err'] = 'Customer ID does not exist';
+                  }
+              }
           }
+          
       
         
           if (empty($data['credit_amount']) || $data['credit_amount'] <= 0) {

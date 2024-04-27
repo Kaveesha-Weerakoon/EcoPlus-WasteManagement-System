@@ -205,5 +205,17 @@
       }
     }
 
+    public function get_current_gabage_stockbyid($center_id){
+      try{
+        $this->db->query('SELECT * FROM center_garbage WHERE center_id = :center_id');
+        $this->db->bind(':center_id', $center_id);
+        $result = $this->db->resultSet();
+    
+        return $result;
 
+      }catch (PDOException $e) {
+        return false;
+      }
+
+    }
 }  

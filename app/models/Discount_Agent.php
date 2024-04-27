@@ -197,7 +197,7 @@
           }
         }
         catch (PDOException $e) {
-  die();
+
 
 
           return false;
@@ -228,7 +228,32 @@
         return false;
      }
     }
+
     
+    public function block($id){
+      try {
+          $this->db->query('UPDATE discount_agents SET disable = :value WHERE user_id = :id');
+          $this->db->bind(':value', TRUE); // You need to provide a value for ":value"
+          $this->db->bind(':id', $id);
+          $result= $this->db->execute();
+          return $result;
+      } catch (PDOException $e) {
+         return FALSE;
+      }
+  } 
+  
+  public function unblock($id){
+    try {
+        $this->db->query('UPDATE discount_agents SET disable = :value WHERE user_id = :id');
+        $this->db->bind(':value', FALSE); // You need to provide a value for ":value"
+        $this->db->bind(':id', $id);
+        $result=$this->db->execute();
+        return $result;
+    } catch (PDOException $e) {
+        return FALSE;
+    }
+}
+
   
 
           

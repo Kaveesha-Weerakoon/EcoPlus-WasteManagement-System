@@ -46,7 +46,8 @@
                             </div>
                             <div class="content_container">
                                 <h3>Customers</h3>
-                                <h2 id="customer_count" style="font-weight:bold"></h2>
+                                <h2 id="customer_count" style="font-weight:bold"><?php echo $data['customer_count']?>
+                                </h2>
                             </div>
                         </div>
                         <div class="main-right-bottom-two-cont A" onclick="redirect_collectors()">
@@ -55,7 +56,8 @@
                             </div>
                             <div class="content_container">
                                 <h3>Collectors</h3>
-                                <h2 id="collector_count" style="font-weight:bold"></h2>
+                                <h2 id="collector_count" style="font-weight:bold"><?php echo $data['collector_count']?>
+                                </h2>
                             </div>
 
                         </div>
@@ -65,7 +67,7 @@
                             </div>
                             <div class="content_container">
                                 <h3>Discount Agents</h3>
-                                <h2 style="font-weight:bold" id="agent_count"></h2>
+                                <h2 style="font-weight:bold" id="agent_count"> <?php echo $data['agent_count']?></h2>
                             </div>
 
                         </div>
@@ -75,7 +77,7 @@
                             </div>
                             <div class="content_container">
                                 <h3>Center Managers</h3>
-                                <h2 style="font-weight:bold" id="cm_count"></h2>
+                                <h2 style="font-weight:bold" id="cm_count"><?php echo $data['cm_count']?></h2>
                             </div>
 
                         </div>
@@ -217,52 +219,9 @@ function submit() {
     document.getElementById('fine_pop').submit();
 }
 
-const customer_count = <?php echo $data['customer_count']?>;
-const cm_count = <?php echo $data['cm_count']?>;
-const collector_count = <?php echo $data['collector_count']?>;
-const agent_count = <?php echo $data['agent_count']?>;
 
-const customerCountElement = document.getElementById('customer_count');
-const collectorCountElement = document.getElementById('collector_count');
-const cmCountElement = document.getElementById('cm_count');
-const agentCountElement = document.getElementById('agent_count');
 
-function updateCount(currentValue) {
-    customerCountElement.textContent = currentValue;
-}
 
-function updateCount2(currentValue) {
-    collectorCountElement.textContent = currentValue;
-}
-
-function updateCount3(currentValue) {
-    cmCountElement.textContent = currentValue;
-}
-
-function updateCount4(currentValue) {
-    agentCountElement.textContent = currentValue;
-}
-
-for (let i = 0; i <= customer_count; i++) {
-    setTimeout(() => {
-        updateCount(i);
-    }, i * 80); // Change 1000 to control the speed of counting (milliseconds)
-}
-for (let i = 0; i <= collector_count; i++) {
-    setTimeout(() => {
-        updateCount2(i);
-    }, i * 80); // Change 1000 to control the speed of counting (milliseconds)
-}
-for (let i = 0; i <= cm_count; i++) {
-    setTimeout(() => {
-        updateCount3(i);
-    }, i * 80); // Change 1000 to control the speed of counting (milliseconds)
-}
-for (let i = 0; i <= agent_count; i++) {
-    setTimeout(() => {
-        updateCount4(i);
-    }, i * 80); // Change 1000 to control the speed of counting (milliseconds)
-}
 
 function initMap() {
     var center = {

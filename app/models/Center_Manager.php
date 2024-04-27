@@ -146,9 +146,9 @@
         $this->re->bind(':centerManagerId2', $old_manager->user_id);
          $this->re->execute();
       }
-    }catch (PDOException $e) {
+     }catch (PDOException $e) {
       return false;
-  }
+     }
   }
 
     public function Remove_Assign($center_manager_id){
@@ -288,6 +288,23 @@
       }catch(Exception $e){
         return false;
       }
-
     }
+
+    public function update_cm_to_na($id){
+      try{
+         
+          $this->db->query('UPDATE center_managers SET assinged = :value, assigned_center_id = :value2 WHERE user_id = :id');
+          $this->db->bind(':value', "No");
+          $this->db->bind(':value2', 0);   
+          $this->db->bind(':id', $id);   
+      
+  
+          return $this->db->execute();
+      }
+      catch(Exception $e){
+          die($e->getMessage());
+          return false;
+      }
+  }
+  
 }

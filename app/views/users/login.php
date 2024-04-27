@@ -44,17 +44,6 @@
                         <h1>Sign Up</h1>
                     </div>
 
-
-                    <div class="edit-profile-content-profile">
-                        <div class="edit-profile-content-profile-container">
-                            <img class="edit-profile-main-image" id="profile_image_placeholder"
-                                src="<?php echo IMGROOT?>./preview2.png" alt="">
-                            <img class="edit-profile-second-image" src="<?php echo IMGROOT?>/edit-icon.png" alt="">
-                            <input name='profile_image' type="file" id="profile_image">
-                            <p>Upload a profile pic</p>
-                        </div>
-                    </div>
-
                     <div class="cont-main">
                         <div class="cont">
                             <p>Name</p>

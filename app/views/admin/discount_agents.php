@@ -67,6 +67,7 @@
                                         <i class="fa-solid fa-user-lock" style="font-size: 20px;"
                                             onclick="block_user('<?php echo $discount_agent->user_id; ?>')"></i>
                                         <?php endif; ?>
+                                    </td>
                                 </tr>
                                 <?php endforeach; ?>
                             </table>

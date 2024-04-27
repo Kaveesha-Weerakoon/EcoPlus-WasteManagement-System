@@ -113,11 +113,27 @@
                             <div class="center-manager-card">
                                 <h3 class="section-subhead">Center Manager</h3>
                                 <div class="center-manager-content">
+                                    <?php if (isset($data['center_manager']->image) && !empty($data['center_manager']->image)) : ?>
                                     <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $data['center_manager']->image?>"
-                                        alt="" />
+                                        alt="Center Manager Image">
+                                    <?php else : ?>
+                                    <!-- Placeholder image or message if no image is available -->
+                                    <img src="<?php echo IMGROOT?>/img_upload/center_manager/Profile.png"
+                                        alt="Center Manager Image"> <?php endif; ?>
+
                                     <div class="center-manager-info">
+                                        <?php if (!empty($data['center']->center_manager_name)) : ?>
                                         <h3><?php echo $data['center']->center_manager_name?></h3>
-                                        <h1>Manager ID: CM<?php echo $data['center']->center_manager_id?></h1>
+                                        <?php else : ?>
+                                        <h3>Center Disabled </h3>
+                                        <?php endif; ?>
+
+                                        <?php if (!empty($data['center']->center_manager_id)) : ?>
+                                        <h1>Manager ID: <?php echo $data['center']->center_manager_id?></h1>
+                                        <?php else : ?>
+                                        <h1>Change the CM to enable</h1>
+                                        <?php endif; ?>
+
                                     </div>
                                     <div class="center-manager-change">
                                         <a

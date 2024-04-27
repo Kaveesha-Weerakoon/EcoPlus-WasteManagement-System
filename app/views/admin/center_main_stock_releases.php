@@ -29,14 +29,21 @@
                         <div class="main-right-top-three">
                             <a href="<?php echo URLROOT?>/Admin/waste_handover/<?php echo $data['center_region']?>"
                                 id="waste_handover">
-                                <div class="main-right-top-three-content" id="current">
+                                <div class="main-right-top-three-content" >
                                     <p>Waste Handover</p>
+                                    <div class="line"></div>
+                                </div>
+                            </a>
+                            <a href="<?php echo URLROOT?>/Admin/center_main_garbage_stock/<?php echo $data['center_region']?>"
+                                id="garbage_stock">
+                                <div class="main-right-top-three-content" >
+                                    <p>Garbage Stock</p>
                                     <div class="line"></div>
                                 </div>
                             </a>
                             <a href="<?php echo URLROOT?>/Admin/stock_releases/<?php echo $data['center_region']?>"
                                 id="stock_releases">
-                                <div class="main-right-top-three-content">
+                                <div class="main-right-top-three-content" id="current">
                                     <p>Stock Releases</p>
                                     <div class="line"></div>
                                 </div>

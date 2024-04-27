@@ -38,6 +38,7 @@
     justify-content: center;
     width: 35%;
     position: relative;
+    visibility: hidden;
   }
 
   .main-right-top-search i {

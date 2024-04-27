@@ -48,6 +48,7 @@ function updateImage($old, $img, $img_name, $location) {
 
 function deleteImage($img) {
     if (basename($img) === 'profile.png') {
+        die();
         return false; // Don't delete if the filename is "profile.png"
     }
 

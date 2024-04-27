@@ -40,7 +40,7 @@
     .main-right-bottom-down {
         padding-left: 3.5%;
         width: 96.5%;
-        height: 450px;
+        height: 550px !important;
         overflow: scroll;
     }
 

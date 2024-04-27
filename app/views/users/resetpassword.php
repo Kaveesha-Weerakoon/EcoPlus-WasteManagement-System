@@ -2,39 +2,39 @@
 
 <div class="ResetPassword-main">
 
-<div class="container">
-<img src="<?php echo IMGROOT;?>/undraw_secure_files_re_6vdh.svg" class="image" alt="">
+  <div class="container">
+    <img src="<?php echo IMGROOT;?>/undraw_secure_files_re_6vdh.svg" class="image" alt="">
 
-    <div class="forms-container">
-        <div class="signin-signup">
-            <form action="<?php echo URLROOT; ?>/ResetPassword/sendEmail" class="sign-in-form" method="POST">
+      <div class="forms-container">
+          <div class="signin-signup">
+              <form action="<?php echo URLROOT; ?>/ResetPassword/sendEmail" class="sign-in-form" method="POST">
 
-                <div class="top"> <img src="<?php echo IMGROOT;?>/Logo.png" alt="">
-                    <h2>Forgot Your Password ?</h2>
-                </div>
-                <div class="slogan">Reset Your Password</div>
-                <div class="line"></div>
+                  <div class="top"> <img src="<?php echo IMGROOT;?>/Logo.png" alt="">
+                      <h2>Forgot Your Password ?</h2>
+                  </div>
+                  <div class="slogan">Reset Your Password</div>
+                  <div class="line"></div>
 
-                <div class="input-field-container">
-                <p>Email : </p>
-                    <div class="input-fieldlog">
-                    <i class="fas fa-envelope icon"></i>
-                        <input id="email" name="email" placeholder="Email address" class="form-control" type="email" value="<?php echo $data['email']; ?>">
-                    </div>
-                    <div class="errlog" style="color:red">
-                      <?php echo $data['email_err']?>
-                    </div>
-                </div>
-                <!-- <input name="recover-submit" class="btn solid" value="Reset Password" type="submit"> -->
-                <button type="submit" name="get_email_button" class="btn solid">Recieve Email</button>
+                  <div class="input-field-container">
+                  <p>Email : </p>
+                      <div class="input-fieldlog">
+                      <i class="fas fa-envelope icon"></i>
+                          <input id="email" name="email" placeholder="Email address" class="form-control" type="email" value="<?php echo $data['email']; ?>">
+                      </div>
+                      <div class="errlog" style="color:red">
+                        <?php echo $data['email_err']?>
+                      </div>
+                  </div>
+                  <!-- <input name="recover-submit" class="btn solid" value="Reset Password" type="submit"> -->
+                  <button type="submit" name="get_email_button" class="btn solid">Recieve Email</button>
 
-            </form>
+              </form>
 
-           
+            
 
-        </div>
-    </div>
-</div>
+          </div>
+      </div>
+  </div>
 </div>
 
 <!--<div class="ResetPassword-main">

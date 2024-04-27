@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-require APPROOT. '/PHPMailer/vendor/autoload.php';
+//require APPROOT. '/PHPMailer/vendor/autoload.php';
 
 class ResetPassword extends Controller {
   

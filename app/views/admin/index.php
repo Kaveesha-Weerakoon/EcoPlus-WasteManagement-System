@@ -357,13 +357,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function createOrUpdateChart(color, textColor) {
     // Define the static data for the chart
+    var Total_Garbage = <?php echo $data['total_garbage']?>;
+
     const staticData = {
-        current_plastic: 100,
-        current_polythene: 80,
-        current_metal: 120,
-        current_glass: 90,
-        current_paper: 110,
-        current_electronic: 70
+        current_plastic: Total_Garbage.total_plastic,
+        current_polythene: Total_Garbage.total_polythene,
+        current_metal: Total_Garbage.total_metals,
+        current_glass: Total_Garbage.total_glass,
+        current_paper: Total_Garbage.total_paper_waste,
+        current_electronic: Total_Garbage.total_electronic_waste
+
     };
 
     const ctx = document.getElementById('myChart').getContext('2d');

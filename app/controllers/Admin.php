@@ -51,13 +51,15 @@
       $collectors =$this->collector_model->get_collectors();
       $centers = $this->center_model->getallCenters();
       $agents  = $this->discount_agentModel->get_discount_agent();
-
+      
+      $total_garbage=$this->Collect_Garbage_Model->getTotalGarbage();
       $jsonData = json_encode($centers );
 
       $fine_details = $this->fine_model->get_fine_details();
       $completedRequests=$this->Collect_Garbage_Model->getAllCompletedRequests();
       $totalRrequests=$this->requests_model->getTotalRequests();
-     
+      $json_Total_Garbage = json_encode($total_garbage);
+      
       $data = [
         'completedRequests'=> $completedRequests,
         'totalRequests'=> $totalRrequests,
@@ -67,6 +69,8 @@
         'collector_count'=>count( $collectors),
         'agent_count'=>count($agents),
         'centers'=>$jsonData,
+        'total_garbage'=> $json_Total_Garbage,
+
         'creditsGiven' => ($creditMonth->credit_amount !== null) ? $creditMonth->credit_amount : 0      ];
 
       foreach($fine_details as $fine ){

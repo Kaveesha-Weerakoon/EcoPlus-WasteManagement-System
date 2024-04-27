@@ -146,45 +146,8 @@
                         </div>
                         <div class="details-cards-left">
                             <div class="graph-card">
-                                <h3 class="section-subhead">Requests Statistics</h3>
+                                <h3 class="section-subhead">Off Days Calendar</h3>
                                 <div class="graph-container">
-                                    <div class="donut-chart-block">
-                                        <div class="donut-chart">
-                                            <div id="part1" class="portion-block">
-                                                <div class="circle"></div>
-                                            </div>
-                                            <div id="part2" class="portion-block">
-                                                <div class="circle"></div>
-                                            </div>
-                                            <div id="part3" class="portion-block">
-                                                <div class="circle"></div>
-                                            </div>
-                                            <div id="part4" class="portion-block">
-                                                <div class="circle"></div>
-                                            </div>
-                                            <p class="donut-chart-center"></p>
-                                        </div>
-                                    </div>
-                                    <div class="donut-chart-details">
-                                        <ul class="donut-chart-details-list">
-                                            <li class="incoming">
-                                                <hr />
-                                                incoming
-                                            </li>
-                                            <li class="assigned">
-                                                <hr />
-                                                assigned
-                                            </li>
-                                            <li class="completed">
-                                                <hr />
-                                                completed
-                                            </li>
-                                            <li class="cancelled">
-                                                <hr />
-                                                cancelled
-                                            </li>
-                                        </ul>
-                                    </div>
                                 </div>
                             </div>
                             <div class="location-map-card">

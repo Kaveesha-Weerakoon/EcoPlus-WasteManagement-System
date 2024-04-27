@@ -199,17 +199,17 @@
                 </div>
                 <div class="tutorial-step" id="step2">
                     <h2>View Wallet Amount !</h2>
-                    <p>Wallet Amount Shows Current <b>Eco Credit</b> Balance </p>
+                    <p>Wallet amount shows current <b>Eco Credit</b> Balance </p>
                     <img src="<?php echo IMGROOT?>/two.png" alt="">
                 </div>
                 <div class="tutorial-step" id="step3">
                     <h2>Overall Collection Total </h2>
-                    <p>Overall Collection Total shows Overall garbage you handoverd in the collections</p>
+                    <p>Overall collection total shows overall garbage you handed over in the collections</p>
                     <img src="<?php echo IMGROOT?>/two.png" alt="">
                 </div>
                 <div class="tutorial-step" id="step4">
                     <h2>Transfer your Eco Credits!</h2>
-                    <p>You can view all the Transaction from history</p>
+                    <p>You can view all the transaction from history</p>
                     <img src="<?php echo IMGROOT?>/two.png" alt="">
                 </div>
                 <div class="tutorial-step" id="step5">

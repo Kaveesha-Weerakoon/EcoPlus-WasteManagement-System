@@ -111,21 +111,21 @@
     function getLatestTransferd($user_id){
         try{
             $this->db->query('
-                SELECT 
-                    credits_transfer.*, 
-                    c.image AS sender_img, 
-                    c2.image AS receiver_img
-                FROM 
-                    credits_transfer
-                JOIN 
-                    customers c ON c.user_id = credits_transfer.sender_id 
-                JOIN 
-                    customers c2 ON c2.user_id = credits_transfer.receiver_id
-                WHERE 
-                    credits_transfer.sender_id = :user_id OR credits_transfer.receiver_id = :user_id 
-                ORDER BY 
-                    CONCAT(credits_transfer.date, " ", credits_transfer.time) DESC
-                LIMIT 1;
+            SELECT 
+            credits_transfer.*, 
+            c.image AS sender_img, 
+            c2.image AS receiver_img
+        FROM 
+            credits_transfer
+        LEFT JOIN 
+            customers c ON c.user_id = credits_transfer.sender_id 
+        LEFT JOIN 
+            customers c2 ON c2.user_id = credits_transfer.receiver_id
+        WHERE 
+            credits_transfer.sender_id = :user_id OR credits_transfer.receiver_id = :user_id 
+        ORDER BY 
+            CONCAT(credits_transfer.date, " ", credits_transfer.time) DESC
+        LIMIT 1
             ');
         
             $this->db->bind(':user_id', $user_id);

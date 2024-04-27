@@ -497,5 +497,5 @@
           ];
           $this->view('users/resetpassword', $data);
       }
-  }
+    }
 }

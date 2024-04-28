@@ -114,23 +114,72 @@ function getMonthName(monthIndex) {
 }
 
 // Generate labels for the last six months
+// const labels = [];
+// for (let i = 0; i < 6; i++) {
+//     const month = (currentMonth - i + 12) % 12; // Ensure the month is within 0-11 range
+//     const year = currentYear - (i === 0 && currentMonth === 0 ? 1 :
+//         0); // Adjust the year if the current month is January
+//     labels.unshift(getMonthName(month) + ' ' + year); // Push to the front of the array
+// }
+
+// function countRequests(requests) {
+//     const counts = Array(6).fill(0);
+//     requests.forEach(request => {
+//         const date = new Date(request.created_at);
+//         const month = date.getMonth();
+//         const year = date.getFullYear();
+//         let monthDiff = (currentYear - year) * 12 + currentMonth - month;
+//         if (monthDiff >= 0 && monthDiff < 6) {
+//             counts[(5 - monthDiff + 6) % 6]++; // Calculate the index in reverse order
+//         }
+//     });
+//     return counts;
+// }
+
+// const completedData = countRequests(alldiscounts);
+
+// const data = {
+//     labels: labels,
+//     datasets: [{
+//         label: 'Discounts',
+//         data: completedData,
+//         fill: false,
+//         borderColor: 'rgb(75, 192, 192)',
+//         tension: 0.1
+//     }],
+//     topic: "Hello"
+// };
+
+// const config = {
+//     type: 'line',
+//     data: data,
+// };
+
+// document.addEventListener('DOMContentLoaded', (event) => {
+//     const myChart = new Chart(
+//         document.getElementById('lineChart'),
+//         config
+//     );
+// });
+
+
+// Generate labels for the last four months
 const labels = [];
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < 4; i++) {
     const month = (currentMonth - i + 12) % 12; // Ensure the month is within 0-11 range
-    const year = currentYear - (i === 0 && currentMonth === 0 ? 1 :
-        0); // Adjust the year if the current month is January
+    const year = currentYear - (i === 0 && currentMonth === 0 ? 1 : 0); // Adjust the year if the current month is January
     labels.unshift(getMonthName(month) + ' ' + year); // Push to the front of the array
 }
 
 function countRequests(requests) {
-    const counts = Array(6).fill(0);
+    const counts = Array(4).fill(0); // Adjusted to fill 4 months instead of 6
     requests.forEach(request => {
         const date = new Date(request.created_at);
         const month = date.getMonth();
         const year = date.getFullYear();
         let monthDiff = (currentYear - year) * 12 + currentMonth - month;
-        if (monthDiff >= 0 && monthDiff < 6) {
-            counts[(5 - monthDiff + 6) % 6]++; // Calculate the index in reverse order
+        if (monthDiff >= 0 && monthDiff < 4) { // Adjusted to count 4 months instead of 6
+            counts[(3 - monthDiff + 4) % 4]++; // Calculate the index in reverse order
         }
     });
     return counts;
@@ -161,6 +210,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         config
     );
 });
+
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

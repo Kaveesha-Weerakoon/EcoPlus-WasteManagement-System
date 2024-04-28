@@ -111,11 +111,17 @@ try{
     }}
 
     public function getCenterManagerBy_centerId($center_id){
+      try{
+
+      
       $this->db->query('SELECT * FROM center_managers WHERE assigned_center_id = :centerId');
       $this->db->bind(':centerId', $center_id);
 
       $row = $this->db->single();
-      return $row;
+      return $row;}catch(PDOException $e){
+        echo 'An error occurred: ' . $e->getMessage();
+        return false;
+      }
     }
 
     public function get_Non_Assigned_CenterManger(){

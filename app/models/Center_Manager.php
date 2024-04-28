@@ -77,13 +77,16 @@
     }
 
     public function getCenterManagerByID($data){
-
+try{
       $this->db->query('SELECT * FROM center_managers WHERE user_id = :managerId');
       $this->db->bind(':managerId', $data);
 
       $row = $this->db->single();
 
-      return $row;
+      return $row;}catch(PDOException $e){
+        echo 'An error occurred: ' . $e->getMessage();
+        return false;
+      }
     }
 
     public function getCenterManagerByNIC_except($NIC, $managerId){

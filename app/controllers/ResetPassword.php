@@ -295,7 +295,7 @@ class ResetPassword extends Controller {
                 ]);
             
                 // Append the query string to the URL
-                $url = 'http://localhost/ecoplus/ResetPassword/resetPassword?' . $queryData;
+                $url = '/ResetPassword/resetPassword?' . $queryData;
             
                 // Redirect to the updated URL
                 redirect($url);

@@ -39,6 +39,7 @@
       unset($_SESSION['superadmin_id']);
       unset($_SESSION['admin_email']);
       unset($_SESSION['admin_name']);
+      unset($_SESSION['admin_profile']);
        session_destroy();
       redirect('users/login');
  }
@@ -1707,7 +1708,7 @@
       $this->adminModel->admin_delete($id);
       $admin = $this->adminModel->get_all();
       if( $admin_by_id->image!='Profile.png'){
-        deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\center_manager\\" . $cm_id->image);
+        deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\Admin\\" .$admin_by_id->image);
       }
       $data = [
         'admin' => $admin,

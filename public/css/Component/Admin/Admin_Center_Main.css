@@ -262,6 +262,11 @@
     border-radius: 15px;
     padding: 1rem 2rem;
     text-align: center;
+    height: 100%;
+  }
+
+  .height {
+    height: 16px;
   }
 
   .center-manager-content img {
@@ -269,6 +274,7 @@
     height: 150px;
     margin: 0.5rem 0rem;
     border-radius: 50%;
+    margin-top: 25px;
   }
 
   .center-manager-info {
@@ -290,6 +296,7 @@
   .center-manager-info h1 {
     font-weight: 400;
     font-size: 15px;
+    height: 16px;
     color: var(--main-text-color);
   }
 

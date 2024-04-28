@@ -123,7 +123,8 @@
 
                                     <div class="center-manager-info">
                                         <?php if (!empty($data['center']->center_manager_name)) : ?>
-                                        <h3><?php echo $data['center']->center_manager_name?></h3>
+
+                                        <div class="height"></div>
                                         <?php else : ?>
                                         <h3>Center Disabled </h3>
                                         <?php endif; ?>

@@ -54,7 +54,7 @@
                                 <?php foreach($data['admin'] as $admin) : ?>
 
                                 <tr class="table-row">
-                                    <td>CM <?php echo $admin->user_id?></td>
+                                    <td> <?php echo $admin->user_id?></td>
                                     <td><img src="<?php echo IMGROOT?>/img_upload/admin/<?php echo $admin->image?>"
                                             alt="" class="manager_img"></td>
                                     <td><?php echo $admin->name?></td>

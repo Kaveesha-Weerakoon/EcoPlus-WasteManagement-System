@@ -310,10 +310,11 @@ use PHPMailer\PHPMailer\Exception;
   
               
               if (!$this->mail->send()) {
-                  $data['registered']='True';  
-                  $this->view('center_managers/collectors_add',$data);       
+                 redirect('users/login');
+
               } else {
-                header("Location: " . URLROOT . "/users/register/True");        
+                $data['registered']='True';  
+                $this->view('center_managers/collectors_add',$data);     
               }
 
             

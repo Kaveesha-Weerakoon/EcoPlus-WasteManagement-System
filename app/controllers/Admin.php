@@ -173,7 +173,10 @@ use PHPMailer\PHPMailer\Exception;
       $cm_id = $this->center_managerModel->getCenterManagerByID($id);
       $this->center_managerModel->delete_centermanager($id);
       $center_managers = $this->center_managerModel->get_center_managers();
-      deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\center_manager\\" . $cm_id->image);
+      if($center_managers->image!="profile.png"){
+        deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\center_manager\\" . $cm_id->image);
+
+      }
       $data = [
         'center_managers' => $center_managers,
         'confirm_delete' =>'',
@@ -1492,9 +1495,8 @@ use PHPMailer\PHPMailer\Exception;
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $data=[ 'name' => trim($_POST['name']),
-        'profile' => $_FILES['profile_image'],
          'contact_no' => trim($_POST['contact_no']),
-        'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
+        'profile_image_name' => "profile.png",
         'nic' => trim($_POST['nic']),
         'address' => trim($_POST['address']),
         'dob' => trim($_POST['dob']),
@@ -1576,25 +1578,10 @@ use PHPMailer\PHPMailer\Exception;
             $data['confirm_password_err'] = 'Passwords do not match';
           }
         } 
-        if ($_FILES['profile_image']['error'] == 4) {
-          $data['profile_err'] = 'Upload a image';
-     
-        }
+      
+      
 
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err'])){
-          if ($_FILES['profile_image']['error'] == 4) {
-            $data['profile_err'] = 'Upload a image';
-        } else {
-            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/Admin/')) {
-              $data['profile_err'] = '';
-  
-            } else {
-                $data['profile_err'] = 'Error uploading the profile image';
-            }
-        }
-        }
-
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err']) && empty($data['profile_err'])){
+        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err']) ){
           // Validated
           $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
           if($this->adminModel->register_admin($data)){
@@ -1805,7 +1792,10 @@ use PHPMailer\PHPMailer\Exception;
       $admin_by_id = $this->adminModel->getAdminByID($id);
       $this->adminModel->admin_delete($id);
       $admin = $this->adminModel->get_all();
-      deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\Admin\\" . $admin_by_id->image);
+      if($admin_by_id->image!="profile.png"){
+        deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\Admin\\" . $admin_by_id->image);
+
+      }
       $data = [
         'admin' => $admin,
         'confirm_delete' =>'',

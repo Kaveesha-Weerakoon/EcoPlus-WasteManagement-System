@@ -217,6 +217,7 @@
             $this->db->bind(':new_balance',  $dicount_agent_balance);
             $this->db->bind(':user_id1',  $agent_id); // corrected access to user_id property
             $result = $this->db->execute();
+            return $result;
           }
         }
         catch (PDOException $e) {

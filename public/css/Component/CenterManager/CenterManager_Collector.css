@@ -367,7 +367,7 @@
         height: 42px;
         width: 200px;
         outline: none;
-        color: white;
+        color: var(--background-color-main);
         font-size: 19px;
         font-weight: 500;
         border-radius: 5px;

@@ -1,45 +1,44 @@
 <div class="main-right-top-notification" id="notification">
-        <i class='bx bx-bell'></i>
-            <?php if (!empty($data['notification'])) : ?>
-               <div class="dot"><?php echo count($data['notification'])?></div>
-             <?php endif; ?>
-             </div>
-              <div id="notification_popup" class="notification_popup">
-                    <h1>Notifications</h1>
-                        <div class="notification_cont">
-                            <?php foreach($data['notification'] as $notification) : ?>
+    <i class='bx bx-bell'></i>
+    <?php if (!empty($data['notification'])) : ?>
+    <div class="dot"><?php echo count($data['notification'])?></div>
+    <?php endif; ?>
+</div>
+<div id="notification_popup" class="notification_popup">
+    <h1>Notifications</h1>
+    <div class="notification_cont">
+        <?php foreach($data['notification'] as $notification) : ?>
 
-                            <div class="notification">
-                                <div class="notification-green-dot">
+        <div class="notification">
+            <div class="notification-green-dot">
 
-                                </div>
-              <div class="notification_right">
-                      <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
-                           <?php echo $notification->notification ?>
-                                </div>
-                            </div>
-                            <?php endforeach; ?>
-
-                </div>
-                <form class="mark_as_read" id="mark_as_read" method="post" >
-                      <i class="fa-solid fa-check"> </i>
-                       <button type="submit-notification">Mark all as read</button>
-                 </form>
+            </div>
+            <div class="notification_right">
+                <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
+                <?php echo $notification->notification ?>
+            </div>
+        </div>
+        <?php endforeach; ?>
 
     </div>
+    <form class="mark_as_read" id="mark_as_read" method="post">
+        <i class="fa-solid fa-check"> </i>
+        <button type="submit-notification" id="submit-notification">Mark all as read</button>
+    </form>
+
+</div>
 
 
-    <div class="main-right-top-profile">
-        <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
-        alt="">
-              <div class="main-right-top-profile-cont">
-                  <h3><?php echo $_SESSION['collector_name']?></h3>
-                      <p>ID :  <?php echo $_SESSION['collector_id']?></p>
-              </div>
+<div class="main-right-top-profile">
+    <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>" alt="">
+    <div class="main-right-top-profile-cont">
+        <h3><?php echo $_SESSION['collector_name']?></h3>
+        <p>ID : <?php echo $_SESSION['collector_id']?></p>
     </div>
+</div>
 
 
-    <script>
+<script>
 var notification = document.getElementById("notification");
 var notification_pop = document.getElementById("notification_popup");
 notification_pop.style.height = "0px";
@@ -70,9 +69,3 @@ notification.addEventListener("click", function() {
     }
 });
 </script>
-
-
-
-
-
-                

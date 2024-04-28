@@ -1278,6 +1278,7 @@
 
   
   public function view_notification($url){
+    
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
      
       $Notifications1 = $this->customerModel->view_Notification($_SESSION['collector_id']);

@@ -141,6 +141,7 @@ try{
     }}
 
     public function delete_centermanager($centermanagerId){
+      try{
       $this->db->query('DELETE FROM users WHERE id = :centermanagerId');
       $this->db->bind(':centermanagerId', $centermanagerId);
 
@@ -148,6 +149,9 @@ try{
         return true;
       }
       else{
+        return false;
+      }}catch(PDOException $e){
+        echo 'An error occurred: ' . $e->getMessage();
         return false;
       }
 
@@ -178,13 +182,17 @@ try{
   }
 
     public function Remove_Assign($center_manager_id){
+      try{
       $updateManagerQuery = 'UPDATE center_managers SET assinged = "No", assigned_center_id = :assigned_center_id WHERE user_id = :centerManagerId';
       $val = 0;
       $this->db->query($updateManagerQuery);
       $this->db->bind(':centerManagerId',$center_manager_id);
       $this->db->bind(':assigned_center_id', $val);
       
-      $result=$this->db->execute();
+      $result=$this->db->execute();}catch(PDOException $e){
+        echo 'An error occurred: ' . $e->getMessage();
+        return false;
+      }
     }
   
     public function update_center_managers($data){

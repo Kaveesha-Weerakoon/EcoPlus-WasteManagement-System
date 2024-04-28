@@ -87,13 +87,13 @@
                                     </div>
                                 </div>
                                 <div class="main-bottom-down-down-content">
-                                    <label for="centerManager">Center Manager</label>
+                                    <label for="centerManager">Center Manager ID</label>
                                     <select name="centerManager" id="centerManager">
                                         <?php
                                                     $centerManagers = $data['center_managers'];
                                                     if (!empty($centerManagers)) {
                                                         foreach ($centerManagers as $manager) {
-                                                            echo "<option value=\"$manager->id\">CM $manager->id</option>";
+                                                            echo "<option value=\"$manager->id\"> $manager->id</option>";
                                                         }
                                                     } else {
                                                         echo "<option value=\"default\">No Center Managers Available</option>";

@@ -56,47 +56,18 @@
         z-index: 3;
     }
 
-    .main-right-top-search {
-        display: flex;
-        visibility: none;
-        align-items: center;
-        justify-content: center;
-        width: 35%;
-        position: relative;
-    }
-
-    .main-right-top-search i {
-        position: absolute;
-        font-size: 25px;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .main-right-top-search input {
-        width: 100%;
-        height: 33px;
-        border-radius: 7px;
-        background-color: var(--background-color-two);
-        border: 1px solid #dcdde1;
-        font-size: 14px;
-        padding-left: 40px;
-        letter-spacing: 0.03rem;
-        color: var(--main-text-color);
-
-    }
-
-    .main-right-top-search input:focus {
-        border: 1px solid #1ca557;
-        outline: none;
-    }
 
     .main-right-top-notification {
         display: flex;
         align-items: center;
         justify-content: center;
         margin-left: 35%;
-        margin-right: 2.5%;
+        margin-right: 6.1%;
+    }
+
+    .main-right-top-profile {
+        display: flex;
+        margin-right: 70px !important;
     }
 
     .main-right-top-two {

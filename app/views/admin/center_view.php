@@ -45,9 +45,8 @@
                                 <tr class="table-header">
                                     <th>Center ID</th>
                                     <th>Region</th>
-                                    <!-- <th>Location</th> -->
+                                    <th>District</th>
                                     <th>Center Manger ID</th>
-                                    <th>Center Manager Name</th>
                                     <th>View</th>
                                     <th>Action</th>
                                 </tr>
@@ -60,9 +59,9 @@
 
                                     <td><?php echo $centers->id?></td>
                                     <td><?php echo $centers->region?></td>
+                                    <td><?php echo $centers->district?></td>
 
                                     <td><?php echo $centers->center_manager_id?></td>
-                                    <td><?php echo $centers->center_manager_name?></td>
                                     <td><i class="fa-solid fa-eye" style="font-size: 20px;"
                                             onclick="locate('<?php echo $centers->id?>/<?php echo $centers->region?>')"></i>
                                     </td>
@@ -125,7 +124,7 @@
 
 
                     <h2>This Action is prohibited</h2>
-                    <p>Center has ongoing requests,Center garbage stock is assisgned to a center</p>
+                    <p>Center has ongoing requests or has non empty garbage stock </p>
 
                     <div class="btns">
                         <a href="<?php echo URLROOT?>/admin/center"><button type="button"

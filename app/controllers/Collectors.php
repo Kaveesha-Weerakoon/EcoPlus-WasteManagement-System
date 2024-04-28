@@ -141,20 +141,27 @@
         }
 
         //validate DOB
-       // Validate date of birth
-        if(empty($data['dob'])) {
-             $data['dob_err'] = 'Please enter your date of birth.';
-        } else {
-           // Calculate age
-           $dob = new DateTime($data['dob']);
-           $now = new DateTime();
-            $age = $now->diff($dob)->y;
 
-      // Check if age is less than 18
-      if($age < 18) {
-      $data['dob_err'] = 'You must be at least 18 years old.';
+        //validate DOB
+if(empty($data['dob'])){
+  $data['dob_err'] = 'Please enter dob';
+} else {
+  // Check if the date is in a valid format
+  $dobDateTime = DateTime::createFromFormat('Y-m-d', $data['dob']);
+  if (!$dobDateTime) {
+      $data['dob_err'] = 'Please enter a valid date in the format YYYY-MM-DD';
+  } else {
+      // Calculate the age
+      $today = new DateTime();
+      $diff = $dobDateTime->diff($today);
+      $age = $diff->y;
+
+      // Check if the person is older than 18 years
+      if ($age < 18) {
+          $data['dob_err'] = 'You must be at least 18 years old';
       }
-      }
+  }
+}
 
 
         // Validate Contact no
@@ -330,6 +337,7 @@
     }
     
     public function collector_assistants_delete($assisId){
+      $Notifications = $this->customerModel->get_Notification($_SESSION['collector_id']);
       $collector_assistants = $this->collector_assistantModel->get_collector_assistants($_SESSION['collector_id']);
       $data = [
         'collector_assistants' => $collector_assistants,

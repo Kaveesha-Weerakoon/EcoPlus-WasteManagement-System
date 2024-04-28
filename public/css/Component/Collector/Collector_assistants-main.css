@@ -224,13 +224,14 @@
 
     .popup {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 1111;
         text-align: center;
         padding: 0 30px 30px;
         color: #333;
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
 
     .popup a {
@@ -253,8 +254,11 @@
         font-size: 23px;
         font-weight: 600;
         margin: 10px 0 10px;
+        color:var(--main-text-color)
     }
-
+    .popup p {
+        color:var(--main-text-color)
+    }
     .btns {
         display: flex;
         flex-direction: row;
@@ -352,7 +356,7 @@
 
     .popup {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         text-align: center;
@@ -430,15 +434,14 @@
 
     .popup-form {
         width: 50%;
-        background: white;
+        background: var(--background-color-main);
         border-radius: 6px;
         top: 0;
         position: relative;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
         transition: transform 0.4s, top 0.4s;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--box-shadow);
 
     }
 
@@ -471,8 +474,8 @@
     .updatebtn {
         width: 310px;
         height: 40px;
-        background: rgb(44, 196, 42);
-        color: white;
+        background: var(--green-color-one);
+        color: var(--background-color-main);
         border: 0;
         outline: none;
         font-size: 18px;
@@ -493,6 +496,11 @@
         cursor: pointer;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
+
+    .cancelbtn1:hover{
+        background: #a7a1a1 ;
+    }
+
 
     .updateData {
         width: 100%;
@@ -518,8 +526,8 @@
         font-size: 16px;
         font-weight: 400;
         line-height: 1.5;
-        background-color: #fff;
-        border: 1px solid #ced4da;
+        background-color: var(--background-color-main);
+        color: var(--main-text-color);
         border-radius: 4px;
     }
 
@@ -532,7 +540,7 @@
         flex-direction: column;
         width: 100%;
         border-radius: 4px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--form-box-shadow);
     }
 
     /*Update success*/
@@ -551,12 +559,12 @@
 
     .popup1 {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         font-family: 'poppins', sans-serif;
         border-radius: 6px;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         transition: transform 0.4s, top 0.4s;
     }
 
@@ -583,8 +591,8 @@
         width: 100%;
         margin-top: 30px;
         padding: 10px 0;
-        background: #6fd649;
-        color: white;
+        background: var(--green-color-one);
+        color: var(--background-color-main);
         border: 0;
         outline: none;
         font-size: 18px;
@@ -593,6 +601,11 @@
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 
     }
+
+    .popup1 button:hover{
+        background: var(--button-hover-green);
+    }
+
 
     @media screen and (max-width:862px) {
         .cancel-confirm-content h1 {
@@ -844,7 +857,9 @@
             margin-left: 20px;
         }
 
-        
+        .popup1 {
+            width: 300px;
+        }
 
       
     }
@@ -901,7 +916,7 @@
             width: 110px;
         }
 
-        .popup{
+        .popup1{
             width: 300px;
         }
        

@@ -229,6 +229,7 @@ try{
     }
 
     public function getCenterManager_ByID_view($managerId){
+      try{
       $this->db->query('SELECT *
                         FROM center_managers
                         INNER JOIN users
@@ -237,7 +238,10 @@ try{
       $this->db->bind(':manager_Id', $managerId);
       
       $row = $this->db->single();
-      return $row;
+      return $row;}catch(PDOException $e){
+        echo 'An error occurred: ' . $e->getMessage();
+        return false;
+      }
 
     }
   

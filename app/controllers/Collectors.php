@@ -140,26 +140,26 @@
         }
 
         //validate DOB
-        //validate DOB
-if(empty($data['dob'])){
-  $data['dob_err'] = 'Please enter dob';
-} else {
-  // Check if the date is in a valid format
-  $dobDateTime = DateTime::createFromFormat('Y-m-d', $data['dob']);
-  if (!$dobDateTime) {
-      $data['dob_err'] = 'Please enter a valid date in the format YYYY-MM-DD';
-  } else {
-      // Calculate the age
-      $today = new DateTime();
-      $diff = $dobDateTime->diff($today);
-      $age = $diff->y;
+            //validate DOB
+      if(empty($data['dob'])){
+        $data['dob_err'] = 'Please enter dob';
+      } else {
+        // Check if the date is in a valid format
+        $dobDateTime = DateTime::createFromFormat('Y-m-d', $data['dob']);
+        if (!$dobDateTime) {
+            $data['dob_err'] = 'Please enter a valid date in the format YYYY-MM-DD';
+        } else {
+            // Calculate the age
+            $today = new DateTime();
+            $diff = $dobDateTime->diff($today);
+            $age = $diff->y;
 
-      // Check if the person is older than 18 years
-      if ($age < 18) {
-          $data['dob_err'] = 'You must be at least 18 years old';
+        // Check if the person is older than 18 years
+        if ($age < 18) {
+            $data['dob_err'] = 'You must be at least 18 years old';
+          }
+        }
       }
-  }
-}
 
 
         // Validate Contact no
@@ -702,6 +702,7 @@ if(empty($data['dob'])){
         'lattitude'=>$center->lat,
         'longitude'=>$center->longi,
         'notification'=> $Notifications,
+        'success'=>'',
         'fine_type' => isset($_POST['attribute']) ? trim($_POST['attribute']) : 'None'
       ]; 
       
@@ -747,7 +748,8 @@ if(empty($data['dob'])){
         'center'=>$center,
         'lattitude'=>$center->lat,
         'longitude'=>$center->longi,
-        'notification'=> $Notifications
+        'notification'=> $Notifications,
+        'success'=>''
 
       ];        
       $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -813,7 +815,8 @@ if(empty($data['dob'])){
     'contactno_err' =>'',
     'city_err'=>'',
     'profile_err'=>'',
-    'success_message'=>''
+    'success_message'=>'',
+    'success'=>''
 
 
     ];
@@ -846,7 +849,8 @@ if(empty($data['dob'])){
             'creditData'=>'',
             'types'=>$types,      
             'credit_Amount'=> '',        
-              'verification_err'=>''
+              'verification_err'=>'',
+              'success'=>''
 
         ];
 
@@ -945,7 +949,8 @@ if(empty($data['dob'])){
 
           'note_err'=>'',
           'creditData'=>'',
-          'verification_err'=>''
+          'verification_err'=>'',
+          'success'=>''
 
           ]; 
           foreach ($types as $type) {
@@ -1076,8 +1081,9 @@ if(empty($data['dob'])){
             $new_credit_balance = $current_credit + $credit_Amount; // Calculate new credit balance
             $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
            
-            if ($inserted && $update_result && $updatedGarbageTotals ) {
-               header("Location: " . URLROOT . "/collectors/request_completed");        
+            if ($inserted && $update_result ) {
+               header("Location: " . URLROOT . "/collectors/request_completed/");
+               
             } else {
               
 
@@ -1112,7 +1118,8 @@ if(empty($data['dob'])){
        'types'=>$types,
        'verification'=>'',
         'creditData'=>'',
-        'verification_err'=>''
+        'verification_err'=>'',
+        'success'=>''
         ]; 
         foreach ($types as $type) {
           if ($type) {

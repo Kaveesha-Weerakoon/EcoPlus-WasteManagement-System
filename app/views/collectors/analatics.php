@@ -18,8 +18,8 @@
 
                     <form class="top-bar" method="post" action="<?php echo URLROOT;?>/collectors/analatics">
                         <div class="top-bar-left">
-                            <h2>Analatics</h2>
-                            <p>Here is overall Analatics</p>
+                            <h2>Analytics</h2>
+                            <p>Here is overall Analytics</p>
                         </div>
 
                         <div class="top-bar-details">
@@ -405,7 +405,7 @@ const config2 = {
             },
             title: {
                 display: true,
-                text: 'Waste Collected Pie Chart'
+                text: 'Waste handovered Pie Chart'
             }
         }
     }

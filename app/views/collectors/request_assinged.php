@@ -180,6 +180,22 @@
                     <?php endif; ?>
                 </div>
 
+
+                <?php if($data['success']=='True') : ?>
+                    die('hhhbbb');
+                <div class="complain_success" style="">
+                    <div class="popup" id="popup">
+                        <img src="<?php echo IMGROOT?>/check.png" alt="">
+                        <h2>Success!!</h2>
+                        <p>Complain has been reported successfully</p>
+                        <a href="<?php echo URLROOT?>/collectors/history_complains"><button
+                                type="button">OK</button></a>
+
+
+                    </div>
+                </div>
+                <?php endif; ?>
+
                 <?php if($data['popup']=='True') : ?>
                 <div class="personal-details-popup-box" id="personal-details-popup-box">
                     <div class="personal-details-popup-form" id="popup">
@@ -294,7 +310,6 @@
                 </div>
 
                 <?php endif; ?>
-
 
 
                 <form class="on_the_way" id="ontheway" action="<?php echo URLROOT?>/collectors/request_ontheway"
@@ -413,7 +428,7 @@
                     </div>
                 </div>
             </div>
-
+            
         </div>
     </div>
 </div>

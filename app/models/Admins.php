@@ -80,6 +80,7 @@ try{
 
 
 public function admin_delete($id){
+  try{
   $this->db->query('DELETE FROM users WHERE id = :adminId');
   $this->db->bind(':adminId', $id);
 
@@ -87,6 +88,9 @@ public function admin_delete($id){
     return true;
   }
   else{
+    return false;
+  }}catch(PDOException $e){
+    echo 'An error occurred: ' . $e->getMessage();
     return false;
   }
 

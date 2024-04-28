@@ -753,6 +753,10 @@
       $no_of_collectors = $this->collector_model->get_no_of_Collectors($center_id);
       $no_of_workers = $this->center_workers_model->get_no_of_center_workers($center_id);
       $total_requests = $this->requests_model->get_total_requests_by_region($region);
+      $total_garbage = $this->garbage_Model->get_total_garbage_by_centerId($center_id);
+      $marked_holidays = $this->center_managerModel->get_marked_holidays($region);
+
+      //var_dump($total_garbage);
       
       if($_SERVER['REQUEST_METHOD'] == 'POST'){  
         $data = [
@@ -763,9 +767,11 @@
           'no_of_workers'=>$no_of_workers,
           'center_manager' =>$center_manager,
           'total_requests'=>$total_requests,
+          'total_garbage' => $total_garbage->total_garbage,
           'lattitude'=>trim($_POST['latittude']),
           'longitude'=>trim($_POST['longitude']),
           'radius'=>trim($_POST['radius']),
+          'marked_holidays'=> $marked_holidays,
           'center_id'=>$center_id,
           'region'=> $region
       ];
@@ -786,11 +792,13 @@
         'no_of_workers'=>$no_of_workers,
         'center_manager' =>$center_manager,
         'total_requests'=>$total_requests,
+        'total_garbage' => $total_garbage->total_garbage,
+        'marked_holidays'=> $marked_holidays,
         'lattitude'=>'',
         'longitude'=>'',
         'radius'=>'',
         'center_id'=>$center_id,
-          'region'=> $region
+        'region'=> $region
       ];
       
       $this->view('admin/center_main', $data);        
@@ -802,6 +810,7 @@
        $no_of_collectors = $this->collector_model->get_no_of_Collectors($center_id);
        $total_requests = $this->requests_model->get_total_requests_by_region($center->region);
        $no_of_workers = $this->center_workers_model->get_no_of_center_workers($center_id);
+       $total_garbage = $this->garbage_Model->get_total_garbage_by_centerId($center_id);
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
        
@@ -835,7 +844,9 @@
             'center_manager'=>trim($_POST['centerManager']),
             'no_of_collectors' =>$no_of_collectors,
             'no_of_workers'=>$no_of_workers,
-            'total_requests'=>$total_requests
+            'total_requests'=>$total_requests,
+            'total_garbage' => $total_garbage->total_garbage,
+
           ];
         
           header("Location: " . URLROOT . "/admin/center_main/$center_id/$center->region");        
@@ -856,7 +867,8 @@
           'no_of_collectors' =>$no_of_collectors,
           'no_of_workers'=>$no_of_workers,
           'center_manager' =>$center_manager,
-          'total_requests'=>$total_requests
+          'total_requests'=>$total_requests,
+          'total_garbage' => $total_garbage->total_garbage
         ];
         $this->view('admin/center_main', $data);
       }

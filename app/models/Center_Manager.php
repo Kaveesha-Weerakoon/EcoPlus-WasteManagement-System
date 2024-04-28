@@ -12,13 +12,13 @@
     public function register_center_manager($data){
       $this->db->query('INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, "centermanager")');
       // Bind values
-      $this->db->bind(':name', $data['name']);
-      $this->db->bind(':email', $data['email']);
-      $this->db->bind(':password', $data['password']);
+      $this->db->bind(':name', $data->name);
+      $this->db->bind(':email', $data->email);
+      $this->db->bind(':password', $data->password);
       $result = $this->db->execute();
       if ($result) {
         $this->db->query('SELECT * FROM users WHERE email = :email');
-        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':email',$data->email);
         $row = $this->db->single();
     
         // Check if the user was successfully inserted and retrieved
@@ -27,11 +27,11 @@
     
             $this->db->query('INSERT INTO center_managers (user_id, contact_no, address, nic,dob,image) VALUES (:user_id, :mobile_number, :address, :nic,:dob,:image)');
             $this->db->bind(':user_id', $user_id);
-            $this->db->bind(':mobile_number', $data['contact_no']);
-            $this->db->bind(':address', $data['address']);
-            $this->db->bind(':nic', $data['nic']);
-            $this->db->bind(':dob', $data['dob']);
-            $this->db->bind(':image', $data['profile_image_name']);
+            $this->db->bind(':mobile_number',$data->contact_no);
+            $this->db->bind(':address', $data->address);
+            $this->db->bind(':nic', $data->nic);
+            $this->db->bind(':dob', $data->dob);
+            $this->db->bind(':image', "profile.png");
             $result = $this->db->execute();
     
             // Return true or false based on the final insert

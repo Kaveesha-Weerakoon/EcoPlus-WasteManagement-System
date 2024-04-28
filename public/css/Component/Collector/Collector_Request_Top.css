@@ -178,7 +178,7 @@
         border: none;
         margin-right: 9px;
         background-color: var(--background-color-main);
-        color:#001f3f;
+        color:var(--main-text-color);;
 
     }
 

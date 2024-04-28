@@ -130,7 +130,7 @@
             <div class="popup" id="popup">
                 <img src="<?php echo IMGROOT?>/check.png" alt="">
                 <h2>Success!!</h2>
-                <p>Center Manager has been registered successfully</p>
+                <p>Mail Send Successfully</p>
                 <a href="<?php echo URLROOT?>/admin/center_managers"><button type="button">OK</button></a>
 
             </div>

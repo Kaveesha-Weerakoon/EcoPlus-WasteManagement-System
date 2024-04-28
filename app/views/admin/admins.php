@@ -41,7 +41,7 @@
                             <table class="table">
                                 <tr class="table-header">
                                     <th>Admin ID</th>
-                                    <!-- <th>Profile</th> -->
+                                    <th>Profile</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Personal Details</th>
@@ -55,8 +55,8 @@
 
                                 <tr class="table-row">
                                     <td> <?php echo $admin->user_id?></td>
-                                    <!-- <td><img src="<?php echo IMGROOT?>/img_upload/admin/<?php echo $admin->image?>"
-                                            alt="" class="manager_img"></td> -->
+                                    <td><img src="<?php echo IMGROOT?>/img_upload/admin/<?php echo $admin->image?>"
+                                            alt="" class="manager_img"></td>
                                     <td><?php echo $admin->name?></td>
                                     <td><?php echo $admin->email?></td>
                                     <td><i onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode( $admin), ENT_QUOTES, 'UTF-8') ?>))"

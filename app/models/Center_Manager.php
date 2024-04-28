@@ -90,6 +90,7 @@ try{
     }
 
     public function getCenterManagerByNIC_except($NIC, $managerId){
+      try{
       $this->db->query('SELECT * FROM center_managers WHERE nic = :nic AND user_id <> :id'); 
       $this->db->bind(':nic', $NIC);
       $this->db->bind(':id', $managerId);
@@ -103,8 +104,11 @@ try{
       else {
         return false;
       }
-
     }
+    catch(PDOException $e){
+      echo 'An error occurred: ' . $e->getMessage();
+      return false;
+    }}
 
     public function getCenterManagerBy_centerId($center_id){
       $this->db->query('SELECT * FROM center_managers WHERE assigned_center_id = :centerId');

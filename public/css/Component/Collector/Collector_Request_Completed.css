@@ -29,7 +29,6 @@
   }
 
   .table-header {
-    background-color: var(--table-header);
     grid-template-columns: 13% 14% 14% 21% 19% 19% 13%;
   }
 
@@ -476,13 +475,13 @@
 
   .collect-details-pop-form-content {
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 60% 40%;
     width: 80%;
     background: var(--background-color-main);
     box-shadow: var(--box-shadow);
     border-radius: 10px;
     padding: 10px 40px;
-    height: 300px;
+    height: 350px;
   }
 
   .collect-details-pop-form-content span {
@@ -499,11 +498,11 @@
   .collect-details-pop-form-content-labels h3 {
     font-weight: 300;
     font-size: 14px;
-    margin-bottom: 5%;
+    margin-bottom: 7%;
     width: 300px;
     text-align: left;
     margin-left: 20%;
-    color: #7c7c7d;
+    color: var(--main-text-color);
   }
 
   .collect-details-pop-form-content-right-values {
@@ -527,7 +526,7 @@
     font-size: 14px;
     color: #767e95;
     font-weight: 550;
-
+    overflow: auto;
   }
 
   .note {
@@ -636,6 +635,7 @@
     color: white;
     cursor: pointer;
   }
+
 
   /* ------------*/
 

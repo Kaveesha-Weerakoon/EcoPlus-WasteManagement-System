@@ -198,6 +198,16 @@
 
 
 <script>
+
+    /* Notification View */
+document.getElementById('submit-notification').onclick = function() {
+    var form = document.getElementById('mark_as_read');
+    var dynamicUrl = "<?php echo URLROOT;?>/collector/view_notification/collector_assistants";
+    form.action = dynamicUrl; // Set the action URL
+    form.submit(); // Submit the form
+
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     const element = document.getElementById('update_click');
     const overlay = document.getElementById('overlay');

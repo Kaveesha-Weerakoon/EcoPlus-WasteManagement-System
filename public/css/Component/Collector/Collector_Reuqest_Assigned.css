@@ -20,6 +20,7 @@
   }
 
   .table-header {
+    background-color: var(--table-header);
     grid-template-columns: 13% 14% 14% 20% 13% 13% 13%;
   }
 
@@ -536,6 +537,7 @@
       font-size: 14px;
       padding-left: 45px;
       transition: all 0.3s ease;
+      color: var(--main-text-color);
     }
 
     .main-right-bottom-content-content input:focus {
@@ -658,7 +660,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--background-color-main);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -670,11 +672,12 @@
   .pop_up_confirm_collect_cont {
     width: 530px;
     height: 600px;
-    background-color: white;
+    background-color: var(--background-color-main);
     border-radius: 10px;
     display: flex;
     align-items: center;
     flex-direction: column;
+    box-shadow: var(--box-shadow);
 
   }
 
@@ -758,7 +761,7 @@
     height: 40px;
     outline: none;
     width: 180px;
-    color: white;
+    color: var(--background-color-right);
     font-size: 17px;
     font-weight: 500;
     border-radius: 5px;
@@ -816,6 +819,7 @@
       }
 
     }
+  }
 
     @media screen and (max-width: 1118px) {
       .table td {
@@ -1225,15 +1229,15 @@
       }
 
 
-  .table-row {
-      grid-template-columns: 11% 12% 14% 11% 11% 11% 14%;
-  }
-  .main-right-top-profile{
-    margin-right: 100px;
-  }
+      .table-row {
+          grid-template-columns: 11% 12% 14% 11% 11% 11% 14%;
+      }
+      .main-right-top-profile{
+        margin-right: 100px;
+      }
 
 
-}
+    }
 
     @media screen and (max-width:650px) {
 
@@ -1260,8 +1264,6 @@
 
 
 
-
-  }
 
 
 

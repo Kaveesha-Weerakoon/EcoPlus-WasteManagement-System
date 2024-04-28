@@ -20,8 +20,10 @@
       $centers = $this->Center_Model->getallCenters();
       $jsonData = json_encode($centers);
 
-      if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id']) ){
-        redirect('pages');
+      if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id'])||isset($_SESSION['agent_id']) ||isset($_SESSION['superadmin_id'])||isset($_SESSION['admin_id'])){
+        redirect('pages');  
+       
+  
      }
       else{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -209,7 +211,7 @@
        // Check for POST
        $centers = $this->Center_Model->getallCenters2();
        $jsonData = json_encode($centers);
-      if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id'])  || isset($_SESSION['admin_id']) || isset($_SESSION['agent_id']) ){
+      if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id'])  || isset($_SESSION['admin_id']) || isset($_SESSION['agent_id'])|| isset($_SESSION['superadmin_id']) ){
         if(isset($_SESSION['user_id'])){
           redirect('customers');
         }
@@ -220,7 +222,8 @@
           redirect('centermanagers');
         }
 
-        if(isset($_SESSION['admin_id'])||$_SESSION['super_admin_id']){
+        if(isset($_SESSION['admin_id'])||$_SESSION['superadmin_id']){
+      
           redirect('admin');
         }
 

@@ -143,25 +143,25 @@
         //validate DOB
 
         //validate DOB
-if(empty($data['dob'])){
-  $data['dob_err'] = 'Please enter dob';
-} else {
-  // Check if the date is in a valid format
-  $dobDateTime = DateTime::createFromFormat('Y-m-d', $data['dob']);
-  if (!$dobDateTime) {
-      $data['dob_err'] = 'Please enter a valid date in the format YYYY-MM-DD';
-  } else {
-      // Calculate the age
-      $today = new DateTime();
-      $diff = $dobDateTime->diff($today);
-      $age = $diff->y;
+      if(empty($data['dob'])){
+      $data['dob_err'] = 'Please enter dob';
+      } else {
+         // Check if the date is in a valid format
+       $dobDateTime = DateTime::createFromFormat('Y-m-d', $data['dob']);
+       if (!$dobDateTime) {
+          $data['dob_err'] = 'Please enter a valid date in the format YYYY-MM-DD';
+         } else {
+          // Calculate the age
+          $today = new DateTime();
+          $diff = $dobDateTime->diff($today);
+           $age = $diff->y;
 
       // Check if the person is older than 18 years
-      if ($age < 18) {
-          $data['dob_err'] = 'You must be at least 18 years old';
+          if ($age < 18) {
+              $data['dob_err'] = 'You must be at least 18 years old';
+         }
       }
-  }
-}
+        }
 
 
         // Validate Contact no
@@ -853,7 +853,8 @@ if(empty($data['dob'])){
 
   public function enterWaste_And_GenerateEcoCredits($req_id,$pop_eco="False") {
      $types=$this->garbageTypeModel->get_all();
-    
+
+  
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         
@@ -1266,6 +1267,17 @@ if(empty($data['dob'])){
    }
   }
 
+  
+  public function view_notification($url){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+     
+      $Notifications1 = $this->customerModel->view_Notification($_SESSION['user_id']);
+      $Notifications2 = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $data['notification']=  $Notifications2 ;
+      header("Location: " . URLROOT . "/collectors/$url");        
+
+   }
+  }
 
   
 }

@@ -16,15 +16,24 @@ use PHPMailer\PHPMailer\Exception;
            $this->Admin_Model=$this->model('Admins');
            $this->resetPasswordModel=$this->model('Reset_Password');
            
-           $this->mail = new PHPMailer();
-           $this->mail->isSMTP();
-           $this->mail->Host = 'smtp.gmail.com';
-           $this->mail->Port = 587;
-           $this->mail->Username = 'ecoplusgroupproject@gmail.com';
-           $this->mail->Password = 'zzruvawrzshhafbk';
-           $this->mail->SMTPSecure = 'tls';
-           $this->mail->SMTPAuth = true;
+          //  $this->mail = new PHPMailer();
+          //  $this->mail->isSMTP();
+          //  $this->mail->Host = 'smtp.gmail.com';
+          //  $this->mail->Port = 587;
+          //  $this->mail->Username = 'ecoplusgroupproject@gmail.com';
+          //  $this->mail->Password = 'zzruvawrzshhafbk';
+          //  $this->mail->SMTPSecure = 'tls';
+          //  $this->mail->SMTPAuth = true;
            
+
+              // Setup PHPMailer
+        $this->mail = new PHPMailer();
+        $this->mail->isSMTP();
+        $this->mail->Host = 'sandbox.smtp.mailtrap.io';
+        $this->mail->SMTPAuth = true;
+        $this->mail->Port = 2525;
+        $this->mail->Username = 'f4ab65cd067d1f';
+        $this->mail->Password = '111c78b575960b';
           }
           public function index(){
             header("Location: " . URLROOT);       

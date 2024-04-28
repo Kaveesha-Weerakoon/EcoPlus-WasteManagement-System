@@ -14,30 +14,31 @@ class ResetPassword extends Controller {
         $this->userModel=$this->model('User');
         $this->resetPasswordModel=$this->model('Reset_Password');
       
-        //Setup PHPMailer
-        // $this->mail = new PHPMailer();
-        // $this->mail->isSMTP();
-        // $this->mail->Host = 'sandbox.smtp.mailtrap.io';
-        // $this->mail->SMTPAuth = true;
-        // $this->mail->Port = 2525;
-        // $this->mail->Username = 'f4ab65cd067d1f';
-        // $this->mail->Password = '111c78b575960b';
+        // Setup PHPMailer
         $this->mail = new PHPMailer();
         $this->mail->isSMTP();
-        $this->mail->Host = 'smtp.gmail.com';
-        $this->mail->Port = 587;
-        $this->mail->Username = 'ecoplusgroupproject@gmail.com';
-        $this->mail->Password = 'zzruvawrzshhafbk';
-        $this->mail->SMTPSecure = 'tls';
+        $this->mail->Host = 'sandbox.smtp.mailtrap.io';
         $this->mail->SMTPAuth = true;
+        $this->mail->Port = 2525;
+        $this->mail->Username = 'f4ab65cd067d1f';
+        $this->mail->Password = '111c78b575960b';
+        // $this->mail = new PHPMailer();
+        // $this->mail->isSMTP();
+        // $this->mail->Host = 'smtp.gmail.com';
+        // $this->mail->Port = 587;
+        // $this->mail->Username = 'ecoplusgroupproject@gmail.com';
+        // $this->mail->Password = 'zzruvawrzshhafbk';
+        // $this->mail->SMTPSecure = 'tls';
+        // $this->mail->SMTPAuth = true;
 
     }
 
-    public function goto_resetpassword(){
+    public function goto_resetpassword($success=""){
 
         $data = [
             'email' => '',
-            'email_err' => ''       
+            'email_err' => '' ,
+            'success'=>$success     
         ];
         $this->view('users/resetpassword', $data);
         // if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -78,7 +79,8 @@ class ResetPassword extends Controller {
             // Init data
             $data = [
                 'email' => trim($_POST['email']),
-                'email_err' => ''    
+                'email_err' => '' ,
+                'success'=>''  
             ];
     
             // Validate Email
@@ -149,6 +151,9 @@ class ResetPassword extends Controller {
                 if (!$this->mail->send()) {
                     echo 'Error sending email: ' . $this->mail->ErrorInfo;
                 } else {
+                    
+                    header("Location: " . URLROOT . "/ResetPassword/goto_resetpassword/True");        
+
                     echo "Please check your emails for the password reset link.";
                 }
 
@@ -163,7 +168,9 @@ class ResetPassword extends Controller {
             // Init data
             $data = [
                 'email' => '',
-                'email_err' => ''       
+                'email_err' => '' ,
+                'success'=>''  
+      
             ];
             $this->view('users/resetpassword', $data);
         }
@@ -312,7 +319,8 @@ class ResetPassword extends Controller {
                 'pwd_repeat' => '',
                 'pwd_err' => '',
                 'pwd_repeat_err' => '',
-                'otp_err'=> ''
+                'otp_err'=> '',
+                ''
 
             ];
 
@@ -328,4 +336,3 @@ class ResetPassword extends Controller {
         
     }
 }
-

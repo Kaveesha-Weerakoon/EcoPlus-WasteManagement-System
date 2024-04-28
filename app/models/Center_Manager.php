@@ -196,6 +196,7 @@ try{
     }
   
     public function update_center_managers($data){
+      try{
       $this->db->query('UPDATE users SET name = :name WHERE id= :managerId');
       $this->db->bind(':managerId', $data['id']);
       $this->db->bind(':name', $data['name']);
@@ -220,7 +221,10 @@ try{
       }else{
         return false;
       }
-
+    }catch(PDOException $e){
+      echo 'An error occurred: ' . $e->getMessage();
+      return false;
+    }
 
     }
 

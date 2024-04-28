@@ -47,7 +47,7 @@
       } else {
         return false;
     }} catch(PDOException $e) {
-      die($e);
+   
       // Handle exceptions
       return false;
   }
@@ -238,7 +238,63 @@
     } catch(PDOException $e) {
        
       return false;
+   }
   }
-   
+
+  public function deleteEmailCM_Admin($email){
+    try {
+        $this->db->query('DELETE FROM cm_admin WHERE email=:email');
+        $this->db->bind(':email', $email);
+        //Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (PDOException $e) {
+       
+        return false;
     }
   }
+
+  public function register_confirm_cm_admin($data){
+    try {
+
+      $this->db->query('INSERT INTO cm_admin (name, email, password,contact_no,address,nic,dob,expires,hashedToken,selector) 
+      VALUES (:name, :email,:password ,:mobile_number,:address,:nic,:dob,:expires,:hashedToken,:selector)');
+      // Bind values
+      $this->db->bind(':name', $data['name']);
+      $this->db->bind(':email', $data['email']);
+      $this->db->bind(':password', $data['password']);
+      $this->db->bind(':mobile_number', $data['contact_no']);
+      $this->db->bind(':address', $data['address']);
+      $this->db->bind(':nic', $data['nic']);
+      $this->db->bind(':dob', $data['dob']);
+
+      $this->db->bind(':expires', $data['expires']);
+      $this->db->bind(':hashedToken', $data['hashedToken']);
+      $this->db->bind(':selector', $data['selector']);
+  
+      $result = $this->db->execute();
+      return $result;
+   } catch (PDOException $e) {
+       die($e);
+    return false;
+   }
+  }
+
+  public function findCMadminByMail($email){
+    try {
+      $this->db->query('SELECT * FROM cm_admin WHERE email =:email');
+      $this->db->bind(':email', $email);
+      
+      // Execute the query
+      $row = $this->db->single();
+      return $row;  
+    }
+      catch (PDOException $e) {
+        die($e);
+     return false;
+    }
+   }
+}

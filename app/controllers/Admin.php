@@ -65,7 +65,6 @@ use PHPMailer\PHPMailer\Exception;
       unset($_SESSION['superadmin_id']);
       unset($_SESSION['admin_email']);
       unset($_SESSION['admin_name']);
-      unset($_SESSION['admin_profile']);
        session_destroy();
       redirect('users/login');
  }
@@ -78,15 +77,13 @@ use PHPMailer\PHPMailer\Exception;
       $collectors =$this->collector_model->get_collectors();
       $centers = $this->center_model->getallCenters();
       $agents  = $this->discount_agentModel->get_discount_agent();
-      
-      $total_garbage=$this->Collect_Garbage_Model->getTotalGarbage();
+
       $jsonData = json_encode($centers );
 
       $fine_details = $this->fine_model->get_fine_details();
       $completedRequests=$this->Collect_Garbage_Model->getAllCompletedRequests();
       $totalRrequests=$this->requests_model->getTotalRequests();
-      $json_Total_Garbage = json_encode($total_garbage);
-      
+     
       $data = [
         'completedRequests'=> $completedRequests,
         'totalRequests'=> $totalRrequests,
@@ -96,8 +93,6 @@ use PHPMailer\PHPMailer\Exception;
         'collector_count'=>count( $collectors),
         'agent_count'=>count($agents),
         'centers'=>$jsonData,
-        'total_garbage'=> $json_Total_Garbage,
-
         'creditsGiven' => ($creditMonth->credit_amount !== null) ? $creditMonth->credit_amount : 0      ];
 
       foreach($fine_details as $fine ){
@@ -175,14 +170,10 @@ use PHPMailer\PHPMailer\Exception;
     }
 
     public function center_managers_delete($id) {
-      
       $cm_id = $this->center_managerModel->getCenterManagerByID($id);
-     
       $this->center_managerModel->delete_centermanager($id);
       $center_managers = $this->center_managerModel->get_center_managers();
-      if( $cm_id->image!='Profile.png'){
-        deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\center_manager\\" . $cm_id->image);
-      }
+      deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\center_manager\\" . $cm_id->image);
       $data = [
         'center_managers' => $center_managers,
         'confirm_delete' =>'',
@@ -290,12 +281,20 @@ use PHPMailer\PHPMailer\Exception;
 
 
         // Validate Password
-        if(empty($data['password'])){
+        if (empty($data['password'])) {
           $data['password_err'] = 'Please enter password';
-        } elseif(strlen($data['password']) < 6){
-          $data['password_err'] = 'Password must be at least 6 characters';
-        }
-
+      } elseif (strlen($data['password']) < 8 || strlen($data['password']) > 30) {
+          $data['password_err'] = 'Password must be between 8 and 30 characters';
+      } elseif (!preg_match('/[^\w\s]/', $data['password'])) {
+          $data['password_err'] = 'Password must include at least one symbol';
+      } elseif (!preg_match('/[A-Z]/', $data['password'])) {
+          $data['password_err'] = 'Password must include at least one uppercase letter';
+      } elseif (!preg_match('/[a-z]/', $data['password'])) {
+          $data['password_err'] = 'Password must include at least one lowercase letter';
+      } elseif (!preg_match('/[0-9]/', $data['password'])) {
+          $data['password_err'] = 'Password must include at least one number';
+      }
+      
         // Validate Confirm Password
         if(empty($data['confirm_password'])){
           $data['confirm_password_err'] = 'Please confirm password';
@@ -309,14 +308,68 @@ use PHPMailer\PHPMailer\Exception;
         
 
         if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err'])){
-          // Validated
+          // // Validated
+          // $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+          // if($this->center_managerModel->register_center_manager($data)){
+          //   $data['registered']='True';        
+          //   $this->view('admin/center_managers_add',$data);
+          // } else {
+          //   die('Something went wrong');
+          // }
+
+
+          $pw=$data['password'];
           $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-          if($this->center_managerModel->register_center_manager($data)){
-            $data['registered']='True';        
-            $this->view('admin/center_managers_add',$data);
-          } else {
-            die('Something went wrong');
+          $selector = bin2hex(random_bytes(8));
+          $token = random_bytes(32);
+         
+          $url = 'http://localhost/ecoplus/users/register_success_CMAdmin?selector='.$selector.'&validator='.bin2hex($token).'&email='.urlencode($data['email']);            
+          //Expiration date will last for half an hour
+          $expires = date("U") + 1800;
+          if(!$this->userModel->deleteEmailCM_Admin($data['email'])){
+            header("Location: " . URLROOT . "");        
+
           }
+         
+          
+          $hashedToken = password_hash($token, PASSWORD_DEFAULT);
+          $data['selector']=$selector;
+          $data['hashedToken']=$hashedToken;
+          $data['expires']=$expires;
+          // Register User
+          if($this->userModel->register_confirm_cm_admin($data)){
+            
+            $usersEmail = $data['email'];
+
+      
+            $subject = "Login to your account";
+            $message = "<p>We recieved a login request.</p>";
+            $message .= "<p>Here is your login link: </p>";
+            $message .= "<a href='".$url."'>".$url."</a>";
+
+            $this->mail->setFrom('ecoplusgroupproject@gmail.com');
+            $this->mail->isHTML(true);
+            $this->mail->Subject = $subject;
+            $this->mail->Body = $message;
+            $this->mail->addAddress( $usersEmail);
+
+            if (!$this->mail->send()) {
+              header("Location: " . URLROOT . "");        
+          } else {
+              $data['registered'] = 'True';        
+              $this->view('admin/center_managers_add', $data);
+          }
+          
+
+          
+          }
+           else {
+            redirect('users/login');
+          }
+
+
+
+          
         }
         else{
          
@@ -679,7 +732,9 @@ use PHPMailer\PHPMailer\Exception;
     }
       
     }
-    
+
+  
+
     public function center_add_confirm(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1425,9 +1480,9 @@ use PHPMailer\PHPMailer\Exception;
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $data=[ 'name' => trim($_POST['name']),
-        'profile' => 'profile.png',
+        'profile' => $_FILES['profile_image'],
          'contact_no' => trim($_POST['contact_no']),
-        'profile_image_name' => 'profile.png',
+        'profile_image_name' => trim($_POST['email']).'_'.$_FILES['profile_image']['name'],
         'nic' => trim($_POST['nic']),
         'address' => trim($_POST['address']),
         'dob' => trim($_POST['dob']),
@@ -1509,6 +1564,23 @@ use PHPMailer\PHPMailer\Exception;
             $data['confirm_password_err'] = 'Passwords do not match';
           }
         } 
+        if ($_FILES['profile_image']['error'] == 4) {
+          $data['profile_err'] = 'Upload a image';
+     
+        }
+
+        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err'])){
+          if ($_FILES['profile_image']['error'] == 4) {
+            $data['profile_err'] = 'Upload a image';
+        } else {
+            if (uploadImage($_FILES['profile_image']['tmp_name'], $data['profile_image_name'], '/img/img_upload/Admin/')) {
+              $data['profile_err'] = '';
+  
+            } else {
+                $data['profile_err'] = 'Error uploading the profile image';
+            }
+        }
+        }
 
         if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['contact_no_err']) && empty($data['nic_err']) && empty($data['address_err']) && empty($data['dob_err']) && empty($data['profile_err'])){
           // Validated
@@ -1721,9 +1793,7 @@ use PHPMailer\PHPMailer\Exception;
       $admin_by_id = $this->adminModel->getAdminByID($id);
       $this->adminModel->admin_delete($id);
       $admin = $this->adminModel->get_all();
-      if( $admin_by_id->image!='Profile.png'){
-        deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\Admin\\" .$admin_by_id->image);
-      }
+      deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\Admin\\" . $admin_by_id->image);
       $data = [
         'admin' => $admin,
         'confirm_delete' =>'',

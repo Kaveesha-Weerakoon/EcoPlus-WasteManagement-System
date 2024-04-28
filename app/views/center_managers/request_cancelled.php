@@ -34,7 +34,7 @@
                                     <td><?php  echo $request->date?></td>
                                     <td><?php  echo $request->time?></td>
                                     <td><?php  
-                                             if ($request->cancelled_by === 'Me') {
+                                             if ($request->cancelled_by === 'Customer') {
                                                     echo 'Customer';
                                                 } else {
                                              if ($request->cancelled_by === 'System') {

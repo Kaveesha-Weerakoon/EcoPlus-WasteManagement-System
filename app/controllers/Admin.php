@@ -567,7 +567,8 @@ use PHPMailer\PHPMailer\Exception;
             'customers' =>$customers,
             'delete_confirm'=>'',
             'fine'=>'',
-            'centers'=> $centers
+            'centers'=> $centers,
+            'center'=>$center
             ] ;
            
         $this->view('admin/customer_main', $data);
@@ -578,7 +579,9 @@ use PHPMailer\PHPMailer\Exception;
             'customers' =>$customers,
             'delete_confirm'=>'',
             'fine'=>'',
-            'centers'=> $centers];
+            'centers'=> $centers,
+          'center'=>''
+        ];
         
         $this->view('admin/customer_main', $data);
 

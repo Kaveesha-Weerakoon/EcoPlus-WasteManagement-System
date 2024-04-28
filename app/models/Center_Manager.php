@@ -47,6 +47,7 @@
     }
 
     public function get_center_managers(){
+      try{
       $this->db->query('SELECT *,
               center_managers.id as cmID,
               users.id as userId
@@ -54,30 +55,42 @@
               INNER JOIN users
               ON center_managers.user_id = users.id');
       $results = $this->db->resultSet();
-      return $results;
+      return $results;}catch(PDOException $e){
+        echo 'An error occurred: ' . $e->getMessage();
+        return false;
+      }
     }
 
     public function getCenterManagerByNIC($NIC){
+      try{
       $this->db->query('SELECT * FROM center_managers WHERE nic = :nic');
       $this->db->bind(':nic', $NIC);
 
       $row = $this->db->single();
 
       return $row;
+      }catch(PDOException $e){
+        echo 'An error occurred: ' . $e->getMessage();
+        return false;
+      }
 
     }
 
     public function getCenterManagerByID($data){
-
+try{
       $this->db->query('SELECT * FROM center_managers WHERE user_id = :managerId');
       $this->db->bind(':managerId', $data);
 
       $row = $this->db->single();
 
-      return $row;
+      return $row;}catch(PDOException $e){
+        echo 'An error occurred: ' . $e->getMessage();
+        return false;
+      }
     }
 
     public function getCenterManagerByNIC_except($NIC, $managerId){
+      try{
       $this->db->query('SELECT * FROM center_managers WHERE nic = :nic AND user_id <> :id'); 
       $this->db->bind(':nic', $NIC);
       $this->db->bind(':id', $managerId);
@@ -91,18 +104,28 @@
       else {
         return false;
       }
-
     }
+    catch(PDOException $e){
+      echo 'An error occurred: ' . $e->getMessage();
+      return false;
+    }}
 
     public function getCenterManagerBy_centerId($center_id){
+      try{
+
+      
       $this->db->query('SELECT * FROM center_managers WHERE assigned_center_id = :centerId');
       $this->db->bind(':centerId', $center_id);
 
       $row = $this->db->single();
-      return $row;
+      return $row;}catch(PDOException $e){
+        echo 'An error occurred: ' . $e->getMessage();
+        return false;
+      }
     }
 
     public function get_Non_Assigned_CenterManger(){
+      try{
       $this->db->query('SELECT *,
               center_managers.id as cmID,
               users.id as userId
@@ -112,9 +135,13 @@
               WHERE center_managers.assinged = "No"');
       $results = $this->db->resultSet();
       return $results;
-    }
+    }catch(PDOException $e){
+      echo 'An error occurred: ' . $e->getMessage();
+      return false;
+    }}
 
     public function delete_centermanager($centermanagerId){
+      try{
       $this->db->query('DELETE FROM users WHERE id = :centermanagerId');
       $this->db->bind(':centermanagerId', $centermanagerId);
 
@@ -122,6 +149,9 @@
         return true;
       }
       else{
+        return false;
+      }}catch(PDOException $e){
+        echo 'An error occurred: ' . $e->getMessage();
         return false;
       }
 
@@ -152,16 +182,21 @@
   }
 
     public function Remove_Assign($center_manager_id){
+      try{
       $updateManagerQuery = 'UPDATE center_managers SET assinged = "No", assigned_center_id = :assigned_center_id WHERE user_id = :centerManagerId';
       $val = 0;
       $this->db->query($updateManagerQuery);
       $this->db->bind(':centerManagerId',$center_manager_id);
       $this->db->bind(':assigned_center_id', $val);
       
-      $result=$this->db->execute();
+      $result=$this->db->execute();}catch(PDOException $e){
+        echo 'An error occurred: ' . $e->getMessage();
+        return false;
+      }
     }
   
     public function update_center_managers($data){
+      try{
       $this->db->query('UPDATE users SET name = :name WHERE id= :managerId');
       $this->db->bind(':managerId', $data['id']);
       $this->db->bind(':name', $data['name']);
@@ -186,11 +221,15 @@
       }else{
         return false;
       }
-
+    }catch(PDOException $e){
+      echo 'An error occurred: ' . $e->getMessage();
+      return false;
+    }
 
     }
 
     public function getCenterManager_ByID_view($managerId){
+      try{
       $this->db->query('SELECT *
                         FROM center_managers
                         INNER JOIN users
@@ -199,7 +238,10 @@
       $this->db->bind(':manager_Id', $managerId);
       
       $row = $this->db->single();
-      return $row;
+      return $row;}catch(PDOException $e){
+        echo 'An error occurred: ' . $e->getMessage();
+        return false;
+      }
 
     }
   

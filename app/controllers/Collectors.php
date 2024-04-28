@@ -142,6 +142,7 @@
 
         //validate DOB
 
+
         //validate DOB
       if(empty($data['dob'])){
       $data['dob_err'] = 'Please enter dob';
@@ -162,6 +163,7 @@
          }
       }
         }
+
 
 
         // Validate Contact no
@@ -731,6 +733,7 @@
         'lattitude'=>$center->lat,
         'longitude'=>$center->longi,
         'notification'=> $Notifications,
+        'success'=>'',
         'fine_type' => isset($_POST['attribute']) ? trim($_POST['attribute']) : 'None'
       ]; 
       
@@ -776,7 +779,8 @@
         'center'=>$center,
         'lattitude'=>$center->lat,
         'longitude'=>$center->longi,
-        'notification'=> $Notifications
+        'notification'=> $Notifications,
+        'success'=>''
 
       ];        
       $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -842,7 +846,8 @@
     'contactno_err' =>'',
     'city_err'=>'',
     'profile_err'=>'',
-    'success_message'=>''
+    'success_message'=>'',
+    'success'=>''
 
 
     ];
@@ -876,7 +881,8 @@
             'creditData'=>'',
             'types'=>$types,      
             'credit_Amount'=> '',        
-              'verification_err'=>''
+              'verification_err'=>'',
+              'success'=>''
 
         ];
 
@@ -975,7 +981,8 @@
 
           'note_err'=>'',
           'creditData'=>'',
-          'verification_err'=>''
+          'verification_err'=>'',
+          'success'=>''
 
           ]; 
           foreach ($types as $type) {
@@ -1106,8 +1113,9 @@
             $new_credit_balance = $current_credit + $credit_Amount; // Calculate new credit balance
             $update_result = $this->Customer_Credit_Model->update_credit_balance($customer_id, $new_credit_balance);
            
-            if ($inserted && $update_result && $updatedGarbageTotals ) {
-               header("Location: " . URLROOT . "/collectors/request_completed");        
+            if ($inserted && $update_result ) {
+               header("Location: " . URLROOT . "/collectors/request_completed/");
+               
             } else {
               
 
@@ -1142,7 +1150,8 @@
        'types'=>$types,
        'verification'=>'',
         'creditData'=>'',
-        'verification_err'=>''
+        'verification_err'=>'',
+        'success'=>''
         ]; 
         foreach ($types as $type) {
           if ($type) {

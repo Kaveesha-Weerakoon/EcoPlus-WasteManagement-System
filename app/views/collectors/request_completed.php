@@ -137,6 +137,7 @@
                                     <h3>Electronic Waste Quantity </h3>
                                     <h3>Metals Quantity</h3>
                                     <h3 class="note">Note</h3>
+                                    <h3>completed date time</h3>
                                     <h3>Earned Credits</h3>
                                 </div>
                                 <div class="collect-details-pop-form-content-right-values">
@@ -166,6 +167,9 @@
                                     </div>
                                     <div class="collect-details-pop-form-content-right-values-cont">
                                         <h3 id="Note" class="note"></h3>
+                                    </div>
+                                    <div class="collect-details-pop-form-content-right-values-cont">
+                                        <h3 id="completed_time"></h3>
                                     </div>
                                     <div class="collect-details-pop-form-content-right-values-cont">
                                         <h3 id="Earned_Credits"></h3>
@@ -286,6 +290,7 @@ function view_collect_details(request) {
     document.getElementById('Electronic_Waste_Quantity').innerText = request.Electronic_Waste;
     document.getElementById('Metals_Quantity').innerText = request.Metals;
     document.getElementById('Note').innerText = request.note;
+    document.getElementById('completed_time').innerText = request.completed_datetime;
     document.getElementById('Earned_Credits').innerText = request.credit_amount;
 }
 

@@ -166,7 +166,7 @@
                     /* Notification View */
                 document.getElementById('submit-notification').onclick = function() {
                     var form = document.getElementById('mark_as_read');
-                    var dynamicUrl = "<?php echo URLROOT;?>/collector/view_notification/complains_history";
+                    var dynamicUrl = "<?php echo URLROOT;?>/collectors/view_notification/complains_history";
                     form.action = dynamicUrl; // Set the action URL
                     form.submit(); // Submit the form
 

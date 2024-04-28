@@ -261,5 +261,15 @@ document.getElementById('searchInput').addEventListener('input', searchTable);
 document.addEventListener("DOMContentLoaded", function() {
 
 });
+
+
+               /* Notification View */
+               document.getElementById('submit-notification').onclick = function() {
+                    var form = document.getElementById('mark_as_read');
+                    var dynamicUrl = "<?php echo URLROOT;?>/collectors/view_notification/request_cancelled";
+                    form.action = dynamicUrl; // Set the action URL
+                    form.submit(); // Submit the form
+
+                };
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

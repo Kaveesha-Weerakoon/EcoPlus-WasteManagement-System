@@ -460,6 +460,15 @@
             createOrUpdateChart(color, textColor);
         });
         createOrUpdateChart(color, textColor);
+
+                    /* Notification View */
+                document.getElementById('submit-notification').onclick = function() {
+                    var form = document.getElementById('mark_as_read');
+                    var dynamicUrl = "<?php echo URLROOT;?>/collectors/view_notification/index";
+                    form.action = dynamicUrl; // Set the action URL
+                    form.submit(); // Submit the form
+
+                };
         </script>
 
         <?php require APPROOT . '/views/inc/footer.php'; ?>

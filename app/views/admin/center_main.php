@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/profile-pic.jpeg" alt="">
+                        <img src="<?php echo IMGROOT?>/Admin.png" alt="">
                         <div class="main-right-top-profile-cont">
                             <h3>Admin</h3>
                         </div>
@@ -368,7 +368,14 @@ const renderCalendar = () => {
         // adding active class to li if the current day, month, and year matched
         let isToday = i === date.getDate() && currMonth === new Date().getMonth() 
                      && currYear === new Date().getFullYear() ? "active" : "";
-        liTag += `<li class="${isToday}">${i}</li>`;
+        
+
+        let isMarked = markedHolidays.some(function(holiday) {
+            return holiday.date ===
+                `${currYear}-${(currMonth + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
+        });
+
+        liTag += `<li class="${isToday} ${isMarked ? 'marked' : ''}">${i}</li>`;
 
        
     }

@@ -47,6 +47,7 @@
     }
 
     public function get_center_managers(){
+      try{
       $this->db->query('SELECT *,
               center_managers.id as cmID,
               users.id as userId
@@ -54,7 +55,10 @@
               INNER JOIN users
               ON center_managers.user_id = users.id');
       $results = $this->db->resultSet();
-      return $results;
+      return $results;}catch(PDOException $e){
+        echo 'An error occurred: ' . $e->getMessage();
+        return false;
+      }
     }
 
     public function getCenterManagerByNIC($NIC){

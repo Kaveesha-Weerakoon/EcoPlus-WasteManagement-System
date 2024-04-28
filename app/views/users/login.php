@@ -30,7 +30,8 @@
                         </div>
                         <div class="errlog"><?php echo $data['password_err']?></div>
                     </div>
-                    <div class="forgot"><a href="<?php echo URLROOT?>/users/resetpassword">Forgot your password?</a>
+                    <div class="forgot"><a href="<?php echo URLROOT?>/ResetPassword/goto_resetpassword">Forgot your
+                            password?</a>
                     </div>
 
                     <input type="submit" value="Login" class="login-btn">
@@ -42,17 +43,6 @@
                     enctype="multipart/form-data">
                     <div class="top1"> <img src="<?php echo IMGROOT?>/Logo.png" alt="">
                         <h1>Sign Up</h1>
-                    </div>
-
-
-                    <div class="edit-profile-content-profile">
-                        <div class="edit-profile-content-profile-container">
-                            <img class="edit-profile-main-image" id="profile_image_placeholder"
-                                src="<?php echo IMGROOT?>./preview2.png" alt="">
-                            <img class="edit-profile-second-image" src="<?php echo IMGROOT?>/edit-icon.png" alt="">
-                            <input name='profile_image' type="file" id="profile_image">
-                            <p>Upload a profile pic</p>
-                        </div>
                     </div>
 
                     <div class="cont-main">
@@ -204,6 +194,35 @@
                 </div>
             </div>
         </div>
+        <?php if($data['success']=='True') : ?>
+        <div class="complain_success">
+            <div class="popup" id="popup">
+                <img src="<?php echo IMGROOT?>/check.png" alt="">
+                <h2>Success!!</h2>
+                <p>Mail Sent Successfully</p>
+                <p>Verify your account</p>
+
+                <a href="<?php echo URLROOT?>/users/register"><button type="button">OK</button></a>
+
+
+            </div>
+        </div>
+        <?php endif; ?>
+        <?php if($data['success']=='Yes') : ?>
+        <div class="complain_success">
+            <div class="popup" id="popup">
+                <img src="<?php echo IMGROOT?>/check.png" alt="">
+                <h2>Success!!</h2>
+                <p>Password changed Successfully</p>
+                <p>Login to your account</p>
+
+                <a href="<?php echo URLROOT?>/users/Login"><button type="button">Login</button></a>
+
+
+            </div>
+        </div>
+        <?php endif; ?>
+
     </div>
 
     <script src="<?php echo JSROOT?>/Customer_Edit_Profile.js"> </script>

@@ -205,5 +205,34 @@
       }
     }
 
+    public function get_current_gabage_stockbyid($center_id){
+      try{
+        $this->db->query('SELECT * FROM center_garbage WHERE center_id = :center_id');
+        $this->db->bind(':center_id', $center_id);
+        $result = $this->db->resultSet();
+    
+        return $result;
 
+      }catch (PDOException $e) {
+        return false;
+      }
+
+    }
+
+    public function get_total_garbage_by_centerId($centerId){
+      try{
+        $this->db->query('SELECT (current_plastic + current_polythene + current_metal + current_glass + current_paper + current_electronic ) AS total_garbage 
+                        FROM center_garbage 
+                        WHERE center_id = :centerId');
+        $this->db->bind(':centerId', $centerId);
+        $result = $this->db->single();
+
+        return $result;
+
+      }catch (PDOException $e){
+        return false;
+      }
+      
+
+    }
 }  

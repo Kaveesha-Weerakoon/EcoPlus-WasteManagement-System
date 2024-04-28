@@ -11,19 +11,7 @@
                         <input type="text" placeholder="Search">
                     </div>
                     <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
-                    <!-- <div class="main-right-top-notification" style="visibility: hidden;" id="notification">
-                        <i class='bx bx-bell'></i>
-                        <div class="dot"></div>
-                    </div>
 
-                    <div class="main-right-top-profile">
-                        <img src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $_SESSION['cm_profile']?>"
-                            alt="">
-                        <div class="main-right-top-profile-cont">
-                            <h3><?php echo $_SESSION['center_manager_name']?></h3>
-                            <p>ID : Col <?php echo $_SESSION['center_manager_id']?></p>
-                        </div>
-                    </div> -->
                 </div>
 
 
@@ -294,7 +282,7 @@
 
                     </div>
 
-                   
+
 
 
 

@@ -73,9 +73,9 @@
                     <?php else: ?>
                     <div class="main-right-bottom-three">
                         <div class="main-right-bottom-three-content">
-                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
-                            <h1>You Have No Incomming Requests</h1>
-                            <p>Incomming requests will be appeared as soon as customer requests</p>
+                            <img src="<?php echo IMGROOT?>/undraw_questions_re_1fy7.svg" alt="">
+                            <h1>You Have No Incoming Requests</h1>
+                            <p>Incoming requests will be appeared as soon as customer requests</p>
                         </div>
                     </div>
                     <?php endif; ?>

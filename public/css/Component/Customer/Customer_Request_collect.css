@@ -655,6 +655,38 @@
             }
         }
 
+        .main-bottom-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: scroll;
+            height: 100%;
+        }
+
+        .cont {
+            padding: 50px;
+            box-shadow: var(--box-shadow);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .main-bottom-empty i {
+            font-size: 45px;
+        }
+
+        .main-bottom-empty h1 {
+            font-size: 21px;
+            width: 270px;
+            text-align: center;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+
         @media screen and (max-width:1190px) {
             .main-bottom-component {
                 width: 90% !important;

@@ -6,6 +6,7 @@
 @import url('Component/Login.css');
 @import url('Component/Register.css');
 @import url('Component/ResetPassword.css');
+@import url('Component/ConfirmPassword.css');
 
 @import url('Component/Announcement_view.css');
 
@@ -165,6 +166,7 @@
 @import url('Component/Admin/Admin_Center_Main_Request_Completed.css');
 @import url('Component/Admin/Admin_Center_Main_Waste_Handover.css');
 @import url('Component/Admin/Admin_Center_Main_Stock_Releases.css');
+@import url('Component/Admin/Admin_Center_Main_Garbage_Stock.css');
 
 @import url('Component/Admin/Admin_Reports.css');
 @import url('Component/Admin/Admin_ReportMain.css');

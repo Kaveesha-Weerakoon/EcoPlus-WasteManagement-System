@@ -29,6 +29,7 @@
   }
 
   .table-header {
+    background-color: var(--table-header);
     grid-template-columns: 13% 14% 14% 21% 19% 19% 13%;
   }
 

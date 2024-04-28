@@ -319,5 +319,27 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
+
+function searchTable() {
+    var input = document.getElementById('searchInput').value.toLowerCase();
+    var rows = document.querySelectorAll('.table-row');
+    rows.forEach(function(row) {
+        var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
+        var status = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+        var date = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+        var time = row.querySelector('td:nth-child(4').innerText.toLowerCase();
+
+        if (time.includes(input) || id.includes(input) || status.includes(input) || date
+            .includes(
+                input)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+
+}
+
+document.getElementById('searchInput').addEventListener('input', searchTable);
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

@@ -280,6 +280,9 @@
                     border: 1px solid #ccc;
                     border-radius: 4px;
                     box-sizing: border-box;
+                    background-color: var(--background-color-main);
+                    color: var(--main-text-color);
+
 
                 }
 
@@ -319,7 +322,8 @@
                     border: 1px solid #ccc;
                     border-radius: 4px;
                     box-sizing: border-box;
-                    background-color: #fff
+                    background-color: var(--background-color-main);
+                    color: var(--main-text-color);
                 }
 
                 select:hover {
@@ -555,7 +559,7 @@
 
                 /* Style for table headers */
                 th {
-                    background-color: #f2f2f2;
+                    background-color: var(--calander-hover-color);
                     padding: 12px;
                     text-align: left;
                 }
@@ -567,7 +571,7 @@
                 }
 
                 tr:nth-child(even) {
-                    background-color: #f9f9f9;
+                    background-color: var(--report-table-color);
                 }
             }
 

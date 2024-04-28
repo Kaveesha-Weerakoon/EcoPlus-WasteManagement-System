@@ -181,7 +181,7 @@
         width: 100%;
         height: max-content;
         height: 405px;
-        background: white;
+        background-color: var(--background-color-main);
         padding: 25px;
         border-radius: 10px;
         box-shadow: var(--box-shadow2);
@@ -284,13 +284,14 @@
 
     .popup {
         width: 400px;
-        background: white;
+        background: var(--background-color-main);
         font-family: 'poppins', sans-serif;
         border-radius: 6px;
         text-align: center;
         padding: 0 30px 30px;
-        color: #333;
+        color: var(--main-text-color);
         transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
 
     .open-popup {
@@ -316,8 +317,8 @@
         width: 100%;
         margin-top: 30px;
         padding: 10px 0;
-        background: #6fd649;
-        color: white;
+        background: var(--green-color-one);
+        color: var(--background-color-main);
         border: 0;
         outline: none;
         font-size: 18px;

@@ -75,7 +75,7 @@
                     <?php else: ?>
                     <div class="main-right-bottom-three">
                         <div class="main-right-bottom-three-content">
-                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                            <img src="<?php echo IMGROOT?>/undraw_questions_re_1fy7.svg" alt="">
                             <h1>You have No Completed Requests</h1>
                             <p>Completed requests will be appeared as soon as collector completes it</p>
                         </div>

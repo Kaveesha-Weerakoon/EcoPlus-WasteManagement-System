@@ -41,7 +41,7 @@
 
     .main-right-bottom-three-content h1 {
         font-size: 23px;
-        color: #333;
+        color: var(--main-text-color);
         font-weight: 550;
     }
 

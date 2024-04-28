@@ -91,10 +91,10 @@
         <div class="delete_confirm2" id="cancel_confirm2">
             <div class="popup" id="popup">
                 <img src="<?php echo IMGROOT?>/exclamation.png" alt="">
-                <h2>UnBlock the User?</h2>
-                <p>This action will UnBlock the user </p>
+                <h2>Unblock the User?</h2>
+                <p>This action will Unblock the user </p>
                 <div class="btns">
-                    <a id="unblockLink"><button type="button" class="deletebtn">UnBlock</button></a>
+                    <a id="unblockLink"><button type="button" class="deletebtn">Unblock</button></a>
                     <a id="close_unblock"><button type="button" class="cancelbtn">Cancel</button></a>
                 </div>
             </div>

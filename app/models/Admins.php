@@ -66,13 +66,16 @@
 }
 
 public function getAdminByID($data){
-
+try{
   $this->db->query('SELECT * FROM admin WHERE user_id = :adminId');
   $this->db->bind(':adminId', $data);
 
   $row = $this->db->single();
 
-  return $row;
+  return $row;}catch(PDOException $e){
+    echo 'An error occurred: ' . $e->getMessage();
+    return false;
+  }
 }
 
 

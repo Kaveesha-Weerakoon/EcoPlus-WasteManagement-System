@@ -22,7 +22,8 @@
       $this->Annoucement_Model=$this->model('Announcement');
       $this->fine_model = $this->model('Fines');
       $this->LatestUpdate= $this->model('LatestUpdate');
-      
+      $this->Request_Model=$this->model('Request');
+
       if(!isLoggedIn('user_id')){
         redirect('users/login');
       }
@@ -34,12 +35,12 @@
       $balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
       // $credit= $this->creditModel->get();
       $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']); 
-      $centers = $this->Center_Model->getallCenters();
+      $centers = $this->Center_Model->getallCenters2();
       
       $completed_requests=count($this->Collect_Garbage_Model->get_complete_request_relevent_customer($_SESSION['user_id']));
       $total_requests=count($this->Request_Model->get_total_requests_by_customer($_SESSION['user_id']));
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
-      $discount_agent = $this->discount_agentModel->get_discount_agent();
+      $discount_agent = $this->discount_agentModel->get_discount_agent2();
       $total_garbage=$this->Collect_Garbage_Model->get_completed_garbage_totals_by_customer($_SESSION['user_id']);
 
       $latestcompleted=   $this->LatestUpdate->getLatestCompleted($_SESSION['user_id']);
@@ -326,6 +327,7 @@
 
       $current_request=$this->Request_Model->get_request_current($_SESSION['user_id']);
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $result=$this->Request_Model->cancelling_auto();
 
       $data = [
         'request' => $current_request,
@@ -448,9 +450,12 @@
 
     public function editprofile(){
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
-      $centers = $this->center_model->getallCenters();
-
-     if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $centers = $this->center_model->getallCenters2();
+      $id=$_SESSION['user_id']; 
+      $user=$this->customerModel->get_customer($id);
+      $data['region']=$user->city;   
+     
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $id=$_SESSION['user_id']; 
         $user=$this->customerModel->get_customer($id);
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -794,7 +799,8 @@
       $center=$this->Center_Model->findCenterbyRegion($user->city);
       $garbage_types = $this->garbage_types_model->get_all();
       $fine_details = $this->fine_model->get_fine_details();
-    
+      $user=$this->customerModel->get_customer($id);
+      $center=$this->Center_Model->findCenterbyRegion($user->city);
       return [
           'centers' => $centers,
           'name' => '',
@@ -819,6 +825,7 @@
           'region_success'=>'', 
           'radius'=>'',
           'radius_err'=>'',
+          'center_block'=>$center->disable,
           'garbage_types'=> $garbage_types,
           'center_lat'=>$center->lat,
           'center_long'=>$center->longi,
@@ -836,9 +843,8 @@
       $data['name'] =$_SESSION['user_name'];
       $data['region']=$user->city;     
       $center=$this->Center_Model->findCenterbyRegion($user->city);
- 
-      $data['radius']=$center->radius;
-
+      $data['radius']=$center->radius; 
+     
      if($_SERVER['REQUEST_METHOD'] == 'POST'){
        
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -854,6 +860,7 @@
         $data['location_success'] =trim($_POST['location_success']);
         $data['region']=$user->city;
         $data['radius']=$center->radius;
+        $data['center_block']=$center->disable;
 
         $requests=$this->Request_Model->get_total_requests_by_customer($id);
         if($data['time']=="Select a slot"){
@@ -976,6 +983,8 @@
              $data['radius']=$center->radius;
              $data['contact_no']=$user->mobile_number;
              $data['name'] =$_SESSION['user_name'];
+             $data['center_block']=$center->disable;
+
              $this->view('customers/request_collect', $data);
         }
 
@@ -1150,7 +1159,7 @@
               'completed' => ''
           ];
   
-  
+
            $numeric_part = preg_replace('/[^0-9]/', '', $data['customer_id']);
            $customer_id = (int)$numeric_part;
 
@@ -1158,9 +1167,9 @@
           if (empty($data['customer_id'])) {
               $data['customer_id_err'] = 'Please enter customer id';
           } else {
-                if(!preg_match('/^C\s*\d+(\s+\d+)*$/i', $data['customer_id'])) {
-                    $data['customer_id_err'] = "Customer ID should be in the format 'C xxx' or 'Cxxx'";
-                } elseif($customer_id === $_SESSION['user_id']) {
+            if (!preg_match('/^\d{1,10}$/', $data['customer_id'])) {
+              $data['customer_id_err'] = "Customer ID should be a maximum of 10-digit number";
+            }elseif($customer_id === $_SESSION['user_id']) {
                     $data['customer_id_err'] = 'You cannot transfer credits to yourself';
                 } else {
                     if (!$this->customerModel->get_customer($customer_id)) {
@@ -1168,32 +1177,33 @@
                     }
                 }
           }
-      
+          
         
           if (empty($data['credit_amount']) || $data['credit_amount'] <= 0) {
             $data['credit_amount_err'] = 'Please enter a credit amount greater than 0';
         } elseif (!filter_var($data['credit_amount'], FILTER_VALIDATE_FLOAT)) {
             $data['credit_amount_err'] = 'Credit amount should be a valid number';
         } else {
-            $user_balance = $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
+       
+          $user_balance = (float) $this->Customer_Credit_Model->get_customer_credit_balance($_SESSION['user_id']);
+       
             if ($data['credit_amount'] > $user_balance) {
                 $data['credit_amount_err'] = 'Transfer amount cannot exceed your available credit balance';
             }
         }
   
-  
-        
+       
           if (empty($data['customer_id_err']) && empty($data['credit_amount_err'])) {
             $sender_id = $_SESSION['user_id'];
             $receiver_id = $customer_id;
             $transfer_amount = $data['credit_amount'];
-  
+           
             $sender_balance = $this->Customer_Credit_Model->get_customer_credit_balance($sender_id);
             $receiver_balance = $this->Customer_Credit_Model->get_customer_credit_balance($receiver_id);
 
-        
-            if ($transfer_amount <= $sender_balance) {
           
+            if ($transfer_amount <= $sender_balance) {
+            
 
                 $new_sender_balance = $sender_balance - $transfer_amount;
                 $new_receiver_balance = $receiver_balance + $transfer_amount;
@@ -1221,7 +1231,7 @@
 
             }
           } else {
-              $this->view('customers/transfer', $data);
+            header("Location: " . URLROOT . "/customers/transfer");        
           }
   
           }else {
@@ -1295,7 +1305,7 @@
     public function discount_agents(){
       $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);    
 
-      $discount_agent = $this->discount_agentModel->get_discount_agent();
+      $discount_agent = $this->discount_agentModel->get_discount_agent2();
       $data = [
         'discount_agents' => $discount_agent,
         'notification'=> $Notifications,   

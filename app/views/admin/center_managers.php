@@ -57,7 +57,7 @@
                             <table class="table">
                                 <?php foreach($data['center_managers'] as $center_manager) : ?>
                                 <tr class="table-row">
-                                    <td>CM <?php echo $center_manager->user_id?></td>
+                                    <td> <?php echo $center_manager->user_id?></td>
                                     <td><img onclick="openpersonaldetails((<?php echo htmlspecialchars(json_encode($center_manager), ENT_QUOTES, 'UTF-8') ?>))"
                                             src="<?php echo IMGROOT?>/img_upload/center_manager/<?php echo $center_manager->image?>"
                                             alt="" class="manager_img"></td>
@@ -212,7 +212,7 @@
                         <!-- <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $data['image']?>" class="profile-pic"
                     alt=""> -->
                         <img src="" id="collector_profile_pic" alt="">
-                        <p>Collector ID: <span id="collector_id">C</span></p>
+                        <p>CM ID: <span id="collector_id"></span></p>
                     </div>
                     <div class="personal-details-right">
                         <div class="personal-details-right-labels">

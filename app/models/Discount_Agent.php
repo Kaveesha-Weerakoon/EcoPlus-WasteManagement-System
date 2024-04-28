@@ -45,14 +45,37 @@
     }
 
     public function get_discount_agent(){
-      $this->db->query('SELECT *,
-              discount_agents.id as AgentID,
-              users.id as userId
-              FROM discount_agents
-              INNER JOIN users
-              ON discount_agents.user_id = users.id');
-      $results = $this->db->resultSet();
-      return $results;
+      try{
+        $this->db->query('SELECT *,
+        discount_agents.id as AgentID,
+        users.id as userId
+        FROM discount_agents
+        INNER JOIN users
+        ON discount_agents.user_id = users.id');
+        $results = $this->db->resultSet();
+        return $results;
+      } catch (PDOException $e) {
+        // Handle exceptions
+        return false;
+    }
+    
+    }  
+    
+    public function get_discount_agent2(){
+      try{
+        $this->db->query('SELECT *,
+        discount_agents.id as AgentID,
+        users.id as userId
+        FROM discount_agents
+        INNER JOIN users
+        ON discount_agents.user_id = users.id where discount_agents.disable=FALSE');
+        $results = $this->db->resultSet();
+        return $results;
+      } catch (PDOException $e) {
+        // Handle exceptions
+        return false;
+    }
+    
     }
 
     public function getDiscountAgentByID($data){
@@ -197,7 +220,7 @@
           }
         }
         catch (PDOException $e) {
-  die();
+
 
 
           return false;
@@ -228,7 +251,32 @@
         return false;
      }
     }
+
     
+    public function block($id){
+      try {
+          $this->db->query('UPDATE discount_agents SET disable = :value WHERE user_id = :id');
+          $this->db->bind(':value', TRUE); // You need to provide a value for ":value"
+          $this->db->bind(':id', $id);
+          $result= $this->db->execute();
+          return $result;
+      } catch (PDOException $e) {
+         return FALSE;
+      }
+  } 
+  
+  public function unblock($id){
+    try {
+        $this->db->query('UPDATE discount_agents SET disable = :value WHERE user_id = :id');
+        $this->db->bind(':value', FALSE); // You need to provide a value for ":value"
+        $this->db->bind(':id', $id);
+        $result=$this->db->execute();
+        return $result;
+    } catch (PDOException $e) {
+        return FALSE;
+    }
+}
+
   
 
           

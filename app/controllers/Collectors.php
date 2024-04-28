@@ -44,6 +44,7 @@
      } 
    
      $json_Total_Garbage = json_encode($total_garbage);
+    
       $data = [
         'collector' =>$collector,
         'assinged_Requests_count' => $assinged_Requests_count,
@@ -140,6 +141,7 @@
         }
 
         //validate DOB
+
         //validate DOB
 if(empty($data['dob'])){
   $data['dob_err'] = 'Please enter dob';
@@ -681,6 +683,7 @@ if(empty($data['dob'])){
     $types=$this->garbageTypeModel->get_all();
     $collector=$this->collectorModel->get_collector( $_SESSION['collector_id'] );
     $center=$this->centerModel->getCenterById($collector->center_id);
+    $result=$this->Request_Model->cancelling_auto();
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );

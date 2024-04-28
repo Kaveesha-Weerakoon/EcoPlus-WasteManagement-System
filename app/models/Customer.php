@@ -50,9 +50,10 @@
           $this->db->query('UPDATE customers SET blocked = :value WHERE user_id = :id');
           $this->db->bind(':value', TRUE); // You need to provide a value for ":value"
           $this->db->bind(':id', $id);
-          $this->db->execute();
+          $result=$this->db->execute();
+          return $result;
       } catch (PDOException $e) {
-          die($e->getMessage());
+          return False;
       }
   } 
   
@@ -61,9 +62,10 @@
         $this->db->query('UPDATE customers SET blocked = :value WHERE user_id = :id');
         $this->db->bind(':value', FALSE); // You need to provide a value for ":value"
         $this->db->bind(':id', $id);
-        $this->db->execute();
+        $result=$this->db->execute();
+        return $result;
     } catch (PDOException $e) {
-        die($e->getMessage());
+        return false;
     }
 }
 

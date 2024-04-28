@@ -7,7 +7,7 @@
 
                 <div class="main-right-top">
                     <div class="main-right-top-one">
-                        <div class="main-right-top-search" style = "visibility: hidden;">
+                        <div class="main-right-top-search" style="visibility: hidden;">
                             <i class='bx bx-search-alt-2'></i>
                             <input type="text" id="searchInput" placeholder="Search">
                         </div>
@@ -54,32 +54,9 @@
                             </div>
                             <div class="main-bottom-down-content-img-container">
                                 <div class="main-bottom-down-content-two-left">
-                                    <div class="form-drag-area">
-                                        <div class="icon">
-                                            <img src="<?php echo IMGROOT;?>/img_upload/placeholder.png"
-                                                alt="PLACEHOLDER" width="90px" height="90px"
-                                                id="profile_image_placeholder">
-                                        </div>
-                                        <div class="right-content">
-                                            <div class="description">
-                                                Drag & Drop to Upload File
-                                            </div>
-                                            <div class="form-upload">
-                                                <input type="file" name="profile_image" id="profile_image"
-                                                    placeholder="select a profile image" style="display: none;">
-                                                Browse File
-                                            </div>
-                                            <div class="form-validation">
-                                                <div class="profile-image-validation">
-                                                    <img src="<?php echo IMGROOT?>/checked.png" alt="green_tik"
-                                                        width="20px" height="20px">
-                                                    <p class="err" style="color: #e74c3c;"><?php echo $data['profile_err'] ?></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
-                                
+
                             </div>
                             <div class="main-bottom-down-content-two">
                                 <div class="main-bottom-down-content-two-right">
@@ -94,7 +71,7 @@
                                         placeholder="Email">
                                     <div class="err"><?php echo $data['email_err']?></div>
                                 </div>
-                                
+
                             </div>
                             <div class="main-bottom-down-content-two">
                                 <div class="main-bottom-down-content-two-right">
@@ -109,7 +86,7 @@
                                         value="<?php echo $data['contact_no']?>">
                                     <div class="err"><?php echo $data['contactNo_err']?></div>
                                 </div>
-                                
+
                             </div>
                             <div class="main-bottom-down-content-two">
                                 <div class="main-bottom-down-content-two-right">

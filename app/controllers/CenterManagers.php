@@ -1,4 +1,8 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
   class CenterManagers extends Controller {
 
     public function __construct(){
@@ -18,7 +22,15 @@
       $this->Center_Manager_Report_Model=$this->model('Center_Manager_Report');
       $this->Report_Model=$this->model('Report');
       $this->customer_complaints_model = $this->model('Customer_Complain');
-
+      
+      $this->mail = new PHPMailer();
+      $this->mail->isSMTP();
+      $this->mail->Host = 'sandbox.smtp.mailtrap.io';
+      $this->mail->SMTPAuth = true;
+      $this->mail->Port = 2525;
+      $this->mail->Username = 'f4ab65cd067d1f';
+      $this->mail->Password = '111c78b575960b';
+      
       if(!isLoggedIn('center_manager_id')){
         redirect('users/login');
       }
@@ -247,15 +259,67 @@
 
 
         if(empty($data['name_err']) && empty($data['nic_err']) && empty($data['dob_err']) && empty($data['contactNo_err'])&& empty($data['address_err']) && empty($data['email_err']) && empty($data['vehicleNo_err']) && empty($data['vehicleType_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) ){
-            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            // $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            // $center=$this->center_model->getCenterById($_SESSION['center_id']);
+            // $data['center_name']=$center->region;
+            // if($this->collectorModel->register_collector($data)){
+            //   $data['registered']='True';  
+            
+            //   $this->view('center_managers/collectors_add',$data);
+            // } else {
+            //   die('Something went wrong');
+            // }
+            
             $center=$this->center_model->getCenterById($_SESSION['center_id']);
             $data['center_name']=$center->region;
-            if($this->collectorModel->register_collector($data)){
-              $data['registered']='True';  
+            $data['center_id']=$center->id;
+            $pw=$data['password'];
+            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            $selector = bin2hex(random_bytes(8));
+            $token = random_bytes(32);
+           
+            $url = 'http://localhost/ecoplus/users/register_success_collector?selector='.$selector.'&validator='.bin2hex($token).'&email='.urlencode($data['email']);            
+            //Expiration date will last for half an hour
+            $expires = date("U") + 1800;
+            if(!$this->userModel->deleteEmail_Collector($data['email'])){
+              header("Location: " . URLROOT . "");        
+
+            }
+            // if(!$this->resetPasswordModel->deleteEmail($usersEmail)){
+            //     die("There was an error");
+            // }
             
-              $this->view('center_managers/collectors_add',$data);
-            } else {
-              die('Something went wrong');
+            $hashedToken = password_hash($token, PASSWORD_DEFAULT);
+            $data['selector']=$selector;
+            $data['hashedToken']=$hashedToken;
+            $data['expires']=$expires;
+            // Register User
+            if($this->userModel->register_confirm_collector($data)){
+              
+              $usersEmail = $data['email'];
+              $subject = "Login to your account";
+              $message = "<p>We recieved a login request.</p>";
+              $message .= "<p>Here is your login link: </p>";
+              $message .= "<a href='".$url."'>".$url."</a>";
+  
+              $this->mail->setFrom('ecoplusgroupproject@gmail.com');
+              $this->mail->isHTML(true);
+              $this->mail->Subject = $subject;
+              $this->mail->Body = $message;
+              $this->mail->addAddress( $usersEmail);
+  
+              
+              if (!$this->mail->send()) {
+                  $data['registered']='True';  
+                  $this->view('center_managers/collectors_add',$data);       
+              } else {
+                header("Location: " . URLROOT . "/users/register/True");        
+              }
+
+            
+            }
+             else {
+              redirect('users/login');
             }
         }
         else{

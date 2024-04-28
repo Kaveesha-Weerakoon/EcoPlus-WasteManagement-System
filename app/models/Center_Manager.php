@@ -125,6 +125,7 @@ try{
     }
 
     public function get_Non_Assigned_CenterManger(){
+      try{
       $this->db->query('SELECT *,
               center_managers.id as cmID,
               users.id as userId
@@ -134,7 +135,10 @@ try{
               WHERE center_managers.assinged = "No"');
       $results = $this->db->resultSet();
       return $results;
-    }
+    }catch(PDOException $e){
+      echo 'An error occurred: ' . $e->getMessage();
+      return false;
+    }}
 
     public function delete_centermanager($centermanagerId){
       $this->db->query('DELETE FROM users WHERE id = :centermanagerId');

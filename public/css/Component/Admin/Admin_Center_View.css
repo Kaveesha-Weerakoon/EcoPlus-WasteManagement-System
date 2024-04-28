@@ -40,7 +40,7 @@
     .main-right-bottom-down {
         padding-left: 3.5%;
         width: 96.5%;
-        height: 550px !important;
+        height: 500px !important;
         overflow: scroll;
     }
 
@@ -54,13 +54,13 @@
     }
 
     .table-header {
-        grid-template-columns: 15% 20% 17% 17% 15% 15%;
+        grid-template-columns: 14% 18% 12% 20% 20% 12%;
     }
 
     .table-row {
         height: 52px;
         display: grid;
-        grid-template-columns: 15% 20% 17% 17% 15% 15%;
+        grid-template-columns: 14% 18% 12% 20% 20% 12%;
     }
 
     .table td {

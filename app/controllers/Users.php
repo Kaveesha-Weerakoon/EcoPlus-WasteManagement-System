@@ -447,9 +447,12 @@
         $_SESSION['admin_name'] = $user->name;
       }
       if($user->role=="admin"){
+        $admin=$this->Admin_Model->getAdminByID($user->id);
+        $_SESSION['admin_profile']=$admin->image;
         $_SESSION['admin_id'] = $user->id;
         $_SESSION['admin_email'] = $user->email;
         $_SESSION['admin_name'] = $user->name;
+        
       }
       redirect('admin');
 

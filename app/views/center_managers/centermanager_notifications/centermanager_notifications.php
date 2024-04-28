@@ -21,7 +21,7 @@
         <?php endforeach; ?>
 
     </div>
-    <form class="mark_as_read" id="mark_as_read" method="post" >
+    <form class="mark_as_read" id="mark_as_read" method="post">
         <i class="fa-solid fa-check"> </i>
         <button id="submit-notification">Mark all as read</button>
     </form>

@@ -141,12 +141,13 @@
                         </div>
 
                         <span name="requestTime" id="requestTime" style="display:none;"></span>
+                        <!-- <input type="hidden" name="requestTime" id="requestTime"> -->
 
                         <div class="time-slot-dropdown-container">
                             <select name="time-slot-dropdown" id="time-slot-dropdown">
                                 <option value="8 am - 10 am">8 am - 10 am</option>
                                 <option value="10 am - 12 noon">10 am - 12 noon</option>
-                                <option value="12 noon -2 pm">12 noon -2 pm</option>
+                                <option value="12 noon - 2 pm">12 noon - 2 pm</option>
                                 <option value="2 pm - 4 pm">2 pm - 4 pm</option>
                                 <option value="all">All</option>
                             </select>
@@ -464,7 +465,7 @@
 
             function assign(id, requestedDate, requestTime, requestLat, requestLongi) {
 
-                console.log(requestLat, requestLongi);
+                //console.log(requestLat, requestLongi);
 
                 var inputElement = document.querySelector('input[name="assign_req_id"]');
 

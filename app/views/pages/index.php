@@ -245,7 +245,19 @@
         navLink.addEventListener("click", () => {
             
             navLink.classList.add("hide");
+        });
+
+        const animation = ScrollReveal({
+            distance: '60px',
+            duration: 2000,
+            delay: 100,
+            reset: true
         })
+
+        animation.reveal('.headerimage, .header-content, .skills-card', {delay: 200, origin: 'top'});
+        animation.reveal('.logo-bar, .cards-section, .contact-form', {delay: 200, origin: 'right'});
+        animation.reveal('.contact-info, .footer, .about-us-container', {delay: 200, origin: 'top'});
+        animation.reveal('.Announcement-cont', {delay: 200, origin: 'top'});
 
         function redirectLogin() {
             var linkUrl = "<?php echo URLROOT?>/users/login";

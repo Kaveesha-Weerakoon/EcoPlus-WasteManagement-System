@@ -275,7 +275,7 @@ use PHPMailer\PHPMailer\Exception;
       
     }
 
-    public function login(){
+    public function login($success=""){
        // Check for POST
        
        $centers = $this->Center_Model->getallCenters2();
@@ -331,7 +331,7 @@ use PHPMailer\PHPMailer\Exception;
             'profile_upload_error'=>'' ,
             'reg'=>'False',
             'center_err'=>'',
-            'success'=>''
+            'success'=>$success
           ];
           // Validate Email
           if(empty($data['email'])){ 
@@ -471,7 +471,7 @@ use PHPMailer\PHPMailer\Exception;
             'profile_upload_error'=>'',
             'reg'=>'False',
             'center_err'=>'',
-            'success'=>''
+            'success'=>$success
           ];
           $this->view('users/login', $data);
         }

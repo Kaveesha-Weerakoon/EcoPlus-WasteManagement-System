@@ -208,6 +208,20 @@
             </div>
         </div>
         <?php endif; ?>
+        <?php if($data['success']=='Yes') : ?>
+        <div class="complain_success">
+            <div class="popup" id="popup">
+                <img src="<?php echo IMGROOT?>/check.png" alt="">
+                <h2>Success!!</h2>
+                <p>Password changed Successfully</p>
+                <p>Login to your account</p>
+
+                <a href="<?php echo URLROOT?>/users/Login"><button type="button">Login</button></a>
+
+
+            </div>
+        </div>
+        <?php endif; ?>
 
     </div>
 

@@ -1,9 +1,9 @@
 <?php 
-    if(empty($_GET['selector']) || empty($_GET['validator'])){
-        echo 'Could not validate your request!';
+    if(empty($data['selector']) || empty($data['validator'])){
+        redirect('');
     }else{
-        $selector = $_GET['selector'];
-        $validator = $_GET['validator'];
+        $selector = $data['selector'];
+        $validator = $data['validator'];
         
         if(ctype_xdigit($selector) && ctype_xdigit($validator)) { ?>
 
@@ -17,8 +17,8 @@
             <div class="signin-signup">
                 <form action="<?php echo URLROOT; ?>/ResetPassword/resetPassword" class="sign-in-form" method="POST">
 
-                    <input type="hidden" name="selector" value="<?php echo $selector ?>" />
-                    <input type="hidden" name="validator" value="<?php echo $validator ?>" />
+                    <input type="hidden" name="selector" value="<?php echo $data['selector'] ?>" />
+                    <input type="hidden" name="validator" value="<?php echo $data['validator'] ?>" />
                     <div class="otp_err" name="otp_err" style="color: red;"></div>
 
                     <div class="top"> <img src="<?php echo IMGROOT;?>/Logo.png" alt="">
@@ -28,20 +28,22 @@
                     <div class="line"></div>
 
                     <div class="input-field-container">
-                    <p>New Password : </p>
+                        <p>New Password : </p>
                         <div class="input-fieldlog">
-                        <i class="fas fa-envelope icon"></i>
-                            <input id="pwd" name="pwd" placeholder="Enter a new password..." class="form-control" type="password" value="">
+                            <i class="fas fa-envelope icon"></i>
+                            <input id="pwd" name="pwd" placeholder="Enter a new password..." class="form-control"
+                                type="password" value="<?php $data['pwd']?>">
                         </div>
                         <div class="errlog" style="color:red">
                             <?php echo $data['pwd_err']?>
                         </div>
                     </div>
                     <div class="input-field-container">
-                    <p>Confirm New Password : </p>
+                        <p>Confirm New Password : </p>
                         <div class="input-fieldlog">
-                        <i class="fas fa-envelope icon"></i>
-                            <input id="pwd_repeat" name="pwd_repeat" placeholder="Repeat new password..." class="form-control" type="password" value="">
+                            <i class="fas fa-envelope icon"></i>
+                            <input id="pwd_repeat" name="pwd_repeat" placeholder="Repeat new password..."
+                                class="form-control" type="password" value="<?php $data['pwd_repeat']?>">
                         </div>
                         <div class="errlog" style="color:red">
                             <?php echo $data['pwd_repeat_err']?>
@@ -52,36 +54,32 @@
 
                 </form>
 
-                
+
 
             </div>
         </div>
     </div>
 </div>
-    <!-- <h1 class="header">Enter New Password</h1>
+<?php if($data['success']=='True') : ?>
+<div class="complain_success">
+    <div class="popup" id="popup">
+        <img src="<?php echo IMGROOT?>/check.png" alt="">
+        <h2>Success!!</h2>
+        <p>Password Changed Successfully</p>
+        <p>Login to your account</p>
 
-    
+        <a href="<?php echo URLROOT?>/users/login"><button type="button">Login</button></a>
 
-    <form method="post" action="<?php echo URLROOT; ?>/ResetPassword/resetPassword">
-        
-        <input type="hidden" name="selector" value="<?php echo $selector ?>" />
-        <input type="hidden" name="validator" value="<?php echo $validator ?>" />
-        <div class="otp_err" name="otp_err" style="color: red;"></div>
-        <input type="password" name="pwd" 
-        placeholder="Enter a new password...">
-        <div class="err" value="<?php echo $data['pwd_err']; ?>"></div>
-        <input type="password" name="pwd_repeat" 
-        placeholder="Repeat new password...">
-        <div class="err" value="<?php echo $data['pwd_repeat_err']; ?>"></div>
-        <button type="submit" name="submit">Submit</button>
-    </form> -->
+
+    </div>
+</div>
+<?php endif; ?>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
-            
+
 <?php 
     }else{
         echo 'Could not validate your request!';
     }
 }
 ?>
-    

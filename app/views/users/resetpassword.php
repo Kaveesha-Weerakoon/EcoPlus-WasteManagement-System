@@ -33,21 +33,21 @@
 
 
             </div>
-            <?php if($data['success']=='True') : ?>
-            <div class="complain_success">
-                <div class="popup" id="popup">
-                    <img src="<?php echo IMGROOT?>/check.png" alt="">
-                    <h2>Success!!</h2>
-                    <p>Mail Sent Successfully</p>
-                    <p>Verify your account</p>
 
-                    <a href="<?php echo URLROOT?>/users/login"><button type="button">OK</button></a>
+        </div> <?php if($data['success']=='True') : ?>
+        <div class="complain_success">
+            <div class="popup" id="popup">
+                <img src="<?php echo IMGROOT?>/check.png" alt="">
+                <h2>Success!!</h2>
+                <p>Mail Sent Successfully</p>
+                <p>Verify your account</p>
+
+                <a href="<?php echo URLROOT?>/users/login"><button type="button">OK</button></a>
 
 
-                </div>
             </div>
-            <?php endif; ?>
         </div>
+        <?php endif; ?>
     </div>
 </div>
 

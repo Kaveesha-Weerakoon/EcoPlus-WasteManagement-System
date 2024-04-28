@@ -45,8 +45,10 @@ use PHPMailer\PHPMailer\Exception;
       $centers = $this->Center_Model->getallCenters();
       $jsonData = json_encode($centers);
 
-      if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id']) ){
-        redirect('pages');
+      if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id'])||isset($_SESSION['agent_id']) ||isset($_SESSION['superadmin_id'])||isset($_SESSION['admin_id'])){
+        redirect('pages');  
+       
+  
      }
       else{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -280,7 +282,7 @@ use PHPMailer\PHPMailer\Exception;
        
        $centers = $this->Center_Model->getallCenters2();
        $jsonData = json_encode($centers);
-      if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id'])  || isset($_SESSION['admin_id']) || isset($_SESSION['agent_id']) ){
+      if(isset($_SESSION['user_id']) ||isset($_SESSION['collector_id'])|| isset($_SESSION['center_manager_id'])  || isset($_SESSION['admin_id']) || isset($_SESSION['agent_id'])|| isset($_SESSION['superadmin_id']) ){
         if(isset($_SESSION['user_id'])){
           redirect('customers');
         }
@@ -291,7 +293,8 @@ use PHPMailer\PHPMailer\Exception;
           redirect('centermanagers');
         }
 
-        if(isset($_SESSION['admin_id'])||$_SESSION['super_admin_id']){
+        if(isset($_SESSION['admin_id'])||$_SESSION['superadmin_id']){
+      
           redirect('admin');
         }
 
@@ -591,9 +594,12 @@ use PHPMailer\PHPMailer\Exception;
         $_SESSION['admin_name'] = $user->name;
       }
       if($user->role=="admin"){
+        $admin=$this->Admin_Model->getAdminByID($user->id);
+        $_SESSION['admin_profile']=$admin->image;
         $_SESSION['admin_id'] = $user->id;
         $_SESSION['admin_email'] = $user->email;
         $_SESSION['admin_name'] = $user->name;
+        
       }
       redirect('admin');
 

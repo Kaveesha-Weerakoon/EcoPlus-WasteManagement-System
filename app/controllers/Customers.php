@@ -482,7 +482,7 @@
         'city_err'=>'',
         'profile_err'=>'',
         'success_message'=>'',
-        'centers2' => $centers
+        'centers' => $centers
        ];
 
        if (empty($data['name'])) {
@@ -531,8 +531,8 @@
           }
           
         }
-       } 
-    
+       }   
+  
        $this->view('customers/edit_profile', $data);
        }
     

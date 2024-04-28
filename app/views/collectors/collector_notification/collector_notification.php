@@ -21,9 +21,9 @@
                             <?php endforeach; ?>
 
                 </div>
-                <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/collectors/">
+                <form class="mark_as_read" id="mark_as_read" method="post" >
                       <i class="fa-solid fa-check"> </i>
-                       <button type="submit">Mark all as read</button>
+                       <button type="submit-notification">Mark all as read</button>
                  </form>
 
     </div>

@@ -1246,8 +1246,19 @@
    }
   }
 
+  public function view_notification($url){
+    
+    die('dddd');
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-  
+     
+      $Notifications1 = $this->customerModel->view_Notification($_SESSION['collector_id']);
+      $Notifications2 = $this->customerModel->get_Notification($_SESSION['collector_id']);
+      $data['notification']=  $Notifications2 ;
+      header("Location: " . URLROOT . "/collectors/$url");        
+
+   }
+  }
 }
 
 

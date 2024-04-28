@@ -98,4 +98,14 @@
 
 </div>
 
+<script>
+                    /* Notification View */
+                document.getElementById('submit-notification').onclick = function() {
+                    var form = document.getElementById('mark_as_read');
+                    var dynamicUrl = "<?php echo URLROOT;?>/collectors/view_notification/complains";
+                    form.action = dynamicUrl; // Set the action URL
+                    form.submit(); // Submit the form
+
+                };
+</script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

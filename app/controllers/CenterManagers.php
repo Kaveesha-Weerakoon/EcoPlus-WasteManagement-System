@@ -969,16 +969,42 @@ use PHPMailer\PHPMailer\Exception;
     }
     
     if (empty($data['new_pw'])) {
-        $data['new_pw_err'] = 'Please Enter New Password';
-    } elseif (strlen($data['new_pw']) < 6) {
-        $data['new_pw_err'] = 'New Password must be at least 6 characters';
+      $data['new_pw_err'] = 'Please Enter New Password';
+    } elseif (strlen($data['new_pw']) < 8 || strlen($data['new_pw']) > 30) {
+        $data['new_pw_err'] = 'New password must be between 8 and 30 characters';
+
+    } elseif (!preg_match('/[^\w\s]/', $data['new_pw'])) {
+        $data['new_pw_err'] = 'New password must include at least one symbol';
+
+    } elseif (!preg_match('/[A-Z]/', $data['new_pw'])) {
+        $data['new_pw_err'] = 'New password must include at least one uppercase letter';
+
+    } elseif (!preg_match('/[a-z]/', $data['new_pw'])) {
+        $data['new_pw_err'] = 'New password must include at least one lowercase letter';
+
+    } elseif (!preg_match('/[0-9]/', $data['new_pw'])) {
+      $data['new_pw_err'] = 'New password must include at least one number';
     }
-    
+
+
     if (empty($data['re_enter_pw'])) {
-        $data['re_enter_pw_err'] = 'Please Confirm New Password';
-    } elseif (strlen($data['re_enter_pw']) < 6) {
-        $data['re_enter_pw_err'] = 'Confirmed Password must be at least 6 characters';
+      $data['re_enter_pw_err'] = 'Please confirm new password';
+    } elseif (strlen($data['re_enter_pw']) < 8 || strlen($data['re_enter_pw']) > 30) {
+        $data['re_enter_pw_err'] = 'Confirmed password must be between 8 and 30 characters';
+
+    } elseif (!preg_match('/[^\w\s]/', $data['re_enter_pw'])) {
+        $data['re_enter_pw_err'] = 'Confirmed password must include at least one symbol';
+
+    } elseif (!preg_match('/[A-Z]/', $data['re_enter_pw'])) {
+        $data['re_enter_pw_err'] = 'Confirmed password must include at least one uppercase letter';
+
+    } elseif (!preg_match('/[a-z]/', $data['re_enter_pw'])) {
+        $data['re_enter_pw_err'] = 'Confirmed password must include at least one lowercase letter';
+
+    } elseif (!preg_match('/[0-9]/', $data['re_enter_pw'])) {
+      $data['re_enter_pw_err'] = 'Confirmed password must include at least one number';
     }
+  
 
     if(empty($data['new_pw_err']) && empty($data['current_err']) && empty($data['re_enter_pw_err'])) {
          

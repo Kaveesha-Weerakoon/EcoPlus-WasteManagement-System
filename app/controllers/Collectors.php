@@ -143,25 +143,25 @@
         //validate DOB
 
         //validate DOB
-if(empty($data['dob'])){
-  $data['dob_err'] = 'Please enter dob';
-} else {
-  // Check if the date is in a valid format
-  $dobDateTime = DateTime::createFromFormat('Y-m-d', $data['dob']);
-  if (!$dobDateTime) {
-      $data['dob_err'] = 'Please enter a valid date in the format YYYY-MM-DD';
-  } else {
-      // Calculate the age
-      $today = new DateTime();
-      $diff = $dobDateTime->diff($today);
-      $age = $diff->y;
+      if(empty($data['dob'])){
+      $data['dob_err'] = 'Please enter dob';
+      } else {
+         // Check if the date is in a valid format
+       $dobDateTime = DateTime::createFromFormat('Y-m-d', $data['dob']);
+       if (!$dobDateTime) {
+          $data['dob_err'] = 'Please enter a valid date in the format YYYY-MM-DD';
+         } else {
+          // Calculate the age
+          $today = new DateTime();
+          $diff = $dobDateTime->diff($today);
+           $age = $diff->y;
 
       // Check if the person is older than 18 years
-      if ($age < 18) {
-          $data['dob_err'] = 'You must be at least 18 years old';
+          if ($age < 18) {
+              $data['dob_err'] = 'You must be at least 18 years old';
+         }
       }
-  }
-}
+        }
 
 
         // Validate Contact no
@@ -615,16 +615,42 @@ if(empty($data['dob'])){
     }
     
     if (empty($data['new_pw'])) {
-        $data['new_pw_err'] = 'Please Enter New Password';
-    } elseif (strlen($data['new_pw']) < 6) {
-        $data['new_pw_err'] = 'New Password must be at least 6 characters';
+      $data['new_pw_err'] = 'Please Enter New Password';
+    } elseif (strlen($data['new_pw']) < 8 || strlen($data['new_pw']) > 30) {
+        $data['new_pw_err'] = 'New password must be between 8 and 30 characters';
+
+    } elseif (!preg_match('/[^\w\s]/', $data['new_pw'])) {
+        $data['new_pw_err'] = 'New password must include at least one symbol';
+
+    } elseif (!preg_match('/[A-Z]/', $data['new_pw'])) {
+        $data['new_pw_err'] = 'New password must include at least one uppercase letter';
+
+    } elseif (!preg_match('/[a-z]/', $data['new_pw'])) {
+        $data['new_pw_err'] = 'New password must include at least one lowercase letter';
+
+    } elseif (!preg_match('/[0-9]/', $data['new_pw'])) {
+      $data['new_pw_err'] = 'New password must include at least one number';
     }
-    
+
+
     if (empty($data['re_enter_pw'])) {
-        $data['re_enter_pw_err'] = 'Please Confirm New Password';
-    } elseif (strlen($data['re_enter_pw']) < 6) {
-        $data['re_enter_pw_err'] = 'Confirmed Password must be at least 6 characters';
+      $data['re_enter_pw_err'] = 'Please confirm new password';
+    } elseif (strlen($data['re_enter_pw']) < 8 || strlen($data['re_enter_pw']) > 30) {
+        $data['re_enter_pw_err'] = 'Confirmed password must be between 8 and 30 characters';
+
+    } elseif (!preg_match('/[^\w\s]/', $data['re_enter_pw'])) {
+        $data['re_enter_pw_err'] = 'Confirmed password must include at least one symbol';
+
+    } elseif (!preg_match('/[A-Z]/', $data['re_enter_pw'])) {
+        $data['re_enter_pw_err'] = 'Confirmed password must include at least one uppercase letter';
+
+    } elseif (!preg_match('/[a-z]/', $data['re_enter_pw'])) {
+        $data['re_enter_pw_err'] = 'Confirmed password must include at least one lowercase letter';
+
+    } elseif (!preg_match('/[0-9]/', $data['re_enter_pw'])) {
+      $data['re_enter_pw_err'] = 'Confirmed password must include at least one number';
     }
+  
 
     if(empty($data['new_pw_err']) && empty($data['current_err']) && empty($data['re_enter_pw_err'])) {
          
@@ -827,7 +853,8 @@ if(empty($data['dob'])){
 
   public function enterWaste_And_GenerateEcoCredits($req_id,$pop_eco="False") {
      $types=$this->garbageTypeModel->get_all();
-    
+
+  
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         
@@ -1240,6 +1267,17 @@ if(empty($data['dob'])){
    }
   }
 
+  
+  public function view_notification($url){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+     
+      $Notifications1 = $this->customerModel->view_Notification($_SESSION['user_id']);
+      $Notifications2 = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $data['notification']=  $Notifications2 ;
+      header("Location: " . URLROOT . "/collectors/$url");        
+
+   }
+  }
 
   
 }

@@ -173,7 +173,9 @@ use PHPMailer\PHPMailer\Exception;
       $cm_id = $this->center_managerModel->getCenterManagerByID($id);
       $this->center_managerModel->delete_centermanager($id);
       $center_managers = $this->center_managerModel->get_center_managers();
-      if($center_managers->image!="profile.png"){
+      if($cm_id->image=="profile.png"){
+
+      }else{
         deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\center_manager\\" . $cm_id->image);
 
       }
@@ -1792,10 +1794,13 @@ use PHPMailer\PHPMailer\Exception;
       $admin_by_id = $this->adminModel->getAdminByID($id);
       $this->adminModel->admin_delete($id);
       $admin = $this->adminModel->get_all();
-      if($admin_by_id->image!="profile.png"){
-        deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\Admin\\" . $admin_by_id->image);
+     
+      if($admin_by_id->image=="profile.png"){
 
+      }else{
+        deleteImage("C:\\xampp\\htdocs\\ecoplus\\public\\img\\img_upload\\Admin\\" . $admin_by_id->image);
       }
+      
       $data = [
         'admin' => $admin,
         'confirm_delete' =>'',

@@ -1721,7 +1721,8 @@
 
       } else {
         if($this->centermanagerModel->mark_holidays($data)){
-          $data['holiday_success']='True';      
+          $data['holiday_success']='True'; 
+          $data['notification'] =  $notifications;
           $this->index();
           //$this->view('center_managers/index',$data);
           

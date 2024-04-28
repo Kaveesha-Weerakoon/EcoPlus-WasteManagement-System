@@ -71,7 +71,7 @@
                     <?php else: ?>
                     <div class="main-right-bottom-three">
                         <div class="main-right-bottom-three-content">
-                            <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                            <img src="<?php echo IMGROOT?>/undraw_questions_re_1fy7.svg" alt="">
                             <h1>You have No Cancelled Requests</h1>
                             <p>Cancelled requests will be appeared as soon as you cancel a request</p>
                         </div>

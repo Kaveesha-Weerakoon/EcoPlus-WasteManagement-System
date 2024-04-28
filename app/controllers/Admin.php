@@ -1,7 +1,14 @@
 <?php
-  class Admin extends Controller {
-    public function __construct(){
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+  class Admin extends Controller {
+    
+    private $mail;
+    
+    public function __construct(){
+ 
       $this->adminModel=$this->model('Admins');
       $this->userModel=$this->model('User');
       $this->creditModel=$this->model('Credit_amount');
@@ -26,6 +33,25 @@
       $this->garbage_Model=$this->model('Garbage_Stock');
       $this->MailSubscriptionModel = $this->model('Mail_Subscriptions');
       $this->Customer_Credit_Model = $this->model('Customer_Credit');
+
+       //  $this->mail = new PHPMailer();
+          //  $this->mail->isSMTP();
+          //  $this->mail->Host = 'smtp.gmail.com';
+          //  $this->mail->Port = 587;
+          //  $this->mail->Username = 'ecoplusgroupproject@gmail.com';
+          //  $this->mail->Password = 'zzruvawrzshhafbk';
+          //  $this->mail->SMTPSecure = 'tls';
+          //  $this->mail->SMTPAuth = true;
+           
+
+              // Setup PHPMailer
+        $this->mail = new PHPMailer();
+        $this->mail->isSMTP();
+        $this->mail->Host = 'sandbox.smtp.mailtrap.io';
+        $this->mail->SMTPAuth = true;
+        $this->mail->Port = 2525;
+        $this->mail->Username = 'f4ab65cd067d1f';
+        $this->mail->Password = '111c78b575960b';
 
 
       if(!isLoggedIn('admin_id')  && !isLoggedIn('superadmin_id')){

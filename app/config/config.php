@@ -3,7 +3,7 @@
   define('DB_HOST', 'localhost');
   define('DB_USER', 'root');
 
-  define('DB_PASS', '12345');
+  define('DB_PASS', 'Ayesh1000@');
   define('DB_NAME', 'eco_plus');
   date_default_timezone_set('Asia/Colombo'); // Set the time zone to Colombo
 

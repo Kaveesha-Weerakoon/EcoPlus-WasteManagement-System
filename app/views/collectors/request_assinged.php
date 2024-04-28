@@ -15,43 +15,8 @@
                                 <i class='bx bx-search-alt-2'></i>
                                 <input type="text" id="searchInput" placeholder="Search">
                             </div>
-                            <div class="main-right-top-notification" id="notification">
-                                <i class='bx bx-bell'></i>
-                                <?php if (!empty($data['notification'])) : ?>
-                                <div class="dot"><?php echo count($data['notification'])?></div>
-                                <?php endif; ?>
-                            </div>
-                            <div id="notification_popup" class="notification_popup">
-                                <h1>Notifications</h1>
-                                <div class="notification_cont">
-                                    <?php foreach($data['notification'] as $notification) : ?>
+                            <?php require APPROOT . '/views/collectors/collector_notification/collector_notification.php'; ?>
 
-                                    <div class="notification">
-                                        <div class="notification-green-dot">
-
-                                        </div>
-                                        <div class="notification_right">
-                                            <p><?php echo date('Y-m-d', strtotime($notification->datetime)); ?></p>
-                                            <?php echo $notification->notification ?>
-                                        </div>
-                                    </div>
-                                    <?php endforeach; ?>
-
-                                </div>
-                                <form class="mark_as_read" method="post" action="<?php echo URLROOT;?>/collectors/">
-                                    <i class="fa-solid fa-check"> </i>
-                                    <button type="submit">Mark all as read</button>
-                                </form>
-
-                            </div>
-                            <div class="main-right-top-profile">
-                                <img src="<?php echo IMGROOT?>/img_upload/collector/<?php echo $_SESSION['collector_profile']?>"
-                                    alt="">
-                                <div class="main-right-top-profile-cont">
-                                    <h3><?php echo $_SESSION['collector_name']?></h3>
-                                    <p>ID :  <?php echo $_SESSION['collector_id']?></p>
-                                </div>
-                            </div>
                         </div>
                         <div class="main-right-top-two">
                             <h1>Requests</h1>
@@ -77,17 +42,18 @@
                             </a>
                         </div>
                         <div class="main-right-top-four">
-                        <div class="main-right-top-four-left">
+                            <div class="main-right-top-four-left">
                                 <p>Date</p>
                                 <input type="date" id="selected-date">
                                 <button onclick="loadLocations()">Filter</button>
                             </div>
-                            
+
                             <div class="main-right-top-four-right">
 
-                                <div class="main-right-top-four-component" style="background-color: var(--request-top-color);" id="tables">
+                                <div class="main-right-top-four-component"
+                                    style="background-color: var(--request-top-color);" id="tables">
                                     <!-- <img src="<?php echo IMGROOT?>/cells.png" alt=""> -->
-                                    <i class='bx bx-table'  style="color:var(--main-text-color); font-size: 23px;"></i>
+                                    <i class='bx bx-table' style="color:var(--main-text-color); font-size: 23px;"></i>
                                     <p>Tables</p>
                                 </div>
 
@@ -139,8 +105,11 @@
                                             <?php
                                            
                                              if ($request->status== "assinged") {
-                                                echo '<i onclick="ontheway(' . $request->req_id . ')" class="fa-solid fa-arrow-up-right-dots"></i>';
-
+                                                if ($request->date> date('Y-m-d')) { // Assuming $request->data is in 'Y-m-d' format
+                                                    echo '<i class="fa-solid fa-arrow-up-right-dots"></i>';
+                                                } else {
+                                                    echo '<i onclick="ontheway(' . $request->req_id . ')" class="fa-solid fa-arrow-up-right-dots"></i>';
+                                                }
 
                                             } else {
                                             echo '<a
@@ -171,14 +140,30 @@
                         </div>
                     </div>
                     <?php else: ?>
-                        <div class="main-right-bottom-three">
-                            <div class="main-right-bottom-three-content">
-                                <img src="<?php echo IMGROOT?>/undraw_questions_re_1fy7.svg" alt="">
-                                <h1>You have No cancel Requests</h1>
-                            </div>
+                    <div class="main-right-bottom-three">
+                        <div class="main-right-bottom-three-content">
+                            <img src="<?php echo IMGROOT?>/undraw_questions_re_1fy7.svg" alt="">
+                            <h1>You have No cancel Requests</h1>
                         </div>
+                    </div>
                     <?php endif; ?>
                 </div>
+
+
+                <?php if($data['success']=='True') : ?>
+                    die('hhhbbb');
+                <div class="complain_success" style="">
+                    <div class="popup" id="popup">
+                        <img src="<?php echo IMGROOT?>/check.png" alt="">
+                        <h2>Success!!</h2>
+                        <p>Complain has been reported successfully</p>
+                        <a href="<?php echo URLROOT?>/collectors/history_complains"><button
+                                type="button">OK</button></a>
+
+
+                    </div>
+                </div>
+                <?php endif; ?>
 
                 <?php if($data['popup']=='True') : ?>
                 <div class="personal-details-popup-box" id="personal-details-popup-box">
@@ -294,7 +279,6 @@
                 </div>
 
                 <?php endif; ?>
-
 
 
                 <form class="on_the_way" id="ontheway" action="<?php echo URLROOT?>/collectors/request_ontheway"
@@ -413,7 +397,7 @@
                     </div>
                 </div>
             </div>
-
+            
         </div>
     </div>
 </div>

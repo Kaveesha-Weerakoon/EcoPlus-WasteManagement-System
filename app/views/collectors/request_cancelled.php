@@ -88,8 +88,8 @@
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
                                     <td><?php  echo $request->cancelled_by?></td>
-                                    <td><img onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
-                                            src="<?php echo IMGROOT?>/location.png" alt=""></td>
+                                    <td><i class='bx bx-map'  style="font-size: 29px" onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"
+                                            ></td>
 
                                     <td>
                                         <i class='bx bx-info-circle' style="font-size: 29px"

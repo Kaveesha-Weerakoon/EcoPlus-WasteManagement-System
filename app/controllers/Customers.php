@@ -896,7 +896,7 @@
           } else {
               $selectedTimestamp = strtotime($data['date']);
               $currentTimestamp = strtotime('tomorrow');
-              $sevenDaysLater = strtotime('+7 days', $currentTimestamp);
+              $sevenDaysLater = strtotime('+6 days', $currentTimestamp);
       
               if ($selectedTimestamp < $currentTimestamp || $selectedTimestamp > $sevenDaysLater) {
                   $data['date_err'] = 'Select a date within the next seven days';

@@ -967,7 +967,7 @@
           $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
           $jsonData = json_encode($assinged_Requests);
           $collector_id = $_SESSION['collector_id'];
-        
+    
           $data = [
           'assigned_requests' => $assinged_Requests,
           'jsonData' => $jsonData,

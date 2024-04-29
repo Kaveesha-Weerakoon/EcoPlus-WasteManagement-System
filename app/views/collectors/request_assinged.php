@@ -7,6 +7,7 @@
                 defer></script>
 
             <div class="main">
+
                 <?php require APPROOT . '/views/collectors/collector_sidebar/side_bar.php'; ?>
                 <div class="main-right">
                     <div class="main-right-top">
@@ -151,7 +152,7 @@
 
 
                 <?php if($data['success']=='True') : ?>
-                    die('hhhbbb');
+
                 <div class="complain_success" style="">
                     <div class="popup" id="popup">
                         <img src="<?php echo IMGROOT?>/check.png" alt="">
@@ -397,7 +398,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

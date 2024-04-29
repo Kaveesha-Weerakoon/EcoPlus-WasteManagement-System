@@ -233,14 +233,15 @@
     }
 
 
-    public function validateUser() {   
+    public function validateUser($success="") {   
 
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
   
           $data = [
               'customer_id' => trim($_POST['customer_id']),
-              'customer_id_err' => ''
+              'customer_id_err' => '',
+              'success'=>$success
           ];
   
   
@@ -258,6 +259,10 @@
                   if (!$this->customerModel->get_customer($customer_id)) {
                       $data['customer_id_err'] = 'Customer ID does not exist';
                   }
+                  else{
+                    header("Location: " . URLROOT . "/CreditDiscountsAgent/validateUser/True");        
+
+                  }
               }
           }
           
@@ -271,7 +276,9 @@
           }else {
             $data = [
               'customer_id' => '',
-              'customer_id_err' => '',   
+              'customer_id_err' => '',  
+              'success'=>$success
+ 
           ];
   
           $this->view('credit_discount_agents/discount_agent_validateUser', $data);
@@ -358,8 +365,10 @@
                   );
                   
                   if ($insert_discount) {
-                      $this->view('credit_discount_agents/agent_discount/True', $data);
+                      header("Location: " . URLROOT . "/CreditDiscountsAgent/balance_validation/True");        
+
                   } else {
+                    
                     $this->view('credit_discount_agents/agent_discount', $data);
                   }
               } else {

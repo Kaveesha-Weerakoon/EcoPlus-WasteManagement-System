@@ -6,18 +6,18 @@
                 <a href="#" class="logo"><img src="<?php echo IMGROOT;?>/Logo_No_Background.png" alt=""></a>
 
                 <div class="hamburger">
-                <span class="line"></span>
-                <span class="line"></span>
-                <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
                 </div>
 
                 <div class="nav__link hide">
-                <a href="#home">Home</a>
-                <a href="#services">Services</a>
-                <a href="#aboutUs">About Us</a>
-                <a href="#announcements">Announcements</a>
-                <a href="#contact">Contact</a>
-                <button class="signin-button" onclick="redirectLogin()">Sign In</button>
+                    <a href="#home">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#aboutUs">About Us</a>
+                    <a href="#announcements">Announcements</a>
+                    <a href="#contact">Contact</a>
+                    <button class="signin-button" onclick="redirectLogin()">Sign In</button>
                 </div>
             </nav>
         </header>
@@ -26,18 +26,18 @@
         <section class="header-section" id="home">
             <div class="header-content">
                 <div class="title-subtitle">
-                <div class="text-wrapper">Dispose | Recycle | Eco-Rewards</div>
-                <div class="div">Recycle Responsibly, Reap Rewards!</div>
-                <p class="this-is-a-template">
-                    Dispose responsibly, recycle efficiently, and earn Eco-rewards with <br> 
-                    <b>Eco Plus</b> your sustainable waste management solution.
-                </p>
+                    <div class="text-wrapper">Dispose | Recycle | Eco-Rewards</div>
+                    <div class="div">Recycle Responsibly, Reap Rewards!</div>
+                    <p class="this-is-a-template">
+                        Dispose responsibly, recycle efficiently, and earn Eco-rewards with <br>
+                        <b>Eco Plus</b> your sustainable waste management solution.
+                    </p>
                 </div>
-                
+
                 <div class="button">
-                    <div class="text-wrapper-2" onclick="redirectSignUp()" >Join Now</div>
+                    <div class="text-wrapper-2" onclick="redirectSignUp()">Join Now</div>
                 </div>
-                
+
             </div>
             <img class="headerimage" src="<?php echo IMGROOT;?>/home1.jpg" alt="" />
         </section>
@@ -47,41 +47,30 @@
             <div class="text-wrapper">Our Services</div>
             <div class="cards-section">
                 <div class="services-card">
-                    <img
-                        class="services-card-icon"
-                        src="<?php echo IMGROOT;?>/bin.png"
-                        alt=""
-                    />
+                    <img class="services-card-icon" src="<?php echo IMGROOT;?>/bin.png" alt="" />
                     <div class="title-description">
                         <div class="title">Garbage Collection</div>
                         <p class="text-wrapper-2">
-                        Conveniently request non-biodegradable waste collection. We'll pick up your trash hassle-free
+                            Conveniently request non-biodegradable waste collection. We'll pick up your trash
+                            hassle-free
                         </p>
                     </div>
                 </div>
                 <div class="services-card">
-                    <img 
-                        class="services-card-icon" 
-                        src="<?php echo IMGROOT;?>/recycling.png" 
-                        alt="" 
-                    />
+                    <img class="services-card-icon" src="<?php echo IMGROOT;?>/recycling.png" alt="" />
                     <div class="title-description">
                         <div class="title">Recycling Solutions</div>
                         <p class="text-wrapper-2">
-                        Release waste to recycling parties and companies, Transforming waste into valuable resources
+                            Release waste to recycling parties and companies, Transforming waste into valuable resources
                         </p>
                     </div>
                 </div>
                 <div class="services-card">
-                    <img
-                        class="services-card-icon"
-                        src="<?php echo IMGROOT;?>/award.png"
-                        alt=""
-                    />
+                    <img class="services-card-icon" src="<?php echo IMGROOT;?>/award.png" alt="" />
                     <div class="title-description">
                         <div class="title">Earn Eco-Rewards</div>
                         <p class="text-wrapper-2">
-                        Earn eco-credits for your waste contributions and enjoy discounts on bills and purchases
+                            Earn eco-credits for your waste contributions and enjoy discounts on bills and purchases
                         </p>
                     </div>
                 </div>
@@ -93,21 +82,26 @@
             <div class="text-wrapper">About Us</div>
             <div class="about-us-container">
                 <div class="about-us-content">
-                <div class="title">Why you should choose us?</div>
-                <ul class="about-us-content-list">
-                    <li>Eco Plus offers region-based collection and recycling services for non-biodegradable garbage</li>
-                    <li>Our system rewards customers with eco-credits, empowering them to save on bills and contribute to a cleaner environment</li>
-                    <li>At Eco Plus, We partner with recycling parties to ensure that collected garbage is reused responsibly</li>
-                    <li>Our team is promoting eco-friendly habits and making a positive impact on the planet through innovative waste solutions</li>
-                    <li>Join us in our mission to create a greener future by choosing Eco Plus for your waste management needs</li>
-                </ul>
+                    <div class="title">Why you should choose us?</div>
+                    <ul class="about-us-content-list">
+                        <li>Eco Plus offers region-based collection and recycling services for non-biodegradable garbage
+                        </li>
+                        <li>Our system rewards customers with eco-credits, empowering them to save on bills and
+                            contribute to a cleaner environment</li>
+                        <li>At Eco Plus, We partner with recycling parties to ensure that collected garbage is reused
+                            responsibly</li>
+                        <li>Our team is promoting eco-friendly habits and making a positive impact on the planet through
+                            innovative waste solutions</li>
+                        <li>Join us in our mission to create a greener future by choosing Eco Plus for your waste
+                            management needs</li>
+                    </ul>
 
                 </div>
                 <div class="about-us-image">
                     <img src="<?php echo IMGROOT?>/home2.jpg" alt="">
                 </div>
             </div>
-        
+
         </section>
 
         <!-- announcement section -->
@@ -118,19 +112,18 @@
                 foreach ($data['announcements'] as $announcement):
                   if($count == 2) break;?>
                 <div class="Announcement-cont">
-                <div class="left slide-top">
-                    <h2> <?php echo $announcement->header ?></h2>
-                    <p><?php echo $announcement->date ?></p>
-                    <img src="<?php echo IMGROOT . '/img_upload/Annoucement/' . $announcement->img; ?>"
-                                alt="logo">
-                </div>
-                <div class="right ">
-                    <div class="cont slide-top">
-                        <p>
-                            <?php echo $announcement->text ?>
-                        </p>
+                    <div class="left slide-top">
+                        <h2> <?php echo $announcement->header ?></h2>
+                        <p><?php echo $announcement->date ?></p>
+                        <img src="<?php echo IMGROOT . '/img_upload/Annoucement/' . $announcement->img; ?>" alt="logo">
                     </div>
-                </div>
+                    <div class="right ">
+                        <div class="cont slide-top">
+                            <p>
+                                <?php echo $announcement->text ?>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <?php
                   $count++;
@@ -155,10 +148,10 @@
                     </div>
                 </div>
                 </div> -->
-                
+
             </div>
             <div class="view-more-button">
-                <button onclick= "redirectAnnouncements()" >View More -></button>
+                <button onclick="redirectAnnouncements()">View More -></button>
             </div>
         </section>
 
@@ -168,45 +161,47 @@
             <div class="div">
                 <!-- contact info -->
                 <div class="contact-info">
-                <div class="text-description">
-                    <p class="p">
-                    For any inquiries or assistance, feel free to reach out to us. 
-                    Our team is ready to help you with your waste management needs and 
-                    eco-friendly initiatives. Contact us today for a cleaner, greener tomorrow!
-                    </p>
-                </div>
+                    <div class="text-description">
+                        <p class="p">
+                            For any inquiries or assistance, feel free to reach out to us.
+                            Our team is ready to help you with your waste management needs and
+                            eco-friendly initiatives. Contact us today for a cleaner, greener tomorrow!
+                        </p>
+                    </div>
 
-                <!-- social links -->
-                <div class="social-links">
-                    <a href="#" title="whatsapp">
-                    <img class="img" src="<?php echo IMGROOT;?>/whatsapp.png" alt="" />
-                    </a>
-                    <a href="#" title="facebook">
-                    <img class="img" src="<?php echo IMGROOT;?>/facebook.png" alt="" />
-                    </a>
-                    <a href="#" title="instagram">
-                    <img class="img" src="<?php echo IMGROOT;?>/instagram.png" alt="" />
-                    </a>
-                </div>
+                    <!-- social links -->
+                    <div class="social-links">
+                        <a href="" title="whatsapp">
+                            <img class="img" src="<?php echo IMGROOT;?>/whatsapp.png" alt="" />
+                        </a>
+                        <a href="https://www.facebook.com/share/DBWp3HgwzhSJnFFZ/?mibextid=LQQJ4d" title="facebook">
+                            <img class="img" src="<?php echo IMGROOT;?>/facebook.png" alt="" />
+                        </a>
+                        <a href="https://www.instagram.com/eco_plus_srilanka/" title="instagram">
+                            <img class="img" src="<?php echo IMGROOT;?>/instagram.png" alt="" />
+                        </a>
+                    </div>
                 </div>
                 <!-- contact form -->
-             
-                <div class="contact-form"> 
-                <form action="<?php echo URLROOT?>/pages/mail_subscriptions#contact" method="post">
-                    <div class="input-fields">
-                        <input type="text" class="input-field" name="name" placeholder="Name" value="<?php echo $data['name']?>"/>
-                        <div class="err" ><?php echo $data['name_err']?></div>
-                        <input type="text" class="input-field" name="email" placeholder="Email" value="<?php echo $data['email']?>"/>
-                        <div class="err" ><?php echo $data['email_err']?></div>
-                    </div>
-                    <button class="button" type="submit"><span class="contact">Submit</span></button>
 
-                </form>
-                    
-              
+                <div class="contact-form">
+                    <form action="<?php echo URLROOT?>/pages/mail_subscriptions#contact" method="post">
+                        <div class="input-fields">
+                            <input type="text" class="input-field" name="name" placeholder="Name"
+                                value="<?php echo $data['name']?>" />
+                            <div class="err"><?php echo $data['name_err']?></div>
+                            <input type="text" class="input-field" name="email" placeholder="Email"
+                                value="<?php echo $data['email']?>" />
+                            <div class="err"><?php echo $data['email_err']?></div>
+                        </div>
+                        <button class="button" type="submit"><span class="contact">Submit</span></button>
+
+                    </form>
+
+
                 </div>
-                
-                
+
+
             </div>
         </section>
 
@@ -217,29 +212,29 @@
         </footer>
 
         <?php if($data['success']=='True') : ?>
-            <div class="success">
-                <div class="popup" id="popup">
+        <div class="success">
+            <div class="popup" id="popup">
                 <img src="<?php echo IMGROOT?>/check.png" alt="">
                 <h2>Success!!</h2>
                 <p>Mail Subscription recorded successfully</p>
-                <a href="<?php echo URLROOT?>/pages/index"><button type="button" >OK</button></a>
+                <a href="<?php echo URLROOT?>/pages/index"><button type="button">OK</button></a>
 
-                </div>
             </div>
+        </div>
         <?php endif; ?>
 
 
 
     </div>
     <script>
-        
-        const hamburger = document.querySelector(".hamburger");
-        const navLink = document.querySelector(".nav__link");
+    const hamburger = document.querySelector(".hamburger");
+    const navLink = document.querySelector(".nav__link");
 
-        hamburger.addEventListener("click", () => {
+    hamburger.addEventListener("click", () => {
         //console.log("Btn clicked");
         navLink.classList.toggle("hide");
-        });
+    });
+
 
 
         navLink.addEventListener("click", () => {
@@ -264,23 +259,27 @@
             window.location.href = linkUrl;
         }
 
-        function redirectSignUp() {
-            var linkUrl = "<?php echo URLROOT?>/users/register";
-            window.location.href = linkUrl;
-        }
+    function redirectLogin() {
+        var linkUrl = "<?php echo URLROOT?>/users/login";
+        window.location.href = linkUrl;
+    }
 
-        function redirectSignUp() {
-            var linkUrl = "<?php echo URLROOT?>/users/register";
-            window.location.href = linkUrl;
-        }
+    function redirectSignUp() {
+        var linkUrl = "<?php echo URLROOT?>/users/register";
+        window.location.href = linkUrl;
+    }
 
-        function redirectAnnouncements(){
-            var linkUrl = "<?php echo URLROOT?>/pages/announcement_view";
-            window.location.href = linkUrl;
-        }
+    function redirectSignUp() {
+        var linkUrl = "<?php echo URLROOT?>/users/register";
+        window.location.href = linkUrl;
+    }
 
+    function redirectAnnouncements() {
+        var linkUrl = "<?php echo URLROOT?>/pages/announcement_view";
+        window.location.href = linkUrl;
+    }
     </script>
-   
+
 </div>
 <!-- <div class="Home-main">
     <div class="main">

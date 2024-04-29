@@ -122,8 +122,8 @@
                         </div>
                         <div class="Warning_Message">
                             <i class="fa-solid fa-triangle-exclamation"></i>
-                            Please have at least one of the above unit
-                            of waste for the collection.otherwise,<br>
+                            Please have at least one of the above amount
+                            of waste for the collection. Otherwise,<br>
                             your request
                             will be
                             cancelled with a <?php echo $data['fine']?> Eco fine

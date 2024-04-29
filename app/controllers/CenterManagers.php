@@ -113,6 +113,18 @@ use PHPMailer\PHPMailer\Exception;
       $this->view('center_managers/collectors', $data);
     }
 
+    public function collector_assistants(){
+      
+      $collector_assistants = $this->collectorModel->getCollectorAssistantsByCenterId($_SESSION['center_id']);
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+      $data = [
+        'collector_assistants' => $collector_assistants,
+        'notification' => $notifications,
+      ];
+     
+      $this->view('center_managers/collector_assistants', $data);
+    }
+
     public function collectors_complains(){
       $center=$this->center_model->getCenterById($_SESSION['center_id']); 
       $collector_complains=$this->collector_complain_Model->get_collector_complaints_by_region($center->region);

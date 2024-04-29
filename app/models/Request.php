@@ -311,6 +311,7 @@
           FROM request_main
           LEFT JOIN request_cancelled ON request_main.req_id = request_cancelled.req_id
           WHERE request_main.region = :region AND request_main.type = :type
+          ORDER BY cancelled_time DESC
       ');
 
       $this->db->bind(':region', $center);

@@ -77,7 +77,7 @@
        
           return $result;
       } catch (PDOException $e) {
-         die($e);
+         //die($e);
          return FALSE;
       }
     }  

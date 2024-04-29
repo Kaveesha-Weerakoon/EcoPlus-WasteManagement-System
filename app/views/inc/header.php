@@ -13,6 +13,8 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script src="https://kit.fontawesome.com/6293c3d0e8.js" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/scrollreveal"></script>
+        
     </head>
     <script>
     if (window.history.replaceState) {

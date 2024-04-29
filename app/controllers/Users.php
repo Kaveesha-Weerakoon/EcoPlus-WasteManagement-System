@@ -351,7 +351,7 @@ use PHPMailer\PHPMailer\Exception;
               if($loggedInUser->role=="customer"){
                 $customer=$this->customerModel->get_customer($loggedInUser->id);
                 if($customer->blocked==TRUE){
-                      $data['email_err'] = 'Your Account has been Blocked Contact Our Team';
+                      $data['email_err'] = 'Your Account has been Blocked. Contact Our Team';
                       $this->view('users/login', $data);
                 }
                 else{
@@ -486,7 +486,7 @@ use PHPMailer\PHPMailer\Exception;
                 $expires = $user->expires;
                 $timeDifference = $currentDate - $expires;
              
-                if ($timeDifference > (1.5 * 3600)) {  die(); 
+                if ($timeDifference > (1.5 * 3600)) {  
                   header("Location: " . URLROOT . "");      
                 
               } else {

@@ -80,7 +80,7 @@
                             <table class="table">
                                 <?php foreach($data['cancelled_requests'] as $request) : ?>
                                 <tr class="table-row">
-                                    <td>R<?php echo $request->req_id?></td>
+                                    <td><?php echo $request->req_id?></td>
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
                                     <td><?php  echo $request->cancelled_by?></td>

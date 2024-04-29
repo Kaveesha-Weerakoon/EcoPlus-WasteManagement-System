@@ -165,7 +165,7 @@
 
         let circularProgress = document.querySelector(".circular-progress");
         let progressValue = document.querySelector(".progress-value");
-        let progressStartValue = 0;
+        let progressStartValue = -1;
         let progressEndValue = <?php echo intval($data['percentage']); ?>;
         let speed = 30;
 

@@ -90,7 +90,7 @@
                                 <table class="table">
                                     <?php foreach($data['assigned_requests'] as $request) : ?>
                                     <tr class="table-row">
-                                        <td>R<?php echo $request->req_id?></td>
+                                        <td><?php echo $request->req_id?></td>
                                         <td><?php  echo $request->date?></td>
                                         <td><?php  echo $request->time?></td>
 
@@ -105,11 +105,9 @@
                                             <?php
                                            
                                              if ($request->status== "assinged") {
-                                                if ($request->date> date('Y-m-d')) { // Assuming $request->data is in 'Y-m-d' format
-                                                    echo '<i class="fa-solid fa-arrow-up-right-dots"></i>';
-                                                } else {
+                                               
                                                     echo '<i onclick="ontheway(' . $request->req_id . ')" class="fa-solid fa-arrow-up-right-dots"></i>';
-                                                }
+                                              
 
                                             } else {
                                             echo '<a
@@ -372,7 +370,7 @@
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
                             id="request-details-pop-form-close" onclick="close_request_details()">
                         <div class="request-details-pop-form-top">
-                            <div class="request-details-topic">Request ID: R <div id="req_id3"></div>
+                            <div class="request-details-topic">Request ID:  <div id="req_id3"></div>
                             </div>
                         </div>
 

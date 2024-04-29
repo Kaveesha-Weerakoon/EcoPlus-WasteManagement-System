@@ -16,6 +16,7 @@
                     
                 </div>
                
+                <?php if(!empty($data['complaints_history'])) : ?>
                 <div class="main-right-bottom">
                     <div class="main-right-top-two">
                         <h1>Complaints History</h1>
@@ -45,6 +46,15 @@
                     
                     </div>
                 </div>
+                <?php else: ?>
+                <div class="main-right-bottom-two">
+                    <div class="main-right-bottom-two-content">
+                        <img src="<?php echo IMGROOT?>/undraw_questions_re_1fy7.svg" alt="">
+                        <h1>There are no complaints yet</h1>    
+                        
+                    </div>
+                </div>
+                <?php endif; ?>  
         
             </div>
         </div>

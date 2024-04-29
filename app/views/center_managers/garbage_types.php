@@ -79,7 +79,7 @@
                 <?php else: ?>
                 <div class="main-right-bottom-two">
                     <div class="main-right-bottom-two-content">
-                        <img src="<?php echo IMGROOT?>/DataNotFound.jpg" alt="">
+                        <img src="<?php echo IMGROOT?>/undraw_questions_re_1fy7.svg" alt="">
                         <h1>There are no garbage types at the moment</h1>
                         <p>All the garbage types will be appear here</p>
                         

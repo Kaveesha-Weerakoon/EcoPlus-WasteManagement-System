@@ -26,14 +26,14 @@
     }
 
     .main-right-bottom-three {
-        display: none;
+        display: flex;
         justify-content: center;
         height: 550px;
     }
 
     .main-right-bottom-three-content {
         border-radius: 10px;
-        display: none;
+        display: flex;
         flex-direction: column;
         align-items: center;
     }
@@ -65,23 +65,23 @@
 
     .table-row {
         height: 55px;
-        grid-template-columns: 11% 13% 14% 14% 12% 12% 12% 12% ;
-      }
-    
-      .table td {
+        grid-template-columns: 11% 13% 14% 14% 12% 12% 12% 12%;
+    }
+
+    .table td {
         height: 55px;
         overflow: auto;
-      }
-    
-      .table-header {
-        grid-template-columns: 11% 13% 14% 14% 12% 12% 12% 12% ;
-      }
-    
-      td img {
+    }
+
+    .table-header {
+        grid-template-columns: 11% 13% 14% 14% 12% 12% 12% 12%;
+    }
+
+    td img {
         margin: 7px;
         height: 25px;
         width: 25px;
-      }
+    }
 
     .Location {
         display: flex;
@@ -127,7 +127,7 @@
 
     /*cancel confirm popup*/
     .cancel-confirm {
-      
+
         display: flex;
         position: fixed;
         top: 50%;
@@ -154,7 +154,7 @@
         background: var(--background-color-main);
         font-family: 'poppins', sans-serif;
         border-radius: 6px;
-        padding:30px;
+        padding: 30px;
         position: relative;
         color: var(--main-text-color);
         transition: transform 0.4s, top 0.4s;
@@ -164,7 +164,7 @@
         box-shadow: var(--box-shadow);
     }
 
-    .confirm-content-img{
+    .confirm-content-img {
         position: absolute;
         top: 10px;
         right: 10px;
@@ -204,10 +204,10 @@
         flex-direction: row;
     }
 
-    .cancel-confirm-button-container{
+    .cancel-confirm-button-container {
         display: flex;
         justify-content: flex-end;
-        align-items: center ;
+        align-items: center;
     }
 
     .cancel-reason-submit-button {
@@ -225,12 +225,12 @@
         color: white;
     }
 
-    
-    .cancel-reason-submit-button:hover{
+
+    .cancel-reason-submit-button:hover {
         background: #c62323;
     }
 
-    .cancel-reason-cancel-button{
+    .cancel-reason-cancel-button {
         width: 20%;
         height: 32px;
         font-size: 14px;
@@ -246,14 +246,14 @@
         color: white;
     }
 
-    .cancel-reason-cancel-button:hover{
+    .cancel-reason-cancel-button:hover {
         background: #a7a1a1;
     }
 
 
     /*Assign popup*/
     .View {
-        
+
         display: flex;
         position: fixed;
         top: 50%;
@@ -278,7 +278,7 @@
 
     .View-content {
         width: 600px;
-        background:var(--background-color-main);
+        background: var(--background-color-main);
         font-family: 'poppins', sans-serif;
         border-radius: 6px;
         text-align: center;
@@ -305,7 +305,7 @@
         font-weight: 500;
     }
 
-    .time-slot-dropdown-container select{
+    .time-slot-dropdown-container select {
         width: 100%;
         font-size: 15px;
         padding: 8px;
@@ -374,7 +374,7 @@
         margin-top: 10px;
     }
 
-    .View-content button:hover{
+    .View-content button:hover {
         background: var(--button-hover-green);
     }
 
@@ -423,7 +423,7 @@
         background-color: #f0f0f0;
     } */
 
- 
+
     .dropdown {
         position: relative;
         display: inline-block;
@@ -433,14 +433,14 @@
     }
 
     .arrow-down {
-        width: 0; 
-        height: 0; 
+        width: 0;
+        height: 0;
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
         border-top: 5px solid #000;
         z-index: 2;
     }
-    
+
     .dropdown-toggle {
         padding: 10px 20px;
         border: 1px solid #ccc;
@@ -454,7 +454,7 @@
         align-items: center;
         margin-left: 27px;
     }
-    
+
     .dropdown-menu {
         display: none;
         position: absolute;
@@ -468,23 +468,23 @@
         padding: 0;
         margin: 0;
         list-style: none;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         margin-left: 27px;
         max-height: 167px;
         overflow: scroll;
-        transition: max-height 0.4s ease-in-out; 
+        transition: max-height 0.4s ease-in-out;
     }
 
     /* .dropdown-menu.open {
         max-height: 200px;
     } */
-    
+
 
     .dropdown-menu.show {
-        display: block; 
-        
+        display: block;
+
     }
-    
+
     .dropdown-menu li {
         padding: 8px 20px;
         display: flex;
@@ -500,20 +500,20 @@
         text-align: left;
     }
 
-    .dropdown-menu li img{
+    .dropdown-menu li img {
         width: 40px;
         height: 40px;
         border-radius: 50%;
         margin-right: 20px;
     }
-    
+
     .dropdown-menu li:hover {
         /* background-color: #f0f0f0; */
         background-color: var(--request-top-color);
     }
-    
 
-   
+
+
     /* .assigned_count{
         position: absolute;
         right: 10px;
@@ -529,28 +529,28 @@
         
     } */
 
-    .assign-line{
+    .assign-line {
         width: 40px;
         height: 2.5px;
         background-color: var(--green-color-one);
         border: none;
     }
 
-    .assigned-map-container{
+    .assigned-map-container {
         width: 80%;
         height: 250px;
         margin: 20px;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .assigned-req-count-container p{
+    .assigned-req-count-container p {
         margin: 17px 0;
         font-size: 14px;
 
     }
 
-    .assigned-map{
+    .assigned-map {
         width: 100%;
         height: 100%;
         border-radius: 10px;
@@ -561,8 +561,8 @@
         margin: 10px;
     } */
 
-    .assigned-req-count-container span{
-        
+    .assigned-req-count-container span {
+
         /* position: absolute;
         display: inline-block;
         background: var(--green-color-one);
@@ -579,18 +579,18 @@
         left: 50%; 
         transform: translateX(-50%); */
         position: relative;
-        display: inline-block; 
-        width: 40px; 
+        display: inline-block;
+        width: 40px;
         height: 40px;
-        line-height: 40px; 
-        border-radius: 50%; 
-        background-color: var(--green-color-one); 
-        color: var(--background-color-main); 
+        line-height: 40px;
+        border-radius: 50%;
+        background-color: var(--green-color-one);
+        color: var(--background-color-main);
         font-weight: 500;
         font-size: 18px;
-            
-      
- 
+
+
+
     }
 
     .overlay {
@@ -667,7 +667,7 @@
 
     /*request details*/
     .request-details-pop {
-       
+
         display: flex;
         position: fixed;
         top: 50%;
@@ -790,8 +790,8 @@
     }
 
 
-  
- 
+
+
 
     @media screen and (max-width:475px) {
 
@@ -802,69 +802,69 @@
     }
 
     @media screen and (max-width: 844px) {
-      
 
-        .request-details-pop-form{
+
+        .request-details-pop-form {
             width: 450px;
         }
 
-        .View-content{
+        .View-content {
             width: 400px;
         }
 
-        .dropdown-menu{
+        .dropdown-menu {
             width: 92.5%;
         }
 
     }
 
     @media screen and (max-width:700px) {
-    
 
-        .request-details-pop-form{
+
+        .request-details-pop-form {
             width: 400px;
         }
 
-        .request-details-right-labels span{
+        .request-details-right-labels span {
             font-size: 12px;
         }
 
-        .request-details-right-values span{
+        .request-details-right-values span {
             font-size: 12px;
         }
 
-        .View-content{
+        .View-content {
             width: 300px;
         }
 
-        .dropdown-menu{
+        .dropdown-menu {
             margin-left: 0;
             width: 96%;
         }
 
-        .dropdown-toggle{
+        .dropdown-toggle {
             margin-left: 0;
         }
 
-        .cancel-confirm-content{
+        .cancel-confirm-content {
             width: 400px;
         }
     }
 
     @media screen and (max-width:500px) {
-        .request-details-right-labels{
+        .request-details-right-labels {
             padding-left: 16px;
         }
 
-        .request-details-right-values{
+        .request-details-right-values {
             padding-left: 70px;
         }
 
-        .request-details-pop-form{
+        .request-details-pop-form {
             width: 300px;
         }
 
-        .cancel-confirm-content{
+        .cancel-confirm-content {
             width: 300px;
         }
 

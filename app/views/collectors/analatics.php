@@ -420,7 +420,7 @@ const myPieChart2 = new Chart(ctx2, config2);
 /* Notification View */
 document.getElementById('submit-notification').onclick = function() {
     var form = document.getElementById('mark_as_read');
-    var dynamicUrl = "<?php echo URLROOT;?>/collector/view_notification/analatics";
+    var dynamicUrl = "<?php echo URLROOT;?>/collectorS/view_notification/analatics";
     form.action = dynamicUrl; // Set the action URL
     form.submit(); // Submit the form
 

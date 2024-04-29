@@ -394,23 +394,154 @@
         justify-content: center;
     }
 
-    .update_click {
+     /*Update popup*/
+     .update_click {
         position: fixed;
-        top: 50%;
-        left: 50%;
-        z-index: 4 !important;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.1);
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         height: 100%;
-        transform: translate(-50%, -50%) scale(0);
-        transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+
     }
 
-    .update_click.active {
-        transform: translate(-50%, -50%) scale(1);
+    .popup-form {
+        width: 50%;
+        background: var(--background-color-main);
+        border-radius: 6px;
+        top: 0;
+        position: relative;
+        text-align: center;
+        padding: 0 30px 30px;
+        transition: transform 0.4s, top 0.4s;
+        box-shadow: var(--box-shadow);
     }
+
+    .popup-form h2 {
+        font-size: 20px;
+        font-weight: 550;
+        margin: 10px 0 4px;
+        margin-top: 25px;
+    }
+
+    .update-popup-img {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
+    }
+
+    .btns1 {
+        margin-top: 5px;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+
+
+    }
+
+    .updatebtn {
+        width: 42%;
+        margin-left: 5px;
+        padding: 10px 0;
+        background: var(--green-color-one);
+        color: var(--background-color-main);
+        border: 0;
+        outline: none;
+        font-size: 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+
+    }
+
+    .updatebtn:hover{
+        background: var(--button-hover-green);
+    }
+
+    .cancelbtn1 {
+        width: 319px;
+        margin-left: 10px;
+        padding: 10px 0;
+        background: #bab3b3;
+        color: white;
+        border: 0;
+        outline: none;
+        font-size: 18px;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+
+    }
+
+    .cancelbtn1:hover{
+        background: #a7a1a1 ;
+    }
+
+    .updateData {
+        width: 100%;
+        margin-bottom: 15px;
+        margin-left: 65px;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+    }
+
+    .A {
+        margin-top: 17px;
+    }
+
+    .B {
+        margin-bottom: 17px;
+    }
+
+    .update-topic-line {
+        width: 90px;
+        height: 4px;
+        background-color: var(--green-color-one);
+        margin-bottom: 15px;
+
+    }
+
+    .updateData input {
+        width: 80%;
+        padding: 6px 12px;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+        background-color: var(--background-color-main);
+        color: var(--main-text-color);
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+
+
+    }
+
+    .updateData label {
+
+        margin-bottom: 7px;
+    }
+
+    .updatePopupform {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-radius: 4px;
+        height: 100%;
+        box-shadow: var(--form-box-shadow);
+    }
+
+   
 
     .overlay {
         position: fixed;
@@ -528,7 +659,6 @@
         line-height: 1.5;
         background-color: var(--background-color-main);
         color: var(--main-text-color);
-        border-radius: 4px;
     }
 
     .updateData label {

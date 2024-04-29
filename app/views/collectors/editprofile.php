@@ -103,4 +103,15 @@
         <script src="<?php echo JSROOT?>/Collector_Edit_Profile.js"> </script>
 
     </div>
+
+    <script>
+                    /* Notification View */
+                document.getElementById('submit-notification').onclick = function() {
+                    var form = document.getElementById('mark_as_read');
+                    var dynamicUrl = "<?php echo URLROOT;?>/collectors/view_notification/editprofile";
+                    form.action = dynamicUrl; // Set the action URL
+                    form.submit(); // Submit the form
+
+                };
+</script>
     <?php require APPROOT . '/views/inc/footer.php'; ?>

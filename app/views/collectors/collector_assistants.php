@@ -108,11 +108,11 @@
                         src="<?php echo IMGROOT?>/close_popup.png" class="update-popup-img" alt=""></a>
                 <h2>Update Details</h2>
                 <center>
-                    <div class="line"></div>
+                    <div class="update-topic-line"></div>
                 </center>
-                <form class="updatePop" method="post"
+                <form class="updatePopupform" method="post"
                     action="<?php echo URLROOT;?>/Collectors/collector_assistants_update/<?php echo $data['id'];?>">
-                    <div class=form>
+                
                         <div class="updateData A">
                             <label>Name</label><br>
                             <input type="text" name="name" placeholder="Enter name"

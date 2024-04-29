@@ -7,10 +7,7 @@
             <div class="main-right">
                 <div class="main-right-top">
                     <div class="main-right-top-one">
-                        <div class="main-right-top-search">
-                            <i class='bx bx-search-alt-2'></i>
-                            <input type="text" placeholder="Search">
-                        </div>
+                        
                         <?php require APPROOT . '/views/collectors/collector_notification/collector_notification.php'; ?>
                     </div>
                     <div class="main-right-top-two">
@@ -55,4 +52,15 @@
     </div>
 
 </div>
+
+<script>
+                    /* Notification View */
+                document.getElementById('submit-notification').onclick = function() {
+                    var form = document.getElementById('mark_as_read');
+                    var dynamicUrl = "<?php echo URLROOT;?>/collectors/view_notification/garbage_types";
+                    form.action = dynamicUrl; // Set the action URL
+                    form.submit(); // Submit the form
+
+                };
+</script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

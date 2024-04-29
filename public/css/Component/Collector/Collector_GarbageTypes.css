@@ -97,13 +97,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 35%;
-        margin-right: 2.5%;
+        margin-left: 80%;
+        margin-right: 7%;
     }
 
     .main-right-top-profile {
         display: flex;
-        margin-right: 22px;
+        margin-right: 90px;
     }
 
     .main-right-top-profile img {

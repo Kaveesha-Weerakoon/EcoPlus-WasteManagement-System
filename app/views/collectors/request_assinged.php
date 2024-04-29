@@ -125,7 +125,7 @@
                                 <table class="table">
                                     <?php foreach($data['assigned_requests'] as $request) : ?>
                                     <tr class="table-row">
-                                        <td>R<?php echo $request->req_id?></td>
+                                        <td><?php echo $request->req_id?></td>
                                         <td><?php  echo $request->date?></td>
                                         <td><?php  echo $request->time?></td>
 
@@ -140,8 +140,10 @@
                                             <?php
                                            
                                              if ($request->status== "assinged") {
-                                                echo '<i onclick="ontheway(' . $request->req_id . ')" class="fa-solid fa-arrow-up-right-dots"></i>';
 
+                                               
+                                                    echo '<i onclick="ontheway(' . $request->req_id . ')" class="fa-solid fa-arrow-up-right-dots"></i>';
+  
 
                                             } else {
                                             echo '<a
@@ -389,7 +391,7 @@
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
                             id="request-details-pop-form-close" onclick="close_request_details()">
                         <div class="request-details-pop-form-top">
-                            <div class="request-details-topic">Request ID: R <div id="req_id3"></div>
+                            <div class="request-details-topic">Request ID:  <div id="req_id3"></div>
                             </div>
                         </div>
 
@@ -825,5 +827,16 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.getElementById('searchInput').addEventListener('input', searchTable);
+
+
+
+               /* Notification View */
+               document.getElementById('submit-notification').onclick = function() {
+                    var form = document.getElementById('mark_as_read');
+                    var dynamicUrl = "<?php echo URLROOT;?>/collectors/view_notification/request_assinged";
+                    form.action = dynamicUrl; // Set the action URL
+                    form.submit(); // Submit the form
+
+                };
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

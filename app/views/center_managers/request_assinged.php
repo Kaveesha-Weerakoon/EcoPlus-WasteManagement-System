@@ -32,7 +32,7 @@
                                 <?php foreach($data['assined_requests'] as $request) : ?>
 
                                 <tr class="table-row">
-                                    <td>R <?php echo $request->req_id?></td>
+                                    <td><?php echo $request->req_id?></td>
                                     <td><?php echo $request->date?></td>
                                     <td><?php echo $request->time?></td>
                                     <td>
@@ -116,7 +116,7 @@
                     <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
                         id="request-details-pop-form-close">
                     <div class="request-details-pop-form-top">
-                        <div class="request-details-topic">Request ID: R <div id="req_id3"></div>
+                        <div class="request-details-topic">Request ID: <div id="req_id3"></div>
                         </div>
                     </div>
 

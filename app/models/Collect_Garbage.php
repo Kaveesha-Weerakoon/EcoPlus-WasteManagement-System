@@ -157,6 +157,7 @@
           LEFT JOIN users ON collectors.user_id=users.id
           WHERE request_main.region = :region
           AND request_main.type = "completed"
+          ORDER BY request_completed.completed_datetime DESC
       ');
   
       $this->db->bind(':region', $region);

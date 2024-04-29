@@ -31,7 +31,7 @@
                             <table class="table">
                                 <?php foreach($data['completed_requests'] as $request) : ?>
                                 <tr class="table-row" id="table-row">
-                                    <td>R<?php echo $request->req_id?></td>
+                                    <td><?php echo $request->req_id?></td>
                                     <!-- <td><?php  echo $request->customer_name?></td> -->
                                     <td><?php  echo $request->date?></td>
                                     <td><?php  echo $request->time?></td>
@@ -170,7 +170,7 @@
                             <div class="personal-details-left">
                                 <img id="collector_profile_img" src="<?php echo IMGROOT?>/img_upload/collector/?>"
                                     class="profile-pic" alt="">
-                                <p>Collector ID: <span id="collector_id">C</span></p>
+                                <p>Collector ID: <span id="collector_id"></span></p>
                             </div>
                             <div class="personal-details-right">
                                 <div class="personal-details-right-labels">
@@ -196,7 +196,7 @@
                         <img src="<?php echo IMGROOT?>/close_popup.png" alt="" class="request-details-pop-form-close"
                             id="request-details-pop-form-close">
                         <div class="request-details-pop-form-top">
-                            <div class="request-details-topic">Request ID: R <div id="req_id3"></div>
+                            <div class="request-details-topic">Request ID: <div id="req_id3"></div>
                             </div>
                         </div>
 

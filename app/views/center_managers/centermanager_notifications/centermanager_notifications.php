@@ -37,7 +37,7 @@
             echo $first_name;
             ?>
         </h3>
-        <p>ID : C <?php echo $_SESSION['center_manager_id']?></p>
+        <p>ID : <?php echo $_SESSION['center_manager_id']?></p>
     </div>
 </div>
 

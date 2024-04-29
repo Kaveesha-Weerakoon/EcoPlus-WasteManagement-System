@@ -36,7 +36,7 @@
                             <table class="table">
                                 <?php foreach($data['incoming_requests'] as $request) : ?>
                                 <tr class="table-row">
-                                    <td>R<?php echo $request->req_id?></td>
+                                    <td><?php echo $request->req_id?></td>
                                     <td><?php  echo $request->name?></td>
                                     <td><?php  echo $request->date?></td>
                                     <td><?php  echo $request->time?></td>
@@ -110,7 +110,7 @@
                         <h2>Assign a Collector</h2>
                         <hr class="assign-line">
                         <div class="view_assing_middle">
-                            <h3>Req ID: <b>R <div id="assign_req_id" style="display: inline;"></div></b></h3>
+                            <h3>Req ID: <b><div id="assign_req_id" style="display: inline;"></div></b></h3>
                         </div>
                         <input name="assign_req_id" type="text" id="assign_req_id" style="display: none;">
 

@@ -293,6 +293,7 @@
     color: #333;
     margin-top: 6px;
     width: 100%;
+    background-color: #0c562d;
 
   }
 
@@ -333,7 +334,7 @@
     border: none;
     line-height: 1;
     font-weight: 200;
-    font-size: 0.1rem;
+    font-size:0.9rem;
     color: var(--main-text-color);
     padding-top: 7px;
     padding-left: 10px;

@@ -358,8 +358,10 @@
                   );
                   
                   if ($insert_discount) {
-                      $this->view('credit_discount_agents/agent_discount/True', $data);
+                      header("Location: " . URLROOT . "/CreditDiscountsAgent/balance_validation/True");        
+
                   } else {
+                    
                     $this->view('credit_discount_agents/agent_discount', $data);
                   }
               } else {

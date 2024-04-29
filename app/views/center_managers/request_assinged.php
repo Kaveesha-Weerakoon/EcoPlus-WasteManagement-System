@@ -7,7 +7,6 @@
         <div class="CenterManager_Request_Assinged">
             <div class="main">
                 <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
-                <?php echo empty($data['assigned_requests'])?>
 
                 <div class="main-right">
                     <?php require APPROOT . '/views/center_managers/centermanager_requests/requests_top_bar.php'; ?>

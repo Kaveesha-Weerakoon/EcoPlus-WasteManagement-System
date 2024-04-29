@@ -1,11 +1,13 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="CenterManager_Main">
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initializeMaps" async defer>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo Google_API ?>&callback=initializeMaps" async
+        defer>
     </script>
     <div class="CenterManager_Request_Main">
         <div class="CenterManager_Request_Assinged">
             <div class="main">
                 <?php require APPROOT . '/views/center_managers/centermanager_sidebar/side_bar.php'; ?>
+                <?php echo empty($data['assigned_requests'])?>
 
                 <div class="main-right">
                     <?php require APPROOT . '/views/center_managers/centermanager_requests/requests_top_bar.php'; ?>
@@ -37,7 +39,7 @@
                                     <td><?php echo $request->time?></td>
                                     <td>
                                         <i class='bx bx-map' style="font-size: 29px;"
-                                        onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
+                                            onclick="viewLocation(<?php echo $request->lat; ?>, <?php echo $request->longi; ?>)"></i>
 
                                     </td>
                                     <td class="cancel-open">
@@ -66,16 +68,17 @@
 
                         </div>
                     </div>
-                </div>
-                <?php else: ?>
-                <div class="main-right-bottom-three">
-                    <div class="main-right-bottom-three-content">
-                        <img src="<?php echo IMGROOT?>/undraw_questions_re_1fy7.svg" alt="">
-                        <h1>You have No Assinged Requests</h1>
-                        <p>Assigned requests will be appeared as soon as you assign collectors</p>
+                    <?php else: ?>
+                    <div class="main-right-bottom-three">
+                        <div class="main-right-bottom-three-content">
+                            <img src="<?php echo IMGROOT?>/undraw_questions_re_1fy7.svg" alt="">
+                            <h1>You have No Assinged Requests</h1>
+                            <p>Assigned requests will be appeared as soon as you assign collectors</p>
+                        </div>
                     </div>
+                    <?php endif; ?>
                 </div>
-                <?php endif; ?>
+
             </div>
 
             <div class="location_pop" id="location_pop">
@@ -105,9 +108,9 @@
                             class="cancel-reason-cancel-button">Cancel</button>
                     </div>
 
-                </form>
+                    </form>
 
-            </div> -->
+                </div> -->
 
             <div class="overlay" id="overlay"></div>
 
@@ -179,13 +182,13 @@
 <script>
 /* Notification View */
 document.getElementById('submit-notification').onclick = function() {
-        var form = document.getElementById('mark_as_read');
-        var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/request_assigned";
-        form.action = dynamicUrl; // Set the action URL
-        form.submit(); // Submit the form
+    var form = document.getElementById('mark_as_read');
+    var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/request_assigned";
+    form.action = dynamicUrl; // Set the action URL
+    form.submit(); // Submit the form
 
-    };
-    /* ----------------- */
+};
+/* ----------------- */
 
 // function cancel(id, collector_id) {
 //     var inputElement = document.querySelector('input[name="id"]');
@@ -212,8 +215,8 @@ function searchTable() {
         var id = row.querySelector('td:nth-child(1)').innerText.toLowerCase();
         var date = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
         var time = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
-       
-        if (time.includes(input) || id.includes(input) || date.includes(input) ) {
+
+        if (time.includes(input) || id.includes(input) || date.includes(input)) {
             row.style.display = '';
         } else {
             row.style.display = 'none'; // Hide the row
@@ -336,7 +339,7 @@ function initMap() {
         lng: <?php echo $data['longitude'] ?>
     };
 
-        // Add a circle to the first map
+    // Add a circle to the first map
     var circle2 = new google.maps.Circle({
         map: map,
         center: defaultLatLng,
@@ -374,7 +377,7 @@ function loadLocations() {
 
         var map = new google.maps.Map(document.getElementById('map-loaction'), {
             center: {
-                lat:  <?php echo $data['lattitude'] ?>,
+                lat: <?php echo $data['lattitude'] ?>,
                 lng: <?php echo $data['longitude'] ?>
             },
             zoom: 10
@@ -402,7 +405,7 @@ function loadLocations() {
             lng: <?php echo $data['longitude'] ?>
         };
 
-            // Add a circle to the first map
+        // Add a circle to the first map
         var circle2 = new google.maps.Circle({
             map: map,
             center: defaultLatLng,
@@ -450,7 +453,7 @@ function updateMapForDate(selectedDate) {
         lng: <?php echo $data['longitude'] ?>
     };
 
-        // Add a circle to the first map
+    // Add a circle to the first map
     var circle2 = new google.maps.Circle({
         map: map,
         center: defaultLatLng,
@@ -518,7 +521,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // });
 
     close_request_details.addEventListener("click", function() {
-       
+
         var request_popup = document.getElementById("request-details-popup-box");
         request_popup.classList.remove('active');
         document.getElementById('overlay').style.display = "none";

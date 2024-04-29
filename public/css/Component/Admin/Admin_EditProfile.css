@@ -23,7 +23,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-around;
+        justify-content: end;
         border: 10px;
         width: 100%;
         box-sizing: border-box;
@@ -182,7 +182,7 @@
         margin-left: 5px;
     }
 
-    .mark_as_read button:hover{
+    .mark_as_read button:hover {
         color: var(--button-hover-green);
     }
 
@@ -232,7 +232,7 @@
         box-sizing: border-box;
         padding: 10px;
         overflow: hidden !important;
-        
+
     }
 
     .main-right-bottom-content {
@@ -252,13 +252,13 @@
         border-radius: 8px;
     }
 
-  
+
 
     .main-right-bottom-content-top {
         padding-left: 80px;
     }
 
-    .B{
+    .B {
         padding-left: 0;
         margin-bottom: 25px;
     }
@@ -276,7 +276,7 @@
         background: var(--green-color-one);
     }
 
-    .D{
+    .D {
         margin-left: 25%;
     }
 
@@ -285,7 +285,7 @@
         grid-template-columns: 50% 50%;
     }
 
-    .E{
+    .E {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -392,13 +392,13 @@
         padding-left: 25px;
     }
 
-    .A{
+    .A {
         padding-top: 0;
         padding-left: 0;
 
     }
 
-  
+
     .main-right-bottom-content-bottom-right button {
         background-color: var(--green-color-two);
         border: none;
@@ -414,7 +414,7 @@
         margin-top: 15px;
     }
 
-    .change-pw-button{
+    .change-pw-button {
         background-color: var(--green-color-two);
         border: none;
         border-radius: 7px;
@@ -427,15 +427,15 @@
         transition: background-color 0.6s ease-in;
         margin-top: 15px;
         width: auto !important;
-       
+
 
     }
 
-    .sup{
+    .sup {
         margin-top: 10px;
     }
 
-  
+
 
     .main-right-bottom-content {
         overflow: scroll;
@@ -500,7 +500,7 @@
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
     }
 
-    .popup button:hover{
+    .popup button:hover {
         background: var(--button-hover-green);
     }
 

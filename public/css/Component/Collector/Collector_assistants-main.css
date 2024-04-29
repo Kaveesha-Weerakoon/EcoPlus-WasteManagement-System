@@ -528,7 +528,6 @@
         line-height: 1.5;
         background-color: var(--background-color-main);
         color: var(--main-text-color);
-        border-radius: 4px;
     }
 
     .updateData label {

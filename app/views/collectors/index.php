@@ -65,7 +65,7 @@
                                         src="<?php echo (empty($completion->customer_image) || !file_exists('C:/xampp/htdocs/ecoplus/public/img/img_upload/customer/'. $completion->customer_image) ) ? IMGROOT . '/img_upload/customer/Profile.png': IMGROOT . '/img_upload/customer/' . $completion->customer_image; ?>"
                                         alt="">
                                     <h3>
-                                        C <?php echo $completion->customer_id; ?>
+                                         <?php echo $completion->customer_id; ?>
                                     </h3>
                                     <h3>
                                         R <?php echo $completion->req_id; ?>

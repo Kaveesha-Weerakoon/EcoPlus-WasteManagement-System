@@ -421,13 +421,7 @@
     }
 
     @media screen and (max-width: 844px) {
-        .main-right-top-notification {
-            margin-left: 5%;
-        }
-        .main-right-top-search {
-            margin-left: 1px;
-        }
-
+       
         .main-right-bottom-container {
             width: 140%;
             overflow-x: scroll;

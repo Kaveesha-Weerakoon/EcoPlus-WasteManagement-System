@@ -359,15 +359,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function createOrUpdateChart(color, textColor) {
+    var Total_Garbage = <?php echo $data['Total_collected']?>;
+
     // Define the static data for the chart
-    const staticData = {
-        current_plastic: 100,
-        current_polythene: 80,
-        current_metal: 120,
-        current_glass: 90,
-        current_paper: 110,
-        current_electronic: 70
-    };
+    const staticData = [
+        Total_Garbage.total_plastic,
+        Total_Garbage.total_polythene,
+        Total_Garbage.total_metals,
+        Total_Garbage.total_glass,
+        Total_Garbage.total_paper_waste,
+        Total_Garbage.total_electronic_waste
+    ];
 
     const ctx = document.getElementById('myChart').getContext('2d');
 
@@ -377,9 +379,8 @@ function createOrUpdateChart(color, textColor) {
             labels: ['Plastic', 'Polythene', 'Metal', 'Glass', 'Paper', 'Electronic'],
             datasets: [{
                 label: 'Kilograms',
-                data: [staticData.current_plastic, staticData.current_polythene, staticData
-                    .current_metal, staticData.current_glass, staticData.current_paper, staticData
-                    .current_electronic
+                data: [staticData[0], staticData[1], staticData[2],
+                    staticData[3], staticData[4], staticData[5]
                 ],
                 backgroundColor: color,
             }]
@@ -457,6 +458,7 @@ const currentMonth = currentDate.getMonth();
 const currentYear = currentDate.getFullYear();
 
 // Function to get the name of the month for a given month index
+// Function to get the name of the month for a given month index
 function getMonthName(monthIndex) {
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
         'October', 'November', 'December'
@@ -468,9 +470,9 @@ function getMonthName(monthIndex) {
 const labels = [];
 for (let i = 0; i < 6; i++) {
     const month = (currentMonth - i + 12) % 12; // Ensure the month is within 0-11 range
-    const year = currentYear - (i === 0 && currentMonth === 0 ? 1 : 0); // Adjust the year if current month is January
-    labels.unshift(getMonthName(month) + ' ' + year); // Push to the front of the array
+    labels.unshift(getMonthName(month)); // Push only the month name to the front of the array
 }
+
 
 const completedRequestCounts = completedRequests.map(request => {
     const date = new Date(request.date);
@@ -562,8 +564,8 @@ const config = {
 };
 
 
-const ctx = document.getElementById('myChart1').getContext('2d');
-new Chart(ctx, config);
+const ctx1 = document.getElementById('myChart1').getContext('2d');
+new Chart(ctx1, config);
 </script>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>

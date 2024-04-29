@@ -1185,7 +1185,7 @@ use PHPMailer\PHPMailer\Exception;
           $this->request_incomming();
       } 
       else {
-        if($data['collector_id']=='default'){die();
+        if($data['collector_id']=='default'){
            $this->request_incomming();
         }
         else{

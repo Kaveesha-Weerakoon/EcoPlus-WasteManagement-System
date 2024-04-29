@@ -108,7 +108,22 @@
             $results = $this->db->resultSet();
            
             return $results;
-    }
+    } 
+    
+    public function getCollectorAssistantsByCenterId($centerId) {
+      $query = 'SELECT collector_assistants.*
+                FROM collectors
+                INNER JOIN users ON collectors.user_id = users.id
+                INNER JOIN collector_assistants ON collectors.user_id = collector_assistants.collector_id
+                WHERE collectors.center_id = :centerId';
+  
+      $this->db->query($query);
+      $this->db->bind(':centerId', $centerId);
+      $results = $this->db->resultSet();
+  
+      return $results;
+  }
+  
 
     public function get_collectors_by_center_id_no_assign($center_id){
       $this->db->query('SELECT *,

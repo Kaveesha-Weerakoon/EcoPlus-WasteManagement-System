@@ -113,6 +113,18 @@ use PHPMailer\PHPMailer\Exception;
       $this->view('center_managers/collectors', $data);
     }
 
+    public function collector_assistants(){
+      
+      $collector_assistants = $this->collectorModel->getCollectorAssistantsByCenterId($_SESSION['center_id']);
+      $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
+      $data = [
+        'collector_assistants' => $collector_assistants,
+        'notification' => $notifications,
+      ];
+     
+      $this->view('center_managers/collector_assistants', $data);
+    }
+
     public function collectors_complains(){
       $center=$this->center_model->getCenterById($_SESSION['center_id']); 
       $collector_complains=$this->collector_complain_Model->get_collector_complaints_by_region($center->region);
@@ -1384,7 +1396,7 @@ use PHPMailer\PHPMailer\Exception;
 
     $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
     $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
-
+   
     $data =[
       'current_polythene'=>$current_quantities->current_polythene,
       'current_plastic'=>$current_quantities->current_plastic,
@@ -1405,7 +1417,7 @@ use PHPMailer\PHPMailer\Exception;
 
   public function release_stocks($complete="False",$pop="False"){
     $types=$this->garbageTypeModel->get_all();
-
+    
     $current_quantities = $this->garbage_Model->get_current_quantities_of_garbage($_SESSION['center_id']);
     $notifications = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
 
@@ -1985,11 +1997,13 @@ use PHPMailer\PHPMailer\Exception;
   }
 
   public function view_notification($url){
+    
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
      
       $Notifications1 = $this->notification_Model->view_center_Notification($_SESSION['center_id']);
       $Notifications2 = $this->notification_Model->get_center_Notification($_SESSION['center_id']);
       $data['notification']=  $Notifications2 ;
+      
       header("Location: " . URLROOT . "/centermanagers/$url");        
 
    }

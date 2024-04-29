@@ -242,10 +242,18 @@ use PHPMailer\PHPMailer\Exception;
         }
 
         //validate password
-        if(empty($data['password'])){
+        if (empty($data['password'])) {
           $data['password_err'] = 'Please enter password';
-        } elseif(strlen($data['password']) < 6){
-          $data['password_err'] = 'Password must be at least 6 characters';
+        } elseif (strlen($data['password']) < 8 || strlen($data['password']) > 30) {
+            $data['password_err'] = 'Password must be between 8 and 30 characters';
+        } elseif (!preg_match('/[^\w\s]/', $data['password'])) {
+            $data['password_err'] = 'Password must include at least one symbol';
+        } elseif (!preg_match('/[A-Z]/', $data['password'])) {
+            $data['password_err'] = 'Password must include at least one uppercase letter';
+        } elseif (!preg_match('/[a-z]/', $data['password'])) {
+            $data['password_err'] = 'Password must include at least one lowercase letter';
+        } elseif (!preg_match('/[0-9]/', $data['password'])) {
+            $data['password_err'] = 'Password must include at least one number';
         }
 
         // Validate Confirm Password

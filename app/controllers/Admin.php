@@ -83,7 +83,9 @@ use PHPMailer\PHPMailer\Exception;
       $fine_details = $this->fine_model->get_fine_details();
       $completedRequests=$this->Collect_Garbage_Model->getAllCompletedRequests();
       $totalRrequests=$this->requests_model->getTotalRequests();
-     
+      
+      $total_collected=json_encode($this->Collect_Garbage_Model->getTotalGarbage());
+   
       $data = [
         'completedRequests'=> $completedRequests,
         'totalRequests'=> $totalRrequests,
@@ -91,6 +93,7 @@ use PHPMailer\PHPMailer\Exception;
         'cm_count'=>count($center_managers),      
         'customer_count'=>count($customers),
         'collector_count'=>count( $collectors),
+        'Total_collected'=>$total_collected,
         'agent_count'=>count($agents),
         'centers'=>$jsonData,
         'creditsGiven' => ($creditMonth->credit_amount !== null) ? $creditMonth->credit_amount : 0      ];

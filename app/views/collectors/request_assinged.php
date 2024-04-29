@@ -18,7 +18,7 @@
                             <div class="main-right-top-notification" id="notification">
                                 <i class='bx bx-bell'></i>
                                 <?php if (!empty($data['notification'])) : ?>
-                                <div class="dot"><?php echo count($data['notification'])?></div>
+                                
                                 <?php endif; ?>
                             </div>
                             <div id="notification_popup" class="notification_popup">
@@ -139,18 +139,19 @@
                                         <td class="cancel-open">
                                             <?php
                                            
-                                             if ($request->status== "assinged") {
-
-                                               
-                                                    echo '<i onclick="ontheway(' . $request->req_id . ')" class="fa-solid fa-arrow-up-right-dots"></i>';
-  
-
+                                           if ($request->status== "assinged") {
+                                            if ($request->date> date('Y-m-d')) { // Assuming $request->data is in 'Y-m-d' format
+                                                echo '<i class="fa-solid fa-arrow-up-right-dots"></i>';
                                             } else {
-                                            echo '<a
-                                                href="' . URLROOT . '/Collectors/enterWaste_And_GenerateEcoCredits/' . $request->req_id . '">
-                                                <i  class="fa-solid fa-check-circle"></i>
-                                            </a>';
+                                                echo '<i onclick="ontheway(' . $request->req_id . ')" class="fa-solid fa-arrow-up-right-dots"></i>';
                                             }
+
+                                        } else {
+                                        echo '<a
+                                            href="' . URLROOT . '/Collectors/enterWaste_And_GenerateEcoCredits/' . $request->req_id . '">
+                                            <i  class="fa-solid fa-check-circle"></i>
+                                        </a>';
+                                        }
                                             ?>
 
                                         </td>

@@ -233,10 +233,11 @@ function scrollToElement(elementId) {
         });
     }
 }
+
+/*Bottom CHART One*/
+
 const currentDate = new Date();
 const currentMonth = currentDate.getMonth() + 1;
-// Add 1 to represent January as index 1
-const currentYear = currentDate.getFullYear();
 const completedRequests = <?php echo json_encode($data['creditsByMonth1']); ?>;
 
 function getMonthName(monthIndex) {
@@ -246,18 +247,17 @@ function getMonthName(monthIndex) {
 
     return monthNames[monthIndex - 1]; // Subtract 1 to correctly index monthNames array
 }
+
 const labels = [];
 for (let i = 0; i < 5; i++) {
     const month = (currentMonth - i + 11) % 12; // No need to subtract 1
-    const year = currentYear - (i === 0 && currentMonth === 1 ? 1 : 0); // Adjust the condition to check for January
-    labels.unshift(getMonthName(month + 1) + ' ' + year);
+    labels.unshift(getMonthName(month + 1)); // Remove the year from labels
 }
 
 const completedRequestCounts = completedRequests.map(request => {
     const date = new Date(request.date);
     return {
         month: date.getMonth() + 1, // Add 1 to represent January as index 1
-        year: date.getFullYear(),
         creditAmount: request.credit_amount,
         req_id: request.req_id
     };
@@ -330,6 +330,7 @@ const config = {
 
 const ctx = document.getElementById('myLineChart').getContext('2d');
 const myLineChart = new Chart(ctx, config);
+
 /*Bottom CHART One*/
 
 const data1 = {
@@ -349,8 +350,6 @@ const data1 = {
     }]
 };
 
-
-
 const config1 = {
     type: 'pie',
     data: data1,
@@ -368,10 +367,9 @@ const config1 = {
     }
 };
 
-
-
 const ctx1 = document.getElementById('myPieChart').getContext('2d');
 const myPieChart = new Chart(ctx1, config1);
+
 /*Bottom CHART One*/
 
 /*Bottom CHART Two*/
@@ -420,7 +418,7 @@ const myPieChart2 = new Chart(ctx2, config2);
 /* Notification View */
 document.getElementById('submit-notification').onclick = function() {
     var form = document.getElementById('mark_as_read');
-    var dynamicUrl = "<?php echo URLROOT;?>/collector/view_notification/analatics";
+    var dynamicUrl = "<?php echo URLROOT;?>/collectors/view_notification/analatics";
     form.action = dynamicUrl; // Set the action URL
     form.submit(); // Submit the form
 

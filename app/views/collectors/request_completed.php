@@ -53,11 +53,7 @@
                                 </div>
 
 
-                                <div class="main-right-top-four-component" id="maps">
-                                    <!-- <img src="<?php echo IMGROOT?>/map.png" alt=""> -->
-                                    <i class='bx bx-map' style="color:var(--main-text-color); font-size: 23px;"></i>
-                                    <p>Maps</p>
-                                </div>
+                                
 
 
                             </div>
@@ -84,7 +80,7 @@
                                     <table class="table">
                                         <?php foreach($data['completed_requests'] as $request) : ?>
                                         <tr class="table-row">
-                                            <td>R<?php echo $request->req_id?></td>
+                                            <td><?php echo $request->req_id?></td>
                                             <td><?php  echo $request->date?></td>
                                             <td><?php  echo $request->time?></td>
                                             <td> <i class='bx bx-info-circle' style="font-size: 29px"
@@ -351,5 +347,15 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
+
+
+               /* Notification View */
+               document.getElementById('submit-notification').onclick = function() {
+                    var form = document.getElementById('mark_as_read');
+                    var dynamicUrl = "<?php echo URLROOT;?>/collectors/view_notification/request_completed";
+                    form.action = dynamicUrl; // Set the action URL
+                    form.submit(); // Submit the form
+
+                };
 </script>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

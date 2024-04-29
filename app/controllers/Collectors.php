@@ -967,7 +967,7 @@
           $assinged_Requests=$this->Request_Model->get_assigned_request_by_collector( $_SESSION['collector_id'] );
           $jsonData = json_encode($assinged_Requests);
           $collector_id = $_SESSION['collector_id'];
-        
+    
           $data = [
           'assigned_requests' => $assinged_Requests,
           'jsonData' => $jsonData,
@@ -1278,16 +1278,17 @@
 
   
   public function view_notification($url){
+    
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-     
-      $Notifications1 = $this->customerModel->view_Notification($_SESSION['user_id']);
-      $Notifications2 = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $Notifications1 = $this->customerModel->view_Notification($_SESSION['collector_id']);
+      $Notifications2 = $this->customerModel->get_Notification($_SESSION['collector_id']);
       $data['notification']=  $Notifications2 ;
       header("Location: " . URLROOT . "/collectors/$url");        
 
    }
   }
 
+ 
   
 }
 

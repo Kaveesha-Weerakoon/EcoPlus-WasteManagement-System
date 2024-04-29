@@ -199,6 +199,8 @@
         flex-direction: column;
         overflow: scroll;
         border: 1px solid #dcdde1;
+        flex: 4;
+        z-index: 4;
     }
 
     .notification_popup h1 {

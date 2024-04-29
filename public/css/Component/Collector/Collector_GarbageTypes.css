@@ -97,13 +97,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 35%;
-        margin-right: 2.5%;
+        margin-left: 80%;
+        margin-right: 7%;
     }
 
     .main-right-top-profile {
         display: flex;
-        margin-right: 22px;
+        margin-right: 90px;
     }
 
     .main-right-top-profile img {
@@ -421,13 +421,7 @@
     }
 
     @media screen and (max-width: 844px) {
-        .main-right-top-notification {
-            margin-left: 5%;
-        }
-        .main-right-top-search {
-            margin-left: 1px;
-        }
-
+       
         .main-right-bottom-container {
             width: 140%;
             overflow-x: scroll;

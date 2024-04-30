@@ -324,8 +324,8 @@ function getMonthName(monthIndex) {
 const labels = [];
 for (let i = 0; i < 5; i++) {
     const month = (currentMonth - i + 11) % 12; // No need to subtract 1
-    const year = currentYear - (i === 0 && currentMonth === 1 ? 1 : 0); // Adjust the condition to check for January
-    labels.unshift(getMonthName(month + 1) + ' ' + year);
+    //const year = currentYear - (i === 0 && currentMonth === 1 ? 1 : 0); // Adjust the condition to check for January
+    labels.unshift(getMonthName(month + 1));
 }
 
 const completedRequestCounts = completedRequests.map(request => {
@@ -483,7 +483,7 @@ const config2 = {
             },
             title: {
                 display: true,
-                text: 'Waste Collected Pie Chart'
+                text: 'Waste Handovered Pie Chart'
             }
         }
     }
@@ -527,7 +527,7 @@ const config3 = {
             },
             title: {
                 display: true,
-                text: 'Waste Collected Pie Chart'
+                text: 'Waste Selled Pie Chart'
             }
         }
     }

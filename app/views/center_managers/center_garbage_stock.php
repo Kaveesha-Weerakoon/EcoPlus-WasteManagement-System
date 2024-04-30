@@ -11,7 +11,7 @@
                             <input type="text" id="searchInput" placeholder="Search">
                         </div>
                         <?php require APPROOT . '/views/center_managers/centermanager_notifications/centermanager_notifications.php'; ?>
-                 
+
                     </div>
                     <div class="main-right-top-two">
                         <h1>Center Waste Management</h1>
@@ -103,7 +103,7 @@
                         method="post" id="myForm">
                         <div class="user-details">
                             <div class="cont">
-                                <?php foreach($data['types'] as $type) : ?> 
+                                <?php foreach($data['types'] as $type) : ?>
                                 <div class="main-right-bottom-content-content">
                                     <span class="details"><?php echo ucfirst($type->name);?></span>
                                     <div class="input-container">
@@ -191,7 +191,7 @@
                     <h4>Total Price(Rs) = <?php echo $data['total_sell_price']?></h4>
 
                 </div>
-              
+
                 <div class="buttons">
                     <button onclick="submitForm()" class="complete-btn" id="complete-btn">OK</button>
                     <button onclick="cancelForm()" class="cancel-btn" type="button">Cancel</button>
@@ -236,7 +236,7 @@ function cancelForm() {
 /* Notification View */
 document.getElementById('submit-notification').onclick = function() {
     var form = document.getElementById('mark_as_read');
-    var dynamicUrl = "<?php echo URLROOT;?>/centermanagers/view_notification/center_garbage_stock";
+    var dynamicUrl = "<?php echo URLROOT;?>/centermanagers";
     form.action = dynamicUrl; // Set the action URL
     form.submit(); // Submit the form
 

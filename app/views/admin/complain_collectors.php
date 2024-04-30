@@ -62,8 +62,8 @@
                             <table class="table">
                                 <?php foreach($data['complains'] as $complaint) : ?>
                                 <tr class="table-row">
-                                    <td>Com<?php echo $complaint->id?></td>
-                                    <td>CO<?php echo $complaint->collector_id?></td>
+                                    <td><?php echo $complaint->id?></td>
+                                    <td><?php echo $complaint->collector_id?></td>
                                     <td><?php echo $complaint->region?></td>
                                     <td><?php echo date('Y-m-d', strtotime($complaint->date)); ?></td>
                                     <td><?php echo $complaint->subject?></td>

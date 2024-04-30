@@ -60,7 +60,7 @@
                             <table class="table">
                                 <?php foreach($data['complaints'] as $complaint) : ?>
                                 <tr class="table-row">
-                                    <td>Com <?php echo $complaint->complaint_id?></td>
+                                    <td><?php echo $complaint->complaint_id?></td>
                                     <!--<td>C<?php echo $complaint->center_id?></td>-->
                                     <td><?php echo $complaint->region?></td>
                                     <!--<td><?php echo $complaint->center_manager_name?></td>-->

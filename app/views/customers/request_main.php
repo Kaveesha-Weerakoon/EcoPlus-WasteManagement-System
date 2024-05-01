@@ -36,7 +36,7 @@
                                     <td>
                                         <?php
                                           $typeContent = ($request->type === 'incoming') ? 
-                                         '<i class="fa-solid fa-spinner processing"></i><p class="bold1">Pending</p>' :
+                                         '<i class="fa-solid fa-spinner processing"></i><p class="bold1" style="color:#414143"">Pending</p>' :
                                          ($request->status === 'ontheway' ?
                                             '<i class="fa-solid fa-truck-arrow-right on-the-way"></i><p class="bold3">On the way</p>' :
                                             '<i class="fa-solid fa-truck-arrow-right assigned"></i><p class="bold2">Assigned</p>');

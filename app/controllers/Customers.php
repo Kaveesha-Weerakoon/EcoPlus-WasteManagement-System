@@ -430,12 +430,68 @@
       $data = [
         'complains' => $complains ,  
         'notification'=> $Notifications ,
+        'update'=>'',
+        'complaint'=>'',
+       'complain_title'=>'',
+       'complain_body'=>''
 
       ];
      
       $this->view('customers/history_complains', $data);
     }
+    public function update_compalin($cid){
+      $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      $id=$_SESSION['user_id'];
+      $user=$this->customerModel->get_customer($id);
+      $complains = $this->customer_complain_Model->get_complains($id);
 
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $data = [
+          'complains' => $complains ,  
+          'notification'=> $Notifications ,
+          'update'=>'True',
+          'complaint'=>trim($_POST['complaint']),
+          'complain_title'=>trim($_POST['complain_title']),
+          'complain_body'=>trim($_POST['complain_body']),
+          'id'=>$cid
+  
+        ];
+
+      
+       if(!empty($data['complaint']) && !empty($data['complain_title'])&& !empty($data['complain_body'])){
+        $this->customer_complain_Model->updatecomplaint($data);
+        $data['update']='';
+        header("Location: " . URLROOT . "/customers/history_complains");        
+
+
+       }
+       else{
+        $this->view('customers/history_complains', $data);
+
+       }
+
+      }else{
+        $id=$_SESSION['user_id']; 
+        $complains = $this->customer_complain_Model->get_complains($id);
+        $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
+      
+        $complain=$this->customer_complain_Model->get_complain_byid($cid);
+
+        
+        $data = [
+          'complains' => $complains ,  
+          'notification'=> $Notifications ,
+          'update'=>'True',
+          'complaint'=>$complain->complaint,
+          'complain_title'=>$complain->complain_title,
+          'complain_body'=>$complain->complain_body,
+          'id'=>$cid,
+        ];
+      
+        $this->view('customers/history_complains', $data);
+      }
+    }
     public function transfer_history(){
       $transaction_history = $this->Customer_Credit_Model->get_transaction_history($_SESSION['user_id']);   
          $Notifications = $this->customerModel->get_Notification($_SESSION['user_id']);
@@ -710,12 +766,16 @@
           'contact_no' => trim($_POST['contact_no']),
           'subject' => trim($_POST['subject']),
           'complain' => trim($_POST['complain']),
+          'complain_title'=> trim($_POST['complain_title']),  
+          'complain_body'=> trim($_POST['complain_body']), 
           'name_err' => '',
           'contact_no_err' => '',
           'region_err' => '',
           'subject_err' => '' ,
           'complain_err' => '' ,
-          'completed'=>'',     
+          'completed'=>'', 
+          'complain_title_err'=>'',
+          'complain_body_err'=>'',
           'notification'=> $Notifications   
         ];
         $data['region']=$user->city;
@@ -753,7 +813,19 @@
           $data['complain_err'] = 'Complain is too long';
       }
 
-        if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) ){
+      if(empty($data['complain_title'])){
+        $data['complain_title_err'] = 'please enter the complain title';
+      }elseif (strlen($data['complain']) > 500) {
+        $data['complain_title_err'] = 'Complain is too long';
+     }  
+    
+      if(empty($data['complain_body'])){
+      $data['complain_body_err'] = 'Please enter the complain body';
+      }elseif (strlen($data['complain']) > 500) {
+      $data['complain_body_err'] = 'complain body is too long';
+     }
+
+        if(empty($data['name_err']) && empty($data['contact_no_err']) && empty($data['region_err']) && empty($data['subject_err']) && empty($data['complain_err']) && empty($data['complain_title_err'])&& empty($data['complain_body_err'])){
           if($this->customer_complain_Model->complains($data)){
             $data['completed']="True";
             $this->view('customers/complains', $data);         
@@ -780,7 +852,11 @@
         'subject_err' => '' ,
         'complain_err' => ''  ,
         'completed'=>''   ,     
-        'notification'=> $Notifications ,   
+        'notification'=> $Notifications , 
+        'complain_title'=>'',
+        'complain_body'=>'',
+        'complain_title_err'=>'',
+        'complain_body_err'  =>'',
       ];
        $id=$_SESSION['user_id']; 
       $user=$this->customerModel->get_customer($id);
@@ -790,6 +866,8 @@
         $this->view('customers/complains', $data);
      } 
     }
+
+    
 
     private function getCommonData() {
       $centers = $this->center_model->getallCenters();    

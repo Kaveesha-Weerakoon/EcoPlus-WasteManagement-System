@@ -57,6 +57,18 @@
                                     placeholder="Complain">
                                 <div class="err"><?php echo $data['complain_err']; ?></div>
                             </div>
+                            <div class="main-bottom-component-left-component">
+                                <h2>Complaint Title</h2>
+                                <input value="<?php echo $data['complain_title']; ?>" name="complain_title" type="text"
+                                    placeholder="Complain">
+                                <div class="err"><?php echo $data['complain_title_err']; ?></div>
+                            </div>
+                            <div class="main-bottom-component-left-component">
+                                <h2>Complaint Body</h2>
+                                <input value="<?php echo $data['complain_body']; ?>" name="complain_body" type="text"
+                                    placeholder="Complain">
+                                <div class="err"><?php echo $data['complain_body_err']; ?></div>
+                            </div>
                             <div class="main-bottom-component-left-button">
                                 <button type="submit">Submit</button>
                             </div>

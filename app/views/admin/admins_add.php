@@ -110,6 +110,7 @@
                                         <div class="err"><?php echo $data['confirm_password_err']?></div>
                                     </div>
                                 </div>
+                               
                             </div>
                             <div class="main-bottom-down-content-bottom-button">
                                 <button type="submit">REGISTER</button>

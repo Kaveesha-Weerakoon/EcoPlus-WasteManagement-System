@@ -1,6 +1,6 @@
 <?php
   class Announcement {
-    private $db;
+    private $db;//database connection
 
     public function __construct(){
       $this->db = new Database;
